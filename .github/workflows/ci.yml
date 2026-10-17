@@ -53,6 +53,11 @@ jobs:
       - name: Verify unqualified publication stays blocked
         shell: pwsh
         run: ./eng/test-release-block.ps1
+      - name: Retain macOS sandbox diagnostics after a native failure
+        if: failure() && runner.os == 'macOS'
+        shell: bash
+        run: |
+          log show --last 10m --style compact --predicate 'eventMessage CONTAINS "Sandbox:" OR eventMessage CONTAINS "native-aot" OR process == "sandboxd"' | tail -160
       - name: Retain source contract evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
