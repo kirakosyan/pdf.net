@@ -43,6 +43,7 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
 }
 Push-Location $root
 try {
+    $null = [IO.Directory]::CreateDirectory($resultsRoot)
     # A failed rerun must not leave an earlier passing aggregate report in this location.
     [IO.File]::Delete((Join-Path $resultsRoot 'source-contract-evidence.json'))
     Run-ContractLane 'net8.0' 'net8' $ExpectedArchitecture
