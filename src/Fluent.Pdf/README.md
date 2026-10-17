@@ -1,5 +1,7 @@
 # Fluent.Pdf package boundary
 
-This project reserves the managed SDK assembly/package identity and target frameworks. It intentionally contains no fake PDF operations or placeholder public API.
+This project implements the managed document/page model, immutable options, diagnostics and explicit provider contracts on net472, netstandard2.0, net8.0 and net10.0. See the [API contract](../../docs/api-contract.md) for behavior and executable examples.
 
-Build validates only framework/reference compatibility. Pack is blocked by the production gate while requirements are planned and readiness is false. Implement the dependency-ordered requirements and qualify the actual package before stable publication.
+No PDF reader/writer, renderer or optional engine is bundled. Open/save requires an explicitly registered provider and fails with PdfProviderUnavailableException otherwise. Test fixture bytes are not PDF output.
+
+Contract tests and API checks validate this implemented layer. Pack remains blocked by the production gate while readiness is false. Complete the dependency-ordered requirements and qualify the exact package before stable publication.

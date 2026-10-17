@@ -6,6 +6,8 @@ Use the dependency graph in [requirements.json](../specs/requirements.json) and 
 
 Each issue is unassigned at creation and has scope, dependencies, acceptance criteria, non-goals and validation. [github-backlog.md](github-backlog.md) provides the issue mapping. This sequence is topologically sorted; it intentionally brings native deployment and a useful managed document workflow forward.
 
+FP-001 has an [implemented source contract layer](api-contract.md) with [runtime/API tests](testing.md). Its tracking issue remains open for actual minimum-runtime and final-package qualification. The foundation milestone and all later SDK requirements remain incomplete; passing contract tests does not authorize publication.
+
 ## Milestones
 
 1. **Foundation:** public contracts, budgets, deployment probes, syntax/filters/writer, fonts and graphics.

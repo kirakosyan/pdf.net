@@ -1,6 +1,6 @@
 # Fluent.Pdf capability catalogue
 
-This is the required SDK production scope. SDK capabilities below are planned; none is advertised as implemented by this planning baseline. The separate Reader placeholder exists. Requirement details and acceptance criteria are normative; this table is an index. [Machine-readable requirements](../specs/requirements.json).
+This is the required SDK production scope. FP-001 has an [implemented source contract layer](api-contract.md) with production qualification pending. Other SDK capabilities below remain planned. The separate Reader placeholder exists. Requirement details and acceptance criteria are normative; this table is an index. [Machine-readable requirements](../specs/requirements.json).
 
 | ID | Capability | Area | Release required |
 | --- | --- | --- | --- |

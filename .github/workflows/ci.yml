@@ -1,4 +1,4 @@
-name: Foundation integrity
+name: Source contracts and release guard
 on:
   push:
     branches: [main]
@@ -8,23 +8,48 @@ permissions:
   contents: read
 jobs:
   validate:
+    name: Contracts (${{ matrix.id }})
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-15-intel]
+        include:
+          - { id: win-x64, os: windows-latest, arch: X64 }
+          - { id: win-arm64, os: windows-11-arm, arch: Arm64 }
+          - { id: linux-x64, os: ubuntu-latest, arch: X64 }
+          - { id: linux-arm64, os: ubuntu-24.04-arm, arch: Arm64 }
+          - { id: osx-x64, os: macos-15-intel, arch: X64 }
+          - { id: osx-arm64, os: macos-15, arch: Arm64 }
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
-          dotnet-version: '10.0.4xx'
+          dotnet-version: |
+            10.0.4xx
+            8.0.x
       - name: Validate specification and naming
         shell: pwsh
         run: ./eng/validate-spec.ps1
       - name: Restore locked dependencies
         run: dotnet restore Fluent.Pdf.slnx --locked-mode
-      - name: Build project boundaries
+      - name: Restore pinned API tooling
+        run: dotnet tool restore
+      - name: Build SDK and executable C#/VB contracts
         run: dotnet build Fluent.Pdf.slnx -c Release --no-restore
+      - name: Compare API across target frameworks
+        shell: pwsh
+        run: ./eng/check-api.ps1
+      - name: Execute source contracts and verify runtime identity
+        shell: pwsh
+        run: ./eng/test-contracts.ps1 -ExpectedArchitecture '${{ matrix.arch }}'
       - name: Verify unqualified publication stays blocked
         shell: pwsh
         run: ./eng/test-release-block.ps1
+      - name: Retain source contract evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-contracts-${{ matrix.id }}
+          path: artifacts/contracts/
+          if-no-files-found: error

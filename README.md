@@ -2,7 +2,7 @@
 
 Fluent.Pdf is an MIT-licensed .NET PDF SDK being designed for Windows, Linux and macOS. Its production scope combines document generation and editing, browser-quality HTML conversion, rendering, extraction, forms, OCR, security, signatures and independently validated PDF standards.
 
-**Current delivery: research, production specification and implementation backlog. The SDK is not implemented or production-qualified yet. No NuGet release is published by this baseline.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
+**Current delivery: specification, backlog and the FP-001 in-memory document/provider contracts. PDF parsing, writing and rendering are not implemented; the SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
 
 ## Product direction
 
@@ -36,27 +36,31 @@ The proposed package ID `Fluent.Pdf` returned HTTP 404 from the NuGet gallery an
 4. Keep [requirements.json](specs/requirements.json), documentation and issue evidence synchronized.
 5. Publish only through the [stable release procedure](docs/releasing.md).
 
-## Local foundation checks
+## Local contract checks
 
-Install the .NET 10 SDK and PowerShell 7, then run:
+Install the .NET 10 SDK, .NET 8 runtime and PowerShell 7, then run:
 
 ```powershell
 pwsh -File eng/validate-spec.ps1
 dotnet restore Fluent.Pdf.slnx --locked-mode
+dotnet tool restore
 dotnet build Fluent.Pdf.slnx -c Release --no-restore
+pwsh -File eng/check-api.ps1
+pwsh -File eng/test-contracts.ps1
 pwsh -File eng/test-release-block.ps1
 ```
 
-These checks validate the planning/package boundary and build configuration. They do not validate PDF functionality. Packing intentionally fails while production readiness is false.
+These checks exercise document editing, provider/stream lifetimes, cancellation and atomic file saves through test fixtures. See the [API contract and C#/VB examples](docs/api-contract.md) and [test/evidence procedure](docs/testing.md). The fixtures emit no PDF. Packing intentionally fails while production readiness is false.
 
 ## Repository layout
 
 - `specs/`: canonical requirements, source inventory and fail-closed release readiness.
 - `docs/requirements/`: independently assignable scopes, dependencies, acceptance and validation.
-- `src/Fluent.Pdf/`: SDK package project boundary; no placeholder PDF operations.
+- `src/Fluent.Pdf/`: managed document model and explicit provider contracts; no built-in PDF codec yet.
+- `tests/` and `examples/`: behavioral contract tests and executable C#/VB consumers.
 - `apps/PdfReader/`: separate Reader project placeholder, excluded from SDK publication.
 - `eng/`: specification validation and production release controls.
-- `.github/workflows/`: foundation CI and manually dispatched, gated stable publication.
+- `.github/workflows/`: source contract CI and manually dispatched, gated stable publication.
 
 ## OCR and document interoperability
 

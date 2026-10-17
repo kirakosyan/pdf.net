@@ -3,7 +3,7 @@
   "product": "Fluent.Pdf",
   "packageVersion": "1.0.0",
   "productionReady": false,
-  "stage": "specification",
+  "stage": "implementation",
   "publicationPolicy": "stable-production-only",
   "requiredLanes": [
     "win-x64-net10.0",
@@ -38,7 +38,7 @@
     "consumer"
   ],
   "publicationBlockedReasons": [
-    "All SDK requirements are planned; no PDF functionality has been implemented.",
+    "SDK scope is incomplete: only FP-001 source contracts are implemented; PDF parsing, writing and rendering remain unimplemented.",
     "Actual runtime, native-provider, standards, security, performance and final-package evidence is absent.",
     "Package ownership/prefix and scoped Trusted Publishing configuration must be verified before release."
   ],

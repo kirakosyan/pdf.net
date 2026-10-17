@@ -9,7 +9,7 @@
       "title": "Public API and provider contracts",
       "area": "foundation",
       "phase": "01-foundation",
-      "status": "planned",
+      "status": "implemented",
       "releaseRequired": true,
       "dependencies": [],
       "scope": "Define a small fluent facade and editable document model with provider-neutral value types, stream ownership, disposal, immutable options and explicit capabilities.",

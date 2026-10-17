@@ -16,7 +16,7 @@ flowchart TD
   Contracts --> Ai[Opt-in intelligence and retrieval]
 ```
 
-The diagram is a target architecture. The current projects reserve boundaries and contain no working PDF processing API.
+The diagram is a target architecture. FP-001 implements the in-memory page model, immutable options and provider-backed I/O contracts described in [api-contract.md](api-contract.md). PDF parsing, writing, layout and native engines remain unimplemented.
 
 ## Managed core
 
@@ -24,7 +24,7 @@ The core owns PDF syntax/object identity, stream semantics, editing transactions
 
 Use a typed object model with stable source/page/object provenance and explicit dirty state. Preserve safe unknown keys and opaque streams; changing a document must not silently discard unrecognized extensions. Low-level operators and high-level layout share resource ownership and version negotiation.
 
-A document is an explicitly disposable editing session. Options are immutable snapshots. Mutations use transactions with validation before atomic commit. Incremental signing paths preserve byte ranges; full rewrite paths record signature/revision effects.
+A document is an explicitly disposable editing session. Options are immutable snapshots. FP-001 validates individual geometry/collection edits before applying them and supplies detached snapshots to writers. General edit transactions and revision/signature behavior belong to later requirements. Incremental signing paths will preserve byte ranges; full rewrite paths will record signature/revision effects.
 
 ## Operation context
 

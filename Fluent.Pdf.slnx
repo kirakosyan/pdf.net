@@ -1,8 +1,15 @@
 <Solution>
+  <Folder Name="/examples/">
+    <Project Path="examples/Fluent.Pdf.Contract.CSharp/Fluent.Pdf.Contract.CSharp.csproj" />
+    <Project Path="examples/Fluent.Pdf.Contract.VisualBasic/Fluent.Pdf.Contract.VisualBasic.vbproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/Fluent.Pdf/Fluent.Pdf.csproj" />
   </Folder>
   <Folder Name="/apps/">
     <Project Path="apps/PdfReader/PdfReader.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj" />
   </Folder>
 </Solution>
