@@ -189,10 +189,21 @@ static int mac_sandbox(const char *root) {
 #endif
 
 #ifndef _WIN32
+static void fatal_signal(int number) { _exit(128+number); }
+static int install_fault_boundary(void) {
+    stack_t stack; struct sigaction action; int signals[]={SIGSEGV,SIGBUS,SIGILL,SIGFPE,SIGABRT}; unsigned i;
+    memset(&stack,0,sizeof(stack)); stack.ss_sp=malloc(65536); stack.ss_size=65536;
+    if(!stack.ss_sp || sigaltstack(&stack,NULL)!=0) return 0;
+    memset(&action,0,sizeof(action)); action.sa_handler=fatal_signal; action.sa_flags=SA_ONSTACK;
+    sigemptyset(&action.sa_mask);
+    for(i=0;i<sizeof(signals)/sizeof(signals[0]);i++) if(sigaction(signals[i],&action,NULL)!=0) return 0;
+    return 1;
+}
 static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds, uint64_t parent) {
     struct rlimit limit; char canonical[PATH_MAX];
     sandbox_step=1;
     if(!realpath(root,canonical)) return 0;
+    if(!install_fault_boundary()) return 0;
     sandbox_step=2;
     limit.rlim_cur=limit.rlim_max=0; if(setrlimit(RLIMIT_CORE,&limit)!=0) return 0;
     sandbox_step=3;
@@ -318,6 +329,7 @@ static int worker_main(int argc, char **argv) {
 #ifdef _WIN32
     HMODULE library; wchar_t library_path[8192],root_path[4096],file_name[256];
     _setmode(_fileno(stdin),_O_BINARY); _setmode(_fileno(stdout),_O_BINARY);
+    SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOGPFAULTERRORBOX|SEM_NOOPENFILEERRORBOX);
     if(argc>1&&strcmp(argv[1],"--inside")==0) offset=2;
 #else
     void *library; char library_path[8192];

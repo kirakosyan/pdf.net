@@ -201,6 +201,7 @@ public sealed class NativeWorkerHost
                 catch (Exception cleanup) when (cleanup is IOException || cleanup is UnauthorizedAccessException)
                 { cleanupFailure ??= cleanup; }
             }
+            Array.Clear(input,0,input.Length);
             if (cleanupFailure is not null)
             {
                 try { throw Fail(context,"Native.CleanupFailed","The native job did not release every owned resource."); }
