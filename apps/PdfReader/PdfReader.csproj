@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Fluent.Pdf.Reader</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <Description>PDF Reader project boundary. Product specification and implementation are deferred.</Description>
+  </PropertyGroup>
+</Project>

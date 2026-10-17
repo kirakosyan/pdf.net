@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "tool": "REA",
+  "toolVersion": "6.5.0",
+  "method": "Static identity, selected CIL/member metadata and native-boundary analysis; supplementary CLR metadata census",
+  "taskLocalMetadataBudgetMiB": 512,
+  "originalToolModified": false,
+  "packages": [
+    {
+      "id": "reference-a",
+      "version": "26.10.0",
+      "bytes": 207629488,
+      "sha256": "FCE227EF00D0C109E2FC88B5587CF90414AC3219A8BBD625F38EACF17AC9A39D"
+    },
+    {
+      "id": "reference-b",
+      "version": "2026.10.3",
+      "bytes": 49045,
+      "sha256": "796A80F5A24254FC7E39CFE33C2528FAA4811977C5BC2963F36B9362B2077C92"
+    },
+    {
+      "id": "reference-b-managed",
+      "version": "2026.10.3",
+      "bytes": 30082700,
+      "sha256": "A0D435361821DD6F34379E043E19869BF2476F3B83D478E45949AD35E072538D"
+    }
+  ],
+  "reports": [
+    {
+      "id": "reference-a-identity",
+      "sha256": "22C81EBA3F2B42A488606E310168D718F05B5EB1E51D0511A87F14597673B02F",
+      "evidenceId": "ev_e8ee4bbbba59fd08b9ad575ad32974827102bf618ab0ba7150350e646fbaa2d4",
+      "operation": "inspect_managed_artifact",
+      "coverage": "complete",
+      "selectedTypes": null,
+      "selectedMethods": null
+    },
+    {
+      "id": "reference-a-selected-members",
+      "sha256": "ACEC91C0ED41C353EE2BBE268CFA56C8AB7728EA037EBE1152B2B59747440B7E",
+      "evidenceId": "ev_feb2defda7a1c0ec03a020d63228a2f418222200f8e45f2bdc3e908ee1a13cba",
+      "operation": "inspect_managed_members",
+      "coverage": "complete",
+      "selectedTypes": 7,
+      "selectedMethods": 900
+    },
+    {
+      "id": "reference-a-native-expanded",
+      "sha256": "9636EE14D0A95962CD9F51F74454AF7A29A06AF9C0C89B3F05C277228824869B",
+      "evidenceId": "ev_8205f4ba4140685907f90aea329880746f1c556293087b0c9be261a3d5003452",
+      "operation": "inspect_managed_native_boundaries",
+      "coverage": "complete",
+      "selectedTypes": null,
+      "selectedMethods": null
+    },
+    {
+      "id": "reference-b-identity-expanded",
+      "sha256": "3D59990B9263312409765AFBB871D20FCFD906CACD2DC83BA0FFCAD65EEBC192",
+      "evidenceId": "ev_edd3ae9009de5178380f12d791f89d58e1561912408144b7d59a95256080057e",
+      "operation": "inspect_managed_artifact",
+      "coverage": "complete",
+      "selectedTypes": null,
+      "selectedMethods": null
+    },
+    {
+      "id": "reference-b-selected-members",
+      "sha256": "8AD895213DE8759FC957E4A3E1CA5A9B303AEB46B160C1F001D08A9B75152A42",
+      "evidenceId": "ev_f992af49c4012f49db638ec02acf2a6017d5af80dfa650811ec33792a3fa7ae9",
+      "operation": "inspect_managed_members",
+      "coverage": "complete",
+      "selectedTypes": 6,
+      "selectedMethods": 560
+    },
+    {
+      "id": "reference-b-native-expanded",
+      "sha256": "68108356993A24D2C764AC1380E197F2338E1E73F36AB25AE11EC6F0DF0B75BF",
+      "evidenceId": "ev_42b034aca0adbac17d90bdc73dd4bea76a93269544d65f413c6de1e2efbcdc9d",
+      "operation": "inspect_managed_native_boundaries",
+      "coverage": "complete",
+      "selectedTypes": null,
+      "selectedMethods": null
+    }
+  ],
+  "publicApiInventories": [
+    {
+      "file": "reference-a-net10-public-api.json",
+      "sha256": "66136451B756D0EEF5A1D949B955662AE9043B230FFAC4DD17A69CBAEDEE8ECF",
+      "assemblySha256": "CD5766908A516C97628D88FB97720867CF002A6454A2E1E63DF28B4D2165D25E",
+      "publicTypes": 1211,
+      "publicOrProtectedMethods": 9124,
+      "allTypes": 21315,
+      "allMethods": 159537
+    },
+    {
+      "file": "reference-a-net4.8-public-api.json",
+      "sha256": "C91839CC46F1739FA1D21145296685D8C6022A86741BF0382DC1D7CE2109045A",
+      "assemblySha256": "0A8B9795CB054B2F61AA86A31A11B45A1FDBBFB8C9F71D539F2D37B195232DCD",
+      "publicTypes": 1060,
+      "publicOrProtectedMethods": 7912,
+      "allTypes": 20714,
+      "allMethods": 156633
+    },
+    {
+      "file": "reference-a-net8.0-public-api.json",
+      "sha256": "4B99BC5C66FFAF46B52380230A3E37C838931828B80908181775719383F26454",
+      "assemblySha256": "49A51F556094C5FD49567BD878656545CF28F28B37CC36E509F1AAF8BE29A369",
+      "publicTypes": 1211,
+      "publicOrProtectedMethods": 9124,
+      "allTypes": 21306,
+      "allMethods": 159535
+    },
+    {
+      "file": "reference-a-net9.0-public-api.json",
+      "sha256": "AF473657D339DE6DD6BD900051F1AC9B80D1AA4D3EE84372D906A5C03E4E9558",
+      "assemblySha256": "CF908FA4DC792FA333310794522CBAADCBDED315A3F9B3FCA73D7F6A7DEFAE1F",
+      "publicTypes": 1211,
+      "publicOrProtectedMethods": 9124,
+      "allTypes": 21315,
+      "allMethods": 159537
+    },
+    {
+      "file": "reference-a-public-api.json",
+      "sha256": "66A593ACB1300B22DF27C6B05B1FD02E787CACF3E8D4D33AF67B2045824D1C1D",
+      "assemblySha256": "B7F2C839E797D06229B12B7F356D21FE7F06518564F4874EC41EB10DBC6C3A46",
+      "publicTypes": 1211,
+      "publicOrProtectedMethods": 9122,
+      "allTypes": 21292,
+      "allMethods": 159449
+    },
+    {
+      "file": "reference-b-net6-public-api.json",
+      "sha256": "80BCEC0EEC690A2403E5D697AB03000FAEFDB1604235D85DB061145E04BD9681",
+      "assemblySha256": "76308F4BB0096B351319A3D14B73C315ED61DF1772E852BCD87A8EF331EDB907",
+      "publicTypes": 331,
+      "publicOrProtectedMethods": 3380,
+      "allTypes": 15697,
+      "allMethods": 144031
+    },
+    {
+      "file": "reference-b-net8-public-api.json",
+      "sha256": "596CCC105C6CC7E797F9D557FB867EA1D7A38C750F6F416F7D0B7B13FD5C2904",
+      "assemblySha256": "340673CEC64D46FF7071613A2D287F1B4340FBB1976B3AD9D9F96BB9016376EA",
+      "publicTypes": 331,
+      "publicOrProtectedMethods": 3380,
+      "allTypes": 15746,
+      "allMethods": 144706
+    },
+    {
+      "file": "reference-b-public-api.json",
+      "sha256": "940A5F046F7A17612617395246DB114F2B9FC4C81115435750B5D34EEA57AFC3",
+      "assemblySha256": "757E1D24EE1D57E891FC3D78EC77C9F15A8BFF46B8BDBFAAB87D4CCDF6C54E7E",
+      "publicTypes": 331,
+      "publicOrProtectedMethods": 3379,
+      "allTypes": 15979,
+      "allMethods": 146245
+    }
+  ],
+  "documentation": [
+    {
+      "id": "S01",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "1E1819B510D145F1D0161F0ED13DD89123BE86B506AF804CAA32A6A8C503AD5A"
+    },
+    {
+      "id": "S02",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "24CF5A5773AF7BCF5FD20DAD097323FA105758838E57E1F359B2CC54E5F6C174"
+    },
+    {
+      "id": "S03",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "2C9C349DE95B388903617F11FE3CFA8811A9EED09AD0E33C2979AC7B7FCF7BCE"
+    },
+    {
+      "id": "S04",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "CC9A5A3427CB17C765A9A2941DD407DF9A9E5B62B8C2FB01A19C6BBCE90A965D"
+    },
+    {
+      "id": "S05",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "8DC51C298B1024E9C8FA02D6A767D6833D08240AFB738405E6DC0CCE8DA68CCA"
+    },
+    {
+      "id": "S06",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "71C7D1E2AD4D47FFEAA746FAE0F29B6576C59055285CBF4B1DE0E8079AB8716A"
+    },
+    {
+      "id": "S07",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "2BC49CFAF3E1B18FC0B7329FFD60242CEA512BD3DBBFB3200CF1F75EFD282F94"
+    },
+    {
+      "id": "S08",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "431652EBDB39D2E1141E75DEC970C24E9E41CC6606626CA86A63F4D564DC1680"
+    },
+    {
+      "id": "S09",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "30F3F8D1A210016DC7D90C87F601BB4F6196910DBC4C9739AFD0B183ADCB4784"
+    },
+    {
+      "id": "S10",
+      "kind": "official-reference-documentation",
+      "httpStatus": 200,
+      "sha256": "D6F7F7513CA5CC1B6B3E35D10E0BACE357DFE70742EF8E170EA482601F994182"
+    },
+    {
+      "id": "S11",
+      "kind": "upstream-dependency-manifest",
+      "httpStatus": 200,
+      "sha256": "DE5901D525FC48095826EB0BF9690798601582A16A5F87171E343B7912E223E3"
+    }
+  ],
+  "upstreamOcrCommit": "141236a3fe890d220b807a270cec2d86a8f7e3b5",
+  "inventoryToolSourceSha256": "CDF6EB58F190767360C152D105C69DD0ACA66890F061557BA6D65135C6590424",
+  "reaConfiguration": {
+    "Version": "6.5.0",
+    "Change": "Task-local metadata representation budget: 64 MiB to 512 MiB",
+    "OriginalBudgetSha256": "ABBD3E74E0098F1B3812F01CCFE57D58DDCA3FB5FE1907F48AA8572CCEB51D1A",
+    "LocalBudgetSha256": "B8FBC19D5E42992AAA43D820BC6ACE4AAEB5E8620F80AC63FD3D547C4FA8CAC7",
+    "InstalledToolUnchanged": true,
+    "BundledBudgetSha256": "DA623D2F5772214CD655CC921C589A2E5A06C2B93B32BFD35B451C1888093211",
+    "OriginalBundledBudgetSha256": "E20BE13BF785DB94AA5DB699C48C0A9E92A562ABA7F32D538059AE4BAA2B335F"
+  },
+  "limitations": [
+    "Complete all-method REA output exceeded the bounded representation budget; selected central declarations and native boundaries were inspected successfully.",
+    "Public/protected declaration counts include embedded dependencies and obsolete declarations; counts are not feature counts or runtime verification.",
+    "Reference native engine bodies and full dynamic behavior were not qualified.",
+    "Source URLs and original identities remain in retained external evidence, outside tracked repository content."
+  ]
+}

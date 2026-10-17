@@ -1,0 +1,111 @@
+name: Publish qualified stable packages
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Stable main-branch tag, for example v1.0.0
+        required: true
+        type: string
+      qualification_run:
+        description: Successful production-qualification workflow run ID
+        required: true
+        type: string
+      artifact_id:
+        description: Immutable qualified artifact ID containing packages and evidence
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: fluent-pdf-production-publish
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify stable tag, main and qualification provenance
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          QUALIFICATION_RUN: ${{ inputs.qualification_run }}
+          QUALIFIED_ARTIFACT_ID: ${{ inputs.artifact_id }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:GITHUB_REF -ne 'refs/heads/main') { throw 'Dispatch only from main.' }
+          if ($env:RELEASE_TAG -notmatch '^v\d+\.\d+\.\d+$') { throw 'Stable tag required.' }
+          if ($env:QUALIFICATION_RUN -notmatch '^\d+$' -or $env:QUALIFIED_ARTIFACT_ID -notmatch '^\d+$') { throw 'Numeric run/artifact IDs required.' }
+          $head = (git rev-parse HEAD).Trim()
+          $tagCommit = (git rev-parse "$($env:RELEASE_TAG)^{commit}").Trim()
+          if ($LASTEXITCODE -ne 0 -or $tagCommit -cne $head) { throw 'Tag must match the current main commit.' }
+          $readiness = Get-Content specs/release-readiness.json -Raw | ConvertFrom-Json
+          if ($env:RELEASE_TAG -cne "v$($readiness.packageVersion)") { throw 'Tag/package version mismatch.' }
+          $run = gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:QUALIFICATION_RUN" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0 -or $run.head_sha -cne $head -or $run.conclusion -cne 'success' -or $run.event -notin @('workflow_dispatch','push') -or $run.head_repository.full_name -cne $env:GITHUB_REPOSITORY -or $run.path -cne ".github/workflows/$($readiness.qualificationWorkflow)") { throw 'Untrusted or unsuccessful qualification run.' }
+          $artifact = gh api "repos/$env:GITHUB_REPOSITORY/actions/artifacts/$env:QUALIFIED_ARTIFACT_ID" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0 -or $artifact.expired -or $artifact.workflow_run.id -ne [long]$env:QUALIFICATION_RUN) { throw 'Artifact does not belong to the qualification run.' }
+      - name: Download exact qualification artifact
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          QUALIFIED_ARTIFACT_ID: ${{ inputs.artifact_id }}
+        run: |
+          gh api "repos/$env:GITHUB_REPOSITORY/actions/artifacts/$env:QUALIFIED_ARTIFACT_ID/zip" > qualified.zip
+          if ($LASTEXITCODE -ne 0) { throw 'Artifact download failed.' }
+          Expand-Archive qualified.zip qualified
+          ./eng/assert-production-ready.ps1 -Stage Publish -EvidenceDirectory qualified/evidence -PackageDirectory qualified/packages
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        id: verified
+        with:
+          name: verified-stable-packages
+          path: qualified/
+          if-no-files-found: error
+          retention-days: 30
+    outputs:
+      artifact_id: ${{ steps.verified.outputs.artifact-id }}
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: nuget
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '10.0.4xx'
+      - name: Retrieve and reverify exact candidate
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERIFIED_ARTIFACT_ID: ${{ needs.verify.outputs.artifact_id }}
+        run: |
+          gh api "repos/$env:GITHUB_REPOSITORY/actions/artifacts/$env:VERIFIED_ARTIFACT_ID/zip" > qualified.zip
+          if ($LASTEXITCODE -ne 0) { throw 'Artifact download failed.' }
+          Expand-Archive qualified.zip qualified
+          ./eng/assert-production-ready.ps1 -Stage Publish -EvidenceDirectory qualified/evidence -PackageDirectory qualified/packages
+      - uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
+        id: login
+        with:
+          user: ${{ vars.NUGET_USER }}
+      - name: Push qualified package and symbol bytes
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($package in Get-ChildItem qualified/packages -Filter '*.nupkg') {
+            dotnet nuget push $package.FullName --source https://api.nuget.org/v3/index.json
+            if ($LASTEXITCODE -ne 0) { throw "Package publication failed: $($package.Name)" }
+          }
