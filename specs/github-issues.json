@@ -1,0 +1,1131 @@
+{
+  "schemaVersion": 1,
+  "verifiedDate": "2026-10-17",
+  "sourceSpecCommit": "68eb09506441c6cea8c791d01f6c529a7ad1c4fb",
+  "roadmap": {
+    "number": 113,
+    "url": "https://github.com/kirakosyan/pdf.net/issues/113"
+  },
+  "issues": [
+    {
+      "requirement": "FP-001",
+      "number": 1,
+      "title": "[FP-001] Public API and provider contracts",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/1",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-002",
+      "number": 2,
+      "title": "[FP-002] Operation policies, diagnostics and resource budgets",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/2",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-003",
+      "number": 4,
+      "title": "[FP-003] PDF syntax and cross-reference reader",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/4",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-004",
+      "number": 5,
+      "title": "[FP-004] Stream filters, object streams and codecs",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/5",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-005",
+      "number": 6,
+      "title": "[FP-005] PDF writer and incremental transactions",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/6",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-006",
+      "number": 30,
+      "title": "[FP-006] Repair, recovery and structural validation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/30",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-007",
+      "number": 7,
+      "title": "[FP-007] Content operators and PDF version negotiation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/7",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-008",
+      "number": 8,
+      "title": "[FP-008] Fonts, embedding, subsetting and fallback",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/8",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-009",
+      "number": 9,
+      "title": "[FP-009] Unicode, bidirectional text and shaping",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/9",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-010",
+      "number": 10,
+      "title": "[FP-010] Vector graphics, color and transparency",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/10",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-011",
+      "number": 11,
+      "title": "[FP-011] Page canvas and geometry",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/11",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-012",
+      "number": 12,
+      "title": "[FP-012] Flow layout and pagination",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/12",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-013",
+      "number": 13,
+      "title": "[FP-013] Tables and data binding",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/13",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-014",
+      "number": 14,
+      "title": "[FP-014] Lists, columns and document composition",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/14",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-015",
+      "number": 15,
+      "title": "[FP-015] Headers, footers, page numbers and contents",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/15",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-016",
+      "number": 16,
+      "title": "[FP-016] Page organization and imposition",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/16",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-017",
+      "number": 17,
+      "title": "[FP-017] Images and reusable page graphics",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/17",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-018",
+      "number": 36,
+      "title": "[FP-018] Watermarks, stamps and artifacts",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/36",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-019",
+      "number": 18,
+      "title": "[FP-019] Annotation model and appearance streams",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/18",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-020",
+      "number": 19,
+      "title": "[FP-020] Links, destinations, actions and navigation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/19",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-021",
+      "number": 20,
+      "title": "[FP-021] Outlines, page labels and viewer preferences",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/20",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-022",
+      "number": 21,
+      "title": "[FP-022] Metadata and document identity",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/21",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-023",
+      "number": 22,
+      "title": "[FP-023] Attachments, portfolios and associated files",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/22",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-024",
+      "number": 23,
+      "title": "[FP-024] Optional-content layers",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/23",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-025",
+      "number": 24,
+      "title": "[FP-025] Text extraction with layout geometry",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/24",
+      "state": "OPEN",
+      "area": "extraction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-026",
+      "number": 38,
+      "title": "[FP-026] Search, regex and text replacement",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/38",
+      "state": "OPEN",
+      "area": "extraction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-027",
+      "number": 39,
+      "title": "[FP-027] Table and structured-data extraction",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/39",
+      "state": "OPEN",
+      "area": "extraction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-028",
+      "number": 37,
+      "title": "[FP-028] Graphics, image, font and artifact extraction",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/37",
+      "state": "OPEN",
+      "area": "extraction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-029",
+      "number": 55,
+      "title": "[FP-029] Document comparison and change reports",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/55",
+      "state": "OPEN",
+      "area": "extraction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-030",
+      "number": 49,
+      "title": "[FP-030] True redaction and comprehensive sanitization",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/49",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-031",
+      "number": 28,
+      "title": "[FP-031] Password and certificate encryption",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/28",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-032",
+      "number": 50,
+      "title": "[FP-032] Digital signatures and certification",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/50",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-033",
+      "number": 51,
+      "title": "[FP-033] Signature verification and trust decisions",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/51",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-034",
+      "number": 52,
+      "title": "[FP-034] HSM and external signing providers",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/52",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-035",
+      "number": 53,
+      "title": "[FP-035] PAdES, timestamps and long-term validation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/53",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-036",
+      "number": 25,
+      "title": "[FP-036] AcroForm creation and editing",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/25",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-037",
+      "number": 26,
+      "title": "[FP-037] Form filling, data exchange and flattening",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/26",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-038",
+      "number": 56,
+      "title": "[FP-038] XFA forms and conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/56",
+      "state": "OPEN",
+      "area": "interaction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-039",
+      "number": 57,
+      "title": "[FP-039] Document JavaScript and sandboxed calculations",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/57",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-040",
+      "number": 27,
+      "title": "[FP-040] PDF page rendering",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/27",
+      "state": "OPEN",
+      "area": "rendering",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-041",
+      "number": 58,
+      "title": "[FP-041] Color-managed production rendering",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/58",
+      "state": "OPEN",
+      "area": "rendering",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-042",
+      "number": 60,
+      "title": "[FP-042] Headless viewing primitives",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/60",
+      "state": "OPEN",
+      "area": "rendering",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-043",
+      "number": 61,
+      "title": "[FP-043] Cross-platform printing",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/61",
+      "state": "OPEN",
+      "area": "rendering",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-044",
+      "number": 32,
+      "title": "[FP-044] HTML, CSS and JavaScript to PDF",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/32",
+      "state": "OPEN",
+      "area": "web",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-045",
+      "number": 33,
+      "title": "[FP-045] Resource loading, authentication and network policy",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/33",
+      "state": "OPEN",
+      "area": "web",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-046",
+      "number": 34,
+      "title": "[FP-046] Dynamic-page readiness and browser lifecycle",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/34",
+      "state": "OPEN",
+      "area": "web",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-047",
+      "number": 35,
+      "title": "[FP-047] Print CSS, HTML pagination and accessibility",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/35",
+      "state": "OPEN",
+      "area": "web",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-048",
+      "number": 62,
+      "title": "[FP-048] Web framework and XAML adapters",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/62",
+      "state": "OPEN",
+      "area": "web",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-049",
+      "number": 63,
+      "title": "[FP-049] Isolated rendering service and container deployment",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/63",
+      "state": "OPEN",
+      "area": "web",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-050",
+      "number": 41,
+      "title": "[FP-050] Text, Markdown and structured input",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/41",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-051",
+      "number": 64,
+      "title": "[FP-051] Raster documents to PDF",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/64",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-052",
+      "number": 65,
+      "title": "[FP-052] SVG import and vector export",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/65",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-053",
+      "number": 42,
+      "title": "[FP-053] Word document conversion adapter",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/42",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-054",
+      "number": 66,
+      "title": "[FP-054] Spreadsheet and tabular conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/66",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-055",
+      "number": 67,
+      "title": "[FP-055] Presentation conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/67",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-056",
+      "number": 68,
+      "title": "[FP-056] PDF to HTML and semantic web output",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/68",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-057",
+      "number": 69,
+      "title": "[FP-057] EPUB and electronic-book conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/69",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-058",
+      "number": 70,
+      "title": "[FP-058] PostScript, EPS and printer-language import",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/70",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-059",
+      "number": 71,
+      "title": "[FP-059] XPS and OpenXPS conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/71",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-060",
+      "number": 72,
+      "title": "[FP-060] TeX and LaTeX conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/72",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-061",
+      "number": 73,
+      "title": "[FP-061] CGM and platform metafile conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/73",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-062",
+      "number": 74,
+      "title": "[FP-062] XSL-FO and XML transformation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/74",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-063",
+      "number": 75,
+      "title": "[FP-063] OFD fixed-layout conversion",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/75",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-064",
+      "number": 59,
+      "title": "[FP-064] PDF raster export and image containers",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/59",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-065",
+      "number": 76,
+      "title": "[FP-065] Conversion orchestration and format discovery",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/76",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-066",
+      "number": 29,
+      "title": "[FP-066] PDF/A archival profiles",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/29",
+      "state": "OPEN",
+      "area": "compliance",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-067",
+      "number": 44,
+      "title": "[FP-067] Tagged PDF and PDF/UA accessibility",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/44",
+      "state": "OPEN",
+      "area": "compliance",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-068",
+      "number": 77,
+      "title": "[FP-068] PDF/X prepress profiles",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/77",
+      "state": "OPEN",
+      "area": "compliance",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-069",
+      "number": 78,
+      "title": "[FP-069] PDF/E engineering and advanced content",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/78",
+      "state": "OPEN",
+      "area": "compliance",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-070",
+      "number": 79,
+      "title": "[FP-070] Electronic invoices and associated XML",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/79",
+      "state": "OPEN",
+      "area": "compliance",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-071",
+      "number": 80,
+      "title": "[FP-071] Preflight, remediation and audit reports",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/80",
+      "state": "OPEN",
+      "area": "compliance",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-072",
+      "number": 81,
+      "title": "[FP-072] Optimization, compression and deduplication",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/81",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-073",
+      "number": 82,
+      "title": "[FP-073] Linearization and progressive access",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/82",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-074",
+      "number": 45,
+      "title": "[FP-074] Local OCR provider and wordnet reuse",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/45",
+      "state": "OPEN",
+      "area": "ocr",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-075",
+      "number": 46,
+      "title": "[FP-075] Multilingual OCR and language models",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/46",
+      "state": "OPEN",
+      "area": "ocr",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-076",
+      "number": 47,
+      "title": "[FP-076] Searchable PDF and structured OCR output",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/47",
+      "state": "OPEN",
+      "area": "ocr",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-077",
+      "number": 48,
+      "title": "[FP-077] Scan preprocessing and reading order",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/48",
+      "state": "OPEN",
+      "area": "ocr",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-078",
+      "number": 83,
+      "title": "[FP-078] Barcode and QR document workflows",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/83",
+      "state": "OPEN",
+      "area": "ocr",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-079",
+      "number": 84,
+      "title": "[FP-079] Opt-in document intelligence providers",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/84",
+      "state": "OPEN",
+      "area": "intelligence",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-080",
+      "number": 85,
+      "title": "[FP-080] Semantic chunking and retrieval adapters",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/85",
+      "state": "OPEN",
+      "area": "intelligence",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-081",
+      "number": 86,
+      "title": "[FP-081] Windows COM interoperability",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/86",
+      "state": "OPEN",
+      "area": "integration",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-082",
+      "number": 87,
+      "title": "[FP-082] Application integrations and viewer controls",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/87",
+      "state": "OPEN",
+      "area": "integration",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-083",
+      "number": 88,
+      "title": "[FP-083] Command-line and batch automation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/88",
+      "state": "OPEN",
+      "area": "integration",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-084",
+      "number": 89,
+      "title": "[FP-084] Developer documentation and executable examples",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/89",
+      "state": "OPEN",
+      "area": "integration",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-085",
+      "number": 3,
+      "title": "[FP-085] Native provider deployment and isolation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/3",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-086",
+      "number": 90,
+      "title": "[FP-086] Runtime and architecture qualification",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/90",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-087",
+      "number": 91,
+      "title": "[FP-087] Async processing, concurrency and cancellation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/91",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-088",
+      "number": 92,
+      "title": "[FP-088] Performance, streaming and resource envelopes",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/92",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-089",
+      "number": 93,
+      "title": "[FP-089] Security, fuzzing and malformed-content robustness",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/93",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-090",
+      "number": 94,
+      "title": "[FP-090] Independent fidelity and interoperability corpus",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/94",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-091",
+      "number": 95,
+      "title": "[FP-091] Deterministic output, caching and tenancy",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/95",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-092",
+      "number": 96,
+      "title": "[FP-092] Observability and support diagnostics",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/96",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-093",
+      "number": 97,
+      "title": "[FP-093] Reproducible NuGet packages and API compatibility",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/97",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-094",
+      "number": 112,
+      "title": "[FP-094] Production release and Trusted Publishing",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/112",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-095",
+      "number": 98,
+      "title": "[FP-095] Dependency licensing and supply-chain inventory",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/98",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-096",
+      "number": 99,
+      "title": "[FP-096] PDF Reader placeholder boundary",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/99",
+      "state": "CLOSED",
+      "area": "reader",
+      "releaseRequired": false,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-097",
+      "number": 100,
+      "title": "[FP-097] Production document workflow acceptance",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/100",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-098",
+      "number": 31,
+      "title": "[FP-098] PDF 2.0 and extension preservation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/31",
+      "state": "OPEN",
+      "area": "foundation",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-099",
+      "number": 40,
+      "title": "[FP-099] Document event hooks and data-source generation",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/40",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-100",
+      "number": 101,
+      "title": "[FP-100] Document collections, packages and interchange",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/101",
+      "state": "OPEN",
+      "area": "integration",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-101",
+      "number": 102,
+      "title": "[FP-101] Accessibility remediation and semantic authoring",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/102",
+      "state": "OPEN",
+      "area": "compliance",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-102",
+      "number": 54,
+      "title": "[FP-102] Signature-preserving editing and revision audit",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/54",
+      "state": "OPEN",
+      "area": "security",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-103",
+      "number": 103,
+      "title": "[FP-103] Image processing and document cleanup",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/103",
+      "state": "OPEN",
+      "area": "rendering",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-104",
+      "number": 104,
+      "title": "[FP-104] Business data extraction and export schemas",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/104",
+      "state": "OPEN",
+      "area": "extraction",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-105",
+      "number": 105,
+      "title": "[FP-105] Cross-platform native distribution packages",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/105",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-106",
+      "number": 106,
+      "title": "[FP-106] Compatibility policy and long-term maintenance",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/106",
+      "state": "OPEN",
+      "area": "production",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-107",
+      "number": 107,
+      "title": "[FP-107] DjVu and CDR document import",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/107",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-108",
+      "number": 108,
+      "title": "[FP-108] PDF to Markdown and text interchange",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/108",
+      "state": "OPEN",
+      "area": "conversion",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-109",
+      "number": 109,
+      "title": "[FP-109] Task-oriented facades and plugin composition",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/109",
+      "state": "OPEN",
+      "area": "integration",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-110",
+      "number": 110,
+      "title": "[FP-110] HTML element and block extraction",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/110",
+      "state": "OPEN",
+      "area": "web",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-111",
+      "number": 111,
+      "title": "[FP-111] Hyphenation and advanced text-fit controls",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/111",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    },
+    {
+      "requirement": "FP-112",
+      "number": 43,
+      "title": "[FP-112] Document templates and mail merge",
+      "url": "https://github.com/kirakosyan/pdf.net/issues/43",
+      "state": "OPEN",
+      "area": "composition",
+      "releaseRequired": true,
+      "assignees": []
+    }
+  ]
+}

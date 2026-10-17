@@ -1,0 +1,3415 @@
+{
+  "schemaVersion": 1,
+  "product": "Fluent.Pdf",
+  "baselineDate": "2026-10-17",
+  "targetVersion": "1.0.0",
+  "features": [
+    {
+      "id": "FP-001",
+      "title": "Public API and provider contracts",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [],
+      "scope": "Define a small fluent facade and editable document model with provider-neutral value types, stream ownership, disposal, immutable options and explicit capabilities.",
+      "acceptance": [
+        "Publish an API contract with C# and VB examples",
+        "Keep public signatures consistent across all target frameworks",
+        "A missing optional provider produces a typed diagnostic without silently degrading output"
+      ],
+      "validation": "Compile API contract consumers for every TFM; compare API baselines and exercise disposed objects.",
+      "evidence": [
+        "D01",
+        "D02",
+        "A01",
+        "B01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-002",
+      "title": "Operation policies, diagnostics and resource budgets",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001"
+      ],
+      "scope": "Implement strict and permissive policies with stable diagnostic codes, bounded input/output, decompression, object counts, recursion, pixels, elapsed time and cancellation.",
+      "acceptance": [
+        "Strict mode rejects unsupported requested behavior before returning success",
+        "Permissive results include every loss with page/object context",
+        "All budget failures release handles and leave atomic outputs unpublished"
+      ],
+      "validation": "Boundary and overflow tests for each limit; cancellation at parse, render and save stages.",
+      "evidence": [
+        "ENH",
+        "A01",
+        "B01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-003",
+      "title": "PDF syntax and cross-reference reader",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-002"
+      ],
+      "scope": "Read PDF 1.2 through 2.0 headers, indirect references, classic xref tables, xref streams, hybrid references, trailers and multiple revisions without executing document actions.",
+      "acceptance": [
+        "Resolve object generations and incremental revisions correctly",
+        "Reject cyclic or overflowing offsets within configured limits",
+        "Preserve unknown dictionary keys and opaque streams where safe"
+      ],
+      "validation": "Independent fixtures for each xref form, truncated files, revision chains and object-number collisions.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-004",
+      "title": "Stream filters, object streams and codecs",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003"
+      ],
+      "scope": "Decode and encode Flate, LZW, ASCII85, ASCIIHex, RunLength, predictors, DCT, JPX, CCITT, JBIG2 and embedded object streams through audited providers where needed.",
+      "acceptance": [
+        "Honor filter chains and decode parameters",
+        "Enforce expanded-byte and image limits before allocation",
+        "Identify unsupported or damaged codecs precisely without returning corrupt content"
+      ],
+      "validation": "Known-answer codec corpus, predictor matrices, decompression bombs and malformed image inputs.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-005",
+      "title": "PDF writer and incremental transactions",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-004"
+      ],
+      "scope": "Write full and incremental revisions, preserve object identities, cross references, trailer IDs and signature byte ranges, and expose atomic file and caller-owned stream saves.",
+      "acceptance": [
+        "A failed save does not replace the destination",
+        "Incremental updates preserve previous signed bytes",
+        "Reopened output passes two independent readers"
+      ],
+      "validation": "Round-trip object graph tests; fault injection at every write boundary; signed incremental fixtures.",
+      "evidence": [
+        "A01",
+        "B01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-006",
+      "title": "Repair, recovery and structural validation",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-004",
+        "FP-005"
+      ],
+      "scope": "Offer explicit repair for broken xrefs, orphan objects and recoverable streams with a machine-readable repair ledger and an untouched source copy.",
+      "acceptance": [
+        "Normal parsing never silently repairs",
+        "Every repaired or discarded object is recorded",
+        "Unsafe ambiguous recovery fails with actionable diagnostics"
+      ],
+      "validation": "Damaged corpus with expected repair ledgers; recovered outputs checked independently.",
+      "evidence": [
+        "D01",
+        "A01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-007",
+      "title": "Content operators and PDF version negotiation",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-005"
+      ],
+      "scope": "Expose typed low-level operators, graphics state, content stream editing and feature-driven PDF version selection, including extension dictionaries and PDF 2.0 constructs.",
+      "acceptance": [
+        "Balance graphics and text state correctly",
+        "Never declare a lower version than emitted features require",
+        "Unknown operators and extensions retain explicit preservation or rejection policy"
+      ],
+      "validation": "Operator grammar fixtures; version compatibility matrix; independent syntax validation.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-008",
+      "title": "Fonts, embedding, subsetting and fallback",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-004",
+        "FP-005",
+        "FP-007"
+      ],
+      "scope": "Support the base 14 fonts, Type 1, TrueType, OpenType/CFF, Type 3, CID/CJK, encodings, ToUnicode maps, embedding permissions, extraction and deterministic caller-provided fallback.",
+      "acceptance": [
+        "Subset embedded fonts without missing used glyphs",
+        "Report missing glyphs and restricted embedding",
+        "Resolve fonts without depending on machine-specific search order in deterministic mode"
+      ],
+      "validation": "Licensed font corpus, CJK/CID mappings, extraction round trips and cross-platform glyph comparisons.",
+      "evidence": [
+        "A01",
+        "D01",
+        "WN01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-009",
+      "title": "Unicode, bidirectional text and shaping",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-008"
+      ],
+      "scope": "Shape complex scripts, ligatures, combining marks, vertical CJK and right-to-left paragraphs while preserving logical Unicode and glyph geometry.",
+      "acceptance": [
+        "Arabic and Indic joining match reference shaping runs",
+        "Extracted text retains logical reading order",
+        "Fallback across multiple fonts preserves metrics and accessible text"
+      ],
+      "validation": "HarfBuzz known-answer shaping, multilingual visual corpus and copy/search tests.",
+      "evidence": [
+        "ENH",
+        "A01",
+        "WN01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-010",
+      "title": "Vector graphics, color and transparency",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-007"
+      ],
+      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "acceptance": [
+        "Maintain graphics-state isolation",
+        "Preserve vector output and transparency semantics",
+        "Report color-profile substitutions and unsupported blend behavior"
+      ],
+      "validation": "Independent raster comparisons for color spaces, clipping and compositing; ICC fixture validation.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-011",
+      "title": "Page canvas and geometry",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-008",
+        "FP-010"
+      ],
+      "scope": "Create pages and place text, images and paths using explicit units, transformations, page boxes, rotation, z-order, margins and coordinate conversions.",
+      "acceptance": [
+        "MediaBox, CropBox, BleedBox, TrimBox and ArtBox remain consistent",
+        "Transformed bounding boxes and hit tests agree",
+        "Inputs with nonfinite geometry fail before writing"
+      ],
+      "validation": "Geometric known-answer fixtures across rotations and nonzero page origins.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-012",
+      "title": "Flow layout and pagination",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-009",
+        "FP-011"
+      ],
+      "scope": "Provide paragraph flow, runs, styles, wrapping, alignment, spacing, widow/orphan rules, keep-with-next, floating elements and deterministic pagination.",
+      "acceptance": [
+        "No text overlaps or disappears at page boundaries",
+        "Overflow behavior is configurable and diagnostic",
+        "Repeated layout with identical inputs produces identical geometry"
+      ],
+      "validation": "Multilingual business-document corpus; stress long words, floats, page breaks and small frames.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-013",
+      "title": "Tables and data binding",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-012"
+      ],
+      "scope": "Create nested tables with merged cells, borders, padding, styles, fixed/auto widths, repeated headers, row splitting and bounded data-source binding.",
+      "acceptance": [
+        "Keep merged cells and repeat headers correct across pages",
+        "Bind typed records and null values using explicit culture",
+        "Reject cyclic or unbounded data sources within budgets"
+      ],
+      "validation": "Invoice and nested-table goldens; large-table streaming and row-split edge cases.",
+      "evidence": [
+        "A01",
+        "D01",
+        "WN01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-014",
+      "title": "Lists, columns and document composition",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-012"
+      ],
+      "scope": "Compose numbered and bulleted lists, nested list restarts, multi-column text, section breaks, footnotes, endnotes and reusable content components.",
+      "acceptance": [
+        "List counters and restarts remain stable across pages",
+        "Footnotes remain associated with their references",
+        "Column reading order matches tagged and extracted output"
+      ],
+      "validation": "Booklet, legal-outline and multi-column fixtures with structure and raster assertions.",
+      "evidence": [
+        "ENH",
+        "A01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-015",
+      "title": "Headers, footers, page numbers and contents",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-012",
+        "FP-013",
+        "FP-014"
+      ],
+      "scope": "Generate text/image or HTML headers and footers, first/odd/even variants, page totals, page labels, tables of contents and index links.",
+      "acceptance": [
+        "Resolve final page counts without unstable pagination",
+        "Contents links point to final destinations",
+        "Decorative headers are marked as artifacts in tagged output"
+      ],
+      "validation": "Multi-pass layout convergence tests; changing document length and page numbering restarts.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-016",
+      "title": "Page organization and imposition",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-011"
+      ],
+      "scope": "Merge, split, extract, insert, copy, delete, reorder, rotate, crop, resize, scale, tile and impose pages with explicit range syntax.",
+      "acceptance": [
+        "Remap links, fields, outlines, tags and shared resources safely",
+        "Handle encrypted and signed sources using explicit policy",
+        "Preserve page geometry and source ownership"
+      ],
+      "validation": "Mixed-document merge/split round trips, booklet/N-up fixtures and duplicate-field collision tests.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-017",
+      "title": "Images and reusable page graphics",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-004",
+        "FP-010",
+        "FP-011"
+      ],
+      "scope": "Embed, replace, remove and extract images, masks and reusable Form XObjects; preserve resolution, alpha, color profiles and transformations.",
+      "acceptance": [
+        "Avoid recompressing images in lossless mode",
+        "Deduplicate only identical safe resources",
+        "Respect image pixel limits and orientation metadata"
+      ],
+      "validation": "Transparent, CMYK, monochrome and large-image fixtures; original-byte preservation checks.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-018",
+      "title": "Watermarks, stamps and artifacts",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-011",
+        "FP-015",
+        "FP-017"
+      ],
+      "scope": "Apply, inspect, update and remove text, image, HTML and PDF-page stamps with opacity, rotation, repetition, placement and artifact classification.",
+      "acceptance": [
+        "Target exact page ranges and foreground/background layers",
+        "Removal identifies owned stamps without deleting unrelated content",
+        "Tagged output distinguishes content from decoration"
+      ],
+      "validation": "Repeated stamping/removal cycles; clipping and transparency visual fixtures.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-019",
+      "title": "Annotation model and appearance streams",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-009",
+        "FP-011"
+      ],
+      "scope": "Create, edit, extract, import and delete comments, highlights, underline, strikeout, squiggle, ink, stamps, shapes, free text, carets, file and rich-media annotations.",
+      "acceptance": [
+        "Preserve replies, authors, dates, states and popup relationships",
+        "Appearance streams match annotation geometry",
+        "Flattening preserves appearance and removes intended interactivity"
+      ],
+      "validation": "Annotation subtype corpus; XFDF round trips; viewer interoperability and flattening checks.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-020",
+      "title": "Links, destinations, actions and navigation",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-011"
+      ],
+      "scope": "Manage named destinations, internal/external links, URI, GoTo, remote, launch and document/page actions with explicit safety policies.",
+      "acceptance": [
+        "Never execute imported actions while parsing or rendering",
+        "Destination remapping survives page edits",
+        "Inspection and sanitization enumerate every action location"
+      ],
+      "validation": "Nested action graphs, malformed destinations, page movement and safe-mode tests.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-021",
+      "title": "Outlines, page labels and viewer preferences",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-016",
+        "FP-020"
+      ],
+      "scope": "Manage nested bookmarks, destinations, numbering styles, page layout/mode, initial view, transitions and presentation preferences.",
+      "acceptance": [
+        "Detect outline cycles",
+        "Preserve destinations through merge/split",
+        "Unsupported presentation settings remain inspectable and diagnostic"
+      ],
+      "validation": "Deep outline trees, page-label ranges and independent-reader round trips.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-022",
+      "title": "Metadata and document identity",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005"
+      ],
+      "scope": "Read and write Info dictionaries, XMP packets, custom namespaces, document IDs, creation/modification timestamps and metadata synchronization.",
+      "acceptance": [
+        "Preserve unknown XMP namespaces safely",
+        "Deterministic mode controls time and identifiers explicitly",
+        "Metadata removal covers revision and embedded-file policy"
+      ],
+      "validation": "XMP schema fixtures, Unicode metadata, malformed XML and deterministic byte comparisons.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-023",
+      "title": "Attachments, portfolios and associated files",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-022"
+      ],
+      "scope": "Add, enumerate, extract, remove and validate embedded files, file specifications, portfolios/collections, AF relationships, checksums and metadata.",
+      "acceptance": [
+        "Extraction prevents path traversal and overwrite surprises",
+        "Associated-file relationships survive saves",
+        "Removal and sanitization account for alternate revisions and collection entries"
+      ],
+      "validation": "Portfolio and PDF/A-3 fixtures, unsafe filenames, decompression limits and attachment round trips.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-024",
+      "title": "Optional-content layers",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-007",
+        "FP-010",
+        "FP-016"
+      ],
+      "scope": "Inspect, create, edit and flatten optional-content groups and configurations, visibility expressions, intents and print/view usage.",
+      "acceptance": [
+        "Rendering honors the selected configuration",
+        "Page extraction preserves valid group references",
+        "Flattening removes hidden content according to explicit policy"
+      ],
+      "validation": "Nested visibility expressions and layer-aware render/extract fixtures.",
+      "evidence": [
+        "A01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-025",
+      "title": "Text extraction with layout geometry",
+      "area": "extraction",
+      "phase": "04-extraction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-004",
+        "FP-008",
+        "FP-009"
+      ],
+      "scope": "Extract plain, raw and layout-preserved text, characters, words, lines and paragraphs with page rectangles, baselines, font attributes, reading order and Unicode confidence.",
+      "acceptance": [
+        "Expose raw order separately from inferred reading order",
+        "Return stable coordinates through rotations and page boxes",
+        "Identify unmapped or ambiguous characters instead of inventing certainty"
+      ],
+      "validation": "Born-digital multilingual corpus with expected text and word boxes; independent extractor comparison.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-026",
+      "title": "Search, regex and text replacement",
+      "area": "extraction",
+      "phase": "04-extraction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-011",
+        "FP-025"
+      ],
+      "scope": "Search by literal, regex, region and style; replace occurrences, runs or paragraphs with bounded matching and explicit reflow/font policies.",
+      "acceptance": [
+        "Regex execution has a deadline",
+        "Cross-run matches preserve unrelated content and accessibility data",
+        "Overflow or unavailable glyphs produce policy-controlled failures"
+      ],
+      "validation": "Cross-stream text, ligatures, regex denial cases and replacement raster/text verification.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-027",
+      "title": "Table and structured-data extraction",
+      "area": "extraction",
+      "phase": "04-extraction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025"
+      ],
+      "scope": "Detect ruled and borderless tables, merged cells, repeating headers and multi-page tables; export typed cells, CSV, JSON and spreadsheet-friendly structures.",
+      "acceptance": [
+        "Report inferred cell boundaries and confidence",
+        "Retain page coordinates and source provenance",
+        "Culture-sensitive numbers are parsed only with explicit settings"
+      ],
+      "validation": "Labeled table corpus; cell precision/recall and multi-page merge accuracy reports.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-028",
+      "title": "Graphics, image, font and artifact extraction",
+      "area": "extraction",
+      "phase": "04-extraction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-007",
+        "FP-008",
+        "FP-017",
+        "FP-018"
+      ],
+      "scope": "Enumerate vector paths, image occurrences, original image bytes, embedded fonts, text/image stamps and page artifacts with transforms and source references.",
+      "acceptance": [
+        "Distinguish shared resources from page occurrences",
+        "Preserve original encoded bytes where requested",
+        "Expose restrictions and unknown resource types accurately"
+      ],
+      "validation": "Known-resource fixtures, duplicate XObjects, nested transforms and content-operator cross checks.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-029",
+      "title": "Document comparison and change reports",
+      "area": "extraction",
+      "phase": "04-extraction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-027",
+        "FP-040"
+      ],
+      "scope": "Compare text, structure, geometry and rendered appearance with configurable tolerances and annotated PDF, JSON and HTML reports.",
+      "acceptance": [
+        "Separate textual, visual and metadata differences",
+        "Ignore configured volatile fields reproducibly",
+        "Keep page/object provenance for each change"
+      ],
+      "validation": "Labeled changed-document corpus; precision/recall, rotated pages and unchanged-document zero-diff tests.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-030",
+      "title": "True redaction and comprehensive sanitization",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-017",
+        "FP-019",
+        "FP-020",
+        "FP-023",
+        "FP-025"
+      ],
+      "scope": "Remove selected text, images and vector content; sanitize metadata, attachments, scripts, hidden layers and prior revisions using a full rewrite.",
+      "acceptance": [
+        "Redacted content cannot be recovered from objects, streams or prior revisions",
+        "A visual overlay alone never counts as redaction",
+        "Produce a removal audit without leaking removed content"
+      ],
+      "validation": "Independent byte/object/text/image recovery attempts; signed-file policy and overlapping-content fixtures.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-031",
+      "title": "Password and certificate encryption",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-005",
+        "FP-023"
+      ],
+      "scope": "Read and write standard password security and public-key certificate encryption, permission flags, crypt filters and current AES modes; handle legacy modes for compatibility with explicit policy.",
+      "acceptance": [
+        "Authentication distinguishes owner and user credentials",
+        "Weak encryption is never selected by default",
+        "Credentials and decrypted content stay out of logs and temporary files"
+      ],
+      "validation": "Published crypto known-answer vectors; independent-reader interoperability and wrong-password tests.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-032",
+      "title": "Digital signatures and certification",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-022",
+        "FP-031"
+      ],
+      "scope": "Sign with PKCS#12, platform certificate stores and caller-supplied signers using CMS, detached signatures, visible appearances, multiple signatures and DocMDP/FieldMDP policies.",
+      "acceptance": [
+        "Reserve and validate byte ranges correctly",
+        "Later edits obey certification permissions",
+        "Signing failure leaves no partially published result"
+      ],
+      "validation": "Independent signature validators; multi-signature revisions, oversized signatures and certification tests.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-033",
+      "title": "Signature verification and trust decisions",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-032"
+      ],
+      "scope": "Verify cryptographic integrity, signer chains, signed revisions, certification permissions, timestamp trust and tampering with explicit trust-store and offline/revocation policy.",
+      "acceptance": [
+        "Report mathematical validity separately from identity trust",
+        "Unknown/offline revocation never becomes an unconditional valid result",
+        "Identify which revisions are signed and later modifications"
+      ],
+      "validation": "Trusted/untrusted/expired/revoked chains, tampered byte ranges and offline fixtures.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-034",
+      "title": "HSM and external signing providers",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-032",
+        "FP-033"
+      ],
+      "scope": "Support PKCS#11 hardware modules, non-exportable keys and asynchronous external signing with bounded sessions and provider-neutral contracts.",
+      "acceptance": [
+        "Private keys never need exporting",
+        "Handle login, PIN and hardware errors without secret logging",
+        "Verify returned signatures before committing output"
+      ],
+      "validation": "Software-token integration tests, mocked remote failures, concurrency and session-leak checks.",
+      "evidence": [
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-035",
+      "title": "PAdES, timestamps and long-term validation",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-032",
+        "FP-033",
+        "FP-034"
+      ],
+      "scope": "Support PAdES B-B, B-T, B-LT and B-LTA, RFC 3161 timestamps, DSS/VRI data, certificate/revocation embedding and renewal.",
+      "acceptance": [
+        "Build the requested profile with independently checked evidence",
+        "Network endpoints require explicit policy and timeouts",
+        "Preserve validation evidence across incremental renewals"
+      ],
+      "validation": "Independent PAdES validator reports; stale/missing OCSP/CRL/TSA data and archival renewal fixtures.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-036",
+      "title": "AcroForm creation and editing",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-008",
+        "FP-011",
+        "FP-019"
+      ],
+      "scope": "Create and edit text, checkbox, radio, choice, push-button and signature fields, widgets, names, flags, appearances and calculations metadata.",
+      "acceptance": [
+        "Field trees and duplicate names remain valid",
+        "Unicode field values have usable appearances",
+        "Tab order and tagged field relationships are preserved"
+      ],
+      "validation": "Form subtype corpus; independent viewer fill/edit round trips and collision tests.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-037",
+      "title": "Form filling, data exchange and flattening",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-016",
+        "FP-036"
+      ],
+      "scope": "Fill and extract field values, import/export FDF, XFDF, XML and JSON, copy fields, decorate widgets and flatten selected or all fields.",
+      "acceptance": [
+        "Checkbox/radio export values retain semantics",
+        "Generated appearances remain visible without viewer regeneration",
+        "Selective flattening preserves remaining fields and signatures"
+      ],
+      "validation": "Data-format round trips, XML entity rejection and viewer-independent raster checks.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-038",
+      "title": "XFA forms and conversion",
+      "area": "interaction",
+      "phase": "03-interaction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-012",
+        "FP-036",
+        "FP-037"
+      ],
+      "scope": "Inspect and fill static and dynamic XFA, manipulate XML data and template packets, render supported layouts and convert to AcroForm or flattened PDF.",
+      "acceptance": [
+        "Declare supported XFA template constructs precisely",
+        "Preserve data and field identities during conversion",
+        "Unsupported dynamic behavior fails explicitly in strict mode"
+      ],
+      "validation": "Licensed static/dynamic XFA corpus with expected field data, page counts and visual outputs.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-039",
+      "title": "Document JavaScript and sandboxed calculations",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-020",
+        "FP-036",
+        "FP-037"
+      ],
+      "scope": "Inspect, add, remove and optionally evaluate document scripts, field calculations and validation inside an isolated restricted engine.",
+      "acceptance": [
+        "Execution is opt-in and has no ambient file/network/process access",
+        "Enforce CPU, memory and recursion limits",
+        "Report unsupported scripting APIs and action triggers"
+      ],
+      "validation": "Malicious-script corpus, deterministic calculation tests and sandbox escape regression cases.",
+      "evidence": [
+        "A01",
+        "D01",
+        "B01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-040",
+      "title": "PDF page rendering",
+      "area": "rendering",
+      "phase": "06-rendering",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-004",
+        "FP-008",
+        "FP-010",
+        "FP-019",
+        "FP-024"
+      ],
+      "scope": "Render PDF pages and regions using an optional audited engine with text, images, vectors, layers, transparency, annotations and form appearance support.",
+      "acceptance": [
+        "Produce stable DPI, crop, color and alpha semantics",
+        "Keep rendering available without a desktop session",
+        "Handle cancellation, malformed content and native failures within isolation policy"
+      ],
+      "validation": "Large fidelity corpus with independent renderer comparisons and per-platform image metrics.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-041",
+      "title": "Color-managed production rendering",
+      "area": "rendering",
+      "phase": "06-rendering",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-010",
+        "FP-040"
+      ],
+      "scope": "Provide output intents, ICC transforms, overprint handling, spot-color policy, separations, grayscale, antialiasing and print-oriented raster controls.",
+      "acceptance": [
+        "Honor embedded profiles and explicit output profiles",
+        "Report conversion losses and unsupported colorants",
+        "Keep screen preview and print output policies distinct"
+      ],
+      "validation": "ICC/color chart corpus, transparency/overprint tests and independent color-managed comparisons.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-042",
+      "title": "Headless viewing primitives",
+      "area": "rendering",
+      "phase": "06-rendering",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-040"
+      ],
+      "scope": "Expose thumbnails, region/tile rendering, progressive page access, text selection, hit testing and accessible structure for applications without implementing the Reader UI.",
+      "acceptance": [
+        "Tile seams and zoom coordinate mapping remain accurate",
+        "Cancel stale page requests and cap caches",
+        "Public viewing contracts remain independent of any GUI toolkit"
+      ],
+      "validation": "Scrolling/zoom simulation, selection geometry and cache eviction/resource tests.",
+      "evidence": [
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-043",
+      "title": "Cross-platform printing",
+      "area": "rendering",
+      "phase": "06-rendering",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-016",
+        "FP-040",
+        "FP-041"
+      ],
+      "scope": "Provide Windows print-system and Linux/macOS CUPS/IPP adapters for printer selection, copies, duplex, ranges, scaling, N-up and spool status.",
+      "acceptance": [
+        "No implicit printer selection or print on document open",
+        "Return actionable spool and permissions errors",
+        "Document headless and interactive applicability per platform"
+      ],
+      "validation": "Virtual-printer integration plus controlled real-printer qualification; print-job cleanup and cancellation.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-044",
+      "title": "HTML, CSS and JavaScript to PDF",
+      "area": "web",
+      "phase": "07-web",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-008",
+        "FP-040"
+      ],
+      "scope": "Provide an optional Chromium-based HTML/file/URL renderer supporting HTML5, CSS layout, JavaScript, SVG, canvas, web fonts and local resources.",
+      "acceptance": [
+        "Browser engine versions are pinned and inspectable",
+        "Execution uses an isolated per-job browser context",
+        "Browser output imports into the same editable PDF model"
+      ],
+      "validation": "Browser fixture corpus with grid/flex, SVG/canvas, fonts and dynamic layouts on every supported RID.",
+      "evidence": [
+        "B01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-045",
+      "title": "Resource loading, authentication and network policy",
+      "area": "web",
+      "phase": "07-web",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-044"
+      ],
+      "scope": "Resolve base URLs, local files, data URIs and assets; support cookies, headers, proxies, TLS client certificates and authenticated sessions through explicit policies.",
+      "acceptance": [
+        "Default offline policy blocks network access",
+        "Redirects and DNS resolution cannot bypass private-address restrictions",
+        "Credentials, cookies and response bodies are redacted from logs"
+      ],
+      "validation": "SSRF, redirect/DNS-rebinding, local path escape and authenticated site fixture tests.",
+      "evidence": [
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-046",
+      "title": "Dynamic-page readiness and browser lifecycle",
+      "area": "web",
+      "phase": "07-web",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-044",
+        "FP-045"
+      ],
+      "scope": "Wait for explicit selectors, JavaScript promises, fonts, images and bounded network-idle conditions; expose viewport, media, timezone, locale and engine lifecycle controls.",
+      "acceptance": [
+        "Readiness always has a finite timeout",
+        "Background requests cannot hang jobs indefinitely",
+        "Browser crashes recycle workers and preserve useful diagnostics"
+      ],
+      "validation": "SPAs, infinite polling, late fonts, failed images, worker crashes and cancellation scenarios.",
+      "evidence": [
+        "B01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-047",
+      "title": "Print CSS, HTML pagination and accessibility",
+      "area": "web",
+      "phase": "07-web",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-015",
+        "FP-044",
+        "FP-046"
+      ],
+      "scope": "Support @page, margins, paper size, orientation, zoom/fit, repeated table headers, page breaks, HTML headers/footers and tagged output.",
+      "acceptance": [
+        "Pagination respects explicit page-break rules",
+        "Header/footer totals match final pages",
+        "HTML semantics produce a validated structure tree where requested"
+      ],
+      "validation": "Long-report print CSS corpus; margin/header clipping and tagged-output validation.",
+      "evidence": [
+        "B01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-048",
+      "title": "Web framework and XAML adapters",
+      "area": "web",
+      "phase": "07-web",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-044",
+        "FP-047"
+      ],
+      "scope": "Provide optional Razor/CSHTML/MVC/Blazor integrations, legacy ASPX/WebForms adapters on Windows Framework, and an explicit XAML adapter with platform-specific capability reporting.",
+      "acceptance": [
+        "No web-framework types leak into core",
+        "Adapters respect request cancellation and caller stream ownership",
+        "Platform-specific adapters fail clearly outside their declared environments"
+      ],
+      "validation": "Minimal hosted sample consumers for each adapter; concurrent request and legacy-runtime qualification.",
+      "evidence": [
+        "B01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-049",
+      "title": "Isolated rendering service and container deployment",
+      "area": "web",
+      "phase": "07-web",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-044",
+        "FP-045",
+        "FP-046",
+        "FP-085"
+      ],
+      "scope": "Offer local process and optional self-hosted worker transport for browser/native jobs on containers, serverless and restricted hosts without requiring a hosted vendor service.",
+      "acceptance": [
+        "Authenticate worker transport and apply per-tenant quotas",
+        "Retry only idempotent operations with explicit bounds",
+        "No unsolicited binary/model downloads occur at runtime"
+      ],
+      "validation": "Docker rootless and read-only filesystem tests; worker restarts, transport failures and tenant isolation.",
+      "evidence": [
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-050",
+      "title": "Text, Markdown and structured input",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-009",
+        "FP-012",
+        "FP-013",
+        "FP-015"
+      ],
+      "scope": "Generate PDF from UTF text, Markdown, JSON-bound templates and a documented XML document schema with culture, style and resource options.",
+      "acceptance": [
+        "Markdown tables, lists, links and code preserve semantics",
+        "XML external entities and unsafe resource references are disabled",
+        "Unknown schema fields are diagnostic and strict-mode failures"
+      ],
+      "validation": "Source-to-PDF text/structure goldens; malformed input and large-data boundary tests.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-051",
+      "title": "Raster documents to PDF",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-011",
+        "FP-017"
+      ],
+      "scope": "Convert JPEG, PNG, BMP, GIF, TIFF/multipage TIFF, WebP, HEIF/HEIC and other explicitly enumerated image formats through optional codecs with EXIF/DPI/page controls.",
+      "acceptance": [
+        "Multi-frame selection and animation handling are explicit",
+        "Preserve color and alpha according to output policy",
+        "Unsupported codec availability is reported before conversion"
+      ],
+      "validation": "Per-codec multi-frame, orientation, DPI and color fixtures; licensing and RID checks.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-052",
+      "title": "SVG import and vector export",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-009",
+        "FP-010",
+        "FP-017"
+      ],
+      "scope": "Import SVG to PDF with bounded external resources and export PDF pages or selected graphics as SVG while retaining editable vectors where possible.",
+      "acceptance": [
+        "Handle transforms, clipping, text and embedded images",
+        "Disclose rasterized or unsupported constructs",
+        "Reject script execution and unapproved resource loading"
+      ],
+      "validation": "SVG conformance subset, PDF-to-SVG round trips and visual/vector inspection.",
+      "evidence": [
+        "A01",
+        "D01",
+        "B01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-053",
+      "title": "Word document conversion adapter",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-012",
+        "FP-025",
+        "FP-040"
+      ],
+      "scope": "Provide bidirectional DOC/DOCX/RTF conversion through an optional wordnet adapter, with fixed-layout versus editable reconstruction modes and explicit fidelity diagnostics.",
+      "acceptance": [
+        "Pin and record the exact wordnet capability/version used",
+        "No dependency cycle forms between document packages",
+        "Round trips distinguish recovered text from inferred document structure"
+      ],
+      "validation": "Exact-package DOC/DOCX/RTF consumers; invoice, floating objects, tables and scanned-input fixtures.",
+      "evidence": [
+        "D01",
+        "D02",
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-054",
+      "title": "Spreadsheet and tabular conversion",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-013",
+        "FP-027",
+        "FP-040"
+      ],
+      "scope": "Convert PDF tables/pages to XLS, XLSX, ODS, CSV and SpreadsheetML and import spreadsheet sheets/ranges to PDF through isolated format adapters.",
+      "acceptance": [
+        "Export typed cell data and source provenance",
+        "Sheet names, row/column limits and locale are handled explicitly",
+        "Never invent executable formulas from extracted text"
+      ],
+      "validation": "Independent spreadsheet readers; merged cells, formulas-as-data, large tables and sheet print-area fixtures.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-055",
+      "title": "Presentation conversion",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-010",
+        "FP-017",
+        "FP-025",
+        "FP-040"
+      ],
+      "scope": "Convert PDF to editable or image-based PPTX and supported presentation input to PDF with explicit object reconstruction and slide/page geometry.",
+      "acceptance": [
+        "Preserve slide size and page ordering",
+        "Distinguish editable objects from raster fallback",
+        "Disclose missing fonts and unsupported effects"
+      ],
+      "validation": "Independent presentation readers; mixed text/vector/image decks and visual output comparison.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-056",
+      "title": "PDF to HTML and semantic web output",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-019",
+        "FP-020",
+        "FP-025",
+        "FP-028",
+        "FP-040"
+      ],
+      "scope": "Export fixed-layout or reflow HTML with CSS, images, fonts, links, headings and tables; support self-contained output and controlled asset callbacks.",
+      "acceptance": [
+        "Preserve reading order and navigation semantics",
+        "Sanitize generated markup and untrusted actions",
+        "Record all rasterized or unreconstructed content"
+      ],
+      "validation": "Browser rendering versus source raster; accessibility checks, CSP/offline asset and text comparisons.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-057",
+      "title": "EPUB and electronic-book conversion",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-044",
+        "FP-050",
+        "FP-056"
+      ],
+      "scope": "Import EPUB and export PDF content to EPUB and documented MobiXML output with navigation, metadata, images and fixed/reflow layout options.",
+      "acceptance": [
+        "Reject zip traversal and expansion bombs",
+        "Generate valid package/navigation manifests",
+        "Disclose unsupported DRM and layout reconstruction limits"
+      ],
+      "validation": "Independent EPUB validators and readers; RTL, embedded-font and malicious archive fixtures.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-058",
+      "title": "PostScript, EPS and printer-language import",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-040",
+        "FP-085"
+      ],
+      "scope": "Export PDF to PostScript and import PostScript/EPS and PCL 5/5e/5c/XL through optional isolated interpreters with explicit language levels, font and vector support.",
+      "acceptance": [
+        "Interpreter cannot access arbitrary host files or processes",
+        "Unsupported PCL commands and substitutions are diagnostic",
+        "Version-specific supported command tables are published"
+      ],
+      "validation": "Printer-language command corpus, resource exhaustion and isolated-process security tests.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-059",
+      "title": "XPS and OpenXPS conversion",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-010",
+        "FP-017",
+        "FP-025",
+        "FP-040"
+      ],
+      "scope": "Import and export XPS/OpenXPS with page geometry, fonts, vector paths, images and resource dictionaries.",
+      "acceptance": [
+        "Preserve resource relationships and package part names",
+        "Report unsupported print tickets or constructs",
+        "Reject unsafe URI and zip package content"
+      ],
+      "validation": "Independent XPS readers; font obfuscation, color and package traversal fixtures.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-060",
+      "title": "TeX and LaTeX conversion",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-009",
+        "FP-040",
+        "FP-085"
+      ],
+      "scope": "Import TeX/LaTeX through a bounded optional typesetting worker and export supported PDF content to documented TeX reconstruction output.",
+      "acceptance": [
+        "No shell escape or ambient network/file access by default",
+        "Missing packages/fonts are explicit prerequisites",
+        "Export marks inferred math and layout without false semantic guarantees"
+      ],
+      "validation": "Scientific-document fixtures, unavailable-package diagnostics and malicious TeX sandbox tests.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-061",
+      "title": "CGM and platform metafile conversion",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-010",
+        "FP-017",
+        "FP-040"
+      ],
+      "scope": "Import CGM and WMF/EMF/EMF+ and export supported PDF pages to EMF with a cross-platform conversion path and explicit Windows-only adapter boundaries.",
+      "acceptance": [
+        "Preserve vector geometry where format permits",
+        "Handle embedded raster/text resources deterministically",
+        "Report unsupported records and platform restrictions before success"
+      ],
+      "validation": "Per-record format corpus, independent renderers and Windows/Linux/macOS compatibility tests.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-062",
+      "title": "XSL-FO and XML transformation",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-012",
+        "FP-013",
+        "FP-050"
+      ],
+      "scope": "Convert XSL-FO and XML+XSLT documents with page masters, tables, regions and resource controls using an optional standards-oriented layout adapter.",
+      "acceptance": [
+        "Disable external entities, scripts and unapproved URI resolution",
+        "Document the supported XSL-FO element/property matrix",
+        "Unsupported formatting cannot disappear silently"
+      ],
+      "validation": "Formatting-object corpus, malicious stylesheets and page-master/table layout goldens.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-063",
+      "title": "OFD fixed-layout conversion",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-010",
+        "FP-017",
+        "FP-025",
+        "FP-040"
+      ],
+      "scope": "Import and export OFD with text, images, fonts, page geometry, metadata and explicit signature handling.",
+      "acceptance": [
+        "Validate package references and resource ownership",
+        "Distinguish signature preservation from invalidation on conversion",
+        "Report unsupported OFD extensions"
+      ],
+      "validation": "Independent OFD validators/readers, round-trip geometry/text and malformed-package tests.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-064",
+      "title": "PDF raster export and image containers",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-040",
+        "FP-041"
+      ],
+      "scope": "Export selected pages or regions to PNG, JPEG, BMP, GIF, TIFF including multipage and fax compression, WebP and explicitly qualified additional formats.",
+      "acceptance": [
+        "Define DPI, bit depth, quality, alpha and color profiles",
+        "Stream large multipage output within resource limits",
+        "Make lossy conversion and annotation/layer selection explicit"
+      ],
+      "validation": "Decode with independent image libraries; pixel/metadata assertions and multipage memory tests.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-065",
+      "title": "Conversion orchestration and format discovery",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-002",
+        "FP-050",
+        "FP-051",
+        "FP-052",
+        "FP-053",
+        "FP-054",
+        "FP-055",
+        "FP-056",
+        "FP-057",
+        "FP-058",
+        "FP-059",
+        "FP-060",
+        "FP-061",
+        "FP-062",
+        "FP-063",
+        "FP-064"
+      ],
+      "scope": "Publish a machine-readable load/save matrix and unify format detection, progress, conversion options, diagnostics, streams and file output across adapters.",
+      "acceptance": [
+        "Detect by content with extension mismatch diagnostics",
+        "List exact direction, provider and platform support for each format",
+        "No advertised conversion succeeds with an empty or substituted document"
+      ],
+      "validation": "End-to-end matrix tests for every declared format direction and error policy.",
+      "evidence": [
+        "A01",
+        "D01",
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-066",
+      "title": "PDF/A archival profiles",
+      "area": "compliance",
+      "phase": "09-compliance",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-008",
+        "FP-022",
+        "FP-023",
+        "FP-031",
+        "FP-040"
+      ],
+      "scope": "Create, convert, validate and repair PDF/A-1a/1b, 2a/2b/2u, 3a/3b/3u and PDF/A-4/4e/4f with explicit profile selection and conversion-loss reporting.",
+      "acceptance": [
+        "Embed required fonts/color metadata and enforce attachment rules",
+        "Never claim conformance based only on metadata",
+        "Keep every emitted profile passing an independent validator"
+      ],
+      "validation": "veraPDF and profile-specific fixtures; prohibited encryption/actions, font failures and repair audit checks.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-067",
+      "title": "Tagged PDF and PDF/UA accessibility",
+      "area": "compliance",
+      "phase": "09-compliance",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-009",
+        "FP-012",
+        "FP-019",
+        "FP-020",
+        "FP-025",
+        "FP-036"
+      ],
+      "scope": "Create, inspect and remediate structure trees, roles, language, alternative text, artifacts, reading order, tables, links and forms for PDF/UA-1 and PDF/UA-2.",
+      "acceptance": [
+        "Maintain MCID/parent-tree consistency through edits",
+        "Require meaningful author input for semantics that cannot be inferred",
+        "Automated checks and human reading-order review are recorded separately"
+      ],
+      "validation": "Independent accessibility validators; screen-reader tests and tagged edit/merge round trips.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-068",
+      "title": "PDF/X prepress profiles",
+      "area": "compliance",
+      "phase": "09-compliance",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-010",
+        "FP-022",
+        "FP-040",
+        "FP-041"
+      ],
+      "scope": "Convert, validate and repair PDF/X-1a, PDF/X-3, PDF/X-4 and explicitly supported variants with output intent, page-box, font and transparency rules.",
+      "acceptance": [
+        "Require explicit output intent and print conditions",
+        "Report transparency flattening and color conversion losses",
+        "Validate the actual requested profile independently"
+      ],
+      "validation": "Prepress validator reports; CMYK/spot/ICC/bleed/font fixtures and output separations.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-069",
+      "title": "PDF/E engineering and advanced content",
+      "area": "compliance",
+      "phase": "09-compliance",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-007",
+        "FP-010",
+        "FP-023",
+        "FP-040"
+      ],
+      "scope": "Support PDF/E-1 generation/conversion and explicit preservation/inspection of 3D, rich media, geospatial metadata and engineering attachments through optional providers.",
+      "acceptance": [
+        "Document render versus preserve-only support for U3D/PRC and geospatial constructs",
+        "Never execute embedded media during ordinary parsing",
+        "Validate PDF/E output against available independent conformance checks"
+      ],
+      "validation": "Engineering/3D/geospatial corpus with preservation digests, safety tests and profile reports.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-070",
+      "title": "Electronic invoices and associated XML",
+      "area": "compliance",
+      "phase": "09-compliance",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-013",
+        "FP-023",
+        "FP-066"
+      ],
+      "scope": "Create and validate ZUGFeRD/Factur-X invoices with profile/version selection, embedded XML, AF relationships and synchronized human-readable totals.",
+      "acceptance": [
+        "Validate XML schemas and business rules for each advertised profile",
+        "PDF and XML totals/currency reconcile",
+        "Invalid invoice data fails before publishing output"
+      ],
+      "validation": "Independent invoice validators; tax/rounding/currency fixtures and PDF/A-3 validation.",
+      "evidence": [
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-071",
+      "title": "Preflight, remediation and audit reports",
+      "area": "compliance",
+      "phase": "09-compliance",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-006",
+        "FP-025",
+        "FP-031",
+        "FP-033",
+        "FP-066",
+        "FP-067",
+        "FP-068",
+        "FP-069",
+        "FP-070"
+      ],
+      "scope": "Expose capability inspection, conformance checks, font/image/security diagnostics and explicit remediation plans with before/after findings.",
+      "acceptance": [
+        "Preflight is read-only unless remediation is requested",
+        "Every fix has a stable code, affected objects and loss description",
+        "A post-fix validation report determines success"
+      ],
+      "validation": "Fault-seeded corpus, stable JSON report schema and non-mutating inspection verification.",
+      "evidence": [
+        "ENH",
+        "A01",
+        "D01"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-072",
+      "title": "Optimization, compression and deduplication",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-008",
+        "FP-017",
+        "FP-023",
+        "FP-040"
+      ],
+      "scope": "Offer lossless object cleanup, unused-resource removal, stream compression, font/image deduplication, image downsampling/re-encoding and bounded optimization presets.",
+      "acceptance": [
+        "Lossless mode preserves decoded content and semantics",
+        "Lossy actions are opt-in and recorded",
+        "Optimization does not invalidate signatures without explicit rewrite policy"
+      ],
+      "validation": "Size/fidelity benchmark corpus; duplicate-resource, alpha and signature preservation checks.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-073",
+      "title": "Linearization and progressive access",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-005",
+        "FP-016",
+        "FP-072"
+      ],
+      "scope": "Write and validate web-optimized linearized PDFs, range-readable sources, lazy page/resource access and bounded caches.",
+      "acceptance": [
+        "Hint tables and offsets are independently valid",
+        "Range providers honor cancellation and authentication policy",
+        "Document edits invalidate or rebuild linearization correctly"
+      ],
+      "validation": "Independent linearization checks, simulated HTTP range server and first-page latency tests.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-074",
+      "title": "Local OCR provider and wordnet reuse",
+      "area": "ocr",
+      "phase": "10-ocr",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-002",
+        "FP-025",
+        "FP-040",
+        "FP-085"
+      ],
+      "scope": "Adapt the reviewed wordnet Tesseract 5 C-API patterns into an independent OCR provider with explicit native/model paths, safe handles, cancellation, confidence and bounded raster/text sizes.",
+      "acceptance": [
+        "Record upstream commit, license and retained attribution for reused code",
+        "Avoid a mandatory wordnet dependency or circular package graph",
+        "Missing models, symbols and wrong-architecture libraries produce precise diagnostics"
+      ],
+      "validation": "Native OCR integration on every declared RID; cancellation, allocation failure and handle-leak tests.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-075",
+      "title": "Multilingual OCR and language models",
+      "area": "ocr",
+      "phase": "10-ocr",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-009",
+        "FP-074"
+      ],
+      "scope": "Support explicitly provisioned language/script models, mixed languages, model selection and per-language accuracy reports for printed text.",
+      "acceptance": [
+        "No automatic model download or network fallback",
+        "Publish model versions, hashes, licenses and supported scripts",
+        "Confidence is reported as engine confidence rather than a correctness guarantee"
+      ],
+      "validation": "Labeled multilingual corpus with character/word error rates and per-language release thresholds.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-076",
+      "title": "Searchable PDF and structured OCR output",
+      "area": "ocr",
+      "phase": "10-ocr",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-067",
+        "FP-074",
+        "FP-075"
+      ],
+      "scope": "Create searchable PDFs with aligned invisible text layers and export text, word boxes, confidence, hOCR, ALTO and structured JSON.",
+      "acceptance": [
+        "OCR overlay remains aligned through page rotations and crops",
+        "Preserve original raster appearance",
+        "Avoid duplicate text when an adequate digital text layer exists"
+      ],
+      "validation": "Pixel and text-position comparisons, mixed scanned/digital pages and independent extraction tests.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-077",
+      "title": "Scan preprocessing and reading order",
+      "area": "ocr",
+      "phase": "10-ocr",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-027",
+        "FP-074",
+        "FP-075",
+        "FP-076"
+      ],
+      "scope": "Provide bounded orientation detection, deskew, denoise, contrast, dewarping and layout/column analysis with original-image preservation and confidence.",
+      "acceptance": [
+        "Keep preprocessing opt-in with reproducible parameters",
+        "Distinguish prose columns from tables/forms",
+        "Track transforms so word geometry maps back to original pages"
+      ],
+      "validation": "Rotated, skewed, noisy, low-resolution and multi-column labeled corpus; accuracy and geometry reports.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-078",
+      "title": "Barcode and QR document workflows",
+      "area": "ocr",
+      "phase": "10-ocr",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-017",
+        "FP-040",
+        "FP-074"
+      ],
+      "scope": "Provide optional barcode/QR generation and detection integrated with PDF placement and page/region extraction, including structured invoice/payment payload validation.",
+      "acceptance": [
+        "State supported symbologies and error correction explicitly",
+        "Return page coordinates and payload encoding safely",
+        "No generated symbol is accepted without independent decoding"
+      ],
+      "validation": "Independent barcode decoder tests, rotated/damaged symbols and multilingual payload fixtures.",
+      "evidence": [
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-079",
+      "title": "Opt-in document intelligence providers",
+      "area": "intelligence",
+      "phase": "11-intelligence",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-025",
+        "FP-027",
+        "FP-030",
+        "FP-045"
+      ],
+      "scope": "Provide optional summarization, question answering, translation, image descriptions, configured remote OCR and structured extraction through caller-selected local or remote model adapters with page citations.",
+      "acceptance": [
+        "No document upload or remote call occurs without explicit configuration",
+        "Return source page/region provenance and schema validation",
+        "Apply cancellation, cost/token limits and prompt-injection isolation"
+      ],
+      "validation": "Recorded deterministic adapter tests, data-exfiltration attempts, schema failures and provenance review.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-080",
+      "title": "Semantic chunking and retrieval adapters",
+      "area": "intelligence",
+      "phase": "11-intelligence",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-027",
+        "FP-067",
+        "FP-079"
+      ],
+      "scope": "Expose layout-aware semantic chunks, table boundaries, token budgets, embeddings and vector-store adapters while preserving page and permission provenance.",
+      "acceptance": [
+        "Chunk boundaries do not lose source text",
+        "Embedding model/dimension/version are recorded",
+        "Cache and tenancy controls prevent cross-document leakage"
+      ],
+      "validation": "Labeled chunk corpus, retrieval relevance measurements, cancellation and tenant-isolation tests.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-081",
+      "title": "Windows COM interoperability",
+      "area": "integration",
+      "phase": "12-integration",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-016",
+        "FP-025",
+        "FP-031",
+        "FP-036"
+      ],
+      "scope": "Provide a separate COM-visible facade for supported Windows automation clients with stable GUIDs, explicit marshaling, registration guidance and bitness support.",
+      "acceptance": [
+        "Keep COM types out of cross-platform core",
+        "Translate diagnostics and ownership rules predictably",
+        "Test both x86 and x64 clients on actual Framework runtimes"
+      ],
+      "validation": "VBScript and native COM consumer samples; registration/unregistration and error marshaling tests.",
+      "evidence": [
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-082",
+      "title": "Application integrations and viewer controls",
+      "area": "integration",
+      "phase": "12-integration",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-042",
+        "FP-043",
+        "FP-048"
+      ],
+      "scope": "Provide optional ASP.NET, WinForms, WPF and cross-platform application samples or controls using shared viewing primitives; keep the standalone Reader product independent.",
+      "acceptance": [
+        "Core remains usable without UI assemblies",
+        "Each control declares exact OS/runtime applicability",
+        "Keyboard, accessibility and cancellation contracts are documented"
+      ],
+      "validation": "Minimal consumer applications and accessibility integration checks for each shipped control.",
+      "evidence": [
+        "D01",
+        "D02",
+        "B01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-083",
+      "title": "Command-line and batch automation",
+      "area": "integration",
+      "phase": "12-integration",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-016",
+        "FP-025",
+        "FP-065",
+        "FP-071"
+      ],
+      "scope": "Provide an optional CLI with stable exit codes, stdin/stdout streaming, JSON diagnostics, bounded batch scheduling and configuration files.",
+      "acceptance": [
+        "Never mix binary output and diagnostic text on stdout",
+        "Secrets use protected input paths and are not echoed",
+        "Batch failures retain per-item results and cleanup state"
+      ],
+      "validation": "Cross-platform CLI consumers, pipe cancellation, partial batch failures and invalid configuration tests.",
+      "evidence": [
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-084",
+      "title": "Developer documentation and executable examples",
+      "area": "integration",
+      "phase": "12-integration",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-065",
+        "FP-071"
+      ],
+      "scope": "Publish API reference, capability matrices, offline deployment, diagnostics, security, samples and task-focused recipes synchronized with package versions.",
+      "acceptance": [
+        "Every advertised code sample builds and runs against the published package",
+        "Clearly identify optional providers and platform prerequisites",
+        "Document lossy conversions and unsupported behavior at the API boundary"
+      ],
+      "validation": "Documentation snippet compilation, clean sample consumers and broken-link checks.",
+      "evidence": [
+        "D01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-085",
+      "title": "Native provider deployment and isolation",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-002"
+      ],
+      "scope": "Define RID-specific packaging/provisioning, exact engine versions, hashes, dependency probes, sandbox boundaries, safe library search and crash recovery.",
+      "acceptance": [
+        "No runtime binary download or PATH-based unsafe loading by default",
+        "Providers report architecture, ABI and missing dependency details",
+        "Native crash/resource limits cannot corrupt the caller's persisted output"
+      ],
+      "validation": "Windows/Linux/macOS x64/ARM64 deployment probes, wrong ABI, read-only filesystem and crash injection.",
+      "evidence": [
+        "WN01",
+        "B01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-086",
+      "title": "Runtime and architecture qualification",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-085"
+      ],
+      "scope": "Qualify exact packages on Windows/Linux/macOS x64/ARM64 modern .NET and Windows x86/x64 actual .NET Framework 4.7.2 plus current Framework, including netstandard fallback consumers.",
+      "acceptance": [
+        "A target framework declaration is never runtime evidence",
+        "Every applicable lane reports zero failures and zero skips",
+        "Platform-specific features have explicit applicability rather than hidden skips"
+      ],
+      "validation": "Native host and isolated minimum-runtime reports with OS, runtime, RID, package hashes and complete test totals.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-087",
+      "title": "Async processing, concurrency and cancellation",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-005",
+        "FP-040",
+        "FP-044",
+        "FP-074"
+      ],
+      "scope": "Define document thread-safety, isolated parallel documents, bounded worker pools, backpressure, progress, cancellation and disposal for managed and native operations.",
+      "acceptance": [
+        "Concurrent operations cannot share mutable document state accidentally",
+        "Cancellation terminates native/browser work within a documented bound",
+        "Worker count and queued memory remain bounded"
+      ],
+      "validation": "64-worker mixed workloads, races, cancellation storms and long-run handle/resource monitoring.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-088",
+      "title": "Performance, streaming and resource envelopes",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-025",
+        "FP-040",
+        "FP-044",
+        "FP-065",
+        "FP-073",
+        "FP-074",
+        "FP-087"
+      ],
+      "scope": "Publish reproducible throughput, latency, peak memory, output-size and first-page budgets for small, large, scanned and adversarial documents.",
+      "acceptance": [
+        "Benchmark hardware, corpus, versions and warm/cold state are recorded",
+        "Large jobs stream or spill only within configured limits",
+        "Threshold regressions fail release qualification"
+      ],
+      "validation": "Pinned corpus benchmark reports with p50/p95/p99 latency, peak working set and resource-limit negatives.",
+      "evidence": [
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-089",
+      "title": "Security, fuzzing and malformed-content robustness",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-003",
+        "FP-004",
+        "FP-030",
+        "FP-031",
+        "FP-039",
+        "FP-045",
+        "FP-058",
+        "FP-060",
+        "FP-085"
+      ],
+      "scope": "Build managed/native fuzz targets and adversarial corpora for parsers, codecs, XML/zip, fonts, scripts, URLs and provider boundaries with triage and regression retention.",
+      "acceptance": [
+        "No unbounded hangs, crashes, uncontrolled writes or secret disclosures",
+        "All confirmed security defects get deterministic regression fixtures",
+        "Release dependency audit has no unaccepted high/critical vulnerabilities"
+      ],
+      "validation": "Coverage-guided and mutation campaigns with saved seeds, time/memory budgets, crash triage and sanitizer reports.",
+      "evidence": [
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-090",
+      "title": "Independent fidelity and interoperability corpus",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-008",
+        "FP-009",
+        "FP-010",
+        "FP-012",
+        "FP-016",
+        "FP-019",
+        "FP-025",
+        "FP-036",
+        "FP-040",
+        "FP-065"
+      ],
+      "scope": "Maintain redistributable fixtures and expected visual, text, structure, form, signature and conformance results from independent readers and validators.",
+      "acceptance": [
+        "Provenance and licenses are recorded for every fixture",
+        "Use semantic metrics alongside image metrics",
+        "Tolerance exceptions are reviewed and never hide missing content"
+      ],
+      "validation": "Cross-platform raster/text/geometry reports, independent readers and fixed golden-update review process.",
+      "evidence": [
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-091",
+      "title": "Deterministic output, caching and tenancy",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-005",
+        "FP-008",
+        "FP-022",
+        "FP-044",
+        "FP-074",
+        "FP-087"
+      ],
+      "scope": "Provide deterministic IDs/timestamps/compression choices, explicit font/model/engine inputs, bounded content-addressed caches and per-tenant isolation.",
+      "acceptance": [
+        "Identical declared inputs produce repeatable output within each qualified profile",
+        "Nondeterministic signing/time sources are explicitly excluded and explained",
+        "Caches do not leak content or credentials between tenants"
+      ],
+      "validation": "Repeated-process byte comparisons, cache poisoning/eviction tests and multi-tenant mixed workloads.",
+      "evidence": [
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-092",
+      "title": "Observability and support diagnostics",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-071",
+        "FP-085",
+        "FP-087"
+      ],
+      "scope": "Emit structured events, progress, timings, traces, engine/version probes and sanitized diagnostic bundles with stable schemas and caller-controlled sinks.",
+      "acceptance": [
+        "Document content and secrets are excluded by default",
+        "Logging failure cannot corrupt processing",
+        "Every error includes a stable code and remediation context"
+      ],
+      "validation": "Redaction and opt-in telemetry tests; trace correlation across workers and support-bundle privacy review.",
+      "evidence": [
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-093",
+      "title": "Reproducible NuGet packages and API compatibility",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-084",
+        "FP-085",
+        "FP-086"
+      ],
+      "scope": "Produce version-coupled core/provider packages with README, MIT/license notices, XML docs, symbols, SourceLink, deterministic builds, dependency locks and API baselines.",
+      "acceptance": [
+        "Core has no mandatory browser/OCR/GUI dependency",
+        "All shipped TFMs expose the reviewed compatible API",
+        "Package/symbol contents and hashes match qualified artifacts"
+      ],
+      "validation": "Pack/content inspection, API compatibility tooling, rebuild comparisons and clean package-only consumers.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-094",
+      "title": "Production release and Trusted Publishing",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-002",
+        "FP-003",
+        "FP-004",
+        "FP-005",
+        "FP-006",
+        "FP-007",
+        "FP-008",
+        "FP-009",
+        "FP-010",
+        "FP-011",
+        "FP-012",
+        "FP-013",
+        "FP-014",
+        "FP-015",
+        "FP-016",
+        "FP-017",
+        "FP-018",
+        "FP-019",
+        "FP-020",
+        "FP-021",
+        "FP-022",
+        "FP-023",
+        "FP-024",
+        "FP-025",
+        "FP-026",
+        "FP-027",
+        "FP-028",
+        "FP-029",
+        "FP-030",
+        "FP-031",
+        "FP-032",
+        "FP-033",
+        "FP-034",
+        "FP-035",
+        "FP-036",
+        "FP-037",
+        "FP-038",
+        "FP-039",
+        "FP-040",
+        "FP-041",
+        "FP-042",
+        "FP-043",
+        "FP-044",
+        "FP-045",
+        "FP-046",
+        "FP-047",
+        "FP-048",
+        "FP-049",
+        "FP-050",
+        "FP-051",
+        "FP-052",
+        "FP-053",
+        "FP-054",
+        "FP-055",
+        "FP-056",
+        "FP-057",
+        "FP-058",
+        "FP-059",
+        "FP-060",
+        "FP-061",
+        "FP-062",
+        "FP-063",
+        "FP-064",
+        "FP-065",
+        "FP-066",
+        "FP-067",
+        "FP-068",
+        "FP-069",
+        "FP-070",
+        "FP-071",
+        "FP-072",
+        "FP-073",
+        "FP-074",
+        "FP-075",
+        "FP-076",
+        "FP-077",
+        "FP-078",
+        "FP-079",
+        "FP-080",
+        "FP-081",
+        "FP-082",
+        "FP-083",
+        "FP-084",
+        "FP-085",
+        "FP-086",
+        "FP-087",
+        "FP-088",
+        "FP-089",
+        "FP-090",
+        "FP-091",
+        "FP-092",
+        "FP-093",
+        "FP-095",
+        "FP-097",
+        "FP-098",
+        "FP-099",
+        "FP-100",
+        "FP-101",
+        "FP-102",
+        "FP-103",
+        "FP-104",
+        "FP-105",
+        "FP-106",
+        "FP-107",
+        "FP-108",
+        "FP-109",
+        "FP-110",
+        "FP-111",
+        "FP-112"
+      ],
+      "scope": "Publish stable 1.0.0 only after the complete required SDK scope and exact-package production gates pass, using scoped GitHub Actions OIDC and immutable evidence.",
+      "acceptance": [
+        "No alpha/beta or empty name-reservation package is published",
+        "Verify public indexing, repository signatures and fresh consumers",
+        "Preserve evidence and clean only release-owned temporary infrastructure"
+      ],
+      "validation": "Gate-negative tests, exact-commit qualification, package hash reconciliation, public consumers and cleanup inventory.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-095",
+      "title": "Dependency licensing and supply-chain inventory",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-085"
+      ],
+      "scope": "Maintain an SBOM and dependency/model/font/codec license inventory covering redistribution, native binaries, update provenance and security support policy.",
+      "acceptance": [
+        "No dependency notice is omitted from shipping packages",
+        "Native and model assets have verifiable origin and hashes",
+        "Dependency updates trigger affected RID and fidelity qualification"
+      ],
+      "validation": "SBOM generation, package content/license audit and dependency vulnerability scan reports.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-096",
+      "title": "PDF Reader placeholder boundary",
+      "area": "reader",
+      "phase": "14-reader",
+      "status": "implemented",
+      "releaseRequired": false,
+      "dependencies": [],
+      "scope": "Create only a separate non-packable Reader project and README reserving a future desktop application boundary; defer UI selection, reference analysis, detailed specification and implementation.",
+      "acceptance": [
+        "No Reader implementation or feature parity is claimed",
+        "Reader is excluded from SDK release blockers and package publication",
+        "Future Reader consumes public SDK contracts rather than core internals"
+      ],
+      "validation": "Build the empty project and inspect packaging boundaries; verify documentation states the deferred scope.",
+      "evidence": [
+        "USER"
+      ],
+      "nonGoals": [
+        "Reader reverse engineering, UI framework selection, feature specification and implementation."
+      ]
+    },
+    {
+      "id": "FP-097",
+      "title": "Production document workflow acceptance",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-013",
+        "FP-015",
+        "FP-016",
+        "FP-023",
+        "FP-030",
+        "FP-032",
+        "FP-035",
+        "FP-037",
+        "FP-044",
+        "FP-053",
+        "FP-066",
+        "FP-067",
+        "FP-070",
+        "FP-076"
+      ],
+      "scope": "Qualify complete offline workflows for invoices, accessible reports, signed forms, scanned archives and redacted disclosure bundles using final NuGet packages.",
+      "acceptance": [
+        "Business-document output passes visual, text and independent conformance checks",
+        "Every workflow runs on all applicable platforms",
+        "Failures preserve actionable diagnostic evidence without partial output"
+      ],
+      "validation": "Fresh package-only end-to-end consumers with signed/archived/redacted/searchable artifacts and validator reports.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-098",
+      "title": "PDF 2.0 and extension preservation",
+      "area": "foundation",
+      "phase": "01-foundation",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-003",
+        "FP-005",
+        "FP-007",
+        "FP-016"
+      ],
+      "scope": "Handle PDF 2.0 dictionaries, Unicode strings, associated files, namespaces, encryption and version-specific changes; preserve unsupported extension payloads safely.",
+      "acceptance": [
+        "Publish a version/extension read-write-preserve matrix",
+        "Editing cannot silently discard unknown safe extension data",
+        "Strict output negotiation rejects incompatible requested features"
+      ],
+      "validation": "PDF 1.x/2.0 interop corpus and exact opaque-payload preservation tests.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-099",
+      "title": "Document event hooks and data-source generation",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-002",
+        "FP-012",
+        "FP-013",
+        "FP-015"
+      ],
+      "scope": "Expose bounded page/layout/save events, reusable templates, typed data binding and generation hooks without allowing reentrant document corruption.",
+      "acceptance": [
+        "Specify event order, cancellation and exception propagation",
+        "Disallow unsafe reentrant mutations with clear diagnostics",
+        "Culture and external resource resolution are explicit"
+      ],
+      "validation": "Event-order traces, hook failures, recursive templates and large data-source tests.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-100",
+      "title": "Document collections, packages and interchange",
+      "area": "integration",
+      "phase": "12-integration",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-019",
+        "FP-023",
+        "FP-029",
+        "FP-037",
+        "FP-065"
+      ],
+      "scope": "Provide batch document collections, archive export, low-level PDF XML interchange, interchange reports and format-specific adapter registration with safe archive naming and limits.",
+      "acceptance": [
+        "Archive extraction/writing prevents traversal and unsafe collisions",
+        "Report individual document outcomes and preserve order",
+        "Adapters cannot alter unrelated global process state"
+      ],
+      "validation": "ZIP/package round trips, Unicode/colliding filenames and failed-batch recovery.",
+      "evidence": [
+        "B01",
+        "D02",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-101",
+      "title": "Accessibility remediation and semantic authoring",
+      "area": "compliance",
+      "phase": "09-compliance",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-027",
+        "FP-067",
+        "FP-071"
+      ],
+      "scope": "Provide human-reviewable tagging suggestions, role maps, heading/list/table authoring, alternate-text requirements and semantic fixes for imported PDFs.",
+      "acceptance": [
+        "Suggestions never count as verified accessibility automatically",
+        "Maintain a review ledger for inferred reading order and alt text",
+        "Revalidate tree integrity after every accepted fix"
+      ],
+      "validation": "Labeled remediation corpus, screen-reader review and independent structural validators.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-102",
+      "title": "Signature-preserving editing and revision audit",
+      "area": "security",
+      "phase": "05-security",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-005",
+        "FP-016",
+        "FP-032",
+        "FP-033",
+        "FP-035",
+        "FP-037"
+      ],
+      "scope": "Expose revision history, change classifications, certification-aware edit plans and preservation policies for signed documents.",
+      "acceptance": [
+        "Preflight identifies edits that invalidate existing signatures",
+        "Never report a signature as preserved solely because its appearance remains",
+        "Revision audit distinguishes signed bytes and later unsigned changes"
+      ],
+      "validation": "Certified forms, multi-signer workflows, field locks and malicious incremental-update fixtures.",
+      "evidence": [
+        "A01",
+        "B01",
+        "D01",
+        "D02"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-103",
+      "title": "Image processing and document cleanup",
+      "area": "rendering",
+      "phase": "06-rendering",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-017",
+        "FP-040",
+        "FP-041",
+        "FP-074"
+      ],
+      "scope": "Provide optional image resampling, thresholding, color conversion, border removal, blank-page detection and scan cleanup with reversible source preservation.",
+      "acceptance": [
+        "Publish algorithm parameters and confidence for inferred blank pages",
+        "Lossy cleanup requires explicit options",
+        "Large-image processing observes pixel/working-set budgets"
+      ],
+      "validation": "Ground-truth blank/noisy/colored-page corpus and before/after fidelity and OCR metrics.",
+      "evidence": [
+        "A01",
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-104",
+      "title": "Business data extraction and export schemas",
+      "area": "extraction",
+      "phase": "04-extraction",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-027",
+        "FP-028",
+        "FP-076"
+      ],
+      "scope": "Export document content as versioned JSON/XML structures, sections, tables, fields and searchable text with page/object provenance and confidence.",
+      "acceptance": [
+        "Schema versions support explicit compatibility rules",
+        "Inferred labels and values remain distinguishable from source facts",
+        "No OCR confidence is promoted into a verified business value"
+      ],
+      "validation": "Schema validation, golden structured outputs and mixed scanned/digital business documents.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-105",
+      "title": "Cross-platform native distribution packages",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-040",
+        "FP-043",
+        "FP-044",
+        "FP-058",
+        "FP-060",
+        "FP-074",
+        "FP-085",
+        "FP-095"
+      ],
+      "scope": "Build and qualify optional RID-specific rendering, browser and OCR asset packages or offline provisioning manifests for Windows, Linux and macOS.",
+      "acceptance": [
+        "Every shipped binary has version/hash/license and supported ABI metadata",
+        "No GDI+/desktop-only assumption leaks into Linux/macOS core",
+        "Air-gapped installs succeed from documented artifacts"
+      ],
+      "validation": "Clean offline container/host installations on every supported RID and dependency-probe reports.",
+      "evidence": [
+        "B01",
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-106",
+      "title": "Compatibility policy and long-term maintenance",
+      "area": "production",
+      "phase": "13-production",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-084",
+        "FP-086",
+        "FP-093",
+        "FP-095"
+      ],
+      "scope": "Define semantic versioning, supported runtime/OS policy, API deprecation, servicing, security disclosure, engine updates and reproducible release rollback/unlisting procedures.",
+      "acceptance": [
+        "Support claims match verified combinations and upstream lifecycle",
+        "Breaking changes require reviewed migration guidance",
+        "Published packages remain traceable to source and qualification evidence"
+      ],
+      "validation": "Policy review, API baseline change exercises and simulated dependency security update/release drill.",
+      "evidence": [
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-107",
+      "title": "DjVu and CDR document import",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-002",
+        "FP-040",
+        "FP-085"
+      ],
+      "scope": "Import DjVu scanned documents and CDR vector documents using optional isolated format adapters with explicit supported versions, compression, page and font behavior.",
+      "acceptance": [
+        "Publish exact supported format versions and read-only limitations",
+        "Keep interpreter file/network access bounded",
+        "Report unsupported records and missing codecs instead of producing empty pages"
+      ],
+      "validation": "Independent readers and versioned DjVu/CDR fixtures; damaged streams, font failures and sandbox tests.",
+      "evidence": [
+        "A01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-108",
+      "title": "PDF to Markdown and text interchange",
+      "area": "conversion",
+      "phase": "08-conversion",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-027",
+        "FP-056",
+        "FP-067"
+      ],
+      "scope": "Export plain text and semantic Markdown with headings, lists, tables, links, images, page references and explicit fixed-layout-to-flow reconstruction choices.",
+      "acceptance": [
+        "Mark inferred structure and retain source provenance",
+        "Preserve Unicode and configurable reading order",
+        "Keep image asset naming and output paths safe"
+      ],
+      "validation": "Markdown parser round trips, text/structure goldens and complex/multi-column document fixtures.",
+      "evidence": [
+        "A01",
+        "D01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-109",
+      "title": "Task-oriented facades and plugin composition",
+      "area": "integration",
+      "phase": "12-integration",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-001",
+        "FP-016",
+        "FP-025",
+        "FP-036",
+        "FP-065",
+        "FP-071"
+      ],
+      "scope": "Expose concise task APIs for generation, conversion, extraction, form filling and optimization with streams, file collections and dependency-injected optional plugins.",
+      "acceptance": [
+        "Facades use the same policies and diagnostics as the document model",
+        "No duplicate PDF engine or license dependency is introduced",
+        "Document every facade's resource ownership and provider requirements"
+      ],
+      "validation": "Facade-to-core equivalence tests, minimal C#/VB/F# samples and missing-provider diagnostics.",
+      "evidence": [
+        "A01",
+        "D01",
+        "B01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-110",
+      "title": "HTML element and block extraction",
+      "area": "web",
+      "phase": "07-web",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-025",
+        "FP-044",
+        "FP-045",
+        "FP-046"
+      ],
+      "scope": "Locate and render selected HTML elements, expose rendered element rectangles and extract blocks by selector or bounded search while preserving resource context.",
+      "acceptance": [
+        "Define coordinate spaces, viewport and selected-element clipping",
+        "Report missing/ambiguous selectors and dynamic-page timeout",
+        "Keep element capture inside the configured origin/resource policy"
+      ],
+      "validation": "Nested transforms, overflow, offscreen elements, dynamic DOM changes and authenticated resource fixtures.",
+      "evidence": [
+        "B01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-111",
+      "title": "Hyphenation and advanced text-fit controls",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-009",
+        "FP-012",
+        "FP-047"
+      ],
+      "scope": "Provide language-aware hyphenation dictionaries, custom rules, paragraph line breaking, overlap policy, fit-to-paper scaling and explicit CSS page-rule precedence.",
+      "acceptance": [
+        "Pin dictionary provenance/version and allow offline provisioning",
+        "Hyphenation preserves logical searchable text",
+        "Overflow never silently clips or shrinks beyond caller limits"
+      ],
+      "validation": "Multilingual word-break goldens, custom dictionary tests and paper-fit/overlap boundary cases.",
+      "evidence": [
+        "B01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    },
+    {
+      "id": "FP-112",
+      "title": "Document templates and mail merge",
+      "area": "composition",
+      "phase": "02-composition",
+      "status": "planned",
+      "releaseRequired": true,
+      "dependencies": [
+        "FP-013",
+        "FP-050",
+        "FP-053",
+        "FP-099"
+      ],
+      "scope": "Fill DOCX and native PDF generation templates with scalar fields, repeating records, conditions, images and explicit culture, then export through shared providers.",
+      "acceptance": [
+        "Use the optional wordnet adapter for document-format semantics",
+        "Bound template evaluation and never execute arbitrary code",
+        "Keep field errors and missing-data policy explicit"
+      ],
+      "validation": "Invoice/mail-merge consumers, empty/missing/large collections, escaping and multilingual formatting fixtures.",
+      "evidence": [
+        "B01",
+        "WN01",
+        "ENH"
+      ],
+      "nonGoals": [
+        "Features owned by other requirements except integration through public contracts.",
+        "Silent fallback, unqualified support claims or changes to the approved production release scope."
+      ]
+    }
+  ]
+}

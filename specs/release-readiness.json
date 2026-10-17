@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "product": "Fluent.Pdf",
+  "packageVersion": "1.0.0",
+  "productionReady": false,
+  "stage": "specification",
+  "publicationPolicy": "stable-production-only",
+  "requiredLanes": [
+    "win-x64-net10.0",
+    "win-x64-net8.0",
+    "win-x64-netstandard2.0-fallback",
+    "win-arm64-net10.0",
+    "win-arm64-net8.0",
+    "win-arm64-netstandard2.0-fallback",
+    "linux-x64-net10.0",
+    "linux-x64-net8.0",
+    "linux-x64-netstandard2.0-fallback",
+    "linux-arm64-net10.0",
+    "linux-arm64-net8.0",
+    "linux-arm64-netstandard2.0-fallback",
+    "osx-x64-net10.0",
+    "osx-x64-net8.0",
+    "osx-x64-netstandard2.0-fallback",
+    "osx-arm64-net10.0",
+    "osx-arm64-net8.0",
+    "osx-arm64-netstandard2.0-fallback",
+    "win-x86-framework472",
+    "win-x64-framework472",
+    "win-x86-framework-current",
+    "win-x64-framework-current"
+  ],
+  "requiredSuites": [
+    "functional",
+    "fidelity",
+    "security",
+    "resource-limits",
+    "concurrency",
+    "consumer"
+  ],
+  "publicationBlockedReasons": [
+    "All SDK requirements are planned; no PDF functionality has been implemented.",
+    "Actual runtime, native-provider, standards, security, performance and final-package evidence is absent.",
+    "Package ownership/prefix and scoped Trusted Publishing configuration must be verified before release."
+  ],
+  "qualificationWorkflow": "production-qualification.yml"
+}
