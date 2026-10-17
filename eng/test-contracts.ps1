@@ -53,7 +53,7 @@ try {
         Run-ContractLane 'net472' 'framework-current-x86' 'X86'
     }
     Run-ContractLane 'net10.0' 'netstandard-fallback' $ExpectedArchitecture $true
-    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf | Sort-Object -Unique | ForEach-Object {
+    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers native/worker tests/native | Sort-Object -Unique | ForEach-Object {
         [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash}
     })
     $summary = [ordered]@{

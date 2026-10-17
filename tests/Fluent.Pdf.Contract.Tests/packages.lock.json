@@ -117,10 +117,18 @@
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
-          "Fluent.Pdf": "[1.0.0, )"
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.contract.visualbasic": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.workers": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
@@ -219,10 +227,18 @@
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
-          "Fluent.Pdf": "[1.0.0, )"
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.contract.visualbasic": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.workers": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
@@ -321,10 +337,18 @@
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
-          "Fluent.Pdf": "[1.0.0, )"
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.contract.visualbasic": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.workers": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"

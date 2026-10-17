@@ -5,6 +5,9 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static byte[] ExecuteNativeWorker(Fluent.Pdf.Workers.NativeWorkerOptions options, byte[] request, PdfOperationContext context) =>
+        new Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context);
+
     public static PdfNativeDeploymentReport InspectDeployment(string directory, string rid, string engineVersion,
         string abi, long maximumBytes, params PdfNativeAsset[] assets)
     {

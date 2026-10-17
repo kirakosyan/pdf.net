@@ -5,6 +5,7 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Fluent.Pdf/Fluent.Pdf.csproj" />
+    <Project Path="src/Fluent.Pdf.Workers/Fluent.Pdf.Workers.csproj" />
   </Folder>
   <Folder Name="/apps/">
     <Project Path="apps/PdfReader/PdfReader.csproj" />

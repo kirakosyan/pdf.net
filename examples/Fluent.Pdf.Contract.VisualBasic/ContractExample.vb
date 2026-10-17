@@ -4,6 +4,10 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function ExecuteNativeWorker(options As Fluent.Pdf.Workers.NativeWorkerOptions, request As Byte(), context As PdfOperationContext) As Byte()
+        Return New Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context)
+    End Function
+
     Public Function InspectDeployment(directory As String, rid As String, engineVersion As String,
                                       abi As String, maximumBytes As Long, ParamArray assets As PdfNativeAsset()) As PdfNativeDeploymentReport
         Dim deployment As New PdfNativeDeployment(directory, rid, "example.native", engineVersion, abi, maximumBytes, assets)

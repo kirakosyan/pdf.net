@@ -1,0 +1,77 @@
+#include "../../native/worker/bridge.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <winsock2.h>
+#else
+#include <unistd.h>
+#include <sys/socket.h>
+#endif
+#ifndef FIXTURE_ABI
+#define FIXTURE_ABI "fluent-pdf-fixture-1"
+#endif
+FP_EXPORT const char *fluent_pdf_bridge_abi_v1(void) { return FIXTURE_ABI; }
+FP_EXPORT const char *fluent_pdf_bridge_version_v1(void) { return "1.0.0"; }
+#ifdef FIXTURE_DEPENDENCY
+extern int fixture_dependency(void);
+#endif
+FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t length,unsigned char *output,size_t capacity,size_t *written) {
+    if(length==0) { *written=0; return 0; }
+#ifdef FIXTURE_DEPENDENCY
+    if(fixture_dependency()!=42) return 99;
+#endif
+    switch(input[0]) {
+        case 1: *(volatile int *)(uintptr_t)0=1; return 99;
+        case 2:
+            for(;;) {
+#ifdef _WIN32
+                Sleep(1000);
+#else
+                sleep(1);
+#endif
+            }
+        case 3: *written=capacity+1; return 0;
+        case 4: {
+            FILE *file;
+            if(length<2||input[length-1]!=0||capacity<1) return 99;
+            file=fopen((const char *)input+1,"wb");
+            output[0]=(unsigned char)(file!=NULL); if(file) { fputs("corrupt",file); fclose(file); }
+            *written=1; return 0;
+        }
+        case 5: {
+#ifdef _WIN32
+            WSADATA data; SOCKET connection;
+            if(capacity<1) return 99;
+            if(WSAStartup(MAKEWORD(2,2),&data)!=0) { output[0]=0; *written=1; return 0; }
+            connection=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+            /* AppContainer can create a socket, but cannot connect without a capability. */
+            if(connection!=INVALID_SOCKET) {
+                struct sockaddr_in address; int result;
+                memset(&address,0,sizeof(address)); address.sin_family=AF_INET; address.sin_port=htons(9); address.sin_addr.s_addr=htonl(0x7f000001);
+                result=connect(connection,(struct sockaddr *)&address,sizeof(address));
+                output[0]=(unsigned char)(result==0||WSAGetLastError()!=WSAEACCES); closesocket(connection);
+            } else output[0]=0;
+            WSACleanup();
+#else
+            int connection=socket(AF_INET,SOCK_STREAM,0);
+            if(capacity<1) return 99;
+            output[0]=(unsigned char)(connection>=0); if(connection>=0) close(connection);
+#endif
+            *written=1; return 0;
+        }
+        case 6: {
+            volatile unsigned char *memory; size_t size=(size_t)512*1024*1024,i;
+            if(capacity<1) return 99;
+            memory=(volatile unsigned char *)malloc(size);
+            if(memory) { for(i=0;i<size;i+=4096) memory[i]=1; free((void *)memory); }
+            output[0]=(unsigned char)(memory!=NULL); *written=1; return 0;
+        }
+        default:
+            if(length-1>capacity) return 99;
+            memcpy(output,input+1,length-1); *written=length-1; return 0;
+    }
+}
