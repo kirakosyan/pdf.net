@@ -12,3 +12,4 @@ $packOutput = & dotnet pack (Join-Path $root 'src/Fluent.Pdf/Fluent.Pdf.csproj')
 if ($LASTEXITCODE -eq 0 -or !$packOutput.Contains('readiness is false')) { throw 'The actual package target did not enforce production readiness.' }
 if ((Test-Path -LiteralPath $packageDirectory) -and @(Get-ChildItem -LiteralPath $packageDirectory -Filter '*.nupkg').Count) { throw 'An unqualified package was produced.' }
 Write-Output 'Verified: the package target rejects unqualified packing and produces no package.'
+exit 0
