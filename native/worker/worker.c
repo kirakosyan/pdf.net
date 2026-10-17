@@ -202,16 +202,6 @@ static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds,
     if(setrlimit(RLIMIT_AS,&limit)!=0 || setrlimit(RLIMIT_DATA,&limit)!=0) return 0;
     if(prctl(PR_SET_PDEATHSIG,SIGKILL)!=0 || (uint64_t)getppid()!=parent) return 0;
 #else
-    {
-        struct task_basic_info_64 information;
-        mach_msg_type_number_t count=TASK_BASIC_INFO_64_COUNT;
-        if(task_info(mach_task_self(),TASK_BASIC_INFO_64,(task_info_t)&information,&count)!=KERN_SUCCESS ||
-            information.virtual_size>UINT64_MAX-memory) return 0;
-        /* Darwin includes shared-cache and reserved image mappings in DATA.
-           Bound additional mappings; the caller also supervises absolute RSS. */
-        limit.rlim_cur=limit.rlim_max=(rlim_t)(information.virtual_size+memory);
-    }
-    if(setrlimit(RLIMIT_DATA,&limit)!=0) return 0;
     sandbox_step=5;
     if(!parent_watch(parent)) return 0;
 #endif
@@ -223,7 +213,18 @@ static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds,
 #ifdef __linux__
     return linux_sandbox(canonical);
 #else
-    return mac_sandbox(canonical);
+    if(!mac_sandbox(canonical)) return 0;
+    sandbox_step=4;
+    {
+        struct task_basic_info_64 information;
+        mach_msg_type_number_t count=TASK_BASIC_INFO_64_COUNT;
+        if(task_info(mach_task_self(),TASK_BASIC_INFO_64,(task_info_t)&information,&count)!=KERN_SUCCESS ||
+            information.virtual_size>UINT64_MAX-memory) return 0;
+        /* Install the VM-growth budget after trusted policy compilation and
+           before the first untrusted library load. Absolute RSS is supervised. */
+        limit.rlim_cur=limit.rlim_max=(rlim_t)(information.virtual_size+memory);
+    }
+    return setrlimit(RLIMIT_DATA,&limit)==0;
 #endif
 }
 #endif
