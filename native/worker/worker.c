@@ -246,7 +246,7 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
     wchar_t profile[100],root[4096],exe[4096],command[24000]; size_t used; int i,result=91;
     PSID sid=NULL; HANDLE job=NULL,parent_process=NULL; JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits;
     STARTUPINFOEXW startup; PROCESS_INFORMATION child; SECURITY_CAPABILITIES capabilities;
-    SIZE_T attribute_bytes=0; LPPROC_THREAD_ATTRIBUTE_LIST attributes=NULL; DWORD code; int attributes_ready=0;
+    SIZE_T attribute_bytes=0; LPPROC_THREAD_ATTRIBUTE_LIST attributes=NULL; DWORD code,failure_code=0; int attributes_ready=0;
     HANDLE inherited[3]={GetStdHandle(STD_INPUT_HANDLE),GetStdHandle(STD_OUTPUT_HANDLE),GetStdHandle(STD_ERROR_HANDLE)};
     sandbox_step=10;
     swprintf(profile,100,L"Fluent.Pdf.worker.%lu.%hs",GetCurrentProcessId(),argv[9]);
@@ -300,11 +300,12 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
     if(GetExitCodeProcess(child.hProcess,&code)) result=(int)code;
     CloseHandle(child.hThread); CloseHandle(child.hProcess);
 done:
+    if(result==91) failure_code=GetLastError();
     if(job) CloseHandle(job);
     if(parent_process) CloseHandle(parent_process);
     if(attributes) { if(attributes_ready) DeleteProcThreadAttributeList(attributes); HeapFree(GetProcessHeap(),0,attributes); }
     if(sid) { FreeSid(sid); DeleteAppContainerProfile(profile); }
-    if(result==91) return respond(FP_SANDBOX,NULL,0);
+    if(result==91) { SetLastError(failure_code); return respond(FP_SANDBOX,NULL,0); }
     return result;
 }
 #endif
