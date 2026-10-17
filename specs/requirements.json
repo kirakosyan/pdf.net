@@ -128,10 +128,11 @@
         "implemented": [
           "Managed Flate/LZW/ASCII85/ASCIIHex/RunLength encode/decode chains",
           "PNG/TIFF predictors across packed, eight-bit and sixteen-bit samples",
-          "Bounded object-stream membership and indirect decode declarations"
+          "Bounded object-stream membership and indirect decode declarations",
+          "Original bounded CCITT Group 3/4 encode/decode with independent TIFF verification"
         ],
         "pending": [
-          "Audited optional DCT/JPX/CCITT/JBIG2 providers",
+          "Audited optional DCT/JPX/JBIG2 providers",
           "Complete native/runtime, known-answer/security and exact-package production qualification"
         ]
       }

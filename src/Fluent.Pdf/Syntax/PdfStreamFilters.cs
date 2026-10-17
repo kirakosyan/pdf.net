@@ -50,6 +50,8 @@ internal static class PdfStreamFilters
                     decoded = Ascii85(current, context);
                 else if (name == "RunLengthDecode")
                     decoded = RunLength(current, context);
+                else if(name=="CCITTFaxDecode")
+                    decoded=PdfCcitt.Decode(current,parameter,stream,context);
                 else
                     throw Error(context, "Filter.Unsupported", "The requested encoded stream filter is unsupported.");
                 current.Dispose();
@@ -358,9 +360,13 @@ internal static class PdfStreamFilters
     {
         if (dictionary.Kind == PdfValueKind.Null || !dictionary.Entries.TryGetValue(key, out var value))
             return fallback;
-        if (value.Kind != PdfValueKind.Number || value.IntegerValue < int.MinValue || value.IntegerValue > int.MaxValue)
+        if(value.Kind==PdfValueKind.Null)return fallback;
+        long integer;
+        try{integer=value.IntegerValue;}
+        catch(InvalidDataException){throw Error(context,"Filter.Parameters","An integer decode parameter is malformed or outside range.");}
+        if (value.Kind != PdfValueKind.Number || integer < int.MinValue || integer > int.MaxValue)
             throw Error(context, "Filter.Parameters", "An integer decode parameter is outside range.");
-        return (int)value.IntegerValue;
+        return (int)integer;
     }
 
     internal static void Trailing(Stream stream, PdfOperationContext context)

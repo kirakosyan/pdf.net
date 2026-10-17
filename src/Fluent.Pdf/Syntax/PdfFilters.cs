@@ -93,6 +93,11 @@ public static class PdfFilters
         var filters = decodingFilters.ToArray();
         if (filters.Any(x => x is null))
             throw new ArgumentException("A filter cannot be CLR null.", nameof(decodingFilters));
+        for(int i=0;i<filters.Length;i++)if(PdfStreamFilters.Canonical(filters[i].Name)=="CCITTFaxDecode")
+        {
+            if(i!=filters.Length-1)throw PdfStreamFilters.Error(context,"Filter.Chain","A fax image codec must be the innermost decoding filter.");
+            PdfCcitt.PreflightEncoding(filters[i].Parameters,context);
+        }
         using var input = new BorrowedStream(decodedInput, true, context);
         var bytes = PdfByteStore.Read(input, context);
         try
@@ -105,7 +110,7 @@ public static class PdfFilters
                 if (name == "FlateDecode" || name == "LZWDecode")
                     bytes = PdfStreamFilters.EncodePrediction(bytes, filter.Parameters, context);
                 using var source = bytes.Open(0, bytes.Length);
-                bytes = name == "FlateDecode" ? PdfFilterEncoders.Flate(source, context) : name == "LZWDecode" ? PdfLzw.Encode(source, PdfStreamFilters.Parameter(filter.Parameters, "EarlyChange", 1, context), context) : name == "ASCIIHexDecode" ? PdfFilterEncoders.Hex(source, context) : name == "ASCII85Decode" ? PdfFilterEncoders.Ascii85(source, context) : name == "RunLengthDecode" ? PdfFilterEncoders.RunLength(bytes, context) : throw PdfStreamFilters.Error(context, "Filter.Unsupported", "The requested encoding filter has no configured implementation.");
+                bytes = name == "FlateDecode" ? PdfFilterEncoders.Flate(source, context) : name == "LZWDecode" ? PdfLzw.Encode(source, PdfStreamFilters.Parameter(filter.Parameters, "EarlyChange", 1, context), context) : name == "ASCIIHexDecode" ? PdfFilterEncoders.Hex(source, context) : name == "ASCII85Decode" ? PdfFilterEncoders.Ascii85(source, context) : name == "RunLengthDecode" ? PdfFilterEncoders.RunLength(bytes, context) : name == "CCITTFaxDecode" ? PdfCcitt.Encode(bytes, filter.Parameters, context, true) : throw PdfStreamFilters.Error(context, "Filter.Unsupported", "The requested encoding filter has no configured implementation.");
             }
 
             return bytes.Open(0, bytes.Length);

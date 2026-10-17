@@ -25,7 +25,10 @@ internal static class PdfFilterDeclarations
         foreach (string key in new[]
         {
             "Filter",
-            "DecodeParms"
+            "DecodeParms",
+            "Width",
+            "Height",
+            "BitsPerComponent"
         }
 
         )
