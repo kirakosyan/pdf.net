@@ -38,6 +38,7 @@
 #include <sandbox.h>
 #include <sys/event.h>
 #include <pthread.h>
+#include <mach/mach.h>
 #endif
 
 enum { FP_OK=0, FP_ABI=1, FP_VERSION=2, FP_DEPENDENCY=3, FP_EXPORT_MISSING=4,
@@ -201,6 +202,15 @@ static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds,
     if(setrlimit(RLIMIT_AS,&limit)!=0 || setrlimit(RLIMIT_DATA,&limit)!=0) return 0;
     if(prctl(PR_SET_PDEATHSIG,SIGKILL)!=0 || (uint64_t)getppid()!=parent) return 0;
 #else
+    {
+        struct task_basic_info_64 information;
+        mach_msg_type_number_t count=TASK_BASIC_INFO_64_COUNT;
+        if(task_info(mach_task_self(),TASK_BASIC_INFO_64,(task_info_t)&information,&count)!=KERN_SUCCESS ||
+            information.virtual_size>UINT64_MAX-memory) return 0;
+        /* Darwin includes shared-cache and reserved image mappings in DATA.
+           Bound additional mappings; the caller also supervises absolute RSS. */
+        limit.rlim_cur=limit.rlim_max=(rlim_t)(information.virtual_size+memory);
+    }
     if(setrlimit(RLIMIT_DATA,&limit)!=0) return 0;
     sandbox_step=5;
     if(!parent_watch(parent)) return 0;
@@ -237,16 +247,20 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
     STARTUPINFOEXW startup; PROCESS_INFORMATION child; SECURITY_CAPABILITIES capabilities;
     SIZE_T attribute_bytes=0; LPPROC_THREAD_ATTRIBUTE_LIST attributes=NULL; DWORD code; int attributes_ready=0;
     HANDLE inherited[3]={GetStdHandle(STD_INPUT_HANDLE),GetStdHandle(STD_OUTPUT_HANDLE),GetStdHandle(STD_ERROR_HANDLE)};
+    sandbox_step=10;
     swprintf(profile,100,L"Fluent.Pdf.worker.%lu.%hs",GetCurrentProcessId(),argv[9]);
     if(MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,argv[1],-1,root,4096)==0) return respond(FP_SANDBOX,NULL,0);
     if(FAILED(CreateAppContainerProfile(profile,L"Fluent.Pdf isolated worker",L"Single offline job",NULL,0,&sid))) goto done;
     parent_process=OpenProcess(SYNCHRONIZE,FALSE,(DWORD)parent_id); if(!parent_process) goto done;
+    sandbox_step=11;
     if(!grant_stage(sid,root)) goto done;
+    sandbox_step=12;
     job=CreateJobObjectW(NULL,NULL); if(!job) goto done;
     memset(&limits,0,sizeof(limits)); limits.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE|
         JOB_OBJECT_LIMIT_ACTIVE_PROCESS|JOB_OBJECT_LIMIT_PROCESS_MEMORY|JOB_OBJECT_LIMIT_JOB_MEMORY|JOB_OBJECT_LIMIT_PROCESS_TIME;
     limits.BasicLimitInformation.ActiveProcessLimit=1; limits.ProcessMemoryLimit=(SIZE_T)memory; limits.JobMemoryLimit=(SIZE_T)memory;
     limits.BasicLimitInformation.PerProcessUserTimeLimit.QuadPart=(LONGLONG)(milliseconds*10000+10000000);
+    sandbox_step=13;
     if(!SetInformationJobObject(job,JobObjectExtendedLimitInformation,&limits,sizeof(limits))) goto done;
     if(!GetModuleFileNameW(NULL,exe,4096)) goto done;
     used=(size_t)swprintf(command,24000,L"\"%ls\" --inside",exe);
@@ -260,10 +274,12 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
     }
     memset(&startup,0,sizeof(startup)); memset(&child,0,sizeof(child)); memset(&capabilities,0,sizeof(capabilities));
     InitializeProcThreadAttributeList(NULL,3,0,&attribute_bytes);
+    sandbox_step=14;
     attributes=(LPPROC_THREAD_ATTRIBUTE_LIST)HeapAlloc(GetProcessHeap(),0,attribute_bytes); if(!attributes) goto done;
     if(!InitializeProcThreadAttributeList(attributes,3,0,&attribute_bytes)) goto done;
     attributes_ready=1;
     capabilities.AppContainerSid=sid;
+    sandbox_step=15;
     if(!UpdateProcThreadAttribute(attributes,0,PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES,&capabilities,sizeof(capabilities),NULL,NULL)) goto done;
     if(!UpdateProcThreadAttribute(attributes,0,PROC_THREAD_ATTRIBUTE_JOB_LIST,&job,sizeof(job),NULL,NULL)) goto done;
     for(i=0;i<3;i++) if(!SetHandleInformation(inherited[i],HANDLE_FLAG_INHERIT,HANDLE_FLAG_INHERIT)) goto done;
@@ -271,7 +287,9 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
     startup.StartupInfo.cb=sizeof(startup); startup.StartupInfo.dwFlags=STARTF_USESTDHANDLES;
     startup.StartupInfo.hStdInput=GetStdHandle(STD_INPUT_HANDLE); startup.StartupInfo.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);
     startup.StartupInfo.hStdError=GetStdHandle(STD_ERROR_HANDLE); startup.lpAttributeList=attributes;
+    sandbox_step=16;
     if(!CreateProcessW(exe,command,NULL,NULL,TRUE,EXTENDED_STARTUPINFO_PRESENT|CREATE_SUSPENDED|CREATE_NO_WINDOW,NULL,root,&startup.StartupInfo,&child)) goto done;
+    sandbox_step=17;
     if(ResumeThread(child.hThread)==(DWORD)-1) { TerminateJobObject(job,91); }
     {
         HANDLE observed[2]={child.hProcess,parent_process};

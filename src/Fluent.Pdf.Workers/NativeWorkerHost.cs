@@ -52,7 +52,7 @@ public sealed class NativeWorkerHost
             // Keep the trusted bootstrap's executable/current directory free of engine DLLs.
             // Its OS imports are resolved before main can restrict dynamic search paths.
             Directory.CreateDirectory(bootstrapDirectory);
-            WorkerPlatform.ProtectDirectory(bootstrapDirectory);
+            if (!WorkerPlatform.IsWindows) WorkerPlatform.ProtectDirectory(bootstrapDirectory);
             string executable = Path.Combine(bootstrapDirectory,options.ExecutableFileName);
             File.Copy(Path.Combine(job,options.ExecutableFileName),executable,false);
             WorkerPlatform.MakeExecutable(executable);
@@ -71,6 +71,8 @@ public sealed class NativeWorkerHost
             start.EnvironmentVariables["TMP"] = job;
             start.EnvironmentVariables["TEMP"] = job;
             start.EnvironmentVariables["TMPDIR"] = job;
+            if (options.Deployment.RuntimeIdentifier.StartsWith("osx-",StringComparison.Ordinal))
+                start.EnvironmentVariables["MallocNanoZone"] = "0";
             string[] arguments = { job,options.LibraryFileName,options.Deployment.Abi,options.Deployment.EngineVersion,
                 options.MaximumInputBytes.ToString(CultureInfo.InvariantCulture),options.MaximumOutputBytes.ToString(CultureInfo.InvariantCulture),
                 options.MaximumMemoryBytes.ToString(CultureInfo.InvariantCulture),
