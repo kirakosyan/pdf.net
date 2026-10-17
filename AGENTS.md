@@ -14,7 +14,7 @@ Use original implementation and our own API. Reference analysis establishes requ
 
 ## Current status and truthfulness
 
-The repository contains research, specification, a backlog and the FP-001 in-memory document/provider contract implementation. No PDF parser, writer or rendering engine is implemented. See docs/api-contract.md for the available behavior and qualification gaps. Do not call a build, contract fixture, package upload, emulator/VM boot or installation proof of PDF functionality or production readiness.
+The repository contains research, specification, a backlog, FP-001 document/provider contracts and FP-002 operation policies/budgets. No PDF parser, writer or rendering engine is implemented. See docs/api-contract.md and docs/operation-policies.md for available behavior and qualification gaps. Do not call a build, contract fixture, package upload, emulator/VM boot or installation proof of PDF functionality or production readiness.
 
 All SDK requirements marked releaseRequired in specs/requirements.json are mandatory for stable publication. The Reader requirement is excluded. Do not silently narrow the required scope to make a release pass. Status changes require reviewed implementation and evidence. Do not publish placeholders, alpha/beta packages or package-name reservations.
 
@@ -26,6 +26,7 @@ All SDK requirements marked releaseRequired in specs/requirements.json are manda
 - Document provider capabilities by OS/RID/runtime/version. No runtime binary or model download by default.
 - No System.Drawing/GDI+ assumption in cross-platform core. Windows-only COM, ASPX, printer or UI integration belongs in separate adapters.
 - Apply operation policies at every parse/decode/layout/render/save boundary. Avoid hidden global mutable configuration.
+- Providers receive the mandatory PdfOperationContext. Charge objects/pixels/expanded bytes before allocation; use scoped depth/workers, bounded decoder leases and cooperative checkpoints. Never catch and hide latched failures, bypass the SDK stream lease or return with outstanding workers/scopes.
 - Strict mode rejects unsupported requested behavior. Permissive mode reports every loss with stable diagnostic codes.
 - Bound input, expansion, recursion, pixels, objects, workers, native execution and output. Preserve caller stream ownership; save files atomically.
 - Documents have explicit thread-safety rules. Independent jobs isolate browser contexts, fonts, caches, credentials and temporary paths.

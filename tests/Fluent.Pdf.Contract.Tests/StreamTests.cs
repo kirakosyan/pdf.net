@@ -113,7 +113,7 @@ public sealed class StreamTests
     {
         using var cancel = new CancellationTokenSource();
         PdfDocument? partial = null;
-        var provider = new ContractProvider { OnRead = (_, document, token) => { Assert.Equal(cancel.Token, token); partial = document; document.AddPage(); cancel.Cancel(); } };
+        var provider = new ContractProvider { OnRead = (_, document, token) => { Assert.True(token.CanBeCanceled); partial = document; document.AddPage(); cancel.Cancel(); Assert.True(token.IsCancellationRequested); } };
         using var input = new MemoryStream(new byte[] { 1 });
         Assert.Throws<OperationCanceledException>(() => Pdf.Open(input, providers: new PdfProviderRegistry(provider), cancellationToken: cancel.Token));
         Assert.True(partial!.IsDisposed);

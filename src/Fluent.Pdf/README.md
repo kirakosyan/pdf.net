@@ -1,6 +1,6 @@
 # Fluent.Pdf package boundary
 
-This project implements the managed document/page model, immutable options, diagnostics and explicit provider contracts on net472, netstandard2.0, net8.0 and net10.0. See the [API contract](../../docs/api-contract.md) for behavior and executable examples.
+This project implements the managed document/page model, immutable options, diagnostics, explicit provider contracts and operation policies/budgets on net472, netstandard2.0, net8.0 and net10.0. See the [API contract](../../docs/api-contract.md) and [operation policies](../../docs/operation-policies.md) for behavior and executable examples.
 
 No PDF reader/writer, renderer or optional engine is bundled. Open/save requires an explicitly registered provider and fails with PdfProviderUnavailableException otherwise. Test fixture bytes are not PDF output.
 

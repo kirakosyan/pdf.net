@@ -57,7 +57,7 @@ try {
         [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash}
     })
     $summary = [ordered]@{
-        schemaVersion=1;purpose='source-contract-tests';requirement='FP-001'
+        schemaVersion=1;purpose='source-contract-tests';requirements=@('FP-001','FP-002')
         sourceCommit=(& git rev-parse HEAD).Trim();workingTreeDirty=[bool](& git status --porcelain)
         sourceFiles=$sourceFiles;lanes=@($records.ToArray());productionQualified=$false
         pending=@('Actual minimum .NET Framework 4.7.2 execution','Exact final NuGet package consumers','Complete SDK capability and production qualification')

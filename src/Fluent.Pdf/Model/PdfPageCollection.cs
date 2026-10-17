@@ -25,7 +25,7 @@ public sealed class PdfPageCollection : IReadOnlyList<PdfPage>
         _owner.EnsureEditable();
         Guard.Size(size, nameof(size));
         if (_pages.Count >= _owner.Options.MaximumPages)
-            throw new PdfException(new PdfDiagnostic("Limit.Pages", "The document's configured page limit was reached."));
+            throw _owner.PageLimit();
         var page = new PdfPage(_owner, size);
         _pages.Add(page);
         _version++;

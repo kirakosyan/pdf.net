@@ -1,5 +1,5 @@
 # Executable contract examples
 
-The [C# example](Fluent.Pdf.Contract.CSharp/ContractExample.cs) and [VB example](Fluent.Pdf.Contract.VisualBasic/ContractExample.vb) exercise the FP-001 page model, snapshots and typed missing-provider result. Both compile for net472, netstandard2.0, net8.0 and net10.0 and execute through [ExampleTests](../tests/Fluent.Pdf.Contract.Tests/ExampleTests.cs). See the [API contract](../docs/api-contract.md).
+The [C# example](Fluent.Pdf.Contract.CSharp/ContractExample.cs) and [VB example](Fluent.Pdf.Contract.VisualBasic/ContractExample.vb) exercise the FP-001 page model, snapshots and typed missing-provider result. `SaveWithReport` configures FP-002 permissive processing and explicit limits, returning every reported loss from an application-supplied provider. Both compile for net472, netstandard2.0, net8.0 and net10.0 and execute through [ExampleTests](../tests/Fluent.Pdf.Contract.Tests/ExampleTests.cs). See the [API contract](../docs/api-contract.md) and [operation policy contract](../docs/operation-policies.md).
 
 Build and run using [docs/testing.md](../docs/testing.md). The examples currently reference the source project. The final release gate must rerun them with exact NuGet package references in fresh consumers; no package is produced or published at this stage. These examples do not generate a PDF or install an engine.

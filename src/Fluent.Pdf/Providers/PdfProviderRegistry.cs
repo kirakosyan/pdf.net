@@ -45,6 +45,8 @@ public sealed class PdfProviderRegistry
     /// <summary>Gets the declared capability inventory in enum order.</summary>
     public IReadOnlyList<PdfCapability> Capabilities { get; }
 
+    internal string GetIdentifier(PdfCapability capability) => _identifiers[capability];
+
     /// <summary>Reports whether a capability has an explicitly registered provider.</summary>
     public bool Supports(PdfCapability capability)
     {

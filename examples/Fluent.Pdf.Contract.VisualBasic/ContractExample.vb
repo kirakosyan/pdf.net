@@ -4,6 +4,14 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function SaveWithReport(providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
+        Dim limits As New PdfResourceLimits(maximumInputBytes:=1048576, maximumOutputBytes:=1048576)
+        Dim policy As New PdfOperationPolicy(PdfProcessingMode.Permissive, limits)
+        Using document = PdfFacade.Create(New PdfOptions(operationPolicy:=policy), providers).AddPage()
+            Return document.Save(output)
+        End Using
+    End Function
+
     Public Function Run() As Integer
         Dim options As New PdfOptions(PdfPageSize.Letter, maximumPages:=10)
         Using document As PdfDocument = PdfFacade.Create(options).

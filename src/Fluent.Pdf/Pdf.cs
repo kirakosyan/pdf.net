@@ -30,8 +30,9 @@ public static class Pdf
         Guard.Text(path, nameof(path), 32767);
         cancellationToken.ThrowIfCancellationRequested();
         var registry = providers ?? PdfProviderRegistry.Empty;
-        registry.GetRequired<IPdfDocumentReader>(PdfCapability.ReadDocument);
-        using var input = File.OpenRead(path);
-        return Open(input, options, registry, cancellationToken);
+        var reader = registry.GetRequired<IPdfDocumentReader>(PdfCapability.ReadDocument);
+        var document = Create(options, registry);
+        try { document.ReadFile(reader, path, cancellationToken); return document; }
+        catch { document.Dispose(); throw; }
     }
 }
