@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <wchar.h>
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -10,6 +11,7 @@
 #else
 #include <unistd.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 #include <sys/wait.h>
 #endif
 #ifndef FIXTURE_ABI
@@ -59,8 +61,15 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
             WSACleanup();
 #else
             int connection=socket(AF_INET,SOCK_STREAM,0);
-            if(capacity<1) return 99;
-            output[0]=(unsigned char)(connection>=0); if(connection>=0) close(connection);
+            if(capacity<1 || length!=3) return 99;
+            output[0]=0;
+            if(connection>=0) {
+                struct sockaddr_in address;
+                memset(&address,0,sizeof(address)); address.sin_family=AF_INET;
+                address.sin_port=htons((unsigned short)((unsigned)input[1]*256+input[2])); address.sin_addr.s_addr=htonl(0x7f000001);
+                output[0]=(unsigned char)(connect(connection,(struct sockaddr *)&address,sizeof(address))==0);
+                close(connection);
+            }
 #endif
             *written=1; return 0;
         }

@@ -2488,12 +2488,13 @@
         "implemented": [
           "Immutable offline provisioning manifests and read-only local integrity preflight",
           "Pinned size/SHA-256, host RID and native header architecture checks",
-          "Stable diagnostics, operation-context failure latching and C#/VB source consumers"
+          "Stable diagnostics, operation-context failure latching and C#/VB source consumers",
+          "Optional original isolated bridge host with actual ABI/version/export/dependency probes",
+          "Platform sandbox/resource boundaries, authenticated bounded transport, native crash/cancellation recovery"
         ],
         "pending": [
-          "Actual ABI and transitive dependency execution probes",
-          "Secure platform loading, isolated workers, OS resource limits and crash recovery",
-          "Complete native/runtime and exact-package production qualification"
+          "Complete native source boundary validation on all host lanes",
+          "Reviewed engine inventories, full security/endurance and exact-package production qualification"
         ]
       }
     },

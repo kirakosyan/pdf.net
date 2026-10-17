@@ -4,6 +4,7 @@ Use PowerShell 7, .NET SDK 10 and the .NET 8 runtime. Windows x64 also needs ins
 
 ```powershell
 pwsh -File eng/validate-spec.ps1
+pwsh -File eng/build-native-fixtures.ps1
 dotnet restore Fluent.Pdf.slnx --locked-mode
 dotnet tool restore
 dotnet build Fluent.Pdf.slnx -c Release --no-restore
@@ -25,7 +26,7 @@ The aggregate report is invalidated at the start of a rerun and written only aft
 
 The contract fixture reads a byte count and writes a labeled text record. It is deliberately test-only and emits no PDF. The suite covers normal edits, invalid geometry/registration, page-count boundaries, disposal, directional expiring stream leases, failed/canceled callbacks, provider seekability, atomic output preservation, examples and independent document isolation. FP-002 adds below/at/above checks for all seven resource kinds, diagnostic retention and elapsed time; 64-bit overflow/pixel multiplication; real bounded Deflate expansion; strict/permissive losses with page/object provenance; latched failures; parallel accounting; scoped ownership; deadlines and cooperative cancellation. The elapsed-time boundary uses an internal monotonic-clock test seam, alongside actual timer/token integration. API analyzers enforce the checked-in public declarations during compilation; APICompat compares actual target assemblies.
 
-FP-085 adds inert original PE/ELF/Mach-O header fixtures, current-host pinned-file hashing, missing dependency/size/digest/RID diagnostics, portable-name validation, cumulative byte/count boundaries and overflow, read-only assets, cancellation at hash-read boundaries, C#/VB consumers and latched preflight failures preserving atomic destinations. These fixtures are not native engines. Modern Unix source runtimes additionally check read-only directories and root/file symbolic links; Windows privileged links and minimum Framework behavior require separate evidence. See [native deployment](native-deployment.md) for all remaining execution and isolation work.
+FP-085 adds inert original PE/ELF/Mach-O header fixtures, current-host pinned-file hashing, missing dependency/size/digest/RID diagnostics, portable-name validation, cumulative byte/count boundaries and overflow, read-only assets, cancellation at hash-read boundaries, C#/VB consumers and latched preflight failures preserving atomic destinations. These fixtures are not native engines. Modern Unix source runtimes additionally check read-only directories and root/file symbolic links; Windows privileged links and minimum Framework behavior require separate evidence. The original native bridge fixtures additionally exercise actual loaders, ABI/version/export/dependency failures, crashes, deadlines/cancellation, memory/transport ceilings, denied document read/write/network/process access and recovery. See [native deployment](native-deployment.md) for host prerequisites and remaining qualification.
 
 ## Remaining production work
 
