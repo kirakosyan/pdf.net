@@ -2,7 +2,7 @@
 
 Fluent.Pdf is an MIT-licensed .NET PDF SDK being designed for Windows, Linux and macOS. Its production scope combines document generation and editing, browser-quality HTML conversion, rendering, extraction, forms, OCR, security, signatures and independently validated PDF standards.
 
-**Current delivery: specification, backlog and the FP-001 in-memory document/provider contracts. PDF parsing, writing and rendering are not implemented; the SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
+**Current delivery: specification, backlog, FP-001 document/provider contracts and FP-002 operation policies/budgets. PDF parsing, writing and rendering are not implemented; the SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
 
 ## Product direction
 
@@ -50,7 +50,7 @@ pwsh -File eng/test-contracts.ps1
 pwsh -File eng/test-release-block.ps1
 ```
 
-These checks exercise document editing, provider/stream lifetimes, cancellation and atomic file saves through test fixtures. See the [API contract and C#/VB examples](docs/api-contract.md) and [test/evidence procedure](docs/testing.md). The fixtures emit no PDF. Packing intentionally fails while production readiness is false.
+These checks exercise document editing, provider/stream lifetimes, strict/permissive losses, resource limits, cancellation/deadlines and atomic file saves through test fixtures. See the [API contract and C#/VB examples](docs/api-contract.md), [operation policies](docs/operation-policies.md) and [test/evidence procedure](docs/testing.md). The fixtures emit no PDF. Packing intentionally fails while production readiness is false.
 
 ## Repository layout
 

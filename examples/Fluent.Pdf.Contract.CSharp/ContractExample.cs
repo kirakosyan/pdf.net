@@ -5,6 +5,14 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport SaveWithReport(PdfProviderRegistry providers, Stream output)
+    {
+        var policy = new PdfOperationPolicy(PdfProcessingMode.Permissive,
+            new PdfResourceLimits(maximumInputBytes: 1048576, maximumOutputBytes: 1048576));
+        using var document = PdfFacade.Create(new PdfOptions(operationPolicy: policy), providers).AddPage();
+        return document.Save(output);
+    }
+
     public static int Run()
     {
         var options = new PdfOptions(PdfPageSize.Letter, maximumPages: 10);

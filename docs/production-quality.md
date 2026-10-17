@@ -47,8 +47,8 @@ Goldens require provenance and redistribution rights. Record original content ha
 
 specs/release-readiness.json is the release switch and required lane/suite inventory. Each qualification report is immutable JSON with schemaVersion, sourceCommit, packageVersion, lane, runtime, os, architecture, suites and artifact hashes. suites contain positive test totals, zero failed, zero skipped and report paths/hashes. Publish stage additionally binds final package filenames/SHA-256.
 
-eng/assert-production-ready.ps1 validates readiness, requirement status and retained report hashes. FP-094 must extend and independently exercise the gate when the full qualification runners exist. Foundation CI tests the current negative publication boundary only.
+eng/assert-production-ready.ps1 validates readiness, requirement status and retained report hashes. FP-094 must extend and independently exercise the gate when the full qualification runners exist. Source CI exercises current contract/policy behavior and the negative publication boundary; it is not full production qualification.
 
 ## Current result
 
-No PDF functionality, native lane, conformance profile, benchmark, OCR result or stable package has been qualified by this planning baseline. All missing production evidence remains a publication blocker.
+FP-001/FP-002 have source implementations and tests. No PDF functionality, native engine, conformance profile, benchmark, OCR result or stable package has been production-qualified. All missing production evidence remains a publication blocker.

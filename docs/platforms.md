@@ -33,3 +33,5 @@ ARM64 qualification must execute on ARM64 hardware/OS. Cross compilation, emulat
 Source contract CI executes .NET 8, .NET 10 and an explicit netstandard2.0 fallback consumer on native Windows/Linux/macOS x64 and ARM64 runners. The Windows x64 runner also executes the net472 contracts in current Framework x86/x64 processes. Runtime identity and exact loaded assembly target are asserted. Reports describe only the contract layer; they are not final-package, minimum-OS or provider qualification. See [testing.md](testing.md).
 
 Actual Framework 4.7.2 execution and the complete production runtime/provider matrix remain pending FP-086 work and block release.
+
+FP-002 policy, decoder-lease, deadline and accounting tests run on these same source lanes, with no new platform/native dependency. They do not qualify a PDF parser/renderer or forced termination of native work; each future provider must integrate and qualify the mandatory operation context.

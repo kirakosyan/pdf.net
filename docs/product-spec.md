@@ -59,7 +59,7 @@ A fluent facade and editable document model share one processing context. Every 
 
 Stream APIs preserve caller ownership and define seekability requirements. Paths use atomic replacement. Sensitive data never enters logs by default. Credentials and private keys remain under caller control. Mutation of a single document is serialized; independent documents support bounded parallel operation.
 
-The implemented FP-001 surface and executable C#/VB examples are described in [api-contract.md](api-contract.md). Other examples shown before implementation remain design proposals. Public API analyzers and cross-TFM compatibility checks enforce the checked-in contract; pre-release API changes require explicit review.
+The implemented FP-001 surface and executable C#/VB examples are described in [api-contract.md](api-contract.md); FP-002 behavior is defined in [operation-policies.md](operation-policies.md). Other examples shown before implementation remain design proposals. Public API analyzers and cross-TFM compatibility checks enforce the checked-in contract; pre-release API changes require explicit review.
 
 ## Definition of better
 
@@ -74,4 +74,4 @@ Per-workload numerical gates and release evidence are defined in [production-qua
 
 ## Delivery status
 
-Requirements discovery and issue preparation are complete. FP-001 now has a source contract implementation; it remains unqualified until actual minimum-runtime and final-package checks are available. The remaining SDK requirements are planned. Contract tests do not qualify PDF processing or permit packing/publication. Every implementation milestone must preserve the full required production scope and update the evidence ledger.
+Requirements discovery and issue preparation are complete. FP-001 and FP-002 have source implementations; production qualification remains pending, including actual minimum-runtime and final-package checks. The remaining SDK requirements are planned. Contract/policy tests do not qualify PDF processing or permit packing/publication. Every implementation milestone must preserve the full required production scope and update the evidence ledger.

@@ -11,18 +11,24 @@ internal sealed class ContractProvider : IPdfDocumentReader, IPdfDocumentWriter,
     public bool RequiresSeekableStream { get; set; }
     internal Action<Stream, PdfDocument, CancellationToken>? OnRead { get; set; }
     internal Action<PdfDocumentSnapshot, Stream, CancellationToken>? OnWrite { get; set; }
+    internal Action<Stream, PdfDocument, PdfOperationContext>? OnReadContext { get; set; }
+    internal Action<PdfDocumentSnapshot, Stream, PdfOperationContext>? OnWriteContext { get; set; }
     internal bool Disposed { get; private set; }
 
-    public void Read(Stream input, PdfDocument target, CancellationToken cancellationToken)
+    public void Read(Stream input, PdfDocument target, PdfOperationContext context)
     {
+        if (OnReadContext is not null) { OnReadContext(input, target, context); return; }
+        var cancellationToken = context.CancellationToken;
         if (OnRead is not null) { OnRead(input, target, cancellationToken); return; }
         int count = input.ReadByte();
         if (count < 0) throw new InvalidDataException("The contract fixture requires one count byte.");
         for (int i = 0; i < count; i++) { cancellationToken.ThrowIfCancellationRequested(); target.Pages.Add(); }
     }
 
-    public void Write(PdfDocumentSnapshot document, Stream output, CancellationToken cancellationToken)
+    public void Write(PdfDocumentSnapshot document, Stream output, PdfOperationContext context)
     {
+        if (OnWriteContext is not null) { OnWriteContext(document, output, context); return; }
+        var cancellationToken = context.CancellationToken;
         if (OnWrite is not null) { OnWrite(document, output, cancellationToken); return; }
         cancellationToken.ThrowIfCancellationRequested();
         var bytes = Encoding.UTF8.GetBytes("contract:" + document.Pages.Count.ToString(System.Globalization.CultureInfo.InvariantCulture));

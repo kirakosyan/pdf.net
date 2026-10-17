@@ -38,8 +38,8 @@
     "consumer"
   ],
   "publicationBlockedReasons": [
-    "SDK scope is incomplete: only FP-001 source contracts are implemented; PDF parsing, writing and rendering remain unimplemented.",
-    "Actual runtime, native-provider, standards, security, performance and final-package evidence is absent.",
+    "SDK scope is incomplete: only FP-001 contracts and FP-002 policies/budgets are implemented; PDF parsing, writing and rendering remain unimplemented.",
+    "Complete production runtime, native-provider, standards, security, performance and final-package evidence is incomplete.",
     "Package ownership/prefix and scoped Trusted Publishing configuration must be verified before release."
   ],
   "qualificationWorkflow": "production-qualification.yml"

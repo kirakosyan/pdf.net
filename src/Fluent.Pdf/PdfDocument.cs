@@ -13,6 +13,8 @@ public sealed class PdfDocument : IDisposable
     private bool _disposed;
     private bool _operationActive;
     private bool _writing;
+    private PdfOperationContext? _context;
+    private PdfOperationReport? _lastReport;
 
     internal PdfDocument(PdfOptions options, PdfProviderRegistry providers)
     {
@@ -29,6 +31,8 @@ public sealed class PdfDocument : IDisposable
     public PdfProviderRegistry Providers { get { EnsureAlive(); return _providers; } }
     /// <summary>Gets the zero-based editable page model.</summary>
     public PdfPageCollection Pages { get { EnsureAlive(); return _pages; } }
+    /// <summary>Gets the last completed provider operation report, including failed operations. Remains readable after disposal.</summary>
+    public PdfOperationReport? LastOperationReport => _lastReport;
 
     /// <summary>Adds a default-sized page and returns this document for fluent composition.</summary>
     public PdfDocument AddPage() { _pages.Add(); return this; }
@@ -46,7 +50,7 @@ public sealed class PdfDocument : IDisposable
 
     /// <summary>Writes through the registered writer at the current stream position, leaving the caller's stream open.</summary>
     /// <remarks>Stream output can be partial on provider failure/cancellation. The SDK does not rewind or truncate the caller's stream.</remarks>
-    public void Save(Stream output, CancellationToken cancellationToken = default)
+    public PdfOperationReport Save(Stream output, CancellationToken cancellationToken = default)
     {
         EnsureAlive();
         EnsureNoActiveOperation();
@@ -54,12 +58,16 @@ public sealed class PdfDocument : IDisposable
         if (!output.CanWrite) throw new ArgumentException("A writable stream is required.", nameof(output));
         cancellationToken.ThrowIfCancellationRequested();
         var writer = _providers.GetRequired<IPdfDocumentWriter>(PdfCapability.WriteDocument);
-        Write(writer, output, cancellationToken);
+        return RunOperation(true, "Save", PdfCapability.WriteDocument, cancellationToken, context =>
+        {
+            Write(writer, output, context);
+            context.EnsureComplete();
+        });
     }
 
     /// <summary>Writes to a private file in the destination directory, then atomically moves/replaces the destination on success.</summary>
     /// <remarks>The destination directory must exist. An unsupported atomic replace fails without a delete-and-copy fallback.</remarks>
-    public void SaveFile(string path, CancellationToken cancellationToken = default)
+    public PdfOperationReport SaveFile(string path, CancellationToken cancellationToken = default)
     {
         EnsureAlive();
         EnsureNoActiveOperation();
@@ -71,30 +79,35 @@ public sealed class PdfDocument : IDisposable
         var temporary = Path.Combine(directory, ".fluent-pdf-" + Guid.NewGuid().ToString("N") + ".tmp");
         bool created = false;
         Exception? failure = null;
-        try
+        return RunOperation(true, "SaveFile", PdfCapability.WriteDocument, cancellationToken, context =>
         {
-            using (var output = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            try
             {
-                created = true;
-                Write(writer, output, cancellationToken);
-                output.Flush(true);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            if (File.Exists(fullPath)) File.Replace(temporary, fullPath, null);
-            else File.Move(temporary, fullPath);
-        }
-        catch (Exception ex) { failure = ex; throw; }
-        finally
-        {
-            if (created)
-            {
-                try { File.Delete(temporary); }
-                catch (Exception cleanup) when (failure is not null && (cleanup is IOException || cleanup is UnauthorizedAccessException))
+                context.Checkpoint();
+                using (var output = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
                 {
-                    failure.Data["Fluent.Pdf.CleanupFailure"] = cleanup;
+                    created = true;
+                    Write(writer, output, context);
+                    output.Flush(true);
+                }
+                context.EnsureComplete();
+                // This is the commit boundary. A later cancellation cannot roll back an atomic replacement.
+                if (File.Exists(fullPath)) File.Replace(temporary, fullPath, null);
+                else File.Move(temporary, fullPath);
+            }
+            catch (Exception ex) { failure = ex; throw; }
+            finally
+            {
+                if (created)
+                {
+                    try { File.Delete(temporary); }
+                    catch (Exception cleanup) when (failure is not null && (cleanup is IOException || cleanup is UnauthorizedAccessException))
+                    {
+                        failure.Data["Fluent.Pdf.CleanupFailure"] = cleanup;
+                    }
                 }
             }
-        }
+        });
     }
 
     /// <summary>Disposes this session and invalidates live page/collection references. Repeated disposal is harmless.</summary>
@@ -110,29 +123,71 @@ public sealed class PdfDocument : IDisposable
     internal void Read(IPdfDocumentReader reader, Stream input, CancellationToken cancellationToken)
     {
         if (reader.RequiresSeekableStream && !input.CanSeek) throw SeekRequired(PdfCapability.ReadDocument);
-        BeginOperation(false);
-        try
+        RunOperation(false, "Open", PdfCapability.ReadDocument, cancellationToken, context =>
         {
-            using var lease = new BorrowedStream(input, true);
-            reader.Read(lease, this, cancellationToken);
-            cancellationToken.ThrowIfCancellationRequested();
-        }
-        finally { EndOperation(); }
+            ReadCore(reader, input, context);
+            context.EnsureComplete();
+        });
     }
 
-    private void Write(IPdfDocumentWriter writer, Stream output, CancellationToken cancellationToken)
+    internal void ReadFile(IPdfDocumentReader reader, string path, CancellationToken cancellationToken)
     {
-        cancellationToken.ThrowIfCancellationRequested();
+        RunOperation(false, "OpenFile", PdfCapability.ReadDocument, cancellationToken, context =>
+        {
+            context.Checkpoint();
+            using (var input = File.OpenRead(path)) ReadCore(reader, input, context);
+            context.EnsureComplete();
+        });
+    }
+
+    private void ReadCore(IPdfDocumentReader reader, Stream input, PdfOperationContext context)
+    {
+        using var lease = new BorrowedStream(input, true, context);
+        reader.Read(lease, this, context);
+        context.Checkpoint();
+    }
+
+    private void Write(IPdfDocumentWriter writer, Stream output, PdfOperationContext context)
+    {
+        context.Checkpoint();
         if (writer.RequiresSeekableStream && !output.CanSeek) throw SeekRequired(PdfCapability.WriteDocument);
-        BeginOperation(true);
+        var snapshot = CreateSnapshot();
+        using var lease = new BorrowedStream(output, false, context);
+        writer.Write(snapshot, lease, context);
+        context.Checkpoint();
+    }
+
+    private PdfOperationReport RunOperation(bool writing, string operation, PdfCapability capability,
+        CancellationToken token, Action<PdfOperationContext> action)
+    {
+        BeginOperation(writing);
+        PdfOperationContext? context = null;
+        bool succeeded = false;
         try
         {
-            var snapshot = CreateSnapshot();
-            using var lease = new BorrowedStream(output, false);
-            writer.Write(snapshot, lease, cancellationToken);
-            cancellationToken.ThrowIfCancellationRequested();
+            context = new PdfOperationContext(operation, _providers.GetIdentifier(capability), capability, _options.OperationPolicy, token);
+            _context = context;
+            context.Checkpoint();
+            action(context);
+            succeeded = true;
         }
-        finally { EndOperation(); }
+        catch (Exception failure)
+        {
+            // Reassert latched policy failures, cancellation and deadline even if a callback swallowed/replaced them.
+            try { context?.Checkpoint(); }
+            catch (Exception policyFailure)
+            {
+                if (!ReferenceEquals(failure, policyFailure)) policyFailure.Data["Fluent.Pdf.UnderlyingFailure"] = failure;
+                throw;
+            }
+            throw;
+        }
+        finally
+        {
+            try { if (context is not null) _lastReport = context.Finish(succeeded); }
+            finally { _context = null; EndOperation(); context?.DisposeSources(); }
+        }
+        return _lastReport!;
     }
 
     private static PdfException SeekRequired(PdfCapability capability) =>
@@ -154,9 +209,16 @@ public sealed class PdfDocument : IDisposable
     }
 
     internal void EnsureAlive() { if (_disposed) throw new ObjectDisposedException(nameof(PdfDocument)); }
+    internal PdfException PageLimit()
+    {
+        var diagnostic = new PdfDiagnostic("Limit.Pages", "The document's configured page limit was reached.");
+        _context?.Report(diagnostic);
+        return new PdfException(diagnostic);
+    }
     internal void EnsureEditable()
     {
         EnsureAlive();
+        _context?.Checkpoint();
         if (_writing) throw new InvalidOperationException("The document cannot be edited during writing.");
     }
 }

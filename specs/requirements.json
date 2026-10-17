@@ -35,7 +35,7 @@
       "title": "Operation policies, diagnostics and resource budgets",
       "area": "foundation",
       "phase": "01-foundation",
-      "status": "planned",
+      "status": "implemented",
       "releaseRequired": true,
       "dependencies": [
         "FP-001"
