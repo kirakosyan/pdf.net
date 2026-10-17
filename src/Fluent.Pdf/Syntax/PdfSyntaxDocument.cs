@@ -67,11 +67,13 @@ public sealed class PdfSyntaxDocument
 {
     internal PdfByteStore Source { get; }
 
-    internal PdfSyntaxDocument(string version, PdfByteStore source, List<PdfRevision> revisions)
+    private readonly PdfOperationPolicy _policy;
+    internal PdfSyntaxDocument(string version, PdfByteStore source, List<PdfRevision> revisions, PdfOperationPolicy policy)
     {
         Version = version;
         Source = source;
         Revisions = revisions.AsReadOnly();
+        _policy = policy;
     }
 
     /// <summary>Gets the header version, from 1.2 through 1.7 or 2.0.</summary>
@@ -96,6 +98,36 @@ public sealed class PdfSyntaxDocument
 
     /// <summary>Opens a detached read-only view of the exact original file, including historical revisions.</summary>
     public Stream OpenOriginalStream() => Source.Open(0, Source.Length);
+    /// <summary>Decodes an indirect stream eagerly under a fresh policy, resolving filter parameter references at the selected revision.</summary>
+    public PdfDecodedData DecodeStream(PdfObjectId id, int revisionIndex = 0, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
+    {
+        var value = Resolve(id, revisionIndex);
+        var context = new PdfOperationContext("DecodeStream", "managed.filters", PdfCapability.ReadDocument, policy ?? _policy, cancellationToken);
+        try
+        {
+            context.Checkpoint();
+            if (value.Kind != PdfValueKind.Stream)
+                throw PdfStreamFilters.Error(context, "Filter.StreamRequired", "The requested indirect object is not a stream.");
+            context.Consume(PdfResourceKind.InputBytes, value.RawStreamLength);
+            var resolved = PdfFilterDeclarations.Resolve(value, reference => Resolve(reference, revisionIndex), context);
+            using var decoded = PdfFilters.Decode(resolved, context);
+            var bytes = PdfByteStore.Read(decoded, context);
+            context.EnsureComplete();
+            return new PdfDecodedData(bytes, context.Finish(true));
+        }
+        catch
+        {
+            if (context.IsActive)
+                context.Checkpoint();
+            throw;
+        }
+        finally
+        {
+            if (context.IsActive)
+                context.Finish(false);
+            context.DisposeSources();
+        }
+    }
 }
 
 /// <summary>Original managed syntax inspection. No provider, file repair, decryption or document action is invoked.</summary>

@@ -7,6 +7,7 @@ internal sealed class PdfSyntaxReader
     private readonly HashSet<long> _xrefOffsets = new();
     private readonly HashSet<(int, int, int)> _resolving = new();
     private readonly Dictionary<(int, int, int), PdfValue> _resolved = new();
+    private readonly Dictionary<(int, int), EmbeddedObjects> _objectStreams = new();
     private readonly PdfSyntaxCursor _errors;
     internal PdfSyntaxReader(PdfByteStore source, PdfOperationContext context)
     {
@@ -71,7 +72,7 @@ internal sealed class PdfSyntaxReader
                             _revisions[revision].Values.Add(entry.Id.Number, Resolve(entry.Id, revision));
             }
 
-            return new PdfSyntaxDocument(version, _source, _revisions);
+            return new PdfSyntaxDocument(version, _source, _revisions, _context.Policy);
         }
         catch (OverflowException)
         {
@@ -218,15 +219,83 @@ internal sealed class PdfSyntaxReader
         using var depth = _context.EnterScope(PdfResourceKind.Depth);
         try
         {
-            if (entry.Kind == PdfCrossReferenceKind.Compressed)
-                throw Error("Syntax.ObjectStreamUnsupported", "Compressed object resolution requires the object-stream decoder.");
-            value = Indirect(entry.Offset, id, revision);
+            value = entry.Kind == PdfCrossReferenceKind.Compressed ? Compressed(entry, revision) : Indirect(entry.Offset, id, revision);
             _resolved.Add(key, value);
             return value;
         }
         finally
         {
             _resolving.Remove(key);
+        }
+    }
+
+    private PdfValue Compressed(PdfCrossReference entry, int revision)
+    {
+        var key = (revision, entry.ContainerObjectNumber);
+        if (!_objectStreams.TryGetValue(key, out var embedded))
+        {
+            PdfCrossReference? container = null;
+            for (int i = revision; i < _revisions.Count; i++)
+                if (_revisions[i].Index.TryGetValue(entry.ContainerObjectNumber, out container))
+                    break;
+            if (container is null || container.Kind != PdfCrossReferenceKind.Offset || container.Id.Generation != 0)
+                throw Error("Syntax.ObjectStream", "An object stream must be an uncompressed generation-zero object.");
+            var stream = Resolve(new PdfObjectId(entry.ContainerObjectNumber), revision);
+            if (stream.Kind != PdfValueKind.Stream || !IsName(stream, "Type", "ObjStm"))
+                throw Error("Syntax.ObjectStream", "A compressed entry does not identify an ObjStm stream.");
+            long count = DirectInteger(Required(stream, "N")), first = DirectInteger(Required(stream, "First"));
+            if (count <= 0 || count > int.MaxValue || first < 0)
+                throw Error("Syntax.ObjectStream", "Object-stream counts or First offsets are outside range.");
+            _context.Consume(PdfResourceKind.Objects, count);
+            _context.Consume(PdfResourceKind.ExpandedBytes, checked(count * 12));
+            var ids = new int[(int)count];
+            var offsets = new long[(int)count];
+            using var decoded = PdfStreamFilters.OpenBootstrap(PdfFilterDeclarations.Resolve(stream, id => Resolve(id, revision), _context), _context);
+            var bytes = PdfByteStore.Read(decoded, _context);
+            if (first > bytes.Length)
+                throw Error("Syntax.ObjectStream", "The first object lies beyond the decoded object stream.");
+            var header = new PdfSyntaxCursor(bytes, _context, 0, first);
+            var seen = new HashSet<int>();
+            for (int i = 0; i < count; i++)
+            {
+                long number = header.Integer(), offset = header.Integer();
+                if (number <= 0 || number > int.MaxValue || offset < 0 || offset > bytes.Length - first || i > 0 && offset <= offsets[i - 1] || !seen.Add((int)number))
+                    throw Error("Syntax.ObjectStream", "An object-stream index has duplicate identities, non-increasing offsets or overflowing fields.");
+                ids[i] = (int)number;
+                offsets[i] = offset;
+            }
+
+            header.Skip();
+            if (header.Position != first)
+                throw Error("Syntax.ObjectStream", "The object-stream header disagrees with First.");
+            embedded = new EmbeddedObjects(bytes, first, ids, offsets);
+            _objectStreams.Add(key, embedded);
+        }
+
+        int member = entry.MemberIndex;
+        if (member >= embedded.Ids.Length || embedded.Ids[member] != entry.Id.Number)
+            throw Error("Syntax.ObjectStream", "A compressed entry disagrees with its member index or object number.");
+        long start = embedded.First + embedded.Offsets[member], end = member + 1 < embedded.Ids.Length ? embedded.First + embedded.Offsets[member + 1] : embedded.Bytes.Length;
+        var cursor = new PdfSyntaxCursor(embedded.Bytes, _context, start, end);
+        var result = cursor.Value();
+        cursor.Skip();
+        if (cursor.Position != end)
+            throw Error("Syntax.ObjectStream", "A compressed member contains trailing data or a forbidden stream object.");
+        return result;
+    }
+
+    private sealed class EmbeddedObjects
+    {
+        internal readonly PdfByteStore Bytes;
+        internal readonly long First;
+        internal readonly int[] Ids;
+        internal readonly long[] Offsets;
+        internal EmbeddedObjects(PdfByteStore bytes, long first, int[] ids, long[] offsets)
+        {
+            Bytes = bytes;
+            First = first;
+            Ids = ids;
+            Offsets = offsets;
         }
     }
 

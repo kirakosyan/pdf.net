@@ -30,6 +30,8 @@ FP-085 adds inert original PE/ELF/Mach-O header fixtures, current-host pinned-fi
 
 FP-003 adds original lexical/revision/xref fixtures, an independently inspected page fixture, fixed/dynamic Flate regressions, truncation checks and deterministic parser mutations. It exercises actual syntax inspection, including C#/VB consumers; it does not qualify rendering, output conformance or the complete fuzz workload.
 
+FP-004 adds lossless encode/decode chains, independent LZW bytes, PNG/TIFF predictor answers and matrices, compressed-object membership checks, indirect parameters, cancellation/limits and detached decoded results. Optional image codecs are still in progress.
+
 ## Remaining production work
 
 Actual minimum Framework 4.7.2 execution on isolated x86/x64 hosts is absent. An assembly targeting net472 on a newer Framework is evidence for that installed runtime only. Exact final NuGet consumers are also absent: candidate creation is intentionally blocked until all source qualification is complete. Convert the examples into package-only consumers at that gate, without project references or direct assembly injection.

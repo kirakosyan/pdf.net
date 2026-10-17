@@ -84,16 +84,16 @@
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
       ],
       "implementationProgress": {
-        "state": "partial",
+        "state": "implemented-source-pending-runtime-validation",
         "contract": "docs/pdf-syntax.md",
         "implemented": [
           "Immutable syntax values, exact generations and revision selection",
           "Classic, stream and hybrid cross-references with bounded Flate/predictor bootstrap",
-          "Opaque stream and unknown-key preservation; strict structural/budget diagnostics"
+          "Opaque stream and unknown-key preservation; strict structural/budget diagnostics",
+          "Bounded object-stream resolution and indirect filter declarations"
         ],
         "pending": [
-          "Compressed object integration through FP-004",
-          "Complete source/runtime and production qualification"
+          "Complete updated source/runtime and production qualification"
         ]
       }
     },
@@ -121,7 +121,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "partial",
+        "contract": "docs/pdf-filters.md",
+        "implemented": [
+          "Managed Flate/LZW/ASCII85/ASCIIHex/RunLength encode/decode chains",
+          "PNG/TIFF predictors across packed, eight-bit and sixteen-bit samples",
+          "Bounded object-stream membership and indirect decode declarations"
+        ],
+        "pending": [
+          "Audited optional DCT/JPX/CCITT/JBIG2 providers",
+          "Complete native/runtime, known-answer/security and exact-package production qualification"
+        ]
+      }
     },
     {
       "id": "FP-005",

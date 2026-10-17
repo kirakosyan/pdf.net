@@ -5,7 +5,7 @@ internal static class PdfStreamFilters
 {
     internal static Stream OpenBootstrap(PdfValue stream, PdfOperationContext context)
     {
-        if (!stream.Entries.TryGetValue("Filter", out var filter))
+        if (!stream.Entries.TryGetValue("Filter", out var filter) || filter.Kind == PdfValueKind.Null)
             return stream.OpenRawStream();
         var filters = filter.Kind == PdfValueKind.Array ? filter.Items : new[]
         {
@@ -35,15 +35,21 @@ internal static class PdfStreamFilters
                 context.Checkpoint();
                 if (filters[i].Kind != PdfValueKind.Name)
                     throw Error(context, "Filter.Name", "A stream filter must be a name.");
-                string name = filters[i].NameValue;
+                string name = Canonical(filters[i].NameValue);
                 PdfValue parameter = parameters?[i] ?? PdfValue.Null;
                 if (parameter.Kind != PdfValueKind.Null && parameter.Kind != PdfValueKind.Dictionary)
                     throw Error(context, "Filter.Parameters", "Decode parameters must be dictionaries or null.");
                 PdfByteStore decoded;
-                if (name == "FlateDecode" || name == "Fl")
+                if (name == "FlateDecode")
                     decoded = Predict(PdfInflate.Decode(current, context), parameter, context);
-                else if (name == "ASCIIHexDecode" || name == "AHx")
+                else if (name == "LZWDecode")
+                    decoded = Predict(PdfLzw.Decode(current, Parameter(parameter, "EarlyChange", 1, context), context), parameter, context);
+                else if (name == "ASCIIHexDecode")
                     decoded = Hex(current, context);
+                else if (name == "ASCII85Decode")
+                    decoded = Ascii85(current, context);
+                else if (name == "RunLengthDecode")
+                    decoded = RunLength(current, context);
                 else
                     throw Error(context, "Filter.Unsupported", "The requested encoded stream filter is unsupported.");
                 current.Dispose();
@@ -52,11 +58,171 @@ internal static class PdfStreamFilters
 
             return current;
         }
+        catch (OverflowException)
+        {
+            current.Dispose();
+            throw Error(context, "Filter.Parameters", "A filter parameter or count overflowed its supported range.");
+        }
+        catch (InvalidDataException)
+        {
+            current.Dispose();
+            throw Error(context, "Filter.Parameters", "An integer decode parameter is malformed or outside range.");
+        }
         catch
         {
             current.Dispose();
             throw;
         }
+    }
+
+    internal static string Canonical(string name) => name == "Fl" ? "FlateDecode" : name == "LZW" ? "LZWDecode" : name == "AHx" ? "ASCIIHexDecode" : name == "A85" ? "ASCII85Decode" : name == "RL" ? "RunLengthDecode" : name == "CCF" ? "CCITTFaxDecode" : name == "DCT" ? "DCTDecode" : name;
+    private static PdfByteStore Ascii85(Stream input, PdfOperationContext context)
+    {
+        var output = new PdfByteBuilder(context);
+        int count = 0;
+        ulong value = 0;
+        void Emit(ulong tuple, int bytes)
+        {
+            if (tuple > uint.MaxValue)
+                throw Error(context, "Filter.Ascii85Malformed", "An ASCII85 tuple exceeds 32 bits.");
+            for (int i = 0; i < bytes; i++)
+                output.Add((byte)(tuple >> (24 - i * 8)));
+        }
+
+        while (true)
+        {
+            context.Checkpoint();
+            int c = input.ReadByte();
+            if (c < 0)
+                throw Error(context, "Filter.Truncated", "An ASCII85 stream is missing its terminator.");
+            if (PdfSyntaxCursor.White(c))
+                continue;
+            if (c == '~')
+            {
+                if (input.ReadByte() != '>')
+                    throw Error(context, "Filter.Ascii85Malformed", "An ASCII85 terminator is malformed.");
+                if (count == 1)
+                    throw Error(context, "Filter.Ascii85Malformed", "An ASCII85 final tuple contains only one digit.");
+                if (count > 1)
+                {
+                    int bytes = count - 1;
+                    while (count++ < 5)
+                        value = value * 85 + 84;
+                    Emit(value, bytes);
+                }
+
+                Trailing(input, context);
+                return output.Build();
+            }
+
+            if (c == 'z')
+            {
+                if (count != 0)
+                    throw Error(context, "Filter.Ascii85Malformed", "ASCII85 zero shorthand occurs inside a tuple.");
+                Emit(0, 4);
+                continue;
+            }
+
+            if (c < 33 || c > 117)
+                throw Error(context, "Filter.Ascii85Malformed", "An ASCII85 stream contains an invalid digit.");
+            value = value * 85 + (uint)(c - 33);
+            count++;
+            if (count == 5)
+            {
+                Emit(value, 4);
+                count = 0;
+                value = 0;
+            }
+        }
+    }
+
+    private static PdfByteStore RunLength(Stream input, PdfOperationContext context)
+    {
+        var output = new PdfByteBuilder(context);
+        while (true)
+        {
+            context.Checkpoint();
+            int control = input.ReadByte();
+            if (control < 0)
+                throw Error(context, "Filter.Truncated", "A RunLength stream is missing its terminator.");
+            if (control == 128)
+            {
+                Trailing(input, context);
+                return output.Build();
+            }
+
+            int count = control < 128 ? control + 1 : 257 - control;
+            int repeat = control > 128 ? input.ReadByte() : 0;
+            if (repeat < 0)
+                throw Error(context, "Filter.Truncated", "A RunLength repeat is truncated.");
+            for (int i = 0; i < count; i++)
+            {
+                int b = control < 128 ? input.ReadByte() : repeat;
+                if (b < 0)
+                    throw Error(context, "Filter.Truncated", "A RunLength literal is truncated.");
+                output.Add((byte)b);
+            }
+        }
+    }
+
+    internal static PdfByteStore EncodePrediction(PdfByteStore input, PdfValue parameters, PdfOperationContext context)
+    {
+        int predictor = Parameter(parameters, "Predictor", 1, context);
+        if (predictor == 1)
+            return input;
+        int colors = Parameter(parameters, "Colors", 1, context), bits = Parameter(parameters, "BitsPerComponent", 8, context), columns = Parameter(parameters, "Columns", 1, context);
+        if (colors <= 0 || columns <= 0 || (bits != 1 && bits != 2 && bits != 4 && bits != 8 && bits != 16) || (predictor != 2 && (predictor < 10 || predictor > 15)))
+            throw Error(context, "Filter.Predictor", "Predictor parameters are outside the supported PDF ranges.");
+        long samples = checked((long)colors * columns), rowLength = checked((samples * bits + 7) / 8), pixel = checked(((long)colors * bits + 7) / 8);
+        if (rowLength > int.MaxValue)
+            throw Error(context, "Filter.Predictor", "A predictor row exceeds the managed buffer range.");
+        if (input.Length % rowLength != 0)
+            throw Error(context, "Filter.Predictor", "Unencoded predictor input must contain complete rows.");
+        int rowSize = (int)rowLength, stride = (int)pixel;
+        context.Consume(PdfResourceKind.ExpandedBytes, rowLength * 3);
+        var row = new byte[rowSize];
+        var previous = new byte[rowSize];
+        var filtered = new byte[rowSize];
+        var output = new PdfByteBuilder(context);
+        using var source = input.Open(0, input.Length);
+        for (long rowIndex = 0; rowIndex < input.Length / rowLength; rowIndex++)
+        {
+            context.Checkpoint();
+            for (int i = 0; i < rowSize; i++)
+                row[i] = (byte)source.ReadByte();
+            if (predictor == 2)
+            {
+                System.Array.Copy(row, filtered, rowSize);
+                int mask = (1 << bits) - 1;
+                for (long sample = colors; sample < samples; sample++)
+                {
+                    if ((sample & 1023) == 0)
+                        context.Checkpoint();
+                    SetSample(filtered, sample, bits, (Sample(row, sample, bits) - Sample(row, sample - colors, bits)) & mask);
+                }
+            }
+            else
+            {
+                int filter = predictor == 15 ? 2 : predictor - 10;
+                output.Add((byte)filter);
+                for (int i = 0; i < rowSize; i++)
+                {
+                    if ((i & 1023) == 0)
+                        context.Checkpoint();
+                    int left = i >= stride ? row[i - stride] : 0, up = previous[i], diagonal = i >= stride ? previous[i - stride] : 0;
+                    int prediction = filter == 0 ? 0 : filter == 1 ? left : filter == 2 ? up : filter == 3 ? (left + up) / 2 : Paeth(left, up, diagonal);
+                    filtered[i] = unchecked((byte)(row[i] - prediction));
+                }
+            }
+
+            for (int i = 0; i < rowSize; i++)
+                output.Add(filtered[i]);
+            var swap = previous;
+            previous = row;
+            row = swap;
+        }
+
+        return output.Build();
     }
 
     private static PdfByteStore Hex(Stream input, PdfOperationContext context)

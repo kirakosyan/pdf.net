@@ -7,6 +7,9 @@ Public Module ContractExample
     Public Function InspectSyntax(borrowedInput As Stream) As PdfSyntaxDocument
         Return PdfSyntax.Read(borrowedInput)
     End Function
+    Public Function DecodeStream(syntax As PdfSyntaxDocument, id As PdfObjectId) As PdfDecodedData
+        Return syntax.DecodeStream(id)
+    End Function
 
     Public Function ExecuteNativeWorker(options As Fluent.Pdf.Workers.NativeWorkerOptions, request As Byte(), context As PdfOperationContext) As Byte()
         Return New Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context)
