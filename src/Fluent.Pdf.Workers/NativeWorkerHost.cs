@@ -83,6 +83,7 @@ public sealed class NativeWorkerHost
             start.EnvironmentVariables["TMP"] = job;
             start.EnvironmentVariables["TEMP"] = job;
             start.EnvironmentVariables["TMPDIR"] = job;
+            start.EnvironmentVariables["HOME"] = job;
             // Fixed per-process runtime bounds for self-contained managed native bridges.
             // These are recomputed from this job's envelope, never inherited from the caller.
             start.EnvironmentVariables["DOTNET_GCHeapHardLimit"]=(options.MaximumMemoryBytes/4).ToString("X",CultureInfo.InvariantCulture);
