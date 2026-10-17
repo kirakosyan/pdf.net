@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -90,7 +92,20 @@ public sealed class NativeWorkerTests
         request[0]=4;Array.Copy(name,0,request,1,name.Length);
         Assert.Equal(new byte[] {0},fixture.Run(request));
         Assert.Equal("original",File.ReadAllText(target));
-        Assert.Equal(new byte[] {0},fixture.Run(new byte[] {5}));
+        var listener=new TcpListener(IPAddress.Loopback,0);
+        listener.Start();
+        try
+        {
+            int port=((IPEndPoint)listener.LocalEndpoint).Port;
+            using(var control=new TcpClient())
+            {
+                control.Connect(IPAddress.Loopback,port);
+                using(var accepted=listener.AcceptTcpClient()) { }
+            }
+            Assert.Equal(new byte[] {0},fixture.Run(new byte[] {5,(byte)(port>>8),(byte)port}));
+            Assert.False(listener.Pending(),"The isolated worker reached the live caller endpoint.");
+        }
+        finally {listener.Stop();}
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }
 

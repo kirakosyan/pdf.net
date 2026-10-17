@@ -34,6 +34,10 @@ jobs:
       - name: Build original native worker and crash/isolation fixtures
         shell: pwsh
         run: ./eng/build-native-fixtures.ps1
+      - name: Enable Windows network isolation prerequisite on disposable runner
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
       - name: Restore locked dependencies
         run: dotnet restore Fluent.Pdf.slnx --locked-mode
       - name: Restore pinned API tooling

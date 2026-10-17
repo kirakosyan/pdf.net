@@ -45,15 +45,15 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
         case 5: {
 #ifdef _WIN32
             WSADATA data; SOCKET connection;
-            if(capacity<1) return 99;
+            if(capacity<1 || length!=3) return 99;
             if(WSAStartup(MAKEWORD(2,2),&data)!=0) { output[0]=0; *written=1; return 0; }
             connection=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
             /* AppContainer can create a socket, but cannot connect without a capability. */
             if(connection!=INVALID_SOCKET) {
                 struct sockaddr_in address; int result;
-                memset(&address,0,sizeof(address)); address.sin_family=AF_INET; address.sin_port=htons(9); address.sin_addr.s_addr=htonl(0x7f000001);
+                memset(&address,0,sizeof(address)); address.sin_family=AF_INET; address.sin_port=htons((unsigned short)((unsigned)input[1]*256+input[2])); address.sin_addr.s_addr=htonl(0x7f000001);
                 result=connect(connection,(struct sockaddr *)&address,sizeof(address));
-                output[0]=(unsigned char)(result==0||WSAGetLastError()!=WSAEACCES); closesocket(connection);
+                output[0]=(unsigned char)(result==0); closesocket(connection);
             } else output[0]=0;
             WSACleanup();
 #else

@@ -14,10 +14,14 @@
 #include <userenv.h>
 #include <aclapi.h>
 #include <sddl.h>
+#include <netfw.h>
 #include <io.h>
 #include <fcntl.h>
 #pragma comment(lib, "userenv.lib")
 #pragma comment(lib, "advapi32.lib")
+#pragma comment(lib, "ole32.lib")
+#pragma comment(lib, "oleaut32.lib")
+#pragma comment(lib, "uuid.lib")
 #else
 #include <unistd.h>
 #include <fcntl.h>
@@ -242,6 +246,24 @@ static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds,
 #endif
 
 #ifdef _WIN32
+static int network_isolation_available(void) {
+    INetFwPolicy2 *policy=NULL; HRESULT initialized,result; int ok=1,i;
+    NET_FW_PROFILE_TYPE2 profiles[]={NET_FW_PROFILE2_DOMAIN,NET_FW_PROFILE2_PRIVATE,NET_FW_PROFILE2_PUBLIC};
+    initialized=CoInitializeEx(NULL,COINIT_MULTITHREADED);
+    if(FAILED(initialized)) return 0;
+    result=CoCreateInstance(&CLSID_NetFwPolicy2,NULL,CLSCTX_INPROC_SERVER,&IID_INetFwPolicy2,(void **)&policy);
+    if(FAILED(result)) ok=0;
+    else {
+        for(i=0;i<3;i++) {
+            VARIANT_BOOL enabled=VARIANT_FALSE;
+            if(FAILED(policy->lpVtbl->get_FirewallEnabled(policy,profiles[i],&enabled)) || enabled!=VARIANT_TRUE) ok=0;
+        }
+        policy->lpVtbl->Release(policy);
+    }
+    CoUninitialize();
+    if(!ok) SetLastError(ERROR_SERVICE_DISABLED);
+    return ok;
+}
 static int grant_stage(PSID sid, const wchar_t *root) {
     PACL old_acl=NULL,new_acl=NULL; PSECURITY_DESCRIPTOR descriptor=NULL;
     EXPLICIT_ACCESSW entry; DWORD status;
@@ -261,6 +283,7 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
     SIZE_T attribute_bytes=0; LPPROC_THREAD_ATTRIBUTE_LIST attributes=NULL; DWORD code,failure_code=0; int attributes_ready=0;
     HANDLE inherited[3]={GetStdHandle(STD_INPUT_HANDLE),GetStdHandle(STD_OUTPUT_HANDLE),GetStdHandle(STD_ERROR_HANDLE)};
     sandbox_step=10;
+    if(!network_isolation_available()) goto done;
     swprintf(profile,100,L"Fluent.Pdf.worker.%lu.%hs",GetCurrentProcessId(),argv[9]);
     if(MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,argv[1],-1,root,4096)==0) return respond(FP_SANDBOX,NULL,0);
     if(FAILED(CreateAppContainerProfile(profile,L"Fluent.Pdf isolated worker",L"Single offline job",NULL,0,&sid))) goto done;
@@ -360,8 +383,12 @@ static int worker_main(int argc, char **argv) {
         symbol=GetProcAddress(library,"fluent_pdf_bridge_execute_v1"); memcpy(&execute_fn,&symbol,sizeof(execute_fn));
     }
 #else
+    {
+        char candidate[8192];
+        int length=snprintf(candidate,sizeof(candidate),"%s/%s",p[0],p[1]);
+        if(length<0 || (size_t)length>=sizeof(candidate) || !realpath(candidate,library_path)) return respond(FP_DEPENDENCY,NULL,0);
+    }
     if(!unix_limits(p[0],memory,milliseconds,parent_id)) return respond(FP_SANDBOX,NULL,0);
-    if(snprintf(library_path,sizeof(library_path),"%s/%s",p[0],p[1])<0) return respond(FP_PROTOCOL,NULL,0);
     library=dlopen(library_path,RTLD_LOCAL|RTLD_NOW);
     if(!library) {
         const char *detail=dlerror(); size_t length=0;
