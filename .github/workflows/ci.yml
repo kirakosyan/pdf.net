@@ -47,6 +47,12 @@ jobs:
       - name: Compare API across target frameworks
         shell: pwsh
         run: ./eng/check-api.ps1
+      - name: Trace failed native system calls on disposable macOS host
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          sudo dtrace -q -n 'syscall:::return /execname == "worker" && arg0 == -1/ { printf("%s errno=%d\n", probefunc, errno); }' -o "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log" &
+          printf '%s\n' "$!" > "$RUNNER_TEMP/fluent-pdf-worker-trace.pid"
       - name: Execute source contracts and verify runtime identity
         shell: pwsh
         run: ./eng/test-contracts.ps1 -ExpectedArchitecture '${{ matrix.arch }}'
@@ -58,6 +64,15 @@ jobs:
         shell: bash
         run: |
           log show --last 10m --style compact --predicate 'eventMessage CONTAINS "Sandbox:" OR eventMessage CONTAINS "native-aot" OR process == "sandboxd"' | tail -160
+          sudo tail -120 "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log"
+      - name: Stop this job's macOS diagnostic tracer
+        if: always() && runner.os == 'macOS'
+        shell: bash
+        run: |
+          if test -f "$RUNNER_TEMP/fluent-pdf-worker-trace.pid"; then
+            read -r task_trace_pid < "$RUNNER_TEMP/fluent-pdf-worker-trace.pid"
+            sudo kill -INT "$task_trace_pid" || true
+          fi
       - name: Retain source contract evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
