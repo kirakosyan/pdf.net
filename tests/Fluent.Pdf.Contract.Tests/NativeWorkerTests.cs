@@ -82,6 +82,22 @@ public sealed class NativeWorkerTests
     }
 
     [Fact]
+    public void CancellationDuringSetupAndExecutionReleasesEveryOwnedStage()
+    {
+        using var fixture=new WorkerFixture(_output);
+        foreach(int delay in new[]{5,20,50,150,250})for(int repeat=0;repeat<2;repeat++)
+        {
+            using var cancellation=new CancellationTokenSource();
+            var canceller=new Thread(()=>{Thread.Sleep(delay);cancellation.Cancel();}){IsBackground=true};canceller.Start();
+            var clock=Stopwatch.StartNew();
+            try {Assert.ThrowsAny<OperationCanceledException>(()=>fixture.Run(new byte[]{2},cancellation.Token));}
+            finally {canceller.Join(1000);}
+            Assert.True(clock.Elapsed<TimeSpan.FromSeconds(5));Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+        }
+        Assert.Equal(new byte[]{42},fixture.Run(new byte[]{0,42}));
+    }
+
+    [Fact]
     public void NativeSandboxRejectsCallerFileWritesAndNetworkAccess()
     {
         using var fixture=new WorkerFixture(_output);

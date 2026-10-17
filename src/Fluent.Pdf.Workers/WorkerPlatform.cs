@@ -42,7 +42,7 @@ internal static class WorkerPlatform
         // ordinarily removes it; this also handles parent cancellation/crashes.
         int result=DeleteAppContainerProfile(profile);
         if (result<0 && result!=unchecked((int)0x80070002) && result!=unchecked((int)0x80070490))
-            throw new IOException("The native job AppContainer profile could not be removed.");
+            throw new IOException("The native job AppContainer profile could not be removed.",result);
     }
 
     [DllImport("libc",SetLastError=true)] private static extern int chmod(string path,uint mode);

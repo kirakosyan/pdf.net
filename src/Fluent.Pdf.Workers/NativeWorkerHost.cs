@@ -162,6 +162,20 @@ public sealed class NativeWorkerHost
         }
         finally
         {
+            var cleanupClock=Stopwatch.StartNew();
+            int RemainingCleanup(int maximum)=>(int)Math.Max(0,Math.Min(maximum,4000-cleanupClock.ElapsedMilliseconds));
+            void CleanupOwned(Action action)
+            {
+                while(true)
+                {
+                    try {action();return;}
+                    catch(Exception cleanup) when(WorkerPlatform.IsWindows &&
+                        (cleanup is IOException || cleanup is UnauthorizedAccessException) &&
+                        ((cleanup.HResult&65535)==5||(cleanup.HResult&65535)==32||(cleanup.HResult&65535)==33||(cleanup.HResult&65535)==145) &&
+                        RemainingCleanup(1000)>0)
+                    {Thread.Sleep(Math.Min(10,RemainingCleanup(10)));}
+                }
+            }
             Exception? cleanupFailure = null;
             if (process is not null && started)
             {
@@ -170,7 +184,7 @@ public sealed class NativeWorkerHost
                     if (!process.HasExited)
                     {
                         WorkerPlatform.Terminate(process);
-                        if (!process.WaitForExit(4000)) cleanupFailure = new IOException("The native process did not terminate.");
+                        if (!process.WaitForExit(RemainingCleanup(3500))) cleanupFailure = new IOException("The native process did not terminate.");
                     }
                 }
                 catch (Exception cleanup) when (cleanup is IOException || cleanup is InvalidOperationException || cleanup is System.ComponentModel.Win32Exception)
@@ -178,17 +192,19 @@ public sealed class NativeWorkerHost
                 try { CloseTransport(process); }
                 catch (Exception cleanup) when (cleanup is IOException || cleanup is InvalidOperationException)
                 { cleanupFailure ??= cleanup; }
-                if (!WaitTasks(new Task?[] { inputTask,responseTask,errorTask }.Where(t => t is not null).Cast<Task>().ToArray(),1000))
+                if (!WaitTasks(new Task?[] { inputTask,responseTask,errorTask }.Where(t => t is not null).Cast<Task>().ToArray(),RemainingCleanup(500)))
                     cleanupFailure ??= new IOException("A native transport did not terminate.");
                 process.Dispose();
             }
             else process?.Dispose();
-            try { if (WorkerPlatform.IsWindows && profile is not null) WorkerPlatform.DeleteProfile(profile); }
+            try { if (WorkerPlatform.IsWindows && profile is not null) CleanupOwned(()=>WorkerPlatform.DeleteProfile(profile)); }
             catch (IOException cleanup) { cleanupFailure ??= cleanup; }
             if (created)
             {
                 try
                 {
+                    CleanupOwned(()=>
+                    {
                     if (Directory.Exists(bootstrapDirectory))
                     {
                         string bootstrap=Path.Combine(bootstrapDirectory,options.ExecutableFileName);
@@ -201,6 +217,7 @@ public sealed class NativeWorkerHost
                         File.Delete(file);
                     }
                     Directory.Delete(job,false);
+                    });
                 }
                 catch (Exception cleanup) when (cleanup is IOException || cleanup is UnauthorizedAccessException)
                 { cleanupFailure ??= cleanup; }
