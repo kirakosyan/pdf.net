@@ -6,7 +6,9 @@ Use the dependency graph in [requirements.json](../specs/requirements.json) and 
 
 Each issue is unassigned at creation and has scope, dependencies, acceptance criteria, non-goals and validation. [github-backlog.md](github-backlog.md) provides the issue mapping. This sequence is topologically sorted; it intentionally brings native deployment and a useful managed document workflow forward.
 
-FP-001 source contracts are merged through [PR #115](https://github.com/kirakosyan/pdf.net/pull/115). FP-002 implements [operation policies and budgets](operation-policies.md), with [runtime/API tests](testing.md). Both tracking issues remain open for production qualification, including actual minimum-runtime and final-package consumers. The foundation milestone and all later SDK requirements remain incomplete; passing source tests does not authorize publication.
+FP-001 source contracts are merged through [PR #115](https://github.com/kirakosyan/pdf.net/pull/115). FP-002 is merged through [PR #116](https://github.com/kirakosyan/pdf.net/pull/116) and implements [operation policies and budgets](operation-policies.md), with [runtime/API tests](testing.md). Both tracking issues remain open for production qualification, including actual minimum-runtime and final-package consumers. The foundation milestone and all later SDK requirements remain incomplete; passing source tests does not authorize publication.
+
+FP-085 (#3) is in progress with [offline deployment integrity checks](native-deployment.md). It remains incomplete: actual ABI/dependency loading, safe execution/sandboxing, supervision, crash recovery and production qualification are still required. Issues #4–#20 retain their existing dependency order and planned status; this partial step does not complete them by association.
 
 ## Milestones
 

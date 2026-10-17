@@ -74,4 +74,4 @@ Per-workload numerical gates and release evidence are defined in [production-qua
 
 ## Delivery status
 
-Requirements discovery and issue preparation are complete. FP-001 and FP-002 have source implementations; production qualification remains pending, including actual minimum-runtime and final-package checks. The remaining SDK requirements are planned. Contract/policy tests do not qualify PDF processing or permit packing/publication. Every implementation milestone must preserve the full required production scope and update the evidence ledger.
+Requirements discovery and issue preparation are complete. FP-001 and FP-002 have source implementations; production qualification remains pending, including actual minimum-runtime and final-package checks. FP-085 has a partial read-only deployment integrity preflight; its isolation and execution contract is still incomplete. The remaining SDK requirements are planned. Contract/policy tests do not qualify PDF processing or permit packing/publication. Every implementation milestone must preserve the full required production scope and update the evidence ledger.

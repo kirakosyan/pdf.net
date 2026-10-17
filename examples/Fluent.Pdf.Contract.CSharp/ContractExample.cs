@@ -5,6 +5,13 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfNativeDeploymentReport InspectDeployment(string directory, string rid, string engineVersion,
+        string abi, long maximumBytes, params PdfNativeAsset[] assets)
+    {
+        var deployment = new PdfNativeDeployment(directory, rid, "example.native", engineVersion, abi, maximumBytes, assets);
+        return PdfNativeDeploymentInspector.Inspect(deployment);
+    }
+
     public static PdfOperationReport SaveWithReport(PdfProviderRegistry providers, Stream output)
     {
         var policy = new PdfOperationPolicy(PdfProcessingMode.Permissive,

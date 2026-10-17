@@ -2481,7 +2481,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "partial",
+        "contract": "docs/native-deployment.md",
+        "implemented": [
+          "Immutable offline provisioning manifests and read-only local integrity preflight",
+          "Pinned size/SHA-256, host RID and native header architecture checks",
+          "Stable diagnostics, operation-context failure latching and C#/VB source consumers"
+        ],
+        "pending": [
+          "Actual ABI and transitive dependency execution probes",
+          "Secure platform loading, isolated workers, OS resource limits and crash recovery",
+          "Complete native/runtime and exact-package production qualification"
+        ]
+      }
     },
     {
       "id": "FP-086",

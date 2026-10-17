@@ -1,6 +1,6 @@
 # Fluent.Pdf capability catalogue
 
-This is the required SDK production scope. FP-001 has an [implemented source contract layer](api-contract.md), and FP-002 implements [operation policies and budgets](operation-policies.md), both with production qualification pending. Other SDK capabilities below remain planned. The separate Reader placeholder exists. Requirement details and acceptance criteria are normative; this table is an index. [Machine-readable requirements](../specs/requirements.json).
+This is the required SDK production scope. FP-001 has an [implemented source contract layer](api-contract.md), and FP-002 implements [operation policies and budgets](operation-policies.md), both with production qualification pending. FP-085 has partial [deployment integrity checks](native-deployment.md); it remains planned until its complete deployment/isolation contract is delivered. Other SDK capabilities below remain planned. The separate Reader placeholder exists. Requirement details and acceptance criteria are normative; this table is an index. [Machine-readable requirements](../specs/requirements.json).
 
 | ID | Capability | Area | Release required |
 | --- | --- | --- | --- |

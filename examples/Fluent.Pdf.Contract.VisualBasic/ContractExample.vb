@@ -4,6 +4,12 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function InspectDeployment(directory As String, rid As String, engineVersion As String,
+                                      abi As String, maximumBytes As Long, ParamArray assets As PdfNativeAsset()) As PdfNativeDeploymentReport
+        Dim deployment As New PdfNativeDeployment(directory, rid, "example.native", engineVersion, abi, maximumBytes, assets)
+        Return PdfNativeDeploymentInspector.Inspect(deployment)
+    End Function
+
     Public Function SaveWithReport(providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
         Dim limits As New PdfResourceLimits(maximumInputBytes:=1048576, maximumOutputBytes:=1048576)
         Dim policy As New PdfOperationPolicy(PdfProcessingMode.Permissive, limits)

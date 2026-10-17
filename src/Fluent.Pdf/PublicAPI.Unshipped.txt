@@ -54,6 +54,28 @@ Fluent.Pdf.PdfLossCategory.None = 0 -> Fluent.Pdf.PdfLossCategory
 Fluent.Pdf.PdfLossCategory.OmittedContent = 2 -> Fluent.Pdf.PdfLossCategory
 Fluent.Pdf.PdfLossCategory.SubstitutedContent = 3 -> Fluent.Pdf.PdfLossCategory
 Fluent.Pdf.PdfLossCategory.UnsupportedContent = 1 -> Fluent.Pdf.PdfLossCategory
+Fluent.Pdf.PdfNativeAsset
+Fluent.Pdf.PdfNativeAsset.FileName.get -> string!
+Fluent.Pdf.PdfNativeAsset.IsNativeBinary.get -> bool
+Fluent.Pdf.PdfNativeAsset.Length.get -> long
+Fluent.Pdf.PdfNativeAsset.PdfNativeAsset(string! fileName, long length, string! sha256, bool isNativeBinary = true) -> void
+Fluent.Pdf.PdfNativeAsset.Sha256.get -> string!
+Fluent.Pdf.PdfNativeDeployment
+Fluent.Pdf.PdfNativeDeployment.Abi.get -> string!
+Fluent.Pdf.PdfNativeDeployment.Assets.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfNativeAsset!>!
+Fluent.Pdf.PdfNativeDeployment.EngineId.get -> string!
+Fluent.Pdf.PdfNativeDeployment.EngineVersion.get -> string!
+Fluent.Pdf.PdfNativeDeployment.MaximumTotalBytes.get -> long
+Fluent.Pdf.PdfNativeDeployment.PdfNativeDeployment(string! rootDirectory, string! runtimeIdentifier, string! engineId, string! engineVersion, string! abi, long maximumTotalBytes, params Fluent.Pdf.PdfNativeAsset![]! assets) -> void
+Fluent.Pdf.PdfNativeDeployment.RootDirectory.get -> string!
+Fluent.Pdf.PdfNativeDeployment.RuntimeIdentifier.get -> string!
+Fluent.Pdf.PdfNativeDeploymentInspector
+Fluent.Pdf.PdfNativeDeploymentReport
+Fluent.Pdf.PdfNativeDeploymentReport.AssetsVerified.get -> bool
+Fluent.Pdf.PdfNativeDeploymentReport.CurrentRuntimeIdentifier.get -> string?
+Fluent.Pdf.PdfNativeDeploymentReport.Deployment.get -> Fluent.Pdf.PdfNativeDeployment!
+Fluent.Pdf.PdfNativeDeploymentReport.Diagnostics.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfDiagnostic!>!
+Fluent.Pdf.PdfNativeDeploymentReport.VerifiedAssetCount.get -> int
 Fluent.Pdf.PdfOperationContext
 Fluent.Pdf.PdfOperationContext.BorrowExpandedInput(System.IO.Stream! decodedInput) -> System.IO.Stream!
 Fluent.Pdf.PdfOperationContext.CancellationToken.get -> System.Threading.CancellationToken
@@ -157,6 +179,9 @@ override Fluent.Pdf.PdfPageSize.GetHashCode() -> int
 static Fluent.Pdf.Pdf.Create(Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.Open(System.IO.Stream! input, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.OpenFile(string! path, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfNativeDeploymentInspector.CurrentRuntimeIdentifier.get -> string?
+static Fluent.Pdf.PdfNativeDeploymentInspector.Inspect(Fluent.Pdf.PdfNativeDeployment! deployment, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfNativeDeploymentReport!
+static Fluent.Pdf.PdfNativeDeploymentInspector.Verify(Fluent.Pdf.PdfNativeDeployment! deployment, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfNativeDeploymentReport!
 static Fluent.Pdf.PdfOperationPolicy.Default.get -> Fluent.Pdf.PdfOperationPolicy!
 static Fluent.Pdf.PdfOptions.Default.get -> Fluent.Pdf.PdfOptions!
 static Fluent.Pdf.PdfPageSize.A4.get -> Fluent.Pdf.PdfPageSize

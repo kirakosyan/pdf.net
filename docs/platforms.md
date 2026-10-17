@@ -24,6 +24,10 @@ COM, legacy ASPX/WebForms and Windows-specific UI/printing integrations are Wind
 
 Reader is currently only a buildable project placeholder. No Reader OS/runtime support claim is made.
 
+## Native deployment preflight
+
+The partial FP-085 [deployment inspector](native-deployment.md) recognizes the current OS/process RID for the six modern lanes and Windows x86. It checks caller-pinned PE, ELF or thin 64-bit Mach-O header architecture without loading files. RID equality does not establish libc, minimum OS, exports, calling convention, runtime dependencies, code signing or sandbox compatibility. Read-only asset probes run in source lanes; modern Unix lanes also exercise read-only directories and rejected root/file symbolic links. Windows privileged link scenarios and actual minimum Framework remain unqualified. No provider capability or native engine support is enabled.
+
 ## Actual runtime evidence
 
 Building net472 or running it on Framework 4.8.1 does not qualify actual 4.7.2. Require an isolated 4.7.2 host, verify runtime identity, execute the exact final package and retain complete reports. The prior wordnet legacy-JIT requirement is historical evidence about that package, not a configuration requirement to copy into Fluent.Pdf without reproducing it.
