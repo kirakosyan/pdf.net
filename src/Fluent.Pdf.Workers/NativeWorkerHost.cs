@@ -113,8 +113,12 @@ public sealed class NativeWorkerHost
                 }
                 if (!WorkerPlatform.IsWindows)
                 {
-                    process.Refresh();
-                    if (process.WorkingSet64 > options.MaximumMemoryBytes) throw Fail(context,"Native.MemoryLimit","The native worker exceeded its resident-memory ceiling.");
+                    try
+                    {
+                        process.Refresh();
+                        if (process.WorkingSet64 > options.MaximumMemoryBytes) throw Fail(context,"Native.MemoryLimit","The native worker exceeded its resident-memory ceiling.");
+                    }
+                    catch(InvalidOperationException) when(process.WaitForExit(0)) { }
                 }
             }
             context.Checkpoint();

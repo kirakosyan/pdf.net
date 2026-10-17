@@ -53,10 +53,20 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
             connection=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
             /* AppContainer can create a socket, but cannot connect without a capability. */
             if(connection!=INVALID_SOCKET) {
-                struct sockaddr_in address; int result;
+                struct sockaddr_in address; int result;u_long nonblocking=1;
+                if(ioctlsocket(connection,FIONBIO,&nonblocking)!=0) {closesocket(connection);WSACleanup();return 99;}
                 memset(&address,0,sizeof(address)); address.sin_family=AF_INET; address.sin_port=htons((unsigned short)((unsigned)input[1]*256+input[2])); address.sin_addr.s_addr=htonl(0x7f000001);
                 result=connect(connection,(struct sockaddr *)&address,sizeof(address));
-                output[0]=(unsigned char)(result==0); closesocket(connection);
+                output[0]=(unsigned char)(result==0);
+                if(result!=0 && WSAGetLastError()==WSAEWOULDBLOCK) {
+                    fd_set writable,failed;struct timeval timeout={1,0};
+                    FD_ZERO(&writable);FD_ZERO(&failed);FD_SET(connection,&writable);FD_SET(connection,&failed);
+                    if(select(0,NULL,&writable,&failed,&timeout)>0 && FD_ISSET(connection,&writable)) {
+                        int error=0,size=sizeof(error);
+                        if(getsockopt(connection,SOL_SOCKET,SO_ERROR,(char *)&error,&size)==0 && error==0)output[0]=1;
+                    }
+                }
+                closesocket(connection);
             } else output[0]=0;
             WSACleanup();
 #else
