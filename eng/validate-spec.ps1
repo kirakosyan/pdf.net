@@ -33,6 +33,23 @@ function Visit-Requirement([string]$id) {
     $visits[$id] = 2
 }
 foreach ($id in $ids.Keys) { Visit-Requirement $id }
+$assignmentOrder = (Get-Content (Join-Path $root 'specs/assignment-order.json') -Raw | ConvertFrom-Json).order
+if ($assignmentOrder.Count -ne $ids.Count -or @($assignmentOrder | Sort-Object -Unique).Count -ne $ids.Count) { throw 'Assignment order is incomplete or duplicated.' }
+$assigned = @{}
+foreach ($id in $assignmentOrder) {
+    if (!$ids.ContainsKey($id)) { throw "Unknown assignment: $id" }
+    foreach ($dependency in $ids[$id].dependencies) {
+        if (!$assigned.ContainsKey($dependency)) { throw "Assignment precedes dependency: $id before $dependency" }
+    }
+    $assigned[$id] = $true
+}
+$research = Get-Content (Join-Path $root 'specs/research-evidence.json') -Raw | ConvertFrom-Json
+foreach ($record in @($research.packages) + @($research.reports) + @($research.documentation)) {
+    if ($record.sha256 -notmatch '^[a-fA-F0-9]{64}$') { throw 'Missing research artifact digest.' }
+}
+foreach ($report in $research.reports) {
+    if ($report.coverage -cne 'complete') { throw "Incomplete retained primary research selection: $($report.id)" }
+}
 $requirementFiles = @(Get-ChildItem (Join-Path $root 'docs/requirements') -Filter 'FP-*.md')
 if ($requirementFiles.Count -ne $ids.Count) { throw 'Stale or missing requirement documents.' }
 $reader = @($spec.features | Where-Object { !$_.releaseRequired })

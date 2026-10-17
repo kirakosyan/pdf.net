@@ -2,7 +2,7 @@
 
 ## Assignment rule
 
-Use the dependency graph in [requirements.json](../specs/requirements.json). Assign one issue at a time in the concrete order below unless the user requests parallel work. A task is ready only when its dependencies have delivered reviewed public contracts and the evidence its implementation needs. Do not equate a closed issue with evidence if the implementation or release claims disagree.
+Use the dependency graph in [requirements.json](../specs/requirements.json) and [GitHub roadmap #113](https://github.com/kirakosyan/pdf.net/issues/113). Assign one issue at a time in the concrete order below unless the user requests parallel work. A task is ready only when its dependencies have delivered reviewed public contracts and the evidence its implementation needs. Do not equate a closed issue with evidence if the implementation or release claims disagree.
 
 Each issue is unassigned at creation and has scope, dependencies, acceptance criteria, non-goals and validation. [github-backlog.md](github-backlog.md) provides the issue mapping. This sequence is topologically sorted; it intentionally brings native deployment and a useful managed document workflow forward.
 
