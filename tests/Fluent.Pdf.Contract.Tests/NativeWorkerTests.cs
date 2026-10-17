@@ -195,7 +195,7 @@ public sealed class NativeWorkerTests
             if(scenario=="dependency") assets.Add(Asset(binaries,"required."+extension));
             var deployment=new PdfNativeDeployment(binaries,rid,"native.fixture",scenario=="wrong-version"?"2.0.0":"1.0.0",
                 "fluent-pdf-fixture-1",16777216,assets.ToArray());
-            Options=new NativeWorkerOptions(deployment,Executable,Library,Jobs,scenario=="native-aot"?1073741824:67108864,4096,1024,timeout??TimeSpan.FromSeconds(5),allowInProcessThreads:scenario=="native-aot",captureWorkerDiagnostics:scenario=="native-aot"||captureDiagnostics);
+            Options=new NativeWorkerOptions(deployment,Executable,Library,Jobs,scenario=="native-aot"?536870912:67108864,4096,1024,timeout??TimeSpan.FromSeconds(5),allowInProcessThreads:scenario=="native-aot",captureWorkerDiagnostics:scenario=="native-aot"||captureDiagnostics);
         }
         internal byte[] Run(byte[] request,CancellationToken cancellation=default)
         {
