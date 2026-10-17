@@ -51,7 +51,7 @@ jobs:
         if: runner.os == 'macOS'
         shell: bash
         run: |
-          sudo dtrace -q -n 'syscall:::return /execname == "worker" && arg0 == -1/ { printf("%s errno=%d\n", probefunc, errno); }' -o "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log" &
+          sudo dtrace -q -n 'syscall:::return /execname == "worker" && arg0 == -1/ { printf("pid=%d %s errno=%d\n", pid, probefunc, errno); } mach_trap:::return /execname == "worker" && arg0 != 0/ { printf("pid=%d mach:%s result=%d\n", pid, probefunc, arg0); }' -o "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log" &
           printf '%s\n' "$!" > "$RUNNER_TEMP/fluent-pdf-worker-trace.pid"
       - name: Execute source contracts and verify runtime identity
         shell: pwsh
@@ -64,7 +64,7 @@ jobs:
         shell: bash
         run: |
           log show --last 10m --style compact --predicate 'eventMessage CONTAINS "Sandbox:" OR eventMessage CONTAINS "native-aot" OR process == "sandboxd"' | tail -160
-          sudo tail -120 "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log"
+          sudo cat "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log"
       - name: Stop this job's macOS diagnostic tracer
         if: always() && runner.os == 'macOS'
         shell: bash
