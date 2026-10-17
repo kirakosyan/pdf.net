@@ -1,6 +1,6 @@
 # Native deployment and isolated workers (FP-085)
 
-FP-085 combines immutable offline provisioning metadata with the optional `Fluent.Pdf.Workers` source adapter and original C worker host. The managed core does not load native libraries. The adapter creates one private process and staging directory per job, verifies every copied asset, and accepts output only after ABI/version negotiation, bounded framing and successful exit. Source implementation is undergoing native runtime validation; production qualification and the NuGet publication block remain in force.
+FP-085 combines immutable offline provisioning metadata with the optional `Fluent.Pdf.Workers` source adapter and original C worker host. The managed core does not load native libraries. The adapter creates one private process and staging directory per job, verifies every copied asset, and accepts output only after ABI/version negotiation, bounded framing and successful exit. [Native source validation](evidence/FP-085-source.json) passed on all six hosts and current Framework x86/x64; production qualification and the NuGet publication block remain in force.
 
 ## Caller contract
 

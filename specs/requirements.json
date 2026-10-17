@@ -82,7 +82,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "partial",
+        "contract": "docs/pdf-syntax.md",
+        "implemented": [
+          "Immutable syntax values, exact generations and revision selection",
+          "Classic, stream and hybrid cross-references with bounded Flate/predictor bootstrap",
+          "Opaque stream and unknown-key preservation; strict structural/budget diagnostics"
+        ],
+        "pending": [
+          "Compressed object integration through FP-004",
+          "Complete source/runtime and production qualification"
+        ]
+      }
     },
     {
       "id": "FP-004",
@@ -2460,7 +2473,7 @@
       "title": "Native provider deployment and isolation",
       "area": "production",
       "phase": "13-production",
-      "status": "planned",
+      "status": "implemented",
       "releaseRequired": true,
       "dependencies": [
         "FP-001",
@@ -2483,7 +2496,7 @@
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
       ],
       "implementationProgress": {
-        "state": "partial",
+        "state": "implemented-source",
         "contract": "docs/native-deployment.md",
         "implemented": [
           "Immutable offline provisioning manifests and read-only local integrity preflight",
@@ -2493,9 +2506,9 @@
           "Platform sandbox/resource boundaries, authenticated bounded transport, native crash/cancellation recovery"
         ],
         "pending": [
-          "Complete native source boundary validation on all host lanes",
           "Reviewed engine inventories, full security/endurance and exact-package production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-085-source.json"
       }
     },
     {

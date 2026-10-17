@@ -39,3 +39,5 @@ Source contract CI executes .NET 8, .NET 10 and an explicit netstandard2.0 fallb
 Actual Framework 4.7.2 execution and the complete production runtime/provider matrix remain pending FP-086 work and block release.
 
 FP-002 policy, decoder-lease, deadline and accounting tests run on these same source lanes, with no new platform/native dependency. They do not qualify a PDF parser/renderer or forced termination of native work; each future provider must integrate and qualify the mandatory operation context.
+
+The optional isolated worker now has [passing source boundary evidence](evidence/FP-085-source.json) on the six modern hosts and current Framework x86/x64. Its [OS prerequisites and limits](native-deployment.md) apply; source success does not qualify an engine, minimum runtime or package.

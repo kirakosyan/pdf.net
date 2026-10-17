@@ -1,6 +1,6 @@
 # FP-001 public API contract
 
-FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). There is no built-in PDF parser, writer, renderer, HTML engine or OCR engine. A registered capability is provider metadata, not a production qualification claim.
+FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). The [syntax inspection API](pdf-syntax.md) reads low-level values and revisions. The high-level facade has no built-in page reader/writer, renderer, HTML engine or OCR engine. A registered capability is provider metadata, not a production qualification claim.
 
 ## Facade and editing
 

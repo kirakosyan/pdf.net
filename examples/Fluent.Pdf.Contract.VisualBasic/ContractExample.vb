@@ -4,6 +4,10 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function InspectSyntax(borrowedInput As Stream) As PdfSyntaxDocument
+        Return PdfSyntax.Read(borrowedInput)
+    End Function
+
     Public Function ExecuteNativeWorker(options As Fluent.Pdf.Workers.NativeWorkerOptions, request As Byte(), context As PdfOperationContext) As Byte()
         Return New Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context)
     End Function

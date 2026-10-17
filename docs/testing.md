@@ -28,6 +28,8 @@ The contract fixture reads a byte count and writes a labeled text record. It is 
 
 FP-085 adds inert original PE/ELF/Mach-O header fixtures, current-host pinned-file hashing, missing dependency/size/digest/RID diagnostics, portable-name validation, cumulative byte/count boundaries and overflow, read-only assets, cancellation at hash-read boundaries, C#/VB consumers and latched preflight failures preserving atomic destinations. These fixtures are not native engines. Modern Unix source runtimes additionally check read-only directories and root/file symbolic links; Windows privileged links and minimum Framework behavior require separate evidence. The original native bridge fixtures additionally exercise actual loaders, ABI/version/export/dependency failures, crashes, deadlines/cancellation, memory/transport ceilings, denied document read/write/network/process access and recovery. See [native deployment](native-deployment.md) for host prerequisites and remaining qualification.
 
+FP-003 adds original lexical/revision/xref fixtures, an independently inspected page fixture, fixed/dynamic Flate regressions, truncation checks and deterministic parser mutations. It exercises actual syntax inspection, including C#/VB consumers; it does not qualify rendering, output conformance or the complete fuzz workload.
+
 ## Remaining production work
 
 Actual minimum Framework 4.7.2 execution on isolated x86/x64 hosts is absent. An assembly targeting net472 on a newer Framework is evidence for that installed runtime only. Exact final NuGet consumers are also absent: candidate creation is intentionally blocked until all source qualification is complete. Convert the examples into package-only consumers at that gate, without project references or direct assembly injection.

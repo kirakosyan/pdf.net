@@ -2,7 +2,7 @@
 
 Fluent.Pdf is an MIT-licensed .NET PDF SDK being designed for Windows, Linux and macOS. Its production scope combines document generation and editing, browser-quality HTML conversion, rendering, extraction, forms, OCR, security, signatures and independently validated PDF standards.
 
-**Current delivery: specification, backlog, FP-001 document/provider contracts and FP-002 operation policies/budgets, plus partial FP-085 native deployment integrity checks. PDF parsing, writing and rendering are not implemented; the SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
+**Current delivery: document/provider contracts, operation budgets, isolated native workers and bounded [PDF syntax inspection](docs/pdf-syntax.md). High-level document reading/writing, rendering and the remaining SDK features are still in progress. The SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
 
 ## Product direction
 

@@ -5,6 +5,8 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfSyntaxDocument InspectSyntax(Stream borrowedInput)=>PdfSyntax.Read(borrowedInput);
+
     public static byte[] ExecuteNativeWorker(Fluent.Pdf.Workers.NativeWorkerOptions options, byte[] request, PdfOperationContext context) =>
         new Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context);
 

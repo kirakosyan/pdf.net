@@ -17,5 +17,8 @@
     <ProjectReference Include="../../examples/Fluent.Pdf.Contract.CSharp/Fluent.Pdf.Contract.CSharp.csproj" />
     <ProjectReference Include="../../examples/Fluent.Pdf.Contract.VisualBasic/Fluent.Pdf.Contract.VisualBasic.vbproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Fixtures/**/*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
   <Import Project="../../eng/ContractProjectReference.props" />
 </Project>
