@@ -119,7 +119,8 @@ public sealed class PolicyIoTests
         using var input = new CountingInput(new byte[100]);
         var provider = new ContractProvider { OnReadContext = (stream, _, _) =>
         {
-            Assert.Throws<PdfException>(() => stream.Read(new byte[1024], 0, 1024));
+            Assert.Equal(2, stream.Read(new byte[1024], 0, 1024));
+            Assert.Throws<PdfException>(() => stream.ReadByte());
             Assert.Throws<PdfException>(() => stream.ReadByte());
         } };
         Assert.Equal("Limit.InputBytes", Assert.Throws<PdfException>(() => Pdf.Open(input,
@@ -216,6 +217,48 @@ public sealed class PolicyIoTests
         Assert.True(decoder.CanRead);
     }
 
+    [Fact]
+    public void ParallelDecoderReadsShareReservationsAndRefundUnusedCapacity()
+    {
+        var report = PolicyTests.Run(context =>
+        {
+            System.Threading.Tasks.Parallel.For(0, 64, _ =>
+            {
+                using var worker = context.EnterScope(PdfResourceKind.Workers);
+                using var decoder = new MemoryStream(new byte[1]);
+                using var view = context.BorrowExpandedInput(decoder);
+                var buffer = new byte[16];
+                Assert.Equal(1, view.Read(buffer, 0, buffer.Length));
+                Assert.Equal(0, view.Read(buffer, 0, buffer.Length));
+            });
+        }, new PdfResourceLimits(maximumExpandedBytes: 64, maximumWorkers: 64));
+        Assert.Equal(64, report.Resources.Single(item => item.Resource == PdfResourceKind.ExpandedBytes).Consumed);
+    }
+
+    [Fact]
+    public void ParallelDecodersCannotEachConsumeTheirOwnOverBudgetProbe()
+    {
+        int bytesRead = 0;
+        var error = Assert.Throws<PdfException>(() => PolicyTests.Run(context =>
+        {
+            using var start = new ManualResetEventSlim();
+            var workers = Enumerable.Range(0, 8).Select(_ => System.Threading.Tasks.Task.Factory.StartNew(() =>
+            {
+                using var worker = context.EnterScope(PdfResourceKind.Workers);
+                using var decoder = new SlowInput(count => Interlocked.Add(ref bytesRead, count));
+                using var view = context.BorrowExpandedInput(decoder);
+                start.Wait();
+                var buffer = new byte[16];
+                while (view.Read(buffer, 0, buffer.Length) != 0) { }
+            }, CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.LongRunning,
+                System.Threading.Tasks.TaskScheduler.Default)).ToArray();
+            start.Set();
+            System.Threading.Tasks.Task.WaitAll(workers);
+        }, new PdfResourceLimits(maximumExpandedBytes: 1, maximumWorkers: 8)));
+        Assert.Equal("Limit.ExpandedBytes", error.Diagnostic.Code);
+        Assert.Equal(2, bytesRead); // One accepted byte and one shared rejection probe, across all eight decoders.
+    }
+
     internal static PdfOptions Options(PdfResourceLimits limits, PdfProcessingMode mode = PdfProcessingMode.Strict) =>
         new(operationPolicy: new PdfOperationPolicy(mode, limits));
 
@@ -229,6 +272,20 @@ public sealed class PolicyIoTests
             int result = base.Read(buffer, offset, count);
             BytesRead += result;
             return result;
+        }
+    }
+
+    private sealed class SlowInput : MemoryStream
+    {
+        private readonly Action<int> _observed;
+        internal SlowInput(Action<int> observed) : base(new byte[100]) => _observed = observed;
+        public override bool CanSeek => false;
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            int read = base.Read(buffer, offset, count);
+            _observed(read);
+            Thread.Sleep(10); // Hold real I/O in flight long enough to exercise shared reservations.
+            return read;
         }
     }
 }

@@ -11,6 +11,8 @@ public sealed class PdfOperationContext
     private readonly object _gate = new();
     private readonly long[] _used = new long[7];
     private readonly long[] _peaks = new long[7];
+    private readonly long[] _reserved = new long[7];
+    private readonly bool[] _probing = new bool[7];
     private readonly List<PdfDiagnostic> _diagnostics = new();
     private readonly CancellationToken _callerToken;
     private readonly CancellationTokenSource _deadline = new();
@@ -108,9 +110,66 @@ public sealed class PdfOperationContext
         }
     }
 
-    internal long Remaining(PdfResourceKind resource)
+    internal int ReadBounded(Stream input, byte[] buffer, int offset, int count, PdfResourceKind resource)
     {
-        lock (_gate) { CheckCore(); return Policy.Limits.GetLimit(resource) - _used[(int)resource]; }
+        int index = (int)resource;
+        int request;
+        bool probe;
+        lock (_gate)
+        {
+            while (true)
+            {
+                CheckCore();
+                if (count == 0) return 0;
+                long available = Policy.Limits.GetLimit(resource) - _used[index] - _reserved[index];
+                if (available > 0)
+                {
+                    request = (int)Math.Min(count, available);
+                    _reserved[index] += request;
+                    probe = false;
+                    break;
+                }
+                if (_reserved[index] == 0 && !_probing[index])
+                {
+                    // Only one lookahead can consume a byte after the shared delivered-byte limit.
+                    _probing[index] = true;
+                    request = 1;
+                    probe = true;
+                    break;
+                }
+                // Release the lock while other I/O completes. Check cancel/deadline at bounded intervals.
+                Monitor.Wait(_gate, 50);
+            }
+        }
+        bool released = false;
+        try
+        {
+            // Never hold the context lock across external stream I/O.
+            int read = input.Read(buffer, offset, request);
+            if (read < 0 || read > request) throw new IOException("The input stream returned an invalid byte count.");
+            lock (_gate)
+            {
+                if (probe) _probing[index] = false;
+                else _reserved[index] -= request;
+                released = true;
+                Monitor.PulseAll(_gate);
+                CheckCore();
+                Charge(resource, read);
+            }
+            return read;
+        }
+        finally
+        {
+            if (!released)
+            {
+                lock (_gate)
+                {
+                    if (probe) _probing[index] = false;
+                    else _reserved[index] -= request;
+                    Monitor.PulseAll(_gate);
+                }
+            }
+        }
     }
 
     internal void CheckOutputRange(long start, long position, long count)
@@ -134,8 +193,10 @@ public sealed class PdfOperationContext
         lock (_gate)
         {
             CheckCore();
-            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0)
-                Fail("Operation.ScopeLeaked", "Provider scopes must be released before returning.");
+            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 ||
+                _reserved[(int)PdfResourceKind.InputBytes] != 0 || _reserved[(int)PdfResourceKind.ExpandedBytes] != 0 ||
+                _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
+                Fail("Operation.ScopeLeaked", "Provider scopes and reads must finish before returning.");
         }
     }
 
@@ -165,7 +226,7 @@ public sealed class PdfOperationContext
     private void Charge(PdfResourceKind resource, long amount)
     {
         int index = (int)resource;
-        if (amount > Policy.Limits.GetLimit(resource) - _used[index]) Fail("Limit." + resource, "The configured resource limit was reached.");
+        if (amount > Policy.Limits.GetLimit(resource) - _used[index] - _reserved[index]) Fail("Limit." + resource, "The configured resource limit was reached.");
         _used[index] += amount;
         _peaks[index] = Math.Max(_peaks[index], _used[index]);
     }

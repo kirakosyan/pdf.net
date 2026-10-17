@@ -51,13 +51,7 @@ internal sealed class BorrowedStream : Stream
         EnsureActive();
         if (!_reading) throw new NotSupportedException("The lease is write-only.");
         ValidateBuffer(buffer, offset, count);
-        long remaining = _context.Remaining(_inputResource);
-        // One bounded lookahead distinguishes exact-limit EOF from an oversized nonseekable input.
-        int request = remaining >= count ? count : (int)Math.Min(count, remaining + 1);
-        int read = _inner.Read(buffer, offset, request);
-        if (read < 0 || read > request) throw new IOException("The input stream returned an invalid byte count.");
-        _context.Consume(_inputResource, read);
-        return read;
+        return _context.ReadBounded(_inner, buffer, offset, count, _inputResource);
     }
 
     public override void Write(byte[] buffer, int offset, int count)
