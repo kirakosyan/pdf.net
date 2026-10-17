@@ -92,6 +92,8 @@ public sealed class NativeWorkerTests
         request[0]=4;Array.Copy(name,0,request,1,name.Length);
         Assert.Equal(new byte[] {0},fixture.Run(request));
         Assert.Equal("original",File.ReadAllText(target));
+        request[0]=7;
+        Assert.Equal(new byte[] {0,0},fixture.Run(request));
         var listener=new TcpListener(IPAddress.Loopback,0);
         listener.Start();
         try

@@ -116,31 +116,41 @@ static int linux_sandbox(const char *root) {
 #endif
         BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_KILL_PROCESS),
         BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,nr)),
-#define DENY_CALL(number) BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,(number),0,1), BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM)
-        DENY_CALL(__NR_socket), DENY_CALL(__NR_connect), DENY_CALL(__NR_bind),
-        DENY_CALL(__NR_listen), DENY_CALL(__NR_accept), DENY_CALL(__NR_accept4),
-        DENY_CALL(__NR_clone), DENY_CALL(__NR_execve), DENY_CALL(__NR_execveat),
-#ifdef __NR_clone3
-        DENY_CALL(__NR_clone3),
+        /* Permit only the single-process bridge's memory, read-only loader,
+           clock and inherited-pipe operations. Unknown/new syscalls fail closed. */
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,__NR_prlimit64,0,4),
+        BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[0])),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,0,1,0),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ALLOW),
+#define ALLOW_CALL(number) BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,(number),0,1), BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ALLOW)
+        ALLOW_CALL(__NR_read), ALLOW_CALL(__NR_write), ALLOW_CALL(__NR_readv), ALLOW_CALL(__NR_writev),
+        ALLOW_CALL(__NR_close), ALLOW_CALL(__NR_fstat), ALLOW_CALL(__NR_newfstatat), ALLOW_CALL(__NR_statx),
+        ALLOW_CALL(__NR_openat), ALLOW_CALL(__NR_faccessat), ALLOW_CALL(__NR_lseek),
+        ALLOW_CALL(__NR_mmap), ALLOW_CALL(__NR_mprotect), ALLOW_CALL(__NR_munmap), ALLOW_CALL(__NR_mremap),
+        ALLOW_CALL(__NR_madvise), ALLOW_CALL(__NR_brk), ALLOW_CALL(__NR_msync),
+        ALLOW_CALL(__NR_rt_sigaction), ALLOW_CALL(__NR_rt_sigprocmask), ALLOW_CALL(__NR_rt_sigreturn), ALLOW_CALL(__NR_sigaltstack),
+        ALLOW_CALL(__NR_clock_gettime), ALLOW_CALL(__NR_clock_getres), ALLOW_CALL(__NR_gettimeofday),
+        ALLOW_CALL(__NR_nanosleep), ALLOW_CALL(__NR_clock_nanosleep), ALLOW_CALL(__NR_sched_yield), ALLOW_CALL(__NR_sched_getaffinity),
+        ALLOW_CALL(__NR_getpid), ALLOW_CALL(__NR_gettid), ALLOW_CALL(__NR_getppid),
+        ALLOW_CALL(__NR_getuid), ALLOW_CALL(__NR_geteuid), ALLOW_CALL(__NR_getgid), ALLOW_CALL(__NR_getegid),
+        ALLOW_CALL(__NR_uname), ALLOW_CALL(__NR_sysinfo), ALLOW_CALL(__NR_getcwd), ALLOW_CALL(__NR_getdents64),
+        ALLOW_CALL(__NR_readlinkat), ALLOW_CALL(__NR_fcntl), ALLOW_CALL(__NR_dup), ALLOW_CALL(__NR_dup3),
+        ALLOW_CALL(__NR_getrandom), ALLOW_CALL(__NR_futex), ALLOW_CALL(__NR_set_robust_list),
+        ALLOW_CALL(__NR_getrlimit), ALLOW_CALL(__NR_setrlimit), ALLOW_CALL(__NR_getrusage),
+        ALLOW_CALL(__NR_exit), ALLOW_CALL(__NR_exit_group),
+#ifdef __NR_open
+        ALLOW_CALL(__NR_open), ALLOW_CALL(__NR_access), ALLOW_CALL(__NR_stat), ALLOW_CALL(__NR_lstat),
+        ALLOW_CALL(__NR_readlink), ALLOW_CALL(__NR_dup2), ALLOW_CALL(__NR_time), ALLOW_CALL(__NR_arch_prctl),
 #endif
-#ifdef __NR_fork
-        DENY_CALL(__NR_fork),
+#ifdef __NR_rseq
+        ALLOW_CALL(__NR_rseq),
 #endif
-#ifdef __NR_vfork
-        DENY_CALL(__NR_vfork),
+#ifdef __NR_faccessat2
+        ALLOW_CALL(__NR_faccessat2),
 #endif
-        DENY_CALL(__NR_ptrace), DENY_CALL(__NR_process_vm_writev), DENY_CALL(__NR_process_vm_readv),
-        DENY_CALL(__NR_kill), DENY_CALL(__NR_tkill), DENY_CALL(__NR_tgkill),
-        DENY_CALL(__NR_mount), DENY_CALL(__NR_umount2), DENY_CALL(__NR_unshare), DENY_CALL(__NR_setns),
-        DENY_CALL(__NR_bpf), DENY_CALL(__NR_perf_event_open),
-#ifdef __NR_open_by_handle_at
-        DENY_CALL(__NR_open_by_handle_at),
-#endif
-#ifdef __NR_io_uring_setup
-        DENY_CALL(__NR_io_uring_setup), DENY_CALL(__NR_io_uring_enter), DENY_CALL(__NR_io_uring_register),
-#endif
-#undef DENY_CALL
-        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ALLOW)
+#undef ALLOW_CALL
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM)
     };
     struct sock_fprog program={(unsigned short)(sizeof(filter)/sizeof(filter[0])),filter};
     if(abi<1 || prctl(PR_SET_NO_NEW_PRIVS,1,0,0,0)<0) return 0;

@@ -10,6 +10,7 @@
 #else
 #include <unistd.h>
 #include <sys/socket.h>
+#include <sys/wait.h>
 #endif
 #ifndef FIXTURE_ABI
 #define FIXTURE_ABI "fluent-pdf-fixture-1"
@@ -70,6 +71,31 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
             allocated=memory!=NULL;
             if(memory) { for(i=0;i<size;i+=4096) memory[i]=1; free((void *)memory); }
             output[0]=(unsigned char)allocated; *written=1; return 0;
+        }
+        case 7: {
+            FILE *file;
+            if(length<2 || input[length-1]!=0 || capacity<2) return 99;
+            file=fopen((const char *)input+1,"rb");
+            output[0]=(unsigned char)(file!=NULL); if(file) fclose(file);
+#ifdef _WIN32
+            {
+                wchar_t executable[MAX_PATH],command[MAX_PATH+32];
+                STARTUPINFOW startup; PROCESS_INFORMATION child;
+                if(!GetSystemDirectoryW(executable,MAX_PATH-10)) return 99;
+                wcscat(executable,L"\\cmd.exe");
+                swprintf(command,MAX_PATH+32,L"\"%ls\" /d /c exit 0",executable);
+                memset(&startup,0,sizeof(startup)); memset(&child,0,sizeof(child)); startup.cb=sizeof(startup);
+                output[1]=(unsigned char)(CreateProcessW(executable,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&child)!=0);
+                if(output[1]) { WaitForSingleObject(child.hProcess,1000); TerminateProcess(child.hProcess,0); CloseHandle(child.hProcess); CloseHandle(child.hThread); }
+            }
+#else
+            {
+                pid_t child=fork();
+                if(child==0) _exit(0);
+                output[1]=(unsigned char)(child>0); if(child>0) waitpid(child,NULL,0);
+            }
+#endif
+            *written=2; return 0;
         }
         default:
             if(length-1>capacity) return 99;
