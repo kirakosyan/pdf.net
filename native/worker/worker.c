@@ -299,6 +299,8 @@ static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds,
         /* Install the VM-growth budget after trusted policy compilation and
            before the first untrusted library load. Absolute RSS is supervised. */
         limit.rlim_cur=limit.rlim_max=(rlim_t)(information.virtual_size+memory);
+        if(threaded) fprintf(stderr,"worker VM baseline=%llu growth-limit=%llu absolute-limit=%llu\n",
+            (unsigned long long)information.virtual_size,(unsigned long long)memory,(unsigned long long)limit.rlim_cur);
     }
     return setrlimit(RLIMIT_DATA,&limit)==0;
 #endif
