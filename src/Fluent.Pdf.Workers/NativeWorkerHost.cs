@@ -22,7 +22,7 @@ public sealed class NativeWorkerHost
         context.Checkpoint();
         if (request.Length > options.MaximumInputBytes) throw Fail(context,"Native.InputLimit","The native request exceeds its configured ceiling.");
         using var scope = context.EnterScope(PdfResourceKind.Workers);
-        PdfNativeDeploymentInspector.Verify(options.Deployment, context);
+        PdfNativeDeploymentInspector.VerifyWorker(options.Deployment, context);
         context.Consume(PdfResourceKind.ExpandedBytes, request.Length);
         var input = (byte[])request.Clone();
         string job = Path.Combine(options.TemporaryDirectory,"fluent-pdf-worker-"+Guid.NewGuid().ToString("N"));
@@ -31,7 +31,7 @@ public sealed class NativeWorkerHost
         Process? process = null;
         Task? inputTask = null;
         Task<Reply>? responseTask = null;
-        Task? errorTask = null;
+        Task<string?>? errorTask = null;
         bool created = false;
         bool started = false;
         try
@@ -45,7 +45,7 @@ public sealed class NativeWorkerHost
             CopyAssets(options,job,context);
             var staged = new PdfNativeDeployment(job, options.Deployment.RuntimeIdentifier, options.Deployment.EngineId,
                 options.Deployment.EngineVersion, options.Deployment.Abi, options.Deployment.MaximumTotalBytes, options.Deployment.Assets.ToArray());
-            PdfNativeDeploymentInspector.Verify(staged,context);
+            PdfNativeDeploymentInspector.VerifyWorker(staged,context);
             var nonce = new byte[16];
             using (var random = RandomNumberGenerator.Create()) random.GetBytes(nonce);
             string nonceText = BitConverter.ToString(nonce).Replace("-","").ToLowerInvariant();
@@ -83,13 +83,21 @@ public sealed class NativeWorkerHost
             start.EnvironmentVariables["TMP"] = job;
             start.EnvironmentVariables["TEMP"] = job;
             start.EnvironmentVariables["TMPDIR"] = job;
+            // Fixed per-process runtime bounds for self-contained managed native bridges.
+            // These are recomputed from this job's envelope, never inherited from the caller.
+            start.EnvironmentVariables["DOTNET_GCHeapHardLimit"]=(options.MaximumMemoryBytes/4).ToString("X",CultureInfo.InvariantCulture);
+            start.EnvironmentVariables["DOTNET_GCConserveMemory"]="9";
+            start.EnvironmentVariables["DOTNET_gcServer"]="0";
+            start.EnvironmentVariables["DOTNET_gcConcurrent"]="0";
+            start.EnvironmentVariables["DOTNET_EnableDiagnostics"]="0";
+            start.EnvironmentVariables["DOTNET_PROCESSOR_COUNT"]="2";
             if (options.Deployment.RuntimeIdentifier.StartsWith("osx-",StringComparison.Ordinal))
                 start.EnvironmentVariables["MallocNanoZone"] = "0";
             string[] arguments = { job,options.LibraryFileName,options.Deployment.Abi,options.Deployment.EngineVersion,
                 options.MaximumInputBytes.ToString(CultureInfo.InvariantCulture),options.MaximumOutputBytes.ToString(CultureInfo.InvariantCulture),
                 options.MaximumMemoryBytes.ToString(CultureInfo.InvariantCulture),
                 ((long)Math.Ceiling(options.MaximumElapsedTime.TotalMilliseconds)).ToString(CultureInfo.InvariantCulture),nonceText,
-                CallerProcessId().ToString(CultureInfo.InvariantCulture) };
+                CallerProcessId().ToString(CultureInfo.InvariantCulture),options.AllowInProcessThreads?"1":"0" };
             start.Arguments = string.Join(" ",arguments.Select(Quote));
             context.Checkpoint();
             process = new Process { StartInfo = start };
@@ -100,7 +108,7 @@ public sealed class NativeWorkerHost
             var running = process;
             inputTask = Task.Factory.StartNew(() => WriteRequest(running.StandardInput.BaseStream,input),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
             responseTask = Task.Factory.StartNew(() => ReadResponse(running.StandardOutput.BaseStream,nonce,options,context),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
-            errorTask = Task.Factory.StartNew(() => DrainErrors(running.StandardError.BaseStream),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
+            errorTask = Task.Factory.StartNew(() => DrainErrors(running.StandardError.BaseStream,options.CaptureWorkerDiagnostics),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
             while (!process.WaitForExit(10))
             {
                 context.Checkpoint();
@@ -146,6 +154,8 @@ public sealed class NativeWorkerHost
         }
         catch (PdfException failure)
         {
+            if(options.CaptureWorkerDiagnostics && errorTask is not null && WaitTasks(new Task[]{errorTask},100) && errorTask.Status==TaskStatus.RanToCompletion && !string.IsNullOrEmpty(errorTask.Result))
+                failure.Data["Native.WorkerDiagnostics"]=errorTask.Result;
             failure.Data["Native.EngineId"] = options.Deployment.EngineId;
             failure.Data["Native.ExpectedAbi"] = options.Deployment.Abi;
             failure.Data["Native.ExpectedEngineVersion"] = options.Deployment.EngineVersion;
@@ -308,15 +318,18 @@ public sealed class NativeWorkerHost
         return bytes;
     }
 
-    private static void DrainErrors(Stream stream)
+    private static string? DrainErrors(Stream stream,bool capture)
     {
         var bytes=new byte[1024];
+        byte[]? retained=capture?new byte[8192]:null;
         int total=0,count;
         while((count=stream.Read(bytes,0,bytes.Length))!=0)
         {
             total+=count;
             if(total>8192) throw new InvalidDataException("Worker diagnostic transport limit exceeded.");
+            if(retained is not null)Array.Copy(bytes,0,retained,total-count,count);
         }
+        return retained is null?null:Encoding.UTF8.GetString(retained,0,total);
     }
 
     private static bool WaitTasks(Task[] tasks, int milliseconds)

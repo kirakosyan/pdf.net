@@ -25,6 +25,29 @@ public sealed class NativeWorkerTests
         Assert.Equal("1.0.0",fixture.Options.Deployment.EngineVersion);
     }
 
+    [Fact]
+    public void SelfContainedManagedBridgeRunsNativeOsArchitectureAndRestrictsNewThreads()
+    {
+        using var fixture=new WorkerFixture(_output,"native-aot");
+        Assert.Equal(new byte[]{1,2,3},fixture.Run(new byte[]{0,1,2,3}));
+        string target=Path.Combine(fixture.Root,"private-thread-probe.txt");File.WriteAllText(target,"original");
+        byte[] path=Encoding.UTF8.GetBytes(target);var request=new byte[path.Length+1];request[0]=7;Array.Copy(path,0,request,1,path.Length);
+        Assert.Equal(new byte[]{42,0},fixture.Run(request));
+        Assert.True(PdfNativeDeploymentInspector.InspectWorker(fixture.Options.Deployment).AssetsVerified);
+        if(PdfNativeDeploymentInspector.CurrentRuntimeIdentifier!=fixture.Options.Deployment.RuntimeIdentifier)
+            Assert.False(PdfNativeDeploymentInspector.Inspect(fixture.Options.Deployment).AssetsVerified);
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
+    [Fact]
+    public void WorkerDiagnosticsRequireExplicitDisclosureOptIn()
+    {
+        using var ordinary=new WorkerFixture(_output);
+        var privateFailure=Assert.Throws<PdfException>(()=>ordinary.Run(new byte[]{8}));Assert.Null(privateFailure.Data["Native.WorkerDiagnostics"]);
+        using var optedIn=new WorkerFixture(_output,captureDiagnostics:true);
+        var failure=Assert.Throws<PdfException>(()=>optedIn.Run(new byte[]{8}));Assert.Equal("owned-fixture-diagnostic",failure.Data["Native.WorkerDiagnostics"]);
+    }
+
     [Theory]
     [InlineData("wrong-abi","Native.AbiMismatch")]
     [InlineData("wrong-version","Native.EngineVersionMismatch")]
@@ -158,21 +181,21 @@ public sealed class NativeWorkerTests
         internal string Executable {get;}
         internal string Library {get;}
         internal NativeWorkerOptions Options {get;}
-        internal WorkerFixture(ITestOutputHelper output,string scenario="normal",TimeSpan? timeout=null)
+        internal WorkerFixture(ITestOutputHelper output,string scenario="normal",TimeSpan? timeout=null,bool captureDiagnostics=false)
         {
             _output=output;
-            string rid=PdfNativeDeploymentInspector.CurrentRuntimeIdentifier??throw new InvalidOperationException("Unsupported source host.");
+            string rid=(scenario=="native-aot"?PdfNativeDeploymentInspector.OperatingSystemRuntimeIdentifier:PdfNativeDeploymentInspector.CurrentRuntimeIdentifier)??throw new InvalidOperationException("Unsupported source host.");
             string repo=FindRepository();
             string binaries=Path.Combine(repo,"artifacts","native-fixtures",rid);
             Executable=rid.StartsWith("win-",StringComparison.Ordinal)?"worker.exe":"worker";
             string extension=rid.StartsWith("win-",StringComparison.Ordinal)?"dll":rid.StartsWith("osx-",StringComparison.Ordinal)?"dylib":"so";
-            Library=(scenario=="wrong-abi"?"wrong-abi":scenario=="dependency"||scenario=="missing-dependency"?"dependent":"bridge")+"."+extension;
+            Library=(scenario=="native-aot"?"native-aot-fixture":scenario=="wrong-abi"?"wrong-abi":scenario=="dependency"||scenario=="missing-dependency"?"dependent":"bridge")+"."+extension;
             Directory.CreateDirectory(Root);Jobs=Path.Combine(Root,"jobs");Directory.CreateDirectory(Jobs);
             var assets=new List<PdfNativeAsset> {Asset(binaries,Executable),Asset(binaries,Library)};
             if(scenario=="dependency") assets.Add(Asset(binaries,"required."+extension));
             var deployment=new PdfNativeDeployment(binaries,rid,"native.fixture",scenario=="wrong-version"?"2.0.0":"1.0.0",
                 "fluent-pdf-fixture-1",16777216,assets.ToArray());
-            Options=new NativeWorkerOptions(deployment,Executable,Library,Jobs,67108864,4096,1024,timeout??TimeSpan.FromSeconds(5));
+            Options=new NativeWorkerOptions(deployment,Executable,Library,Jobs,scenario=="native-aot"?536870912:67108864,4096,1024,timeout??TimeSpan.FromSeconds(5),allowInProcessThreads:scenario=="native-aot",captureWorkerDiagnostics:scenario=="native-aot"||captureDiagnostics);
         }
         internal byte[] Run(byte[] request,CancellationToken cancellation=default)
         {
@@ -184,6 +207,7 @@ public sealed class NativeWorkerTests
             {
                 _output.WriteLine(error.Diagnostic.Code+": "+error.Diagnostic.Message);
                 if(error.Data["Native.LoaderDetail"] is string detail) _output.WriteLine(detail);
+                if(error.Data["Native.WorkerDiagnostics"] is string diagnostics) _output.WriteLine(diagnostics);
                 throw;
             }
             return output.ToArray();

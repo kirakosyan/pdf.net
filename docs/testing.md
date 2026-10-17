@@ -1,6 +1,6 @@
 # Source contract testing and evidence
 
-Use PowerShell 7, .NET SDK 10 and the .NET 8 runtime. Windows x64 also needs installed current .NET Framework and its x86 runtime. Restore uses committed lock files; API tooling is pinned in the repository tool manifest.
+Use PowerShell 7, .NET SDK 10, the .NET 8 runtime and NativeAOT platform prerequisites (C/C++ compiler, linker and development libraries). Windows x64 also needs installed current .NET Framework and its x86 runtime. Restore uses committed lock files; API tooling is pinned in the repository tool manifest.
 
 ```powershell
 pwsh -File eng/validate-spec.ps1
@@ -31,6 +31,8 @@ FP-085 adds inert original PE/ELF/Mach-O header fixtures, current-host pinned-fi
 FP-003 adds original lexical/revision/xref fixtures, an independently inspected page fixture, fixed/dynamic Flate regressions, truncation checks and deterministic parser mutations. It exercises actual syntax inspection, including C#/VB consumers; it does not qualify rendering, output conformance or the complete fuzz workload.
 
 FP-004 adds lossless encode/decode chains, independent LZW bytes, PNG/TIFF predictor answers and matrices, compressed-object membership checks, indirect parameters, cancellation/limits and detached decoded results. Optional image codecs are still in progress.
+
+The original self-contained NativeAOT fixture exercises sandboxed managed thread creation and native OS architecture from current Framework x86, alongside opt-in diagnostic disclosure and repeated setup/execution cancellation. Its compiler/runtime packages are pinned in its own lock file. It supplies no PDF/image capability.
 
 ## Remaining production work
 

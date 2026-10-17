@@ -47,10 +47,25 @@ public static class PdfNativeDeploymentInspector
         }
     }
 
+    /// <summary>Gets the supported native OS RID, which can differ from a 32-bit or emulated caller process.</summary>
+    public static string? OperatingSystemRuntimeIdentifier
+    {
+        get
+        {
+            string? os=RuntimeInformation.IsOSPlatform(OSPlatform.Windows)?"win":RuntimeInformation.IsOSPlatform(OSPlatform.Linux)?"linux":RuntimeInformation.IsOSPlatform(OSPlatform.OSX)?"osx":null;
+            string rid=os+"-"+RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant();
+            return PdfNativeDeployment.IsSupportedRuntimeIdentifier(rid)?rid:null;
+        }
+    }
+
     /// <summary>Performs a read-only preflight with bounded buffers and cooperative cancellation between file reads.</summary>
     /// <remarks>Root/file reparse points are rejected. Caller-controlled immutable directory ancestry is required; this is not a race-free secure loader or a native worker sandbox.</remarks>
     public static PdfNativeDeploymentReport Inspect(PdfNativeDeployment deployment, CancellationToken cancellationToken = default) =>
         InspectCore(deployment, cancellationToken.ThrowIfCancellationRequested);
+
+    /// <summary>Inspects a worker deployment targeting either the current process RID or the native OS RID; no code is executed.</summary>
+    public static PdfNativeDeploymentReport InspectWorker(PdfNativeDeployment deployment,CancellationToken cancellationToken=default)=>
+        InspectCore(deployment,cancellationToken.ThrowIfCancellationRequested,true);
 
     /// <summary>Preflights within an SDK operation; any integrity failure is reported as a latched fatal diagnostic.</summary>
     /// <remarks>The deployment byte ceiling bounds this configuration I/O; operation checkpoints enforce cancellation/deadline. No native execution occurs.</remarks>
@@ -62,16 +77,25 @@ public static class PdfNativeDeploymentInspector
         return report;
     }
 
-    private static PdfNativeDeploymentReport InspectCore(PdfNativeDeployment deployment, Action checkpoint)
+    /// <summary>Preflights an explicit out-of-process worker, allowing native OS architecture independently of caller bitness.</summary>
+    public static PdfNativeDeploymentReport VerifyWorker(PdfNativeDeployment deployment,PdfOperationContext context)
+    {
+        if(context is null)throw new ArgumentNullException(nameof(context));
+        var report=InspectCore(deployment,context.Checkpoint,true);
+        foreach(var diagnostic in report.Diagnostics)context.Report(diagnostic);
+        return report;
+    }
+
+    private static PdfNativeDeploymentReport InspectCore(PdfNativeDeployment deployment, Action checkpoint,bool worker=false)
     {
         if (deployment is null) throw new ArgumentNullException(nameof(deployment));
         checkpoint();
         var diagnostics = new List<PdfDiagnostic>();
         string? current = CurrentRuntimeIdentifier;
         int verified = 0;
-        if (current != deployment.RuntimeIdentifier)
+        if (current != deployment.RuntimeIdentifier && (!worker || OperatingSystemRuntimeIdentifier!=deployment.RuntimeIdentifier))
         {
-            diagnostics.Add(Failure("Native.RuntimeMismatch", "The deployment RID does not match a supported current OS/process architecture.", deployment));
+            diagnostics.Add(Failure("Native.RuntimeMismatch", worker?"The worker RID matches neither the current process nor the native operating system.":"The deployment RID does not match a supported current OS/process architecture.", deployment));
             return new PdfNativeDeploymentReport(deployment, current, verified, diagnostics);
         }
         try

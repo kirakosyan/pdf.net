@@ -11,7 +11,7 @@ public static class Pdf
         new(options ?? PdfOptions.Default, providers ?? PdfProviderRegistry.Empty);
 
     /// <summary>Reads eagerly from a borrowed readable stream, leaving it open at the position reached by the provider.</summary>
-    /// <remarks>On failure the partially populated document is disposed. No parser is built into the current contract layer.</remarks>
+    /// <remarks>On failure the partially populated document is disposed. Low-level syntax inspection is separate; this facade requires an explicit document reader.</remarks>
     public static PdfDocument Open(Stream input, PdfOptions? options = null, PdfProviderRegistry? providers = null, CancellationToken cancellationToken = default)
     {
         if (input is null) throw new ArgumentNullException(nameof(input));

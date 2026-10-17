@@ -8,7 +8,7 @@ public sealed class NativeWorkerOptions
     /// <summary>Captures pinned executable/library names, an owned-job root and hard input/output ceilings.</summary>
     public NativeWorkerOptions(PdfNativeDeployment deployment, string executableFileName, string libraryFileName,
         string temporaryDirectory, long maximumMemoryBytes = 268435456, int maximumInputBytes = 67108864,
-        int maximumOutputBytes = 67108864, TimeSpan? maximumElapsedTime = null)
+        int maximumOutputBytes = 67108864, TimeSpan? maximumElapsedTime = null,bool allowInProcessThreads=false,bool captureWorkerDiagnostics=false)
     {
         Deployment = deployment ?? throw new ArgumentNullException(nameof(deployment));
         ExecutableFileName = RequireBinary(executableFileName);
@@ -29,6 +29,8 @@ public sealed class NativeWorkerOptions
         MaximumInputBytes = maximumInputBytes;
         MaximumOutputBytes = maximumOutputBytes;
         MaximumElapsedTime = timeout;
+        AllowInProcessThreads=allowInProcessThreads;
+        CaptureWorkerDiagnostics=captureWorkerDiagnostics;
     }
 
     /// <summary>Gets the immutable pinned deployment, including the native worker executable.</summary>
@@ -47,6 +49,10 @@ public sealed class NativeWorkerOptions
     public int MaximumOutputBytes { get; }
     /// <summary>Gets the per-worker deadline, additionally constrained by the operation context.</summary>
     public TimeSpan MaximumElapsedTime { get; }
+    /// <summary>Gets whether Linux permits threads in the same process under additional unprivileged-user and task-count restrictions.</summary>
+    public bool AllowInProcessThreads {get;}
+    /// <summary>Gets whether bounded worker stderr may be retained in failure exception data; enable only when that output may be disclosed.</summary>
+    public bool CaptureWorkerDiagnostics {get;}
 
     private string RequireBinary(string name)
     {

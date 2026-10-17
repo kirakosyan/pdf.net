@@ -116,6 +116,7 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
 #endif
             *written=2; return 0;
         }
+        case 8: fputs("owned-fixture-diagnostic",stderr); fflush(stderr); return 99;
         default:
             if(length-1>capacity) return 99;
             memcpy(output,input+1,length-1); *written=length-1; return 0;

@@ -37,6 +37,8 @@
 #include <linux/seccomp.h>
 #include <linux/filter.h>
 #include <linux/audit.h>
+#include <linux/sched.h>
+#include <linux/capability.h>
 #endif
 #ifdef __APPLE__
 #include <sandbox.h>
@@ -102,7 +104,7 @@ static int allow_read_path(int rules, const char *path, int directory) {
     if(syscall(__NR_landlock_add_rule,rules,LANDLOCK_RULE_PATH_BENEATH,&rule,0)<0) { close(fd); return 0; }
     close(fd); return 1;
 }
-static int linux_sandbox(const char *root) {
+static int linux_sandbox(const char *root, int threaded) {
     int abi=(int)syscall(__NR_landlock_create_ruleset,NULL,0,LANDLOCK_CREATE_RULESET_VERSION);
     int rules; struct landlock_ruleset_attr policy;
     struct sock_filter filter[]={
@@ -116,6 +118,30 @@ static int linux_sandbox(const char *root) {
 #endif
         BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_KILL_PROCESS),
         BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,nr)),
+        /* Thread creation is opt-in. Fork/vfork and clone namespace/process
+           flags remain denied; every new thread inherits Landlock/seccomp. */
+#ifdef __NR_clone3
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,__NR_clone3,0,1),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|ENOSYS),
+#endif
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,threaded?(unsigned)__NR_clone:UINT_MAX,0,12),
+        BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[0])+4),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,0,1,0),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM),
+        BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[0])),
+        BPF_STMT(BPF_ALU|BPF_AND|BPF_K,CLONE_VM|CLONE_THREAD|CLONE_SIGHAND),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,CLONE_VM|CLONE_THREAD|CLONE_SIGHAND,1,0),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM),
+        BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[0])),
+        BPF_STMT(BPF_ALU|BPF_AND|BPF_K,~(CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|CLONE_DETACHED)),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,0,1,0),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ALLOW),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,__NR_tgkill,0,4),
+        BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[0])),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,(unsigned)getpid(),1,0),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ALLOW),
         /* Permit only the single-process bridge's memory, read-only loader,
            clock and inherited-pipe operations. Unknown/new syscalls fail closed. */
         BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,__NR_prlimit64,0,4),
@@ -137,6 +163,9 @@ static int linux_sandbox(const char *root) {
         ALLOW_CALL(__NR_uname), ALLOW_CALL(__NR_sysinfo), ALLOW_CALL(__NR_getcwd), ALLOW_CALL(__NR_getdents64),
         ALLOW_CALL(__NR_readlinkat), ALLOW_CALL(__NR_fcntl), ALLOW_CALL(__NR_dup), ALLOW_CALL(__NR_dup3),
         ALLOW_CALL(__NR_getrandom), ALLOW_CALL(__NR_futex), ALLOW_CALL(__NR_set_robust_list),
+        ALLOW_CALL(__NR_rt_sigpending), ALLOW_CALL(__NR_rt_sigtimedwait), ALLOW_CALL(__NR_rt_sigsuspend),
+        ALLOW_CALL(__NR_eventfd2), ALLOW_CALL(__NR_pipe2), ALLOW_CALL(__NR_ppoll), ALLOW_CALL(__NR_pselect6),
+        ALLOW_CALL(__NR_epoll_create1), ALLOW_CALL(__NR_epoll_ctl), ALLOW_CALL(__NR_epoll_pwait), ALLOW_CALL(__NR_mincore),
         ALLOW_CALL(__NR_getrlimit), ALLOW_CALL(__NR_setrlimit), ALLOW_CALL(__NR_getrusage),
         ALLOW_CALL(__NR_exit), ALLOW_CALL(__NR_exit_group),
 #ifdef __NR_open
@@ -148,6 +177,12 @@ static int linux_sandbox(const char *root) {
 #endif
 #ifdef __NR_faccessat2
         ALLOW_CALL(__NR_faccessat2),
+#endif
+#ifdef __NR_futex_waitv
+        ALLOW_CALL(__NR_futex_waitv),
+#endif
+#ifdef __NR_membarrier
+        ALLOW_CALL(__NR_membarrier),
 #endif
 #undef ALLOW_CALL
         BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM)
@@ -213,7 +248,7 @@ static int install_fault_boundary(void) {
     for(i=0;i<sizeof(signals)/sizeof(signals[0]);i++) if(sigaction(signals[i],&action,NULL)!=0) return 0;
     return 1;
 }
-static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds, uint64_t parent) {
+static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds, uint64_t parent, int threaded) {
     struct rlimit limit; char canonical[PATH_MAX];
     sandbox_step=1;
     if(!realpath(root,canonical)) return 0;
@@ -225,9 +260,24 @@ static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds,
     sandbox_step=4;
     limit.rlim_cur=limit.rlim_max=(rlim_t)memory;
 #ifdef __linux__
+    if(threaded) {
+        struct __user_cap_header_struct header={_LINUX_CAPABILITY_VERSION_3,0};
+        struct __user_cap_data_struct capabilities[2];struct rlimit tasks;
+        sandbox_step=18;
+        if(getuid()==0 || geteuid()==0) {errno=EPERM;return 0;}
+        memset(capabilities,0,sizeof(capabilities));
+        if(syscall(__NR_capget,&header,capabilities)<0) return 0;
+        if(capabilities[0].effective||capabilities[0].permitted||capabilities[0].inheritable||
+           capabilities[1].effective||capabilities[1].permitted||capabilities[1].inheritable) {errno=EPERM;return 0;}
+        if(getrlimit(RLIMIT_NPROC,&tasks)!=0) return 0;
+        if(tasks.rlim_cur>1024)tasks.rlim_cur=1024;
+        if(tasks.rlim_max>1024)tasks.rlim_max=1024;
+        if(setrlimit(RLIMIT_NPROC,&tasks)!=0) return 0;
+    }
     if(setrlimit(RLIMIT_AS,&limit)!=0 || setrlimit(RLIMIT_DATA,&limit)!=0) return 0;
     if(prctl(PR_SET_PDEATHSIG,SIGKILL)!=0 || (uint64_t)getppid()!=parent) return 0;
 #else
+    (void)threaded;
     sandbox_step=5;
     if(!parent_watch(parent)) return 0;
 #endif
@@ -237,7 +287,7 @@ static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds,
     limit.rlim_cur=limit.rlim_max=64; if(setrlimit(RLIMIT_NOFILE,&limit)!=0) return 0;
     sandbox_step=9;
 #ifdef __linux__
-    return linux_sandbox(canonical);
+    return linux_sandbox(canonical,threaded);
 #else
     if(!mac_sandbox(canonical)) return 0;
     sandbox_step=4;
@@ -356,7 +406,7 @@ done:
 #endif
 
 static int worker_main(int argc, char **argv) {
-    int offset=1,status; char **p; uint64_t max_input,max_output,memory,milliseconds,parent_id;
+    int offset=1,status; char **p; uint64_t max_input,max_output,memory,milliseconds,parent_id,threaded;
     unsigned char size_bytes[4],*input=NULL,*output=NULL; uint32_t input_size; size_t output_size=0;
     fp_identity_fn abi_fn,version_fn; fp_execute_fn execute_fn;
 #ifdef _WIN32
@@ -367,10 +417,10 @@ static int worker_main(int argc, char **argv) {
 #else
     void *library; char library_path[8192];
 #endif
-    if(argc-offset!=10) return 92;
+    if(argc-offset!=11) return 92;
     p=argv+offset;
     if(!parse_nonce(p[8])||!parse_limit(p[4],&max_input)||!parse_limit(p[5],&max_output)||
-       !parse_limit(p[6],&memory)||!parse_limit(p[7],&milliseconds)||!parse_limit(p[9],&parent_id)||parent_id==0||parent_id>UINT32_MAX||max_input>INT_MAX||max_output>INT_MAX||
+       !parse_limit(p[6],&memory)||!parse_limit(p[7],&milliseconds)||!parse_limit(p[9],&parent_id)||!parse_limit(p[10],&threaded)||threaded>1||parent_id==0||parent_id>UINT32_MAX||max_input>INT_MAX||max_output>INT_MAX||
        memory<16777216||memory>UINT64_C(1099511627776)||milliseconds==0||milliseconds>86400000) return 92;
     if(strlen(p[2])>128||strlen(p[3])>128||strchr(p[1],'/')||strchr(p[1],'\\')) return 92;
 #ifdef _WIN32
@@ -398,7 +448,7 @@ static int worker_main(int argc, char **argv) {
         int length=snprintf(candidate,sizeof(candidate),"%s/%s",p[0],p[1]);
         if(length<0 || (size_t)length>=sizeof(candidate) || !realpath(candidate,library_path)) return respond(FP_DEPENDENCY,NULL,0);
     }
-    if(!unix_limits(p[0],memory,milliseconds,parent_id)) return respond(FP_SANDBOX,NULL,0);
+    if(!unix_limits(p[0],memory,milliseconds,parent_id,(int)threaded)) return respond(FP_SANDBOX,NULL,0);
     library=dlopen(library_path,RTLD_LOCAL|RTLD_NOW);
     if(!library) {
         const char *detail=dlerror(); size_t length=0;

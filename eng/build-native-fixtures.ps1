@@ -56,12 +56,20 @@ exit /b %errorlevel%
             & cc @common @shared '-DFIXTURE_DEPENDENCY' 'tests/native/bridge-fixture.c' (Join-Path $directory "required.$extension") "-Wl,-rpath,$origin" '-o' (Join-Path $directory "dependent.$extension")
             if($LASTEXITCODE -ne 0) { throw "Dependent bridge fixture build failed: $rid" }
         }
-        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required)\.(dll|so|dylib))$' } | ForEach-Object {
+        if($arch -eq $architecture) {
+            & dotnet restore 'tests/native-aot/NativeFixture.csproj' --locked-mode
+            if($LASTEXITCODE -ne 0) { throw "Locked native-AOT fixture restore failed: $rid" }
+            & dotnet publish 'tests/native-aot/NativeFixture.csproj' -c Release -r $rid --no-restore -o $directory
+            if($LASTEXITCODE -ne 0) { throw "Native-AOT fixture build failed: $rid" }
+        }
+        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required|native-aot-fixture)\.(dll|so|dylib))$' } | ForEach-Object {
             [ordered]@{name=$_.Name;length=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
         })
         $records.Add([ordered]@{rid=$rid;files=$files})
     }
-    [ordered]@{schemaVersion=1;purpose='original-native-test-fixtures';sourceCommit=(& git rev-parse HEAD).Trim();deployments=@($records.ToArray())} |
+    [ordered]@{schemaVersion=1;purpose='original-native-test-fixtures';sourceCommit=(& git rev-parse HEAD).Trim();
+        nativeAot=[ordered]@{sdk=(& dotnet --version).Trim();lockSha256=(Get-FileHash -LiteralPath (Join-Path $root 'tests/native-aot/packages.lock.json')).Hash};
+        deployments=@($records.ToArray())} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $destination 'native-fixtures.json') -Encoding utf8
     $contracts=Join-Path $root 'artifacts/contracts'
     $null=[IO.Directory]::CreateDirectory($contracts)
