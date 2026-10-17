@@ -1,0 +1,8 @@
+<Project>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Fluent.Pdf/Fluent.Pdf.csproj">
+      <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
+      <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

@@ -30,4 +30,6 @@ Building net472 or running it on Framework 4.8.1 does not qualify actual 4.7.2. 
 
 ARM64 qualification must execute on ARM64 hardware/OS. Cross compilation, emulation, successful installation or a container label is insufficient. Linux containers do not qualify macOS or Windows. A hosted build runner proves only the lanes it actually executes.
 
-Current foundation CI builds on Windows/Linux/macOS x64 runners. It does not yet implement the required runtime/provider test matrix; FP-086 owns that work.
+Source contract CI executes .NET 8, .NET 10 and an explicit netstandard2.0 fallback consumer on native Windows/Linux/macOS x64 and ARM64 runners. The Windows x64 runner also executes the net472 contracts in current Framework x86/x64 processes. Runtime identity and exact loaded assembly target are asserted. Reports describe only the contract layer; they are not final-package, minimum-OS or provider qualification. See [testing.md](testing.md).
+
+Actual Framework 4.7.2 execution and the complete production runtime/provider matrix remain pending FP-086 work and block release.

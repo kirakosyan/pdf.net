@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net472;net8.0;net10.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <DefineConstants Condition="'$(UseNetStandardAssembly)' == 'true'">$(DefineConstants);TEST_NETSTANDARD_ASSEMBLY</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../examples/Fluent.Pdf.Contract.CSharp/Fluent.Pdf.Contract.CSharp.csproj" />
+    <ProjectReference Include="../../examples/Fluent.Pdf.Contract.VisualBasic/Fluent.Pdf.Contract.VisualBasic.vbproj" />
+  </ItemGroup>
+  <Import Project="../../eng/ContractProjectReference.props" />
+</Project>

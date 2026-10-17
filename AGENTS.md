@@ -14,7 +14,7 @@ Use original implementation and our own API. Reference analysis establishes requ
 
 ## Current status and truthfulness
 
-This baseline contains research, specification, build/package boundaries and a backlog. It has no working PDF API. Do not call a build, empty assembly, package upload, emulator/VM boot or installation proof of functionality or production readiness.
+The repository contains research, specification, a backlog and the FP-001 in-memory document/provider contract implementation. No PDF parser, writer or rendering engine is implemented. See docs/api-contract.md for the available behavior and qualification gaps. Do not call a build, contract fixture, package upload, emulator/VM boot or installation proof of PDF functionality or production readiness.
 
 All SDK requirements marked releaseRequired in specs/requirements.json are mandatory for stable publication. The Reader requirement is excluded. Do not silently narrow the required scope to make a release pass. Status changes require reviewed implementation and evidence. Do not publish placeholders, alpha/beta packages or package-name reservations.
 
@@ -47,7 +47,7 @@ Use rg for file/text search and batch independent reads. Keep secrets, licensed 
 
 ## Validation and publication
 
-Run eng/validate-spec.ps1 and the relevant build/tests after changes. Foundation CI currently proves specification/build integrity only. Production gates in docs/production-quality.md are literal acceptance requirements, including independent conformance, visual/semantic fidelity, actual minimum runtimes, concurrency, fuzzing, resource limits and clean package consumers. A skipped required test or missing required lane blocks release.
+Run eng/validate-spec.ps1 and the relevant build/tests after changes. CI checks source contracts, API compatibility and release blocking; see docs/testing.md. It does not qualify PDF processing or final packages. Production gates in docs/production-quality.md are literal acceptance requirements, including independent conformance, visual/semantic fidelity, actual minimum runtimes, concurrency, fuzzing, resource limits and clean package consumers. A skipped required test or missing required lane blocks release.
 
 Use docs/releasing.md and the fail-closed eng/assert-production-ready.ps1. Never bypass the package target, weaken a gate, fabricate evidence, copy reports from a different commit or infer qualification from an API inventory. Candidate creation and public publication both require complete qualification. Use NuGet Trusted Publishing with exact package scopes; never paste stored API keys. Publish only the exact qualified artifacts and verify indexing, signatures and fresh public consumers.
 

@@ -4,7 +4,7 @@
 
 Publish only when the complete SDK production scope is ready. Target first stable version: 1.0.0. No placeholder, alpha/beta or package-name reservation publication. Keep readiness false until the exact source and package evidence satisfies every applicable gate.
 
-Current state: specification and project boundaries only. NuGet publication and persistent publishing-policy activation are not performed by this baseline.
+Current state: specification and FP-001 source contracts; production qualification remains incomplete. Candidate packing and NuGet publication stay blocked. No publishing policy is activated by the contract implementation.
 
 ## Package identity and ownership
 
