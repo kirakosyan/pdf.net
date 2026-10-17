@@ -336,7 +336,10 @@ static int worker_main(int argc, char **argv) {
     if(swprintf(library_path,8192,L"%ls\\%ls",root_path,file_name)<0) return respond(FP_PROTOCOL,NULL,0);
     SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_SYSTEM32);
     library=LoadLibraryExW(library_path,NULL,LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR|LOAD_LIBRARY_SEARCH_SYSTEM32);
-    if(!library) return respond(FP_DEPENDENCY,NULL,0);
+    if(!library) {
+        unsigned char loader_error[4]; put32(loader_error,GetLastError());
+        return respond(FP_DEPENDENCY,loader_error,4);
+    }
     {
         FARPROC symbol;
         _Static_assert(sizeof(symbol)==sizeof(abi_fn),"Windows bridge function pointer size differs");
@@ -348,7 +351,11 @@ static int worker_main(int argc, char **argv) {
     if(!unix_limits(p[0],memory,milliseconds,parent_id)) return respond(FP_SANDBOX,NULL,0);
     if(snprintf(library_path,sizeof(library_path),"%s/%s",p[0],p[1])<0) return respond(FP_PROTOCOL,NULL,0);
     library=dlopen(library_path,RTLD_LOCAL|RTLD_NOW);
-    if(!library) return respond(FP_DEPENDENCY,NULL,0);
+    if(!library) {
+        const char *detail=dlerror(); size_t length=0;
+        if(detail) while(length<2048 && detail[length]) length++;
+        return respond(FP_DEPENDENCY,(const unsigned char *)detail,(uint32_t)length);
+    }
     *(void **)(&abi_fn)=dlsym(library,"fluent_pdf_bridge_abi_v1");
     *(void **)(&version_fn)=dlsym(library,"fluent_pdf_bridge_version_v1");
     *(void **)(&execute_fn)=dlsym(library,"fluent_pdf_bridge_execute_v1");

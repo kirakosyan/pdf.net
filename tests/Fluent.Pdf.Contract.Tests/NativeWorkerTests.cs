@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading;
 using Fluent.Pdf.Workers;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Fluent.Pdf.Contract.Tests;
 
 public sealed class NativeWorkerTests
 {
+    private readonly ITestOutputHelper _output;
+    public NativeWorkerTests(ITestOutputHelper output)=>_output=output;
     [Fact]
     public void RealBridgeChecksAbiAndVersionAndReturnsDetachedBytes()
     {
-        using var fixture=new WorkerFixture();
+        using var fixture=new WorkerFixture(_output);
         byte[] request={0,1,2,3,4};
         Assert.Equal(new byte[] {1,2,3,4},fixture.Run(request));
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
@@ -26,7 +29,7 @@ public sealed class NativeWorkerTests
     [InlineData("missing-dependency","Native.DependencyLoadFailed")]
     public void ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(string scenario,string code)
     {
-        using var fixture=new WorkerFixture(scenario);
+        using var fixture=new WorkerFixture(_output,scenario);
         var error=Assert.Throws<PdfException>(()=>fixture.Run(new byte[] {0}));
         Assert.Equal(code,error.Diagnostic.Code);
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
@@ -35,14 +38,14 @@ public sealed class NativeWorkerTests
     [Fact]
     public void CompletePinnedTransitiveDependencyLoadsFromThePrivateDirectory()
     {
-        using var fixture=new WorkerFixture("dependency");
+        using var fixture=new WorkerFixture(_output,"dependency");
         Assert.Equal(new byte[] {7},fixture.Run(new byte[] {0,7}));
     }
 
     [Fact]
     public void NativeCrashDoesNotCrashTheCallerOrCommitPartialFileOutput()
     {
-        using var fixture=new WorkerFixture();
+        using var fixture=new WorkerFixture(_output);
         string output=Path.Combine(fixture.Root,"persisted.bin");
         File.WriteAllText(output,"original");
         var error=Assert.Throws<PdfException>(()=>fixture.SaveFile(new byte[] {1},output));
@@ -57,7 +60,7 @@ public sealed class NativeWorkerTests
     [InlineData(true)]
     public void NativeHangIsTerminatedOnDeadlineOrCallerCancellation(bool cancel)
     {
-        using var fixture=new WorkerFixture(timeout:cancel?TimeSpan.FromSeconds(5):TimeSpan.FromMilliseconds(300));
+        using var fixture=new WorkerFixture(_output,timeout:cancel?TimeSpan.FromSeconds(5):TimeSpan.FromMilliseconds(300));
         using var cancellation=new CancellationTokenSource();
         Thread? canceller=null;
         if(cancel)
@@ -79,7 +82,7 @@ public sealed class NativeWorkerTests
     [Fact]
     public void NativeSandboxRejectsCallerFileWritesAndNetworkAccess()
     {
-        using var fixture=new WorkerFixture();
+        using var fixture=new WorkerFixture(_output);
         string target=Path.Combine(fixture.Root,"protected.txt");
         File.WriteAllText(target,"original");
         byte[] name=Encoding.UTF8.GetBytes(target+"\0");
@@ -94,7 +97,7 @@ public sealed class NativeWorkerTests
     [Fact]
     public void NativeMemoryAndOutputBoundariesCannotReturnUnboundedResults()
     {
-        using var fixture=new WorkerFixture();
+        using var fixture=new WorkerFixture(_output);
         try { Assert.Equal(new byte[] {0},fixture.Run(new byte[] {6})); }
         catch(PdfException error) { Assert.Contains(error.Diagnostic.Code,new[] {"Native.MemoryLimit","Native.WorkerCrashed"}); }
         Assert.Equal("Native.EngineFailure",Assert.Throws<PdfException>(()=>fixture.Run(new byte[] {3})).Diagnostic.Code);
@@ -106,7 +109,7 @@ public sealed class NativeWorkerTests
     [Fact]
     public void HostValidatesRequestBeforeStartingAProcessAndCannotHideFailures()
     {
-        using var fixture=new WorkerFixture();
+        using var fixture=new WorkerFixture(_output);
         Assert.Equal("Native.InputLimit",Assert.Throws<PdfException>(()=>fixture.Run(new byte[4097])).Diagnostic.Code);
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
         Assert.Throws<ArgumentException>(()=>new NativeWorkerOptions(fixture.Options.Deployment,"missing",fixture.Library,fixture.Jobs));
@@ -116,13 +119,15 @@ public sealed class NativeWorkerTests
 
     private sealed class WorkerFixture : IDisposable
     {
+        private readonly ITestOutputHelper _output;
         internal string Root {get;}=Path.Combine(Path.GetTempPath(),"fluent-pdf-worker-tests-"+Guid.NewGuid().ToString("N"));
         internal string Jobs {get;}
         internal string Executable {get;}
         internal string Library {get;}
         internal NativeWorkerOptions Options {get;}
-        internal WorkerFixture(string scenario="normal",TimeSpan? timeout=null)
+        internal WorkerFixture(ITestOutputHelper output,string scenario="normal",TimeSpan? timeout=null)
         {
+            _output=output;
             string rid=PdfNativeDeploymentInspector.CurrentRuntimeIdentifier??throw new InvalidOperationException("Unsupported source host.");
             string repo=FindRepository();
             string binaries=Path.Combine(repo,"artifacts","native-fixtures",rid);
@@ -141,7 +146,13 @@ public sealed class NativeWorkerTests
             using var provider=Provider(request);
             using var document=Pdf.Create(providers:new PdfProviderRegistry(provider)).AddPage();
             using var output=new MemoryStream();
-            document.Save(output,cancellation);
+            try { document.Save(output,cancellation); }
+            catch(PdfException error)
+            {
+                _output.WriteLine(error.Diagnostic.Code+": "+error.Diagnostic.Message);
+                if(error.Data["Native.LoaderDetail"] is string detail) _output.WriteLine(detail);
+                throw;
+            }
             return output.ToArray();
         }
         internal void SaveFile(byte[] request,string path)

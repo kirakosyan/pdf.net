@@ -125,7 +125,15 @@ public sealed class NativeWorkerHost
             {
                 string detail=reply.Status==5 ? " Host stage "+Read32(reply.Output,0).ToString(CultureInfo.InvariantCulture)+
                     ", native status "+Read32(reply.Output,4).ToString(CultureInfo.InvariantCulture)+"." : "";
-                throw Fail(context,StatusCode(reply.Status),"The isolated native deployment or operation was rejected."+detail);
+                try { throw Fail(context,StatusCode(reply.Status),"The isolated native deployment or operation was rejected."+detail); }
+                catch(PdfException failure)
+                {
+                    if(reply.Status==3)
+                        failure.Data["Native.LoaderDetail"]=WorkerPlatform.IsWindows && reply.Output.Length==4
+                            ? "Windows loader status "+Read32(reply.Output,0).ToString(CultureInfo.InvariantCulture)
+                            : Encoding.UTF8.GetString(reply.Output);
+                    throw;
+                }
             }
             if (!WaitTasks(new[] { inputTask },1000) || inputTask.IsFaulted || errorTask.IsFaulted)
                 throw Fail(context,"Native.Protocol","The native request transport did not complete.");
@@ -253,7 +261,8 @@ public sealed class NativeWorkerHost
         for (int i=0;i<8;i++) if (header[i] != magic[i]) throw new InvalidDataException("Invalid worker response.");
         for (int i=0;i<16;i++) if (header[i+8] != nonce[i]) throw new InvalidDataException("Invalid worker authentication.");
         uint status = Read32(header,24),length = Read32(header,28);
-        if (status > 9 || status == 0 && length > options.MaximumOutputBytes || status == 5 && length != 8 || status != 0 && status != 5 && length != 0)
+        if (status > 9 || status == 0 && length > options.MaximumOutputBytes || status == 5 && length != 8 ||
+            status == 3 && length > 2048 || status != 0 && status != 3 && status != 5 && length != 0)
             throw new InvalidDataException("Invalid worker response bounds.");
         if (status == 0) context.Consume(PdfResourceKind.ExpandedBytes,length);
         var result = ReadExact(stream,(int)length,context);
