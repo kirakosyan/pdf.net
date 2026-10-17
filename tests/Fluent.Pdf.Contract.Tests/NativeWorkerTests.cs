@@ -57,12 +57,21 @@ public sealed class NativeWorkerTests
     [InlineData(true)]
     public void NativeHangIsTerminatedOnDeadlineOrCallerCancellation(bool cancel)
     {
-        using var fixture=new WorkerFixture(timeout:TimeSpan.FromMilliseconds(300));
+        using var fixture=new WorkerFixture(timeout:cancel?TimeSpan.FromSeconds(5):TimeSpan.FromMilliseconds(300));
         using var cancellation=new CancellationTokenSource();
-        if(cancel) cancellation.CancelAfter(150);
+        Thread? canceller=null;
+        if(cancel)
+        {
+            canceller=new Thread(()=>{Thread.Sleep(150);cancellation.Cancel();}) {IsBackground=true};
+            canceller.Start();
+        }
         var watch=Stopwatch.StartNew();
-        if(cancel) Assert.ThrowsAny<OperationCanceledException>(()=>fixture.Run(new byte[] {2},cancellation.Token));
-        else Assert.Equal("Native.ElapsedTime",Assert.Throws<PdfException>(()=>fixture.Run(new byte[] {2})).Diagnostic.Code);
+        try
+        {
+            if(cancel) Assert.ThrowsAny<OperationCanceledException>(()=>fixture.Run(new byte[] {2},cancellation.Token));
+            else Assert.Equal("Native.ElapsedTime",Assert.Throws<PdfException>(()=>fixture.Run(new byte[] {2})).Diagnostic.Code);
+        }
+        finally { canceller?.Join(1000); }
         Assert.True(watch.Elapsed<TimeSpan.FromSeconds(5),"Native termination exceeded five seconds.");
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }

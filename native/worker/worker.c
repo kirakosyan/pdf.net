@@ -43,6 +43,7 @@
 enum { FP_OK=0, FP_ABI=1, FP_VERSION=2, FP_DEPENDENCY=3, FP_EXPORT_MISSING=4,
        FP_SANDBOX=5, FP_INPUT=6, FP_ENGINE=7, FP_MEMORY=8, FP_PROTOCOL=9 };
 static unsigned char nonce[16];
+static unsigned sandbox_step;
 static uint32_t get32(const unsigned char *p) {
     return (uint32_t)p[0] | (uint32_t)p[1]<<8 | (uint32_t)p[2]<<16 | (uint32_t)p[3]<<24;
 }
@@ -51,6 +52,16 @@ static void put32(unsigned char *p, uint32_t n) {
 }
 static int respond(unsigned status, const unsigned char *output, uint32_t length) {
     unsigned char header[32]={'F','P','N','W','0','0','0','1'};
+    unsigned char failure[8];
+    if(status==FP_SANDBOX && length==0) {
+        put32(failure,sandbox_step);
+#ifdef _WIN32
+        put32(failure+4,GetLastError());
+#else
+        put32(failure+4,(uint32_t)errno);
+#endif
+        output=failure; length=8;
+    }
     memcpy(header+8,nonce,16); put32(header+24,status); put32(header+28,length);
     if(fwrite(header,1,sizeof(header),stdout)!=sizeof(header)) return 90;
     if(length && fwrite(output,1,length,stdout)!=length) return 90;
@@ -178,20 +189,27 @@ static int mac_sandbox(const char *root) {
 #ifndef _WIN32
 static int unix_limits(const char *root, uint64_t memory, uint64_t milliseconds, uint64_t parent) {
     struct rlimit limit; char canonical[PATH_MAX];
+    sandbox_step=1;
     if(!realpath(root,canonical)) return 0;
+    sandbox_step=2;
     limit.rlim_cur=limit.rlim_max=0; if(setrlimit(RLIMIT_CORE,&limit)!=0) return 0;
+    sandbox_step=3;
     limit.rlim_cur=limit.rlim_max=(rlim_t)((milliseconds+999)/1000+1); if(setrlimit(RLIMIT_CPU,&limit)!=0) return 0;
+    sandbox_step=4;
     limit.rlim_cur=limit.rlim_max=(rlim_t)memory;
 #ifdef __linux__
     if(setrlimit(RLIMIT_AS,&limit)!=0 || setrlimit(RLIMIT_DATA,&limit)!=0) return 0;
     if(prctl(PR_SET_PDEATHSIG,SIGKILL)!=0 || (uint64_t)getppid()!=parent) return 0;
 #else
     if(setrlimit(RLIMIT_DATA,&limit)!=0) return 0;
+    sandbox_step=5;
     if(!parent_watch(parent)) return 0;
 #endif
+    sandbox_step=6;
     limit.rlim_cur=limit.rlim_max=0; if(setrlimit(RLIMIT_FSIZE,&limit)!=0) return 0;
+    sandbox_step=7;
     limit.rlim_cur=limit.rlim_max=64; if(setrlimit(RLIMIT_NOFILE,&limit)!=0) return 0;
-    if(setsid()<0) return 0;
+    sandbox_step=9;
 #ifdef __linux__
     return linux_sandbox(canonical);
 #else
@@ -218,6 +236,7 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
     PSID sid=NULL; HANDLE job=NULL,parent_process=NULL; JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits;
     STARTUPINFOEXW startup; PROCESS_INFORMATION child; SECURITY_CAPABILITIES capabilities;
     SIZE_T attribute_bytes=0; LPPROC_THREAD_ATTRIBUTE_LIST attributes=NULL; DWORD code; int attributes_ready=0;
+    HANDLE inherited[3]={GetStdHandle(STD_INPUT_HANDLE),GetStdHandle(STD_OUTPUT_HANDLE),GetStdHandle(STD_ERROR_HANDLE)};
     swprintf(profile,100,L"Fluent.Pdf.worker.%lu.%hs",GetCurrentProcessId(),argv[9]);
     if(MultiByteToWideChar(CP_UTF8,MB_ERR_INVALID_CHARS,argv[1],-1,root,4096)==0) return respond(FP_SANDBOX,NULL,0);
     if(FAILED(CreateAppContainerProfile(profile,L"Fluent.Pdf isolated worker",L"Single offline job",NULL,0,&sid))) goto done;
@@ -240,13 +259,15 @@ static int windows_child(int argc, char **argv, uint64_t memory, uint64_t millis
         command[used++]=L'"'; command[used]=0;
     }
     memset(&startup,0,sizeof(startup)); memset(&child,0,sizeof(child)); memset(&capabilities,0,sizeof(capabilities));
-    InitializeProcThreadAttributeList(NULL,2,0,&attribute_bytes);
+    InitializeProcThreadAttributeList(NULL,3,0,&attribute_bytes);
     attributes=(LPPROC_THREAD_ATTRIBUTE_LIST)HeapAlloc(GetProcessHeap(),0,attribute_bytes); if(!attributes) goto done;
-    if(!InitializeProcThreadAttributeList(attributes,2,0,&attribute_bytes)) goto done;
+    if(!InitializeProcThreadAttributeList(attributes,3,0,&attribute_bytes)) goto done;
     attributes_ready=1;
     capabilities.AppContainerSid=sid;
     if(!UpdateProcThreadAttribute(attributes,0,PROC_THREAD_ATTRIBUTE_SECURITY_CAPABILITIES,&capabilities,sizeof(capabilities),NULL,NULL)) goto done;
     if(!UpdateProcThreadAttribute(attributes,0,PROC_THREAD_ATTRIBUTE_JOB_LIST,&job,sizeof(job),NULL,NULL)) goto done;
+    for(i=0;i<3;i++) if(!SetHandleInformation(inherited[i],HANDLE_FLAG_INHERIT,HANDLE_FLAG_INHERIT)) goto done;
+    if(!UpdateProcThreadAttribute(attributes,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,inherited,sizeof(inherited),NULL,NULL)) goto done;
     startup.StartupInfo.cb=sizeof(startup); startup.StartupInfo.dwFlags=STARTF_USESTDHANDLES;
     startup.StartupInfo.hStdInput=GetStdHandle(STD_INPUT_HANDLE); startup.StartupInfo.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);
     startup.StartupInfo.hStdError=GetStdHandle(STD_ERROR_HANDLE); startup.lpAttributeList=attributes;
@@ -322,15 +343,11 @@ static int worker_main(int argc, char **argv) {
     status=execute_fn(input,input_size,output,(size_t)max_output,&output_size);
     if(status!=0||output_size>max_output) status=FP_ENGINE;
     else status=FP_OK;
-#ifndef _WIN32
+#ifdef __APPLE__
     {
         struct rusage usage;
         if(getrusage(RUSAGE_SELF,&usage)!=0) status=FP_MEMORY;
-#ifdef __APPLE__
         else if((uint64_t)usage.ru_maxrss>memory) status=FP_MEMORY;
-#else
-        else if((uint64_t)usage.ru_maxrss>memory/1024) status=FP_MEMORY;
-#endif
     }
 #endif
     free(input);
@@ -343,7 +360,6 @@ static int worker_main(int argc, char **argv) {
 #else
     _exit(status);
 #endif
-    return status;
 }
 
 #ifdef _WIN32

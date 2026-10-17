@@ -64,11 +64,12 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
             *written=1; return 0;
         }
         case 6: {
-            volatile unsigned char *memory; size_t size=(size_t)512*1024*1024,i;
+            volatile unsigned char *memory; size_t size=(size_t)512*1024*1024,i; int allocated;
             if(capacity<1) return 99;
             memory=(volatile unsigned char *)malloc(size);
+            allocated=memory!=NULL;
             if(memory) { for(i=0;i<size;i+=4096) memory[i]=1; free((void *)memory); }
-            output[0]=(unsigned char)(memory!=NULL); *written=1; return 0;
+            output[0]=(unsigned char)allocated; *written=1; return 0;
         }
         default:
             if(length-1>capacity) return 99;

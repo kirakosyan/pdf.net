@@ -26,6 +26,7 @@ public sealed class NativeWorkerHost
         context.Consume(PdfResourceKind.ExpandedBytes, request.Length);
         var input = (byte[])request.Clone();
         string job = Path.Combine(options.TemporaryDirectory,"fluent-pdf-worker-"+Guid.NewGuid().ToString("N"));
+        string bootstrapDirectory = Path.Combine(job,"host");
         string? profile = null;
         Process? process = null;
         Task? inputTask = null;
@@ -48,12 +49,17 @@ public sealed class NativeWorkerHost
             var nonce = new byte[16];
             using (var random = RandomNumberGenerator.Create()) random.GetBytes(nonce);
             string nonceText = BitConverter.ToString(nonce).Replace("-","").ToLowerInvariant();
-            string executable = Path.Combine(job,options.ExecutableFileName);
+            // Keep the trusted bootstrap's executable/current directory free of engine DLLs.
+            // Its OS imports are resolved before main can restrict dynamic search paths.
+            Directory.CreateDirectory(bootstrapDirectory);
+            WorkerPlatform.ProtectDirectory(bootstrapDirectory);
+            string executable = Path.Combine(bootstrapDirectory,options.ExecutableFileName);
+            File.Copy(Path.Combine(job,options.ExecutableFileName),executable,false);
             WorkerPlatform.MakeExecutable(executable);
             var start = new ProcessStartInfo
             {
                 FileName = executable,
-                WorkingDirectory = job,
+                WorkingDirectory = bootstrapDirectory,
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardInput = true,
@@ -78,9 +84,9 @@ public sealed class NativeWorkerHost
             profile = "Fluent.Pdf.worker."+process.Id.ToString(CultureInfo.InvariantCulture)+"."+nonceText;
             var clock = Stopwatch.StartNew();
             var running = process;
-            inputTask = Task.Run(() => WriteRequest(running.StandardInput.BaseStream,input));
-            responseTask = Task.Run(() => ReadResponse(running.StandardOutput.BaseStream,nonce,options,context));
-            errorTask = Task.Run(() => DrainErrors(running.StandardError.BaseStream));
+            inputTask = Task.Factory.StartNew(() => WriteRequest(running.StandardInput.BaseStream,input),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
+            responseTask = Task.Factory.StartNew(() => ReadResponse(running.StandardOutput.BaseStream,nonce,options,context),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
+            errorTask = Task.Factory.StartNew(() => DrainErrors(running.StandardError.BaseStream),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
             while (!process.WaitForExit(10))
             {
                 context.Checkpoint();
@@ -101,7 +107,12 @@ public sealed class NativeWorkerHost
             if (!WaitTasks(new Task[] { responseTask,errorTask },1000)) throw Fail(context,"Native.TransportLeaked","A native transport did not close after process exit.");
             if (process.ExitCode != 0) throw Fail(context,"Native.WorkerCrashed","The isolated native worker exited abnormally.");
             var reply = responseTask.GetAwaiter().GetResult();
-            if (reply.Status != 0) throw Fail(context,StatusCode(reply.Status),"The isolated native deployment or operation was rejected.");
+            if (reply.Status != 0)
+            {
+                string detail=reply.Status==5 ? " Host stage "+Read32(reply.Output,0).ToString(CultureInfo.InvariantCulture)+
+                    ", native status "+Read32(reply.Output,4).ToString(CultureInfo.InvariantCulture)+"." : "";
+                throw Fail(context,StatusCode(reply.Status),"The isolated native deployment or operation was rejected."+detail);
+            }
             if (!WaitTasks(new[] { inputTask },1000) || inputTask.IsFaulted || errorTask.IsFaulted)
                 throw Fail(context,"Native.Protocol","The native request transport did not complete.");
             context.Checkpoint();
@@ -152,6 +163,12 @@ public sealed class NativeWorkerHost
             {
                 try
                 {
+                    if (Directory.Exists(bootstrapDirectory))
+                    {
+                        string bootstrap=Path.Combine(bootstrapDirectory,options.ExecutableFileName);
+                        if (File.Exists(bootstrap)) { File.SetAttributes(bootstrap,FileAttributes.Normal); File.Delete(bootstrap); }
+                        Directory.Delete(bootstrapDirectory,false);
+                    }
                     foreach (string file in Directory.GetFiles(job))
                     {
                         if ((File.GetAttributes(file) & FileAttributes.ReparsePoint) == 0) File.SetAttributes(file,FileAttributes.Normal);
@@ -222,9 +239,9 @@ public sealed class NativeWorkerHost
         for (int i=0;i<8;i++) if (header[i] != magic[i]) throw new InvalidDataException("Invalid worker response.");
         for (int i=0;i<16;i++) if (header[i+8] != nonce[i]) throw new InvalidDataException("Invalid worker authentication.");
         uint status = Read32(header,24),length = Read32(header,28);
-        if (status > 9 || length > options.MaximumOutputBytes || status != 0 && length != 0)
+        if (status > 9 || status == 0 && length > options.MaximumOutputBytes || status == 5 && length != 8 || status != 0 && status != 5 && length != 0)
             throw new InvalidDataException("Invalid worker response bounds.");
-        context.Consume(PdfResourceKind.ExpandedBytes,length);
+        if (status == 0) context.Consume(PdfResourceKind.ExpandedBytes,length);
         var result = ReadExact(stream,(int)length,context);
         if (stream.ReadByte() != -1) throw new InvalidDataException("Trailing worker response bytes.");
         context.Checkpoint();

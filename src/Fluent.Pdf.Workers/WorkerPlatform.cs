@@ -47,11 +47,17 @@ internal static class WorkerPlatform
 
     [DllImport("libc",SetLastError=true)] private static extern int chmod(string path,uint mode);
     [DllImport("advapi32.dll",CharSet=CharSet.Unicode,SetLastError=true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [return:MarshalAs(UnmanagedType.Bool)]
     private static extern bool ConvertStringSecurityDescriptorToSecurityDescriptorW(string text,uint revision,out IntPtr descriptor,out uint size);
     [DllImport("advapi32.dll",CharSet=CharSet.Unicode,SetLastError=true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [return:MarshalAs(UnmanagedType.Bool)]
     private static extern bool SetFileSecurityW(string path,uint information,IntPtr descriptor);
-    [DllImport("kernel32.dll")] private static extern IntPtr LocalFree(IntPtr memory);
-    [DllImport("userenv.dll",CharSet=CharSet.Unicode)] private static extern int DeleteAppContainerProfile(string name);
+    [DllImport("kernel32.dll")]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static extern IntPtr LocalFree(IntPtr memory);
+    [DllImport("userenv.dll",CharSet=CharSet.Unicode)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static extern int DeleteAppContainerProfile(string name);
 }
