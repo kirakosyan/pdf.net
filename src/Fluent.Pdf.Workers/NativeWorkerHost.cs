@@ -67,7 +67,19 @@ public sealed class NativeWorkerHost
                 RedirectStandardError = true
             };
             start.EnvironmentVariables.Clear();
-            if (WorkerPlatform.IsWindows) start.EnvironmentVariables["SystemRoot"] = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+            if (WorkerPlatform.IsWindows)
+            {
+                string windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                start.EnvironmentVariables["SystemRoot"] = windows;
+                start.EnvironmentVariables["WINDIR"] = windows;
+                start.EnvironmentVariables["SystemDrive"] = Path.GetPathRoot(windows)!.TrimEnd('\\');
+                // AppContainer creation expands these OS-owned profile locations.
+                // Values are recomputed, never copied from the caller's environment.
+                start.EnvironmentVariables["USERPROFILE"] = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                start.EnvironmentVariables["LOCALAPPDATA"] = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                start.EnvironmentVariables["APPDATA"] = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                start.EnvironmentVariables["ProgramData"] = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            }
             start.EnvironmentVariables["TMP"] = job;
             start.EnvironmentVariables["TEMP"] = job;
             start.EnvironmentVariables["TMPDIR"] = job;

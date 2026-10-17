@@ -180,7 +180,8 @@ static int mac_sandbox(const char *root) {
     for(i=0;root[i];i++) { if(j+3>=sizeof(escaped)) return 0; if(root[i]=='"'||root[i]=='\\') escaped[j++]='\\'; escaped[j++]=root[i]; }
     escaped[j]=0;
     if(snprintf(profile,sizeof(profile),"(version 1)(deny default)(allow process-info* (target self))(allow sysctl-read)"
-        "(allow file-read* (subpath \"%s\") (subpath \"/usr/lib\") (subpath \"/System\") (subpath \"/private/var/db/dyld\"))",escaped)<0) return 0;
+        "(allow file-map-executable (subpath \"%s\") (subpath \"/usr/lib\") (subpath \"/System\"))"
+        "(allow file-read* (subpath \"%s\") (subpath \"/usr/lib\") (subpath \"/System\") (subpath \"/private/var/db/dyld\"))",escaped,escaped)<0) return 0;
     /* Existing stdin/stdout pipes are the sole transport; no network or writes are granted. */
     if(sandbox_init(profile,0,&error)!=0) { if(error) sandbox_free_error(error); return 0; }
     return 1;
