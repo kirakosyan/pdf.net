@@ -51,7 +51,7 @@ jobs:
         if: runner.os == 'macOS'
         shell: bash
         run: |
-          sudo dtrace -q -n 'syscall:::return /execname == "worker" && arg0 == -1/ { printf("pid=%d %s errno=%d\n", pid, probefunc, errno); } mach_trap:::return /execname == "worker" && arg0 != 0/ { printf("pid=%d mach:%s result=%d\n", pid, probefunc, arg0); }' -o "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log" &
+          sudo dtrace -q -n 'syscall::mmap:entry /execname == "worker"/ { self->maplength=arg1; self->mapflags=arg3; } syscall:::return /execname == "worker" && arg0 == -1/ { printf("pid=%d %s errno=%d maplength=%d mapflags=%d\n", pid, probefunc, errno, self->maplength, self->mapflags); } syscall::mmap:return { self->maplength=0; self->mapflags=0; }' -o "$RUNNER_TEMP/fluent-pdf-worker-syscalls.log" &
           printf '%s\n' "$!" > "$RUNNER_TEMP/fluent-pdf-worker-trace.pid"
       - name: Execute source contracts and verify runtime identity
         shell: pwsh
