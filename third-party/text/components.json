@@ -26,5 +26,19 @@
       "name": "harfbuzzsharp.nativeassets.win32",
       "sha256": "20518a559c120cb322b57d8986de49c5dca4eca2547ee69f756b38211b7dd10e"
     }
+  ],
+  "notices": [
+    {
+      "file": "LICENSE.txt",
+      "suppliedSha256": "89101e35a8c66fd4d6dffc1763259161d35cb564c169714ec227a768c89f2938",
+      "retainedSha256": "4319f2fc2c635aa1d97672ec2ea84a93bc99ea4e9d4cfbeccd046be0a90c2415",
+      "normalization": "UTF-8 LF and trailing whitespace only; complete notice text retained"
+    },
+    {
+      "file": "THIRD-PARTY-NOTICES.txt",
+      "suppliedSha256": "21504c46c4c58aa64c1055bd2dcbc5f9a136b4b8c412ed3cc6740e22c5b127f5",
+      "retainedSha256": "43688ce96e07c7277ca6753e0ebbb6024cd0164ee04a792c1f7f590e7de8f678",
+      "normalization": "UTF-8 LF and trailing whitespace only; complete notice text retained"
+    }
   ]
 }
