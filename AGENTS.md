@@ -75,3 +75,5 @@ Bounded native PDF/DOCX templates, closed scalar/record/condition/image evaluati
 Explicit logical structure authoring/inspection/remediation, exact MCID/parent-tree/annotation associations and optional complete independent UA reports now have a source profile; complete accessibility, human/screen-reader review and production qualification remain pending.
 
 Explicit raster/OCR contracts and an optional isolated Tesseract5 C-API adapter now have a source profile with pinned native/model assets and retained MIT pattern attribution. Complete actual-engine/model/RID/accuracy and production qualification remain pending.
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](docs/ocr-models.md).

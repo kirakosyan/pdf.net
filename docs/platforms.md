@@ -93,3 +93,5 @@ FP-112 managed/native-template and optional Word-template APIs target all four f
 FP-067 core and optional compliance contracts target all four SDK frameworks. Actual minimum/provider/OS/package and complete automated/human accessibility qualification remain pending; see [accessibility](accessibility.md).
 
 FP-074 core/optional OCR contracts target all four frameworks. A path, header or original C API fixture is not actual Tesseract/model/RID qualification. Complete actual-engine/minimum-runtime/final-package evidence remains mandatory; see [local OCR](local-ocr.md).
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).

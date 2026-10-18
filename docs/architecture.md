@@ -137,3 +137,5 @@ FP-112 evaluates closed immutable data through shared generation or an original 
 FP-067 keeps passive content/structure traversal and transactional association edits in core. Optional compliance bridges exact-engine complete reports without discovering or launching engines; automated validation never supplies human review. See [accessibility](accessibility.md).
 
 FP-074 keeps OCR contracts in core and explicit loading/model binding inside a fresh existing isolated worker through the optional OCR assembly. Narrow MIT patterns retain pinned attribution; no Word/Skia/native discovery dependency enters core. See [local OCR](local-ocr.md).
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).

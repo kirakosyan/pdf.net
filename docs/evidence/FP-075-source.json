@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-075",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1218,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "d6cabbe730890dca24ce2145165c4cdaf7391711d9fe839af1000fe74a57a331"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "5dfa0ff86c94484f41df6019562fe8932848f6548e65015d1505e28d059411ab"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "dc668117919e38823db78e475891167d6eebf621ce22a136f0b96cbf2d3673aa"
+    }
+  ],
+  "newManagedModelAccuracyCases": 18,
+  "newOriginalNativeModelCases": 2,
+  "sdkLibraries": 11,
+  "apiComparisons": 33,
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Ocr/PdfOcrModels.cs": "c0a1f0e983f315a426113be665e5d5101b9a5150117ac1d7ed295a87332635fa",
+    "src/Fluent.Pdf/Ocr/PdfOcrAccuracy.cs": "4fc6fd7a78271505a934799e664bb3df95a69770812b47f0cf11506e77d6f5ff",
+    "src/Fluent.Pdf/Ocr/PdfOcrContracts.cs": "f955c06407fc98f4e3666db0c813b79dc222e69ed4944fcc932f191202ca70be",
+    "src/Fluent.Pdf/Ocr/PdfOcr.cs": "42462756a4a3829037455d229659f97728e323415f9a5f4c6018af8acb9c07bc",
+    "src/Fluent.Pdf.Ocr/IsolatedTesseractOcr.cs": "d296fe34ffe39c9431c12ebaf41e1452c2cf1cff5465cf075c0343f7c2d9cda2",
+    "src/Fluent.Pdf.Ocr/PublicAPI.Unshipped.txt": "1db546d6a0c189ae193ab25f6a8ddf3ea068d87083d6b0fe0a78ec97d913625b",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "9060a323f79760321af8de332edbfc37888951cbd0a66a130919d63a9c02e1bc",
+    "src/Fluent.Pdf.Workers/NativeWorkerHost.cs": "28f245e7110f48627f1ce8234d9be688005d5c500e98020236416edae47d3480",
+    "native/ocr/bridge.c": "44c2d3872d5d14385e02e2c9215ad7d48d7899b15fa930225a94688e9c9cdfe6",
+    "tests/native/ocr-fixture.c": "710e88e8a5d86815c2bf8aa05e03e9b80a57f59fb5334a34c23f7613f12fb2b4",
+    "tests/native/ocr-fixture.def": "e4c017c965de7f96f0b667651c3d74cfa744147bda89a9a7e1719a6ed8edb48a",
+    "tests/native/ocr-missing.def": "a15421f947963eb574ccb37c2be1d66e1c77b7f74805a88d50359285b08faf08",
+    "tests/Fluent.Pdf.Contract.Tests/OcrModelsTests.cs": "e6d860a6deae17ee307662631e240c0632cd7e5818f4c78ccfefda5c3510efe8",
+    "tests/Fluent.Pdf.Contract.Tests/NativeOcrContractTests.cs": "6402114b1bb753d0f7092a397e6d07219e841c6a8ec0a6db0134478ec15a70ec",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "fec157ea797c998683d3939fd0b4aac5fafa4d49e3db024f86b0e0cdd9639015",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "11cfe1b262a0143564c1b481591f5fa9d2f542ec43606784e66b51c69f29102f"
+  },
+  "reports": {
+    "models-final-spec.log": "7eb670ea72f5109ba8ef1a219189d8332dbed3777459ec11673bdc41a8494f86",
+    "models-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "models-final-net10.log": "e53c68425a6a3b10507b1afd0488e5feb0cddf9c95f47ebacd63337d7f320049",
+    "models-final-build.log": "77c37ed81944787d3881ac18f82a1198b27d00aaf2220b9f7911e6f8bc38cf4a",
+    "models-final-net8.log": "072ca92eea3c4924c52dd8531d81cc5a66ebec4a1d6149917a2c1c99d1cfde98",
+    "models-final-api.log": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c",
+    "models-final-fallback.log": "26ad70d3a22bd2044dd02e004c5b92c910da55a63353e43c0eadce22473c7474",
+    "models-fallback-build.log": "cc2b5b5f825dc1344e837347eb5ea12a330399e979b4c37e12e7a1c4aa6abfae",
+    "models-normal-build.log": "3d63642cdaa8de717019cde33e21ca11b01779c37768bd54cee4bbe69a8bd23d",
+    "models-fixtures-build3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "independentReportSha256": "837616e9e369e7ed01c225bf7e89523d6080c4e00a80eec322ee2cb3d70e57b5",
+  "actualSubsetThresholdFailure": {
+    "language": "eng+deu",
+    "characterErrors": 1,
+    "referenceCharacters": 30,
+    "wordErrors": 1,
+    "referenceWords": 4,
+    "meanEngineConfidence": 94,
+    "thresholdsUnchanged": true
+  },
+  "previousCIFixes": [
+    "Fortified Linux fixture fread return is checked; -Werror remains.",
+    "Private staging preserves Native.AssetMissing and exact asset identity on absent pinned data; original CI expectation remains unchanged."
+  ],
+  "localNativeExclusions": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeTextTests",
+    "NativeRenderingTests",
+    "NativeOcrContractTests"
+  ],
+  "localMissingModelRegression": "Actual isolated-provider path fails before process launch with Native.AssetMissing and exact model identity; this managed/prelaunch case executes locally. Positive native isolation is still unavailable because host lacks Landlock.",
+  "sourceCI": "New exact-head unfiltered CI required. Historical44green20lanes retained asPR-118-CI-111;45failed4testlanes/twoLinuxbuilds retained asPR-118-CI-112.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete multilingual/script/scan corpora and native-engine/RID/runtime qualification remain mandatory; retained mixed-language subset fails prior thresholds.",
+    "Independent fidelity/geometry, security, concurrency/endurance/performance and minimum/runtime/fallback qualification remain mandatory.",
+    "Exact final SDK packages, model provenance/licensing qualification and all production gates remain mandatory."
+  ],
+  "apiComparisonReportSha256": "42f13467ddee01448d0d50e7068069888dfd103482ec7dd0eba788749ead485d"
+}

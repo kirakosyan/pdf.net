@@ -101,5 +101,14 @@
     "Complete PDF/UA1/UA2 semantic/role/namespace/class-map/attribute/font/language/table/form/appearance profiles and tag-aware content/edit/merge fidelity remain mandatory",
     "Independent full corpus, human and screen-reader review, security/fuzz/concurrency/endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
     "Exact final SDK packages and all production gates remain mandatory"
-  ]
+  ],
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-111-source.json",
+    "conclusion": "success",
+    "runtimeLanes": 20,
+    "passed": 25000,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Exact44source tree only; later source needs its own CI."
+  }
 }

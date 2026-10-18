@@ -381,6 +381,14 @@ Public Module ContractExample
     Public Function TagPdf(source As PdfDocumentSnapshot, plan As PdfStructurePlan) As PdfDocument
         Return PdfAccessibility.Author(source, plan)
     End Function
+    Public Function SelectOcrModels(catalog As PdfOcrModelCatalog, language As String) As PdfOcrModelSelection
+        Return catalog.Select(language)
+    End Function
+
+    Public Function MeasureOcrAccuracy(samples As PdfOcrAccuracySample(), options As PdfOcrAccuracyOptions) As PdfOcrAccuracyReport
+        Return PdfOcrAccuracy.Evaluate(samples, "caller-labeled-corpus", "1", options)
+    End Function
+
     Public Function RecognizeOcr(image As PdfOcrRaster, options As PdfOcrOptions, providers As PdfProviderRegistry) As PdfOcrResult
         Return PdfOcr.Recognize(image, options, providers)
     End Function

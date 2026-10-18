@@ -1439,6 +1439,64 @@ Fluent.Pdf.PdfObjectId.Number.get -> int
 Fluent.Pdf.PdfObjectId.PdfObjectId() -> void
 Fluent.Pdf.PdfObjectId.PdfObjectId(int number, int generation = 0) -> void
 Fluent.Pdf.PdfOcr
+Fluent.Pdf.PdfOcrAccuracy
+Fluent.Pdf.PdfOcrAccuracyGroup
+Fluent.Pdf.PdfOcrAccuracyGroup.CharacterErrorRate.get -> double?
+Fluent.Pdf.PdfOcrAccuracyGroup.CharacterErrors.get -> long
+Fluent.Pdf.PdfOcrAccuracyGroup.Language.get -> string!
+Fluent.Pdf.PdfOcrAccuracyGroup.ModelIdentity.get -> string!
+Fluent.Pdf.PdfOcrAccuracyGroup.ReferenceCharacters.get -> long
+Fluent.Pdf.PdfOcrAccuracyGroup.ReferenceWords.get -> long
+Fluent.Pdf.PdfOcrAccuracyGroup.Samples.get -> int
+Fluent.Pdf.PdfOcrAccuracyGroup.Thresholds.get -> Fluent.Pdf.PdfOcrAccuracyThresholds!
+Fluent.Pdf.PdfOcrAccuracyGroup.ThresholdsMet.get -> bool
+Fluent.Pdf.PdfOcrAccuracyGroup.WordErrorRate.get -> double?
+Fluent.Pdf.PdfOcrAccuracyGroup.WordErrors.get -> long
+Fluent.Pdf.PdfOcrAccuracyOptions
+Fluent.Pdf.PdfOcrAccuracyOptions.MaximumCharactersPerSample.get -> int
+Fluent.Pdf.PdfOcrAccuracyOptions.MaximumComparisonCells.get -> long
+Fluent.Pdf.PdfOcrAccuracyOptions.MaximumSamples.get -> int
+Fluent.Pdf.PdfOcrAccuracyOptions.PdfOcrAccuracyOptions(System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfOcrAccuracyThresholds!>! thresholds, int maximumSamples = 10000, long maximumComparisonCells = 16000000, int maximumCharactersPerSample = 1000000) -> void
+Fluent.Pdf.PdfOcrAccuracyOptions.Thresholds.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfOcrAccuracyThresholds!>!
+Fluent.Pdf.PdfOcrAccuracyReport
+Fluent.Pdf.PdfOcrAccuracyReport.ComparisonCells.get -> long
+Fluent.Pdf.PdfOcrAccuracyReport.CorpusIdentifier.get -> string!
+Fluent.Pdf.PdfOcrAccuracyReport.CorpusVersion.get -> string!
+Fluent.Pdf.PdfOcrAccuracyReport.Groups.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfOcrAccuracyGroup!>!
+Fluent.Pdf.PdfOcrAccuracyReport.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfOcrAccuracyReport.RecognitionSha256.get -> string!
+Fluent.Pdf.PdfOcrAccuracyReport.ReferenceSha256.get -> string!
+Fluent.Pdf.PdfOcrAccuracySample
+Fluent.Pdf.PdfOcrAccuracySample.Identifier.get -> string!
+Fluent.Pdf.PdfOcrAccuracySample.Language.get -> string!
+Fluent.Pdf.PdfOcrAccuracySample.ModelIdentity.get -> string!
+Fluent.Pdf.PdfOcrAccuracySample.PdfOcrAccuracySample(string! identifier, string! language, string! modelIdentity, string! referenceText, string! recognizedText) -> void
+Fluent.Pdf.PdfOcrAccuracySample.RecognizedText.get -> string!
+Fluent.Pdf.PdfOcrAccuracySample.ReferenceText.get -> string!
+Fluent.Pdf.PdfOcrAccuracyThresholds
+Fluent.Pdf.PdfOcrAccuracyThresholds.MaximumCharacterErrorRate.get -> double
+Fluent.Pdf.PdfOcrAccuracyThresholds.MaximumWordErrorRate.get -> double
+Fluent.Pdf.PdfOcrAccuracyThresholds.PdfOcrAccuracyThresholds(double maximumCharacterErrorRate, double maximumWordErrorRate) -> void
+Fluent.Pdf.PdfOcrLanguageModel
+Fluent.Pdf.PdfOcrLanguageModel.ByteLength.get -> long
+Fluent.Pdf.PdfOcrLanguageModel.FileName.get -> string!
+Fluent.Pdf.PdfOcrLanguageModel.Identifier.get -> string!
+Fluent.Pdf.PdfOcrLanguageModel.Languages.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.PdfOcrLanguageModel.License.get -> string!
+Fluent.Pdf.PdfOcrLanguageModel.PdfOcrLanguageModel(string! identifier, string! version, string! sha256, long byteLength, string! license, string! sourceId, string![]! scripts, string![]! languages) -> void
+Fluent.Pdf.PdfOcrLanguageModel.Scripts.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.PdfOcrLanguageModel.Sha256.get -> string!
+Fluent.Pdf.PdfOcrLanguageModel.SourceId.get -> string!
+Fluent.Pdf.PdfOcrLanguageModel.Version.get -> string!
+Fluent.Pdf.PdfOcrModelCatalog
+Fluent.Pdf.PdfOcrModelCatalog.Models.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfOcrLanguageModel!>!
+Fluent.Pdf.PdfOcrModelCatalog.PdfOcrModelCatalog(params Fluent.Pdf.PdfOcrLanguageModel![]! models) -> void
+Fluent.Pdf.PdfOcrModelCatalog.Select(string! language, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOcrModelSelection!
+Fluent.Pdf.PdfOcrModelSelection
+Fluent.Pdf.PdfOcrModelSelection.Identity.get -> string!
+Fluent.Pdf.PdfOcrModelSelection.Language.get -> string!
+Fluent.Pdf.PdfOcrModelSelection.Models.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfOcrLanguageModel!>!
+Fluent.Pdf.PdfOcrModelSelection.OperationReport.get -> Fluent.Pdf.PdfOperationReport?
 Fluent.Pdf.PdfOcrOptions
 Fluent.Pdf.PdfOcrOptions.Language.get -> string!
 Fluent.Pdf.PdfOcrOptions.MaximumCharacters.get -> int
@@ -1463,8 +1521,10 @@ Fluent.Pdf.PdfOcrResult.EngineVersion.get -> string!
 Fluent.Pdf.PdfOcrResult.Language.get -> string!
 Fluent.Pdf.PdfOcrResult.MeanConfidence.get -> double?
 Fluent.Pdf.PdfOcrResult.ModelIdentity.get -> string!
+Fluent.Pdf.PdfOcrResult.Models.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfOcrLanguageModel!>!
 Fluent.Pdf.PdfOcrResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport?
 Fluent.Pdf.PdfOcrResult.PdfOcrResult(string! text, Fluent.Pdf.PdfOcrWord![]! words, string! language, string! engineVersion, string! modelIdentity, double? meanConfidence = null) -> void
+static Fluent.Pdf.PdfOcrResult.WithModels(string! text, Fluent.Pdf.PdfOcrWord![]! words, string! language, string! engineVersion, string! modelIdentity, double? meanConfidence, Fluent.Pdf.PdfOcrLanguageModel![]! models) -> Fluent.Pdf.PdfOcrResult!
 Fluent.Pdf.PdfOcrResult.Text.get -> string!
 Fluent.Pdf.PdfOcrResult.Words.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfOcrWord!>!
 Fluent.Pdf.PdfOcrSegmentation
@@ -2444,6 +2504,7 @@ Fluent.Pdf.PdfWriteOptions.Mode.get -> Fluent.Pdf.PdfWriteMode
 Fluent.Pdf.PdfWriteOptions.PdfWriteOptions(Fluent.Pdf.PdfWriteMode mode = Fluent.Pdf.PdfWriteMode.Full, Fluent.Pdf.PdfCrossReferenceFormat crossReferenceFormat = Fluent.Pdf.PdfCrossReferenceFormat.Auto, string? version = null, bool allowSignatureInvalidation = false, string? minimumVersion = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfExtensionRequirement!>? extensions = null, Fluent.Pdf.PdfUnknownExtensionPolicy unknownExtensions = Fluent.Pdf.PdfUnknownExtensionPolicy.Preserve) -> void
 Fluent.Pdf.PdfWriteOptions.UnknownExtensions.get -> Fluent.Pdf.PdfUnknownExtensionPolicy
 Fluent.Pdf.PdfWriteOptions.Version.get -> string?
+const Fluent.Pdf.PdfOcrAccuracy.ComparisonProfile = "unicode-scalars+whitespace15.1+ordinal-v1" -> string!
 override Fluent.Pdf.PdfObjectId.Equals(object? obj) -> bool
 override Fluent.Pdf.PdfObjectId.GetHashCode() -> int
 override Fluent.Pdf.PdfObjectId.ToString() -> string!
@@ -2598,6 +2659,7 @@ static Fluent.Pdf.PdfNavigation.SetPageAction(Fluent.Pdf.PdfDocumentSnapshot! so
 static Fluent.Pdf.PdfObjectId.operator !=(Fluent.Pdf.PdfObjectId left, Fluent.Pdf.PdfObjectId right) -> bool
 static Fluent.Pdf.PdfObjectId.operator ==(Fluent.Pdf.PdfObjectId left, Fluent.Pdf.PdfObjectId right) -> bool
 static Fluent.Pdf.PdfOcr.Recognize(Fluent.Pdf.PdfOcrRaster! raster, Fluent.Pdf.PdfOcrOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOcrResult!
+static Fluent.Pdf.PdfOcrAccuracy.Evaluate(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfOcrAccuracySample!>! samples, string! corpusIdentifier, string! corpusVersion, Fluent.Pdf.PdfOcrAccuracyOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOcrAccuracyReport!
 static Fluent.Pdf.PdfOcrRaster.Read(System.IO.Stream! input, int width, int height, int stride, Fluent.Pdf.PdfOcrPixelFormat pixelFormat, int dpi = 200, long maximumBytes = 67108864, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOcrRaster!
 static Fluent.Pdf.PdfOperationPolicy.Default.get -> Fluent.Pdf.PdfOperationPolicy!
 static Fluent.Pdf.PdfOptions.Default.get -> Fluent.Pdf.PdfOptions!

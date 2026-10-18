@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "purpose": "actual-native-model-source-observations-with-retained-failure-not-qualification",
+  "requirement": "FP-075",
+  "reportSha256": "837616e9e369e7ed01c225bf7e89523d6080c4e00a80eec322ee2cb3d70e57b5",
+  "observations": {
+    "purpose": "honest-actual-model-source-measurement-not-qualification",
+    "cases": [
+      {
+        "id": "english",
+        "language": "eng",
+        "reference": "ORIGINAL PRINTED WORDS 12345\n",
+        "recognized": "ORIGINAL PRINTED WORDS 12345\n",
+        "characterErrors": 0,
+        "referenceCharacters": 29,
+        "wordErrors": 0,
+        "referenceWords": 4,
+        "CER": 0.0,
+        "WER": 0.0,
+        "thresholds": {
+          "CER": 0.01,
+          "WER": 0.03
+        },
+        "thresholdsMet": true,
+        "cliAgrees": true,
+        "rasterSha256": "cb06143627155b094ccfac563115215437b8ceddbcdb97c2a532d110f3b1c1f7"
+      },
+      {
+        "id": "german",
+        "language": "deu",
+        "reference": "FÜNF GRÜNE BÄUME 12345\n",
+        "recognized": "FÜNF GRÜNE BÄUME 12345\n",
+        "characterErrors": 0,
+        "referenceCharacters": 23,
+        "wordErrors": 0,
+        "referenceWords": 4,
+        "CER": 0.0,
+        "WER": 0.0,
+        "thresholds": {
+          "CER": 0.01,
+          "WER": 0.03
+        },
+        "thresholdsMet": true,
+        "cliAgrees": true,
+        "rasterSha256": "4c47cac0f7bc0c26fece80ecb723f9de1170491e1d0322760f5b6e6dc7a1de4e"
+      },
+      {
+        "id": "mixed",
+        "language": "eng+deu",
+        "reference": "ORIGINAL PRINTED WÖRTER 12345\n",
+        "recognized": "ORIGINAL PRINTED WORTER 12345\n",
+        "characterErrors": 1,
+        "referenceCharacters": 30,
+        "wordErrors": 1,
+        "referenceWords": 4,
+        "CER": 0.03333333333333333,
+        "WER": 0.25,
+        "thresholds": {
+          "CER": 0.01,
+          "WER": 0.03
+        },
+        "thresholdsMet": false,
+        "cliAgrees": true,
+        "rasterSha256": "bd916c720e37057581ff243fa70b0f4e02068b8c46d09d81b73c7d1ea318f6d2"
+      }
+    ],
+    "labelsSha256": "864695bf0e29f830550ef761e4937387043f035aa4256ec56441ac02b2282b00",
+    "originalCheckerSha256": "33661af3014469eed90462770153590901c2250d890f5569c9e1c06bfb2c3009",
+    "originalFailureLogSha256": "bd6cbcb394cd457463911017fa43a409b96be41f29fca1d717616bd925111b33",
+    "collectorSha256": "091b26cf460ec940d4def26fccf1fe1c100f0b975c020802fa6f3e8b0547f475",
+    "nativeBridgeSha256": "1f5763ffaba4eb3e52491bbb8757ec102ac5688ac8f988ee720c47ac64137461",
+    "engineSha256": "66b27d857aa90bb7a31059c65bb624e918e96a7c276699bd5ac5dca4cf1ba322",
+    "engineVersion": "5.5.0",
+    "modelProvenance": {
+      "sourceCommit": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+      "tag": "4.1.0",
+      "license": "Apache-2.0",
+      "assets": {
+        "eng.traineddata": {
+          "gitBlob": "bbef4675053b5b468cdb477053e28b1c698ba08e",
+          "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+          "bytes": 4113088
+        },
+        "deu.traineddata": {
+          "gitBlob": "97ed7b2b60f2771c07040660ef0f6daf596dc7bf",
+          "sha256": "19d219bbb6672c869d20a9636c6816a81eb9a71796cb93ebe0cb1530e2cdb22d",
+          "bytes": 1525436
+        },
+        "LICENSE": {
+          "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358
+        }
+      }
+    },
+    "allThresholdsMet": false,
+    "SDKisolatedHostExecuted": false,
+    "productionQualified": false,
+    "limitations": [
+      "Original acceptance checker unchanged after mixed-language threshold failure. Thresholds and labels unchanged. This collector records all observations including the failure.",
+      "Three original printed cases are not a complete corpus; mixed eng+deu lost the umlaut despite high confidence.",
+      "Direct C ABI tool observation; local kernel lacks Landlock. CLI agreement uses the same recognizer, not an independent engine."
+    ]
+  },
+  "originalCheckerUnchanged": true,
+  "labelsAndThresholdsUnchanged": true,
+  "toolModifications": "None. Original acceptance checker failed the mixed case and remains unchanged. A separate retained measurement collector records exact results including that failure.",
+  "productionQualified": false,
+  "managedMeasurementCrossCheck": {
+    "reportSha256": "1328ac5ae02322bb3fec3ec7ef6241e031001cb08fd4c818471f442e72212854",
+    "independentCountsAgree": true,
+    "cases": 3,
+    "retainedThresholdFailure": "eng+deu"
+  }
+}

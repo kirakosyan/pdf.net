@@ -95,6 +95,25 @@ public sealed class NativeOcrContractTests
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }
 
+    [Fact]
+    public void ExplicitMixedModelsReturnExactDeclarationsAndSelectionIdentity()
+    {
+        using var fixture = new Fixture(catalog: true);
+        var result = PdfOcr.Recognize(OcrTests.Raster(), new("eng+deu"), fixture.Providers);
+        Assert.Equal("eng+deu", result.Language);
+        Assert.Equal(new[] { "eng", "deu" }, result.Models.Select(m => m.Identifier));
+        Assert.Equal(fixture.Catalog!.Select("eng+deu").Identity, result.ModelIdentity);
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
+    [Fact]
+    public void SuccessfulNativeInitializationWithOnlySomeRequestedModelsCannotFallback()
+    {
+        using var fixture = new Fixture(catalog: true, partial: true);
+        Assert.Equal("Ocr.ModelLanguageBinding", Error(() => PdfOcr.Recognize(OcrTests.Raster(), new("eng+deu"), fixture.Providers)));
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
     internal sealed class Fixture : IDisposable
     {
         private readonly string _root = Path.Combine(Path.GetTempPath(), "fluent-pdf-original-ocr-" + Guid.NewGuid().ToString("N"));
@@ -102,8 +121,9 @@ public sealed class NativeOcrContractTests
         internal string Jobs { get; }
         internal string ModelSha256 { get; }
         internal PdfProviderRegistry Providers { get; }
+        internal PdfOcrModelCatalog? Catalog { get; }
 
-        internal Fixture(bool missingSymbol = false, bool corruptModel = false, string version = "5.5.0-fixture")
+        internal Fixture(bool missingSymbol = false, bool corruptModel = false, string version = "5.5.0-fixture", bool catalog = false, bool partial = false)
         {
             string rid = PdfNativeDeploymentInspector.OperatingSystemRuntimeIdentifier ?? throw new InvalidOperationException("The source native worker RID is unsupported.");
             var repo = new DirectoryInfo(AppContext.BaseDirectory);
@@ -129,10 +149,18 @@ public sealed class NativeOcrContractTests
                 engine,
                 "eng.traineddata"
             };
-            var assets = names.Select(name => Pin(name, name != "eng.traineddata")).ToArray();
+            if (catalog)
+            {
+                File.WriteAllText(Path.Combine(Assets, "deu.traineddata"), partial ? "original-model-fixture-partial" : "original-model-fixture");
+                names = names.Concat(new[] { "deu.traineddata" }).ToArray();
+            }
+
+            var assets = names.Select(name => Pin(name, !name.EndsWith(".traineddata", StringComparison.Ordinal))).ToArray();
+            if (catalog)
+                Catalog = new PdfOcrModelCatalog(assets.Where(a => !a.IsNativeBinary).Select(a => new PdfOcrLanguageModel(a.FileName.Substring(0, 3), "original-fixture-1", a.Sha256, a.Length, "original-fixture", "own-capi-stub", new[] { "Latn" }, new[] { a.FileName.StartsWith("eng", StringComparison.Ordinal) ? "en" : "de" })).ToArray());
             ModelSha256 = assets[3].Sha256;
             var deployment = new PdfNativeDeployment(Assets, rid, "original.ocr-capi-fixture", IsolatedTesseractOcr.BridgeVersion, IsolatedTesseractOcr.BridgeAbi, 16777216, assets);
-            Providers = new(new IsolatedTesseractOcr(new NativeWorkerOptions(deployment, executable, bridge, Jobs, 67108864, 1048576, 65536, TimeSpan.FromSeconds(10)), version));
+            Providers = new(new IsolatedTesseractOcr(new NativeWorkerOptions(deployment, executable, bridge, Jobs, 67108864, 1048576, 65536, TimeSpan.FromSeconds(10)), version, Catalog));
         }
 
         private PdfNativeAsset Pin(string name, bool native)

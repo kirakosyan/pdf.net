@@ -51,6 +51,9 @@ public static class PdfOcr
         if (characters > options.MaximumCharacters)
             throw PdfWriterCore.Error(c, "Ocr.CharacterLimit", "Recognized Unicode exceeds its explicit total character ceiling.");
         c.Consume(PdfResourceKind.ExpandedBytes, (result.Language.Length + result.EngineVersion.Length + result.ModelIdentity.Length) * 2L + result.Words.Count * 16L + 256);
-        return new(result.Text, result.Words.ToArray(), result.Language, result.EngineVersion, result.ModelIdentity, result.MeanConfidence);
+        c.Consume(PdfResourceKind.ExpandedBytes, result.Models.Count * 32L + 256);
+        foreach (var model in result.Models)
+            c.Consume(PdfResourceKind.ExpandedBytes, (model.Identifier.Length + model.Version.Length + model.Sha256.Length + model.License.Length + model.SourceId.Length + model.Scripts.Sum(s => (long)s.Length) + model.Languages.Sum(s => (long)s.Length)) * 2L + 128);
+        return new(result.Text, result.Words.ToArray(), result.Language, result.EngineVersion, result.ModelIdentity, result.MeanConfidence, result.Models.ToArray());
     }
 }

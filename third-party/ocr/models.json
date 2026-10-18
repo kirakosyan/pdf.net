@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "S75-MODELS-01",
+  "version": "4.1.0",
+  "sourceCommit": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+  "license": "Apache-2.0",
+  "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "distribution": "Models and engines are explicitly caller-provisioned; no binary is included in Git or SDK packages. Full provenance/legal qualification remains mandatory.",
+  "models": [
+    {
+      "identifier": "eng",
+      "version": "4.1.0",
+      "license": "Apache-2.0",
+      "scripts": [
+        "Latn"
+      ],
+      "languages": [
+        "en"
+      ],
+      "gitBlob": "bbef4675053b5b468cdb477053e28b1c698ba08e",
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "bytes": 4113088
+    },
+    {
+      "identifier": "deu",
+      "version": "4.1.0",
+      "license": "Apache-2.0",
+      "scripts": [
+        "Latn"
+      ],
+      "languages": [
+        "de"
+      ],
+      "gitBlob": "97ed7b2b60f2771c07040660ef0f6daf596dc7bf",
+      "sha256": "19d219bbb6672c869d20a9636c6816a81eb9a71796cb93ebe0cb1530e2cdb22d",
+      "bytes": 1525436
+    }
+  ],
+  "qualification": "Unqualified. The retained mixed eng+deu subset fails its predeclared CER/WER threshold."
+}

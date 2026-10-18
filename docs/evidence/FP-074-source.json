@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-074",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "67bf2501d8d51078ab93c7e51849447e877d32fd",
+  "sourceTree": "94f38709f09a848040366210392e5e1e18c4659c",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -133,7 +133,11 @@
     "NativeRenderingTests",
     "NativeOcrContractTests"
   ],
-  "sourceCI": "New exact-head unfiltered CI required; no local native-positive execution is presented as passing.",
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-112-source.json",
+    "conclusion": "failure",
+    "scope": "Exact45source: two Linux fixture compilation failures and four precise missing-model diagnostic assertion failures. Corrections are subsequent46source; this report does not claim them passing."
+  },
   "productionQualified": false,
   "packageSha256": null,
   "pending": [

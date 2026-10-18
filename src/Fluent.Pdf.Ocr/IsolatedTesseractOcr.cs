@@ -10,7 +10,7 @@ public sealed class IsolatedTesseractOcr : IPdfOcrProvider
     /// <summary>Gets the exact original IPC bridge version, separate from the caller's checked Tesseract version.</summary>
     public const string BridgeVersion = "1.0";
     private readonly NativeWorkerOptions _worker;
-    private readonly PdfNativeAsset _model;
+    private readonly PdfNativeAsset? _model;
     private readonly string _version;
     private static readonly string[] Symbols =
     {
@@ -29,10 +29,17 @@ public sealed class IsolatedTesseractOcr : IPdfOcrProvider
         "TessMonitorCreate",
         "TessMonitorDelete",
         "TessMonitorSetCancelFunc",
-        "TessMonitorSetDeadlineMSecs"
+        "TessMonitorSetDeadlineMSecs",
+        "TessBaseAPIGetLoadedLanguagesAsVector",
+        "TessDeleteTextArray"
     };
     /// <summary>Captures the exact bridge/deployment and expected actual Tesseract5 version. The manifest must explicitly pin its canonical engine binary and eng.traineddata; runtime identity, hashes, dependencies and sandbox remain mandatory.</summary>
-    public IsolatedTesseractOcr(NativeWorkerOptions worker, string exactEngineVersion)
+    public IsolatedTesseractOcr(NativeWorkerOptions worker, string exactEngineVersion) : this(worker, exactEngineVersion, null)
+    {
+    }
+
+    /// <summary>Captures explicit versioned model declarations matching exact native data assets. Null retains the legacy English-only digest profile; no model or metadata is inferred.</summary>
+    public IsolatedTesseractOcr(NativeWorkerOptions worker, string exactEngineVersion, PdfOcrModelCatalog? modelCatalog)
     {
         _worker = worker ?? throw new ArgumentNullException(nameof(worker));
         if (worker.Deployment.Abi != BridgeAbi || worker.Deployment.EngineVersion != BridgeVersion)
@@ -44,12 +51,20 @@ public sealed class IsolatedTesseractOcr : IPdfOcrProvider
         string engine = rid.StartsWith("win-", StringComparison.Ordinal) ? "tesseract.dll" : rid.StartsWith("osx-", StringComparison.Ordinal) ? "libtesseract.dylib" : rid.StartsWith("linux-", StringComparison.Ordinal) ? "libtesseract.so" : throw new ArgumentException("An explicit supported worker RID is required.", nameof(worker));
         if (!worker.Deployment.Assets.Any(a => a.FileName == engine && a.IsNativeBinary))
             throw new ArgumentException("The explicit canonical Tesseract binary must be pinned in the worker inventory.", nameof(worker));
-        _model = worker.Deployment.Assets.SingleOrDefault(a => a.FileName == "eng.traineddata" && !a.IsNativeBinary) ?? throw new ArgumentException("The explicit English model must be pinned as eng.traineddata in the worker inventory.", nameof(worker));
+        ModelCatalog = modelCatalog;
+        if (modelCatalog == null)
+            _model = worker.Deployment.Assets.SingleOrDefault(a => a.FileName == "eng.traineddata" && !a.IsNativeBinary) ?? throw new ArgumentException("The explicit English model must be pinned as eng.traineddata in the worker inventory.", nameof(worker));
+        else
+            foreach (var model in modelCatalog.Models)
+                if (!worker.Deployment.Assets.Any(a => a.FileName == model.FileName && !a.IsNativeBinary && a.Length == model.ByteLength && a.Sha256 == model.Sha256))
+                    throw new ArgumentException("Every explicit model declaration must match its exact named, sized and hashed data asset.", nameof(modelCatalog));
         Descriptor = new("isolated.tesseract", exactEngineVersion, PdfCapability.RecognizeText);
     }
 
     /// <summary>Gets the exact requested native engine version and recognition service; capability declaration is not production qualification.</summary>
     public PdfProviderDescriptor Descriptor { get; }
+    /// <summary>Gets complete caller-declared model metadata, or null for the legacy English-only digest profile. Neither declares qualification.</summary>
+    public PdfOcrModelCatalog? ModelCatalog { get; }
 
     /// <summary>Recognizes through mandatory isolated execution with exact native-version/model binding, finite pixels/text/TSV and native deadline plus parent supervision.</summary>
     public PdfOcrResult Recognize(PdfOcrRaster raster, PdfOcrOptions options, PdfOperationContext context)
@@ -61,8 +76,9 @@ public sealed class IsolatedTesseractOcr : IPdfOcrProvider
         if (context == null)
             throw new ArgumentNullException(nameof(context));
         context.Checkpoint();
-        if (options.Language != "eng")
-            throw Error("LanguageUnsupported", "This explicit source profile requires the pinned English model; no fallback is performed.");
+        var selection = ModelCatalog?.SelectCore(options.Language, context);
+        if (selection == null && options.Language != "eng")
+            throw Error("LanguageUnsupported", "The legacy source profile requires the pinned English model; explicit model metadata is required for additional selections.");
         int versionLength = _version.Length, languageLength = options.Language.Length;
         long requestLength = 64L + versionLength + languageLength + raster.ByteLength;
         long utf8Limit = (long)options.MaximumCharacters * 4, tsvLimit = Math.Min(16777216L, (long)options.MaximumCharacters * 4 + options.MaximumWords * 128L + 4096);
@@ -151,6 +167,7 @@ public sealed class IsolatedTesseractOcr : IPdfOcrProvider
                     6 => "Recognition",
                     7 => "NativeTextLimit",
                     8 => "NativeDeadline",
+                    9 => "ModelLanguageBinding",
                     _ => "NativeRejected"
                 }, "The isolated OCR engine rejected its explicit native/model configuration, recognition or finite result extent.");
             }
@@ -177,7 +194,14 @@ public sealed class IsolatedTesseractOcr : IPdfOcrProvider
             var words = OcrTsv.Read(tsv, raster, options, text.Length, context);
             context.Consume(PdfResourceKind.ExpandedBytes, words.Count * 16L + 256);
             context.Report(new("Ocr.RecognitionProvenance", "Explicit local machine recognition supplied Unicode, geometry and confidence; linguistic accuracy and semantic order require independent review.", severity: PdfDiagnosticSeverity.Information));
-            return new(text, words.ToArray(), options.Language, actual, _model.Sha256, confidence);
+            if (selection == null)
+            {
+                context.Report(new("Ocr.ModelMetadataUnavailable", "The explicit legacy English profile supplies a content digest only; version/license/script declarations and qualification remain pending.", severity: PdfDiagnosticSeverity.Information));
+                return new(text, words.ToArray(), options.Language, actual, _model!.Sha256, confidence);
+            }
+
+            context.Consume(PdfResourceKind.ExpandedBytes, selection.Models.Count * 32L + 256);
+            return new(text, words.ToArray(), options.Language, actual, selection.Identity, confidence, selection.Models.ToArray());
         }
         finally
         {

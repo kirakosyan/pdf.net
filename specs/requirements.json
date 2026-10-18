@@ -364,7 +364,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -2802,12 +2802,29 @@
       "validation": "Labeled multilingual corpus with character/word error rates and per-language release thresholds.",
       "evidence": [
         "WN01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-075-source.json",
+        "docs/evidence/FP-075-independent.json",
+        "docs/evidence/FP-075-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/ocr-models.md",
+        "implemented": [
+          "Explicit immutable local model provenance/catalog selection and exact ordered version/content identities",
+          "Optional same-context native mixed-language selection with exact loaded-model binding; no model discovery/download/fallback",
+          "Bounded Unicode-scalar CER/ordinal-word WER with prior per-language thresholds, exact corpus digests and separate model-version groups"
+        ],
+        "pending": [
+          "Complete multilingual/script/scan corpora and actual native-engine/RID/runtime qualification remain mandatory; retained mixed-language subset fails prior thresholds",
+          "Independent fidelity/geometry, security, concurrency/endurance/performance and minimum/runtime/fallback qualification remain mandatory",
+          "Exact final SDK packages, model provenance/licensing qualification and all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-076",

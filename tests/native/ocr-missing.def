@@ -14,3 +14,5 @@ EXPORTS
     TessMonitorDelete
     TessMonitorSetCancelFunc
     TessMonitorSetDeadlineMSecs
+    TessBaseAPIGetLoadedLanguagesAsVector
+    TessDeleteTextArray

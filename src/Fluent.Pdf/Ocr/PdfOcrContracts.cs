@@ -99,6 +99,18 @@ public sealed class PdfOcrResult
         MeanConfidence = meanConfidence;
     }
 
+    /// <summary>Captures recognized data together with exact caller-selected model declarations. Model metadata never substitutes for accuracy/license qualification.</summary>
+    internal PdfOcrResult(string text, PdfOcrWord[] words, string language, string engineVersion, string modelIdentity, double? meanConfidence, PdfOcrLanguageModel[] models) : this(text, words, language, engineVersion, modelIdentity, meanConfidence)
+    {
+        if (models == null || models.Length > 32 || models.Any(m => m == null))
+            throw new ArgumentException("A bounded explicit model metadata inventory is required.", nameof(models));
+        Models = Array.AsReadOnly((PdfOcrLanguageModel[])models.Clone());
+    }
+
+    /// <summary>Captures recognized data with explicit selected model declarations, preserving the legacy constructor signature.</summary>
+    public static PdfOcrResult WithModels(string text, PdfOcrWord[] words, string language, string engineVersion, string modelIdentity, double? meanConfidence, PdfOcrLanguageModel[] models) => new PdfOcrResult(text, words, language, engineVersion, modelIdentity, meanConfidence, models);
+    /// <summary>Gets exact selected model declarations; empty means the provider supplied only a legacy digest without complete model metadata.</summary>
+    public IReadOnlyList<PdfOcrLanguageModel> Models { get; } = Array.Empty<PdfOcrLanguageModel>();
     /// <summary>Gets raw recognized Unicode in engine order.</summary>
     public string Text { get; }
     /// <summary>Gets words in engine-returned order, separately from later inferred reading order.</summary>

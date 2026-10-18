@@ -165,3 +165,5 @@ FP-112 adds immutable merge data/blocks, explicit culture/missing-field/visit po
 FP-067 adds explicit immutable structure plans, passive association inspection, identity-preserving semantic/reading-order remediation and exact-input independent UA validation with separate human review. See [accessibility](accessibility.md).
 
 FP-074 adds explicit immutable OCR rasters/options/words/results, mandatory-context providers and optional isolated Tesseract5 recognition. Source checks cover eleven SDK assemblies and thirty-three API comparisons; see [local OCR](local-ocr.md).
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).
