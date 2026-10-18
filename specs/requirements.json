@@ -361,7 +361,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/vector-graphics.md",
+        "implemented": [
+          "Original immutable paths/affine geometry, state-isolated drawings and detached shared resource graph embedding",
+          "Explicit device/calibrated/Lab/ICC/spot/DeviceN/pattern colors and bounded interpolation/mesh data",
+          "Standard blend modes, alpha/overprint, vector transparency groups and alpha/luminosity masks with explicit unsupported diagnostics"
+        ],
+        "pending": [
+          "Complete color/profile/vector/compositing corpus and advanced provider profiles",
+          "Actual minimum runtimes, final packages, standards/fidelity/security and long fuzz/endurance qualification"
+        ]
+      }
     },
     {
       "id": "FP-011",

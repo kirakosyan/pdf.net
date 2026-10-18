@@ -78,6 +78,7 @@ public sealed class PdfValue
             (value is IReadOnlyList<PdfValue> items&&items.Any(item=>item.HasSignatureByteRanges)));
     }
     internal bool HasSignatureByteRanges{get;}
+    internal PdfValue WithStreamDictionary(PdfValue dictionary)=>Kind==PdfValueKind.Stream?StreamValue(dictionary,_bytes!,_start,_length):throw WrongKind();
     internal PdfValue DictionaryView()=>Kind==PdfValueKind.Dictionary?this:new(PdfValueKind.Dictionary,dictionary:Entries,signatureHint:HasSignatureByteRanges);
 
     /// <summary>Gets the lexical kind.</summary>

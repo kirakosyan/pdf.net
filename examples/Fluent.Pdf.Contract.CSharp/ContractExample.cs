@@ -5,6 +5,12 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteVectorPdf(Stream output)
+    {
+        var path=PdfPath.Create(new[]{PdfPathSegment.Move(20,20),PdfPathSegment.Curve(40,100,120,100,160,20),PdfPathSegment.Close()});
+        var operations=new List<PdfContentOperation>{new(PdfOperator.FillRgb,PdfValues.Real(.2),PdfValues.Real(.4),PdfValues.Real(.6))};operations.AddRange(path.Operations);operations.Add(new(PdfOperator.FillStroke));
+        var drawing=PdfDrawing.Create(operations);var form=PdfGraphicsObjects.Form(drawing,new(0,0,200,120));using var document=PdfFacade.Create().AddPage(new PdfPageSize(200,120));document.Pages[0].SetResource("Art",form);document.Pages[0].Content=PdfContentProgram.Create(new[]{new PdfContentOperation(PdfOperator.SaveState),new PdfContentOperation(PdfOperator.DrawObject,PdfValue.Name("Art")),new PdfContentOperation(PdfOperator.RestoreState)});return document.Save(output);
+    }
     public static PdfTextDrawing ShapeText(string text,PdfFontFallback fonts,IPdfTextShaper shaper,PdfOperationPolicy? policy=null)
     {
         var shaped=PdfText.Shape(text,fonts,new PdfProviderRegistry(shaper),policy:policy);

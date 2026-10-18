@@ -1,0 +1,3 @@
+The original Gray profile is dedicated to the public domain under CC0-1.0.
+The generated standard sRGB profile retains its built-in copyright tag: No copyright, use freely.
+No third-party implementation code is included in either profile.

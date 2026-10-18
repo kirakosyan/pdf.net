@@ -413,8 +413,11 @@ internal static class PdfWriterCore
         if (value.Kind == PdfValueKind.Stream && !topLevel)
             throw Error(context, "Writer.DirectStream", "A PDF stream must be an indirect object.");
         if (value.Kind == PdfValueKind.Array)
+        {
+            requiredVersion=Math.Max(requiredVersion,PdfFeatureVersion.Array(value,resolve));
             foreach (var item in value.Items)
                 Inspect(item, context, false, ref signature,ref requiredVersion,resolve);
+        }
         if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
         {
             requiredVersion=Math.Max(requiredVersion,PdfFeatureVersion.Dictionary(value,resolve));

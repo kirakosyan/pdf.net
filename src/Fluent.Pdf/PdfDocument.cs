@@ -50,9 +50,9 @@ public sealed class PdfDocument : IDisposable
     {
         EnsureAlive();
         int count=_pages.Count;
-        if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*64L+32);}
+        if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*128L+32);}
         var pages = count==0?Array.Empty<PdfPageSnapshot>():new PdfPageSnapshot[count];
-        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context));
+        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context),_pages[i].SnapshotGraphicsResources(_context));
         return new PdfDocumentSnapshot(_options, pages,_source,_originalOrder,writeOptions);
     }
 

@@ -17,6 +17,7 @@ internal static class PdfFeatureVersion
         string type = Name("Type"), subtype = Name("Subtype");
         if (type == "ObjStm" || type == "XRef" || type == "OCG" || type == "OCMD")
             floor = 15;
+        if(entries.ContainsKey("ShadingType")||entries.ContainsKey("OPM")||entries.TryGetValue("PatternType",out var patternType)&&patternType.Kind==PdfValueKind.Number&&patternType.NumberValue==2)floor=Math.Max(floor,13);
         if (entries.ContainsKey("CA") || entries.ContainsKey("ca") || entries.ContainsKey("BM") || entries.ContainsKey("SMask"))
             floor = Math.Max(floor, 14);
         if (type == "Group" && Name("S") == "Transparency" || entries.ContainsKey("SMask"))
@@ -49,5 +50,12 @@ internal static class PdfFeatureVersion
             else if (name == "JBIG2Decode")
                 floor = Math.Max(floor, 14);
         }
+    }
+    internal static int Array(PdfValue value,Func<PdfValue,PdfValue> resolve)
+    {
+        if(value.Items.Count==0)return 12;var first=resolve(value.Items[0]);if(first.Kind!=PdfValueKind.Name)return 12;
+        if(first.NameValue=="ICCBased")return 13;
+        if(first.NameValue=="DeviceN"){var names=value.Items.Count>1?resolve(value.Items[1]):PdfValue.Null;return value.Items.Count>4||names.Kind==PdfValueKind.Array&&names.Items.Count>8?16:13;}
+        return 12;
     }
 }

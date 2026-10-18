@@ -27,7 +27,7 @@ public sealed class PdfDocumentSnapshot
 /// <summary>A detached, immutable page geometry value.</summary>
 public readonly struct PdfPageSnapshot
 {
-    internal PdfPageSnapshot(PdfPageSize size, PdfPageRotation rotation,PdfPageSource? source=null,PdfContentProgram? content=null,IReadOnlyDictionary<string,PdfFontResource>? fonts=null) { Size = size; Rotation = rotation;Source=source;Content=content;FontResources=fonts??new System.Collections.ObjectModel.ReadOnlyDictionary<string,PdfFontResource>(new Dictionary<string,PdfFontResource>()); }
+    internal PdfPageSnapshot(PdfPageSize size, PdfPageRotation rotation,PdfPageSource? source=null,PdfContentProgram? content=null,IReadOnlyDictionary<string,PdfFontResource>? fonts=null,PdfResourceSet? graphics=null) { GraphicsResources=graphics??PdfResourceSet.Empty;Size = size; Rotation = rotation;Source=source;Content=content;FontResources=fonts??new System.Collections.ObjectModel.ReadOnlyDictionary<string,PdfFontResource>(new Dictionary<string,PdfFontResource>()); }
     /// <summary>Gets the unrotated physical size.</summary>
     public PdfPageSize Size { get; }
     /// <summary>Gets the clockwise display rotation.</summary>
@@ -36,6 +36,8 @@ public readonly struct PdfPageSnapshot
     public PdfPageSource? Source{get;}
     /// <summary>Gets immutable replacement content, or null to retain original bytes.</summary>
     public PdfContentProgram? Content{get;}
+    /// <summary>Gets immutable named replacement graphics resources.</summary>
+    public PdfResourceSet GraphicsResources{get;}
     /// <summary>Gets immutable named replacement font resources.</summary>
     public IReadOnlyDictionary<string,PdfFontResource> FontResources{get;}
 }

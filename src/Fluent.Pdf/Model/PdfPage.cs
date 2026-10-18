@@ -12,6 +12,22 @@ public sealed class PdfPage
     private PdfPageSource? _source;
     private PdfContentProgram? _content;
     private readonly Dictionary<string,PdfFontResource> _fonts=new(StringComparer.Ordinal);
+    private readonly Dictionary<(PdfGraphicsResourceCategory Category,string Name),PdfGraphicsResource> _graphics=new();
+    /// <summary>Captures the explicit replacement graphics bindings; original inherited resources remain in Source.</summary>
+    public PdfResourceSet GraphicsResources{get{EnsureAttached();return SnapshotGraphicsResources(null);}}
+    /// <summary>Registers or replaces a named graphics resource in its standard category.</summary>
+    public void SetResource(string resourceName,PdfGraphicsResource resource)
+    {
+        EnsureEditable();var binding=new PdfResourceBinding(resourceName,resource);
+        if(resource.FontResource is PdfFontResource font){SetFont(resourceName,font);return;}
+        var key=(resource.Category,resourceName);if(!_graphics.ContainsKey(key)&&_graphics.Count>=4096)throw new InvalidOperationException("A page supports at most 4096 explicit graphics bindings.");_graphics[key]=binding.Resource;
+    }
+    /// <summary>Removes a replacement binding, retaining an original source binding when present.</summary>
+    public bool RemoveResource(PdfGraphicsResourceCategory category,string resourceName)
+    {EnsureEditable();if(!Enum.IsDefined(typeof(PdfGraphicsResourceCategory),category))throw new ArgumentOutOfRangeException(nameof(category));if(resourceName==null)throw new ArgumentNullException(nameof(resourceName));return category==PdfGraphicsResourceCategory.Font?RemoveFont(resourceName):_graphics.Remove((category,resourceName));}
+    internal PdfResourceSet SnapshotGraphicsResources(PdfOperationContext? context)
+    {context?.Consume(PdfResourceKind.Objects,_graphics.Count);context?.Consume(PdfResourceKind.ExpandedBytes,_graphics.Count*192L+256);return _graphics.Count==0?PdfResourceSet.Empty:new PdfResourceSet(_graphics.OrderBy(x=>x.Key.Category).ThenBy(x=>x.Key.Name,StringComparer.Ordinal).Select(x=>new PdfResourceBinding(x.Key.Name,x.Value)).ToArray());}
+
     /// <summary>Registers or replaces an exact named font resource for subsequent saves.</summary>
     public void SetFont(string resourceName,PdfFontResource font)
     {EnsureEditable();Guard.Text(resourceName,nameof(resourceName),127);PdfValue.Name(resourceName);if(font==null)throw new ArgumentNullException(nameof(font));_fonts[resourceName]=font;}

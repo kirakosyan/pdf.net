@@ -4,6 +4,19 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteVectorPdf(output As Stream) As PdfOperationReport
+        Dim path = PdfPath.Create({PdfPathSegment.Move(20, 20), PdfPathSegment.Curve(40, 100, 120, 100, 160, 20), PdfPathSegment.Close()})
+        Dim operations As New System.Collections.Generic.List(Of PdfContentOperation) From {New PdfContentOperation(PdfOperator.FillRgb, PdfValues.Real(0.2), PdfValues.Real(0.4), PdfValues.Real(0.6))}
+        operations.AddRange(path.Operations)
+        operations.Add(New PdfContentOperation(PdfOperator.FillStroke))
+        Dim drawing = PdfDrawing.Create(operations)
+        Dim form = PdfGraphicsObjects.Form(drawing, New PdfRect(0, 0, 200, 120))
+        Using document = PdfFacade.Create().AddPage(New PdfPageSize(200, 120))
+            document.Pages(0).SetResource("Art", form)
+            document.Pages(0).Content = PdfContentProgram.Create({New PdfContentOperation(PdfOperator.SaveState), New PdfContentOperation(PdfOperator.DrawObject, PdfValue.Name("Art")), New PdfContentOperation(PdfOperator.RestoreState)})
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function ShapeText(text As String, fonts As PdfFontFallback, shaper As IPdfTextShaper, Optional policy As PdfOperationPolicy = Nothing) As PdfTextDrawing
         Dim shaped = PdfText.Shape(text, fonts, New PdfProviderRegistry(shaper), policy:=policy)
         Return PdfTextDrawing.Create(shaped, 20, 80, 24)

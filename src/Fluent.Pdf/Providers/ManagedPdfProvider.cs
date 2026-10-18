@@ -91,6 +91,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
         var pageIds = new List<PdfValue>(document.Pages.Count);
         var writeOptions=document.WriteOptions;
         var embeddedFonts=new Dictionary<PdfFontResource,PdfObjectId>();
+        var resourceWriter=new PdfResourceWriter(edit,context,embeddedFonts);
         foreach (var page in document.Pages)
         {
             context.Checkpoint();
@@ -98,7 +99,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             PdfObjectId id;
             if (binding != null && !ReferenceEquals(binding.Document, document.SourceDocument))
                 throw PdfWriterCore.Error(context, "Writer.PageImportRequired", "A page from another graph requires the explicit page import operation.");
-            bool changed = binding == null || orderChanged || page.Size != binding.Size || page.Rotation != binding.Rotation || page.Content!=null || page.FontResources.Count>0;
+            bool changed = binding == null || orderChanged || page.Size != binding.Size || page.Rotation != binding.Rotation || page.Content!=null || page.FontResources.Count>0 || page.GraphicsResources.Bindings.Count>0;
             if (binding == null)
                 id = edit.Add(PdfValue.Null);
             else
@@ -145,6 +146,22 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
                     context.Checkpoint();if(!embeddedFonts.TryGetValue(pair.Value,out var fontId)){fontId=pair.Value.AddTo(edit,context);embeddedFonts.Add(pair.Value,fontId);}fonts[pair.Key]=PdfValue.Reference(fontId);writeOptions=writeOptions.RequireVersion(pair.Value.MinimumVersion);
                 }
                 resources["Font"]=PdfValue.OwnedDictionary(fonts);entries["Resources"]=PdfValue.OwnedDictionary(resources);
+            }
+            if(page.GraphicsResources.Bindings.Count>0)
+            {
+                var declared=entries.TryGetValue("Resources",out var direct)?direct:binding!=null&&binding.EffectiveAttributes.Entries.TryGetValue("Resources",out var inherited)?inherited:PdfValue.Null;
+                var existing=binding==null?declared:Resolve(binding.Document,declared,context);
+                if(existing.Kind!=PdfValueKind.Null&&existing.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Graphics.ResourceDictionary","Page Resources must resolve to a dictionary.");
+                var resources=existing.Kind==PdfValueKind.Dictionary?PdfWriterCore.CopyDictionary(existing.Entries,context):new Dictionary<string,PdfValue>(StringComparer.Ordinal);
+                foreach(var group in page.GraphicsResources.Bindings.GroupBy(x=>x.Resource.Category))
+                {
+                    context.Checkpoint();string category=group.Key.ToString();var old=resources.TryGetValue(category,out var names)?names:PdfValue.Null;if(binding!=null)old=Resolve(binding.Document,old,context);
+                    if(old.Kind!=PdfValueKind.Null&&old.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Graphics.ResourceDictionary","A named resource category must resolve to a dictionary.");
+                    var namesDictionary=old.Kind==PdfValueKind.Dictionary?PdfWriterCore.CopyDictionary(old.Entries,context):new Dictionary<string,PdfValue>(StringComparer.Ordinal);
+                    foreach(var pair in group){context.Consume(PdfResourceKind.ExpandedBytes,128);namesDictionary[pair.Name]=resourceWriter.Embed(pair.Resource);writeOptions=writeOptions.RequireVersion(pair.Resource.MinimumVersion);}
+                    resources[category]=PdfValue.OwnedDictionary(namesDictionary);
+                }
+                entries["Resources"]=PdfValue.OwnedDictionary(resources);
             }
             edit.Set(id, PdfValue.OwnedDictionary(entries));
         }
