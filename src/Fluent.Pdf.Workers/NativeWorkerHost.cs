@@ -397,7 +397,7 @@ public sealed class NativeWorkerHost
             if ((File.GetAttributes(path) & (FileAttributes.ReparsePoint | FileAttributes.Directory | FileAttributes.Device)) != 0)
                 throw Fail(context, "Native.UnsafePath", "A deployment asset cannot be a reparse point or device.");
             using var source = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            using var target = new FileStream(Path.Combine(job, asset.FileName), FileMode.CreateNew, FileAccess.Write, FileShare.None);
+            using var target = new FileStream(Path.Combine(job, asset.FileName), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
             using var hash = SHA256.Create();
             if (source.Length != asset.Length)
                 throw Fail(context, "Native.SizeMismatch", "A native asset changed during private staging.");
@@ -419,7 +419,8 @@ public sealed class NativeWorkerHost
             hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
             if (BitConverter.ToString(hash.Hash!).Replace("-", "").ToLowerInvariant() != asset.Sha256)
                 throw Fail(context, "Native.HashMismatch", "A native asset changed during private staging.");
-            if (asset.IsNativeBinary && PdfNativeDeploymentInspector.InspectBinary(source, deployment.RuntimeIdentifier, context.Checkpoint)is string code)
+            target.Flush();
+            if (asset.IsNativeBinary && PdfNativeDeploymentInspector.InspectBinary(target, deployment.RuntimeIdentifier, context.Checkpoint)is string code)
                 throw Fail(context, code, "A pinned asset has an incompatible binary header.");
         }
     }
