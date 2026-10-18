@@ -99,7 +99,8 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             PdfObjectId id;
             if (binding != null && !ReferenceEquals(binding.Document, document.SourceDocument))
                 throw PdfWriterCore.Error(context, "Writer.PageImportRequired", "A page from another graph requires the explicit page import operation.");
-            bool changed = binding == null || orderChanged || page.Size != binding.Size || page.Rotation != binding.Rotation || page.Content!=null || page.FontResources.Count>0 || page.GraphicsResources.Bindings.Count>0;
+            bool geometryChanged=binding==null||!page.Geometry.Equals(binding.Geometry);
+            bool changed = binding == null || orderChanged || geometryChanged || page.Content!=null || page.FontResources.Count>0 || page.GraphicsResources.Bindings.Count>0 || page.CanvasLayers.Count>0;
             if (binding == null)
                 id = edit.Add(PdfValue.Null);
             else
@@ -114,13 +115,14 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             entries["Type"] = PdfValue.Name("Page");
             if (orderChanged || binding == null)
                 entries["Parent"] = PdfValue.Reference(pagesId);
-            if (binding == null || page.Size != binding.Size)
+            if(geometryChanged)
             {
-                double left = binding?.Left ?? 0, bottom = binding?.Bottom ?? 0, unit = binding?.UserUnit ?? 1;
-                double right = left + page.Size.Width / unit, top = bottom + page.Size.Height / unit;
-                if (right <= left || top <= bottom || double.IsInfinity(right) || double.IsInfinity(top))
-                    throw PdfWriterCore.Error(context, "Writer.GeometryNotRepresentable", "The requested size cannot be represented at the original page origin.");
-                entries["MediaBox"] = PdfValue.Array(PdfValues.Real(left), PdfValues.Real(bottom), PdfValues.Real(right), PdfValues.Real(top));
+                var geometry=page.Geometry;entries["MediaBox"]=geometry.Boxes.Media.Value;
+                if(binding!=null||!PdfPageBoxes.Same(geometry.Boxes.Crop,geometry.Boxes.Media))entries["CropBox"]=geometry.Boxes.Crop.Value;
+                else entries.Remove("CropBox");
+                foreach(var pair in new[]{("BleedBox",geometry.Boxes.Bleed),("TrimBox",geometry.Boxes.Trim),("ArtBox",geometry.Boxes.Art)})
+                {if(!PdfPageBoxes.Same(pair.Item2,geometry.Boxes.Crop)||binding?.Dictionary.Entries.ContainsKey(pair.Item1)==true)entries[pair.Item1]=pair.Item2.Value;else entries.Remove(pair.Item1);}
+                if(geometry.UserUnit!=1){entries["UserUnit"]=PdfValues.Real(geometry.UserUnit);writeOptions=writeOptions.RequireVersion("1.6");}else entries.Remove("UserUnit");
             }
 
             if (binding == null)
@@ -131,6 +133,12 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             {
                 entries["Contents"]=PdfValue.Reference(edit.Add(page.Content.ToStream(context)));
                 writeOptions=writeOptions.RequireVersion(page.Content.MinimumVersion);
+            }
+            if(page.CanvasLayers.Count>0)
+            {
+                var original=entries.TryGetValue("Contents",out var baseContents)?baseContents:PdfValue.Null;
+                entries["Contents"]=PdfCanvasLayerContent.Compose(edit,original,page.CanvasLayers,context);
+                foreach(var layer in page.CanvasLayers)writeOptions=writeOptions.RequireVersion(layer.Content.MinimumVersion);
             }
             if(page.FontResources.Count>0)
             {
@@ -288,7 +296,9 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
         var size = new PdfPageSize(width, height);
         context.Consume(PdfResourceKind.Objects, 1);
         context.Consume(PdfResourceKind.ExpandedBytes, 1024);
-        var binding = new PdfPageSource(source, id, node, PdfValue.Dictionary(attributes), size, normalized, left, bottom, unit);
+        var effective=PdfValue.Dictionary(attributes);
+        var geometry=PdfPageGeometry.Read(source,node,effective,new PdfRect(left,bottom,Math.Abs(coordinates[2]-coordinates[0]),Math.Abs(coordinates[3]-coordinates[1])),normalized,unit,context);
+        var binding = new PdfPageSource(source, id, node, effective, size, normalized, left, bottom, unit,geometry);
         target.Pages.Add(size, context).Bind(binding);
     }
 
@@ -300,7 +310,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
         return id;
     }
 
-    private static PdfValue Resolve(PdfSyntaxDocument source, PdfValue value, PdfOperationContext context) => Resolve(source, value, context, out _);
+    internal static PdfValue Resolve(PdfSyntaxDocument source, PdfValue value, PdfOperationContext context) => Resolve(source, value, context, out _);
     private static PdfValue Resolve(PdfSyntaxDocument source, PdfValue value, PdfOperationContext context, out PdfObjectId terminal)
     {
         terminal = default;

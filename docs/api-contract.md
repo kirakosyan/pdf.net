@@ -97,3 +97,5 @@ Provider read/write methods now require `PdfOperationContext` in place of the to
 Actual Framework 4.7.2 and exact final-package execution remain pending. No requirement is production-qualified by these source tests. `productionReady` remains false and packing/publication remain blocked.
 
 FP-005 also adds `PdfTransaction`, `PdfWriteOptions`, immutable original page bindings, the stateless default managed provider and optional revision choices on save methods. These changes remain in the unshipped baseline; compiled binaries/delegates must rebuild. See [managed writing](pdf-writing.md).
+
+FP-011 adds immutable five-box page geometry, explicit units, rotated coordinate conversions, scoped canvas transforms/clips, vector/text/image placement frames and atomic page canvas application. See [page canvas and geometry](page-canvas.md).

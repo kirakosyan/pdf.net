@@ -36,6 +36,10 @@ public sealed class PdfPageCollection : IReadOnlyList<PdfPage>
         return page;
     }
 
+    /// <summary>Adds a page with explicit immutable boxes, UserUnit and rotation.</summary>
+    public PdfPage Add(PdfPageGeometry geometry)
+    {if(geometry==null)throw new ArgumentNullException(nameof(geometry));var page=Add(geometry.Size);page.Geometry=geometry;return page;}
+
     /// <summary>Removes a page and invalidates previously retained references to that page.</summary>
     public void RemoveAt(int index)
     {

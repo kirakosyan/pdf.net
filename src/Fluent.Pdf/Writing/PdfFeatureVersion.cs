@@ -18,6 +18,7 @@ internal static class PdfFeatureVersion
         if (type == "ObjStm" || type == "XRef" || type == "OCG" || type == "OCMD")
             floor = 15;
         if(entries.ContainsKey("ShadingType")||entries.ContainsKey("OPM")||entries.TryGetValue("PatternType",out var patternType)&&patternType.Kind==PdfValueKind.Number&&patternType.NumberValue==2)floor=Math.Max(floor,13);
+        if(entries.ContainsKey("ActualText"))floor=Math.Max(floor,14);
         if (entries.ContainsKey("CA") || entries.ContainsKey("ca") || entries.ContainsKey("BM") || entries.ContainsKey("SMask"))
             floor = Math.Max(floor, 14);
         if (type == "Group" && Name("S") == "Transparency" || entries.ContainsKey("SMask"))

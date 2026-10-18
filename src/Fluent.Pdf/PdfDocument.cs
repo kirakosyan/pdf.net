@@ -43,6 +43,9 @@ public sealed class PdfDocument : IDisposable
     /// <summary>Adds a page and returns this document for fluent composition.</summary>
     public PdfDocument AddPage(PdfPageSize size) { _pages.Add(size); return this; }
 
+    /// <summary>Adds a page with explicit boxes, UserUnit and viewing rotation.</summary>
+    public PdfDocument AddPage(PdfPageGeometry geometry){_pages.Add(geometry);return this;}
+
     /// <summary>Captures immutable page geometry independent of subsequent edits and disposal.</summary>
     public PdfDocumentSnapshot CreateSnapshot()
         =>CreateSnapshotCore(PdfWriteOptions.Default);
@@ -52,7 +55,7 @@ public sealed class PdfDocument : IDisposable
         int count=_pages.Count;
         if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*128L+32);}
         var pages = count==0?Array.Empty<PdfPageSnapshot>():new PdfPageSnapshot[count];
-        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context),_pages[i].SnapshotGraphicsResources(_context));
+        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context),_pages[i].SnapshotGraphicsResources(_context),_pages[i].Geometry,_pages[i].SnapshotCanvasLayers(_context));
         return new PdfDocumentSnapshot(_options, pages,_source,_originalOrder,writeOptions);
     }
 
@@ -200,9 +203,29 @@ public sealed class PdfDocument : IDisposable
         {
             if(page.Content!=null)result=PdfContentProgram.CreateCore(page.Content.Operations,PdfContentKind.Page,context);
             else result=PdfPageContent.Read(page.Source,unknown,version,_providers,context);
+            var layers=page.SnapshotCanvasLayers(context);if(layers.Count>0)result=PdfCanvasLayerContent.Combine(result!,layers,context);
             context.EnsureComplete();
         },"managed.content");
         result!.OperationReport=report;return result;
+    }
+    internal PdfOperationReport ApplyCanvas(PdfPage page,PdfCanvasResult canvas,PdfCanvasApplyMode mode,CancellationToken token)
+    {
+        EnsureNoActiveOperation();if(!page.Geometry.Equals(canvas.Geometry))throw new ArgumentException("The canvas must match the page's current boxes, UserUnit and rotation.",nameof(canvas));
+        PdfGraphicsResource? appliedForm=null;PdfContentProgram? appliedProgram=null;
+        var report=RunOperation(false,"ApplyCanvas",PdfCapability.WriteDocument,token,context=>
+        {
+            if(mode!=PdfCanvasApplyMode.Replace&&page.Content==null&&page.Source!=null)_=PdfPageContent.Read(page.Source,PdfUnknownOperatorPolicy.Preserve,page.Source.Document.Version,_providers,context);
+            var form=PdfGraphicsObjects.FormCore(canvas.Drawing,page.Geometry.Boxes.Media,null,null,context);appliedForm=form;int sequence=page.CanvasSequence;var existing=page.SnapshotGraphicsResources(context);PdfValue names=PdfValue.Null;
+            if(page.Source!=null&&page.Source.EffectiveAttributes.Entries.TryGetValue("Resources",out var declared))
+            {
+                var resources=ManagedPdfProvider.Resolve(page.Source.Document,declared,context);if(resources.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Canvas.ResourceDictionary","Source resources must resolve to a dictionary.");if(resources.Entries.TryGetValue("XObject",out var objects))names=ManagedPdfProvider.Resolve(page.Source.Document,objects,context);if(names.Kind!=PdfValueKind.Null&&names.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Canvas.ResourceDictionary","Source XObject resources must resolve to a dictionary.");
+            }
+            string name;while(true)
+            {
+                context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);if(sequence==int.MaxValue)throw PdfWriterCore.Error(context,"Canvas.ResourceNames","The generated resource name sequence is exhausted.");name="FC"+(sequence++).ToString(System.Globalization.CultureInfo.InvariantCulture);if(names.Kind==PdfValueKind.Dictionary&&names.Entries.ContainsKey(name)||existing.Bindings.Any(x=>x.Resource.Category==PdfGraphicsResourceCategory.XObject&&x.Name==name))continue;break;
+            }
+            var program=PdfContentProgram.CreateCore(new[]{new PdfContentOperation(PdfOperator.SaveState),new PdfContentOperation(PdfOperator.DrawObject,PdfValue.Name(name)),new PdfContentOperation(PdfOperator.RestoreState)},PdfContentKind.Page,context);appliedProgram=program;context.EnsureComplete();page.CommitCanvas(new(name,form),program,mode,sequence,context);
+        },"managed.canvas");appliedForm!.OperationReport=report;appliedProgram!.OperationReport=report;return report;
     }
     internal IReadOnlyList<PdfPageFont> ReadPageFonts(PdfPage page,CancellationToken token)
     {

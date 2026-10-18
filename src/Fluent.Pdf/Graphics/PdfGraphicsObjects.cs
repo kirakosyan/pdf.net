@@ -17,23 +17,16 @@ public static class PdfGraphicsObjects
         if (bounds.Width <= 0 || bounds.Height <= 0)
             throw new ArgumentException("A reusable form requires positive bounds.", nameof(bounds));
         PdfGraphicsResource? result = null;
-        var report = PdfFont.Run("CreateForm", "managed.graphics", policy, token, context =>
-        {
-            var stream = drawing.Content.ToStream(context);
-            var entries = PdfWriterCore.CopyDictionary(stream.Entries, context);
-            entries["Type"] = PdfValue.Name("XObject");
-            entries["Subtype"] = PdfValue.Name("Form");
-            entries["FormType"] = PdfValue.Integer(1);
-            entries["BBox"] = bounds.Value;
-            entries["Matrix"] = (matrix ?? PdfMatrix.Identity).Value;
-            entries["Resources"] = PdfValue.Dictionary(System.Array.Empty<KeyValuePair<string, PdfValue>>());
-            if (group != null)
-                entries["Group"] = group;
-            result = PdfGraphicsResource.CreateCore(PdfGraphicsResourceCategory.XObject, stream.WithStreamDictionary(PdfValue.OwnedDictionary(entries)), group == null ? drawing.MinimumVersion : PdfVersionNumber.Text(Math.Max(14, PdfVersionNumber.Parse(drawing.MinimumVersion))), drawing.Resources, context);
-        }, PdfCapability.WriteDocument);
+        var report = PdfFont.Run("CreateForm", "managed.graphics", policy, token, context =>result=FormCore(drawing,bounds,matrix,group,context), PdfCapability.WriteDocument);
         result!.OperationReport = report;
         return result;
     }
+    internal static PdfGraphicsResource FormCore(PdfDrawing drawing,PdfRect bounds,PdfMatrix? matrix,PdfValue? group,PdfOperationContext context)
+    {
+        if(bounds.Width<=0||bounds.Height<=0)throw new ArgumentException("A reusable form requires positive bounds.",nameof(bounds));
+        var stream=drawing.Content.ToStream(context);var entries=PdfWriterCore.CopyDictionary(stream.Entries,context);entries["Type"]=PdfValue.Name("XObject");entries["Subtype"]=PdfValue.Name("Form");entries["FormType"]=PdfValue.Integer(1);entries["BBox"]=bounds.Value;entries["Matrix"]=(matrix??PdfMatrix.Identity).Value;entries["Resources"]=PdfValue.Dictionary(System.Array.Empty<KeyValuePair<string,PdfValue>>());if(group!=null)entries["Group"]=group;return PdfGraphicsResource.CreateCore(PdfGraphicsResourceCategory.XObject,stream.WithStreamDictionary(PdfValue.OwnedDictionary(entries)),group==null?drawing.MinimumVersion:PdfVersionNumber.Text(Math.Max(14,PdfVersionNumber.Parse(drawing.MinimumVersion))),drawing.Resources,context);
+    }
+
 }
 
 /// <summary>An explicit Form XObject transparency group.</summary>

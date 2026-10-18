@@ -5,6 +5,23 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteCanvasPdf(Stream output)
+    {
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(-20, 10, 240, 160)), PdfPageRotation.Clockwise90);
+        var path = PdfPath.Create(new[] { PdfPathSegment.Rectangle(new PdfRect(0, 0, 30, 15)) });
+        var canvas = PdfCanvas.Create(geometry, c =>
+        {
+            using (c.Save())
+            {
+                c.Translate(10, 10);
+                c.Rotate(30);
+                c.DrawPath(path);
+            }
+        }, new PdfCanvasOptions(PdfLengthUnit.Millimeter, margins: PdfMargins.Uniform(5)));
+        using var document = PdfFacade.Create().AddPage(geometry);
+        canvas.ApplyTo(document.Pages[0]);
+        return document.Save(output);
+    }
     public static PdfOperationReport WriteVectorPdf(Stream output)
     {
         var path=PdfPath.Create(new[]{PdfPathSegment.Move(20,20),PdfPathSegment.Curve(40,100,120,100,160,20),PdfPathSegment.Close()});

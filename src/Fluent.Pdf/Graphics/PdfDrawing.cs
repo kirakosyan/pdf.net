@@ -18,7 +18,7 @@ public sealed class PdfDrawing
     /// <summary>Gets its aggregate version floor.</summary>
     public string MinimumVersion { get; }
     /// <summary>Gets the successful bounded composition report.</summary>
-    public PdfOperationReport OperationReport { get; private set; } = null!;
+    public PdfOperationReport OperationReport { get; internal set; } = null!;
 
     /// <summary>Validates and captures a drawing, adding q/Q around the complete program and rejecting missing named resources.</summary>
     public static PdfDrawing Create(IEnumerable<PdfContentOperation> operations, PdfResourceSet? resources = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)

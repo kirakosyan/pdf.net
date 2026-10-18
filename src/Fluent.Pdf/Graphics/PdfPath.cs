@@ -31,7 +31,7 @@ public sealed class PdfPathSegment
 }
 
 /// <summary>An immutable path that retains vector segments and can be edited without changing another drawing.</summary>
-public sealed class PdfPath
+public sealed partial class PdfPath
 {
     private PdfPath(List<PdfPathSegment> segments, List<PdfContentOperation> operations)
     {
@@ -44,7 +44,7 @@ public sealed class PdfPath
     /// <summary>Gets validated path construction operators.</summary>
     public IReadOnlyList<PdfContentOperation> Operations { get; }
     /// <summary>Gets the successful bounded construction report.</summary>
-    public PdfOperationReport OperationReport { get; private set; } = null!;
+    public PdfOperationReport OperationReport { get; internal set; } = null!;
 
     /// <summary>Creates a validated vector path under a fresh operation budget.</summary>
     public static PdfPath Create(IEnumerable<PdfPathSegment> segments, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)

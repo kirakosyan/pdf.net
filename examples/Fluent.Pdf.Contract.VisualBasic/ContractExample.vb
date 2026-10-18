@@ -4,6 +4,21 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteCanvasPdf(output As Stream) As PdfOperationReport
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(-20, 10, 240, 160)), PdfPageRotation.Clockwise90)
+        Dim path = PdfPath.Create({PdfPathSegment.Rectangle(New PdfRect(0, 0, 30, 15))})
+        Dim canvas = PdfCanvas.Create(geometry, Sub(c)
+                                                    Using c.Save()
+                                                        c.Translate(10, 10)
+                                                        c.Rotate(30)
+                                                        c.DrawPath(path)
+                                                    End Using
+                                                End Sub, New PdfCanvasOptions(PdfLengthUnit.Millimeter, margins:=PdfMargins.Uniform(5)))
+        Using document = PdfFacade.Create().AddPage(geometry)
+            canvas.ApplyTo(document.Pages(0))
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function WriteVectorPdf(output As Stream) As PdfOperationReport
         Dim path = PdfPath.Create({PdfPathSegment.Move(20, 20), PdfPathSegment.Curve(40, 100, 120, 100, 160, 20), PdfPathSegment.Close()})
         Dim operations As New System.Collections.Generic.List(Of PdfContentOperation) From {New PdfContentOperation(PdfOperator.FillRgb, PdfValues.Real(0.2), PdfValues.Real(0.4), PdfValues.Real(0.6))}

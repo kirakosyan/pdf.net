@@ -347,7 +347,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -405,7 +405,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/page-canvas.md",
+        "implemented": [
+          "Managed immutable five-box geometry, rotation/UserUnit and explicit physical coordinate conversions",
+          "Bounded scoped canvas, paths/text/explicit image resources, placements/clips/z-order and hit frames",
+          "Atomic source-preserving page overlay/underlay and replacement"
+        ],
+        "pending": [
+          "Complete geometry/clipping/text/image corpus and actual minimum runtimes",
+          "Final packages, standards/fidelity/security and long fuzz/endurance qualification"
+        ]
+      }
     },
     {
       "id": "FP-012",
