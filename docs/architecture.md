@@ -107,3 +107,5 @@ FP-031 keeps password/file-security algorithms in managed core and CMS behind `I
 Archival generation/conversion uses the managed graph/writer and an explicit independent validator boundary. Core preflight is not a conformance oracle. Optional Fluent.Pdf.Compliance checks exact reports from a caller-supplied offline host; no browser/native/Java runtime is linked into core. Staged archival downgrades cannot reach caller output without complete matching independent validation.
 
 Structural recovery has a separate scanner, explicit identity/stream authority, immutable original bytes and ledger. It does not catch ordinary parse errors or guess markers inside stream payloads. Reconstructed output passes the normal strict reader before final copying; this is structural validation rather than PDF standards or content-fidelity qualification.
+
+PDF compatibility inspection retains raw immutable graph values and explicit version provenance; text encoding remains separate from binary/font-code strings. Typed text placement carries a version floor while low-level callers declare it explicitly.

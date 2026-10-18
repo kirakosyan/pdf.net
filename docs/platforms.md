@@ -61,3 +61,5 @@ The managed password/file-security profile and optional CMS contracts target all
 FP-066 archival contracts and the optional report bridge target all four library TFMs. The source corpus provisions a pinned external Java validator on the six modern OS lanes and current Framework/fallback consumers. A caller-owned test host does not qualify a deployable SDK isolation adapter, actual minimum runtimes or complete standards/semantic fidelity. See [archival applicability](archival.md).
 
 The FP-006 managed structural repair/ledger profile targets all four library TFMs and introduces no platform/native dependency. Independent source observations use unrelated PDF readers; complete damaged-corpus, actual minimum runtime and final-package qualification remain mandatory.
+
+FP-098 text encoding and passive compatibility inventory use only managed core on all four target frameworks. Independent source fixtures do not qualify complete PDF 2.0, actual minimum runtimes or final packages. See the [version matrix](pdf-compatibility.md).

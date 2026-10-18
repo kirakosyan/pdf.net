@@ -48,6 +48,31 @@ public sealed class PdfMetadataEditor
         return _information.TryGetValue(name, out var value) ? PdfTextStrings.Decode(_graph.Resolve(value), _graph.Context) : null;
     }
 
+    /// <summary>Writes exact explicitly encoded Info text and raises the catalog version floor for UTF-8. Date/Trapped semantic validation remains explicit.</summary>
+    public PdfMetadataEditor SetInformationText(string name, PdfTextString text)
+    {
+        if (text == null)
+            throw new ArgumentNullException(nameof(text));
+        Check();
+        if (name == "Trapped")
+            throw new ArgumentException("Trapped is a PDF name; use SetInformation for its semantic value.", nameof(name));
+        PdfMetadataValues.Key(name);
+        _graph.Context.Consume(PdfResourceKind.Objects, 1);
+        if (name == "CreationDate" || name == "ModDate")
+            PdfMetadataDates.Validate(text.Text, _graph.Context);
+        _graph.Context.Consume(PdfResourceKind.ExpandedBytes, text.Value.StringBytes.Count + 64L);
+        _information[name] = text.Value;
+        _infoDirty = true;
+        if (text.MinimumVersion == "2.0")
+        {
+            var catalog = _graph.Copy(_graph.Catalog);
+            catalog["Version"] = PdfValue.Name("2.0");
+            _graph.SetCatalog(catalog);
+        }
+
+        return this;
+    }
+
     /// <summary>Sets or removes a standard/custom Info text field. Trapped uses its standard name representation.</summary>
     public PdfMetadataEditor SetInformation(string name, string? value)
     {

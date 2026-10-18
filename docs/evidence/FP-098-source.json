@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-098",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "compatibilityCasesIncludedInFullSuite": 23,
+  "selectedTests": {
+    "passed": 907,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeRenderingTests"
+  },
+  "sourceFileHashes": {
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "6a96d6efcd922b13d535e2bf31f48da31ac7bafbb64144beb884b344e5acf42c",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "dab6ffda755c3909f9d9f6d0b815584f201351f146158598c810ce3d88f576e3",
+    "src/Fluent.Pdf/Compatibility/PdfCompatibility.cs": "91d247fd0d41a32d2003ced85ee3238cfc2083a3475d2b9ab932553296fbd9df",
+    "src/Fluent.Pdf/Compatibility/PdfTextString.cs": "fe65e29c15455c25500e284aa9817cc9bfbe292b35c58f026c2d5c4733f04ce0",
+    "src/Fluent.Pdf/Editing/PdfTextStrings.cs": "4c323c555c2963467db44a1a9063020481b593d5bdf1ceb1a04cb9f0e51a582b",
+    "src/Fluent.Pdf/Metadata/PdfMetadataEditor.cs": "7fd98dd834557a55e53ad29aaf848300e1d5f3b07ea76e679149ea8b2dacd133",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "48b8175b312c128be62689818d564fc4b5ee9f18923a59c47131599b0cab918a",
+    "src/Fluent.Pdf/Writing/PdfExtensionRequirement.cs": "ddf6d617d941e419f62c914264b077b0c046d5cb9712a4ac267784b6f9e3eaaf",
+    "src/Fluent.Pdf/Writing/PdfWriterCore.cs": "4d758bdb0674be0203885f61f1251b7b8fc767a6bd652a3ec8f91a1dcf0d7ad2",
+    "tests/Fluent.Pdf.Contract.Tests/CompatibilityTests.cs": "aee4bc339e0b58a23b987868d905836f31972c29b6eb9ff372cfb2eb04fd2ae0"
+  },
+  "reportSha256": {
+    "compatibility-final-build.log": "fcd8353fea2f9919ba84e4de62c4ae997ec99b74656c80dc604d2fe7667810ef",
+    "compatibility-final-tests.log": "0afb7e2b78151edd1894dec78c68ba8ddb69abf6761a990c326e0d9bef86089c",
+    "compatibility-targeted-tests2.log": "ff7d27c7f0105eb852ea9d8c49d0c1f7ea00b225e13995c733dcb3a498eeb0cd",
+    "compatibility-api-check.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67",
+    "compatibility-spec-check.log": "c03d8c41fb047e70054ca2cb2162edbb53cb6940d0074d2a86b5b90b98c1a214",
+    "compatibility-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "compatibility-api-comparisons.json": "582ffec48307cfe5f95159cb2271fd2a437e3616d0989d5f0a6758fc94652f42"
+  },
+  "retainedInitialFailures": [
+    {
+      "reportSha256": "cc08f0d9fcdf151b7108d75bccbd93f9cf296a85c6a1885966633026cdb0291b",
+      "observation": "Test fixture referenced a nonexistent stream factory; corrected to existing PdfValues.Stream without changing SDK contract"
+    },
+    {
+      "reportSha256": "9ebb0914c88db956fcdb9c8c0ba72d00f75518586c32146c66eb40ae25c1b6a3",
+      "passed": 21,
+      "failed": 1,
+      "skipped": 0,
+      "observation": "Associated-file fixture omitted required explicit modification time; corrected fixture authority"
+    }
+  ],
+  "packageSha256": null,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "limitations": [
+    "Local native-positive tests cannot run: Landlock ENOSYS; CI remains unfiltered",
+    "pypdf and PDFBox do not decode the original UTF-8 title correctly; MuPDF and Poppler do. UTF-8 remains explicit, UTF-16BE remains default",
+    "Complete normative/schema/extension/linguistic corpus, resource/fuzz/concurrency/endurance, actual minimum runtimes and final packages remain mandatory"
+  ],
+  "apiComparisons": 24
+}

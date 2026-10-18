@@ -6,6 +6,7 @@ internal static class PdfTextStrings
 {
     private static readonly string Low = "\u02d8\u02c7\u02c6\u02d9\u02dd\u02db\u02da\u02dc";
     private static readonly string High = "\u2022\u2020\u2021\u2026\u2014\u2013\u0192\u2044\u2039\u203a\u2212\u2030\u201e\u201c\u201d\u2018\u2019\u201a\u2122\ufb01\ufb02\u0141\u0152\u0160\u0178\u017d\u0131\u0142\u0153\u0161\u017e";
+    internal static char? LegacyCharacter(int b) => b < 0 || b > 255 || b == 127 || b == 159 || b == 173 ? null : b >= 24 && b <= 31 ? Low[b - 24] : b >= 128 && b <= 158 ? High[b - 128] : b == 160 ? '\u20ac' : (char)b;
     internal static PdfValue Encode(string text, PdfOperationContext context)
     {
         context.Checkpoint();

@@ -3417,7 +3417,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/pdf-compatibility.md",
+        "implemented": [
+          "Explicit strict PDFDocEncoding/UTF-16BE/UTF-8 text values, typed PDF 2.0 Info output and passive version/extension/namespace/associated-file inventory",
+          "Reserved Extensions Type handling, direct ASCII documentation URL/revision authoring, version negotiation and exact opaque source graph/stream retention tests",
+          "C#/VB consumers, source matrix and independent reader observations"
+        ],
+        "pending": [
+          "Complete normative PDF 1.x/2.0 and extension schema/directness/semantics corpus remains mandatory",
+          "Complete text-placement/language-escape coverage, resource/fuzz/concurrency/endurance campaigns and actual minimum runtimes remain mandatory",
+          "Exact final-package consumers and every production qualification gate remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-098-standards.json",
+        "sourceEvidence": "docs/evidence/FP-098-source.json",
+        "independentEvidence": "docs/evidence/FP-098-independent.json"
+      }
     },
     {
       "id": "FP-099",

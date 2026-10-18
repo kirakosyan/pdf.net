@@ -5,6 +5,15 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfCompatibilityInspection InspectCompatibility(PdfDocumentSnapshot source) => PdfCompatibility.Inspect(source);
+    public static PdfOperationReport WriteUtf8MetadataPdf(Stream output)
+    {
+        var title = PdfTextString.Create("Original title 一😀", PdfTextStringEncoding.Utf8);
+        using var blank = PdfFacade.Create().AddPage();
+        using var document = PdfMetadata.Edit(blank.CreateSnapshot(), e => e.SetInformationText("Title", title));
+        return document.Save(output);
+    }
+
     public static PdfStructuralInspection InspectStructure(Stream input) => PdfStructuralValidation.Inspect(input);
     public static PdfRepairResult RecoverPdf(Stream input, Stream output, Stream ledger, PdfRepairOptions options)
     {

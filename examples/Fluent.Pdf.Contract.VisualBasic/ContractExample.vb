@@ -4,6 +4,16 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function InspectCompatibility(source As PdfDocumentSnapshot) As PdfCompatibilityInspection
+        Return PdfCompatibility.Inspect(source)
+    End Function
+    Public Function WriteUtf8MetadataPdf(output As Stream) As PdfOperationReport
+        Dim title = PdfTextString.Create("Original title 一😀", PdfTextStringEncoding.Utf8)
+        Using blank = PdfFacade.Create().AddPage(), document = PdfMetadata.Edit(blank.CreateSnapshot(), Function(e) e.SetInformationText("Title", title))
+            Return document.Save(output)
+        End Using
+    End Function
+
     Public Function InspectStructure(input As Stream) As PdfStructuralInspection
         Return PdfStructuralValidation.Inspect(input)
     End Function
