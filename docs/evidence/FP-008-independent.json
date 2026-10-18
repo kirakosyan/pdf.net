@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "purpose": "source font independent verification, not production qualification",
-  "sourceCommit": "84210d95d1ed8ae1b3e7ee02fc7c614231d06180",
-  "sourceWorkingTreeDirty": true,
+  "sourceCommit": "81d73d958bab07890ef5c4783a49fd90d7170ed5",
+  "sourceWorkingTreeDirty": false,
   "fontToolsVersion": "4.61.1",
   "pypdfVersion": "6.10.0",
   "pdfinfoVersion": "pdfinfo version 26.05.0",
