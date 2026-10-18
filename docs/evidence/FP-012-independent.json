@@ -57,5 +57,6 @@
   "pending": [
     "Complete multilingual styled business corpus, all constraints, float and line-break profiles",
     "Actual minimum runtimes, final packages, standards/fidelity/security/fuzz/endurance workloads"
-  ]
+  ],
+  "rendererRevalidation": "docs/evidence/renderer-profile-revalidation.json"
 }

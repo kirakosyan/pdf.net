@@ -104,5 +104,6 @@
   "pending": [
     "Complete geometry/clipping/font/image corpus and minimum runtimes",
     "Final packages, standards/fidelity/security and long fuzz/endurance qualification"
-  ]
+  ],
+  "rendererRevalidation": "docs/evidence/renderer-profile-revalidation.json"
 }

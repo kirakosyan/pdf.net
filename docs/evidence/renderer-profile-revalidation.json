@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Bind prior development renderer labels to an explicit executable by rechecking stored PDF artifacts; no SDK outputs regenerated",
+  "revalidatedUtc": "2026-10-18T03:45:14.497455+00:00",
+  "renderer": {
+    "path": "/usr/bin/pdftoppm",
+    "version": "25.03.0",
+    "sha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "originalLabelLimitation": "Original scripts used an unqualified executable name and did not bind the version label to a path. The environment also exposes a Poppler 26.05.0 PATH override. This revalidation establishes the recorded 25.03.0 profile explicitly.",
+  "reports": [
+    {
+      "requirement": "FP-009",
+      "sourceCommit": "ed9de0cb25b68e4c157004036099ff047da6cac0",
+      "pdfCases": 8,
+      "pdfSha256": [
+        "24c5afa421a5cbe4020c507518bfb87c212258da1dca94a714a05cb056dff7a5",
+        "2eb2bf5f929f439c038bab56228c0f2072cc387be170de13eaec405f68246323",
+        "9050d0782e621a20ca2c58279bb2ef4298abe47472516146a5f026628867cfc6",
+        "4e9fa9c329485f301eec523fdad8e4ca011fb33a931bc80a61f4fa4fb5b2cefd",
+        "d7db59771973e25e17e553482485d2a55b73c41befd51a7fbea9452d1ffe60f2",
+        "c8fdff600657bc64dd829cf2744a1b40cbddbca468963a8b64f068a3074e317a",
+        "038f237ce280ade5da0b15a7c46398c7f10f17a63c777850a97575bd2c430157",
+        "d66c092c9775bca5b264ea2a1fea3db25766d0aa10b742f66ef70b7cdfd1bf59"
+      ],
+      "differentPixels": 0
+    },
+    {
+      "requirement": "FP-010",
+      "sourceCommit": "7c7b0aa63d72b769a4a82c602f3335ba7f7372d7",
+      "pdfCases": 46,
+      "pdfSha256": [
+        "e23b473cb578236e6c899b22a1961f66795c73fa67aa2e25a44e03121c792a64",
+        "273d598b08739b4c6c947649e3b71e1b4434692485120e685b2ecf643adb9f67",
+        "f20a811528eb81a0428f0bb0415a9cb19d803058858fe2313ae8966652ec5dd3",
+        "3e24c0a52fcfae04e967e0000ddbedf4b06eeb3e55c1647162ad90040efadfa5",
+        "e2e2ea0fdacae727bf0c9cc02656cdcc132482e6013de921697b29e0bcea658d",
+        "f6832191a220d5c26f55c9907cefb3fefa6e5cc6ff0b1bbd237c783b2fa03b63",
+        "df36b845e26e201b92c8c8e7cc81a056c85b265dfb70c2c5f8c104245abb2c81",
+        "3e9d89baded1102983b1ea256c70b5fe7d1102df6dc0ee5ce6e0d22bfb9db1ab",
+        "34717a0dcb889ade67c41f070c4146580f5148deea7c8b8cf97df85121f088f4",
+        "a7116e5888ac088a5b6573bc1aae9af5a4cf30d97d11d35c794c8e623bcb1ed3",
+        "b466befade75e0cab136ab96fd82cd2eec19a63f17f58fec3493bbf3c20b6e6f",
+        "8f94c17078077036763f995e5b7aa4ed4af7c1fd8ab2cb017d6f5d3e60d7d469",
+        "d4224fba28fe4c70e9d4d970e1917f8eec04d07d89ab05a38df42a5b17afa7b9",
+        "d4c9b6766e5a1468c67a30ff869efa8c74a950b8f96c22a823c4203594d330ea",
+        "f4aa21628cb078d451066dac77b2e0f04aa6d6becf3a7f75c094d3be2a09efdd",
+        "dd636b9ffbf2dbbb087c5a95eb863f8b0fd83bc01ec0c01afc33bd752c8e5584",
+        "f36eebbd34d1e31d10d379fb7dd07ce947f54c8e86e78f07dabd1eef5f3251bf",
+        "9385bbed9103a32b09a061477b033ecbc64c3395429410db657664f2aec47cb4",
+        "aa4d523db17ab462cb087dd5a9487124c4ddceac222829c5f15826a9bac365d1",
+        "2f78b4589a6e4d4fa96171c12bb397555088de812635c28b6acb393aa3df2772",
+        "c342189452a39750072fae88ae62ac4c432eae3d47a15116045625e82a83e50b",
+        "7ea2125642d2ab226e254c08b495c5d36e7f78bafdbec53ed346fe0f464e08af",
+        "e5ae63453dccc715bbf722c9e1d6105e4756744337f724647e0d379da69545c2",
+        "2c62fe76dc5e0108cfc7bd7b1a4d8d0e2ffe07e30a252f55fa69788740727248",
+        "dc27a946a363ede8278a402bcef03793fa806ee1efc1ab147c9dbf4ab7cb214d",
+        "ae18334b57ee301f8caf31648139a7e0d2a588ece9584fc9cbea5f2a6bd58713",
+        "309ed1669b80c9bf539c00e9ddcf205e5b0850656ce9b30d3e19eed39cb1fcd4",
+        "a2f392884d70a15823cefa880b4225cb0abe1f59922b277d6671dc52c52d7ed2",
+        "c076ebdadc3b2d438300cda85829e42e671fa1f66588a0163958c9853abb792c",
+        "8a5e23628feb81ede9333ee66e79f504ac016de081f1af924dea283d26e28e8b",
+        "d6d9cadd7b00b16ea5b4acb913adbad8bcaa2cce15651f7204fc5b6bf8948571",
+        "48e8d4daeadcdf6eb8646151e49b7e908fc23e8b927b735ad23749cf05571063",
+        "fd80ee0be63a4f05e27424f391ae9e9397ee1991e95d4645e51ade88c5b1b984",
+        "1774a1abb7e7489e81d89a1ce948e5e65b115c4cd5468ea273c0035745e32484",
+        "4fc3c23e93894fb9ba854675ccbd2f62eb1f61e689e65801ac3d669e6d687a45",
+        "954b262a61496f8ad11caeae24ef64e55c3a1e0523bb394697423568601882d0",
+        "7ebec786d1a36b6ea0fb83b90edaa40865a33b6cbaca092fb3ba602aa2ab2e61",
+        "b3f313cf0e9cf5e9548dbfb66ec5c46016a3ac3ee55c498690efe3eb16baf9ac",
+        "90090efa57c105cff4e2e743e03cf4a5216f5d93ab19e8052c9e254aa0b5969d",
+        "50d16f6de2a3cdb25202525d81581cd6ea53f623cd7142d6d562150d9bfec134",
+        "cde90ff7f40057773b98a42b106440d55337cd46004271bb328a75add192e65d",
+        "c1db93cad5248d89a2b95642051223a80ec1fd933cdf45dce60bd6bb6e63a936",
+        "c41d58af3168435867e3390eed53823a747fb0c9a7aa4bc32ff93e783a88e7c2",
+        "b4056b79f2e175057f03696d9420b45f4d9e4dbabae557791918fdddd20d70a8",
+        "3bd890de7725171448f6ccd1380c818431a7b8d75522dd6b39fa8b70bea16e17",
+        "7336c6bf0bd86310206f2db5759972f5f379b7eb24103ef97cf0299d9b801c28"
+      ],
+      "differentPixels": 0
+    },
+    {
+      "requirement": "FP-011",
+      "sourceCommit": "3e032e6f61562276247e986a506cd8d81e694861",
+      "pdfCases": 8,
+      "pdfSha256": [
+        "880f7f03464509cdad1f0c4af9e88b8300c8eb5695ac4a1f099a5858cb2b1ded",
+        "4f98037e24522c360cb585718619fc47cf59e8826b30a36b46ae62caf58a3b91",
+        "7621f3edda7f7bcafcf2b3415ed0a7bb7db6bf97aa37be2f1df39a087b584ef2",
+        "ef9551abf3df8b50301912f730b90a81182e655053201d4e76004567b7a90d18",
+        "46ecacf361e84c4774d3045091d65fbf6f51438993616cd8372da2ef01adaa86",
+        "510f40af942c1e93a2e6def623a5854b4a1447bd25311c7d000d7f4d5a8c091e",
+        "c26a7f7947896d648809da3d6dbeab07281dc2946c3e53306136c24915ff9667",
+        "57d2a1924ac0beda21a25b215d98ffe94a2123e8a2cc6e218655347d3285c515"
+      ],
+      "differentPixels": 0
+    },
+    {
+      "requirement": "FP-012",
+      "sourceCommit": "4457ce3039e0004ad81483673fef1a3337c799e1",
+      "pdfCases": 4,
+      "pdfSha256": [
+        "878bfe491398563fcc20a8cf10fe2a18573ec311cd7a8ef6cc4ef335417f2a39",
+        "4aef8fc53bc4f4f1a97acfcd229019c1d091ee130c0352653fcb6f9244b6d72e",
+        "066d339f968d563c00d98916d532ea9cfd5c5ab44b567c2c4994812b4c1b0ee9",
+        "80bc31e770c858663026a864322d86a88f046fffce43c31f6930d621df810b71"
+      ],
+      "differentPixels": 0
+    }
+  ],
+  "productionQualified": false,
+  "limitations": [
+    "Stored SDK PDF/source hashes match their retained reports; complete production corpora, minimum runtimes and final packages remain pending."
+  ]
+}

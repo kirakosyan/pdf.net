@@ -133,5 +133,6 @@
     "extendedGraphemeVectors": 853,
     "passed": true,
     "requiredRuntimeMatrix": "reported separately by source CI"
-  }
+  },
+  "rendererRevalidation": "docs/evidence/renderer-profile-revalidation.json"
 }

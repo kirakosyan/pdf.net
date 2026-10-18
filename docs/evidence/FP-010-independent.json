@@ -355,5 +355,6 @@
       "name": "independent-reference-encoder-and-verifier",
       "sha256": "afaedc700023119ef1835dd061d91c8edaea3943647102d0d99f9e63933dc0ad"
     }
-  ]
+  ],
+  "rendererRevalidation": "docs/evidence/renderer-profile-revalidation.json"
 }
