@@ -28,6 +28,7 @@ public sealed class PdfProviderRegistry
                     capability == PdfCapability.WriteDocument && provider is not IPdfDocumentWriter ||
                     capability == PdfCapability.ImageCodecs && provider is not IPdfImageCodecProvider ||
                     capability == PdfCapability.Fonts && provider is not IPdfFontProvider ||
+                    capability == PdfCapability.RecognizeText && provider is not IPdfOcrProvider ||
                     capability == PdfCapability.ShapeText && provider is not IPdfTextShaper ||
                     capability == PdfCapability.RenderPages && provider is not IPdfPageRenderer ||
                     capability == PdfCapability.RenderHtml && provider is not IPdfHtmlRenderer ||

@@ -86,3 +86,5 @@ An explicit optional [Word conversion source profile](docs/word-conversion.md) a
 An explicit [document template and mail-merge source profile](docs/mail-merge.md) adds native PDF/DOCX scalar, repeat, condition, table and captured-image binding. Complete semantics, fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.
 
 An explicit [logical structure/accessibility source profile](docs/accessibility.md) adds author-supplied roles, language, descriptions, tables, Form/annotation associations and identity-preserving reading-order remediation. Complete UA1/UA2 and production qualification remain mandatory; SDK packing/publication stay blocked.
+
+An explicit [local OCR source profile](docs/local-ocr.md) adds bounded raster/Unicode/word contracts and an optional isolated Tesseract5 adapter with pinned caller assets. Complete real-engine/model/language/RID and production qualification remain mandatory; SDK packing/publication stay blocked.

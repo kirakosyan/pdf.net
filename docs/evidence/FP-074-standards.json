@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-ABI-and-pattern-observations-not-production-qualification",
+  "requirement": "FP-074",
+  "sources": [
+    {
+      "id": "S74-WN01-MIT-PATTERNS",
+      "sourceCommit": "141236a3fe890d220b807a270cec2d86a8f7e3b5",
+      "inventory": "third-party/ocr/reuse.json",
+      "license": "MIT"
+    },
+    {
+      "id": "S74-ACTUAL-TESS5-CAPI",
+      "version": "5.5.0",
+      "engineSha256": "66b27d857aa90bb7a31059c65bb624e918e96a7c276699bd5ac5dca4cf1ba322",
+      "modelSha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "scope": "Explicit original raster through actual C API; no SDK host qualification."
+    }
+  ],
+  "decisions": [
+    "Explicit absolute module/model paths and exact native-version/export/model binding replace any default engine/model discovery.",
+    "Fresh process lifetime retains native module/TLS safely while per-job API/monitor/UTF8/TSV/gray ownership is released before response.",
+    "Headerless C-API TSV is normalized explicitly; raster geometry and raw engine order/confidence remain distinct from semantic order, language accuracy or PDF coordinates.",
+    "Native process reservations, original host isolation and supervised cancellation/deadlines remain mandatory; unavailable Landlock blocks execution rather than selecting fallback."
+  ],
+  "independentReportSha256": "a5942898a4475917f79926dd3af0be083c7c48f67a0943847f8e71bd80968ca1",
+  "productionQualified": false
+}

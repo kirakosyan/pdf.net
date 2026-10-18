@@ -259,6 +259,13 @@
           "System.Text.Json": "[10.0.13, )"
         }
       },
+      "fluent.pdf.ocr": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.rendering": {
         "type": "Project",
         "dependencies": {
@@ -503,6 +510,13 @@
           "System.Text.Json": "[10.0.13, )"
         }
       },
+      "fluent.pdf.ocr": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.rendering": {
         "type": "Project",
         "dependencies": {
@@ -610,6 +624,13 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.ocr": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.rendering": {
@@ -751,6 +772,13 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "System.Text.Json": "[10.0.13, )"
+        }
+      },
+      "fluent.pdf.ocr": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.rendering": {

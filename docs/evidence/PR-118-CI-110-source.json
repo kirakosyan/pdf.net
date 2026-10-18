@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-ci-not-production-qualification",
+  "runId": 39167921767,
+  "sourceCommit": "545bfdd506be4f0d0f1f51c03a68c81e2c99ff6c",
+  "testedMergeCommit": "5331c4e24daf02e416eef3c5909c3d1c2332f62b",
+  "testedTree": "a50e03e2c80980daf707923b4bf2883f3bc3ce9a",
+  "exactMergeTreeVerified": true,
+  "conclusion": "success",
+  "platformJobs": 6,
+  "completedRuntimeLanes": 20,
+  "expectedRuntimeLanes": 20,
+  "passed": 24560,
+  "failed": 0,
+  "skipped": 0,
+  "jobs": [
+    {
+      "jobId": 117794692525,
+      "name": "Contracts (linux-x64)",
+      "conclusion": "success",
+      "logSha256": "1c12226428392ba7596c82c318f6bdef4d3325466084108de5fc439afb5d1f5c",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        }
+      ]
+    },
+    {
+      "jobId": 117794692605,
+      "name": "Contracts (osx-arm64)",
+      "conclusion": "success",
+      "logSha256": "d6c1019cf3d5ad46377a11936ccf9647121088a9894bcd5f790d5a81cef4b725",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        }
+      ]
+    },
+    {
+      "jobId": 117794692657,
+      "name": "Contracts (win-x64)",
+      "conclusion": "success",
+      "logSha256": "5a25cc38f3f6cc11e8a0d2999b5ca5765cd3a7d9cf9d95dbe138f6daaee2e112",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        }
+      ]
+    },
+    {
+      "jobId": 117794692670,
+      "name": "Contracts (win-arm64)",
+      "conclusion": "success",
+      "logSha256": "f72c69810efcc0e7d3d9958fecaca72e8a601570cf82044df3527468c089629b",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        }
+      ]
+    },
+    {
+      "jobId": 117794692700,
+      "name": "Contracts (linux-arm64)",
+      "conclusion": "success",
+      "logSha256": "b5e8df651b51c041efb0ca85437d20f78b03c9399cdef9ca0c601de53fcee282",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        }
+      ]
+    },
+    {
+      "jobId": 117794692787,
+      "name": "Contracts (osx-x64)",
+      "conclusion": "success",
+      "logSha256": "9a73705c88c3a65aa0b762d86233c564849f8dd1e7fb888892d36ac6e6ea6f64",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        },
+        {
+          "failed": 0,
+          "passed": 1228,
+          "skipped": 0,
+          "total": 1228
+        }
+      ]
+    }
+  ],
+  "metadataSha256": "7f2c76cbc3b663b670956483b083925f81b62cc0a04d183a599c59024398550c",
+  "artifacts": [
+    {
+      "id": 12151895107,
+      "name": "source-contracts-linux-arm64",
+      "digestFromGitHub": "sha256:94699b2c753141080887e063016ae99d4229e3f48e5f297f32e726b9f9064ed3",
+      "sizeBytes": 2016719,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39167921767/artifacts/12151895107"
+    },
+    {
+      "id": 12151852223,
+      "name": "source-contracts-osx-x64",
+      "digestFromGitHub": "sha256:08cf947b3a3768f387c09fc26264f298aec5923309bd14090c4e87b77865d36b",
+      "sizeBytes": 2035833,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39167921767/artifacts/12151852223"
+    },
+    {
+      "id": 12151851054,
+      "name": "source-contracts-win-arm64",
+      "digestFromGitHub": "sha256:049cbd27abeb4e35f043e5fa1e3d5d045cc2ad263ffa6bf3b5f9a2eb0804cad1",
+      "sizeBytes": 2017170,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39167921767/artifacts/12151851054"
+    },
+    {
+      "id": 12151661339,
+      "name": "source-contracts-osx-arm64",
+      "digestFromGitHub": "sha256:1daf99deb70c6148b4abe26f9677e2284c60077bc4c8dd0be0ba4f890d9f2e36",
+      "sizeBytes": 2028153,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39167921767/artifacts/12151661339"
+    },
+    {
+      "id": 12151429420,
+      "name": "source-contracts-win-x64",
+      "digestFromGitHub": "sha256:df59927f171420151de2ba58a5232aa611bb18cfc619af4d02c308a949bf8c4e",
+      "sizeBytes": 3292864,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39167921767/artifacts/12151429420"
+    },
+    {
+      "id": 12151054341,
+      "name": "source-contracts-linux-x64",
+      "digestFromGitHub": "sha256:1d3b03887f8aeda8aea07184fef3b0d6bac43536dedb622536da3011a73bf2a7",
+      "sizeBytes": 2018033,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39167921767/artifacts/12151054341"
+    }
+  ],
+  "retention": "Complete decoded logs and workflow/artifact metadata retained outsideGit. No artifact ZIP payload retrieved/extracted. Exact merge bytes reconstructed from GitHub Git data and SHA verified because shell Git authentication expired; tree and both parents verified locally.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "limitations": [
+    "This run covers the exact #43 source tree, not later commits. Final-headCIremainsrequired.",
+    "Actual minimum Framework, exact final SDK packages and complete production qualification remain mandatory."
+  ]
+}

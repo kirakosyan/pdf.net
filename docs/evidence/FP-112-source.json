@@ -94,5 +94,6 @@
     "Complete DOCX/native field/control/story/identity/layout/linguistic/fidelity profiles remain mandatory",
     "Complete hostile-input, independent corpus, fuzz, concurrency, endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
     "Exact final SDK packages and all production gates remain mandatory"
-  ]
+  ],
+  "sourceCI": "docs/evidence/PR-118-CI-110-source.json"
 }

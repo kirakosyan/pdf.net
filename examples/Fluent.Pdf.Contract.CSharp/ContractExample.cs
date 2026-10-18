@@ -315,4 +315,5 @@ public static class ContractExample
         return snapshot.Pages.Count;
     }
     public static PdfDocument TagPdf(PdfDocumentSnapshot source, PdfStructurePlan plan) => PdfAccessibility.Author(source, plan);
+    public static PdfOcrResult RecognizeOcr(PdfOcrRaster image, PdfOcrOptions options, PdfProviderRegistry providers) => PdfOcr.Recognize(image, options, providers);
 }

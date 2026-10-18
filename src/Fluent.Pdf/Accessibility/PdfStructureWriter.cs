@@ -125,7 +125,10 @@ internal sealed class PdfStructureWriter
         var catalog = _g.Copy(_g.Catalog);
         catalog["StructTreeRoot"] = PdfValue.Reference(_root);
         catalog["Lang"] = PdfTextStrings.Encode(_plan.Language, _g.Context);
-        var mark = _g.Copy(_g.Get(_g.Catalog, "MarkInfo"));
+        var declaredMark = _g.Get(_g.Catalog, "MarkInfo");
+        if (declaredMark.Kind != PdfValueKind.Null && declaredMark.Kind != PdfValueKind.Dictionary)
+            throw _r.Error("MarkInfo", "The source MarkInfo entry must be a dictionary.");
+        var mark = _g.Copy(declaredMark);
         mark["Marked"] = PdfValue.Boolean(true);
         mark["Suspects"] = PdfValue.Boolean(false);
         catalog["MarkInfo"] = PdfValue.OwnedDictionary(mark);

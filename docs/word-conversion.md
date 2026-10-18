@@ -34,7 +34,7 @@ Each opaque conversion phase has explicit input/output, character, archive, nest
 
 ## Validation and applicability
 
-Core and adapter contracts target net472, netstandard2.0, net8.0 and net10.0. Actual supported provider/runtime/format behavior needs independent qualification on every required lane. Source API/runtime checks cover all ten SDK assemblies and thirty cross-framework comparisons; portable consumers verify the actual loaded asset. C# and VB `ExportWord` consumers execute through the public API.
+Core and adapter contracts target net472, netstandard2.0, net8.0 and net10.0. Actual supported provider/runtime/format behavior needs independent qualification on every required lane. Source API/runtime checks cover the complete SDK assembly inventory and cross-framework comparisons; portable consumers verify the actual loaded asset. C# and VB `ExportWord` consumers execute through the public API.
 
 Original source observations include real DOC/DOCX/RTF round trips, RTF Unicode/style/table fixtures and synthetic fixed-page rendering. Independent readers inspect Word97 piece tables, WordprocessingML text, RTF text, emitted PNG pixels and the resulting PDF Unicode. Open XML validator 3.5.1 checks Office2007 schema output. Synthetic pixels are not a PDF-rendering or Word-pagination fidelity claim.
 

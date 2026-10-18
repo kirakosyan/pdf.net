@@ -162,3 +162,5 @@ Source progress through #42 now includes [optional Word interchange](word-conver
 Source progress through #43 includes [document templates/mail merge](mail-merge.md). Full FP-112 scope and production qualification remain mandatory; #44–#50 remain in progress.
 
 Source progress through #44 includes [logical structure/accessibility](accessibility.md). Full FP-067 scope and production qualification remain mandatory; #45–#50 remain in progress.
+
+Source progress through #45 includes [explicit local OCR](local-ocr.md). Full FP-074 scope and production qualification remain mandatory; #46–#50 remain in progress.

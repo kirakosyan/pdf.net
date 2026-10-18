@@ -73,3 +73,5 @@ Explicit optional Word interchange, pinned published dependency identity, origin
 Bounded native PDF/DOCX templates, closed scalar/record/condition/image evaluation and shared-context optional Word export now have a source profile; complete template semantics and production qualification remain pending.
 
 Explicit logical structure authoring/inspection/remediation, exact MCID/parent-tree/annotation associations and optional complete independent UA reports now have a source profile; complete accessibility, human/screen-reader review and production qualification remain pending.
+
+Explicit raster/OCR contracts and an optional isolated Tesseract5 C-API adapter now have a source profile with pinned native/model assets and retained MIT pattern attribution. Complete actual-engine/model/RID/accuracy and production qualification remain pending.

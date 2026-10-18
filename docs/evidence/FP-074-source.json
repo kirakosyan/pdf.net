@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-074",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1200,
+      "failed": 0,
+      "skipped": 0,
+      "newManagedOcrCases": 11,
+      "typedMarkInfoRegressionCases": 1,
+      "trxSha256": "d6939a07755278e66c11b350b621993a087afd6af141d0b8a7571b3217d55f3d"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 107,
+      "failed": 0,
+      "skipped": 0,
+      "newManagedOcrCases": 11,
+      "typedMarkInfoRegressionCases": 1,
+      "trxSha256": "ffc6fb1378eb81b3c323c4c9d763d104db59e38836cab1996d018e0fd57f350b"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 107,
+      "failed": 0,
+      "skipped": 0,
+      "newManagedOcrCases": 11,
+      "typedMarkInfoRegressionCases": 1,
+      "trxSha256": "1ef014f31dfb13a810091f871033132a892819f57604b952984d4a6b173859bb"
+    }
+  ],
+  "newManagedSourceCases": 11,
+  "newOriginalNativeContractCases": 10,
+  "sdkLibraries": 11,
+  "apiComparisons": 33,
+  "apiComparisonReportSha256": "ac7b46d62ecfed7ac6b6c3ffbb700f71c18b9a112f050499ddc11837f133d01e",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Ocr/PdfOcrRaster.cs": "c363eb6f3ab009470e697bee98a13921e72160daf6447bdd35baddb958ee153e",
+    "src/Fluent.Pdf/Ocr/PdfOcrContracts.cs": "4087b3a65cc0067188ca062237a7565e2e8cde3d6aab695588d9b293f777c413",
+    "src/Fluent.Pdf/Ocr/PdfOcr.cs": "676140658672bab6343a160fdf451c4cf99ab2c4712245928d81ae34b1fd6d01",
+    "src/Fluent.Pdf.Ocr/OcrTsv.cs": "2e53e11d92c6e1178641f4bf67315ffca63d50018510b17bd63bbb555f7db77f",
+    "src/Fluent.Pdf.Ocr/IsolatedTesseractOcr.cs": "2252a2c05777668dc94d61e27179179380480356d91eefa8d2b36231f78a16d7",
+    "native/ocr/bridge.c": "a8bad90e27435dcc1b1fa5d3d6620cf1421e0fec40a53cb6b2a2fd5feca63e24",
+    "tests/native/ocr-fixture.c": "7f339f7a6c734352ae470540e189376c1cbd1df2bfe55cc79d1a824710327ff4",
+    "tests/native/ocr-fixture.def": "31a2b63718a4bf5edbd5679013f672c5875f707039418109ae9243c49ece9b4e",
+    "tests/native/ocr-missing.def": "0232e23d345237e88d0802ee88492d97a918a03d37d1950f559592a6cffc5ab2",
+    "src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj": "3b846067451acba009aa9bf48436ef9e0a4ed07d41bc36326a9a2715a5a05c73",
+    "src/Fluent.Pdf.Ocr/packages.lock.json": "971461ff71dbb6c0b41297ab76b77de11cdc3da1f696473b8b212af75fd7aea1",
+    "src/Fluent.Pdf.Ocr/PublicAPI.Unshipped.txt": "45f3f15ebd5a757ff990ef12184faaa315e86997aaa89b4d93bd6f6d9e355537",
+    "src/Fluent.Pdf/Accessibility/PdfStructureWriter.cs": "93051e3529579deec4e5f65f2b1f663dcb4451cbcad4757090c8bee7a9b6c445",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "4db0670d29a1c83afe091be870a88e73f34762e4ec326652dfee6c53c89c8a65",
+    "src/Fluent.Pdf/Properties/AssemblyInfo.cs": "7784b2dd8f14f64e33e241683916193ae61b2dfdfccad28d8f729e89c9f53a4c",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "14c34164cb37874346fa82861ab4547a147cceac16d8eab410e1d8ee6da97506",
+    "eng/ContractProjectReference.props": "6fd03784ee4b9e61246ed76b71b3e6fba4011ee41630518b3074334f2eb8a312",
+    "eng/check-api.ps1": "8f855c3a83c36f0942799381b84fe797a79eafda39d13148541e9df4259129f9",
+    "eng/test-contracts.ps1": "4af379653de8f516c591013869ad44e43e5785706364c519d90789035ab88c59",
+    "eng/build-native-fixtures.ps1": "74178f356bd3dba68d32bd2c1175c8d721e84a03697c15c4aff234d5351f9c7c",
+    "eng/build-ocr-fixture.ps1": "1902088dd1701dae0a56c1d1d070f92b229c50282604784a31d8b1c021292d5f",
+    "Fluent.Pdf.slnx": "d1cbfe56411a444ec2765d7720220b5cddb71345bc4e8c8e8e7b7b4a86a76165",
+    "tests/Fluent.Pdf.Contract.Tests/OcrTests.cs": "bea7aa716e25063fd44ede0184168757c7b23d655f7c11907de3ad72a58465a5",
+    "tests/Fluent.Pdf.Contract.Tests/NativeOcrContractTests.cs": "ca423f5bb34464c2608878b0d77e7d55c089b7b2cd00e82ed61dc0ef7b407acd",
+    "tests/Fluent.Pdf.Contract.Tests/AccessibilityTests.cs": "11d8a2ba9cf4f44d1002bd636c6a64bfa2b424fa1a6df553d7910cfb3eeee366",
+    "tests/Fluent.Pdf.Contract.Tests/RuntimeIdentityTests.cs": "81c4930b78bc340f0b0f85c2923b2aba56145914a056f5ee9bee101389864ee7",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "767b5cc898749035e484e9b9d548fa0de019d66e0d578c1d0106e70160f57795",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "89091ab08b5cda8a2e8759c31cca03fffe8c6ad6c6dad36c160a17b32f7759a6"
+  },
+  "reports": {
+    "ocr-final-build.log": "76057e7aad5a1bc4c646a7b98872abe400a6e8d5a0eb4fc4249fe804afbcac42",
+    "ocr-final-net10.log": "609bd3fa2c0405ee53bb625e3937e56e9541f9027f0956167d4fc82c21b8d591",
+    "ocr-final-net8.log": "bd2a7c23f5c0de92914fa339ac8344065adae9355a33fe6674e9a53627ca1653",
+    "ocr-fallback-build.log": "663434717b68df6e887609204224a42774782fd5f03ec1230853f9da0547d97a",
+    "ocr-final-fallback.log": "53f7da1b8d3b58338052e506b457ee2530d83e4789aa9fb09ba548a913744c95",
+    "ocr-normal-build.log": "3de111f8e09ec22717afc331f8a77fa898003d3f57dfdd289f32f3d38ef40bae",
+    "ocr-final-api.log": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c",
+    "ocr-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "ocr-fixtures-build1.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ocr-native-build1.log": "e7410f81aab754eec1af4fa589e922707eade759eb9cbac77a4e6fb0e854ed1d",
+    "ocr-native-build2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ocr-native-build3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ocr-native-probe1.log": "296682d8f95570b69fb8ac6075a0bf6b39ed704f962eb0b9a928379315a02175",
+    "ocr-native-probe2.log": "fc880d82bd6444731b6aa60365a076d8aed25acf63b815a6c26807a8bfdb628d",
+    "ocr-native-host-first.log": "ccca239ec8c1bcb6207f6cb8e2a7c53760b9d3cb1fb099ffd968946118f4f2c0"
+  },
+  "scope": [
+    "Original immutable raster/Unicode/word/geometry/confidence/provider contracts and mandatory same-context result binding/limits/ownership",
+    "Optional original isolated Tesseract5 C-API/TSV bridge with explicit native/model inventory, actual native version, exact export diagnostics and finite native buffers/monitor/deadline/parent supervision",
+    "Narrow approved MIT source-pattern adaptation with retained revision/notice/digests, no Word/model/rendering dependency in core and no implicit downloads/discovery"
+  ],
+  "reuseInventory": "third-party/ocr/reuse.json",
+  "reuseInventorySha256": "aa9fb171710063cc429aed1ef75d79c9c960061e0f368a0c9f1be496857875cf",
+  "independentReportSha256": "a5942898a4475917f79926dd3af0be083c7c48f67a0943847f8e71bd80968ca1",
+  "fixtureAudit": [
+    "First native C compile failed misleading-indentation warnings; source formatting corrected and clean warning-as-error builds retained. A draft cleanup-order issue was corrected before compiling/executing the bridge.",
+    "First actual native tool probe revealed C-API TSV has no header. The SDK bridge now adds its explicit canonical wire header under the same finite ceiling; the independent checker/labels were not modified. Actual second probe passed text/word boxes/version/confidence and same-engine CLI comparison.",
+    "Core/optional managed compile errors were only expected API-baseline declarations; actual clean build/tests pass after baselines are synchronized.",
+    "A separate malformed MarkInfo source finding from44 is now a typed Accessibility.MarkInfo failure with an original-preservation regression; historical44reports remain bound to their actual source.",
+    "Native C-API contract fixtures report5.5.0-fixture and use owned original model-marker data; they check protocol/ownership/errors/cancel, never real-engine recognition accuracy."
+  ],
+  "localNativeFailure": {
+    "attempted": 1,
+    "passed": 0,
+    "failed": 1,
+    "skipped": 0,
+    "code": "Native.SandboxUnavailable",
+    "hostStage": 9,
+    "nativeStatus": 38,
+    "meaning": "Host lacks Landlock; isolated SDK execution fails closed. No unrestricted SDK fallback.",
+    "trxSha256": "252168eeae20e828e5a13d0ee7b57573392e35a375ed3cbc97cb1c21154f4b4c",
+    "productionQualificationBlocked": true
+  },
+  "localNativeExclusions": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeTextTests",
+    "NativeRenderingTests",
+    "NativeOcrContractTests"
+  ],
+  "sourceCI": "New exact-head unfiltered CI required; no local native-positive execution is presented as passing.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete actual native Tesseract/model integration on every required RID/runtime, cancellation/allocation/handle/concurrency/endurance and security qualification remain mandatory",
+    "Pinned labeled language/scan corpus CER/WER, independent geometry/accuracy/fidelity and every required minimum/current/fallback runtime qualification remain mandatory",
+    "Exact final SDK packages, dependency/model provenance qualification and all production gates remain mandatory"
+  ]
+}

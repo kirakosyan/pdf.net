@@ -10,7 +10,7 @@ public sealed class AccessibilityTests
     {
         using var f = new SyntaxFixtures();
         var offsets = new Dictionary<int, long>();
-        offsets[1] = f.Object(1, "<< /Type /Catalog /Pages 2 0 R >>");
+        offsets[1] = f.Object(1, "<< /Type /Catalog /Pages 2 0 R " + (mode == "badMarkInfo" ? "/MarkInfo (malformed)" : "") + " >>");
         offsets[2] = f.Object(2, "<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
         offsets[3] = f.Object(3, "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 300 400] /Contents 4 0 R /Resources << " + (mode.StartsWith("form", StringComparison.Ordinal) ? "/XObject << /X 5 0 R >>" : "") + " >> " + (mode == "link" ? "/Annots [5 0 R]" : "") + " >>");
         string content = mode.StartsWith("form", StringComparison.Ordinal) ? "/X Do" : mode == "unmarked" ? "0 0 10 10 re f" : "/P <</MCID 0>> BDC 0 0 10 10 re f EMC /P <</MCID 1>> BDC 20 0 10 10 re f EMC /Artifact BMC 30 0 10 10 re f EMC";
@@ -240,6 +240,13 @@ public sealed class AccessibilityTests
         Assert.Null(result.HumanReview);
     }
 
+    [Fact]
+    public void MalformedMarkInformationHasATypedDiagnosticAndPreservesTheSource()
+    {
+        using var original = Open("badMarkInfo");
+        Assert.Equal("Accessibility.MarkInfo", Error(() => PdfAccessibility.Author(original.CreateSnapshot(), Plan())));
+        Assert.Empty(PdfAccessibility.Inspect(original.CreateSnapshot()).Elements);
+    }
     private sealed class Validator(string mode = "") : IPdfAccessibilityValidator
     {
         public PdfProviderDescriptor Descriptor { get; } = new("original.accessibility-boundary", "1", PdfCapability.ValidateAccessibility);

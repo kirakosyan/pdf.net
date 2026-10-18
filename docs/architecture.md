@@ -135,3 +135,5 @@ FP-053 keeps core independent of Word dependencies. An optional pinned adapter u
 FP-112 evaluates closed immutable data through shared generation or an original bounded DOCX package editor; optional Word import uses the same mandatory root context. See [mail merge](mail-merge.md).
 
 FP-067 keeps passive content/structure traversal and transactional association edits in core. Optional compliance bridges exact-engine complete reports without discovering or launching engines; automated validation never supplies human review. See [accessibility](accessibility.md).
+
+FP-074 keeps OCR contracts in core and explicit loading/model binding inside a fresh existing isolated worker through the optional OCR assembly. Narrow MIT patterns retain pinned attribution; no Word/Skia/native discovery dependency enters core. See [local OCR](local-ocr.md).

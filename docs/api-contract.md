@@ -163,3 +163,5 @@ FP-053 adds `PdfWordConversion`, explicit format/reconstruction/limit contracts 
 FP-112 adds immutable merge data/blocks, explicit culture/missing-field/visit policies, native `PdfMailMerge` and optional `PdfDocxMailMerge` contracts. See [mail merge](mail-merge.md).
 
 FP-067 adds explicit immutable structure plans, passive association inspection, identity-preserving semantic/reading-order remediation and exact-input independent UA validation with separate human review. See [accessibility](accessibility.md).
+
+FP-074 adds explicit immutable OCR rasters/options/words/results, mandatory-context providers and optional isolated Tesseract5 recognition. Source checks cover eleven SDK assemblies and thirty-three API comparisons; see [local OCR](local-ocr.md).

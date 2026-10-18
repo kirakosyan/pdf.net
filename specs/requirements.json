@@ -2766,7 +2766,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/local-ocr.md",
+        "implemented": [
+          "Explicit immutable raster/recognition/Unicode/word geometry/confidence contracts and same-context provider validation",
+          "Optional original bounded isolated Tesseract5 C API/TSV bridge with explicit pinned engine/model paths, version and precise export/error diagnostics",
+          "Reviewed narrow MIT attribution and finite API/monitor/text/raster/worker ownership; no Word/OCR package cycle or implicit download"
+        ],
+        "pending": [
+          "Complete actual native Tesseract/model integration on every required RID/runtime, cancellation/allocation/handle/concurrency/endurance and security qualification remain mandatory",
+          "Pinned labeled language/scan corpus CER/WER, independent geometry/accuracy/fidelity and every required minimum/current/fallback runtime qualification remain mandatory",
+          "Exact final SDK packages, dependency/model provenance qualification and all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-075",

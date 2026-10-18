@@ -381,4 +381,7 @@ Public Module ContractExample
     Public Function TagPdf(source As PdfDocumentSnapshot, plan As PdfStructurePlan) As PdfDocument
         Return PdfAccessibility.Author(source, plan)
     End Function
+    Public Function RecognizeOcr(image As PdfOcrRaster, options As PdfOcrOptions, providers As PdfProviderRegistry) As PdfOcrResult
+        Return PdfOcr.Recognize(image, options, providers)
+    End Function
 End Module

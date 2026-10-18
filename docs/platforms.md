@@ -91,3 +91,5 @@ FP-053 core and optional Word contracts target all four library frameworks. Sour
 FP-112 managed/native-template and optional Word-template APIs target all four frameworks. Actual Word/provider/minimum-runtime and final-package qualification remain pending; see [mail merge](mail-merge.md).
 
 FP-067 core and optional compliance contracts target all four SDK frameworks. Actual minimum/provider/OS/package and complete automated/human accessibility qualification remain pending; see [accessibility](accessibility.md).
+
+FP-074 core/optional OCR contracts target all four frameworks. A path, header or original C API fixture is not actual Tesseract/model/RID qualification. Complete actual-engine/minimum-runtime/final-package evidence remains mandatory; see [local OCR](local-ocr.md).
