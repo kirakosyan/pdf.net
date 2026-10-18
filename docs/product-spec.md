@@ -81,3 +81,5 @@ FP-028 has an original [resource extraction profile](resource-extraction.md); fu
 FP-026 has a [search/replacement source profile](text-search.md); complete profiles and production qualification remain mandatory.
 
 FP-027 has a [table extraction source profile](table-extraction.md); complete detection/reconstruction, typed interchange and production qualification remain mandatory.
+
+FP-099 has a [typed generation/event source profile](data-generation.md); complete event/model/callback/data coverage and production qualification remain mandatory.

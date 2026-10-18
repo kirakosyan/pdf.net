@@ -157,50 +157,65 @@ public sealed class PdfPageTemplateResult
     /// <summary>Creates a document with final decorations, page labels and internal locator links under a new bounded operation.</summary>
     public PdfDocument CreateDocument(PdfOptions? options = null, CancellationToken cancellationToken = default)
     {
-        var document = Body.CreateDocument(options, cancellationToken);
+        options ??= PdfOptions.Default;
+        PdfDocument? document = null;
+        var completed = new List<Action<PdfOperationReport>>();
         try
         {
-            var completed = new List<Action<PdfOperationReport>>();
-            var report = PdfFont.Run("CreateTemplateDocument", "managed.templates", document.Options.OperationPolicy, cancellationToken, context =>
-            {
-                for (int i = 0; i < document.Pages.Count; i++)
-                {
-                    context.Checkpoint();
-                    var page = document.Pages[i];
-                    var decoration = Decorations[i];
-                    if (decoration.Placements.Count == 0)
-                        continue;
-                    var form = PdfGraphicsObjects.FormCore(decoration.Drawing, page.Geometry.Boxes.Media, null, null, context);
-                    string name = "Decoration";
-                    int suffix = 0;
-                    while (page.GraphicsResources.Bindings.Any(b => b.Name == name))
-                        name = "Decoration" + (++suffix).ToString(System.Globalization.CultureInfo.InvariantCulture);
-                    var roles = page.StructureRoles;
-                    var operations = new List<PdfContentOperation>(page.Content!.Operations);
-                    context.Consume(PdfResourceKind.ExpandedBytes, operations.Count * 32L + 512);
-                    operations.Add(new(PdfOperator.SaveState));
-                    operations.Add(new(PdfOperator.BeginMarkedContent, PdfValue.Name("Artifact")));
-                    operations.Add(new(PdfOperator.DrawObject, PdfValue.Name(name)));
-                    operations.Add(new(PdfOperator.EndMarkedContent));
-                    operations.Add(new(PdfOperator.RestoreState));
-                    var content = PdfContentProgram.CreateCore(operations, PdfContentKind.Page, context);
-                    completed.Add(r =>
-                    {
-                        form.OperationReport = r;
-                        content.OperationReport = r;
-                    });
-                    page.SetResource(name, form);
-                    page.Content = content;
-                    page.SetStructureRoles(roles);
-                }
-
-                foreach (var link in Links)
-                    document.Pages[link.SourcePage].AddDeferredLink(link.Bounds, document.Pages[link.TargetPage], link.Point, context);
-                document.SetPageNumbering(Template.Numbering);
-            }, PdfCapability.WriteDocument);
+            var report = PdfFont.Run("CreateTemplateDocument", "managed.templates", options.OperationPolicy, cancellationToken, context => document = CreateDocumentCore(options, null, context, completed), PdfCapability.WriteDocument);
             foreach (var complete in completed)
                 complete(report);
-            document.SetCompositionReport(report);
+            document!.SetCompositionReport(report);
+            return document;
+        }
+        catch
+        {
+            document?.Dispose();
+            throw;
+        }
+    }
+
+    internal PdfDocument CreateDocumentCore(PdfOptions options, PdfProviderRegistry? providers, PdfOperationContext context, List<Action<PdfOperationReport>> completed)
+    {
+        context.Consume(PdfResourceKind.ExpandedBytes, 512);
+        var document = Body.CreateDocumentCore(options, providers, context, completed);
+        try
+        {
+            using var modelScope = document.UseModelContext(context);
+            for (int i = 0; i < document.Pages.Count; i++)
+            {
+                context.Checkpoint();
+                var page = document.Pages[i];
+                var decoration = Decorations[i];
+                if (decoration.Placements.Count == 0)
+                    continue;
+                var form = PdfGraphicsObjects.FormCore(decoration.Drawing, page.Geometry.Boxes.Media, null, null, context);
+                string name = "Decoration";
+                int suffix = 0;
+                while (page.GraphicsResources.Bindings.Any(b => b.Name == name))
+                    name = "Decoration" + (++suffix).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                var roles = page.StructureRoles;
+                context.Consume(PdfResourceKind.ExpandedBytes, page.Content!.Operations.Count * 32L + 512);
+                var operations = new List<PdfContentOperation>(page.Content.Operations);
+                operations.Add(new(PdfOperator.SaveState));
+                operations.Add(new(PdfOperator.BeginMarkedContent, PdfValue.Name("Artifact")));
+                operations.Add(new(PdfOperator.DrawObject, PdfValue.Name(name)));
+                operations.Add(new(PdfOperator.EndMarkedContent));
+                operations.Add(new(PdfOperator.RestoreState));
+                var content = PdfContentProgram.CreateCore(operations, PdfContentKind.Page, context);
+                completed.Add(r =>
+                {
+                    form.OperationReport = r;
+                    content.OperationReport = r;
+                });
+                page.SetResource(name, form);
+                page.Content = content;
+                page.SetStructureRoles(roles);
+            }
+
+            foreach (var link in Links)
+                document.Pages[link.SourcePage].AddDeferredLink(link.Bounds, document.Pages[link.TargetPage], link.Point, context);
+            document.SetPageNumbering(Template.Numbering);
             return document;
         }
         catch

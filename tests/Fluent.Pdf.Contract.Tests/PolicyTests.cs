@@ -375,7 +375,9 @@ public sealed class PolicyTests
     {
         var limit = TimeSpan.FromSeconds(30);
         TimeSpan elapsed = TimeSpan.Zero;
-        var context = new PdfOperationContext("Fixture", "local", PdfCapability.ReadDocument, new PdfOperationPolicy(limits: new PdfResourceLimits(maximumElapsedTime: limit)), CancellationToken.None, () => elapsed);
+        var policy = new PdfOperationPolicy();
+        Assert.Equal(limit, policy.Limits.MaximumElapsedTime);
+        var context = new PdfOperationContext("Fixture", "local", PdfCapability.ReadDocument, policy, CancellationToken.None, () => elapsed);
         try
         {
             elapsed = limit + TimeSpan.FromTicks(tickOffset);

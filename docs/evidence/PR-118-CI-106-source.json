@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-ci-not-production-qualification",
+  "runId": 39160272002,
+  "sourceCommit": "30e8b910dd7815f286828f42ba522a3fb772927c",
+  "testedMergeCommit": "8de96e1e821363cc1fbaac78a797a720b5d7285b",
+  "testedTree": "2e126d7a0ff964243341e7dd5f6d50436753d365",
+  "exactMergeTreeVerified": true,
+  "conclusion": "failure",
+  "platformJobs": 6,
+  "completedRuntimeLanes": 15,
+  "expectedRuntimeLanes": 20,
+  "passed": 17099,
+  "failed": 1,
+  "skipped": 0,
+  "jobs": [
+    {
+      "jobId": 117771927571,
+      "name": "Contracts (win-arm64)",
+      "conclusion": "failure",
+      "logSha256": "0bbd1b32c3fa29f2175f41ccfc14c6f958dc8b0aa836250d58f130a5dfe96bc9",
+      "completedLaneTotals": [
+        {
+          "failed": 1,
+          "passed": 1139,
+          "skipped": 0,
+          "total": 1140
+        }
+      ]
+    },
+    {
+      "jobId": 117771927763,
+      "name": "Contracts (osx-x64)",
+      "conclusion": "success",
+      "logSha256": "e214495e77b5270f99d4c1c0e205b0f57dceddc61c94f5e36a09996126a1e740",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        }
+      ]
+    },
+    {
+      "jobId": 117771927772,
+      "name": "Contracts (osx-arm64)",
+      "conclusion": "failure",
+      "logSha256": "972f81964a5afe9891fe51c67f4035473879671b2d832f2abb5cba5512ce4296",
+      "completedLaneTotals": []
+    },
+    {
+      "jobId": 117771927834,
+      "name": "Contracts (linux-x64)",
+      "conclusion": "success",
+      "logSha256": "d31c536a28ce4d840f72e113b4a6f3a1efad3a9e2a30267e63286c04e01acefb",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        }
+      ]
+    },
+    {
+      "jobId": 117771927838,
+      "name": "Contracts (win-x64)",
+      "conclusion": "success",
+      "logSha256": "440c71d8bedd2e63884c6a8f2c7e95dce4bdebd4446859acf2f0e42cec7c9ebf",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        }
+      ]
+    },
+    {
+      "jobId": 117771927854,
+      "name": "Contracts (linux-arm64)",
+      "conclusion": "success",
+      "logSha256": "2f15d96309eb5e5c16be3bc9762471f548cbc4c40f080507cd162b4e6374c89b",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        },
+        {
+          "failed": 0,
+          "passed": 1140,
+          "skipped": 0,
+          "total": 1140
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12149236870,
+      "name": "source-contracts-osx-x64",
+      "digest": "sha256:5696b60f33f6fa3aac42dfbc621de6580f83faf6d7395c41de93684ec28b1804",
+      "sizeBytes": 1957586,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39160272002/artifacts/12149236870"
+    },
+    {
+      "id": 12149121323,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:ec7876b4f1763c0abab57a4aa83bb2398881b2c231c706e3651d6d23703cddaf",
+      "sizeBytes": 3161752,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39160272002/artifacts/12149121323"
+    },
+    {
+      "id": 12148637330,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:f60063328afa3081d6be2ea648f8a8eb8c6eb1b5c0e1affb9836a8bf44f85866",
+      "sizeBytes": 1938123,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39160272002/artifacts/12148637330"
+    },
+    {
+      "id": 12148582730,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:dc72b2394bb4db74882576cd7e26049e833bd472c70c936c2c1fd8941ac79f1e",
+      "sizeBytes": 1937473,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39160272002/artifacts/12148582730"
+    },
+    {
+      "id": 12148543255,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:524eecdd15dbd884a87d3329354644e97dc07024fbbbc6a26de68ef51c4faf0e",
+      "sizeBytes": 679732,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39160272002/artifacts/12148543255"
+    },
+    {
+      "id": 12148497861,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:b67fd46d16950ae115c80eafb6e87baaa9fef6759fc4a4c81e39a8b75c7274ad",
+      "sizeBytes": 68021,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39160272002/artifacts/12148497861"
+    }
+  ],
+  "retention": "All six complete logs/run/artifact metadata/exact merge retained outside repository; archives were not downloaded/extracted.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "limitations": [
+    "Source CI does not qualify complete profiles, actual minimum runtimes, exact final packages or full production gates.",
+    "This run binds the stated source commit, not later changes."
+  ],
+  "failureAnalysis": {
+    "win-arm64": "net8 default30s operation deadline enforced during64process-startup memory fixture;1139passed1failed. Laternet10/fallbacknotexecuted.",
+    "osx-arm64": "APItoolprocess exited137 onFonts/net472after9successful comparisons; no API mismatch diagnostic. All3runtime lanes did not execute; OS-kill cause not established.",
+    "followup": "Keep64decodes/defaultmemory and explicit2-minute batchtest deadline; assert actual default30s boundary separately; release completed CI build servers before unchanged API checks; require fresh full current-head CI."
+  }
+}

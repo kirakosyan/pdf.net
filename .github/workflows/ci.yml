@@ -51,6 +51,8 @@ jobs:
         run: dotnet tool restore
       - name: Build SDK and executable C#/VB contracts
         run: dotnet build Fluent.Pdf.slnx -c Release --no-restore
+      - name: Release completed build servers before API comparison
+        run: dotnet build-server shutdown
       - name: Compare API across target frameworks
         shell: pwsh
         run: ./eng/check-api.ps1

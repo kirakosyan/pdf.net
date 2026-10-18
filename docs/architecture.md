@@ -125,3 +125,5 @@ FP-028 separates immutable resource identities, effective bindings and operator 
 FP-026 shares one capture/extraction/matching/shaping/font/write context. Replacement edits exact source strings with TJ advance compensation and isolated explicit-font foreground text; unsupported owner/reflow profiles reject. See [text search](text-search.md).
 
 FP-027 uses one graph/text/resource context for explicit geometric inference. Immutable page cells keep source provenance; continuation groups retain original headers, and interchange has separate bounded/atomic export contexts. See [table extraction](table-extraction.md).
+
+FP-099 shares binding/layout/template/model/write helpers under one root generation context. Private model assembly carries the context into page/resource mutations; immutable observer views and phase/thread/cycle guards protect staged work. See [data generation](data-generation.md).

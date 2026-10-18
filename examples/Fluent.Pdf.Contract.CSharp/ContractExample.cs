@@ -5,6 +5,11 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfDocument GenerateData(IEnumerable<string> rows, PdfFlowOptions layout, PdfFlowTextStyle style, PdfProviderRegistry providers)
+    {
+        var template = new PdfGenerationTemplate<string>("sample-data", (context, row) => context.Paragraph(row, style));
+        return PdfDataGeneration.Generate(rows, template, new PdfGenerationOptions(layout, ""), providers);
+    }
     public static PdfTableExtractionResult ExtractTables(PdfDocumentSnapshot source, PdfTableDetectionMode mode) => PdfTableExtraction.Read(source, new[] { 0 }, new PdfTableExtractionOptions(mode));
     public static PdfTextSearchResult Search(PdfDocumentSnapshot source, string literal) => PdfTextSearch.FindPage(source, 0, new PdfTextQuery(literal));
     public static PdfPageResourceManifest ExtractResources(PdfDocumentSnapshot source, int page) => PdfResourceExtraction.ReadPage(source, page);

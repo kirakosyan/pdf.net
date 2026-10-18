@@ -77,7 +77,6 @@ public sealed class PdfFlowPage
     }
 
     internal PdfTemplateLocator[] TemplateLocators { get; }
-
     /// <summary>Gets the zero-based output page index.</summary>
     public int Index { get; }
     /// <summary>Gets the completed page canvas with content-relative point coordinates.</summary>
@@ -117,38 +116,57 @@ public sealed class PdfFlowResult
     /// <summary>Creates a caller-owned document from already laid-out pages. Save is a separate bounded operation.</summary>
     public PdfDocument CreateDocument(PdfOptions? options = null, CancellationToken cancellationToken = default)
     {
-        var document = Pdf.Create(options);
+        options ??= PdfOptions.Default;
+        PdfDocument? document = null;
+        var completed = new List<Action<PdfOperationReport>>();
         try
         {
-            var finish = new List<Action<PdfOperationReport>>();
-            bool tagged = Pages.Any(p => p.Columns.Count > 0);
-            var report = PdfFont.Run("CreateFlowDocument", "managed.composition", document.Options.OperationPolicy, cancellationToken, context =>
-            {
-                foreach (var page in Pages)
-                {
-                    context.Checkpoint();
-                    context.Consume(PdfResourceKind.Objects, 1);
-                    context.Consume(PdfResourceKind.ExpandedBytes, 512);
-                    var target = document.Pages.Add(Options.Geometry);
-                    if (tagged)
-                    {
-                        var value = PdfFlowTaggedPage.Build(page, Options, context, finish);
-                        foreach (var binding in value.Resources.Bindings)
-                            target.SetResource(binding.Name, binding.Resource);
-                        target.Content = value.Content;
-                        target.SetStructureRoles(value.Roles);
-                    }
-                    else
-                    {
-                        foreach (var binding in page.Canvas.Drawing.Resources.Bindings)
-                            target.SetResource(binding.Name, binding.Resource);
-                        target.Content = page.Canvas.Drawing.Content;
-                    }
-                }
-            }, PdfCapability.WriteDocument);
-            foreach (var complete in finish)
+            var report = PdfFont.Run("CreateFlowDocument", "managed.composition", options.OperationPolicy, cancellationToken, context => document = CreateDocumentCore(options, null, context, completed), PdfCapability.WriteDocument);
+            foreach (var complete in completed)
                 complete(report);
-            document.SetCompositionReport(report);
+            document!.SetCompositionReport(report);
+            return document;
+        }
+        catch
+        {
+            document?.Dispose();
+            throw;
+        }
+    }
+
+    internal PdfDocument CreateDocumentCore(PdfOptions options, PdfProviderRegistry? providers, PdfOperationContext context, List<Action<PdfOperationReport>> completed)
+    {
+        context.Consume(PdfResourceKind.ExpandedBytes, 512);
+        var document = Pdf.Create(options, providers);
+        try
+        {
+            using var modelScope = document.UseModelContext(context);
+            bool tagged = Pages.Any(page => page.Columns.Count > 0);
+            var finish = completed;
+            foreach (var page in Pages)
+            {
+                context.Checkpoint();
+                context.Consume(PdfResourceKind.Objects, 1);
+                context.Consume(PdfResourceKind.ExpandedBytes, 512);
+                if (document.Pages.Count >= options.MaximumPages)
+                    context.Report(new("Limit.Pages", "The document page limit was reached."));
+                var target = document.Pages.Add(Options.Geometry);
+                if (tagged)
+                {
+                    var value = PdfFlowTaggedPage.Build(page, Options, context, finish);
+                    foreach (var binding in value.Resources.Bindings)
+                        target.SetResource(binding.Name, binding.Resource);
+                    target.Content = value.Content;
+                    target.SetStructureRoles(value.Roles);
+                }
+                else
+                {
+                    foreach (var binding in page.Canvas.Drawing.Resources.Bindings)
+                        target.SetResource(binding.Name, binding.Resource);
+                    target.Content = page.Canvas.Drawing.Content;
+                }
+            }
+
             return document;
         }
         catch

@@ -76,5 +76,6 @@
     "Complete Form/structure/MCID/ActualText replacement, color/z-order and all text geometry profiles remain mandatory",
     "Complete paragraph/run reflow, ink/font/shaping/overflow profiles and full deterministic corpora remain mandatory",
     "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
-  ]
+  ],
+  "successfulSourceCI": "docs/evidence/PR-118-CI-105-source.json"
 }

@@ -152,3 +152,5 @@ Source progress through #37 now includes [resource extraction](resource-extracti
 Source progress through #38 now includes [search and text replacement](text-search.md). Full FP-026 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
 
 Source progress through #39 now includes [table/structured-data extraction](table-extraction.md). Full FP-027 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #40 now includes [document events and typed generation](data-generation.md). Full FP-099 scope and production qualification remain mandatory; dependent requirements remain independently scoped.

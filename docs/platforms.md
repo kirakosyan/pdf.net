@@ -81,3 +81,5 @@ FP-028 managed contracts target all four library frameworks. Actual independent 
 FP-026 managed contracts target all four library frameworks. Independent original text/raster observations currently cover Linux x64/.NET10; complete runtime/provider/profile and final-package qualification remain mandatory.
 
 FP-027 managed contracts target all four library frameworks. Independent original labeled table observations currently cover Linux x64/.NET10; all required runtime/profile/corpus and exact-package qualification remain mandatory.
+
+FP-099 managed contracts target all four library frameworks. Independent original generation observations currently cover Linux x64/.NET10; complete callback/provider/runtime/corpus and exact-package qualification remain mandatory.

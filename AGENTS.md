@@ -63,3 +63,5 @@ Passive resource/path/artifact inventory, exact encoded stream export and explic
 Bounded literal/regex/region/style search and explicit advance-preserving text replacement now have a source profile; complete replacement/reflow/accessibility profiles and production qualification remain pending.
 
 Explicit literal-grid/aligned-text table inference, rectangular merged cells, continuation provenance and bounded CSV/JSON now have a source profile; complete reconstruction profiles and production qualification remain pending.
+
+Bounded typed generation, reusable record templates and ordered precommit record/layout/page/save hooks now have a shared-context source profile; complete event/model/host coverage and production qualification remain pending.

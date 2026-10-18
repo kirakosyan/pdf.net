@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-027",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "30e8b910dd7815f286828f42ba522a3fb772927c",
+  "sourceTree": "2e126d7a0ff964243341e7dd5f6d50436753d365",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -90,5 +90,6 @@
     "Complete multiple/irregular/rotated/conditional/clip/owner, borderless-merge, automatic header and wrapped continuation profiles remain mandatory",
     "Complete typed cultural/schema/date/boolean profiles and full labeled precision/recall/continuation corpora remain mandatory",
     "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
-  ]
+  ],
+  "failedSourceCI": "docs/evidence/PR-118-CI-106-source.json"
 }

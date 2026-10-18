@@ -3602,7 +3602,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/data-generation.md",
+        "implemented": [
+          "Typed finite record/template generation and explicit culture/scalar/table binding under one shared operation context",
+          "Ordered immutable precommit record/layout/final-page/save observations with phase/thread/lifetime/cycle/resource guards",
+          "Atomic same-context generation/writing, reusable page decorations, executable C#/VB consumers and independent original outputs"
+        ],
+        "pending": [
+          "Complete document-wide editing/page/layout/save integration and asynchronous/uncooperative callback/host profiles remain mandatory",
+          "Complete deterministic schema/culture/resource/provider/large-data corpora and callback/concurrency/endurance validation remain mandatory",
+          "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-099-source.json",
+        "standardsEvidence": "docs/evidence/FP-099-standards.json",
+        "independentEvidence": "docs/evidence/FP-099-independent.json"
+      }
     },
     {
       "id": "FP-100",

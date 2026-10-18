@@ -76,3 +76,5 @@ FP-028 adds [resource extraction](docs/resource-extraction.md): shared definitio
 FP-026 adds [bounded text search and explicit replacement](docs/text-search.md). Complete profiles and production qualification remain mandatory.
 
 FP-027 adds [table extraction and structured export](docs/table-extraction.md), with explicit inference/culture/merge/continuation decisions. Complete profiles and production qualification remain mandatory.
+
+FP-099 adds [typed generation and bounded events](docs/data-generation.md), with explicit culture/resources, guarded callbacks and precommit serialization. Complete profiles and production qualification remain mandatory.

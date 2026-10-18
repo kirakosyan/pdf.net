@@ -414,6 +414,7 @@ Fluent.Pdf.PdfCrossReferenceKind
 Fluent.Pdf.PdfCrossReferenceKind.Compressed = 2 -> Fluent.Pdf.PdfCrossReferenceKind
 Fluent.Pdf.PdfCrossReferenceKind.Free = 0 -> Fluent.Pdf.PdfCrossReferenceKind
 Fluent.Pdf.PdfCrossReferenceKind.Offset = 1 -> Fluent.Pdf.PdfCrossReferenceKind
+Fluent.Pdf.PdfDataGeneration
 Fluent.Pdf.PdfDecodedData
 Fluent.Pdf.PdfDecodedData.Length.get -> long
 Fluent.Pdf.PdfDecodedData.OpenRead() -> System.IO.Stream!
@@ -981,6 +982,65 @@ Fluent.Pdf.PdfFunction.InputComponents.get -> int
 Fluent.Pdf.PdfFunction.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfFunction.OutputComponents.get -> int
 Fluent.Pdf.PdfFunction.Range.get -> System.Collections.Generic.IReadOnlyList<double>!
+Fluent.Pdf.PdfGenerationContext
+Fluent.Pdf.PdfGenerationContext.Add(Fluent.Pdf.PdfFlowBlock! block) -> void
+Fluent.Pdf.PdfGenerationContext.Add(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! blocks) -> void
+Fluent.Pdf.PdfGenerationContext.AddTable<T>(System.Collections.Generic.IEnumerable<T>! source, Fluent.Pdf.PdfTableDataColumn<T>![]! columns, int maximumRows = 100000, Fluent.Pdf.PdfTableRow![]? headerRows = null, bool allowRowSplit = true) -> void
+Fluent.Pdf.PdfGenerationContext.Apply<T>(Fluent.Pdf.PdfGenerationTemplate<T>! template, T record) -> void
+Fluent.Pdf.PdfGenerationContext.BlockCount.get -> int
+Fluent.Pdf.PdfGenerationContext.Culture.get -> System.Globalization.CultureInfo!
+Fluent.Pdf.PdfGenerationContext.Format(object? value, string? format = null, string! nullText = "") -> string!
+Fluent.Pdf.PdfGenerationContext.OperationContext.get -> Fluent.Pdf.PdfOperationContext!
+Fluent.Pdf.PdfGenerationContext.Paragraph(string! text, Fluent.Pdf.PdfFlowTextStyle! style, Fluent.Pdf.PdfFlowParagraphStyle? paragraphStyle = null) -> void
+Fluent.Pdf.PdfGenerationContext.Providers.get -> Fluent.Pdf.PdfProviderRegistry!
+Fluent.Pdf.PdfGenerationContext.RecordIndex.get -> int
+Fluent.Pdf.PdfGenerationContext.RecordsPrepared.get -> int
+Fluent.Pdf.PdfGenerationEvent
+Fluent.Pdf.PdfGenerationEvent.BlockCount.get -> int
+Fluent.Pdf.PdfGenerationEvent.Kind.get -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEvent.OperationContext.get -> Fluent.Pdf.PdfOperationContext!
+Fluent.Pdf.PdfGenerationEvent.Ordinal.get -> int
+Fluent.Pdf.PdfGenerationEvent.Page.get -> Fluent.Pdf.PdfGenerationPage?
+Fluent.Pdf.PdfGenerationEvent.PageCount.get -> int
+Fluent.Pdf.PdfGenerationEvent.PageIndex.get -> int
+Fluent.Pdf.PdfGenerationEvent.Pages.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfGenerationPage!>!
+Fluent.Pdf.PdfGenerationEvent.RecordIndex.get -> int
+Fluent.Pdf.PdfGenerationEvent.RecordsPrepared.get -> int
+Fluent.Pdf.PdfGenerationEvent.TemplateDepth.get -> int
+Fluent.Pdf.PdfGenerationEvent.TemplateIdentifier.get -> string?
+Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.LayoutPrepared = 6 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.LayoutStarting = 5 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.PagePrepared = 7 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.Prepared = 10 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.RecordPrepared = 4 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.RecordStarting = 1 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.SavePrepared = 9 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.SaveStarting = 8 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.Starting = 0 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.TemplatePrepared = 3 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationEventKind.TemplateStarting = 2 -> Fluent.Pdf.PdfGenerationEventKind
+Fluent.Pdf.PdfGenerationOptions
+Fluent.Pdf.PdfGenerationOptions.Culture.get -> System.Globalization.CultureInfo!
+Fluent.Pdf.PdfGenerationOptions.DocumentOptions.get -> Fluent.Pdf.PdfOptions!
+Fluent.Pdf.PdfGenerationOptions.Layout.get -> Fluent.Pdf.PdfFlowOptions!
+Fluent.Pdf.PdfGenerationOptions.MaximumBlocks.get -> int
+Fluent.Pdf.PdfGenerationOptions.MaximumEvents.get -> int
+Fluent.Pdf.PdfGenerationOptions.MaximumRecords.get -> int
+Fluent.Pdf.PdfGenerationOptions.Observer.get -> System.Action<Fluent.Pdf.PdfGenerationEvent!>?
+Fluent.Pdf.PdfGenerationOptions.PageTemplate.get -> Fluent.Pdf.PdfPageTemplate?
+Fluent.Pdf.PdfGenerationOptions.PdfGenerationOptions(Fluent.Pdf.PdfFlowOptions! layout, string! cultureName, Fluent.Pdf.PdfPageTemplate? pageTemplate = null, Fluent.Pdf.PdfOptions? documentOptions = null, System.Action<Fluent.Pdf.PdfGenerationEvent!>? observer = null, int maximumRecords = 100000, int maximumBlocks = 100000, int maximumEvents = 1000000) -> void
+Fluent.Pdf.PdfGenerationPage
+Fluent.Pdf.PdfGenerationPage.ColumnCount.get -> int
+Fluent.Pdf.PdfGenerationPage.ContentHeight.get -> double
+Fluent.Pdf.PdfGenerationPage.Geometry.get -> Fluent.Pdf.PdfPageGeometry!
+Fluent.Pdf.PdfGenerationPage.Index.get -> int
+Fluent.Pdf.PdfGenerationPage.LineCount.get -> int
+Fluent.Pdf.PdfGenerationPage.NoteCount.get -> int
+Fluent.Pdf.PdfGenerationPage.TableFragmentCount.get -> int
+Fluent.Pdf.PdfGenerationTemplate<T>
+Fluent.Pdf.PdfGenerationTemplate<T>.Identifier.get -> string!
+Fluent.Pdf.PdfGenerationTemplate<T>.PdfGenerationTemplate(string! identifier, System.Action<Fluent.Pdf.PdfGenerationContext!, T>! render) -> void
 Fluent.Pdf.PdfGlyphMapping
 Fluent.Pdf.PdfGlyphMapping.GlyphIndex.get -> int
 Fluent.Pdf.PdfGlyphMapping.PdfGlyphMapping(int glyphIndex, string! unicodeText) -> void
@@ -2217,6 +2277,9 @@ static Fluent.Pdf.PdfContentOperation.Extension(string! token, string! minimumVe
 static Fluent.Pdf.PdfContentOperation.InlineImage(Fluent.Pdf.PdfValue! dictionary, System.IO.Stream! encodedInput, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfContentOperation!
 static Fluent.Pdf.PdfContentProgram.Create(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfContentOperation!>! operations, Fluent.Pdf.PdfContentKind kind = Fluent.Pdf.PdfContentKind.Page, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfContentProgram!
 static Fluent.Pdf.PdfContentProgram.Parse(System.IO.Stream! decodedInput, Fluent.Pdf.PdfContentKind kind = Fluent.Pdf.PdfContentKind.Page, Fluent.Pdf.PdfUnknownOperatorPolicy unknownOperators = Fluent.Pdf.PdfUnknownOperatorPolicy.Reject, string? unknownOperatorVersion = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfContentProgram!
+static Fluent.Pdf.PdfDataGeneration.Generate<T>(System.Collections.Generic.IEnumerable<T>! source, Fluent.Pdf.PdfGenerationTemplate<T>! template, Fluent.Pdf.PdfGenerationOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfDataGeneration.Write<T>(System.Collections.Generic.IEnumerable<T>! source, Fluent.Pdf.PdfGenerationTemplate<T>! template, Fluent.Pdf.PdfGenerationOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, System.IO.Stream! output, Fluent.Pdf.PdfWriteOptions? writeOptions = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfDataGeneration.WriteFile<T>(System.Collections.Generic.IEnumerable<T>! source, Fluent.Pdf.PdfGenerationTemplate<T>! template, Fluent.Pdf.PdfGenerationOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, string! path, Fluent.Pdf.PdfWriteOptions? writeOptions = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfDrawing.Create(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfContentOperation!>! operations, Fluent.Pdf.PdfResourceSet? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDrawing!
 static Fluent.Pdf.PdfFilters.Decode(Fluent.Pdf.PdfValue! encodedStream, Fluent.Pdf.PdfOperationContext! context, Fluent.Pdf.PdfProviderRegistry? providers = null) -> System.IO.Stream!
 static Fluent.Pdf.PdfFilters.Encode(System.IO.Stream! decodedInput, System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfFilter!>! decodingFilters, Fluent.Pdf.PdfOperationContext! context, Fluent.Pdf.PdfImageInfo? imageInfo = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> System.IO.Stream!

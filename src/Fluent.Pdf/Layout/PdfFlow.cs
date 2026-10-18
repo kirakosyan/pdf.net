@@ -13,29 +13,39 @@ public static class PdfFlow
             throw new ArgumentNullException(nameof(options));
         if (providers == null)
             throw new ArgumentNullException(nameof(providers));
+        PdfFlowResult? result = null;
+        Action<PdfOperationReport>? complete = null;
+        var report = PdfFont.Run("LayoutFlow", "managed.layout", policy, cancellationToken, context => result = LayoutCore(blocks, options, providers, context, out complete), PdfCapability.WriteDocument);
+        complete!(report);
+        return result!;
+    }
+
+    internal static PdfFlowResult LayoutCore(IEnumerable<PdfFlowBlock> blocks, PdfFlowOptions options, PdfProviderRegistry providers, PdfOperationContext context, out Action<PdfOperationReport> completeOperation)
+    {
         var shaper = providers.GetRequired<IPdfTextShaper>(PdfCapability.ShapeText);
         PdfFlowResult? result = null;
         PdfFlowEngine? engine = null;
-        var report = PdfFont.Run("LayoutFlow", "managed.layout", policy, cancellationToken, context =>
+        context.Consume(PdfResourceKind.ExpandedBytes, 512);
+        var copy = new List<PdfFlowBlock>();
+        foreach (var block in blocks)
         {
-            context.Consume(PdfResourceKind.ExpandedBytes, 512);
-            var copy = new List<PdfFlowBlock>();
-            foreach (var block in blocks)
-            {
-                context.Checkpoint();
-                context.Consume(PdfResourceKind.Objects, 1);
-                context.Consume(PdfResourceKind.ExpandedBytes, 64);
-                if (block == null)
-                    throw new ArgumentException("Flow blocks cannot contain null.", nameof(blocks));
-                copy.Add(block);
-            }
+            context.Checkpoint();
+            context.Consume(PdfResourceKind.Objects, 1);
+            context.Consume(PdfResourceKind.ExpandedBytes, 64);
+            if (block == null)
+                throw new ArgumentException("Flow blocks cannot contain null.", nameof(blocks));
+            copy.Add(block);
+        }
 
-            engine = new PdfFlowEngine(options, shaper, context);
-            result = engine.Layout(copy);
-        }, PdfCapability.WriteDocument);
-        engine!.Complete(report);
-        result!.OperationReport = report;
-        return result;
+        engine = new PdfFlowEngine(options, shaper, context);
+        result = engine.Layout(copy);
+        var captured = result!;
+        completeOperation = report =>
+        {
+            engine!.Complete(report);
+            captured.OperationReport = report;
+        };
+        return captured;
     }
 }
 

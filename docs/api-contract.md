@@ -153,3 +153,5 @@ FP-028 adds `PdfResourceExtraction.ReadPage`, immutable `PdfPageResourceManifest
 FP-026 adds `PdfTextQuery`, `PdfTextSearch.FindPage`, provenance-rich matches and `ReplacePage` with explicit fonts/shaping/overflow. See [search and replacement contracts](text-search.md).
 
 FP-027 adds `PdfTableExtraction.Read`, explicit options and immutable cells/tables/sequences, plus explicit merged-cell CSV and versioned typed JSON exports. See [table extraction contracts](table-extraction.md).
+
+FP-099 adds `PdfDataGeneration`, `PdfGenerationTemplate<T>`, explicit immutable options, a guarded synchronous context and immutable precommit event/page views. See [generation contracts](data-generation.md).
