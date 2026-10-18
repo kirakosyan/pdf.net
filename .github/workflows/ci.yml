@@ -58,6 +58,9 @@ jobs:
         shell: bash
         run: |
           log show --last 10m --style compact --predicate 'eventMessage CONTAINS "Sandbox:" OR eventMessage CONTAINS "native-aot" OR process == "sandboxd"' | tail -160
+      - name: Diagnose isolated native runtime startup after a macOS failure
+        if: failure() && runner.os == 'macOS'
+        run: python3 eng/diagnose-native-runtime.py
       - name: Retain source contract evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
