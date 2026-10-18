@@ -108,15 +108,8 @@ public static partial class PdfArchival
             validated = ValidateCore(encoded, options.Profile, validator, context);
             if (!validated.Completed || !validated.IsCompliant)
             {
-                try
-                {
-                    throw Error(context, "IndependentValidation", "The independent validator did not establish the requested archival profile; no converted output was copied.");
-                }
-                catch (PdfException failure)
-                {
-                    failure.Data["Fluent.Pdf.ArchivalValidation"] = validated;
-                    throw;
-                }
+                context.ReportFailure(new PdfDiagnostic("Archival.IndependentValidation", "The independent validator did not establish the requested archival profile; no converted output was copied."), "Fluent.Pdf.ArchivalValidation", validated);
+                throw new InvalidOperationException("A fatal validation diagnostic unexpectedly returned.");
             }
 
             Copy(encoded, output, context);

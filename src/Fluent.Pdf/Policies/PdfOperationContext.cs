@@ -204,7 +204,19 @@ public sealed class PdfOperationContext
     }
 
     /// <summary>Records a diagnostic with SDK-bound provenance. Strict losses and error severity latch a fatal failure.</summary>
-    public void Report(PdfDiagnostic diagnostic)
+    public void Report(PdfDiagnostic diagnostic) => ReportCore(diagnostic, null, null);
+    // Attach bounded operation-owned details before publishing/throwing a latched failure on every runtime.
+    internal void ReportFailure(PdfDiagnostic diagnostic, string dataKey, object details)
+    {
+        if (string.IsNullOrEmpty(dataKey) || dataKey.Length > 128)
+            throw new ArgumentException("A bounded failure-data key is required.", nameof(dataKey));
+        if (details == null)
+            throw new ArgumentNullException(nameof(details));
+        Consume(PdfResourceKind.ExpandedBytes, 512);
+        ReportCore(diagnostic, dataKey, details);
+    }
+
+    private void ReportCore(PdfDiagnostic diagnostic, string? dataKey, object? details)
     {
         if (diagnostic is null)
             throw new ArgumentNullException(nameof(diagnostic));
@@ -220,6 +232,8 @@ public sealed class PdfOperationContext
             if (severity == PdfDiagnosticSeverity.Error)
             {
                 _fatal = new PdfException(bound);
+                if (dataKey != null)
+                    _fatal.Data[dataKey] = details;
                 throw _fatal;
             }
         }

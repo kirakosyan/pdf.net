@@ -117,5 +117,135 @@
     "limitations": [
       "Early setup failure also prevented source artifact creation and macOS runtime diagnostics because fixtures did not exist. All six complete raw job logs are retained."
     ]
+  },
+  "runtimeFailureCI": {
+    "runId": 39141390767,
+    "runNumber": 91,
+    "headCommit": "c0044bef812669e8963c835bb5f729354f8418c5",
+    "headTree": "01a7566ccca2b7f7073e0aced6b07eeef81f2dc6",
+    "snapshotComplete": false,
+    "pendingJobs": [
+      117716383673
+    ],
+    "failedJob": 117716383906,
+    "failedCase": "ArchivalTests.FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
+    "frameworkX64Result": {
+      "passed": 923,
+      "failed": 1,
+      "skipped": 0,
+      "total": 924
+    },
+    "failure": "Correct Archival.IndependentValidation diagnostic, but the detached observation was absent from Exception.Data on current Framework x64.",
+    "requiredFrameworkX86AndFallbackNotExecuted": true,
+    "correction": "Create and attach bounded operation-owned failure details before the context publishes/throws the latched failure. Existing diagnostic provenance, policy severity and failure latching remain enforced.",
+    "rootCauseLimit": "The underlying runtime difference is unproven; this records the observed failure and the concrete attachment change, not a runtime-cause claim.",
+    "jobs": [
+      {
+        "jobId": 117716383876,
+        "logSha256": "45087d51f964e05f4bc8ac8f495c678e0284d418461d3aa972e891d694ab45ba",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716383906,
+        "logSha256": "1cfcca67271abd75e371d6d0e56121a61c4394a1c2f66c6c86e930fbe982bf50",
+        "passingLaneTotals": [
+          924,
+          924
+        ],
+        "failedFrameworkLane": true
+      },
+      {
+        "jobId": 117716384029,
+        "logSha256": "01957debaa80ac7273ee046eaeac1944a37982c78960ffec4018529cff64a8fb",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716384055,
+        "logSha256": "9e2262631dcd9f218aa72b51f6e6a2dc45d623bf30884fe03709b6e35f923320",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716384130,
+        "logSha256": "0001a6429fc7b32fdb384fbd1585db7e9996d8f2c4a07fab23ccd524337e2332",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      }
+    ],
+    "artifactSnapshot": [
+      {
+        "id": 12142335412,
+        "name": "source-contracts-osx-arm64",
+        "size_in_bytes": 1680679,
+        "digest": "sha256:b3ec6ca0fc436613c2e3b992457da676a903795ea44de18d8168bc485de8c6f2"
+      },
+      {
+        "id": 12142016200,
+        "name": "source-contracts-win-arm64",
+        "size_in_bytes": 1669455,
+        "digest": "sha256:12c65fb68f643886320ca9b820abd42ebee3af900ab4409a2705434bf59a719a"
+      },
+      {
+        "id": 12141658300,
+        "name": "source-contracts-linux-x64",
+        "size_in_bytes": 1668597,
+        "digest": "sha256:be029166e69cbdd27e1b8dabc2dca0dd5121a3bc5a733c57b5eddef4cbe8de3d"
+      },
+      {
+        "id": 12141644196,
+        "name": "source-contracts-win-x64",
+        "size_in_bytes": 1641141,
+        "digest": "sha256:a5c54bd6d77709a50819bd64dd05d6b258ec6a3a74e062e6c2aef4a3e9ec5ad7"
+      },
+      {
+        "id": 12141284974,
+        "name": "source-contracts-linux-arm64",
+        "size_in_bytes": 1668428,
+        "digest": "sha256:d197d48f57352e23e913a11bfa6ab8f89ef2841d44457ba1b587725f1b73db2c"
+      }
+    ]
+  },
+  "failureDetailFixLocalChecks": {
+    "sourceFileHashes": {
+      "src/Fluent.Pdf/Policies/PdfOperationContext.cs": "d2e04bcfeeda8e69ffa8abdab48392d8b9b7614cb7a278edd22c97d623f14a32",
+      "src/Fluent.Pdf/Archival/PdfArchival.cs": "1a575040fbe5cc59d21c233a54414a801c8e34eeae0a319ee216f67bcecb9a22"
+    },
+    "buildTargetFrameworks": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "selectedWorkspaceTests": {
+      "passed": 883,
+      "failed": 0,
+      "skipped": 0,
+      "includesUncommittedRepairTests": 21
+    },
+    "apiComparisons": 24,
+    "reportSha256": {
+      "archival-failure-details-build.log": "e890e584fcd0243768e5687157e597c31048d01cdcb30fbefafa4123555616ac",
+      "archival-failure-details-tests.log": "eac379c8fc76421a878b2407a6e330dc48a1ca82c8decb5c4787d623d05e51f3",
+      "archival-failure-details-api.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67"
+    },
+    "frameworkRuntimeVerification": "Pending corrected full platform CI; local Framework execution is unavailable."
   }
 }
