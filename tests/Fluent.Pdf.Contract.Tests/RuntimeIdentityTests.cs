@@ -25,6 +25,10 @@ public sealed class RuntimeIdentityTests
 #endif
         var assembly = typeof(PdfDocument).Assembly;
         Assert.Equal(expected, assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Workers.NativeWorkerHost).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Codecs.IsolatedImageCodecProvider).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Fonts.ManagedFontProvider).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Text.IsolatedTextShaper).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
         var expectedArchitecture = Environment.GetEnvironmentVariable("FLUENT_PDF_EXPECTED_ARCH");
         if (!string.IsNullOrEmpty(expectedArchitecture))
             Assert.Equal(expectedArchitecture, RuntimeInformation.ProcessArchitecture.ToString(), ignoreCase: true);

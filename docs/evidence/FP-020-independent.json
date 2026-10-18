@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "purpose": "small-independent-navigation-source-profile-not-production-qualification",
+  "sourceCommit": "46c2b7f3eceab8f300412dd18847c7c91c887145",
+  "tools": {
+    "pypdf": "6.10.0",
+    "renderer": "Poppler 25.03.0",
+    "rendererPath": "/usr/bin/pdftoppm",
+    "rendererSha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "files": [
+    {
+      "file": "navigation.pdf",
+      "sha256": "1ff86ae3058c72233fe6189c8e665592377caa33f5337a3cf75209c00daacdd6",
+      "pages": 3,
+      "names": 9,
+      "actionTypes": [
+        "/GoTo",
+        "/GoTo",
+        "/GoToR",
+        "/JavaScript",
+        "/Launch",
+        "/URI"
+      ],
+      "popplerDestinationReportSha256": "47499de4ef699a8d62f6ca2ed0632ae97f397830f9a0a0b1336c522dfb6507b6"
+    },
+    {
+      "file": "sanitized.pdf",
+      "sha256": "ec1612808fc66928b5727fe7b37c6c1aa0d2900a5cc38ebd159bc058f00618b5",
+      "pages": 3,
+      "names": 9,
+      "actionTypes": [
+        "/GoTo",
+        "/GoTo",
+        "/URI"
+      ],
+      "popplerDestinationReportSha256": "47499de4ef699a8d62f6ca2ed0632ae97f397830f9a0a0b1336c522dfb6507b6"
+    },
+    {
+      "file": "no-actions.pdf",
+      "sha256": "e3115ef2a27ff994d131136a2249219b0aed6f40c42e5b0ca738617b027df0a8",
+      "pages": 3,
+      "names": 9,
+      "actionTypes": [],
+      "popplerDestinationReportSha256": "47499de4ef699a8d62f6ca2ed0632ae97f397830f9a0a0b1336c522dfb6507b6"
+    },
+    {
+      "file": "moved.pdf",
+      "sha256": "f7b6c611515193f3b66095a473528a7c78dc3ce2f25539f24997b2e03ff7f783",
+      "pages": 3,
+      "names": 9,
+      "actionTypes": [
+        "/GoTo",
+        "/GoTo",
+        "/GoToR",
+        "/JavaScript",
+        "/Launch",
+        "/URI"
+      ],
+      "popplerDestinationReportSha256": "6e6a96fa79564e5cc38e48109310df7a23a6cb14283c7180c311a7b0301aa45c"
+    },
+    {
+      "file": "extracted.pdf",
+      "sha256": "affc8fdd4af34002e853fc5e9384440a2923b3f0b1e10d80739e087b9848f021",
+      "pages": 3,
+      "names": 9,
+      "actionTypes": [
+        "/GoTo",
+        "/GoTo",
+        "/GoToR",
+        "/JavaScript",
+        "/Launch",
+        "/URI"
+      ],
+      "popplerDestinationReportSha256": "6a19d5f8ecfea1bd2a5caeaeb12e2b8626fece8dbef4d20c4e525e5a9696deef"
+    }
+  ],
+  "visualPreservation": [
+    {
+      "actual": "navigation-1.png",
+      "reference": "base-1.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "navigation-2.png",
+      "reference": "base-2.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "navigation-3.png",
+      "reference": "base-3.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "sanitized-1.png",
+      "reference": "base-1.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "sanitized-2.png",
+      "reference": "base-2.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "sanitized-3.png",
+      "reference": "base-3.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "no-actions-1.png",
+      "reference": "base-1.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "no-actions-2.png",
+      "reference": "base-2.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "no-actions-3.png",
+      "reference": "base-3.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-1.png",
+      "reference": "base-3.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-2.png",
+      "reference": "base-1.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-3.png",
+      "reference": "base-2.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-1.png",
+      "reference": "base-2.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-2.png",
+      "reference": "base-1.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-3.png",
+      "reference": "base-3.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    }
+  ],
+  "probeSha256": "2a29bf7fd82d014544fd8616b53c9892e00865222a4e89886c41018faf8e985b",
+  "verifierSha256": "8105366fcea615dd721aff11db3c4dd5ed6283b7771b5e57933c685468ec750f",
+  "limitations": [
+    "Passive dictionary/destination checks and unchanged page-mark comparisons do not qualify viewer action execution, script safety, all extension locations, complete corpora or final packages.",
+    "No script, URI, remote file or process was executed or fetched. Actual minimum runtimes and every production gate remain mandatory."
+  ],
+  "productionQualified": false,
+  "environment": {
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "runtime": [
+      "Microsoft.AspNetCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.AspNetCore.App]",
+      "Microsoft.NETCore.App 8.0.32 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]",
+      "Microsoft.NETCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]"
+    ],
+    "packageSha256": null
+  },
+  "commands": [
+    "dotnet run --project /workspace/scratch/navigation-probe -c Release",
+    "python /workspace/scratch/verify-navigation.py 46c2b7f3eceab8f300412dd18847c7c91c887145"
+  ],
+  "logs": {
+    "navigation-independent-probe2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "navigation-independent2.log": "070c4aee864b6698a2188a793caaebfbde9378e0fce1d9fe28d9630bcca94fbc"
+  }
+}

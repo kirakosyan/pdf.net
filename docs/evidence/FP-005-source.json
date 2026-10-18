@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirements": [
+    "FP-085",
+    "FP-003",
+    "FP-004",
+    "FP-005"
+  ],
+  "branchCommit": "6ac9303d9ae9f375060fbf6ce01e509d299c3a9f",
+  "testedMergeCommit": "4ebd8be2b4405a5c8e230ec94f214d2a9e5d5390",
+  "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39083908796",
+  "conclusion": "success",
+  "testCasesPerLane": 337,
+  "executionLanes": 20,
+  "totalPassed": 6740,
+  "failed": 0,
+  "skipped": 0,
+  "hosts": [
+    "win-x64",
+    "win-arm64",
+    "linux-x64",
+    "linux-arm64",
+    "osx-x64",
+    "osx-arm64"
+  ],
+  "runtimeLanes": "net8/net10/netstandard2.0 fallback on six hosts; current Framework x86/x64 on Windows x64",
+  "packageSha256": null,
+  "productionQualified": false,
+  "artifacts": [
+    {
+      "name": "source-contracts-win-x64",
+      "id": 12120360600,
+      "digestFromGitHub": "sha256:0ca5c248d3b0bdcd6c2f13c9c505242e8d8482defddf9a3caa5bb04ecc08436f",
+      "sizeBytes": 406824,
+      "expiresAt": "2027-01-16T00:44:59Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39083908796/artifacts/12120360600"
+    },
+    {
+      "name": "source-contracts-linux-x64",
+      "id": 12120205857,
+      "digestFromGitHub": "sha256:a403b8a665b2feb5b5d549cbecd78d58d260a8cf01de1de521acd69b33341f23",
+      "sizeBytes": 249154,
+      "expiresAt": "2027-01-16T00:44:59Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39083908796/artifacts/12120205857"
+    },
+    {
+      "name": "source-contracts-win-arm64",
+      "id": 12120003090,
+      "digestFromGitHub": "sha256:3a329ef614ef58f2e261dd2c473cd51f08785d999593d330fefe536bbdb071ca",
+      "sizeBytes": 250198,
+      "expiresAt": "2027-01-16T00:44:59Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39083908796/artifacts/12120003090"
+    },
+    {
+      "name": "source-contracts-osx-x64",
+      "id": 12119948264,
+      "digestFromGitHub": "sha256:7fa7f4b7b06eee11ffafbbb8da1a7d94ac739409f506276f31564d9a8e44682c",
+      "sizeBytes": 251359,
+      "expiresAt": "2027-01-16T00:44:59Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39083908796/artifacts/12119948264"
+    },
+    {
+      "name": "source-contracts-linux-arm64",
+      "id": 12119707602,
+      "digestFromGitHub": "sha256:eec826e47d7989ad395efc3d8e135083296e6b2c4e11d1d4214fa8718e093562",
+      "sizeBytes": 249376,
+      "expiresAt": "2027-01-16T00:44:59Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39083908796/artifacts/12119707602"
+    },
+    {
+      "name": "source-contracts-osx-arm64",
+      "id": 12119624265,
+      "digestFromGitHub": "sha256:a5598ca2b2ddb6fb161e2f7f10feb3fcb9bc974fe20ec02807db409f328bca9a",
+      "sizeBytes": 252117,
+      "expiresAt": "2027-01-16T00:44:59Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39083908796/artifacts/12119624265"
+    }
+  ],
+  "limitations": [
+    "Source tests and independent writer outputs are evidence of implemented behavior, not production qualification.",
+    "Actual minimum Framework 4.7.2, final packages, independent standards/fidelity, endurance, fuzzing and remaining mandatory requirements are not qualified."
+  ]
+}

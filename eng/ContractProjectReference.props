@@ -1,6 +1,23 @@
 <Project>
   <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Fluent.Pdf.Text/Fluent.Pdf.Text.csproj">
+      <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
+      <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
+
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Fluent.Pdf.Fonts/Fluent.Pdf.Fonts.csproj">
+      <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
+      <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
     <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Fluent.Pdf/Fluent.Pdf.csproj">
+      <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
+      <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Fluent.Pdf.Workers/Fluent.Pdf.Workers.csproj">
+      <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
+      <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Fluent.Pdf.Codecs/Fluent.Pdf.Codecs.csproj">
       <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
       <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
     </ProjectReference>

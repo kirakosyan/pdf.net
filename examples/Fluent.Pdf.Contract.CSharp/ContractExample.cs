@@ -5,6 +5,163 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WritePresentationPdf(Stream output)
+    {
+        using var blank = PdfFacade.Create().AddPage().AddPage();
+        using var outlines = PdfPresentation.SetOutlines(blank.CreateSnapshot(), new[] { new PdfBookmark("Report", new PdfDestination(0), children: new[] { new PdfBookmark("Details", new PdfDestination(1)) }) });
+        using var labels = PdfPresentation.SetPageLabels(outlines.CreateSnapshot(), new PdfPageNumbering(new PdfPageNumberRange(0, PdfPageLabelStyle.LowerRoman), new PdfPageNumberRange(1, prefix: "Report-")));
+        using var viewed = PdfPresentation.SetView(labels.CreateSnapshot(), PdfPageLayout.OneColumn, PdfPageMode.UseOutlines);
+        using var document = PdfPresentation.SetPageTransition(viewed.CreateSnapshot(), 1, new PdfPageTransition(PdfTransitionStyle.Fade, .5), 8);
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteNavigationPdf(Stream output)
+    {
+        using var blank = PdfFacade.Create().AddPage().AddPage();
+        using var named = PdfNavigation.SetNamedDestination(blank.CreateSnapshot(), "chapter", new PdfDestination(1));
+        using var linked = PdfNavigation.AddLink(named.CreateSnapshot(), 0, new PdfRect(20, 30, 100, 24), PdfAction.GoToNamed("chapter"));
+        using var document = PdfNavigation.SetDocumentAction(linked.CreateSnapshot(), "OpenAction", PdfAction.GoToNamed("chapter"));
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteAnnotationPdf(Stream output)
+    {
+        using var blank = PdfFacade.Create().AddPage(new PdfPageSize(240, 160));
+        var note = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Text, "note", new PdfRect(20, 90, 40, 40), new PdfColor(PdfColorSpace.Rgb, 1, .85, .2), metadata: new PdfAnnotationMetadata("Review this page", "Reviewer"));
+        var box = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Square, "box", new PdfRect(80, 30, 120, 90), new PdfColor(PdfColorSpace.Rgb, .8, .1, .1));
+        using var document = PdfAnnotations.Add(blank.CreateSnapshot(), 0, new[] { note, box }); return document.Save(output);
+    }
+    public static PdfOperationReport WriteImagePdf(Stream imageInput, Stream output, bool allowLosslessTranscode = false)
+    {
+        var image = PdfImages.Read(imageInput, new PdfImageReadOptions(allowLosslessTranscode));
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 200, 160)));
+        var canvas = PdfCanvas.Create(geometry, c => c.DrawImageAsset(image, new PdfRect(10, 10, 180, 140)));
+        using var document = PdfFacade.Create().AddPage(geometry);
+        canvas.ApplyTo(document.Pages[0]); return document.Save(output);
+    }
+    public static PdfOperationReport CombinePages(Stream firstInput, Stream secondInput, Stream output)
+    {
+        using var first = PdfFacade.Open(firstInput);
+        using var second = PdfFacade.Open(secondInput);
+        using var combined = PdfPageOrganization.Merge(new[] { new PdfPageInput(first.CreateSnapshot()), new PdfPageInput(second.CreateSnapshot()) });
+        return combined.Save(output);
+    }
+    public static PdfOperationReport WriteTemplatePdf(Stream fontInput, Stream output, IPdfTextShaper shaper)
+    {
+        var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));
+        var style = new PdfFlowTextStyle(new PdfFontFallback(font), 10);
+        var blocks = new PdfFlowBlock[] { new PdfFlowContents(style), new PdfFlowHeading("intro", "Introduction", style), new PdfFlowParagraph("A document with final page totals and linked contents.", style) };
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 300, 200)));
+        var template = new PdfPageTemplate(footerHeight: 18, footer: c => PdfPageDecoration.Flow(new[] { new PdfFlowParagraph(c.PageLabel + " of " + c.TotalPages.ToString(System.Globalization.CultureInfo.InvariantCulture), style) }));
+        var result = PdfTemplateLayout.Layout(blocks, new PdfFlowOptions(geometry, PdfMargins.Uniform(12)), new PdfProviderRegistry(shaper), template);
+        using var document = result.CreateDocument();
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteCompositionPdf(Stream fontInput, Stream output, IPdfTextShaper shaper)
+    {
+        var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));
+        var style = new PdfFlowTextStyle(new PdfFontFallback(font), 12);
+        var small = new PdfFlowTextStyle(style.Fonts, 8);
+        var list = PdfFlowList.Create(new[] {
+            new PdfFlowListItem(new[] { new PdfFlowParagraph("first item", style) }),
+            new PdfFlowListItem(new[] { new PdfFlowParagraph("second item", style) }) }, style);
+        var note = new PdfFlowNote("source", "1", new[] { new PdfFlowParagraph("source note", small) }, small);
+        var blocks = new PdfFlowBlock[] {
+            new PdfFlowColumns(new PdfFlowBlock[] { list, new PdfFlowParagraph("office office office office office office", style) }, height: 100),
+            new PdfFlowNoteReference(new PdfFlowParagraph("reference", style), note) };
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 300, 200)));
+        var result = PdfFlow.Layout(blocks, new PdfFlowOptions(geometry, PdfMargins.Uniform(12)), new PdfProviderRegistry(shaper));
+        using var document = result.CreateDocument(); return document.Save(output);
+    }
+    public static PdfOperationReport WriteTablePdf(Stream fontInput, Stream output, IPdfTextShaper shaper)
+    {
+        var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));
+        var style = new PdfFlowTextStyle(new PdfFontFallback(font), 12);
+        var columns = new[] {
+            new PdfTableDataColumn<string>(PdfTableColumn.Fixed(108), value => value, style),
+            new PdfTableDataColumn<string>(PdfTableColumn.Fixed(108), value => value, style,
+                paragraphStyle: new PdfFlowParagraphStyle(PdfFlowAlignment.End)) };
+        var header = new PdfTableRow(new[] { PdfTableCell.Text("A", style), PdfTableCell.Text("office", style) });
+        var table = PdfTableData.Bind(Enumerable.Repeat("office", 8), columns,
+            System.Globalization.CultureInfo.InvariantCulture, headerRows: new[] { header });
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 240, 140)));
+        var result = table.Layout(new PdfFlowOptions(geometry, PdfMargins.Uniform(12)), new PdfProviderRegistry(shaper));
+        using var document = result.CreateDocument();
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteFlowPdf(Stream fontInput, Stream output, string text, IPdfTextShaper shaper)
+    {
+        var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));
+        var style = new PdfFlowTextStyle(new PdfFontFallback(font), 12);
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 200, 160)));
+        var result = PdfFlow.Layout(new[] { new PdfFlowParagraph(text, style) },
+            new PdfFlowOptions(geometry, PdfMargins.Uniform(12)), new PdfProviderRegistry(shaper));
+        using var document = result.CreateDocument();
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteCanvasPdf(Stream output)
+    {
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(-20, 10, 240, 160)), PdfPageRotation.Clockwise90);
+        var path = PdfPath.Create(new[] { PdfPathSegment.Rectangle(new PdfRect(0, 0, 30, 15)) });
+        var canvas = PdfCanvas.Create(geometry, c =>
+        {
+            using (c.Save())
+            {
+                c.Translate(10, 10);
+                c.Rotate(30);
+                c.DrawPath(path);
+            }
+        }, new PdfCanvasOptions(PdfLengthUnit.Millimeter, margins: PdfMargins.Uniform(5)));
+        using var document = PdfFacade.Create().AddPage(geometry);
+        canvas.ApplyTo(document.Pages[0]);
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteVectorPdf(Stream output)
+    {
+        var path=PdfPath.Create(new[]{PdfPathSegment.Move(20,20),PdfPathSegment.Curve(40,100,120,100,160,20),PdfPathSegment.Close()});
+        var operations=new List<PdfContentOperation>{new(PdfOperator.FillRgb,PdfValues.Real(.2),PdfValues.Real(.4),PdfValues.Real(.6))};operations.AddRange(path.Operations);operations.Add(new(PdfOperator.FillStroke));
+        var drawing=PdfDrawing.Create(operations);var form=PdfGraphicsObjects.Form(drawing,new(0,0,200,120));using var document=PdfFacade.Create().AddPage(new PdfPageSize(200,120));document.Pages[0].SetResource("Art",form);document.Pages[0].Content=PdfContentProgram.Create(new[]{new PdfContentOperation(PdfOperator.SaveState),new PdfContentOperation(PdfOperator.DrawObject,PdfValue.Name("Art")),new PdfContentOperation(PdfOperator.RestoreState)});return document.Save(output);
+    }
+    public static PdfTextDrawing ShapeText(string text,PdfFontFallback fonts,IPdfTextShaper shaper,PdfOperationPolicy? policy=null)
+    {
+        var shaped=PdfText.Shape(text,fonts,new PdfProviderRegistry(shaper),policy:policy);
+        return PdfTextDrawing.Create(shaped,20,80,24);
+    }
+    public static PdfOperationReport WriteFontPdf(Stream fontInput,Stream output,string text)
+    {
+        var providers=new PdfProviderRegistry(ManagedPdfProvider.Instance,Fluent.Pdf.Fonts.ManagedFontProvider.Instance);
+        var font=PdfFont.Read(fontInput,providers);var resource=PdfFontResource.CreateText(font,text);using var document=PdfFacade.Create(providers:providers).AddPage();document.Pages[0].SetFont("F1",resource);
+        document.Pages[0].Content=PdfContentProgram.Create(new[]{new PdfContentOperation(PdfOperator.BeginText),new PdfContentOperation(PdfOperator.Font,PdfValue.Name("F1"),PdfValue.Integer(24)),new PdfContentOperation(PdfOperator.MoveText,PdfValue.Integer(20),PdfValue.Integer(60)),new PdfContentOperation(PdfOperator.ShowText,resource.EncodedText),new PdfContentOperation(PdfOperator.EndText)});
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteRectangle(Stream output)
+    {
+        using var document=PdfFacade.Create().AddPage();
+        document.Pages[0].Content=PdfContentProgram.Create(new[]{
+            new PdfContentOperation(PdfOperator.SaveState),
+            new PdfContentOperation(PdfOperator.Rectangle,PdfValue.Integer(20),PdfValue.Integer(20),PdfValue.Integer(100),PdfValue.Integer(50)),
+            new PdfContentOperation(PdfOperator.Fill),
+            new PdfContentOperation(PdfOperator.RestoreState)});
+        return document.Save(output);
+    }
+    public static PdfOperationReport WriteManagedPdf(Stream output)
+    {
+        using var document=PdfFacade.Create().AddPage(PdfPageSize.Letter);
+        return document.Save(output);
+    }
+    public static PdfProviderRegistry ImageCodecs(Fluent.Pdf.Workers.NativeWorkerOptions worker)=>
+        new(ManagedPdfProvider.Instance,new Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker));
+    public static PdfSyntaxDocument InspectSyntax(Stream borrowedInput)=>PdfSyntax.Read(borrowedInput);
+    public static PdfDecodedData DecodeStream(PdfSyntaxDocument syntax,PdfObjectId id)=>syntax.DecodeStream(id);
+
+    public static byte[] ExecuteNativeWorker(Fluent.Pdf.Workers.NativeWorkerOptions options, byte[] request, PdfOperationContext context) =>
+        new Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context);
+
+    public static PdfNativeDeploymentReport InspectDeployment(string directory, string rid, string engineVersion,
+        string abi, long maximumBytes, params PdfNativeAsset[] assets)
+    {
+        var deployment = new PdfNativeDeployment(directory, rid, "example.native", engineVersion, abi, maximumBytes, assets);
+        return PdfNativeDeploymentInspector.Inspect(deployment);
+    }
+
     public static PdfOperationReport SaveWithReport(PdfProviderRegistry providers, Stream output)
     {
         var policy = new PdfOperationPolicy(PdfProcessingMode.Permissive,
@@ -16,7 +173,7 @@ public static class ContractExample
     public static int Run()
     {
         var options = new PdfOptions(PdfPageSize.Letter, maximumPages: 10);
-        using var document = PdfFacade.Create(options)
+        using var document = PdfFacade.Create(options,PdfProviderRegistry.Empty)
             .AddPage()
             .AddPage(PdfPageSize.A4);
         document.Pages[0].Rotation = PdfPageRotation.Clockwise90;

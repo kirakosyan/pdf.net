@@ -1,0 +1,8 @@
+#nullable enable
+Fluent.Pdf.Fonts.ManagedFontProvider
+Fluent.Pdf.Fonts.ManagedFontProvider.DecodeSimple(Fluent.Pdf.PdfValue! encoding, Fluent.Pdf.PdfValue! encodedText, string! baseFont, Fluent.Pdf.PdfOperationContext! context) -> string!
+Fluent.Pdf.Fonts.ManagedFontProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Fonts.ManagedFontProvider.ManagedFontProvider() -> void
+Fluent.Pdf.Fonts.ManagedFontProvider.Read(System.IO.Stream! input, int faceIndex, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.IPdfFontProgram!
+Fluent.Pdf.Fonts.ManagedFontProvider.Standard(string! postScriptName, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.IPdfFontProgram!
+static Fluent.Pdf.Fonts.ManagedFontProvider.Instance.get -> Fluent.Pdf.Fonts.ManagedFontProvider!

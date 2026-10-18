@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirements": [
+    "FP-085",
+    "FP-003",
+    "FP-004",
+    "FP-005",
+    "FP-007",
+    "FP-008",
+    "FP-009",
+    "FP-010",
+    "FP-011",
+    "FP-012",
+    "FP-013",
+    "FP-014"
+  ],
+  "branchCommit": "3ad027c395cb52d193dd5fd5f8f7e028e8a01baf",
+  "testedMergeCommit": "08e8da4cbec8c0d0d1220e07d70fbc851acab24d",
+  "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39095754956",
+  "conclusion": "success",
+  "testCasesPerLane": 547,
+  "executionLanes": 20,
+  "totalPassed": 10940,
+  "failed": 0,
+  "skipped": 0,
+  "hosts": [
+    "osx-arm64",
+    "osx-x64",
+    "win-x64",
+    "linux-arm64",
+    "linux-x64",
+    "win-arm64"
+  ],
+  "runtimeLanes": "net8/net10/netstandard2.0 fallback on six hosts; current Framework x86/x64 on Windows x64",
+  "packageSha256": null,
+  "productionQualified": false,
+  "artifacts": [
+    {
+      "name": "source-contracts-win-x64",
+      "id": 12124508887,
+      "digestFromGitHub": "sha256:88ab8cfbb5b294711a92133928d230c2b4405ed5a63a337f6b18e357d9bb3b11",
+      "sizeBytes": 703675,
+      "expiresAt": "2027-01-16T04:03:17Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39095754956/artifacts/12124508887"
+    },
+    {
+      "name": "source-contracts-osx-arm64",
+      "id": 12124304121,
+      "digestFromGitHub": "sha256:688268788114da649a8cee919290e3eb89f421fe3189feb14c0610f69373d424",
+      "sizeBytes": 431248,
+      "expiresAt": "2027-01-16T04:03:17Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39095754956/artifacts/12124304121"
+    },
+    {
+      "name": "source-contracts-linux-arm64",
+      "id": 12124194513,
+      "digestFromGitHub": "sha256:8e729e1f6f7fee618d65533b9336cee07e42e9eaf202388c48352ff80ea83675",
+      "sizeBytes": 430964,
+      "expiresAt": "2027-01-16T04:03:17Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39095754956/artifacts/12124194513"
+    },
+    {
+      "name": "source-contracts-linux-x64",
+      "id": 12124049878,
+      "digestFromGitHub": "sha256:94d91fdef4ed95ee33f0d83ec16bafe4d0f3a0a934d54da881265c6653ffe20d",
+      "sizeBytes": 432237,
+      "expiresAt": "2027-01-16T04:03:17Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39095754956/artifacts/12124049878"
+    },
+    {
+      "name": "source-contracts-osx-x64",
+      "id": 12123859489,
+      "digestFromGitHub": "sha256:d388c66ae8c956312d1805c67b3bfb6e3b2b9e432c2a57ecdb7fc2f6c6311163",
+      "sizeBytes": 434345,
+      "expiresAt": "2027-01-16T04:03:17Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39095754956/artifacts/12123859489"
+    },
+    {
+      "name": "source-contracts-win-arm64",
+      "id": 12123519891,
+      "digestFromGitHub": "sha256:4b8d5a88142d4d3edcb91da5b7faf4b00bfbcd2a3d25f6063e2b96845bd500c3",
+      "sizeBytes": 430166,
+      "expiresAt": "2027-01-16T04:03:17Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39095754956/artifacts/12123519891"
+    }
+  ],
+  "limitations": [
+    "Source contracts and independent small composition fixtures do not establish complete composition or SDK qualification.",
+    "Actual minimum Framework 4.7.2, final packages, complete corpus/fidelity/standards/security/fuzz/endurance workloads remain mandatory."
+  ]
+}

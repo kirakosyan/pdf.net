@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirements": [
+    "FP-085",
+    "FP-003",
+    "FP-004",
+    "FP-005",
+    "FP-007",
+    "FP-008",
+    "FP-009",
+    "FP-010",
+    "FP-011",
+    "FP-012",
+    "FP-013",
+    "FP-014",
+    "FP-015",
+    "FP-016"
+  ],
+  "branchCommit": "b434bef5f0d0e49a642e48b7549e40f9d678f900",
+  "testedMergeCommit": "28aa593dd1aa7803a175a652b86a97c19660de8c",
+  "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39097514507",
+  "conclusion": "success",
+  "testCasesPerLane": 575,
+  "executionLanes": 20,
+  "totalPassed": 11500,
+  "failed": 0,
+  "skipped": 0,
+  "hosts": [
+    "linux-arm64",
+    "win-x64",
+    "osx-x64",
+    "linux-x64",
+    "osx-arm64",
+    "win-arm64"
+  ],
+  "runtimeLanes": "net8/net10/netstandard2.0 fallback on six hosts; current Framework x86/x64 on Windows x64",
+  "packageSha256": null,
+  "productionQualified": false,
+  "artifacts": [
+    {
+      "name": "source-contracts-linux-arm64",
+      "id": 12125765061,
+      "digestFromGitHub": "sha256:c009a2c842a180f6fae958d71dd25e43c1b8d26a013e2968864e1a722069ef06",
+      "sizeBytes": 453915,
+      "expiresAt": "2027-01-16T04:33:34Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39097514507/artifacts/12125765061"
+    },
+    {
+      "name": "source-contracts-win-x64",
+      "id": 12125645462,
+      "digestFromGitHub": "sha256:e371f7fe914577a841f57aeb9f998355f7e0787e2eafa79741328cb86658cfb3",
+      "sizeBytes": 741946,
+      "expiresAt": "2027-01-16T04:33:34Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39097514507/artifacts/12125645462"
+    },
+    {
+      "name": "source-contracts-osx-arm64",
+      "id": 12125580462,
+      "digestFromGitHub": "sha256:6c2b217e92b4bf6d4b50a9c5de11416bc8cd1cd6ee57097b909a72072d06b88a",
+      "sizeBytes": 455747,
+      "expiresAt": "2027-01-16T04:33:34Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39097514507/artifacts/12125580462"
+    },
+    {
+      "name": "source-contracts-osx-x64",
+      "id": 12125546616,
+      "digestFromGitHub": "sha256:592e7f23da1760d74b7b8742bba33ed31f9fefa371e3447936cec8b5d9c64c59",
+      "sizeBytes": 456535,
+      "expiresAt": "2027-01-16T04:33:34Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39097514507/artifacts/12125546616"
+    },
+    {
+      "name": "source-contracts-linux-x64",
+      "id": 12125118321,
+      "digestFromGitHub": "sha256:69df6523171e2d29fcf857ff172aa6c49a195bac4c5ee647e8eaeedcf7194ed7",
+      "sizeBytes": 454736,
+      "expiresAt": "2027-01-16T04:33:34Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39097514507/artifacts/12125118321"
+    },
+    {
+      "name": "source-contracts-win-arm64",
+      "id": 12124719828,
+      "digestFromGitHub": "sha256:5bb5518d5b7b7a3a422febc7a66d7de60ce2f81d1116303d2dad2605b5f055d3",
+      "sizeBytes": 454199,
+      "expiresAt": "2027-01-16T04:33:34Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39097514507/artifacts/12124719828"
+    }
+  ],
+  "limitations": [
+    "Source contracts and small independent vector/structure checks do not establish complete organization or SDK qualification.",
+    "Additional interactive/structure/encryption profiles, complete mixed-document corpus, actual minimum Framework 4.7.2, final packages and all production gates remain mandatory."
+  ]
+}

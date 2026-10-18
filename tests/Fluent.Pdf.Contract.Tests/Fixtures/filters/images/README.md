@@ -1,0 +1,7 @@
+The grayscale and RGB rasters are original deterministic inputs: component `k` at `(x,y)` is `(17*x + 29*y + 43*k) mod 256`, with dimensions 64 by 16. Pillow 12.3.0 encoded JPEG and reversible JPEG 2000 using its independent native codec libraries; the manifest records the library versions and SHA-256 digests. The `.samples` files are independently decoded expected bytes. Grayscale JPEG and both JPEG 2000 fixtures are compared exactly by the isolated SDK decoder.
+
+The RGB JPEG uses chroma subsampling. Its independently decoded samples are retained for analysis; JPEG implementations can use different permitted chroma interpolation algorithms. The selected managed JPEG library uses DCT-based chroma enlargement and produces materially different edge pixels from the independent decoder on this high-frequency raster. This variation must be evaluated against the production visual corpus; the fixture does not establish that fidelity gate.
+
+The JBIG2 fixture contains original SDK-generated, lossless generic MMR regions for a deterministic 64 by 16 bitonal raster. Poppler's `pdfimages` independently decodes every pixel exactly after embedding the stream in an original PDF. The expected samples use 0 for black and 1 for white. This covers MMR interoperability; arithmetic, symbol dictionary and shared-global JBIG2 corpus qualification remains required.
+
+No reference-product implementation bodies or binaries are included.

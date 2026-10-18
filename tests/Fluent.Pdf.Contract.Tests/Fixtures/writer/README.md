@@ -1,0 +1,5 @@
+`signed-original.pdf` is an original one-page PDF 1.4 with an actual detached RSA-2048/SHA-256 CMS signature. The accompanying JSON records the PDF, CMS and covered-byte digests, byte ranges, generator digest and exact independent tool versions. OpenSSL verified the detached CMS against the covered bytes, and Poppler `pdfsig` reported `Signature is Valid`. The self-signed test certificate is intentionally untrusted; this fixture does not establish trust-chain qualification.
+
+The test key was generated outside the repository solely to construct this fixture and was deleted after verification. The PDF contains only the public certificate and signature. SDK tests preserve every original byte and every covered range while appending table/stream revisions and changing page rotation. Full rewriting rejects signature invalidation unless the caller explicitly authorizes it. Independent checks of the emitted incremental files are recorded with writer source evidence.
+
+The PDF emitter and test inputs are original under the repository MIT license. No reference-product bodies, private keys or credentials are included.

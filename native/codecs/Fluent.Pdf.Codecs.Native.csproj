@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework><AssemblyName>fluent-pdf-codecs</AssemblyName>
+    <IsPackable>false</IsPackable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PublishAot>true</PublishAot><NativeLib>Shared</NativeLib><InvariantGlobalization>true</InvariantGlobalization>
+    <ServerGarbageCollection>false</ServerGarbageCollection><ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <RuntimeIdentifiers>win-x64;win-arm64;linux-x64;linux-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../third-party/codecs/*.txt" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Compile Include="../../src/Fluent.Pdf.Codecs/CodecHeaders.cs" Link="CodecHeaders.cs" />
+    <ProjectReference Include="../../src/Fluent.Pdf/Fluent.Pdf.csproj" />
+    <PackageReference Include="CoreJ2K" Version="2.4.1.108" />
+    <PackageReference Include="BitMiracle.LibJpeg.NET" Version="1.5.324" />
+    <PackageReference Include="PdfPig.Filters.Jbig2.PdfboxJbig2" Version="0.1.16.2" />
+  </ItemGroup>
+</Project>

@@ -1,6 +1,6 @@
 # FP-001 public API contract
 
-FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). There is no built-in PDF parser, writer, renderer, HTML engine or OCR engine. A registered capability is provider metadata, not a production qualification claim.
+FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). The [syntax inspection API](pdf-syntax.md) reads low-level values and revisions. FP-005 adds the original managed [page reader and full/incremental writer](pdf-writing.md). FP-007 adds [typed content and version selection](content-operators.md). FP-008 adds explicit [font providers, embedding and mappings](fonts.md). FP-009 adds [Unicode analysis, shaping and positioned text](text-shaping.md), with an optional isolated native provider. FP-010 adds [vector paths, color resources and transparency](vector-graphics.md). Rendering, HTML and OCR remain later capabilities. A registered capability is provider metadata, not a production qualification claim.
 
 ## Facade and editing
 
@@ -38,7 +38,7 @@ The [C# consumer](../examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs) and
 
 `PdfOptions` is immutable and defaults to A4 and a maximum of 10,000 pages. Sizes use points, with finite positive width/height. A default-initialized `PdfPageSize` is invalid and is rejected at model boundaries. Rotations are the four named quarter-turn values. Page indices are zero-based. Add, move, remove and clear validate before mutating their collection; moving preserves page identity. Removed/cleared page handles become invalid. Collection changes invalidate enumeration, including changes before its first move.
 
-`CreateSnapshot()` copies the current geometry into an immutable, detached `PdfDocumentSnapshot`. It survives subsequent editing and document disposal. Snapshots currently contain only the geometry represented by this model; later content features must extend them deliberately.
+`CreateSnapshot()` copies current geometry and immutable original object/page bindings into a detached `PdfDocumentSnapshot`. It survives subsequent editing and disposal. Writer invocations also capture immutable save choices; later content features extend snapshots explicitly.
 
 ## Ownership and concurrency
 
@@ -50,7 +50,7 @@ Serialize all access to a single mutable document. Reentrant I/O is rejected, an
 
 `PdfProviderRegistry` captures immutable descriptors once and accepts up to 64 caller-owned providers. IDs and version strings are nonempty and limited to 128 characters. IDs compare ordinally without case. Duplicate IDs, duplicate services, invalid capabilities, null entries and read/write declarations lacking the matching service interface are rejected during registration. Lists are defensively copied and exposed read-only. There is no global registry, engine discovery, fallback or automatic download.
 
-`Supports` reports registration. `GetRequired<T>` resolves the requested contract. `ReadDocument` uses `IPdfDocumentReader`; `WriteDocument` uses `IPdfDocumentWriter`. `RenderPages`, `RenderHtml` and `RecognizeText` reserve capability identities; their operation interfaces and implementations belong to later requirements. Engine hashes, ABI/RID probes and qualification manifests also remain later work; descriptor version text alone proves none of these.
+`PdfProviderRegistry.Default` contains the managed reader/writer; `Empty` disables all services. Custom registries retain their explicitly declared services. `Supports` reports registration. `GetRequired<T>` resolves the requested contract. `ReadDocument` uses `IPdfDocumentReader`; `WriteDocument` uses `IPdfDocumentWriter`. `RenderPages`, `RenderHtml` and `RecognizeText` reserve capability identities; their operation interfaces and implementations belong to later requirements. The separate [native deployment and worker adapter](native-deployment.md) checks caller-pinned local assets and supplies bounded isolated ABI/dependency execution. It grants no PDF capability. Native validation and production qualification remain pending; descriptor version text alone proves neither.
 
 Readers synchronously populate an empty document, honoring its options and mandatory `PdfOperationContext`. Writers receive a detached immutable snapshot, borrowed output and the same operation context. They must finish all work and release depth/worker scopes before returning, without retaining live documents or leases. Context accounting is synchronized; each I/O stream still requires serialized access. Provider execution is trusted extension code; these contracts do not isolate or forcibly interrupt a provider that ignores cancellation. Native/browser supervision belongs to the relevant worker requirements.
 
@@ -60,10 +60,10 @@ Readers synchronously populate an empty document, honoring its options and manda
 | --- | --- |
 | `Pdf.Open(Stream, ..., CancellationToken)` | Reads from current position. Requires readable input. Caller retains the stream. Partial documents are disposed on failure. |
 | `Pdf.OpenFile(string, ..., CancellationToken)` | SDK opens and closes the file before returning, including error paths. |
-| `document.Save(Stream, CancellationToken)` | Returns a detached `PdfOperationReport`. Writes from current position. Requires writable output. Caller retains the stream. Does not rewind/truncate; failure or cancellation can leave partial bytes. |
-| `document.SaveFile(string, CancellationToken)` | Returns the report after commit. Requires an existing destination directory. Writes a private same-directory temporary file, flushes it, then uses atomic move/replace. Failure before commit preserves the destination. |
+| `document.Save(Stream, CancellationToken, writeOptions)` | Returns a detached `PdfOperationReport`. Writes from current position. Requires writable output. Caller retains the stream. Does not rewind/truncate; failure or cancellation can leave partial bytes. |
+| `document.SaveFile(string, CancellationToken, writeOptions)` | Returns the report after commit. Requires an existing destination directory. Writes a private same-directory temporary file, flushes it, then uses atomic move/replace. Failure before commit preserves the destination. |
 
-Providers receive directional, budgeted stream leases that expire on return, including failure. Closing a lease never closes the underlying caller stream. Reading through an output lease and writing through an input lease are rejected. A provider declares whether it requires seekability; incompatible streams fail before the callback. No implicit buffering/rewinding is added. Providers that need read/write scratch storage must own and budget that storage themselves. Output cannot seek before its starting position or beyond the configured relative extent. [Operation policies](operation-policies.md) define cumulative writes, growth and bounded input EOF lookahead.
+Providers receive directional, budgeted stream leases that expire on return, including failure. Closing a lease never closes the underlying caller stream. Reading through an output lease and writing through an input lease are rejected. A provider declares whether it requires seekability; incompatible streams fail before the callback. The managed reader explicitly snapshots input; the SDK adds no buffering/rewinding around other providers. Providers that need read/write scratch storage must own and budget that storage themselves. Output cannot seek before its starting position or beyond the configured relative extent. [Operation policies](operation-policies.md) define cumulative writes, growth and bounded input EOF lookahead.
 
 Path saves never delete an existing destination before replacement and never fall back to copying. Filesystem atomic-replace failures propagate. Atomic visibility is distinct from power-loss durability of directory metadata. Cancellation is checked before work, after callbacks and before file commit. Cancellation after commit cannot roll back the destination. Temporary cleanup preserves the primary exception and attaches cleanup I/O failures in `Exception.Data["Fluent.Pdf.CleanupFailure"]`.
 
@@ -95,3 +95,25 @@ Provider read/write methods now require `PdfOperationContext` in place of the to
 [Contract tests](../tests/Fluent.Pdf.Contract.Tests) exercise editing, ownership, callback failure, cancellation, resource boundaries, nonseekable streams, atomic saves, retained handles and C#/VB examples. A 64-logical-worker by 200-iteration fixture checks independent document isolation; it emits no PDF and does not establish full mixed-workload production concurrency or throughput. [Testing instructions](testing.md) define evidence and remaining qualification gaps.
 
 Actual Framework 4.7.2 and exact final-package execution remain pending. No requirement is production-qualified by these source tests. `productionReady` remains false and packing/publication remain blocked.
+
+FP-005 also adds `PdfTransaction`, `PdfWriteOptions`, immutable original page bindings, the stateless default managed provider and optional revision choices on save methods. These changes remain in the unshipped baseline; compiled binaries/delegates must rebuild. See [managed writing](pdf-writing.md).
+
+FP-011 adds immutable five-box page geometry, explicit units, rotated coordinate conversions, scoped canvas transforms/clips, vector/text/image placement frames and atomic page canvas application. See [page canvas and geometry](page-canvas.md).
+
+FP-012 adds immutable styled paragraphs/runs, explicit line/tab/overflow and pagination policies, floating vectors, detached line/page geometry and shared-context canvas output. See [flow layout and pagination](flow-layout.md).
+
+FP-013 adds immutable merged/nested table grids, bounded typed scalar binding with explicit culture, automatic/fixed widths, repeated headers and safe row fragments integrated into flow. See [tables and binding](tables.md).
+
+FP-014 adds immutable list counters/restarts, reusable components, section parity, column regions, notes and physical baseline shifts. `CreateDocument` adds cancellation and a bounded composition operation; column output has real basic structure/parent-tree associations without claiming PDF/UA. See [composition](composition.md).
+
+FP-015 adds final page template callbacks, explicit decorations, stable heading destinations, linked contents/index locators and standard numbering ranges. See [page templates](page-templates.md).
+
+FP-016 adds explicit page selections, detached page organization and vector imposition with shared budgets, reference remapping and explicit interactive profiles. See [page organization](page-organization.md).
+
+FP-017 adds immutable image assets, bounded PNG/JPEG packaging, masks/orientation, per-operation exact deduplication and captured graphics invocation extraction/editing. See [images and reusable graphics](images.md).
+
+FP-019 adds immutable annotation definitions/source manifests, generated markup and shaped text appearances, metadata/relationships, staged editing/import, explicit flattening and owned-graph XFDF. See [annotations](annotations.md).
+
+FP-020 adds managed `PdfDestination`, immutable `PdfAction`/`PdfActionPolicy` and `PdfNavigation` editing/inspection/sanitization. Source records and explicit profile limits are in [navigation.md](navigation.md).
+
+FP-021 adds `PdfBookmark`, `PdfPresentation`, passive transition contracts and source outline/label/preference inventories. See [presentation.md](presentation.md) for indices, standard names and supported value/formatter profiles.

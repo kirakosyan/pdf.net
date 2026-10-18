@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-085",
+  "branchCommit": "676128c176e69579e26883a57235aecea03903ac",
+  "testedMergeCommit": "6eabb24092343e1116ce5f96c3ae44d55d206953",
+  "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39076043507",
+  "conclusion": "success",
+  "testCasesPerLane": 182,
+  "executionLanes": 20,
+  "totalPassed": 3640,
+  "failed": 0,
+  "skipped": 0,
+  "hosts": [
+    "win-x64",
+    "win-arm64",
+    "linux-x64",
+    "linux-arm64",
+    "osx-x64",
+    "osx-arm64"
+  ],
+  "runtimeLanes": "net8/net10/netstandard2.0 fallback on six hosts; current Framework x86/x64 on Windows x64",
+  "packageSha256": null,
+  "productionQualified": false,
+  "artifacts": [
+    {
+      "name": "source-contracts-linux-arm64",
+      "id": 12117315881,
+      "digestFromGitHub": "sha256:98b7e51ad7838bf8d3dad4bbe69511e24bd95b19df7876931eea6617f0182635",
+      "sizeBytes": 122335,
+      "expiresAt": "2027-01-15T22:40:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39076043507/artifacts/12117315881"
+    },
+    {
+      "name": "source-contracts-linux-x64",
+      "id": 12117315873,
+      "digestFromGitHub": "sha256:35b8de42945c0d35beffcee8fecfa63e7e04613e283e457ba9a36acb7e979a51",
+      "sizeBytes": 122733,
+      "expiresAt": "2027-01-15T22:40:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39076043507/artifacts/12117315873"
+    },
+    {
+      "name": "source-contracts-osx-x64",
+      "id": 12116873885,
+      "digestFromGitHub": "sha256:36904c1aa852cb3be18484a44e47989ea0400663a3bfdc8e5c4041390aa480cd",
+      "sizeBytes": 123419,
+      "expiresAt": "2027-01-15T22:40:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39076043507/artifacts/12116873885"
+    },
+    {
+      "name": "source-contracts-win-x64",
+      "id": 12116652990,
+      "digestFromGitHub": "sha256:ce67f68bc5b7e63067ae404065fffb26c2f2152a8ea8c75dab72f083186af8d4",
+      "sizeBytes": 201699,
+      "expiresAt": "2027-01-15T22:40:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39076043507/artifacts/12116652990"
+    },
+    {
+      "name": "source-contracts-osx-arm64",
+      "id": 12116639415,
+      "digestFromGitHub": "sha256:47affc9f03024a477bd1ed4c38ba37ee02168ddd3c45e0e5929ec09801a72cdf",
+      "sizeBytes": 123239,
+      "expiresAt": "2027-01-15T22:40:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39076043507/artifacts/12116639415"
+    },
+    {
+      "name": "source-contracts-win-arm64",
+      "id": 12116473303,
+      "digestFromGitHub": "sha256:02a8c2008da7a4c023ec3f8446edd51c846ed1a34c11a4c6afc269da6f171534",
+      "sizeBytes": 122456,
+      "expiresAt": "2027-01-15T22:40:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39076043507/artifacts/12116473303"
+    }
+  ],
+  "limitations": [
+    "Exact OS/runtime/native fixture identities and individual TRX hashes are retained in the linked CI artifacts.",
+    "Artifact digests here are GitHub API observations, not independently downloaded ZIP verification. Local archive download was blocked by the execution network.",
+    "Actual minimum Framework 4.7.2, reviewed engine assets and complete production security/endurance/final-package qualification remain pending."
+  ]
+}

@@ -13,8 +13,8 @@ public sealed class StreamTests
     {
         using var input = new MemoryStream(new byte[] { 2 });
         using var output = new MemoryStream();
-        using var document = Pdf.Create().AddPage();
-        Assert.Throws<PdfProviderUnavailableException>(() => Pdf.Open(input));
+        using var document = Pdf.Create(providers:PdfProviderRegistry.Empty).AddPage();
+        Assert.Throws<PdfProviderUnavailableException>(() => Pdf.Open(input,providers:PdfProviderRegistry.Empty));
         Assert.Throws<PdfProviderUnavailableException>(() => document.Save(output));
         Assert.Equal(0, input.Position);
         Assert.Equal(0, output.Length);

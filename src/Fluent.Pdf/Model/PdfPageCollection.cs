@@ -21,16 +21,24 @@ public sealed class PdfPageCollection : IReadOnlyList<PdfPage>
 
     /// <summary>Adds a page with a valid size, within the document's maximum page count.</summary>
     public PdfPage Add(PdfPageSize size)
+        =>AddCore(size,null);
+    internal PdfPage Add(PdfPageSize size,PdfOperationContext context)=>AddCore(size,context);
+    private PdfPage AddCore(PdfPageSize size,PdfOperationContext? context)
     {
         _owner.EnsureEditable();
         Guard.Size(size, nameof(size));
         if (_pages.Count >= _owner.Options.MaximumPages)
             throw _owner.PageLimit();
+        _owner.BeforePageAllocation(context);
         var page = new PdfPage(_owner, size);
         _pages.Add(page);
         _version++;
         return page;
     }
+
+    /// <summary>Adds a page with explicit immutable boxes, UserUnit and rotation.</summary>
+    public PdfPage Add(PdfPageGeometry geometry)
+    {if(geometry==null)throw new ArgumentNullException(nameof(geometry));var page=Add(geometry.Size);page.Geometry=geometry;return page;}
 
     /// <summary>Removes a page and invalidates previously retained references to that page.</summary>
     public void RemoveAt(int index)

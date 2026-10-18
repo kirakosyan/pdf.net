@@ -1,0 +1,7 @@
+#nullable enable
+Fluent.Pdf.Text.IsolatedTextShaper
+Fluent.Pdf.Text.IsolatedTextShaper.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Text.IsolatedTextShaper.IsolatedTextShaper(Fluent.Pdf.Workers.NativeWorkerOptions! worker) -> void
+Fluent.Pdf.Text.IsolatedTextShaper.Shape(Fluent.Pdf.PdfShapingRequest! request, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfShapedGlyph>!
+const Fluent.Pdf.Text.IsolatedTextShaper.BridgeAbi = "fluent-pdf-text-1" -> string!
+const Fluent.Pdf.Text.IsolatedTextShaper.BridgeVersion = "14.2.1" -> string!

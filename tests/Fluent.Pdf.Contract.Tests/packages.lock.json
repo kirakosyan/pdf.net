@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     ".NETFramework,Version=v4.7.2": {
+      "BitMiracle.LibTiff.NET": {
+        "type": "Direct",
+        "requested": "[2.4.660, )",
+        "resolved": "2.4.660",
+        "contentHash": "Drd0fDFVrR3v19IJtqiDVnjgcVZoGlzFw/CYni1OQ5/xVYvjPNp18E9eu+dH/RmpIUw6Pn/JhE/H+Yc3kHI89A=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[18.11.0, )",
@@ -114,13 +120,47 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.codecs": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Text": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.contract.visualbasic": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Text": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.fonts": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
         }
       },
-      "fluent.pdf.contract.visualbasic": {
+      "fluent.pdf.text": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.workers": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
@@ -128,6 +168,12 @@
       }
     },
     "net10.0": {
+      "BitMiracle.LibTiff.NET": {
+        "type": "Direct",
+        "requested": "[2.4.660, )",
+        "resolved": "2.4.660",
+        "contentHash": "Drd0fDFVrR3v19IJtqiDVnjgcVZoGlzFw/CYni1OQ5/xVYvjPNp18E9eu+dH/RmpIUw6Pn/JhE/H+Yc3kHI89A=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[18.11.0, )",
@@ -216,13 +262,47 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.codecs": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Text": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.contract.visualbasic": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Text": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.fonts": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
         }
       },
-      "fluent.pdf.contract.visualbasic": {
+      "fluent.pdf.text": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.workers": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
@@ -230,6 +310,12 @@
       }
     },
     "net8.0": {
+      "BitMiracle.LibTiff.NET": {
+        "type": "Direct",
+        "requested": "[2.4.660, )",
+        "resolved": "2.4.660",
+        "contentHash": "Drd0fDFVrR3v19IJtqiDVnjgcVZoGlzFw/CYni1OQ5/xVYvjPNp18E9eu+dH/RmpIUw6Pn/JhE/H+Yc3kHI89A=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[18.11.0, )",
@@ -318,13 +404,47 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.codecs": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Text": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.contract.visualbasic": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Text": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.fonts": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
         }
       },
-      "fluent.pdf.contract.visualbasic": {
+      "fluent.pdf.text": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.workers": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"

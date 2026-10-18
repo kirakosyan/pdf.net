@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Primary normative fact capture provenance; not runtime or production qualification",
+  "facts": [
+    "STD-ANNOT-ISO1: appearance BBox/Matrix mapping, opacity with explicit appearances, annotation subtype floors and metadata",
+    "STD-ANNOT-ISO2-ERR12: current annotation appearance and dictionary corrections",
+    "STD-ANNOT-ISO2-ERR13: rich-media configuration/instance/assets identity and unique settings corrections"
+  ],
+  "externalCaptures": [
+    {
+      "id": "annotationStandardsPrimary",
+      "sha256": "358df5f0ebc5a39680d6b1289c09b1afa830f66a4a54ae730168ba5af6734c8b"
+    },
+    {
+      "id": "annotationMoreStandards",
+      "sha256": "0a4fbdaceed9e8fbad84b5adb51350d333de7cd06dbb34a3b8e0e1791bf57a8e"
+    },
+    {
+      "id": "annotationRichMediaFacts",
+      "sha256": "94b384bf56c309904f8378591fa45312138808cfc5752fb60245fd004e1e9c33"
+    },
+    {
+      "id": "annotationVersionFacts",
+      "sha256": "fbedb0e2bffe83420147526a083ff97436a1320d8395acfe7f88dff3d323e7a6"
+    }
+  ],
+  "implementationBodiesCopied": false,
+  "productionQualified": false
+}

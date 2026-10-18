@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-017 independent development image preservation/orientation/edit checks; not full image/color or production qualification",
+  "sourceCommit": "118107b2f7a5cc878a6d1603b14039f841c80ed9",
+  "workingTreeDirty": false,
+  "method": "Strict unrelated PDF reader; independently decoded/physically oriented image references emitted by independent writer; independent one-pixel image edit references; independent CMM comparison",
+  "tools": {
+    "pypdf": "6.10.0",
+    "Pillow": "12.3.0",
+    "LittleCMS": "2.19",
+    "NumPy": "2.3.5",
+    "SciPy": "1.17.0"
+  },
+  "renderer": {
+    "path": "/usr/bin/pdftoppm",
+    "version": "25.03.0",
+    "sha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "cases": [
+    {
+      "case": "adam7-rgb.png",
+      "pages": 1,
+      "pdfSha256": "921238885c264385fa6e9b5cc302bbe7acd570dd06f1fa5e4cf1991d040be9b7",
+      "exactEncodedSha256": "71356279eefcd5edcede08b124249fb6375f6d44772c2178730a16621cf9e777",
+      "exactContainerSha256": "5154953f99613d3a2283807db75587909dd4f3609d6754aea1d2a72cdafef904",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "cmyk.jpg",
+      "pages": 1,
+      "pdfSha256": "1fae8588315e49f0cea326059de2f727d80176efaacabb77961c3488a1fde58f",
+      "exactEncodedSha256": "42153007684f95aaf6084222990c0a7b27d863f7424914f7aa3b1f8fc49044fd",
+      "exactContainerSha256": "42153007684f95aaf6084222990c0a7b27d863f7424914f7aa3b1f8fc49044fd",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "icc.jpg",
+      "pages": 1,
+      "pdfSha256": "837c91f2aa4923d3d0b11741a54566a48cbda6b0ebdac50ac45900d2b68da976",
+      "exactEncodedSha256": "038a83948807a5baa28748ebb5d9ea1504e692f94bcb7589d6d59d92f7d3e7c4",
+      "exactContainerSha256": "038a83948807a5baa28748ebb5d9ea1504e692f94bcb7589d6d59d92f7d3e7c4",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "icc.png",
+      "pages": 1,
+      "pdfSha256": "f4c3c007f9d49f39a181e4f91fe46b4e52de1b50d67fcf7796c77c23c6fab1f5",
+      "exactEncodedSha256": "b895c03ecb02b9d50505dada73506229ccc928ae337bc4dfc8a3714a54782fe1",
+      "exactContainerSha256": "efd5a07d4a282d931aea57dcf5a2fc52e00395e1e3e2ac48615f9c21015cddab",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "mono.png",
+      "pages": 1,
+      "pdfSha256": "1663d9d591c042b1a02f2eabd1d79b5f171d6a991aadf9d7694e654a760f55a0",
+      "exactEncodedSha256": "15444e287d5136e3450db4e42023f8d9f131700ce65290b7b12f89c2603bb888",
+      "exactContainerSha256": "664b0f87912fc228b69a083e3fd98c7c917c602289f0bdcebb7def2185641eb5",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-1.jpg",
+      "pages": 1,
+      "pdfSha256": "ec0eaddbb8c7692382534533ddd08a6a4d884eb4d59f5d073a0b47b48864448f",
+      "exactEncodedSha256": "bb8f3fcd7e076f72e4638fffe7ce2e316181ab7e078145d48ed010158aa089bc",
+      "exactContainerSha256": "bb8f3fcd7e076f72e4638fffe7ce2e316181ab7e078145d48ed010158aa089bc",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-2.jpg",
+      "pages": 1,
+      "pdfSha256": "bb5a399faeac41e87631657caa9c27612941829a6d5fe06bb89e0ce00fef2e89",
+      "exactEncodedSha256": "8e244d9e744f7166743abbd86782bcb01e78e74dab65f691aeffc0a15a994664",
+      "exactContainerSha256": "8e244d9e744f7166743abbd86782bcb01e78e74dab65f691aeffc0a15a994664",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-3.jpg",
+      "pages": 1,
+      "pdfSha256": "478805b820a1c47c3958e7060dbcc3f6578bc19162e80b3877e694911008ee2c",
+      "exactEncodedSha256": "eae7b4b483f0efe36a5c7a56d738ef3c57c87a2287c6db233b3a39cbff1db098",
+      "exactContainerSha256": "eae7b4b483f0efe36a5c7a56d738ef3c57c87a2287c6db233b3a39cbff1db098",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-4.jpg",
+      "pages": 1,
+      "pdfSha256": "04b4ef82321399c5b7bc909591a6d793170f8cf5ec7a3a45087fa37ebeb67530",
+      "exactEncodedSha256": "2c7b53d5539e18b23855af661a4ad94530873571b2bc9d923b516ab0a6ecd288",
+      "exactContainerSha256": "2c7b53d5539e18b23855af661a4ad94530873571b2bc9d923b516ab0a6ecd288",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-5.jpg",
+      "pages": 1,
+      "pdfSha256": "d227e53329c80904e86f9801e5641aa631e9b2492e3a4c6b734d735c108b1125",
+      "exactEncodedSha256": "9bab91655dbb7b0143791d7d7a61f494dad6edcfbd1899a9ff70320cc3f2cf94",
+      "exactContainerSha256": "9bab91655dbb7b0143791d7d7a61f494dad6edcfbd1899a9ff70320cc3f2cf94",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-6.jpg",
+      "pages": 1,
+      "pdfSha256": "19a74db82fd4b6d0e959eaa763eddd0b549d78e58b78d80d5b6eb0335a93cee5",
+      "exactEncodedSha256": "ff49a7ec6173429516b1d59380dc5b37e2b54e24563a6042d4941b5f0b4de557",
+      "exactContainerSha256": "ff49a7ec6173429516b1d59380dc5b37e2b54e24563a6042d4941b5f0b4de557",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-7.jpg",
+      "pages": 1,
+      "pdfSha256": "8d035514f5a5040c26a18c30f9ea05ca62e3af205a2d4723afb35f9a0ae30dc1",
+      "exactEncodedSha256": "c941776b89f293f0a75e58f62bc07206eb70b5169978a16d893ba0545c69cbf8",
+      "exactContainerSha256": "c941776b89f293f0a75e58f62bc07206eb70b5169978a16d893ba0545c69cbf8",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "orientation-8.jpg",
+      "pages": 1,
+      "pdfSha256": "57c3bedfc18373055bcdbb16629bb909e7c19ccf69952f94a5d2bbc0f4f75159",
+      "exactEncodedSha256": "2506f7ec9fe2f2ecdd5699567885f6ed96d5050d0091129a16477ee47455c3a7",
+      "exactContainerSha256": "2506f7ec9fe2f2ecdd5699567885f6ed96d5050d0091129a16477ee47455c3a7",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "palette-alpha.png",
+      "pages": 1,
+      "pdfSha256": "58a40798e22ccae8dd2ce005e9695b3c0f7999a5076ccd55493764e9ae8ed64d",
+      "exactEncodedSha256": "4c9ee5578b8ee478c30881c3c0f3eb50bf8bbf74eca3aa0b28b2b9e05d8e2518",
+      "exactContainerSha256": "89cc4fd4d66d0f7e0711c02431b2464fa2c463b4e73901c52b952f824c98c15e",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "rgb.png",
+      "pages": 1,
+      "pdfSha256": "1ee89775258516164fad9b6958835b1df0b0775e05bc226116a5a11b3f161ee7",
+      "exactEncodedSha256": "b895c03ecb02b9d50505dada73506229ccc928ae337bc4dfc8a3714a54782fe1",
+      "exactContainerSha256": "3d0ac15f6c6ddbbffa0a50dc5dfbf661ce86c33f4d387003f7464d49434dd320",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "rgb16.png",
+      "pages": 1,
+      "pdfSha256": "c7be704c6d512c6588c220b0ad9863f5865af5c1797d1700be8726c844255b51",
+      "exactEncodedSha256": "3edf369bef774e9d2ba58e26acedf8c9485e62b5d44e37675cf5f55576117797",
+      "exactContainerSha256": "a92d9ce5a7ceae8ef3b6bf6730ca5fd792df68ad40649fde58be658f68114b5e",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "rgba.png",
+      "pages": 1,
+      "pdfSha256": "a7bb737ac3c641c7067ed3df68dcd77087fe7c83731e508128c0e775cfb8f779",
+      "exactEncodedSha256": "71356279eefcd5edcede08b124249fb6375f6d44772c2178730a16621cf9e777",
+      "exactContainerSha256": "1bf64b821b9746c86fab918b660df18922f01dce174f53862b0873304889a67d",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "srgb.png",
+      "pages": 1,
+      "pdfSha256": "ba34e47a70ab33df3abfbf6c40895979b2584fc46164702eaa384ecdf09bbec3",
+      "exactEncodedSha256": "b895c03ecb02b9d50505dada73506229ccc928ae337bc4dfc8a3714a54782fe1",
+      "exactContainerSha256": "0816933844eaa402d603186ce3b6116e4fb908632db2fc4abf0242ef33a02ebe",
+      "readerChecks": "exact packed samples/masks where managed; packet/profile preservation; declared geometry; independent orientation/physical aspect",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "edit-source",
+      "pages": 1,
+      "pdfSha256": "2a4e9595a25988e543c54d394c5959a58fe4b9769c22cac4574abea47990fd06",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "edit-replaced",
+      "pages": 1,
+      "pdfSha256": "24d1461fc6f4304fc84d8d4ed92061a68e4a760d4716b7c0d441edbb0f7460d5",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "edit-removed",
+      "pages": 1,
+      "pdfSha256": "3f534f33ef6322c2abee3d173c7ef05fa2fefdb127962f734cb78da894377964",
+      "rasterPixels": 504000,
+      "differentPixels": 0,
+      "ssim": 1.0,
+      "requiredSSIM": 0.995
+    }
+  ],
+  "colorProfileChecks": {
+    "rgb8Samples": 4096,
+    "maximumChannelError": 0,
+    "gray8Samples": 256,
+    "grayMaximumChannelError": 0,
+    "independentStandardProfileSha256": "3663c3964bd76da2c400ac428765bef44d53d0497a6177039e6756ed7ec3f51d"
+  },
+  "productionQualified": false,
+  "pending": [
+    "Complete image/color/precision/malformed-input/owner-dependent resource corpus and second independent PDF renderer",
+    "Actual minimum runtimes, final packages, independent conformance and all fuzz/resource/concurrency/endurance production gates"
+  ],
+  "referenceConstructionAudit": {
+    "sourcePdfBytesChanged": false,
+    "thresholdChanged": false,
+    "masksApplied": false,
+    "observation": "Resampling/transposing source pixels into a standalone image, explicit path clips, and vector-rectangle edit references produced one-pixel edge coverage differences below the fixed threshold. The final independent references apply normative orientation point mappings within a unit Form BBox and use independently authored one-pixel image samples for edits, preserving PDF painting/clipping semantics. All failed reference attempts are retained externally. No SDK PDF or expected sample was regenerated.",
+    "retainedPrototypes": [
+      {
+        "file": "first-result.log",
+        "sha256": "05e724fbfa2d9ca2a0d7593bec8dac11afc0a84a7ded63beb54c688eb8911bc5"
+      },
+      {
+        "file": "reference-first.pdf",
+        "sha256": "5c5fdb72467eaa08d1b927010f913b6041ff784ceef89e74f8b7ed37bb399691"
+      },
+      {
+        "file": "reference-first.ppm",
+        "sha256": "a4d0b4ce4c8dea9592ad50dfe7e0c8597970b878010c0d615501a63961853eee"
+      },
+      {
+        "file": "reference-second-icc.pdf",
+        "sha256": "d51e4bbc11e8ccf21fb18db18473b1f77ba7b2b040114520b6f593e0f43049c6"
+      },
+      {
+        "file": "reference-third-edit.pdf",
+        "sha256": "a49c8a784f3068d57a0f6ec31345f14cda978a77fabf34c6334958b3157785bb"
+      },
+      {
+        "file": "second-result.log",
+        "sha256": "cf21f24c6f63f3fbe0532f728bc1e5621b99ab8f830d43fc41bc308657b22991"
+      },
+      {
+        "file": "third-result.log",
+        "sha256": "2abd473ec9bf4921b4b4cb95e9aa3478aa6d5b5cf4b58decf633fdfdeac44e35"
+      },
+      {
+        "file": "verify-images-first.py",
+        "sha256": "73db504d7fc140c3db788de066a16998aba225414e63efedaa8c3fd5a0837105"
+      },
+      {
+        "file": "verify-images-second.py",
+        "sha256": "b39e9d53e4a767ea3c8a1beb3c23dd1058c3b659b62d065be0f60cb3d8581324"
+      },
+      {
+        "file": "verify-images-third.py",
+        "sha256": "63340fd1f2860fe59400947a25bf6ad20fd83e9a57eb8bdeaaa9cfa27eb36aa1"
+      }
+    ],
+    "verifierSha256": "fd7f81e78519e6ff8e498009760612ddacc5f235cb1df95de0b7a2209c775002"
+  }
+}

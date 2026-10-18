@@ -1,0 +1,17 @@
+{
+  "sourceId": "FONT-CJK-001",
+  "sourceSha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "sourceVersion": "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603",
+  "faceIndex": 0,
+  "license": "SIL-OFL-1.1",
+  "renamedPrimaryName": "FluentCjkFixture",
+  "tool": "FontTools 4.61.1",
+  "unicodeScalars": [
+    "0020",
+    "0041",
+    "0042",
+    "4E00",
+    "4E2D",
+    "6587"
+  ]
+}

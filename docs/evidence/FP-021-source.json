@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirements": [
+    "FP-001",
+    "FP-002",
+    "FP-085",
+    "FP-003",
+    "FP-004",
+    "FP-005",
+    "FP-007",
+    "FP-008",
+    "FP-009",
+    "FP-010",
+    "FP-011",
+    "FP-012",
+    "FP-013",
+    "FP-014",
+    "FP-015",
+    "FP-016",
+    "FP-017",
+    "FP-019",
+    "FP-020",
+    "FP-021"
+  ],
+  "branchCommit": "c2f3bbc57bd2ecdf410f3501adc08b7e06a4cf16",
+  "testedMergeCommit": "48d12667b2958613624d8554adeb4a341da61fcc",
+  "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39106603939",
+  "conclusion": "success",
+  "testCasesPerLane": 663,
+  "executionLanes": 20,
+  "totalPassed": 13260,
+  "failed": 0,
+  "skipped": 0,
+  "hosts": [
+    "win-arm64",
+    "osx-arm64",
+    "linux-x64",
+    "win-x64",
+    "osx-x64",
+    "linux-arm64"
+  ],
+  "runtimeLanes": "net8/net10/netstandard2.0 fallback on six hosts; current Framework x86/x64 on Windows x64",
+  "packageSha256": null,
+  "productionQualified": false,
+  "artifacts": [
+    {
+      "name": "source-contracts-win-x64",
+      "id": 12129185506,
+      "digestFromGitHub": "sha256:d60c221db3cff1a1a4f5eb639c123c69446659196c835d259d994add678e3500",
+      "sizeBytes": 859988,
+      "expiresAt": "2027-01-16T07:09:20Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39106603939/artifacts/12129185506"
+    },
+    {
+      "name": "source-contracts-osx-arm64",
+      "id": 12129100615,
+      "digestFromGitHub": "sha256:eb2f2abf471e28e7eadec0010931829b9a09bb520856b68bc8a3603b9657afdb",
+      "sizeBytes": 526439,
+      "expiresAt": "2027-01-16T07:09:20Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39106603939/artifacts/12129100615"
+    },
+    {
+      "name": "source-contracts-osx-x64",
+      "id": 12128916605,
+      "digestFromGitHub": "sha256:d899864fc49e9fe095b4a21fd1d1458c23e476bea1319266ad22d4c1ff68d098",
+      "sizeBytes": 527738,
+      "expiresAt": "2027-01-16T07:09:20Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39106603939/artifacts/12128916605"
+    },
+    {
+      "name": "source-contracts-linux-arm64",
+      "id": 12128911243,
+      "digestFromGitHub": "sha256:6c565baeef0e1b5d70805d9acaabe08c5f48dc57a1a4a1818858e320a06a52b4",
+      "sizeBytes": 525638,
+      "expiresAt": "2027-01-16T07:09:20Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39106603939/artifacts/12128911243"
+    },
+    {
+      "name": "source-contracts-win-arm64",
+      "id": 12128801955,
+      "digestFromGitHub": "sha256:6310e25b0db4d09b1877c2f19cdf58ebb804f06e7b6334582e40d700857cb2a0",
+      "sizeBytes": 525396,
+      "expiresAt": "2027-01-16T07:09:20Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39106603939/artifacts/12128801955"
+    },
+    {
+      "name": "source-contracts-linux-x64",
+      "id": 12127883932,
+      "digestFromGitHub": "sha256:d497ac4979fc2da1d813d52367814ee0a60726214ed919469179b5000bcf0c25",
+      "sizeBytes": 525670,
+      "expiresAt": "2027-01-16T07:09:20Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39106603939/artifacts/12127883932"
+    }
+  ],
+  "jobLogs": [
+    {
+      "jobId": 117613693623,
+      "sha256": "c7289a48d6fb2fee9564fda7727e37900331ca4f3e60ac098765c0b3e1b3f686",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117613693721,
+      "sha256": "ba6dc13ffc9604ab952ba60cf01bd02c2a1d2bbbfa3547d69e7de366e6c59ce2",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117613693753,
+      "sha256": "cd192ad41c1f84089aef95fec6ed073a08c37afbecd9ffbf9fa3f05d84c8d8ff",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117613693762,
+      "sha256": "b902c534bb6395c5dd1c7bf5a62915a372a7114ca9415657bc021643a53bbea1",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117613693781,
+      "sha256": "ddf815c778f492dca30a3c3260fee0099ee133954562cf28bf44e34825668d26",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117613693806,
+      "sha256": "009a4fe7261264df2b09cb4278de362d7d60de540d415d446bb95b7a5633817d",
+      "retainedOutsideRepository": true
+    }
+  ],
+  "localValidation": {
+    "managedPassed": 622,
+    "failed": 0,
+    "skipped": 0,
+    "targetFrameworks": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "apiComparisons": 15,
+    "publicationBlocked": true,
+    "reports": {
+      "timing-full-build.log": "7a2adc90fc0ab6d76bf63bdb8fe6804cdea2113aadab4eb543854ba344e364f8",
+      "timing-full-managed.log": "62464e7ca3441fa409dc4ccc5fa100d91c8a2d9fce8dc3c01c20a7c3af55925c",
+      "timing-full-api.log": "5073dfc2e5e4dd12d29239fc06b2c6a93ae4886614c13328541e6a55ce67e8a3",
+      "timing-full-spec.log": "7dd37218527a3ff0f7ddfbf81ac88dc8c4a39afd2b3bcf6021207e077dd65130",
+      "timing-full-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+    }
+  },
+  "recentIndependentReports": {
+    "docs/evidence/FP-017-independent.json": "02bf166b0417a91c3c12feea97bcb6706026e83de430892825de92af4db6a114",
+    "docs/evidence/FP-019-independent.json": "f92d21aab39d720680b88be85a8e9354745528031f63dad788455e8e37925cd6",
+    "docs/evidence/FP-020-independent.json": "d4e02242a981b1d11aa1609b43ee7cfd531aace1401f0d083177932f3c19a0e5",
+    "docs/evidence/FP-021-independent.json": "6df0cba7a3ddeb0bfbee54bc37e82a5b2cfe50bafe0d00ea620816c769934c50",
+    "docs/evidence/template-convergence.json": "838dbfee7edd92c5e5de4b59b7e0e2865df57e7ea47a314acf1d3bb29446f018",
+    "docs/evidence/uri-serialization.json": "cd570192fdaac118575e92654cd1a981cf060b461fc33bc54f622aa52c94a806",
+    "docs/evidence/template-planning.json": "32012773d8f6e52949af0a2a79b5209e4fe390bf03425680215d8c58333e5f32",
+    "docs/evidence/import-ownership.json": "c614c9b8054251f8384dbeb3300358f26a00df187c954ff86666bedaf1afb91b"
+  },
+  "earlierFailureAudit": {
+    "report": "docs/evidence/FP-020-source.json",
+    "sha256": "49a31302de4451cd9edb761a92bac389a376153cedca2e57b23b7291acc6e4c3",
+    "observations": "Earlier native memory-status and Unix launch failures plus Intel macOS deadline failures are retained in that source audit. Failure-only native measurements, bounded pre-exec retries and operation-local template measurement reuse keep every ceiling/deadline intact. A passing source profile is not a complete root-cause or production-qualification claim."
+  },
+  "limitations": [
+    "Source implementations expose bounded supported profiles and explicit unsupported cases. All remaining required profiles, reviews and complete corpus/conformance work remain mandatory.",
+    "Actual minimum Framework 4.7.2, exact final packages and complete security/fuzz/concurrency/endurance/performance qualification remain missing and block publication.",
+    "These reports bind the stated tested branch/merge commits. Later evidence-only edits do not qualify different final packages."
+  ],
+  "sourceScheduling": {
+    "collectionThreads": 2,
+    "parallelCollections": true,
+    "testContainedConcurrencyUnchanged": true,
+    "productionConcurrencyQualified": false
+  },
+  "additionalFailureAudit": [
+    {
+      "run": 39104753011,
+      "logSha256": "3c7dab60b61e7cc1d11f116a81a16ef1696f9378873ddeb551b10cd141efb985",
+      "observation": "Two template cases exceeded the unchanged default deadline before trial body painting was removed."
+    },
+    {
+      "run": 39105883712,
+      "logSha256": "37e71941d0d5c39c5681938198cc9b41c67d081f913b07a9f7a4e43a62ac2f64",
+      "observation": "The positive template still exceeded the deadline in an unrestricted collection run; bounded phase diagnostics and controlled collection scheduling were subsequently added."
+    }
+  ]
+}

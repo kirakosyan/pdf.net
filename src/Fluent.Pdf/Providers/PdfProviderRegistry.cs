@@ -25,7 +25,10 @@ public sealed class PdfProviderRegistry
             {
                 if (_providers.ContainsKey(capability)) throw new ArgumentException("Only one provider may supply a capability.", nameof(providers));
                 if (capability == PdfCapability.ReadDocument && provider is not IPdfDocumentReader ||
-                    capability == PdfCapability.WriteDocument && provider is not IPdfDocumentWriter)
+                    capability == PdfCapability.WriteDocument && provider is not IPdfDocumentWriter ||
+                    capability == PdfCapability.ImageCodecs && provider is not IPdfImageCodecProvider ||
+                    capability == PdfCapability.Fonts && provider is not IPdfFontProvider ||
+                    capability == PdfCapability.ShapeText && provider is not IPdfTextShaper)
                     throw new ArgumentException("A provider does not implement the interface for its declared service.", nameof(providers));
                 _providers.Add(capability, provider);
                 _identifiers.Add(capability, descriptor.Id);
@@ -40,6 +43,8 @@ public sealed class PdfProviderRegistry
 
     /// <summary>Gets the shared empty immutable registry.</summary>
     public static PdfProviderRegistry Empty { get; } = new();
+    /// <summary>Gets the shared original managed reader/writer registry. Optional native/image services remain explicitly configured.</summary>
+    public static PdfProviderRegistry Default{get;}=new(ManagedPdfProvider.Instance);
     /// <summary>Gets captured provider metadata in registration order.</summary>
     public IReadOnlyList<PdfProviderDescriptor> Descriptors { get; }
     /// <summary>Gets the declared capability inventory in enum order.</summary>

@@ -1,0 +1,18 @@
+{
+  "purpose": "original signed PDF preservation fixture; no trust-chain qualification",
+  "pdfSha256": "a5b7f85ce5fd2366b02d5a4c7222a0bde3f36c75892856b87c880f75d65908d1",
+  "signedBytesSha256": "e12813d9a3db81ec1a0075f100c9b627a65045b8adfb27204a3cb2e5558bf520",
+  "byteRange": [
+    0,
+    816,
+    17202,
+    378
+  ],
+  "cmsLength": 1354,
+  "cmsSha256": "c124da630cf9d148f1b192efa42215de4dcb15b2e747c4fc75852082c67bc376",
+  "opensslVersion": "OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)",
+  "pdfsigVersion": "pdfsig version 25.03.0",
+  "signatureVerification": "OpenSSL detached CMS verification and independent Poppler pdfsig report Signature is Valid; self-signed test certificate is untrusted",
+  "generatorSha256": "e2e337dd87237473c0367f8144c92a4c1d30cde200a547c727d272b6d5af79ec",
+  "privateKeyRetained": false
+}

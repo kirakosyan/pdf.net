@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-019 independent development appearance-flattening/interchange/metadata checks; not full annotation/XFDF/viewer or production qualification",
+  "sourceCommit": "0310ceddca0af6f395b716c20fe1175d8edcc0b1",
+  "workingTreeDirty": false,
+  "method": "Strict unrelated PDF reader; independent renderer on original annotation versus flattened and owned-XFDF outputs; original separate literal affine Form reference; independent font-metric/Unicode and WAVE decoder checks",
+  "tools": {
+    "pypdf": "6.10.0",
+    "FontTools": "4.61.1",
+    "Pillow": "12.3.0",
+    "NumPy": "2.3.5",
+    "SciPy": "1.17.0",
+    "Python": "3.12.14"
+  },
+  "renderer": {
+    "path": "/usr/bin/pdftoppm",
+    "version": "25.03.0",
+    "sha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "cases": [
+    {
+      "case": "markup",
+      "pages": 1,
+      "annotations": 12,
+      "sourcePdfSha256": "de54c974702bb630c49dbeba242e5dcf3f501c26cc859a48f9057cb0b406f2ac",
+      "flattenedPdfSha256": "4084ff08314b2378292289854a0f54bdb620e8353a7c3f48519deac257be5607",
+      "interchangePdfSha256": "a99930ef1af5dc99cb098b703d63376fea5948cd05b4f8e46ccec750d12f985a",
+      "xfdfSha256": "adcc71251b4ddbf8f7de2d772c30ed172f4aad042b4d70bf5af1c395880ffd67",
+      "rasterPixelsPerComparison": 598400,
+      "flatteningInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "ownedXfdfInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "readerChecks": "exact subtype/native Rect/Unicode/date/state metadata, appearance bytes, page/reply/popup ownership; payload/configuration identity and independently decoded WAVE where present; independent original-font glyph positions/Unicode for free text"
+    },
+    {
+      "case": "affine",
+      "pages": 1,
+      "annotations": 1,
+      "sourcePdfSha256": "89eadbea706fbcef1f85015dee2ad5181ef1d34980745e167e22e9d4800cf516",
+      "flattenedPdfSha256": "4256f94d4b45c57940a83b05d7b26706d250d31b85b54c03194c66f5a7a7fd06",
+      "interchangePdfSha256": "24735330f923ec72cd06cb4a0cc140f9733765577da41112a6fde69364d5fbdc",
+      "xfdfSha256": "5ec45a44d820708ce0adbc1e50e3d7628998352c3da614cbfe9c62d2fc5d99c6",
+      "rasterPixelsPerComparison": 80000,
+      "flatteningInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "ownedXfdfInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "readerChecks": "exact subtype/native Rect/Unicode/date/state metadata, appearance bytes, page/reply/popup ownership; payload/configuration identity and independently decoded WAVE where present; independent original-font glyph positions/Unicode for free text"
+    },
+    {
+      "case": "text",
+      "pages": 1,
+      "annotations": 1,
+      "sourcePdfSha256": "9b538c0c2e3dd5af96fff8a3377cbdf6d7e124ce88192d54652465f87f293d9d",
+      "flattenedPdfSha256": "5fecf542f9ae0586fb5c51ecfefc14b8d69d18ee7621241b95b5a127344824a2",
+      "interchangePdfSha256": "2ca794d57db6c5d5a3395e1c2f72471a3498cd68799b78870aeb6f242c4b6a79",
+      "xfdfSha256": "9180eb1727bb03e36fca7905868d8cd80780bdaed9b30297d716f6bfb9e89b49",
+      "rasterPixelsPerComparison": 134400,
+      "flatteningInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "ownedXfdfInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "readerChecks": "exact subtype/native Rect/Unicode/date/state metadata, appearance bytes, page/reply/popup ownership; payload/configuration identity and independently decoded WAVE where present; independent original-font glyph positions/Unicode for free text"
+    },
+    {
+      "case": "media",
+      "pages": 1,
+      "annotations": 3,
+      "sourcePdfSha256": "21e7ef881a91e465cbc788ac58e1cc8d2c09705f70acfcb808186cd12cf2340d",
+      "flattenedPdfSha256": "bf7fd48c6ddec5fbc538ada1732f5f2fd9cea60ad08ec4dff1996308f8a6fff6",
+      "interchangePdfSha256": "5b800e665503793253d2c8d61d1113763801b643b7e65e59b25a471e5a7cd310",
+      "xfdfSha256": "07aa4612bc3968b3b21832521d08ce28eaaa14221b49370e6ca323e183d359eb",
+      "rasterPixelsPerComparison": 134400,
+      "flatteningInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "ownedXfdfInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "readerChecks": "exact subtype/native Rect/Unicode/date/state metadata, appearance bytes, page/reply/popup ownership; payload/configuration identity and independently decoded WAVE where present; independent original-font glyph positions/Unicode for free text"
+    },
+    {
+      "case": "relations",
+      "pages": 1,
+      "annotations": 3,
+      "sourcePdfSha256": "b916a4efcf81a15ce000ed245642ad4a4632a5230dfd55170e33d4124e6bdcb5",
+      "flattenedPdfSha256": "2512d74fe87ce1a2860f940d7f3fb641c06abd039d5ab17693b0c4b4c82dbc89",
+      "interchangePdfSha256": "6f2d073dd37dc3c5e2886cee34896acf69a15e4fb3250265d71cdab5781fb9c6",
+      "xfdfSha256": "5d4c313d33e5f0de2b02572b51eb242e0ffd84b6f2da2429d41bf72323cfa4c6",
+      "rasterPixelsPerComparison": 134400,
+      "flatteningInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "ownedXfdfInvariant": {
+        "differentPixels": 0,
+        "ssim": 1.0,
+        "requiredSSIM": 0.995
+      },
+      "readerChecks": "exact subtype/native Rect/Unicode/date/state metadata, appearance bytes, page/reply/popup ownership; payload/configuration identity and independently decoded WAVE where present; independent original-font glyph positions/Unicode for free text"
+    }
+  ],
+  "separateAffineReference": {
+    "pdfSha256": "36699ecef8c18d0e94657369bfc3c8f4ddba3b6f314e907e2e4cef6ad075ee87",
+    "differentPixels": 0,
+    "ssim": 1.0,
+    "requiredSSIM": 0.995
+  },
+  "wavePayloadSha256": "d38bcc09e44b149dded4428142e65a183e51c2b9e2e8bb1d19756ba0df6ffe8b",
+  "independentTextChecks": {
+    "logicalUnicode": "office",
+    "glyphMatrices": 6,
+    "maximumAllowedErrorPoints": 1e-09
+  },
+  "productionQualified": false,
+  "limitations": [
+    "Before/after raster comparisons establish limited flattening/interchange invariance, not independent visual correctness for every generated markup subtype. The separate affine reference and original-font geometry checks are independently constructed.",
+    "For pypdf 6.10.0 raw glyph codes use the parser-recorded _original_bytes; get_original_bytes synthesized a BOM on BOM-free CID strings. Raw appearance literals were inspected and retained externally; no library was patched.",
+    "Full subtype/viewer/semantic/conformance/XFDF corpus and additional ownership/compositing/media/regeneration profiles remain mandatory.",
+    "Actual minimum runtimes, final packages and all security/fuzz/resource/concurrency/endurance production gates remain mandatory."
+  ],
+  "verifierSha256": "05471bd71679e29b7284534a451e4ff754fd4563479c9706ba2a57aac7126e9a",
+  "rawCidObservation": {
+    "priorVerifierSha256": "360098cfca90c44984d42195fcb27ed76e0e17b09bff6e17132f0b82f4dafc50",
+    "retainedObservationSha256": "2b2401320f826360be427300dc3bcd7b2542d8960e139a5189198cc9c79a9fd8",
+    "libraryPatched": false
+  }
+}

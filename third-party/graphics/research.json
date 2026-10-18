@@ -1,0 +1,14 @@
+{
+  "purpose": "Normative data/version research only; no imported implementation body",
+  "sourceIds": [
+    "SPEC-PDF17-TABLE67",
+    "SPEC-PDF20-8.6.5.5-APPROVED-ERRATA",
+    "SPEC-ICC-EDITION-HISTORY"
+  ],
+  "capturedAt": "2026-10-18",
+  "captureSha256": "7df255b7003b04a0c743b159ad194fe575e247918e05355d8911e52eac68bdf6",
+  "digestKind": "Exact UTF-8 JSON web-tool capture retained outside repository; not a hash of the underlying complete standard publications",
+  "versionPolicy": "Conservative ICC binary-header minor-version floors, propagated through typed dependent resources",
+  "rawReferences": "Retained outside repository in qualification research",
+  "qualification": "Complete ICC transform/profile corpus and final conformance remain pending"
+}

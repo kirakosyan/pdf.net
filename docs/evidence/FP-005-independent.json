@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source writer independent verification, not production qualification",
+  "sourceCommit": "50f6664d278a681472cc9ed761b457ef741a8591",
+  "sourceWorkingTreeDirty": false,
+  "pypdfVersion": "6.10.0",
+  "pdfinfoVersion": "pdfinfo version 26.05.0",
+  "pdfsigVersion": "pdfsig version 25.03.0",
+  "outputs": [
+    {
+      "file": "new-letter.pdf",
+      "sha256": "bd46ff5acacbe0ab68a04b79b0843159da3758112b608ae16f5499aa554b167c",
+      "bytes": 364,
+      "pages": 1,
+      "text": "",
+      "pypdfStrict": true,
+      "pdfinfoExit": 0
+    },
+    {
+      "file": "roundtrip-stream.pdf",
+      "sha256": "d04d96fbc9a72799b2c60df1e569129b688f521d05a1a33a8f6e0e1ad887afcf",
+      "bytes": 630,
+      "pages": 1,
+      "text": "Original syntax fixture",
+      "pypdfStrict": true,
+      "pdfinfoExit": 0
+    },
+    {
+      "file": "roundtrip-table.pdf",
+      "sha256": "0df42c73cf4795d33b6576118b83b7ec998bedcd2a9b47adcf518d8442d44d78",
+      "bytes": 607,
+      "pages": 1,
+      "text": "Original syntax fixture",
+      "pypdfStrict": true,
+      "pdfinfoExit": 0
+    },
+    {
+      "file": "signed-stream.pdf",
+      "sha256": "e89850a25a95ee38ccb2edb442333f8a30cfc4b39c431c1f868b8c98d8afd25e",
+      "bytes": 18129,
+      "pages": 1,
+      "text": "Original signed fixture",
+      "pypdfStrict": true,
+      "pdfinfoExit": 0,
+      "pdfsig": "Signature is Valid; original covered bytes retained; self-signed test certificate untrusted"
+    },
+    {
+      "file": "signed-table.pdf",
+      "sha256": "bdf745508bc6f4a1532e2a122eb3efb8d9e192d4c6486e781f8a238063c7ed08",
+      "bytes": 17946,
+      "pages": 1,
+      "text": "Original signed fixture",
+      "pypdfStrict": true,
+      "pdfinfoExit": 0,
+      "pdfsig": "Signature is Valid; original covered bytes retained; self-signed test certificate untrusted"
+    }
+  ],
+  "packageSha256": null,
+  "productionQualified": false
+}

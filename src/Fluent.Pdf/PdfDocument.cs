@@ -15,6 +15,10 @@ public sealed class PdfDocument : IDisposable
     private bool _writing;
     private PdfOperationContext? _context;
     private PdfOperationReport? _lastReport;
+    private PdfSyntaxDocument? _source;
+    private PdfPageNumbering? _pageNumbering;
+    internal void SetPageNumbering(PdfPageNumbering value){EnsureEditable();_pageNumbering=value;}
+    private IReadOnlyList<PdfObjectId> _originalOrder=Array.Empty<PdfObjectId>();
 
     internal PdfDocument(PdfOptions options, PdfProviderRegistry providers)
     {
@@ -33,24 +37,35 @@ public sealed class PdfDocument : IDisposable
     public PdfPageCollection Pages { get { EnsureAlive(); return _pages; } }
     /// <summary>Gets the last completed provider operation report, including failed operations. Remains readable after disposal.</summary>
     public PdfOperationReport? LastOperationReport => _lastReport;
+    internal void SetCompositionReport(PdfOperationReport report) { _lastReport = report; }
+    /// <summary>Gets the immutable original object graph, or null for a newly authored session.</summary>
+    public PdfSyntaxDocument? SourceDocument{get{EnsureAlive();return _source;}}
 
     /// <summary>Adds a default-sized page and returns this document for fluent composition.</summary>
     public PdfDocument AddPage() { _pages.Add(); return this; }
     /// <summary>Adds a page and returns this document for fluent composition.</summary>
     public PdfDocument AddPage(PdfPageSize size) { _pages.Add(size); return this; }
 
+    /// <summary>Adds a page with explicit boxes, UserUnit and viewing rotation.</summary>
+    public PdfDocument AddPage(PdfPageGeometry geometry){_pages.Add(geometry);return this;}
+
     /// <summary>Captures immutable page geometry independent of subsequent edits and disposal.</summary>
     public PdfDocumentSnapshot CreateSnapshot()
+        =>CreateSnapshotCore(PdfWriteOptions.Default);
+    private PdfDocumentSnapshot CreateSnapshotCore(PdfWriteOptions writeOptions)
     {
         EnsureAlive();
-        var pages = new PdfPageSnapshot[_pages.Count];
-        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation);
-        return new PdfDocumentSnapshot(_options, pages);
+        int count=_pages.Count;
+        if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*128L+32);}
+        var indices=new Dictionary<PdfPage,int>();for(int i=0;i<count;i++)indices.Add(_pages[i],i);
+        var pages = count==0?Array.Empty<PdfPageSnapshot>():new PdfPageSnapshot[count];
+        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context),_pages[i].SnapshotGraphicsResources(_context),_pages[i].Geometry,_pages[i].SnapshotCanvasLayers(_context),_pages[i].StructureRoles,_pages[i].SnapshotLinks(indices,_context));
+        return new PdfDocumentSnapshot(_options, pages,_source,_originalOrder,writeOptions,_pageNumbering);
     }
 
     /// <summary>Writes through the registered writer at the current stream position, leaving the caller's stream open.</summary>
     /// <remarks>Stream output can be partial on provider failure/cancellation. The SDK does not rewind or truncate the caller's stream.</remarks>
-    public PdfOperationReport Save(Stream output, CancellationToken cancellationToken = default)
+    public PdfOperationReport Save(Stream output, CancellationToken cancellationToken = default,PdfWriteOptions? writeOptions=null)
     {
         EnsureAlive();
         EnsureNoActiveOperation();
@@ -60,54 +75,22 @@ public sealed class PdfDocument : IDisposable
         var writer = _providers.GetRequired<IPdfDocumentWriter>(PdfCapability.WriteDocument);
         return RunOperation(true, "Save", PdfCapability.WriteDocument, cancellationToken, context =>
         {
-            Write(writer, output, context);
+            Write(writer, output, context,writeOptions??PdfWriteOptions.Default);
             context.EnsureComplete();
         });
     }
 
     /// <summary>Writes to a private file in the destination directory, then atomically moves/replaces the destination on success.</summary>
     /// <remarks>The destination directory must exist. An unsupported atomic replace fails without a delete-and-copy fallback.</remarks>
-    public PdfOperationReport SaveFile(string path, CancellationToken cancellationToken = default)
+    public PdfOperationReport SaveFile(string path, CancellationToken cancellationToken = default,PdfWriteOptions? writeOptions=null)
     {
         EnsureAlive();
         EnsureNoActiveOperation();
         Guard.Text(path, nameof(path), 32767);
         cancellationToken.ThrowIfCancellationRequested();
         var writer = _providers.GetRequired<IPdfDocumentWriter>(PdfCapability.WriteDocument);
-        var fullPath = Path.GetFullPath(path);
-        var directory = Path.GetDirectoryName(fullPath)!;
-        var temporary = Path.Combine(directory, ".fluent-pdf-" + Guid.NewGuid().ToString("N") + ".tmp");
-        bool created = false;
-        Exception? failure = null;
         return RunOperation(true, "SaveFile", PdfCapability.WriteDocument, cancellationToken, context =>
-        {
-            try
-            {
-                context.Checkpoint();
-                using (var output = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-                {
-                    created = true;
-                    Write(writer, output, context);
-                    output.Flush(true);
-                }
-                context.EnsureComplete();
-                // This is the commit boundary. A later cancellation cannot roll back an atomic replacement.
-                if (File.Exists(fullPath)) File.Replace(temporary, fullPath, null);
-                else File.Move(temporary, fullPath);
-            }
-            catch (Exception ex) { failure = ex; throw; }
-            finally
-            {
-                if (created)
-                {
-                    try { File.Delete(temporary); }
-                    catch (Exception cleanup) when (failure is not null && (cleanup is IOException || cleanup is UnauthorizedAccessException))
-                    {
-                        failure.Data["Fluent.Pdf.CleanupFailure"] = cleanup;
-                    }
-                }
-            }
-        });
+            PdfAtomicFile.Write(path,context,output=>Write(writer,output,context,writeOptions??PdfWriteOptions.Default)));
     }
 
     /// <summary>Disposes this session and invalidates live page/collection references. Repeated disposal is harmless.</summary>
@@ -117,6 +100,7 @@ public sealed class PdfDocument : IDisposable
         if (_disposed) return;
         if (_operationActive) throw new InvalidOperationException("Cannot dispose a document during a provider operation.");
         _pages.ClearCore();
+        _source=null;_originalOrder=Array.Empty<PdfObjectId>();
         _disposed = true;
     }
 
@@ -147,25 +131,28 @@ public sealed class PdfDocument : IDisposable
         context.Checkpoint();
     }
 
-    private void Write(IPdfDocumentWriter writer, Stream output, PdfOperationContext context)
+    private void Write(IPdfDocumentWriter writer, Stream output, PdfOperationContext context,PdfWriteOptions writeOptions)
     {
         context.Checkpoint();
         if (writer.RequiresSeekableStream && !output.CanSeek) throw SeekRequired(PdfCapability.WriteDocument);
-        var snapshot = CreateSnapshot();
+        if(writer is IPdfRevisionWriter revisions)
+        {if(!revisions.Supports(writeOptions))throw PdfWriterCore.Error(context,"Writer.OptionsUnsupported","The selected writer does not support the requested save choices.");}
+        else if(!writeOptions.IsDefault)throw PdfWriterCore.Error(context,"Writer.OptionsUnsupported","The selected writer does not implement revision-aware save choices.");
+        var snapshot = CreateSnapshotCore(writeOptions);
         using var lease = new BorrowedStream(output, false, context);
         writer.Write(snapshot, lease, context);
         context.Checkpoint();
     }
 
     private PdfOperationReport RunOperation(bool writing, string operation, PdfCapability capability,
-        CancellationToken token, Action<PdfOperationContext> action)
+        CancellationToken token, Action<PdfOperationContext> action,string? providerId=null)
     {
         BeginOperation(writing);
         PdfOperationContext? context = null;
         bool succeeded = false;
         try
         {
-            context = new PdfOperationContext(operation, _providers.GetIdentifier(capability), capability, _options.OperationPolicy, token);
+            context = new PdfOperationContext(operation, providerId??_providers.GetIdentifier(capability), capability, _options.OperationPolicy, token);
             _context = context;
             context.Checkpoint();
             action(context);
@@ -209,6 +196,70 @@ public sealed class PdfDocument : IDisposable
     }
 
     internal void EnsureAlive() { if (_disposed) throw new ObjectDisposedException(nameof(PdfDocument)); }
+    internal void BeforePageAllocation(PdfOperationContext? context=null){var selected=context??_context;selected?.Consume(PdfResourceKind.Objects,1);selected?.Consume(PdfResourceKind.ExpandedBytes,256);}
+    internal PdfContentProgram ReadPageContent(PdfPage page,PdfUnknownOperatorPolicy unknown,string? version,CancellationToken token)
+    {
+        EnsureNoActiveOperation();if(!Enum.IsDefined(typeof(PdfUnknownOperatorPolicy),unknown))throw new ArgumentOutOfRangeException(nameof(unknown));
+        if(unknown==PdfUnknownOperatorPolicy.Preserve&&version==null)throw new ArgumentException("Preservation requires an explicit extension version floor.",nameof(version));
+        if(version!=null)PdfVersionNumber.Parse(version);
+        PdfContentProgram? result=null;
+        var report=RunOperation(false,"ReadPageContent",PdfCapability.ReadDocument,token,context=>
+        {
+            if(page.Content!=null)result=PdfContentProgram.CreateCore(page.Content.Operations,PdfContentKind.Page,context);
+            else result=PdfPageContent.Read(page.Source,unknown,version,_providers,context);
+            var layers=page.SnapshotCanvasLayers(context);if(layers.Count>0)result=PdfCanvasLayerContent.Combine(result!,layers,context);
+            context.EnsureComplete();
+        },"managed.content");
+        result!.OperationReport=report;return result;
+    }
+    internal PdfOperationReport ApplyCanvas(PdfPage page,PdfCanvasResult canvas,PdfCanvasApplyMode mode,CancellationToken token)
+    {
+        EnsureNoActiveOperation();if(!page.Geometry.Equals(canvas.Geometry))throw new ArgumentException("The canvas must match the page's current boxes, UserUnit and rotation.",nameof(canvas));
+        PdfGraphicsResource? appliedForm=null;PdfContentProgram? appliedProgram=null;
+        var report=RunOperation(false,"ApplyCanvas",PdfCapability.WriteDocument,token,context=>
+        {
+            if(mode!=PdfCanvasApplyMode.Replace&&page.Content==null&&page.Source!=null)_=PdfPageContent.Read(page.Source,PdfUnknownOperatorPolicy.Preserve,page.Source.Document.Version,_providers,context);
+            var form=PdfGraphicsObjects.FormCore(canvas.Drawing,page.Geometry.Boxes.Media,null,null,context);appliedForm=form;int sequence=page.CanvasSequence;var existing=page.SnapshotGraphicsResources(context);PdfValue names=PdfValue.Null;
+            if(page.Source!=null&&page.Source.EffectiveAttributes.Entries.TryGetValue("Resources",out var declared))
+            {
+                var resources=ManagedPdfProvider.Resolve(page.Source.Document,declared,context);if(resources.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Canvas.ResourceDictionary","Source resources must resolve to a dictionary.");if(resources.Entries.TryGetValue("XObject",out var objects))names=ManagedPdfProvider.Resolve(page.Source.Document,objects,context);if(names.Kind!=PdfValueKind.Null&&names.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Canvas.ResourceDictionary","Source XObject resources must resolve to a dictionary.");
+            }
+            string name;while(true)
+            {
+                context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);if(sequence==int.MaxValue)throw PdfWriterCore.Error(context,"Canvas.ResourceNames","The generated resource name sequence is exhausted.");name="FC"+(sequence++).ToString(System.Globalization.CultureInfo.InvariantCulture);if(names.Kind==PdfValueKind.Dictionary&&names.Entries.ContainsKey(name)||existing.Bindings.Any(x=>x.Resource.Category==PdfGraphicsResourceCategory.XObject&&x.Name==name))continue;break;
+            }
+            var program=PdfContentProgram.CreateCore(new[]{new PdfContentOperation(PdfOperator.SaveState),new PdfContentOperation(PdfOperator.DrawObject,PdfValue.Name(name)),new PdfContentOperation(PdfOperator.RestoreState)},PdfContentKind.Page,context);appliedProgram=program;context.EnsureComplete();page.CommitCanvas(new(name,form),program,mode,sequence,context);
+        },"managed.canvas");appliedForm!.OperationReport=report;appliedProgram!.OperationReport=report;return report;
+    }
+    internal IReadOnlyList<PdfPageFont> ReadPageFonts(PdfPage page,CancellationToken token)
+    {
+        EnsureNoActiveOperation();IReadOnlyList<PdfPageFont>? result=null;
+        RunOperation(false,"ReadPageFonts",PdfCapability.Fonts,token,context=>
+        {
+            var replacements=page.SnapshotFonts(context);var fonts=new SortedDictionary<string,PdfPageFont>(StringComparer.Ordinal);var binding=page.Source;
+            PdfValue Resolve(PdfValue value)
+            {
+                if(value.Kind!=PdfValueKind.Reference)return value;context.Consume(PdfResourceKind.ExpandedBytes,64);var seen=new HashSet<PdfObjectId>();int depth=0;
+                while(value.Kind==PdfValueKind.Reference){context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);context.Consume(PdfResourceKind.ExpandedBytes,64);if(++depth>context.Available(PdfResourceKind.Depth))context.RejectLimit(PdfResourceKind.Depth);if(!seen.Add(value.ReferenceId))throw PdfWriterCore.Error(context,"Font.ReferenceCycle","Font resource references contain a cycle.");value=binding!.Document.Resolve(value.ReferenceId);}return value;
+            }
+            if(binding!=null&&binding.EffectiveAttributes.Entries.TryGetValue("Resources",out var declared))
+            {
+                var resources=Resolve(declared);if(resources.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.ResourceDictionary","Page Resources must resolve to a dictionary.");
+                var dictionary=resources.Entries.TryGetValue("Font",out var value)?Resolve(value):PdfValue.Null;
+                if(dictionary.Kind!=PdfValueKind.Null&&dictionary.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.ResourceDictionary","Font resources must resolve to a dictionary.");
+                if(dictionary.Kind==PdfValueKind.Dictionary)foreach(var pair in dictionary.Entries)
+                {context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);context.Consume(PdfResourceKind.ExpandedBytes,256);if(replacements.ContainsKey(pair.Key))continue;var font=Resolve(pair.Value);if(font.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.SourceDictionary","A named font must resolve to a dictionary.");fonts.Add(pair.Key,new PdfPageFont(pair.Key,font,binding.Document,null,_providers,_options.OperationPolicy,context));}
+            }
+            foreach(var pair in replacements){context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);context.Consume(PdfResourceKind.ExpandedBytes,256);fonts[pair.Key]=new PdfPageFont(pair.Key,null,null,pair.Value,_providers,_options.OperationPolicy,context);}
+            context.Consume(PdfResourceKind.ExpandedBytes,fonts.Count*16L+32);result=new System.Collections.ObjectModel.ReadOnlyCollection<PdfPageFont>(fonts.Values.ToArray());context.EnsureComplete();
+        },"core.fonts");return result!;
+    }
+    internal void AttachSource(PdfSyntaxDocument source,PdfOperationContext context)
+    {
+        EnsureEditable();context.Consume(PdfResourceKind.ExpandedBytes,_pages.Count*16L+32);
+        var order=new PdfObjectId[_pages.Count];for(int i=0;i<order.Length;i++)order[i]=_pages[i].Source!.ObjectId;
+        _originalOrder=order;_source=source;
+    }
     internal PdfException PageLimit()
     {
         var diagnostic = new PdfDiagnostic("Limit.Pages", "The document's configured page limit was reached.");

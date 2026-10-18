@@ -1,0 +1,716 @@
+{
+  "schemaVersion": 1,
+  "purpose": "small-independent-presentation-source-profile-not-production-qualification",
+  "sourceCommit": "68d5496e022cc5a6d4b6c13edbfb013c6964d09c",
+  "environment": {
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "runtime": [
+      "Microsoft.AspNetCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.AspNetCore.App]",
+      "Microsoft.NETCore.App 8.0.32 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]",
+      "Microsoft.NETCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]"
+    ]
+  },
+  "tools": {
+    "pypdf": "6.10.0",
+    "pypdfium2": "5.13.0",
+    "pdfium": "153.0.7999.0",
+    "pdfiumBinarySha256": "224f8ece41f7e35891f11c10073b7b7062d7a18e9ef870586162a85c46130f7d",
+    "renderer": "Poppler 25.03.0",
+    "rendererSha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "files": [
+    {
+      "file": "presentation.pdf",
+      "sha256": "bf275c1696ddba68913a73a2410a57e0f5affb265303412660fe2f8fcd8207da",
+      "outlineRecords": [
+        {
+          "title": "First",
+          "count": 0,
+          "target": 0,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Last",
+          "count": 0,
+          "target": 11,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Closed",
+          "count": -2,
+          "target": null,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Web",
+          "count": 0,
+          "target": null,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "\u0533\u056c\u056d\u0561\u057e\u0578\u0580",
+          "count": 2,
+          "target": 6,
+          "flags": 3,
+          "color": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "title": "Remote",
+          "count": 0,
+          "target": null,
+          "flags": 0,
+          "color": []
+        }
+      ],
+      "labels": [
+        "i",
+        "ii",
+        "IV",
+        "V",
+        "N-7",
+        "N-8",
+        "AA",
+        "BB",
+        "zz",
+        "aaa",
+        "Appendix",
+        "Appendix"
+      ],
+      "pypdfReportedLabels": [
+        "i",
+        "ii",
+        "IV",
+        "V",
+        "N-7",
+        "N-8",
+        "AA",
+        "AB",
+        "az",
+        "ba",
+        "Appendix",
+        "Appendix"
+      ],
+      "pypdfAlphabeticDisagreement": true,
+      "transitions": 12,
+      "popplerInfoSha256": "7d9ce3e1a1ebb8e1104bface9b0d664f66765400342b0589d5faa2434ced1cdf"
+    },
+    {
+      "file": "closed.pdf",
+      "sha256": "a2d903e3887ef2f2aa5ea76d980bb9abf501e1706c3a37fe772edd47b3fffd82",
+      "outlineRecords": [
+        {
+          "title": "Child",
+          "count": 0,
+          "target": 0,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Closed top",
+          "count": -1,
+          "target": null,
+          "flags": 0,
+          "color": []
+        }
+      ],
+      "labels": [
+        "i",
+        "ii",
+        "IV",
+        "V",
+        "N-7",
+        "N-8",
+        "AA",
+        "BB",
+        "zz",
+        "aaa",
+        "Appendix",
+        "Appendix"
+      ],
+      "pypdfReportedLabels": [
+        "i",
+        "ii",
+        "IV",
+        "V",
+        "N-7",
+        "N-8",
+        "AA",
+        "AB",
+        "az",
+        "ba",
+        "Appendix",
+        "Appendix"
+      ],
+      "pypdfAlphabeticDisagreement": true,
+      "transitions": 12,
+      "popplerInfoSha256": "0486c6d9ff4d8acc12b78b342de39bae1a04f31d05f59c70ff4abc743905d542"
+    },
+    {
+      "file": "cleared.pdf",
+      "sha256": "93f0f687a82b4691c9ff1c75ffee06177096885d3f40c924c5538897bb4fd40d",
+      "clearedSettings": true
+    },
+    {
+      "file": "moved.pdf",
+      "sha256": "9609b959c587d6e876b87d3e8de30361a3657df2df10c7d5d6b2014fc3a8c54c",
+      "outlineRecords": [
+        {
+          "title": "First",
+          "count": 0,
+          "target": 1,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Last",
+          "count": 0,
+          "target": 0,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Closed",
+          "count": -2,
+          "target": null,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Web",
+          "count": 0,
+          "target": null,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "\u0533\u056c\u056d\u0561\u057e\u0578\u0580",
+          "count": 2,
+          "target": 7,
+          "flags": 3,
+          "color": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "title": "Remote",
+          "count": 0,
+          "target": null,
+          "flags": 0,
+          "color": []
+        }
+      ],
+      "labels": [
+        "i",
+        "ii",
+        "IV",
+        "V",
+        "N-7",
+        "N-8",
+        "AA",
+        "BB",
+        "zz",
+        "aaa",
+        "Appendix",
+        "Appendix"
+      ],
+      "pypdfReportedLabels": [
+        "i",
+        "ii",
+        "IV",
+        "V",
+        "N-7",
+        "N-8",
+        "AA",
+        "AB",
+        "az",
+        "ba",
+        "Appendix",
+        "Appendix"
+      ],
+      "pypdfAlphabeticDisagreement": true,
+      "transitions": 12,
+      "popplerInfoSha256": "7d9ce3e1a1ebb8e1104bface9b0d664f66765400342b0589d5faa2434ced1cdf"
+    },
+    {
+      "file": "extracted.pdf",
+      "sha256": "34133c38cdbb30b6317e416db96b60028f5a9fe876803e002e60cfb5e91e8e88",
+      "outlineRecords": [
+        {
+          "title": "First",
+          "count": 0,
+          "target": 10,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Last",
+          "count": 0,
+          "target": 11,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Closed",
+          "count": -2,
+          "target": null,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "Web",
+          "count": 0,
+          "target": null,
+          "flags": 0,
+          "color": []
+        },
+        {
+          "title": "\u0533\u056c\u056d\u0561\u057e\u0578\u0580",
+          "count": 2,
+          "target": 4,
+          "flags": 3,
+          "color": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "title": "Remote",
+          "count": 0,
+          "target": null,
+          "flags": 0,
+          "color": []
+        }
+      ],
+      "labels": [
+        "Appendix",
+        "Appendix",
+        "aaa",
+        "zz",
+        "BB",
+        "AA",
+        "N-8",
+        "N-7",
+        "V",
+        "IV",
+        "ii",
+        "i"
+      ],
+      "pypdfReportedLabels": [
+        "Appendix",
+        "Appendix",
+        "ba",
+        "az",
+        "AB",
+        "AA",
+        "N-8",
+        "N-7",
+        "V",
+        "IV",
+        "ii",
+        "i"
+      ],
+      "pypdfAlphabeticDisagreement": true,
+      "transitions": 12,
+      "popplerInfoSha256": "e8e5da0f1040204ba1a997caf374bfe4d211bd9be5a6589440c0b79fb3aef314"
+    }
+  ],
+  "visualPreservation": [
+    {
+      "actual": "presentation-01.png",
+      "reference": "base-01.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-02.png",
+      "reference": "base-02.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-03.png",
+      "reference": "base-03.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-04.png",
+      "reference": "base-04.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-05.png",
+      "reference": "base-05.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-06.png",
+      "reference": "base-06.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-07.png",
+      "reference": "base-07.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-08.png",
+      "reference": "base-08.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-09.png",
+      "reference": "base-09.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-10.png",
+      "reference": "base-10.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-11.png",
+      "reference": "base-11.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "presentation-12.png",
+      "reference": "base-12.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-01.png",
+      "reference": "base-01.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-02.png",
+      "reference": "base-02.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-03.png",
+      "reference": "base-03.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-04.png",
+      "reference": "base-04.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-05.png",
+      "reference": "base-05.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-06.png",
+      "reference": "base-06.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-07.png",
+      "reference": "base-07.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-08.png",
+      "reference": "base-08.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-09.png",
+      "reference": "base-09.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-10.png",
+      "reference": "base-10.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-11.png",
+      "reference": "base-11.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "closed-12.png",
+      "reference": "base-12.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-01.png",
+      "reference": "base-01.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-02.png",
+      "reference": "base-02.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-03.png",
+      "reference": "base-03.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-04.png",
+      "reference": "base-04.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-05.png",
+      "reference": "base-05.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-06.png",
+      "reference": "base-06.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-07.png",
+      "reference": "base-07.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-08.png",
+      "reference": "base-08.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-09.png",
+      "reference": "base-09.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-10.png",
+      "reference": "base-10.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-11.png",
+      "reference": "base-11.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "cleared-12.png",
+      "reference": "base-12.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-01.png",
+      "reference": "base-12.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-02.png",
+      "reference": "base-01.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-03.png",
+      "reference": "base-02.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-04.png",
+      "reference": "base-03.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-05.png",
+      "reference": "base-04.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-06.png",
+      "reference": "base-05.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-07.png",
+      "reference": "base-06.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-08.png",
+      "reference": "base-07.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-09.png",
+      "reference": "base-08.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-10.png",
+      "reference": "base-09.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-11.png",
+      "reference": "base-10.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "moved-12.png",
+      "reference": "base-11.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-01.png",
+      "reference": "base-11.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-02.png",
+      "reference": "base-10.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-03.png",
+      "reference": "base-09.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-04.png",
+      "reference": "base-08.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-05.png",
+      "reference": "base-07.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-06.png",
+      "reference": "base-06.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-07.png",
+      "reference": "base-05.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-08.png",
+      "reference": "base-04.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-09.png",
+      "reference": "base-03.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-10.png",
+      "reference": "base-02.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-11.png",
+      "reference": "base-01.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    },
+    {
+      "actual": "extracted-12.png",
+      "reference": "base-12.png",
+      "pixels": 128000,
+      "differentPixels": 0
+    }
+  ],
+  "probeSha256": "f0770a38a0494c2bcd70fc2bbed96138187c07fd4ad661e9c5d87a45a2b38612",
+  "verifierSha256": "612a141d2165b4a6643d28bc85417d799a3572c4b58d0b7c03012fe10dfa34c8",
+  "analysisToolAudit": {
+    "initialVerifierSha256": "450d6b2f3bef99a653a6d2d63c44c0751d24a8fe7bea184be95b215ffbe113a3",
+    "initialLogSha256": "5f5c2bc2dbc1437fc93e5496fd4bb033e2456a16567fde3a7efa4cd55dbd41b6",
+    "observation": "pypdf 6.10.0 formats alphabetic page labels as spreadsheet columns, conflicting with ISO 32000-1 Table 159. PDFium 153 reports the unchanged expected repeated-letter labels. Raw emitted style/counter dictionaries were also inspected; no SDK output, expected labels or global analysis tool was changed.",
+    "verifierAdjustmentDiffSha256": "f9f85e5ed9c8e250001b072568526cbe6621584689d179287d810367bad3d91b",
+    "globalToolsModified": false
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Independent structure/label/parameter reading and unchanged-page comparisons do not qualify viewer transition playback, printer behavior or full conformance.",
+    "The base page marks are an unchanged-content preservation reference, not independently authored visual goldens.",
+    "Full corpora, actual minimum runtimes, final packages and all production qualification gates remain mandatory."
+  ],
+  "commands": [
+    "dotnet run --project /workspace/scratch/presentation-probe -c Release",
+    "python /workspace/scratch/verify-presentation.py 68d5496e022cc5a6d4b6c13edbfb013c6964d09c"
+  ],
+  "logs": {
+    "presentation-independent-probe.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "presentation-independent2.log": "f41f949e22d2ccd01801022c8179a8e9f5d39ff361bada863d43683840428555"
+  }
+}

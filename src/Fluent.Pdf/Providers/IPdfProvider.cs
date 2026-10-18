@@ -28,3 +28,10 @@ public interface IPdfDocumentWriter : IPdfProvider
     /// <remarks>Charge resources before allocation and report every loss through the context. The lease expires on return. Stream output may be partial on failure; file-path saves are committed atomically.</remarks>
     void Write(PdfDocumentSnapshot document, Stream output, PdfOperationContext context);
 }
+
+/// <summary>A document writer that explicitly honors revision, xref, version and signature rewrite choices.</summary>
+public interface IPdfRevisionWriter:IPdfDocumentWriter
+{
+    /// <summary>Reports whether the specified choices are implemented; unsupported choices must fail before output changes.</summary>
+    bool Supports(PdfWriteOptions options);
+}

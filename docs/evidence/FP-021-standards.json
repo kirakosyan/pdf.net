@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-source-facts-not-implementation-or-qualification",
+  "sourceId": "P21-ISO1-2008",
+  "primaryDocumentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+  "textExtractionSha256": "84ec11e8849f4ce4f91386556dd59d678efa548d729f0bc3846d6bcca8958285",
+  "sections": [
+    "12.2 viewer preferences",
+    "12.3.2 destinations",
+    "12.3.3 outlines",
+    "12.4.4 presentation"
+  ],
+  "facts": [
+    "Local destinations use page references and standard view arrays; destination byte-string identities are preserved.",
+    "Outline nodes use indirect parent/sibling/child links; Count magnitude reflects visible descendants and the sign reflects expansion.",
+    "Viewer PrintPageRange pairs use one-based page numbers.",
+    "The replacement transition style is R; 90/180 degree transition directions apply only to Wipe and 315 applies only to Glitter.",
+    "Fly SS describes starting/ending scale; None is the nondirectional Fly name.",
+    "Alphabetic labels repeat each letter: A..Z, AA..ZZ, AAA..ZZZ; lowercase follows the same rule."
+  ],
+  "limitations": [
+    "The primary specification does not establish source behavior or production conformance.",
+    "PDF 2.0 Enforce requires separate complete final-profile conformance evidence."
+  ],
+  "rawSourcesRetainedOutsideRepository": true
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source dependency inventory; final artifact SBOM and security/license approval pending",
+  "components": [
+    {
+      "name": "CoreJ2K",
+      "version": "2.4.1.108",
+      "license": "BSD-3-Clause",
+      "packageSha256": "4b352600a9781a0b6e53b05ce501cd68ebe40356002155a9d6e5a6d00daef535",
+      "declaredSourceCommit": "f5895ac7f8371d6cf1c23828516c66675e07a87a"
+    },
+    {
+      "name": "BitMiracle.LibJpeg.NET",
+      "version": "1.5.324",
+      "license": "BSD-3-Clause AND IJG",
+      "packageSha256": "cdd11d3acc215e4a71e43d2c9a3c29ffed8797b8f56bd81a9ccacfdbc453acc3",
+      "declaredSourceCommit": null
+    },
+    {
+      "name": "PdfPig.Filters.Jbig2.PdfboxJbig2",
+      "version": "0.1.16.2",
+      "license": "Apache-2.0",
+      "packageSha256": "b6788f1bfe65d47e0ef7ae1d4b065c286754d07c45ac71343e761f40f4a1eaad",
+      "declaredSourceCommit": "bed0ed488c97b49a1355f2440b96e82c88aee01c"
+    },
+    {
+      "name": "PdfPig",
+      "version": "0.1.16",
+      "license": "Apache-2.0",
+      "packageSha256": "d67171846ea8c28f50359137065fec4514266d7a32b23eae6c5f2ebed8ffcfc4",
+      "declaredSourceCommit": "a7bb35662bbbf405efddad50aedc9bcdcf515afc"
+    }
+  ],
+  "licenses": [
+    {
+      "path": "third-party/codecs/LICENSE.Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "third-party/codecs/LICENSE.CoreJ2K.txt",
+      "sha256": "2b718cb2d9c117bc0744a9f421083e8b282765e920b71d547a683d257e8cea77"
+    },
+    {
+      "path": "third-party/codecs/LICENSE.LibJpeg.NET.txt",
+      "sha256": "5fe40a8717cae6aac9ab4d93908550603ca8fb901cba6cf52785b328e4dd89ff"
+    },
+    {
+      "path": "third-party/codecs/NOTICE.JBIG2.txt",
+      "sha256": "011898ae372d35c9ba85a8ee6da778cbe2f8ed95d55552982d4a1ab89ee53b87"
+    },
+    {
+      "path": "third-party/codecs/NOTICE.PdfPig.txt",
+      "sha256": "e66a02ba43d947a8cc44eaa1efaa86ce9a1bb167ce66001c1c711146be574c25"
+    }
+  ],
+  "advisoryQuery": {
+    "command": "dotnet list native/codecs/Fluent.Pdf.Codecs.Native.csproj package --vulnerable --include-transitive --format json",
+    "source": "NuGet configured advisory service",
+    "reportedVulnerablePackages": [],
+    "reportSha256": "ad346aa0d17ed1f68dc7197cc19cdcbecf78eed5d5923e52dd0512f022bb9cd4",
+    "limitation": "An advisory query does not establish absence of vulnerabilities or complete source audit."
+  },
+  "productionQualified": false
+}

@@ -1,0 +1,94 @@
+{
+  "pillow": "12.3.0",
+  "libtiff": "4.7.1",
+  "records": [
+    {
+      "name": "transitions-g4.bin",
+      "width": 65,
+      "height": 16,
+      "k": -1,
+      "encodedByteAlign": false,
+      "endOfLine": false,
+      "endOfBlock": true,
+      "raw": "transitions.raw",
+      "sha256": "22e0dec3ce9fa50fb8c2e43e8583ab8d2b727d805de9cf1bc2b878256bac805b"
+    },
+    {
+      "name": "transitions-g3-1d.bin",
+      "width": 65,
+      "height": 16,
+      "k": 0,
+      "encodedByteAlign": false,
+      "endOfLine": true,
+      "endOfBlock": false,
+      "raw": "transitions.raw",
+      "sha256": "63b89a590b77edb998cc0f57fc730841244ac829fe21a13fecdfc11381cbc413"
+    },
+    {
+      "name": "transitions-g3-mixed.bin",
+      "width": 65,
+      "height": 16,
+      "k": 2,
+      "encodedByteAlign": false,
+      "endOfLine": true,
+      "endOfBlock": false,
+      "raw": "transitions.raw",
+      "sha256": "4ae256a83e82f4aff93feb73a20c8ff40461e8c75cb94bc27a047591c2159306"
+    },
+    {
+      "name": "transitions-g3-mixed-fill.bin",
+      "width": 65,
+      "height": 16,
+      "k": 2,
+      "encodedByteAlign": true,
+      "endOfLine": true,
+      "endOfBlock": false,
+      "raw": "transitions.raw",
+      "sha256": "6da5fd3bd9621b0e322202863cd07b99a4bba7377b93fd3d0cc3ccf2ab65a39d"
+    },
+    {
+      "name": "long-runs-g4.bin",
+      "width": 3456,
+      "height": 8,
+      "k": -1,
+      "encodedByteAlign": false,
+      "endOfLine": false,
+      "endOfBlock": true,
+      "raw": "long-runs.raw",
+      "sha256": "4229754e00ebf0f0f329d61c8c839212f32cd9521426de0aa97ddcbeb56c8d31"
+    },
+    {
+      "name": "long-runs-g3-1d.bin",
+      "width": 3456,
+      "height": 8,
+      "k": 0,
+      "encodedByteAlign": false,
+      "endOfLine": true,
+      "endOfBlock": false,
+      "raw": "long-runs.raw",
+      "sha256": "07e7ec26096fb7187ac97f4044a41e01f4e0c17f1cfaa11d0dbcd109b6089ae0"
+    },
+    {
+      "name": "long-runs-g3-mixed.bin",
+      "width": 3456,
+      "height": 8,
+      "k": 2,
+      "encodedByteAlign": false,
+      "endOfLine": true,
+      "endOfBlock": false,
+      "raw": "long-runs.raw",
+      "sha256": "70aeea68ec701280f5b2554b2665f14e8cac165f3162fb5ae00a7d28b23c4577"
+    },
+    {
+      "name": "long-runs-g3-mixed-fill.bin",
+      "width": 3456,
+      "height": 8,
+      "k": 2,
+      "encodedByteAlign": true,
+      "endOfLine": true,
+      "endOfBlock": false,
+      "raw": "long-runs.raw",
+      "sha256": "fc1ac8cdcc7cf2ea693feff76e5a28cedda96637fb8676c3580209f8e61ff5c3"
+    }
+  ]
+}

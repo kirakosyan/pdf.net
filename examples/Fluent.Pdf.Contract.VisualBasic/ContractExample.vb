@@ -4,6 +4,184 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WritePresentationPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage().AddPage()
+            Dim items = {New PdfBookmark("Report", New PdfDestination(0)).WithChildren(New PdfBookmark("Details", New PdfDestination(1)))}
+            Using outlines = PdfPresentation.SetOutlines(blank.CreateSnapshot(), items)
+                Using labels = PdfPresentation.SetPageLabels(outlines.CreateSnapshot(), New PdfPageNumbering(New PdfPageNumberRange(0, PdfPageLabelStyle.LowerRoman), New PdfPageNumberRange(1, prefix:="Report-")))
+                    Using viewed = PdfPresentation.SetView(labels.CreateSnapshot(), PdfPageLayout.OneColumn, PdfPageMode.UseOutlines)
+                        Using document = PdfPresentation.SetPageTransition(viewed.CreateSnapshot(), 1, New PdfPageTransition(PdfTransitionStyle.Fade, .5), 8)
+                            Return document.Save(output)
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Function
+    Public Function WriteNavigationPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage().AddPage()
+            Using named = PdfNavigation.SetNamedDestination(blank.CreateSnapshot(), "chapter", New PdfDestination(1))
+                Using linked = PdfNavigation.AddLink(named.CreateSnapshot(), 0, New PdfRect(20, 30, 100, 24), PdfAction.GoToNamed("chapter"))
+                    Using document = PdfNavigation.SetDocumentAction(linked.CreateSnapshot(), "OpenAction", PdfAction.GoToNamed("chapter"))
+                        Return document.Save(output)
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Function
+    Public Function WriteAnnotationPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage(New PdfPageSize(240, 160))
+            Dim note = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Text, "note", New PdfRect(20, 90, 40, 40), New PdfColor(PdfColorSpace.Rgb, 1, .85, .2), metadata:=New PdfAnnotationMetadata("Review this page", "Reviewer"))
+            Dim box = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Square, "box", New PdfRect(80, 30, 120, 90), New PdfColor(PdfColorSpace.Rgb, .8, .1, .1))
+            Using document = PdfAnnotations.Add(blank.CreateSnapshot(), 0, {note, box})
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
+    Public Function WriteImagePdf(imageInput As Stream, output As Stream, Optional allowLosslessTranscode As Boolean = False) As PdfOperationReport
+        Dim image = PdfImages.Read(imageInput, New PdfImageReadOptions(allowLosslessTranscode))
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 200, 160)))
+        Dim canvas = PdfCanvas.Create(geometry, Sub(c) c.DrawImageAsset(image, New PdfRect(10, 10, 180, 140)))
+        Using document = PdfFacade.Create().AddPage(geometry)
+            canvas.ApplyTo(document.Pages(0))
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function CombinePages(firstInput As Stream, secondInput As Stream, output As Stream) As PdfOperationReport
+        Using first = PdfFacade.Open(firstInput), second = PdfFacade.Open(secondInput)
+            Using combined = PdfPageOrganization.Merge({New PdfPageInput(first.CreateSnapshot()), New PdfPageInput(second.CreateSnapshot())})
+                Return combined.Save(output)
+            End Using
+        End Using
+    End Function
+    Public Function WriteTemplatePdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 10)
+        Dim blocks As PdfFlowBlock() = {New PdfFlowContents(style), New PdfFlowHeading("intro", "Introduction", style), New PdfFlowParagraph("A document with final page totals and linked contents.", style)}
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 300, 200)))
+        Dim template = New PdfPageTemplate(footerHeight:=18, footer:=Function(c) PdfPageDecoration.Flow({New PdfFlowParagraph(c.PageLabel & " of " & c.TotalPages.ToString(System.Globalization.CultureInfo.InvariantCulture), style)}))
+        Dim result = PdfTemplateLayout.Layout(blocks, New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper), template)
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function WriteCompositionPdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)
+        Dim small = New PdfFlowTextStyle(style.Fonts, 8)
+        Dim list = PdfFlowList.Create({New PdfFlowListItem({New PdfFlowParagraph("first item", style)}), New PdfFlowListItem({New PdfFlowParagraph("second item", style)})}, style)
+        Dim note = New PdfFlowNote("source", "1", {New PdfFlowParagraph("source note", small)}, small)
+        Dim blocks As PdfFlowBlock() = {New PdfFlowColumns(New PdfFlowBlock() {list, New PdfFlowParagraph("office office office office office office", style)}, height:=100), New PdfFlowNoteReference(New PdfFlowParagraph("reference", style), note)}
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 300, 200)))
+        Dim result = PdfFlow.Layout(blocks, New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper))
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function WriteTablePdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)
+        Dim columns = {New PdfTableDataColumn(Of String)(PdfTableColumn.Fixed(108), Function(value) value, style),
+                       New PdfTableDataColumn(Of String)(PdfTableColumn.Fixed(108), Function(value) value, style, paragraphStyle:=New PdfFlowParagraphStyle(PdfFlowAlignment.End))}
+        Dim header = New PdfTableRow({PdfTableCell.Text("A", style), PdfTableCell.Text("office", style)})
+        Dim table = PdfTableData.Bind(System.Linq.Enumerable.Repeat("office", 8), columns, System.Globalization.CultureInfo.InvariantCulture, headerRows:={header})
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 240, 140)))
+        Dim result = table.Layout(New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper))
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function WriteFlowPdf(fontInput As Stream, output As Stream, text As String, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 200, 160)))
+        Dim result = PdfFlow.Layout({New PdfFlowParagraph(text, style)}, New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper))
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function WriteCanvasPdf(output As Stream) As PdfOperationReport
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(-20, 10, 240, 160)), PdfPageRotation.Clockwise90)
+        Dim path = PdfPath.Create({PdfPathSegment.Rectangle(New PdfRect(0, 0, 30, 15))})
+        Dim canvas = PdfCanvas.Create(geometry, Sub(c)
+                                                    Using c.Save()
+                                                        c.Translate(10, 10)
+                                                        c.Rotate(30)
+                                                        c.DrawPath(path)
+                                                    End Using
+                                                End Sub, New PdfCanvasOptions(PdfLengthUnit.Millimeter, margins:=PdfMargins.Uniform(5)))
+        Using document = PdfFacade.Create().AddPage(geometry)
+            canvas.ApplyTo(document.Pages(0))
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function WriteVectorPdf(output As Stream) As PdfOperationReport
+        Dim path = PdfPath.Create({PdfPathSegment.Move(20, 20), PdfPathSegment.Curve(40, 100, 120, 100, 160, 20), PdfPathSegment.Close()})
+        Dim operations As New System.Collections.Generic.List(Of PdfContentOperation) From {New PdfContentOperation(PdfOperator.FillRgb, PdfValues.Real(0.2), PdfValues.Real(0.4), PdfValues.Real(0.6))}
+        operations.AddRange(path.Operations)
+        operations.Add(New PdfContentOperation(PdfOperator.FillStroke))
+        Dim drawing = PdfDrawing.Create(operations)
+        Dim form = PdfGraphicsObjects.Form(drawing, New PdfRect(0, 0, 200, 120))
+        Using document = PdfFacade.Create().AddPage(New PdfPageSize(200, 120))
+            document.Pages(0).SetResource("Art", form)
+            document.Pages(0).Content = PdfContentProgram.Create({New PdfContentOperation(PdfOperator.SaveState), New PdfContentOperation(PdfOperator.DrawObject, PdfValue.Name("Art")), New PdfContentOperation(PdfOperator.RestoreState)})
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function ShapeText(text As String, fonts As PdfFontFallback, shaper As IPdfTextShaper, Optional policy As PdfOperationPolicy = Nothing) As PdfTextDrawing
+        Dim shaped = PdfText.Shape(text, fonts, New PdfProviderRegistry(shaper), policy:=policy)
+        Return PdfTextDrawing.Create(shaped, 20, 80, 24)
+    End Function
+    Public Function WriteFontPdf(fontInput As Stream, output As Stream, text As String) As PdfOperationReport
+        Dim providers As New PdfProviderRegistry(ManagedPdfProvider.Instance, Fluent.Pdf.Fonts.ManagedFontProvider.Instance)
+        Dim font = PdfFont.Read(fontInput, providers)
+        Dim resource = PdfFontResource.CreateText(font, text)
+        Using document = PdfFacade.Create(providers:=providers).AddPage()
+            document.Pages(0).SetFont("F1", resource)
+            document.Pages(0).Content = PdfContentProgram.Create({
+                New PdfContentOperation(PdfOperator.BeginText),
+                New PdfContentOperation(PdfOperator.Font, PdfValue.Name("F1"), PdfValue.Integer(24)),
+                New PdfContentOperation(PdfOperator.MoveText, PdfValue.Integer(20), PdfValue.Integer(60)),
+                New PdfContentOperation(PdfOperator.ShowText, resource.EncodedText),
+                New PdfContentOperation(PdfOperator.EndText)})
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function WriteRectangle(output As Stream) As PdfOperationReport
+        Using document = PdfFacade.Create().AddPage()
+            document.Pages(0).Content = PdfContentProgram.Create({
+                New PdfContentOperation(PdfOperator.SaveState),
+                New PdfContentOperation(PdfOperator.Rectangle, PdfValue.Integer(20), PdfValue.Integer(20), PdfValue.Integer(100), PdfValue.Integer(50)),
+                New PdfContentOperation(PdfOperator.Fill),
+                New PdfContentOperation(PdfOperator.RestoreState)})
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function WriteManagedPdf(output As Stream) As PdfOperationReport
+        Using document = PdfFacade.Create().AddPage(PdfPageSize.Letter)
+            Return document.Save(output)
+        End Using
+    End Function
+    Public Function ImageCodecs(worker As Fluent.Pdf.Workers.NativeWorkerOptions) As PdfProviderRegistry
+        Return New PdfProviderRegistry(ManagedPdfProvider.Instance, New Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker))
+    End Function
+    Public Function InspectSyntax(borrowedInput As Stream) As PdfSyntaxDocument
+        Return PdfSyntax.Read(borrowedInput)
+    End Function
+    Public Function DecodeStream(syntax As PdfSyntaxDocument, id As PdfObjectId) As PdfDecodedData
+        Return syntax.DecodeStream(id)
+    End Function
+
+    Public Function ExecuteNativeWorker(options As Fluent.Pdf.Workers.NativeWorkerOptions, request As Byte(), context As PdfOperationContext) As Byte()
+        Return New Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context)
+    End Function
+
+    Public Function InspectDeployment(directory As String, rid As String, engineVersion As String,
+                                      abi As String, maximumBytes As Long, ParamArray assets As PdfNativeAsset()) As PdfNativeDeploymentReport
+        Dim deployment As New PdfNativeDeployment(directory, rid, "example.native", engineVersion, abi, maximumBytes, assets)
+        Return PdfNativeDeploymentInspector.Inspect(deployment)
+    End Function
+
     Public Function SaveWithReport(providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
         Dim limits As New PdfResourceLimits(maximumInputBytes:=1048576, maximumOutputBytes:=1048576)
         Dim policy As New PdfOperationPolicy(PdfProcessingMode.Permissive, limits)
@@ -14,7 +192,7 @@ Public Module ContractExample
 
     Public Function Run() As Integer
         Dim options As New PdfOptions(PdfPageSize.Letter, maximumPages:=10)
-        Using document As PdfDocument = PdfFacade.Create(options).
+        Using document As PdfDocument = PdfFacade.Create(options, PdfProviderRegistry.Empty).
             AddPage().
             AddPage(PdfPageSize.A4)
             document.Pages(0).Rotation = PdfPageRotation.Clockwise90

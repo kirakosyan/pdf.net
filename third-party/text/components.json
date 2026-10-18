@@ -1,0 +1,44 @@
+{
+  "nativeEngine": "HarfBuzz",
+  "nativeVersion": "14.2.1",
+  "assetPackageVersion": "14.2.1.301",
+  "isolation": "required fresh process; no in-process or automatic binary download fallback",
+  "runtimeRids": [
+    "win-x64",
+    "win-arm64",
+    "linux-x64",
+    "linux-arm64",
+    "osx-x64",
+    "osx-arm64"
+  ],
+  "macDerivation": "thin universal source with lipo; private install identity; ad-hoc signature; record original and derived asset digests",
+  "qualification": "source integration in progress; minimum OS/dependency runtimes, complete corpus and final packages remain mandatory",
+  "packages": [
+    {
+      "name": "harfbuzzsharp.nativeassets.linux",
+      "sha256": "1e22d3bc6765ae70d227a61a30af88b94ae646dc26ec03c26e7487f9752cbf38"
+    },
+    {
+      "name": "harfbuzzsharp.nativeassets.macos",
+      "sha256": "1e952b7472a56b5df53a830a491b3614ee004a7b51557d2c32d53d73a2a4c651"
+    },
+    {
+      "name": "harfbuzzsharp.nativeassets.win32",
+      "sha256": "20518a559c120cb322b57d8986de49c5dca4eca2547ee69f756b38211b7dd10e"
+    }
+  ],
+  "notices": [
+    {
+      "file": "LICENSE.txt",
+      "suppliedSha256": "89101e35a8c66fd4d6dffc1763259161d35cb564c169714ec227a768c89f2938",
+      "retainedSha256": "4319f2fc2c635aa1d97672ec2ea84a93bc99ea4e9d4cfbeccd046be0a90c2415",
+      "normalization": "UTF-8 LF and trailing whitespace only; complete notice text retained"
+    },
+    {
+      "file": "THIRD-PARTY-NOTICES.txt",
+      "suppliedSha256": "21504c46c4c58aa64c1055bd2dcbc5f9a136b4b8c412ed3cc6740e22c5b127f5",
+      "retainedSha256": "43688ce96e07c7277ca6753e0ebbb6024cd0164ee04a792c1f7f590e7de8f678",
+      "normalization": "UTF-8 LF and trailing whitespace only; complete notice text retained"
+    }
+  ]
+}

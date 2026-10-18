@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirements": [
+    "FP-085",
+    "FP-003",
+    "FP-004",
+    "FP-005",
+    "FP-007",
+    "FP-008",
+    "FP-009",
+    "FP-010",
+    "FP-011",
+    "FP-012",
+    "FP-013",
+    "FP-014",
+    "FP-015",
+    "FP-016",
+    "FP-017",
+    "FP-019",
+    "FP-020"
+  ],
+  "branchCommit": "46c2b7f3eceab8f300412dd18847c7c91c887145",
+  "testedMergeCommit": "8829532a3de0d12677c95df54cab686d87a13045",
+  "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39103494129",
+  "conclusion": "success",
+  "testCasesPerLane": 637,
+  "executionLanes": 20,
+  "totalPassed": 12740,
+  "failed": 0,
+  "skipped": 0,
+  "hosts": [
+    "osx-x64",
+    "linux-x64",
+    "win-x64",
+    "osx-arm64",
+    "linux-arm64",
+    "win-arm64"
+  ],
+  "runtimeLanes": "net8/net10/netstandard2.0 fallback on six hosts; current Framework x86/x64 on Windows x64",
+  "packageSha256": null,
+  "productionQualified": false,
+  "artifacts": [
+    {
+      "name": "source-contracts-osx-x64",
+      "id": 12127657635,
+      "digestFromGitHub": "sha256:44027bc07a85a8cf9417c96345f4274a4562fed3df2071fd3fe4dc9776ba7169",
+      "sizeBytes": 509118,
+      "expiresAt": "2027-01-16T06:17:08Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39103494129/artifacts/12127657635"
+    },
+    {
+      "name": "source-contracts-win-x64",
+      "id": 12127572995,
+      "digestFromGitHub": "sha256:7ab6d0e2862d536afd3fdf4caecca575394016afa47875329e2913dfc1a04de4",
+      "sizeBytes": 823714,
+      "expiresAt": "2027-01-16T06:17:08Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39103494129/artifacts/12127572995"
+    },
+    {
+      "name": "source-contracts-linux-x64",
+      "id": 12127318847,
+      "digestFromGitHub": "sha256:ee484c8b67145ba28ccccf9840a3f5587be0d7c59d119b1332fd345776f1e3e0",
+      "sizeBytes": 507145,
+      "expiresAt": "2027-01-16T06:17:08Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39103494129/artifacts/12127318847"
+    },
+    {
+      "name": "source-contracts-win-arm64",
+      "id": 12127187940,
+      "digestFromGitHub": "sha256:217d6f5753cbb37c731aa904627251e41d1944ac48888c786e7d755e40a400f0",
+      "sizeBytes": 507225,
+      "expiresAt": "2027-01-16T06:17:08Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39103494129/artifacts/12127187940"
+    },
+    {
+      "name": "source-contracts-linux-arm64",
+      "id": 12127184033,
+      "digestFromGitHub": "sha256:a3a61d46f96e225933bd598aa8c9cc5a03627c753d84ca5eb4a08c07f1cf8dbf",
+      "sizeBytes": 506714,
+      "expiresAt": "2027-01-16T06:17:08Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39103494129/artifacts/12127184033"
+    },
+    {
+      "name": "source-contracts-osx-arm64",
+      "id": 12127164103,
+      "digestFromGitHub": "sha256:6eaa9823928b2dcb8c35b3059321b40ed8dc29086f1983de75d0c73eb4eb3692",
+      "sizeBytes": 507617,
+      "expiresAt": "2027-01-16T06:17:08Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39103494129/artifacts/12127164103"
+    }
+  ],
+  "jobLogs": [
+    {
+      "jobId": 117604385870,
+      "sha256": "87dc7cfcc99c506a5472b37867c998b065cc98ea858627e066b0a93bdd697031",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117604385968,
+      "sha256": "5043152595d0e321f05690710dae78d247a62f44237c9047b5ea7dacf515f128",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117604385973,
+      "sha256": "83f7b7b51cf6373c7ba776c1e2a9c2c008087d3120b675bd1d22d84910350749",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117604385984,
+      "sha256": "58769ae6924e63484227d505492962686375b1ff91375c3b320c6d0b68207619",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117604386032,
+      "sha256": "8ca30f95f3e96a0c664500aaa161bc89c3a1fa78d8c347730b304be10bca573a",
+      "retainedOutsideRepository": true
+    },
+    {
+      "jobId": 117604386065,
+      "sha256": "50e336b2e3ddf61f699ccc45a0c934d4b49fb9f1d3c50c5011947e4f37011d1c",
+      "retainedOutsideRepository": true
+    }
+  ],
+  "priorFailureAudit": [
+    {
+      "run": 39101850422,
+      "observation": "A macOS ARM64 native text worker returned its memory-limit status. Allocation/RSS diagnostics were expanded; caller-resident-set regression passed. Memory ceilings remain unchanged; the original failure was not reproduced in this passing source run.",
+      "logSha256": "90077f02cdb7ef45e0edb462ce87a5803768151e8fab9c0bf4bcef78c65b1477"
+    },
+    {
+      "run": 39102253269,
+      "observation": "A Unix pre-exec ETXTBSY launch race was subsequently bounded by a pin-verified, cancellable retry; concurrent launch tests passed.",
+      "logSha256": "da5731fe2d39fe483ddf04de34acf0aead27cef54d98b65fc4a0fecb789f82e9"
+    },
+    {
+      "run": 39102253269,
+      "observation": "An Intel macOS template reached the unchanged 30-second deadline.",
+      "logSha256": "a3504b5f0348fcbe20c01a1ce2686f4cdf1b1732ac046d9efafa756a59bc2f99"
+    },
+    {
+      "run": 39102863326,
+      "observation": "An Intel macOS template again reached the unchanged deadline on a different runtime. The complete subsequent source run passed; repeated template work remains under performance investigation.",
+      "logSha256": "984759d6a5c4f13854e0040a5c3a314b0f72b82378a2becb1d2e821288b6b215"
+    }
+  ],
+  "limitations": [
+    "This passing source profile and small independent checks do not establish SDK production qualification or a root cause for an earlier non-reproduced memory status.",
+    "Complete corpus/conformance/fuzz/concurrency/endurance gates, actual minimum Framework 4.7.2 and exact final-package consumers remain mandatory."
+  ]
+}

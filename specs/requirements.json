@@ -82,7 +82,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "implemented-source-pending-runtime-validation",
+        "contract": "docs/pdf-syntax.md",
+        "implemented": [
+          "Immutable syntax values, exact generations and revision selection",
+          "Classic, stream and hybrid cross-references with bounded Flate/predictor bootstrap",
+          "Opaque stream and unknown-key preservation; strict structural/budget diagnostics",
+          "Bounded object-stream resolution and indirect filter declarations"
+        ],
+        "pending": [
+          "Complete updated source/runtime and production qualification"
+        ]
+      }
     },
     {
       "id": "FP-004",
@@ -108,7 +121,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "partial",
+        "contract": "docs/pdf-filters.md",
+        "implemented": [
+          "Managed Flate/LZW/ASCII85/ASCIIHex/RunLength encode/decode chains",
+          "PNG/TIFF predictors across packed, eight-bit and sixteen-bit samples",
+          "Bounded object-stream membership and indirect decode declarations",
+          "Original bounded CCITT Group 3/4 encode/decode with independent TIFF verification",
+          "Explicit optional isolated DCT/JPX/JBIG2 provider, pinned NativeAOT bridge and bounded image contracts"
+        ],
+        "pending": [
+          "Complete codec profiles, security/license audit, independent fidelity/corpus, minimum-runtime and exact-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-004-source.json"
+      }
     },
     {
       "id": "FP-005",
@@ -135,7 +163,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/pdf-writing.md",
+        "implemented": [
+          "Original managed page-tree reader with immutable original bindings",
+          "Full/incremental object overlays, exact generations, free entries and trailer IDs",
+          "Classic/64-bit stream xrefs and version floors",
+          "Original signed-byte protection, atomic file saves and bounded caller-owned streams"
+        ],
+        "pending": [
+          "Full production qualification beyond passing source runtime evidence",
+          "Actual minimum Framework 4.7.2, exact final package, complete standards/security/endurance/fuzz consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-005-source.json"
+      }
     },
     {
       "id": "FP-006",
@@ -190,7 +233,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/content-operators.md",
+        "implemented": [
+          "Typed standard operators, complete state/operand validation and immutable content editing",
+          "Deterministic bounded inline image boundaries and page Contents integration",
+          "Feature-driven version floors, developer extension policies and PDF 2.0 feature facts"
+        ],
+        "pending": [
+          "Full production qualification beyond passing source/runtime and independent original-fixture evidence",
+          "Full standards/fidelity, named inline resource interpretation, final packages, minimum runtimes, endurance and fuzz qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-007-source.json",
+        "independentEvidence": "docs/evidence/FP-007-independent.json"
+      }
     },
     {
       "id": "FP-008",
@@ -219,7 +277,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/fonts.md",
+        "implemented": [
+          "Original optional managed static TrueType/OpenType/CFF/Type 1 font reader and subset writer",
+          "Base-14 metrics, authored Type 3 glyph procedures, exact source/resource Unicode maps and explicit simple encodings",
+          "Deterministic caller fallback, embedding restrictions, CID/CJK resources, vertical metrics, immutable font bindings and extraction"
+        ],
+        "pending": [
+          "Complete production qualification beyond passing source/runtime and original-fixture independent evidence",
+          "Complete licensed/profile corpus, actual minimum runtimes, final packages, standards/fidelity, long security/fuzz/endurance qualification",
+          "Explicit instancing/affine and additional font/CMap provider profiles remain release qualification work"
+        ],
+        "sourceEvidence": "docs/evidence/FP-008-source.json",
+        "independentEvidence": "docs/evidence/FP-008-independent.json"
+      }
     },
     {
       "id": "FP-009",
@@ -246,7 +320,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/text-shaping.md",
+        "implemented": [
+          "Original pinned Unicode bidi and extended grapheme analysis with full official conformance fixtures",
+          "Explicit complete-grapheme fallback, script/direction itemization and immutable positioned glyph contracts",
+          "Optional isolated pinned HarfBuzz broker/C bridge, exact known answers and logical ActualText/ToUnicode PDF composition"
+        ],
+        "pending": [
+          "Complete production multilingual visual/copy/search/accessibility corpus and additional provider profiles",
+          "Actual minimum runtimes, exact final packages and full standards/security/fuzz/endurance qualification"
+        ],
+        "independentEvidence": "docs/evidence/FP-009-independent.json",
+        "sourceEvidence": "docs/evidence/FP-009-source.json"
+      }
     },
     {
       "id": "FP-010",
@@ -258,7 +347,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -272,7 +361,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/vector-graphics.md",
+        "implemented": [
+          "Original immutable paths/affine geometry, state-isolated drawings and detached shared resource graph embedding",
+          "Explicit device/calibrated/Lab/ICC/spot/DeviceN/pattern colors and bounded interpolation/mesh data",
+          "Standard blend modes, alpha/overprint, vector transparency groups and alpha/luminosity masks with explicit unsupported diagnostics"
+        ],
+        "pending": [
+          "Complete color/profile/vector/compositing corpus and advanced provider profiles",
+          "Actual minimum runtimes, final packages, standards/fidelity/security and long fuzz/endurance qualification"
+        ],
+        "independentEvidence": "docs/evidence/FP-010-independent.json",
+        "sourceEvidence": "docs/evidence/FP-010-source.json"
+      }
     },
     {
       "id": "FP-011",
@@ -301,7 +405,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/page-canvas.md",
+        "implemented": [
+          "Managed immutable five-box geometry, rotation/UserUnit and explicit physical coordinate conversions",
+          "Bounded scoped canvas, paths/text/explicit image resources, placements/clips/z-order and hit frames",
+          "Atomic source-preserving page overlay/underlay and replacement"
+        ],
+        "pending": [
+          "Complete geometry/clipping/text/image corpus and actual minimum runtimes",
+          "Final packages, standards/fidelity/security and long fuzz/endurance qualification"
+        ],
+        "independentEvidence": "docs/evidence/FP-011-independent.json",
+        "sourceEvidence": "docs/evidence/FP-011-source.json"
+      }
     },
     {
       "id": "FP-012",
@@ -328,7 +447,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/flow-layout.md",
+        "implemented": [
+          "Immutable styled runs/paragraphs, deterministic bounded wrapping/alignment/spacing and float exclusions",
+          "Widow/orphan, keep-together/keep-chain and explicit page/overflow/tab constraints",
+          "Paragraph-context bidi line reshaping, logical ActualText and shared-context page canvas composition"
+        ],
+        "pending": [
+          "Complete multilingual business/constraint corpus and language line-break profiles",
+          "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
+        ],
+        "independentEvidence": "docs/evidence/FP-012-independent.json",
+        "sourceEvidence": "docs/evidence/FP-012-source.json"
+      }
     },
     {
       "id": "FP-013",
@@ -355,7 +489,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/tables.md",
+        "implemented": [
+          "Immutable merged/nested grids, explicit cell styles and fixed/automatic column sizing",
+          "Repeated top-level/nested header bands and safe row/content fragments with body-placement preservation",
+          "Bounded single-pass typed data binding with explicit culture/null/format profiles and shared-context flow composition"
+        ],
+        "pending": [
+          "Complete styled/merged/nested business goldens and labeled data corpus",
+          "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
+        ],
+        "independentEvidence": "docs/evidence/FP-013-independent.json",
+        "sourceEvidence": "docs/evidence/FP-013-source.json"
+      }
     },
     {
       "id": "FP-014",
@@ -381,7 +530,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/composition.md",
+        "implemented": [
+          "Invariant bounded list counters/restarts, nested lists and reusable immutable components",
+          "Fixed-height logical/physical column flow and section parity with real basic structure/parent-tree output",
+          "Associated page-reserving footnotes/endnotes and explicit baseline shifts under shared budgets"
+        ],
+        "pending": [
+          "Complete legal/booklet/notes/column corpus and full accessibility semantics/profile qualification",
+          "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
+        ],
+        "independentEvidence": "docs/evidence/FP-014-independent.json",
+        "sourceEvidence": "docs/evidence/FP-014-source.json"
+      }
     },
     {
       "id": "FP-015",
@@ -411,7 +575,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/page-templates.md",
+        "implemented": [
+          "Bounded contents/index convergence and final first/odd/even header/footer callbacks with shared operation context",
+          "Explicit flow/vector/image or optional HTML decoration marked as artifacts",
+          "Final physical links and standard page-label restarts with immutable destination metadata"
+        ],
+        "pending": [
+          "Complete book-length/template/HTML-provider/fidelity corpus and full semantic structure qualification",
+          "Actual minimum runtimes, final packages and complete production gates"
+        ],
+        "independentEvidence": "docs/evidence/FP-015-independent.json",
+        "sourceEvidence": "docs/evidence/FP-021-source.json"
+      }
     },
     {
       "id": "FP-016",
@@ -440,7 +619,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/page-organization.md",
+        "implemented": [
+          "Bounded ordered range syntax, detached shared-resource imports and merge/extract/copy/reorder/insert/delete/split operations",
+          "Explicit signature/omitted-target/field-collision policies, destinations/outlines/labels, namespaced form defaults and basic structure remapping",
+          "Geometry transforms and physical scaling plus vector N-up/booklet/tiling and basic form-stream MCID associations"
+        ],
+        "pending": [
+          "Complete interactive duplicate/tile/annotation, structure-root metadata, text-string encoding and encrypted-source profiles and mixed-document corpora",
+          "Full independent fidelity/conformance/accessibility, actual minimum runtimes, final packages and all production gates"
+        ],
+        "independentEvidence": "docs/evidence/FP-016-independent.json",
+        "sourceEvidence": "docs/evidence/FP-016-source.json"
+      }
     },
     {
       "id": "FP-017",
@@ -469,7 +663,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/images.md",
+        "implemented": [
+          "Exact raw/encoded images, PNG/JPEG metadata, profiles, orientation, palette/alpha/masks and explicit lossless reconstruction",
+          "Bounded invoked Form/image inspection, detached extraction and occurrence-specific replacement/removal",
+          "Conservative per-operation graph-and-byte-verified safe deduplication; C#/VB consumers"
+        ],
+        "pending": [
+          "Additional file/codec/owner-dependent resource profiles and full independent image/color/visual/conformance corpus",
+          "Actual minimum runtimes, final packages and all production qualification gates"
+        ],
+        "independentEvidence": "docs/evidence/FP-017-independent.json",
+        "sourceEvidence": "docs/evidence/FP-017-source.json"
+      }
     },
     {
       "id": "FP-018",
@@ -528,7 +737,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/annotations.md",
+        "implemented": [
+          "Immutable annotations and source manifests, explicit normal appearances, generated vector markup and embedded shaped free text",
+          "Metadata/dates/states, bounded reply/popup relationships, staged editing/import/deletion and explicit screen/print flattening profiles",
+          "Passive attachment/Video/Sound media graphs with exact payload/reference preservation; owned-graph XFDF round trips; C#/VB examples"
+        ],
+        "pending": [
+          "Full viewer/conformance/fidelity/XFDF corpus and additional ownership/compositing/view-dependent/media/regeneration profiles",
+          "Actual minimum runtimes, final package consumers and every production qualification gate"
+        ],
+        "independentEvidence": "docs/evidence/FP-019-independent.json",
+        "sourceEvidence": "docs/evidence/FP-021-source.json"
+      }
     },
     {
       "id": "FP-020",
@@ -556,7 +780,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/navigation.md",
+        "implemented": [
+          "Native-coordinate local destinations and Unicode/legacy named destination editing with page identity validation",
+          "Passive typed actions, explicit URI/remote/launch/script retention policy, document/page actions and links",
+          "All-active-object action/attachment inspection and explicit sanitization with cycle/resource/cancellation checks; C#/VB consumers"
+        ],
+        "pending": [
+          "Full navigation/action interoperability, fuzzing, foreign active content and production corpus",
+          "Actual minimum runtimes, exact final packages and all production qualification gates"
+        ],
+        "independentEvidence": "docs/evidence/FP-020-independent.json",
+        "sourceEvidence": "docs/evidence/FP-021-source.json"
+      }
     },
     {
       "id": "FP-021",
@@ -584,7 +823,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/presentation.md",
+        "standardsEvidence": "docs/evidence/FP-021-standards.json",
+        "implemented": [
+          "Nested styled Unicode bookmarks with real indirect links, signed visible counts, passive actions and page-identity remapping",
+          "Page-label range authoring and bounded source number-tree/formatter inspection with unknown-setting retention",
+          "Catalog layout/mode/initial view, standard viewer preferences and all twelve passive transition styles; C#/VB consumers"
+        ],
+        "pending": [
+          "Complete viewer/conformance/presentation corpus and additional source formatting/extension profiles",
+          "Actual minimum runtimes, exact final packages and every production qualification gate"
+        ],
+        "independentEvidence": "docs/evidence/FP-021-independent.json",
+        "sourceEvidence": "docs/evidence/FP-021-source.json"
+      }
     },
     {
       "id": "FP-022",
@@ -2460,7 +2715,7 @@
       "title": "Native provider deployment and isolation",
       "area": "production",
       "phase": "13-production",
-      "status": "planned",
+      "status": "implemented",
       "releaseRequired": true,
       "dependencies": [
         "FP-001",
@@ -2481,7 +2736,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "implemented-source",
+        "contract": "docs/native-deployment.md",
+        "implemented": [
+          "Immutable offline provisioning manifests and read-only local integrity preflight",
+          "Pinned size/SHA-256, host RID and native header architecture checks",
+          "Stable diagnostics, operation-context failure latching and C#/VB source consumers",
+          "Optional original isolated bridge host with actual ABI/version/export/dependency probes",
+          "Platform sandbox/resource boundaries, authenticated bounded transport, native crash/cancellation recovery"
+        ],
+        "pending": [
+          "Reviewed engine inventories, full security/endurance and exact-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-085-source.json"
+      }
     },
     {
       "id": "FP-086",

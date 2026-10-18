@@ -1,0 +1,172 @@
+{
+  "purpose": "factual standard-font metrics and normative glyph-name mapping data, no font outlines or third-party implementation bodies",
+  "fontToolsVersion": "4.61.1",
+  "adobeGlyphListCommit": "4036a9ca80a62f64f9de4f7321a9a045ad0ecfd6",
+  "adobeGlyphListDataSha256": "0d146227f9cca30bb3a388785a069ae23d111de8dbf6b479f32d1e866530133c",
+  "metricsSource": "14 standard AFM metric datasets observed from the independent plotting distribution; only numerical facts and standardized glyph identifiers are retained",
+  "records": [
+    {
+      "sourceId": "FONT-METRICS-Courier-Bold",
+      "sourceSha256": "b080c323e07cd956770b4988fe61c5213099ecf567dfb00860cbf50ab1d7e2c1",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Courier-Bold.metrics",
+      "derivedSha256": "dd42fbced5c3f998af1af8703143d139b0893193b1b8856683d3dc30f3625f94",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Courier-BoldOblique",
+      "sourceSha256": "ce0eb54286c3dd853d5017c25e6be684135a14a9e8fb18fcb18d1bd91a607cbc",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Courier-BoldOblique.metrics",
+      "derivedSha256": "8b2de37f8adb0ba70034b9e19373d8c8d70d093cbb03ffcdbb338c28eb2a299d",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Courier-Oblique",
+      "sourceSha256": "bd1426e63d6c4d4378862713d4f71567d3fd0d34d41e11337cf5ea514cd56611",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Courier-Oblique.metrics",
+      "derivedSha256": "8ec004e903da632d0b8f27dc68c29d648d92fbe54cb593c59964dcab5e9392fc",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Courier",
+      "sourceSha256": "31d72adad79910126b22a5579ec9e179eee86674ecebe3fcff6f76916193af0e",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Courier.metrics",
+      "derivedSha256": "8e40e291b087bff9530621067378a088b439e5971931d0952d2a373976db53df",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Helvetica-Bold",
+      "sourceSha256": "8b697881c8ee617a177f6f2e2bbc88570b9fd2b9f0e89ecfc0f5507878f988fc",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Helvetica-Bold.metrics",
+      "derivedSha256": "9869c8827583e6cfad68d4f041533c6b89459e3bc334b4219518f03d1b155006",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Helvetica-BoldOblique",
+      "sourceSha256": "526e4eeaa2b5d435cbb7cba3ff42285a473ce132aa1caddb39b48a52cc10aaf6",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Helvetica-BoldOblique.metrics",
+      "derivedSha256": "4f8d1202ff6bbc3ca58c74c50027a04ff778729b446a3e9b32abfc3e3360e1d5",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Helvetica-Oblique",
+      "sourceSha256": "8556038366f9da4aad6d5782ce68afdb96d6d7261da64652f8b5e519110dd91b",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Helvetica-Oblique.metrics",
+      "derivedSha256": "a18c8415b2b6cf1a48f532019c616a92de34af1c50924555712783139c9a626d",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Helvetica",
+      "sourceSha256": "db772f2830fb6d000907791d8d26a12524d96943a9a739e520ee855c6b25c96f",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Helvetica.metrics",
+      "derivedSha256": "dedb050437ee26a357a11838e95e5f42192e145be39aef02c9c543ed06e23c03",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Symbol",
+      "sourceSha256": "3f951aa17af8cb4aa1e1288c6b9baa8a30d3e990ebdbe8cf9a3d5acabcb9f771",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Symbol.metrics",
+      "derivedSha256": "f3291f48cd775fe9184682ca0a36daacbe4db093de58dcb345afb531862d5707",
+      "glyphMetricFacts": 190
+    },
+    {
+      "sourceId": "FONT-METRICS-Times-Bold",
+      "sourceSha256": "7104e6af62c53f029013fb0641a81e31c98589c8f27b5ea6289b25b092c74321",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Times-Bold.metrics",
+      "derivedSha256": "7b52bd2d6d972d07da13a42204fe73917043fa5c83be2011ad6a16bb27bd0abe",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Times-BoldItalic",
+      "sourceSha256": "a7358e772726e91aa87015a001563926ad33dc5a7b2eea9680b34cc78aba385c",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Times-BoldItalic.metrics",
+      "derivedSha256": "8b2e96fab66fc25666b4e8c0ab11a1babead409da5f052d5fe2e6ae5e2bfb49e",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Times-Italic",
+      "sourceSha256": "6cae69b92329193fd85082f0c89ad7a318df8fb5c939d7efe5343f88ab09473c",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Times-Italic.metrics",
+      "derivedSha256": "46c36268e4de9e01c4e19bd6734a87dc1aadd6f8b4733eff55bfcb87cdc38c64",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-Times-Roman",
+      "sourceSha256": "86136b527a5acee0c3283d56a6b68fc6a3d60982eb3bb0fb6cc54e83ecc8d77a",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/Times-Roman.metrics",
+      "derivedSha256": "ed3540cb24e1fdc568ca0828e86112b1c8ae5089d9597453e68d8e6045ba82d5",
+      "glyphMetricFacts": 315
+    },
+    {
+      "sourceId": "FONT-METRICS-ZapfDingbats",
+      "sourceSha256": "66e3a6b7d19c2a87e374eabc92a84f86d00884ec242f6ad3253999c408c56a40",
+      "derivedFile": "src/Fluent.Pdf.Fonts/Data/ZapfDingbats.metrics",
+      "derivedSha256": "68a5541947a4b78084b0e718c4acee808dc8e8811b61b0b20c7a0f2cc890567a",
+      "glyphMetricFacts": 202
+    }
+  ],
+  "normativeData": [
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/AdobeGlyphList.txt",
+      "sha256": "0d146227f9cca30bb3a388785a069ae23d111de8dbf6b479f32d1e866530133c"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/CffExpertCharset.txt",
+      "sha256": "4563f3dc3a7cfe819a70a323c28870699365c98923236816c39470b771fe2df1"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/CffExpertSubsetCharset.txt",
+      "sha256": "98003dcead217f52282484c1ba1a4191909685d8b5610703e738b3f5877d304a"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/CffStandardStrings.txt",
+      "sha256": "2c4798dcb4360a7d4d944cdbc4f6d471e843c798b422368bf81ebe3209e4f39a"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/MacExpertEncoding.txt",
+      "sha256": "600261acf5e46b82d4abe74df3be487afb6c8307c4cde8fd004b3541df08148f"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/MacRomanEncoding.txt",
+      "sha256": "302d682a9f623bf38ca42f8f3bf74218d48889ab2070fc5af3c2fb5015b6e718"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/StandardEncoding.txt",
+      "sha256": "ca72466b7da0d30730e0f26b6bd63fadc1e6b42e377794e5d3400e8a721f80e2"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/SymbolEncoding.txt",
+      "sha256": "ace96d16ead504eef49bd2ad1396b39e65e9cd5d22ae46a9c4066249255984a3"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/WinAnsiEncoding.txt",
+      "sha256": "bdf8af8abb6c11474f9c17947a4848e127cf595227819e2d9a123155bee64c4d"
+    },
+    {
+      "file": "src/Fluent.Pdf.Fonts/Data/ZapfDingbatsEncoding.txt",
+      "sha256": "afd2f2242a8ffe1c543a1c442060e1174b4b099e9b40b6c2989b76dbe0287624"
+    }
+  ],
+  "encodingDataToolVersion": "4.4.9",
+  "encodingSourceFacts": [
+    {
+      "sourceId": "FONT-ENCODING-WINANSI",
+      "sourceSha256": "e7b5d1be40351a19333dc1741573bd8e8014c363b4a845c8de63693ea7c629a2"
+    },
+    {
+      "sourceId": "FONT-ENCODING-MACROMAN",
+      "sourceSha256": "235cc3f87af60d4da009cc1250d6508ff69786355ee84082b0c5219df343de33"
+    },
+    {
+      "sourceId": "FONT-ENCODING-MACEXPERT",
+      "sourceSha256": "0a57cd77e313dc11abd69847fe0cdc4b0d87e5b81732ca2513fdce3fe22450ef"
+    },
+    {
+      "sourceId": "FONT-ENCODING-SYMBOL",
+      "sourceSha256": "93335536e0c5c6d80dd5994d050f33940e8e1fc3a828cbfba13b6101616cb372"
+    },
+    {
+      "sourceId": "FONT-ENCODING-ZAPFDINGBATS",
+      "sourceSha256": "9398fc8f4f4ee5f6067c7d17dca90d3b55787e796b97f362a51bbc9459b8a84a"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-planning-regression-not-production-performance-qualification",
+  "sourceCommit": "81bcf674d9bb54060e2da5e088bc68116a822dd3",
+  "baselineSourceCommit": "68d5496e022cc5a6d4b6c13edbfb013c6964d09c",
+  "before": {
+    "elapsedMilliseconds": 3893.5583,
+    "Passes": 2,
+    "pages": 9,
+    "Calls": 328,
+    "FullParagraphCalls": 12,
+    "bytes": 3550309,
+    "sourceCommit": "68d5496e022cc5a6d4b6c13edbfb013c6964d09c"
+  },
+  "after": {
+    "elapsedMilliseconds": 2972.4026,
+    "Passes": 2,
+    "pages": 9,
+    "Calls": 214,
+    "FullParagraphCalls": 6,
+    "bytes": 3550309,
+    "sourceCommit": "81bcf674d9bb54060e2da5e088bc68116a822dd3"
+  },
+  "byteIdentical": true,
+  "pdfSha256": "ba1bfc2e1db40318eada39457b64c0c4bccccd22acf9843127a5aca62b23dc78",
+  "environment": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "probeSha256": "e0fabd6f1d5a0b4c4b56d59cb1abf4f62b6ef922bb05d89dc6ad2e23ac32eda8",
+  "regressions": [
+    "Trial pagination performs no top-level body font writes before convergence.",
+    "A converged top-level body is painted once; body font writes do not exceed painted runs.",
+    "Independent operations do not share paragraph measurements."
+  ],
+  "reports": {
+    "final-plan-tests.log": "c6d95e62dadcba33bde2df6bacacfdb5f1bf8a3ebadc9bde48889a4162843992",
+    "final-plan-full-managed.log": "62464e7ca3441fa409dc4ccc5fa100d91c8a2d9fce8dc3c01c20a7c3af55925c",
+    "template-perf-final-plan.log": "db31dde61bfc85c718b6cc55ddebcd13945236bc3f7d66a496572e5536969356"
+  },
+  "priorCiFailure": {
+    "run": 39104753011,
+    "job": 117608090780,
+    "logSha256": "3c7dab60b61e7cc1d11f116a81a16ef1696f9378873ddeb551b10cd141efb985",
+    "observation": "Two Intel macOS template cases reached the unchanged 30-second deadline after measurement caching alone. Trial-body painting was subsequently removed."
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Individual local cold timings are investigation samples, not calibrated performance or endurance gates.",
+    "Nested/table measurement retains its required local content; complete workloads and all production qualification remain mandatory.",
+    "No deadline, memory ceiling, required test or release gate was relaxed."
+  ],
+  "subsequentFailureAudit": {
+    "run": 39105883712,
+    "job": 117611502605,
+    "case": "TemplateTests.ContentsConvergeAndCallbacksReceiveFinalTotalsAndVariants",
+    "runtime": "net8.0 on Intel macOS",
+    "logSha256": "37e71941d0d5c39c5681938198cc9b41c67d081f913b07a9f7a4e43a62ac2f64",
+    "observation": "The unchanged deadline still expired in a source collection run. Bounded phase timings and two collection threads per test host were added for diagnosis and controlled source scheduling. Explicit test-contained concurrency workloads and SDK limits remain unchanged."
+  }
+}

@@ -1,0 +1,10 @@
+#nullable enable
+Fluent.Pdf.Codecs.IsolatedImageCodecProvider
+Fluent.Pdf.Codecs.IsolatedImageCodecProvider.Decode(Fluent.Pdf.PdfImageCodec codec, Fluent.Pdf.PdfImageInfo! info, Fluent.Pdf.PdfValue! imageDictionary, Fluent.Pdf.PdfValue! decodeParameters, System.IO.Stream! encodedInput, System.IO.Stream! sampleOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Codecs.IsolatedImageCodecProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Codecs.IsolatedImageCodecProvider.Encode(Fluent.Pdf.PdfImageCodec codec, Fluent.Pdf.PdfImageInfo! info, Fluent.Pdf.PdfValue! parameters, System.IO.Stream! sampleInput, System.IO.Stream! encodedOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Codecs.IsolatedImageCodecProvider.Inspect(Fluent.Pdf.PdfImageCodec codec, System.IO.Stream! encodedInput, Fluent.Pdf.PdfValue! imageDictionary, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfImageInfo!
+Fluent.Pdf.Codecs.IsolatedImageCodecProvider.IsolatedImageCodecProvider(Fluent.Pdf.Workers.NativeWorkerOptions! worker) -> void
+Fluent.Pdf.Codecs.IsolatedImageCodecProvider.Supports(Fluent.Pdf.PdfImageCodec codec, bool encoding) -> bool
+const Fluent.Pdf.Codecs.IsolatedImageCodecProvider.BridgeAbi = "fluent-pdf-codecs-1" -> string!
+const Fluent.Pdf.Codecs.IsolatedImageCodecProvider.BridgeVersion = "1.0.0" -> string!

@@ -1,0 +1,15 @@
+{
+  "purpose": "Independent original ICC fixtures; no SDK conversion implementation imported",
+  "generator": "Original ICC v2 Gray builder and Pillow 12.3.0 / LittleCMS built-in sRGB profile with fixed header date and cleared optional ID",
+  "lcmsVersion": "2.19",
+  "fixtures": [
+    {
+      "file": "original-gray.icc",
+      "sha256": "3989f9b72cae03048f0e8bd016563284b1a7631e19bbff05dde22ba07a937447"
+    },
+    {
+      "file": "original-srgb.icc",
+      "sha256": "6f6fe5cc53cd24ceeb7997fb24ce2889fdfb88d88ce4fdc5f8e25e0481294953"
+    }
+  ]
+}

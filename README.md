@@ -2,7 +2,7 @@
 
 Fluent.Pdf is an MIT-licensed .NET PDF SDK being designed for Windows, Linux and macOS. Its production scope combines document generation and editing, browser-quality HTML conversion, rendering, extraction, forms, OCR, security, signatures and independently validated PDF standards.
 
-**Current delivery: specification, backlog, FP-001 document/provider contracts and FP-002 operation policies/budgets. PDF parsing, writing and rendering are not implemented; the SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
+**Current delivery: document/provider contracts, operation budgets, isolated native workers and bounded [PDF syntax inspection](docs/pdf-syntax.md). The original managed [page reader and full/incremental writer](docs/pdf-writing.md), [content operators/version selection](docs/content-operators.md) optional [fonts/embedding](docs/fonts.md) and [Unicode/shaping](docs/text-shaping.md) and [vector/color/transparency](docs/vector-graphics.md) and [page canvas/geometry](docs/page-canvas.md) and [flow layout/pagination](docs/flow-layout.md) and [tables/data binding](docs/tables.md) and [lists/columns/notes](docs/composition.md) and [page templates/contents](docs/page-templates.md) and [page organization/imposition](docs/page-organization.md) and [images/reusable graphics](docs/images.md) and [annotations/appearances](docs/annotations.md) and [navigation/action policy](docs/navigation.md) and [bookmarks/presentation](docs/presentation.md) are implemented in source; rendering and the remaining SDK features are in progress. The SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
 
 ## Product direction
 
@@ -42,6 +42,7 @@ Install the .NET 10 SDK, .NET 8 runtime and PowerShell 7, then run:
 
 ```powershell
 pwsh -File eng/validate-spec.ps1
+pwsh -File eng/build-native-fixtures.ps1
 dotnet restore Fluent.Pdf.slnx --locked-mode
 dotnet tool restore
 dotnet build Fluent.Pdf.slnx -c Release --no-restore
@@ -50,13 +51,13 @@ pwsh -File eng/test-contracts.ps1
 pwsh -File eng/test-release-block.ps1
 ```
 
-These checks exercise document editing, provider/stream lifetimes, strict/permissive losses, resource limits, cancellation/deadlines and atomic file saves through test fixtures. See the [API contract and C#/VB examples](docs/api-contract.md), [operation policies](docs/operation-policies.md) and [test/evidence procedure](docs/testing.md). The fixtures emit no PDF. Packing intentionally fails while production readiness is false.
+These checks exercise document editing, provider/stream lifetimes, strict/permissive losses, resource limits, cancellation/deadlines and atomic file saves through test fixtures. See the [API contract and C#/VB examples](docs/api-contract.md), [operation policies](docs/operation-policies.md) and [test/evidence procedure](docs/testing.md). Native boundary/codec tests build and execute original pinned worker fixtures; see [native deployment](docs/native-deployment.md) for prerequisites and limits. Managed writer tests emit real PDF and signed incremental revisions; separate legacy contract fixtures emit labeled test bytes. Packing intentionally fails while production readiness is false.
 
 ## Repository layout
 
 - `specs/`: canonical requirements, source inventory and fail-closed release readiness.
 - `docs/requirements/`: independently assignable scopes, dependencies, acceptance and validation.
-- `src/Fluent.Pdf/`: managed document model and explicit provider contracts; no built-in PDF codec yet.
+- `src/Fluent.Pdf/`: managed document model, syntax/filters and original reader/writer with optional provider contracts.
 - `tests/` and `examples/`: behavioral contract tests and executable C#/VB consumers.
 - `apps/PdfReader/`: separate Reader project placeholder, excluded from SDK publication.
 - `eng/`: specification validation and production release controls.

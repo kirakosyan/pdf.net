@@ -1,0 +1,104 @@
+{
+  "unicodeVersion": "18.0.0",
+  "snapshotCommit": "4fd8eca90b30aa4c72543ccddb4c15d05becdf8d",
+  "purpose": "pinned normative property/test data; no imported algorithm implementation",
+  "records": 3890,
+  "residentChargeBytes": 1048576,
+  "binaryBytes": 85544,
+  "binarySha256": "259ba178f4b55bbf559db3e1e180071b661b84067f2b237a9e49822cb706839c",
+  "bidiClasses": [
+    "L",
+    "R",
+    "AL",
+    "EN",
+    "ES",
+    "ET",
+    "AN",
+    "CS",
+    "NSM",
+    "BN",
+    "B",
+    "S",
+    "WS",
+    "ON",
+    "LRE",
+    "LRO",
+    "RLE",
+    "RLO",
+    "PDF",
+    "LRI",
+    "RLI",
+    "FSI",
+    "PDI"
+  ],
+  "graphemeClasses": [
+    "Other",
+    "CR",
+    "LF",
+    "Control",
+    "Extend",
+    "ZWJ",
+    "Regional_Indicator",
+    "Prepend",
+    "SpacingMark",
+    "L",
+    "V",
+    "T",
+    "LV",
+    "LVT"
+  ],
+  "sources": [
+    {
+      "sourceId": "UNICODE-BidiBrackets.txt",
+      "sha256": "4b3b62e4a14b84ee752808c810c602534921c09a4a1bf78cfbee566d66c125b3"
+    },
+    {
+      "sourceId": "UNICODE-BidiCharacterTest.txt",
+      "sha256": "045b24d2c8ab066951bd32fe8c6b4de34647f72b5b1c7df0265f24ab53573e01"
+    },
+    {
+      "sourceId": "UNICODE-BidiMirroring.txt",
+      "sha256": "cd54810ebf52f0e61a730c8b9cb25975de6c85f6d788a559b416afd548923fd6"
+    },
+    {
+      "sourceId": "UNICODE-BidiTest.txt",
+      "sha256": "9af2f882a4ab50912e388f069a673b94eacd82fa6d07d20a3ff7f3c759e905aa"
+    },
+    {
+      "sourceId": "UNICODE-DerivedCoreProperties.txt",
+      "sha256": "09c928886a178fcafd93c29e4bd59073a058e5a100b716d425cb563ab50f68c9"
+    },
+    {
+      "sourceId": "UNICODE-PropertyValueAliases.txt",
+      "sha256": "06c4c8eaf7b0bf34abe73b113da1215bd784ac254d4c223600b90267caa4bbbd"
+    },
+    {
+      "sourceId": "UNICODE-ReadMe.txt",
+      "sha256": "75a1ce9e5b14164a22d35b2a56fb5a8f927de323a08c43791c6fb050901f84f8"
+    },
+    {
+      "sourceId": "UNICODE-ScriptExtensions.txt",
+      "sha256": "5c9d34a922f687726f2a8bcf57d49f905987e51f1b21b58c95a00fbe255cec23"
+    },
+    {
+      "sourceId": "UNICODE-Scripts.txt",
+      "sha256": "0071fd81b6aeae25f6e8bce8efec3066a6476a91b49bdb2f52dc76e817862a6a"
+    },
+    {
+      "sourceId": "UNICODE-auxiliary-GraphemeBreakProperty.txt",
+      "sha256": "0839dcb79e4ac639ecd538b1abf7c9d22e3f9dd265b7e182d33627aa4d75b45a"
+    },
+    {
+      "sourceId": "UNICODE-auxiliary-GraphemeBreakTest.txt",
+      "sha256": "b0cf047ee94485bbdc846de2b902f5f8a815f6b674f9d04223cddadd91c9df31"
+    },
+    {
+      "sourceId": "UNICODE-emoji-emoji-data.txt",
+      "sha256": "80d00f8e616a0ef27fd6b8de3b758c06383b5d917e2977709578e68baf733bf1"
+    },
+    {
+      "sourceId": "UNICODE-extracted-DerivedBidiClass.txt",
+      "sha256": "d9e23222522551348ea1ccfbb4f62efbf98982afb95840f8959c08ed992c5607"
+    }
+  ]
+}

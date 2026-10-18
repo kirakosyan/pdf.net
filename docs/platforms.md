@@ -24,6 +24,10 @@ COM, legacy ASPX/WebForms and Windows-specific UI/printing integrations are Wind
 
 Reader is currently only a buildable project placeholder. No Reader OS/runtime support claim is made.
 
+## Native deployment preflight
+
+The partial FP-085 [deployment inspector](native-deployment.md) recognizes the current OS/process RID for the six modern lanes and Windows x86. It checks caller-pinned PE, ELF or thin 64-bit Mach-O header architecture without loading files. RID equality does not establish libc, minimum OS, exports, calling convention, runtime dependencies, code signing or sandbox compatibility. Read-only asset probes run in source lanes; modern Unix lanes also exercise read-only directories and rejected root/file symbolic links. Windows privileged link scenarios and actual minimum Framework remain unqualified. No provider capability or native engine support is enabled.
+
 ## Actual runtime evidence
 
 Building net472 or running it on Framework 4.8.1 does not qualify actual 4.7.2. Require an isolated 4.7.2 host, verify runtime identity, execute the exact final package and retain complete reports. The prior wordnet legacy-JIT requirement is historical evidence about that package, not a configuration requirement to copy into Fluent.Pdf without reproducing it.
@@ -35,3 +39,5 @@ Source contract CI executes .NET 8, .NET 10 and an explicit netstandard2.0 fallb
 Actual Framework 4.7.2 execution and the complete production runtime/provider matrix remain pending FP-086 work and block release.
 
 FP-002 policy, decoder-lease, deadline and accounting tests run on these same source lanes, with no new platform/native dependency. They do not qualify a PDF parser/renderer or forced termination of native work; each future provider must integrate and qualify the mandatory operation context.
+
+The optional isolated worker now has [passing source boundary evidence](evidence/FP-085-source.json) on the six modern hosts and current Framework x86/x64. Its [OS prerequisites and limits](native-deployment.md) apply; source success does not qualify an engine, minimum runtime or package.

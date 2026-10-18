@@ -55,9 +55,9 @@ public sealed class FileTests : IDisposable
     public void MissingProviderCreatesNoTemporaryFileAndOpensNoInputFile()
     {
         var path = Path.Combine(_directory, "missing.bin");
-        using var document = Pdf.Create();
+        using var document = Pdf.Create(providers:PdfProviderRegistry.Empty);
         Assert.Throws<PdfProviderUnavailableException>(() => document.SaveFile(path));
-        Assert.Throws<PdfProviderUnavailableException>(() => Pdf.OpenFile(path));
+        Assert.Throws<PdfProviderUnavailableException>(() => Pdf.OpenFile(path,providers:PdfProviderRegistry.Empty));
         Assert.Empty(Directory.GetFiles(_directory));
     }
 

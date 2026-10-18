@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-012 independent development flow verification; not complete production qualification",
+  "sourceCommit": "4457ce3039e0004ad81483673fef1a3337c799e1",
+  "workingTreeDirty": false,
+  "method": "Separate original Python word-wrap/metric/alignment/pagination model and literal PDF encoder; FontTools metrics, strict pypdf logical text and Poppler raster comparisons",
+  "fontSha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+  "tools": {
+    "FontTools": "4.61.1",
+    "pypdf": "6.10.0",
+    "Poppler": "25.03.0",
+    "Pillow": "12.3.0"
+  },
+  "cases": [
+    {
+      "case": "Start",
+      "pdfSha256": "878bfe491398563fcc20a8cf10fe2a18573ec311cd7a8ef6cc4ef335417f2a39",
+      "pages": 2,
+      "lines": 4,
+      "logicalActualText": "exact",
+      "lineGeometryTolerancePoints": 1e-09,
+      "rasterPixels": 112000,
+      "differentPixels": 0
+    },
+    {
+      "case": "End",
+      "pdfSha256": "4aef8fc53bc4f4f1a97acfcd229019c1d091ee130c0352653fcb6f9244b6d72e",
+      "pages": 2,
+      "lines": 4,
+      "logicalActualText": "exact",
+      "lineGeometryTolerancePoints": 1e-09,
+      "rasterPixels": 112000,
+      "differentPixels": 0
+    },
+    {
+      "case": "Center",
+      "pdfSha256": "066d339f968d563c00d98916d532ea9cfd5c5ab44b567c2c4994812b4c1b0ee9",
+      "pages": 2,
+      "lines": 4,
+      "logicalActualText": "exact",
+      "lineGeometryTolerancePoints": 1e-09,
+      "rasterPixels": 112000,
+      "differentPixels": 0
+    },
+    {
+      "case": "Justify",
+      "pdfSha256": "80bc31e770c858663026a864322d86a88f046fffce43c31f6930d621df810b71",
+      "pages": 2,
+      "lines": 4,
+      "logicalActualText": "exact",
+      "lineGeometryTolerancePoints": 1e-09,
+      "rasterPixels": 112000,
+      "differentPixels": 0
+    }
+  ],
+  "productionQualified": false,
+  "pending": [
+    "Complete multilingual styled business corpus, all constraints, float and line-break profiles",
+    "Actual minimum runtimes, final packages, standards/fidelity/security/fuzz/endurance workloads"
+  ],
+  "rendererRevalidation": "docs/evidence/renderer-profile-revalidation.json"
+}

@@ -1,0 +1,60 @@
+%!PS-AdobeFont-1.0: FluentFixtureType1 1.0
+11 dict begin
+/FontType 1 def
+/FontName /FluentFixtureType1 def
+/FontMatrix [0.001 0 0 0.001 0 0] readonly def
+/FontBBox [0 0 700 800] readonly def
+/Encoding 256 array
+0 1 255 {1 index exch /.notdef put} for
+dup 65 /A put dup 180 /acute put dup 193 /Aacute put readonly def
+currentdict end
+currentfile eexec
+dup /Private 8 dict dup begin
+/RD {string currentfile exch readstring pop} executeonly def
+/ND {noaccess def} executeonly def
+/NP {noaccess put} executeonly def
+/lenIV 4 def
+/BlueValues [] def
+/Subrs 0 array ND
+2 index /CharStrings 5 dict dup begin
+/.notdef {
+0 600 hsbw
+endchar
+} ND
+/A {
+0 600 hsbw
+100 0 rmoveto
+200 700 rlineto
+200 -700 rlineto
+closepath
+endchar
+} ND
+/B {
+0 650 hsbw
+100 0 rmoveto
+0 700 rlineto
+300 0 rlineto
+0 -700 rlineto
+closepath
+endchar
+} ND
+/acute {
+0 300 hsbw
+100 700 rmoveto
+100 100 rlineto
+100 0 rlineto
+-100 -100 rlineto
+closepath
+endchar
+} ND
+/Aacute {
+0 600 hsbw
+0 0 0 65 194 seac
+} ND
+end
+end
+readonly put
+noaccess put
+dup /FontName get exch definefont pop
+mark currentfile closefile
+cleartomark

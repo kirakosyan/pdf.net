@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-010 independent development graphics verification; not complete production qualification",
+  "sourceCommit": "7c7b0aa63d72b769a4a82c602f3335ba7f7372d7",
+  "workingTreeDirty": false,
+  "method": "Original separate Python PDF encoder and manually specified resource/operator reference models; strict pypdf parsing and independent Poppler raster comparison",
+  "tools": {
+    "pypdf": "6.10.0",
+    "Poppler": "25.03.0",
+    "Pillow": "12.3.0",
+    "LittleCMS": "2.19"
+  },
+  "cases": [
+    {
+      "case": "gray",
+      "pdfSha256": "e23b473cb578236e6c899b22a1961f66795c73fa67aa2e25a44e03121c792a64",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "rgb",
+      "pdfSha256": "273d598b08739b4c6c947649e3b71e1b4434692485120e685b2ecf643adb9f67",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "cmyk",
+      "pdfSha256": "f20a811528eb81a0428f0bb0415a9cb19d803058858fe2313ae8966652ec5dd3",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "lab",
+      "pdfSha256": "3e24c0a52fcfae04e967e0000ddbedf4b06eeb3e55c1647162ad90040efadfa5",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "calgray",
+      "pdfSha256": "e2e2ea0fdacae727bf0c9cc02656cdcc132482e6013de921697b29e0bcea658d",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "calrgb",
+      "pdfSha256": "f6832191a220d5c26f55c9907cefb3fefa6e5cc6ff0b1bbd237c783b2fa03b63",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "icc-rgb",
+      "pdfSha256": "df36b845e26e201b92c8c8e7cc81a056c85b265dfb70c2c5f8c104245abb2c81",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "icc-gray",
+      "pdfSha256": "3e9d89baded1102983b1ea256c70b5fe7d1102df6dc0ee5ce6e0d22bfb9db1ab",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "spot",
+      "pdfSha256": "34717a0dcb889ade67c41f070c4146580f5148deea7c8b8cf97df85121f088f4",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "devicen",
+      "pdfSha256": "a7116e5888ac088a5b6573bc1aae9af5a4cf30d97d11d35c794c8e623bcb1ed3",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "axial",
+      "pdfSha256": "b466befade75e0cab136ab96fd82cd2eec19a63f17f58fec3493bbf3c20b6e6f",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "radial",
+      "pdfSha256": "8f94c17078077036763f995e5b7aa4ed4af7c1fd8ab2cb017d6f5d3e60d7d469",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "functional",
+      "pdfSha256": "d4224fba28fe4c70e9d4d970e1917f8eec04d07d89ab05a38df42a5b17afa7b9",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "mesh4",
+      "pdfSha256": "d4c9b6766e5a1468c67a30ff869efa8c74a950b8f96c22a823c4203594d330ea",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "mesh5",
+      "pdfSha256": "f4aa21628cb078d451066dac77b2e0f04aa6d6becf3a7f75c094d3be2a09efdd",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "mesh6",
+      "pdfSha256": "dd636b9ffbf2dbbb087c5a95eb863f8b0fd83bc01ec0c01afc33bd752c8e5584",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "mesh7",
+      "pdfSha256": "f36eebbd34d1e31d10d379fb7dd07ce947f54c8e86e78f07dabd1eef5f3251bf",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "tiling-colored",
+      "pdfSha256": "9385bbed9103a32b09a061477b033ecbc64c3395429410db657664f2aec47cb4",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "tiling-uncolored",
+      "pdfSha256": "aa4d523db17ab462cb087dd5a9487124c4ddceac222829c5f15826a9bac365d1",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "shading-pattern",
+      "pdfSha256": "2f78b4589a6e4d4fa96171c12bb397555088de812635c28b6acb393aa3df2772",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Normal",
+      "pdfSha256": "c342189452a39750072fae88ae62ac4c432eae3d47a15116045625e82a83e50b",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Compatible",
+      "pdfSha256": "7ea2125642d2ab226e254c08b495c5d36e7f78bafdbec53ed346fe0f464e08af",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Multiply",
+      "pdfSha256": "e5ae63453dccc715bbf722c9e1d6105e4756744337f724647e0d379da69545c2",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Screen",
+      "pdfSha256": "2c62fe76dc5e0108cfc7bd7b1a4d8d0e2ffe07e30a252f55fa69788740727248",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Overlay",
+      "pdfSha256": "dc27a946a363ede8278a402bcef03793fa806ee1efc1ab147c9dbf4ab7cb214d",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Darken",
+      "pdfSha256": "ae18334b57ee301f8caf31648139a7e0d2a588ece9584fc9cbea5f2a6bd58713",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Lighten",
+      "pdfSha256": "309ed1669b80c9bf539c00e9ddcf205e5b0850656ce9b30d3e19eed39cb1fcd4",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-ColorDodge",
+      "pdfSha256": "a2f392884d70a15823cefa880b4225cb0abe1f59922b277d6671dc52c52d7ed2",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-ColorBurn",
+      "pdfSha256": "c076ebdadc3b2d438300cda85829e42e671fa1f66588a0163958c9853abb792c",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-HardLight",
+      "pdfSha256": "8a5e23628feb81ede9333ee66e79f504ac016de081f1af924dea283d26e28e8b",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-SoftLight",
+      "pdfSha256": "d6d9cadd7b00b16ea5b4acb913adbad8bcaa2cce15651f7204fc5b6bf8948571",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Difference",
+      "pdfSha256": "48e8d4daeadcdf6eb8646151e49b7e908fc23e8b927b735ad23749cf05571063",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Exclusion",
+      "pdfSha256": "fd80ee0be63a4f05e27424f391ae9e9397ee1991e95d4645e51ade88c5b1b984",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Hue",
+      "pdfSha256": "1774a1abb7e7489e81d89a1ce948e5e65b115c4cd5468ea273c0035745e32484",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Saturation",
+      "pdfSha256": "4fc3c23e93894fb9ba854675ccbd2f62eb1f61e689e65801ac3d669e6d687a45",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Color",
+      "pdfSha256": "954b262a61496f8ad11caeae24ef64e55c3a1e0523bb394697423568601882d0",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "blend-Luminosity",
+      "pdfSha256": "7ebec786d1a36b6ea0fb83b90edaa40865a33b6cbaca092fb3ba602aa2ab2e61",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "mask-Alpha",
+      "pdfSha256": "b3f313cf0e9cf5e9548dbfb66ec5c46016a3ac3ee55c498690efe3eb16baf9ac",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "mask-Luminosity",
+      "pdfSha256": "90090efa57c105cff4e2e743e03cf4a5216f5d93ab19e8052c9e254aa0b5969d",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "group-00",
+      "pdfSha256": "50d16f6de2a3cdb25202525d81581cd6ea53f623cd7142d6d562150d9bfec134",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "group-01",
+      "pdfSha256": "cde90ff7f40057773b98a42b106440d55337cd46004271bb328a75add192e65d",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "group-10",
+      "pdfSha256": "c1db93cad5248d89a2b95642051223a80ec1fd933cdf45dce60bd6bb6e63a936",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "group-11",
+      "pdfSha256": "c41d58af3168435867e3390eed53823a747fb0c9a7aa4bc32ff93e783a88e7c2",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "curve",
+      "pdfSha256": "b4056b79f2e175057f03696d9420b45f4d9e4dbabae557791918fdddd20d70a8",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "clip-nonzero",
+      "pdfSha256": "3bd890de7725171448f6ccd1380c818431a7b8d75522dd6b39fa8b70bea16e17",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    },
+    {
+      "case": "clip-evenodd",
+      "pdfSha256": "7336c6bf0bd86310206f2db5759972f5f379b7eb24103ef97cf0299d9b801c28",
+      "rasterPixels": 48000,
+      "differentPixels": 0,
+      "rasterImageXObjects": 0
+    }
+  ],
+  "productionQualified": false,
+  "pending": [
+    "Complete ICC/profile and vector/compositing corpus",
+    "All actual minimum runtimes and exact final packages",
+    "Standards, security, long fuzz and endurance qualification"
+  ],
+  "runtime": {
+    "sdk": "10.0.402",
+    "runtime": "10.0.13",
+    "rid": "linux-x64",
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41"
+  },
+  "analysisTools": [
+    {
+      "name": "original-public-api-probe",
+      "sha256": "c5db25f3b59ad92019c6d83297078de53d13cae8b75797e8104f422492b45783"
+    },
+    {
+      "name": "independent-reference-encoder-and-verifier",
+      "sha256": "afaedc700023119ef1835dd061d91c8edaea3943647102d0d99f9e63933dc0ad"
+    }
+  ],
+  "rendererRevalidation": "docs/evidence/renderer-profile-revalidation.json"
+}
