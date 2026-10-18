@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-045",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "22b053f8830188c9513e4c1399ba24ba9f9c6d1a",
+  "sourceTree": "90d60fce54be382c69b0dd933a1184cd3f1ce608",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -108,7 +108,7 @@
     }
   ],
   "priorDependencyCI": "docs/evidence/PR-118-CI-97-source.json",
-  "currentSourceCI": "Pending after this source commit; prior CI is not claimed for the new resource implementation.",
+  "currentSourceCI": "CI98 failed on the two Windows positive mutual-TLS fixtures; six later Windows lanes did not execute. Correction and qualified Windows TLS profiles remain required.",
   "packageSha256": null,
   "packingBlocked": true,
   "publicationBlocked": true,
@@ -117,6 +117,39 @@
     "Complete legacy/portable HTTP/TLS/decoding and race-safe protected-file OS adapters",
     "Complete browser host isolation, interactive authentication/site/proxy and cookie/IDNA/certificate/address-registry profiles",
     "All actual supported RID/runtime/minimum Framework/fallback and exact final-package consumers",
-    "Full security/fuzz/resource/concurrency/endurance/performance and independent fidelity qualification"
-  ]
+    "Full security/fuzz/resource/concurrency/endurance/performance and independent fidelity qualification",
+    "Complete Windows certificate-less/general PKI-chain TLS and qualified runtime credential-cache isolation; built-in restrictions do not waive Windows support"
+  ],
+  "failedSourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-98-source.json",
+    "passed": 14516,
+    "failed": 2,
+    "completedRuntimeLanes": 14,
+    "notExecutedRuntimeLanes": 6
+  },
+  "pendingWindowsCorrection": {
+    "sourceCommit": null,
+    "sourceFileHashes": {
+      "src/Fluent.Pdf.Html/Resources/PinnedHtmlHttpTransport.cs": "7de3d145034bed47223bafd1f4b9452528616df2aad014835fcdd8405b6d3a34",
+      "tests/Fluent.Pdf.Contract.Tests/HtmlHttpTransportTests.cs": "59edcbb95a731330818fc0c8cd5935bf728f68d45e91c9d927e89522b98377c8"
+    },
+    "localOriginalTransportFixtures": {
+      "net8Passed": 7,
+      "net10Passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "os": "Debian GNU/Linux13",
+      "architecture": "x64",
+      "reportSha256": {
+        "tls-isolation-net8-tests.log": "fa3f7932609f4df2e4a39f0175d2e063a8831944bc231437a5a6a514e26a15d7",
+        "tls-isolation-net10-tests.log": "c4546392cce94b282b8defe5548f4ccea3af2f7462ad30ce8b7fdd79c30e3ce0"
+      }
+    },
+    "changes": [
+      "Disposable import-backed original test identities on Windows; only fixture keys exported, cleared and disposed",
+      "Sanitized numeric transport error metadata and joined server work on fixture failure",
+      "Avoid vulnerable direct client-certificate contexts on Windows; fail closed for certificate-less/general PKI-chain Windows TLS; full isolated/runtime-serviced Windows TLS remains mandatory"
+    ],
+    "windowsRuntimeProof": "Pending fresh CI. Local Linux results do not qualify Windows TLS."
+  }
 }

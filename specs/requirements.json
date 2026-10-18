@@ -1711,7 +1711,8 @@
         "pending": [
           "Complete legacy/portable transport and decoding profiles, race-safe protected-file OS adapters and complete authentication/site/proxy profiles remain mandatory",
           "Qualified browser host isolation, certificate/IDNA/address-registry review and every actual supported runtime/RID remain mandatory",
-          "Complete security/fuzz/resource/concurrency/endurance/performance and exact final-package consumers remain mandatory"
+          "Complete security/fuzz/resource/concurrency/endurance/performance and exact final-package consumers remain mandatory",
+          "Complete Windows certificate-less/PKI-chain TLS and runtime credential-cache isolation/servicing remain mandatory; restricted built-in source profiles do not waive Windows support"
         ],
         "sourceEvidence": "docs/evidence/FP-045-source.json",
         "standardsEvidence": "docs/evidence/FP-045-standards.json",

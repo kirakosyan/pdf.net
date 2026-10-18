@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "purpose": "failed-source-ci-not-production-qualification",
+  "runId": 39149801006,
+  "sourceCommit": "22b053f8830188c9513e4c1399ba24ba9f9c6d1a",
+  "testedMergeCommit": "15894dac3bdcf5e961995bbd6ecbf35437811fd3",
+  "testedTree": "90d60fce54be382c69b0dd933a1184cd3f1ce608",
+  "exactMergeTreeVerified": true,
+  "platformJobs": 6,
+  "completedRuntimeLanes": 14,
+  "passed": 14516,
+  "failed": 2,
+  "skipped": 0,
+  "notExecutedLanes": [
+    "win-x64/net10",
+    "win-x64/currentFramework-x64",
+    "win-x64/currentFramework-x86",
+    "win-x64/netstandard-on-net10",
+    "win-arm64/net10",
+    "win-arm64/netstandard-on-net10"
+  ],
+  "failure": "Positive mutual-TLS original fixture fails with Html.HttpTransport on both Windows net8 lanes; later Windows lanes did not execute. Linux and both macOS jobs pass their complete three-lane matrices.",
+  "jobs": [
+    {
+      "jobId": 117740925967,
+      "logSha256": "428f8fb3610c97a07cf623205909b97d23e9ddb0bac5b31e2b2e5e4f81b75c82",
+      "completedLaneTotals": [
+        {
+          "passed": 1036,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1037
+        }
+      ]
+    },
+    {
+      "jobId": 117740926068,
+      "logSha256": "7bf42c84d3fef0ae73fed06c529b795c84680fc002d3868b1934841b43879cc1",
+      "completedLaneTotals": [
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        }
+      ]
+    },
+    {
+      "jobId": 117740926129,
+      "logSha256": "b28102ebac730b007e29202b35a993b28c87acca05deef5a95a9d0e68f3fff2b",
+      "completedLaneTotals": [
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        }
+      ]
+    },
+    {
+      "jobId": 117740926148,
+      "logSha256": "0b40666d4cc5547368d1d12fc9918e6d19ccbffbf1b610bb5885151c4d814344",
+      "completedLaneTotals": [
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        }
+      ]
+    },
+    {
+      "jobId": 117740926187,
+      "logSha256": "fc8cbd958e95de2704704e587b9c4aa84e4d52f5b1e482cabf65989b151f6275",
+      "completedLaneTotals": [
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        },
+        {
+          "passed": 1037,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1037
+        }
+      ]
+    },
+    {
+      "jobId": 117740926194,
+      "logSha256": "9c92a483b60ae55fb3c39507df59adc1eae5f1bbf44d381004f90359853448b6",
+      "completedLaneTotals": [
+        {
+          "passed": 1036,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1037
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12145435748,
+      "name": "source-contracts-osx-x64",
+      "digest": "sha256:879613643a1702128e4ba833d2cbc488dbbad52b9baefd0e2edf999050511ce6",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145435748"
+    },
+    {
+      "id": 12145245837,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:99b9e2dedce4d450fa54ec2e915ca618064d674747d1b801429e5873cc8b47c4",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145245837"
+    },
+    {
+      "id": 12145061839,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:31cd1cfe467aa56c0a27d2cbd5e9e0ab9a6239e86fe7e2a44ef8b23dbd3a17e1",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145061839"
+    },
+    {
+      "id": 12144862765,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:a07c86a79f547f71f6d0757715573397de08942d27706f1af9b16340926bf705",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12144862765"
+    },
+    {
+      "id": 12144349475,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:298902f680293203cfdc8affe620faca6b58f7a9b5fa366a5fdad87f8fa25372",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12144349475"
+    },
+    {
+      "id": 12144274995,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:b84d9377caf6baae7e7a8801caa5e92a9695f4e15eba36e3f80532417bdf3a8e",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12144274995"
+    }
+  ],
+  "artifactRetention": "Complete decoded job logs and artifact URLs/digests retained; ZIPs not retrieved locally.",
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

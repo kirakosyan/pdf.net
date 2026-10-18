@@ -15,6 +15,24 @@ namespace Fluent.Pdf.Contract.Tests;
 public sealed class HtmlHttpTransportTests
 {
     [Fact]
+    public void CertificateLessWindowsTlsRequiresAnExplicitQualifiedIsolatedTransport()
+    {
+#if NET8_0_OR_GREATER && !TEST_NETSTANDARD_ASSEMBLY
+        if (OperatingSystem.IsWindows())
+        {
+            var origin = new Uri("https://127.0.0.1:1/");
+            var policy = new HtmlNetworkPolicy(new[] { new HtmlOriginRule(origin) }, new[] { "127.0.0.1" });
+            var failure = Assert.Throws<PdfException>(() => Capture(origin, policy));
+            Assert.Equal("Html.TlsIsolationRequired", failure.Diagnostic.Code);
+        }
+        else
+            Assert.True(new PinnedHtmlHttpTransport().IsSupported);
+#else
+        Assert.False(new PinnedHtmlHttpTransport().IsSupported);
+#endif
+    }
+
+    [Fact]
     public async Task ActualPinnedHttpUsesExplicitHeadersAndReadsExactBytes()
     {
 #if NET8_0_OR_GREATER && !TEST_NETSTANDARD_ASSEMBLY
@@ -65,10 +83,12 @@ public sealed class HtmlHttpTransportTests
         names.AddDnsName("original.example.invalid");
         request.CertificateExtensions.Add(names.Build());
         request.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new OidCollection { new("1.3.6.1.5.5.7.3.1") }, false));
-        using var serverCertificate = request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5), DateTimeOffset.UtcNow.AddDays(1));
+        using var generatedServer = request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5), DateTimeOffset.UtcNow.AddDays(1));
+        using var serverCertificate = TransportIdentity(generatedServer);
         var identity = new CertificateRequest("CN=Original explicit client", clientKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         identity.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new OidCollection { new("1.3.6.1.5.5.7.3.2") }, false));
-        using var clientCertificate = identity.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5), DateTimeOffset.UtcNow.AddDays(1));
+        using var generatedClient = identity.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5), DateTimeOffset.UtcNow.AddDays(1));
+        using var clientCertificate = TransportIdentity(generatedClient);
         string serverPin = Hash(serverCertificate), clientPin = Hash(clientCertificate);
         using var listener = new TcpListener(IPAddress.Loopback, 0);
         listener.Start();
@@ -93,19 +113,48 @@ public sealed class HtmlHttpTransportTests
             }
         }, timeout.Token);
         var policy = new HtmlNetworkPolicy(new[] { new HtmlOriginRule(origin, serverCertificateSha256: condition == "pin" ? new string ('0', 64) : serverPin, clientCertificate: clientCertificate) }, new[] { "127.0.0.1" });
+        PdfException? requestFailure = null;
         try
         {
             if (condition == "valid")
-                Capture(origin, policy);
+            {
+                try
+                {
+                    Capture(origin, policy);
+                }
+                catch (PdfException failure)
+                {
+                    requestFailure = failure;
+                }
+            }
             else
-                Assert.Equal("Html.HttpTransport", Assert.Throws<PdfException>(() => Capture(origin, policy)).Diagnostic.Code);
+            {
+                var failure = Assert.Throws<PdfException>(() => Capture(origin, policy));
+                Assert.Equal("Html.HttpTransport", failure.Diagnostic.Code);
+                Assert.IsType<int>(failure.Data["Fluent.Pdf.Html.TransportErrorCode"]);
+            }
         }
         finally
         {
             listener.Stop();
         }
 
-        await server;
+        string? serverFailure = null;
+        try
+        {
+            await server;
+        }
+        catch (Exception failure)when (requestFailure != null)
+        {
+            serverFailure = failure.GetType().Name;
+        }
+
+        if (requestFailure != null)
+        {
+            object? code = requestFailure.Data["Fluent.Pdf.Html.TransportErrorCode"];
+            throw new Xunit.Sdk.XunitException("Original loopback TLS failed; sanitized platform code=" + (code is int number ? number.ToString("X8", System.Globalization.CultureInfo.InvariantCulture) : "unavailable") + "; joined server outcome=" + (serverFailure ?? "completed") + ".");
+        }
+
         Assert.True(clientCertificate.HasPrivateKey);
 #else
         await Task.CompletedTask;
@@ -220,6 +269,26 @@ public sealed class HtmlHttpTransportTests
         raw.CopyTo(copy);
         Assert.Equal("Original exact 一😀", Encoding.UTF8.GetString(copy.ToArray()));
     }, PdfCapability.RenderHtml);
+    // Original fixture keys only. Schannel gets explicitly imported disposable identities; the SDK never exports caller keys.
+    private static X509Certificate2 TransportIdentity(X509Certificate2 generated)
+    {
+        if (!OperatingSystem.IsWindows())
+            return new X509Certificate2(generated);
+        byte[] encoded = generated.Export(X509ContentType.Pkcs12, "Original fixture identity");
+        try
+        {
+#if NET9_0_OR_GREATER
+            return X509CertificateLoader.LoadPkcs12(encoded, "Original fixture identity", X509KeyStorageFlags.DefaultKeySet);
+#else
+            return new X509Certificate2(encoded, "Original fixture identity", X509KeyStorageFlags.DefaultKeySet);
+#endif
+        }
+        finally
+        {
+            CryptographicOperations.ZeroMemory(encoded);
+        }
+    }
+
     private static string Hash(X509Certificate certificate) => Convert.ToHexString(SHA256.HashData(certificate.GetRawCertData())).ToLowerInvariant();
     private static async Task<string> Header(Stream stream, CancellationToken token)
     {

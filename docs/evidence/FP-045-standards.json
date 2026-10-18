@@ -17,6 +17,29 @@
       "id": "S45-DEFLATE-BASE",
       "kind": "retained official HTTP zlib/deflate and URI-base-resolution excerpts; registry metadata only",
       "sha256": "49fd0df8065c2340824aa5b8e21b181300e7e72fa90147bfd467d0a5067d2913"
+    },
+    {
+      "id": "S45-WINDOWS-KEYS",
+      "kind": "retained official TLS ephemeral-key troubleshooting and key-storage documentation",
+      "sha256": "ce4cb5705b3699588aaa2d638e0195c8367ad20c4096248fc61f068016772e98"
+    },
+    {
+      "id": "S45-CACHE-REPORT",
+      "kind": "retained upstream credential-cache defect report and maintainer/reporter closure comments; no implementation copied",
+      "sha256": "19418f8dad9bc77251faf151a89a09638f2cbcdcfa1429e396d9b5c1f9afef8c",
+      "commentsSha256": "1a834ba1b85e07c184456fbe10df2cbfa579db44fd24a3bc906ee1b258fda86d"
+    },
+    {
+      "id": "S45-RUNTIME8-PROTOCOL",
+      "kind": "exact8.0.32 protocol source snapshot reviewed for required context-restoration fix",
+      "sha256": "6ba60dba3895b56bb581c5e79cfd2c1da9a4e294a8c8c6eb95d3f294742aa9a9",
+      "requiredContextRestorationFixPresent": false
+    },
+    {
+      "id": "S45-RUNTIME10-PROTOCOL",
+      "kind": "exact10.0.13 protocol source snapshot reviewed for required context-restoration fix",
+      "sha256": "ca3987aac5b4006abd46ed993cfd783384af9556cd20f2478180607b85a00458",
+      "requiredContextRestorationFixPresent": false
     }
   ],
   "decisions": [
@@ -25,13 +48,15 @@
     "Keep private cookie jars and explicit headers/certificates per exact origin/job; prevent silent quota eviction",
     "Disable implicit HTTP behaviors and external chain downloads; create explicit client certificate contexts offline",
     "Decode gzip and modern zlib/deflate/Brotli under shared bounded leases; retain explicit applicability failures",
-    "Snapshot protected files and strict data-URI octets into virtual HTTP resources; never grant browser file access"
+    "Snapshot protected files and strict data-URI octets into virtual HTTP resources; never grant browser file access",
+    "Avoid the affected Windows direct client-certificate-context path; built-in anonymous/general-chain Windows TLS fails closed pending a qualified isolated/serviced transport. Preserve the full mandatory Windows requirement."
   ],
   "retrievalLimitation": "Direct shell HTTP retrieval of the official text/CSV endpoints was blocked by the workspace proxy. Retained web observations are rendered excerpts, not complete raw standard/registry snapshots; full registry/standards review remains mandatory.",
   "limitations": [
     "Conservative address exclusions are not a completed IANA/routing/IDNA security audit",
     "No implementation bodies copied; original protocol/policy code",
-    "Complete legacy, filesystem race, authentication and supported-platform security profiles remain mandatory"
+    "Complete legacy, filesystem race, authentication and supported-platform security profiles remain mandatory",
+    "Current pinned Windows runtime source retains a confirmed upstream credential-cache defect; complete Windows TLS is not qualified and remains a release blocker."
   ],
   "productionQualified": false
 }

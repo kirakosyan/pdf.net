@@ -2,6 +2,7 @@ using System.IO;
 using System.Net;
 #if NET8_0_OR_GREATER
 using System.Net.Http;
+using System.Formats.Asn1;
 #endif
 using System.Net.Security;
 using System.Net.Sockets;
@@ -65,6 +66,10 @@ public sealed class PinnedHtmlHttpTransport : IHtmlHttpTransport
             throw new ArgumentNullException(nameof(context));
         context.Checkpoint();
 #if NET8_0_OR_GREATER
+        if (OperatingSystem.IsWindows() && request.Address.Scheme == "https" && request.ClientCertificate == null)
+            throw HtmlResourceLoader.Error(context, "TlsIsolationRequired", "This Windows runtime TLS profile requires an explicitly qualified isolated transport for certificate-less HTTPS; no connection was attempted.");
+        if (OperatingSystem.IsWindows() && request.ClientCertificate != null)
+            RequireWindowsIdentityProfile(request.ClientCertificate, context);
         context.Consume(PdfResourceKind.ExpandedBytes, 1179648);
         context.Consume(PdfResourceKind.Objects, 8);
         var handler = new SocketsHttpHandler
@@ -112,7 +117,19 @@ public sealed class PinnedHtmlHttpTransport : IHtmlHttpTransport
             }
         };
         if (request.ClientCertificate != null)
-            handler.SslOptions.ClientCertificateContext = SslStreamCertificateContext.Create(request.ClientCertificate, additionalCertificates: null, offline: true);
+        {
+            if (OperatingSystem.IsWindows())
+            {
+                handler.SslOptions.ClientCertificates = new X509CertificateCollection
+                {
+                    request.ClientCertificate
+                };
+                handler.SslOptions.LocalCertificateSelectionCallback = (_, _, _, _, _) => request.ClientCertificate;
+            }
+            else
+                handler.SslOptions.ClientCertificateContext = SslStreamCertificateContext.Create(request.ClientCertificate, additionalCertificates: null, offline: true);
+        }
+
         handler.ConnectCallback = async (endpoint, token) =>
         {
             if (!endpoint.DnsEndPoint.Host.Equals(request.Address.IdnHost, StringComparison.OrdinalIgnoreCase) || endpoint.DnsEndPoint.Port != request.Address.Port)
@@ -185,12 +202,17 @@ public sealed class PinnedHtmlHttpTransport : IHtmlHttpTransport
             context.Checkpoint();
             throw;
         }
-        catch (HttpRequestException)
+        catch (HttpRequestException failure)
         {
             response?.Dispose();
             client.Dispose();
             context.Checkpoint();
-            throw HtmlResourceLoader.Error(context, "HttpTransport", "An authorized HTTP/TLS request failed; credentials, URLs and response bodies are omitted.");
+            Exception detail = failure;
+            for (int depth = 0; depth < 8 && detail.InnerException != null; depth++)
+                detail = detail.InnerException;
+            int code = detail is System.ComponentModel.Win32Exception native ? native.NativeErrorCode : detail.HResult;
+            context.ReportFailure(new("Html.HttpTransport", "An authorized HTTP/TLS request failed; credentials, URLs and response bodies are omitted."), "Fluent.Pdf.Html.TransportErrorCode", code);
+            throw HtmlResourceLoader.Error(context, "HttpTransport", "The authorized request failed; private request and response data are omitted.");
         }
         catch (IOException)
         {
@@ -211,6 +233,63 @@ public sealed class PinnedHtmlHttpTransport : IHtmlHttpTransport
     }
 
 #if NET8_0_OR_GREATER
+    private static void RequireWindowsIdentityProfile(X509Certificate2 certificate, PdfOperationContext context)
+    {
+        context.Consume(PdfResourceKind.ExpandedBytes, 8388608);
+        context.Consume(PdfResourceKind.Objects, 32);
+        // Source profile: direct self-signed identities with no external chain/revocation URLs.
+        // Complete PKI chains and process-wide runtime credential-cache isolation require a separately qualified transport.
+        try
+        {
+            byte[] encoded = certificate.RawData;
+            if (!certificate.HasPrivateKey || encoded.Length > 65536 || !certificate.SubjectName.RawData.SequenceEqual(certificate.IssuerName.RawData))
+                throw HtmlResourceLoader.Error(context, "ClientCertificateProfile", "The Windows client identity is outside the direct self-signed source profile.");
+            context.Consume(PdfResourceKind.Objects, encoded.Length / 2L + 32);
+            if (certificate.Extensions.Count > 64)
+                throw HtmlResourceLoader.Error(context, "ClientCertificateProfile", "The explicit client identity exceeds the supported extension inventory.");
+            foreach (var extension in certificate.Extensions)
+                if (extension.Oid?.Value == "1.3.6.1.5.5.7.1.1" || extension.Oid?.Value == "2.5.29.31" || extension.Oid?.Value == "2.5.29.46")
+                    throw HtmlResourceLoader.Error(context, "ClientCertificateProfile", "The Windows client identity requires an explicit qualified offline-chain transport; no connection was attempted.");
+            var reader = new AsnReader(encoded, AsnEncodingRules.DER);
+            var sequence = reader.ReadSequence();
+            ReadOnlyMemory<byte> signed = sequence.ReadEncodedValue();
+            var algorithm = sequence.ReadSequence();
+            string oid = algorithm.ReadObjectIdentifier();
+            if (algorithm.HasData)
+                algorithm.ReadNull();
+            algorithm.ThrowIfNotEmpty();
+            byte[] signature = sequence.ReadBitString(out int unused);
+            sequence.ThrowIfNotEmpty();
+            reader.ThrowIfNotEmpty();
+            var hash = oid == "1.2.840.113549.1.1.11" || oid == "1.2.840.10045.4.3.2" ? HashAlgorithmName.SHA256 : oid == "1.2.840.113549.1.1.12" || oid == "1.2.840.10045.4.3.3" ? HashAlgorithmName.SHA384 : oid == "1.2.840.113549.1.1.13" || oid == "1.2.840.10045.4.3.4" ? HashAlgorithmName.SHA512 : default;
+            bool valid = false;
+            if (unused == 0 && hash != default)
+            {
+                if (oid.StartsWith("1.2.840.113549.1.1.", StringComparison.Ordinal))
+                {
+                    using var rsa = certificate.GetRSAPublicKey();
+                    valid = rsa != null && rsa.KeySize >= 2048 && rsa.KeySize <= 8192 && rsa.VerifyData(signed.Span, signature, hash, RSASignaturePadding.Pkcs1);
+                }
+                else
+                {
+                    using var ec = certificate.GetECDsaPublicKey();
+                    valid = ec != null && ec.KeySize >= 256 && ec.KeySize <= 521 && ec.VerifyData(signed.Span, signature, hash, DSASignatureFormat.Rfc3279DerSequence);
+                }
+            }
+
+            if (!valid)
+                throw HtmlResourceLoader.Error(context, "ClientCertificateProfile", "The explicit client certificate is not a supported verified self-signed identity.");
+        }
+        catch (AsnContentException)
+        {
+            throw HtmlResourceLoader.Error(context, "ClientCertificateProfile", "The explicit client identity has unsupported certificate syntax.");
+        }
+        catch (CryptographicException)
+        {
+            throw HtmlResourceLoader.Error(context, "ClientCertificateProfile", "The explicit client identity could not be verified within the supported profile.");
+        }
+    }
+
     private static async Task Tunnel(Stream stream, HtmlHttpRequest request, PdfOperationContext context, System.Threading.CancellationToken token)
     {
         context.Consume(PdfResourceKind.ExpandedBytes, 131072);
