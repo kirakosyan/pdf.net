@@ -29,8 +29,13 @@ profiles += [(268291082, 33554432, 67108864, 4194304),
 for memory in (268291082, 268054568, 267975730):
     for region in (33554432, 67108864):
         profiles += [(memory, 16777216, region, 1048576)] * 32
+for overrides in ({}, {"MallocMediumZone": "0"}, {"MallocSpaceEfficient": "1"}, {"MallocLargeCache": "0"}):
+    heap = 8388608 if not overrides else 16777216
+    profiles += [(268054568, heap, 67108864, 1048576, overrides)] * 48
 records = []
-for memory, heap, region, size in profiles:
+for profile in profiles:
+    memory, heap, region, size = profile[:4]
+    overrides = profile[4] if len(profile) > 4 else {}
     with tempfile.TemporaryDirectory(prefix="fluent-pdf-runtime-probe-", dir=temporary) as directory:
         job = Path(directory).resolve()
         if not job.is_relative_to(temporary):
@@ -50,6 +55,7 @@ for memory, heap, region, size in profiles:
                        "DOTNET_GCRegionSize": f"{size:X}", "DOTNET_GCConserveMemory": "9",
                        "DOTNET_gcServer": "0", "DOTNET_gcConcurrent": "0",
                        "DOTNET_EnableDiagnostics": "0", "DOTNET_PROCESSOR_COUNT": "2"}
+        environment.update(overrides)
         command = [str(job / "worker"), str(job), library, "fluent-pdf-codecs-1", "1.0.0",
                    "1", "48", str(memory), "10000", "00" * 16, str(os.getpid()), "1"]
         process = subprocess.run(command, input=b"\0\0\0\0", env=environment,
@@ -59,7 +65,8 @@ for memory, heap, region, size in profiles:
         records.append({"memoryBytes": memory, "gcHeapBytes": heap, "gcRangeBytes": region,
                         "gcRegionBytes": size, "exitCode": process.returncode,
                         "status": status, "stderr": process.stderr.decode("utf-8", errors="replace")[:8192],
-                        "assetSha256": hashes, "assetBytes": asset_sizes})
+                        "assetSha256": hashes, "assetBytes": asset_sizes,
+                        "environmentOverrides": overrides})
 
 report = {"schemaVersion": 1, "runtimeIdentifier": rid,
           "scope": "Separate fresh sandboxed ABI initialization probes with empty requests; no PDF processing or qualification claim.",
