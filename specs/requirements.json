@@ -374,7 +374,8 @@
           "Complete color/profile/vector/compositing corpus and advanced provider profiles",
           "Actual minimum runtimes, final packages, standards/fidelity/security and long fuzz/endurance qualification"
         ],
-        "independentEvidence": "docs/evidence/FP-010-independent.json"
+        "independentEvidence": "docs/evidence/FP-010-independent.json",
+        "sourceEvidence": "docs/evidence/FP-010-source.json"
       }
     },
     {
