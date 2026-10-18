@@ -58,6 +58,12 @@ extern void FPDFDOC_ExitFormFillEnvironment(void *);
 extern void FORM_OnAfterLoadPage(void *,void *);
 extern void FORM_OnBeforeClosePage(void *,void *);
 extern void FPDF_FFLDraw(void *,void *,void *,int,int,int,int,int,int);
+extern int FPDFPage_GetAnnotCount(void *);
+extern void *FPDFPage_GetAnnot(void *,int);
+extern int FPDFAnnot_GetSubtype(void *);
+extern int FPDFAnnot_GetFlags(void *);
+extern int FPDFAnnot_SetFlags(void *,int);
+extern void FPDFPage_CloseAnnot(void *);
 static void *no_map(font_info *a,int b,int c,int d,int e,const char *f,int *g) {(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;(void)g;return NULL;}
 static void *no_font(font_info *a,const char *b) {(void)a;(void)b;return NULL;}
 static unsigned long no_data(font_info *a,void *b,unsigned c,unsigned char *d,unsigned long e) {(void)a;(void)b;(void)c;(void)d;(void)e;return 0;}
@@ -66,6 +72,22 @@ static int no_charset(font_info *a,void *b) {(void)a;(void)b;return 0;}
 static void no_delete(font_info *a,void *b) {(void)a;(void)b;}
 static void *get_page(form_info *info,void *document,int index) {return document==info->document && index==info->page_index?info->page:NULL;}
 static int no_pause(pause_info *info) {(void)info;return 0;}
+static int widget_visibility(void *page,int printing)
+{
+    int count=FPDFPage_GetAnnotCount(page);if(count<0)return 0;
+    for(int i=0;i<count;i++) {
+        void *annotation=FPDFPage_GetAnnot(page,i);if(!annotation)return 0;
+        if(FPDFAnnot_GetSubtype(annotation)==20) {
+            int flags=FPDFAnnot_GetFlags(annotation);
+            /* Invisible applies to unknown annotation types, not standard widgets. */
+            int visible=!(flags&2) && (printing?!!(flags&4):!(flags&32));
+            int adjusted=visible?(flags&~33):(flags|2);
+            int ok=adjusted==flags || FPDFAnnot_SetFlags(annotation,adjusted);
+            FPDFPage_CloseAnnot(annotation);if(!ok)return 0;
+        }else FPDFPage_CloseAnnot(annotation);
+    }
+    return 1;
+}
 static uint32_t get(const uint8_t *p) {return (uint32_t)p[0]|(uint32_t)p[1]<<8|(uint32_t)p[2]<<16|(uint32_t)p[3]<<24;}
 static void put(uint8_t *p,uint32_t v) {p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8);p[2]=(uint8_t)(v>>16);p[3]=(uint8_t)(v>>24);}
 API const char *fluent_pdf_bridge_abi_v1(void) {return "fluent-pdf-render-1";}
@@ -99,6 +121,9 @@ static int render(const uint8_t *input,size_t length,uint8_t *output,size_t capa
     if(!bitmap){status=3;goto done;}
     if(!FPDFBitmap_FillRect(bitmap,0,0,(int)width,(int)height,(unsigned long)background)){status=4;goto done;}
     if(flags&1u) {
+        /* Form-fill drawing does not consistently apply print visibility.
+           Adapt only this private worker's widget flags before page-view creation. */
+        if(!widget_visibility(page,!!(flags&2048u))){status=4;goto done;}
         forms.version=2;forms.get_page=get_page;forms.xfa_disabled=1;forms.page=page;forms.document=document;forms.page_index=(int)index;
         form=FPDFDOC_InitFormFillEnvironment(document,&forms);if(!form){status=4;goto done;}
         FORM_OnAfterLoadPage(page,form);

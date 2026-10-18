@@ -91,19 +91,25 @@ public sealed class NativeRenderingTests
         Assert.All(hidden, b => Assert.Equal((byte)255, b));
     }
 
-    [Fact]
-    public void PrintIntentUsesAnnotationVisibilityWithoutExecutingActions()
+    [Theory]
+    [InlineData(0, true, false)]
+    [InlineData(4, true, true)]
+    [InlineData(36, false, true)]
+    [InlineData(6, false, false)]
+    [InlineData(5, true, true)]
+    public void PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(int flags, bool screenVisible, bool printVisible)
     {
         using var fixture = new Fixture(_output);
         using var blank = Drawing(content: "");
-        using var forms = PdfForms.Add(blank.CreateSnapshot(), new("Visible", PdfFormFieldKind.CheckBox, new[] { new PdfFormWidgetDefinition(0, new(5, 5, 40, 20), FormTests.Box(), "On", FormTests.Box()) }, PdfValue.Name("On")));
+        var paint = PdfGraphicsObjects.Form(PdfDrawing.Create(new[] { new PdfContentOperation(PdfOperator.Rectangle, PdfValue.Integer(10), PdfValue.Integer(2), PdfValue.Integer(80), PdfValue.Integer(16)), new PdfContentOperation(PdfOperator.Fill) }), new(0, 0, 100, 20));
+        using var forms = PdfForms.Add(blank.CreateSnapshot(), new("Visible", PdfFormFieldKind.CheckBox, new[] { new PdfFormWidgetDefinition(0, new(5, 5, 40, 20), paint, "On", paint) }, PdfValue.Name("On")));
         var field = Assert.Single(PdfForms.Inspect(forms.CreateSnapshot()).Fields);
         var widget = Assert.Single(field.Widgets);
-        using var hiddenPrint = PdfForms.EditWidget(field, widget.Id, new(0, new(5, 5, 40, 20), FormTests.Box(), "On", FormTests.Box(), annotationFlags: 0));
-        var screen = Samples(PdfRendering.RenderPage(hiddenPrint.CreateSnapshot(), 0, fixture.Providers, new(72, 72)));
-        var print = Samples(PdfRendering.RenderPage(hiddenPrint.CreateSnapshot(), 0, fixture.Providers, new(72, 72, print: true)));
-        Assert.NotEqual(screen, print);
-        Assert.All(print, b => Assert.Equal((byte)255, b));
+        using var changed = PdfForms.EditWidget(field, widget.Id, new(0, new(5, 5, 40, 20), paint, "On", paint, annotationFlags: flags));
+        var screen = PdfRendering.RenderPage(changed.CreateSnapshot(), 0, fixture.Providers, new(72, 72));
+        var print = PdfRendering.RenderPage(changed.CreateSnapshot(), 0, fixture.Providers, new(72, 72, print: true));
+        Assert.Equal(screenVisible ? new byte[] { 0, 0, 0, 255 } : new byte[] { 255, 255, 255, 255 }, Pixel(Samples(screen), screen.Request, 25, 45));
+        Assert.Equal(printVisible ? new byte[] { 0, 0, 0, 255 } : new byte[] { 255, 255, 255, 255 }, Pixel(Samples(print), print.Request, 25, 45));
     }
 
     [Fact]

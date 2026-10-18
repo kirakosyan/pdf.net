@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-040",
+  "sourceCommit": "c3a129bd881122c766e11db43651b6dc5496e649",
+  "sourceTree": "2503f9992fb10ce4e60aca712cf35112ac6a193e",
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "selectedTests": {
+    "passed": 789,
+    "failed": 0,
+    "skipped": 0,
+    "managedTests": 787,
+    "nativePreflightTestsWithoutEngineExecution": 2,
+    "excluded": "Native-positive worker, codec, shaping and rendering tests are not selected locally because Landlock is unavailable. CI remains unfiltered."
+  },
+  "apiComparisons": 18,
+  "originalNativeBridgeBuild": "C11 -O2 -Wall -Wextra -Werror; pinned unchanged Linux x64 engine; exact private dependency",
+  "independentEvidence": "FP-040-independent.json",
+  "sourceFileHashes": {
+    "eng/build-native-fixtures.ps1": "d5f9d5bd35ca16a23d7b5d535b14842e1a112006cc93fb5c1090d1604f25a659",
+    "eng/build-rendering-fixture.ps1": "e3965b3117d0a6e7f8570184eeb333deb17ae3523ada2d58c6055cccace0e010",
+    "eng/check-api.ps1": "9c00982ee3544d21b75d8f8da2fb3444eaa84ac3e48ce774d1e778a5e4255fee",
+    "eng/test-contracts.ps1": "8556b531bd4f5ebfd7f883de9db33b0ce21287b3d992da52c499fee1390a0e2d",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "c12c4fd088a6e8e71d9eb11ff80488fde6b8854bcb0a506c9a3dd714dbc248e0",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "a00fd5831ed320256ae67bcaed1f44a2aef2f3dcf8e6e2404a51c3bebbed4758",
+    "native/rendering/bridge.c": "9daac54f774d4b24d2db5a1e6d1335b88046b54b88051e7c16c41966034bf50a",
+    "src/Fluent.Pdf.Rendering/Fluent.Pdf.Rendering.csproj": "81a452bb66664bec1c8ab4e0af2426c6a739fada2c3d105ee6dc4ac982d34b62",
+    "src/Fluent.Pdf.Rendering/IsolatedPdfRenderer.cs": "9a810db2f86b18fda800ec6d31ceccbf02e8844f5ea2d06fbabab4da15dd3a33",
+    "src/Fluent.Pdf.Rendering/PdfRenderAssets.cs": "a30fb1c89eb0ba673dc95666a6e2b4bce47109ca1f475a19b4692c12021c483a",
+    "src/Fluent.Pdf.Rendering/PdfRenderProfile.cs": "7beb095d01b536f44f98e291da082175c8052c752d37bf36afb72e4c2d7b6b59",
+    "src/Fluent.Pdf.Rendering/PublicAPI.Shipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Fluent.Pdf.Rendering/PublicAPI.Unshipped.txt": "ccb8cfd678baac9a0c55b4f9ab75d81c81a0d1f584646bde276b6e77f438b52a",
+    "src/Fluent.Pdf.Rendering/packages.lock.json": "971461ff71dbb6c0b41297ab76b77de11cdc3da1f696473b8b212af75fd7aea1",
+    "src/Fluent.Pdf/Properties/AssemblyInfo.cs": "f9fde1d5e997d0bb4c7fe357bf378948f6cebce9c17abab12e8b7da60573feca",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "39be72c726ba6abad19bf844a4eba237cfc883d32f19a83c1cbf238e9b0d63fb",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "d1d9d0241a10a7b7c6f7b0aff8c88a9ca554b817d291159c8e97d64e25ff4508",
+    "src/Fluent.Pdf/Rendering/IPdfPageRenderer.cs": "a979a820ef2543f7f08f0ae51a1bb94e7872944d8a51e5dbca51202a9202dbc9",
+    "src/Fluent.Pdf/Rendering/PdfRaster.cs": "2abe9049fa07792576b957edd5a0f2883bf3bcb3f4dcc11c77f46e4da022a7a0",
+    "src/Fluent.Pdf/Rendering/PdfRasterRequest.cs": "a1478e1e837b55697921a2d1ae317ce365f5d484348e217c24664ec0f509d512",
+    "src/Fluent.Pdf/Rendering/PdfRenderOptions.cs": "a690fd9bbb8080bf72285b0beb44f962de0e14b202391bd3754989313a4930d7",
+    "src/Fluent.Pdf/Rendering/PdfRendering.cs": "6c19dea69d845c4a615d0d8702a907f258a526a683b753ac8cb7e2726d583309",
+    "tests/Fluent.Pdf.Contract.Tests/NativeRenderingTests.cs": "046d89aaaa0fea9187f0f13dd7e50f726ceb4014f12c2fd739c2afe779e1032b",
+    "tests/Fluent.Pdf.Contract.Tests/RenderingTests.cs": "1b444e6f8bbb84636fa03af594adebcef2fab57f9029d4fc5d8b391c8f45ec93",
+    "third-party/rendering/components.json": "9fd3856f39ef49b4e6d8c9d14d337601ad4b17aadc5b318d1d0b166ab4b067ed"
+  },
+  "reportSha256": {
+    "render-final-build.log": "950d9133ec2e46f9d40f0b31f4e97682f3e2b0ac301e28523bd30a649b395888",
+    "render-final-tests.log": "9a02714b7245fcc760eae9b123930d689ab0158243ad6b7fcf4d20b4ec9abbd3",
+    "render-api-check.log": "595b274212d6417746839e390bdc2a75f6c6a027afc575757da64ffa66f89f1c",
+    "render-final-spec-check.log": "83c552e9a7dca888c8e8e5901452d0ae30e9e9d6eaaec53edf015cbbeb5537c6",
+    "render-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "render-native-final-build2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "sourceCI": {
+    "runId": 39134352072,
+    "runNumber": 87,
+    "state": "completed",
+    "conclusion": "failure",
+    "headCommit": "c3a129bd881122c766e11db43651b6dc5496e649",
+    "headTree": "2503f9992fb10ce4e60aca712cf35112ac6a193e",
+    "failure": "PrintIntentUsesAnnotationVisibilityWithoutExecutingActions: equal screen/print widget output despite missing Print flag. Adapter visibility handling is being corrected; no retry or removed assertion.",
+    "observedJobs": [
+      {
+        "id": 117695723573,
+        "rid": "linux-arm64",
+        "net8Passed": 844,
+        "net8Failed": 1,
+        "net8Skipped": 0,
+        "logSha256": "071dfb801bc0cd0a7b0bb78ed9107b858b8b2644394bb4e450aa710f392eb4c5"
+      },
+      {
+        "id": 117695724163,
+        "rid": "linux-x64",
+        "net8Passed": 844,
+        "net8Failed": 1,
+        "net8Skipped": 0,
+        "logSha256": "119a7d95adbec40216c33a4e930c6ad66a8b842258212ae2104a68160ad390a7"
+      },
+      {
+        "id": 117695724015,
+        "rid": "osx-arm64",
+        "net8Passed": 844,
+        "net8Failed": 1,
+        "net8Skipped": 0,
+        "logSha256": "a1663cac7b9149c0ad8e0cc19ff070e51fba88bd69c2900eac3d20820648dfa9"
+      },
+      {
+        "id": 117695723715,
+        "rid": "osx-x64",
+        "net8Passed": 844,
+        "net8Failed": 1,
+        "net8Skipped": 0,
+        "logSha256": "851cc3e9e34351558a88c9b23d89b1454c977b9e521c9e51df58f347db91aa2f"
+      },
+      {
+        "id": 117695723749,
+        "rid": "win-arm64",
+        "net8Passed": 844,
+        "net8Failed": 1,
+        "net8Skipped": 0,
+        "logSha256": "c0552523f5eb1e4efccc4dd379896d12efd67e214b7dbc0767de9a99cb949df9"
+      },
+      {
+        "id": 117695723945,
+        "rid": "win-x64",
+        "net8Passed": 844,
+        "net8Failed": 1,
+        "net8Skipped": 0,
+        "logSha256": "e5f0f3337743240186b759f00d4b8dab17903811e992795e0fd4da5d9f4c0205"
+      }
+    ],
+    "executedRuntimeLanes": 6,
+    "laterRuntimeLanesNotExecutedAfterFailure": 14,
+    "totalPassed": 5064,
+    "totalFailed": 6,
+    "skipped": 0,
+    "artifacts": [
+      {
+        "id": 12139720006,
+        "name": "source-contracts-win-arm64",
+        "digest": "sha256:ecbb7a07b7954a70d208e80175273df3e22905774a83d1c0e27babd411aed343",
+        "size_in_bytes": 278100
+      },
+      {
+        "id": 12139700076,
+        "name": "source-contracts-linux-arm64",
+        "digest": "sha256:80cb5316255114a7a88a3d321a12194fc2773f224edb03283f743e8365410d3f",
+        "size_in_bytes": 277855
+      },
+      {
+        "id": 12139466087,
+        "name": "source-contracts-linux-x64",
+        "digest": "sha256:0dfefeada01760b661a74eeb1cf39706aebfd7110d756886f8f452ef678a3ab0",
+        "size_in_bytes": 277164
+      },
+      {
+        "id": 12139397420,
+        "name": "source-contracts-win-x64",
+        "digest": "sha256:36ad03e672c3712e3d2c66e66181ef9c92472855f61d7ce34357dd68ebb762a3",
+        "size_in_bytes": 278082
+      },
+      {
+        "id": 12139093149,
+        "name": "source-contracts-osx-arm64",
+        "digest": "sha256:149b3904afaef5dd43fbec26cd17b6a842ba4fab63d32815572bf288ad71f519",
+        "size_in_bytes": 288246
+      },
+      {
+        "id": 12138889188,
+        "name": "source-contracts-osx-x64",
+        "digest": "sha256:5771eca16f1accc82e3f4f6567ad9996062197fea97126a2faf925cc2435185d",
+        "size_in_bytes": 292871
+      }
+    ],
+    "testedMergeCommit": "607371905ebaf50c72bb31c5210db5d40fc8c4ba",
+    "testedMergeTree": "2503f9992fb10ce4e60aca712cf35112ac6a193e"
+  },
+  "productionQualified": false,
+  "packageSha256": null,
+  "packingAndPublicationBlocked": true,
+  "limitations": [
+    "Candidate engine adoption, exact upstream source/build provenance and complete license/security review remain pending.",
+    "Full fidelity/color/appearance/extension corpus, actual minimum OS/runtime, transitive dependencies, concurrency/fuzz/endurance and exact final packages remain mandatory.",
+    "Independent ABI probes do not prove SDK process isolation; local native-positive execution is unavailable."
+  ]
+}

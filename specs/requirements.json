@@ -1504,7 +1504,8 @@
           "All-platform concurrency, fuzzing, endurance and exact final-package consumers and production qualification remain mandatory"
         ],
         "standardsEvidence": "docs/evidence/FP-040-standards.json",
-        "independentEvidence": "docs/evidence/FP-040-independent.json"
+        "independentEvidence": "docs/evidence/FP-040-independent.json",
+        "sourceEvidence": "docs/evidence/FP-040-source.json"
       }
     },
     {

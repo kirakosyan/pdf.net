@@ -43,7 +43,7 @@ $arch=$Rid.Split('-')[1]
 Push-Location $root
 try{
     if($IsWindows){
-        $names=[regex]::Matches([IO.File]::ReadAllText((Join-Path $root 'native/rendering/bridge.c')),'extern[^;]+?\b((?:FPDF|FORM)_\w+|FPDFBitmap_\w+|FPDFDOC_\w+)\(') | ForEach-Object {$_.Groups[1].Value}
+        $names=[regex]::Matches([IO.File]::ReadAllText((Join-Path $root 'native/rendering/bridge.c')),'extern[^;]+?\b((?:FPDF|FORM|FPDFBitmap|FPDFDOC|FPDFPage|FPDFAnnot)_\w+)\(') | ForEach-Object {$_.Groups[1].Value}
         $definition=Join-Path $Directory 'pdfium-import.def'
         [IO.File]::WriteAllText($definition,"LIBRARY pdfium.dll`nEXPORTS`n"+($names -join "`n")+"`n")
         $command=@"

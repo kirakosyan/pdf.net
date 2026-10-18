@@ -27,13 +27,16 @@ internal static class PdfRenderProfile
                     if (annotation.Kind != PdfValueKind.Dictionary)
                         throw Error("Render.Annotations", "An annotation must resolve to a dictionary.");
                     var flags = Get(annotation, "F");
-                    int bits = 0;
-                    if (flags.Kind != PdfValueKind.Null && (flags.Kind != PdfValueKind.Number || !int.TryParse(flags.NumberText, System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out bits)))
+                    long bits = 0;
+                    if (flags.Kind != PdfValueKind.Null && (!flags.TryGetInteger(out bits) || bits < 0 || bits > int.MaxValue))
                         throw Error("Render.Annotations", "Annotation flags must be a nonnegative integer.");
-                    if ((bits & 3) != 0 || (options.Print ? (bits & 4) == 0 : (bits & 32) != 0))
-                        continue;
-                    var appearances = Get(annotation, "AP");
                     string subtype = Name(Get(annotation, "Subtype"));
+                    bool standard = subtype is "Text" or "Link" or "FreeText" or "Line" or "Square" or "Circle" or "Polygon" or "PolyLine" or "Highlight" or "Underline" or "Squiggly" or "StrikeOut" or "Stamp" or "Caret" or "Ink" or "Popup" or "FileAttachment" or "Sound" or "Movie" or "Screen" or "Widget" or "PrinterMark" or "TrapNet" or "Watermark" or "3D" or "Redact" or "Projection" or "RichMedia";
+                    if ((bits & 2) != 0 || !standard && (bits & 1) != 0 || (options.Print ? (bits & 4) == 0 : (bits & 32) != 0))
+                        continue;
+                    if (!standard)
+                        throw Error("Render.AnnotationProfile", "An unknown visible annotation type requires an explicit rendering profile.");
+                    var appearances = Get(annotation, "AP");
                     if (subtype != "Link" && subtype != "Popup" && Get(appearances, "N").Kind == PdfValueKind.Null)
                         throw Error("Render.AppearanceRequired", "A visible annotation requires an explicit normal appearance in this source profile.");
                     if (subtype == "Widget")

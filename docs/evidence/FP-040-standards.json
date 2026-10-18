@@ -39,6 +39,12 @@
       "kind": "upstream public C ABI header inspected as interface documentation only",
       "sha256": "0e99f7e7d2a818ed56ff8529f7a90a121cc86cdecda6b1682eadd60259021b16",
       "limitation": "Retrieved main headers; not proof of exact engine build/source provenance. No implementation bodies copied."
+    },
+    {
+      "id": "R40-ABI-5",
+      "kind": "upstream public annotation C ABI header inspected as interface documentation only",
+      "sha256": "16d2e4359af3e54572e77a80baae0312bf0c9664dac313e6a7d2f0769d44d2e8",
+      "limitation": "Retrieved main public header; actual functions also exercised against the exact pinned candidate asset."
     }
   ],
   "decisions": [
