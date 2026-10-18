@@ -119,3 +119,5 @@ FP-046 phase deadlines stay in the managed operation boundary. A provider can ti
 FP-047 keeps print policy in the managed core and browser commands/template normalization in the optional HTML adapter. Requested tagging is checked after ordinary managed import, under the same context, before exposing a document. The page/structure/parent-tree association profile is separate from full PDF/UA semantics and human accessibility qualification.
 
 FP-018 composes captured sources through the existing canvas/resource writer, then stages private page invocation/scope streams in the managed graph transaction. Visible removal validates exact private ownership and preserves shared resources/unrelated content. Internal HTML rendering is reusable under one context so stamp capture never resets its resource or time budget.
+
+FP-028 separates immutable resource identities, effective bindings and operator occurrences. Same-context page/Form traversal retains per-segment transforms and source provenance; optional explicit font inspection never discovers host fonts. See [resource extraction](resource-extraction.md).

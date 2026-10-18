@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-028",
+  "observations": {
+    "purpose": "independent-original-resource-extraction-observations-not-production-qualification",
+    "readers": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6",
+      "FontTools": "4.61.1"
+    },
+    "sourceSha256": "7d00c7afc843f776ec8f01e3380f08b4645eb2595d0ca69f357ea613a7ef3e42",
+    "sharedImageDefinitions": 1,
+    "actualImageUses": 3,
+    "encodedImageBytesHex": "4646303030303e",
+    "decodedImageHex": "ff0000",
+    "imageTransforms": [
+      [
+        8.0,
+        0.0,
+        0.0,
+        15.0,
+        22.0,
+        47.0
+      ],
+      [
+        4.0,
+        0.0,
+        0.0,
+        5.0,
+        106.0,
+        9.0
+      ],
+      [
+        2.0,
+        0.0,
+        0.0,
+        2.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "displayedImageBoxes": [
+      [
+        22.0,
+        338.0,
+        30.0,
+        353.0
+      ],
+      [
+        106.0,
+        386.0,
+        110.0,
+        391.0
+      ],
+      [
+        0.0,
+        398.0,
+        2.0,
+        400.0
+      ]
+    ],
+    "paths": [
+      {
+        "elements": [
+          {
+            "token": "re",
+            "transform": [
+              2.0,
+              0.0,
+              0.0,
+              3.0,
+              20.0,
+              41.0
+            ]
+          }
+        ],
+        "end": "n",
+        "clip": true
+      },
+      {
+        "elements": [
+          {
+            "token": "re",
+            "transform": [
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              105.0,
+              7.0
+            ]
+          }
+        ],
+        "end": "n",
+        "clip": true
+      },
+      {
+        "elements": [
+          {
+            "token": "m",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "token": "l",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "token": "l",
+            "transform": [
+              2.0,
+              0.0,
+              0.0,
+              2.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "token": "h",
+            "transform": [
+              2.0,
+              0.0,
+              0.0,
+              2.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "end": "S",
+        "clip": false
+      }
+    ],
+    "fontProgramSha256": "300a09abebb8c2b2bbee36c2d55a8b9a57f94c1a61eae2644cb99c8451b3ce35",
+    "sfntFsType": 4,
+    "reportedEmbeddingRights": "PreviewAndPrint",
+    "exactText": "A",
+    "productionQualified": false,
+    "limitations": [
+      "Small hand-authored source corpus only",
+      "Patterns/glyph/soft-mask painting, complete visibility/color/clip semantics, full font/resource profiles and production gates remain mandatory"
+    ]
+  },
+  "sourceObserverSha256": "8de3097e9cff93f4fa10f3d0e5155eae5caecb29558a461f8d9e78731152dc8d",
+  "independentReportSha256": "e456f07a36db84a007a55dbd19168d5c4a083a89072b3429b91967a2384925a7",
+  "retainedTools": {
+    "observerSourceSha256": "ab7884fcd478b8b248579783f230efbcbf6b5c83c5766f1ed7fac33d60e712d9",
+    "independentToolSha256": "3ba3d739743ea56787f692a3823015845122d90e08b8bf21911efdf8b8d3ac3b",
+    "formatManifestSha256": "d640adfd2b23a05832d2d888dae626eb95c2de7599ee9824282d96b24cc87df0"
+  },
+  "productionQualified": false
+}

@@ -4,6 +4,9 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function ExtractResources(source As PdfDocumentSnapshot, page As Integer) As PdfPageResourceManifest
+        Return PdfResourceExtraction.ReadPage(source, page)
+    End Function
     Public Function Stamp(source As PdfDocumentSnapshot, identifier As String, content As PdfStampContent, pages As Integer(), options As PdfStampOptions) As PdfDocument
         Return PdfStamps.Apply(source, identifier, content, pages, options)
     End Function

@@ -57,3 +57,5 @@ Use docs/releasing.md and the fail-closed eng/assert-production-ready.ps1. Never
 Archive and verify qualification reports, source/package hashes and release-owned resource inventory before cleanup. Gracefully stop disposable qualification VMs and helper processes; remove only this release's temporary containers, images, networks, volumes, disks, snapshots, downloads and credentials. Protect shared resources and retained OCR/font/model assets. Do not use global Docker pruning.
 
 Before any recursive Windows deletion or move, resolve and verify absolute target paths remain within the explicitly intended workspace/resource directory. Use native PowerShell LiteralPath operations end to end. Report removed, retained and failed resources. Never remove research evidence until it is preserved and the owner has authorized its disposal.
+
+Passive resource/path/artifact inventory, exact encoded stream export and explicit embedded-font inspection now have a source profile; complete resource/program profiles and production qualification remain pending.

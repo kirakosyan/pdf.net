@@ -24,7 +24,7 @@
   "packingAndPublicationBlocked": true,
   "sourceTree": "72681c2c2a59aa7b4d86d26c7f35731c08ba5f8e",
   "followup": {
-    "sourceCommit": null,
+    "sourceCommit": "489cd1582567b92cc2efd67c284ebc7fa990dc64",
     "failure": "CI102 macOS ARM/net8 reports awaited-task completion120.657ms but the independently registered signal slot is still unobserved at the assertion; its -1tick sentinel rounds to the printed0.000ms. The first instrumentation assumed callback completion order.",
     "correction": "Use an asynchronously continued task-completion source for the signal observer and await both observations before checking timestamps. Do not depend on cancellation callback ordering or the test continuation queue.",
     "maximumSignalAndTaskCompletionMilliseconds": 1000,
@@ -43,6 +43,7 @@
         "observation": "Phase signal=50.186ms; awaited-task completion=55.544ms; test-continuation observation=58.401ms."
       }
     ],
-    "freshCleanCommitCIRequired": true
+    "freshCleanCommitCIRequired": true,
+    "sourceTree": "1a0915aef2be7522720bd2ef3bdc6a4959a32a4f"
   }
 }

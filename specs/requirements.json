@@ -1133,7 +1133,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/resource-extraction.md",
+        "implemented": [
+          "Shared definitions separate from effective bindings and actual page/Form operator occurrences",
+          "Nested/per-segment transforms, explicit artifact associations and owned stamp integration",
+          "Exact encoded stream export, explicit decoding and explicit provider font/restriction inspection; source contracts and independent original-fixture observations"
+        ],
+        "pending": [
+          "Complete pattern/glyph/soft-mask program expansion, resource/font/image and visibility/color/clip profiles remain mandatory",
+          "Complete stamp/decoration classification and full content/corpus coverage remain mandatory",
+          "All actual mandatory RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-028-source.json",
+        "standardsEvidence": "docs/evidence/FP-028-standards.json",
+        "independentEvidence": "docs/evidence/FP-028-independent.json"
+      }
     },
     {
       "id": "FP-029",

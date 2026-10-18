@@ -10,6 +10,13 @@ public static class PdfStamps
     private const string Marker = "FluentPdfStamp";
     private const string FormOwner = "FluentPdfStampOwner";
     private const string ScopeMarker = "FluentPdfStampScope";
+
+    internal static IReadOnlyList<PdfStampInfo> InspectCore(PdfGraphEdit graph)
+    {
+        var owned = ReadOwned(graph);
+        graph.Context.Consume(PdfResourceKind.ExpandedBytes, owned.Count * 16L + 64);
+        return new ReadOnlyCollection<PdfStampInfo>(owned.Select(x => x.Info).ToArray());
+    }
     /// <summary>Passively validates and inventories owned streams without executing actions or decoding stamp images.</summary>
     public static PdfStampInspection Inspect(PdfDocumentSnapshot source, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {

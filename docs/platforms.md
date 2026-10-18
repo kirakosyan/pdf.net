@@ -75,3 +75,5 @@ FP-046 readiness/options and shared phase-deadline contracts target all four lib
 FP-047 print contracts target all four library frameworks. Actual pinned trusted-browser print observations currently cover Linux x64/.NET10; complete browser/host/font, minimum/current/fallback runtime, all mandatory RID and final-package qualification remains required. Generic template font selection and browser Type3 text extraction are explicitly unqualified.
 
 FP-018 managed stamping/source contracts target all four library frameworks. The optional HTML source retains its explicit provider/host applicability. Actual original visual/browser observations currently cover Linux x64/.NET10; complete owner/color/content profiles, mandatory RIDs/minimum/current/fallback runtimes and final packages remain required.
+
+FP-028 managed contracts target all four library frameworks. Actual independent original-resource observations cover Linux x64/.NET10; complete resource/provider/RID/minimum/current/fallback runtime and final-package profiles remain mandatory.

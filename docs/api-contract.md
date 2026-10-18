@@ -147,3 +147,5 @@ FP-046 adds immutable finite HTML readiness, locale/timezone/media controls and 
 FP-047 adds immutable `PdfHtmlPrintOptions` through `PdfHtmlOptions.WithPrint`, preserving existing constructor signatures. Explicit paper/CSS fitting, orientation, scale, point margins, bounded passive print templates and requested page-MCID structure validation share the original operation context. See [HTML print contracts](html-printing.md).
 
 FP-018 adds immutable detached stamp sources/options plus transactional `PdfStamps.Apply`, `Inspect`, `Update` and `Remove`. Exact page/group ownership and canonical private streams distinguish removable stamps from unrelated content; decoration classification remains separate from semantic tag authoring. See [stamp contracts](stamps.md).
+
+FP-028 adds `PdfResourceExtraction.ReadPage`, immutable `PdfPageResourceManifest` and explicit resource stream/font-program export/inspection. See [resource extraction](resource-extraction.md) for coordinate, identity and encoded-byte semantics.
