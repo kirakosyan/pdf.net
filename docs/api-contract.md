@@ -133,3 +133,5 @@ FP-037 adds immutable field-value packets, explicit FDF/XFDF/XML/JSON profiles, 
 FP-031 adds explicit full-rewrite password/certificate security, owner/user/recipient results, disposable prepared-byte credentials, permission/cipher/metadata choices and an optional offline CMS boundary. [Security contracts](security.md) describe source applicability, ownership, permission semantics and mandatory gaps.
 
 FP-066 adds explicit archival profiles, common structural preflight, conversion gated on complete independent exact-byte validation, detached findings and mandatory shared validation-host contracts. Optional Fluent.Pdf.Compliance supplies a bounded pinned report bridge; it launches no engine. See [archival behavior and qualification gaps](archival.md).
+
+FP-006 adds separate strict structural inspection and explicit recovery, immutable source/output views and digests, exact stream and active-identity authority, explicit orphan/signature policies and a machine-readable ledger. The ordinary parser never repairs. See [repair behavior and remaining profiles](repair.md).

@@ -1544,6 +1544,35 @@ Fluent.Pdf.PdfRenderOptions.PdfRenderOptions(double dpiX = 96, double dpiY = 96,
 Fluent.Pdf.PdfRenderOptions.Print.get -> bool
 Fluent.Pdf.PdfRenderOptions.Region.get -> Fluent.Pdf.PdfRect?
 Fluent.Pdf.PdfRendering
+Fluent.Pdf.PdfRepair
+Fluent.Pdf.PdfRepairOptions
+Fluent.Pdf.PdfRepairOptions.ActiveObjects.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfObjectId>?
+Fluent.Pdf.PdfRepairOptions.AllowSignatureInvalidation.get -> bool
+Fluent.Pdf.PdfRepairOptions.Orphans.get -> Fluent.Pdf.PdfRepairOrphanPolicy
+Fluent.Pdf.PdfRepairOptions.PdfRepairOptions(Fluent.Pdf.PdfObjectId? root = null, Fluent.Pdf.PdfRepairOrphanPolicy orphans = Fluent.Pdf.PdfRepairOrphanPolicy.Preserve, Fluent.Pdf.PdfRepairStreamLength![]? streamLengths = null, Fluent.Pdf.PdfObjectId[]? activeObjects = null, bool rejectDanglingReferences = true, bool allowSignatureInvalidation = false) -> void
+Fluent.Pdf.PdfRepairOptions.RejectDanglingReferences.get -> bool
+Fluent.Pdf.PdfRepairOptions.Root.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfRepairOptions.StreamLengths.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRepairStreamLength!>!
+Fluent.Pdf.PdfRepairOrphanPolicy
+Fluent.Pdf.PdfRepairOrphanPolicy.Discard = 1 -> Fluent.Pdf.PdfRepairOrphanPolicy
+Fluent.Pdf.PdfRepairOrphanPolicy.Preserve = 0 -> Fluent.Pdf.PdfRepairOrphanPolicy
+Fluent.Pdf.PdfRepairRecord
+Fluent.Pdf.PdfRepairRecord.Code.get -> string!
+Fluent.Pdf.PdfRepairRecord.Message.get -> string!
+Fluent.Pdf.PdfRepairRecord.ObjectId.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfRepairRecord.SourceOffset.get -> long?
+Fluent.Pdf.PdfRepairResult
+Fluent.Pdf.PdfRepairResult.Ledger.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRepairRecord!>!
+Fluent.Pdf.PdfRepairResult.OpenOriginalStream() -> System.IO.Stream!
+Fluent.Pdf.PdfRepairResult.OpenRepairedStream() -> System.IO.Stream!
+Fluent.Pdf.PdfRepairResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfRepairResult.OriginalSha256.get -> string!
+Fluent.Pdf.PdfRepairResult.RepairedSha256.get -> string!
+Fluent.Pdf.PdfRepairResult.WriteLedger(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfRepairStreamLength
+Fluent.Pdf.PdfRepairStreamLength.Length.get -> long
+Fluent.Pdf.PdfRepairStreamLength.ObjectId.get -> Fluent.Pdf.PdfObjectId
+Fluent.Pdf.PdfRepairStreamLength.PdfRepairStreamLength(Fluent.Pdf.PdfObjectId objectId, long length) -> void
 Fluent.Pdf.PdfResourceBinding
 Fluent.Pdf.PdfResourceBinding.Name.get -> string!
 Fluent.Pdf.PdfResourceBinding.PdfResourceBinding(string! name, Fluent.Pdf.PdfGraphicsResource! resource) -> void
@@ -1632,6 +1661,11 @@ Fluent.Pdf.PdfSoftMask.Transfer.get -> Fluent.Pdf.PdfFunction?
 Fluent.Pdf.PdfSoftMaskKind
 Fluent.Pdf.PdfSoftMaskKind.Alpha = 0 -> Fluent.Pdf.PdfSoftMaskKind
 Fluent.Pdf.PdfSoftMaskKind.Luminosity = 1 -> Fluent.Pdf.PdfSoftMaskKind
+Fluent.Pdf.PdfStructuralInspection
+Fluent.Pdf.PdfStructuralInspection.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRepairRecord!>!
+Fluent.Pdf.PdfStructuralInspection.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfStructuralInspection.Syntax.get -> Fluent.Pdf.PdfSyntaxDocument!
+Fluent.Pdf.PdfStructuralValidation
 Fluent.Pdf.PdfSyntax
 Fluent.Pdf.PdfSyntaxDocument
 Fluent.Pdf.PdfSyntaxDocument.DecodeStream(Fluent.Pdf.PdfObjectId id, int revisionIndex = 0, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), Fluent.Pdf.PdfProviderRegistry? providers = null) -> Fluent.Pdf.PdfDecodedData!
@@ -2031,6 +2065,7 @@ static Fluent.Pdf.PdfPresentation.SetViewerPreferences(Fluent.Pdf.PdfDocumentSna
 static Fluent.Pdf.PdfProviderRegistry.Default.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfProviderRegistry.Empty.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfRendering.RenderPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfRenderOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRaster!
+static Fluent.Pdf.PdfRepair.Recover(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfRepairOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRepairResult!
 static Fluent.Pdf.PdfResourceSet.Empty.get -> Fluent.Pdf.PdfResourceSet!
 static Fluent.Pdf.PdfSecurity.DecryptWithCertificate(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfCertificateCredential! credential, Fluent.Pdf.PdfProviderRegistry! providers, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfSecurity.DecryptWithPassword(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfPassword! password, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
@@ -2040,6 +2075,7 @@ static Fluent.Pdf.PdfShading.Axial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.
 static Fluent.Pdf.PdfShading.Functional(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfFunction! function, Fluent.Pdf.PdfRect domain, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Mesh(Fluent.Pdf.PdfColorSpace! colorSpace, int shadingType, System.IO.Stream! packedData, int bitsPerCoordinate, int bitsPerComponent, double[]! decode, int bitsPerFlag = 2, int verticesPerRow = 0, Fluent.Pdf.PdfFunction? function = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Radial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfPoint start, double startRadius, Fluent.Pdf.PdfPoint end, double endRadius, Fluent.Pdf.PdfFunction! function, bool extendStart = false, bool extendEnd = false, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
+static Fluent.Pdf.PdfStructuralValidation.Inspect(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfStructuralInspection!
 static Fluent.Pdf.PdfSyntax.Read(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSyntaxDocument!
 static Fluent.Pdf.PdfTable.Create(Fluent.Pdf.PdfTableColumn![]! columns, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfTableRow!>! rows, int headerRows = 0, bool allowRowSplit = true, int maximumRows = 100000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTable!
 static Fluent.Pdf.PdfTableBorder.None.get -> Fluent.Pdf.PdfTableBorder!

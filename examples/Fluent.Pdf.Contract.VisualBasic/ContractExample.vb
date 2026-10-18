@@ -4,6 +4,15 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function InspectStructure(input As Stream) As PdfStructuralInspection
+        Return PdfStructuralValidation.Inspect(input)
+    End Function
+    Public Function RecoverPdf(input As Stream, output As Stream, ledger As Stream, options As PdfRepairOptions) As PdfRepairResult
+        Dim result = PdfRepair.Recover(input, output, options)
+        result.WriteLedger(ledger)
+        Return result
+    End Function
+
     Public Function ArchivalValidator(host As Fluent.Pdf.Compliance.PdfArchivalValidationRunner) As PdfProviderRegistry
         Return New PdfProviderRegistry(New Fluent.Pdf.Compliance.VeraPdfReportValidator(host))
     End Function

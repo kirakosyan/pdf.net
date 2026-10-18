@@ -5,6 +5,14 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfStructuralInspection InspectStructure(Stream input) => PdfStructuralValidation.Inspect(input);
+    public static PdfRepairResult RecoverPdf(Stream input, Stream output, Stream ledger, PdfRepairOptions options)
+    {
+        var result = PdfRepair.Recover(input, output, options);
+        result.WriteLedger(ledger);
+        return result;
+    }
+
     public static PdfProviderRegistry ArchivalValidator(Fluent.Pdf.Compliance.PdfArchivalValidationRunner host) => new(new Fluent.Pdf.Compliance.VeraPdfReportValidator(host));
     public static PdfArchivalConversion ConvertToArchive(PdfDocumentSnapshot source, Stream output, PdfArchivalOptions options, PdfProviderRegistry providers) => PdfArchival.Convert(source, output, options, providers);
 

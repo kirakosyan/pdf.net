@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-original-damaged-corpus-source-observations-not-production-qualification",
+  "requirement": "FP-006",
+  "sourceCommit": null,
+  "tools": {
+    "pypdf": "6.10.0",
+    "MuPDF": "1.26.6"
+  },
+  "observations": [
+    {
+      "fixture": "damaged-offsets-98cbec407eb84afca04bfa57a13116bc",
+      "sourceSha256": "2fc4fcc53a1956b5fadf6debf2c4638eba76eca4974b95c258a8e883f67699d7",
+      "recoveredSha256": "f2118ae107846aef139ef4d04e57b37a941118abbbea9c062eabc19b82c6b104",
+      "ledgerSha256": "99fc8cb69a16de193d9c9f0e4f3be02557bb06cafca975be5d4f5773945d57ce",
+      "pageCount": 1,
+      "pypdfText": "Original recovered text",
+      "mupdfText": "Original recovered text",
+      "ledgerRecords": 13
+    },
+    {
+      "fixture": "explicit-active-inventory-96a98bc131414c43aec3509792837308",
+      "sourceSha256": "c041bac0a7d5633af9a43cc78cd62e7dbfe28ec2815cc2d1572b4ddf476ca542",
+      "recoveredSha256": "f6ada0d22c3d56c271869c7c79237b4309d9322b31be682c81882a52ed18991f",
+      "ledgerSha256": "3af4f7b5092f2340b38e855be4e46be06219c9bda52e020633c94fd5536756ff",
+      "pageCount": 1,
+      "pypdfText": "Original recovered text",
+      "mupdfText": "Original recovered text",
+      "ledgerRecords": 13
+    },
+    {
+      "fixture": "missing-eof-null-reference-673a9d04b55b48a39832edc0c8f2519a",
+      "sourceSha256": "d5bb9c059f189fc56879c129e06d1f0dc2c9ea5311859332d23d933615e1b73c",
+      "recoveredSha256": "37207793d611a5aa19ed0307adabafb5ba3ff043e232e51894897f2deee4b74a",
+      "ledgerSha256": "764861bd95da781e33c0f29a24215e21b7ad88e2f018bfbc37b45bd6976b74cd",
+      "pageCount": 1,
+      "pypdfText": "Original recovered text",
+      "mupdfText": "Original recovered text",
+      "ledgerRecords": 15
+    },
+    {
+      "fixture": "orphan-discard-a5a822ad4d694fbe8cdffa31333a4222",
+      "sourceSha256": "2fc4fcc53a1956b5fadf6debf2c4638eba76eca4974b95c258a8e883f67699d7",
+      "recoveredSha256": "781a3e825a076459337df707db1259721adb3fdb886ed29722c1d9ff7fab1f6b",
+      "ledgerSha256": "9910983e5c2be3ea50b7e39f6e2e2788575c66cbbcfd0b09a886dfb0e2824151",
+      "pageCount": 1,
+      "pypdfText": "Original recovered text",
+      "mupdfText": "Original recovered text",
+      "ledgerRecords": 12
+    },
+    {
+      "fixture": "freed-body-excluded-da8114ece0e64f37a38e4d121dc6062d",
+      "sourceSha256": "4441b62f08e812c99b97d2bf5e8cc131a92c9850ce746a0579731606bec4fd91",
+      "recoveredSha256": "f6ada0d22c3d56c271869c7c79237b4309d9322b31be682c81882a52ed18991f",
+      "ledgerSha256": "407b103491cc4938f585f12717301ccffd98ee75db65b023178a640c6c9608a1",
+      "pageCount": 1,
+      "pypdfText": "Original recovered text",
+      "mupdfText": "Original recovered text",
+      "ledgerRecords": 12
+    },
+    {
+      "fixture": "root-inferred-ca2ed9a99cea4ccca718510b9e0b3703",
+      "sourceSha256": "1e96bb7a5445eeedaa48e9dc63c66eba46eb69370a8b6b1013689818d9c7d3d1",
+      "recoveredSha256": "f2118ae107846aef139ef4d04e57b37a941118abbbea9c062eabc19b82c6b104",
+      "ledgerSha256": "cb6bfe0c28e306adeeeade988f7099feb3880485480991ac7e0551c3d80ec60a",
+      "pageCount": 1,
+      "pypdfText": "Original recovered text",
+      "mupdfText": "Original recovered text",
+      "ledgerRecords": 14
+    },
+    {
+      "fixture": "exact-stream-length-3143224155a74836aca6f3933c43dcd2",
+      "sourceSha256": "e08088e840b095cc3230d36e61b3f3d7908ea08c40d6cdefcc89eacd4655ac23",
+      "recoveredSha256": "f2118ae107846aef139ef4d04e57b37a941118abbbea9c062eabc19b82c6b104",
+      "ledgerSha256": "ef207b06e1e22c1b38de9072c8607c6955a7b90f3a53cdae35048725027afceb",
+      "pageCount": 1,
+      "pypdfText": "Original recovered text",
+      "mupdfText": "Original recovered text",
+      "ledgerRecords": 14
+    }
+  ],
+  "rawReportSha256": "213459bcab1449c5493b020ae427ed249272ff7186d1727b7ef90faef611745a",
+  "expectedText": "Original recovered text",
+  "retainedInitialFailure": {
+    "passed": 5,
+    "failed": 7,
+    "skipped": 0,
+    "reportSha256": "425c4c4d9b84da6f4852a4f9e95bd45f20278ea7093f69c6aba3e62860a60603",
+    "cause": "Synthetic revision was constructed before its index entries; its immutable entry inventory was empty. Index construction now precedes revision construction, and strict output validation remains required."
+  },
+  "limitations": [
+    "Original small classic-index fixtures; not a complete damaged-file, security or fidelity corpus",
+    "Full compressed/history/codec/content recovery and minimum runtime/final-package qualification remain mandatory"
+  ],
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

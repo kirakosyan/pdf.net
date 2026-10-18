@@ -123,10 +123,8 @@
     "runNumber": 91,
     "headCommit": "c0044bef812669e8963c835bb5f729354f8418c5",
     "headTree": "01a7566ccca2b7f7073e0aced6b07eeef81f2dc6",
-    "snapshotComplete": false,
-    "pendingJobs": [
-      117716383673
-    ],
+    "snapshotComplete": true,
+    "pendingJobs": [],
     "failedJob": 117716383906,
     "failedCase": "ArchivalTests.FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
     "frameworkX64Result": {
@@ -188,9 +186,25 @@
           924
         ],
         "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716383673,
+        "logSha256": "a517d4e5183fecc3219ad60b84d861a130022bbfc662d6b3b2888fbe1556de6d",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
       }
     ],
     "artifactSnapshot": [
+      {
+        "id": 12142675302,
+        "name": "source-contracts-osx-x64",
+        "size_in_bytes": 1687003,
+        "digest": "sha256:45524c444673b21080aac76bf4fc9d7a79db76ac0cf03d99ed9c1638487f7923"
+      },
       {
         "id": 12142335412,
         "name": "source-contracts-osx-arm64",
@@ -221,7 +235,15 @@
         "size_in_bytes": 1668428,
         "digest": "sha256:d197d48f57352e23e913a11bfa6ab8f89ef2841d44457ba1b587725f1b73db2c"
       }
-    ]
+    ],
+    "conclusion": "failure",
+    "testedMergeCommit": "b93ace1731a92a4f91b4eb6454b9220233d34470",
+    "testedMergeTree": "01a7566ccca2b7f7073e0aced6b07eeef81f2dc6",
+    "runtimeLanesExecuted": 18,
+    "passed": 16631,
+    "failed": 1,
+    "skipped": 0,
+    "requiredLanesNotExecuted": 2
   },
   "failureDetailFixLocalChecks": {
     "sourceFileHashes": {

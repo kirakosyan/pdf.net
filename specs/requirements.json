@@ -206,7 +206,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/repair.md",
+        "implemented": [
+          "Separate strict structural inspection and explicit one-revision classic-index recovery with unique exact lexical frames and authoritative active/free identities",
+          "Caller-authorized exact stream lengths and active inventories, explicit orphan/signature/null-reference policies, complete object ledger and unchanged original-source views",
+          "Shared-context private full rewrite and strict post-validation before output; C#/VB consumers and two independent reader observations"
+        ],
+        "pending": [
+          "Revision/hybrid/compressed/encrypted recovery and additional stream/codec/content repair profiles remain mandatory",
+          "Complete damaged/ambiguous corpus, resource/fuzz/concurrency/endurance campaigns and actual minimum runtimes remain mandatory",
+          "Exact final-package consumers and every production qualification gate remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-006-standards.json",
+        "sourceEvidence": "docs/evidence/FP-006-source.json",
+        "independentEvidence": "docs/evidence/FP-006-independent.json"
+      }
     },
     {
       "id": "FP-007",
