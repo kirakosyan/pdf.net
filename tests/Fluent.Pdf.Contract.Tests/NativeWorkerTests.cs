@@ -29,7 +29,11 @@ public sealed class NativeWorkerTests
     public void RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces()
     {
         using var fixture=new WorkerFixture(_output);
-        for(int iteration=0;iteration<20;iteration++)Assert.Equal(new byte[]{1,2,3},fixture.Run(new byte[]{0,1,2,3}));
+        for(int iteration=0;iteration<40;iteration++)
+        {
+            Assert.Equal(new byte[]{1,2,3},fixture.Run(new byte[]{0,1,2,3}));
+            Assert.Equal("Native.EngineFailure",Assert.Throws<PdfException>(()=>fixture.Run(new byte[]{3})).Diagnostic.Code);
+        }
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }
 
@@ -214,6 +218,7 @@ public sealed class NativeWorkerTests
             catch(PdfException error)
             {
                 _output.WriteLine(error.Diagnostic.Code+": "+error.Diagnostic.Message);
+                foreach(string key in new[]{"Native.FailureType","Native.FailureHResult","Native.FailureErrorCode","Native.WorkerFailureDetail"})if(error.Data[key] is object value)_output.WriteLine(key+": "+value);
                 if(error.Data["Native.LoaderDetail"] is string detail) _output.WriteLine(detail);
                 if(error.Data["Native.WorkerDiagnostics"] is string diagnostics) _output.WriteLine(diagnostics);
                 throw;

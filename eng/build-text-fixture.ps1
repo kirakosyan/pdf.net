@@ -14,7 +14,8 @@ try {
     $source=Join-Path $package "runtimes/$assetRid/native/libHarfBuzzSharp.$extension"
     $dependency=Join-Path $Directory $(if(!$IsWindows -and !$IsMacOS){'libHarfBuzzSharp.so.0.61421.0'}else{"libHarfBuzzSharp.$extension"})
     if($IsMacOS){
-        & lipo $source -thin $arch -output $dependency
+        $machoArch=if($arch -eq 'x64'){'x86_64'}else{$arch}
+        & lipo $source -thin $machoArch -output $dependency
         if($LASTEXITCODE -ne 0){throw 'Cannot create the explicitly inventoried thin shaping asset.'}
         & install_name_tool -id '@rpath/libHarfBuzzSharp.dylib' $dependency
         if($LASTEXITCODE -ne 0){throw 'Cannot set the private shaping dependency identity.'}
