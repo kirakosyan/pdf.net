@@ -40,10 +40,11 @@ internal static class PdfWriterCore
         return result;
     }
 
-    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context)
+    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null)
     {
         context.Checkpoint();
         bool incremental = options.Mode == PdfWriteMode.Incremental;
+        if (incremental && (crypt != null || source?.DecryptionApplied == true)) throw Error(context, "Security.IncrementalProfile", "Security transformations require a full rewrite in this profile.");
         if (incremental && source == null)
             throw Error(context, "Writer.IncrementalBaseRequired", "An incremental revision requires an immutable original file.");
         if (incremental && changes.Count == 0 && removed.Count == 0 && !trailerChanged && options.Version == null && options.CrossReferenceFormat == PdfCrossReferenceFormat.Auto && options.MinimumVersion == null && options.Extensions.Count == 0 && options.UnknownExtensions == PdfUnknownExtensionPolicy.Preserve)
@@ -55,7 +56,7 @@ internal static class PdfWriterCore
             return;
         }
 
-        if (Encrypted(trailer) || (source != null && source.Revisions.Any(revision => Encrypted(revision.Trailer))))
+        if (Encrypted(trailer) && crypt == null || source != null && source.Revisions.Any(revision => Encrypted(revision.Trailer)) && !source.DecryptionApplied)
             throw Error(context, "Writer.EncryptionProviderRequired", "Changing or rewriting encrypted objects requires an explicitly configured encryption implementation.");
         long estimate = changes.Count + removed.Count + 1L;
         if (source != null)
@@ -255,7 +256,8 @@ internal static class PdfWriterCore
             context.Checkpoint();
             written.Add(pair.Key, new Row(sink.Position, pair.Value.Id.Generation, false));
             sink.Text(pair.Value.Id.Number.ToString(CultureInfo.InvariantCulture) + " " + pair.Value.Id.Generation.ToString(CultureInfo.InvariantCulture) + " obj\n");
-            sink.Value(pair.Value.Value, true);
+            var emitted = crypt == null ? pair.Value.Value : crypt.Transform(pair.Value.Value, pair.Value.Id, true, ResolveFeature);
+            sink.Value(emitted, true);
             sink.Text("\nendobj\n");
         }
 

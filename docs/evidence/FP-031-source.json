@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-031",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "securityTargetedTests": {
+    "passed": 46,
+    "failed": 0,
+    "skipped": 0
+  },
+  "sourceFileHashes": {
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "02235bc993fd4cb5548c537f83a5e2a33ce1b385cff3ff58e7ba45ed5f8812e3",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "7aca761a553a50469b5a5fde71c9c0cdc92ba116b893a4ae344eb14a7aa4bb89",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "87c041fabe3fd9a98fd3a7b18f53146fa1a9ba7dcdd6286e8ea278ba4a7a19b8",
+    "src/Fluent.Pdf/Security/PdfCertificateContracts.cs": "1d0255ec13241d93ea5503a623efbfb453f151a812d72620388db560f1092a10",
+    "src/Fluent.Pdf/Security/PdfObjectCrypt.cs": "597486613916c2237c0b8f3e4c3d3358be839c079caf7b64ca9e4abb4e6bfdb9",
+    "src/Fluent.Pdf/Security/PdfPublicKeySecurity.cs": "684e3eed7f36ab7497e55864d3072b6558ee25f0570c839fc45ae318587acee2",
+    "src/Fluent.Pdf/Security/PdfSecurity.Certificates.cs": "7cef283f4154efd5d0df6950d1afe63787a7b26a45a6ed657f5ddb48f7863e59",
+    "src/Fluent.Pdf/Security/PdfSecurity.cs": "61427249e10a4b30979d6d5cc2727d99de9aa1e74a3e68808f4c4a1c7141af7d",
+    "src/Fluent.Pdf/Security/PdfSecurityContracts.cs": "057d71afb095024c26cda49e53c44df12e771aa074b2113079f928ccf76eb8f1",
+    "src/Fluent.Pdf/Security/PdfSecurityCryptography.cs": "049a614b30fdc754eb0455f9bda9cb22ef839f3c25c0e95b8668ed1c0a68a197",
+    "src/Fluent.Pdf/Security/PdfStandardSecurity.cs": "370e0bddefd7707862e6d6cdf6c8c64cb1ecd6aa2ffbf500aabcb67ffbe4de83",
+    "src/Fluent.Pdf/Syntax/PdfSyntaxDocument.cs": "084c162ebc7ebd7d4880b0684ae42d56399bafb246efa8826a3fc0adcdea19b2",
+    "src/Fluent.Pdf/Syntax/PdfSyntaxReader.cs": "f3dd900d20f810c88173b72618d57b019905873eaaabe02365c7598c1d4b108f",
+    "src/Fluent.Pdf/Writing/PdfTransaction.cs": "b2b030fe54b4e59c780525a546014cc986c5472ca2208feccb989c45cd84d631",
+    "src/Fluent.Pdf/Writing/PdfWriterCore.cs": "3fce3a20246482e3d442a2ebd1422d3b8581bd7e5d07b766dc8d83748fbb6648",
+    "src/Fluent.Pdf.Cryptography/ManagedCmsEnvelopeProvider.Parsing.cs": "92b4086be10d6e6eebbc4552383590a136edfb2c9dddb89136ddaa22fffa0348",
+    "src/Fluent.Pdf.Cryptography/ManagedCmsEnvelopeProvider.cs": "2eeeb98ee54b5e0a7fa953cdc5777dd9e5a22971091c46b064b77a060470c0a8",
+    "src/Fluent.Pdf.Cryptography/PublicAPI.Unshipped.txt": "b89d1929d3bc30e77ce479d9c1681500f4bf37663bb4429a674c7e27d3ae102d",
+    "tests/Fluent.Pdf.Contract.Tests/CertificateSecurityTests.cs": "925dccd738179f88b9a0219a0693f8330cc0ebe6579e791e02338476bad10041",
+    "tests/Fluent.Pdf.Contract.Tests/CmsLegacyTests.cs": "749914fbacbb97d273c64e619de6a70548300644f526eb63263851835db04de1",
+    "tests/Fluent.Pdf.Contract.Tests/SecurityHandlerTests.cs": "3ad9ebdecfbbc57ceb3625d32607383d7f59e7729d2a50ceb5ce3ced4e07860e",
+    "tests/Fluent.Pdf.Contract.Tests/SecurityKnownAnswers.cs": "000c6f0f9866d955b85c4accd95f1feb6d477e962bde06b4fb12cf7bb39516a7",
+    "tests/Fluent.Pdf.Contract.Tests/SecurityObjectKnownAnswers.cs": "671d084b17c9199334b4b821a84b00ac4a2f787ff094fcebe8205a8a61e190c5",
+    "tests/Fluent.Pdf.Contract.Tests/SecurityObjectTests.cs": "8dec7a6949710b8c3f6fc70c58717602c57636021bb2cc0f5ed7e129f084dc5e",
+    "tests/Fluent.Pdf.Contract.Tests/SecurityPrimitiveTests.cs": "23cc6f07474fca39028227bf9a9d781218926125c0b5c9a0f80ddfd5633f4b98",
+    "tests/Fluent.Pdf.Contract.Tests/SecurityRegressionTests.cs": "91e57d53464e0547ac710447f7d4d8f71cd90a61d95650fe8918a3d890df991e",
+    "tests/Fluent.Pdf.Contract.Tests/SecurityWorkflowTests.cs": "e13d97bd8f799b4e8f9e63cc9be0649ffea8900c985ca579887251ab1f2bb93d"
+  },
+  "reportSha256": {
+    "crypto-final-build.log": "06a2caa774e7b88fca5052da9de34e4b6da9df7c7209bcfdc8ca7f9bc784f619",
+    "crypto-safeguards-tests.log": "b945c8d4d0114693e8346bccc983eda0d3c9b3fa631b929f2b3fed5b7aa8e4cb",
+    "crypto-vulnerability-scan.json": "75dc514c6624d2d379ff6fa9a9db5f8e5e43475a28e1eb3d45047f02a377f48e",
+    "crypto-final-tests.log": "753cf4f7071d28a7b0a8fc802db9a2f31bc919882b78d3da892a4897a4b562e4",
+    "crypto-api-check.log": "7bb28fdd2568c89e765bc63a4103674e61f5ea5bbeefaed64bc030884a7fd289",
+    "crypto-spec-check.log": "c81d2478886c06b6bc05d45357c7f700d6a4b42cc8772da938438283597ed9cf",
+    "crypto-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "api-comparisons.json": "2619c95688907a2aec7d54b14e98f1b1f681006fd9989a01e9ec4b8f14e09e66"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "limitations": [
+    "Local native-positive source tests cannot run: Landlock ENOSYS; CI remains unfiltered",
+    "Actual minimum runtimes and exact final packages are not qualified",
+    "Full security profiles and production qualification remain mandatory as declared in docs/security.md"
+  ],
+  "managedTests": {
+    "passed": 833,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeRenderingTests"
+  },
+  "apiComparisons": 21,
+  "sourceDependencyVulnerabilityObservation": "Pinned public feed scan reported no known vulnerable direct/transitive packages for this project at the time of the source check; complete release security review remains mandatory."
+}

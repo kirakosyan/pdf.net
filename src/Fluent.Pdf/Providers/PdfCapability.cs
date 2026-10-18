@@ -18,5 +18,7 @@ public enum PdfCapability
     /// <summary>Explicit offline font parsing, embedding and standard-font metrics.</summary>
     Fonts = 6,
     /// <summary>Explicit Unicode-aware glyph shaping with logical cluster provenance.</summary>
-    ShapeText = 7
+    ShapeText = 7,
+    /// <summary>Explicit offline CMS seed envelopes for certificate encryption.</summary>
+    CmsEnvelopes = 8
 }

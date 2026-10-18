@@ -64,10 +64,44 @@
           "System.Reflection.Metadata": "1.6.0"
         }
       },
+      "System.Buffers": {
+        "type": "Transitive",
+        "resolved": "4.6.1",
+        "contentHash": "N8GXpmiLMtljq7gwvyS+1QvKT/W2J8sNAvx+HVg4NGmsG/H+2k/y9QI23auLJRterrzCiDH+IWAw4V/GPwsMlw=="
+      },
       "System.Collections.Immutable": {
         "type": "Transitive",
         "resolved": "1.5.0",
         "contentHash": "EXKiDFsChZW0RjrZ4FYHu9aW6+P4MCgEDCklsVseRfhoO0F+dXeMSsMRAlVXIo06kGJ/zv+2w1a2uc2+kxxSaQ=="
+      },
+      "System.Formats.Asn1": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "uwKFGyJaUQ8xsf+wddv512+UIU1O4reOveom3y0gpQr86P1ReAKcQa/UdOZtg1etTIHgb01/grXp00tgeGBxqA==",
+        "dependencies": {
+          "System.Memory": "4.6.3",
+          "System.ValueTuple": "4.6.2"
+        }
+      },
+      "System.IO": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg=="
+      },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.6.3",
+        "contentHash": "qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A==",
+        "dependencies": {
+          "System.Buffers": "4.6.1",
+          "System.Numerics.Vectors": "4.6.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.1.2"
+        }
+      },
+      "System.Numerics.Vectors": {
+        "type": "Transitive",
+        "resolved": "4.6.1",
+        "contentHash": "sQxefTnhagrhoq2ReR0D/6K0zJcr9Hrd6kikeXsA1I8kOCboTavcUC4r7TSfpKFeE163uMuxZcyfO1mGO3EN8Q=="
       },
       "System.Reflection.Metadata": {
         "type": "Transitive",
@@ -76,6 +110,50 @@
         "dependencies": {
           "System.Collections.Immutable": "1.5.0"
         }
+      },
+      "System.Runtime": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Transitive",
+        "resolved": "6.1.2",
+        "contentHash": "2hBr6zdbIBTDE3EhK7NSVNdX58uTK6iHW/P/Axmm9sl1xoGSLqDvMtpecn226TNwHByFokYwJmt/aQQNlO5CRw=="
+      },
+      "System.Security.Cryptography.Algorithms": {
+        "type": "Transitive",
+        "resolved": "4.3.1",
+        "contentHash": "DVUblnRfnarrI5olEC2B/OCsJQd0anjVaObQMndHSc43efbc88/RMOlDyg/EyY0ix5ecyZMXS8zMksb5ukebZA==",
+        "dependencies": {
+          "System.IO": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Security.Cryptography.Encoding": "4.3.0",
+          "System.Security.Cryptography.Primitives": "4.3.0"
+        }
+      },
+      "System.Security.Cryptography.Cng": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "jIMXsKn94T9JY7PvPq/tMfqa6GAaHpElRDpmG+SuL+D3+sTw2M8VhnibKnN8Tq+4JqbPJ/f+BwtLeDMEnzAvRg==",
+        "dependencies": {
+          "System.Security.Cryptography.Algorithms": "4.3.1"
+        }
+      },
+      "System.Security.Cryptography.Encoding": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "1DEWjZZly9ae9C79vFwqaO5kaOlI5q+3/55ohmq/7dpDyDfc8lYe7YVxJUZ5MF/NtbkRjwFRo14yM4OEo9EmDw=="
+      },
+      "System.Security.Cryptography.Primitives": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "7bDIyVFNL/xKeFHjhobUAQqSpJq9YTOpbEs6mR233Et01STBMXNAc/V+BM6dwYGc95gVh/Zf+iVXWzj3mE8DWg=="
+      },
+      "System.ValueTuple": {
+        "type": "Transitive",
+        "resolved": "4.6.2",
+        "contentHash": "yQgmjfFximrNm9LIV3mL6T5MzjeC+epeE5rl4hXxAlYmxby7RM1dPSkIKXk9HNkl6G54h2JHOmLD46+Pey+IRg=="
       },
       "xunit.abstractions": {
         "type": "Transitive",
@@ -132,6 +210,7 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -143,10 +222,19 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.cryptography": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "System.Formats.Asn1": "[10.0.13, )",
+          "System.Security.Cryptography.Cng": "[5.0.0, )"
         }
       },
       "fluent.pdf.fonts": {
@@ -283,6 +371,7 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -294,10 +383,17 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.cryptography": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
         }
       },
       "fluent.pdf.fonts": {
@@ -379,6 +475,16 @@
           "Microsoft.TestPlatform.ObjectModel": "18.11.0"
         }
       },
+      "System.Formats.Asn1": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "uwKFGyJaUQ8xsf+wddv512+UIU1O4reOveom3y0gpQr86P1ReAKcQa/UdOZtg1etTIHgb01/grXp00tgeGBxqA=="
+      },
+      "System.Security.Cryptography.Cng": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "jIMXsKn94T9JY7PvPq/tMfqa6GAaHpElRDpmG+SuL+D3+sTw2M8VhnibKnN8Tq+4JqbPJ/f+BwtLeDMEnzAvRg=="
+      },
       "xunit.abstractions": {
         "type": "Transitive",
         "resolved": "2.0.3",
@@ -434,6 +540,7 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -445,10 +552,19 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.cryptography": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "System.Formats.Asn1": "[10.0.13, )",
+          "System.Security.Cryptography.Cng": "[5.0.0, )"
         }
       },
       "fluent.pdf.fonts": {

@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-031",
+  "sourceCommit": null,
+  "tools": [
+    {
+      "name": "pypdf",
+      "version": "6.10.0"
+    },
+    {
+      "name": "MuPDF",
+      "version": "1.26.6"
+    },
+    {
+      "name": "PDFBox",
+      "version": "3.0.8",
+      "artifactSha256": "f6b3a80c39747ff0ef5d06708bc03882152403de58dbef4a1fbffbee568eceb1"
+    },
+    {
+      "name": "ECJ analysis-only compiler",
+      "version": "3.44.0",
+      "artifactSha256": "14c46ddc2e511c46c998da728f6a80f13a689c920f3832402f7ad150f6a6188d"
+    },
+    {
+      "name": "OpenSSL",
+      "version": "3.5.7"
+    }
+  ],
+  "observations": {
+    "publishedVectors": [
+      "NIST SP 800-38A AES-CBC",
+      "RFC 6229 legacy stream cipher"
+    ],
+    "independentRevision6HashAnswers": 4,
+    "independentStandardHandlersAndObjects": 5,
+    "passwordOwnerUserChecks": 8,
+    "independentOwnerFullDecryptOutputsWithExactMetadataAttachmentsAndPages": 8,
+    "publicKeyRecipientPermissionChecks": [
+      {
+        "fixture": "certificate-Aes256-True",
+        "recipient": "owner",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=true print=true modify=true extract=true fill=true"
+      },
+      {
+        "fixture": "certificate-Aes256-True",
+        "recipient": "user",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      },
+      {
+        "fixture": "certificate-Aes256-True",
+        "recipient": "other",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      },
+      {
+        "fixture": "certificate-Aes256-False",
+        "recipient": "owner",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=true print=true modify=true extract=true fill=true"
+      },
+      {
+        "fixture": "certificate-Aes256-False",
+        "recipient": "user",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      },
+      {
+        "fixture": "certificate-Aes256-False",
+        "recipient": "other",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      },
+      {
+        "fixture": "certificate-Aes128-True",
+        "recipient": "owner",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=true print=true modify=true extract=true fill=true"
+      },
+      {
+        "fixture": "certificate-Aes128-True",
+        "recipient": "user",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      },
+      {
+        "fixture": "certificate-Aes128-True",
+        "recipient": "other",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      },
+      {
+        "fixture": "certificate-Aes128-False",
+        "recipient": "owner",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=true print=true modify=true extract=true fill=true"
+      },
+      {
+        "fixture": "certificate-Aes128-False",
+        "recipient": "user",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      },
+      {
+        "fixture": "certificate-Aes128-False",
+        "recipient": "other",
+        "exit": 0,
+        "observations": "pages=2 title=Original Unicode \u2013 \u03c0 owner=false print=true modify=false extract=false fill=true"
+      }
+    ],
+    "independentCmsPayloads": [
+      {
+        "label": "openssl-certificate-Aes256-True-0",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffff3c4",
+        "payloadSha256": "0c69a18ed72d05cdc03fc531d8fafffeda4533c6a3cc9568f807eeba0dd173a8"
+      },
+      {
+        "label": "openssl-certificate-Aes256-True-1",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffffffe",
+        "payloadSha256": "d8ed73c98083bb7a4447a152e98cfbb51e44aa0932d1b3a9cbc5be66a152be7c"
+      },
+      {
+        "label": "openssl-certificate-Aes256-False-0",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffff3c4",
+        "payloadSha256": "145506d12b01712c98f708763c5163e13fb7e8c3d21bdb6060d0b3a1c23b237b"
+      },
+      {
+        "label": "openssl-certificate-Aes256-False-1",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffffffe",
+        "payloadSha256": "99f04cb5b7a7f5f50c882fa4330dffd539bad00dda0d6c2956237980e854fc4c"
+      },
+      {
+        "label": "openssl-certificate-Aes128-True-0",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffff1c4",
+        "payloadSha256": "77f6f4f7871dadf39bb22a303af58a6d4e319b140eae4c2c9296fdb9730c67e7"
+      },
+      {
+        "label": "openssl-certificate-Aes128-True-1",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffffffe",
+        "payloadSha256": "f8ccc9c221651c964af1955554a9c436ffea8ae7797286b34bf7e5fdb1481a8c"
+      },
+      {
+        "label": "openssl-certificate-Aes128-False-0",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffff1c4",
+        "payloadSha256": "eee9ad14da4e8ff43663f46ff329a7b58144020bbe43e202a633573526ddaebb"
+      },
+      {
+        "label": "openssl-certificate-Aes128-False-1",
+        "exit": 0,
+        "tail": "",
+        "payloadLength": 24,
+        "permissionBits": "0xfffffffe",
+        "payloadSha256": "4e7ccb2c57d8dde59e393039b8d6579db4814871df1f310c02e8f2d236df891c"
+      }
+    ],
+    "independentSourceDecrypts": [
+      {
+        "name": "pdfbox-certificate-128",
+        "exit": 0,
+        "result": "{\"Role\":2,\"Cipher\":\"PubSec-legacy-RC4-128\",\"Revision\":0,\"Permissions\":3900}",
+        "pageCount": 2,
+        "title": "Original Unicode \u2013 \u03c0"
+      },
+      {
+        "name": "pdfbox-certificate-256",
+        "exit": 0,
+        "result": "{\"Role\":2,\"Cipher\":\"PubSec-AES-256\",\"Revision\":0,\"Permissions\":3900}",
+        "pageCount": 2,
+        "title": "Original Unicode \u2013 \u03c0"
+      },
+      {
+        "name": "mupdf-password-object-stream",
+        "exit": 0,
+        "result": "{\"Role\":0,\"Cipher\":\"Standard-R6-256-bit\",\"Revision\":6,\"Permissions\":3900}",
+        "pageCount": 2,
+        "title": "Original Unicode \u2013 \u03c0"
+      },
+      {
+        "name": "minimal-encrypted-history",
+        "exit": 0,
+        "result": "{\"Role\":0,\"Cipher\":\"Standard-R6-256-bit\",\"Revision\":6,\"Permissions\":3900}",
+        "pageCount": 1,
+        "title": "Original encrypted revision two"
+      }
+    ]
+  },
+  "retainedInitialFindings": [
+    "Legacy RC2 CMS source initially rejected; explicit legacy RC2/3DES input profile added and independent AES256 certificate source then decrypted successfully",
+    "Direct encryption dictionary initially rejected on independent compressed-object input; direct bounded dictionaries and stable history added with retained independent regressions",
+    "Independent CLI emits restricted-recipient refusal with exit 0; direct reader API independently checked all12 recipients and permissions instead"
+  ],
+  "reportSha256": {
+    "crypto-probe/independent-report.json": "4fc01fc72491a90b0c71b2eed159f14525540fc9745ce34aaba55a6bae30c0d9",
+    "crypto-probe/pdfbox-recipient-report.json": "6a536bce0f9ae56a308cdfba7a3518cfcba6683c62ab78c2cfe1afde0863df18",
+    "crypto-probe/pdfbox-semantic-report.json": "1d35eb80b36a14b5faa86592d8ee0a1ea3233203f471cf2221ad575ae8f66121",
+    "crypto-probe/initial-input-report.json": "4e598731f45bd37ce1d4f7afa0809661452fa168399faf0a4babdc310f9dff23",
+    "crypto-probe/final-input-report.json": "feabedce226fff45da5f3d54c469f79c6ff97db528c6d4425c08cdfa66d88123",
+    "crypto-r6-independent-vectors.json": "7a25488c079c6d6bb449694694a01ed113fbf7fe1e76c4d5c5ba91376cea345c",
+    "crypto-independent/report.json": "8859630c0f4c72257bc1ee430740b073a2bbd3f0be1c5177ff5fe356acb9e573",
+    "crypto-independent/object-report.json": "b2a4ff4ed9f00c1633e44996e2eec994f10880f8393f308dec0c97eb10235a15",
+    "crypto-vulnerability-scan.json": "75dc514c6624d2d379ff6fa9a9db5f8e5e43475a28e1eb3d45047f02a377f48e",
+    "crypto-probe/CertificateProbe.java": "ddc015bfba9b8588fccfc5426514ef18f8484dec6f288bbd1a6f44d25d52612d",
+    "crypto-probe/independent.py": "9a83ef723c2ca990f3c7d78eaa0715fe40bef0947a4bb95ead0c938353ff6122"
+  },
+  "limitations": [
+    "Original small public-test-key fixtures; not a complete conformance, security or production corpus",
+    "Raw analysis keys and seed bytes are fictitious test material retained outside the repository; SDK itself creates no plaintext/key temporary files",
+    "Advanced filters/CMS/key-provider/Unicode profiles, actual minimum runtimes, fuzz/endurance/concurrency and exact final packages remain mandatory"
+  ],
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

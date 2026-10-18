@@ -1190,7 +1190,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/security.md",
+        "implemented": [
+          "Original standard R6/AES256 and explicit R4/AES128 protection, owner/user authentication, opt-in legacy input and bounded object crypt filters",
+          "Explicit certificate/RSA credentials, optional offline CMS provider, effective recipient permission grouping and AES public-key protection",
+          "Shared-context parsing/full rewrites, encrypted object streams and stable history, signature rewrite controls, C#/VB consumers and independent interoperability observations"
+        ],
+        "pending": [
+          "Complete prepared-Unicode, independently keyed/multiple/embedded-only filters, additional CMS/bootstrap/history and key-provider profiles remain mandatory",
+          "Full independent security corpus, fuzzing, concurrency/endurance, actual minimum runtimes and exact final-package consumers remain mandatory",
+          "All production qualification and dependency/security review remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-031-standards.json",
+        "independentEvidence": "docs/evidence/FP-031-independent.json",
+        "sourceEvidence": "docs/evidence/FP-031-source.json"
+      }
     },
     {
       "id": "FP-032",

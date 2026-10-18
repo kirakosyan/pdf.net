@@ -1,0 +1,6 @@
+#nullable enable
+Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider
+Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.Encrypt(System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCertificateRecipient!>! recipients, System.IO.Stream! plaintext, System.IO.Stream! envelope, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.ManagedCmsEnvelopeProvider() -> void
+Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.TryDecrypt(Fluent.Pdf.PdfCertificateCredential! credential, bool allowLegacyKeyTransport, System.IO.Stream! envelope, System.IO.Stream! plaintext, Fluent.Pdf.PdfOperationContext! context) -> bool

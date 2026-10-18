@@ -101,3 +101,5 @@ Text extraction interprets page/Form text state in the shared context, caching s
 AcroForm capture resolves inherited field attributes under the graph operation context and keeps logical fields separate from exact terminal/widget identities. Edits preserve source object and structure links; authored private appearances and explicit default editing fonts have separate ownership. Scripts/XFA are never run during capture or editing.
 
 Field-data parsing remains independent from document mutation. Filling/appearance generation shares the graph context; copy operations map exact ownership/resources and flattening removes both field-tree and page-widget relationships before validating surviving references. Incremental graph output preserves original bytes without asserting signature validity.
+
+FP-031 keeps password/file-security algorithms in managed core and CMS behind `IPdfCmsEnvelopeProvider`. Optional `Fluent.Pdf.Cryptography` composes pinned ASN.1 and platform RSA/AES, without certificate-store discovery or private-key export. Explicit plaintext/security rewrites retain shared budgets and signature safeguards; see [security](security.md).

@@ -1,0 +1,171 @@
+{
+  "purpose": "locked-source-dependency-inventory-not-release-SBOM",
+  "qualification": "Complete release SBOM, vulnerability/license review and exact-package qualification remain mandatory.",
+  "components": [
+    {
+      "name": "Microsoft.CodeAnalysis.PublicApiAnalyzers",
+      "version": "3.3.4",
+      "packageSha256": "5a61b7ae142ccabf2e47ad89e0c75f27d6fd2f1eda12ee802fd9cd4acd157611",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "buildOnly": true
+    },
+    {
+      "name": "Microsoft.NETCore.Platforms",
+      "version": "1.1.0",
+      "packageSha256": "15e338d24b5c39b4099389cc612841eb51ff13c07bb4829f97d39b27420e7023",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "Microsoft.NETFramework.ReferenceAssemblies",
+      "version": "1.0.3",
+      "packageSha256": "141a093f90c7645d101ccd312e6f727781c965540eb92a52280f95411a698441",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": true
+    },
+    {
+      "name": "Microsoft.NETFramework.ReferenceAssemblies.net472",
+      "version": "1.0.3",
+      "packageSha256": "ffa0a5570a39f911399164d0581ffddef99b5e3dfbaa5f220e5ce22969bcf57c",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": true
+    },
+    {
+      "name": "NETStandard.Library",
+      "version": "2.0.3",
+      "packageSha256": "3eb87644f79bcffb3c0331dbdac3c7837265f2cdf58a7bfd93e431776f77c9ba",
+      "licenseExpression": null,
+      "notices": [
+        {
+          "path": "third-party/cryptography/NETStandard.Library-LICENSE.TXT",
+          "sha256": "18647d26bc4c4d892a5fd29de1264d10906b3124cafa98313300ff300441c7f0",
+          "packageNoticeSha256": "fc95de1436a321aadbfafd21f8a8506a2f4678bfc003bd806d6b59d3088efadc"
+        },
+        {
+          "path": "third-party/cryptography/NETStandard.Library-THIRD-PARTY-NOTICES.TXT",
+          "sha256": "fd880d29a522f238c178452b38cbf196bb5c0dab7ebfdc590b02b8e5019ebc71",
+          "packageNoticeSha256": "0684b2349427ee28e392ae8914645832e59731dba8a38a984f72b3fb8769c76b"
+        }
+      ],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Buffers",
+      "version": "4.6.1",
+      "packageSha256": "b00451e91d016fbec091ad1e361f3a7015e1d91d4047f7e48a74455b2a673d79",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Formats.Asn1",
+      "version": "10.0.13",
+      "packageSha256": "783c54a6ef9d259b5665c649a6cc34d7bcbf9305e5a33e385993ef5f2ff568ba",
+      "licenseExpression": "MIT",
+      "notices": [
+        {
+          "path": "third-party/cryptography/System.Formats.Asn1-THIRD-PARTY-NOTICES.TXT",
+          "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54",
+          "packageNoticeSha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21"
+        }
+      ],
+      "buildOnly": false
+    },
+    {
+      "name": "System.IO",
+      "version": "4.3.0",
+      "packageSha256": "aeeca74077a414fe703eb0e257284d891217799fc8f4da632b9a54f873c38916",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Memory",
+      "version": "4.6.3",
+      "packageSha256": "26078aeb758c9ae985e8bf851f973026061da6a5eb4837204d0c2d2204c72955",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Numerics.Vectors",
+      "version": "4.6.1",
+      "packageSha256": "2bc500a86dcb02f2032d6d877f9e2d6e9e4a79080e57239b4198679d4031f2c7",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Runtime",
+      "version": "4.3.0",
+      "packageSha256": "e75f35dd65e9048b2e03a7d4b44e57691423716750dbf966128909b7deeed118",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Runtime.CompilerServices.Unsafe",
+      "version": "6.1.2",
+      "packageSha256": "5f6a7f53af3465f92beb6da873ebe0e496206c313313b98badee4355a6b25937",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Security.Cryptography.Algorithms",
+      "version": "4.3.1",
+      "packageSha256": "4253bfa69464fcec836070a2983f3aed102528839a922743d0808d3adeb75cd4",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Security.Cryptography.Cng",
+      "version": "5.0.0",
+      "packageSha256": "9ce24fdef76641a600d3b4c8dfbdcebd95fab96b211138a9be2e4aa4bee8131a",
+      "licenseExpression": "MIT",
+      "notices": [
+        {
+          "path": "third-party/cryptography/System.Security.Cryptography.Cng-LICENSE.TXT",
+          "sha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310",
+          "packageNoticeSha256": "d7a68596ab69b06f51ca278a6545148e4269a9381c26d597c13df5d88e08cf5b"
+        },
+        {
+          "path": "third-party/cryptography/System.Security.Cryptography.Cng-THIRD-PARTY-NOTICES.TXT",
+          "sha256": "723c221df67cb638f983d38e01c30a8975a8c184d2351bb874b5b1e05e01d4fc",
+          "packageNoticeSha256": "78e22d4d24a710d2a09426c09060f3448204778ed506b1da55447a6089b54fae"
+        }
+      ],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Security.Cryptography.Encoding",
+      "version": "4.3.0",
+      "packageSha256": "62e81ef3d37a33e35c6e572f5cc7b21d9ea46437f006fdcb3cc0e217c1e126cb",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.Security.Cryptography.Primitives",
+      "version": "4.3.0",
+      "packageSha256": "7e7162ec1dd29d58f96be05b8179db8e718dbd6ac2114e87a7fc23b235b3df5f",
+      "licenseExpression": null,
+      "notices": [],
+      "buildOnly": false
+    },
+    {
+      "name": "System.ValueTuple",
+      "version": "4.6.2",
+      "packageSha256": "76fd0e366a2b90655fd15d557b0b79504197748358cb578fe3193f6d97bdd9aa",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "buildOnly": false
+    }
+  ],
+  "noticeDerivation": "License/notice text retains original content with CRLF normalized to LF; both original package notice and retained-file digests are recorded."
+}

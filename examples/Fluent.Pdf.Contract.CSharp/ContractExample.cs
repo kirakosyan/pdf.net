@@ -5,6 +5,19 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfProviderRegistry CertificateSecurity() => new(new Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider());
+    public static PdfSecurityResult ProtectWithPassword(PdfDocumentSnapshot source, Stream output, byte[] preparedUser, byte[] preparedOwner)
+    {
+        using var user = new PdfPassword(preparedUser);
+        using var owner = new PdfPassword(preparedOwner);
+        return PdfSecurity.EncryptWithPassword(source, output, new(user, owner));
+    }
+    public static PdfSecurityResult DecryptWithPassword(Stream input, Stream output, byte[] preparedPassword)
+    {
+        using var password = new PdfPassword(preparedPassword);
+        return PdfSecurity.DecryptWithPassword(input, output, password);
+    }
+
     public static PdfProviderRegistry PageRenderer(Fluent.Pdf.Workers.NativeWorkerOptions worker) => new(new Fluent.Pdf.Rendering.IsolatedPdfRenderer(worker));
     public static PdfRaster RenderPagePreview(Stream input, PdfProviderRegistry providers, PdfRenderOptions options)
     {

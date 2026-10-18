@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-design-observations-not-production-qualification",
+  "requirement": "FP-031",
+  "sources": [
+    {
+      "id": "S31-ISO-PDF17",
+      "kind": "retained ISO 32000-1:2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "7.6 Encryption",
+        "7.4.10 Crypt filter",
+        "12.8 signature protection"
+      ]
+    },
+    {
+      "id": "S31-ISO2-ERRATA",
+      "kind": "official public PDF 2.0 errata",
+      "sha256": "8efbdad284ad9d1e6923cc6bda1dedf3b26dda5522e4662ebfbbb8f4177e98f8",
+      "sections": [
+        "Algorithm 2.B",
+        "public-key permission byte order",
+        "crypt-filter key length units"
+      ]
+    },
+    {
+      "id": "S31-ENCRYPTION-MANUAL",
+      "kind": "independent public user manual",
+      "sha256": "c616b4d5b94ebd547e0af9e5374bc322ee59f642ce19b1ad7a905bf59678e87f",
+      "sections": [
+        "standard security revisions and permission semantics"
+      ]
+    }
+  ],
+  "decisions": [
+    "Original bounded key algorithms over platform cryptography; no copied implementation bodies",
+    "Standard permissions little endian; public-key payload permissions big endian; CF key-length bytes for Standard and bits for PubSec",
+    "AES256 revision6 default, explicit AES128 compatibility, explicit legacy input policy",
+    "Caller standard-prepared byte credentials; no implicit Unicode preparation or credential discovery",
+    "Signature Contents and xref exceptions; decrypt object-stream containers once; full rewrite preserves default signature guards"
+  ],
+  "pending": [
+    "Complete normative password-preparation and advanced security/CMS profiles",
+    "Independent full corpus, cryptographic/platform review and all production gates"
+  ]
+}

@@ -173,5 +173,267 @@
     "Candidate engine adoption, exact upstream source/build provenance and complete license/security review remain pending.",
     "Full fidelity/color/appearance/extension corpus, actual minimum OS/runtime, transitive dependencies, concurrency/fuzz/endurance and exact final packages remain mandatory.",
     "Independent ABI probes do not prove SDK process isolation; local native-positive execution is unavailable."
-  ]
+  ],
+  "widgetVisibilityFix": {
+    "sourceCommit": "7b0ae2d09d256988e4a2589112b0281df112906a",
+    "sourceTree": "b735be690551b2123077edeb701bbe612d70848e",
+    "behavior": "Translate standard-widget Hidden/NoView/Print visibility in private worker flags before form-page-view creation; clear Invisible for a known standard widget. Original caller bytes remain unchanged.",
+    "sourceFileHashes": {
+      "native/rendering/bridge.c": "5c303ea4394b7d49a7724cbcd5680a2f623d74b92a6e388030c40d033b5782de",
+      "src/Fluent.Pdf.Rendering/PdfRenderProfile.cs": "2dc208305d199699e250801319e54d369a9eb131e910a8ae183e97a06b501a1f",
+      "tests/Fluent.Pdf.Contract.Tests/NativeRenderingTests.cs": "d080e3bbb866e0683de5128c207b4e8837c6a5938902e1c5769719e9f47c238a",
+      "eng/build-rendering-fixture.ps1": "9bbc956bcb8b39abc696485c03ba0d0f024eecc2405b8ba95a1b2766000a0041"
+    },
+    "localChecks": {
+      "allFourBuildTargets": true,
+      "selectedPassed": 789,
+      "failed": 0,
+      "skipped": 0,
+      "directAbiVisibilityCases": 5,
+      "limitations": "Native-positive SDK tests remain unavailable locally; CI remains unfiltered."
+    },
+    "reportSha256": {
+      "render-visibility-final-build.log": "2e9b6a5a69dc0ddb9e15a364d3162e20a6e2a54817c96c3622889d6da3727b61",
+      "render-visibility-final-tests.log": "c0927ef82458bdd23403788c93a94668c7c2d993272d98822b3178cb0c3819e9",
+      "render-visibility-final-spec.log": "1ffbbbc1e9f5a9d0f19d54978be3819e6ca74b82158b344d344fd2a6cca03991",
+      "render-widget-visibility-probe.log": "cde8c024ff9f4579fcf81bd37d7a562ce3ad03993dcc35d6b0669edc39f004d1"
+    },
+    "sourceCI": {
+      "runId": 39134895043,
+      "runNumber": 88,
+      "state": "completed",
+      "conclusion": "success",
+      "headCommit": "7b0ae2d09d256988e4a2589112b0281df112906a",
+      "headTree": "b735be690551b2123077edeb701bbe612d70848e",
+      "testedMergeCommit": "2b090a04e924d5a882b280eee41ae70f441969ed",
+      "testedMergeTree": "b735be690551b2123077edeb701bbe612d70848e",
+      "runtimeLanes": 20,
+      "passedPerLane": 849,
+      "totalPassed": 16980,
+      "failed": 0,
+      "skipped": 0,
+      "jobs": [
+        {
+          "jobId": 117697302698,
+          "rid": "linux-x64",
+          "logSha256": "08cf986308a6ba5076fdcef30ebc9ae60d1b92e0ebc2da64bb56b5bf122b133a",
+          "lanes": [
+            {
+              "target": "net8.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            }
+          ]
+        },
+        {
+          "jobId": 117697302864,
+          "rid": "linux-arm64",
+          "logSha256": "accb1a2744eea7a0a5580a1270ccc2c744f4e96160c91bf8527d4efc1bd9df61",
+          "lanes": [
+            {
+              "target": "net8.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            }
+          ]
+        },
+        {
+          "jobId": 117697302907,
+          "rid": "osx-arm64",
+          "logSha256": "3227422f1bf3d5b01d579429ce48c5825555ab30d33dd507f8239ede86b2b8d2",
+          "lanes": [
+            {
+              "target": "net8.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            }
+          ]
+        },
+        {
+          "jobId": 117697302898,
+          "rid": "osx-x64",
+          "logSha256": "ea94b8a56d3343deafc5e7140724082ef6f04666ca3c38bd9710ae23b5676372",
+          "lanes": [
+            {
+              "target": "net8.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            }
+          ]
+        },
+        {
+          "jobId": 117697302980,
+          "rid": "win-arm64",
+          "logSha256": "6de7a49459c2b456c1d04926846560ec22463cf83bed22b89be07d6836ea1efd",
+          "lanes": [
+            {
+              "target": "net8.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            }
+          ]
+        },
+        {
+          "jobId": 117697302834,
+          "rid": "win-x64",
+          "logSha256": "8c5f42ddc7ea8b3c6b14a627f046a923a6d10ee3a3497f9e6df9bbea8c379d53",
+          "lanes": [
+            {
+              "target": "net8.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net472",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net472",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            },
+            {
+              "target": "net10.0",
+              "failed": 0,
+              "passed": 849,
+              "skipped": 0,
+              "total": 849
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12139567818,
+          "name": "source-contracts-osx-arm64",
+          "digest": "sha256:3f5cb52c031fffdc1fed2a729f95bb3f1a52c863afb9b4338bd3379c82568894",
+          "size_in_bytes": 751730
+        },
+        {
+          "id": 12139443164,
+          "name": "source-contracts-linux-x64",
+          "digest": "sha256:06df4dda6d3028a698589ca770de3d1b8a2877f35ba1b0075b2e281fb1197dbb",
+          "size_in_bytes": 738856
+        },
+        {
+          "id": 12139398830,
+          "name": "source-contracts-osx-x64",
+          "digest": "sha256:e71724749e68490732150d52adb0b236984f2ca321445c8d2c2851b7e55ba054",
+          "size_in_bytes": 757501
+        },
+        {
+          "id": 12139308464,
+          "name": "source-contracts-linux-arm64",
+          "digest": "sha256:a46fae62433e9007367b7b3f33377f93047558faa2b382511ef63427181826a7",
+          "size_in_bytes": 738626
+        },
+        {
+          "id": 12139262792,
+          "name": "source-contracts-win-arm64",
+          "digest": "sha256:e2cbe13eb8c547dd8245d71cdf545b42053b006e51066c0082c604fae4fad0bb",
+          "size_in_bytes": 739396
+        },
+        {
+          "id": 12138893807,
+          "name": "source-contracts-win-x64",
+          "digest": "sha256:7e5e80b6f72a32d459601a9ffa00594daf5ca61dfdb72c3301981db7b3abd680",
+          "size_in_bytes": 1173070
+        }
+      ]
+    }
+  }
 }

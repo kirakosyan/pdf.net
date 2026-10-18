@@ -4,6 +4,20 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function CertificateSecurity() As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider())
+    End Function
+    Public Function ProtectWithPassword(source As PdfDocumentSnapshot, output As Stream, preparedUser As Byte(), preparedOwner As Byte()) As PdfSecurityResult
+        Using user As New PdfPassword(preparedUser), owner As New PdfPassword(preparedOwner)
+            Return PdfSecurity.EncryptWithPassword(source, output, New PdfPasswordProtection(user, owner))
+        End Using
+    End Function
+    Public Function DecryptWithPassword(input As Stream, output As Stream, preparedPassword As Byte()) As PdfSecurityResult
+        Using password As New PdfPassword(preparedPassword)
+            Return PdfSecurity.DecryptWithPassword(input, output, password)
+        End Using
+    End Function
+
     Public Function PageRenderer(worker As Fluent.Pdf.Workers.NativeWorkerOptions) As PdfProviderRegistry
         Return New PdfProviderRegistry(New Fluent.Pdf.Rendering.IsolatedPdfRenderer(worker))
     End Function

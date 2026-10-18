@@ -10,11 +10,14 @@ internal sealed class PdfSyntaxReader
     private readonly Dictionary<long, List<(PdfObjectId Id, PdfValue Value)>> _offsetValues = new();
     private readonly Dictionary<PdfValue, List<EmbeddedObjects>> _objectStreams = new();
     private readonly PdfSyntaxCursor _errors;
-    internal PdfSyntaxReader(PdfByteStore source, PdfOperationContext context)
+    private readonly Func<PdfValue, PdfObjectId, PdfValue, PdfObjectCrypt>? _authenticate;
+    private PdfObjectCrypt? _crypt;
+    internal PdfSyntaxReader(PdfByteStore source, PdfOperationContext context, Func<PdfValue, PdfObjectId, PdfValue, PdfObjectCrypt>? authenticate = null)
     {
         _source = source;
         _context = context;
         _errors = new(source, context);
+        _authenticate = authenticate;
     }
 
     internal PdfSyntaxDocument Read()
@@ -64,7 +67,9 @@ internal sealed class PdfSyntaxReader
                 next = DirectInteger(previous);
             }
 
-            if (_revisions.Any(revision => revision.Trailer.Entries.TryGetValue("Encrypt", out var encryption) && encryption.Kind != PdfValueKind.Null) && _revisions.Any(revision => revision.Entries.Any(entry => entry.Kind == PdfCrossReferenceKind.Compressed)))
+            if (_authenticate != null)
+                ConfigureCrypt();
+            if (_crypt == null && _revisions.Any(revision => revision.Trailer.Entries.TryGetValue("Encrypt", out var encryption) && encryption.Kind != PdfValueKind.Null) && _revisions.Any(revision => revision.Entries.Any(entry => entry.Kind == PdfCrossReferenceKind.Compressed)))
                 throw Error("Syntax.EncryptionProviderRequired", "Encrypted object streams require an explicitly configured encryption implementation.");
             for (int revision = 0; revision < _revisions.Count; revision++)
             {
@@ -75,7 +80,7 @@ internal sealed class PdfSyntaxReader
                             _revisions[revision].Values.Add(entry.Id.Number, Resolve(entry.Id, revision));
             }
 
-            return new PdfSyntaxDocument(version, _source, _revisions, _context.Policy);
+            return new PdfSyntaxDocument(version, _source, _revisions, _context.Policy, _crypt != null);
         }
         catch (OverflowException)
         {
@@ -85,6 +90,107 @@ internal sealed class PdfSyntaxReader
         {
             throw Error("Syntax.IntegerRange", "An integer field is malformed or outside its supported range.");
         }
+    }
+
+    private void ConfigureCrypt()
+    {
+        var trailer = _revisions[0].Trailer;
+        if (!trailer.Entries.TryGetValue("Encrypt", out var encryption) || encryption.Kind == PdfValueKind.Null)
+            throw SecurityError("NotEncrypted", "An explicitly encrypted input document is required.");
+        bool indirect = encryption.Kind == PdfValueKind.Reference;
+        if (!indirect && encryption.Kind != PdfValueKind.Dictionary)
+            throw SecurityError("EncryptionDictionary", "The encryption declaration must be a direct dictionary or an uncompressed indirect dictionary.");
+        var id = indirect ? encryption.ReferenceId : default;
+        if (indirect)
+            for (int revision = 0; revision < _revisions.Count; revision++)
+            {
+                PdfCrossReference? entry = null;
+                for (int i = revision; i < _revisions.Count; i++)
+                    if (_revisions[i].Index.TryGetValue(id.Number, out entry))
+                        break;
+                if (entry == null || entry.Kind != PdfCrossReferenceKind.Offset || entry.Id != id)
+                    throw SecurityError("EncryptionDictionary", "The encryption dictionary must remain uncompressed and active throughout its history.");
+            }
+
+        var dictionary = indirect ? Resolve(id, 0) : encryption;
+        ValidateDirect(dictionary);
+        if (dictionary.Kind != PdfValueKind.Dictionary)
+            throw SecurityError("EncryptionDictionary", "The encryption reference must identify a dictionary.");
+        var identity = Identity(trailer);
+        bool legacyIdentity = !dictionary.Entries.TryGetValue("V", out var version) || !version.TryGetInteger(out long v) || v < 5;
+        for (int revision = 1; revision < _revisions.Count; revision++)
+        {
+            var prior = _revisions[revision].Trailer;
+            if (!prior.Entries.TryGetValue("Encrypt", out var oldEncryption) || (indirect ? oldEncryption.Kind != PdfValueKind.Reference || oldEncryption.ReferenceId != id || !Same(dictionary, Resolve(id, revision)) : !Same(dictionary, oldEncryption)))
+                throw SecurityError("EncryptionHistoryProfile", "Changing security handlers within incremental history requires a separately validated profile.");
+            if (legacyIdentity)
+            {
+                var oldIdentity = Identity(prior);
+                if (identity.Kind != PdfValueKind.Array || oldIdentity.Kind != PdfValueKind.Array || !Same(identity.Items[0], oldIdentity.Items[0]))
+                    throw SecurityError("EncryptionHistoryProfile", "Legacy encrypted revisions must retain the permanent file identifier.");
+            }
+        }
+
+        _crypt = _authenticate!(dictionary, id, identity) ?? throw SecurityError("SecurityHandler", "Authentication returned no content security handler.");
+        _resolved.Clear(); // Bootstrap observations are raw; normal resolution now produces decrypted values.
+        PdfValue Identity(PdfValue value)
+        {
+            if (!value.Entries.TryGetValue("ID", out var ids) || ids.Kind == PdfValueKind.Null)
+                return PdfValue.Null;
+            if (ids.Kind != PdfValueKind.Array || ids.Items.Count != 2 || ids.Items.Any(item => item.Kind != PdfValueKind.String))
+                throw SecurityError("IdentifierProfile", "Encrypted input requires a direct pair of string file identifiers when ID is present.");
+            return ids;
+        }
+
+        void ValidateDirect(PdfValue value)
+        {
+            _context.Checkpoint();
+            _context.Consume(PdfResourceKind.Objects, 1);
+            using var depth = _context.EnterScope(PdfResourceKind.Depth);
+            if (value.Kind == PdfValueKind.Reference || value.Kind == PdfValueKind.Stream)
+                throw SecurityError("ParameterReferenceProfile", "Indirect security parameters require a separately validated bootstrap profile.");
+            if (value.Kind == PdfValueKind.Array)
+                foreach (var child in value.Items)
+                    ValidateDirect(child);
+            if (value.Kind == PdfValueKind.Dictionary)
+                foreach (var child in value.Entries.Values)
+                    ValidateDirect(child);
+        }
+
+        bool Same(PdfValue left, PdfValue right)
+        {
+            _context.Checkpoint();
+            _context.Consume(PdfResourceKind.Objects, 1);
+            using var depth = _context.EnterScope(PdfResourceKind.Depth);
+            if (left.Kind != right.Kind)
+                return false;
+            switch (left.Kind)
+            {
+                case PdfValueKind.Null:
+                    return true;
+                case PdfValueKind.Boolean:
+                    return left.BooleanValue == right.BooleanValue;
+                case PdfValueKind.Number:
+                    return left.NumberText == right.NumberText;
+                case PdfValueKind.Name:
+                    return left.NameValue == right.NameValue;
+                case PdfValueKind.String:
+                    return left.StringBytes.SequenceEqual(right.StringBytes);
+                case PdfValueKind.Array:
+                    return left.Items.Count == right.Items.Count && left.Items.Select((value, i) => Same(value, right.Items[i])).All(equal => equal);
+                case PdfValueKind.Dictionary:
+                    if (left.Entries.Count != right.Entries.Count)
+                        return false;
+                    foreach (var pair in left.Entries)
+                        if (!right.Entries.TryGetValue(pair.Key, out var value) || !Same(pair.Value, value))
+                            return false;
+                    return true;
+                default:
+                    throw SecurityError("ParameterReferenceProfile", "Indirect security parameters require a separately validated bootstrap profile.");
+            }
+        }
+
+        PdfException SecurityError(string code, string message) => PdfWriterCore.Error(_context, "Security." + code, message);
     }
 
     private PdfRevision ReadRevision(long offset)
@@ -224,8 +330,28 @@ internal sealed class PdfSyntaxReader
         try
         {
             value = entry.Kind == PdfCrossReferenceKind.Compressed ? Compressed(entry, revision) : Indirect(entry.Offset, id, revision);
+            if (_crypt != null && entry.Kind != PdfCrossReferenceKind.Compressed)
+                value = _crypt.Transform(value, id, false, Follow);
             _resolved.Add(key, value);
             return value;
+            PdfValue Follow(PdfValue item)
+            {
+                if (item.Kind != PdfValueKind.Reference)
+                    return item;
+                _context.Consume(PdfResourceKind.ExpandedBytes, 128);
+                var seen = new HashSet<PdfObjectId>();
+                while (item.Kind == PdfValueKind.Reference)
+                {
+                    _context.Checkpoint();
+                    _context.Consume(PdfResourceKind.ExpandedBytes, 48);
+                    if (!seen.Add(item.ReferenceId))
+                        throw SecurityError();
+                    item = Resolve(item.ReferenceId, revision);
+                }
+
+                return item;
+                PdfException SecurityError() => PdfWriterCore.Error(_context, "Security.ReferenceCycle", "A cryptographic stream parameter contains a reference cycle.");
+            }
         }
         finally
         {

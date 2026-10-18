@@ -66,15 +66,17 @@ public sealed class PdfRevision
 public sealed class PdfSyntaxDocument
 {
     internal PdfByteStore Source { get; }
+    internal bool DecryptionApplied { get; }
 
     private readonly PdfOperationPolicy _policy;
     internal PdfOperationPolicy ReadPolicy=>_policy;
-    internal PdfSyntaxDocument(string version, PdfByteStore source, List<PdfRevision> revisions, PdfOperationPolicy policy)
+    internal PdfSyntaxDocument(string version, PdfByteStore source, List<PdfRevision> revisions, PdfOperationPolicy policy, bool decryptionApplied = false)
     {
         Version = version;
         Source = source;
         Revisions = revisions.AsReadOnly();
         _policy = policy;
+        DecryptionApplied = decryptionApplied;
         HasSignatureByteRanges=revisions.Any(revision=>revision.Values.Values.Any(value=>value.HasSignatureByteRanges));
     }
 

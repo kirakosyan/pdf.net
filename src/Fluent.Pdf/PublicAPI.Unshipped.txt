@@ -1,6 +1,9 @@
 #nullable enable
 Fluent.Pdf.IPdfCidFontProgram
 Fluent.Pdf.IPdfCidFontProgram.MapCid(int cid, Fluent.Pdf.PdfOperationContext! context) -> int
+Fluent.Pdf.IPdfCmsEnvelopeProvider
+Fluent.Pdf.IPdfCmsEnvelopeProvider.Encrypt(System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCertificateRecipient!>! recipients, System.IO.Stream! plaintext, System.IO.Stream! envelope, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.IPdfCmsEnvelopeProvider.TryDecrypt(Fluent.Pdf.PdfCertificateCredential! credential, bool allowLegacyKeyTransport, System.IO.Stream! envelope, System.IO.Stream! plaintext, Fluent.Pdf.PdfOperationContext! context) -> bool
 Fluent.Pdf.IPdfDocumentReader
 Fluent.Pdf.IPdfDocumentReader.Read(System.IO.Stream! input, Fluent.Pdf.PdfDocument! target, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfDocumentReader.RequiresSeekableStream.get -> bool
@@ -152,6 +155,11 @@ Fluent.Pdf.PdfAttachmentSet.Items.get -> System.Collections.Generic.IReadOnlyLis
 Fluent.Pdf.PdfAttachmentSet.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfAttachmentSet.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
 Fluent.Pdf.PdfAttachments
+Fluent.Pdf.PdfAuthenticationRole
+Fluent.Pdf.PdfAuthenticationRole.Certificate = 2 -> Fluent.Pdf.PdfAuthenticationRole
+Fluent.Pdf.PdfAuthenticationRole.CreatedProtection = 3 -> Fluent.Pdf.PdfAuthenticationRole
+Fluent.Pdf.PdfAuthenticationRole.Owner = 1 -> Fluent.Pdf.PdfAuthenticationRole
+Fluent.Pdf.PdfAuthenticationRole.User = 0 -> Fluent.Pdf.PdfAuthenticationRole
 Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AL = 2 -> Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AN = 6 -> Fluent.Pdf.PdfBidiClass
@@ -276,6 +284,7 @@ Fluent.Pdf.PdfCanvasStyle.PdfCanvasStyle(Fluent.Pdf.PdfPaint? fill = null, Fluen
 Fluent.Pdf.PdfCanvasStyle.State.get -> Fluent.Pdf.PdfGraphicsState?
 Fluent.Pdf.PdfCanvasStyle.Stroke.get -> Fluent.Pdf.PdfPaint?
 Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.CmsEnvelopes = 8 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.Fonts = 6 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ImageCodecs = 5 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ReadDocument = 0 -> Fluent.Pdf.PdfCapability
@@ -284,6 +293,24 @@ Fluent.Pdf.PdfCapability.RenderHtml = 3 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderPages = 2 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ShapeText = 7 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.WriteDocument = 1 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCertificateCredential
+Fluent.Pdf.PdfCertificateCredential.OpenCertificate() -> System.IO.Stream!
+Fluent.Pdf.PdfCertificateCredential.PdfCertificateCredential(System.Security.Cryptography.X509Certificates.X509Certificate2! certificate, System.Security.Cryptography.RSA! privateKey) -> void
+Fluent.Pdf.PdfCertificateCredential.PrivateKey.get -> System.Security.Cryptography.RSA!
+Fluent.Pdf.PdfCertificateProtection
+Fluent.Pdf.PdfCertificateProtection.Cipher.get -> Fluent.Pdf.PdfPublicKeyCipher
+Fluent.Pdf.PdfCertificateProtection.EncryptMetadata.get -> bool
+Fluent.Pdf.PdfCertificateProtection.PdfCertificateProtection(Fluent.Pdf.PdfCertificateRecipient![]! recipients, Fluent.Pdf.PdfPublicKeyCipher cipher = Fluent.Pdf.PdfPublicKeyCipher.Aes256, bool encryptMetadata = true) -> void
+Fluent.Pdf.PdfCertificateProtection.Recipients.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCertificateRecipient!>!
+Fluent.Pdf.PdfCertificateRecipient
+Fluent.Pdf.PdfCertificateRecipient.KeyTransport.get -> Fluent.Pdf.PdfCmsKeyTransport
+Fluent.Pdf.PdfCertificateRecipient.OpenCertificate() -> System.IO.Stream!
+Fluent.Pdf.PdfCertificateRecipient.OwnerAuthority.get -> bool
+Fluent.Pdf.PdfCertificateRecipient.PdfCertificateRecipient(System.Security.Cryptography.X509Certificates.X509Certificate2! certificate, Fluent.Pdf.PdfDocumentPermissions permissions = Fluent.Pdf.PdfDocumentPermissions.All, bool ownerAuthority = false, Fluent.Pdf.PdfCmsKeyTransport keyTransport = Fluent.Pdf.PdfCmsKeyTransport.OaepSha256) -> void
+Fluent.Pdf.PdfCertificateRecipient.Permissions.get -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfCmsKeyTransport
+Fluent.Pdf.PdfCmsKeyTransport.LegacyPkcs1 = 1 -> Fluent.Pdf.PdfCmsKeyTransport
+Fluent.Pdf.PdfCmsKeyTransport.OaepSha256 = 0 -> Fluent.Pdf.PdfCmsKeyTransport
 Fluent.Pdf.PdfColor
 Fluent.Pdf.PdfColor.ColorSpace.get -> Fluent.Pdf.PdfColorSpace!
 Fluent.Pdf.PdfColor.Components.get -> System.Collections.Generic.IReadOnlyList<double>!
@@ -385,6 +412,17 @@ Fluent.Pdf.PdfDocument.Providers.get -> Fluent.Pdf.PdfProviderRegistry!
 Fluent.Pdf.PdfDocument.Save(System.IO.Stream! output, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfDocument.SaveFile(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfDocument.SourceDocument.get -> Fluent.Pdf.PdfSyntaxDocument?
+Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.All = Fluent.Pdf.PdfDocumentPermissions.Print | Fluent.Pdf.PdfDocumentPermissions.Modify | Fluent.Pdf.PdfDocumentPermissions.Extract | Fluent.Pdf.PdfDocumentPermissions.Annotate | Fluent.Pdf.PdfDocumentPermissions.FillForms | Fluent.Pdf.PdfDocumentPermissions.ExtractForAccessibility | Fluent.Pdf.PdfDocumentPermissions.Assemble | Fluent.Pdf.PdfDocumentPermissions.PrintHighQuality -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.Annotate = 32 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.Assemble = 1024 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.Extract = 16 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.ExtractForAccessibility = 512 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.FillForms = 256 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.Modify = 8 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.None = 0 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.Print = 4 -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfDocumentPermissions.PrintHighQuality = 2048 -> Fluent.Pdf.PdfDocumentPermissions
 Fluent.Pdf.PdfDocumentSnapshot
 Fluent.Pdf.PdfDocumentSnapshot.Options.get -> Fluent.Pdf.PdfOptions!
 Fluent.Pdf.PdfDocumentSnapshot.PageNumbering.get -> Fluent.Pdf.PdfPageNumbering?
@@ -1355,6 +1393,19 @@ Fluent.Pdf.PdfParagraphDirection
 Fluent.Pdf.PdfParagraphDirection.Auto = 0 -> Fluent.Pdf.PdfParagraphDirection
 Fluent.Pdf.PdfParagraphDirection.LeftToRight = 1 -> Fluent.Pdf.PdfParagraphDirection
 Fluent.Pdf.PdfParagraphDirection.RightToLeft = 2 -> Fluent.Pdf.PdfParagraphDirection
+Fluent.Pdf.PdfPassword
+Fluent.Pdf.PdfPassword.Dispose() -> void
+Fluent.Pdf.PdfPassword.PdfPassword(byte[]! preparedPasswordBytes) -> void
+Fluent.Pdf.PdfPasswordCipher
+Fluent.Pdf.PdfPasswordCipher.Aes128 = 1 -> Fluent.Pdf.PdfPasswordCipher
+Fluent.Pdf.PdfPasswordCipher.Aes256 = 0 -> Fluent.Pdf.PdfPasswordCipher
+Fluent.Pdf.PdfPasswordProtection
+Fluent.Pdf.PdfPasswordProtection.Cipher.get -> Fluent.Pdf.PdfPasswordCipher
+Fluent.Pdf.PdfPasswordProtection.EncryptMetadata.get -> bool
+Fluent.Pdf.PdfPasswordProtection.OwnerPassword.get -> Fluent.Pdf.PdfPassword!
+Fluent.Pdf.PdfPasswordProtection.PdfPasswordProtection(Fluent.Pdf.PdfPassword! userPassword, Fluent.Pdf.PdfPassword! ownerPassword, Fluent.Pdf.PdfDocumentPermissions permissions = Fluent.Pdf.PdfDocumentPermissions.All, Fluent.Pdf.PdfPasswordCipher cipher = Fluent.Pdf.PdfPasswordCipher.Aes256, bool encryptMetadata = true) -> void
+Fluent.Pdf.PdfPasswordProtection.Permissions.get -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfPasswordProtection.UserPassword.get -> Fluent.Pdf.PdfPassword!
 Fluent.Pdf.PdfPath
 Fluent.Pdf.PdfPath.Contains(Fluent.Pdf.PdfPoint point, bool evenOdd = false, double tolerance = 1E-09, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> bool
 Fluent.Pdf.PdfPath.Edit(int index, int removeCount, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfPathSegment!>! replacement, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPath!
@@ -1398,6 +1449,9 @@ Fluent.Pdf.PdfProviderRegistry.PdfProviderRegistry(params Fluent.Pdf.IPdfProvide
 Fluent.Pdf.PdfProviderRegistry.Supports(Fluent.Pdf.PdfCapability capability) -> bool
 Fluent.Pdf.PdfProviderUnavailableException
 Fluent.Pdf.PdfProviderUnavailableException.PdfProviderUnavailableException(Fluent.Pdf.PdfCapability capability) -> void
+Fluent.Pdf.PdfPublicKeyCipher
+Fluent.Pdf.PdfPublicKeyCipher.Aes128 = 1 -> Fluent.Pdf.PdfPublicKeyCipher
+Fluent.Pdf.PdfPublicKeyCipher.Aes256 = 0 -> Fluent.Pdf.PdfPublicKeyCipher
 Fluent.Pdf.PdfQuad
 Fluent.Pdf.PdfQuad.Bounds.get -> Fluent.Pdf.PdfRect
 Fluent.Pdf.PdfQuad.Contains(Fluent.Pdf.PdfPoint point) -> bool
@@ -1483,6 +1537,14 @@ Fluent.Pdf.PdfRevision.Entries.get -> System.Collections.Generic.IReadOnlyList<F
 Fluent.Pdf.PdfRevision.IsHybrid.get -> bool
 Fluent.Pdf.PdfRevision.StartXref.get -> long
 Fluent.Pdf.PdfRevision.Trailer.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfSecurity
+Fluent.Pdf.PdfSecurityResult
+Fluent.Pdf.PdfSecurityResult.Cipher.get -> string!
+Fluent.Pdf.PdfSecurityResult.EncryptMetadata.get -> bool
+Fluent.Pdf.PdfSecurityResult.Permissions.get -> Fluent.Pdf.PdfDocumentPermissions
+Fluent.Pdf.PdfSecurityResult.Report.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfSecurityResult.Revision.get -> int
+Fluent.Pdf.PdfSecurityResult.Role.get -> Fluent.Pdf.PdfAuthenticationRole
 Fluent.Pdf.PdfShading
 Fluent.Pdf.PdfShading.ColorSpace.get -> Fluent.Pdf.PdfColorSpace!
 Fluent.Pdf.PdfShading.Resource.get -> Fluent.Pdf.PdfGraphicsResource!
@@ -1924,6 +1986,10 @@ static Fluent.Pdf.PdfProviderRegistry.Default.get -> Fluent.Pdf.PdfProviderRegis
 static Fluent.Pdf.PdfProviderRegistry.Empty.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfRendering.RenderPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfRenderOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRaster!
 static Fluent.Pdf.PdfResourceSet.Empty.get -> Fluent.Pdf.PdfResourceSet!
+static Fluent.Pdf.PdfSecurity.DecryptWithCertificate(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfCertificateCredential! credential, Fluent.Pdf.PdfProviderRegistry! providers, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
+static Fluent.Pdf.PdfSecurity.DecryptWithPassword(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfPassword! password, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
+static Fluent.Pdf.PdfSecurity.EncryptWithCertificates(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfCertificateProtection! protection, Fluent.Pdf.PdfProviderRegistry! providers, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
+static Fluent.Pdf.PdfSecurity.EncryptWithPassword(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfPasswordProtection! protection, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfShading.Axial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfPoint start, Fluent.Pdf.PdfPoint end, Fluent.Pdf.PdfFunction! function, bool extendStart = false, bool extendEnd = false, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Functional(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfFunction! function, Fluent.Pdf.PdfRect domain, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Mesh(Fluent.Pdf.PdfColorSpace! colorSpace, int shadingType, System.IO.Stream! packedData, int bitsPerCoordinate, int bitsPerComponent, double[]! decode, int bitsPerFlag = 2, int verticesPerRow = 0, Fluent.Pdf.PdfFunction? function = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
