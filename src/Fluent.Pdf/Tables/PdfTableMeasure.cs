@@ -187,6 +187,7 @@ internal sealed class PdfTableMeasure
                 }
 
                 break;
+            case PdfFlowHeading heading: result = Natural(heading.Paragraph); break;
             case PdfFlowList list: result = Natural(list.ToTable(_options, _shaper, _context)); break;
             case PdfFlowComponent component:
                 double componentMinimum = 0, componentPreferred = 0;

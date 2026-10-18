@@ -543,7 +543,8 @@
           "Complete legal/booklet/notes/column corpus and full accessibility semantics/profile qualification",
           "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
         ],
-        "independentEvidence": "docs/evidence/FP-014-independent.json"
+        "independentEvidence": "docs/evidence/FP-014-independent.json",
+        "sourceEvidence": "docs/evidence/FP-014-source.json"
       }
     },
     {
@@ -574,7 +575,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/page-templates.md",
+        "implemented": [
+          "Bounded contents/index convergence and final first/odd/even header/footer callbacks with shared operation context",
+          "Explicit flow/vector/image or optional HTML decoration marked as artifacts",
+          "Final physical links and standard page-label restarts with immutable destination metadata"
+        ],
+        "pending": [
+          "Complete book-length/template/HTML-provider/fidelity corpus and full semantic structure qualification",
+          "Actual minimum runtimes, final packages and complete production gates"
+        ]
+      }
     },
     {
       "id": "FP-016",

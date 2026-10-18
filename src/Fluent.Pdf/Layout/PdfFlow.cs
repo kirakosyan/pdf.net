@@ -170,7 +170,7 @@ internal sealed partial class PdfFlowEngine
             used = Math.Max(used, notes.Select(v => v.Bounds.Top).DefaultIfEmpty(0).Max());
             if (p == _page)
                 used = Math.Max(used, Math.Min(_options.Frame.Height, _y));
-            pages[p] = new(p, canvas, lines.Select(l => l.Line).ToArray(), floats, tables, used, columns, notes);
+            pages[p] = new(p, canvas, lines.Select(l => l.Line).ToArray(), floats, tables, used, columns, notes, HeadingsForPage(p), LocatorsForPage(p));
         }
 
         return new(_options, pages);

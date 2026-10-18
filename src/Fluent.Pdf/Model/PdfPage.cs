@@ -15,6 +15,11 @@ public sealed class PdfPage
     {get{EnsureAttached();return _geometry;}set{EnsureEditable();if(value==null)throw new ArgumentNullException(nameof(value));_geometry=value;_size=value.Size;_rotation=value.Rotation;}}
     internal IReadOnlyList<string> StructureRoles { get; private set; } = System.Array.Empty<string>();
     internal void SetStructureRoles(IReadOnlyList<string> roles) { EnsureEditable(); StructureRoles = roles; }
+    private readonly List<(PdfRect Bounds, PdfPage Target, PdfPoint Point)> _deferredLinks = new();
+    internal void AddDeferredLink(PdfRect bounds, PdfPage target, PdfPoint point, PdfOperationContext context)
+    { EnsureEditable(); target.EnsureAttached(); if(!ReferenceEquals(_owner,target._owner))throw new ArgumentException("A deferred destination belongs to another document.",nameof(target));if(bounds.Width<=0||bounds.Height<=0)throw new ArgumentException("A link requires a positive rectangle.",nameof(bounds));context.Consume(PdfResourceKind.Objects,1);context.Consume(PdfResourceKind.ExpandedBytes,96);_deferredLinks.Add((bounds,target,point)); }
+    internal IReadOnlyList<PdfPageLinkSnapshot> SnapshotLinks(IReadOnlyDictionary<PdfPage,int> indices,PdfOperationContext? context)
+    { context?.Consume(PdfResourceKind.ExpandedBytes,_deferredLinks.Count*64L+32);var values=new PdfPageLinkSnapshot[_deferredLinks.Count];for(int i=0;i<values.Length;i++){if(!indices.TryGetValue(_deferredLinks[i].Target,out int target))throw new InvalidOperationException("An internal destination page has been removed.");values[i]=new(_deferredLinks[i].Bounds,target,_deferredLinks[i].Point);}return System.Array.AsReadOnly(values); }
     private PdfPageSource? _source;
     private PdfContentProgram? _content;
     private IReadOnlyList<PdfCanvasPageLayer> _canvasLayers=System.Array.Empty<PdfCanvasPageLayer>();

@@ -22,6 +22,8 @@ public sealed class PdfContentOperation
         Token = token;
         Operands = new ReadOnlyCollection<PdfValue>((PdfValue[])operands.Clone());
         if((operation==PdfOperator.BeginMarkedContentProperties||operation==PdfOperator.MarkPointProperties)&&operands.Length==2&&operands[1].Kind==PdfValueKind.Dictionary&&operands[1].Entries.ContainsKey("ActualText"))version=PdfVersionNumber.Text(Math.Max(14,PdfVersionNumber.Parse(version)));
+        if ((operation == PdfOperator.BeginMarkedContent || operation == PdfOperator.BeginMarkedContentProperties) && operands.Length > 0 && operands[0].Kind == PdfValueKind.Name && operands[0].NameValue == "Artifact")
+            version = PdfVersionNumber.Text(Math.Max(14, PdfVersionNumber.Parse(version)));
         MinimumVersion = version;
     }
 

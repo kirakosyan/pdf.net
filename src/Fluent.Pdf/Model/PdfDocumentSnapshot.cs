@@ -6,9 +6,9 @@ namespace Fluent.Pdf;
 /// <remarks>Snapshots remain valid after the source document changes or is disposed. They are not PDF bytes.</remarks>
 public sealed class PdfDocumentSnapshot
 {
-    internal PdfDocumentSnapshot(PdfOptions options, PdfPageSnapshot[] pages,PdfSyntaxDocument? source=null,IReadOnlyList<PdfObjectId>? originalOrder=null,PdfWriteOptions? writeOptions=null)
+    internal PdfDocumentSnapshot(PdfOptions options, PdfPageSnapshot[] pages,PdfSyntaxDocument? source=null,IReadOnlyList<PdfObjectId>? originalOrder=null,PdfWriteOptions? writeOptions=null,PdfPageNumbering? pageNumbering=null)
     {
-        Options = options;
+        PageNumbering=pageNumbering;Options = options;
         Pages = new ReadOnlyCollection<PdfPageSnapshot>(pages);
         SourceDocument=source;OriginalOrder=originalOrder??System.Array.Empty<PdfObjectId>();WriteOptions=writeOptions??PdfWriteOptions.Default;
     }
@@ -21,13 +21,15 @@ public sealed class PdfDocumentSnapshot
     public PdfSyntaxDocument? SourceDocument{get;}
     /// <summary>Gets the immutable save choices captured for this writer invocation.</summary>
     public PdfWriteOptions WriteOptions{get;}
+    /// <summary>Gets explicit generated page-label ranges, or null to preserve source labels.</summary>
+    public PdfPageNumbering? PageNumbering{get;}
     internal IReadOnlyList<PdfObjectId> OriginalOrder{get;}
 }
 
 /// <summary>A detached, immutable page geometry value.</summary>
 public readonly struct PdfPageSnapshot
 {
-    internal PdfPageSnapshot(PdfPageSize size, PdfPageRotation rotation,PdfPageSource? source=null,PdfContentProgram? content=null,IReadOnlyDictionary<string,PdfFontResource>? fonts=null,PdfResourceSet? graphics=null,PdfPageGeometry? geometry=null,IReadOnlyList<PdfCanvasPageLayer>? canvasLayers=null,IReadOnlyList<string>? structureRoles=null) { StructureRoles=structureRoles??System.Array.Empty<string>();CanvasLayers=canvasLayers??System.Array.Empty<PdfCanvasPageLayer>();Geometry=geometry??new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0,0,size.Width,size.Height)),rotation);GraphicsResources=graphics??PdfResourceSet.Empty;Size = size; Rotation = rotation;Source=source;Content=content;FontResources=fonts??new System.Collections.ObjectModel.ReadOnlyDictionary<string,PdfFontResource>(new Dictionary<string,PdfFontResource>()); }
+    internal PdfPageSnapshot(PdfPageSize size, PdfPageRotation rotation,PdfPageSource? source=null,PdfContentProgram? content=null,IReadOnlyDictionary<string,PdfFontResource>? fonts=null,PdfResourceSet? graphics=null,PdfPageGeometry? geometry=null,IReadOnlyList<PdfCanvasPageLayer>? canvasLayers=null,IReadOnlyList<string>? structureRoles=null,IReadOnlyList<PdfPageLinkSnapshot>? links=null) { Links=links??System.Array.Empty<PdfPageLinkSnapshot>();StructureRoles=structureRoles??System.Array.Empty<string>();CanvasLayers=canvasLayers??System.Array.Empty<PdfCanvasPageLayer>();Geometry=geometry??new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0,0,size.Width,size.Height)),rotation);GraphicsResources=graphics??PdfResourceSet.Empty;Size = size; Rotation = rotation;Source=source;Content=content;FontResources=fonts??new System.Collections.ObjectModel.ReadOnlyDictionary<string,PdfFontResource>(new Dictionary<string,PdfFontResource>()); }
     /// <summary>Gets the unrotated physical size.</summary>
     public PdfPageSize Size { get; }
     /// <summary>Gets the clockwise display rotation.</summary>
@@ -44,6 +46,8 @@ public readonly struct PdfPageSnapshot
     public PdfResourceSet GraphicsResources{get;}
     /// <summary>Gets ordered basic structure roles matching generated page MCIDs; this does not declare PDF/UA conformance.</summary>
     public IReadOnlyList<string> StructureRoles{get;}
+    /// <summary>Gets resolved immutable internal links.</summary>
+    public IReadOnlyList<PdfPageLinkSnapshot> Links{get;}
     /// <summary>Gets immutable named replacement font resources.</summary>
     public IReadOnlyDictionary<string,PdfFontResource> FontResources{get;}
 }

@@ -62,7 +62,7 @@ public sealed class PdfFlowFloatPlacement
 /// <summary>An immutable page with line/float geometry and its complete reusable canvas.</summary>
 public sealed class PdfFlowPage
 {
-    internal PdfFlowPage(int index, PdfCanvasResult canvas, PdfFlowLine[] lines, PdfFlowFloatPlacement[] floats, PdfTableFragment[] tables, double contentHeight, PdfFlowColumnPlacement[] columns, PdfFlowNotePlacement[] notes)
+    internal PdfFlowPage(int index, PdfCanvasResult canvas, PdfFlowLine[] lines, PdfFlowFloatPlacement[] floats, PdfTableFragment[] tables, double contentHeight, PdfFlowColumnPlacement[] columns, PdfFlowNotePlacement[] notes, PdfFlowHeadingPlacement[] headings, PdfTemplateLocator[] locators)
     {
         Index = index;
         Canvas = canvas;
@@ -72,7 +72,11 @@ public sealed class PdfFlowPage
         ContentHeight = contentHeight;
         Columns = new ReadOnlyCollection<PdfFlowColumnPlacement>(columns);
         Notes = new ReadOnlyCollection<PdfFlowNotePlacement>(notes);
+        Headings = new ReadOnlyCollection<PdfFlowHeadingPlacement>(headings);
+        TemplateLocators = locators;
     }
+
+    internal PdfTemplateLocator[] TemplateLocators { get; }
 
     /// <summary>Gets the zero-based output page index.</summary>
     public int Index { get; }
@@ -90,6 +94,8 @@ public sealed class PdfFlowPage
     public IReadOnlyList<PdfFlowColumnPlacement> Columns { get; }
     /// <summary>Gets footnotes/endnotes and their reference associations.</summary>
     public IReadOnlyList<PdfFlowNotePlacement> Notes { get; }
+    /// <summary>Gets resolved explicit body headings on this page.</summary>
+    public IReadOnlyList<PdfFlowHeadingPlacement> Headings { get; }
 }
 
 /// <summary>A detached deterministic layout, ready for independent page inspection and managed writing.</summary>

@@ -144,6 +144,11 @@ public sealed class PdfFlowList : PdfFlowBlock
         return result;
     }
 
+    internal PdfFlowList WithContent(Func<IReadOnlyList<PdfFlowBlock>, IReadOnlyList<PdfFlowBlock>> map)
+    {
+        var value = new PdfFlowList(Items.Select(item => new PdfFlowListItem(map(item.Content), item.CounterValue)).ToArray(), Markers.ToArray(), Counters.ToArray(), MarkerStyle, MarkerWidth, Gap);
+        value.OperationReport = OperationReport; return value;
+    }
     internal PdfTable ToTable(PdfFlowOptions options, IPdfTextShaper shaper, PdfOperationContext context)
     {
         context.Consume(PdfResourceKind.ExpandedBytes, Items.Count * 512L + 256);

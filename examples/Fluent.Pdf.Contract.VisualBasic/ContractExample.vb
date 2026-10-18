@@ -4,6 +4,17 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteTemplatePdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 10)
+        Dim blocks As PdfFlowBlock() = {New PdfFlowContents(style), New PdfFlowHeading("intro", "Introduction", style), New PdfFlowParagraph("A document with final page totals and linked contents.", style)}
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 300, 200)))
+        Dim template = New PdfPageTemplate(footerHeight:=18, footer:=Function(c) PdfPageDecoration.Flow({New PdfFlowParagraph(c.PageLabel & " of " & c.TotalPages.ToString(System.Globalization.CultureInfo.InvariantCulture), style)}))
+        Dim result = PdfTemplateLayout.Layout(blocks, New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper), template)
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function WriteCompositionPdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
         Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
         Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)

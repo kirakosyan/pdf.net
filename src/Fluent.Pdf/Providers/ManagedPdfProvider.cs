@@ -201,6 +201,8 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
         if (document.SourceDocument == null)
             edit.Set(catalogId, Dictionary(("Type", PdfValue.Name("Catalog")), ("Pages", PdfValue.Reference(pagesId))));
         PdfBasicStructure.Write(edit,catalogId,pageIds,document.Pages,context);
+        PdfDeferredNavigation.Write(edit,catalogId,pageIds,document,context);
+        if(document.PageNumbering!=null)writeOptions=writeOptions.RequireVersion("1.3");
         edit.WriteCore(output, writeOptions, context);
     }
 
