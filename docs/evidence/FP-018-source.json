@@ -230,5 +230,6 @@
     "behavior": "Later unrelated content outside an owned isolation pair retains the exact state operators as ordinary content, with private scope markers relinquished; the unrelated invocation retains its original transform.",
     "sourceContractRegression": "The surviving resource invocation remains at identity transform after an original0.5CTM program inside the owned pair.",
     "independentObservation": "MuPDF confirms20..100point red frames before(twoinvocations) andafter(oneunrelatedinvocation) removal; pypdf finds no remaining owned markers."
-  }
+  },
+  "successfulSourceCI": "docs/evidence/PR-118-CI-103-source.json"
 }

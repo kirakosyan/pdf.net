@@ -4,6 +4,9 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function Search(source As PdfDocumentSnapshot, literal As String) As PdfTextSearchResult
+        Return PdfTextSearch.FindPage(source, 0, New PdfTextQuery(literal))
+    End Function
     Public Function ExtractResources(source As PdfDocumentSnapshot, page As Integer) As PdfPageResourceManifest
         Return PdfResourceExtraction.ReadPage(source, page)
     End Function

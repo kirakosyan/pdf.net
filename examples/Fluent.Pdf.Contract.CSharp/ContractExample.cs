@@ -5,6 +5,7 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfTextSearchResult Search(PdfDocumentSnapshot source, string literal) => PdfTextSearch.FindPage(source, 0, new PdfTextQuery(literal));
     public static PdfPageResourceManifest ExtractResources(PdfDocumentSnapshot source, int page) => PdfResourceExtraction.ReadPage(source, page);
     public static PdfDocument Stamp(PdfDocumentSnapshot source, string identifier, PdfStampContent content, int[] pages, PdfStampOptions options) => PdfStamps.Apply(source, identifier, content, pages, options);
     public static PdfProviderRegistry HtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory host, string exactVersion, string exactRevision) => new(new Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision));

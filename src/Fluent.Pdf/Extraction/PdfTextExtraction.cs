@@ -28,6 +28,7 @@ internal sealed class PdfTextPageData
 {
     internal readonly int Page;
     internal readonly PdfPageGeometry Geometry;
+    internal PdfContentProgram Program = null!;
     internal readonly List<PdfExtractedCharacter> Characters = new();
     internal readonly List<PdfExtractedSpan> Spans = new();
     internal List<PdfExtractedWord> Words = new();
@@ -98,6 +99,7 @@ internal sealed class PdfTextExtractionEngine
         var binding = page.Source!;
         var resources = _graph.Get(binding.EffectiveAttributes, "Resources");
         var program = PdfPageContent.Read(binding, PdfUnknownOperatorPolicy.Reject, null, _providers, Context);
+        _page.Program = program;
         try
         {
             Execute(program, resources, new State(), true);
@@ -266,6 +268,7 @@ internal sealed class PdfTextExtractionEngine
         while (at < encoded.StringBytes.Count)
         {
             Context.Checkpoint();
+            int byteOffset = at;
             var decoded = font.Decode(encoded.StringBytes, ref at, keep);
             var metrics = font.Metrics(decoded.Code);
             _totalCodes++;
@@ -286,7 +289,7 @@ internal sealed class PdfTextExtractionEngine
                 var emOrigin = _display.Multiply(origin).Transform(new(0, 0));
                 var emTop = _display.Multiply(origin).Transform(new(0, state.Size));
                 double size = Distance(emOrigin, emTop);
-                _page.Characters.Add(new(_page.Characters.Count, ordinal, decoded.Code, decoded.Length, decoded.Text, decoded.Confidence, quad, user, start, end, font.Name, size, state.Mode, visible, font.Estimated || font.WidthWasEstimated));
+                _page.Characters.Add(new(_page.Characters.Count, ordinal, decoded.Code, decoded.Length, decoded.Text, decoded.Confidence, quad, user, start, end, font.Name, size, state.Mode, visible, font.Estimated || font.WidthWasEstimated) { EncodedString = encoded, ByteOffset = byteOffset, AdvanceTJ = (font.Vertical ? metrics.AdvanceY : metrics.Width) + 1000 * (state.CharacterSpacing + (decoded.Length == 1 && decoded.Code == 32 ? state.WordSpacing : 0)) / state.Size, Vertical = font.Vertical });
             }
 
             double spacing = state.CharacterSpacing + (decoded.Length == 1 && decoded.Code == 32 ? state.WordSpacing : 0);

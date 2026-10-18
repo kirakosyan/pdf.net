@@ -72,3 +72,5 @@ The reviewed wordnet upstream implementation provides useful Tesseract 5 loading
 [MIT](LICENSE). Optional dependencies, native engines, fonts and OCR models retain their own licenses and redistribution requirements. Shipping assets require the inventory in [FP-095](docs/requirements/FP-095.md).
 
 FP-028 adds [resource extraction](docs/resource-extraction.md): shared definitions, actual transformed uses, literal paths, artifacts and exact encoded stream export. Complete profiles and production qualification remain mandatory.
+
+FP-026 adds [bounded text search and explicit replacement](docs/text-search.md). Complete profiles and production qualification remain mandatory.

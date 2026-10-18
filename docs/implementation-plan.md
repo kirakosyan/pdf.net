@@ -148,3 +148,5 @@ Source progress through #35 now includes [bounded HTML print layout and structur
 Source progress through #36 now includes [owned watermarks/stamps and artifact classification](stamps.md). Full FP-018 profiles and production qualification remain mandatory; dependent requirements remain independently scoped.
 
 Source progress through #37 now includes [resource extraction](resource-extraction.md). Full FP-028 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #38 now includes [search and text replacement](text-search.md). Full FP-026 scope and production qualification remain mandatory; dependent requirements remain independently scoped.

@@ -59,3 +59,5 @@ Archive and verify qualification reports, source/package hashes and release-owne
 Before any recursive Windows deletion or move, resolve and verify absolute target paths remain within the explicitly intended workspace/resource directory. Use native PowerShell LiteralPath operations end to end. Report removed, retained and failed resources. Never remove research evidence until it is preserved and the owner has authorized its disposal.
 
 Passive resource/path/artifact inventory, exact encoded stream export and explicit embedded-font inspection now have a source profile; complete resource/program profiles and production qualification remain pending.
+
+Bounded literal/regex/region/style search and explicit advance-preserving text replacement now have a source profile; complete replacement/reflow/accessibility profiles and production qualification remain pending.

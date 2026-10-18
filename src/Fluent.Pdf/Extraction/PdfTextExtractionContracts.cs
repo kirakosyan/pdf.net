@@ -68,6 +68,10 @@ public sealed class PdfExtractedCharacter
         GeometryEstimated = approximate;
     }
 
+    internal PdfValue EncodedString { get; set; } = PdfValue.Null;
+    internal int ByteOffset { get; set; }
+    internal double AdvanceTJ { get; set; }
+    internal bool Vertical { get; set; }
     /// <summary>Gets raw execution order within the selected page.</summary>
     public int Index { get; }
     /// <summary>Gets source operator execution order, including nested Forms.</summary>

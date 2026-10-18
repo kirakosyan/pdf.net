@@ -1960,12 +1960,43 @@ Fluent.Pdf.PdfTextMappingConfidence.ActualText = 1 -> Fluent.Pdf.PdfTextMappingC
 Fluent.Pdf.PdfTextMappingConfidence.Inferred = 2 -> Fluent.Pdf.PdfTextMappingConfidence
 Fluent.Pdf.PdfTextMappingConfidence.ToUnicode = 0 -> Fluent.Pdf.PdfTextMappingConfidence
 Fluent.Pdf.PdfTextMappingConfidence.Unmapped = 3 -> Fluent.Pdf.PdfTextMappingConfidence
+Fluent.Pdf.PdfTextMatch
+Fluent.Pdf.PdfTextMatch.Bounds.get -> Fluent.Pdf.PdfRect?
+Fluent.Pdf.PdfTextMatch.Characters.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedCharacter!>!
+Fluent.Pdf.PdfTextMatch.IsPartialCluster.get -> bool
+Fluent.Pdf.PdfTextMatch.Start.get -> int
+Fluent.Pdf.PdfTextMatch.Text.get -> string!
+Fluent.Pdf.PdfTextMatch.UsesActualText.get -> bool
 Fluent.Pdf.PdfTextOptions
 Fluent.Pdf.PdfTextOptions.Features.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTextFeature>!
 Fluent.Pdf.PdfTextOptions.Language.get -> string!
 Fluent.Pdf.PdfTextOptions.ParagraphDirection.get -> Fluent.Pdf.PdfParagraphDirection
 Fluent.Pdf.PdfTextOptions.PdfTextOptions(Fluent.Pdf.PdfParagraphDirection paragraphDirection = Fluent.Pdf.PdfParagraphDirection.Auto, bool vertical = false, string! language = "und", params Fluent.Pdf.PdfTextFeature[]! features) -> void
 Fluent.Pdf.PdfTextOptions.Vertical.get -> bool
+Fluent.Pdf.PdfTextQuery
+Fluent.Pdf.PdfTextQuery.FontName.get -> string?
+Fluent.Pdf.PdfTextQuery.IgnoreCase.get -> bool
+Fluent.Pdf.PdfTextQuery.IsRegex.get -> bool
+Fluent.Pdf.PdfTextQuery.MaximumFontSize.get -> double?
+Fluent.Pdf.PdfTextQuery.MaximumMatches.get -> int
+Fluent.Pdf.PdfTextQuery.MinimumFontSize.get -> double?
+Fluent.Pdf.PdfTextQuery.Pattern.get -> string!
+Fluent.Pdf.PdfTextQuery.PdfTextQuery(string! pattern, bool regex = false, bool ignoreCase = false, int maximumMatches = 10000, int regexTimeoutMilliseconds = 100, Fluent.Pdf.PdfRect? region = null, string? fontName = null, double? minimumFontSize = null, double? maximumFontSize = null) -> void
+Fluent.Pdf.PdfTextQuery.RegexTimeoutMilliseconds.get -> int
+Fluent.Pdf.PdfTextQuery.Region.get -> Fluent.Pdf.PdfRect?
+Fluent.Pdf.PdfTextReplacementOptions
+Fluent.Pdf.PdfTextReplacementOptions.FontSize.get -> double
+Fluent.Pdf.PdfTextReplacementOptions.Overflow.get -> Fluent.Pdf.PdfTextReplacementOverflow
+Fluent.Pdf.PdfTextReplacementOptions.PdfTextReplacementOptions(double fontSize, Fluent.Pdf.PdfTextReplacementOverflow overflow = Fluent.Pdf.PdfTextReplacementOverflow.Reject) -> void
+Fluent.Pdf.PdfTextReplacementOverflow
+Fluent.Pdf.PdfTextReplacementOverflow.Reject = 0 -> Fluent.Pdf.PdfTextReplacementOverflow
+Fluent.Pdf.PdfTextReplacementOverflow.ShrinkToFit = 1 -> Fluent.Pdf.PdfTextReplacementOverflow
+Fluent.Pdf.PdfTextSearch
+Fluent.Pdf.PdfTextSearchResult
+Fluent.Pdf.PdfTextSearchResult.Matches.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTextMatch!>!
+Fluent.Pdf.PdfTextSearchResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTextSearchResult.PageIndex.get -> int
+Fluent.Pdf.PdfTextSearchResult.Text.get -> string!
 Fluent.Pdf.PdfTextString
 Fluent.Pdf.PdfTextString.Encoding.get -> Fluent.Pdf.PdfTextStringEncoding
 Fluent.Pdf.PdfTextString.MinimumVersion.get -> string!
@@ -2288,6 +2319,8 @@ static Fluent.Pdf.PdfTemplateLayout.Layout(System.Collections.Generic.IEnumerabl
 static Fluent.Pdf.PdfText.Shape(string! text, Fluent.Pdf.PdfFontFallback! fonts, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfTextOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShapedText!
 static Fluent.Pdf.PdfTextDrawing.Create(Fluent.Pdf.PdfShapedText! text, double x, double y, double fontSize, double lineHeight = 1.2, string! resourcePrefix = "FT", bool subset = true, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextDrawing!
 static Fluent.Pdf.PdfTextExtraction.ReadPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfTextExtractionOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextExtractionResult!
+static Fluent.Pdf.PdfTextSearch.FindPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfTextQuery! query, Fluent.Pdf.PdfTextExtractionOptions? extraction = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextSearchResult!
+static Fluent.Pdf.PdfTextSearch.ReplacePage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfTextQuery! query, string! replacement, Fluent.Pdf.PdfFontFallback! fonts, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfTextReplacementOptions! options, Fluent.Pdf.PdfOrganizationOptions? organization = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfTextString.Create(string! text, Fluent.Pdf.PdfTextStringEncoding encoding = Fluent.Pdf.PdfTextStringEncoding.Utf16BigEndian, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextString!
 static Fluent.Pdf.PdfTextString.Read(Fluent.Pdf.PdfValue! value, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextString!
 static Fluent.Pdf.PdfTransparencyGroup.Create(Fluent.Pdf.PdfDrawing! drawing, Fluent.Pdf.PdfRect bounds, Fluent.Pdf.PdfColorSpace! colorSpace, bool isolated = false, bool knockout = false, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTransparencyGroup!
