@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace Fluent.Pdf;
 /// <summary>An immutable line with exact logical paragraph provenance and physical point geometry.</summary>
@@ -61,7 +62,7 @@ public sealed class PdfFlowFloatPlacement
 /// <summary>An immutable page with line/float geometry and its complete reusable canvas.</summary>
 public sealed class PdfFlowPage
 {
-    internal PdfFlowPage(int index, PdfCanvasResult canvas, PdfFlowLine[] lines, PdfFlowFloatPlacement[] floats, PdfTableFragment[] tables, double contentHeight)
+    internal PdfFlowPage(int index, PdfCanvasResult canvas, PdfFlowLine[] lines, PdfFlowFloatPlacement[] floats, PdfTableFragment[] tables, double contentHeight, PdfFlowColumnPlacement[] columns, PdfFlowNotePlacement[] notes)
     {
         Index = index;
         Canvas = canvas;
@@ -69,6 +70,8 @@ public sealed class PdfFlowPage
         Floats = new ReadOnlyCollection<PdfFlowFloatPlacement>(floats);
         Tables = new ReadOnlyCollection<PdfTableFragment>(tables);
         ContentHeight = contentHeight;
+        Columns = new ReadOnlyCollection<PdfFlowColumnPlacement>(columns);
+        Notes = new ReadOnlyCollection<PdfFlowNotePlacement>(notes);
     }
 
     /// <summary>Gets the zero-based output page index.</summary>
@@ -83,6 +86,10 @@ public sealed class PdfFlowPage
     public IReadOnlyList<PdfTableFragment> Tables { get; }
     /// <summary>Gets the occupied vertical extent below the page content top, in physical points.</summary>
     public double ContentHeight { get; }
+    /// <summary>Gets logical columns in content-stream and structure order.</summary>
+    public IReadOnlyList<PdfFlowColumnPlacement> Columns { get; }
+    /// <summary>Gets footnotes/endnotes and their reference associations.</summary>
+    public IReadOnlyList<PdfFlowNotePlacement> Notes { get; }
 }
 
 /// <summary>A detached deterministic layout, ready for independent page inspection and managed writing.</summary>
@@ -102,19 +109,40 @@ public sealed class PdfFlowResult
     public PdfOperationReport OperationReport { get; internal set; } = null!;
 
     /// <summary>Creates a caller-owned document from already laid-out pages. Save is a separate bounded operation.</summary>
-    public PdfDocument CreateDocument(PdfOptions? options = null)
+    public PdfDocument CreateDocument(PdfOptions? options = null, CancellationToken cancellationToken = default)
     {
         var document = Pdf.Create(options);
         try
         {
-            foreach (var page in Pages)
+            var finish = new List<Action<PdfOperationReport>>();
+            bool tagged = Pages.Any(p => p.Columns.Count > 0);
+            var report = PdfFont.Run("CreateFlowDocument", "managed.composition", document.Options.OperationPolicy, cancellationToken, context =>
             {
-                var target = document.Pages.Add(Options.Geometry);
-                foreach (var binding in page.Canvas.Drawing.Resources.Bindings)
-                    target.SetResource(binding.Name, binding.Resource);
-                target.Content = page.Canvas.Drawing.Content;
-            }
-
+                foreach (var page in Pages)
+                {
+                    context.Checkpoint();
+                    context.Consume(PdfResourceKind.Objects, 1);
+                    context.Consume(PdfResourceKind.ExpandedBytes, 512);
+                    var target = document.Pages.Add(Options.Geometry);
+                    if (tagged)
+                    {
+                        var value = PdfFlowTaggedPage.Build(page, Options, context, finish);
+                        foreach (var binding in value.Resources.Bindings)
+                            target.SetResource(binding.Name, binding.Resource);
+                        target.Content = value.Content;
+                        target.SetStructureRoles(value.Roles);
+                    }
+                    else
+                    {
+                        foreach (var binding in page.Canvas.Drawing.Resources.Bindings)
+                            target.SetResource(binding.Name, binding.Resource);
+                        target.Content = page.Canvas.Drawing.Content;
+                    }
+                }
+            }, PdfCapability.WriteDocument);
+            foreach (var complete in finish)
+                complete(report);
+            document.SetCompositionReport(report);
             return document;
         }
         catch

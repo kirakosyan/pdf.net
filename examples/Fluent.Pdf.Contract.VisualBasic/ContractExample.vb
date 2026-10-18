@@ -4,6 +4,19 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteCompositionPdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)
+        Dim small = New PdfFlowTextStyle(style.Fonts, 8)
+        Dim list = PdfFlowList.Create({New PdfFlowListItem({New PdfFlowParagraph("first item", style)}), New PdfFlowListItem({New PdfFlowParagraph("second item", style)})}, style)
+        Dim note = New PdfFlowNote("source", "1", {New PdfFlowParagraph("source note", small)}, small)
+        Dim blocks As PdfFlowBlock() = {New PdfFlowColumns(New PdfFlowBlock() {list, New PdfFlowParagraph("office office office office office office", style)}, height:=100), New PdfFlowNoteReference(New PdfFlowParagraph("reference", style), note)}
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 300, 200)))
+        Dim result = PdfFlow.Layout(blocks, New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper))
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function WriteTablePdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
         Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
         Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)

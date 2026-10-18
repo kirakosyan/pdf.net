@@ -88,6 +88,8 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
                     break;
                 }
 
+        if(document.SourceDocument!=null&&edit.Resolve(catalogId).Entries.ContainsKey("StructTreeRoot")&&(orderChanged||document.Pages.Any(p=>p.Content!=null||p.CanvasLayers.Count>0)))
+            throw PdfWriterCore.Error(context,"Structure.SourceEditPolicy","Editing source structure associations requires an explicit structure-preservation profile.");
         var pageIds = new List<PdfValue>(document.Pages.Count);
         var writeOptions=document.WriteOptions;
         var embeddedFonts=new Dictionary<PdfFontResource,PdfObjectId>();
@@ -100,7 +102,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             if (binding != null && !ReferenceEquals(binding.Document, document.SourceDocument))
                 throw PdfWriterCore.Error(context, "Writer.PageImportRequired", "A page from another graph requires the explicit page import operation.");
             bool geometryChanged=binding==null||!page.Geometry.Equals(binding.Geometry);
-            bool changed = binding == null || orderChanged || geometryChanged || page.Content!=null || page.FontResources.Count>0 || page.GraphicsResources.Bindings.Count>0 || page.CanvasLayers.Count>0;
+            bool changed = binding == null || orderChanged || geometryChanged || page.Content!=null || page.FontResources.Count>0 || page.GraphicsResources.Bindings.Count>0 || page.CanvasLayers.Count>0 || page.StructureRoles.Count>0;
             if (binding == null)
                 id = edit.Add(PdfValue.Null);
             else
@@ -171,6 +173,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
                 }
                 entries["Resources"]=PdfValue.OwnedDictionary(resources);
             }
+            if(page.StructureRoles.Count>0){entries["StructParents"]=PdfValue.Integer(pageIds.Count-1);writeOptions=writeOptions.RequireVersion("1.3");}
             edit.Set(id, PdfValue.OwnedDictionary(entries));
         }
 
@@ -197,6 +200,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
 
         if (document.SourceDocument == null)
             edit.Set(catalogId, Dictionary(("Type", PdfValue.Name("Catalog")), ("Pages", PdfValue.Reference(pagesId))));
+        PdfBasicStructure.Write(edit,catalogId,pageIds,document.Pages,context);
         edit.WriteCore(output, writeOptions, context);
     }
 

@@ -187,6 +187,15 @@ internal sealed class PdfTableMeasure
                 }
 
                 break;
+            case PdfFlowList list: result = Natural(list.ToTable(_options, _shaper, _context)); break;
+            case PdfFlowComponent component:
+                double componentMinimum = 0, componentPreferred = 0;
+                foreach (var child in component.Content) { var natural = Natural(child); componentMinimum = Math.Max(componentMinimum, natural.Minimum); componentPreferred = Math.Max(componentPreferred, natural.Preferred); }
+                result = (componentMinimum, componentPreferred); break;
+            case PdfFlowColumns columns:
+                double columnMinimum = 0, columnPreferred = 0;
+                foreach (var child in columns.Content) { var natural = Natural(child); columnMinimum = Math.Max(columnMinimum, natural.Minimum); columnPreferred = Math.Max(columnPreferred, natural.Preferred); }
+                result = (columnMinimum * columns.Count + columns.Gap * (columns.Count - 1), columnPreferred * columns.Count + columns.Gap * (columns.Count - 1)); break;
             case PdfFlowPageBreak:
                 throw Error("Table.CellPageBreak", "An explicit page break inside a cell requires a separate cell-fragment policy.");
             default:

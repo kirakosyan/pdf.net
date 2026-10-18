@@ -80,7 +80,7 @@ internal static class PdfFlowLinePainter
                 var code = new byte[codeWidth];
                 for (int b = 0; b < codeWidth; b++)
                     code[b] = bytes[i * codeWidth + b];
-                double gx = x + glyph.OffsetX * scale, gy = glyph.OffsetY * scale;
+                double gx = x + glyph.OffsetX * scale, gy = glyph.OffsetY * scale + textStyle.BaselineShift;
                 operations.Add(new(PdfOperator.TextMatrix, PdfValue.Integer(1), PdfValue.Integer(0), PdfValue.Integer(0), PdfValue.Integer(1), PdfValues.Real(gx), PdfValues.Real(gy)));
                 operations.Add(new(PdfOperator.ShowText, PdfValue.String(code)));
                 left = Math.Min(left, gx + m.Left * scale);

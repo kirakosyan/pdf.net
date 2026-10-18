@@ -51,12 +51,14 @@ public enum PdfFlowClear
 public sealed class PdfFlowTextStyle
 {
     /// <summary>Captures explicit fonts, physical size, horizontal shaping options and color.</summary>
-    public PdfFlowTextStyle(PdfFontFallback fonts, double fontSize = 12, PdfTextOptions? textOptions = null, PdfColor? color = null)
+    public PdfFlowTextStyle(PdfFontFallback fonts, double fontSize = 12, PdfTextOptions? textOptions = null, PdfColor? color = null, double baselineShift = 0)
     {
         Fonts = fonts ?? throw new ArgumentNullException(nameof(fonts));
         PdfGraphicsNumbers.Finite(fontSize);
         if (fontSize <= 0)
             throw new ArgumentOutOfRangeException(nameof(fontSize));
+        PdfGraphicsNumbers.Finite(baselineShift);
+        BaselineShift = baselineShift;
         FontSize = fontSize;
         var o = textOptions ?? new PdfTextOptions();
         if (o.Vertical)
@@ -71,6 +73,8 @@ public sealed class PdfFlowTextStyle
     public PdfFontFallback Fonts { get; }
     /// <summary>Gets the typographic size in physical points.</summary>
     public double FontSize { get; }
+    /// <summary>Gets a finite physical baseline raise, in points.</summary>
+    public double BaselineShift { get; }
     /// <summary>Gets immutable language, direction and shaping feature choices.</summary>
     public PdfTextOptions TextOptions { get; }
     /// <summary>Gets the explicit text paint color.</summary>

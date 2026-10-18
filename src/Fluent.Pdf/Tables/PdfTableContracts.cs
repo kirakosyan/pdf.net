@@ -210,6 +210,7 @@ public sealed class PdfTable : PdfFlowBlock
     /// <summary>Gets the successful bounded grid-construction or data-binding report.</summary>
     public PdfOperationReport OperationReport { get; internal set; } = null!;
     internal PdfTableGridCell[] Grid { get; }
+    internal PdfFlowList? ListSource { get; set; }
 
     /// <summary>Snapshots a bounded row source, validates merged slots and rejects header/body span crossings.</summary>
     public static PdfTable Create(PdfTableColumn[] columns, IEnumerable<PdfTableRow> rows, int headerRows = 0, bool allowRowSplit = true, int maximumRows = 100000, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)

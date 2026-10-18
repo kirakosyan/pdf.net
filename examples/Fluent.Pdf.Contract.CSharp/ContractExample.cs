@@ -5,6 +5,22 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteCompositionPdf(Stream fontInput, Stream output, IPdfTextShaper shaper)
+    {
+        var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));
+        var style = new PdfFlowTextStyle(new PdfFontFallback(font), 12);
+        var small = new PdfFlowTextStyle(style.Fonts, 8);
+        var list = PdfFlowList.Create(new[] {
+            new PdfFlowListItem(new[] { new PdfFlowParagraph("first item", style) }),
+            new PdfFlowListItem(new[] { new PdfFlowParagraph("second item", style) }) }, style);
+        var note = new PdfFlowNote("source", "1", new[] { new PdfFlowParagraph("source note", small) }, small);
+        var blocks = new PdfFlowBlock[] {
+            new PdfFlowColumns(new PdfFlowBlock[] { list, new PdfFlowParagraph("office office office office office office", style) }, height: 100),
+            new PdfFlowNoteReference(new PdfFlowParagraph("reference", style), note) };
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 300, 200)));
+        var result = PdfFlow.Layout(blocks, new PdfFlowOptions(geometry, PdfMargins.Uniform(12)), new PdfProviderRegistry(shaper));
+        using var document = result.CreateDocument(); return document.Save(output);
+    }
     public static PdfOperationReport WriteTablePdf(Stream fontInput, Stream output, IPdfTextShaper shaper)
     {
         var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));

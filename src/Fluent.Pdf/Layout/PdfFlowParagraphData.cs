@@ -192,8 +192,8 @@ internal sealed class PdfFlowParagraphData
                 _context.Checkpoint();
                 if (g.AdvanceX < 0 || g.AdvanceY != 0)
                     throw Error("Layout.ShaperDirection", "Horizontal flow requires nonnegative horizontal advances and zero vertical advance.");
-                top = Math.Max(top, (m.Top + g.OffsetY) * scale);
-                bottom = Math.Min(bottom, (m.Bottom + g.OffsetY) * scale);
+                top = Math.Max(top, (m.Top + g.OffsetY) * scale + style.BaselineShift);
+                bottom = Math.Min(bottom, (m.Bottom + g.OffsetY) * scale + style.BaselineShift);
                 char c = analysis.Text[g.Cluster];
                 if (!char.IsWhiteSpace(c))
                 {
@@ -211,8 +211,8 @@ internal sealed class PdfFlowParagraphData
         {
             var m = firstStyle.Fonts.Fonts[0].Info.Metrics;
             double scale = firstStyle.FontSize / m.UnitsPerEm;
-            top = Math.Max(0, m.Top * scale);
-            bottom = Math.Min(0, m.Bottom * scale);
+            top = Math.Max(0, m.Top * scale + firstStyle.BaselineShift);
+            bottom = Math.Min(0, m.Bottom * scale + firstStyle.BaselineShift);
             requested = firstStyle.FontSize * _paragraph.Style.LineHeight;
         }
 

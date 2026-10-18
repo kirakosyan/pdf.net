@@ -530,7 +530,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/composition.md",
+        "implemented": [
+          "Invariant bounded list counters/restarts, nested lists and reusable immutable components",
+          "Fixed-height logical/physical column flow and section parity with real basic structure/parent-tree output",
+          "Associated page-reserving footnotes/endnotes and explicit baseline shifts under shared budgets"
+        ],
+        "pending": [
+          "Complete legal/booklet/notes/column corpus and full accessibility semantics/profile qualification",
+          "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
+        ]
+      }
     },
     {
       "id": "FP-015",

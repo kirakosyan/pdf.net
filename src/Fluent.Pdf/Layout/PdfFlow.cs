@@ -77,6 +77,8 @@ internal sealed partial class PdfFlowEngine
 
     internal PdfFlowResult Layout(IReadOnlyList<PdfFlowBlock> blocks)
     {
+        using var layoutDepth = _context.EnterScope(PdfResourceKind.Depth);
+        blocks = ExpandComponents(blocks);
         for (int i = 0; i < blocks.Count; i++)
         {
             _context.Checkpoint();
@@ -87,6 +89,21 @@ internal sealed partial class PdfFlowEngine
                     break;
                 case PdfFlowFloat value:
                     PlaceFloat(i, value);
+                    break;
+                case PdfFlowList list:
+                    PlaceTable(i, list.ToTable(_options, _shaper, _context));
+                    break;
+                case PdfFlowColumns columns:
+                    PlaceColumns(i, columns);
+                    break;
+                case PdfFlowComponent component:
+                    PlaceKeptComponent(i, component);
+                    break;
+                case PdfFlowSectionBreak section:
+                    Section(section.Start);
+                    break;
+                case PdfFlowNoteReference note:
+                    PlaceNote(i, note);
                     break;
                 case PdfTable table:
                     PlaceTable(i, table);
@@ -117,6 +134,7 @@ internal sealed partial class PdfFlowEngine
             }
         }
 
+        AppendEndnotes();
         _context.Consume(PdfResourceKind.ExpandedBytes, (_page + 1L) * 256 + _lines.Count * 32L + _floats.Count * 32L);
         var pages = new PdfFlowPage[_page + 1];
         for (int p = 0; p < pages.Length; p++)
@@ -126,20 +144,33 @@ internal sealed partial class PdfFlowEngine
             var lines = _lines.Where(l => l.Page == p).ToArray();
             var floats = _floats.Where(f => f.Page == p).Select(f => f.Value).ToArray();
             var tables = _tableFragments.Where(t => t.Page == p).Select(t => t.Fragment).ToArray();
+            var columns = _columns.Where(v => v.Page == p).Select(v => v.Column).ToArray();
+            var components = _components.Where(v => v.Page == p).ToArray();
+            var notes = NotesForPage(p);
             var canvas = PdfCanvas.CreateCore(_options.Geometry, c =>
             {
+                var paint = new List<(int Block, Action Draw)>();
                 foreach (var table in tables)
-                    PdfTablePainter.Paint(c, table, _context);
+                    paint.Add((table.BlockIndex, () => PdfTablePainter.Paint(c, table, _context)));
                 foreach (var f in floats)
-                    c.DrawDrawing(f.Float.Drawing, f.Float.SourceBounds, f.Bounds, PdfCanvasFit.Stretch);
+                    paint.Add((f.BlockIndex, () => c.DrawDrawing(f.Float.Drawing, f.Float.SourceBounds, f.Bounds, PdfCanvasFit.Stretch)));
                 foreach (var line in lines)
-                    PdfFlowLinePainter.Paint(c, line.Line, line.Measured, line.Style, line.Last, _options, _context, _finish);
+                    paint.Add((line.Line.BlockIndex, () => PdfFlowLinePainter.Paint(c, line.Line, line.Measured, line.Style, line.Last, _options, _context, _finish)));
+                foreach (var column in columns)
+                    paint.Add((column.BlockIndex, () => column.PlacementIndex = c.DrawDrawing(column.Source.Canvas.Drawing, column.Source.Canvas.Geometry.Boxes.Media, column.Bounds, PdfCanvasFit.Stretch).Index));
+                foreach (var component in components)
+                    paint.Add((component.Block, () => c.DrawDrawing(component.Source.Canvas.Drawing, component.Source.Canvas.Geometry.Boxes.Media, new(0, component.Y, _options.Frame.Width, component.Source.Canvas.Geometry.Size.Height), PdfCanvasFit.Stretch)));
+                foreach (var item in paint.OrderBy(v => v.Block))
+                    item.Draw();
+                PaintNotes(c, p);
             }, new(PdfLengthUnit.Point, margins: _options.Margins), _context, out var finish);
             _finish.Add(finish);
             double used = Math.Max(lines.Select(l => l.Line.Bounds.Top).DefaultIfEmpty(0).Max(), Math.Max(floats.Select(f => f.Bounds.Top).DefaultIfEmpty(0).Max(), tables.Select(t => t.Bounds.Top).DefaultIfEmpty(0).Max()));
+            used = Math.Max(used, columns.Select(v => v.Bounds.Y + v.Source.ContentHeight).DefaultIfEmpty(0).Max());
+            used = Math.Max(used, notes.Select(v => v.Bounds.Top).DefaultIfEmpty(0).Max());
             if (p == _page)
                 used = Math.Max(used, Math.Min(_options.Frame.Height, _y));
-            pages[p] = new(p, canvas, lines.Select(l => l.Line).ToArray(), floats, tables, used);
+            pages[p] = new(p, canvas, lines.Select(l => l.Line).ToArray(), floats, tables, used, columns, notes);
         }
 
         return new(_options, pages);
@@ -319,13 +350,15 @@ internal sealed partial class PdfFlowEngine
             double height = data.Height;
             if (height > _options.Frame.Height)
                 throw Error("Layout.LineTooTall", "A complete line cannot fit the empty page frame.");
-            if (y + height > _options.Frame.Height)
+            if (y + height > BodyHeight(page))
             {
                 page++;
                 y = 0;
             }
 
             CheckPage(page);
+            if (height > BodyHeight(page))
+                throw Error("Composition.NoteFrame", "Notes leave insufficient body height for a complete line.");
             var interval = Interval(page, y, height);
             double left = interval.Left + style.LeftIndent + (first ? style.FirstLineIndent : 0), right = interval.Right - style.RightIndent;
             if (right <= left)
@@ -467,7 +500,7 @@ internal sealed partial class PdfFlowEngine
         {
             _context.Checkpoint();
             _context.Consume(PdfResourceKind.Objects, 1);
-            if (y + value.Height > _options.Frame.Height)
+            if (y + value.Height > BodyHeight(_page))
             {
                 NewPage();
                 y = 0;

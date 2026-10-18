@@ -13,6 +13,8 @@ public sealed class PdfPage
     /// <summary>Gets or atomically replaces explicit page boxes, UserUnit and rotation.</summary>
     public PdfPageGeometry Geometry
     {get{EnsureAttached();return _geometry;}set{EnsureEditable();if(value==null)throw new ArgumentNullException(nameof(value));_geometry=value;_size=value.Size;_rotation=value.Rotation;}}
+    internal IReadOnlyList<string> StructureRoles { get; private set; } = System.Array.Empty<string>();
+    internal void SetStructureRoles(IReadOnlyList<string> roles) { EnsureEditable(); StructureRoles = roles; }
     private PdfPageSource? _source;
     private PdfContentProgram? _content;
     private IReadOnlyList<PdfCanvasPageLayer> _canvasLayers=System.Array.Empty<PdfCanvasPageLayer>();
@@ -22,13 +24,13 @@ public sealed class PdfPage
     internal IReadOnlyList<PdfCanvasPageLayer> SnapshotCanvasLayers(PdfOperationContext? context)
     {context?.Consume(PdfResourceKind.ExpandedBytes,_canvasLayers.Count*16L+32);return _canvasLayers.Count==0?System.Array.Empty<PdfCanvasPageLayer>():System.Array.AsReadOnly(_canvasLayers.ToArray());}
     internal PdfOperationReport ApplyCanvas(PdfCanvasResult canvas,PdfCanvasApplyMode mode,System.Threading.CancellationToken token)
-    {EnsureEditable();return _owner.ApplyCanvas(this,canvas,mode,token);}
+    {EnsureEditable();if(StructureRoles.Count>0&&mode!=PdfCanvasApplyMode.Replace)throw new InvalidOperationException("Structured page overlays require an explicit structure edit profile.");return _owner.ApplyCanvas(this,canvas,mode,token);}
     internal void CommitCanvas(PdfResourceBinding binding,PdfContentProgram program,PdfCanvasApplyMode mode,int sequence,PdfOperationContext context)
     {
         EnsureEditable();var key=(PdfGraphicsResourceCategory.XObject,binding.Name);if(!_graphics.ContainsKey(key)&&_graphics.Count>=4096)throw PdfWriterCore.Error(context,"Canvas.ResourceLimit","The page replacement resource scope is full; compose paint layers into one canvas.");
         context.Consume(PdfResourceKind.ExpandedBytes,_graphics.Count*192L+_canvasLayers.Count*32L+1024);var resources=new Dictionary<(PdfGraphicsResourceCategory,string),PdfGraphicsResource>(_graphics){[key]=binding.Resource};
         IReadOnlyList<PdfCanvasPageLayer> layers=mode==PdfCanvasApplyMode.Replace?System.Array.Empty<PdfCanvasPageLayer>():System.Array.AsReadOnly(_canvasLayers.Concat(new[]{new PdfCanvasPageLayer(mode,binding.Name,program)}).ToArray());
-        context.Checkpoint();_graphics=resources;_canvasLayers=layers;CanvasSequence=sequence;if(mode==PdfCanvasApplyMode.Replace)_content=program;
+        context.Checkpoint();_graphics=resources;_canvasLayers=layers;CanvasSequence=sequence;if(mode==PdfCanvasApplyMode.Replace){_content=program;StructureRoles=System.Array.Empty<string>();}
     }
 
     private readonly Dictionary<string,PdfFontResource> _fonts=new(StringComparer.Ordinal);
@@ -63,7 +65,7 @@ public sealed class PdfPage
     public PdfContentProgram? Content
     {
         get{EnsureAttached();return _content;}
-        set{EnsureEditable();if(value!=null&&value.Kind!=PdfContentKind.Page)throw new ArgumentException("Page content cannot be a Type 3 glyph program.",nameof(value));_content=value;_canvasLayers=System.Array.Empty<PdfCanvasPageLayer>();}
+        set{EnsureEditable();if(value!=null&&value.Kind!=PdfContentKind.Page)throw new ArgumentException("Page content cannot be a Type 3 glyph program.",nameof(value));_content=value;StructureRoles=System.Array.Empty<string>();_canvasLayers=System.Array.Empty<PdfCanvasPageLayer>();}
     }
     /// <summary>Reads original or replacement operators under the document's operation policy without executing document actions.</summary>
     public PdfContentProgram ReadContent(PdfUnknownOperatorPolicy unknownOperators=PdfUnknownOperatorPolicy.Reject,string? unknownOperatorVersion=null,System.Threading.CancellationToken cancellationToken=default)

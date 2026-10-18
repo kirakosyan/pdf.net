@@ -103,3 +103,5 @@ FP-011 adds immutable five-box page geometry, explicit units, rotated coordinate
 FP-012 adds immutable styled paragraphs/runs, explicit line/tab/overflow and pagination policies, floating vectors, detached line/page geometry and shared-context canvas output. See [flow layout and pagination](flow-layout.md).
 
 FP-013 adds immutable merged/nested table grids, bounded typed scalar binding with explicit culture, automatic/fixed widths, repeated headers and safe row fragments integrated into flow. See [tables and binding](tables.md).
+
+FP-014 adds immutable list counters/restarts, reusable components, section parity, column regions, notes and physical baseline shifts. `CreateDocument` adds cancellation and a bounded composition operation; column output has real basic structure/parent-tree associations without claiming PDF/UA. See [composition](composition.md).

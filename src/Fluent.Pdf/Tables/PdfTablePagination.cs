@@ -20,7 +20,7 @@ internal sealed partial class PdfFlowEngine
             _context.Consume(PdfResourceKind.Objects, 1);
             CheckPage(_page);
             var repeats = ContinuationHeaders(plan, start, _y + header, out double nestedBand);
-            double available = _options.Frame.Height - _y - header - nestedBand;
+            double available = BodyHeight(_page) - _y - header - nestedBand;
             if (available < 0 || start < plan.Height && available <= 0)
             {
                 if (_y == 0)

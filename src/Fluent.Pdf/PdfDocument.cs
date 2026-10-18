@@ -35,6 +35,7 @@ public sealed class PdfDocument : IDisposable
     public PdfPageCollection Pages { get { EnsureAlive(); return _pages; } }
     /// <summary>Gets the last completed provider operation report, including failed operations. Remains readable after disposal.</summary>
     public PdfOperationReport? LastOperationReport => _lastReport;
+    internal void SetCompositionReport(PdfOperationReport report) { _lastReport = report; }
     /// <summary>Gets the immutable original object graph, or null for a newly authored session.</summary>
     public PdfSyntaxDocument? SourceDocument{get{EnsureAlive();return _source;}}
 
@@ -55,7 +56,7 @@ public sealed class PdfDocument : IDisposable
         int count=_pages.Count;
         if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*128L+32);}
         var pages = count==0?Array.Empty<PdfPageSnapshot>():new PdfPageSnapshot[count];
-        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context),_pages[i].SnapshotGraphicsResources(_context),_pages[i].Geometry,_pages[i].SnapshotCanvasLayers(_context));
+        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context),_pages[i].SnapshotGraphicsResources(_context),_pages[i].Geometry,_pages[i].SnapshotCanvasLayers(_context),_pages[i].StructureRoles);
         return new PdfDocumentSnapshot(_options, pages,_source,_originalOrder,writeOptions);
     }
 

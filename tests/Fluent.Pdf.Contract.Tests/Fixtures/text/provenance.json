@@ -35,6 +35,15 @@
       "license": "SIL-OFL-1.1",
       "derivation": "FontTools 4.61.1 retain GIDs; OpenType layout closure; renamed family/PostScript names; fixed timestamps",
       "fontVersion": "Version 2.001; ttfautohint (v1.8.3) -l 8 -r 50 -G 200 -x 14 -D beng -f none -a qsq -X \"\""
+    },
+    {
+      "file": "business.ttf",
+      "sourceId": "NOTO-CORE-Latin",
+      "sourceSha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d",
+      "fixtureSha256": "c0aea456c056dbc5712c307799bcbf96637bb494d030cd9707d57921de78209f",
+      "license": "SIL-OFL-1.1",
+      "derivation": "FontTools 4.61.1 retain GIDs and layout closure; ASCII/bullet/dash fixture, renamed family/PostScript names and fixed timestamps",
+      "fontVersion": "Version 2.004; ttfautohint (v1.8.3) -l 8 -r 50 -G 200 -x 14 -D latn -f none -a qsq -X \"\""
     }
   ],
   "referenceAssetSha256": "4bd4d846aab1a0fd8333f96c70a564005dc3ca1becda52c3c4e8d093b46c1273"
