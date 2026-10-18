@@ -26,6 +26,7 @@ internal static class PdfFeatureVersion
         if (subtype == "Image" && entries.TryGetValue("BitsPerComponent", out var precision) && resolve(precision).Kind == PdfValueKind.Number && resolve(precision).TryGetInteger(out long bits) && bits == 16) floor = Math.Max(floor, 15);
         if (type == "ObjStm" || type == "XRef" || type == "OCG" || type == "OCMD")
             floor = Math.Max(floor, 15);
+        if (type == "OCMD" && entries.ContainsKey("VE")) floor = Math.Max(floor, 16);
         if(entries.ContainsKey("ShadingType")||entries.ContainsKey("OPM")||entries.TryGetValue("PatternType",out var patternType)&&patternType.Kind==PdfValueKind.Number&&patternType.NumberValue==2)floor=Math.Max(floor,13);
         if(entries.ContainsKey("ActualText"))floor=Math.Max(floor,14);
         if (entries.ContainsKey("CA") || entries.ContainsKey("ca") || entries.ContainsKey("BM") || entries.ContainsKey("SMask"))

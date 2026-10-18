@@ -923,7 +923,9 @@
           "Complete portfolio, archival and associated-file interoperability corpora and review",
           "Actual minimum runtimes, exact final package consumers and every production qualification gate"
         ],
-        "standardsEvidence": "docs/evidence/FP-023-standards.json"
+        "standardsEvidence": "docs/evidence/FP-023-standards.json",
+        "sourceEvidence": "docs/evidence/FP-023-source.json",
+        "independentEvidence": "docs/evidence/FP-023-independent.json"
       }
     },
     {
@@ -951,7 +953,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/layers.md",
+        "implemented": [
+          "Passive registered group/configuration inventory, explicit intent/usage state evaluation and nested membership expressions",
+          "Unicode group/configuration authoring, selected initial view and cloned page XObject membership binding",
+          "Managed bounded page/Form/image/appearance flattening with explicit state-dependency rejection and page extraction retention"
+        ],
+        "pending": [
+          "Additional glyph/pattern/mask, interactive/structure and text-state flattening profiles remain mandatory",
+          "SDK renderer integration, full optional-content/fidelity corpus and all actual-runtime/final-package production qualification"
+        ],
+        "standardsEvidence": "docs/evidence/FP-024-standards.json"
+      }
     },
     {
       "id": "FP-025",

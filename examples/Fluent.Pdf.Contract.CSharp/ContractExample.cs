@@ -5,6 +5,18 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteLayerPdf(Stream output)
+    {
+        using var blank = PdfFacade.Create().AddPage();
+        var path = PdfPath.Create(new[] { PdfPathSegment.Rectangle(new PdfRect(20, 20, 80, 40)) });
+        PdfCanvas.Create(blank.Pages[0].Geometry, canvas => canvas.DrawPath(path)).ApplyTo(blank.Pages[0]);
+        string resource = blank.CreateSnapshot().Pages[0].CanvasLayers[0].ResourceName;
+        using var grouped = PdfLayers.AddGroup(blank.CreateSnapshot(), "Details", visible: false);
+        var group = PdfLayers.Inspect(grouped.CreateSnapshot()).Groups[0];
+        using var document = PdfLayers.BindXObject(grouped.CreateSnapshot(), 0, resource, PdfValue.Reference(group.Id));
+        return document.Save(output);
+    }
+
     public static PdfOperationReport WriteAttachmentPdf(Stream payload, Stream output)
     {
         using var blank = PdfFacade.Create().AddPage();

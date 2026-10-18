@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-source-facts-not-implementation-or-qualification",
+  "requirement": "FP-024",
+  "sourceId": "P24-ISO1-2008",
+  "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+  "sections": [
+    "8.11.2 optional-content groups and membership dictionaries",
+    "8.11.3 visibility and persistent graphics-state effects",
+    "8.11.4 configuration, intent, usage and application behavior"
+  ],
+  "facts": [
+    "OCGs have indirect identities; OCMD combines states with AllOn/AnyOn/AllOff/AnyOff or a PDF 1.6 visibility expression.",
+    "An empty/null/deleted OCMD group list has no visibility effect.",
+    "The default configuration BaseState is ON; alternate configurations can use OFF or Unchanged.",
+    "Groups not matching the configuration intents do not affect visibility.",
+    "Hidden content still changes persistent graphics state and text position; encapsulated XObjects can be omitted entirely.",
+    "An omitted usage-application OCGs array affects no groups. Multiple matching applications combine recommendations.",
+    "Viewer viewing adjustments precede temporary viewer print/export adjustments; stand-alone printing/aggregation uses configured states without those applications."
+  ],
+  "limitations": [
+    "Primary facts do not qualify the implementation, renderer integration or full layer fidelity."
+  ],
+  "rawSourcesRetainedOutsideRepository": true
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-profile-not-release-qualification",
+  "requirement": "FP-023",
+  "pypdf": "6.10.0",
+  "renderer": "pdftoppm version 25.03.0",
+  "passedAssertions": [
+    "Unicode filename, MIME, AF and name-tree identity",
+    "Exact decoded payload, declared size and independent MD5",
+    "Explicit modification date",
+    "Collection view/initial document/item value",
+    "Removed collection/AF/name-tree entries, orphan and historical bytes",
+    "One output revision and unchanged independent rendered page pixels"
+  ],
+  "artifacts": {
+    "revised.png": "0e4009b09b3aa1a1f28bf0187bd5853c5e53fa7192c0042d48dcf75d72b23523",
+    "blank.png": "0e4009b09b3aa1a1f28bf0187bd5853c5e53fa7192c0042d48dcf75d72b23523",
+    "Program.cs": "8058d24217e7924a3b99126794cc9ac3ecb3dc50e8f87b2404bcee5a50300479",
+    "removed.pdf": "08741a2de11a10551b29842472b467139f92209c8f01ea69da982c46c856d83d",
+    "verify.py": "e0ab7e6b5597b08843fb10e33ffb8274d40e88a608ce5bb4905d6bff62807ef2",
+    "removed.png": "0e4009b09b3aa1a1f28bf0187bd5853c5e53fa7192c0042d48dcf75d72b23523",
+    "attached.png": "0e4009b09b3aa1a1f28bf0187bd5853c5e53fa7192c0042d48dcf75d72b23523",
+    "expected.bin": "362908cad6ff35e700c0f7459c9c73d95c77a1ce6025e1337c23693bf320ce2e",
+    "extracted.bin": "362908cad6ff35e700c0f7459c9c73d95c77a1ce6025e1337c23693bf320ce2e",
+    "attached.pdf": "449ef3c23b542c6d0d1e8f08bdca73a7b59f4fe4badcce9bacb6c30eceaffad4",
+    "blank.pdf": "3f1da488b151b767c18412df5401ba283630d3b8aaf79fdfd9ededc081daab55",
+    "revised.pdf": "5727591a203a8f53a3e17243dea6ff5a0049362b6812674aad89880b25f407b1"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Synthetic source-assembly profile; not complete portfolio/associated-file conformance or PDF/A qualification",
+    "No exact final package or actual minimum-runtime qualification"
+  ],
+  "sourceCommit": "40fd05b0e0057e6f2ce93e8eb4fc9c20a46e78fc",
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Attachments/PdfAttachmentCollection.cs": "fe073ef013581a890ae60c908478b143ada4bebf44a7d354769e1dc52ad73a5e",
+    "src/Fluent.Pdf/Attachments/PdfAttachments.cs": "be2df1c28b728f62f703224e0d98396a3110af407214bd21a9e91466b6926909",
+    "src/Fluent.Pdf/Attachments/PdfAttachmentOptions.cs": "98fae32d1b777fa58cba91e263a998a0957c8a0e49182505553adda3abbdb138",
+    "src/Fluent.Pdf/Attachments/PdfAttachmentGraph.cs": "1260f9e2ef3c9d05eeb2a3e0f9c0d9069bc6c085a186d8394d9c344cebd506bf",
+    "src/Fluent.Pdf/Metadata/PdfMetadataValues.cs": "9f5fb1cb2fe47d80fd33c874beeb7d6830146f9e34e5d238794b1771b94fc3de",
+    "src/Fluent.Pdf/Writing/PdfFeatureVersion.cs": "d7e0d84dc73917bb30c6b513e851cf395ae450f1c1a0477fc8c2a33883e3d07a",
+    "tests/Fluent.Pdf.Contract.Tests/AttachmentTests.cs": "f2f636f5c8264c47faa76d876a71afd1faa746812084b2916817d8e3113a9043"
+  }
+}

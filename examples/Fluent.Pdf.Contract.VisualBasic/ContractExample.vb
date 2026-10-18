@@ -4,6 +4,20 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteLayerPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage()
+            Dim path = PdfPath.Create({PdfPathSegment.Rectangle(New PdfRect(20, 20, 80, 40))})
+            PdfCanvas.Create(blank.Pages(0).Geometry, Sub(canvas) canvas.DrawPath(path)).ApplyTo(blank.Pages(0))
+            Dim resource = blank.CreateSnapshot().Pages(0).CanvasLayers(0).ResourceName
+            Using grouped = PdfLayers.AddGroup(blank.CreateSnapshot(), "Details", visible:=False)
+                Dim group = PdfLayers.Inspect(grouped.CreateSnapshot()).Groups(0)
+                Using document = PdfLayers.BindXObject(grouped.CreateSnapshot(), 0, resource, PdfValue.Reference(group.Id))
+                    Return document.Save(output)
+                End Using
+            End Using
+        End Using
+    End Function
+
     Public Function WriteAttachmentPdf(payload As Stream, output As Stream) As PdfOperationReport
         Using blank = PdfFacade.Create().AddPage()
             Using document = PdfAttachments.Add(blank.CreateSnapshot(), payload,

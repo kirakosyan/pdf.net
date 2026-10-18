@@ -772,6 +772,26 @@ Fluent.Pdf.PdfImageReadOptions.ApplyExifOrientation.get -> bool
 Fluent.Pdf.PdfImageReadOptions.ColorSpaceOverride.get -> Fluent.Pdf.PdfColorSpace?
 Fluent.Pdf.PdfImageReadOptions.PdfImageReadOptions(bool allowLosslessTranscode = false, bool applyExifOrientation = true, Fluent.Pdf.PdfColorSpace? colorSpaceOverride = null) -> void
 Fluent.Pdf.PdfImages
+Fluent.Pdf.PdfLayerGroup
+Fluent.Pdf.PdfLayerGroup.Definition.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfLayerGroup.Id.get -> Fluent.Pdf.PdfObjectId
+Fluent.Pdf.PdfLayerGroup.Name.get -> string!
+Fluent.Pdf.PdfLayerGroup.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfLayerSet
+Fluent.Pdf.PdfLayerSet.Configurations.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfValue!>!
+Fluent.Pdf.PdfLayerSet.Groups.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfLayerGroup!>!
+Fluent.Pdf.PdfLayerSet.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfLayerSet.Properties.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfLayerSet.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfLayerUsage
+Fluent.Pdf.PdfLayerUsage.Configured = 3 -> Fluent.Pdf.PdfLayerUsage
+Fluent.Pdf.PdfLayerUsage.Export = 2 -> Fluent.Pdf.PdfLayerUsage
+Fluent.Pdf.PdfLayerUsage.Print = 1 -> Fluent.Pdf.PdfLayerUsage
+Fluent.Pdf.PdfLayerUsage.View = 0 -> Fluent.Pdf.PdfLayerUsage
+Fluent.Pdf.PdfLayerVisibility
+Fluent.Pdf.PdfLayerVisibility.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfLayerVisibility.Visible.get -> bool
+Fluent.Pdf.PdfLayers
 Fluent.Pdf.PdfLengthUnit
 Fluent.Pdf.PdfLengthUnit.Centimeter = 3 -> Fluent.Pdf.PdfLengthUnit
 Fluent.Pdf.PdfLengthUnit.Inch = 1 -> Fluent.Pdf.PdfLengthUnit
@@ -1617,6 +1637,14 @@ static Fluent.Pdf.PdfImages.FromStencil(System.IO.Stream! input, int width, int 
 static Fluent.Pdf.PdfImages.Read(System.IO.Stream! input, Fluent.Pdf.PdfImageReadOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageAsset!
 static Fluent.Pdf.PdfImages.WithColorKey(Fluent.Pdf.PdfImageAsset! image, int[]! componentRanges, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageAsset!
 static Fluent.Pdf.PdfImages.WithHardMask(Fluent.Pdf.PdfImageAsset! image, Fluent.Pdf.PdfImageAsset! stencil, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageAsset!
+static Fluent.Pdf.PdfLayers.AddGroup(Fluent.Pdf.PdfDocumentSnapshot! source, string! name, bool visible = true, Fluent.Pdf.PdfValue? usage = null, Fluent.Pdf.PdfValue? intents = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfLayers.BindXObject(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, string! resourceName, Fluent.Pdf.PdfValue! membership, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfLayers.EditGroup(Fluent.Pdf.PdfLayerGroup! group, string? name = null, Fluent.Pdf.PdfValue? usage = null, Fluent.Pdf.PdfValue? intents = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfLayers.Flatten(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue? configuration = null, Fluent.Pdf.PdfLayerUsage usage = Fluent.Pdf.PdfLayerUsage.View, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfLayers.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfLayerSet!
+static Fluent.Pdf.PdfLayers.IsVisible(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue! membership, Fluent.Pdf.PdfValue? configuration = null, Fluent.Pdf.PdfLayerUsage usage = Fluent.Pdf.PdfLayerUsage.View, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfLayerVisibility!
+static Fluent.Pdf.PdfLayers.SelectConfiguration(Fluent.Pdf.PdfDocumentSnapshot! source, int configurationIndex, Fluent.Pdf.PdfLayerUsage usage = Fluent.Pdf.PdfLayerUsage.View, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfLayers.SetConfiguration(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue! configuration, bool makeDefault = true, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfMargins.Uniform(double value) -> Fluent.Pdf.PdfMargins
 static Fluent.Pdf.PdfMatrix.Identity.get -> Fluent.Pdf.PdfMatrix
 static Fluent.Pdf.PdfMetadata.Edit(Fluent.Pdf.PdfDocumentSnapshot! source, System.Action<Fluent.Pdf.PdfMetadataEditor!>! edit, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!

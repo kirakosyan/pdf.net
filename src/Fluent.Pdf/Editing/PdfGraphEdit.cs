@@ -76,6 +76,43 @@ internal sealed class PdfGraphEdit : IDisposable
     }
 
     internal PdfException Error(string code, string message) => PdfWriterCore.Error(Context, code, message);
+    internal void PruneUnreachable()
+    {
+        var reachable = new HashSet<PdfObjectId>();
+        Reach(Edit.Trailer);
+        var remove = new List<PdfObjectId>();
+        foreach (var id in Edit.ActiveIds(Context))
+            if (!reachable.Contains(id))
+            {
+                Context.Consume(PdfResourceKind.ExpandedBytes, 32);
+                remove.Add(id);
+            }
+
+        foreach (var id in remove)
+            Edit.Remove(id);
+        void Reach(PdfValue value)
+        {
+            Context.Checkpoint();
+            using var depth = Context.EnterScope(PdfResourceKind.Depth);
+            Context.Consume(PdfResourceKind.Objects, 1);
+            while (value.Kind == PdfValueKind.Reference)
+            {
+                Context.Checkpoint();
+                Context.Consume(PdfResourceKind.ExpandedBytes, 48);
+                if (!reachable.Add(value.ReferenceId))
+                    return;
+                value = Edit.Resolve(value.ReferenceId);
+            }
+
+            if (value.Kind == PdfValueKind.Array)
+                foreach (var child in value.Items)
+                    Reach(child);
+            else if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
+                foreach (var child in value.Entries.Values)
+                    Reach(child);
+        }
+    }
+
     public void Dispose() => Edit.Dispose();
     internal static PdfDocument Run(string operation, PdfDocumentSnapshot source, PdfOrganizationOptions? options, PdfOperationPolicy? policy, CancellationToken token, Action<PdfGraphEdit> action, string minimumVersion = "1.2")
     {
