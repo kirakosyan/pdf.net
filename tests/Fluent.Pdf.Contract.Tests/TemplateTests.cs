@@ -58,6 +58,35 @@ public sealed class TemplateTests
         Assert.All(reopened.Pages, p => Assert.Contains(p.ReadContent().Operations, o => o.Operation == PdfOperator.BeginMarkedContent && o.Operands[0].NameValue == "Artifact"));
     }
 
+    [Fact]
+    public void ConvergenceReusesImmutableParagraphMeasurementsWithinOneOperationOnly()
+    {
+        var shaper = new CountedShaper();
+        var providers = new PdfProviderRegistry(shaper);
+        var blocks = Body(2);
+        var first = PdfTemplateLayout.Layout(blocks, Options(), providers, new());
+        Assert.True(first.Passes >= 2);
+        Assert.Equal(2, shaper.FullParagraphCalls);
+        var second = PdfTemplateLayout.Layout(blocks, Options(), providers, new());
+        Assert.Equal(first.Body.Pages.Count, second.Body.Pages.Count);
+        Assert.Equal(4, shaper.FullParagraphCalls);
+        Assert.Equal(first.Entries.Select(e => e.PageIndex), second.Entries.Select(e => e.PageIndex));
+    }
+
+    private sealed class CountedShaper : IPdfTextShaper
+    {
+        private readonly PdfSimpleTextShaper _inner = new();
+        public PdfProviderDescriptor Descriptor => _inner.Descriptor;
+        public int FullParagraphCalls { get; private set; }
+
+        public IReadOnlyList<PdfShapedGlyph> Shape(PdfShapingRequest request, PdfOperationContext context)
+        {
+            if (request.Text.Length == 349 && request.Start == 0 && request.Length == 349)
+                FullParagraphCalls++;
+            return _inner.Shape(request, context);
+        }
+    }
+
     [Theory]
     [InlineData(PdfPageLabelStyle.UpperLetters, 26, "AA")]
     [InlineData(PdfPageLabelStyle.LowerLetters, 51, "zz")]

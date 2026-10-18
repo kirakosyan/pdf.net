@@ -48,13 +48,15 @@ internal sealed partial class PdfFlowEngine
     private readonly List<PlannedLine> _lines = new();
     private readonly List<Action<PdfOperationReport>> _finish = new();
     private readonly Dictionary<int, PdfFlowParagraphData> _prepared = new();
+    private readonly Dictionary<PdfFlowParagraph, PdfFlowParagraphData>? _paragraphCache;
     private int _page;
     private double _y;
-    internal PdfFlowEngine(PdfFlowOptions options, IPdfTextShaper shaper, PdfOperationContext context)
+    internal PdfFlowEngine(PdfFlowOptions options, IPdfTextShaper shaper, PdfOperationContext context, Dictionary<PdfFlowParagraph, PdfFlowParagraphData>? paragraphCache = null)
     {
         _options = options;
         _shaper = shaper;
         _context = context;
+        _paragraphCache = paragraphCache;
     }
 
     private sealed class PlannedLine
@@ -191,9 +193,19 @@ internal sealed partial class PdfFlowEngine
 
     private PdfFlowParagraphData Prepare(int index, PdfFlowParagraph paragraph)
     {
+        _context.Checkpoint();
         if (!_prepared.TryGetValue(index, out var data))
         {
-            data = new(paragraph, _options, _shaper, _context);
+            if (_paragraphCache == null || !_paragraphCache.TryGetValue(paragraph, out data))
+            {
+                data = new(paragraph, _options, _shaper, _context);
+                if (_paragraphCache != null)
+                {
+                    _context.Consume(PdfResourceKind.ExpandedBytes, 64);
+                    _paragraphCache.Add(paragraph, data);
+                }
+            }
+
             _prepared.Add(index, data);
         }
 

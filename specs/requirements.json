@@ -836,7 +836,8 @@
         "pending": [
           "Complete viewer/conformance/presentation corpus and additional source formatting/extension profiles",
           "Actual minimum runtimes, exact final packages and every production qualification gate"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-021-independent.json"
       }
     },
     {

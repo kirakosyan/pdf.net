@@ -71,11 +71,14 @@ public static class PdfTemplateLayout
             PdfFlowResult? body = null;
             int passes = 0;
             bool converged = false;
+            // Only these engines share the exact immutable options, shaper and operation context.
+            // Header/footer and nested-layout engines retain their own measurements.
+            var paragraphs = new Dictionary<PdfFlowParagraph, PdfFlowParagraphData>();
             for (; passes < template.MaximumPasses; passes++)
             {
                 context.Checkpoint();
                 var expanded = Materialize(source, definitions, targets, template.Numbering, bodyOptions, context);
-                var engine = new PdfFlowEngine(bodyOptions, shaper, context);
+                var engine = new PdfFlowEngine(bodyOptions, shaper, context, paragraphs);
                 var current = engine.Layout(expanded);
                 var next = new Dictionary<string, PdfFlowHeadingPlacement>(StringComparer.Ordinal);
                 foreach (var heading in current.Pages.SelectMany(p => p.Headings))
