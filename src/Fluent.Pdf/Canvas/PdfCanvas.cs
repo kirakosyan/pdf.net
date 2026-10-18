@@ -497,36 +497,7 @@ public sealed class PdfCanvas
         return new(x, y, right - x, top - y);
     }
 
-    private PdfRect TextBounds(PdfShapedText text, double size, double lineHeight)
-    {
-        bool any = false;
-        PdfRect bounds = default;
-        int paragraph = -1;
-        double penX = 0, penY = 0;
-        foreach (var run in text.Runs)
-        {
-            if (paragraph != run.ParagraphIndex)
-            {
-                paragraph = run.ParagraphIndex;
-                penX = text.Options.Vertical ? -paragraph * size * lineHeight : 0;
-                penY = text.Options.Vertical ? 0 : -paragraph * size * lineHeight;
-            }
-
-            var m = run.Request.Font.Info.Metrics;
-            double scale = size / m.UnitsPerEm;
-            foreach (var glyph in run.Glyphs)
-            {
-                _context.Checkpoint();
-                var box = new PdfRect(penX + (glyph.OffsetX + m.Left) * scale, penY + (glyph.OffsetY + m.Bottom) * scale, (m.Right - (double)m.Left) * scale, (m.Top - (double)m.Bottom) * scale);
-                bounds = any ? Union(bounds, box) : box;
-                any = true;
-                penX += glyph.AdvanceX * scale;
-                penY += glyph.AdvanceY * scale;
-            }
-        }
-
-        return bounds;
-    }
+    private PdfRect TextBounds(PdfShapedText text, double size, double lineHeight) => PdfTextGeometry.Bounds(text, size, lineHeight, _context);
 
     private sealed class ScopeState
     {

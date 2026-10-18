@@ -675,7 +675,9 @@
         "pending": [
           "Additional file/codec/owner-dependent resource profiles and full independent image/color/visual/conformance corpus",
           "Actual minimum runtimes, final packages and all production qualification gates"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-017-independent.json",
+        "sourceEvidence": "docs/evidence/FP-017-source.json"
       }
     },
     {
@@ -735,7 +737,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/annotations.md",
+        "implemented": [
+          "Immutable annotations and source manifests, explicit normal appearances, generated vector markup and embedded shaped free text",
+          "Metadata/dates/states, bounded reply/popup relationships, staged editing/import/deletion and explicit screen/print flattening profiles",
+          "Passive attachment/Video/Sound media graphs with exact payload/reference preservation; owned-graph XFDF round trips; C#/VB examples"
+        ],
+        "pending": [
+          "Full viewer/conformance/fidelity/XFDF corpus and additional ownership/compositing/view-dependent/media/regeneration profiles",
+          "Actual minimum runtimes, final package consumers and every production qualification gate"
+        ]
+      }
     },
     {
       "id": "FP-020",

@@ -45,6 +45,68 @@ Fluent.Pdf.ManagedPdfProvider.RequiresSeekableStream.get -> bool
 Fluent.Pdf.ManagedPdfProvider.Supports(Fluent.Pdf.PdfWriteOptions! options) -> bool
 Fluent.Pdf.ManagedPdfProvider.Write(Fluent.Pdf.PdfDocumentSnapshot! document, System.IO.Stream! output, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Pdf
+Fluent.Pdf.PdfAnnotation
+Fluent.Pdf.PdfAnnotation.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfAnnotation.Identifier.get -> string!
+Fluent.Pdf.PdfAnnotation.Kind.get -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotation.Metadata.get -> Fluent.Pdf.PdfAnnotationMetadata!
+Fluent.Pdf.PdfAnnotation.MinimumVersion.get -> string!
+Fluent.Pdf.PdfAnnotation.NormalAppearance.get -> Fluent.Pdf.PdfGraphicsResource!
+Fluent.Pdf.PdfAnnotation.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfAnnotation.Properties.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Caret = 13 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Circle = 8 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.FileAttachment = 14 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.FreeText = 12 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Highlight = 1 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Ink = 5 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Line = 9 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.PolyLine = 11 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Polygon = 10 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.RichMedia = 15 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Square = 7 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Squiggly = 4 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Stamp = 6 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.StrikeOut = 3 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Text = 0 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationKind.Underline = 2 -> Fluent.Pdf.PdfAnnotationKind
+Fluent.Pdf.PdfAnnotationMetadata
+Fluent.Pdf.PdfAnnotationMetadata.Author.get -> string!
+Fluent.Pdf.PdfAnnotationMetadata.Contents.get -> string!
+Fluent.Pdf.PdfAnnotationMetadata.Created.get -> System.DateTimeOffset?
+Fluent.Pdf.PdfAnnotationMetadata.GroupReply.get -> bool
+Fluent.Pdf.PdfAnnotationMetadata.Modified.get -> System.DateTimeOffset?
+Fluent.Pdf.PdfAnnotationMetadata.PdfAnnotationMetadata(string! contents = "", string! author = "", string! subject = "", System.DateTimeOffset? created = null, System.DateTimeOffset? modified = null, string? state = null, string? stateModel = null, string? replyTo = null, bool groupReply = false) -> void
+Fluent.Pdf.PdfAnnotationMetadata.ReplyTo.get -> string?
+Fluent.Pdf.PdfAnnotationMetadata.State.get -> string?
+Fluent.Pdf.PdfAnnotationMetadata.StateModel.get -> string?
+Fluent.Pdf.PdfAnnotationMetadata.Subject.get -> string!
+Fluent.Pdf.PdfAnnotationRecord
+Fluent.Pdf.PdfAnnotationRecord.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfAnnotationRecord.Definition.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfAnnotationRecord.Identifier.get -> string?
+Fluent.Pdf.PdfAnnotationRecord.Index.get -> int
+Fluent.Pdf.PdfAnnotationRecord.ObjectId.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfAnnotationRecord.PageIndex.get -> int
+Fluent.Pdf.PdfAnnotationRecord.PageOrdinal.get -> int
+Fluent.Pdf.PdfAnnotationRecord.Subtype.get -> string!
+Fluent.Pdf.PdfAnnotationRecord.TextProperties.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+Fluent.Pdf.PdfAnnotationSet
+Fluent.Pdf.PdfAnnotationSet.AddPopup(int annotationIndex, Fluent.Pdf.PdfRect bounds, bool open = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfAnnotationSet.Annotations.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAnnotationRecord!>!
+Fluent.Pdf.PdfAnnotationSet.Delete(System.Collections.Generic.IEnumerable<int>! annotationIndices, bool cascade = true, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfAnnotationSet.Flatten(System.Collections.Generic.IEnumerable<int>! annotationIndices, Fluent.Pdf.PdfAnnotationView view = Fluent.Pdf.PdfAnnotationView.Screen, bool cascade = true, bool allowRichMediaPosterOnly = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfAnnotationSet.ImportTo(Fluent.Pdf.PdfDocumentSnapshot! target, int targetPageIndex, System.Collections.Generic.IEnumerable<int>! annotationIndices, bool includeRelated = true, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfAnnotationSet.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfAnnotationSet.SetReply(int annotationIndex, int? targetIndex, bool grouped = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfAnnotationSet.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfAnnotationSet.Update(int annotationIndex, Fluent.Pdf.PdfValue! properties, Fluent.Pdf.PdfRect? bounds = null, Fluent.Pdf.PdfGraphicsResource? normalAppearance = null, string![]? removeProperties = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfAnnotationSet.WriteXfdf(System.IO.Stream! output, System.Collections.Generic.IEnumerable<int>? annotationIndices = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfAnnotationView
+Fluent.Pdf.PdfAnnotationView.Print = 1 -> Fluent.Pdf.PdfAnnotationView
+Fluent.Pdf.PdfAnnotationView.Screen = 0 -> Fluent.Pdf.PdfAnnotationView
+Fluent.Pdf.PdfAnnotations
 Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AL = 2 -> Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AN = 6 -> Fluent.Pdf.PdfBidiClass
@@ -1325,6 +1387,12 @@ static Fluent.Pdf.ManagedPdfProvider.Instance.get -> Fluent.Pdf.ManagedPdfProvid
 static Fluent.Pdf.Pdf.Create(Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.Open(System.IO.Stream! input, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.OpenFile(string! path, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAnnotation.Create(Fluent.Pdf.PdfAnnotationKind kind, string! identifier, Fluent.Pdf.PdfRect bounds, Fluent.Pdf.PdfGraphicsResource! normalAppearance, Fluent.Pdf.PdfValue? properties = null, Fluent.Pdf.PdfAnnotationMetadata? metadata = null, string! minimumVersion = "1.7", Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotation!
+static Fluent.Pdf.PdfAnnotation.CreateFreeText(string! identifier, Fluent.Pdf.PdfRect bounds, Fluent.Pdf.PdfShapedText! text, double fontSize, Fluent.Pdf.PdfAnnotationMetadata? metadata = null, double padding = 2, bool allowClipping = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotation!
+static Fluent.Pdf.PdfAnnotation.CreateMarkup(Fluent.Pdf.PdfAnnotationKind kind, string! identifier, Fluent.Pdf.PdfRect bounds, Fluent.Pdf.PdfColor! color, Fluent.Pdf.PdfValue? properties = null, Fluent.Pdf.PdfAnnotationMetadata? metadata = null, double strokeWidth = 1, double opacity = 1, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotation!
+static Fluent.Pdf.PdfAnnotationSet.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotationSet!
+static Fluent.Pdf.PdfAnnotationSet.ReadXfdf(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotationSet!
+static Fluent.Pdf.PdfAnnotations.Add(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfAnnotation!>! annotations, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfCanvas.Create(Fluent.Pdf.PdfPageGeometry! geometry, System.Action<Fluent.Pdf.PdfCanvas!>! draw, Fluent.Pdf.PdfCanvasOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfCanvasResult!
 static Fluent.Pdf.PdfCanvasStyle.Default.get -> Fluent.Pdf.PdfCanvasStyle!
 static Fluent.Pdf.PdfColorSpace.CalGray(double whiteX, double whiteZ, double gamma = 1, double blackX = 0, double blackY = 0, double blackZ = 0) -> Fluent.Pdf.PdfColorSpace!

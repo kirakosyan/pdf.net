@@ -4,6 +4,15 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteAnnotationPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage(New PdfPageSize(240, 160))
+            Dim note = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Text, "note", New PdfRect(20, 90, 40, 40), New PdfColor(PdfColorSpace.Rgb, 1, .85, .2), metadata:=New PdfAnnotationMetadata("Review this page", "Reviewer"))
+            Dim box = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Square, "box", New PdfRect(80, 30, 120, 90), New PdfColor(PdfColorSpace.Rgb, .8, .1, .1))
+            Using document = PdfAnnotations.Add(blank.CreateSnapshot(), 0, {note, box})
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
     Public Function WriteImagePdf(imageInput As Stream, output As Stream, Optional allowLosslessTranscode As Boolean = False) As PdfOperationReport
         Dim image = PdfImages.Read(imageInput, New PdfImageReadOptions(allowLosslessTranscode))
         Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 200, 160)))

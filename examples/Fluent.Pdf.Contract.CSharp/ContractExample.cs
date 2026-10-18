@@ -5,6 +5,13 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteAnnotationPdf(Stream output)
+    {
+        using var blank = PdfFacade.Create().AddPage(new PdfPageSize(240, 160));
+        var note = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Text, "note", new PdfRect(20, 90, 40, 40), new PdfColor(PdfColorSpace.Rgb, 1, .85, .2), metadata: new PdfAnnotationMetadata("Review this page", "Reviewer"));
+        var box = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Square, "box", new PdfRect(80, 30, 120, 90), new PdfColor(PdfColorSpace.Rgb, .8, .1, .1));
+        using var document = PdfAnnotations.Add(blank.CreateSnapshot(), 0, new[] { note, box }); return document.Save(output);
+    }
     public static PdfOperationReport WriteImagePdf(Stream imageInput, Stream output, bool allowLosslessTranscode = false)
     {
         var image = PdfImages.Read(imageInput, new PdfImageReadOptions(allowLosslessTranscode));

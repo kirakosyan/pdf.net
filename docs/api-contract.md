@@ -111,3 +111,5 @@ FP-015 adds final page template callbacks, explicit decorations, stable heading 
 FP-016 adds explicit page selections, detached page organization and vector imposition with shared budgets, reference remapping and explicit interactive profiles. See [page organization](page-organization.md).
 
 FP-017 adds immutable image assets, bounded PNG/JPEG packaging, masks/orientation, per-operation exact deduplication and captured graphics invocation extraction/editing. See [images and reusable graphics](images.md).
+
+FP-019 adds immutable annotation definitions/source manifests, generated markup and shaped text appearances, metadata/relationships, staged editing/import, explicit flattening and owned-graph XFDF. See [annotations](annotations.md).

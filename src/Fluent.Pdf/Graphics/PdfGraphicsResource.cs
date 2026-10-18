@@ -230,6 +230,8 @@ internal sealed class PdfResourceWriter
         return result;
     }
 
+    internal PdfValue EmbedValue(PdfValue value) => Promote(value);
+
     private PdfValue Promote(PdfValue value, bool root = false)
     {
         _context.Checkpoint();

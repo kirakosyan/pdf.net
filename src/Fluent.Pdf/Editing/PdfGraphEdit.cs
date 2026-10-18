@@ -26,7 +26,9 @@ internal sealed class PdfGraphEdit : IDisposable
         else
         {
             using var normalized = PdfPageOrganization.Normalize(source, options, context);
-            Snapshot = normalized.CreateSnapshot();
+            var captured = normalized.CreateSnapshot();
+            context.Consume(PdfResourceKind.ExpandedBytes, captured.Pages.Count * 16L + 64);
+            Snapshot = new(source.Options, captured.Pages.ToArray(), captured.SourceDocument, captured.OriginalOrder, captured.WriteOptions, captured.PageNumbering);
         }
 
         Graph = Snapshot.SourceDocument!;
@@ -70,7 +72,7 @@ internal sealed class PdfGraphEdit : IDisposable
         using var buffer = new PdfCodecBufferStream(Context, Context.Available(PdfResourceKind.ExpandedBytes));
         using (var output = new BorrowedStream(buffer, false, Context))
             Edit.WriteCore(output, new(allowSignatureInvalidation: options.AllowSignatureInvalidation, minimumVersion: minimumVersion), Context);
-        return PdfPageOrganization.Read(buffer.Finish(), Snapshot.Pages.Count, Context);
+        return PdfPageOrganization.Read(buffer.Finish(), Snapshot.Options.MaximumPages, Context, Snapshot.Options.DefaultPageSize);
     }
 
     internal PdfException Error(string code, string message) => PdfWriterCore.Error(Context, code, message);

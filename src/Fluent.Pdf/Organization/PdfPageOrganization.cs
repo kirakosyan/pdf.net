@@ -53,9 +53,9 @@ public static partial class PdfPageOrganization
         return Read(buffer.Finish(), snapshot.Pages.Count, context);
     }
 
-    internal static PdfDocument Read(PdfByteStore bytes, int maximumPages, PdfOperationContext context)
+    internal static PdfDocument Read(PdfByteStore bytes, int maximumPages, PdfOperationContext context, PdfPageSize? defaultPageSize = null)
     {
-        var result = Pdf.Create(new(maximumPages: maximumPages, operationPolicy: context.Policy));
+        var result = Pdf.Create(new(defaultPageSize, maximumPages: maximumPages, operationPolicy: context.Policy));
         try
         {
             using var input = bytes.Open(0, bytes.Length);
