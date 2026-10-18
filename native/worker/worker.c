@@ -407,6 +407,26 @@ done:
 }
 #endif
 
+#ifdef __APPLE__
+static void mac_memory_diagnostics(const char *phase,uint64_t memory,uint64_t startup_peak,int failure_errno) {
+    struct mach_task_basic_info basic;
+    struct task_vm_info vm;
+    struct rusage usage;
+    struct rlimit data;
+    mach_msg_type_number_t basic_count=MACH_TASK_BASIC_INFO_COUNT,vm_count=TASK_VM_INFO_COUNT;
+    int basic_ok,vm_ok,usage_ok,data_ok;
+    memset(&basic,0,sizeof(basic));memset(&vm,0,sizeof(vm));memset(&usage,0,sizeof(usage));memset(&data,0,sizeof(data));
+    basic_ok=task_info(mach_task_self(),MACH_TASK_BASIC_INFO,(task_info_t)&basic,&basic_count)==KERN_SUCCESS;
+    vm_ok=task_info(mach_task_self(),TASK_VM_INFO,(task_info_t)&vm,&vm_count)==KERN_SUCCESS;
+    usage_ok=getrusage(RUSAGE_SELF,&usage)==0;data_ok=getrlimit(RLIMIT_DATA,&data)==0;
+    fprintf(stderr,"worker memory phase=%s errno=%d limit=%llu startup-rusage-peak=%llu final-rusage-peak=%llu current-rss=%llu mach-peak=%llu vm-peak=%llu current-vm=%llu data-limit=%llu\n",
+        phase,failure_errno,(unsigned long long)memory,(unsigned long long)startup_peak,
+        (unsigned long long)(usage_ok?usage.ru_maxrss:0),(unsigned long long)(basic_ok?basic.resident_size:0),
+        (unsigned long long)(basic_ok?basic.resident_size_max:0),(unsigned long long)(vm_ok?vm.resident_size_peak:0),
+        (unsigned long long)(basic_ok?basic.virtual_size:0),(unsigned long long)(data_ok?data.rlim_cur:0));
+}
+#endif
+
 static int worker_main(int argc, char **argv) {
     int offset=1,status; char **p; uint64_t max_input,max_output,memory,milliseconds,parent_id,threaded;
     unsigned char size_bytes[4],*input=NULL,*output=NULL; uint32_t input_size; size_t output_size=0;
@@ -474,7 +494,12 @@ static int worker_main(int argc, char **argv) {
     if(fread(size_bytes,1,4,stdin)!=4) return respond(FP_INPUT,NULL,0);
     input_size=get32(size_bytes); if(input_size>max_input) return respond(FP_INPUT,NULL,0);
     input=(unsigned char *)malloc(input_size?input_size:1); output=(unsigned char *)malloc(max_output?(size_t)max_output:1);
-    if(!input||!output) { free(input); free(output); return respond(FP_MEMORY,NULL,0); }
+    if(!input||!output) {
+#ifdef __APPLE__
+        mac_memory_diagnostics("request-allocation",memory,startup_rusage_peak,errno);
+#endif
+        free(input); free(output); return respond(FP_MEMORY,NULL,0);
+    }
     if(fread(input,1,input_size,stdin)!=input_size||fgetc(stdin)!=EOF) { free(input); free(output); return respond(FP_INPUT,NULL,0); }
     status=execute_fn(input,input_size,output,(size_t)max_output,&output_size);
     if(status!=0||output_size>max_output) status=FP_ENGINE;
@@ -482,20 +507,11 @@ static int worker_main(int argc, char **argv) {
 #ifdef __APPLE__
     {
         struct rusage usage;
-        if(getrusage(RUSAGE_SELF,&usage)!=0) status=FP_MEMORY;
+        if(getrusage(RUSAGE_SELF,&usage)!=0) {
+            mac_memory_diagnostics("resident-measurement",memory,startup_rusage_peak,errno);status=FP_MEMORY;
+        }
         else if((uint64_t)usage.ru_maxrss>memory) {
-            struct mach_task_basic_info basic;
-            struct task_vm_info vm;
-            mach_msg_type_number_t basic_count=MACH_TASK_BASIC_INFO_COUNT,vm_count=TASK_VM_INFO_COUNT;
-            int basic_ok,vm_ok;
-            memset(&basic,0,sizeof(basic));memset(&vm,0,sizeof(vm));
-            basic_ok=task_info(mach_task_self(),MACH_TASK_BASIC_INFO,(task_info_t)&basic,&basic_count)==KERN_SUCCESS;
-            vm_ok=task_info(mach_task_self(),TASK_VM_INFO,(task_info_t)&vm,&vm_count)==KERN_SUCCESS;
-            fprintf(stderr,"worker resident limit=%llu startup-rusage-peak=%llu final-rusage-peak=%llu current-rss=%llu mach-peak=%llu vm-peak=%llu\n",
-                (unsigned long long)memory,(unsigned long long)startup_rusage_peak,(unsigned long long)usage.ru_maxrss,
-                (unsigned long long)(basic_ok?basic.resident_size:0),(unsigned long long)(basic_ok?basic.resident_size_max:0),
-                (unsigned long long)(vm_ok?vm.resident_size_peak:0));
-            status=FP_MEMORY;
+            mac_memory_diagnostics("resident-ceiling",memory,startup_rusage_peak,0);status=FP_MEMORY;
         }
     }
 #endif

@@ -104,11 +104,31 @@ public sealed class NativeWorkerHost
                 CallerProcessId().ToString(CultureInfo.InvariantCulture),options.AllowInProcessThreads?"1":"0" };
             start.Arguments = string.Join(" ",arguments.Select(Quote));
             context.Checkpoint();
-            process = new Process { StartInfo = start };
-            if (!process.Start()) throw Fail(context,"Native.StartFailed","The pinned native worker could not be started.");
-            started = true;
-            profile = "Fluent.Pdf.worker."+process.Id.ToString(CultureInfo.InvariantCulture)+"."+nonceText;
+            var bootstrap = new PdfNativeDeployment(bootstrapDirectory, options.Deployment.RuntimeIdentifier, options.Deployment.EngineId,
+                options.Deployment.EngineVersion, options.Deployment.Abi, options.Deployment.MaximumTotalBytes,
+                options.Deployment.Assets.Where(a => a.FileName == options.ExecutableFileName).ToArray());
             var clock = Stopwatch.StartNew();
+            for (int attempt = 0; ; attempt++)
+            {
+                context.Checkpoint();
+                if (clock.Elapsed >= options.MaximumElapsedTime) throw Fail(context,"Native.ElapsedTime","The native worker deadline elapsed before startup completed.");
+                PdfNativeDeploymentInspector.VerifyWorker(bootstrap, context);
+                process = new Process { StartInfo = start };
+                try
+                {
+                    if (!process.Start()) throw Fail(context,"Native.StartFailed","The pinned native worker could not be started.");
+                    started = true;
+                    break;
+                }
+                catch (System.ComponentModel.Win32Exception failure) when (!WorkerPlatform.IsWindows && failure.NativeErrorCode == 26 && attempt < 9)
+                {
+                    // A concurrent trusted fork can briefly retain a close-on-exec staging write descriptor.
+                    // ETXTBSY proves exec did not start; no executed request or protocol failure is retried.
+                    process.Dispose(); process = null;
+                    context.CancellationToken.WaitHandle.WaitOne(10);
+                }
+            }
+            profile = "Fluent.Pdf.worker."+process.Id.ToString(CultureInfo.InvariantCulture)+"."+nonceText;
             var running = process;
             inputTask = Task.Factory.StartNew(() => WriteRequest(running.StandardInput.BaseStream,input),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
             responseTask = Task.Factory.StartNew(() => ReadResponse(running.StandardOutput.BaseStream,nonce,options,context),CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
@@ -136,6 +156,7 @@ public sealed class NativeWorkerHost
                 }
             }
             context.Checkpoint();
+            if (clock.Elapsed >= options.MaximumElapsedTime) throw Fail(context,"Native.ElapsedTime","The native worker deadline elapsed.");
             if (!WaitTasks(new Task[] { responseTask,errorTask },1000)) throw Fail(context,"Native.TransportLeaked","A native transport did not close after process exit.");
             if (process.ExitCode != 0) throw Fail(context,"Native.WorkerCrashed","The isolated native worker exited abnormally.");
             var reply = responseTask.GetAwaiter().GetResult();

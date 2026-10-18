@@ -163,6 +163,19 @@ public sealed class NativeWorkerTests
     }
 
     [Fact]
+    public async System.Threading.Tasks.Task ConcurrentStagingAndStartingRetainsIndependentExecutablePins()
+    {
+        using var fixture=new WorkerFixture(_output,captureDiagnostics:true);
+        var jobs=Enumerable.Range(0,4).Select(index=>System.Threading.Tasks.Task.Run(()=>
+        {
+            for(int iteration=0;iteration<20;iteration++)
+                Assert.Equal(new byte[]{(byte)index,(byte)iteration},fixture.Run(new byte[]{0,(byte)index,(byte)iteration}));
+        }));
+        await System.Threading.Tasks.Task.WhenAll(jobs);
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
+    [Fact]
     public void NativeWorkerMemoryAccountingIsIndependentOfTheCallersResidentSet()
     {
         using var fixture=new WorkerFixture(_output,captureDiagnostics:true);
