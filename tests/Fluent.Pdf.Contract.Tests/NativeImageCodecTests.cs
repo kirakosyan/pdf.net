@@ -16,7 +16,7 @@ public sealed class NativeImageCodecTests
         var report = fixture.RunContext(context =>
         {
             var codec = fixture.Registry.GetRequired<IPdfImageCodecProvider>(PdfCapability.ImageCodecs);
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 64; i++)
             {
                 using var input = new MemoryStream(valid);
                 using var output = new MemoryStream();

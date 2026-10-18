@@ -119,6 +119,10 @@ public sealed class NativeWorkerHost
             start.EnvironmentVariables["DOTNET_PROCESSOR_COUNT"] = "2";
             if (options.Deployment.RuntimeIdentifier.StartsWith("osx-", StringComparison.Ordinal))
                 start.EnvironmentVariables["MallocNanoZone"] = "0";
+            // Bound allocator magazine reservations as well as the managed heap.
+            // Fresh ARM64 initialization probes otherwise approach the OS VM-growth ceiling.
+            if (macArm)
+                start.EnvironmentVariables["MallocSpaceEfficient"] = "1";
             string[] arguments =
             {
                 job,

@@ -450,7 +450,7 @@ static void mac_memory_diagnostics(const char *phase,uint64_t memory,uint64_t st
     basic_ok=task_info(mach_task_self(),MACH_TASK_BASIC_INFO,(task_info_t)&basic,&basic_count)==KERN_SUCCESS;
     vm_ok=task_info(mach_task_self(),TASK_VM_INFO,(task_info_t)&vm,&vm_count)==KERN_SUCCESS;
     usage_ok=getrusage(RUSAGE_SELF,&usage)==0;data_ok=getrlimit(RLIMIT_DATA,&data)==0;
-    fprintf(stderr,"worker memory phase=%s errno=%d limit=%llu startup-rusage-peak=%llu final-rusage-peak=%llu current-rss=%llu mach-peak=%llu vm-peak=%llu current-vm=%llu data-limit=%llu\n",
+    fprintf(stderr,"worker memory phase=%s errno=%d limit=%llu startup-rusage-peak=%llu final-rusage-peak=%llu current-rss=%llu mach-peak=%llu task-vm-resident-peak=%llu current-vm=%llu data-limit=%llu\n",
         phase,failure_errno,(unsigned long long)memory,(unsigned long long)startup_peak,
         (unsigned long long)(usage_ok?usage.ru_maxrss:0),(unsigned long long)(basic_ok?basic.resident_size:0),
         (unsigned long long)(basic_ok?basic.resident_size_max:0),(unsigned long long)(vm_ok?vm.resident_size_peak:0),

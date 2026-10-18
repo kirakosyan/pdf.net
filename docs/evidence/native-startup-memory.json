@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "purpose": "native-startup-investigation-not-production-qualification",
+  "scope": "Fresh isolated empty-request ABI probes on macOS 15.7.9 ARM64 using NativeAOT 10.0.13. Expected protocol status 7 rejects the empty codec request after initialization. No PDF functionality or package qualification.",
+  "observations": [
+    {
+      "sourceCommit": "ef40aa3117f035a2a487585e6e90e1981bd627b4",
+      "runId": 39130182452,
+      "jobId": 117683577809,
+      "reportSha256": "3be5477a3bf1d1453ab9ff29bdd1684560000041103292eab652a25cafa6dc99",
+      "groups": [
+        {
+          "memoryBytes": 268291082,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 33554432,
+          "environmentOverrides": {},
+          "attempts": 33,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 245481472
+        },
+        {
+          "memoryBytes": 268291082,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {},
+          "attempts": 33,
+          "initializationFailures": 1,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 246530048
+        },
+        {
+          "memoryBytes": 268291082,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 134217728,
+          "environmentOverrides": {},
+          "attempts": 1,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 236044288,
+          "postInitializationVmGrowthMaximumBytes": 236044288
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 33554432,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 245481472
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 245481472
+        },
+        {
+          "memoryBytes": 267975730,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 33554432,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 245481472
+        },
+        {
+          "memoryBytes": 267975730,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 246530048
+        }
+      ],
+      "assetSha256": {
+        "worker": "0133a72c77af48ea7f0fe47ce7412583c78c1cf9be3961196393f735dcb0c8ad",
+        "fluent-pdf-codecs.dylib": "60363beeeb856d76d4bfc306175b09d3655ca29c845f6f65d8344f36edfd14f4"
+      }
+    },
+    {
+      "sourceCommit": "8ada9333719ecd562c733b44d6c30430df2a46aa",
+      "runId": 39130802103,
+      "jobId": 117685377225,
+      "reportSha256": "e1f48e0651e424c34cabad101db59618d27dc44ea817ed34ac4a4911de960c05",
+      "groups": [
+        {
+          "memoryBytes": 268291082,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 33554432,
+          "environmentOverrides": {},
+          "attempts": 33,
+          "initializationFailures": 1,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 245481472
+        },
+        {
+          "memoryBytes": 268291082,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {},
+          "attempts": 33,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 246530048
+        },
+        {
+          "memoryBytes": 268291082,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 134217728,
+          "environmentOverrides": {},
+          "attempts": 1,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 237092864,
+          "postInitializationVmGrowthMaximumBytes": 237092864
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 33554432,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 246530048
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 246530048
+        },
+        {
+          "memoryBytes": 267975730,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 33554432,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 246530048
+        },
+        {
+          "memoryBytes": 267975730,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {},
+          "attempts": 32,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 245481472
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 8388608,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {},
+          "attempts": 48,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 246530048
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {
+            "MallocMediumZone": "0"
+          },
+          "attempts": 48,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93650944,
+          "postInitializationVmGrowthMaximumBytes": 112525312
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {
+            "MallocSpaceEfficient": "1"
+          },
+          "attempts": 48,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 112312320
+        },
+        {
+          "memoryBytes": 268054568,
+          "gcHeapBytes": 16777216,
+          "gcRangeBytes": 67108864,
+          "environmentOverrides": {
+            "MallocLargeCache": "0"
+          },
+          "attempts": 48,
+          "initializationFailures": 0,
+          "postInitializationVmGrowthMinimumBytes": 93437952,
+          "postInitializationVmGrowthMaximumBytes": 245481472
+        }
+      ],
+      "assetSha256": {
+        "worker": "0133a72c77af48ea7f0fe47ce7412583c78c1cf9be3961196393f735dcb0c8ad",
+        "fluent-pdf-codecs.dylib": "1b68d45cc0a5d1ace4ca2e3c4b78c2c8029112816d73f4cde2c2f049a3223e0d"
+      }
+    }
+  ],
+  "selectedMitigation": "Private macOS ARM64 worker MallocSpaceEfficient=1 with existing GC/OS limits retained; real repeated-decode regression extended from 12 to 64.",
+  "evidenceLimits": [
+    "Saved errno=12 at the initialization abort supports a memory-pressure failure; exact failing allocation and all OS/runtime variants are not yet qualified.",
+    "Values describe current VM growth after successful initialization, not an observed transient VM high-water mark.",
+    "The historical diagnostic label vm-peak described TASK_VM_INFO resident_size_peak; new source labels it task-vm-resident-peak.",
+    "Upstream allocator source was read for configuration semantics only; its digest does not identify the exact running OS binary. No implementation body is imported.",
+    "The macOS ARM64 API comparison on run 39130802103 exited before contract tests without an emitted API difference. New source retains comparator exit codes, assembly hashes and complete output; this remains an audited source-CI failure.",
+    "Earlier Framework worker deadline and native-runtime failures remain retained. Full qualification and publication remain blocked."
+  ],
+  "primarySourceFacts": [
+    {
+      "sourceId": "PINIT-NET-GC-10.0.13",
+      "sha256": "5b1394edf34d08b18550b582940ab0a28079c44d4e8ae3a7cb7ace30636f37b6"
+    },
+    {
+      "sourceId": "PINIT-NET-GC-UNIX-10.0.13",
+      "sha256": "ca6f3fb82bb8d33a17126edd3e72183452d60c49b66e0aebb18babdb3645fcab"
+    },
+    {
+      "sourceId": "PINIT-ALLOCATOR-CONFIG-UPSTREAM",
+      "sha256": "756266669e8251f475d8939a3770f4d430b644104b9f3cb65460c71edea94ec6"
+    },
+    {
+      "sourceId": "PINIT-ALLOCATOR-MAGAZINES-UPSTREAM",
+      "sha256": "7ffde60795e19c69808dc37322dd291c4d8c910b95da6c78d3163f423f18f279"
+    }
+  ],
+  "rawSourcesRetainedOutsideRepository": true,
+  "productionQualified": false
+}
