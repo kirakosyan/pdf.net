@@ -38,7 +38,7 @@
     "consumer"
   ],
   "publicationBlockedReasons": [
-    "SDK scope is incomplete: only FP-001 contracts and FP-002 policies/budgets are implemented; PDF parsing, writing and rendering remain unimplemented. FP-085 deployment integrity preflight is partial; ABI execution and worker isolation remain unimplemented.",
+    "SDK scope and qualification are incomplete. Source implementations through issues #3\u2013#20 do not qualify the complete SDK; rendering and later mandatory feature areas remain unimplemented.",
     "Complete production runtime, native-provider, standards, security, performance and final-package evidence is incomplete.",
     "Package ownership/prefix and scoped Trusted Publishing configuration must be verified before release."
   ],

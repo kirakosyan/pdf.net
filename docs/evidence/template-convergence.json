@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-regression-probe-not-production-performance-qualification",
+  "sourceCommit": "5fba97e0ad61e9a75e2b3218b13c8d06f26f255f",
+  "baselineSourceCommit": "68d5496e022cc5a6d4b6c13edbfb013c6964d09c",
+  "environment": {
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "architecture": "x86_64",
+    "runtime": [
+      "Microsoft.AspNetCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.AspNetCore.App]",
+      "Microsoft.NETCore.App 8.0.32 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]",
+      "Microsoft.NETCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]"
+    ]
+  },
+  "before": {
+    "elapsedMilliseconds": 3893.5583,
+    "Passes": 2,
+    "pages": 9,
+    "Calls": 328,
+    "FullParagraphCalls": 12,
+    "bytes": 3550309,
+    "sourceCommit": "68d5496e022cc5a6d4b6c13edbfb013c6964d09c"
+  },
+  "after": {
+    "elapsedMilliseconds": 3545.7975,
+    "Passes": 2,
+    "pages": 9,
+    "Calls": 214,
+    "FullParagraphCalls": 6,
+    "bytes": 3550309,
+    "sourceCommit": "5fba97e0ad61e9a75e2b3218b13c8d06f26f255f"
+  },
+  "pdfSha256": "ba1bfc2e1db40318eada39457b64c0c4bccccd22acf9843127a5aca62b23dc78",
+  "byteIdentical": true,
+  "probeSha256": "e0fabd6f1d5a0b4c4b56d59cb1abf4f62b6ef922bb05d89dc6ad2e23ac32eda8",
+  "baselineAssemblySha256": "be3eefddfae4dd2d43b3c9c3d9611886249f2084d96cdf3ff5722e433dacb739",
+  "afterAssemblySha256": "f83ecf59da6d6b79fafe270e7c3b0c8d2daeba272b873d2128395f49f47a0368",
+  "sourceCodeFiles": {
+    "src/Fluent.Pdf/Layout/PdfFlow.cs": "58d034361b7e22d964eff2ca4a200431a68d772fd9819dd848241f969fe1c693",
+    "src/Fluent.Pdf/Templates/PdfTemplateLayout.cs": "8cfb7cb3e3975dcc695acca9145e163e18ae17aec820f5a969e16022575573a3",
+    "tests/Fluent.Pdf.Contract.Tests/TemplateTests.cs": "ea9d7624292453cd0a2ebfe5e6bde8c227e9a7c37fa3fb1130489fc19b9a9172"
+  },
+  "logs": {
+    "template-perf-baseline.log": "0bf6eba727d8f6ad917d0e3f74cbd29fe859aa328d3d47ad0b803116eda321e0",
+    "template-perf-final.log": "741d859a1f5945eae594230328fd6d96697b10577b1af0b4a249ae2cd56a6af3",
+    "template-cache-tests.log": "901e5dde17742d70627333a0819a9c49492a7c8646cb36c19c01dadc7c08471d",
+    "final-source-managed.log": "d0e41415593c42ec0837bf8960e8fde610c27172a4b1b258c9a39658e03bd41e",
+    "final-source-api.log": "5073dfc2e5e4dd12d29239fc06b2c6a93ae4886614c13328541e6a55ce67e8a3",
+    "final-source-spec.log": "ad4b523a1e243252f72a7914c289b5de32307fc0f6836a865245952eae8e40d0",
+    "final-source-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "commands": [
+    "dotnet run --project /workspace/scratch/template-perf -c Release",
+    "cmp /workspace/scratch/template-perf-before.pdf /workspace/scratch/template-perf-final.pdf"
+  ],
+  "limitations": [
+    "One cold local timing per source is an investigation sample, not a calibrated latency threshold or production performance result.",
+    "The source regression checks shaping work, unchanged output bytes and operation-local cache ownership. Full workloads, pinned hardware, concurrency/endurance and all production gates remain mandatory.",
+    "Deadlines, memory ceilings and release gates remain in force."
+  ],
+  "packageSha256": null,
+  "productionQualified": false
+}

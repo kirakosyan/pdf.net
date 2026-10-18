@@ -220,6 +220,19 @@ public sealed class NavigationTests
     }
 
     [Fact]
+    public void InternationalUriHostsAndEscapedPathsRetainTheirTargetAndMalformedUnicodeFails()
+    {
+        using var blank = Pdf.Create().AddPage();
+        using var document = PdfNavigation.AddLink(blank.CreateSnapshot(), 0, new(0, 0, 10, 10), PdfAction.Uri("https://bücher.example.test/path?q=é"));
+        var uri = PdfNavigation.Inspect(document.CreateSnapshot()).Actions.First(a => a.Subtype == "URI").Definition.Entries["URI"];
+        Assert.Equal("https://xn--bcher-kva.example.test/path?q=%C3%A9", System.Text.Encoding.ASCII.GetString(uri.StringBytes.ToArray()));
+        using var ipv6 = PdfNavigation.AddLink(blank.CreateSnapshot(), 0, new(0, 0, 10, 10), PdfAction.Uri("https://[::1]/path"));
+        Assert.Contains(PdfNavigation.Inspect(ipv6.CreateSnapshot()).Actions, a => a.Subtype == "URI" && a.IsAllowed);
+        Assert.Throws<ArgumentException>(() => PdfAction.Remote("bad\uD800.pdf", "chapter"));
+        Assert.Throws<ArgumentException>(() => PdfAction.Launch("bad\uDC00.pdf"));
+    }
+
+    [Fact]
     public void NoActionPolicyRemovesEvenLocalAndUriActions()
     {
         using var blank = Pdf.Create().AddPage();

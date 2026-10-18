@@ -24,7 +24,7 @@ public sealed class PdfAction
         Text(uri, nameof(uri));
         if (!System.Uri.TryCreate(uri, UriKind.Absolute, out var parsed))
             throw new ArgumentException("An absolute URI is required.", nameof(uri));
-        return new(PdfGraphicsNumbers.Dict(("S", PdfValue.Name("URI")), ("URI", Ascii(parsed.AbsoluteUri))));
+        return new(PdfGraphicsNumbers.Dict(("S", PdfValue.Name("URI")), ("URI", Ascii(parsed.Host.Length == 0 ? parsed.AbsoluteUri : new System.UriBuilder(parsed) { Host = parsed.IdnHost }.Uri.AbsoluteUri))));
     }
 
     /// <summary>Creates a remote-file named destination action, requiring explicit policy permission.</summary>
@@ -78,8 +78,31 @@ public sealed class PdfAction
         return new PdfResourceWriter(reader.Edit, reader.Context, new()).EmbedValue(PdfValue.OwnedDictionary(values));
     }
 
-    private static string Text(string text, string parameter) => string.IsNullOrEmpty(text) || text.Length > 8192 || text.Any(c => c == 0 || char.IsControl(c)) ? throw new ArgumentException("A nonempty bounded string without controls is required.", parameter) : text;
-    private static PdfValue Ascii(string text) => PdfValue.String(System.Text.Encoding.ASCII.GetBytes(text));
+    private static string Text(string text, string parameter)
+    {
+        if (string.IsNullOrEmpty(text) || text.Length > 8192 || text.Any(c => c == 0 || char.IsControl(c)))
+            throw new ArgumentException("A nonempty bounded string without controls is required.", parameter);
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (char.IsHighSurrogate(text[i]))
+            {
+                if (i + 1 == text.Length || !char.IsLowSurrogate(text[++i]))
+                    throw new ArgumentException("Well-formed Unicode is required.", parameter);
+            }
+            else if (char.IsLowSurrogate(text[i]))
+                throw new ArgumentException("Well-formed Unicode is required.", parameter);
+        }
+
+        return text;
+    }
+
+    private static PdfValue Ascii(string text)
+    {
+        if (text.Any(c => c > 127))
+            throw new ArgumentException("The URI must serialize to ASCII without replacement.", nameof(text));
+        return PdfValue.String(System.Text.Encoding.ASCII.GetBytes(text));
+    }
+
     private static PdfValue Unicode(string text) => PdfValue.String(new byte[] { 254, 255 }.Concat(System.Text.Encoding.BigEndianUnicode.GetBytes(text)).ToArray());
 }
 
