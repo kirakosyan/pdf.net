@@ -124,6 +124,7 @@ public sealed class NativeImageCodecTests
             catch (PdfException failure)
             {
                 _output.WriteLine(failure.Diagnostic.Code);
+                foreach(string key in new[]{"Native.FailureType","Native.FailureHResult","Native.FailureErrorCode","Native.WorkerFailureDetail"})if(failure.Data[key] is object value)_output.WriteLine(key+": "+value);
                 if (failure.Data["Native.WorkerDiagnostics"] is string detail)
                     _output.WriteLine(detail);
                 throw;

@@ -26,6 +26,14 @@ public sealed class NativeWorkerTests
     }
 
     [Fact]
+    public void RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces()
+    {
+        using var fixture=new WorkerFixture(_output);
+        for(int iteration=0;iteration<20;iteration++)Assert.Equal(new byte[]{1,2,3},fixture.Run(new byte[]{0,1,2,3}));
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
+    [Fact]
     public void SelfContainedManagedBridgeRunsNativeOsArchitectureAndRestrictsNewThreads()
     {
         using var fixture=new WorkerFixture(_output,"native-aot");

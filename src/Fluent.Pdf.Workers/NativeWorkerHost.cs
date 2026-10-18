@@ -131,6 +131,7 @@ public sealed class NativeWorkerHost
                         if (process.WorkingSet64 > options.MaximumMemoryBytes) throw Fail(context,"Native.MemoryLimit","The native worker exceeded its resident-memory ceiling.");
                     }
                     catch(InvalidOperationException) when(process.WaitForExit(0)) { }
+                    catch(System.ComponentModel.Win32Exception) when(process.WaitForExit(0)) { }
                 }
             }
             context.Checkpoint();
@@ -172,7 +173,20 @@ public sealed class NativeWorkerHost
         catch (Exception failure) when (failure is IOException || failure is UnauthorizedAccessException || failure is System.ComponentModel.Win32Exception || failure is AggregateException)
         {
             context.Checkpoint();
-            throw Fail(context,"Native.WorkerFailure","The native worker or its private transport failed.");
+            try {throw Fail(context,"Native.WorkerFailure","The native worker or its private transport failed.");}
+            catch(PdfException reported)
+            {
+                reported.Data["Native.FailureType"]=failure.GetType().FullName;
+                reported.Data["Native.FailureHResult"]=failure.HResult;
+                if(failure is System.ComponentModel.Win32Exception native)reported.Data["Native.FailureErrorCode"]=native.NativeErrorCode;
+                if(options.CaptureWorkerDiagnostics)
+                {
+                    string detail=failure.Message;
+                    reported.Data["Native.WorkerFailureDetail"]=detail.Substring(0,Math.Min(2048,detail.Length));
+                    if(errorTask is not null&&WaitTasks(new Task[]{errorTask},100)&&errorTask.Status==TaskStatus.RanToCompletion&&!string.IsNullOrEmpty(errorTask.Result))reported.Data["Native.WorkerDiagnostics"]=errorTask.Result;
+                }
+                throw;
+            }
         }
         finally
         {
