@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-profile-not-release-qualification",
+  "requirement": "FP-025",
+  "pypdf": "6.10.0",
+  "poppler": "pdftotext version 25.03.0",
+  "passedAssertions": [
+    "Strict independent PDF text read including Armenian and supplementary Unicode",
+    "Raw execution order differs from inferred line order",
+    "Independent text-object baselines and authored 600/1000-em advance cells agree within 1e-9 points",
+    "Every returned native quad matches the fixture height/width declarations",
+    "Poppler layout extraction confirms geometric top/bottom ordering"
+  ],
+  "artifacts": {
+    "result.json": "a085fa37685387c94d2afac1ce3f234dd94a9f8512b75ce828a8c9a8349e2b64",
+    "poppler.txt": "845ed1794dd7ef7b9111a063c9ee6f62264aff7fdc4e0a885e6f52fc38c1bb0a",
+    "Program.cs": "dec4d4c6a446ffb5406442292aaf5b68e9d7052711a03d9939ad715e3189e324",
+    "verify.py": "8f2639f53aca9be5234d79cd23da31442904c6ecb7b937002de242b09d14a074",
+    "text.pdf": "07209bd7a4c5301da095ca806b0c28bb382cdb6f883f9889e9bdadbd448be195"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Synthetic advance-cell geometry profile; cells are not glyph ink bounds or full fidelity qualification",
+    "No claim of original linguistic reading order from geometry; ActualText remains separate",
+    "Full multilingual/rotation/column corpus, additional CMaps, final packages and actual minimum runtimes remain mandatory"
+  ],
+  "sourceCommit": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7",
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Extraction/PdfExtractionFont.cs": "5d45dc24b69f8ca98d43f4a902c5f384a89dc387c2d160354ddcb05be7166368",
+    "src/Fluent.Pdf/Extraction/PdfTextExtraction.cs": "8713a5efb567112b8be340b4bbb9526b27ab8ce5ba89657e12e34058bbab555a",
+    "src/Fluent.Pdf/Extraction/PdfTextGrouping.cs": "0f1b9599a73ec3af30c4cd288a951022e69eb32664086975140728a26c61a7e8",
+    "src/Fluent.Pdf/Extraction/PdfTextExtractionContracts.cs": "7898a3a62fb5a25efa5e26759791757847e54a968fe57a072c8a93672dc18a96",
+    "src/Fluent.Pdf/Fonts/PdfUnicodeMap.cs": "48a7d0574ce395d0bc5fde7e6cdafa25f9192880dee8eb1472fd60ea6a68c678",
+    "src/Fluent.Pdf/Fonts/PdfFontContracts.cs": "c80f9a31834ff65c36e61943fd2ad88e2df8389998fbfecf842ee57690b1af79",
+    "src/Fluent.Pdf.Fonts/ManagedFontProvider.cs": "946f9dfce316eaf614bfa401571a6dc7b4fe603935c9df309fa8c52bf80ff4e1",
+    "src/Fluent.Pdf.Fonts/SimpleFontEncoding.cs": "c4977bd7fc0f16065a02af121d6c2bc203ecf30b0e7578c3fe023de9dafea292",
+    "src/Fluent.Pdf.Fonts/StandardFont.cs": "57739c6e852d83e307b68f2b17fa81bc065d35a41950a2e27fe00e3681d69c25",
+    "tests/Fluent.Pdf.Contract.Tests/ExtractionTests.cs": "484307171d7cd62bd32314064da005e01fe5e0837aa9a0ded911a2d7380cb187"
+  }
+}

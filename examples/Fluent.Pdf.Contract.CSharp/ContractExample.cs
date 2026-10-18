@@ -5,6 +5,18 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteFormPdf(Stream output, PdfFont font)
+    {
+        var text = PdfText.Shape("office", new PdfFontFallback(font), new PdfProviderRegistry(new PdfSimpleTextShaper()));
+        var appearance = PdfForms.CreateTextAppearance(text, new PdfRect(0, 0, 160, 40), 12);
+        var editingFont = PdfFontResource.CreateText(font, "office", subset: false);
+        using var blank = PdfFacade.Create().AddPage();
+        var widget = new PdfFormWidgetDefinition(0, new PdfRect(20, 50, 160, 40), appearance);
+        byte[] unicodeValue = System.Text.Encoding.BigEndianUnicode.GetPreamble().Concat(System.Text.Encoding.BigEndianUnicode.GetBytes("office")).ToArray();
+        using var document = PdfForms.Add(blank.CreateSnapshot(), new PdfFormFieldDefinition("Customer.Name", PdfFormFieldKind.Text, new[] { widget }, PdfValue.String(unicodeValue), editingFont: editingFont));
+        return document.Save(output);
+    }
+
     public static string ExtractPageText(Stream input)
     {
         using var document = PdfFacade.Open(input);

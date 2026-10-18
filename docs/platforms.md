@@ -49,3 +49,5 @@ FP-023 attachments/collections use managed APIs on all four target frameworks. P
 FP-024 layer graph/evaluation/flattening is managed on all four target frameworks. Independent Poppler output checks emitted configuration behavior; SDK rendering is a separate provider capability with its own qualification.
 
 FP-025 page/Form extraction is managed on the four core frameworks. Optional standard-font encoding/metrics come from explicitly registered providers; complete source mappings and metrics need no machine fonts or native renderer. Full production geometry/linguistic/package qualification remains pending.
+
+The FP-036 AcroForm source profile uses only the managed core on all four TFMs. Shaped appearances use explicitly selected font/shaping providers; the form API adds no native dependency. Interactive viewer regeneration, additional tagged creation/relocation profiles and full production qualification remain pending.

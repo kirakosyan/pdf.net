@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-source-facts-not-implementation-or-qualification",
+  "requirement": "FP-036",
+  "sourceId": "P36-ISO1-2008",
+  "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+  "sections": ["12.7.2 interactive form dictionary", "12.7.3 field dictionaries and hierarchy", "12.7.4 standard field types", "12.5.6.19 widget annotations"],
+  "facts": [
+    "Fields and widget annotations have separate ownership links; a merged field/widget dictionary omits Kids.",
+    "Partial names combine through named ancestors; unnamed terminal representations may share a name and consistent field attributes.",
+    "Calculation order references terminal fields with calculation actions; inspection does not require execution.",
+    "Variable text has default appearance/resources and private widget appearances; state buttons synchronize V and AS.",
+    "Multi-select choice indices are sorted in option order and agree with selected values.",
+    "The signature-presence flag includes unsigned signature fields; it does not assert a valid cryptographic signature."
+  ],
+  "limitations": ["Normative facts do not qualify implementation or independent interactive viewer behavior."],
+  "rawSourcesRetainedOutsideRepository": true
+}

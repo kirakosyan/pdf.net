@@ -347,7 +347,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -1013,7 +1013,9 @@
           "Additional source CMap/CID, arbitrary glyph-matrix and linguistic/column/ink/appearance extraction profiles remain mandatory",
           "Complete multilingual/geometry/fidelity corpus, all actual runtimes, exact final packages and every production qualification gate"
         ],
-        "standardsEvidence": "docs/evidence/FP-025-standards.json"
+        "standardsEvidence": "docs/evidence/FP-025-standards.json",
+        "sourceEvidence": "docs/evidence/FP-025-source.json",
+        "independentEvidence": "docs/evidence/FP-025-independent.json"
       }
     },
     {
@@ -1334,7 +1336,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/forms.md",
+        "implemented": [
+          "Passive inherited field/widget inventories and valid logical duplicate representations",
+          "Seven standard field kinds, explicit private appearances/default editing fonts, hierarchy, state/choice synchronization and C#/VB consumers",
+          "Identity-preserving common-flag/same-page widget/tab edits and policy-checked passive calculation metadata"
+        ],
+        "pending": [
+          "Interactive multilingual appearance regeneration, merged/legacy consolidation, new tagged field creation and cross-page structure relocation profiles remain mandatory",
+          "Full subtype/viewer fill/edit corpus, actual minimum runtimes, exact final packages and all production qualification gates"
+        ],
+        "standardsEvidence": "docs/evidence/FP-036-standards.json"
+      }
     },
     {
       "id": "FP-037",

@@ -4,6 +4,19 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteFormPdf(output As Stream, font As PdfFont) As PdfOperationReport
+        Dim text = PdfText.Shape("office", New PdfFontFallback(font), New PdfProviderRegistry(New PdfSimpleTextShaper()))
+        Dim appearance = PdfForms.CreateTextAppearance(text, New PdfRect(0, 0, 160, 40), 12)
+        Dim editingFont = PdfFontResource.CreateText(font, "office", subset:=False)
+        Using blank = PdfFacade.Create().AddPage()
+            Dim widget As New PdfFormWidgetDefinition(0, New PdfRect(20, 50, 160, 40), appearance)
+            Dim unicodeValue = System.Text.Encoding.BigEndianUnicode.GetPreamble().Concat(System.Text.Encoding.BigEndianUnicode.GetBytes("office")).ToArray()
+            Using document = PdfForms.Add(blank.CreateSnapshot(), New PdfFormFieldDefinition("Customer.Name", PdfFormFieldKind.Text, {widget}, PdfValue.String(unicodeValue), editingFont:=editingFont))
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
+
     Public Function ExtractPageText(input As Stream) As String
         Using document = PdfFacade.Open(input)
             Return PdfTextExtraction.ReadPage(document.CreateSnapshot(), 0,
