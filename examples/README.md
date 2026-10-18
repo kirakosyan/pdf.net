@@ -5,3 +5,5 @@ The [C# example](Fluent.Pdf.Contract.CSharp/ContractExample.cs) and [VB example]
 Build and run using [docs/testing.md](../docs/testing.md). The examples currently reference the source project. The final release gate must rerun them with exact NuGet package references in fresh consumers; no package is produced or published at this stage. These examples do not generate a PDF or install an engine.
 
 `WriteCanvasPdf` in both languages uses millimeters, margins, a scoped rotation and nonzero-origin page geometry. It writes a real vector PDF through the managed provider. These project-reference consumers must become exact final-package consumers at qualification.
+
+`WriteFlowPdf` in C# and VB reads a caller-supplied font, uses an explicitly supplied shaper, wraps logical text into page canvases and writes a real PDF. Borrowed font/output streams remain open. Exact final-package consumers remain gated.

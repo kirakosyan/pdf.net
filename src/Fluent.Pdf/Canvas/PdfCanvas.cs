@@ -48,39 +48,48 @@ public sealed class PdfCanvas
         if (draw == null)
             throw new ArgumentNullException(nameof(draw));
         options ??= new();
-        PdfCanvas? canvas = null;
         PdfCanvasResult? result = null;
-        var report = PdfFont.Run("CreateCanvas", "managed.canvas", policy, cancellationToken, context =>
+        Action<PdfOperationReport>? finish = null;
+        var report = PdfFont.Run("CreateCanvas", "managed.canvas", policy, cancellationToken, context => result = CreateCore(geometry, draw, options, context, out finish), PdfCapability.WriteDocument);
+        finish!(report);
+        return result!;
+    }
+
+    internal static PdfCanvasResult CreateCore(PdfPageGeometry geometry, Action<PdfCanvas> draw, PdfCanvasOptions options, PdfOperationContext context, out Action<PdfOperationReport> finish)
+    {
+        var canvas = new PdfCanvas(geometry, options, context);
+        PdfCanvasResult result;
+        try
         {
-            canvas = new PdfCanvas(geometry, options, context);
-            try
-            {
-                draw(canvas);
-                canvas.Check();
-                if (canvas._scopes.Count != 0)
-                    throw canvas.Error("Canvas.UnbalancedScope", "Every canvas scope must close before the callback returns.");
-                result = canvas.Finish();
-            }
-            finally
-            {
-                canvas._active = false;
-                while (canvas._scopes.Count > 0)
-                    canvas._scopes.Pop().Lease.Dispose();
-            }
-        }, PdfCapability.WriteDocument);
-        result!.OperationReport = report;
-        result.Drawing.OperationReport = report;
-        result.Drawing.Content.OperationReport = report;
-        foreach (var resource in canvas!._createdResources)
-            resource.OperationReport = report;
-        foreach (var drawing in canvas._createdDrawings)
+            draw(canvas);
+            canvas.Check();
+            if (canvas._scopes.Count != 0)
+                throw canvas.Error("Canvas.UnbalancedScope", "Every canvas scope must close before the callback returns.");
+            result = canvas.Finish();
+        }
+        finally
         {
-            drawing.OperationReport = report;
-            drawing.Content.OperationReport = report;
+            canvas._active = false;
+            while (canvas._scopes.Count > 0)
+                canvas._scopes.Pop().Lease.Dispose();
         }
 
-        foreach (var font in canvas._createdFonts)
-            font.OperationReport = report;
+        finish = report =>
+        {
+            result.OperationReport = report;
+            result.Drawing.OperationReport = report;
+            result.Drawing.Content.OperationReport = report;
+            foreach (var resource in canvas._createdResources)
+                resource.OperationReport = report;
+            foreach (var drawing in canvas._createdDrawings)
+            {
+                drawing.OperationReport = report;
+                drawing.Content.OperationReport = report;
+            }
+
+            foreach (var font in canvas._createdFonts)
+                font.OperationReport = report;
+        };
         return result;
     }
 

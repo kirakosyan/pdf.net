@@ -92,9 +92,10 @@ public static class PdfText
         return result;
     }
 
-    internal static PdfShapedText ShapeCore(string text, PdfFontFallback fonts, IPdfTextShaper shaper, PdfTextOptions options, PdfOperationContext context)
+    internal static PdfShapedText ShapeCore(string text, PdfFontFallback fonts, IPdfTextShaper shaper, PdfTextOptions options, PdfOperationContext context,
+        PdfUnicodeAnalysis? analysis = null, Func<int, PdfFontFallback>? fontsAt = null, Func<int, PdfTextOptions>? optionsAt = null, bool allowTabs = false)
     {
-        var unicode = PdfUnicode.AnalyzeCore(text, options.ParagraphDirection, context);
+        var unicode = analysis ?? PdfUnicode.AnalyzeCore(text, options.ParagraphDirection, context);
         var scalars = unicode.Scalars;
         context.Consume(PdfResourceKind.ExpandedBytes, scalars.Count * 48L + unicode.Graphemes.Count * 192L + 512);
         var visual = new int[scalars.Count];
@@ -109,7 +110,7 @@ public static class PdfText
             resolvedScripts[i] = following;
         }
 
-        var items = new List<(int Start, int End, int Level, int Paragraph, int Visual, uint Script, PdfFont Font)>();
+        var items = new List<(int Start, int End, int Level, int Paragraph, int Visual, uint Script, PdfFont Font, PdfTextOptions Options)>();
         int paragraph = 0;
         uint preceding = 0;
         foreach (var cluster in unicode.Graphemes)
@@ -129,6 +130,7 @@ public static class PdfText
             for (int i = first; i < first + cluster.ScalarCount; i++)
             {
                 var scalar = scalars[i];
+                if (allowTabs && scalar.Value == 9) continue;
                 if (scalar.BidiClass == PdfBidiClass.S)
                     throw PdfWriterCore.Error(context, "Text.TabLayoutRequired", "Segment separators require an explicit layout/tab-stop policy.");
                 if (scalar.BidiClass == PdfBidiClass.B)
@@ -150,7 +152,8 @@ public static class PdfText
             else
                 preceding = script;
             PdfFont? selected = null;
-            foreach (var font in fonts.Fonts)
+            var selectedOptions = optionsAt?.Invoke(cluster.Utf16Offset) ?? options;
+            foreach (var font in (fontsAt?.Invoke(cluster.Utf16Offset) ?? fonts).Fonts)
             {
                 bool covers = true;
                 for (int i = first; i < first + cluster.ScalarCount; i++)
@@ -173,22 +176,22 @@ public static class PdfText
             if (items.Count > 0)
             {
                 var previous = items[items.Count - 1];
-                if (previous.End == cluster.Utf16Offset && previous.Level == level && previous.Paragraph == paragraph && previous.Script == script && ReferenceEquals(previous.Font, selected))
+                if (previous.End == cluster.Utf16Offset && previous.Level == level && previous.Paragraph == paragraph && previous.Script == script && ReferenceEquals(previous.Font, selected) && ReferenceEquals(previous.Options, selectedOptions))
                 {
-                    items[items.Count - 1] = (previous.Start, end, level, paragraph, Math.Min(previous.Visual, position), script, selected);
+                    items[items.Count - 1] = (previous.Start, end, level, paragraph, Math.Min(previous.Visual, position), script, selected, selectedOptions);
                     continue;
                 }
             }
 
-            items.Add((cluster.Utf16Offset, end, level, paragraph, position, script, selected));
+            items.Add((cluster.Utf16Offset, end, level, paragraph, position, script, selected, selectedOptions));
         }
 
         var runs = new List<PdfShapedRun>();
         foreach (var item in items.OrderBy(x => x.Paragraph).ThenBy(x => x.Visual))
         {
             context.Checkpoint();
-            var direction = options.Vertical ? PdfTextDirection.TopToBottom : (item.Level & 1) == 0 ? PdfTextDirection.LeftToRight : PdfTextDirection.RightToLeft;
-            var request = new PdfShapingRequest(text, item.Start, item.End - item.Start, item.Font, direction, item.Script, options.Language, options.Features);
+            var direction = item.Options.Vertical ? PdfTextDirection.TopToBottom : (item.Level & 1) == 0 ? PdfTextDirection.LeftToRight : PdfTextDirection.RightToLeft;
+            var request = new PdfShapingRequest(text, item.Start, item.End - item.Start, item.Font, direction, item.Script, item.Options.Language, item.Options.Features);
             var supplied = shaper.Shape(request, context) ?? throw PdfWriterCore.Error(context, "Text.ProviderResult", "The shaper returned no glyph sequence.");
             context.Consume(PdfResourceKind.Objects, supplied.Count + 1L);
             context.Consume(PdfResourceKind.ExpandedBytes, supplied.Count * 56L + 128);

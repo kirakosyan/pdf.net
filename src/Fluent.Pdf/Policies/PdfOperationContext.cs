@@ -21,6 +21,17 @@ public sealed class PdfOperationContext
     private readonly Func<TimeSpan> _elapsed;
     private PdfException? _fatal;
     private bool _active = true;
+    private bool _unicodeResidentCharged;
+    internal void ChargeUnicodeResident(long bytes)
+    {
+        lock (_gate)
+        {
+            CheckCore();
+            if (_unicodeResidentCharged) return;
+            Consume(PdfResourceKind.ExpandedBytes, bytes);
+            _unicodeResidentCharged = true;
+        }
+    }
 
     internal PdfOperationContext(string operation, string providerId, PdfCapability capability, PdfOperationPolicy policy, CancellationToken token,
         Func<TimeSpan>? elapsedTime = null)

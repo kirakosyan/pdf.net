@@ -4,6 +4,15 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteFlowPdf(fontInput As Stream, output As Stream, text As String, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 200, 160)))
+        Dim result = PdfFlow.Layout({New PdfFlowParagraph(text, style)}, New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper))
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function WriteCanvasPdf(output As Stream) As PdfOperationReport
         Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(-20, 10, 240, 160)), PdfPageRotation.Clockwise90)
         Dim path = PdfPath.Create({PdfPathSegment.Rectangle(New PdfRect(0, 0, 30, 15))})

@@ -5,6 +5,16 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteFlowPdf(Stream fontInput, Stream output, string text, IPdfTextShaper shaper)
+    {
+        var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));
+        var style = new PdfFlowTextStyle(new PdfFontFallback(font), 12);
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 200, 160)));
+        var result = PdfFlow.Layout(new[] { new PdfFlowParagraph(text, style) },
+            new PdfFlowOptions(geometry, PdfMargins.Uniform(12)), new PdfProviderRegistry(shaper));
+        using var document = result.CreateDocument();
+        return document.Save(output);
+    }
     public static PdfOperationReport WriteCanvasPdf(Stream output)
     {
         var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(-20, 10, 240, 160)), PdfPageRotation.Clockwise90);

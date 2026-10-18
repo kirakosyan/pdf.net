@@ -447,7 +447,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/flow-layout.md",
+        "implemented": [
+          "Immutable styled runs/paragraphs, deterministic bounded wrapping/alignment/spacing and float exclusions",
+          "Widow/orphan, keep-together/keep-chain and explicit page/overflow/tab constraints",
+          "Paragraph-context bidi line reshaping, logical ActualText and shared-context page canvas composition"
+        ],
+        "pending": [
+          "Complete multilingual business/constraint corpus and language line-break profiles",
+          "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
+        ]
+      }
     },
     {
       "id": "FP-013",

@@ -49,7 +49,7 @@ internal sealed class PdfUnicodeData
     internal static PdfUnicodeData For(PdfOperationContext context)
     {
         context.Checkpoint();
-        context.Consume(PdfResourceKind.ExpandedBytes, ResidentCharge);
+        context.ChargeUnicodeResident(ResidentCharge);
         var data = Instance.Value;
         context.Checkpoint();
         return data;

@@ -58,6 +58,26 @@ public sealed class NativeTextTests
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }
 
+    [Fact]
+    public void WrappedFlowRetainsOriginalRtlParagraphDirectionOnLatinContinuationLines()
+    {
+        using var fixture = new Fixture(_output);
+        var fonts = new PdfFontFallback(TextTests.Read("latin.ttf"), TextTests.Read("arabic.ttf"));
+        var paragraph = new PdfFlowParagraph("مرحبا office office", new PdfFlowTextStyle(fonts), new PdfFlowParagraphStyle(orphanLines: 1, widowLines: 1));
+        var options = new PdfFlowOptions(new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 42, 160))), PdfMargins.Uniform(0), PdfFlowOverflow.BreakGrapheme);
+        var result = PdfFlow.Layout(new[] { paragraph }, options, fixture.Providers, new PdfOperationPolicy(limits: new PdfResourceLimits(maximumExpandedBytes: 8589934592)));
+        var lines = result.Pages.SelectMany(p => p.Lines).ToArray();
+        Assert.True(lines.Length >= 3);
+        Assert.Equal("مرحبا office office", string.Concat(lines.Select(l => l.Text)));
+        Assert.All(lines, line => Assert.Equal(1, line.ShapedText.Unicode.Paragraphs[0].EmbeddingLevel));
+        Assert.Contains(lines.Skip(1).SelectMany(l => l.ShapedText.Runs), r => r.Request.Direction == PdfTextDirection.LeftToRight);
+        using var document = result.CreateDocument();
+        using var output = new MemoryStream();
+        document.Save(output);
+        Assert.True(output.Length > 0);
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
     private sealed class ReportingShaper : IPdfTextShaper
     {
         private readonly IPdfTextShaper _inner;

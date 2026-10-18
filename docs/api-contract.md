@@ -99,3 +99,5 @@ Actual Framework 4.7.2 and exact final-package execution remain pending. No requ
 FP-005 also adds `PdfTransaction`, `PdfWriteOptions`, immutable original page bindings, the stateless default managed provider and optional revision choices on save methods. These changes remain in the unshipped baseline; compiled binaries/delegates must rebuild. See [managed writing](pdf-writing.md).
 
 FP-011 adds immutable five-box page geometry, explicit units, rotated coordinate conversions, scoped canvas transforms/clips, vector/text/image placement frames and atomic page canvas application. See [page canvas and geometry](page-canvas.md).
+
+FP-012 adds immutable styled paragraphs/runs, explicit line/tab/overflow and pagination policies, floating vectors, detached line/page geometry and shared-context canvas output. See [flow layout and pagination](flow-layout.md).

@@ -75,3 +75,5 @@ Conformance is established by independent validators and semantic review where r
 apps/PdfReader is a separate non-packable project. It will consume public SDK contracts for rendering, navigation, search and interaction after a later specification. No GUI framework, visual clone, Reader runtime or desktop distribution is selected in this baseline.
 
 The page canvas emits private vector Form XObjects under the managed core. Geometry captures all five standard boxes, viewing rotation and UserUnit. Completed canvases are immutable; synchronous builders own one operation context and thread. Application stages page resource/layer changes before committing. Source overlays retain the original encoded content streams behind an isolated graphics state.
+
+Flow layout preserves paragraph bidi resolution and reshapes each wrapped line before painting rich text. Constraint planning and immutable page canvas construction share one bounded context. The planner stages complete results; save remains a separate managed document boundary.
