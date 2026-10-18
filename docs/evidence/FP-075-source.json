@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-075",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "577ff59d77323bccae9c93ff34e91f016c6881f6",
+  "sourceTree": "20316045d855569bb502a3e36046d774c21846a9",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -97,7 +97,15 @@
     "NativeOcrContractTests"
   ],
   "localMissingModelRegression": "Actual isolated-provider path fails before process launch with Native.AssetMissing and exact model identity; this managed/prelaunch case executes locally. Positive native isolation is still unavailable because host lacks Landlock.",
-  "sourceCI": "New exact-head unfiltered CI required. Historical44green20lanes retained asPR-118-CI-111;45failed4testlanes/twoLinuxbuilds retained asPR-118-CI-112.",
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-113-source.json",
+    "conclusion": "failure",
+    "runtimeLanes": 6,
+    "passed": 7740,
+    "failed": 12,
+    "skipped": 0,
+    "scope": "Exact46source. Two new native tests requested oversized output envelopes; subsequent47source fixes test requests without weakening SDK bounds. Fourteen further runtime lanes are unexecuted."
+  },
   "productionQualified": false,
   "packageSha256": null,
   "pending": [

@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-ci-not-production-qualification",
+  "runId": 39172111577,
+  "sourceCommit": "577ff59d77323bccae9c93ff34e91f016c6881f6",
+  "testedMergeCommit": "e63eb995d2a0eab6269480fd65b7b806eeccdbf5",
+  "testedTree": "20316045d855569bb502a3e36046d774c21846a9",
+  "exactMergeTreeVerified": true,
+  "conclusion": "failure",
+  "platformJobs": 6,
+  "completedRuntimeLanes": 6,
+  "expectedRuntimeLanes": 20,
+  "passed": 7740,
+  "failed": 12,
+  "skipped": 0,
+  "jobs": [
+    {
+      "jobId": 117807167481,
+      "name": "Contracts (win-arm64)",
+      "conclusion": "failure",
+      "logSha256": "c03df77a26225736115b776086d967c6192cd9fb76a096ca057076ce47c5475f",
+      "completedLaneTotals": [
+        {
+          "failed": 2,
+          "passed": 1290,
+          "skipped": 0,
+          "total": 1292
+        }
+      ]
+    },
+    {
+      "jobId": 117807167685,
+      "name": "Contracts (osx-arm64)",
+      "conclusion": "failure",
+      "logSha256": "6295579e489238e413454ef53cfe0dba8e768baecd13d208f8cdf19ba6c44d02",
+      "completedLaneTotals": [
+        {
+          "failed": 2,
+          "passed": 1290,
+          "skipped": 0,
+          "total": 1292
+        }
+      ]
+    },
+    {
+      "jobId": 117807167687,
+      "name": "Contracts (osx-x64)",
+      "conclusion": "failure",
+      "logSha256": "84e5360c12d36152c9fea3d3cf044e62862b6bd657e95f462b9245cb8d994624",
+      "completedLaneTotals": [
+        {
+          "failed": 2,
+          "passed": 1290,
+          "skipped": 0,
+          "total": 1292
+        }
+      ]
+    },
+    {
+      "jobId": 117807167692,
+      "name": "Contracts (win-x64)",
+      "conclusion": "failure",
+      "logSha256": "655a70ca2549db86a3d52e3654eca189e25bc714b7c162d918e004d930a7a9e2",
+      "completedLaneTotals": [
+        {
+          "failed": 2,
+          "passed": 1290,
+          "skipped": 0,
+          "total": 1292
+        }
+      ]
+    },
+    {
+      "jobId": 117807167694,
+      "name": "Contracts (linux-x64)",
+      "conclusion": "failure",
+      "logSha256": "de8a87760a6832134942a3d84f52ca1a88bfa5a0c6d9484725006b18bce7f603",
+      "completedLaneTotals": [
+        {
+          "failed": 2,
+          "passed": 1290,
+          "skipped": 0,
+          "total": 1292
+        }
+      ]
+    },
+    {
+      "jobId": 117807167696,
+      "name": "Contracts (linux-arm64)",
+      "conclusion": "failure",
+      "logSha256": "4c76d250311bd2a5488de4084eb473e23cff003e3974b4741801ea06db6a76ed",
+      "completedLaneTotals": [
+        {
+          "failed": 2,
+          "passed": 1290,
+          "skipped": 0,
+          "total": 1292
+        }
+      ]
+    }
+  ],
+  "metadataSha256": "d1346cc3228798b647874af672bf5e301da19163adf6e9a7c3f0999531af1336",
+  "artifacts": [
+    {
+      "id": 12153216448,
+      "name": "source-contracts-win-arm64",
+      "digestFromGitHub": "sha256:05ff7b43e91b61e0171f849c76b6ecbb8f71b8ea71dad48b0b8bca3f813345cf",
+      "sizeBytes": 734204,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39172111577/artifacts/12153216448"
+    },
+    {
+      "id": 12153067106,
+      "name": "source-contracts-osx-arm64",
+      "digestFromGitHub": "sha256:240bb8ff02bd9e31343f0a83e11628ac836f2907bcc3d9a38b1a3b1a0f318b52",
+      "sizeBytes": 747138,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39172111577/artifacts/12153067106"
+    },
+    {
+      "id": 12152937688,
+      "name": "source-contracts-linux-x64",
+      "digestFromGitHub": "sha256:c737fc842e4df239d36c776442dac330590d9845a89751abe5a6a298de7a0095",
+      "sizeBytes": 734194,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39172111577/artifacts/12152937688"
+    },
+    {
+      "id": 12152878092,
+      "name": "source-contracts-linux-arm64",
+      "digestFromGitHub": "sha256:04afd1571baabbbb8d7e2879a4507da556974116173f6d50f294b6c402531a57",
+      "sizeBytes": 733804,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39172111577/artifacts/12152878092"
+    },
+    {
+      "id": 12152853535,
+      "name": "source-contracts-win-x64",
+      "digestFromGitHub": "sha256:7e62fa201605dba071b017f39ca872c7039a2bbad302e991f13ed933d3d1a5ad",
+      "sizeBytes": 734360,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39172111577/artifacts/12152853535"
+    },
+    {
+      "id": 12152747707,
+      "name": "source-contracts-osx-x64",
+      "digestFromGitHub": "sha256:896e889d73446cef0ca8a4d06e290d5f67a802bdd22e49c84586fdd9d4fd6e50",
+      "sizeBytes": 749173,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39172111577/artifacts/12152747707"
+    }
+  ],
+  "retention": "Complete decoded logs and workflow/artifact metadata retained outside Git. No artifact ZIP retrieved/extracted. Exact merge bytes reconstructed from Git data and SHA verified; tree and both parents verified locally.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "limitations": [
+    "This historical run covers its exact source tree; final-head CI remains required.",
+    "Actual minimum Framework, final SDK packages and complete production gates remain mandatory."
+  ],
+  "failureAnalysis": [
+    "All six hosts build successfully and execute their first .NET8 lane:1290passed/2failed/0skipped each. Fourteen further runtime lanes are unexecuted.",
+    "The two new46native-model tests request default100kcharacter/word ceilings outside their64KiBfixture response envelope; the SDK correctly rejects Ocr.OutputLimit before native initialization. Bounded explicit test requests are corrected in subsequent47source; SDK limit checks and binding expectations remain unchanged.",
+    "Both previous45failures are fixed: fortified Linux compilation succeeds and the exact missing-pinned-model diagnostic regression passes on all six hosts. This run does not qualify the later corrected model tests."
+  ]
+}

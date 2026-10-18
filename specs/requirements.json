@@ -2848,12 +2848,29 @@
       "validation": "Pixel and text-position comparisons, mixed scanned/digital pages and independent extraction tests.",
       "evidence": [
         "WN01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-076-source.json",
+        "docs/evidence/FP-076-independent.json",
+        "docs/evidence/FP-076-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/searchable-ocr.md",
+        "implemented": [
+          "Explicit raster-to-page frames across crop, rotation and UserUnit; original raster-preserving invisible text with embedded mappings",
+          "Finite geometric existing-digital-word policies and same-context render/capture/recognize/shape/write workflow",
+          "Bounded exact text/versionedJSON/hOCR/ALTO4 output with confidence provenance and atomic file saves"
+        ],
+        "pending": [
+          "Complete explicit tagged-content associations, real OCR/script/scan/native/RID and visual/semantic fidelity profiles remain mandatory",
+          "Independent full corpora, security, concurrency/endurance/performance, actual minimum/runtime/fallback qualification remain mandatory",
+          "Exact final SDK packages and every production gate remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-077",

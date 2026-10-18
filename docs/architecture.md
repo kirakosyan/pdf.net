@@ -139,3 +139,5 @@ FP-067 keeps passive content/structure traversal and transactional association e
 FP-074 keeps OCR contracts in core and explicit loading/model binding inside a fresh existing isolated worker through the optional OCR assembly. Narrow MIT patterns retain pinned attribution; no Word/Skia/native discovery dependency enters core. See [local OCR](local-ocr.md).
 
 Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](searchable-ocr.md).

@@ -99,7 +99,7 @@ public sealed class NativeOcrContractTests
     public void ExplicitMixedModelsReturnExactDeclarationsAndSelectionIdentity()
     {
         using var fixture = new Fixture(catalog: true);
-        var result = PdfOcr.Recognize(OcrTests.Raster(), new("eng+deu"), fixture.Providers);
+        var result = PdfOcr.Recognize(OcrTests.Raster(), new("eng+deu", maximumCharacters: 1000, maximumWords: 100), fixture.Providers);
         Assert.Equal("eng+deu", result.Language);
         Assert.Equal(new[] { "eng", "deu" }, result.Models.Select(m => m.Identifier));
         Assert.Equal(fixture.Catalog!.Select("eng+deu").Identity, result.ModelIdentity);
@@ -110,7 +110,7 @@ public sealed class NativeOcrContractTests
     public void SuccessfulNativeInitializationWithOnlySomeRequestedModelsCannotFallback()
     {
         using var fixture = new Fixture(catalog: true, partial: true);
-        Assert.Equal("Ocr.ModelLanguageBinding", Error(() => PdfOcr.Recognize(OcrTests.Raster(), new("eng+deu"), fixture.Providers)));
+        Assert.Equal("Ocr.ModelLanguageBinding", Error(() => PdfOcr.Recognize(OcrTests.Raster(), new("eng+deu", maximumCharacters: 1000, maximumWords: 100), fixture.Providers)));
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }
 

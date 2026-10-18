@@ -14,36 +14,46 @@ public static class PdfRendering
             throw new ArgumentNullException(nameof(providers));
         if (pageIndex < 0 || pageIndex >= source.Pages.Count)
             throw new ArgumentOutOfRangeException(nameof(pageIndex));
-        var provider = providers.GetRequired<IPdfPageRenderer>(PdfCapability.RenderPages);
+        _ = providers.GetRequired<IPdfPageRenderer>(PdfCapability.RenderPages);
         options ??= new();
         PdfByteStore? samples = null;
         PdfRasterRequest? request = null;
         var report = PdfFont.Run("RenderPage", providers.GetIdentifier(PdfCapability.RenderPages), policy, cancellationToken, context =>
         {
-            context.Consume(PdfResourceKind.Objects, 1);
-            context.Consume(PdfResourceKind.ExpandedBytes, 256);
             // Normalization is a private preview only; an unmodified source retains its original byte history.
             using var graph = new PdfGraphEdit(source, new(allowSignatureInvalidation: true), context);
-            request = new(pageIndex, graph.Snapshot.Pages[pageIndex].Source!, options, context);
-            context.ConsumePixels(request.Width, request.Height);
-            using var output = new PdfCodecBufferStream(context, request.ByteLength);
-            using (var lease = new BorrowedStream(output, false, context))
-                provider.Render(request, lease, context);
-            context.Checkpoint();
-            if (output.BufferedLength != request.ByteLength)
-                throw PdfWriterCore.Error(context, "Render.OutputLength", "The renderer did not return the exact planned sample extent.");
-            samples = output.Finish();
-            for (long at = 0; at < samples.Length; at += 4)
-            {
-                if ((at & 65535) == 0)
-                    context.Checkpoint();
-                int b = samples.At(at), g = samples.At(at + 1), r = samples.At(at + 2), a = samples.At(at + 3);
-                if (options.BackgroundRgb.HasValue && a != 255 || a == 0 && (b != 0 || g != 0 || r != 0))
-                    throw PdfWriterCore.Error(context, "Render.OutputAlpha", "The renderer returned samples outside the declared alpha contract.");
-                if (options.Color == PdfRasterColor.Gray && (r != g || g != b))
-                    throw PdfWriterCore.Error(context, "Render.OutputColor", "A device-gray renderer returned unequal color channels.");
-            }
+            var rendered = RenderCore(graph, pageIndex, providers, options, context);
+            request = rendered.Request;
+            samples = rendered.Samples;
         }, PdfCapability.RenderPages);
         return new(samples!, request!, report);
+    }
+
+    internal static (PdfByteStore Samples, PdfRasterRequest Request) RenderCore(PdfGraphEdit graph, int pageIndex, PdfProviderRegistry providers, PdfRenderOptions options, PdfOperationContext context)
+    {
+        context.Consume(PdfResourceKind.Objects, 1);
+        context.Consume(PdfResourceKind.ExpandedBytes, 256);
+        var provider = providers.GetRequired<IPdfPageRenderer>(PdfCapability.RenderPages);
+        var request = new PdfRasterRequest(pageIndex, graph.Snapshot.Pages[pageIndex].Source!, options, context);
+        context.ConsumePixels(request.Width, request.Height);
+        using var output = new PdfCodecBufferStream(context, request.ByteLength);
+        using (var lease = new BorrowedStream(output, false, context))
+            provider.Render(request, lease, context);
+        context.Checkpoint();
+        if (output.BufferedLength != request.ByteLength)
+            throw PdfWriterCore.Error(context, "Render.OutputLength", "The renderer did not return the exact planned sample extent.");
+        var samples = output.Finish();
+        for (long at = 0; at < samples.Length; at += 4)
+        {
+            if ((at & 65535) == 0)
+                context.Checkpoint();
+            int b = samples.At(at), g = samples.At(at + 1), r = samples.At(at + 2), a = samples.At(at + 3);
+            if (options.BackgroundRgb.HasValue && a != 255 || a == 0 && (b != 0 || g != 0 || r != 0))
+                throw PdfWriterCore.Error(context, "Render.OutputAlpha", "The renderer returned samples outside the declared alpha contract.");
+            if (options.Color == PdfRasterColor.Gray && (r != g || g != b))
+                throw PdfWriterCore.Error(context, "Render.OutputColor", "A device-gray renderer returned unequal color channels.");
+        }
+
+        return (samples, request);
     }
 }

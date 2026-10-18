@@ -77,3 +77,5 @@ Explicit logical structure authoring/inspection/remediation, exact MCID/parent-t
 Explicit raster/OCR contracts and an optional isolated Tesseract5 C-API adapter now have a source profile with pinned native/model assets and retained MIT pattern attribution. Complete actual-engine/model/RID/accuracy and production qualification remain pending.
 
 Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](docs/ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](docs/searchable-ocr.md).

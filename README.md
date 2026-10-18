@@ -90,3 +90,5 @@ An explicit [logical structure/accessibility source profile](docs/accessibility.
 An explicit [local OCR source profile](docs/local-ocr.md) adds bounded raster/Unicode/word contracts and an optional isolated Tesseract5 adapter with pinned caller assets. Complete real-engine/model/language/RID and production qualification remain mandatory; SDK packing/publication stay blocked.
 
 Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](docs/ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](docs/searchable-ocr.md).

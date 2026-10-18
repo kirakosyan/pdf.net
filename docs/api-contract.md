@@ -167,3 +167,5 @@ FP-067 adds explicit immutable structure plans, passive association inspection, 
 FP-074 adds explicit immutable OCR rasters/options/words/results, mandatory-context providers and optional isolated Tesseract5 recognition. Source checks cover eleven SDK assemblies and thirty-three API comparisons; see [local OCR](local-ocr.md).
 
 Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](searchable-ocr.md).

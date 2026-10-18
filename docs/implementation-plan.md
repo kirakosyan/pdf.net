@@ -166,3 +166,5 @@ Source progress through #44 includes [logical structure/accessibility](accessibi
 Source progress through #45 includes [explicit local OCR](local-ocr.md). Full FP-074 scope and production qualification remain mandatory; #46–#50 remain in progress.
 
 Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](searchable-ocr.md).

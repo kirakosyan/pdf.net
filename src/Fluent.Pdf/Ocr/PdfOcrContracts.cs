@@ -93,6 +93,9 @@ public sealed class PdfOcrResult
         Language = Guard.Text(language, nameof(language), 256);
         EngineVersion = Guard.Text(engineVersion, nameof(engineVersion), 256);
         ModelIdentity = Guard.Text(modelIdentity, nameof(modelIdentity), 4096);
+        PdfOcrRules.Text(Language);
+        PdfOcrRules.Text(EngineVersion);
+        PdfOcrRules.Text(ModelIdentity);
         PdfOcrRules.Confidence(meanConfidence);
         Text = text;
         Words = Array.AsReadOnly((PdfOcrWord[])words.Clone());

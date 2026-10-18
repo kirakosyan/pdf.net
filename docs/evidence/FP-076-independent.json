@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-original-source-observations-not-production-qualification",
+  "requirement": "FP-076",
+  "reportSha256": "af7cfc28a427d214f528e2d49631b2214040ed9d561a751fbf39ccb153b765a5",
+  "observations": {
+    "purpose": "independent-original-searchable-source-observations-not-production-qualification",
+    "cases": [
+      {
+        "rotation": 0,
+        "sourceSha256": "00d63cdab1d180d28cd571250b54e722b82a0f1986441d00feaab4ddb8df6b44",
+        "outputSha256": "ad35085aa61f70c58c4726aaaca62f069ef3e60f0c1a1e37c96436e2ea7b7390",
+        "exactRasterSamplesEqual": true,
+        "sourceEncodedImageHashes": [
+          "b895c03ecb02b9d50505dada73506229ccc928ae337bc4dfc8a3714a54782fe1"
+        ],
+        "encodedImagesUnchanged": true,
+        "displayedWordBox": [
+          13.0,
+          16.33333396911621,
+          16.0,
+          8.333332061767578
+        ],
+        "maximumWordFrameErrorPoints": 1.2715657558004523e-06,
+        "independentReaders": [
+          "pypdf6.10.0",
+          "MuPDF1.26.6",
+          "Poppler25.03.0"
+        ]
+      },
+      {
+        "rotation": 90,
+        "sourceSha256": "d4874b44f75936a77ecfc4b7e40984138220d934e00553233144bbaa8b16636f",
+        "outputSha256": "98ae2394f1666832ff1bd23757fd8c0b61b1ecd7ef61f1efeddce91f3b48701e",
+        "exactRasterSamplesEqual": true,
+        "sourceEncodedImageHashes": [
+          "b895c03ecb02b9d50505dada73506229ccc928ae337bc4dfc8a3714a54782fe1"
+        ],
+        "encodedImagesUnchanged": true,
+        "displayedWordBox": [
+          13.0,
+          16.33333396911621,
+          16.0,
+          8.333332061767578
+        ],
+        "maximumWordFrameErrorPoints": 1.2715657558004523e-06,
+        "independentReaders": [
+          "pypdf6.10.0",
+          "MuPDF1.26.6",
+          "Poppler25.03.0"
+        ]
+      },
+      {
+        "rotation": 180,
+        "sourceSha256": "88ab66744288804046b9feaf45f3cb1d5236b3b2f2fcef3315da6506f479254d",
+        "outputSha256": "2b2ab3c5a5d51f3b9dc0a6399d383dc08ed58728a90648ed03661288a33d3f96",
+        "exactRasterSamplesEqual": true,
+        "sourceEncodedImageHashes": [
+          "b895c03ecb02b9d50505dada73506229ccc928ae337bc4dfc8a3714a54782fe1"
+        ],
+        "encodedImagesUnchanged": true,
+        "displayedWordBox": [
+          13.0,
+          16.333335876464844,
+          16.0,
+          8.333328247070312
+        ],
+        "maximumWordFrameErrorPoints": 5.086263021425452e-06,
+        "independentReaders": [
+          "pypdf6.10.0",
+          "MuPDF1.26.6",
+          "Poppler25.03.0"
+        ]
+      },
+      {
+        "rotation": 270,
+        "sourceSha256": "3949bea0af9640341bd1516d550193ac41a0a5ea498c3513a4510fe75e2874ed",
+        "outputSha256": "04140df4d9f500f469409ab6c1610b11b5c5e75cc8334f0aece2524e704057ea",
+        "exactRasterSamplesEqual": true,
+        "sourceEncodedImageHashes": [
+          "b895c03ecb02b9d50505dada73506229ccc928ae337bc4dfc8a3714a54782fe1"
+        ],
+        "encodedImagesUnchanged": true,
+        "displayedWordBox": [
+          13.0,
+          16.333328247070312,
+          16.0,
+          8.333343505859375
+        ],
+        "maximumWordFrameErrorPoints": 1.0172526041074548e-05,
+        "independentReaders": [
+          "pypdf6.10.0",
+          "MuPDF1.26.6",
+          "Poppler25.03.0"
+        ]
+      }
+    ],
+    "interchange": {
+      "jsonUnicodeGeometryConfidence": true,
+      "hocrXhtmlMetadataIdsBoxesConfidence": true,
+      "alto44UnmodifiedSchemaErrors": 0,
+      "altoUnicodeGeometryConfidence": true
+    },
+    "labelsSha256": "21c1663622d3d6404ff3251285ac3465eeda3c3984844ca22c323d3b7c14c8e2",
+    "checkerSha256": "ed85550f35b80d301e1dd792fa97f1c109f767010dbfb47b3ffb62cf6f807015",
+    "altoSchemaSha256": "2d1ba4b0ce268c4ed763f718cfb9b1ab67ac952caf5bcffa5fc314179cb0866b",
+    "xlinkMirrorSha256": "f1f5bb6003165cdd8f6c1fcc32f8fd1f965e1681010f3b9806d9460bcffa8a3c",
+    "hocrPrimarySha256": "48b7e5f325629d7d0a2219a475d8ae68a2e0463d68c328cbe09ddd51e5986093",
+    "toolModifications": {
+      "reason": "Observed MuPDF1.26.6 coordinate API mismatch for nondefaultUserUnit: text bounds are physical while rotation_matrix translations are native. Convert physical crop coordinates with the explicit ISO quarter-turn using independently read raw PDF CropBox/UserUnit. No SDK output, expected label, tolerance or standards schema changed.",
+      "originalSha256": "4a19480f35d4438e8f24352f516777aeca16785408d944fab9d37d834e9d87bf",
+      "diffSha256": "191fd532fa7b71c1de5bb8c72d902548f5c88961f5c58c3ffabbf89977461b71",
+      "firstFailureLogSha256": "5a40c11f203b567756e085cef79e4995b0e9033692f740bd8c674e61cd99e87b",
+      "coordinateAdapterSha256": "3763edc16cf064828daa4fb216fcc041b26ca645f0d7907178bb096bc08cc528",
+      "finalCheckerSha256": "ed85550f35b80d301e1dd792fa97f1c109f767010dbfb47b3ffb62cf6f807015",
+      "finalDiffSha256": "ac05f3b33bcc1fbd394dbc894621d8398da5b6834257a4f1a1f4b95fb3095da3"
+    },
+    "schemaResolution": "Unmodified primary ALTO schema uses an explicit local resolver for its pinned mirrored LOC XLink dependency because live LOC access returned403; no external resource is resolved.",
+    "productionQualified": false,
+    "limitations": [
+      "Original managed-provider recognition data, not a real OCR corpus, end-to-end native host, minimum runtime or final package.",
+      "Tagged input currently rejects without explicit structure association; full structural/semantic profiles remain mandatory."
+    ]
+  },
+  "analysisToolModification": {
+    "reason": "Observed MuPDF1.26.6 coordinate API mismatch for nondefaultUserUnit: text bounds are physical while rotation_matrix translations are native. Convert physical crop coordinates with the explicit ISO quarter-turn using independently read raw PDF CropBox/UserUnit. No SDK output, expected label, tolerance or standards schema changed.",
+    "originalSha256": "4a19480f35d4438e8f24352f516777aeca16785408d944fab9d37d834e9d87bf",
+    "diffSha256": "191fd532fa7b71c1de5bb8c72d902548f5c88961f5c58c3ffabbf89977461b71",
+    "firstFailureLogSha256": "5a40c11f203b567756e085cef79e4995b0e9033692f740bd8c674e61cd99e87b",
+    "coordinateAdapterSha256": "3763edc16cf064828daa4fb216fcc041b26ca645f0d7907178bb096bc08cc528",
+    "finalCheckerSha256": "ed85550f35b80d301e1dd792fa97f1c109f767010dbfb47b3ffb62cf6f807015",
+    "finalDiffSha256": "ac05f3b33bcc1fbd394dbc894621d8398da5b6834257a4f1a1f4b95fb3095da3"
+  },
+  "unchangedAcceptance": "Expected labels, geometry tolerance, original/source PDFs, primary ALTO/XLink schemas and SDK output were not changed to obtain agreement. A retained local tool adapter applies the ISO quarter-turn in physical coordinates instead of combining mismatched MuPDF coordinate API units.",
+  "productionQualified": false
+}
