@@ -315,6 +315,8 @@ public static class ContractExample
         return snapshot.Pages.Count;
     }
     public static PdfDocument TagPdf(PdfDocumentSnapshot source, PdfStructurePlan plan) => PdfAccessibility.Author(source, plan);
+    public static PdfScanPreprocessingResult PreprocessScan(PdfOcrRaster original, PdfScanPreprocessingOptions options) => PdfScanPreprocessing.Process(original, options);
+    public static PdfScanLayoutResult AnalyzeScanLayout(PdfOcrResult recognition, int width, int height, PdfScanLayoutOptions options) => PdfScanLayout.Analyze(recognition, width, height, options);
     public static PdfDocument ApplyOcrLayer(PdfDocumentSnapshot source, PdfOcrResult result, PdfOcrPageFrame frame, PdfFontFallback fonts, PdfProviderRegistry providers) => PdfOcrSearchable.Apply(source, 0, result, frame, fonts, providers);
     public static PdfOperationReport WriteOcrJson(PdfOcrResult result, int width, int height, Stream output) => PdfOcrOutput.Write(result, width, height, PdfOcrOutputFormat.Json, output);
     public static PdfOcrModelSelection SelectOcrModels(PdfOcrModelCatalog catalog, string language) => catalog.Select(language);

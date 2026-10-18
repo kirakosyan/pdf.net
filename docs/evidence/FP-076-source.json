@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-076",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "58741165aa5a3825b29fb81358b1144dc490b96a",
+  "sourceTree": "f9b4bdede835f1faea76db19a7ab1af7fa3b3e2d",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -81,7 +81,13 @@
     "NativeRenderingTests",
     "NativeOcrContractTests"
   ],
-  "sourceCI": "New exact-head unfiltered CI required; historical113on46failed oversized new test requests and remains retained.",
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-114-source.json",
+    "snapshotStatus": "in_progress",
+    "completedRuntimeLanes": 15,
+    "knownFailedCases": 1,
+    "scope": "Exact47source. Five completed hosts include four green and one failed original-UA2 report; MacIntel pending. No remaining lane success inferred."
+  },
   "productionQualified": false,
   "packageSha256": null,
   "pending": [

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-comparison-and-transform-decisions-not-production-qualification",
+  "requirement": "FP-077",
+  "sources": [
+    {
+      "id": "S77-ORIGINAL-LABELED-SCANS",
+      "sha256": "335100b707d63fbe015b5e0935d0658a862428ab3fa860092d2ec2d067451117",
+      "scope": "Seven predeclared original English raster/geometry/accuracy fixtures plus separately declared layout order."
+    },
+    {
+      "id": "S77-EXPLICIT-TESS5-ORIENTATION",
+      "version": "5.5.0",
+      "sha256": "ab8e76efd92903e92833efde53892511b657fefd086b0a1ca0f5932767ea4958",
+      "scope": "Four actual original C-API observations on one predeclared raster; no SDK host qualification."
+    },
+    {
+      "id": "S77-MODEL-01",
+      "inventory": "third-party/ocr/models.json",
+      "version": "4.1.0",
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "scope": "Explicit caller-provisioned English model, no implicit model lookup/download."
+    }
+  ],
+  "decisions": [
+    "Preserve the immutable original and retain opt-in parameters; nearest-neighbor corrections have explicit pixel-edge inverse transforms.",
+    "Explicit vertical-curvature bilinear grids use nonfolding columns. Nonlinear word boundaries split at grid crossings and bound quadratic chord error before allocation.",
+    "Orientation/skew confidence gaps and layout evidence scores are not correctness probabilities. Table/form semantic hints are caller authority; detected closed grids retain unresolved semantics/raw order.",
+    "Processed DPI remains the nominal source OCR hint; inverse geometry carries physical mapping. Full automatic curve/general-deformation/semantic profiles remain mandatory."
+  ],
+  "independentReportSha256": "89f92af364575b44dd926973322a7db4f6b2a9f7cd31e213d8a8cfee7123ef90",
+  "productionQualified": false
+}

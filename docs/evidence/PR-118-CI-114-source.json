@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "purpose": "historical-source-ci-snapshot-not-production-qualification",
+  "runId": 39173163898,
+  "sourceCommit": "58741165aa5a3825b29fb81358b1144dc490b96a",
+  "testedMergeCommit": "f87f5f993c62d4666889deb74c8937e52a249de0",
+  "testedTree": "f9b4bdede835f1faea76db19a7ab1af7fa3b3e2d",
+  "exactMergeTreeVerified": true,
+  "snapshotStatus": "in_progress",
+  "conclusion": null,
+  "knownFailure": "Linuxx64first.NET8lane:1312pass/1fail on the original prepared-UA2 independent-validator report, rejected as malformed XML. Underlying host output is unavailable locally; cause is unconfirmed.",
+  "platformJobs": 6,
+  "completedRuntimeLanes": 15,
+  "expectedRuntimeLanes": 20,
+  "passed": 19694,
+  "failed": 1,
+  "skipped": 0,
+  "jobs": [
+    {
+      "jobId": 117810281643,
+      "name": "Contracts (osx-arm64)",
+      "status": "completed",
+      "conclusion": "success",
+      "logSha256": "6b0daf2e4782ea0bdf2ad9d4f82c4e6560d87673e81e2546a710827f9c486aed",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        }
+      ]
+    },
+    {
+      "jobId": 117810281828,
+      "name": "Contracts (win-x64)",
+      "status": "completed",
+      "conclusion": "success",
+      "logSha256": "d157673729c708a3f3f27001fdaf9d91d10b59df3c885260eec43a4e03773389",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        }
+      ]
+    },
+    {
+      "jobId": 117810281841,
+      "name": "Contracts (win-arm64)",
+      "status": "completed",
+      "conclusion": "success",
+      "logSha256": "8aa0174eeee350a8c9ce1e919baf247692adc4796b62e045022fd0883e0805ab",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        }
+      ]
+    },
+    {
+      "jobId": 117810281842,
+      "name": "Contracts (osx-x64)",
+      "status": "in_progress",
+      "conclusion": null,
+      "logSha256": null,
+      "completedLaneTotals": []
+    },
+    {
+      "jobId": 117810281858,
+      "name": "Contracts (linux-x64)",
+      "status": "completed",
+      "conclusion": "failure",
+      "logSha256": "82b82fd2bdb20c4b49daa7d910704f7a6b637b7ccc0d050f9d36c89206c7965e",
+      "completedLaneTotals": [
+        {
+          "failed": 1,
+          "passed": 1312,
+          "skipped": 0,
+          "total": 1313
+        }
+      ]
+    },
+    {
+      "jobId": 117810281859,
+      "name": "Contracts (linux-arm64)",
+      "status": "completed",
+      "conclusion": "success",
+      "logSha256": "91481c5d2d35ac76d26b8fe0adfce8d1ceb036ebd49b073ba4135e8018bb940f",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        }
+      ]
+    }
+  ],
+  "metadataSha256": "b52f5e941948089a5c266eb4b60331890716c7f147f26ce5c26e29038f5db2f6",
+  "artifacts": [
+    {
+      "id": 12153905660,
+      "name": "source-contracts-win-x64",
+      "digestFromGitHub": "sha256:49ed9999fbd60cbd059fdd4c4c1cd124a9c52094193b214fffabf80897bec46e",
+      "sizeBytes": 3455591,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12153905660"
+    },
+    {
+      "id": 12153810743,
+      "name": "source-contracts-osx-arm64",
+      "digestFromGitHub": "sha256:7cfeb350d568dc80325018df9e91d939c59c59986a2f0cb73bf9391dbfbaa8ce",
+      "sizeBytes": 2132522,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12153810743"
+    },
+    {
+      "id": 12153661159,
+      "name": "source-contracts-win-arm64",
+      "digestFromGitHub": "sha256:2f5d5cec02f4d970b635f58d4f2a476ed38b40d4dc6f3178e04a100b0aaea8f6",
+      "sizeBytes": 2120724,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12153661159"
+    },
+    {
+      "id": 12153089016,
+      "name": "source-contracts-linux-arm64",
+      "digestFromGitHub": "sha256:2c9b16f30f0c7d5ff79ce70e66a34aa5c4156a3718924f545f0fffc0600aea7e",
+      "sizeBytes": 2117419,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12153089016"
+    },
+    {
+      "id": 12152884948,
+      "name": "source-contracts-linux-x64",
+      "digestFromGitHub": "sha256:f5ace74679b532eb8191d29fde641992622389ba7375ed3e799139122dbd7908",
+      "sizeBytes": 739270,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12152884948"
+    }
+  ],
+  "retention": "Five completed decoded logs and exact workflow/artifact metadata retained outside Git. Archive download returns proxy CONNECT403; no ZIP payload retrieved/extracted. Pending MacIntel job is not counted as successful. Exact tested merge/tree/parents verified locally.",
+  "followup": "Subsequent48source test host retains exit/byte-count diagnostics and exposes bounded original stdout/stderr prefixes on malformed XML. No SDK report filtering, retries, deadline changes or relaxed acceptance. Final exact-headCIremainsmandatory.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "limitations": [
+    "Snapshot remains incomplete while MacIntel runs; remaining runtime lanes must not be inferred successful.",
+    "Historical source CI is not actual minimum Framework, final-package or production qualification."
+  ]
+}

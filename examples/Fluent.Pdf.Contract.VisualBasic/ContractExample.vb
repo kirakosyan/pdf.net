@@ -381,6 +381,14 @@ Public Module ContractExample
     Public Function TagPdf(source As PdfDocumentSnapshot, plan As PdfStructurePlan) As PdfDocument
         Return PdfAccessibility.Author(source, plan)
     End Function
+    Public Function PreprocessScan(original As PdfOcrRaster, options As PdfScanPreprocessingOptions) As PdfScanPreprocessingResult
+        Return PdfScanPreprocessing.Process(original, options)
+    End Function
+
+    Public Function AnalyzeScanLayout(recognition As PdfOcrResult, width As Integer, height As Integer, options As PdfScanLayoutOptions) As PdfScanLayoutResult
+        Return PdfScanLayout.Analyze(recognition, width, height, options)
+    End Function
+
     Public Function ApplyOcrLayer(source As PdfDocumentSnapshot, result As PdfOcrResult, frame As PdfOcrPageFrame, fonts As PdfFontFallback, providers As PdfProviderRegistry) As PdfDocument
         Return PdfOcrSearchable.Apply(source, 0, result, frame, fonts, providers)
     End Function

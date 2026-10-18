@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Fluent.Pdf.Compliance;
 
 namespace Fluent.Pdf.Contract.Tests;
@@ -80,6 +81,23 @@ internal static class ArchivalFixture
             }
 
             context.Checkpoint();
+            // Retain precise original-fixture host diagnostics instead of losing them behind the SDK's intentionally neutral XML error.
+            string capturedXml = Path.Combine(directory, "validation.xml"), capturedError = Path.Combine(directory, "stderr.txt");
+            long xmlLength = new FileInfo(capturedXml).Length, errorLength = new FileInfo(capturedError).Length;
+            File.WriteAllText(Path.Combine(directory, "host-status.json"), "{\"exitCode\":" + process.ExitCode.ToString(System.Globalization.CultureInfo.InvariantCulture) + ",\"stdoutBytes\":" + xmlLength.ToString(System.Globalization.CultureInfo.InvariantCulture) + ",\"stderrBytes\":" + errorLength.ToString(System.Globalization.CultureInfo.InvariantCulture) + "}");
+            context.Consume(PdfResourceKind.ExpandedBytes, xmlLength * 8L + 65536);
+            try
+            {
+                using var sourceXml = File.OpenRead(capturedXml);
+                using var inspected = XmlReader.Create(sourceXml, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null, MaxCharactersInDocument = 16777216 });
+                while (inspected.Read())
+                    context.Checkpoint();
+            }
+            catch (XmlException failure)
+            {
+                context.Checkpoint();
+                throw new InvalidDataException("Independent original-source validator produced malformed XML. Exit=" + process.ExitCode.ToString(System.Globalization.CultureInfo.InvariantCulture) + "; stdoutBytes=" + xmlLength.ToString(System.Globalization.CultureInfo.InvariantCulture) + "; stderrBytes=" + errorLength.ToString(System.Globalization.CultureInfo.InvariantCulture) + "; stdoutPrefix=" + Prefix(capturedXml) + "; stderrPrefix=" + Prefix(capturedError), failure);
+            }
         // The CLI uses nonzero exit for a completed noncompliant result; exact report completeness decides the result.
         }
         finally
@@ -115,6 +133,14 @@ internal static class ArchivalFixture
             output.Write(part, 0, count);
             retained?.Write(part, 0, count);
         }
+    }
+
+    private static string Prefix(string path)
+    {
+        using var input = new StreamReader(path, Encoding.UTF8, true);
+        var characters = new char[4096];
+        int count = input.Read(characters, 0, characters.Length);
+        return new string (characters, 0, count);
     }
 
     private static string Quote(string value) => "\"" + value.Replace("\"", "\\\"") + "\"";

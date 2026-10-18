@@ -2894,12 +2894,29 @@
       "validation": "Rotated, skewed, noisy, low-resolution and multi-column labeled corpus; accuracy and geometry reports.",
       "evidence": [
         "WN01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-077-source.json",
+        "docs/evidence/FP-077-independent.json",
+        "docs/evidence/FP-077-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/scan-processing.md",
+        "implemented": [
+          "Opt-in bounded gray/median/contrast/threshold/orientation/deskew and explicit bilinear vertical-curvature dewarping with exact original preservation",
+          "Inverse affine/nonlinear word-boundary mapping with prior certified chord error and finite point limits",
+          "Separate bounded prose-column/heading order, explicit table/form authority and unresolved literal-grid semantics, with same-context preprocessing/OCR/layout"
+        ],
+        "pending": [
+          "Complete automatic curve/general deformation/semantic/table/form/reading-order profiles and labeled multilingual/scan/native/RID/runtime corpora remain mandatory",
+          "Full independent fidelity/geometry/security/concurrency/endurance/performance and actual minimum/runtime/fallback qualification remain mandatory",
+          "Exact final SDK packages, model/font/provenance qualification and every production gate remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-078",
