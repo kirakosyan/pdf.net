@@ -133,3 +133,5 @@ FP-050 uses original managed bounded parsers through generation, immutable expli
 FP-053 keeps core independent of Word dependencies. An optional pinned adapter uses bounded original RTF/WordprocessingML, passive package checks and shared-context extraction/rendering/IO, with explicit reconstruction provenance and loss policy. See [Word conversion](word-conversion.md).
 
 FP-112 evaluates closed immutable data through shared generation or an original bounded DOCX package editor; optional Word import uses the same mandatory root context. See [mail merge](mail-merge.md).
+
+FP-067 keeps passive content/structure traversal and transactional association edits in core. Optional compliance bridges exact-engine complete reports without discovering or launching engines; automated validation never supplies human review. See [accessibility](accessibility.md).

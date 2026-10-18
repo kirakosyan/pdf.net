@@ -25,7 +25,9 @@ internal static class ArchivalFixture
     }
 
     internal static PdfProviderRegistry Providers() => new(new VeraPdfReportValidator(Run));
-    private static void Run(PdfArchivalProfile profile, Stream input, Stream report, PdfOperationContext context)
+    private static void Run(PdfArchivalProfile profile, Stream input, Stream report, PdfOperationContext context) => RunProfile(PdfArchival.ProfileIdentifier(profile), input, report, context);
+    internal static void RunAccessibility(PdfAccessibilityProfile profile, Stream input, Stream report, PdfOperationContext context) => RunProfile(profile == PdfAccessibilityProfile.Ua1 ? "ua1" : "ua2", input, report, context);
+    private static void RunProfile(string profile, Stream input, Stream report, PdfOperationContext context)
     {
         string jar = Path.Combine(Root(), "artifacts", "archival-fixtures", "greenfield-apps-1.28.2.jar");
         if (!File.Exists(jar))
@@ -36,7 +38,7 @@ internal static class ArchivalFixture
         using (var output = File.Create(file))
             Copy(input, output, context, long.MaxValue);
         // Source staging is an explicit test-host decision. The optional SDK report bridge creates no files or processes.
-        var start = new ProcessStartInfo("java", "-Djava.awt.headless=true -Xms16m -Xmx128m -XX:ActiveProcessorCount=2 -cp " + Quote(jar) + " org.verapdf.apps.GreenfieldCliWrapper --format xml --flavour " + PdfArchival.ProfileIdentifier(profile) + " " + Quote(file))
+        var start = new ProcessStartInfo("java", "-Djava.awt.headless=true -Xms16m -Xmx128m -XX:ActiveProcessorCount=2 -cp " + Quote(jar) + " org.verapdf.apps.GreenfieldCliWrapper --format xml --flavour " + profile + " " + Quote(file))
         {
             UseShellExecute = false,
             RedirectStandardOutput = true,

@@ -121,5 +121,6 @@
     "Complete bidirectional DOC/DOCX/RTF feature, fixed/editable reconstruction, story/field/table/floating/linguistic/resource/fidelity profiles remain mandatory",
     "Complete opaque dependency/host/resource/security/fuzz/concurrency/endurance and independent invoice/floating/table/scanned/multilingual corpus qualification remain mandatory",
     "All required RIDs/minimum/current/fallback runtimes, exact final SDK packages and every production gate remain mandatory"
-  ]
+  ],
+  "sourceCI": "docs/evidence/PR-118-CI-109-source.json"
 }

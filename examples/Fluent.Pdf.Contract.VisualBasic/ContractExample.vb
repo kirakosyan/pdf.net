@@ -378,4 +378,7 @@ Public Module ContractExample
             Return snapshot.Pages.Count
         End Using
     End Function
+    Public Function TagPdf(source As PdfDocumentSnapshot, plan As PdfStructurePlan) As PdfDocument
+        Return PdfAccessibility.Author(source, plan)
+    End Function
 End Module

@@ -24,5 +24,7 @@ public enum PdfCapability
     /// <summary>Explicit complete independent PDF/A profile validation.</summary>
     ValidateArchival = 9,
     /// <summary>Explicit optional Word interchange with direction, reconstruction and fidelity diagnostics.</summary>
-    ConvertWord = 10
+    ConvertWord = 10,
+    /// <summary>Explicit complete independent PDF/UA validation, separate from human semantic review.</summary>
+    ValidateAccessibility = 11
 }

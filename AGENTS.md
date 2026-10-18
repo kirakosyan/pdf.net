@@ -71,3 +71,5 @@ Bounded Unicode/Markdown/version-one JSON/XML conversion, explicit scalar/style/
 Explicit optional Word interchange, pinned published dependency identity, original bounded RTF/WordprocessingML bridges and shared-context reconstruction now have a source profile; complete bidirectional format/reconstruction fidelity and production qualification remain pending.
 
 Bounded native PDF/DOCX templates, closed scalar/record/condition/image evaluation and shared-context optional Word export now have a source profile; complete template semantics and production qualification remain pending.
+
+Explicit logical structure authoring/inspection/remediation, exact MCID/parent-tree/annotation associations and optional complete independent UA reports now have a source profile; complete accessibility, human/screen-reader review and production qualification remain pending.

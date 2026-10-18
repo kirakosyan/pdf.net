@@ -2538,7 +2538,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/accessibility.md",
+        "implemented": [
+          "Explicit native logical structure plans with roles/language/author descriptions/table IDs and page/Form/annotation associations",
+          "Passive bounded MCID/parent-tree consistency inspection and identity-preserving semantic/reading-order remediation",
+          "Optional complete exact-input UA1/UA2 report validation with separate explicit human review observations"
+        ],
+        "pending": [
+          "Complete PDF/UA1/UA2 semantic/role/namespace/class-map/attribute/font/language/table/form/appearance profiles and tag-aware content/edit/merge fidelity remain mandatory",
+          "Independent full corpus, human and screen-reader review, security/fuzz/concurrency/endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
+          "Exact final SDK packages and all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-068",

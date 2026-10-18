@@ -161,3 +161,5 @@ FP-050 adds `PdfInputConversion`, explicit format/options/named drawing contract
 FP-053 adds `PdfWordConversion`, explicit format/reconstruction/limit contracts and `IPdfWordConverter`. The optional `Fluent.Pdf.Word` adapter pins the actual published dependency and requires explicit font-pack adoption. See [Word contracts](word-conversion.md).
 
 FP-112 adds immutable merge data/blocks, explicit culture/missing-field/visit policies, native `PdfMailMerge` and optional `PdfDocxMailMerge` contracts. See [mail merge](mail-merge.md).
+
+FP-067 adds explicit immutable structure plans, passive association inspection, identity-preserving semantic/reading-order remediation and exact-input independent UA validation with separate human review. See [accessibility](accessibility.md).

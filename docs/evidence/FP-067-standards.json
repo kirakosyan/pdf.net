@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-and-independent-source-observations-not-production-qualification",
+  "requirement": "FP-067",
+  "sources": [
+    {
+      "id": "S67-PDF-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "14.7structure/MCR/OBJR/parent-trees",
+        "14.7.5revisionedattributes",
+        "14.8.4roles/links",
+        "14.8.5.7tableattributes",
+        "14.9language/alternative/replacementtext"
+      ]
+    },
+    {
+      "id": "S67-PINNED-FULL-UA-VALIDATOR",
+      "version": "1.28.2",
+      "jarSha256": "687d4d8bcfec48c9f7e931cf78ed061f1eeccfba55d4cdc000ba9b4d8aa46ce6",
+      "profiles": [
+        "PDF/UA-1 validation profile",
+        "PDF/UA-2 + Tagged PDF validation profile"
+      ],
+      "positiveOriginalFixtures": 2,
+      "negativeOriginalFixtures": 2
+    }
+  ],
+  "decisions": [
+    "Explicit semantics and exact structural ownership are never inferred from geometry or metadata-only checks.",
+    "PDF2 namespace/UA identification on explicit original figures passes the independent full requested automated profile; complete normative profile coverage and human semantics remain mandatory.",
+    "Structure element revision increments preserve source attributes and their prior revision provenance; unsupported role/table/annotation remediation rejects.",
+    "Whole-Form ownership and inner Form MCIDs cannot be combined; repeated tagged Form identity, orphan MCIDs and inconsistent parent entries reject.",
+    "Independent exact-byte/profile results and explicit matching human attestations remain separate; no actual human/screen-reader review is claimed."
+  ],
+  "independentReportSha256": "bdee600b1937c8023e44ff1537ff77c23802dd6a5d1229fe3fcb988f74a9fab5",
+  "productionQualified": false
+}

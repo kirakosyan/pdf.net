@@ -84,3 +84,5 @@ Text, Markdown and structured input now have an explicit bounded [managed conver
 An explicit optional [Word conversion source profile](docs/word-conversion.md) adds DOC/DOCX/RTF interchange and diagnostic fixed/editable reconstruction. Complete format/fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.
 
 An explicit [document template and mail-merge source profile](docs/mail-merge.md) adds native PDF/DOCX scalar, repeat, condition, table and captured-image binding. Complete semantics, fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.
+
+An explicit [logical structure/accessibility source profile](docs/accessibility.md) adds author-supplied roles, language, descriptions, tables, Form/annotation associations and identity-preserving reading-order remediation. Complete UA1/UA2 and production qualification remain mandatory; SDK packing/publication stay blocked.

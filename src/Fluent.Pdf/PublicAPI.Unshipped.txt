@@ -1,4 +1,6 @@
 #nullable enable
+Fluent.Pdf.IPdfAccessibilityValidator
+Fluent.Pdf.IPdfAccessibilityValidator.Validate(Fluent.Pdf.PdfAccessibilityProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfAccessibilityValidation!
 Fluent.Pdf.IPdfArchivalValidator
 Fluent.Pdf.IPdfArchivalValidator.Validate(Fluent.Pdf.PdfArchivalProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfArchivalValidation!
 Fluent.Pdf.IPdfCidFontProgram
@@ -60,6 +62,41 @@ Fluent.Pdf.ManagedPdfProvider.RequiresSeekableStream.get -> bool
 Fluent.Pdf.ManagedPdfProvider.Supports(Fluent.Pdf.PdfWriteOptions! options) -> bool
 Fluent.Pdf.ManagedPdfProvider.Write(Fluent.Pdf.PdfDocumentSnapshot! document, System.IO.Stream! output, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Pdf
+Fluent.Pdf.PdfAccessibility
+Fluent.Pdf.PdfAccessibilityFinding
+Fluent.Pdf.PdfAccessibilityFinding.Location.get -> string!
+Fluent.Pdf.PdfAccessibilityFinding.Message.get -> string!
+Fluent.Pdf.PdfAccessibilityFinding.PdfAccessibilityFinding(string! rule, string! location, string! message) -> void
+Fluent.Pdf.PdfAccessibilityFinding.Rule.get -> string!
+Fluent.Pdf.PdfAccessibilityHumanReview
+Fluent.Pdf.PdfAccessibilityHumanReview.PdfAccessibilityHumanReview(Fluent.Pdf.PdfAccessibilityProfile profile, string! sourceSha256, string! reviewer, string! reportId, bool readingOrderReviewed, bool semanticsReviewed) -> void
+Fluent.Pdf.PdfAccessibilityHumanReview.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfAccessibilityHumanReview.ReadingOrderReviewed.get -> bool
+Fluent.Pdf.PdfAccessibilityHumanReview.ReportId.get -> string!
+Fluent.Pdf.PdfAccessibilityHumanReview.Reviewer.get -> string!
+Fluent.Pdf.PdfAccessibilityHumanReview.SemanticsReviewed.get -> bool
+Fluent.Pdf.PdfAccessibilityHumanReview.SourceSha256.get -> string!
+Fluent.Pdf.PdfAccessibilityInspection
+Fluent.Pdf.PdfAccessibilityInspection.Content.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfStructureContent!>!
+Fluent.Pdf.PdfAccessibilityInspection.Elements.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfStructureElementInfo!>!
+Fluent.Pdf.PdfAccessibilityInspection.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAccessibilityFinding!>!
+Fluent.Pdf.PdfAccessibilityInspection.HumanReviewRequired.get -> bool
+Fluent.Pdf.PdfAccessibilityInspection.Language.get -> string?
+Fluent.Pdf.PdfAccessibilityInspection.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfAccessibilityInspection.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfAccessibilityInspection.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfAccessibilityProfile.Ua1 = 0 -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfAccessibilityProfile.Ua2 = 1 -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfAccessibilityValidation
+Fluent.Pdf.PdfAccessibilityValidation.Completed.get -> bool
+Fluent.Pdf.PdfAccessibilityValidation.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAccessibilityFinding!>!
+Fluent.Pdf.PdfAccessibilityValidation.HumanReview.get -> Fluent.Pdf.PdfAccessibilityHumanReview?
+Fluent.Pdf.PdfAccessibilityValidation.IsCompliant.get -> bool
+Fluent.Pdf.PdfAccessibilityValidation.OperationReport.get -> Fluent.Pdf.PdfOperationReport?
+Fluent.Pdf.PdfAccessibilityValidation.PdfAccessibilityValidation(Fluent.Pdf.PdfAccessibilityProfile profile, string! sourceSha256, bool completed, bool isCompliant, Fluent.Pdf.PdfAccessibilityFinding![]! findings) -> void
+Fluent.Pdf.PdfAccessibilityValidation.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfAccessibilityValidation.SourceSha256.get -> string!
 Fluent.Pdf.PdfAction
 Fluent.Pdf.PdfAction.Then(params Fluent.Pdf.PdfAction![]! actions) -> Fluent.Pdf.PdfAction!
 Fluent.Pdf.PdfActionPolicy
@@ -340,6 +377,7 @@ Fluent.Pdf.PdfCapability.RecognizeText = 4 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderHtml = 3 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderPages = 2 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ShapeText = 7 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.ValidateAccessibility = 11 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ValidateArchival = 9 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.WriteDocument = 1 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCertificateCredential
@@ -2009,6 +2047,42 @@ Fluent.Pdf.PdfStructuralInspection.Findings.get -> System.Collections.Generic.IR
 Fluent.Pdf.PdfStructuralInspection.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfStructuralInspection.Syntax.get -> Fluent.Pdf.PdfSyntaxDocument!
 Fluent.Pdf.PdfStructuralValidation
+Fluent.Pdf.PdfStructureContent
+Fluent.Pdf.PdfStructureContent.AnnotationId.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfStructureContent.Mcid.get -> int
+Fluent.Pdf.PdfStructureContent.PageIndex.get -> int
+Fluent.Pdf.PdfStructureContent.StreamId.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfStructureElement
+Fluent.Pdf.PdfStructureElement.ActualText.get -> string?
+Fluent.Pdf.PdfStructureElement.AlternativeText.get -> string?
+Fluent.Pdf.PdfStructureElement.Identifier.get -> string?
+Fluent.Pdf.PdfStructureElement.Items.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfStructureItem!>!
+Fluent.Pdf.PdfStructureElement.Language.get -> string?
+Fluent.Pdf.PdfStructureElement.PdfStructureElement(string! role, Fluent.Pdf.PdfStructureItem![]! items, string? language = null, string? alternativeText = null, string? actualText = null, string? identifier = null, Fluent.Pdf.PdfStructureTableAttributes? table = null) -> void
+Fluent.Pdf.PdfStructureElement.Role.get -> string!
+Fluent.Pdf.PdfStructureElement.Table.get -> Fluent.Pdf.PdfStructureTableAttributes?
+Fluent.Pdf.PdfStructureElementInfo
+Fluent.Pdf.PdfStructureElementInfo.ActualText.get -> string?
+Fluent.Pdf.PdfStructureElementInfo.AlternativeText.get -> string?
+Fluent.Pdf.PdfStructureElementInfo.Children.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfValue!>!
+Fluent.Pdf.PdfStructureElementInfo.Dictionary.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfStructureElementInfo.Language.get -> string?
+Fluent.Pdf.PdfStructureElementInfo.ObjectId.get -> Fluent.Pdf.PdfObjectId
+Fluent.Pdf.PdfStructureElementInfo.Role.get -> string!
+Fluent.Pdf.PdfStructureItem
+Fluent.Pdf.PdfStructurePlan
+Fluent.Pdf.PdfStructurePlan.Language.get -> string!
+Fluent.Pdf.PdfStructurePlan.PdfStructurePlan(string! language, Fluent.Pdf.PdfStructureElement! root, Fluent.Pdf.PdfAccessibilityProfile profile = Fluent.Pdf.PdfAccessibilityProfile.Ua1, bool replaceExisting = false) -> void
+Fluent.Pdf.PdfStructurePlan.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfStructurePlan.ReplaceExisting.get -> bool
+Fluent.Pdf.PdfStructurePlan.Root.get -> Fluent.Pdf.PdfStructureElement!
+Fluent.Pdf.PdfStructureTableAttributes
+Fluent.Pdf.PdfStructureTableAttributes.ColumnSpan.get -> int
+Fluent.Pdf.PdfStructureTableAttributes.HeaderScope.get -> string?
+Fluent.Pdf.PdfStructureTableAttributes.Headers.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.PdfStructureTableAttributes.PdfStructureTableAttributes(int rowSpan = 1, int columnSpan = 1, string? headerScope = null, string![]? headers = null, string? summary = null) -> void
+Fluent.Pdf.PdfStructureTableAttributes.RowSpan.get -> int
+Fluent.Pdf.PdfStructureTableAttributes.Summary.get -> string?
 Fluent.Pdf.PdfSyntax
 Fluent.Pdf.PdfSyntaxDocument
 Fluent.Pdf.PdfSyntaxDocument.DecodeStream(Fluent.Pdf.PdfObjectId id, int revisionIndex = 0, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), Fluent.Pdf.PdfProviderRegistry? providers = null) -> Fluent.Pdf.PdfDecodedData!
@@ -2338,6 +2412,10 @@ static Fluent.Pdf.ManagedPdfProvider.Instance.get -> Fluent.Pdf.ManagedPdfProvid
 static Fluent.Pdf.Pdf.Create(Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.Open(System.IO.Stream! input, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.OpenFile(string! path, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAccessibility.Author(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfStructurePlan! plan, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAccessibility.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfAccessibilityProfile profile = Fluent.Pdf.PdfAccessibilityProfile.Ua1, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAccessibilityInspection!
+static Fluent.Pdf.PdfAccessibility.Remediate(Fluent.Pdf.PdfAccessibilityInspection! source, Fluent.Pdf.PdfObjectId elementId, string? role = null, string? language = null, string? alternativeText = null, string? actualText = null, int[]? childOrder = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAccessibility.Validate(System.IO.Stream! input, Fluent.Pdf.PdfAccessibilityProfile profile, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfAccessibilityHumanReview? humanReview = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAccessibilityValidation!
 static Fluent.Pdf.PdfAction.Advanced(Fluent.Pdf.PdfValue! definition) -> Fluent.Pdf.PdfAction!
 static Fluent.Pdf.PdfAction.GoTo(Fluent.Pdf.PdfDestination! destination) -> Fluent.Pdf.PdfAction!
 static Fluent.Pdf.PdfAction.GoToNamed(string! name) -> Fluent.Pdf.PdfAction!
@@ -2537,6 +2615,8 @@ static Fluent.Pdf.PdfStamps.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Flue
 static Fluent.Pdf.PdfStamps.Remove(Fluent.Pdf.PdfDocumentSnapshot! source, string! identifier, Fluent.Pdf.PdfOrganizationOptions? organization = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfStamps.Update(Fluent.Pdf.PdfDocumentSnapshot! source, string! identifier, Fluent.Pdf.PdfStampContent! content, Fluent.Pdf.PdfStampOptions! options, Fluent.Pdf.PdfOrganizationOptions? organization = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfStructuralValidation.Inspect(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfStructuralInspection!
+static Fluent.Pdf.PdfStructureContent.Annotation(int pageIndex, Fluent.Pdf.PdfObjectId annotationId) -> Fluent.Pdf.PdfStructureContent!
+static Fluent.Pdf.PdfStructureContent.MarkedContent(int pageIndex, int mcid, Fluent.Pdf.PdfObjectId? streamId = null) -> Fluent.Pdf.PdfStructureContent!
 static Fluent.Pdf.PdfSyntax.Read(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSyntaxDocument!
 static Fluent.Pdf.PdfTable.Create(Fluent.Pdf.PdfTableColumn![]! columns, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfTableRow!>! rows, int headerRows = 0, bool allowRowSplit = true, int maximumRows = 100000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTable!
 static Fluent.Pdf.PdfTableBorder.None.get -> Fluent.Pdf.PdfTableBorder!
