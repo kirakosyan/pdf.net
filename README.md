@@ -82,3 +82,5 @@ FP-099 adds [typed generation and bounded events](docs/data-generation.md), with
 Text, Markdown and structured input now have an explicit bounded [managed conversion profile](docs/input-conversion.md). Complete source-format fidelity and production qualification remain mandatory; NuGet packing/publishing remain blocked.
 
 An explicit optional [Word conversion source profile](docs/word-conversion.md) adds DOC/DOCX/RTF interchange and diagnostic fixed/editable reconstruction. Complete format/fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.
+
+An explicit [document template and mail-merge source profile](docs/mail-merge.md) adds native PDF/DOCX scalar, repeat, condition, table and captured-image binding. Complete semantics, fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.

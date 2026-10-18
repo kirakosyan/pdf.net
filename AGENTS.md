@@ -69,3 +69,5 @@ Bounded typed generation, reusable record templates and ordered precommit record
 Bounded Unicode/Markdown/version-one JSON/XML conversion, explicit scalar/style/resource capture and nested passive URI annotations now have a shared-context source profile; complete conversion fidelity and production qualification remain pending.
 
 Explicit optional Word interchange, pinned published dependency identity, original bounded RTF/WordprocessingML bridges and shared-context reconstruction now have a source profile; complete bidirectional format/reconstruction fidelity and production qualification remain pending.
+
+Bounded native PDF/DOCX templates, closed scalar/record/condition/image evaluation and shared-context optional Word export now have a source profile; complete template semantics and production qualification remain pending.

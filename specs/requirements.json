@@ -4049,7 +4049,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/mail-merge.md",
+        "implemented": [
+          "Closed immutable scalar/record/finite-collection/image values and native paragraph/repeat/boolean/table templates",
+          "Original bounded DOCX split-run/scalar/content-control binding with explicit culture/missing policies and passive package preservation",
+          "Shared-context native generation and optional pinned Word PDF export; stable limits, cancellation and atomic ownership"
+        ],
+        "pending": [
+          "Complete DOCX/native field/control/story/identity/layout/linguistic/fidelity profiles remain mandatory",
+          "Complete hostile-input, independent corpus, fuzz, concurrency, endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
+          "Exact final SDK packages and all production gates remain mandatory"
+        ]
+      }
     }
   ]
 }

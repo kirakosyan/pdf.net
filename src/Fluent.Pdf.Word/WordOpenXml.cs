@@ -262,6 +262,15 @@ internal static class WordOpenXml
         x.WriteEndElement();
     }
 
+    internal static System.Xml.Linq.XElement PictureFragment(WordPicture image, int index, PdfOperationContext c)
+    {
+        c.Consume(PdfResourceKind.ExpandedBytes, 16384);
+        var text = new StringBuilder();
+        using (var writer = XmlWriter.Create(text, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment }))
+            Picture(writer, image, index, c);
+        return System.Xml.Linq.XElement.Parse(text.ToString(), System.Xml.Linq.LoadOptions.PreserveWhitespace);
+    }
+
     private static void Picture(XmlWriter x, WordPicture image, int index, PdfOperationContext c)
     {
         WordErrors.Node(c);

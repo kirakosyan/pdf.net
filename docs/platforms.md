@@ -87,3 +87,5 @@ FP-099 managed contracts target all four library frameworks. Independent origina
 FP-050 managed conversion contracts target all four library frameworks. Original independent input observations cover Linux x64/.NET10; complete source-format/provider/corpus, all required runtime/RID and exact-package qualification remain mandatory.
 
 FP-053 core and optional Word contracts target all four library frameworks. Source observations and independent readers currently cover Linux x64/.NET10; full format/host/provider, minimum/current/fallback runtime/RID and exact final-package qualification remain mandatory.
+
+FP-112 managed/native-template and optional Word-template APIs target all four frameworks. Actual Word/provider/minimum-runtime and final-package qualification remain pending; see [mail merge](mail-merge.md).

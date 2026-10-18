@@ -1,4 +1,9 @@
 #nullable enable
+Fluent.Pdf.Word.PdfDocxMailMerge
+Fluent.Pdf.Word.PdfDocxMergeOptions
+Fluent.Pdf.Word.PdfDocxMergeOptions.Evaluation.get -> Fluent.Pdf.PdfMergeEvaluationOptions!
+Fluent.Pdf.Word.PdfDocxMergeOptions.PdfDocxMergeOptions(Fluent.Pdf.PdfMergeEvaluationOptions! evaluation, Fluent.Pdf.PdfWordConversionOptions! word) -> void
+Fluent.Pdf.Word.PdfDocxMergeOptions.Word.get -> Fluent.Pdf.PdfWordConversionOptions!
 Fluent.Pdf.Word.PdfWordnetFont
 Fluent.Pdf.Word.PdfWordnetFont.Bold.get -> bool
 Fluent.Pdf.Word.PdfWordnetFont.Family.get -> string!
@@ -16,3 +21,6 @@ Fluent.Pdf.Word.WordnetPdfConverter.WordnetPdfConverter(bool allowBundledFonts, 
 const Fluent.Pdf.Word.WordnetPdfConverter.PackageSha256 = "073bc06d91367c340f6f031e8cf2066f8a18d735cd93968d37f346d77c7bd4e5" -> string!
 const Fluent.Pdf.Word.WordnetPdfConverter.SourceRevision = "bc6ada467dd4626dd23dfbee5f848b21e9f67dc5" -> string!
 const Fluent.Pdf.Word.WordnetPdfConverter.UpstreamVersion = "1.1.0" -> string!
+static Fluent.Pdf.Word.PdfDocxMailMerge.GeneratePdf(System.IO.Stream! template, Fluent.Pdf.PdfMergeRecord! data, Fluent.Pdf.Word.PdfDocxMergeOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.Word.PdfDocxMailMerge.Write(System.IO.Stream! template, Fluent.Pdf.PdfMergeRecord! data, Fluent.Pdf.Word.PdfDocxMergeOptions! options, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Word.PdfDocxMailMerge.WriteFile(System.IO.Stream! template, Fluent.Pdf.PdfMergeRecord! data, Fluent.Pdf.Word.PdfDocxMergeOptions! options, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!

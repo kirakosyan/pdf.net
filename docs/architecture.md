@@ -131,3 +131,5 @@ FP-099 shares binding/layout/template/model/write helpers under one root generat
 FP-050 uses original managed bounded parsers through generation, immutable explicit font/style/resource capture and private same-context post-layout link assembly. Unknown source content is diagnostic; no dynamic code, default resolver or resource discovery is introduced. See [input conversion](input-conversion.md).
 
 FP-053 keeps core independent of Word dependencies. An optional pinned adapter uses bounded original RTF/WordprocessingML, passive package checks and shared-context extraction/rendering/IO, with explicit reconstruction provenance and loss policy. See [Word conversion](word-conversion.md).
+
+FP-112 evaluates closed immutable data through shared generation or an original bounded DOCX package editor; optional Word import uses the same mandatory root context. See [mail merge](mail-merge.md).

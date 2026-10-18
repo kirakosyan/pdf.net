@@ -282,6 +282,9 @@ public static class ContractExample
     public static PdfOperationReport ExportWord(PdfDocumentSnapshot source, PdfWordFormat format, PdfWordConversionOptions options, PdfProviderRegistry providers, Stream output)
         => PdfWordConversion.Write(source, format, options, providers, output, new PdfOperationPolicy(PdfProcessingMode.Permissive));
 
+    public static PdfOperationReport MergePdf(PdfMergeTemplate template, PdfMergeRecord data, PdfMailMergeOptions options, PdfProviderRegistry providers, Stream output)
+        => PdfMailMerge.Write(template, data, options, providers, output);
+
     public static int Run()
     {
         var options = new PdfOptions(PdfPageSize.Letter, maximumPages: 10);

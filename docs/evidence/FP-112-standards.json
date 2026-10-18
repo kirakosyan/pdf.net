@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-schema-and-format-observations-not-production-qualification",
+  "requirement": "FP-112",
+  "sources": [
+    {
+      "id": "S112-OPENXML-SCHEMA",
+      "version": "3.5.1",
+      "profile": "Office2007schema",
+      "filledOutputs": 1,
+      "schemaErrors": 0
+    },
+    {
+      "id": "S112-PDF-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "scope": "Existing managed page/content/font serialization reused without a new conformance claim."
+    }
+  ],
+  "decisions": [
+    "Closed original merge syntax is SDK-owned, not a claim to execute all Word field/expression semantics.",
+    "Missing/empty/preserved-scalar policy is explicit; unsupported structural identities reject rather than inventing semantic rebinding.",
+    "Same root budgets and actual optional pinned Word provider apply; DOCX text uses XML escaping and forbidden-character rejection."
+  ],
+  "independentReportSha256": "36ee221871cd673c6012202eaf1b67e35de1c582f4d845ede9908051f1416e88",
+  "productionQualified": false
+}

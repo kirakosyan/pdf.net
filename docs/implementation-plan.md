@@ -158,3 +158,5 @@ Source progress through #40 now includes [document events and typed generation](
 Source progress through #41 now includes [text and structured conversion](input-conversion.md). Full FP-050 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
 
 Source progress through #42 now includes [optional Word interchange](word-conversion.md). Full FP-053 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #43 includes [document templates/mail merge](mail-merge.md). Full FP-112 scope and production qualification remain mandatory; #44–#50 remain in progress.

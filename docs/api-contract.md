@@ -159,3 +159,5 @@ FP-099 adds `PdfDataGeneration`, `PdfGenerationTemplate<T>`, explicit immutable 
 FP-050 adds `PdfInputConversion`, explicit format/options/named drawing contracts and passive URI page-link snapshots. Parsing, binding, layout, link geometry and writing share the operation budget. See [input conversion contracts](input-conversion.md).
 
 FP-053 adds `PdfWordConversion`, explicit format/reconstruction/limit contracts and `IPdfWordConverter`. The optional `Fluent.Pdf.Word` adapter pins the actual published dependency and requires explicit font-pack adoption. See [Word contracts](word-conversion.md).
+
+FP-112 adds immutable merge data/blocks, explicit culture/missing-field/visit policies, native `PdfMailMerge` and optional `PdfDocxMailMerge` contracts. See [mail merge](mail-merge.md).

@@ -1247,6 +1247,12 @@ Fluent.Pdf.PdfLossCategory.None = 0 -> Fluent.Pdf.PdfLossCategory
 Fluent.Pdf.PdfLossCategory.OmittedContent = 2 -> Fluent.Pdf.PdfLossCategory
 Fluent.Pdf.PdfLossCategory.SubstitutedContent = 3 -> Fluent.Pdf.PdfLossCategory
 Fluent.Pdf.PdfLossCategory.UnsupportedContent = 1 -> Fluent.Pdf.PdfLossCategory
+Fluent.Pdf.PdfMailMerge
+Fluent.Pdf.PdfMailMergeOptions
+Fluent.Pdf.PdfMailMergeOptions.Evaluation.get -> Fluent.Pdf.PdfMergeEvaluationOptions!
+Fluent.Pdf.PdfMailMergeOptions.Generation.get -> Fluent.Pdf.PdfGenerationOptions!
+Fluent.Pdf.PdfMailMergeOptions.PdfMailMergeOptions(Fluent.Pdf.PdfGenerationOptions! generation, System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfFlowTextStyle!>! styles, Fluent.Pdf.PdfMergeMissingField missingFields = Fluent.Pdf.PdfMergeMissingField.Error, int maximumVisits = 100000, int maximumRecords = 100000) -> void
+Fluent.Pdf.PdfMailMergeOptions.Styles.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfFlowTextStyle!>!
 Fluent.Pdf.PdfMargins
 Fluent.Pdf.PdfMargins.Bottom.get -> double
 Fluent.Pdf.PdfMargins.Left.get -> double
@@ -1266,6 +1272,58 @@ Fluent.Pdf.PdfMatrix.Multiply(Fluent.Pdf.PdfMatrix right) -> Fluent.Pdf.PdfMatri
 Fluent.Pdf.PdfMatrix.PdfMatrix() -> void
 Fluent.Pdf.PdfMatrix.PdfMatrix(double a, double b, double c, double d, double e, double f) -> void
 Fluent.Pdf.PdfMatrix.Transform(Fluent.Pdf.PdfPoint point) -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfMergeBlock
+Fluent.Pdf.PdfMergeCondition
+Fluent.Pdf.PdfMergeCondition.Path.get -> string!
+Fluent.Pdf.PdfMergeCondition.PdfMergeCondition(string! path, Fluent.Pdf.PdfMergeBlock![]! whenTrue, Fluent.Pdf.PdfMergeBlock![]? whenFalse = null) -> void
+Fluent.Pdf.PdfMergeCondition.WhenFalse.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfMergeBlock!>!
+Fluent.Pdf.PdfMergeCondition.WhenTrue.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfMergeBlock!>!
+Fluent.Pdf.PdfMergeEvaluationOptions
+Fluent.Pdf.PdfMergeEvaluationOptions.Culture.get -> System.Globalization.CultureInfo!
+Fluent.Pdf.PdfMergeEvaluationOptions.MaximumRecords.get -> int
+Fluent.Pdf.PdfMergeEvaluationOptions.MaximumVisits.get -> int
+Fluent.Pdf.PdfMergeEvaluationOptions.MissingFields.get -> Fluent.Pdf.PdfMergeMissingField
+Fluent.Pdf.PdfMergeEvaluationOptions.PdfMergeEvaluationOptions(string! cultureName, Fluent.Pdf.PdfMergeMissingField missingFields = Fluent.Pdf.PdfMergeMissingField.Error, int maximumVisits = 100000, int maximumRecords = 100000) -> void
+Fluent.Pdf.PdfMergeImage
+Fluent.Pdf.PdfMergeImage.Height.get -> double
+Fluent.Pdf.PdfMergeImage.Width.get -> double
+Fluent.Pdf.PdfMergeImageBlock
+Fluent.Pdf.PdfMergeImageBlock.Path.get -> string!
+Fluent.Pdf.PdfMergeImageBlock.PdfMergeImageBlock(string! path) -> void
+Fluent.Pdf.PdfMergeMissingField
+Fluent.Pdf.PdfMergeMissingField.Empty = 1 -> Fluent.Pdf.PdfMergeMissingField
+Fluent.Pdf.PdfMergeMissingField.Error = 0 -> Fluent.Pdf.PdfMergeMissingField
+Fluent.Pdf.PdfMergeMissingField.PreserveScalar = 2 -> Fluent.Pdf.PdfMergeMissingField
+Fluent.Pdf.PdfMergeParagraph
+Fluent.Pdf.PdfMergeParagraph.PdfMergeParagraph(Fluent.Pdf.PdfMergeRun![]! runs, Fluent.Pdf.PdfFlowParagraphStyle? style = null) -> void
+Fluent.Pdf.PdfMergeParagraph.Runs.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfMergeRun!>!
+Fluent.Pdf.PdfMergeParagraph.Style.get -> Fluent.Pdf.PdfFlowParagraphStyle!
+Fluent.Pdf.PdfMergeRecord
+Fluent.Pdf.PdfMergeRecord.Fields.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfMergeValue!>!
+Fluent.Pdf.PdfMergeRecord.PdfMergeRecord(System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfMergeValue!>! fields) -> void
+Fluent.Pdf.PdfMergeRepeat
+Fluent.Pdf.PdfMergeRepeat.Children.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfMergeBlock!>!
+Fluent.Pdf.PdfMergeRepeat.Path.get -> string!
+Fluent.Pdf.PdfMergeRepeat.PdfMergeRepeat(string! path, params Fluent.Pdf.PdfMergeBlock![]! children) -> void
+Fluent.Pdf.PdfMergeRun
+Fluent.Pdf.PdfMergeRun.Format.get -> string?
+Fluent.Pdf.PdfMergeRun.IsField.get -> bool
+Fluent.Pdf.PdfMergeRun.Style.get -> string!
+Fluent.Pdf.PdfMergeRun.Value.get -> string!
+Fluent.Pdf.PdfMergeTable
+Fluent.Pdf.PdfMergeTable.Columns.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfMergeTableColumn!>!
+Fluent.Pdf.PdfMergeTable.Path.get -> string!
+Fluent.Pdf.PdfMergeTable.PdfMergeTable(string! path, params Fluent.Pdf.PdfMergeTableColumn![]! columns) -> void
+Fluent.Pdf.PdfMergeTableColumn
+Fluent.Pdf.PdfMergeTableColumn.Column.get -> Fluent.Pdf.PdfTableColumn!
+Fluent.Pdf.PdfMergeTableColumn.Header.get -> string?
+Fluent.Pdf.PdfMergeTableColumn.PdfMergeTableColumn(Fluent.Pdf.PdfTableColumn! column, Fluent.Pdf.PdfMergeRun![]! runs, string? header = null) -> void
+Fluent.Pdf.PdfMergeTableColumn.Runs.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfMergeRun!>!
+Fluent.Pdf.PdfMergeTemplate
+Fluent.Pdf.PdfMergeTemplate.Blocks.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfMergeBlock!>!
+Fluent.Pdf.PdfMergeTemplate.Identifier.get -> string!
+Fluent.Pdf.PdfMergeTemplate.PdfMergeTemplate(string! identifier, params Fluent.Pdf.PdfMergeBlock![]! blocks) -> void
+Fluent.Pdf.PdfMergeValue
 Fluent.Pdf.PdfMergedCellCsvPolicy
 Fluent.Pdf.PdfMergedCellCsvPolicy.AnchorOnly = 0 -> Fluent.Pdf.PdfMergedCellCsvPolicy
 Fluent.Pdf.PdfMergedCellCsvPolicy.RepeatText = 1 -> Fluent.Pdf.PdfMergedCellCsvPolicy
@@ -2387,8 +2445,18 @@ static Fluent.Pdf.PdfLayers.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Flue
 static Fluent.Pdf.PdfLayers.IsVisible(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue! membership, Fluent.Pdf.PdfValue? configuration = null, Fluent.Pdf.PdfLayerUsage usage = Fluent.Pdf.PdfLayerUsage.View, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfLayerVisibility!
 static Fluent.Pdf.PdfLayers.SelectConfiguration(Fluent.Pdf.PdfDocumentSnapshot! source, int configurationIndex, Fluent.Pdf.PdfLayerUsage usage = Fluent.Pdf.PdfLayerUsage.View, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfLayers.SetConfiguration(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue! configuration, bool makeDefault = true, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfMailMerge.Generate(Fluent.Pdf.PdfMergeTemplate! template, Fluent.Pdf.PdfMergeRecord! data, Fluent.Pdf.PdfMailMergeOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfMailMerge.Write(Fluent.Pdf.PdfMergeTemplate! template, Fluent.Pdf.PdfMergeRecord! data, Fluent.Pdf.PdfMailMergeOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, System.IO.Stream! output, Fluent.Pdf.PdfWriteOptions? writeOptions = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfMailMerge.WriteFile(Fluent.Pdf.PdfMergeTemplate! template, Fluent.Pdf.PdfMergeRecord! data, Fluent.Pdf.PdfMailMergeOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, string! path, Fluent.Pdf.PdfWriteOptions? writeOptions = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfMargins.Uniform(double value) -> Fluent.Pdf.PdfMargins
 static Fluent.Pdf.PdfMatrix.Identity.get -> Fluent.Pdf.PdfMatrix
+static Fluent.Pdf.PdfMergeImage.ReadPng(System.IO.Stream! input, double width, double height, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfMergeImage!
+static Fluent.Pdf.PdfMergeRun.Field(string! path, string! style = "body", string? format = null) -> Fluent.Pdf.PdfMergeRun!
+static Fluent.Pdf.PdfMergeRun.Text(string! text, string! style = "body") -> Fluent.Pdf.PdfMergeRun!
+static Fluent.Pdf.PdfMergeValue.Image(Fluent.Pdf.PdfMergeImage! value) -> Fluent.Pdf.PdfMergeValue!
+static Fluent.Pdf.PdfMergeValue.Record(Fluent.Pdf.PdfMergeRecord! value) -> Fluent.Pdf.PdfMergeValue!
+static Fluent.Pdf.PdfMergeValue.Records(params Fluent.Pdf.PdfMergeRecord![]! values) -> Fluent.Pdf.PdfMergeValue!
+static Fluent.Pdf.PdfMergeValue.Scalar(object? value) -> Fluent.Pdf.PdfMergeValue!
 static Fluent.Pdf.PdfMetadata.Edit(Fluent.Pdf.PdfDocumentSnapshot! source, System.Action<Fluent.Pdf.PdfMetadataEditor!>! edit, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfMetadata.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfMetadataSet!
 static Fluent.Pdf.PdfMetadata.Remove(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfMetadataRemovalOptions? removal = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!

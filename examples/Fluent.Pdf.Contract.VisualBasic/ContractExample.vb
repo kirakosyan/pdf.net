@@ -345,6 +345,10 @@ Public Module ContractExample
         Return PdfWordConversion.Write(source, format, options, providers, output, New PdfOperationPolicy(PdfProcessingMode.Permissive))
     End Function
 
+    Public Function MergePdf(template As PdfMergeTemplate, data As PdfMergeRecord, options As PdfMailMergeOptions, providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
+        Return PdfMailMerge.Write(template, data, options, providers, output)
+    End Function
+
     Public Function Run() As Integer
         Dim options As New PdfOptions(PdfPageSize.Letter, maximumPages:=10)
         Using document As PdfDocument = PdfFacade.Create(options, PdfProviderRegistry.Empty).

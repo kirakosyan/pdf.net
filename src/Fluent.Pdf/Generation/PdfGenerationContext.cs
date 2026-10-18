@@ -164,6 +164,13 @@ public sealed class PdfGenerationContext
     }
 
     private readonly List<Action<PdfDocument, PdfOperationContext>> _modelActions = new();
+    internal void RegisterFinisher(Action<PdfOperationReport> finish)
+    {
+        Mutable();
+        _context.Consume(PdfResourceKind.ExpandedBytes, 128);
+        _finish.Add(finish);
+    }
+
     internal void RegisterModelAction(Action<PdfDocument, PdfOperationContext> action)
     {
         Mutable();
