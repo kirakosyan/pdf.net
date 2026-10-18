@@ -417,7 +417,9 @@
         "pending": [
           "Complete geometry/clipping/text/image corpus and actual minimum runtimes",
           "Final packages, standards/fidelity/security and long fuzz/endurance qualification"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-011-independent.json",
+        "sourceEvidence": "docs/evidence/FP-011-source.json"
       }
     },
     {

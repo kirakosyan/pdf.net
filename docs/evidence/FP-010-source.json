@@ -12,7 +12,7 @@
     "FP-010"
   ],
   "branchCommit": "7c7b0aa63d72b769a4a82c602f3335ba7f7372d7",
-  "testedMergeCommit": "2026-10-18T02:36:44.6128827Z Current runner version: '2.337.0'",
+  "testedMergeCommit": "b9ba7efaf9902bc2e48cd3297a91b97c7056652c",
   "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39090707367",
   "conclusion": "success",
   "testCasesPerLane": 480,
