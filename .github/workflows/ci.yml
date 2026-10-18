@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
           distribution: temurin
-          java-version: '21.0.12.1+1'
+          java-version: '21'
       - name: Provision pinned independent archival source validator
         shell: pwsh
         run: ./eng/build-archival-fixture.ps1

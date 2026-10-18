@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-066",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "5d6cff42e7bfd5174af5ea0cc2eaa3d2a60ee99e",
+  "sourceTree": "aa1504141611505f9924461748847c9d3891910d",
   "localLane": {
     "os": "Linux",
     "architecture": "x64",
@@ -64,5 +64,58 @@
     "Local native-positive SDK worker/render/codec tests cannot run: Landlock ENOSYS. CI remains unfiltered",
     "Explicit external validator fixtures exercise real validation; their caller-owned host does not qualify SDK isolation or the complete conformance corpus",
     "Actual minimum runtimes and exact final packages are not qualified; all mandatory profiles and production gates remain open"
-  ]
+  ],
+  "initialCI": {
+    "runId": 39141112777,
+    "runNumber": 90,
+    "headCommit": "5d6cff42e7bfd5174af5ea0cc2eaa3d2a60ee99e",
+    "headTree": "aa1504141611505f9924461748847c9d3891910d",
+    "conclusion": "failure",
+    "sdkTestsExecuted": 0,
+    "requiredRuntimeLanesNotExecuted": 20,
+    "cause": "The setup action rejected Java patch input 21.0.12.1+1 as invalid SemVer before SDK or standards fixtures ran.",
+    "correction": "Use the documented Java major21 selector and retain exact resolved runtime identity. The validator jar digest and complete source test matrix remain unchanged.",
+    "jobs": [
+      {
+        "jobId": 117715568441,
+        "logSha256": "f5d711e092b11b45d71b40efa045420892e19e06907d557d6d0918db34462e7a",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568604,
+        "logSha256": "01d8155531bfb87bd9930bde96b98c9af3d4b6dad6976d108e843aea19984194",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568674,
+        "logSha256": "10ffb364011477ad9601196a6c212a9a2cf52b64f68bf17fcda1948034a95515",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568699,
+        "logSha256": "bb474afcc57c0c7e1a68d4c429785069d089cabbbfeb798d8cac866181310c24",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568749,
+        "logSha256": "5757a186639f72aad2a4b71bcb7a12500014ffb80e4e3be5efb12aa2d91016a9",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568773,
+        "logSha256": "333b4b41a52f3d8e5d178fc063ab07f326a5ce374f6b41f7a2a7f49576e82430",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      }
+    ],
+    "artifacts": [],
+    "limitations": [
+      "Early setup failure also prevented source artifact creation and macOS runtime diagnostics because fixtures did not exist. All six complete raw job logs are retained."
+    ]
+  }
 }

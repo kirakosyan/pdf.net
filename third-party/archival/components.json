@@ -126,7 +126,8 @@
   },
   "ciJava": {
     "distribution": "Temurin",
-    "version": "21.0.12.1+1",
+    "requestedMajor": 21,
+    "selection": "supported setup-action major selector; exact resolved runtime identity retained in each engine.json",
     "runtimeIdentityRetained": true
   },
   "qualification": "Candidate source tool only. Complete licensing, security, transitive/runtime inventory, isolated SDK host and production qualification remain mandatory."
