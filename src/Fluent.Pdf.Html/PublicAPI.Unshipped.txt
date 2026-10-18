@@ -2,10 +2,78 @@
 Fluent.Pdf.Html.ChromiumConnectionFactory
 Fluent.Pdf.Html.ChromiumHtmlRenderer
 Fluent.Pdf.Html.ChromiumHtmlRenderer.ChromiumHtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory! factory, string! exactVersion, string! exactRevision) -> void
+Fluent.Pdf.Html.ChromiumHtmlRenderer.ChromiumHtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory! factory, string! exactVersion, string! exactRevision, Fluent.Pdf.Html.HtmlResourceSessionFactory? resourceSessionFactory) -> void
 Fluent.Pdf.Html.ChromiumHtmlRenderer.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.Html.ChromiumHtmlRenderer.ExpectedRevision.get -> string!
 Fluent.Pdf.Html.ChromiumHtmlRenderer.ExpectedVersion.get -> string!
 Fluent.Pdf.Html.ChromiumHtmlRenderer.Render(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.PdfHtmlOptions! options, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Html.HtmlAssets
+Fluent.Pdf.Html.HtmlHttpRequest
+Fluent.Pdf.Html.HtmlHttpRequest.Address.get -> System.Uri!
+Fluent.Pdf.Html.HtmlHttpRequest.ClientCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Fluent.Pdf.Html.HtmlHttpRequest.DestinationAddress.get -> string!
+Fluent.Pdf.Html.HtmlHttpRequest.Headers.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+Fluent.Pdf.Html.HtmlHttpRequest.Proxy.get -> Fluent.Pdf.Html.HtmlProxySettings?
+Fluent.Pdf.Html.HtmlHttpRequest.ProxyAddress.get -> string?
+Fluent.Pdf.Html.HtmlHttpRequest.ServerCertificateSha256.get -> string?
+Fluent.Pdf.Html.HtmlHttpResponse
+Fluent.Pdf.Html.HtmlHttpResponse.Body.get -> System.IO.Stream!
+Fluent.Pdf.Html.HtmlHttpResponse.Dispose() -> void
+Fluent.Pdf.Html.HtmlHttpResponse.Headers.get -> System.Collections.Generic.IReadOnlyList<System.Collections.Generic.KeyValuePair<string!, string!>>!
+Fluent.Pdf.Html.HtmlHttpResponse.HtmlHttpResponse(int statusCode, string! mediaType, System.IO.Stream! body, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, string!>>? headers, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Html.HtmlHttpResponse.MediaType.get -> string!
+Fluent.Pdf.Html.HtmlHttpResponse.StatusCode.get -> int
+Fluent.Pdf.Html.HtmlNetworkPolicy
+Fluent.Pdf.Html.HtmlNetworkPolicy.HtmlNetworkPolicy(System.Collections.Generic.IEnumerable<Fluent.Pdf.Html.HtmlOriginRule!>? origins = null, System.Collections.Generic.IEnumerable<string!>? permittedNonPublicAddresses = null, int maximumRedirects = 5, long maximumResponseBytes = 8388608, Fluent.Pdf.Html.HtmlProxySettings? proxy = null) -> void
+Fluent.Pdf.Html.HtmlNetworkPolicy.MaximumRedirects.get -> int
+Fluent.Pdf.Html.HtmlNetworkPolicy.MaximumResponseBytes.get -> long
+Fluent.Pdf.Html.HtmlNetworkPolicy.Origins.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Html.HtmlOriginRule!>!
+Fluent.Pdf.Html.HtmlNetworkPolicy.PermittedNonPublicAddresses.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.Html.HtmlNetworkPolicy.Proxy.get -> Fluent.Pdf.Html.HtmlProxySettings?
+Fluent.Pdf.Html.HtmlOriginRule
+Fluent.Pdf.Html.HtmlOriginRule.ClientCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+Fluent.Pdf.Html.HtmlOriginRule.Headers.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+Fluent.Pdf.Html.HtmlOriginRule.HtmlOriginRule(System.Uri! origin, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, string!>>? headers = null, System.Collections.Generic.IEnumerable<string!>? initialCookies = null, string? serverCertificateSha256 = null, System.Security.Cryptography.X509Certificates.X509Certificate2? clientCertificate = null) -> void
+Fluent.Pdf.Html.HtmlOriginRule.InitialCookies.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.Html.HtmlOriginRule.Origin.get -> System.Uri!
+Fluent.Pdf.Html.HtmlOriginRule.ServerCertificateSha256.get -> string?
+Fluent.Pdf.Html.HtmlProxySettings
+Fluent.Pdf.Html.HtmlProxySettings.Address.get -> System.Uri!
+Fluent.Pdf.Html.HtmlProxySettings.Authorization.get -> string?
+Fluent.Pdf.Html.HtmlProxySettings.HtmlProxySettings(System.Uri! address, string? authorization = null) -> void
+Fluent.Pdf.Html.HtmlResourceLoader
+Fluent.Pdf.Html.HtmlResourceLoader.HtmlResourceLoader(Fluent.Pdf.Html.HtmlNetworkPolicy? policy = null, Fluent.Pdf.Html.IHtmlNameResolver? resolver = null, Fluent.Pdf.Html.IHtmlHttpTransport? transport = null) -> void
+Fluent.Pdf.Html.HtmlResourceLoader.OpenSession(Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Html.IHtmlResourceSession!
+Fluent.Pdf.Html.HtmlResourceRequest
+Fluent.Pdf.Html.HtmlResourceRequest.Address.get -> System.Uri!
+Fluent.Pdf.Html.HtmlResourceRequest.HtmlResourceRequest(System.Uri! address, string! requestId, string? redirectedRequestId = null, bool isMainDocument = false) -> void
+Fluent.Pdf.Html.HtmlResourceRequest.IsMainDocument.get -> bool
+Fluent.Pdf.Html.HtmlResourceRequest.RedirectedRequestId.get -> string?
+Fluent.Pdf.Html.HtmlResourceRequest.RequestId.get -> string!
+Fluent.Pdf.Html.HtmlResourceResult
+Fluent.Pdf.Html.HtmlResourceResult.Content.get -> Fluent.Pdf.PdfHtmlResource!
+Fluent.Pdf.Html.HtmlResourceResult.Headers.get -> System.Collections.Generic.IReadOnlyList<System.Collections.Generic.KeyValuePair<string!, string!>>!
+Fluent.Pdf.Html.HtmlResourceResult.HtmlResourceResult(Fluent.Pdf.PdfHtmlResource! content, int statusCode, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, string!>>? headers, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Html.HtmlResourceResult.StatusCode.get -> int
+Fluent.Pdf.Html.HtmlResourceSessionFactory
 Fluent.Pdf.Html.IChromiumConnection
 Fluent.Pdf.Html.IChromiumConnection.Receive(Fluent.Pdf.PdfOperationContext! context) -> string!
 Fluent.Pdf.Html.IChromiumConnection.Send(string! message, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Html.IHtmlHttpTransport
+Fluent.Pdf.Html.IHtmlHttpTransport.Send(Fluent.Pdf.Html.HtmlHttpRequest! request, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Html.HtmlHttpResponse!
+Fluent.Pdf.Html.IHtmlNameResolver
+Fluent.Pdf.Html.IHtmlNameResolver.Resolve(string! host, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<System.Net.IPAddress!>!
+Fluent.Pdf.Html.IHtmlResourceSession
+Fluent.Pdf.Html.IHtmlResourceSession.Resolve(Fluent.Pdf.Html.HtmlResourceRequest! request, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Html.HtmlResourceResult?
+Fluent.Pdf.Html.PinnedHtmlHttpTransport
+Fluent.Pdf.Html.PinnedHtmlHttpTransport.IsSupported.get -> bool
+Fluent.Pdf.Html.PinnedHtmlHttpTransport.PinnedHtmlHttpTransport() -> void
+Fluent.Pdf.Html.PinnedHtmlHttpTransport.Send(Fluent.Pdf.Html.HtmlHttpRequest! request, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Html.HtmlHttpResponse!
+Fluent.Pdf.Html.SystemHtmlNameResolver
+Fluent.Pdf.Html.SystemHtmlNameResolver.Resolve(string! host, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<System.Net.IPAddress!>!
+Fluent.Pdf.Html.SystemHtmlNameResolver.SystemHtmlNameResolver() -> void
+static Fluent.Pdf.Html.HtmlAssets.CaptureDataUri(string! dataUri, System.Uri! address, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfHtmlResource!
+static Fluent.Pdf.Html.HtmlAssets.CaptureFile(string! protectedRoot, string! relativePath, System.Uri! address, string! mediaType, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfHtmlResource!
+static Fluent.Pdf.Html.HtmlAssets.ReadDataUri(string! dataUri, System.Uri! address, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
+static Fluent.Pdf.Html.HtmlAssets.ReadFile(string! protectedRoot, string! relativePath, System.Uri! address, string! mediaType, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
+static Fluent.Pdf.Html.HtmlNetworkPolicy.Offline.get -> Fluent.Pdf.Html.HtmlNetworkPolicy!

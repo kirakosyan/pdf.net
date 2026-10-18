@@ -1699,7 +1699,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-resources.md",
+        "implemented": [
+          "Explicit offline default, exact-origin and every-DNS-answer admission, numeric endpoint transport and unique bounded browser redirects",
+          "Private per-job/per-origin cookies/headers, explicit CONNECT proxy and TLS client/pinned server certificates; modern owned cancellable HTTP transport",
+          "Bounded protected-file/data snapshots, same-context browser acquisition, C#/VB source consumers and source/actual local protocol fixtures"
+        ],
+        "pending": [
+          "Complete legacy/portable transport and decoding profiles, race-safe protected-file OS adapters and complete authentication/site/proxy profiles remain mandatory",
+          "Qualified browser host isolation, certificate/IDNA/address-registry review and every actual supported runtime/RID remain mandatory",
+          "Complete security/fuzz/resource/concurrency/endurance/performance and exact final-package consumers remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-045-source.json",
+        "standardsEvidence": "docs/evidence/FP-045-standards.json",
+        "independentEvidence": "docs/evidence/FP-045-independent.json"
+      }
     },
     {
       "id": "FP-046",

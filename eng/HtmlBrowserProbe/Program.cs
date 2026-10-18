@@ -75,6 +75,8 @@ foreach (bool enabled in new[]
 }
 
 File.WriteAllText(Path.Combine(outputRoot, "observations.json"), JsonSerializer.Serialize(new { purpose = "trusted-original-source-fixtures-not-security-or-production-qualification", runtime = RuntimeInformation.FrameworkDescription, os = RuntimeInformation.OSDescription, architecture = RuntimeInformation.ProcessArchitecture.ToString(), version, revision, observations, productionQualified = false }, new JsonSerializerOptions { WriteIndented = true }));
+if (settings.TryGetProperty("includeResourceFixtures", out var resourceFixtures) && resourceFixtures.GetBoolean())
+    await ResourceFixture.ObserveAsync(outputRoot, context => new FixtureConnection(node, browser, temporaryParent, context), fontPath, version, revision);
 static string Hash(string path)
 {
     using var input = File.OpenRead(path);

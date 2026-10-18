@@ -68,7 +68,7 @@ public sealed class PdfHtmlSource
         Resources = resources;
     }
 
-    /// <summary>Gets explicit logical HTML markup, or null when the main document must be found in Resources.</summary>
+    /// <summary>Gets explicit logical HTML markup, or null when the main document requires a supplied resource or explicit renderer acquisition policy.</summary>
     public string? Markup { get; }
     /// <summary>Gets the absolute virtual main address and relative-resource base.</summary>
     public Uri Address { get; }
@@ -85,7 +85,7 @@ public sealed class PdfHtmlSource
         return Create(markup, address ?? new Uri("https://fluent-pdf.invalid/document"), resources, null, policy, cancellationToken);
     }
 
-    /// <summary>Uses an exact HTTP(S) document address whose bytes must be explicitly supplied in Resources. This method performs no network request.</summary>
+    /// <summary>Uses an exact HTTP(S) document address. Bytes require supplied Resources or an explicit renderer acquisition policy; this method performs no network request.</summary>
     public static PdfHtmlSource FromResource(Uri address, IEnumerable<PdfHtmlResource> resources, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default) => Create(null, address, resources ?? throw new ArgumentNullException(nameof(resources)), null, policy, cancellationToken);
     /// <summary>Captures UTF-8 HTML from a borrowed file/document stream. A UTF-8 BOM is allowed; malformed Unicode rejects without guessing another encoding.</summary>
     public static PdfHtmlSource Read(Stream input, Uri? address = null, IEnumerable<PdfHtmlResource>? resources = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)

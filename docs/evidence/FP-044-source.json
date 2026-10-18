@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-044",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "bc5dae21b7a0a56d4943aeea361d32b4801e8f2e",
+  "sourceTree": "b25c87da960bdb56ac2273ee841b9cb44ad812aa",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -155,5 +155,14 @@
       "failed": 0,
       "skipped": 0
     }
-  ]
+  ],
+  "passingSourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-97-source.json",
+    "runId": 39147687640,
+    "passed": 19900,
+    "failed": 0,
+    "skipped": 0,
+    "runtimeLanes": 20,
+    "productionQualified": false
+  }
 }

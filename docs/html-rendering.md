@@ -8,7 +8,7 @@ FP-044 has a managed source contract and an optional original `Fluent.Pdf.Html` 
 
 The source profile bounds markup to 4 Mi UTF-16 code units, file markup to 8 MiB UTF-8, each captured resource to 16 MiB, and the inventory to 128 uniquely addressed resources/64 MiB. Main addresses must be absolute HTTP(S), without user information or fragments. Captured bytes survive input disposal. Preparation and rendering are separate explicit operations with their own supplied policies.
 
-The adapter intercepts GET requests and fulfills only supplied markup/resources, including web fonts and local images/styles/scripts. Strict mode rejects missing subresources; permissive mode records `Html.ResourceMissing` and fails that request without a network fallback. Missing main content always rejects. Inline data/blob resources stay within the explicit document job. The browser's own tab favicon may receive an empty response; explicit image requests still follow the resource policy. URL acquisition, filesystem roots, authentication and network authorization belong to FP-045 and remain mandatory.
+The adapter intercepts GET requests and serves supplied markup/resources first. An explicit per-job resource session can then apply [resource/authentication policy](html-resources.md); the default remains offline. Strict mode rejects missing subresources; permissive mode records `Html.ResourceMissing` and fails the request. Missing main content rejects. Native data/blob resources require the qualified host's memory/process boundary. The browser's own tab favicon may receive an empty response; explicit image requests still follow policy.
 
 ## Engine and job boundary
 

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-045",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "sourceCasesAdded": 42,
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "passed": 975,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "8d0e5a03f0bd206fe9e3209034426214c949079518109b40b86d797aea30a243",
+      "trxRetainedPath": "/workspace/scratch/resource-final-current-net10/source.trx",
+      "actualRuntime": ".NET10.0.13"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "passed": 69,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "ad121fa7613790301ba26fdb8abadb7e78edfc3fb29723ba6e2252ab0d895e60",
+      "trxRetainedPath": "/workspace/scratch/resource-final-net8/source.trx",
+      "actualRuntime": ".NET8.0.32"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "passed": 69,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "e4e193cf481a6b4405e3be08c82208a2be747e0b61ef878ecd386943cdc5037b",
+      "trxRetainedPath": "/workspace/scratch/resource-final-fallback/source.trx",
+      "actualRuntime": ".NET10.0.13"
+    }
+  ],
+  "fullLocalFilter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeRenderingTests",
+  "localNativeLimitation": "Landlock ENOSYS prevents local SDK positive native worker/codec/text/rendering fixtures. Required source CI is unfiltered; no production lane is waived.",
+  "apiComparisons": 27,
+  "actualModernTransportSourceObservations": [
+    "HTTP original Host/explicit Authorization and exact response bytes",
+    "Mutual TLS with caller-owned client identity, exact leaf pin/name and explicit wrong-pin/wrong-name rejection",
+    "Numeric CONNECT tunnel with proxy-only credentials",
+    "Stalled-body cancellation closes the owned connection within1second"
+  ],
+  "legacyAndFallbackApplicability": "Policy/capture/provider contracts exercised. Built-in DNS/transport intentionally fail before network work; complete legacy/portable transports remain mandatory. Six modern transport-specific test cases assert fail-closed applicability on these assets, not successful HTTP behavior.",
+  "actualBrowserSourceObservation": {
+    "purpose": "trusted-original-source-observation-not-production-qualification",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "requests": [
+      "/start",
+      "/protected/page.html",
+      "/asset.svg"
+    ],
+    "text": "A B",
+    "pageCount": 1,
+    "outputSha256": "0c5990e230ff692c91b664efbe822df1b8ef28d9a811fe7d0d4ab28672ed1830",
+    "productionQualified": false
+  },
+  "sourceFileHashes": {
+    "src/Fluent.Pdf.Html/Resources/HtmlAssets.cs": "58b82fdc51b288649f244142a092bf8f5b4c8e6c6e9a1ca5259683144b2d3235",
+    "src/Fluent.Pdf.Html/Resources/HtmlNetworkPolicy.cs": "e29f5ea3912c41681c53127613b80dcca86d104375816a35fc305bf9242345f9",
+    "src/Fluent.Pdf.Html/Resources/HtmlResourceContracts.cs": "dcd12ef8646ad8024a51848c7449f67198f931a1ba41b033f02f37b05a4828ad",
+    "src/Fluent.Pdf.Html/Resources/HtmlResourceLoader.cs": "53fef0b49b1325d349b4326f368b72afd64c420f8e2062f72555900d90b55037",
+    "src/Fluent.Pdf.Html/Resources/PinnedHtmlHttpTransport.cs": "a3d43b31a896659c4e00d5cd4144e68b9bc86d272ec0b8846b6f67eaea3370c9",
+    "src/Fluent.Pdf.Html/ChromiumHtmlRenderer.cs": "c857f14cc555e9c27247fb493a68055bc34f42cedf96db098846c19672f6eb7f",
+    "src/Fluent.Pdf.Html/PublicAPI.Unshipped.txt": "73fbea81a3a10cef8daec5884b27fcbcddc952da70c0e601db5056ab2de1881c",
+    "src/Fluent.Pdf/Html/PdfHtmlSource.cs": "f15bb1ebac91092c07edfb8956f096284bad3dc18cdcf78c4ba98faf236a3dd5",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlResourceTests.cs": "66bc0bb63686f95d0ab84e9a1e824a77bdcc7cbd62f5cc42c023c9a09d9f38ee",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlHttpTransportTests.cs": "b000d5d043a6c8592fbce676c8f67ea279487a67364d62cd3ff577c583dc4639",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlTests.cs": "fec5c97b10ea04ba321069bbacb26a8bd8096381cf58b61332dd8888fde204fd",
+    "eng/HtmlBrowserProbe/Program.cs": "14432bb93b737ae5021173df51c2fba4d2239a2e4280f8a52682c7227def4964",
+    "eng/HtmlBrowserProbe/ResourceFixture.cs": "b895cd3dea064e6915fe5d6bb040a1af533e321e06032482f1fa47c2c430eb65",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "b8e1265fe63f25cef88d99765c9c3f38b6376af30032d5c7997859b6fd8bffee",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "c149bcdf4e73da15dbf3a7307886283e30ce84e4c56aa8182bc7dc2996cb9e4b"
+  },
+  "reportSha256": {
+    "resource-final-normal-build.log": "6a57f97e7f50fe59ec2c3042332b8b9bf1ebffa62f1f4bf6df545eada6a1a4ec",
+    "resource-final-current-tests.log": "47469c1a6168a6b0ab3c1fd2081d10ee98d214022718ee9e4b74bc08e386ab6f",
+    "resource-net8-tests.log": "20bd180fe2a7519299f6ae10faba06e4852d4b53a78be0ccab02247564e76ff4",
+    "resource-fallback-tests.log": "ac1a2a3415136dd39c49d5c23d8a0c2e7fdff290e3f1ab42026a55c304035398",
+    "resource-final-api.log": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "resource-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "resource-observed-final-browser.log": "e4695e1e88ec1ecab8768b0be07fac36e0e5a103be63d52a0d5073ca25775e6c"
+  },
+  "retainedFailureObservations": [
+    {
+      "report": "resource-first-tests.log",
+      "sha256": "5b0a57139ffcb30911c5622e45a42500d804aa65775520bd6e9583aa6d425c1d",
+      "observation": "A source assertion initially expected PdfException for caller cancellation. The established context contract correctly throws OperationCanceledException; the assertion was corrected."
+    },
+    {
+      "report": "resource-real-browser.log",
+      "sha256": "b0d9236f4ed59667d3c6174912bf3bf0cc86d89c3f5645e91e0ea109d03d992c",
+      "observation": "Before document input, Chromium aborted because the explicitly selected temporary parent made its Unix socket path too long. A shorter private fixture parent succeeded; engine sandbox/time/resource limits were unchanged."
+    }
+  ],
+  "priorDependencyCI": "docs/evidence/PR-118-CI-97-source.json",
+  "currentSourceCI": "Pending after this source commit; prior CI is not claimed for the new resource implementation.",
+  "packageSha256": null,
+  "packingBlocked": true,
+  "publicationBlocked": true,
+  "productionQualified": false,
+  "mandatoryPending": [
+    "Complete legacy/portable HTTP/TLS/decoding and race-safe protected-file OS adapters",
+    "Complete browser host isolation, interactive authentication/site/proxy and cookie/IDNA/certificate/address-registry profiles",
+    "All actual supported RID/runtime/minimum Framework/fallback and exact final-package consumers",
+    "Full security/fuzz/resource/concurrency/endurance/performance and independent fidelity qualification"
+  ]
+}

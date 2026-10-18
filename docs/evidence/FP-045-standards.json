@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-design-observations-not-production-qualification",
+  "requirement": "FP-045",
+  "sources": [
+    {
+      "id": "S45-DATA-COOKIE-IP4",
+      "kind": "retained official rendered RFC2397/RFC6265 and IPv4 registry web observations",
+      "sha256": "da10dfced2355db66c528400e7048d01593751a0ac9bbcc3f737a4915535ef86"
+    },
+    {
+      "id": "S45-HTTP-URI-IP6",
+      "kind": "retained official rendered RFC9110/RFC3986 and IPv6 registry web observations",
+      "sha256": "2595ce4c5ef1a290f7d8ce0dafcf360a53a59d08b37c670ea87d9cbf465d7dd1"
+    },
+    {
+      "id": "S45-DEFLATE-BASE",
+      "kind": "retained official HTTP zlib/deflate and URI-base-resolution excerpts; registry metadata only",
+      "sha256": "49fd0df8065c2340824aa5b8e21b181300e7e72fa90147bfd467d0a5067d2913"
+    }
+  ],
+  "decisions": [
+    "Default offline; authorize exact origins before DNS and every resulting address before pinned numeric connection",
+    "Preserve real browser redirects and final-resource bases; bind every redirect continuation and revalidate all addresses",
+    "Keep private cookie jars and explicit headers/certificates per exact origin/job; prevent silent quota eviction",
+    "Disable implicit HTTP behaviors and external chain downloads; create explicit client certificate contexts offline",
+    "Decode gzip and modern zlib/deflate/Brotli under shared bounded leases; retain explicit applicability failures",
+    "Snapshot protected files and strict data-URI octets into virtual HTTP resources; never grant browser file access"
+  ],
+  "retrievalLimitation": "Direct shell HTTP retrieval of the official text/CSV endpoints was blocked by the workspace proxy. Retained web observations are rendered excerpts, not complete raw standard/registry snapshots; full registry/standards review remains mandatory.",
+  "limitations": [
+    "Conservative address exclusions are not a completed IANA/routing/IDNA security audit",
+    "No implementation bodies copied; original protocol/policy code",
+    "Complete legacy, filesystem race, authentication and supported-platform security profiles remain mandatory"
+  ],
+  "productionQualified": false
+}

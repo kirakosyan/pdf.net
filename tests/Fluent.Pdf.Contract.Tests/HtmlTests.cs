@@ -9,6 +9,58 @@ namespace Fluent.Pdf.Contract.Tests;
 public sealed class HtmlTests
 {
     [Fact]
+    public void ExplicitResourceSessionsAcquireMainBytesWithTheSameContextAndAreDisposedPerJob()
+    {
+        var sessions = new List<RemoteResources>();
+        HtmlResourceSessionFactory resources = context =>
+        {
+            var session = new RemoteResources(context);
+            sessions.Add(session);
+            return session;
+        };
+        foreach (bool suppliedMarkup in new[]
+        {
+            false,
+            true
+        }
+
+        )
+        {
+            var peer = new Peer
+            {
+                Behavior = "missing"
+            };
+            var renderer = new ChromiumHtmlRenderer(_ => peer, Peer.Version, Peer.Revision, resources);
+            var source = suppliedMarkup ? PdfHtmlSource.FromHtml("<p>A</p>") : PdfHtmlSource.FromResource(new("https://fluent-pdf.invalid/document"), Array.Empty<PdfHtmlResource>());
+            using var document = PdfHtml.Render(source, new PdfProviderRegistry(renderer));
+            Assert.Single(document.Pages);
+            Assert.True(sessions[sessions.Count - 1].Disposed);
+            Assert.Equal(suppliedMarkup ? 1 : 2, sessions[sessions.Count - 1].Requests.Count);
+            Assert.Equal(!suppliedMarkup, sessions[sessions.Count - 1].Requests.Any(r => r.IsMainDocument));
+            string headers = peer.ResponseHeaders[peer.ResponseHeaders.Count - 1];
+            Assert.DoesNotContain("Set-Cookie", headers);
+            Assert.DoesNotContain("Access-Control-Allow-Origin", headers);
+        }
+    }
+
+    private sealed class RemoteResources : IHtmlResourceSession
+    {
+        private readonly PdfOperationContext _context;
+        internal readonly List<HtmlResourceRequest> Requests = new();
+        internal bool Disposed;
+        internal RemoteResources(PdfOperationContext context) => _context = context;
+        public HtmlResourceResult Resolve(HtmlResourceRequest request, PdfOperationContext context)
+        {
+            Assert.Same(_context, context);
+            Requests.Add(request);
+            var resource = HtmlAssets.CaptureDataUri(request.IsMainDocument ? "data:text/html,%3Cp%3EA%3C/p%3E" : "data:image/png;base64,AA==", request.Address, context);
+            return new(resource, 200, new[] { new KeyValuePair<string, string>("Set-Cookie", "private=secret") }, context);
+        }
+
+        public void Dispose() => Disposed = true;
+    }
+
+    [Fact]
     public void LargeCapturedResourceFitsTheDocumentedTransportWithAnExplicitMemoryBudget()
     {
         byte[] bytes = new byte[9 * 1024 * 1024];
@@ -285,7 +337,7 @@ public sealed class HtmlTests
         private readonly byte[] _pdf = PdfBytes();
         internal string Behavior = "";
         internal bool WrongVersion, Disposed, ScriptDisabled;
-        internal readonly List<string> Commands = new(), Bodies = new();
+        internal readonly List<string> Commands = new(), Bodies = new(), ResponseHeaders = new();
         public void Send(string message, PdfOperationContext context)
         {
             using var parsed = JsonDocument.Parse(message);
@@ -414,6 +466,8 @@ public sealed class HtmlTests
                     break;
                 case "Fetch.fulfillRequest":
                     Bodies.Add(p.GetProperty("body").GetString()!);
+                    if (p.TryGetProperty("responseHeaders", out var responseHeaders) && Behavior == "missing")
+                        ResponseHeaders.Add(responseHeaders.GetRawText());
                     break;
                 case "Target.closeTarget":
                     Event("Inspector.detached", new { reason = "target_closed" });

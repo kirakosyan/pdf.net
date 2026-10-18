@@ -9,8 +9,14 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
 {
     private readonly ChromiumConnectionFactory _factory;
     private readonly string _version, _revision;
+    private readonly HtmlResourceSessionFactory? _resourceFactory;
     /// <summary>Requires a private host factory and exact expected four-part Chromium version and DevTools source revision. The actual Browser.getVersion response must match before document input is sent.</summary>
-    public ChromiumHtmlRenderer(ChromiumConnectionFactory factory, string exactVersion, string exactRevision)
+    public ChromiumHtmlRenderer(ChromiumConnectionFactory factory, string exactVersion, string exactRevision) : this(factory, exactVersion, exactRevision, null)
+    {
+    }
+
+    /// <summary>Captures an optional explicit factory for a fresh policy-bound resource/authentication session on every job. The browser host must still deny uncontrolled network and filesystem access.</summary>
+    public ChromiumHtmlRenderer(ChromiumConnectionFactory factory, string exactVersion, string exactRevision, HtmlResourceSessionFactory? resourceSessionFactory)
     {
         _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         if (exactVersion == null || exactVersion.Length > 64 || exactVersion.Split('.').Length != 4 || exactVersion.Split('.').Any(part => part.Length == 0 || part.Length > 10 || part.Any(c => c < '0' || c > '9')))
@@ -19,6 +25,7 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
             throw new ArgumentException("An exact bounded browser source revision is required.", nameof(exactRevision));
         _version = exactVersion;
         _revision = exactRevision;
+        _resourceFactory = resourceSessionFactory;
         Descriptor = new("chromium.html", exactVersion, PdfCapability.RenderHtml);
     }
 
@@ -44,6 +51,9 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
         context.Consume(PdfResourceKind.ExpandedBytes, 4096);
         context.Consume(PdfResourceKind.Objects, 8);
         using var worker = context.EnterScope(PdfResourceKind.Workers);
+        using var resourceSession = _resourceFactory?.Invoke(context);
+        if (_resourceFactory != null && resourceSession == null)
+            throw PdfWriterCore.Error(context, "Html.ResourceSession", "The explicit resource factory returned no private session.");
         using var connection = _factory(context) ?? throw PdfWriterCore.Error(context, "Html.HostUnavailable", "The explicit browser host returned no connection.");
         var protocol = new ChromiumProtocol(connection, context);
         using (var observed = protocol.Call("Browser.getVersion"))
@@ -68,6 +78,7 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
         context.Consume(PdfResourceKind.ExpandedBytes, source.Resources.Count * 256L + 2048);
         var resources = source.Resources.ToDictionary(r => r.Address.AbsoluteUri, r => r, StringComparer.Ordinal);
         var idleLoaders = new HashSet<string>(StringComparer.Ordinal);
+        var mainRequests = new HashSet<string>(StringComparer.Ordinal);
         protocol.Notification = Notify;
         Command("Target.setAutoAttach", P(("autoAttach", true), ("waitForDebuggerOnStart", true), ("flatten", true)));
         Command("Page.enable");
@@ -212,6 +223,8 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
             }
 
             string contentType, body;
+            int status = 200;
+            object[]? responseHeaders = null;
             if (url == source.Address.AbsoluteUri && source.Markup != null)
             {
                 context.Consume(PdfResourceKind.ExpandedBytes, source.Markup.Length * 16L + 256);
@@ -245,6 +258,54 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
                     // The browser's own tab icon is outside printed document content. Explicit image/script requests still follow the resource policy.
                     protocol.Acknowledge("Fetch.fulfillRequest", P(("requestId", requestId), ("responseCode", 204), ("body", "")), session);
                     return;
+                }
+
+                if (resourceSession != null)
+                {
+                    if (!Uri.TryCreate(url, UriKind.Absolute, out var address))
+                        throw protocol.Error("ResourceAddress", "The browser requested an invalid resource address.");
+                    string? previous = parameters.TryGetProperty("redirectedRequestId", out var redirected) ? protocol.String(parameters, "redirectedRequestId") : null;
+                    bool main = url == source.Address.AbsoluteUri || previous != null && mainRequests.Contains(previous);
+                    if (main)
+                    {
+                        if (mainRequests.Count == 1024)
+                            throw protocol.Error("RequestIdentity", "The main-document request inventory exceeds its job bound.");
+                        context.Consume(PdfResourceKind.ExpandedBytes, 1024);
+                        mainRequests.Add(requestId);
+                    }
+
+                    var acquired = resourceSession.Resolve(new(address, requestId, previous, main), context);
+                    context.Checkpoint();
+                    if (acquired != null)
+                    {
+                        resource = acquired.Content;
+                        if (resource.Address != address)
+                            throw protocol.Error("ResourceIdentity", "The resource provider returned content for another address.");
+                        if (main && acquired.StatusCode >= 400)
+                            throw protocol.Error("MainResourceStatus", "The authorized main document returned an unsuccessful status.");
+                        if (main && acquired.StatusCode >= 200 && acquired.StatusCode < 300 && !new[]
+                        {
+                            "text/html",
+                            "application/xhtml+xml"
+                        }.Contains(resource.MediaType.Split(';')[0].Trim(), StringComparer.OrdinalIgnoreCase))
+                            throw protocol.Error("MainMediaType", "The authorized main resource must explicitly contain HTML or XHTML.");
+                        context.Consume(PdfResourceKind.ExpandedBytes, resource.Length * 6L + 32768);
+                        var captured = new byte[checked((int)resource.Length)];
+                        using var raw = resource.OpenContent();
+                        using var lease = context.BorrowExpandedInput(raw);
+                        int at = 0, count;
+                        while (at < captured.Length && (count = lease.Read(captured, at, Math.Min(65536, captured.Length - at))) > 0)
+                            at += count;
+                        if (at != captured.Length || lease.ReadByte() != -1)
+                            throw protocol.Error("ResourceExtent", "A captured resource has an inconsistent extent.");
+                        contentType = resource.MediaType;
+                        body = Convert.ToBase64String(captured);
+                        status = acquired.StatusCode;
+                        // Authentication cookies stay in the managed per-origin jar. Browser requests never supply credentials to the loader.
+                        responseHeaders = acquired.Headers.Where(h => !h.Key.Equals("Set-Cookie", StringComparison.OrdinalIgnoreCase) && !h.Key.Equals("Content-Type", StringComparison.OrdinalIgnoreCase)).Select(h => (object)P(("name", h.Key), ("value", h.Value))).Concat(new object[] { P(("name", "Content-Type"), ("value", contentType)) }).ToArray();
+                        protocol.Acknowledge("Fetch.fulfillRequest", P(("requestId", requestId), ("responseCode", status), ("responseHeaders", responseHeaders), ("body", body)), session);
+                        return;
+                    }
                 }
 
                 if (url == source.Address.AbsoluteUri)
