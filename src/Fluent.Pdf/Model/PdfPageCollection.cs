@@ -21,11 +21,15 @@ public sealed class PdfPageCollection : IReadOnlyList<PdfPage>
 
     /// <summary>Adds a page with a valid size, within the document's maximum page count.</summary>
     public PdfPage Add(PdfPageSize size)
+        =>AddCore(size,null);
+    internal PdfPage Add(PdfPageSize size,PdfOperationContext context)=>AddCore(size,context);
+    private PdfPage AddCore(PdfPageSize size,PdfOperationContext? context)
     {
         _owner.EnsureEditable();
         Guard.Size(size, nameof(size));
         if (_pages.Count >= _owner.Options.MaximumPages)
             throw _owner.PageLimit();
+        _owner.BeforePageAllocation(context);
         var page = new PdfPage(_owner, size);
         _pages.Add(page);
         _version++;

@@ -12,6 +12,15 @@ Fluent.Pdf.IPdfImageCodecProvider.Inspect(Fluent.Pdf.PdfImageCodec codec, System
 Fluent.Pdf.IPdfImageCodecProvider.Supports(Fluent.Pdf.PdfImageCodec codec, bool encoding) -> bool
 Fluent.Pdf.IPdfProvider
 Fluent.Pdf.IPdfProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.IPdfRevisionWriter
+Fluent.Pdf.IPdfRevisionWriter.Supports(Fluent.Pdf.PdfWriteOptions! options) -> bool
+Fluent.Pdf.ManagedPdfProvider
+Fluent.Pdf.ManagedPdfProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.ManagedPdfProvider.ManagedPdfProvider() -> void
+Fluent.Pdf.ManagedPdfProvider.Read(System.IO.Stream! input, Fluent.Pdf.PdfDocument! target, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.ManagedPdfProvider.RequiresSeekableStream.get -> bool
+Fluent.Pdf.ManagedPdfProvider.Supports(Fluent.Pdf.PdfWriteOptions! options) -> bool
+Fluent.Pdf.ManagedPdfProvider.Write(Fluent.Pdf.PdfDocumentSnapshot! document, System.IO.Stream! output, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Pdf
 Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ImageCodecs = 5 -> Fluent.Pdf.PdfCapability
@@ -26,6 +35,10 @@ Fluent.Pdf.PdfCrossReference.Id.get -> Fluent.Pdf.PdfObjectId
 Fluent.Pdf.PdfCrossReference.Kind.get -> Fluent.Pdf.PdfCrossReferenceKind
 Fluent.Pdf.PdfCrossReference.MemberIndex.get -> int
 Fluent.Pdf.PdfCrossReference.Offset.get -> long
+Fluent.Pdf.PdfCrossReferenceFormat
+Fluent.Pdf.PdfCrossReferenceFormat.Auto = 0 -> Fluent.Pdf.PdfCrossReferenceFormat
+Fluent.Pdf.PdfCrossReferenceFormat.Stream = 2 -> Fluent.Pdf.PdfCrossReferenceFormat
+Fluent.Pdf.PdfCrossReferenceFormat.Table = 1 -> Fluent.Pdf.PdfCrossReferenceFormat
 Fluent.Pdf.PdfCrossReferenceKind
 Fluent.Pdf.PdfCrossReferenceKind.Compressed = 2 -> Fluent.Pdf.PdfCrossReferenceKind
 Fluent.Pdf.PdfCrossReferenceKind.Free = 0 -> Fluent.Pdf.PdfCrossReferenceKind
@@ -60,11 +73,14 @@ Fluent.Pdf.PdfDocument.LastOperationReport.get -> Fluent.Pdf.PdfOperationReport?
 Fluent.Pdf.PdfDocument.Options.get -> Fluent.Pdf.PdfOptions!
 Fluent.Pdf.PdfDocument.Pages.get -> Fluent.Pdf.PdfPageCollection!
 Fluent.Pdf.PdfDocument.Providers.get -> Fluent.Pdf.PdfProviderRegistry!
-Fluent.Pdf.PdfDocument.Save(System.IO.Stream! output, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
-Fluent.Pdf.PdfDocument.SaveFile(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfDocument.Save(System.IO.Stream! output, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfDocument.SaveFile(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken), Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfDocument.SourceDocument.get -> Fluent.Pdf.PdfSyntaxDocument?
 Fluent.Pdf.PdfDocumentSnapshot
 Fluent.Pdf.PdfDocumentSnapshot.Options.get -> Fluent.Pdf.PdfOptions!
 Fluent.Pdf.PdfDocumentSnapshot.Pages.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfPageSnapshot>!
+Fluent.Pdf.PdfDocumentSnapshot.SourceDocument.get -> Fluent.Pdf.PdfSyntaxDocument?
+Fluent.Pdf.PdfDocumentSnapshot.WriteOptions.get -> Fluent.Pdf.PdfWriteOptions!
 Fluent.Pdf.PdfException
 Fluent.Pdf.PdfException.Diagnostic.get -> Fluent.Pdf.PdfDiagnostic!
 Fluent.Pdf.PdfException.PdfException(Fluent.Pdf.PdfDiagnostic! diagnostic, System.Exception? innerException = null) -> void
@@ -153,6 +169,7 @@ Fluent.Pdf.PdfPage.Rotation.get -> Fluent.Pdf.PdfPageRotation
 Fluent.Pdf.PdfPage.Rotation.set -> void
 Fluent.Pdf.PdfPage.Size.get -> Fluent.Pdf.PdfPageSize
 Fluent.Pdf.PdfPage.Size.set -> void
+Fluent.Pdf.PdfPage.Source.get -> Fluent.Pdf.PdfPageSource?
 Fluent.Pdf.PdfPageCollection
 Fluent.Pdf.PdfPageCollection.Add() -> Fluent.Pdf.PdfPage!
 Fluent.Pdf.PdfPageCollection.Add(Fluent.Pdf.PdfPageSize size) -> Fluent.Pdf.PdfPage!
@@ -178,6 +195,14 @@ Fluent.Pdf.PdfPageSnapshot
 Fluent.Pdf.PdfPageSnapshot.PdfPageSnapshot() -> void
 Fluent.Pdf.PdfPageSnapshot.Rotation.get -> Fluent.Pdf.PdfPageRotation
 Fluent.Pdf.PdfPageSnapshot.Size.get -> Fluent.Pdf.PdfPageSize
+Fluent.Pdf.PdfPageSnapshot.Source.get -> Fluent.Pdf.PdfPageSource?
+Fluent.Pdf.PdfPageSource
+Fluent.Pdf.PdfPageSource.Dictionary.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfPageSource.Document.get -> Fluent.Pdf.PdfSyntaxDocument!
+Fluent.Pdf.PdfPageSource.EffectiveAttributes.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfPageSource.ObjectId.get -> Fluent.Pdf.PdfObjectId
+Fluent.Pdf.PdfPageSource.Rotation.get -> Fluent.Pdf.PdfPageRotation
+Fluent.Pdf.PdfPageSource.Size.get -> Fluent.Pdf.PdfPageSize
 Fluent.Pdf.PdfProcessingMode
 Fluent.Pdf.PdfProcessingMode.Permissive = 1 -> Fluent.Pdf.PdfProcessingMode
 Fluent.Pdf.PdfProcessingMode.Strict = 0 -> Fluent.Pdf.PdfProcessingMode
@@ -230,6 +255,19 @@ Fluent.Pdf.PdfSyntaxDocument.OperationReport.get -> Fluent.Pdf.PdfOperationRepor
 Fluent.Pdf.PdfSyntaxDocument.Resolve(Fluent.Pdf.PdfObjectId id, int revisionIndex = 0) -> Fluent.Pdf.PdfValue!
 Fluent.Pdf.PdfSyntaxDocument.Revisions.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRevision!>!
 Fluent.Pdf.PdfSyntaxDocument.Version.get -> string!
+Fluent.Pdf.PdfTransaction
+Fluent.Pdf.PdfTransaction.Add(Fluent.Pdf.PdfValue! value) -> Fluent.Pdf.PdfObjectId
+Fluent.Pdf.PdfTransaction.Dispose() -> void
+Fluent.Pdf.PdfTransaction.LastOperationReport.get -> Fluent.Pdf.PdfOperationReport?
+Fluent.Pdf.PdfTransaction.PdfTransaction(Fluent.Pdf.PdfSyntaxDocument? source = null, Fluent.Pdf.PdfOperationPolicy? policy = null) -> void
+Fluent.Pdf.PdfTransaction.Remove(Fluent.Pdf.PdfObjectId id) -> void
+Fluent.Pdf.PdfTransaction.Resolve(Fluent.Pdf.PdfObjectId id) -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfTransaction.Save(System.IO.Stream! output, Fluent.Pdf.PdfWriteOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTransaction.SaveFile(string! path, Fluent.Pdf.PdfWriteOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTransaction.Set(Fluent.Pdf.PdfObjectId id, Fluent.Pdf.PdfValue! value) -> void
+Fluent.Pdf.PdfTransaction.Source.get -> Fluent.Pdf.PdfSyntaxDocument?
+Fluent.Pdf.PdfTransaction.Trailer.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfTransaction.Trailer.set -> void
 Fluent.Pdf.PdfValue
 Fluent.Pdf.PdfValue.BooleanValue.get -> bool
 Fluent.Pdf.PdfValue.Entries.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfValue!>!
@@ -252,11 +290,22 @@ Fluent.Pdf.PdfValueKind.Number = 2 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValueKind.Reference = 7 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValueKind.Stream = 8 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValueKind.String = 4 -> Fluent.Pdf.PdfValueKind
+Fluent.Pdf.PdfValues
+Fluent.Pdf.PdfWriteMode
+Fluent.Pdf.PdfWriteMode.Full = 0 -> Fluent.Pdf.PdfWriteMode
+Fluent.Pdf.PdfWriteMode.Incremental = 1 -> Fluent.Pdf.PdfWriteMode
+Fluent.Pdf.PdfWriteOptions
+Fluent.Pdf.PdfWriteOptions.AllowSignatureInvalidation.get -> bool
+Fluent.Pdf.PdfWriteOptions.CrossReferenceFormat.get -> Fluent.Pdf.PdfCrossReferenceFormat
+Fluent.Pdf.PdfWriteOptions.Mode.get -> Fluent.Pdf.PdfWriteMode
+Fluent.Pdf.PdfWriteOptions.PdfWriteOptions(Fluent.Pdf.PdfWriteMode mode = Fluent.Pdf.PdfWriteMode.Full, Fluent.Pdf.PdfCrossReferenceFormat crossReferenceFormat = Fluent.Pdf.PdfCrossReferenceFormat.Auto, string? version = null, bool allowSignatureInvalidation = false) -> void
+Fluent.Pdf.PdfWriteOptions.Version.get -> string?
 override Fluent.Pdf.PdfObjectId.Equals(object? obj) -> bool
 override Fluent.Pdf.PdfObjectId.GetHashCode() -> int
 override Fluent.Pdf.PdfObjectId.ToString() -> string!
 override Fluent.Pdf.PdfPageSize.Equals(object? obj) -> bool
 override Fluent.Pdf.PdfPageSize.GetHashCode() -> int
+static Fluent.Pdf.ManagedPdfProvider.Instance.get -> Fluent.Pdf.ManagedPdfProvider!
 static Fluent.Pdf.Pdf.Create(Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.Open(System.IO.Stream! input, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.OpenFile(string! path, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
@@ -277,6 +326,7 @@ static Fluent.Pdf.PdfPageSize.A4.get -> Fluent.Pdf.PdfPageSize
 static Fluent.Pdf.PdfPageSize.Letter.get -> Fluent.Pdf.PdfPageSize
 static Fluent.Pdf.PdfPageSize.operator !=(Fluent.Pdf.PdfPageSize left, Fluent.Pdf.PdfPageSize right) -> bool
 static Fluent.Pdf.PdfPageSize.operator ==(Fluent.Pdf.PdfPageSize left, Fluent.Pdf.PdfPageSize right) -> bool
+static Fluent.Pdf.PdfProviderRegistry.Default.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfProviderRegistry.Empty.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfSyntax.Read(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSyntaxDocument!
 static Fluent.Pdf.PdfValue.Array(params Fluent.Pdf.PdfValue![]! items) -> Fluent.Pdf.PdfValue!
@@ -288,3 +338,6 @@ static Fluent.Pdf.PdfValue.Null.get -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfValue.Number(string! text) -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfValue.Reference(Fluent.Pdf.PdfObjectId id) -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfValue.String(params byte[]! bytes) -> Fluent.Pdf.PdfValue!
+static Fluent.Pdf.PdfValues.Real(double value) -> Fluent.Pdf.PdfValue!
+static Fluent.Pdf.PdfValues.Stream(Fluent.Pdf.PdfValue! dictionary, System.IO.Stream! encodedInput, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfValue!
+static Fluent.Pdf.PdfWriteOptions.Default.get -> Fluent.Pdf.PdfWriteOptions!

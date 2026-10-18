@@ -66,7 +66,7 @@ public sealed class PdfValue
     private readonly IReadOnlyDictionary<string, PdfValue>? _dictionary;
     private readonly PdfByteStore? _bytes;
     private readonly long _start, _length;
-    private PdfValue(PdfValueKind kind, object? value = null, IReadOnlyDictionary<string, PdfValue>? dictionary = null, PdfByteStore? bytes = null, long start = 0, long length = 0)
+    private PdfValue(PdfValueKind kind, object? value = null, IReadOnlyDictionary<string, PdfValue>? dictionary = null, PdfByteStore? bytes = null, long start = 0, long length = 0,bool? signatureHint=null)
     {
         Kind = kind;
         _value = value;
@@ -74,7 +74,11 @@ public sealed class PdfValue
         _bytes = bytes;
         _start = start;
         _length = length;
+        HasSignatureByteRanges=signatureHint??((dictionary!=null&&((dictionary.ContainsKey("ByteRange")&&dictionary.ContainsKey("Contents"))||dictionary.Values.Any(item=>item.HasSignatureByteRanges)))||
+            (value is IReadOnlyList<PdfValue> items&&items.Any(item=>item.HasSignatureByteRanges)));
     }
+    internal bool HasSignatureByteRanges{get;}
+    internal PdfValue DictionaryView()=>Kind==PdfValueKind.Dictionary?this:new(PdfValueKind.Dictionary,dictionary:Entries,signatureHint:HasSignatureByteRanges);
 
     /// <summary>Gets the lexical kind.</summary>
     public PdfValueKind Kind { get; }

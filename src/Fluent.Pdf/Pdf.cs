@@ -8,16 +8,16 @@ public static class Pdf
 {
     /// <summary>Creates an empty in-memory editing session with immutable defaults and explicit providers.</summary>
     public static PdfDocument Create(PdfOptions? options = null, PdfProviderRegistry? providers = null) =>
-        new(options ?? PdfOptions.Default, providers ?? PdfProviderRegistry.Empty);
+        new(options ?? PdfOptions.Default, providers ?? PdfProviderRegistry.Default);
 
     /// <summary>Reads eagerly from a borrowed readable stream, leaving it open at the position reached by the provider.</summary>
-    /// <remarks>On failure the partially populated document is disposed. Low-level syntax inspection is separate; this facade requires an explicit document reader.</remarks>
+    /// <remarks>On failure the partially populated document is disposed. The managed reader is the default; an explicitly empty registry disables it.</remarks>
     public static PdfDocument Open(Stream input, PdfOptions? options = null, PdfProviderRegistry? providers = null, CancellationToken cancellationToken = default)
     {
         if (input is null) throw new ArgumentNullException(nameof(input));
         if (!input.CanRead) throw new ArgumentException("A readable stream is required.", nameof(input));
         cancellationToken.ThrowIfCancellationRequested();
-        var registry = providers ?? PdfProviderRegistry.Empty;
+        var registry = providers ?? PdfProviderRegistry.Default;
         var reader = registry.GetRequired<IPdfDocumentReader>(PdfCapability.ReadDocument);
         var document = Create(options, registry);
         try { document.Read(reader, input, cancellationToken); return document; }
@@ -29,7 +29,7 @@ public static class Pdf
     {
         Guard.Text(path, nameof(path), 32767);
         cancellationToken.ThrowIfCancellationRequested();
-        var registry = providers ?? PdfProviderRegistry.Empty;
+        var registry = providers ?? PdfProviderRegistry.Default;
         var reader = registry.GetRequired<IPdfDocumentReader>(PdfCapability.ReadDocument);
         var document = Create(options, registry);
         try { document.ReadFile(reader, path, cancellationToken); return document; }

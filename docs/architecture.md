@@ -16,7 +16,7 @@ flowchart TD
   Contracts --> Ai[Opt-in intelligence and retrieval]
 ```
 
-The diagram is a target architecture. FP-001 implements the in-memory page model, immutable options and provider-backed I/O contracts described in [api-contract.md](api-contract.md). FP-003 adds [low-level syntax inspection](pdf-syntax.md); high-level reading/writing, layout and native engines remain in progress.
+The diagram is a target architecture. FP-001 implements the in-memory page model, immutable options and provider-backed I/O contracts described in [api-contract.md](api-contract.md). FP-003 adds [low-level syntax inspection](pdf-syntax.md); FP-005 adds the original managed [page reader and transactional writer](pdf-writing.md). Layout and later engines remain in progress.
 
 ## Managed core
 

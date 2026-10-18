@@ -68,16 +68,19 @@ public sealed class PdfSyntaxDocument
     internal PdfByteStore Source { get; }
 
     private readonly PdfOperationPolicy _policy;
+    internal PdfOperationPolicy ReadPolicy=>_policy;
     internal PdfSyntaxDocument(string version, PdfByteStore source, List<PdfRevision> revisions, PdfOperationPolicy policy)
     {
         Version = version;
         Source = source;
         Revisions = revisions.AsReadOnly();
         _policy = policy;
+        HasSignatureByteRanges=revisions.Any(revision=>revision.Values.Values.Any(value=>value.HasSignatureByteRanges));
     }
 
     /// <summary>Gets the header version, from 1.2 through 1.7 or 2.0.</summary>
     public string Version { get; }
+    internal bool HasSignatureByteRanges{get;}
     /// <summary>Gets immutable revisions, newest first.</summary>
     public IReadOnlyList<PdfRevision> Revisions { get; }
     /// <summary>Gets the source-read operation report. Internal provider reads use their enclosing document report.</summary>

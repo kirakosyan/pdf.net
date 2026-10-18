@@ -41,6 +41,8 @@ public sealed class PdfProviderRegistry
 
     /// <summary>Gets the shared empty immutable registry.</summary>
     public static PdfProviderRegistry Empty { get; } = new();
+    /// <summary>Gets the shared original managed reader/writer registry. Optional native/image services remain explicitly configured.</summary>
+    public static PdfProviderRegistry Default{get;}=new(ManagedPdfProvider.Instance);
     /// <summary>Gets captured provider metadata in registration order.</summary>
     public IReadOnlyList<PdfProviderDescriptor> Descriptors { get; }
     /// <summary>Gets the declared capability inventory in enum order.</summary>

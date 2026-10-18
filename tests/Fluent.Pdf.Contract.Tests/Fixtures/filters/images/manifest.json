@@ -52,7 +52,7 @@
       "components": 1,
       "bits": 1,
       "encoder": "original SDK MMR generic-region encoder",
-      "independentVerification": "Poppler 26.05.0, native-resolution PBM samples, exact 1024 expanded samples",
+      "independentVerification": "Poppler pdfimages 25.03.0, native-resolution PBM samples, exact 1024 expanded samples",
       "sha256": "dc967925c28023421fee87eb7aca144573c6d0f423ba43371136b07884e863ac",
       "samplesSha256": "0ae7ea8e91523cf2174b6379b06f7314a2d0295323e4b3ad641f0c581ad67770"
     }

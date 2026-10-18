@@ -15,6 +15,8 @@ public sealed class PdfDocument : IDisposable
     private bool _writing;
     private PdfOperationContext? _context;
     private PdfOperationReport? _lastReport;
+    private PdfSyntaxDocument? _source;
+    private IReadOnlyList<PdfObjectId> _originalOrder=Array.Empty<PdfObjectId>();
 
     internal PdfDocument(PdfOptions options, PdfProviderRegistry providers)
     {
@@ -33,6 +35,8 @@ public sealed class PdfDocument : IDisposable
     public PdfPageCollection Pages { get { EnsureAlive(); return _pages; } }
     /// <summary>Gets the last completed provider operation report, including failed operations. Remains readable after disposal.</summary>
     public PdfOperationReport? LastOperationReport => _lastReport;
+    /// <summary>Gets the immutable original object graph, or null for a newly authored session.</summary>
+    public PdfSyntaxDocument? SourceDocument{get{EnsureAlive();return _source;}}
 
     /// <summary>Adds a default-sized page and returns this document for fluent composition.</summary>
     public PdfDocument AddPage() { _pages.Add(); return this; }
@@ -41,16 +45,20 @@ public sealed class PdfDocument : IDisposable
 
     /// <summary>Captures immutable page geometry independent of subsequent edits and disposal.</summary>
     public PdfDocumentSnapshot CreateSnapshot()
+        =>CreateSnapshotCore(PdfWriteOptions.Default);
+    private PdfDocumentSnapshot CreateSnapshotCore(PdfWriteOptions writeOptions)
     {
         EnsureAlive();
-        var pages = new PdfPageSnapshot[_pages.Count];
-        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation);
-        return new PdfDocumentSnapshot(_options, pages);
+        int count=_pages.Count;
+        if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*64L+32);}
+        var pages = count==0?Array.Empty<PdfPageSnapshot>():new PdfPageSnapshot[count];
+        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source);
+        return new PdfDocumentSnapshot(_options, pages,_source,_originalOrder,writeOptions);
     }
 
     /// <summary>Writes through the registered writer at the current stream position, leaving the caller's stream open.</summary>
     /// <remarks>Stream output can be partial on provider failure/cancellation. The SDK does not rewind or truncate the caller's stream.</remarks>
-    public PdfOperationReport Save(Stream output, CancellationToken cancellationToken = default)
+    public PdfOperationReport Save(Stream output, CancellationToken cancellationToken = default,PdfWriteOptions? writeOptions=null)
     {
         EnsureAlive();
         EnsureNoActiveOperation();
@@ -60,54 +68,22 @@ public sealed class PdfDocument : IDisposable
         var writer = _providers.GetRequired<IPdfDocumentWriter>(PdfCapability.WriteDocument);
         return RunOperation(true, "Save", PdfCapability.WriteDocument, cancellationToken, context =>
         {
-            Write(writer, output, context);
+            Write(writer, output, context,writeOptions??PdfWriteOptions.Default);
             context.EnsureComplete();
         });
     }
 
     /// <summary>Writes to a private file in the destination directory, then atomically moves/replaces the destination on success.</summary>
     /// <remarks>The destination directory must exist. An unsupported atomic replace fails without a delete-and-copy fallback.</remarks>
-    public PdfOperationReport SaveFile(string path, CancellationToken cancellationToken = default)
+    public PdfOperationReport SaveFile(string path, CancellationToken cancellationToken = default,PdfWriteOptions? writeOptions=null)
     {
         EnsureAlive();
         EnsureNoActiveOperation();
         Guard.Text(path, nameof(path), 32767);
         cancellationToken.ThrowIfCancellationRequested();
         var writer = _providers.GetRequired<IPdfDocumentWriter>(PdfCapability.WriteDocument);
-        var fullPath = Path.GetFullPath(path);
-        var directory = Path.GetDirectoryName(fullPath)!;
-        var temporary = Path.Combine(directory, ".fluent-pdf-" + Guid.NewGuid().ToString("N") + ".tmp");
-        bool created = false;
-        Exception? failure = null;
         return RunOperation(true, "SaveFile", PdfCapability.WriteDocument, cancellationToken, context =>
-        {
-            try
-            {
-                context.Checkpoint();
-                using (var output = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
-                {
-                    created = true;
-                    Write(writer, output, context);
-                    output.Flush(true);
-                }
-                context.EnsureComplete();
-                // This is the commit boundary. A later cancellation cannot roll back an atomic replacement.
-                if (File.Exists(fullPath)) File.Replace(temporary, fullPath, null);
-                else File.Move(temporary, fullPath);
-            }
-            catch (Exception ex) { failure = ex; throw; }
-            finally
-            {
-                if (created)
-                {
-                    try { File.Delete(temporary); }
-                    catch (Exception cleanup) when (failure is not null && (cleanup is IOException || cleanup is UnauthorizedAccessException))
-                    {
-                        failure.Data["Fluent.Pdf.CleanupFailure"] = cleanup;
-                    }
-                }
-            }
-        });
+            PdfAtomicFile.Write(path,context,output=>Write(writer,output,context,writeOptions??PdfWriteOptions.Default)));
     }
 
     /// <summary>Disposes this session and invalidates live page/collection references. Repeated disposal is harmless.</summary>
@@ -117,6 +93,7 @@ public sealed class PdfDocument : IDisposable
         if (_disposed) return;
         if (_operationActive) throw new InvalidOperationException("Cannot dispose a document during a provider operation.");
         _pages.ClearCore();
+        _source=null;_originalOrder=Array.Empty<PdfObjectId>();
         _disposed = true;
     }
 
@@ -147,11 +124,14 @@ public sealed class PdfDocument : IDisposable
         context.Checkpoint();
     }
 
-    private void Write(IPdfDocumentWriter writer, Stream output, PdfOperationContext context)
+    private void Write(IPdfDocumentWriter writer, Stream output, PdfOperationContext context,PdfWriteOptions writeOptions)
     {
         context.Checkpoint();
         if (writer.RequiresSeekableStream && !output.CanSeek) throw SeekRequired(PdfCapability.WriteDocument);
-        var snapshot = CreateSnapshot();
+        if(writer is IPdfRevisionWriter revisions)
+        {if(!revisions.Supports(writeOptions))throw PdfWriterCore.Error(context,"Writer.OptionsUnsupported","The selected writer does not support the requested save choices.");}
+        else if(!writeOptions.IsDefault)throw PdfWriterCore.Error(context,"Writer.OptionsUnsupported","The selected writer does not implement revision-aware save choices.");
+        var snapshot = CreateSnapshotCore(writeOptions);
         using var lease = new BorrowedStream(output, false, context);
         writer.Write(snapshot, lease, context);
         context.Checkpoint();
@@ -209,6 +189,13 @@ public sealed class PdfDocument : IDisposable
     }
 
     internal void EnsureAlive() { if (_disposed) throw new ObjectDisposedException(nameof(PdfDocument)); }
+    internal void BeforePageAllocation(PdfOperationContext? context=null){var selected=context??_context;selected?.Consume(PdfResourceKind.Objects,1);selected?.Consume(PdfResourceKind.ExpandedBytes,96);}
+    internal void AttachSource(PdfSyntaxDocument source,PdfOperationContext context)
+    {
+        EnsureEditable();context.Consume(PdfResourceKind.ExpandedBytes,_pages.Count*16L+32);
+        var order=new PdfObjectId[_pages.Count];for(int i=0;i<order.Length;i++)order[i]=_pages[i].Source!.ObjectId;
+        _originalOrder=order;_source=source;
+    }
     internal PdfException PageLimit()
     {
         var diagnostic = new PdfDiagnostic("Limit.Pages", "The document's configured page limit was reached.");

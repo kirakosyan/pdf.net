@@ -30,7 +30,7 @@ FP-085 adds inert original PE/ELF/Mach-O header fixtures, current-host pinned-fi
 
 FP-003 adds original lexical/revision/xref fixtures, an independently inspected page fixture, fixed/dynamic Flate regressions, truncation checks and deterministic parser mutations. It exercises actual syntax inspection, including C#/VB consumers; it does not qualify rendering, output conformance or the complete fuzz workload.
 
-FP-004 adds lossless encode/decode chains, independent LZW bytes, PNG/TIFF predictor answers and matrices, compressed-object membership checks, indirect parameters, cancellation/limits and detached decoded results. Optional image codecs are still in progress.
+FP-004 adds lossless encode/decode chains, independent LZW bytes, PNG/TIFF predictor answers and matrices, compressed-object membership checks, indirect parameters, cancellation/limits and detached decoded results. The optional isolated DCT/JPX/JBIG2 provider has passing source tests on all six actual CI hosts; complete profile/security and production qualification remains pending.
 
 The original self-contained NativeAOT fixture exercises sandboxed managed thread creation and native OS architecture from current Framework x86, alongside opt-in diagnostic disclosure and repeated setup/execution cancellation. Its compiler/runtime packages are pinned in its own lock file. It supplies no PDF/image capability.
 
@@ -45,3 +45,5 @@ PDF codecs, native providers, actual format validation, visual/semantic fidelity
 ## Development-only dependencies
 
 The managed library introduces no runtime native, browser, OCR or GUI dependency. Public API analyzers 3.3.4 and Framework reference assemblies 1.0.3 are private build assets. APICompat 10.0.402 is a local tool. Microsoft.NET.Test.Sdk 18.11.0, xUnit 2.9.3 and its Visual Studio runner 4.0.1 belong only to the non-packable test project. BitMiracle.LibTiff.NET 2.4.660 is a private test-only independent CCITT verifier (package SHA-256 `2779c539262f5c68b37eb19d62220e17fccabcc409fca6948be9529a60fff57a`, permissive TIFF license recorded by its [upstream license](https://bitmiracle.github.io/libtiff.net/help/articles/license.html)). It is not referenced by the managed core or examples. The C#/VB consumers are also non-packable. Lock files pin their transitive dependencies. Shipping asset/license/SBOM review remains required FP-095 work.
+
+FP-005 tests exercise real managed PDF output, table/stream xrefs, historical generations, trailer IDs, inherited page geometry, every output-byte fault boundary, atomic failure, and actual detached-CMS signed-byte preservation. Independent pypdf and Poppler probes check emitted text/pages/rotation and retained signatures. Final-package, minimum-runtime and complete production qualification remain blocked.

@@ -163,7 +163,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/pdf-writing.md",
+        "implemented": [
+          "Original managed page-tree reader with immutable original bindings",
+          "Full/incremental object overlays, exact generations, free entries and trailer IDs",
+          "Classic/64-bit stream xrefs and version floors",
+          "Original signed-byte protection, atomic file saves and bounded caller-owned streams"
+        ],
+        "pending": [
+          "Actual supported-runtime source evidence and full production qualification",
+          "Actual minimum Framework 4.7.2, exact final package, complete standards/security/endurance/fuzz consumers"
+        ]
+      }
     },
     {
       "id": "FP-006",

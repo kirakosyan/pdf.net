@@ -48,6 +48,8 @@ public sealed class PdfOperationContext
     public CancellationToken CancellationToken { get; }
 
     internal bool IsActive { get { lock (_gate) return _active; } }
+    internal long Available(PdfResourceKind resource)
+    {ValidateResource(resource);lock(_gate){CheckCore();return Policy.Limits.GetLimit(resource)-_used[(int)resource]-_reserved[(int)resource];}}
 
     internal ResourceReservation ReserveRemainingObjects()
     {

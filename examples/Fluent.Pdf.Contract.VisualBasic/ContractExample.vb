@@ -4,8 +4,13 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteManagedPdf(output As Stream) As PdfOperationReport
+        Using document = PdfFacade.Create().AddPage(PdfPageSize.Letter)
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function ImageCodecs(worker As Fluent.Pdf.Workers.NativeWorkerOptions) As PdfProviderRegistry
-        Return New PdfProviderRegistry(New Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker))
+        Return New PdfProviderRegistry(ManagedPdfProvider.Instance, New Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker))
     End Function
     Public Function InspectSyntax(borrowedInput As Stream) As PdfSyntaxDocument
         Return PdfSyntax.Read(borrowedInput)
@@ -34,7 +39,7 @@ Public Module ContractExample
 
     Public Function Run() As Integer
         Dim options As New PdfOptions(PdfPageSize.Letter, maximumPages:=10)
-        Using document As PdfDocument = PdfFacade.Create(options).
+        Using document As PdfDocument = PdfFacade.Create(options, PdfProviderRegistry.Empty).
             AddPage().
             AddPage(PdfPageSize.A4)
             document.Pages(0).Rotation = PdfPageRotation.Clockwise90

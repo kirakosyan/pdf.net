@@ -9,6 +9,10 @@ public sealed class PdfPage
     private bool _attached = true;
 
     internal PdfPage(PdfDocument owner, PdfPageSize size) { _owner = owner; _size = size; }
+    private PdfPageSource? _source;
+    /// <summary>Gets the immutable original binding, or null for a newly authored page.</summary>
+    public PdfPageSource? Source{get{EnsureAttached();return _source;}}
+    internal void Bind(PdfPageSource source){_source=source;_rotation=source.Rotation;}
 
     /// <summary>Gets or changes the unrotated physical page dimensions.</summary>
     public PdfPageSize Size

@@ -5,8 +5,13 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteManagedPdf(Stream output)
+    {
+        using var document=PdfFacade.Create().AddPage(PdfPageSize.Letter);
+        return document.Save(output);
+    }
     public static PdfProviderRegistry ImageCodecs(Fluent.Pdf.Workers.NativeWorkerOptions worker)=>
-        new(new Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker));
+        new(ManagedPdfProvider.Instance,new Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker));
     public static PdfSyntaxDocument InspectSyntax(Stream borrowedInput)=>PdfSyntax.Read(borrowedInput);
     public static PdfDecodedData DecodeStream(PdfSyntaxDocument syntax,PdfObjectId id)=>syntax.DecodeStream(id);
 
@@ -31,7 +36,7 @@ public static class ContractExample
     public static int Run()
     {
         var options = new PdfOptions(PdfPageSize.Letter, maximumPages: 10);
-        using var document = PdfFacade.Create(options)
+        using var document = PdfFacade.Create(options,PdfProviderRegistry.Empty)
             .AddPage()
             .AddPage(PdfPageSize.A4);
         document.Pages[0].Rotation = PdfPageRotation.Clockwise90;

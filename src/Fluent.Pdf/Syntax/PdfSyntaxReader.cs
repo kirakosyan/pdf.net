@@ -63,6 +63,8 @@ internal sealed class PdfSyntaxReader
                 next = DirectInteger(previous);
             }
 
+            if(_revisions.Any(revision=>revision.Trailer.Entries.TryGetValue("Encrypt",out var encryption)&&encryption.Kind!=PdfValueKind.Null)&&_revisions.Any(revision=>revision.Entries.Any(entry=>entry.Kind==PdfCrossReferenceKind.Compressed)))
+                throw Error("Syntax.EncryptionProviderRequired","Encrypted object streams require an explicitly configured encryption implementation.");
             for (int revision = 0; revision < _revisions.Count; revision++)
             {
                 var seen = new HashSet<int>();
