@@ -67,3 +67,5 @@ Explicit literal-grid/aligned-text table inference, rectangular merged cells, co
 Bounded typed generation, reusable record templates and ordered precommit record/layout/page/save hooks now have a shared-context source profile; complete event/model/host coverage and production qualification remain pending.
 
 Bounded Unicode/Markdown/version-one JSON/XML conversion, explicit scalar/style/resource capture and nested passive URI annotations now have a shared-context source profile; complete conversion fidelity and production qualification remain pending.
+
+Explicit optional Word interchange, pinned published dependency identity, original bounded RTF/WordprocessingML bridges and shared-context reconstruction now have a source profile; complete bidirectional format/reconstruction fidelity and production qualification remain pending.

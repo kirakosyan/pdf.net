@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-053",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1150,
+      "failed": 0,
+      "skipped": 0,
+      "newWordCases": 22,
+      "trxSha256": "96f682ae82ad18a86680b01b54df86d401cf4a10535ac1cb1bf4b9478671fd45"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 84,
+      "failed": 0,
+      "skipped": 0,
+      "newWordCases": 22,
+      "trxSha256": "1b2d4c37591324263c1a57a3d3bd17e25640f6c300eee2322e492000b1b2a5c1"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 84,
+      "failed": 0,
+      "skipped": 0,
+      "newWordCases": 22,
+      "trxSha256": "962c2dac2fd10b51572ea46b076fa5f54495af3f3ec12017dea0c78d06800856"
+    }
+  ],
+  "newSourceCases": 22,
+  "sdkLibraries": 10,
+  "apiComparisons": 30,
+  "apiComparisonReportSha256": "cb926ca54ad9794f887201efb7ae07ab08eda87f45f7d0da7228dac260414b9f",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf.Word/WordRtf.cs": "a88315a3a1d8173f3ecbb2ab5cda8b4fe792b95693fcd9be1bfdbcf7b282d4bd",
+    "src/Fluent.Pdf.Word/WordOpenXml.cs": "63171b9b94ef0aebe3a0255ae338371c7a473c770a65b675bbc9341d740379d5",
+    "src/Fluent.Pdf.Word/WordPackagePreflight.cs": "dcd83309d999dc46d128917a011a0f0355ab804ce72414ce7942cfaf11d683b8",
+    "src/Fluent.Pdf.Word/WordModel.cs": "3b6467f7366a34c542a055eff23edb3ddf124a4067ff3bb10df33b2310e9b7e7",
+    "src/Fluent.Pdf.Word/WordnetPdfConverter.cs": "2b43585251b64bc5142d4cb9d9abb1499df2c6e639fe84753f122cc5721725b3",
+    "src/Fluent.Pdf.Word/WordPng.cs": "bdcf2435855c4f30df5fce6adafc3a9f478e25113a7800d7c48d9ebcee3495cb",
+    "src/Fluent.Pdf/Word/PdfWordConversion.cs": "e0d99fdf9aa8b6e8210a0a383bf505cfba63e6ee306763de49cb21b0768c8c80",
+    "src/Fluent.Pdf/Word/PdfWordConversionContracts.cs": "eb06c025a24e9f55d007d7faef725ca7d3866a1748b826a813adce6e6d9eef6b",
+    "src/Fluent.Pdf.Word/Fluent.Pdf.Word.csproj": "965eb054abd07e6d30ab1832db63e5339c44a8cd526db0b9adb4d62e00e70526",
+    "src/Fluent.Pdf.Word/packages.lock.json": "00987dd871d3d18a61d7b4976103ea100046f2c50578660fb4d6b73dac2cc3e6",
+    "src/Fluent.Pdf.Word/PublicAPI.Unshipped.txt": "359924070c761c07b480d75472abadd9f37db6b865cc49b50e1622ed0b4f2b05",
+    "src/Fluent.Pdf/Providers/PdfCapability.cs": "b8f90981aa81f10f3598ec3196604101794cd693a678462d0c097ccc789d98d8",
+    "src/Fluent.Pdf/Properties/AssemblyInfo.cs": "774f3ca8a2418b3cf452e804679e28b9bfb4cd3a63b572e40d523cbeff65d24a",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "e528b3591397008974e840e3c96e1ac48202b93950c50f17f7f798428722318e",
+    "eng/ContractProjectReference.props": "954d623f3a4ad785f272c99b3cea20929f79ddc70bcf985e29281d5b5947216d",
+    "eng/check-api.ps1": "61df18491459c1af695c8de2c1b113d058051ffb94d709491cf663b15baa6ab9",
+    "eng/test-contracts.ps1": "aa22a38ff064aa605c671cf438ed58c55a2baeb5624905412e8c1df215cc8e1d",
+    "Fluent.Pdf.slnx": "7a057035ddf1965253fdc758a7823dbbab655ae0b427d85bc01aae78e5598778",
+    "tests/Fluent.Pdf.Contract.Tests/WordConversionTests.cs": "44f076f7c282c874c1155b369677605329999b0ef6ab5c72ddb5ff6a77153b85",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlReadinessTests.cs": "255411c3d9b303bb5a4a8fca9ec50f851d484cd930f58e5504207b50d8b5624a",
+    "tests/Fluent.Pdf.Contract.Tests/RuntimeIdentityTests.cs": "3e627e0674e8956cc6bad26cf774ed98ad32446756ff53176699add8ef5e7486",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "55a5f06fa40460babb21c929881a14a689e45a8831b2e2ec9725b5bed9fdd9c9",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "5601dfc86148dd88d308eba71b234e7a9e493170e593a4507c4441b9d1bac090"
+  },
+  "reports": {
+    "word-final-build.log": "7c27d9a0823d04bcb48f5adf1181004faadc35b05fefd253c715bd2c04932506",
+    "word-final-net10.log": "6ba33660e6f5109970d6409541a3a0913e66322bec1124345d0cb651af4712ba",
+    "word-final-net8.log": "70f4bb3f2d148cb7840e60019dd3c1f030f62ebcb32770b61a80782646aeaa9e",
+    "word-fallback-build.log": "235ef9b149a8b71eecd0bf4995119c7bb10a4b643b270315d704dcfc7621938b",
+    "word-final-fallback.log": "80888d2c248a6ea889b2852d756bc8a8d9d8419d5f33ab52117381f7c0978318",
+    "word-normal-build.log": "46eb3204675e2ff7175648c8348e26cbec564288d0431fb32b763e3dcc00042b",
+    "word-final-api.log": "973a15dc75d811cbc7e27c170e3e2af8fc0601ae956a4756461ca0d639d120f6",
+    "word-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "word-observer-build2.log": "629f80e626970f46f9163cc82e8b4472c38644c6a7293731b203d6e57ce5ab3b",
+    "word-observer-run2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "dependencyInventory": "third-party/word/components.json",
+  "dependencyInventorySha256": "436360a243616181ecbe1735ea6c4a74836942e77c2160e3c5fb49d33b64fc39",
+  "dependency": {
+    "package": "wordnet",
+    "version": "1.1.0",
+    "sourceRevision": "bc6ada467dd4626dd23dfbee5f848b21e9f67dc5",
+    "packageSha256": "073bc06d91367c340f6f031e8cf2066f8a18d735cd93968d37f346d77c7bd4e5",
+    "bundledFonts": "Explicit caller adoption required; package cannot disable builtin availability. No OS fonts or OCR/native/model discovery."
+  },
+  "sourceCapabilityAudit": [
+    "Published package does not expose the newer snapshot WordDocument API and its source revision differs from the separately reviewed OCR snapshot. Actual package-only probes, corrected public APIs and exact adopted source/version/hash are retained.",
+    "The dependency has no RTF format. Original bounded RTF/WordprocessingML plus actual DOCX/PDF and DOCX/DOC entry points implement the source bridge; no fictitious upstream capability is advertised.",
+    "Published diagnostic severity has Info and Warning only; source adapter maps every occurrence count/code through root strict/permissive policy and retains dependency failures as typed errors.",
+    "Core captures/bounds input and output; private output completes before publication. Preflight, source format/Unicode/table serialization, explicit fonts and SDK extraction/rendering/IO share one mandatory root context. Each opaque upstream phase consumes a finite precharged root envelope and the linked token.",
+    "Portable SDK assets are explicitly selected and verified. A modern host may select modern transitive dependency assets normally; complete dependency/fallback/minimum-runtime/final-package qualification is not inferred."
+  ],
+  "fixtureAudit": [
+    "Initial compile-only corrections fixed public package API assumptions, helper nesting and a page-content property name; final builds have zero warnings/errors.",
+    "First30case combined run29passed1test-exception-type mismatch: missing renderer correctly threw the specific provider-unavailable subclass; the test now accepts the typed PdfException hierarchy.",
+    "Expanded37case Word/readiness run passed, including real three-format round trips, UTF/style/table content, package entity/external/macro/traversal denial, budgets, atomic files and executable C#/VB consumers.",
+    "Independent original outputs pass without modifying the checker. Repeated binary DOC file hashes differ while independent text/piece observations remain identical; deterministic metadata/binary behavior remains a qualification obligation."
+  ],
+  "readinessFollowup": {
+    "failedSourceCI": "docs/evidence/PR-118-CI-108-source.json",
+    "change": "Test-only timestamps now measure navigation/readiness through completed owned-host disposal; separate host/phase assertions have precise messages. The100msreadiness policy and1sfixturephasebound remain, while prephase SDK setup and postassert/report formatting are excluded. SDKdefault30s/per-worker timers and every production gate are unchanged.",
+    "causeLimit": "Original combined assertion failure does not prove a resource leak or uniquely identify scheduler/reporting delay; no root-cause claim is made. Fresh full current-head CI remains required."
+  },
+  "observerReportSha256": "c1bcc695bbf68443b947c6df446ba598654be9bac45e7a47e4d58dcbc32900b2",
+  "independentReportSha256": "b808419f5a0d10248520513b5d2f27e830144fc2f161259c88c3ca490cfe8096",
+  "localNativeLimitation": "Four local native-positive classes cannot run because the host lacks Landlock; CI remains unfiltered.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete bidirectional DOC/DOCX/RTF feature, fixed/editable reconstruction, story/field/table/floating/linguistic/resource/fidelity profiles remain mandatory",
+    "Complete opaque dependency/host/resource/security/fuzz/concurrency/endurance and independent invoice/floating/table/scanned/multilingual corpus qualification remain mandatory",
+    "All required RIDs/minimum/current/fallback runtimes, exact final SDK packages and every production gate remain mandatory"
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-053",
+  "observations": {
+    "purpose": "independent-original-Word-observations-not-production-qualification",
+    "labelSha256": "5cd7eeea23371154c09cbe402e530efb55a1c986558ef0c8bbc5541b07116344",
+    "toolSha256": "bbb9405e2851ba25065dd284df12de253af36110da8892c364627568e263d20a",
+    "readers": {
+      "python-docx": "1.2.0",
+      "olefile": "0.47",
+      "striprtf": "0.0.29",
+      "Pillow": "12.3.0",
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6",
+      "OpenXmlValidator": "3.5.1/Office2007schema"
+    },
+    "results": [
+      {
+        "mode": "editable",
+        "format": "doc",
+        "fileSha256": "fcc92998bdb7e92777f24933f592b98bb85bff63f88428ac246180fbd402b5f1",
+        "independentRecoveredText": "AB\r",
+        "details": {
+          "compoundStreams": [
+            "1Table",
+            "WordDocument"
+          ],
+          "sourceTextCharacterCount": 3,
+          "pieceCount": 1
+        },
+        "productionQualified": false
+      },
+      {
+        "mode": "editable",
+        "format": "docx",
+        "fileSha256": "f73dbce2828e7b09a7f2fb3cede4b013d2cc9bd81317aae9b60a9c6c882f8d4d",
+        "independentRecoveredText": "AB",
+        "details": {
+          "validator": "3.5.1",
+          "schemaErrors": 0
+        },
+        "productionQualified": false
+      },
+      {
+        "mode": "editable",
+        "format": "rtf",
+        "fileSha256": "d18fadb3c15c92944588183a3cf3665a74ce5796c5acfc7a701e07c2b8221b60",
+        "independentRecoveredText": "AB\n",
+        "details": {
+          "independentParser": "striprtf0.0.29"
+        },
+        "productionQualified": false
+      },
+      {
+        "mode": "fixed-original-renderer",
+        "format": "docx",
+        "fileSha256": "e714aa0bfb837d92da357feadb61ad3fc079b1cbe9d38ff0bf0cdf9230094475",
+        "pngSha256": "d65d7e3ae85c5dd4dd4b686c182b16c7c03f86bf1a0a241284c67b40e77f7482",
+        "exactPixelCount": 20000,
+        "rgb": [
+          10,
+          20,
+          30
+        ],
+        "pageGeometryPoints": [
+          200,
+          100
+        ],
+        "schemaErrors": 0,
+        "visualPdfRenderingQualified": false,
+        "productionQualified": false
+      },
+      {
+        "mode": "fixed-original-renderer",
+        "format": "rtf",
+        "fileSha256": "0cac2cda62a8b3c11e040aaf58679744469c25d0d46c70458773e7dea886711c",
+        "pngSha256": "d65d7e3ae85c5dd4dd4b686c182b16c7c03f86bf1a0a241284c67b40e77f7482",
+        "exactPixelCount": 20000,
+        "rgb": [
+          10,
+          20,
+          30
+        ],
+        "pageGeometryPoints": [
+          200,
+          100
+        ],
+        "schemaErrors": null,
+        "visualPdfRenderingQualified": false,
+        "productionQualified": false
+      },
+      {
+        "file": "rtf-source.pdf",
+        "sha256": "6060f29fcbae187485c91a9b567fe518b04ed7b1c00f4d1fd92bbfe50b65a190",
+        "pages": 1,
+        "independentText": {
+          "pypdf": "A\u00e9BABABBABAAB",
+          "MuPDF": "A\u00e9BABABBABAAB",
+          "Poppler-layout": "A\u00e9BABABBABAAB"
+        },
+        "productionQualified": false
+      },
+      {
+        "file": "roundtrip-doc.pdf",
+        "sha256": "ca1552936f741f21826f6c100fa4b1c5935db28ee27d835d19856f1eb35ce0b1",
+        "pages": 1,
+        "independentText": {
+          "pypdf": "AB",
+          "MuPDF": "AB",
+          "Poppler-layout": "AB"
+        },
+        "productionQualified": false
+      },
+      {
+        "file": "roundtrip-docx.pdf",
+        "sha256": "ca1552936f741f21826f6c100fa4b1c5935db28ee27d835d19856f1eb35ce0b1",
+        "pages": 1,
+        "independentText": {
+          "pypdf": "AB",
+          "MuPDF": "AB",
+          "Poppler-layout": "AB"
+        },
+        "productionQualified": false
+      },
+      {
+        "file": "roundtrip-rtf.pdf",
+        "sha256": "ca1552936f741f21826f6c100fa4b1c5935db28ee27d835d19856f1eb35ce0b1",
+        "pages": 1,
+        "independentText": {
+          "pypdf": "AB",
+          "MuPDF": "AB",
+          "Poppler-layout": "AB"
+        },
+        "productionQualified": false
+      }
+    ],
+    "limitations": [
+      "Bounded original Word97 piece-table observations do not validate all binary Word versions or structures.",
+      "Exact synthetic renderer PNG pixels and schema-valid anchored pages do not qualify PDF rendering or Word pagination/visual fidelity.",
+      "Complete source-format/corpus/host/runtime/final-package and production qualification remains mandatory."
+    ],
+    "productionQualified": false
+  },
+  "reportSha256": "b808419f5a0d10248520513b5d2f27e830144fc2f161259c88c3ca490cfe8096",
+  "originalObserverSha256": "9fbd141b896ddd3643860c3f37400ab0c22c40fd900949c4193a5e479f7525a5",
+  "observerReportSha256": "c1bcc695bbf68443b947c6df446ba598654be9bac45e7a47e4d58dcbc32900b2",
+  "earlierReportSha256": "f42a60225cee9321a05584b8c7456049a11323d1b69328a61319fb99188de9f7",
+  "repeatDifference": "Only editableDOC file bytes/hash changed; all independent recovered-text/piece observations and other output observations agree. Binary determinism remains unqualified.",
+  "productionQualified": false
+}

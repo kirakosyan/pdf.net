@@ -1,0 +1,273 @@
+{
+  "purpose": "locked-source-dependency-inventory-not-release-SBOM",
+  "adoptedDependency": {
+    "name": "wordnet",
+    "version": "1.1.0",
+    "sourceRevision": "bc6ada467dd4626dd23dfbee5f848b21e9f67dc5",
+    "packageSha256": "073bc06d91367c340f6f031e8cf2066f8a18d735cd93968d37f346d77c7bd4e5"
+  },
+  "dependencyCycle": "Optional adapter references core and published wordnet; core references neither. Published dependency metadata contains no Fluent.Pdf reference.",
+  "components": [
+    {
+      "name": "AngleSharp",
+      "version": "1.8.4",
+      "packageSha256": "9c2e71b31d95eff4ff7d95ee61ce09f3a8e6e64e517616a8ddaa216819afff61",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "Markdig",
+      "version": "1.4.0",
+      "packageSha256": "bdd84353a3f499f989f3111b33aceebd9434f8a069ca8b3da2a065f2230e7baf",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "BSD-2-Clause",
+      "licenseType": "expression"
+    },
+    {
+      "name": "Microsoft.Bcl.HashCode",
+      "version": "6.0.0",
+      "packageSha256": "f3b9b2bab0bf8cc717d5fdf6d7aee3ec54e36d9e85bd41347acae161319cbd6b",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "Microsoft.CodeAnalysis.PublicApiAnalyzers",
+      "version": "3.3.4",
+      "packageSha256": "5a61b7ae142ccabf2e47ad89e0c75f27d6fd2f1eda12ee802fd9cd4acd157611",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [
+        {
+          "packageEntry": "ThirdPartyNotices.txt",
+          "rawSha256": "0eabe2880daf9bfb25ac160b1e779c5da95a88406dd06cdb570ec7edb5eabb76",
+          "path": "third-party/word/Microsoft.CodeAnalysis.PublicApiAnalyzers-3.3.4-ThirdPartyNotices.txt",
+          "sha256": "d3541d7e650299bc9abfe9d0398d800a543666eb0058d1370fd22d05fee6d89c",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        }
+      ],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "Microsoft.NETCore.Platforms",
+      "version": "1.1.0",
+      "packageSha256": "15e338d24b5c39b4099389cc612841eb51ff13c07bb4829f97d39b27420e7023",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [
+        {
+          "packageEntry": "dotnet_library_license.txt",
+          "rawSha256": "f1db688d8481c91a452fabcea5060a23da9ea5088329b58c478a040e2e426297",
+          "path": "third-party/word/Microsoft.NETCore.Platforms-1.1.0-dotnet_library_license.txt",
+          "sha256": "53766b3090e6efaad7cc5479f1ef5c6fdfa95b4bfbab11d78a1fbf9cd6485288",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        },
+        {
+          "packageEntry": "ThirdPartyNotices.txt",
+          "rawSha256": "0684b2349427ee28e392ae8914645832e59731dba8a38a984f72b3fb8769c76b",
+          "path": "third-party/word/Microsoft.NETCore.Platforms-1.1.0-ThirdPartyNotices.txt",
+          "sha256": "52bd2f19fdfde1128ecc91ce72a12f2bc2ac8e0de1039f02f80fde19a15890d1",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.NETFramework.ReferenceAssemblies",
+      "version": "1.0.3",
+      "packageSha256": "141a093f90c7645d101ccd312e6f727781c965540eb92a52280f95411a698441",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": []
+    },
+    {
+      "name": "Microsoft.NETFramework.ReferenceAssemblies.net472",
+      "version": "1.0.3",
+      "packageSha256": "ffa0a5570a39f911399164d0581ffddef99b5e3dfbaa5f220e5ce22969bcf57c",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": []
+    },
+    {
+      "name": "NETStandard.Library",
+      "version": "2.0.3",
+      "packageSha256": "3eb87644f79bcffb3c0331dbdac3c7837265f2cdf58a7bfd93e431776f77c9ba",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [
+        {
+          "packageEntry": "LICENSE.TXT",
+          "rawSha256": "fc95de1436a321aadbfafd21f8a8506a2f4678bfc003bd806d6b59d3088efadc",
+          "path": "third-party/word/NETStandard.Library-2.0.3-LICENSE.TXT",
+          "sha256": "18647d26bc4c4d892a5fd29de1264d10906b3124cafa98313300ff300441c7f0",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        },
+        {
+          "packageEntry": "THIRD-PARTY-NOTICES.TXT",
+          "rawSha256": "0684b2349427ee28e392ae8914645832e59731dba8a38a984f72b3fb8769c76b",
+          "path": "third-party/word/NETStandard.Library-2.0.3-THIRD-PARTY-NOTICES.TXT",
+          "sha256": "52bd2f19fdfde1128ecc91ce72a12f2bc2ac8e0de1039f02f80fde19a15890d1",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        }
+      ]
+    },
+    {
+      "name": "OpenMcdf",
+      "version": "3.3.0",
+      "packageSha256": "7e7262ddd4a907cfa4b0358ffebeeba0a91b0cc57abde311e492bf767280c447",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MPL-2.0",
+      "licenseType": "expression"
+    },
+    {
+      "name": "PdfPig",
+      "version": "0.1.16",
+      "packageSha256": "d67171846ea8c28f50359137065fec4514266d7a32b23eae6c5f2ebed8ffcfc4",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "Apache-2.0",
+      "licenseType": "expression"
+    },
+    {
+      "name": "PdfPig.Filters.Dct.JpegLibrary",
+      "version": "0.1.16.1",
+      "packageSha256": "c87d74723b4ce87c8e4c575d66c258fc15b4e61aaf5df011f82f858a362a41db",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "Apache-2.0",
+      "licenseType": "expression"
+    },
+    {
+      "name": "System.Buffers",
+      "version": "4.6.1",
+      "packageSha256": "b00451e91d016fbec091ad1e361f3a7015e1d91d4047f7e48a74455b2a673d79",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "System.Memory",
+      "version": "4.6.3",
+      "packageSha256": "26078aeb758c9ae985e8bf851f973026061da6a5eb4837204d0c2d2204c72955",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "System.Numerics.Vectors",
+      "version": "4.6.1",
+      "packageSha256": "2bc500a86dcb02f2032d6d877f9e2d6e9e4a79080e57239b4198679d4031f2c7",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "System.Runtime.CompilerServices.Unsafe",
+      "version": "6.1.2",
+      "packageSha256": "5f6a7f53af3465f92beb6da873ebe0e496206c313313b98badee4355a6b25937",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "System.Text.Encoding.CodePages",
+      "version": "10.0.12",
+      "packageSha256": "1066a6b6ffc6d89184ec83978971da9586971d547aafc798bf9451cf66389ee0",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [
+        {
+          "packageEntry": "THIRD-PARTY-NOTICES.TXT",
+          "rawSha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21",
+          "path": "third-party/word/System.Text.Encoding.CodePages-10.0.12-THIRD-PARTY-NOTICES.TXT",
+          "sha256": "c6926930d0181fa515076603e1305461b1bce5275a8b35337d75d2eef3acad4a",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        }
+      ],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "System.ValueTuple",
+      "version": "4.6.2",
+      "packageSha256": "76fd0e366a2b90655fd15d557b0b79504197748358cb578fe3193f6d97bdd9aa",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "wordnet",
+      "version": "1.1.0",
+      "packageSha256": "073bc06d91367c340f6f031e8cf2066f8a18d735cd93968d37f346d77c7bd4e5",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [
+        {
+          "packageEntry": "LICENSE",
+          "rawSha256": "32d3e9dc9a8edb9aed2eddb4b26464d9c1b2663a9dd5ee73de5119efbb974314",
+          "path": "third-party/word/wordnet-1.1.0-LICENSE",
+          "sha256": "32d3e9dc9a8edb9aed2eddb4b26464d9c1b2663a9dd5ee73de5119efbb974314",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        },
+        {
+          "packageEntry": "THIRD_PARTY_NOTICES.md",
+          "rawSha256": "2238c61a540099cc53efec2bcc58bb9ac0a8d26b941e5bb543c536347d84cf74",
+          "path": "third-party/word/wordnet-1.1.0-THIRD_PARTY_NOTICES.md",
+          "sha256": "2238c61a540099cc53efec2bcc58bb9ac0a8d26b941e5bb543c536347d84cf74",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        },
+        {
+          "packageEntry": "licenses/NotoSans-OFL.txt",
+          "rawSha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb",
+          "path": "third-party/word/wordnet-1.1.0-licenses_NotoSans-OFL.txt",
+          "sha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        }
+      ],
+      "license": "MIT",
+      "licenseType": "expression"
+    },
+    {
+      "name": "wordnet.Fonts",
+      "version": "1.1.0",
+      "packageSha256": "ecc0cc405e0d383069323cd8af8d68654766c15fd8f0f0570cc6f7ab188f98bf",
+      "role": "locked optional adapter dependency; complete release SBOM/license/vulnerability review remains mandatory",
+      "notices": [
+        {
+          "packageEntry": "LICENSE",
+          "rawSha256": "32d3e9dc9a8edb9aed2eddb4b26464d9c1b2663a9dd5ee73de5119efbb974314",
+          "path": "third-party/word/wordnet.Fonts-1.1.0-LICENSE",
+          "sha256": "32d3e9dc9a8edb9aed2eddb4b26464d9c1b2663a9dd5ee73de5119efbb974314",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        },
+        {
+          "packageEntry": "licenses/Caladea-OFL.txt",
+          "rawSha256": "ccdab61d371d8c8683a128a92cd7d498dbdb1d37689f7cb21f1bf6b16658d213",
+          "path": "third-party/word/wordnet.Fonts-1.1.0-licenses_Caladea-OFL.txt",
+          "sha256": "94d8f421006f5e234a5d5710832c5da66181129a43c0dc20971c5ba3addb888b",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        },
+        {
+          "packageEntry": "licenses/Carlito-OFL.txt",
+          "rawSha256": "58402f82a7c332a700294988fe7554fbb0a63a8d27ccc1ee3bbc640311990a00",
+          "path": "third-party/word/wordnet.Fonts-1.1.0-licenses_Carlito-OFL.txt",
+          "sha256": "ecd848e05cf9ac95f4565491833b06c9fff3b17f396f8d8df06f77f432a793ac",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        },
+        {
+          "packageEntry": "licenses/Liberation-OFL.txt",
+          "rawSha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+          "path": "third-party/word/wordnet.Fonts-1.1.0-licenses_Liberation-OFL.txt",
+          "sha256": "a0c060f758d33ee59a674cd7b45914a560d0a5935968af5e87b0c6981fd89ddc",
+          "normalization": "UTF8 without BOM; LF and trailing-whitespace normalization only; raw package digest retained."
+        }
+      ],
+      "license": "MIT AND OFL-1.1",
+      "licenseType": "expression"
+    }
+  ],
+  "productionQualified": false
+}

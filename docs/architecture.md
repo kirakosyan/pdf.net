@@ -129,3 +129,5 @@ FP-027 uses one graph/text/resource context for explicit geometric inference. Im
 FP-099 shares binding/layout/template/model/write helpers under one root generation context. Private model assembly carries the context into page/resource mutations; immutable observer views and phase/thread/cycle guards protect staged work. See [data generation](data-generation.md).
 
 FP-050 uses original managed bounded parsers through generation, immutable explicit font/style/resource capture and private same-context post-layout link assembly. Unknown source content is diagnostic; no dynamic code, default resolver or resource discovery is introduced. See [input conversion](input-conversion.md).
+
+FP-053 keeps core independent of Word dependencies. An optional pinned adapter uses bounded original RTF/WordprocessingML, passive package checks and shared-context extraction/rendering/IO, with explicit reconstruction provenance and loss policy. See [Word conversion](word-conversion.md).

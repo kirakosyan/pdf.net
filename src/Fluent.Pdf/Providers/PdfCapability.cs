@@ -22,5 +22,7 @@ public enum PdfCapability
     /// <summary>Explicit offline CMS seed envelopes for certificate encryption.</summary>
     CmsEnvelopes = 8,
     /// <summary>Explicit complete independent PDF/A profile validation.</summary>
-    ValidateArchival = 9
+    ValidateArchival = 9,
+    /// <summary>Explicit optional Word interchange with direction, reconstruction and fidelity diagnostics.</summary>
+    ConvertWord = 10
 }

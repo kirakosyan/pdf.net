@@ -1,0 +1,18 @@
+#nullable enable
+Fluent.Pdf.Word.PdfWordnetFont
+Fluent.Pdf.Word.PdfWordnetFont.Bold.get -> bool
+Fluent.Pdf.Word.PdfWordnetFont.Family.get -> string!
+Fluent.Pdf.Word.PdfWordnetFont.Font.get -> Fluent.Pdf.PdfFont!
+Fluent.Pdf.Word.PdfWordnetFont.Italic.get -> bool
+Fluent.Pdf.Word.PdfWordnetFont.PdfWordnetFont(string! family, Fluent.Pdf.PdfFont! font, bool bold = false, bool italic = false) -> void
+Fluent.Pdf.Word.WordnetPdfConverter
+Fluent.Pdf.Word.WordnetPdfConverter.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Word.WordnetPdfConverter.Export(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfWordFormat format, System.IO.Stream! output, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Word.WordnetPdfConverter.FallbackFamily.get -> string!
+Fluent.Pdf.Word.WordnetPdfConverter.Fonts.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Word.PdfWordnetFont!>!
+Fluent.Pdf.Word.WordnetPdfConverter.Import(System.IO.Stream! source, Fluent.Pdf.PdfWordFormat format, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Word.WordnetPdfConverter.Supports(Fluent.Pdf.PdfWordFormat format, bool import) -> bool
+Fluent.Pdf.Word.WordnetPdfConverter.WordnetPdfConverter(bool allowBundledFonts, string! fallbackFamily = "Noto Sans", Fluent.Pdf.Word.PdfWordnetFont![]? fonts = null) -> void
+const Fluent.Pdf.Word.WordnetPdfConverter.PackageSha256 = "073bc06d91367c340f6f031e8cf2066f8a18d735cd93968d37f346d77c7bd4e5" -> string!
+const Fluent.Pdf.Word.WordnetPdfConverter.SourceRevision = "bc6ada467dd4626dd23dfbee5f848b21e9f67dc5" -> string!
+const Fluent.Pdf.Word.WordnetPdfConverter.UpstreamVersion = "1.1.0" -> string!

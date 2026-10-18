@@ -341,6 +341,10 @@ Public Module ContractExample
         Return PdfInputConversion.Write(input, format, options, providers, output)
     End Function
 
+    Public Function ExportWord(source As PdfDocumentSnapshot, format As PdfWordFormat, options As PdfWordConversionOptions, providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
+        Return PdfWordConversion.Write(source, format, options, providers, output, New PdfOperationPolicy(PdfProcessingMode.Permissive))
+    End Function
+
     Public Function Run() As Integer
         Dim options As New PdfOptions(PdfPageSize.Letter, maximumPages:=10)
         Using document As PdfDocument = PdfFacade.Create(options, PdfProviderRegistry.Empty).

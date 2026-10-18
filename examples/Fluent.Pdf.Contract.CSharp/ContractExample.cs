@@ -279,6 +279,9 @@ public static class ContractExample
     public static PdfOperationReport ConvertInput(Stream input, PdfInputFormat format, PdfInputConversionOptions options, PdfProviderRegistry providers, Stream output)
         => PdfInputConversion.Write(input, format, options, providers, output);
 
+    public static PdfOperationReport ExportWord(PdfDocumentSnapshot source, PdfWordFormat format, PdfWordConversionOptions options, PdfProviderRegistry providers, Stream output)
+        => PdfWordConversion.Write(source, format, options, providers, output, new PdfOperationPolicy(PdfProcessingMode.Permissive));
+
     public static int Run()
     {
         var options = new PdfOptions(PdfPageSize.Letter, maximumPages: 10);

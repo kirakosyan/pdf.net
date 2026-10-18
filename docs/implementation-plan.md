@@ -156,3 +156,5 @@ Source progress through #39 now includes [table/structured-data extraction](tabl
 Source progress through #40 now includes [document events and typed generation](data-generation.md). Full FP-099 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
 
 Source progress through #41 now includes [text and structured conversion](input-conversion.md). Full FP-050 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #42 now includes [optional Word interchange](word-conversion.md). Full FP-053 scope and production qualification remain mandatory; dependent requirements remain independently scoped.

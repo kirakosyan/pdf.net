@@ -48,6 +48,10 @@ Fluent.Pdf.IPdfTextShaper.Shape(Fluent.Pdf.PdfShapingRequest! request, Fluent.Pd
 Fluent.Pdf.IPdfVerticalFontProgram
 Fluent.Pdf.IPdfVerticalFontProgram.GetVerticalMetrics(int glyph, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfFontVerticalMetrics
 Fluent.Pdf.IPdfVerticalFontProgram.SupportsVerticalMetrics.get -> bool
+Fluent.Pdf.IPdfWordConverter
+Fluent.Pdf.IPdfWordConverter.Export(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfWordFormat format, System.IO.Stream! output, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.IPdfWordConverter.Import(System.IO.Stream! source, Fluent.Pdf.PdfWordFormat format, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.IPdfWordConverter.Supports(Fluent.Pdf.PdfWordFormat format, bool import) -> bool
 Fluent.Pdf.ManagedPdfProvider
 Fluent.Pdf.ManagedPdfProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.ManagedPdfProvider.ManagedPdfProvider() -> void
@@ -328,6 +332,7 @@ Fluent.Pdf.PdfCanvasStyle.State.get -> Fluent.Pdf.PdfGraphicsState?
 Fluent.Pdf.PdfCanvasStyle.Stroke.get -> Fluent.Pdf.PdfPaint?
 Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.CmsEnvelopes = 8 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.ConvertWord = 10 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.Fonts = 6 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ImageCodecs = 5 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ReadDocument = 0 -> Fluent.Pdf.PdfCapability
@@ -2231,6 +2236,25 @@ Fluent.Pdf.PdfValueKind.Reference = 7 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValueKind.Stream = 8 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValueKind.String = 4 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValues
+Fluent.Pdf.PdfWordConversion
+Fluent.Pdf.PdfWordConversionOptions
+Fluent.Pdf.PdfWordConversionOptions.MaximumArchiveEntries.get -> int
+Fluent.Pdf.PdfWordConversionOptions.MaximumCharacters.get -> int
+Fluent.Pdf.PdfWordConversionOptions.MaximumDepth.get -> int
+Fluent.Pdf.PdfWordConversionOptions.MaximumInputBytes.get -> int
+Fluent.Pdf.PdfWordConversionOptions.MaximumOutputBytes.get -> int
+Fluent.Pdf.PdfWordConversionOptions.MaximumPages.get -> int
+Fluent.Pdf.PdfWordConversionOptions.MaximumProviderExpandedBytes.get -> int
+Fluent.Pdf.PdfWordConversionOptions.PdfWordConversionOptions(Fluent.Pdf.PdfWordReconstruction reconstruction, int maximumInputBytes = 4194304, int maximumOutputBytes = 16777216, int maximumProviderExpandedBytes = 33554432, int maximumCharacters = 131072, int maximumArchiveEntries = 1024, int maximumPages = 1000, int maximumDepth = 32, double rasterDpi = 144) -> void
+Fluent.Pdf.PdfWordConversionOptions.RasterDpi.get -> double
+Fluent.Pdf.PdfWordConversionOptions.Reconstruction.get -> Fluent.Pdf.PdfWordReconstruction
+Fluent.Pdf.PdfWordFormat
+Fluent.Pdf.PdfWordFormat.Doc = 0 -> Fluent.Pdf.PdfWordFormat
+Fluent.Pdf.PdfWordFormat.Docx = 1 -> Fluent.Pdf.PdfWordFormat
+Fluent.Pdf.PdfWordFormat.Rtf = 2 -> Fluent.Pdf.PdfWordFormat
+Fluent.Pdf.PdfWordReconstruction
+Fluent.Pdf.PdfWordReconstruction.Editable = 1 -> Fluent.Pdf.PdfWordReconstruction
+Fluent.Pdf.PdfWordReconstruction.FixedLayout = 0 -> Fluent.Pdf.PdfWordReconstruction
 Fluent.Pdf.PdfWriteMode
 Fluent.Pdf.PdfWriteMode.Full = 0 -> Fluent.Pdf.PdfWriteMode
 Fluent.Pdf.PdfWriteMode.Incremental = 1 -> Fluent.Pdf.PdfWriteMode
@@ -2478,4 +2502,7 @@ static Fluent.Pdf.PdfValue.Reference(Fluent.Pdf.PdfObjectId id) -> Fluent.Pdf.Pd
 static Fluent.Pdf.PdfValue.String(params byte[]! bytes) -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfValues.Real(double value) -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfValues.Stream(Fluent.Pdf.PdfValue! dictionary, System.IO.Stream! encodedInput, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfValue!
+static Fluent.Pdf.PdfWordConversion.Import(System.IO.Stream! input, Fluent.Pdf.PdfWordFormat format, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfWordConversion.Write(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfWordFormat format, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfWordConversion.WriteFile(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfWordFormat format, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfWriteOptions.Default.get -> Fluent.Pdf.PdfWriteOptions!

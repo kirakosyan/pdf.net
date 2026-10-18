@@ -53,7 +53,7 @@ try {
         Run-ContractLane 'net472' 'framework-current-x86' 'X86'
     }
     Run-ContractLane 'net10.0' 'netstandard-fallback' $ExpectedArchitecture $true
-    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers src/Fluent.Pdf.Codecs src/Fluent.Pdf.Fonts src/Fluent.Pdf.Text src/Fluent.Pdf.Rendering src/Fluent.Pdf.Cryptography src/Fluent.Pdf.Compliance src/Fluent.Pdf.Html native/worker native/codecs native/text native/rendering tests/native tests/native-aot tests/Fluent.Pdf.Contract.Tests examples eng .github/workflows third-party | Sort-Object -Unique | ForEach-Object {
+    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers src/Fluent.Pdf.Codecs src/Fluent.Pdf.Fonts src/Fluent.Pdf.Text src/Fluent.Pdf.Rendering src/Fluent.Pdf.Cryptography src/Fluent.Pdf.Compliance src/Fluent.Pdf.Html src/Fluent.Pdf.Word native/worker native/codecs native/text native/rendering tests/native tests/native-aot tests/Fluent.Pdf.Contract.Tests examples eng .github/workflows third-party | Sort-Object -Unique | ForEach-Object {
         [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash}
     })
     $summary = [ordered]@{

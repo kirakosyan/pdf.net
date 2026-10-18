@@ -80,3 +80,5 @@ FP-027 adds [table extraction and structured export](docs/table-extraction.md), 
 FP-099 adds [typed generation and bounded events](docs/data-generation.md), with explicit culture/resources, guarded callbacks and precommit serialization. Complete profiles and production qualification remain mandatory.
 
 Text, Markdown and structured input now have an explicit bounded [managed conversion profile](docs/input-conversion.md). Complete source-format fidelity and production qualification remain mandatory; NuGet packing/publishing remain blocked.
+
+An explicit optional [Word conversion source profile](docs/word-conversion.md) adds DOC/DOCX/RTF interchange and diagnostic fixed/editable reconstruction. Complete format/fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.

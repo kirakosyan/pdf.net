@@ -85,3 +85,5 @@ FP-027 managed contracts target all four library frameworks. Independent origina
 FP-099 managed contracts target all four library frameworks. Independent original generation observations currently cover Linux x64/.NET10; complete callback/provider/runtime/corpus and exact-package qualification remain mandatory.
 
 FP-050 managed conversion contracts target all four library frameworks. Original independent input observations cover Linux x64/.NET10; complete source-format/provider/corpus, all required runtime/RID and exact-package qualification remain mandatory.
+
+FP-053 core and optional Word contracts target all four library frameworks. Source observations and independent readers currently cover Linux x64/.NET10; full format/host/provider, minimum/current/fallback runtime/RID and exact final-package qualification remain mandatory.

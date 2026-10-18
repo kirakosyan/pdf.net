@@ -11,3 +11,5 @@ using System.Runtime.CompilerServices;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Fluent.Pdf.Compliance")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Fluent.Pdf.Html")]
+
+[assembly: InternalsVisibleTo("Fluent.Pdf.Word")]

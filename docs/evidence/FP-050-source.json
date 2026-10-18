@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-050",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "8ec7ebd2d720704bad60ca4c85970611da9601d8",
+  "sourceTree": "a1c087a142263fa66379d93a08f956b8c5bcc601",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -101,5 +101,6 @@
     "Complete Markdown and structured-document schema/semantic/accessibility/resource/culture/language fidelity profiles remain mandatory",
     "Complete malformed/fuzz/large/concurrency/endurance/security/provider and independent corpus qualification remain mandatory",
     "All required RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
-  ]
+  ],
+  "failedSourceCI": "docs/evidence/PR-118-CI-108-source.json"
 }

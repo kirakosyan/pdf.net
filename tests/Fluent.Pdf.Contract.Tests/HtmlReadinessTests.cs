@@ -37,11 +37,14 @@ public sealed class HtmlReadinessTests
         };
         bool promise = behavior == "promiseNever";
         var readiness = Ready(TimeSpan.FromMilliseconds(100), promise: promise ? "new Promise(()=>{})" : null, quiet: behavior == "networkNever" ? TimeSpan.FromMilliseconds(20) : TimeSpan.Zero);
-        var clock = System.Diagnostics.Stopwatch.StartNew();
-        var failure = Assert.Throws<PdfException>(() => PdfHtml.Render(Source(), Registry(peer), new(enableJavaScript: promise, readiness: readiness)));
+        var observed = new ReadinessPhasePeer(peer);
+        var registry = new PdfProviderRegistry(new ChromiumHtmlRenderer(_ => observed, Peer.Version, Peer.Revision));
+        var failure = Assert.Throws<PdfException>(() => PdfHtml.Render(Source(), registry, new(enableJavaScript: promise, readiness: readiness)));
         Assert.Equal("Limit.ElapsedTime", failure.Diagnostic.Code);
-        Assert.True(clock.Elapsed < TimeSpan.FromSeconds(1));
-        Assert.True(peer.Disposed);
+        Assert.True(peer.Disposed, "The created private host must be disposed before the SDK returns.");
+        Assert.True(observed.NavigationAt.HasValue, "The readiness phase must begin with navigation.");
+        Assert.True(observed.DisposedAt.HasValue, "Host disposal must have an observed completion timestamp.");
+        Assert.True(observed.DisposedAt!.Value - observed.NavigationAt!.Value < TimeSpan.FromSeconds(1), "The unchanged one-second bound measures navigation/readiness through private-host disposal, before assertion/report formatting.");
         Assert.DoesNotContain("Page.printToPDF", peer.Commands);
     }
 
@@ -190,5 +193,31 @@ public sealed class HtmlReadinessTests
         Assert.Throws<ArgumentOutOfRangeException>(() => new PdfHtmlOptions(media: (PdfHtmlMedia)2));
         var previousSignature = new PdfHtmlOptions(null, 1280, 720, false, true, 1000);
         Assert.Same(PdfHtmlReadinessOptions.Default, previousSignature.Readiness);
+    }
+
+    private sealed class ReadinessPhasePeer : IChromiumConnection
+    {
+        private readonly Peer _peer;
+        private readonly System.Diagnostics.Stopwatch _clock = System.Diagnostics.Stopwatch.StartNew();
+        internal TimeSpan? NavigationAt, DisposedAt;
+        internal ReadinessPhasePeer(Peer peer)
+        {
+            _peer = peer;
+        }
+
+        public void Send(string message, PdfOperationContext context)
+        {
+            using var parsed = System.Text.Json.JsonDocument.Parse(message);
+            if (parsed.RootElement.GetProperty("method").GetString() == "Page.navigate")
+                NavigationAt = _clock.Elapsed;
+            _peer.Send(message, context);
+        }
+
+        public string Receive(PdfOperationContext context) => _peer.Receive(context);
+        public void Dispose()
+        {
+            _peer.Dispose();
+            DisposedAt = _clock.Elapsed;
+        }
     }
 }
