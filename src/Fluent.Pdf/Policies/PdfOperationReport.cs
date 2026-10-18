@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 namespace Fluent.Pdf;
 
 /// <summary>A detached immutable result containing every accepted diagnostic and resource usage.</summary>
+[Serializable]
 public sealed class PdfOperationReport
 {
     internal PdfOperationReport(string operation, string providerId, bool succeeded, TimeSpan elapsed,
@@ -33,6 +34,7 @@ public sealed class PdfOperationReport
 }
 
 /// <summary>An immutable resource counter snapshot.</summary>
+[Serializable]
 public sealed class PdfResourceUsage
 {
     internal PdfResourceUsage(PdfResourceKind resource, long consumed, long peak) { Resource = resource; Consumed = consumed; Peak = peak; }

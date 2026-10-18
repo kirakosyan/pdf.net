@@ -61,6 +61,7 @@ public sealed class PdfArchivalOptions
 }
 
 /// <summary>A detached validation/preflight rule finding, without an implied conformance claim.</summary>
+[Serializable]
 public sealed class PdfArchivalFinding
 {
     /// <summary>Captures bounded rule, location and description text.</summary>
@@ -82,6 +83,7 @@ public sealed class PdfArchivalFinding
 }
 
 /// <summary>A complete or incomplete independent validation observation bound to exact bytes and profile.</summary>
+[Serializable]
 public sealed class PdfArchivalValidation
 {
     /// <summary>Captures a validator result. Compliance requires a complete result with zero violations; sourceSha256 is the lowercase exact-input digest.</summary>

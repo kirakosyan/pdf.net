@@ -11,7 +11,7 @@ public sealed class PolicyTests
     [Fact]
     public void FailureDetailsSurviveLatchedRethrowAndOperationCompletion()
     {
-        var details = new object();
+        var details = new PdfArchivalValidation(PdfArchivalProfile.A2B, new string('0', 64), true, false, new[] { new PdfArchivalFinding("original.rule", "original.location", "Original bounded finding.") });
         PdfException? original = null;
         var failure = Assert.Throws<PdfException>(() => PdfFont.Run("FailureDetails", "fixture.details", null, default, context =>
         {

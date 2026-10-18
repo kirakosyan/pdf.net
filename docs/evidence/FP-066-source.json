@@ -286,5 +286,239 @@
     },
     "localTestsIncludeUncommittedCompatibilitySource": true,
     "productionQualified": false
+  },
+  "attachmentTimingFailureCI": {
+    "runId": 39142512682,
+    "headSha": "6623d1544b06c560450d8fc29857bc9a7b75c550",
+    "testedMergeSha": "fe3cb3247b9942186afa2153620ed5544ccdd127",
+    "testedTree": "df5e973f4922ebf1cbae11fcbc15994b28439c3e",
+    "exactTreeVerified": true,
+    "jobs": [
+      {
+        "jobId": 117719641218,
+        "logSha256": "270000f8b6410de4c59fd662af4a68cc45bfd9d32ddf2d9f03a85290f8d6acab",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641393,
+        "logSha256": "c137b67a4d5d9245c0460ddf589b988a704c13e779d9c0de86485f4c2518197e",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641396,
+        "logSha256": "d5cb840bc021bc08df345f04de8bd1ed9fef829c50b7ef477456cdcc8909bc59",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 923,
+            "failed": 1,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641405,
+        "logSha256": "3182c24301d46737d3c3e081f23b430a6505d9c6d26288367b879b6c43f39bc0",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641408,
+        "logSha256": "f7a5c9862821fc0b8f20ddf538a3401d1b4fb3855345c0949facbeb2f624fc1a",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641429,
+        "logSha256": "169d2d731466e42b65796cf18eaded25260367f4148f59dae46e216f8185da49",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      }
+    ],
+    "executedLanes": 18,
+    "passed": 16631,
+    "failed": 1,
+    "skipped": 0,
+    "notExecutedLanes": [
+      "current Framework x86",
+      "Windows x64 netstandard fallback"
+    ],
+    "failure": "Framework x64 archival findings Data entry rejected because the DTO lacked serializable metadata; correction pending CI",
+    "artifacts": [
+      {
+        "id": 12142791810,
+        "name": "source-contracts-osx-x64",
+        "digest": "sha256:814d3a757ac7e90eee4448b0de2048c29a8dfd8c8baea589e87315e7d2930882"
+      },
+      {
+        "id": 12142745570,
+        "name": "source-contracts-osx-arm64",
+        "digest": "sha256:6e49266da9ced9ec7c05be94b887f03476d0fe44480fe38518be8f8d32ce6e07"
+      },
+      {
+        "id": 12142540814,
+        "name": "source-contracts-linux-x64",
+        "digest": "sha256:5abe002f0862bdf46572b521ac9e08dd9a0b2e2300cfe3b429630969d8930947"
+      },
+      {
+        "id": 12142233080,
+        "name": "source-contracts-win-x64",
+        "digest": "sha256:4b60b3b58c162f093c4ff8f8057d2003b4827248668f94de4ee4de194419349a"
+      },
+      {
+        "id": 12142041825,
+        "name": "source-contracts-linux-arm64",
+        "digest": "sha256:b178b198a8f903ba63360b6f781c4af662434fa0d49657f144b3fc05e493e43d"
+      },
+      {
+        "id": 12142023966,
+        "name": "source-contracts-win-arm64",
+        "digest": "sha256:4e097030383f906457023efb290a93526670542d847e3ddbf35279a40cf5ab87"
+      }
+    ],
+    "productionQualified": false
+  },
+  "serializableFailureDetailsCorrection": {
+    "rootCause": ".NET Framework Exception.Data uses ListDictionaryInternal, whose FEATURE_SERIALIZATION path rejects a value without serializable metadata. PdfArchivalValidation lacked that metadata. The resulting ArgumentException was replaced by the already latched archival failure during the required operation checkpoint. The direct System.Object test passed because System.Object is serializable.",
+    "sources": [
+      {
+        "id": "S66-FRAMEWORK-EXCEPTION",
+        "sha256": "789b2e58e21de99d64ab95600f314aa30a36f23d7f2537b6d293d3d6242047ed",
+        "observation": "Exception.Data creates ListDictionaryInternal"
+      },
+      {
+        "id": "S66-FRAMEWORK-DATA",
+        "sha256": "e11f6104b29e144d6a195a900c0a7dbc8efacae42621feeb8e98a4f93b6807a1",
+        "observation": "Data assignment checks key/value serializability and rejects a nonserializable value"
+      }
+    ],
+    "investigationRun": 39143402467,
+    "failedJob": 117722240028,
+    "retainedLogSha256": "930879ef528d3298c973a729309e5ea5714d32e4a8a503579b18487ebea6aa0b",
+    "change": "Detached finding/validation/diagnostic/resource-report types carry serializable metadata. Regression uses actual PdfArchivalValidation rather than System.Object. No formatter or deserialization is invoked.",
+    "buildTargetFrameworks": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "localTargetedTests": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "runtime": ".NET10.0.13"
+    },
+    "apiComparisons": 24,
+    "reports": {
+      "archival-serializable-build.log": "aed0adfdec027e0a7b24e67f4a5e014e1fd2c19fb4552d0b23f627fe1fbea8bc",
+      "archival-serializable-tests.log": "0f73d2f86062290dc8ceea59040b7e80d69f6a5d300a188abf737031b85bb8da",
+      "archival-serializable-api.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67"
+    },
+    "frameworkConfirmation": "pending corrected CI",
+    "productionQualified": false
   }
 }

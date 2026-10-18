@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-006",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "83252a7820cb9e286cc8849653ec0497d41684bd",
+  "sourceTree": "ffc0f52900aeb415ca18f811fec7f72cd0b6811f",
   "localLane": {
     "os": "Linux",
     "architecture": "x64",
@@ -54,5 +54,200 @@
     "Local native-positive SDK worker/render/codec tests cannot run: Landlock ENOSYS; CI remains unfiltered",
     "Structural post-validation is not stream codec/content/standards or cryptographic signature verification",
     "Complete recovery profiles, corpus/fuzz/endurance/concurrency, actual minimum runtimes and final packages remain mandatory"
-  ]
+  ],
+  "sourceCI": {
+    "runId": 39142788370,
+    "headSha": "83252a7820cb9e286cc8849653ec0497d41684bd",
+    "testedMergeSha": "8d41a0a5dc5d1786c68da8081576b7854848a2ef",
+    "testedTree": "ffc0f52900aeb415ca18f811fec7f72cd0b6811f",
+    "exactTreeVerified": true,
+    "jobs": [
+      {
+        "jobId": 117720455746,
+        "logSha256": "d87599dd84c0da22a3a59572aec65aa3de5aaeb0b19fd23d27adc007df61e17c",
+        "lanes": [
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          }
+        ]
+      },
+      {
+        "jobId": 117720455827,
+        "logSha256": "2f3d878fff4bf6b7a8644f1619bc40fb691da7f2107c70562ac1ba857b1d6d32",
+        "lanes": [
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 944,
+            "failed": 1,
+            "skipped": 0,
+            "total": 945
+          }
+        ]
+      },
+      {
+        "jobId": 117720455831,
+        "logSha256": "34b43d73f30712e26275e4152ee74e3ac3951ec129123d5e27d22f8ba04053cb",
+        "lanes": [
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          }
+        ]
+      },
+      {
+        "jobId": 117720455855,
+        "logSha256": "2dc85c3c185f1d6ea82a703c1e06648a79a1defa68d7dc2ef6e7cb865b7cc350",
+        "lanes": [
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          }
+        ]
+      },
+      {
+        "jobId": 117720455887,
+        "logSha256": "43ba79a59fd6ea1a62a6c3408519657ef2551a557ef1ade6f3458aacc1d7e955",
+        "lanes": [
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          }
+        ]
+      },
+      {
+        "jobId": 117720455928,
+        "logSha256": "0fd4e957271cf7a028ac99243371de618bd7e8307e7e025206f53ca767e1c9db",
+        "lanes": [
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          },
+          {
+            "passed": 945,
+            "failed": 0,
+            "skipped": 0,
+            "total": 945
+          }
+        ]
+      }
+    ],
+    "executedLanes": 18,
+    "passed": 17009,
+    "failed": 1,
+    "skipped": 0,
+    "notExecutedLanes": [
+      "current Framework x86",
+      "Windows x64 netstandard fallback"
+    ],
+    "failure": "Framework x64 archival findings Data entry rejected because the DTO lacked serializable metadata; correction pending CI",
+    "artifacts": [
+      {
+        "id": 12142760774,
+        "name": "source-contracts-linux-arm64",
+        "digest": "sha256:0f8fe56b88a3091e5828210db35064e8c3159daae1753357ee9c112160a0b809"
+      },
+      {
+        "id": 12142471287,
+        "name": "source-contracts-linux-x64",
+        "digest": "sha256:74fc7d363b914c908475c64066976ed9390cd56d5c5b71c8f0d46bf04d5ce9bb"
+      },
+      {
+        "id": 12142409337,
+        "name": "source-contracts-osx-x64",
+        "digest": "sha256:a00ba7446be7b6a279a58f654cda6652295d5c87ea9e44f9ca399cf4dd8467db"
+      },
+      {
+        "id": 12142316956,
+        "name": "source-contracts-win-x64",
+        "digest": "sha256:4b0e6eec05270550669312aafbfdcca25edb8f563ce46ea507345c97aa183418"
+      },
+      {
+        "id": 12142137299,
+        "name": "source-contracts-osx-arm64",
+        "digest": "sha256:e73ba293be13c22678eadd29f83d4f6dd05776c871b41f2a0eb711903aec2034"
+      },
+      {
+        "id": 12141409895,
+        "name": "source-contracts-win-arm64",
+        "digest": "sha256:3f10ec618cac59708c6233403325d585fd91ca1543c2ce75c6eea8567340c992"
+      }
+    ],
+    "productionQualified": false
+  }
 }

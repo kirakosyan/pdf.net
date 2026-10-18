@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "purpose": "independent-original-damaged-corpus-source-observations-not-production-qualification",
   "requirement": "FP-006",
-  "sourceCommit": null,
+  "sourceCommit": "83252a7820cb9e286cc8849653ec0497d41684bd",
   "tools": {
     "pypdf": "6.10.0",
     "MuPDF": "1.26.6"
