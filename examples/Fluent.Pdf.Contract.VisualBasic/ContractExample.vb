@@ -4,6 +4,13 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function CombinePages(firstInput As Stream, secondInput As Stream, output As Stream) As PdfOperationReport
+        Using first = PdfFacade.Open(firstInput), second = PdfFacade.Open(secondInput)
+            Using combined = PdfPageOrganization.Merge({New PdfPageInput(first.CreateSnapshot()), New PdfPageInput(second.CreateSnapshot())})
+                Return combined.Save(output)
+            End Using
+        End Using
+    End Function
     Public Function WriteTemplatePdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
         Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
         Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 10)

@@ -271,6 +271,9 @@ Fluent.Pdf.PdfExtensionRequirement.BaseVersion.get -> string!
 Fluent.Pdf.PdfExtensionRequirement.ExtensionLevel.get -> int
 Fluent.Pdf.PdfExtensionRequirement.PdfExtensionRequirement(string! prefix, string! baseVersion, int extensionLevel) -> void
 Fluent.Pdf.PdfExtensionRequirement.Prefix.get -> string!
+Fluent.Pdf.PdfFieldCollisionPolicy
+Fluent.Pdf.PdfFieldCollisionPolicy.Reject = 0 -> Fluent.Pdf.PdfFieldCollisionPolicy
+Fluent.Pdf.PdfFieldCollisionPolicy.Rename = 1 -> Fluent.Pdf.PdfFieldCollisionPolicy
 Fluent.Pdf.PdfFilter
 Fluent.Pdf.PdfFilter.Name.get -> string!
 Fluent.Pdf.PdfFilter.Parameters.get -> Fluent.Pdf.PdfValue!
@@ -631,6 +634,9 @@ Fluent.Pdf.PdfMatrix.Multiply(Fluent.Pdf.PdfMatrix right) -> Fluent.Pdf.PdfMatri
 Fluent.Pdf.PdfMatrix.PdfMatrix() -> void
 Fluent.Pdf.PdfMatrix.PdfMatrix(double a, double b, double c, double d, double e, double f) -> void
 Fluent.Pdf.PdfMatrix.Transform(Fluent.Pdf.PdfPoint point) -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfMissingDestinationPolicy
+Fluent.Pdf.PdfMissingDestinationPolicy.OmitWithDiagnostic = 1 -> Fluent.Pdf.PdfMissingDestinationPolicy
+Fluent.Pdf.PdfMissingDestinationPolicy.Reject = 0 -> Fluent.Pdf.PdfMissingDestinationPolicy
 Fluent.Pdf.PdfNativeAsset
 Fluent.Pdf.PdfNativeAsset.FileName.get -> string!
 Fluent.Pdf.PdfNativeAsset.IsNativeBinary.get -> bool
@@ -761,6 +767,12 @@ Fluent.Pdf.PdfOptions.DefaultPageSize.get -> Fluent.Pdf.PdfPageSize
 Fluent.Pdf.PdfOptions.MaximumPages.get -> int
 Fluent.Pdf.PdfOptions.OperationPolicy.get -> Fluent.Pdf.PdfOperationPolicy!
 Fluent.Pdf.PdfOptions.PdfOptions(Fluent.Pdf.PdfPageSize? defaultPageSize = null, int maximumPages = 10000, Fluent.Pdf.PdfOperationPolicy? operationPolicy = null) -> void
+Fluent.Pdf.PdfOrganizationOptions
+Fluent.Pdf.PdfOrganizationOptions.AllowSignatureInvalidation.get -> bool
+Fluent.Pdf.PdfOrganizationOptions.FieldCollisions.get -> Fluent.Pdf.PdfFieldCollisionPolicy
+Fluent.Pdf.PdfOrganizationOptions.MaximumPages.get -> int
+Fluent.Pdf.PdfOrganizationOptions.MissingDestinations.get -> Fluent.Pdf.PdfMissingDestinationPolicy
+Fluent.Pdf.PdfOrganizationOptions.PdfOrganizationOptions(bool allowSignatureInvalidation = false, Fluent.Pdf.PdfMissingDestinationPolicy missingDestinations = Fluent.Pdf.PdfMissingDestinationPolicy.Reject, Fluent.Pdf.PdfFieldCollisionPolicy fieldCollisions = Fluent.Pdf.PdfFieldCollisionPolicy.Reject, int maximumPages = 100000) -> void
 Fluent.Pdf.PdfPage
 Fluent.Pdf.PdfPage.CanvasLayers.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCanvasPageLayer!>!
 Fluent.Pdf.PdfPage.Content.get -> Fluent.Pdf.PdfContentProgram?
@@ -826,6 +838,11 @@ Fluent.Pdf.PdfPageGeometry.Size.get -> Fluent.Pdf.PdfPageSize
 Fluent.Pdf.PdfPageGeometry.UserToDisplay(Fluent.Pdf.PdfPageBox box = Fluent.Pdf.PdfPageBox.Crop) -> Fluent.Pdf.PdfMatrix
 Fluent.Pdf.PdfPageGeometry.UserUnit.get -> double
 Fluent.Pdf.PdfPageGeometry.WithRotation(Fluent.Pdf.PdfPageRotation rotation) -> Fluent.Pdf.PdfPageGeometry!
+Fluent.Pdf.PdfPageImposition
+Fluent.Pdf.PdfPageInput
+Fluent.Pdf.PdfPageInput.Document.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfPageInput.PdfPageInput(Fluent.Pdf.PdfDocumentSnapshot! document, Fluent.Pdf.PdfPageSelection? selection = null) -> void
+Fluent.Pdf.PdfPageInput.Selection.get -> Fluent.Pdf.PdfPageSelection?
 Fluent.Pdf.PdfPageLabelStyle
 Fluent.Pdf.PdfPageLabelStyle.Decimal = 1 -> Fluent.Pdf.PdfPageLabelStyle
 Fluent.Pdf.PdfPageLabelStyle.LowerLetters = 4 -> Fluent.Pdf.PdfPageLabelStyle
@@ -848,11 +865,14 @@ Fluent.Pdf.PdfPageNumbering
 Fluent.Pdf.PdfPageNumbering.GetLabel(int pageIndex) -> string!
 Fluent.Pdf.PdfPageNumbering.PdfPageNumbering(params Fluent.Pdf.PdfPageNumberRange![]! ranges) -> void
 Fluent.Pdf.PdfPageNumbering.Ranges.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfPageNumberRange!>!
+Fluent.Pdf.PdfPageOrganization
 Fluent.Pdf.PdfPageRotation
 Fluent.Pdf.PdfPageRotation.Clockwise180 = 180 -> Fluent.Pdf.PdfPageRotation
 Fluent.Pdf.PdfPageRotation.Clockwise270 = 270 -> Fluent.Pdf.PdfPageRotation
 Fluent.Pdf.PdfPageRotation.Clockwise90 = 90 -> Fluent.Pdf.PdfPageRotation
 Fluent.Pdf.PdfPageRotation.None = 0 -> Fluent.Pdf.PdfPageRotation
+Fluent.Pdf.PdfPageSelection
+Fluent.Pdf.PdfPageSelection.Indices.get -> System.Collections.Generic.IReadOnlyList<int>!
 Fluent.Pdf.PdfPageSize
 Fluent.Pdf.PdfPageSize.Equals(Fluent.Pdf.PdfPageSize other) -> bool
 Fluent.Pdf.PdfPageSize.Height.get -> double
@@ -1295,6 +1315,17 @@ static Fluent.Pdf.PdfOptions.Default.get -> Fluent.Pdf.PdfOptions!
 static Fluent.Pdf.PdfPageDecoration.Flow(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! content) -> Fluent.Pdf.PdfPageDecoration!
 static Fluent.Pdf.PdfPageDecoration.Html(string! html, Fluent.Pdf.IPdfTemplateHtmlProvider? provider = null) -> Fluent.Pdf.PdfPageDecoration!
 static Fluent.Pdf.PdfPageDecoration.Vector(Fluent.Pdf.PdfDrawing! drawing, Fluent.Pdf.PdfRect sourceBounds) -> Fluent.Pdf.PdfPageDecoration!
+static Fluent.Pdf.PdfPageImposition.Booklet(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, Fluent.Pdf.PdfMargins? margins = null, double gap = 0, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageImposition.NUp(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, int columns = 2, int rows = 1, Fluent.Pdf.PdfMargins? margins = null, double gap = 0, Fluent.Pdf.PdfCanvasFit fit = Fluent.Pdf.PdfCanvasFit.Contain, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageImposition.Tile(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, Fluent.Pdf.PdfMargins? margins = null, double overlap = 0, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageOrganization.Delete(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSelection! selection, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageOrganization.Extract(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSelection! selection, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageOrganization.Insert(Fluent.Pdf.PdfDocumentSnapshot! host, int index, Fluent.Pdf.PdfPageInput! input, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageOrganization.Merge(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfPageInput!>! inputs, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageOrganization.Scale(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSelection! selection, double factor, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageOrganization.Split(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfPageSelection!>! selections, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfDocument!>!
+static Fluent.Pdf.PdfPageOrganization.Transform(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSelection! selection, System.Func<Fluent.Pdf.PdfPageGeometry!, Fluent.Pdf.PdfPageGeometry!>! transform, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageSelection.Parse(string! expression, int pageCount, int maximumSelectedPages = 100000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPageSelection!
 static Fluent.Pdf.PdfPageSize.A4.get -> Fluent.Pdf.PdfPageSize
 static Fluent.Pdf.PdfPageSize.Letter.get -> Fluent.Pdf.PdfPageSize
 static Fluent.Pdf.PdfPageSize.operator !=(Fluent.Pdf.PdfPageSize left, Fluent.Pdf.PdfPageSize right) -> bool

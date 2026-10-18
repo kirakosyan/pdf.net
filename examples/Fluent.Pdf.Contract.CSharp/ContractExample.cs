@@ -5,6 +5,13 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport CombinePages(Stream firstInput, Stream secondInput, Stream output)
+    {
+        using var first = PdfFacade.Open(firstInput);
+        using var second = PdfFacade.Open(secondInput);
+        using var combined = PdfPageOrganization.Merge(new[] { new PdfPageInput(first.CreateSnapshot()), new PdfPageInput(second.CreateSnapshot()) });
+        return combined.Save(output);
+    }
     public static PdfOperationReport WriteTemplatePdf(Stream fontInput, Stream output, IPdfTextShaper shaper)
     {
         var font = PdfFont.Read(fontInput, new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance));

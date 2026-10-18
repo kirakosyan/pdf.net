@@ -588,7 +588,8 @@
           "Complete book-length/template/HTML-provider/fidelity corpus and full semantic structure qualification",
           "Actual minimum runtimes, final packages and complete production gates"
         ],
-        "independentEvidence": "docs/evidence/FP-015-independent.json"
+        "independentEvidence": "docs/evidence/FP-015-independent.json",
+        "sourceEvidence": "docs/evidence/FP-015-source.json"
       }
     },
     {
@@ -618,7 +619,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/page-organization.md",
+        "implemented": [
+          "Bounded ordered range syntax, detached shared-resource imports and merge/extract/copy/reorder/insert/delete/split operations",
+          "Explicit signature/omitted-target/field-collision policies, destinations/outlines/labels, namespaced form defaults and basic structure remapping",
+          "Geometry transforms and physical scaling plus vector N-up/booklet/tiling and basic form-stream MCID associations"
+        ],
+        "pending": [
+          "Complete interactive duplicate/tile/annotation, structure-root metadata, text-string encoding and encrypted-source profiles and mixed-document corpora",
+          "Full independent fidelity/conformance/accessibility, actual minimum runtimes, final packages and all production gates"
+        ]
+      }
     },
     {
       "id": "FP-017",

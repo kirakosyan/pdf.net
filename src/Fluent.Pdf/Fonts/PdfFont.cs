@@ -138,6 +138,7 @@ public sealed partial class PdfFont
         PdfOperationReport report;
         try
         {
+            context.Checkpoint();
             action(context);
             context.EnsureComplete();
             success = true;

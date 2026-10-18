@@ -107,3 +107,5 @@ FP-013 adds immutable merged/nested table grids, bounded typed scalar binding wi
 FP-014 adds immutable list counters/restarts, reusable components, section parity, column regions, notes and physical baseline shifts. `CreateDocument` adds cancellation and a bounded composition operation; column output has real basic structure/parent-tree associations without claiming PDF/UA. See [composition](composition.md).
 
 FP-015 adds final page template callbacks, explicit decorations, stable heading destinations, linked contents/index locators and standard numbering ranges. See [page templates](page-templates.md).
+
+FP-016 adds explicit page selections, detached page organization and vector imposition with shared budgets, reference remapping and explicit interactive profiles. See [page organization](page-organization.md).
