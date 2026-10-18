@@ -65,3 +65,5 @@ Bounded literal/regex/region/style search and explicit advance-preserving text r
 Explicit literal-grid/aligned-text table inference, rectangular merged cells, continuation provenance and bounded CSV/JSON now have a source profile; complete reconstruction profiles and production qualification remain pending.
 
 Bounded typed generation, reusable record templates and ordered precommit record/layout/page/save hooks now have a shared-context source profile; complete event/model/host coverage and production qualification remain pending.
+
+Bounded Unicode/Markdown/version-one JSON/XML conversion, explicit scalar/style/resource capture and nested passive URI annotations now have a shared-context source profile; complete conversion fidelity and production qualification remain pending.

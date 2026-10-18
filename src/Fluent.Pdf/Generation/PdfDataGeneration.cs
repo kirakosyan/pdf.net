@@ -95,6 +95,7 @@ public static class PdfDataGeneration
                         document = layout.CreateDocumentCore(options.DocumentOptions, providers, c, finish);
                     }
 
+                    generation.PrepareModel(document);
                     generation.SetLayout(flow);
                     generation.Emit(PdfGenerationEventKind.LayoutPrepared);
                     for (int i = 0; i < flow.Pages.Count; i++)

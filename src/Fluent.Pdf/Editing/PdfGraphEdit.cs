@@ -26,7 +26,9 @@ internal sealed class PdfGraphEdit : IDisposable
         else
         {
             using var normalized = PdfPageOrganization.Normalize(source, options, context);
-            var captured = normalized.CreateSnapshot();
+            PdfDocumentSnapshot captured;
+            using (normalized.UseModelContext(context))
+                captured = normalized.CreateSnapshot();
             context.Consume(PdfResourceKind.ExpandedBytes, captured.Pages.Count * 16L + 64);
             Snapshot = new(source.Options, captured.Pages.ToArray(), captured.SourceDocument, captured.OriginalOrder, captured.WriteOptions, captured.PageNumbering);
         }

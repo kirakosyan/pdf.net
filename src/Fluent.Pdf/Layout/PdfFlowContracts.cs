@@ -79,6 +79,14 @@ public sealed class PdfFlowTextStyle
     public PdfTextOptions TextOptions { get; }
     /// <summary>Gets the explicit text paint color.</summary>
     public PdfColor Color { get; }
+    internal string? SourceUri { get; private set; }
+    internal string? SourceRole { get; private set; }
+
+    internal PdfFlowTextStyle Source(string? uri, string? role) => new(Fonts, FontSize, TextOptions, Color, BaselineShift)
+    {
+        SourceUri = uri,
+        SourceRole = role
+    };
 }
 
 /// <summary>A logical UTF-16 run. A style boundary may not split an extended grapheme.</summary>

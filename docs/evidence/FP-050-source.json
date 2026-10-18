@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-050",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "newSourceCases": 36,
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1128,
+      "failed": 0,
+      "skipped": 0,
+      "inputConversionCases": 36,
+      "trxSha256": "8bed8435b2e59cf64c2ed73c47bd6c9eb606c310a86ee8e5dc8bfd88f276550b"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 97,
+      "failed": 0,
+      "skipped": 0,
+      "inputConversionCases": 36,
+      "trxSha256": "ac3694446137a423cb0fe97c208a4df216fb89a9c47838d68b6d40b6dbc7b814"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 97,
+      "failed": 0,
+      "skipped": 0,
+      "inputConversionCases": 36,
+      "trxSha256": "65a6e1ea7689ed1ba3b6a9f72de9441c6c851b847107ff0afec8ec80cef4e97e"
+    }
+  ],
+  "apiComparisons": 27,
+  "apiComparisonReportSha256": "f90ab1cdcb496252cc3dda6f29020bb80dde3fe18f653618c6996f7f7d86f370",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Conversion/PdfInputMarkdown.cs": "4ce0b126d82615f9e92189510f235ab08d3f2492ef8a02986ece9c351401ee4b",
+    "src/Fluent.Pdf/Conversion/PdfInputLinks.cs": "84db61d720a03ce1a5d5a85212c545491228c921c4910590803544dedcb1476f",
+    "src/Fluent.Pdf/Conversion/PdfInputXml.cs": "dbed7c4f505312167edbffa3bc55e295b27997eaa51d477fbd694166ebd359d3",
+    "src/Fluent.Pdf/Conversion/PdfInputSchema.cs": "b332217822d97807a6ad35ebc4a41974671fd84ac91a13fb16fd85f76609d187",
+    "src/Fluent.Pdf/Conversion/PdfInputParser.cs": "7816f5e6744d91997cd1ae4a87e3509b425593f1080d753cf3b4a9d5402c6391",
+    "src/Fluent.Pdf/Conversion/PdfInputJson.cs": "809bcda507a6af90fb479a7f109440448013730655c72cafd573801ab4cddd45",
+    "src/Fluent.Pdf/Conversion/PdfInputConversion.cs": "de6e5bbdb1f29b8452080f399fcc1b4ed0d9dc430a77fed588143d103dd95026",
+    "src/Fluent.Pdf/Composition/PdfFlowComposition.cs": "2036185a2f17f44e91bf1a228d121a90d5d55227d7112e967209a72fe8464dfe",
+    "src/Fluent.Pdf/Editing/PdfGraphEdit.cs": "c6342ced518b50ae70a4381f4a852a0273ee0816f2a799da6bd9bd43deea3922",
+    "src/Fluent.Pdf/Extraction/PdfTextExtraction.cs": "bd5e21208971ec28d5f6d3e8608479e1c401c3d49664bc6f43f3f48e7598d5a4",
+    "src/Fluent.Pdf/Generation/PdfGenerationContext.cs": "a7bde97b37edd0c7a2cd9a99fdbd9a832c69ff0cfeba17cc82366a1f5413a52f",
+    "src/Fluent.Pdf/Generation/PdfDataGeneration.cs": "c2518ecee41376b2f4544342c934052fe3f7db5f0ed526c6cf0bdf756c08b8d0",
+    "src/Fluent.Pdf/Layout/PdfFlowContracts.cs": "682347d99ffbf256e35c2c0a7399493af930390bc685bdea1b8f1581d4d6a01d",
+    "src/Fluent.Pdf/Layout/PdfFlowLinePainter.cs": "15877b09ba4eba541e15bed2f6e7dd692706e05c704113c08e69fdca1aba7033",
+    "src/Fluent.Pdf/Model/PdfPage.cs": "fc7fbecffc4ede8a39547daca09dc7811b3f195c1dd792cc915d5adad62e6cb5",
+    "src/Fluent.Pdf/Model/PdfPageLinkSnapshot.cs": "e75b1761f9adda8a39f65eb923f457a54bba7afce03c689316bc9318eebb2b73",
+    "src/Fluent.Pdf/Writing/PdfDeferredNavigation.cs": "6d5789e043f4e2548ff1fdc376fa1a350051317d5d750c279e8792cc457dac2a",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "cb05593d93d61bba30c4ece5fa92a7fb8f83971b7d084aeaeb7cef7c86441439",
+    "tests/Fluent.Pdf.Contract.Tests/InputConversionTests.cs": "2eec3bd66d739f7921d21b2c5fc68d28d947b64ef06f423eff0203d676143f34",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "4c289e1d4361930da0c226d3c82c9424fc606cfb6443ec2b10b9d2c4f00e8255",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "4d6ef393ee333668cfab98f8b54a62a770d99958a054917b195a8c4233f6c4d9"
+  },
+  "reports": {
+    "input-final-build4.log": "9aee9f3246b119c23726382db4fcde49f5442b1c551cb036f72f1e69ec35a77e",
+    "input-final-net10b.log": "2c63b57a4bb963b2f159d348ba5ffaa126c0a51d499ab36f5a3d9294ecae0ef3",
+    "input-final-net8.log": "ad7e028adcd66572404c556e8748eeb194a54c21d27b7d90ffa4b09ada8d9d48",
+    "input-fallback-build.log": "c2cfcd665ed14ec94c4da032cb2b5a3b3bfe29fa90abeaa20c213d05d28dc975",
+    "input-final-fallback.log": "91fa97237a4c6cdcbfef74ab8a711df96dccf98ebc4216e5cbfee62c98b148c6",
+    "input-normal-build.log": "fde2fc4036f06904d293ea56c80f91c0341f05c8df659ad7352bf958a9926f83",
+    "input-final-api.log": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "input-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "input-observer-build2.log": "9a16821c3db4690857b405a81d88351b62585aa1b261c53d2406fe260036ab3d",
+    "input-observer-run2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "observerReportSha256": "c95b88135e55e726f425bfe18eac0554676fb563c9031f50cd65feb52b813535",
+  "independentReportSha256": "52fafeeb7502ca9d1168b1fce6e43bfc6b6139044bb25e344e3074e412fe3e62",
+  "sharedBudget": "Parsing, scalar binding, private list/table construction, flow/model assembly, normalized model snapshots, nested link inspection, providers and writing share the root context; no fresh nested operation is opened. SDK-owned model actions run before every publication hook completes.",
+  "fixtureAndImplementationAudit": [
+    "Initial compiler-only fixes corrected the test writer contract/provider registry, consumer namespaces and an async test assertion; final builds have zero warnings/errors.",
+    "Initial27case run22passed5failed because its test assumed paragraph separators in the extraction source-text view. Corrected test verifies unchanged source text plus both geometric line contents and their separation; no SDK workaround was made for that expectation.",
+    "An86case integration run85passed1failed exposed mailto address user-info being treated as HTTP credentials. The scheme-specific source policy was corrected; the repeated86case run passed.",
+    "Primary PDF review caught URI ASCII encoding before independent observations; final actions use IDN host names and escaped ASCII URI bytes, with international/IPv6/mailto positive cases.",
+    "A final model-snapshot allocation audit attached the root context to normalized snapshot capture; a complete repeated1128case managed run and all current-runtime/API/guard checks passed.",
+    "Pre-run label arithmetic was corrected before any probe executed; original labels, exact diff and hashes are retained. Both independent probe runs passed without modifying the independent checker."
+  ],
+  "localNativeLimitation": "LandlockENOSYS prevents four local native-positive classes; required CI remains unfiltered.",
+  "previousSourceCI": "docs/evidence/PR-118-CI-107-source.json",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete Markdown and structured-document schema/semantic/accessibility/resource/culture/language fidelity profiles remain mandatory",
+    "Complete malformed/fuzz/large/concurrency/endurance/security/provider and independent corpus qualification remain mandatory",
+    "All required RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+  ]
+}

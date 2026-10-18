@@ -127,3 +127,5 @@ FP-026 shares one capture/extraction/matching/shaping/font/write context. Replac
 FP-027 uses one graph/text/resource context for explicit geometric inference. Immutable page cells keep source provenance; continuation groups retain original headers, and interchange has separate bounded/atomic export contexts. See [table extraction](table-extraction.md).
 
 FP-099 shares binding/layout/template/model/write helpers under one root generation context. Private model assembly carries the context into page/resource mutations; immutable observer views and phase/thread/cycle guards protect staged work. See [data generation](data-generation.md).
+
+FP-050 uses original managed bounded parsers through generation, immutable explicit font/style/resource capture and private same-context post-layout link assembly. Unknown source content is diagnostic; no dynamic code, default resolver or resource discovery is introduced. See [input conversion](input-conversion.md).

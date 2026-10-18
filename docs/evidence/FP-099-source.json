@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-099",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "998b2211592ce1cec2bdcda199eef961451cc801",
+  "sourceTree": "9aa078f1cffe6a831275107c8747c482587134a3",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -96,5 +96,6 @@
     "Complete document-wide editing/page/layout/save integration and asynchronous/uncooperative callback/host profiles remain mandatory",
     "Complete deterministic schema/culture/resource/provider/large-data corpora and callback/concurrency/endurance validation remain mandatory",
     "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
-  ]
+  ],
+  "successfulSourceCI": "docs/evidence/PR-118-CI-107-source.json"
 }

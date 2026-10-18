@@ -337,6 +337,10 @@ Public Module ContractExample
         End Using
     End Function
 
+    Public Function ConvertInput(input As Stream, format As PdfInputFormat, options As PdfInputConversionOptions, providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
+        Return PdfInputConversion.Write(input, format, options, providers, output)
+    End Function
+
     Public Function Run() As Integer
         Dim options As New PdfOptions(PdfPageSize.Letter, maximumPages:=10)
         Using document As PdfDocument = PdfFacade.Create(options, PdfProviderRegistry.Empty).

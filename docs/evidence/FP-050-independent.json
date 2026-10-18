@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-050",
+  "observations": {
+    "purpose": "independent-original-input-source-observations-not-production-qualification",
+    "readers": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6",
+      "Poppler": "pdftotext version 25.03.0"
+    },
+    "labelSha256": "ece7c1bb12c559e52a4d3ee4617123216b231cef6b1c70ab30497aacd34c9bf2",
+    "toolSha256": "6ef90467fa93b9d1b4c081714ffc5e480bc98485f9e07d182fcc1ebff08ca9dc",
+    "observations": [
+      {
+        "mode": "text",
+        "outputSha256": "67c2160defb0994364e45216c6dfd8b55f6982f74d7b4f597a69ea2f81515268",
+        "pages": 1,
+        "normalizedTextByIndependentReader": {
+          "pypdf": "ABBA",
+          "MuPDF": "ABBA",
+          "Poppler-layout": "ABBA"
+        },
+        "sourceRoles": {
+          "/Span": 2
+        },
+        "links": [],
+        "renderObservationSha256": "0c18cdc7049a00f2762672a9b33a8550454b0deca730c8992824fbee8b439451",
+        "renderFidelityQualified": false,
+        "productionQualified": false
+      },
+      {
+        "mode": "markdown",
+        "outputSha256": "ce4ef5fa136bca6fc91352308d53dd62f935fa7c7c3b222447fab2e0fd8564b4",
+        "pages": 1,
+        "normalizedTextByIndependentReader": {
+          "pypdf": "ABABBAAB-AB-BAABBABAABABBA",
+          "MuPDF": "ABABBAAB-AB-BAABBABAABABBA",
+          "Poppler-layout": "ABABBAAB-AB-BAABBABAABABBA"
+        },
+        "sourceRoles": {
+          "/Span": 11,
+          "/Strong": 1,
+          "/Em": 1,
+          "/Code": 2,
+          "/Link": 2
+        },
+        "links": [
+          {
+            "uri": "https://example.test/list",
+            "pdfRect": [
+              23.610000000000003,
+              350.855,
+              35.61,
+              358.71500000000003
+            ],
+            "independentTextInLink": " AB"
+          },
+          {
+            "uri": "https://example.test/cell",
+            "pdfRect": [
+              14.73,
+              301.355,
+              26.73,
+              309.21500000000003
+            ],
+            "independentTextInLink": "BA"
+          }
+        ],
+        "renderObservationSha256": "2221881cd39a4e6cbfe001d6973b7322a2b4e80985fb11fa5a76bb66d8422165",
+        "renderFidelityQualified": false,
+        "productionQualified": false
+      },
+      {
+        "mode": "json",
+        "outputSha256": "73d2c3b58d8436cccb074adef9e2b02f03f9ba3c859b45bd0bf09cc2646970a8",
+        "pages": 1,
+        "normalizedTextByIndependentReader": {
+          "pypdf": "1.234,501.AB2.BAABAB",
+          "MuPDF": "1.234,501.AB2.BAABAB",
+          "Poppler-layout": "1.234,501.AB2.BAABAB"
+        },
+        "sourceRoles": {
+          "/Span": 7
+        },
+        "links": [],
+        "renderObservationSha256": "50616c81468d08494ed00b6c9059a157cc59cf49eb4d560cde2578cc11572c1d",
+        "renderFidelityQualified": false,
+        "productionQualified": false
+      },
+      {
+        "mode": "xml",
+        "outputSha256": "73d2c3b58d8436cccb074adef9e2b02f03f9ba3c859b45bd0bf09cc2646970a8",
+        "pages": 1,
+        "normalizedTextByIndependentReader": {
+          "pypdf": "1.234,501.AB2.BAABAB",
+          "MuPDF": "1.234,501.AB2.BAABAB",
+          "Poppler-layout": "1.234,501.AB2.BAABAB"
+        },
+        "sourceRoles": {
+          "/Span": 7
+        },
+        "links": [],
+        "renderObservationSha256": "50616c81468d08494ed00b6c9059a157cc59cf49eb4d560cde2578cc11572c1d",
+        "renderFidelityQualified": false,
+        "productionQualified": false
+      }
+    ],
+    "productionQualified": false
+  },
+  "reportSha256": "52fafeeb7502ca9d1168b1fce6e43bfc6b6139044bb25e344e3074e412fe3e62",
+  "originalObserverSha256": "98c8c589cbcf14f05a8a82376a20ead23edb42b7319b24ec5169ce8938791014",
+  "observerReportSha256": "c95b88135e55e726f425bfe18eac0554676fb563c9031f50cd65feb52b813535",
+  "limitations": [
+    "Four original Latin source fixtures exercise text/Markdown/JSON/XML output text, literal code spacing, source role markers and nested URI annotations; they do not establish complete source-format or multilingual fidelity.",
+    "Raster hashes are observations only; visual fidelity, accessibility, standard-format security and independent corpus qualification remain mandatory."
+  ],
+  "productionQualified": false
+}

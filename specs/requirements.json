@@ -1963,7 +1963,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/input-conversion.md",
+        "implemented": [
+          "Strict BOM-aware Unicode and original bounded Markdown/version-one JSON/XML conversion under one shared parse/bind/layout/provider/write context",
+          "Explicit culture, styles, captured named drawings, scalar templates and passive ASCII URI annotations through nested Form geometry",
+          "DTD/resolver/action/resource denial, strict/permissive loss diagnostics, atomic files, executable C#/VB consumers and independent original outputs"
+        ],
+        "pending": [
+          "Complete Markdown and structured-document schema/semantic/accessibility/resource/culture/language fidelity profiles remain mandatory",
+          "Complete malformed/fuzz/large/concurrency/endurance/security/provider and independent corpus qualification remain mandatory",
+          "All required RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-050-source.json",
+        "standardsEvidence": "docs/evidence/FP-050-standards.json",
+        "independentEvidence": "docs/evidence/FP-050-independent.json"
+      }
     },
     {
       "id": "FP-051",

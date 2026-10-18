@@ -276,6 +276,9 @@ public static class ContractExample
         return document.Save(output);
     }
 
+    public static PdfOperationReport ConvertInput(Stream input, PdfInputFormat format, PdfInputConversionOptions options, PdfProviderRegistry providers, Stream output)
+        => PdfInputConversion.Write(input, format, options, providers, output);
+
     public static int Run()
     {
         var options = new PdfOptions(PdfPageSize.Letter, maximumPages: 10);

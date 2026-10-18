@@ -31,6 +31,7 @@ internal sealed class PdfTextPageData
     internal PdfContentProgram Program = null!;
     internal readonly List<PdfExtractedCharacter> Characters = new();
     internal readonly List<PdfExtractedSpan> Spans = new();
+    internal readonly List<(int First, int Count, string Uri)> SourceLinks = new();
     internal List<PdfExtractedWord> Words = new();
     internal List<PdfExtractedLine> Lines = new();
     internal List<PdfExtractedParagraph> Paragraphs = new();
@@ -50,6 +51,7 @@ internal sealed class PdfTextExtractionEngine
     private readonly PdfTextExtractionOptions _options;
     private readonly PdfProviderRegistry _providers;
     private readonly PdfLayerEvaluator _layers;
+    private readonly bool _collectSourceLinks;
     private readonly Dictionary<PdfValue, PdfExtractionFont> _fonts = new();
     private readonly HashSet<PdfValue> _formPath = new();
     private PdfTextPageData _page = null!;
@@ -83,9 +85,10 @@ internal sealed class PdfTextExtractionEngine
         }
     }
 
-    internal PdfTextExtractionEngine(PdfGraphEdit graph, PdfTextExtractionOptions options, PdfProviderRegistry providers)
+    internal PdfTextExtractionEngine(PdfGraphEdit graph, PdfTextExtractionOptions options, PdfProviderRegistry providers, bool collectSourceLinks = false)
     {
         _graph = graph;
+        _collectSourceLinks = collectSourceLinks;
         _options = options;
         _providers = providers;
         _layers = new(graph, options.LayerConfiguration, options.LayerUsage);
@@ -122,7 +125,7 @@ internal sealed class PdfTextExtractionEngine
             throw Error("Resources", "Content resources must be a dictionary.");
         State state = initial;
         var graphics = new Stack<State>();
-        var marked = new Stack<(bool Visible, Actual? Previous, bool Own)>();
+        var marked = new Stack<(bool Visible, Actual? Previous, bool Own, int First, string? Uri)>();
         PdfMatrix text = PdfMatrix.Identity, line = PdfMatrix.Identity;
         bool visible = initialVisibility;
         foreach (var operation in program.Operations)
@@ -233,10 +236,20 @@ internal sealed class PdfTextExtractionEngine
                     }
 
                     Context.Consume(PdfResourceKind.ExpandedBytes, 64);
-                    marked.Push((old, previous, owns));
+                    string? sourceUri = null;
+                    if (_collectSourceLinks && values[0].NameValue == "Link" && resolved.Kind == PdfValueKind.Dictionary && resolved.Entries.TryGetValue("FPLinkURI", out var uriValue))
+                        sourceUri = PdfTextStrings.Decode(_graph.Resolve(uriValue), Context);
+                    marked.Push((old, previous, owns, _page.Characters.Count, sourceUri));
                     break;
                 case PdfOperator.EndMarkedContent:
                     var frame = marked.Pop();
+                    if (frame.Uri != null)
+                    {
+                        Context.Consume(PdfResourceKind.ExpandedBytes, 96);
+                        Context.Consume(PdfResourceKind.Objects, 1);
+                        _page.SourceLinks.Add((frame.First, _page.Characters.Count - frame.First, frame.Uri));
+                    }
+
                     if (frame.Own)
                         CloseActual();
                     _actual = frame.Previous;

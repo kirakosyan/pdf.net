@@ -163,6 +163,25 @@ public sealed class PdfGenerationContext
         }
     }
 
+    private readonly List<Action<PdfDocument, PdfOperationContext>> _modelActions = new();
+    internal void RegisterModelAction(Action<PdfDocument, PdfOperationContext> action)
+    {
+        Mutable();
+        _context.Consume(PdfResourceKind.Objects, 1);
+        _context.Consume(PdfResourceKind.ExpandedBytes, 128);
+        _modelActions.Add(action);
+    }
+
+    internal void PrepareModel(PdfDocument document)
+    {
+        using (document.UseModelContext(_context))
+            foreach (var action in _modelActions)
+            {
+                Check();
+                action(document, _context);
+            }
+    }
+
     internal void SetLayout(PdfFlowResult layout)
     {
         _context.Consume(PdfResourceKind.ExpandedBytes, layout.Pages.Count * 256L + 64);
