@@ -9,6 +9,24 @@ namespace Fluent.Pdf.Contract.Tests;
 
 public sealed class PolicyTests
 {
+    [Fact]
+    public void IsolatedObjectReservationsReconcileUseAndDetectUnfinishedJobs()
+    {
+        var report=Run(context=>
+        {
+            context.Consume(PdfResourceKind.Objects,2);
+            using(var reservation=context.ReserveRemainingObjects())reservation.Complete(1);
+            context.Consume(PdfResourceKind.Objects,2);
+        },new PdfResourceLimits(maximumObjects:5));
+        Assert.Equal(5,report.Resources.Single(x=>x.Resource==PdfResourceKind.Objects).Consumed);
+        Run(context=>{using(var abandoned=context.ReserveRemainingObjects()){}context.Consume(PdfResourceKind.Objects,5);},new PdfResourceLimits(maximumObjects:5));
+        Assert.Equal("Operation.ScopeLeaked",Assert.Throws<PdfException>(()=>Run(context=>context.ReserveRemainingObjects())).Diagnostic.Code);
+        Assert.Equal("Limit.Objects",Assert.Throws<PdfException>(()=>Run(context=>
+        {
+            using var reservation=context.ReserveRemainingObjects();
+            try{context.Consume(PdfResourceKind.Objects,1);}catch(PdfException){}
+        })).Diagnostic.Code);
+    }
     internal static PdfOperationReport Run(Action<PdfOperationContext> action, PdfResourceLimits? limits = null,
         PdfProcessingMode mode = PdfProcessingMode.Strict)
     {

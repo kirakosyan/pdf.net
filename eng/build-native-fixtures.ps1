@@ -61,14 +61,19 @@ exit /b %errorlevel%
             if($LASTEXITCODE -ne 0) { throw "Locked native-AOT fixture restore failed: $rid" }
             & dotnet publish 'tests/native-aot/NativeFixture.csproj' -c Release -r $rid --no-restore -o $directory
             if($LASTEXITCODE -ne 0) { throw "Native-AOT fixture build failed: $rid" }
+            & dotnet restore 'native/codecs/Fluent.Pdf.Codecs.Native.csproj' --locked-mode
+            if($LASTEXITCODE -ne 0) { throw "Locked image codec restore failed: $rid" }
+            & dotnet publish 'native/codecs/Fluent.Pdf.Codecs.Native.csproj' -c Release -r $rid --no-restore -o $directory
+            if($LASTEXITCODE -ne 0) { throw "Image codec bridge build failed: $rid" }
         }
-        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required|native-aot-fixture)\.(dll|so|dylib))$' } | ForEach-Object {
+        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required|native-aot-fixture|fluent-pdf-codecs)\.(dll|so|dylib))$' } | ForEach-Object {
             [ordered]@{name=$_.Name;length=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
         })
         $records.Add([ordered]@{rid=$rid;files=$files})
     }
     [ordered]@{schemaVersion=1;purpose='original-native-test-fixtures';sourceCommit=(& git rev-parse HEAD).Trim();
         nativeAot=[ordered]@{sdk=(& dotnet --version).Trim();lockSha256=(Get-FileHash -LiteralPath (Join-Path $root 'tests/native-aot/packages.lock.json')).Hash};
+        imageCodecs=[ordered]@{lockSha256=(Get-FileHash -LiteralPath (Join-Path $root 'native/codecs/packages.lock.json')).Hash;dependencyInventorySha256=(Get-FileHash -LiteralPath (Join-Path $root 'third-party/codecs/components.json')).Hash};
         deployments=@($records.ToArray())} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $destination 'native-fixtures.json') -Encoding utf8
     $contracts=Join-Path $root 'artifacts/contracts'

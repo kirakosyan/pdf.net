@@ -120,10 +120,18 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.codecs": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
@@ -131,6 +139,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
@@ -236,10 +245,18 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.codecs": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
@@ -247,6 +264,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
@@ -352,10 +370,18 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.codecs": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
@@ -363,6 +389,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },

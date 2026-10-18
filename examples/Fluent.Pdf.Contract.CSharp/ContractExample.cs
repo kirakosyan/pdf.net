@@ -5,6 +5,8 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfProviderRegistry ImageCodecs(Fluent.Pdf.Workers.NativeWorkerOptions worker)=>
+        new(new Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker));
     public static PdfSyntaxDocument InspectSyntax(Stream borrowedInput)=>PdfSyntax.Read(borrowedInput);
     public static PdfDecodedData DecodeStream(PdfSyntaxDocument syntax,PdfObjectId id)=>syntax.DecodeStream(id);
 

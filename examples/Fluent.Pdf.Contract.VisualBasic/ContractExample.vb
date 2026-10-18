@@ -4,6 +4,9 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function ImageCodecs(worker As Fluent.Pdf.Workers.NativeWorkerOptions) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker))
+    End Function
     Public Function InspectSyntax(borrowedInput As Stream) As PdfSyntaxDocument
         Return PdfSyntax.Read(borrowedInput)
     End Function

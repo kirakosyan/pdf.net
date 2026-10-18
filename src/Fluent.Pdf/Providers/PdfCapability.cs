@@ -12,5 +12,7 @@ public enum PdfCapability
     /// <summary>Render HTML; the operation contract is defined by its owning requirement.</summary>
     RenderHtml = 3,
     /// <summary>Recognize text; the operation contract is defined by its owning requirement.</summary>
-    RecognizeText = 4
+    RecognizeText = 4,
+    /// <summary>Explicit optional image stream codecs; algorithm/direction support is reported by their provider.</summary>
+    ImageCodecs = 5
 }

@@ -14,7 +14,7 @@ Use original implementation and our own API. Reference analysis establishes requ
 
 ## Current status and truthfulness
 
-The repository contains research, specification, a backlog, FP-001 document/provider contracts and FP-002 operation policies/budgets. The isolated native worker has passing source tests; low-level PDF syntax inspection is being implemented. No high-level PDF document reader/writer or rendering engine is implemented. See docs/api-contract.md and docs/operation-policies.md for available behavior and qualification gaps. Do not call a build, contract fixture, package upload, emulator/VM boot or installation proof of PDF functionality or production readiness.
+The repository contains research, specification, a backlog, FP-001 document/provider contracts and FP-002 operation policies/budgets. The isolated native worker has passing source tests; low-level PDF syntax inspection and lossless stream filters are implemented. Optional isolated image codecs are in progress. No high-level PDF document reader/writer or rendering engine is implemented. See docs/api-contract.md and docs/operation-policies.md for available behavior and qualification gaps. Do not call a build, contract fixture, package upload, emulator/VM boot or installation proof of PDF functionality or production readiness.
 
 All SDK requirements marked releaseRequired in specs/requirements.json are mandatory for stable publication. The Reader requirement is excluded. Do not silently narrow the required scope to make a release pass. Status changes require reviewed implementation and evidence. Do not publish placeholders, alpha/beta packages or package-name reservations.
 

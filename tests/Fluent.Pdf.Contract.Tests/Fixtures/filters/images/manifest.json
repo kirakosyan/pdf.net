@@ -1,0 +1,60 @@
+{
+  "purpose": "original input rasters encoded with independent image libraries",
+  "pillow": "12.3.0",
+  "libjpeg": "6.2",
+  "openjpeg": "2.5.4",
+  "fixtures": [
+    {
+      "file": "l.jpg",
+      "samples": "l.jpg.samples",
+      "width": 64,
+      "height": 16,
+      "components": 1,
+      "bits": 8,
+      "sha256": "8e8f21dceb3aa44a0095b5aa0e2022d2b80e4240400a0714ccc13c815f1f2bca",
+      "samplesSha256": "575c00998897943b0e591bf0ffe63a3734d236460f43b04b5ea37e05d6513272"
+    },
+    {
+      "file": "l.j2k",
+      "samples": "l.j2k.samples",
+      "width": 64,
+      "height": 16,
+      "components": 1,
+      "bits": 8,
+      "sha256": "f0291ab265822cbccf40b3bed6e8c6d8c85660467f4a37b83d3e6199855acfa9",
+      "samplesSha256": "00b6a027e63c2369c043583933cd314dc3c69bb827fb74c02aa6ce9f136fad2b"
+    },
+    {
+      "file": "rgb.jpg",
+      "samples": "rgb.jpg.samples",
+      "width": 64,
+      "height": 16,
+      "components": 3,
+      "bits": 8,
+      "sha256": "7cf8eaa646d951bd59fa428223b66214a8a96d405828acbd75505320bfe43575",
+      "samplesSha256": "0892e4a70591aafd3198635ad87fef8e89f9c06fa147a9d3cfb067fb713fa72c"
+    },
+    {
+      "file": "rgb.j2k",
+      "samples": "rgb.j2k.samples",
+      "width": 64,
+      "height": 16,
+      "components": 3,
+      "bits": 8,
+      "sha256": "895ee51592009ec89e9904a052e98430e4591bc45b944f798637936eeefe2ff0",
+      "samplesSha256": "10a94a4d2e8a2e30884ffaaf37c37bff545a18e35e2d2e32e835b91a34a1a94f"
+    },
+    {
+      "file": "mmr.jb2",
+      "samples": "mmr.jb2.samples",
+      "width": 64,
+      "height": 16,
+      "components": 1,
+      "bits": 1,
+      "encoder": "original SDK MMR generic-region encoder",
+      "independentVerification": "Poppler 26.05.0, native-resolution PBM samples, exact 1024 expanded samples",
+      "sha256": "dc967925c28023421fee87eb7aca144573c6d0f423ba43371136b07884e863ac",
+      "samplesSha256": "0ae7ea8e91523cf2174b6379b06f7314a2d0295323e4b3ad641f0c581ad67770"
+    }
+  ]
+}

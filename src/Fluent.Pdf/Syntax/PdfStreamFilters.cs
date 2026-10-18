@@ -3,7 +3,7 @@ using System.IO;
 namespace Fluent.Pdf;
 internal static class PdfStreamFilters
 {
-    internal static Stream OpenBootstrap(PdfValue stream, PdfOperationContext context)
+    internal static Stream OpenBootstrap(PdfValue stream, PdfOperationContext context,PdfProviderRegistry? providers=null)
     {
         if (!stream.Entries.TryGetValue("Filter", out var filter) || filter.Kind == PdfValueKind.Null)
             return stream.OpenRawStream();
@@ -52,6 +52,8 @@ internal static class PdfStreamFilters
                     decoded = RunLength(current, context);
                 else if(name=="CCITTFaxDecode")
                     decoded=PdfCcitt.Decode(current,parameter,stream,context);
+                else if(PdfImageCodecPipeline.TryKind(name,out var imageCodec))
+                    decoded=PdfImageCodecPipeline.Decode(imageCodec,current,stream,parameter,providers,context);
                 else
                     throw Error(context, "Filter.Unsupported", "The requested encoded stream filter is unsupported.");
                 current.Dispose();

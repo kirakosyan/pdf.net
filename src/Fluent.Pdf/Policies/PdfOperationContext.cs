@@ -49,6 +49,43 @@ public sealed class PdfOperationContext
 
     internal bool IsActive { get { lock (_gate) return _active; } }
 
+    internal ResourceReservation ReserveRemainingObjects()
+    {
+        lock(_gate)
+        {
+            CheckCore();int i=(int)PdfResourceKind.Objects;long available=Policy.Limits.MaximumObjects-_used[i]-_reserved[i];
+            if(available==0)Fail("Limit.Objects","No object budget remains for an isolated operation.");
+            _reserved[i]+=available;return new ResourceReservation(this,available);
+        }
+    }
+
+    internal sealed class ResourceReservation:IDisposable
+    {
+        private PdfOperationContext? _owner;
+        internal ResourceReservation(PdfOperationContext owner,long amount){_owner=owner;Amount=amount;}
+        internal long Amount{get;}
+        internal void Complete(long consumed)
+        {
+            var owner=_owner??throw new ObjectDisposedException(nameof(ResourceReservation));
+            lock(owner._gate)
+            {
+                if(!ReferenceEquals(_owner,owner))throw new ObjectDisposedException(nameof(ResourceReservation));
+                owner.CheckCore();
+                if(consumed<0||consumed>Amount)owner.Fail("Limit.Objects","An isolated operation exceeded its object reservation.");
+                owner._reserved[(int)PdfResourceKind.Objects]-=Amount;_owner=null;owner.Charge(PdfResourceKind.Objects,consumed);
+            }
+        }
+        public void Dispose()
+        {
+            var owner=_owner;
+            if(owner!=null)lock(owner._gate)
+            {
+                if(!ReferenceEquals(_owner,owner))return;
+                _owner=null;owner._reserved[(int)PdfResourceKind.Objects]-=Amount;Monitor.PulseAll(owner._gate);
+            }
+        }
+    }
+
     /// <summary>Wraps a readable decoder output in a borrowed lease charging the shared expanded-byte budget.</summary>
     /// <remarks>The caller owns the decoder. The lease never closes it and expires with this operation. No codec is selected implicitly.</remarks>
     public Stream BorrowExpandedInput(Stream decodedInput)
@@ -194,7 +231,7 @@ public sealed class PdfOperationContext
         {
             CheckCore();
             if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 ||
-                _reserved[(int)PdfResourceKind.InputBytes] != 0 || _reserved[(int)PdfResourceKind.ExpandedBytes] != 0 ||
+                _reserved.Any(value=>value!=0) ||
                 _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
                 Fail("Operation.ScopeLeaked", "Provider scopes and reads must finish before returning.");
         }

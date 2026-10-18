@@ -65,6 +65,8 @@ internal static class PdfFilterDeclarations
             return PdfValue.OwnedArray(result);
         }
 
+        if (value.Kind == PdfValueKind.Stream)
+            return Resolve(value,resolver,context);
         if (value.Kind == PdfValueKind.Dictionary)
         {
             context.Consume(PdfResourceKind.Objects, 1);

@@ -129,11 +129,12 @@
           "Managed Flate/LZW/ASCII85/ASCIIHex/RunLength encode/decode chains",
           "PNG/TIFF predictors across packed, eight-bit and sixteen-bit samples",
           "Bounded object-stream membership and indirect decode declarations",
-          "Original bounded CCITT Group 3/4 encode/decode with independent TIFF verification"
+          "Original bounded CCITT Group 3/4 encode/decode with independent TIFF verification",
+          "Explicit optional isolated DCT/JPX/JBIG2 provider, pinned NativeAOT bridge and bounded image contracts"
         ],
         "pending": [
-          "Audited optional DCT/JPX/JBIG2 providers",
-          "Complete native/runtime, known-answer/security and exact-package production qualification"
+          "Native bridge runtime initialization on macOS under unchanged hard limits",
+          "Complete codec profiles, security/license audit, independent corpus, native/runtime and exact-package production qualification"
         ]
       }
     },

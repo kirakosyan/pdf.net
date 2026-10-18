@@ -99,7 +99,7 @@ public sealed class PdfSyntaxDocument
     /// <summary>Opens a detached read-only view of the exact original file, including historical revisions.</summary>
     public Stream OpenOriginalStream() => Source.Open(0, Source.Length);
     /// <summary>Decodes an indirect stream eagerly under a fresh policy, resolving filter parameter references at the selected revision.</summary>
-    public PdfDecodedData DecodeStream(PdfObjectId id, int revisionIndex = 0, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
+    public PdfDecodedData DecodeStream(PdfObjectId id, int revisionIndex = 0, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default,PdfProviderRegistry? providers=null)
     {
         var value = Resolve(id, revisionIndex);
         var context = new PdfOperationContext("DecodeStream", "managed.filters", PdfCapability.ReadDocument, policy ?? _policy, cancellationToken);
@@ -110,7 +110,7 @@ public sealed class PdfSyntaxDocument
                 throw PdfStreamFilters.Error(context, "Filter.StreamRequired", "The requested indirect object is not a stream.");
             context.Consume(PdfResourceKind.InputBytes, value.RawStreamLength);
             var resolved = PdfFilterDeclarations.Resolve(value, reference => Resolve(reference, revisionIndex), context);
-            using var decoded = PdfFilters.Decode(resolved, context);
+            using var decoded = PdfFilters.Decode(resolved, context,providers);
             var bytes = PdfByteStore.Read(decoded, context);
             context.EnsureComplete();
             return new PdfDecodedData(bytes, context.Finish(true));
