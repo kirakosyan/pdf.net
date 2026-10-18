@@ -13,6 +13,17 @@ namespace Fluent.Pdf.Contract.Tests;
 public sealed class NativeWorkerTests
 {
     [Fact]
+    public void DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden()
+    {
+        using var fixture = new WorkerFixture(_output);
+        Assert.Equal(new byte[] { 1, 2, 3 }, fixture.Run(new byte[] { 12, 1, 2, 3 }));
+        Assert.Equal("Native.EngineFailure", Assert.Throws<PdfException>(() => fixture.Run(new byte[] { 10 })).Diagnostic.Code);
+        Assert.Equal("Native.EngineFailure", Assert.Throws<PdfException>(() => fixture.Run(new byte[] { 11 })).Diagnostic.Code);
+        Assert.Equal(new byte[] { 4 }, fixture.Run(new byte[] { 12, 4 }));
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
+    [Fact]
     public void BridgeCannotChangeHardOrSoftProcessLimitsAfterIsolation()
     {
         using var fixture = new WorkerFixture(_output);

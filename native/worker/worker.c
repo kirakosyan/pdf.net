@@ -51,6 +51,15 @@ enum { FP_OK=0, FP_ABI=1, FP_VERSION=2, FP_DEPENDENCY=3, FP_EXPORT_MISSING=4,
        FP_SANDBOX=5, FP_INPUT=6, FP_ENGINE=7, FP_MEMORY=8, FP_PROTOCOL=9 };
 static unsigned char nonce[16];
 static unsigned sandbox_step;
+struct output_allocation { unsigned char *bytes; size_t maximum,size; int attempted,failed,memory_failed; };
+static void *allocate_output(void *state,size_t size) {
+    struct output_allocation *allocation=(struct output_allocation *)state;
+    if(allocation->attempted || size>allocation->maximum) {allocation->failed=1;return NULL;}
+    allocation->attempted=1;allocation->size=size;
+    allocation->bytes=(unsigned char *)malloc(size?size:1);
+    if(!allocation->bytes){allocation->failed=1;allocation->memory_failed=1;}
+    return allocation->bytes;
+}
 static uint32_t get32(const unsigned char *p) {
     return (uint32_t)p[0] | (uint32_t)p[1]<<8 | (uint32_t)p[2]<<16 | (uint32_t)p[3]<<24;
 }
@@ -436,7 +445,8 @@ static void mac_memory_diagnostics(const char *phase,uint64_t memory,uint64_t st
 static int worker_main(int argc, char **argv) {
     int offset=1,status; char **p; uint64_t max_input,max_output,memory,milliseconds,parent_id,threaded;
     unsigned char size_bytes[4],*input=NULL,*output=NULL; uint32_t input_size; size_t output_size=0;
-    fp_identity_fn abi_fn,version_fn; fp_execute_fn execute_fn;
+    fp_identity_fn abi_fn,version_fn; fp_execute_fn execute_fn;fp_execute_alloc_fn execute_alloc_fn=NULL;
+    struct output_allocation allocation={0};
 #ifdef _WIN32
     HMODULE library; wchar_t library_path[8192],root_path[4096],file_name[256];
     _setmode(_fileno(stdin),_O_BINARY); _setmode(_fileno(stdout),_O_BINARY);
@@ -476,6 +486,7 @@ static int worker_main(int argc, char **argv) {
         symbol=GetProcAddress(library,"fluent_pdf_bridge_abi_v1"); memcpy(&abi_fn,&symbol,sizeof(abi_fn));
         symbol=GetProcAddress(library,"fluent_pdf_bridge_version_v1"); memcpy(&version_fn,&symbol,sizeof(version_fn));
         symbol=GetProcAddress(library,"fluent_pdf_bridge_execute_v1"); memcpy(&execute_fn,&symbol,sizeof(execute_fn));
+        symbol=GetProcAddress(library,"fluent_pdf_bridge_execute_alloc_v1"); memcpy(&execute_alloc_fn,&symbol,sizeof(execute_alloc_fn));
     }
 #else
     {
@@ -493,22 +504,35 @@ static int worker_main(int argc, char **argv) {
     *(void **)(&abi_fn)=dlsym(library,"fluent_pdf_bridge_abi_v1");
     *(void **)(&version_fn)=dlsym(library,"fluent_pdf_bridge_version_v1");
     *(void **)(&execute_fn)=dlsym(library,"fluent_pdf_bridge_execute_v1");
+    *(void **)(&execute_alloc_fn)=dlsym(library,"fluent_pdf_bridge_execute_alloc_v1");
 #endif
     if(!abi_fn||!version_fn||!execute_fn) return respond(FP_EXPORT_MISSING,NULL,0);
     if(!same_identity(abi_fn(),p[2])) return respond(FP_ABI,NULL,0);
     if(!same_identity(version_fn(),p[3])) return respond(FP_VERSION,NULL,0);
     if(fread(size_bytes,1,4,stdin)!=4) return respond(FP_INPUT,NULL,0);
     input_size=get32(size_bytes); if(input_size>max_input) return respond(FP_INPUT,NULL,0);
-    input=(unsigned char *)malloc(input_size?input_size:1); output=(unsigned char *)malloc(max_output?(size_t)max_output:1);
-    if(!input||!output) {
+    input=(unsigned char *)malloc(input_size?input_size:1);
+    if(!input) {
 #ifdef __APPLE__
         mac_memory_diagnostics("request-allocation",memory,startup_rusage_peak,errno);
 #endif
-        free(input); free(output); return respond(FP_MEMORY,NULL,0);
+        return respond(FP_MEMORY,NULL,0);
     }
     if(fread(input,1,input_size,stdin)!=input_size||fgetc(stdin)!=EOF) { free(input); free(output); return respond(FP_INPUT,NULL,0); }
-    status=execute_fn(input,input_size,output,(size_t)max_output,&output_size);
-    if(status!=0||output_size>max_output) status=FP_ENGINE;
+    allocation.maximum=(size_t)max_output;
+    if(execute_alloc_fn)status=execute_alloc_fn(input,input_size,(size_t)max_output,allocate_output,&allocation,&output_size);
+    else {
+        output=(unsigned char *)allocate_output(&allocation,(size_t)max_output);
+        status=output?execute_fn(input,input_size,output,(size_t)max_output,&output_size):99;
+    }
+    output=allocation.bytes;
+    if(allocation.memory_failed) {
+#ifdef __APPLE__
+        mac_memory_diagnostics("response-allocation",memory,startup_rusage_peak,errno);
+#endif
+        status=FP_MEMORY;
+    }
+    else if(status!=0||allocation.failed||!allocation.attempted||output_size>allocation.size||output_size>max_output) status=FP_ENGINE;
     else status=FP_OK;
 #ifdef __APPLE__
     {

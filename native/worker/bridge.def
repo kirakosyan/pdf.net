@@ -2,3 +2,4 @@ EXPORTS
     fluent_pdf_bridge_abi_v1
     fluent_pdf_bridge_version_v1
     fluent_pdf_bridge_execute_v1
+fluent_pdf_bridge_execute_alloc_v1

@@ -11,4 +11,8 @@
    must not exceed capacity. A nonzero result rejects the whole operation. */
 typedef const char *(*fp_identity_fn)(void);
 typedef int (*fp_execute_fn)(const unsigned char *, size_t, unsigned char *, size_t, size_t *);
+/* Optional deferred output allocation. The engine calls the allocator exactly
+   once after determining its response size. The worker owns and bounds it. */
+typedef void *(*fp_allocate_fn)(void *, size_t);
+typedef int (*fp_execute_alloc_fn)(const unsigned char *, size_t, size_t, fp_allocate_fn, void *, size_t *);
 #endif

@@ -67,6 +67,8 @@ The host reserves process memory only while the isolated job is alive. Its effec
 
 The `Execute` overload with `maximumResponseBytes` reduces the native output allocation for requests with a known response bound. Image decoding supplies the exact sample length plus its reply header. Unknown-length encoders and generic bridges retain the caller's configured maximum because the bounded-buffer ABI requires capacity before execution. No executed operation is retried to grow a buffer. Staging verifies each asset's hash and binary header in its copy pass; the private bootstrap is checked immediately before each exec attempt.
 
+Bridges may additionally export `fluent_pdf_bridge_execute_alloc_v1`. This backward-compatible extension receives a worker-owned allocator and the configured response ceiling. The bridge determines its response size before requesting exactly one allocation; excess or repeated allocation attempts latch a failure even if the bridge ignores it. The isolated text bridge shapes once and then allocates only its header and actual glyph records. It retains no cross-job state and performs no executed-request retry. Older bridges continue through the bounded-buffer entry point. Failure diagnostics distinguish request and response allocation.
+
 The original [host source](../native/worker/worker.c) loads the absolute staged library only after sandbox installation, verifies the actual ABI and engine-version exports, and invokes the bounded buffer bridge. Its platform boundary is:
 
 | Host | Boundary before engine loading |

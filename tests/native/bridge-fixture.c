@@ -143,3 +143,19 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
             memcpy(output,input+1,length-1); *written=length-1; return 0;
     }
 }
+
+FP_EXPORT int fluent_pdf_bridge_execute_alloc_v1(const unsigned char *input,size_t length,size_t maximum,fp_allocate_fn allocate,void *owner,size_t *written) {
+    unsigned char *output;
+    if(length&&input[0]==10) {
+        output=(unsigned char *)allocate(owner,maximum+1);
+        if(output)return 99;
+        *written=0;return 0;
+    }
+    if(length&&input[0]==11) {
+        output=(unsigned char *)allocate(owner,1);if(!output)return 99;
+        output[0]=42;(void)allocate(owner,1);*written=1;return 0;
+    }
+    size_t capacity=length&&input[0]==12?length-1:maximum;
+    output=(unsigned char *)allocate(owner,capacity);if(!output)return 99;
+    return fluent_pdf_bridge_execute_v1(input,length,output,capacity,written);
+}
