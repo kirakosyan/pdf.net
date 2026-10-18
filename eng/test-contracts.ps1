@@ -53,11 +53,11 @@ try {
         Run-ContractLane 'net472' 'framework-current-x86' 'X86'
     }
     Run-ContractLane 'net10.0' 'netstandard-fallback' $ExpectedArchitecture $true
-    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers src/Fluent.Pdf.Codecs src/Fluent.Pdf.Fonts src/Fluent.Pdf.Text native/worker native/codecs native/text tests/native tests/native-aot tests/Fluent.Pdf.Contract.Tests examples eng .github/workflows third-party | Sort-Object -Unique | ForEach-Object {
+    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers src/Fluent.Pdf.Codecs src/Fluent.Pdf.Fonts src/Fluent.Pdf.Text src/Fluent.Pdf.Rendering native/worker native/codecs native/text native/rendering tests/native tests/native-aot tests/Fluent.Pdf.Contract.Tests examples eng .github/workflows third-party | Sort-Object -Unique | ForEach-Object {
         [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash}
     })
     $summary = [ordered]@{
-        schemaVersion=1;purpose='source-contract-tests';requirements=@('FP-001','FP-002','FP-085','FP-003','FP-004','FP-005','FP-007','FP-008','FP-009','FP-010','FP-011','FP-012','FP-013','FP-014','FP-015','FP-016','FP-017','FP-019','FP-020','FP-021')
+        schemaVersion=1;purpose='source-contract-tests';requirements=@('FP-001','FP-002','FP-085','FP-003','FP-004','FP-005','FP-007','FP-008','FP-009','FP-010','FP-011','FP-012','FP-013','FP-014','FP-015','FP-016','FP-017','FP-019','FP-020','FP-021','FP-022','FP-023','FP-024','FP-025','FP-036','FP-037','FP-040')
         sourceCommit=(& git rev-parse HEAD).Trim();workingTreeDirty=[bool](& git status --porcelain)
         sourceFiles=$sourceFiles;lanes=@($records.ToArray());productionQualified=$false
         pending=@('FP-085 complete native security/endurance and reviewed engine qualification','Actual minimum .NET Framework 4.7.2 execution','Exact final NuGet package consumers','Complete SDK capability and production qualification')

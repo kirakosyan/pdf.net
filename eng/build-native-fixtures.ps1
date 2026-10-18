@@ -69,10 +69,11 @@ exit /b %errorlevel%
             if($LASTEXITCODE -ne 0) { throw "Image codec bridge build failed: $rid" }
         }
         & "$PSScriptRoot/build-text-fixture.ps1" -Directory $directory -Rid $rid -Developer $(if($IsWindows){$developer}else{''}) -HostArchitecture $architecture
-        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required|native-aot-fixture|fluent-pdf-codecs|fluent-pdf-text|libHarfBuzzSharp)\.(dll|so|dylib)(\.0\.61421\.0)?)$' } | ForEach-Object {
+        & "$PSScriptRoot/build-rendering-fixture.ps1" -Directory $directory -Rid $rid -Developer $(if($IsWindows){$developer}else{''}) -HostArchitecture $architecture
+        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required|native-aot-fixture|fluent-pdf-codecs|fluent-pdf-text|libHarfBuzzSharp|fluent-pdf-render|libpdfium|pdfium)\.(dll|so|dylib)(\.0\.61421\.0)?)$' } | ForEach-Object {
             [ordered]@{name=$_.Name;length=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
         })
-        $records.Add([ordered]@{rid=$rid;files=$files;textAsset=(Get-Content -LiteralPath (Join-Path $directory 'text-asset.json') -Raw | ConvertFrom-Json)})
+        $records.Add([ordered]@{rid=$rid;files=$files;textAsset=(Get-Content -LiteralPath (Join-Path $directory 'text-asset.json') -Raw | ConvertFrom-Json);renderingAsset=$(if($arch -ne 'x86'){Get-Content -LiteralPath (Join-Path $directory 'rendering-asset.json') -Raw | ConvertFrom-Json}else{$null})})
     }
     [ordered]@{schemaVersion=1;purpose='original-native-test-fixtures';sourceCommit=(& git rev-parse HEAD).Trim();
         nativeAot=[ordered]@{sdk=(& dotnet --version).Trim();lockSha256=(Get-FileHash -LiteralPath (Join-Path $root 'tests/native-aot/packages.lock.json')).Hash};

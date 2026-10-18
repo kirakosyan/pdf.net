@@ -15,3 +15,5 @@ Build and run using [docs/testing.md](../docs/testing.md). The examples currentl
 `WriteNavigationPdf` in C# and VB emits two pages, a named destination, an internal Link and catalog OpenAction without executing navigation.
 
 `WritePresentationPdf` in C# and VB emits nested bookmarks, restarted page labels, a viewer mode and a passive page transition.
+
+`RenderPagePreview` in both language consumers renders through an explicit provider registry and returns detached raw BGRA samples with exact geometry. `PageRenderer` captures a caller-provisioned offline isolated deployment. Neither method downloads engines or claims production qualification.

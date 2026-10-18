@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-profile-not-release-qualification",
+  "requirement": "FP-037",
+  "sourceCommit": "ac97b7c31b7f85cd687d726effe3313f243519aa",
+  "sourceFileHashes": {
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "21412658cc43c9e508122b9d0d2eeea231d625f58cf340d60d4a3df2e9d136cb",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "549ced105feeb422f80b5e053ed92bc4138ea93ddfeb1283ffce0f9a15c3c495",
+    "src/Fluent.Pdf/Editing/PdfGraphEdit.cs": "ab0a26f43fc91b4cbb8931fc7cfcadc2c120ecf8f08b16441b34191416b1403f",
+    "src/Fluent.Pdf/Forms/PdfFormContracts.cs": "f6de4528e97aac198335ba70a9cc0d466c874792c608778705212b2ae4828bc0",
+    "src/Fluent.Pdf/Forms/PdfFormData.cs": "55af93b262b7cf8ea76d68c9efafa427048209028b14cf459a698e6821ffde2a",
+    "src/Fluent.Pdf/Forms/PdfFormFdf.cs": "0ae598cf3364e66875f053d408ace0f7a446f7aa54906886e8cb8d7b144fcf59",
+    "src/Fluent.Pdf/Forms/PdfFormFillContracts.cs": "463b5f25b6564804db050ff4fe6c46425376e717dce19c08220c58cb66ebd4e0",
+    "src/Fluent.Pdf/Forms/PdfFormJson.cs": "bbf13c334cff9d5a609ce8ecf522c029ffc1e1138f108489ecc2587078fab807",
+    "src/Fluent.Pdf/Forms/PdfFormReader.cs": "2f8d1879739eb514448200d2ef1251e049ac7ad0e2aac898ec6e7f0cce61e60b",
+    "src/Fluent.Pdf/Forms/PdfFormValues.cs": "c8854f2ef939ea4024cb05be350ecddd2899102c7ef406ff4da153f40204032d",
+    "src/Fluent.Pdf/Forms/PdfFormXml.cs": "1ea0c479e3d3520df4f3bdcfcf044ef3e1f9ece7d7e72d1d55561665486e9d69",
+    "src/Fluent.Pdf/Forms/PdfForms.Copying.cs": "a77abbfd1df10df8f19fa6c4304818c39ad88cd01aa56d564023db7bde096884",
+    "src/Fluent.Pdf/Forms/PdfForms.Editing.cs": "9bd40f68b724c154697fd6a1f428d179889954ff80a181a378b49c529e33d0cb",
+    "src/Fluent.Pdf/Forms/PdfForms.Filling.cs": "d514e12a26efbbd3c6f86e36f0a7ea2c2828a5532f962e15bc9e205b66706fd9",
+    "src/Fluent.Pdf/Forms/PdfForms.Flattening.cs": "6e51c7fa4113cefdb92494ed239037acb80adecb624f735d7179460c6a638e7c",
+    "src/Fluent.Pdf/Forms/PdfForms.cs": "8390fd665a28eeae6a9c48211ae5b606df424cbd47fb67e4706164e17fda1945",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "84fe79db66946e2b99ffab3acb2eb9154fef6776d093eb751ebc201da21c68d6",
+    "tests/Fluent.Pdf.Contract.Tests/FormDataTests.cs": "995e8e5591d0beb86dacfd7bb78655989fc96e098a6457497999545955ce80f1",
+    "tests/Fluent.Pdf.Contract.Tests/FormWorkflowTests.cs": "f4d416aa9ac5443ee9d95c15749529ef13dcbf0a7c6649960faa0a3119eb0cf1"
+  },
+  "toolVersions": {
+    "pypdf": "6.10.0",
+    "poppler": "25.03.0",
+    "python": "3.12.14",
+    "Pillow": "12.3.0"
+  },
+  "results": {
+    "passed": true,
+    "formatValues": {
+      "Customer.Անուն": "officec –",
+      "Agree": "/Yes Exact",
+      "Radio": "/B"
+    },
+    "independentFdfFields": {
+      "Agree": "/Yes Exact",
+      "Customer.Անուն": "officec –",
+      "Radio": "/B"
+    },
+    "remainingFields": [
+      "Radio",
+      "Sign"
+    ],
+    "formatAndFlattenPixelDifferences": {
+      "filled-Xfdf": [
+        0,
+        0
+      ],
+      "filled-Xml": [
+        0,
+        0
+      ],
+      "filled-Json": [
+        0,
+        0
+      ],
+      "selective-flat": [
+        0,
+        0
+      ],
+      "all-flat": [
+        0,
+        0
+      ]
+    },
+    "decorationChangedPixels": 96,
+    "decorationOtherPageDifferences": 0,
+    "limitations": [
+      "Small original form fixture; not full FDF/XFDF conformance, GUI editing, signature validation or production qualification."
+    ],
+    "artifacts": {
+      "selective-flat-2.png": "9e2fad3cfe54658273a32713998a5ff0399107743384a0c8317f338304853c67",
+      "selective-flat-1.png": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+      "filled-Json-2.png": "9e2fad3cfe54658273a32713998a5ff0399107743384a0c8317f338304853c67",
+      "all-flat-1.png": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+      "source.pdf": "6f83e53fd5c6077cdba80ab6842a4dc67fa28c5b2503c3c086556c08733566a5",
+      "filled-Json-1.png": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+      "filled-Fdf-1.png": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+      "decorated-2.png": "9e2fad3cfe54658273a32713998a5ff0399107743384a0c8317f338304853c67",
+      "selective-flat.pdf": "71f70cee203dbc4042bf33ef77418b8c1acb1357d3cc3093030f5ebc14b98a27",
+      "filled-Xml.pdf": "a809dc8b1e66a9ff95ce83246b81d98f19d0ed6b62386c6ce163bbfc60a7443e",
+      "filled-Xml-1.png": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+      "filled-Fdf.pdf": "a809dc8b1e66a9ff95ce83246b81d98f19d0ed6b62386c6ce163bbfc60a7443e",
+      "copied-1.png": "6c205951995c8b20408516dac94322ae245064993a9591e79023df51afc6541a",
+      "values.fdf": "6344b63d5e9ec441a86e2b945da804021a8686866e6f24394684b487de7dd4f7",
+      "all-flat.pdf": "e29712f94bd5981bd6aea58011b0b04e862e40e6c4ec4c34030df5add4018c20",
+      "filled-Xfdf.pdf": "a809dc8b1e66a9ff95ce83246b81d98f19d0ed6b62386c6ce163bbfc60a7443e",
+      "decorated.pdf": "a3731dc31ef7dd4ca20f9fbe6030f97dcecfbaa85b6d19cd48734fa009ace870",
+      "values.json": "467f66d2b01bced3bd42ead6ad66338a7d5b56f19531624742327969872bf828",
+      "filled-Xfdf-2.png": "9e2fad3cfe54658273a32713998a5ff0399107743384a0c8317f338304853c67",
+      "all-flat-2.png": "9e2fad3cfe54658273a32713998a5ff0399107743384a0c8317f338304853c67",
+      "filled-Fdf-2.png": "9e2fad3cfe54658273a32713998a5ff0399107743384a0c8317f338304853c67",
+      "values.xfdf": "855e1c24be28894ab1603ce2ef2de3a8aca3bb16f7b9c4e3b08c848fd9681135",
+      "sdk-report.json": "e076453a43c1755aad73f6792e55b0e0304ee0b294a0dbcb687e3ab9a36a3b60",
+      "decorated-1.png": "f22d44fa517442aa21614b4b8ac82b5e72a19c11765b081b70b8c04477c07a32",
+      "flat.txt": "7ff9c7f9e7abf26d582c6b86df8363bca93b09176f3e078beb9cd5e46dd627c6",
+      "filled-Xml-2.png": "9e2fad3cfe54658273a32713998a5ff0399107743384a0c8317f338304853c67",
+      "filled-Xfdf-1.png": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+      "filled-Json.pdf": "a809dc8b1e66a9ff95ce83246b81d98f19d0ed6b62386c6ce163bbfc60a7443e",
+      "values.xml": "2128a8e6db6d034b2ec89bedcdf6af9d027701c41a1cff3e17e8c4763b1f3694",
+      "copied.pdf": "23c41a48d98578f9747aabd0143a3ecb80b48c6b122e1007c7f420520106bcb8",
+      "copied-2.png": "6879288d65eef8f98ebb515b4a02aafa5fefae693316f29a5ad9932c89ec4451"
+    }
+  },
+  "probeSha256": {
+    "Program.cs": "57394f854ed5381775f324b184f6263e67218e64a90fd14c9ce28d405ba1231f",
+    "verify.py": "3e97aa6dd629dffa068d60ef8219cfb5a1872bf107fb131a04e1433dee6cf39a",
+    "generate-final.log": "9438eecfd8c548bb2c9228c5b4b73cfee6af7e161339787bf7e3679462db78d5",
+    "verify-final.log": "50fd00bb81073ee99e90d9b91a7533748a254a6464caa033313887c2413268e3",
+    "sdk-report.json": "e076453a43c1755aad73f6792e55b0e0304ee0b294a0dbcb687e3ab9a36a3b60"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Small original value/appearance fixture; not full FDF/XFDF conformance, GUI/viewer corpus or cryptographic signature validation.",
+    "Missing format/appearance/structure profiles, actual minimum runtimes and final-package qualification remain mandatory."
+  ]
+}

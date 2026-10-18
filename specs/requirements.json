@@ -347,7 +347,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -1395,7 +1395,9 @@
           "Legacy/merged/tagged ownership conversion, broader default-resource rebinding and inheritance materialization profiles remain mandatory",
           "Independent signature/transform verification and full corpus/fidelity/viewer, actual minimum-runtime, exact-package and production qualification remain mandatory"
         ],
-        "standardsEvidence": "docs/evidence/FP-037-standards.json"
+        "standardsEvidence": "docs/evidence/FP-037-standards.json",
+        "sourceEvidence": "docs/evidence/FP-037-source.json",
+        "independentEvidence": "docs/evidence/FP-037-independent.json"
       }
     },
     {
@@ -1487,7 +1489,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/rendering.md",
+        "implemented": [
+          "Optional isolated candidate engine adapter with immutable request/result contracts, explicit integer-grid DPI/crop/alpha/device-color semantics and headless operation",
+          "Shared-context source preparation, page/Form/resource validation, explicit existing appearance/print visibility and offline embedded-font policy",
+          "Bounded fresh-process IPC with exact asset/version inventory, OS isolation, pixel/output/memory limits, cancellation and original C ABI bridge; C#/VB consumers"
+        ],
+        "pending": [
+          "Complete rendering/font/appearance/color/extension profiles and independent large visual/semantic fidelity corpus remain mandatory",
+          "Engine source/build provenance and license/security audit, transitive dependency and actual minimum OS/runtime validation remain mandatory",
+          "All-platform concurrency, fuzzing, endurance and exact final-package consumers and production qualification remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-040-standards.json",
+        "independentEvidence": "docs/evidence/FP-040-independent.json"
+      }
     },
     {
       "id": "FP-041",

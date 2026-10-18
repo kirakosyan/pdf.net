@@ -4,6 +4,14 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function PageRenderer(worker As Fluent.Pdf.Workers.NativeWorkerOptions) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Rendering.IsolatedPdfRenderer(worker))
+    End Function
+    Public Function RenderPagePreview(input As Stream, providers As PdfProviderRegistry, options As PdfRenderOptions) As PdfRaster
+        Using document = PdfFacade.Open(input)
+            Return PdfRendering.RenderPage(document.CreateSnapshot(), 0, providers, options)
+        End Using
+    End Function
     Public Function FillAndFlattenForm(input As Stream, output As Stream, data As PdfFormData, font As PdfFont, Optional writeMode As PdfWriteMode = PdfWriteMode.Full) As PdfOperationReport
         Using source = PdfFacade.Open(input)
             Dim style As New PdfFormTextStyle(New PdfFontFallback(font), New PdfProviderRegistry(New PdfSimpleTextShaper()))

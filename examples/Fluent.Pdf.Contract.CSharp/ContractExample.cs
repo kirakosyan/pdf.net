@@ -5,6 +5,12 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfProviderRegistry PageRenderer(Fluent.Pdf.Workers.NativeWorkerOptions worker) => new(new Fluent.Pdf.Rendering.IsolatedPdfRenderer(worker));
+    public static PdfRaster RenderPagePreview(Stream input, PdfProviderRegistry providers, PdfRenderOptions options)
+    {
+        using var document = PdfFacade.Open(input);
+        return PdfRendering.RenderPage(document.CreateSnapshot(), 0, providers, options);
+    }
     public static PdfOperationReport FillAndFlattenForm(Stream input, Stream output, PdfFormData data, PdfFont font, PdfWriteMode writeMode = PdfWriteMode.Full)
     {
         using var source = PdfFacade.Open(input);

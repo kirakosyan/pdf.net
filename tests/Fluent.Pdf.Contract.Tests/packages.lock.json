@@ -133,6 +133,7 @@
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
@@ -143,6 +144,7 @@
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
@@ -151,6 +153,13 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.rendering": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.text": {
@@ -275,6 +284,7 @@
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
@@ -285,6 +295,7 @@
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
@@ -293,6 +304,13 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.rendering": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.text": {
@@ -417,6 +435,7 @@
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
@@ -427,6 +446,7 @@
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
@@ -435,6 +455,13 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.rendering": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
       "fluent.pdf.text": {

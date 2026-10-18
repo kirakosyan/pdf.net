@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-interoperability-observations-not-release-qualification",
+  "requirement": "FP-040",
+  "directBridgeChecks": {
+    "kind": "direct-native-ABI-probe-not-SDK-isolation-proof",
+    "engine": "153.0.7999.0",
+    "sourceVsFlattenChangedPixels": 0,
+    "regionVsFullChangedPixels": 0,
+    "annotationExcludedChangedPixels": 732,
+    "blankAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sampleSha256": "bae70da46a5152b2cbd89de574c80e5f01a17da15eccbb4d5f2655d4e6cca08f"
+  },
+  "independentComparison": {
+    "kind": "independent-renderer-observation-not-complete-fidelity-qualification",
+    "engine": "candidate PDFium 153.0.7999.0 AGG",
+    "independentRenderer": "Poppler 25.03.0",
+    "fixture": "original Unicode text/check/radio AcroForm filled by SDK #26 source",
+    "dimensions": [
+      400,
+      300,
+      3
+    ],
+    "maxChannelDelta": 241,
+    "meanAbsoluteChannelDelta": 0.28470833333333334,
+    "changedPixels": 419,
+    "changedPixelsAbove8": 375,
+    "totalPixels": 120000,
+    "nativePngSha256": "c5e34954c279bf5d7e78f41c93f1f934f7e56ece6733ddc9a7c7f0e1a500b59e",
+    "independentPngSha256": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+    "limitations": [
+      "Single fixture only; observed text/outline rendering differences are retained without a complete causal or full-corpus/color/conformance qualification conclusion.",
+      "Direct native ABI probe executed outside the SDK worker because local Landlock is unavailable; not native isolation proof."
+    ]
+  },
+  "productionQualified": false,
+  "packageSha256": null,
+  "packingAndPublicationBlocked": true
+}

@@ -28,6 +28,8 @@ Fluent.Pdf.IPdfImageCodecProvider.Decode(Fluent.Pdf.PdfImageCodec codec, Fluent.
 Fluent.Pdf.IPdfImageCodecProvider.Encode(Fluent.Pdf.PdfImageCodec codec, Fluent.Pdf.PdfImageInfo! info, Fluent.Pdf.PdfValue! parameters, System.IO.Stream! sampleInput, System.IO.Stream! encodedOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfImageCodecProvider.Inspect(Fluent.Pdf.PdfImageCodec codec, System.IO.Stream! encodedInput, Fluent.Pdf.PdfValue! imageDictionary, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfImageInfo!
 Fluent.Pdf.IPdfImageCodecProvider.Supports(Fluent.Pdf.PdfImageCodec codec, bool encoding) -> bool
+Fluent.Pdf.IPdfPageRenderer
+Fluent.Pdf.IPdfPageRenderer.Render(Fluent.Pdf.PdfRasterRequest! request, System.IO.Stream! bgraOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfProvider
 Fluent.Pdf.IPdfProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.IPdfRevisionWriter
@@ -1405,6 +1407,28 @@ Fluent.Pdf.PdfQuad.P2.get -> Fluent.Pdf.PdfPoint
 Fluent.Pdf.PdfQuad.P3.get -> Fluent.Pdf.PdfPoint
 Fluent.Pdf.PdfQuad.PdfQuad() -> void
 Fluent.Pdf.PdfQuad.PdfQuad(Fluent.Pdf.PdfPoint p0, Fluent.Pdf.PdfPoint p1, Fluent.Pdf.PdfPoint p2, Fluent.Pdf.PdfPoint p3) -> void
+Fluent.Pdf.PdfRaster
+Fluent.Pdf.PdfRaster.OpenSamples() -> System.IO.Stream!
+Fluent.Pdf.PdfRaster.Report.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfRaster.Request.get -> Fluent.Pdf.PdfRasterRequest!
+Fluent.Pdf.PdfRasterColor
+Fluent.Pdf.PdfRasterColor.Gray = 1 -> Fluent.Pdf.PdfRasterColor
+Fluent.Pdf.PdfRasterColor.Rgb = 0 -> Fluent.Pdf.PdfRasterColor
+Fluent.Pdf.PdfRasterRequest
+Fluent.Pdf.PdfRasterRequest.ByteLength.get -> long
+Fluent.Pdf.PdfRasterRequest.EffectiveDpiX.get -> double
+Fluent.Pdf.PdfRasterRequest.EffectiveDpiY.get -> double
+Fluent.Pdf.PdfRasterRequest.FullHeight.get -> int
+Fluent.Pdf.PdfRasterRequest.FullWidth.get -> int
+Fluent.Pdf.PdfRasterRequest.Height.get -> int
+Fluent.Pdf.PdfRasterRequest.Options.get -> Fluent.Pdf.PdfRenderOptions!
+Fluent.Pdf.PdfRasterRequest.Page.get -> Fluent.Pdf.PdfPageSource!
+Fluent.Pdf.PdfRasterRequest.PageIndex.get -> int
+Fluent.Pdf.PdfRasterRequest.Region.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfRasterRequest.Stride.get -> int
+Fluent.Pdf.PdfRasterRequest.Width.get -> int
+Fluent.Pdf.PdfRasterRequest.X.get -> int
+Fluent.Pdf.PdfRasterRequest.Y.get -> int
 Fluent.Pdf.PdfRect
 Fluent.Pdf.PdfRect.Height.get -> double
 Fluent.Pdf.PdfRect.PdfRect() -> void
@@ -1414,6 +1438,16 @@ Fluent.Pdf.PdfRect.Top.get -> double
 Fluent.Pdf.PdfRect.Width.get -> double
 Fluent.Pdf.PdfRect.X.get -> double
 Fluent.Pdf.PdfRect.Y.get -> double
+Fluent.Pdf.PdfRenderOptions
+Fluent.Pdf.PdfRenderOptions.Annotations.get -> bool
+Fluent.Pdf.PdfRenderOptions.BackgroundRgb.get -> uint?
+Fluent.Pdf.PdfRenderOptions.Color.get -> Fluent.Pdf.PdfRasterColor
+Fluent.Pdf.PdfRenderOptions.DpiX.get -> double
+Fluent.Pdf.PdfRenderOptions.DpiY.get -> double
+Fluent.Pdf.PdfRenderOptions.PdfRenderOptions(double dpiX = 96, double dpiY = 96, Fluent.Pdf.PdfRect? region = null, uint? backgroundRgb = 16777215, Fluent.Pdf.PdfRasterColor color = Fluent.Pdf.PdfRasterColor.Rgb, bool annotations = true, bool print = false) -> void
+Fluent.Pdf.PdfRenderOptions.Print.get -> bool
+Fluent.Pdf.PdfRenderOptions.Region.get -> Fluent.Pdf.PdfRect?
+Fluent.Pdf.PdfRendering
 Fluent.Pdf.PdfResourceBinding
 Fluent.Pdf.PdfResourceBinding.Name.get -> string!
 Fluent.Pdf.PdfResourceBinding.PdfResourceBinding(string! name, Fluent.Pdf.PdfGraphicsResource! resource) -> void
@@ -1888,6 +1922,7 @@ static Fluent.Pdf.PdfPresentation.SetView(Fluent.Pdf.PdfDocumentSnapshot! source
 static Fluent.Pdf.PdfPresentation.SetViewerPreferences(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue! preferences, bool replace = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfProviderRegistry.Default.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfProviderRegistry.Empty.get -> Fluent.Pdf.PdfProviderRegistry!
+static Fluent.Pdf.PdfRendering.RenderPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfRenderOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRaster!
 static Fluent.Pdf.PdfResourceSet.Empty.get -> Fluent.Pdf.PdfResourceSet!
 static Fluent.Pdf.PdfShading.Axial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfPoint start, Fluent.Pdf.PdfPoint end, Fluent.Pdf.PdfFunction! function, bool extendStart = false, bool extendEnd = false, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Functional(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfFunction! function, Fluent.Pdf.PdfRect domain, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!

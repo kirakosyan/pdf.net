@@ -53,3 +53,5 @@ FP-025 page/Form extraction is managed on the four core frameworks. Optional sta
 The FP-036 AcroForm source profile uses only the managed core on all four TFMs. Shaped appearances use explicitly selected font/shaping providers; the form API adds no native dependency. Interactive viewer regeneration, additional tagged creation/relocation profiles and full production qualification remain pending.
 
 FP-037 field-data and static workflow profiles run in the managed core on all four TFMs. Automatic text appearances use explicitly provisioned font/shaping services; no new native/runtime dependency is added. Full corpus, minimum-runtime and final-package qualification remains pending.
+
+FP-040 rendering contracts work on all four target frameworks. The optional non-packable adapter targets explicit 64-bit Windows, Linux and macOS workers with separately pinned candidate assets. Framework x86 callers use the 64-bit OS worker. CI integration and headless source probes do not qualify actual minimum OS/runtime versions, transitive platform dependencies, complete fidelity or final packages. See [rendering](rendering.md) and the candidate dependency inventory.

@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-037",
+  "sourceCommit": "ac97b7c31b7f85cd687d726effe3313f243519aa",
+  "sourceTree": "500bd84527ae2589c7437a761a3239cfdc87c1ab",
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "managedTests": {
+    "passed": 775,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests"
+  },
+  "formRelatedTests": 58,
+  "newDataAndWorkflowTests": 36,
+  "apiComparisons": 15,
+  "sourceFileHashes": {
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "21412658cc43c9e508122b9d0d2eeea231d625f58cf340d60d4a3df2e9d136cb",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "549ced105feeb422f80b5e053ed92bc4138ea93ddfeb1283ffce0f9a15c3c495",
+    "src/Fluent.Pdf/Editing/PdfGraphEdit.cs": "ab0a26f43fc91b4cbb8931fc7cfcadc2c120ecf8f08b16441b34191416b1403f",
+    "src/Fluent.Pdf/Forms/PdfFormContracts.cs": "f6de4528e97aac198335ba70a9cc0d466c874792c608778705212b2ae4828bc0",
+    "src/Fluent.Pdf/Forms/PdfFormData.cs": "55af93b262b7cf8ea76d68c9efafa427048209028b14cf459a698e6821ffde2a",
+    "src/Fluent.Pdf/Forms/PdfFormFdf.cs": "0ae598cf3364e66875f053d408ace0f7a446f7aa54906886e8cb8d7b144fcf59",
+    "src/Fluent.Pdf/Forms/PdfFormFillContracts.cs": "463b5f25b6564804db050ff4fe6c46425376e717dce19c08220c58cb66ebd4e0",
+    "src/Fluent.Pdf/Forms/PdfFormJson.cs": "bbf13c334cff9d5a609ce8ecf522c029ffc1e1138f108489ecc2587078fab807",
+    "src/Fluent.Pdf/Forms/PdfFormReader.cs": "2f8d1879739eb514448200d2ef1251e049ac7ad0e2aac898ec6e7f0cce61e60b",
+    "src/Fluent.Pdf/Forms/PdfFormValues.cs": "c8854f2ef939ea4024cb05be350ecddd2899102c7ef406ff4da153f40204032d",
+    "src/Fluent.Pdf/Forms/PdfFormXml.cs": "1ea0c479e3d3520df4f3bdcfcf044ef3e1f9ece7d7e72d1d55561665486e9d69",
+    "src/Fluent.Pdf/Forms/PdfForms.Copying.cs": "a77abbfd1df10df8f19fa6c4304818c39ad88cd01aa56d564023db7bde096884",
+    "src/Fluent.Pdf/Forms/PdfForms.Editing.cs": "9bd40f68b724c154697fd6a1f428d179889954ff80a181a378b49c529e33d0cb",
+    "src/Fluent.Pdf/Forms/PdfForms.Filling.cs": "d514e12a26efbbd3c6f86e36f0a7ea2c2828a5532f962e15bc9e205b66706fd9",
+    "src/Fluent.Pdf/Forms/PdfForms.Flattening.cs": "6e51c7fa4113cefdb92494ed239037acb80adecb624f735d7179460c6a638e7c",
+    "src/Fluent.Pdf/Forms/PdfForms.cs": "8390fd665a28eeae6a9c48211ae5b606df424cbd47fb67e4706164e17fda1945",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "84fe79db66946e2b99ffab3acb2eb9154fef6776d093eb751ebc201da21c68d6",
+    "tests/Fluent.Pdf.Contract.Tests/FormDataTests.cs": "995e8e5591d0beb86dacfd7bb78655989fc96e098a6457497999545955ce80f1",
+    "tests/Fluent.Pdf.Contract.Tests/FormWorkflowTests.cs": "f4d416aa9ac5443ee9d95c15749529ef13dcbf0a7c6649960faa0a3119eb0cf1"
+  },
+  "reportSha256": {
+    "form-workflow-final-build.log": "0b8ce2ce2c97f1504396df91c92cae08987b5eb6c6d83ada2fefa647d40fe7f4",
+    "form-workflow-final-tests.log": "60aac8061cf8d1d2346209e8f143b81c922e223a79a019a1774d84d29887a5b1",
+    "form-workflow-api-check.log": "5073dfc2e5e4dd12d29239fc06b2c6a93ae4886614c13328541e6a55ce67e8a3",
+    "form-workflow-spec-check.log": "65baa4532dd5bd83e1562174cbd4edceeed9e880808203e6ec95554099379d85",
+    "form-workflow-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "limitations": [
+    "Additional interchange, appearance and ownership profiles remain mandatory, as declared by the source contract.",
+    "Incremental byte-prefix preservation uses an explicitly non-cryptographic signature fixture; it does not verify signature validity/transform permissions.",
+    "Local native-positive tests cannot execute because Landlock is unavailable. CI remains unfiltered.",
+    "Actual minimum runtimes, exact final packages and every production gate remain pending."
+  ],
+  "sourceCI": {
+    "runId": 39132797134,
+    "runNumber": 86,
+    "conclusion": "success",
+    "headCommit": "ac97b7c31b7f85cd687d726effe3313f243519aa",
+    "headTree": "500bd84527ae2589c7437a761a3239cfdc87c1ab",
+    "testedMergeCommit": "1e35763167a06fac7073252b0fada2cce3aa0a4f",
+    "testedMergeTree": "500bd84527ae2589c7437a761a3239cfdc87c1ab",
+    "runtimeLanes": 20,
+    "passedPerLane": 821,
+    "totalPassed": 16420,
+    "failed": 0,
+    "skipped": 0,
+    "jobs": [
+      {
+        "jobId": 117691221468,
+        "logSha256": "03a00d1ed26fa78c812b1eaef413657cc05cec0aab36cb6b39001cd370ad94b3",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          }
+        ]
+      },
+      {
+        "jobId": 117691221647,
+        "logSha256": "a6438a10e537d2e89519ab480536ca548e0db137791d76fe5a1bb7168a8106a8",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          }
+        ]
+      },
+      {
+        "jobId": 117691221710,
+        "logSha256": "56dae3fea46c41b97e1ca7553fd42ffeeecc9d771ad32a409e1a35c648167920",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net472",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net472",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          }
+        ]
+      },
+      {
+        "jobId": 117691221767,
+        "logSha256": "cb6d5a2f106e675205c0c3aa3c3717b217d58040210b50042afa967423debfef",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          }
+        ]
+      },
+      {
+        "jobId": 117691221821,
+        "logSha256": "6f55cf9dcaa66e85c84c8efc9e775e66fddfae8eb225f49208777c0ee3f16380",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          }
+        ]
+      },
+      {
+        "jobId": 117691221955,
+        "logSha256": "91c0e8f907c3e6c2a11a20aa6f58f34667e70357eac9b8823d2c71b0dae8de3a",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 821,
+            "skipped": 0,
+            "total": 821
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Source fixtures only; actual minimum runtimes, complete form interoperability corpus, fuzz/endurance, cryptographic signature verification and exact final-package consumers remain mandatory.",
+      "Historical native startup failures and the earlier Framework deadline failure remain retained in their original evidence; this run does not replace full reliability qualification."
+    ],
+    "artifacts": [
+      {
+        "id": 12139440297,
+        "name": "source-contracts-win-x64",
+        "digest": "sha256:6740ca05aeada3e2f78eb5d7853acd674592cc01506793c73c88e26bd0f18141",
+        "size_in_bytes": 1079747
+      },
+      {
+        "id": 12138890755,
+        "name": "source-contracts-linux-arm64",
+        "digest": "sha256:f779b37ae02a04c8a8fbb9674fb58413326fd441e1c6f0d5d9f0242992f90a7a",
+        "size_in_bytes": 661417
+      },
+      {
+        "id": 12138582027,
+        "name": "source-contracts-osx-x64",
+        "digest": "sha256:6e0974f55f6f682f0c142aa9475988a2ef24f3f7a9f9cce77879a8faa2633214",
+        "size_in_bytes": 680404
+      },
+      {
+        "id": 12138467445,
+        "name": "source-contracts-osx-arm64",
+        "digest": "sha256:977fd1b1da5c28c040c8cc8804cf5fa1e8407044e48fc8c47d9673d710e210bd",
+        "size_in_bytes": 675254
+      },
+      {
+        "id": 12138409131,
+        "name": "source-contracts-win-arm64",
+        "digest": "sha256:f528a21630a8ac19cb67b94d177afef35a1271c56e9c1a6471d910c66326c2d1",
+        "size_in_bytes": 660026
+      },
+      {
+        "id": 12137709616,
+        "name": "source-contracts-linux-x64",
+        "digest": "sha256:6af087b122fcb3f2841b55bc7fff45c77d0f4eb58bf789e13ee5ddf86ed8a478",
+        "size_in_bytes": 661173
+      }
+    ]
+  }
+}
