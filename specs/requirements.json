@@ -542,7 +542,8 @@
         "pending": [
           "Complete legal/booklet/notes/column corpus and full accessibility semantics/profile qualification",
           "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-014-independent.json"
       }
     },
     {

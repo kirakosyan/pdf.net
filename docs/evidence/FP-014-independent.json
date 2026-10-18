@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-014 independent development composition verification; not production or PDF/UA qualification",
+  "sourceCommit": "3ad027c395cb52d193dd5fd5f8f7e028e8a01baf",
+  "workingTreeDirty": false,
+  "method": "Separate original metric/column/note geometry and literal PDF reference models; strict pypdf logical/structure inspection and independent Poppler raster comparison",
+  "fontSha256": "c0aea456c056dbc5712c307799bcbf96637bb494d030cd9707d57921de78209f",
+  "tools": {
+    "FontTools": "4.61.1",
+    "pypdf": "6.10.0",
+    "Pillow": "12.3.0",
+    "NumPy": "2.3.5",
+    "SciPy": "1.17.0"
+  },
+  "renderer": {
+    "path": "/usr/bin/pdftoppm",
+    "version": "25.03.0",
+    "sha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "cases": [
+    {
+      "case": "LeftToRight",
+      "pdfSha256": "8220caa2dacb9b68bbc1638cde082ce60a15e0970ef8ef60e67b2586ea769177",
+      "pages": 2,
+      "logicalText": "exact in logical content order",
+      "structureParentTree": "exact page/MCID/ordered column associations",
+      "rasterPixels": 480000,
+      "differentPixels": 0,
+      "minimumSSIM": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "RightToLeft",
+      "pdfSha256": "b42433812d2b9be9429cf9d90995717df9de3073380c11096bbf96b47e31e6dd",
+      "pages": 2,
+      "logicalText": "exact in logical content order",
+      "structureParentTree": "exact page/MCID/ordered column associations",
+      "rasterPixels": 480000,
+      "differentPixels": 0,
+      "minimumSSIM": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "footnote",
+      "pdfSha256": "ad223664b0d266c0db7d0013c1c0e942e44bc5bc336a1ea051e197ee4e770524",
+      "pages": 1,
+      "logicalText": "exact in logical content order",
+      "structureParentTree": "not requested",
+      "rasterPixels": 115200,
+      "differentPixels": 0,
+      "minimumSSIM": 1.0,
+      "requiredSSIM": 0.995
+    }
+  ],
+  "productionQualified": false,
+  "pending": [
+    "Complete legal-outline/booklet/notes/column structure and fidelity corpus",
+    "Full accessibility semantics and independent PDF/UA profile qualification",
+    "Actual minimum runtimes, final packages, standards/security/fuzz/endurance workloads"
+  ]
+}
