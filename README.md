@@ -74,3 +74,5 @@ The reviewed wordnet upstream implementation provides useful Tesseract 5 loading
 FP-028 adds [resource extraction](docs/resource-extraction.md): shared definitions, actual transformed uses, literal paths, artifacts and exact encoded stream export. Complete profiles and production qualification remain mandatory.
 
 FP-026 adds [bounded text search and explicit replacement](docs/text-search.md). Complete profiles and production qualification remain mandatory.
+
+FP-027 adds [table extraction and structured export](docs/table-extraction.md), with explicit inference/culture/merge/continuation decisions. Complete profiles and production qualification remain mandatory.

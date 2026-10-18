@@ -79,3 +79,5 @@ Requirements discovery and issue preparation are complete. The canonical manifes
 FP-028 has an original [resource extraction profile](resource-extraction.md); full required resource/program profiles and production qualification remain mandatory.
 
 FP-026 has a [search/replacement source profile](text-search.md); complete profiles and production qualification remain mandatory.
+
+FP-027 has a [table extraction source profile](table-extraction.md); complete detection/reconstruction, typed interchange and production qualification remain mandatory.

@@ -26,6 +26,15 @@ public static class PdfResourceExtraction
         return engine!.Finish(report);
     }
 
+    internal static IReadOnlyList<PdfExtractedPath> ReadPathsCore(PdfGraphEdit graph, int page, PdfProviderRegistry providers)
+    {
+        graph.Context.Consume(PdfResourceKind.ExpandedBytes, 4096);
+        graph.Context.Consume(PdfResourceKind.Objects, 16);
+        var engine = new Engine(graph, page, PdfUnknownOperatorPolicy.Reject, providers);
+        engine.Read();
+        return engine.Paths;
+    }
+
     private sealed class Engine
     {
         private readonly PdfGraphEdit _graph;
@@ -84,6 +93,8 @@ public static class PdfResourceExtraction
             C.Consume(PdfResourceKind.ExpandedBytes, 1024);
             C.Consume(PdfResourceKind.Objects, 16);
         }
+
+        internal IReadOnlyList<PdfExtractedPath> Paths => _paths.AsReadOnly();
 
         internal PdfPageResourceManifest Finish(PdfOperationReport report) => new(_graph.Snapshot, _page, _resources.AsReadOnly(), _declarations.AsReadOnly(), _uses.AsReadOnly(), _paths.AsReadOnly(), _artifacts.AsReadOnly(), _content.AsReadOnly(), _stamps, report);
         private void RegisterScope(PdfObjectId owner, PdfValue scope)

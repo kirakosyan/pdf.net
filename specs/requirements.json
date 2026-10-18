@@ -1121,7 +1121,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/table-extraction.md",
+        "implemented": [
+          "Explicit literal ruled/aligned borderless inference with inferred bounds/scores and rectangular merged-cell spans",
+          "Semantic/source-character/rule provenance, explicit decimal culture and opt-in page/header continuation retaining original tables",
+          "Bounded explicit merged-cell CSV and typed JSON/atomic JSON files; source/runtime consumers and independent original labeled observations"
+        ],
+        "pending": [
+          "Complete multiple/irregular/rotated/conditional/clip/owner, borderless-merge, automatic header and wrapped continuation profiles remain mandatory",
+          "Complete typed cultural/schema/date/boolean profiles and full labeled precision/recall/continuation corpora remain mandatory",
+          "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-027-source.json",
+        "standardsEvidence": "docs/evidence/FP-027-standards.json",
+        "independentEvidence": "docs/evidence/FP-027-independent.json"
+      }
     },
     {
       "id": "FP-028",

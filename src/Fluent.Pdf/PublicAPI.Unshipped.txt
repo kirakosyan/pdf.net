@@ -564,6 +564,30 @@ Fluent.Pdf.PdfExtractedSpan.Bounds.get -> Fluent.Pdf.PdfRect?
 Fluent.Pdf.PdfExtractedSpan.CharacterCount.get -> int
 Fluent.Pdf.PdfExtractedSpan.FirstCharacter.get -> int
 Fluent.Pdf.PdfExtractedSpan.Text.get -> string!
+Fluent.Pdf.PdfExtractedTable
+Fluent.Pdf.PdfExtractedTable.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfExtractedTable.Cells.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedTableCell!>!
+Fluent.Pdf.PdfExtractedTable.ColumnBoundaries.get -> System.Collections.Generic.IReadOnlyList<double>!
+Fluent.Pdf.PdfExtractedTable.ColumnCount.get -> int
+Fluent.Pdf.PdfExtractedTable.Confidence.get -> double
+Fluent.Pdf.PdfExtractedTable.Mode.get -> Fluent.Pdf.PdfTableDetectionMode
+Fluent.Pdf.PdfExtractedTable.PageIndex.get -> int
+Fluent.Pdf.PdfExtractedTable.RowCount.get -> int
+Fluent.Pdf.PdfExtractedTableCell
+Fluent.Pdf.PdfExtractedTableCell.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfExtractedTableCell.Characters.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedCharacter!>!
+Fluent.Pdf.PdfExtractedTableCell.Column.get -> int
+Fluent.Pdf.PdfExtractedTableCell.ColumnSpan.get -> int
+Fluent.Pdf.PdfExtractedTableCell.Confidence.get -> double
+Fluent.Pdf.PdfExtractedTableCell.Number.get -> decimal?
+Fluent.Pdf.PdfExtractedTableCell.PageIndex.get -> int
+Fluent.Pdf.PdfExtractedTableCell.Row.get -> int
+Fluent.Pdf.PdfExtractedTableCell.RowSpan.get -> int
+Fluent.Pdf.PdfExtractedTableCell.RuleSources.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfResourceSource!>!
+Fluent.Pdf.PdfExtractedTableCell.Text.get -> string!
+Fluent.Pdf.PdfExtractedTableSequence
+Fluent.Pdf.PdfExtractedTableSequence.RepeatedHeaderRows.get -> int
+Fluent.Pdf.PdfExtractedTableSequence.TableIndices.get -> System.Collections.Generic.IReadOnlyList<int>!
 Fluent.Pdf.PdfExtractedWord
 Fluent.Pdf.PdfExtractedWord.Bounds.get -> Fluent.Pdf.PdfRect
 Fluent.Pdf.PdfExtractedWord.Characters.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedCharacter!>!
@@ -1158,6 +1182,9 @@ Fluent.Pdf.PdfMatrix.Multiply(Fluent.Pdf.PdfMatrix right) -> Fluent.Pdf.PdfMatri
 Fluent.Pdf.PdfMatrix.PdfMatrix() -> void
 Fluent.Pdf.PdfMatrix.PdfMatrix(double a, double b, double c, double d, double e, double f) -> void
 Fluent.Pdf.PdfMatrix.Transform(Fluent.Pdf.PdfPoint point) -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfMergedCellCsvPolicy
+Fluent.Pdf.PdfMergedCellCsvPolicy.AnchorOnly = 0 -> Fluent.Pdf.PdfMergedCellCsvPolicy
+Fluent.Pdf.PdfMergedCellCsvPolicy.RepeatText = 1 -> Fluent.Pdf.PdfMergedCellCsvPolicy
 Fluent.Pdf.PdfMetadata
 Fluent.Pdf.PdfMetadataEditor
 Fluent.Pdf.PdfMetadataEditor.GetInformation(string! name) -> string?
@@ -1895,6 +1922,30 @@ Fluent.Pdf.PdfTableDataColumn<T>.PdfTableDataColumn(Fluent.Pdf.PdfTableColumn! w
 Fluent.Pdf.PdfTableDataColumn<T>.TextStyle.get -> Fluent.Pdf.PdfFlowTextStyle!
 Fluent.Pdf.PdfTableDataColumn<T>.Value.get -> System.Func<T, object?>!
 Fluent.Pdf.PdfTableDataColumn<T>.Width.get -> Fluent.Pdf.PdfTableColumn!
+Fluent.Pdf.PdfTableDetectionMode
+Fluent.Pdf.PdfTableDetectionMode.Borderless = 1 -> Fluent.Pdf.PdfTableDetectionMode
+Fluent.Pdf.PdfTableDetectionMode.Ruled = 0 -> Fluent.Pdf.PdfTableDetectionMode
+Fluent.Pdf.PdfTableExtraction
+Fluent.Pdf.PdfTableExtractionOptions
+Fluent.Pdf.PdfTableExtractionOptions.HeaderRows.get -> int
+Fluent.Pdf.PdfTableExtractionOptions.JoinConsecutivePages.get -> bool
+Fluent.Pdf.PdfTableExtractionOptions.MaximumCells.get -> int
+Fluent.Pdf.PdfTableExtractionOptions.MinimumColumnGap.get -> double
+Fluent.Pdf.PdfTableExtractionOptions.MinimumColumns.get -> int
+Fluent.Pdf.PdfTableExtractionOptions.MinimumRows.get -> int
+Fluent.Pdf.PdfTableExtractionOptions.Mode.get -> Fluent.Pdf.PdfTableDetectionMode
+Fluent.Pdf.PdfTableExtractionOptions.NumericCulture.get -> string?
+Fluent.Pdf.PdfTableExtractionOptions.PdfTableExtractionOptions(Fluent.Pdf.PdfTableDetectionMode mode, Fluent.Pdf.PdfRect? region = null, double tolerance = 1, double minimumColumnGap = 12, int minimumRows = 2, int minimumColumns = 2, int maximumCells = 100000, int headerRows = 0, bool joinConsecutivePages = false, string? numericCulture = null) -> void
+Fluent.Pdf.PdfTableExtractionOptions.Region.get -> Fluent.Pdf.PdfRect?
+Fluent.Pdf.PdfTableExtractionOptions.Tolerance.get -> double
+Fluent.Pdf.PdfTableExtractionResult
+Fluent.Pdf.PdfTableExtractionResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTableExtractionResult.Sequences.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedTableSequence!>!
+Fluent.Pdf.PdfTableExtractionResult.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfTableExtractionResult.Tables.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedTable!>!
+Fluent.Pdf.PdfTableExtractionResult.WriteCsv(System.IO.Stream! output, Fluent.Pdf.PdfMergedCellCsvPolicy mergedCells, int sequenceIndex = 0, bool omitRepeatedHeaders = false, bool escapeSpreadsheetFormulas = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTableExtractionResult.WriteJson(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTableExtractionResult.WriteJsonFile(string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfTableFragment
 Fluent.Pdf.PdfTableFragment.BlockIndex.get -> int
 Fluent.Pdf.PdfTableFragment.BodyEnd.get -> double
@@ -2315,6 +2366,7 @@ static Fluent.Pdf.PdfTableCell.Text(string! text, Fluent.Pdf.PdfFlowTextStyle! t
 static Fluent.Pdf.PdfTableColumn.Auto(double minimum = 0, double maximum = 14400, double weight = 1) -> Fluent.Pdf.PdfTableColumn!
 static Fluent.Pdf.PdfTableColumn.Fixed(double width) -> Fluent.Pdf.PdfTableColumn!
 static Fluent.Pdf.PdfTableData.Bind<T>(System.Collections.Generic.IEnumerable<T>! source, Fluent.Pdf.PdfTableDataColumn<T>![]! columns, System.Globalization.CultureInfo! culture, int maximumRows = 100000, Fluent.Pdf.PdfTableRow![]? headerRows = null, bool allowRowSplit = true, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTable!
+static Fluent.Pdf.PdfTableExtraction.Read(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IReadOnlyList<int>! pages, Fluent.Pdf.PdfTableExtractionOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTableExtractionResult!
 static Fluent.Pdf.PdfTemplateLayout.Layout(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! blocks, Fluent.Pdf.PdfFlowOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfPageTemplate! template, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPageTemplateResult!
 static Fluent.Pdf.PdfText.Shape(string! text, Fluent.Pdf.PdfFontFallback! fonts, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfTextOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShapedText!
 static Fluent.Pdf.PdfTextDrawing.Create(Fluent.Pdf.PdfShapedText! text, double x, double y, double fontSize, double lineHeight = 1.2, string! resourcePrefix = "FT", bool subset = true, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextDrawing!

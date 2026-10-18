@@ -151,3 +151,5 @@ FP-018 adds immutable detached stamp sources/options plus transactional `PdfStam
 FP-028 adds `PdfResourceExtraction.ReadPage`, immutable `PdfPageResourceManifest` and explicit resource stream/font-program export/inspection. See [resource extraction](resource-extraction.md) for coordinate, identity and encoded-byte semantics.
 
 FP-026 adds `PdfTextQuery`, `PdfTextSearch.FindPage`, provenance-rich matches and `ReplacePage` with explicit fonts/shaping/overflow. See [search and replacement contracts](text-search.md).
+
+FP-027 adds `PdfTableExtraction.Read`, explicit options and immutable cells/tables/sequences, plus explicit merged-cell CSV and versioned typed JSON exports. See [table extraction contracts](table-extraction.md).

@@ -75,5 +75,6 @@
     "Complete pattern/glyph/soft-mask program expansion, resource/font/image and visibility/color/clip profiles remain mandatory",
     "Complete stamp/decoration classification and full content/corpus coverage remain mandatory",
     "All actual mandatory RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
-  ]
+  ],
+  "incompleteSourceCI": "docs/evidence/PR-118-CI-104-source.json"
 }

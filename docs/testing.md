@@ -102,3 +102,7 @@ FP-018 adds owned stream/scope, exact page, persistence, update/removal cycle, r
 FP-028 source contracts exercise shared resources/occurrences, nested/mixed transforms, exact encoded/decoded exports, explicit font restrictions, artifacts/stamps, unknown resources/operators, cycles and budget/cancellation/atomic-output boundaries, and both language consumers. Independent original-fixture observations do not constitute production qualification.
 
 FP-026 source contracts cover semantic/cross-stream/Form/regex/region/style search, ligature/ActualText provenance, denial deadlines, match/resource/cancellation bounds, source-position-preserving replacement, missing glyphs, overflow, explicit unsupported owners/reflow and C#/VB execution. Independent original outputs do not qualify the full mandatory corpus.
+
+FP-027 source contracts cover ruled/borderless/merged cells, explicit culture, source geometry/provenance, matching/mismatched page headers, ActualText, CSV/JSON, malformed merges, resource/cancellation boundaries, atomic files and C#/VB execution. Independent measurements cover 32 small pre-labeled cells; full precision/recall/continuation qualification remains mandatory.
+
+The macOS Intel source CI job allows 40 minutes for setup/build/API comparison and all three required runtime lanes; other jobs allow 20 minutes. CI104 completed two Intel runtime lanes before cancellation near the previous 20-minute cap. This is a CI job duration setting; SDK operation limits, deadline assertions, required checks and production qualification remain mandatory.

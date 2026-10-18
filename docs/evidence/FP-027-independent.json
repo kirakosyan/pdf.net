@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-027",
+  "observations": {
+    "purpose": "independent-original-labeled-table-source-observations-not-production-qualification",
+    "versions": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6"
+    },
+    "labelSha256": "2867d9ec4a63d8d73082393eefd3366ed4ed77011e8b19a21887c0e6684b662b",
+    "labeledCells": 32,
+    "predictedCells": 32,
+    "correctCells": 32,
+    "cellPrecision": 1.0,
+    "cellRecall": 1.0,
+    "continuationPositiveFixtures": 1,
+    "continuationNegativeFixtures": 1,
+    "observations": [
+      {
+        "mode": "merged",
+        "sourceSha256": "01d62d054506b97fcb5a2587cf4c0d8c114ef12060a46e7a579be4fb7385896d",
+        "jsonSha256": "f0a2f48b9a2e010ca29f76b7084473842cb5e2428023fc84e4aec3a3b20ece54",
+        "csvSha256": "56504168957c2562be180816ca880021a5303a3befe0122e7599630b69e1ee17",
+        "tables": [
+          {
+            "page": 0,
+            "labeledCells": 3,
+            "independentSourceCharacters": 8,
+            "pypdfRawText": "Header\nA B",
+            "MuPDFText": "Header\nA\nB\n",
+            "MuPDFRulePaths": 3
+          }
+        ],
+        "sequences": [
+          [
+            0
+          ]
+        ],
+        "csvRows": 2,
+        "productionQualified": false
+      },
+      {
+        "mode": "rectangular",
+        "sourceSha256": "02dee31539957e16a5dff90bd257e662b6ea9d4ac8ed3c76810a1594c4e91197",
+        "jsonSha256": "3f64cb3f0325f4f95e14318e28c1094b4914c486f0fefdfa12296a19575661fe",
+        "csvSha256": "7a807a7b44cc596a128ff7a5e43a16fd9470c8ee7d89dd1eec2f7ccf761d4309",
+        "tables": [
+          {
+            "page": 0,
+            "labeledCells": 4,
+            "independentSourceCharacters": 6,
+            "pypdfRawText": "H1 H2\nA B",
+            "MuPDFText": "H1\nH2\nA\nB\n",
+            "MuPDFRulePaths": 3
+          }
+        ],
+        "sequences": [
+          [
+            0
+          ]
+        ],
+        "csvRows": 2,
+        "productionQualified": false
+      },
+      {
+        "mode": "borderless",
+        "sourceSha256": "91680f96eedebd277ac94354b15acd791e180e73e2bf51fc807c9f5579072525",
+        "jsonSha256": "f954aeb4655b6cf83aa4a201462d3077c30d32297f0a247148aaa1fec28a97c2",
+        "csvSha256": "7a807a7b44cc596a128ff7a5e43a16fd9470c8ee7d89dd1eec2f7ccf761d4309",
+        "tables": [
+          {
+            "page": 0,
+            "labeledCells": 4,
+            "independentSourceCharacters": 6,
+            "pypdfRawText": "H1 H2\nA B",
+            "MuPDFText": "H1\nH2\nA\nB\n",
+            "MuPDFRulePaths": 0
+          }
+        ],
+        "sequences": [
+          [
+            0
+          ]
+        ],
+        "csvRows": 2,
+        "productionQualified": false
+      },
+      {
+        "mode": "culture",
+        "sourceSha256": "de109252ba57567c2773f75423d9238630686ffbcabf74cfb4a1d4ebb893b749",
+        "jsonSha256": "23814d9df864db37d8c00e79743543a2c4db331424f298fcd9432691245d693b",
+        "csvSha256": "807c11e82fcd7d67e5c377b0e35e703da3fd727d64f18c56f72e048d5333768c",
+        "tables": [
+          {
+            "page": 0,
+            "labeledCells": 3,
+            "independentSourceCharacters": 18,
+            "pypdfRawText": "Header\n1.234,50 -2,5",
+            "MuPDFText": "Header\n1.234,50\n-2,5\n",
+            "MuPDFRulePaths": 3
+          }
+        ],
+        "sequences": [
+          [
+            0
+          ]
+        ],
+        "csvRows": 2,
+        "productionQualified": false
+      },
+      {
+        "mode": "actual",
+        "sourceSha256": "8207c57f18c53b3ead8d9e268fc685ffca88f764ffc3d0663b7a1391753b19a0",
+        "jsonSha256": "035aeb56d13bc278a33fe9d36589b7d544930633d15246813c16ffbfe5ba2b9c",
+        "csvSha256": "5133a764cfa521eb8cec0b9516041954241a8dfada04c9da14ee72dfdf240c3b",
+        "tables": [
+          {
+            "page": 0,
+            "labeledCells": 3,
+            "independentSourceCharacters": 8,
+            "pypdfRawText": "Header\nA B",
+            "MuPDFText": "Header\nquote\"comma,\n=A1\nB\n",
+            "MuPDFRulePaths": 3
+          }
+        ],
+        "sequences": [
+          [
+            0
+          ]
+        ],
+        "csvRows": 2,
+        "productionQualified": false
+      },
+      {
+        "mode": "continuation",
+        "sourceSha256": "eb1e9c970a606bc6cc567513927c2c00d5d0b2900022bb2ea03c8dc2ba6d268c",
+        "jsonSha256": "8bc06b9804e27c5ab04923a562954f74824a854e848d4d37620955f3752d27e5",
+        "csvSha256": "08ff79d491ba3538d93f415d154e535f4cc7a4ed82971348468d3b654b07c1b8",
+        "tables": [
+          {
+            "page": 0,
+            "labeledCells": 4,
+            "independentSourceCharacters": 6,
+            "pypdfRawText": "H1 H2\nA B",
+            "MuPDFText": "H1\nH2\nA\nB\n",
+            "MuPDFRulePaths": 3
+          },
+          {
+            "page": 1,
+            "labeledCells": 4,
+            "independentSourceCharacters": 6,
+            "pypdfRawText": "H1 H2\nC D",
+            "MuPDFText": "H1\nH2\nC\nD\n",
+            "MuPDFRulePaths": 3
+          }
+        ],
+        "sequences": [
+          [
+            0,
+            1
+          ]
+        ],
+        "csvRows": 3,
+        "productionQualified": false
+      },
+      {
+        "mode": "different-header",
+        "sourceSha256": "5c62585c427741f42444f29129b289d5e90ef1e16735d6a71d2bf5bdb82985a5",
+        "jsonSha256": "30fb179f7bc03c672310a49fdbeec4ba9e2b9dfd04c05b279c83222781f6f1a2",
+        "csvSha256": "7a807a7b44cc596a128ff7a5e43a16fd9470c8ee7d89dd1eec2f7ccf761d4309",
+        "tables": [
+          {
+            "page": 0,
+            "labeledCells": 4,
+            "independentSourceCharacters": 6,
+            "pypdfRawText": "H1 H2\nA B",
+            "MuPDFText": "H1\nH2\nA\nB\n",
+            "MuPDFRulePaths": 3
+          },
+          {
+            "page": 1,
+            "labeledCells": 3,
+            "independentSourceCharacters": 8,
+            "pypdfRawText": "Header\nC D",
+            "MuPDFText": "Header\nC\nD\n",
+            "MuPDFRulePaths": 3
+          }
+        ],
+        "sequences": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "csvRows": 2,
+        "productionQualified": false
+      }
+    ],
+    "productionQualified": false,
+    "limitations": [
+      "Seven small original source profiles; scores here are fixture measurements, not production reconstruction qualification",
+      "Cell edges use explicit declared source advance/rule geometry, not glyph ink or calibrated semantic probability",
+      "Complete noisy/rotated/multiple-candidate/borderless-merge/semantic/continuation/culture corpora remain mandatory",
+      "All actual mandatory runtime/RID, final-package and production gates remain mandatory"
+    ]
+  },
+  "sourceObserverSha256": "42691b4a52a718f331d394f3d5971c54ddc7f5c64f9855276fe81c12a74dd15b",
+  "independentReportSha256": "b88459c27244eb02dc336ab32153771a6d9b91f30642835b96e9e0d8e7361394",
+  "retainedTools": {
+    "observerSourceSha256": "dcad0d6c4865cede7b0626251bf1e29eefeea0251a50a96adcfd3b8bc6af0ede",
+    "independentToolSha256": "e16133c3e916a384e9903edc049168d88cd7419d8664f40f84840e027fb1f7f7",
+    "labelsSha256": "2867d9ec4a63d8d73082393eefd3366ed4ed77011e8b19a21887c0e6684b662b",
+    "initialFormatManifestSha256": "284f223b6d0b566e76314cfd8153e1b00c21eb04dd29e82a032e5743365e2e72",
+    "finalFormatManifestSha256": "843076c7130eda5bd271c51dccf40255f2f636e8fa61c96bfd68cf07315ca296"
+  },
+  "productionQualified": false
+}

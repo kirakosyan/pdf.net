@@ -9,7 +9,7 @@ permissions:
 jobs:
   validate:
     name: Contracts (${{ matrix.id }})
-    timeout-minutes: 20
+    timeout-minutes: ${{ matrix.id == 'osx-x64' && 40 || 20 }}
     strategy:
       fail-fast: false
       matrix:

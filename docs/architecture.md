@@ -123,3 +123,5 @@ FP-018 composes captured sources through the existing canvas/resource writer, th
 FP-028 separates immutable resource identities, effective bindings and operator occurrences. Same-context page/Form traversal retains per-segment transforms and source provenance; optional explicit font inspection never discovers host fonts. See [resource extraction](resource-extraction.md).
 
 FP-026 shares one capture/extraction/matching/shaping/font/write context. Replacement edits exact source strings with TJ advance compensation and isolated explicit-font foreground text; unsupported owner/reflow profiles reject. See [text search](text-search.md).
+
+FP-027 uses one graph/text/resource context for explicit geometric inference. Immutable page cells keep source provenance; continuation groups retain original headers, and interchange has separate bounded/atomic export contexts. See [table extraction](table-extraction.md).

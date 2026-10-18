@@ -150,3 +150,5 @@ Source progress through #36 now includes [owned watermarks/stamps and artifact c
 Source progress through #37 now includes [resource extraction](resource-extraction.md). Full FP-028 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
 
 Source progress through #38 now includes [search and text replacement](text-search.md). Full FP-026 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #39 now includes [table/structured-data extraction](table-extraction.md). Full FP-027 scope and production qualification remain mandatory; dependent requirements remain independently scoped.

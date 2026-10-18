@@ -5,6 +5,7 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfTableExtractionResult ExtractTables(PdfDocumentSnapshot source, PdfTableDetectionMode mode) => PdfTableExtraction.Read(source, new[] { 0 }, new PdfTableExtractionOptions(mode));
     public static PdfTextSearchResult Search(PdfDocumentSnapshot source, string literal) => PdfTextSearch.FindPage(source, 0, new PdfTextQuery(literal));
     public static PdfPageResourceManifest ExtractResources(PdfDocumentSnapshot source, int page) => PdfResourceExtraction.ReadPage(source, page);
     public static PdfDocument Stamp(PdfDocumentSnapshot source, string identifier, PdfStampContent content, int[] pages, PdfStampOptions options) => PdfStamps.Apply(source, identifier, content, pages, options);
