@@ -587,7 +587,8 @@
         "pending": [
           "Complete book-length/template/HTML-provider/fidelity corpus and full semantic structure qualification",
           "Actual minimum runtimes, final packages and complete production gates"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-015-independent.json"
       }
     },
     {

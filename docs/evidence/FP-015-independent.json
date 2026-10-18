@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-015 independent development reader verification; not complete template or production qualification",
+  "sourceCommit": "3e8228d30b3bd90e2aff9a111a27c822e48f73ef",
+  "workingTreeDirty": false,
+  "tool": {
+    "pypdf": "6.10.0"
+  },
+  "cases": [
+    {
+      "sections": 1,
+      "pages": 2,
+      "passes": 2,
+      "pdfSha256": "77f44abcfcf39c265fa02e4bfd79dd99e468e72e30e5eaa48b631f93dc42d277",
+      "links": 1,
+      "readerChecks": "exact heading/body target page objects and native top coordinates; final totals, variants, labels and artifact scopes"
+    },
+    {
+      "sections": 3,
+      "pages": 4,
+      "passes": 2,
+      "pdfSha256": "cdb025afdcf67199b109dbad68606548d43d7408d08c2f6593e153280fd62eb1",
+      "links": 3,
+      "readerChecks": "exact heading/body target page objects and native top coordinates; final totals, variants, labels and artifact scopes"
+    },
+    {
+      "sections": 12,
+      "pages": 14,
+      "passes": 2,
+      "pdfSha256": "a82272550ef7e7ee3eee4593d4b1edf5b513b34a6e413898bede59d1553d4607",
+      "links": 12,
+      "readerChecks": "exact heading/body target page objects and native top coordinates; final totals, variants, labels and artifact scopes"
+    }
+  ],
+  "productionQualified": false,
+  "pending": [
+    "Full book-length convergence and nested/HTML-provider fidelity corpus",
+    "Independent visual/conformance qualification for all supported profiles",
+    "Actual minimum runtimes, final packages and complete security/fuzz/endurance workloads"
+  ]
+}
