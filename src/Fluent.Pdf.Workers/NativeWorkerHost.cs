@@ -86,8 +86,9 @@ public sealed class NativeWorkerHost
             start.EnvironmentVariables["HOME"] = job;
             // Fixed per-process runtime bounds for self-contained managed native bridges.
             // These are recomputed from this job's envelope, never inherited from the caller.
-            start.EnvironmentVariables["DOTNET_GCHeapHardLimit"]=(options.MaximumMemoryBytes/4).ToString("X",CultureInfo.InvariantCulture);
-            start.EnvironmentVariables["DOTNET_GCRegionRange"]=Math.Max(33554432,options.MaximumMemoryBytes/2).ToString("X",CultureInfo.InvariantCulture);
+            // GC auxiliary mappings also consume the OS address-space envelope.
+            start.EnvironmentVariables["DOTNET_GCHeapHardLimit"]=(options.MaximumMemoryBytes/8).ToString("X",CultureInfo.InvariantCulture);
+            start.EnvironmentVariables["DOTNET_GCRegionRange"]=Math.Max(33554432,options.MaximumMemoryBytes/4).ToString("X",CultureInfo.InvariantCulture);
             start.EnvironmentVariables["DOTNET_GCRegionSize"]="400000";
             start.EnvironmentVariables["DOTNET_GCConserveMemory"]="9";
             start.EnvironmentVariables["DOTNET_gcServer"]="0";
