@@ -156,6 +156,7 @@ public sealed class ArchivalTests
         var failure = Assert.Throws<PdfException>(() => PdfArchival.Convert(source.CreateSnapshot(), output, new(PdfArchivalProfile.A2B), ArchivalFixture.Providers()));
         Assert.Equal("Archival.IndependentValidation", failure.Diagnostic.Code);
         Assert.Equal(0, output.Length);
+        Assert.True(failure.Data.Contains("Fluent.Pdf.ArchivalValidation"), "Missing archival details; operation=" + failure.Diagnostic.Operation + "; keys=" + string.Join(",", failure.Data.Keys.Cast<object>().Select(key => key.ToString())) + "; stack=" + failure.StackTrace);
         var observation = Assert.IsType<PdfArchivalValidation>(failure.Data["Fluent.Pdf.ArchivalValidation"]);
         Assert.True(observation.Completed);
         Assert.False(observation.IsCompliant);

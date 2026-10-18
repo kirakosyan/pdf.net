@@ -9,6 +9,23 @@ namespace Fluent.Pdf.Contract.Tests;
 public sealed class PolicyTests
 {
     [Fact]
+    public void FailureDetailsSurviveLatchedRethrowAndOperationCompletion()
+    {
+        var details = new object();
+        PdfException? original = null;
+        var failure = Assert.Throws<PdfException>(() => PdfFont.Run("FailureDetails", "fixture.details", null, default, context =>
+        {
+            original = Assert.Throws<PdfException>(() => context.ReportFailure(new("Fixture.Details", "Original bounded details."), "fixture.details", details));
+            Assert.Same(details, original.Data["fixture.details"]);
+            var repeated = Assert.Throws<PdfException>(context.Checkpoint);
+            Assert.Same(original, repeated);
+            Assert.Same(details, repeated.Data["fixture.details"]);
+        }));
+        Assert.Same(original, failure);
+        Assert.Same(details, failure.Data["fixture.details"]);
+    }
+
+    [Fact]
     public void TemporaryReservationsReleaseMemoryAndAllowOverlappingObjectWork()
     {
         var report = Run(context =>

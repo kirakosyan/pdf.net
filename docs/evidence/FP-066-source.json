@@ -269,5 +269,22 @@
       "archival-failure-details-api.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67"
     },
     "frameworkRuntimeVerification": "Pending corrected full platform CI; local Framework execution is unavailable."
+  },
+  "failureDetailsInvestigation": {
+    "failedRun": 39142512682,
+    "head": "6623d1544b06c560450d8fc29857bc9a7b75c550",
+    "failedJob": 117719641396,
+    "runtime": "current .NET Framework x64",
+    "failedCase": "FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
+    "observation": "The same missing Data finding remains after attachment-before-throw. No root cause established. Added a direct shared-context rethrow contract and detailed failure-key/stack reporting without weakening the archival assertion.",
+    "retainedLogSha256": "d5cb840bc021bc08df345f04de8bd1ed9fef829c50b7ef477456cdcc8909bc59",
+    "localTargetedTests": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "runtime": ".NET10.0.13"
+    },
+    "localTestsIncludeUncommittedCompatibilitySource": true,
+    "productionQualified": false
   }
 }
