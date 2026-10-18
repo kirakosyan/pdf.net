@@ -54,12 +54,90 @@
     "host": "osx-arm64",
     "runtime": ".NET 10",
     "case": "SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
-    "observation": "The native codec worker exited with a runtime initialization failure. Five hosts and the macOS ARM64 net8 lane passed. A fresh-job retry is pending; failure cause remains unproven and blocks production reliability qualification.",
+    "observation": "The original macOS ARM64 net10 codec case failed during native runtime initialization. Five hosts and the macOS ARM64 net8 lane passed. An unchanged-job retry then passed all three macOS ARM64 lanes. Cause remains unproven and blocks production reliability qualification.",
     "workerVmBaseline": 420054368256,
     "workerMemoryGrowthLimit": 267975730,
     "failureLogSha256": "b72cc5d7441728f49a92aaf6e45cc093ed6d9250a1e0a13519da3df5cd4ba7f4",
     "freshInitializationProbeReportSha256": "57d309d085d158e599541027eb34072a4ceed0730af30683ca6e7b62f70dd01f",
     "retryChangesTestsOrLimits": false,
-    "retainedOutsideRepository": true
+    "retainedOutsideRepository": true,
+    "retryJob": 117672958669
+  },
+  "sourceCi": {
+    "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455",
+    "testedMergeCommit": "1cb2e97941381a9751d038441c25a78a8451b257",
+    "conclusion": "success-after-one-recorded-job-retry",
+    "testsPerLane": 725,
+    "executionLanes": 20,
+    "passedSelectedAttempts": 14500,
+    "failedSelectedAttempts": 0,
+    "skippedSelectedAttempts": 0,
+    "allEarlierAttemptsRetained": true,
+    "artifacts": [
+      {
+        "name": "source-contracts-osx-arm64",
+        "id": 12136408174,
+        "digest": "sha256:40d75df8eda0af43c19c580d71d7866545f35c038f5cb87034be11006a045bec",
+        "sizeBytes": 577665,
+        "expiresAt": "2027-01-16T12:16:35Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136408174"
+      },
+      {
+        "name": "source-contracts-linux-arm64",
+        "id": 12136355992,
+        "digest": "sha256:924f7cd39aada10ccbfe416dd5d869dba9746462b35dcc9503b3376ab64bb2c8",
+        "sizeBytes": 575300,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136355992"
+      },
+      {
+        "name": "source-contracts-linux-x64",
+        "id": 12136306983,
+        "digest": "sha256:354f6edbf31d2fc5b98c240e4be95b6b24bff335cff150b90845ffd817355f81",
+        "sizeBytes": 576520,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136306983"
+      },
+      {
+        "name": "source-contracts-win-x64",
+        "id": 12136262619,
+        "digest": "sha256:606b3ce317f5097795a5711ae8cc7306c88c22b9e0cf5a76a083c1a03dd9a0ab",
+        "sizeBytes": 942530,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136262619"
+      },
+      {
+        "name": "source-contracts-osx-arm64",
+        "id": 12136197234,
+        "digest": "sha256:8d16e17959cfaa97ef3e49d52b69450e1a8f2df4af3126ba7a2edf9fd7bda82a",
+        "sizeBytes": 373141,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136197234"
+      },
+      {
+        "name": "source-contracts-osx-x64",
+        "id": 12135957421,
+        "digest": "sha256:65adbafed70ec531ededdfc11ddfbcc9ab3a853c9b88a6161514b04fdb826b0d",
+        "sizeBytes": 579310,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12135957421"
+      },
+      {
+        "name": "source-contracts-win-arm64",
+        "id": 12135304299,
+        "digest": "sha256:0b3ea5023a42a83f0e0680a66e438c2fac5a46104af534527a9895cd9d60e6f0",
+        "sizeBytes": 577002,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12135304299"
+      }
+    ],
+    "retainedLogs": {
+      "pr118-attachments-ci-117670556403.log": "5f7e0aaa31143d7c84486589d72124e97d0bf468e066f687e978ae374efeb9d6",
+      "pr118-attachments-ci-117670556290.log": "c014005b9fa85e5fc7ac329a1c670d94b314b6b0c6dce792db2304270e7b9370",
+      "pr118-attachments-ci-117672958669.log": "ec0528784afceb978a7d2615345e9baad1fcc2aef1cf750686c3d049e4448cd8",
+      "pr118-attachments-ci-117670556209.log": "91333cbcc832ed5c1c46a60b30f49f072f823e7e773ce86bded571b97cc0e65a",
+      "pr118-attachments-ci-117670556223.log": "63aa6723a05fc803cf686641f79f560128bdebbe06437e5ec713853621b2490d",
+      "pr118-attachments-ci-117670556030.log": "522e5e62d175c971824dde0c2528c7dc830d517ec2cb43098c82afbee585fd88"
+    }
   }
 }

@@ -5,6 +5,12 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static string ExtractPageText(Stream input)
+    {
+        using var document = PdfFacade.Open(input);
+        return PdfTextExtraction.ReadPage(document.CreateSnapshot(), 0, providers: new PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance)).Text;
+    }
+
     public static PdfOperationReport WriteLayerPdf(Stream output)
     {
         using var blank = PdfFacade.Create().AddPage();

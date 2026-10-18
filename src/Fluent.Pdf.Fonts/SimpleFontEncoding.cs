@@ -15,8 +15,54 @@ internal static class SimpleFontEncoding
             throw new ArgumentNullException(nameof(baseFont));
         if (encodedText.Kind != PdfValueKind.String)
             throw new ArgumentException("Encoded font text must be a byte string.", nameof(encodedText));
+        var glyphNames = Names(encoding, baseFont, context, out var normalized);
+        var names = FontResources.GlyphList(context);
+        if (normalized == "ZapfDingbats")
+        {
+            string metrics = FontResources.Text("ZapfDingbats.metrics", context);
+            context.Consume(PdfResourceKind.ExpandedBytes, metrics.Length * 8L);
+            using var reader = new StringReader(metrics);
+            reader.ReadLine();
+            string? line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                context.Checkpoint();
+                var fields = line.Split('\t');
+                string[] scalars = fields[2].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var unicode = new StringBuilder();
+                foreach (string scalar in scalars)
+                    unicode.Append(char.ConvertFromUtf32(int.Parse(scalar, NumberStyles.HexNumber, CultureInfo.InvariantCulture)));
+                names[fields[0]] = unicode.ToString();
+            }
+        }
+
+        var result = new StringBuilder();
+        foreach (byte code in encodedText.StringBytes)
+        {
+            context.Checkpoint();
+            context.Consume(PdfResourceKind.Objects, 1);
+            string unicode = FontResources.Unicode(glyphNames[code], names);
+            if (unicode.Length == 0)
+            {
+                context.Report(new PdfDiagnostic("Font.UnmappedCode", "A simple-font glyph name has no published Unicode mapping.", severity: PdfDiagnosticSeverity.Warning, lossCategory: PdfLossCategory.SubstitutedContent));
+                unicode = "\ufffd";
+            }
+
+            context.Consume(PdfResourceKind.ExpandedBytes, unicode.Length * 4L + 16);
+            result.Append(unicode);
+        }
+
+        return result.ToString();
+    }
+
+    internal static string[] Names(PdfValue encoding, string baseFont, PdfOperationContext context, out string normalized)
+    {
+        if (encoding == null)
+            throw new ArgumentNullException(nameof(encoding));
+        if (baseFont == null)
+            throw new ArgumentNullException(nameof(baseFont));
         context.Checkpoint();
-        string normalized = baseFont.Length > 7 && baseFont[6] == '+' && baseFont.Take(6).All(c => c >= 'A' && c <= 'Z') ? baseFont.Substring(7) : baseFont;
+        normalized = baseFont.Length > 7 && baseFont[6] == '+' && baseFont.Take(6).All(c => c >= 'A' && c <= 'Z') ? baseFont.Substring(7) : baseFont;
         string? name = encoding.Kind == PdfValueKind.Name ? encoding.NameValue : null;
         PdfValue differences = PdfValue.Null;
         if (encoding.Kind == PdfValueKind.Dictionary)
@@ -74,43 +120,7 @@ internal static class SimpleFontEncoding
             }
         }
 
-        var names = FontResources.GlyphList(context);
-        if (normalized == "ZapfDingbats")
-        {
-            string metrics = FontResources.Text("ZapfDingbats.metrics", context);
-            context.Consume(PdfResourceKind.ExpandedBytes, metrics.Length * 8L);
-            using var reader = new StringReader(metrics);
-            reader.ReadLine();
-            string? line;
-            while ((line = reader.ReadLine()) != null)
-            {
-                context.Checkpoint();
-                var fields = line.Split('\t');
-                string[] scalars = fields[2].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                var unicode = new StringBuilder();
-                foreach (string scalar in scalars)
-                    unicode.Append(char.ConvertFromUtf32(int.Parse(scalar, NumberStyles.HexNumber, CultureInfo.InvariantCulture)));
-                names[fields[0]] = unicode.ToString();
-            }
-        }
-
-        var result = new StringBuilder();
-        foreach (byte code in encodedText.StringBytes)
-        {
-            context.Checkpoint();
-            context.Consume(PdfResourceKind.Objects, 1);
-            string unicode = FontResources.Unicode(glyphNames[code], names);
-            if (unicode.Length == 0)
-            {
-                context.Report(new PdfDiagnostic("Font.UnmappedCode", "A simple-font glyph name has no published Unicode mapping.", severity: PdfDiagnosticSeverity.Warning, lossCategory: PdfLossCategory.SubstitutedContent));
-                unicode = "\ufffd";
-            }
-
-            context.Consume(PdfResourceKind.ExpandedBytes, unicode.Length * 4L + 16);
-            result.Append(unicode);
-        }
-
-        return result.ToString();
+        return glyphNames;
     }
 
     private static PdfException Error(PdfOperationContext context, string code, string message) => PdfWriterCore.Error(context, code, message);

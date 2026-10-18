@@ -966,7 +966,9 @@
           "Additional glyph/pattern/mask, interactive/structure and text-state flattening profiles remain mandatory",
           "SDK renderer integration, full optional-content/fidelity corpus and all actual-runtime/final-package production qualification"
         ],
-        "standardsEvidence": "docs/evidence/FP-024-standards.json"
+        "standardsEvidence": "docs/evidence/FP-024-standards.json",
+        "sourceEvidence": "docs/evidence/FP-024-source.json",
+        "independentEvidence": "docs/evidence/FP-024-independent.json"
       }
     },
     {
@@ -998,7 +1000,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/text-extraction.md",
+        "implemented": [
+          "Bounded page/Form text-state interpretation with Unicode mapping provenance, ActualText and explicit layer/nonpainting selection",
+          "Raw code order, semantic text and separate geometric word/line/paragraph inference",
+          "Declared simple/CID/vertical metrics and native/display advance cells, plus explicit standard encoding-metrics provider and C#/VB consumers"
+        ],
+        "pending": [
+          "Additional source CMap/CID, arbitrary glyph-matrix and linguistic/column/ink/appearance extraction profiles remain mandatory",
+          "Complete multilingual/geometry/fidelity corpus, all actual runtimes, exact final packages and every production qualification gate"
+        ],
+        "standardsEvidence": "docs/evidence/FP-025-standards.json"
+      }
     },
     {
       "id": "FP-026",

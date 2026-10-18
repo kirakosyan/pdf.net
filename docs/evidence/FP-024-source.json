@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-024",
+  "sourceCommit": "72cc510732e7d7e5058bfb1693ef7f697ea3c7de",
+  "sourceTree": "f16ae3ad669a178d60eabdfc4f728802ec04a70a",
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "managedTests": {
+    "passed": 697,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests"
+  },
+  "layerTests": 18,
+  "apiComparisons": 15,
+  "packingAndPublicationBlocked": true,
+  "packageSha256": null,
+  "productionQualified": false,
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Layers/PdfLayerContracts.cs": "151fd2d0d18132ac99690fc464814c719715fe4fee256db45cb9f0dfd60ab02b",
+    "src/Fluent.Pdf/Layers/PdfLayerEvaluator.cs": "54f6775267188284ce3712d78f336c8cc91fc9b3e346bc886f5797a8797dd29a",
+    "src/Fluent.Pdf/Layers/PdfLayerFlattener.cs": "1ae358e8ed2f18846651b29ad6dc731dc1654aeddc49397e25d2f374110fdc00",
+    "src/Fluent.Pdf/Layers/PdfLayerValues.cs": "cc091410d39a071c91c5c7134db34004624d1572cfe477a06f3fd20c99cdde8a",
+    "src/Fluent.Pdf/Layers/PdfLayers.cs": "33ed9589702a5776a94dd7cec4d060d3bf50193972aaa81f727da3d09043dd07",
+    "src/Fluent.Pdf/Editing/PdfGraphEdit.cs": "c3fd674a0df5ca9c8a2bbbda8ff0195e913a89e0d5f9edc2ea894839f150d210",
+    "src/Fluent.Pdf/Writing/PdfFeatureVersion.cs": "92ca28907196ae7687d6e7e301f9e2eb925aa0a0f698eb5e013fb32d132b06de",
+    "tests/Fluent.Pdf.Contract.Tests/LayerTests.cs": "3e543b5ffbfb4b2b0ef0fd47883ca8fd9ce565a0f4e7dc1b0ec77e93caedd5bb"
+  },
+  "reportSha256": {
+    "layers-full-build.log": "09db5384dc1527ad95553e004c46e155359db163d73938e8796749834a647f07",
+    "layers-full-tests.log": "4af9ae4e5aa3052a864b74f5ff288cff4e0e4e53540f4150b7c38590b8a21e4b",
+    "layers-api-check.log": "5073dfc2e5e4dd12d29239fc06b2c6a93ae4886614c13328541e6a55ce67e8a3",
+    "layers-spec-check.log": "8b016b51f08891cbfdde2928658bd3ec5f98337b240d55f535e4268419875017",
+    "layers-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "limitations": [
+    "Additional flattening profiles in the requirement manifest remain mandatory; no full optional-content claim.",
+    "SDK renderer integration and all production/runtime/package qualification remain pending.",
+    "Native-positive local tests cannot run because the required Landlock boundary is unavailable; CI remains unfiltered."
+  ],
+  "sourceCi": {
+    "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39126822365",
+    "testedMergeCommit": "c959ec284b0bf9bd0d40fe801132bb71fdbea5f0",
+    "conclusion": "success",
+    "testsPerLane": 743,
+    "executionLanes": 20,
+    "passed": 14860,
+    "failed": 0,
+    "skipped": 0,
+    "artifacts": [
+      {
+        "name": "source-contracts-osx-arm64",
+        "id": 12136970038,
+        "digest": "sha256:18730f52c8a0d1572334dc00546aa7abeb423bf2eafc59eadbfb7de46fb48a09",
+        "sizeBytes": 592438,
+        "expiresAt": "2027-01-16T12:19:48Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39126822365/artifacts/12136970038"
+      },
+      {
+        "name": "source-contracts-osx-x64",
+        "id": 12136801799,
+        "digest": "sha256:73b99d129b018ac179b7f6593814d4e27b9fb3592c6411cab50bfa1d8488edbb",
+        "sizeBytes": 596492,
+        "expiresAt": "2027-01-16T12:19:48Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39126822365/artifacts/12136801799"
+      },
+      {
+        "name": "source-contracts-linux-arm64",
+        "id": 12136507548,
+        "digest": "sha256:0e733a30ee8a33722389301ae58b2ff54b0630961ee1ca79d598817b4d71d98d",
+        "sizeBytes": 590766,
+        "expiresAt": "2027-01-16T12:19:48Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39126822365/artifacts/12136507548"
+      },
+      {
+        "name": "source-contracts-win-x64",
+        "id": 12136417634,
+        "digest": "sha256:c53c1378b89ba1531b8dee8d602dcf027178421c5b00250320fba5ff80a55b56",
+        "sizeBytes": 968715,
+        "expiresAt": "2027-01-16T12:19:48Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39126822365/artifacts/12136417634"
+      },
+      {
+        "name": "source-contracts-linux-x64",
+        "id": 12136029682,
+        "digest": "sha256:616cfe1f708541fd083868a48ca99574c2d456499462fe102c993ef0559f46a1",
+        "sizeBytes": 591001,
+        "expiresAt": "2027-01-16T12:19:48Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39126822365/artifacts/12136029682"
+      },
+      {
+        "name": "source-contracts-win-arm64",
+        "id": 12135534675,
+        "digest": "sha256:44354346d12c47f16605d999c270e34e6a30a490b1e81959518a1ca83685ab14",
+        "sizeBytes": 590933,
+        "expiresAt": "2027-01-16T12:19:48Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39126822365/artifacts/12135534675"
+      }
+    ],
+    "retainedLogs": {
+      "pr118-layers-ci-117673591471.log": "e3d4649da62ff4f2b21d8aef1a73efe2f8b448bf57d83ad14c526ed9122e0ff2",
+      "pr118-layers-ci-117673591446.log": "1fd1efac7cd45939e9f7624a07b490d4ec9ef9ed3885ba5cc6cc3c36f9996399",
+      "pr118-layers-ci-117673591497.log": "e8f7e0c6c9950054ee2289f1d599e5bb62214ce7488068a64c8e4a3c5a303d62",
+      "pr118-layers-ci-117673591570.log": "249165d16b268ea96c4d1cd27924f2b1e8565af2ba8b2b24bdeac33fd9e3375e",
+      "pr118-layers-ci-117673591502.log": "3a89eca07bc3f219a29d4d6e2a88fa66b830c9aaca1acfd9523cd4de63ad4d05",
+      "pr118-layers-ci-117673591372.log": "4351e15296ab21cb9705979d6efd70b8896adcd14f9042db38922d39c5d3fe84"
+    }
+  }
+}

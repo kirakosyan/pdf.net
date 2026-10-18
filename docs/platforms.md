@@ -47,3 +47,5 @@ FP-022 metadata inspection/editing is managed and targets all four core framewor
 FP-023 attachments/collections use managed APIs on all four target frameworks. Payload processing is offline and bounded; native rendering and a portfolio UI are not dependencies. Source validation does not qualify complete archival or final-package behavior.
 
 FP-024 layer graph/evaluation/flattening is managed on all four target frameworks. Independent Poppler output checks emitted configuration behavior; SDK rendering is a separate provider capability with its own qualification.
+
+FP-025 page/Form extraction is managed on the four core frameworks. Optional standard-font encoding/metrics come from explicitly registered providers; complete source mappings and metrics need no machine fonts or native renderer. Full production geometry/linguistic/package qualification remains pending.

@@ -220,6 +220,13 @@ public interface IPdfFontEncodingProvider
     string DecodeSimple(PdfValue encoding, PdfValue encodedText, string baseFont, PdfOperationContext context);
 }
 
+/// <summary>Optional deterministic source-code advances for standard simple fonts without a Widths array.</summary>
+public interface IPdfFontEncodingMetricsProvider
+{
+    /// <summary>Returns 256 advances in 1000-em units, indexed by encoded byte. Null denotes an unsupported glyph name; no machine fonts may be used.</summary>
+    IReadOnlyList<double?> GetSimpleAdvances(PdfValue encoding, string baseFont, PdfOperationContext context);
+}
+
 /// <summary>Optional original CID-to-glyph lookup for a CID-keyed embedded font program without a Unicode cmap.</summary>
 public interface IPdfCidFontProgram
 {

@@ -95,3 +95,5 @@ Metadata edits use the shared managed graph transaction. XML is preflighted and 
 Embedded-file operations keep payload bytes behind bounded stream/filter leases. Extraction validates into private storage before output; same-directory file commits default to no overwrite. Inventory is passive, while collection and associated-file authoring use explicit PDF structures. Removal rewrites the full graph and drops prior revisions.
 
 Optional-content decisions are operation-local and passive. Configuration evaluation binds exact OCG identities and explicit usage events. Flattening stages private resource/content rewrites, preserves graphics-state side effects and rejects unresolved state/semantic dependencies before commit.
+
+Text extraction interprets page/Form text state in the shared context, caching source mappings/metrics per operation. It preserves source code order and declared ActualText independently of bounded geometric grouping. Coordinate records retain native user space and the existing displayed CropBox/rotation/UserUnit transform.

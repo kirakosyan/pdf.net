@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-profile-not-release-qualification",
+  "requirement": "FP-024",
+  "pypdf": "6.10.0",
+  "renderer": "pdftoppm version 25.03.0",
+  "passedAssertions": [
+    "Strict source/rewritten PDF reads",
+    "Selected configuration changes independent rendering",
+    "Default and selected flattening preserve exact page pixels",
+    "Hidden text removed and no remaining OCG/OCMD objects",
+    "Page extraction preserves valid groups and identical pixels",
+    "Graphics color changes inside hidden spans affect later visible painting correctly"
+  ],
+  "artifacts": {
+    "flattened.png": "2e6050de5ec72587c41b7136ac44ab9b4f9f473d6f58ab41afad361b5a7ce08d",
+    "flattened.pdf": "23f67f17721c4b241dea496fd049e687bfba551e3b3a5a1c821e6ceda4432c17",
+    "extracted.pdf": "5f4070452bcea813908d1aa1a375d2a4ecc53135e157bb31fd568d9091926dd3",
+    "original.pdf": "0e696738ee7dd3ef739a841b4762762aff2dc056e192737675baee829eb50136",
+    "selected.pdf": "ec4c3d0a6299d41cb83c56efee5243085ceca816cbe11752f7181215a39f0626",
+    "selected-flat.png": "ad8d2e40817fe70a2166e26296905afc2698f21e3e113e140a997625f4e87c77",
+    "original.png": "2e6050de5ec72587c41b7136ac44ab9b4f9f473d6f58ab41afad361b5a7ce08d",
+    "Program.cs": "0eadbcf3531769836b15896b4c8e852a5c0ff6982ecfb3fd9892802e15cbcc16",
+    "extracted.png": "2e6050de5ec72587c41b7136ac44ab9b4f9f473d6f58ab41afad361b5a7ce08d",
+    "verify.py": "fe5df4333813f0da1fbe9ba19c767c9f8bf4b245a80e0895e3341020f28389a0",
+    "selected.png": "ad8d2e40817fe70a2166e26296905afc2698f21e3e113e140a997625f4e87c77",
+    "selected-flat.pdf": "5d7b82471be9a767a5c10f92923b13e3030e386dc05cf3886b1f103b22dd713f"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Synthetic source profile, not complete layer/renderer/fidelity qualification",
+    "Type 3 glyphs, tiling patterns, soft masks, interactive/structured documents and unresolved text-state dependencies require additional supported flattening profiles",
+    "Managed SDK rendering is not implemented yet; independent rendering verifies emitted structures"
+  ],
+  "sourceCommit": "72cc510732e7d7e5058bfb1693ef7f697ea3c7de",
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Layers/PdfLayerContracts.cs": "151fd2d0d18132ac99690fc464814c719715fe4fee256db45cb9f0dfd60ab02b",
+    "src/Fluent.Pdf/Layers/PdfLayerEvaluator.cs": "54f6775267188284ce3712d78f336c8cc91fc9b3e346bc886f5797a8797dd29a",
+    "src/Fluent.Pdf/Layers/PdfLayerFlattener.cs": "1ae358e8ed2f18846651b29ad6dc731dc1654aeddc49397e25d2f374110fdc00",
+    "src/Fluent.Pdf/Layers/PdfLayerValues.cs": "cc091410d39a071c91c5c7134db34004624d1572cfe477a06f3fd20c99cdde8a",
+    "src/Fluent.Pdf/Layers/PdfLayers.cs": "33ed9589702a5776a94dd7cec4d060d3bf50193972aaa81f727da3d09043dd07",
+    "src/Fluent.Pdf/Editing/PdfGraphEdit.cs": "c3fd674a0df5ca9c8a2bbbda8ff0195e913a89e0d5f9edc2ea894839f150d210",
+    "src/Fluent.Pdf/Writing/PdfFeatureVersion.cs": "92ca28907196ae7687d6e7e301f9e2eb925aa0a0f698eb5e013fb32d132b06de",
+    "tests/Fluent.Pdf.Contract.Tests/LayerTests.cs": "3e543b5ffbfb4b2b0ef0fd47883ca8fd9ce565a0f4e7dc1b0ec77e93caedd5bb"
+  }
+}

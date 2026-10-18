@@ -4,6 +4,13 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function ExtractPageText(input As Stream) As String
+        Using document = PdfFacade.Open(input)
+            Return PdfTextExtraction.ReadPage(document.CreateSnapshot(), 0,
+                providers:=New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance)).Text
+        End Using
+    End Function
+
     Public Function WriteLayerPdf(output As Stream) As PdfOperationReport
         Using blank = PdfFacade.Create().AddPage()
             Dim path = PdfPath.Create({PdfPathSegment.Rectangle(New PdfRect(20, 20, 80, 40))})

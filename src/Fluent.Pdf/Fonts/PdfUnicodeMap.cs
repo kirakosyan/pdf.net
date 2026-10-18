@@ -58,34 +58,40 @@ public sealed class PdfUnicodeMap
         int position = 0;
         while (position < bytes.Count)
         {
-            context.Checkpoint();
-            uint code = 0;
-            int length = 0;
-            for (int n = 1; n <= 4 && position + n <= bytes.Count; n++)
-            {
-                code = (code << 8) | bytes[position + n - 1];
-                if (Overlaps(_spaces, code, code, n))
-                {
-                    length = n;
-                    break;
-                }
-            }
-
-            if (length == 0)
-                throw PdfWriterCore.Error(context, "Font.CMapCodeSpace", "The encoded string contains a truncated or undeclared code.");
-            position += length;
-            if (!_values.TryGetValue(Key(code, length), out string? unicode))
-            {
-                context.Report(new PdfDiagnostic("Font.UnmappedCode", "An encoded font code has no Unicode mapping.", severity: PdfDiagnosticSeverity.Warning, lossCategory: PdfLossCategory.SubstitutedContent));
-                unicode = "\ufffd";
-            }
-
-            context.Consume(PdfResourceKind.Objects, 1);
-            context.Consume(PdfResourceKind.ExpandedBytes, unicode.Length * 4L + 16);
-            text.Append(unicode);
+            text.Append(DecodeCode(bytes, ref position, context).Text);
         }
 
         return text.ToString();
+    }
+
+    internal (uint Code, int Length, string Text, bool Mapped) DecodeCode(IReadOnlyList<byte> bytes, ref int position, PdfOperationContext context)
+    {
+        context.Checkpoint();
+        uint code = 0;
+        int length = 0;
+        for (int n = 1; n <= 4 && position + n <= bytes.Count; n++)
+        {
+            code = (code << 8) | bytes[position + n - 1];
+            if (Overlaps(_spaces, code, code, n))
+            {
+                length = n;
+                break;
+            }
+        }
+
+        if (length == 0)
+            throw PdfWriterCore.Error(context, "Font.CMapCodeSpace", "The encoded string contains a truncated or undeclared code.");
+        position += length;
+        bool mapped = _values.TryGetValue(Key(code, length), out string? unicode);
+        if (!mapped)
+        {
+            context.Report(new PdfDiagnostic("Font.UnmappedCode", "An encoded font code has no Unicode mapping.", severity: PdfDiagnosticSeverity.Warning, lossCategory: PdfLossCategory.SubstitutedContent));
+            unicode = "\ufffd";
+        }
+
+        context.Consume(PdfResourceKind.Objects, 1);
+        context.Consume(PdfResourceKind.ExpandedBytes, unicode!.Length * 4L + 16);
+        return (code, length, unicode, mapped);
     }
 
     private static ulong Key(uint code, int length) => ((ulong)length << 32) | code;

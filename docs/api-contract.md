@@ -123,3 +123,5 @@ FP-022 adds `PdfMetadata`, its synchronous editor and explicit synchronization/r
 FP-023 adds `PdfAttachments`, detached file inventories and explicit embedding/extraction options. [attachments.md](attachments.md) specifies portable filenames, variant selection, collection types and privacy boundaries.
 
 FP-024 adds `PdfLayers`, registered group inventories, explicit configuration/usage evaluation, page XObject binding and a state-preserving flattening profile. See [layers.md](layers.md) for supported behavior and rejected state dependencies.
+
+FP-025 adds `PdfTextExtraction.ReadPage`, source-code/ActualText provenance and separate raw/semantic/geometric result views. [text-extraction.md](text-extraction.md) defines advance-cell coordinates, mapping certainty, layer selection and current profile limits.

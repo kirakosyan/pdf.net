@@ -7,6 +7,8 @@ Fluent.Pdf.IPdfDocumentReader.RequiresSeekableStream.get -> bool
 Fluent.Pdf.IPdfDocumentWriter
 Fluent.Pdf.IPdfDocumentWriter.RequiresSeekableStream.get -> bool
 Fluent.Pdf.IPdfDocumentWriter.Write(Fluent.Pdf.PdfDocumentSnapshot! document, System.IO.Stream! output, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.IPdfFontEncodingMetricsProvider
+Fluent.Pdf.IPdfFontEncodingMetricsProvider.GetSimpleAdvances(Fluent.Pdf.PdfValue! encoding, string! baseFont, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<double?>!
 Fluent.Pdf.IPdfFontEncodingProvider
 Fluent.Pdf.IPdfFontEncodingProvider.DecodeSimple(Fluent.Pdf.PdfValue! encoding, Fluent.Pdf.PdfValue! encodedText, string! baseFont, Fluent.Pdf.PdfOperationContext! context) -> string!
 Fluent.Pdf.IPdfFontProgram
@@ -400,6 +402,38 @@ Fluent.Pdf.PdfExtensionRequirement.BaseVersion.get -> string!
 Fluent.Pdf.PdfExtensionRequirement.ExtensionLevel.get -> int
 Fluent.Pdf.PdfExtensionRequirement.PdfExtensionRequirement(string! prefix, string! baseVersion, int extensionLevel) -> void
 Fluent.Pdf.PdfExtensionRequirement.Prefix.get -> string!
+Fluent.Pdf.PdfExtractedCharacter
+Fluent.Pdf.PdfExtractedCharacter.BaselineEnd.get -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfExtractedCharacter.BaselineStart.get -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfExtractedCharacter.Code.get -> uint
+Fluent.Pdf.PdfExtractedCharacter.CodeLength.get -> int
+Fluent.Pdf.PdfExtractedCharacter.Confidence.get -> Fluent.Pdf.PdfTextMappingConfidence
+Fluent.Pdf.PdfExtractedCharacter.FontName.get -> string!
+Fluent.Pdf.PdfExtractedCharacter.FontSize.get -> double
+Fluent.Pdf.PdfExtractedCharacter.GeometryEstimated.get -> bool
+Fluent.Pdf.PdfExtractedCharacter.Index.get -> int
+Fluent.Pdf.PdfExtractedCharacter.LayerVisible.get -> bool
+Fluent.Pdf.PdfExtractedCharacter.OperationIndex.get -> int
+Fluent.Pdf.PdfExtractedCharacter.Quad.get -> Fluent.Pdf.PdfQuad
+Fluent.Pdf.PdfExtractedCharacter.RenderingMode.get -> int
+Fluent.Pdf.PdfExtractedCharacter.Text.get -> string!
+Fluent.Pdf.PdfExtractedCharacter.UserQuad.get -> Fluent.Pdf.PdfQuad
+Fluent.Pdf.PdfExtractedLine
+Fluent.Pdf.PdfExtractedLine.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfExtractedLine.Words.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedWord!>!
+Fluent.Pdf.PdfExtractedParagraph
+Fluent.Pdf.PdfExtractedParagraph.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfExtractedParagraph.Lines.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedLine!>!
+Fluent.Pdf.PdfExtractedSpan
+Fluent.Pdf.PdfExtractedSpan.Bounds.get -> Fluent.Pdf.PdfRect?
+Fluent.Pdf.PdfExtractedSpan.CharacterCount.get -> int
+Fluent.Pdf.PdfExtractedSpan.FirstCharacter.get -> int
+Fluent.Pdf.PdfExtractedSpan.Text.get -> string!
+Fluent.Pdf.PdfExtractedWord
+Fluent.Pdf.PdfExtractedWord.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfExtractedWord.Characters.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedCharacter!>!
+Fluent.Pdf.PdfExtractedWord.Index.get -> int
+Fluent.Pdf.PdfExtractedWord.Text.get -> string!
 Fluent.Pdf.PdfFieldCollisionPolicy
 Fluent.Pdf.PdfFieldCollisionPolicy.Reject = 0 -> Fluent.Pdf.PdfFieldCollisionPolicy
 Fluent.Pdf.PdfFieldCollisionPolicy.Rename = 1 -> Fluent.Pdf.PdfFieldCollisionPolicy
@@ -1443,6 +1477,27 @@ Fluent.Pdf.PdfTextDrawing
 Fluent.Pdf.PdfTextDrawing.Content.get -> Fluent.Pdf.PdfContentProgram!
 Fluent.Pdf.PdfTextDrawing.Fonts.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfFontResource!>!
 Fluent.Pdf.PdfTextDrawing.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTextExtraction
+Fluent.Pdf.PdfTextExtractionOptions
+Fluent.Pdf.PdfTextExtractionOptions.IncludeHiddenLayers.get -> bool
+Fluent.Pdf.PdfTextExtractionOptions.IncludeInvisibleText.get -> bool
+Fluent.Pdf.PdfTextExtractionOptions.LayerConfiguration.get -> Fluent.Pdf.PdfValue?
+Fluent.Pdf.PdfTextExtractionOptions.LayerUsage.get -> Fluent.Pdf.PdfLayerUsage
+Fluent.Pdf.PdfTextExtractionOptions.LineTolerance.get -> double
+Fluent.Pdf.PdfTextExtractionOptions.PdfTextExtractionOptions(bool includeHiddenLayers = false, bool includeInvisibleText = true, double lineTolerance = 2, double wordGapRatio = 0.25, Fluent.Pdf.PdfLayerUsage layerUsage = Fluent.Pdf.PdfLayerUsage.View, Fluent.Pdf.PdfValue? layerConfiguration = null) -> void
+Fluent.Pdf.PdfTextExtractionOptions.WordGapRatio.get -> double
+Fluent.Pdf.PdfTextExtractionResult
+Fluent.Pdf.PdfTextExtractionResult.ActualTextSpans.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedSpan!>!
+Fluent.Pdf.PdfTextExtractionResult.Characters.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedCharacter!>!
+Fluent.Pdf.PdfTextExtractionResult.Geometry.get -> Fluent.Pdf.PdfPageGeometry!
+Fluent.Pdf.PdfTextExtractionResult.LayoutText.get -> string!
+Fluent.Pdf.PdfTextExtractionResult.Lines.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedLine!>!
+Fluent.Pdf.PdfTextExtractionResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTextExtractionResult.PageIndex.get -> int
+Fluent.Pdf.PdfTextExtractionResult.Paragraphs.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedParagraph!>!
+Fluent.Pdf.PdfTextExtractionResult.RawText.get -> string!
+Fluent.Pdf.PdfTextExtractionResult.Text.get -> string!
+Fluent.Pdf.PdfTextExtractionResult.Words.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedWord!>!
 Fluent.Pdf.PdfTextFeature
 Fluent.Pdf.PdfTextFeature.End.get -> int
 Fluent.Pdf.PdfTextFeature.PdfTextFeature() -> void
@@ -1450,6 +1505,11 @@ Fluent.Pdf.PdfTextFeature.PdfTextFeature(string! tag, uint value = 1, int start 
 Fluent.Pdf.PdfTextFeature.Start.get -> int
 Fluent.Pdf.PdfTextFeature.Tag.get -> string!
 Fluent.Pdf.PdfTextFeature.Value.get -> uint
+Fluent.Pdf.PdfTextMappingConfidence
+Fluent.Pdf.PdfTextMappingConfidence.ActualText = 1 -> Fluent.Pdf.PdfTextMappingConfidence
+Fluent.Pdf.PdfTextMappingConfidence.Inferred = 2 -> Fluent.Pdf.PdfTextMappingConfidence
+Fluent.Pdf.PdfTextMappingConfidence.ToUnicode = 0 -> Fluent.Pdf.PdfTextMappingConfidence
+Fluent.Pdf.PdfTextMappingConfidence.Unmapped = 3 -> Fluent.Pdf.PdfTextMappingConfidence
 Fluent.Pdf.PdfTextOptions
 Fluent.Pdf.PdfTextOptions.Features.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTextFeature>!
 Fluent.Pdf.PdfTextOptions.Language.get -> string!
@@ -1720,6 +1780,7 @@ static Fluent.Pdf.PdfTableData.Bind<T>(System.Collections.Generic.IEnumerable<T>
 static Fluent.Pdf.PdfTemplateLayout.Layout(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! blocks, Fluent.Pdf.PdfFlowOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfPageTemplate! template, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPageTemplateResult!
 static Fluent.Pdf.PdfText.Shape(string! text, Fluent.Pdf.PdfFontFallback! fonts, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfTextOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShapedText!
 static Fluent.Pdf.PdfTextDrawing.Create(Fluent.Pdf.PdfShapedText! text, double x, double y, double fontSize, double lineHeight = 1.2, string! resourcePrefix = "FT", bool subset = true, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextDrawing!
+static Fluent.Pdf.PdfTextExtraction.ReadPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfTextExtractionOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextExtractionResult!
 static Fluent.Pdf.PdfTransparencyGroup.Create(Fluent.Pdf.PdfDrawing! drawing, Fluent.Pdf.PdfRect bounds, Fluent.Pdf.PdfColorSpace! colorSpace, bool isolated = false, bool knockout = false, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTransparencyGroup!
 static Fluent.Pdf.PdfUnicode.Analyze(string! text, Fluent.Pdf.PdfParagraphDirection direction = Fluent.Pdf.PdfParagraphDirection.Auto, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfUnicodeAnalysis!
 static Fluent.Pdf.PdfUnicode.Version.get -> string!

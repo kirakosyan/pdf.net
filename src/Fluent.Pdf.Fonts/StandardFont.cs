@@ -86,6 +86,19 @@ internal sealed class StandardFont : IPdfFontProgram
         return _glyphs[glyph].Width;
     }
 
+    internal double? AdvanceForName(string name, PdfOperationContext context)
+    {
+        for (int i = 0; i < _glyphs.Count; i++)
+        {
+            if ((i & 127) == 0)
+                context.Checkpoint();
+            if (_glyphs[i].Name == name)
+                return _glyphs[i].Width;
+        }
+
+        return null;
+    }
+
     public double GetVerticalAdvance(int glyph, PdfOperationContext context)
     {
         Check(glyph, context);
