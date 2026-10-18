@@ -18,6 +18,7 @@ internal static class PdfContentState
         IDisposable? text = null;
         bool glyphMetrics = false;
         int index = 0;
+        bool uncoloredGlyph=false;
         try
         {
             foreach (var operation in operations)
@@ -79,11 +80,13 @@ internal static class PdfContentState
                         if (kind != PdfContentKind.Type3Glyph || glyphMetrics || index != 0)
                             throw Error(context, "Content.GlyphMetrics", "Glyph metrics must be the first operator, once, in a Type 3 glyph program.");
                         glyphMetrics = true;
+                        uncoloredGlyph=code==PdfOperator.GlyphBounds;
                         break;
                 }
 
                 if (text != null && ForbiddenInText(code))
                     throw Error(context, "Content.GraphicsInsideText", "Path construction/painting and object painting require text objects to be closed.");
+                if(uncoloredGlyph&&(SetsColor(code)||code==PdfOperator.Shading||code==PdfOperator.InlineImage&&!Mask(operation)))throw Error(context,"Content.Type3Color","A d1 glyph cannot set colors or paint a non-mask inline image.");
                 index++;
             }
 
@@ -110,4 +113,7 @@ internal static class PdfContentState
 
     private static bool ForbiddenInText(PdfOperator code) => code == PdfOperator.SaveState || code == PdfOperator.RestoreState || code == PdfOperator.Transform || code == PdfOperator.MoveTo || code == PdfOperator.LineTo || code == PdfOperator.CurveTo || code == PdfOperator.CurveFromCurrent || code == PdfOperator.CurveToEndpoint || code == PdfOperator.ClosePath || code == PdfOperator.Rectangle || code == PdfOperator.Stroke || code == PdfOperator.CloseStroke || code == PdfOperator.Fill || code == PdfOperator.LegacyFill || code == PdfOperator.FillEvenOdd || code == PdfOperator.FillStroke || code == PdfOperator.FillStrokeEvenOdd || code == PdfOperator.CloseFillStroke || code == PdfOperator.CloseFillStrokeEvenOdd || code == PdfOperator.EndPath || code == PdfOperator.Clip || code == PdfOperator.ClipEvenOdd || code == PdfOperator.DrawObject || code == PdfOperator.Shading || code == PdfOperator.InlineImage;
     internal static PdfException Error(PdfOperationContext context, string code, string message) => PdfWriterCore.Error(context, code, message);
+    private static bool SetsColor(PdfOperator code)=>code==PdfOperator.StrokeColorSpace||code==PdfOperator.FillColorSpace||code==PdfOperator.StrokeColor||code==PdfOperator.FillColor||code==PdfOperator.StrokeColorExtended||code==PdfOperator.FillColorExtended||code==PdfOperator.StrokeGray||code==PdfOperator.FillGray||code==PdfOperator.StrokeRgb||code==PdfOperator.FillRgb||code==PdfOperator.StrokeCmyk||code==PdfOperator.FillCmyk;
+    private static bool Mask(PdfContentOperation operation)
+    {var image=operation.Image!;return (image.Entries.TryGetValue("ImageMask",out var value)||image.Entries.TryGetValue("IM",out value))&&value.Kind==PdfValueKind.Boolean&&value.BooleanValue;}
 }

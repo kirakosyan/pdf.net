@@ -1,6 +1,6 @@
 # FP-001 public API contract
 
-FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). The [syntax inspection API](pdf-syntax.md) reads low-level values and revisions. FP-005 adds the original managed [page reader and full/incremental writer](pdf-writing.md). FP-007 adds [typed content and version selection](content-operators.md). Rendering, HTML and OCR remain later capabilities. A registered capability is provider metadata, not a production qualification claim.
+FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). The [syntax inspection API](pdf-syntax.md) reads low-level values and revisions. FP-005 adds the original managed [page reader and full/incremental writer](pdf-writing.md). FP-007 adds [typed content and version selection](content-operators.md). FP-008 adds explicit [font providers, embedding and mappings](fonts.md). Rendering, HTML and OCR remain later capabilities. A registered capability is provider metadata, not a production qualification claim.
 
 ## Facade and editing
 

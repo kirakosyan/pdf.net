@@ -1,0 +1,46 @@
+{
+  "fontTools": "4.61.1",
+  "purpose": "original geometric font and licensed renamed CJK fixtures",
+  "records": [
+    {
+      "file": "licensed-cjk.otf",
+      "bytes": 3968,
+      "sha256": "2eeba986e3fbb12aebe1011c13c2c656e8946a5d92ca9e4b736e404692b91cfa"
+    },
+    {
+      "file": "original-seac.otf",
+      "bytes": 1276,
+      "sha256": "7a232c22dfa60ef8d5e2d69d187d78169ac7e4bb9ac262558b957cc65b046700"
+    },
+    {
+      "file": "original.cff",
+      "bytes": 259,
+      "sha256": "e004b9b76557245ecadc2ce62244e39da2c1ba0cfdd4fa0bac5db29e4d98d461"
+    },
+    {
+      "file": "original.otf",
+      "bytes": 1520,
+      "sha256": "70778e6ee0e70c662eae1eebfc688b94a2aec8402b36610c0393a09ecb9d7ac2"
+    },
+    {
+      "file": "original.pfa",
+      "bytes": 1954,
+      "sha256": "fcb5322c6e5ef4c42cd97786e7a78c82409a8e6beeaaa0cb1ea953d2d76d91fa"
+    },
+    {
+      "file": "original.pfb",
+      "bytes": 1430,
+      "sha256": "f2c0e4f6b14e54c2fd0c0827b9fa8be557b3420b0b86146a54d2f3c21958aa6a"
+    },
+    {
+      "file": "original.ttc",
+      "bytes": 2256,
+      "sha256": "8c997de7335ff28db85b045b22a31e8cb79271094a8d40a6e51668c6d14a4c7d"
+    },
+    {
+      "file": "original.ttf",
+      "bytes": 1524,
+      "sha256": "300a09abebb8c2b2bbee36c2d55a8b9a57f94c1a61eae2644cb99c8451b3ce35"
+    }
+  ]
+}

@@ -5,6 +5,13 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteFontPdf(Stream fontInput,Stream output,string text)
+    {
+        var providers=new PdfProviderRegistry(ManagedPdfProvider.Instance,Fluent.Pdf.Fonts.ManagedFontProvider.Instance);
+        var font=PdfFont.Read(fontInput,providers);var resource=PdfFontResource.CreateText(font,text);using var document=PdfFacade.Create(providers:providers).AddPage();document.Pages[0].SetFont("F1",resource);
+        document.Pages[0].Content=PdfContentProgram.Create(new[]{new PdfContentOperation(PdfOperator.BeginText),new PdfContentOperation(PdfOperator.Font,PdfValue.Name("F1"),PdfValue.Integer(24)),new PdfContentOperation(PdfOperator.MoveText,PdfValue.Integer(20),PdfValue.Integer(60)),new PdfContentOperation(PdfOperator.ShowText,resource.EncodedText),new PdfContentOperation(PdfOperator.EndText)});
+        return document.Save(output);
+    }
     public static PdfOperationReport WriteRectangle(Stream output)
     {
         using var document=PdfFacade.Create().AddPage();

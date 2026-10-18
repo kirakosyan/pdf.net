@@ -14,5 +14,7 @@ public enum PdfCapability
     /// <summary>Recognize text; the operation contract is defined by its owning requirement.</summary>
     RecognizeText = 4,
     /// <summary>Explicit optional image stream codecs; algorithm/direction support is reported by their provider.</summary>
-    ImageCodecs = 5
+    ImageCodecs = 5,
+    /// <summary>Explicit offline font parsing, embedding and standard-font metrics.</summary>
+    Fonts = 6
 }

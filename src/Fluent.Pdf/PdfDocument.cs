@@ -52,7 +52,7 @@ public sealed class PdfDocument : IDisposable
         int count=_pages.Count;
         if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*64L+32);}
         var pages = count==0?Array.Empty<PdfPageSnapshot>():new PdfPageSnapshot[count];
-        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content);
+        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content,_pages[i].SnapshotFonts(_context));
         return new PdfDocumentSnapshot(_options, pages,_source,_originalOrder,writeOptions);
     }
 
@@ -189,7 +189,7 @@ public sealed class PdfDocument : IDisposable
     }
 
     internal void EnsureAlive() { if (_disposed) throw new ObjectDisposedException(nameof(PdfDocument)); }
-    internal void BeforePageAllocation(PdfOperationContext? context=null){var selected=context??_context;selected?.Consume(PdfResourceKind.Objects,1);selected?.Consume(PdfResourceKind.ExpandedBytes,96);}
+    internal void BeforePageAllocation(PdfOperationContext? context=null){var selected=context??_context;selected?.Consume(PdfResourceKind.Objects,1);selected?.Consume(PdfResourceKind.ExpandedBytes,256);}
     internal PdfContentProgram ReadPageContent(PdfPage page,PdfUnknownOperatorPolicy unknown,string? version,CancellationToken token)
     {
         EnsureNoActiveOperation();if(!Enum.IsDefined(typeof(PdfUnknownOperatorPolicy),unknown))throw new ArgumentOutOfRangeException(nameof(unknown));
@@ -203,6 +203,29 @@ public sealed class PdfDocument : IDisposable
             context.EnsureComplete();
         },"managed.content");
         result!.OperationReport=report;return result;
+    }
+    internal IReadOnlyList<PdfPageFont> ReadPageFonts(PdfPage page,CancellationToken token)
+    {
+        EnsureNoActiveOperation();IReadOnlyList<PdfPageFont>? result=null;
+        RunOperation(false,"ReadPageFonts",PdfCapability.Fonts,token,context=>
+        {
+            var replacements=page.SnapshotFonts(context);var fonts=new SortedDictionary<string,PdfPageFont>(StringComparer.Ordinal);var binding=page.Source;
+            PdfValue Resolve(PdfValue value)
+            {
+                if(value.Kind!=PdfValueKind.Reference)return value;context.Consume(PdfResourceKind.ExpandedBytes,64);var seen=new HashSet<PdfObjectId>();int depth=0;
+                while(value.Kind==PdfValueKind.Reference){context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);context.Consume(PdfResourceKind.ExpandedBytes,64);if(++depth>context.Available(PdfResourceKind.Depth))context.RejectLimit(PdfResourceKind.Depth);if(!seen.Add(value.ReferenceId))throw PdfWriterCore.Error(context,"Font.ReferenceCycle","Font resource references contain a cycle.");value=binding!.Document.Resolve(value.ReferenceId);}return value;
+            }
+            if(binding!=null&&binding.EffectiveAttributes.Entries.TryGetValue("Resources",out var declared))
+            {
+                var resources=Resolve(declared);if(resources.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.ResourceDictionary","Page Resources must resolve to a dictionary.");
+                var dictionary=resources.Entries.TryGetValue("Font",out var value)?Resolve(value):PdfValue.Null;
+                if(dictionary.Kind!=PdfValueKind.Null&&dictionary.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.ResourceDictionary","Font resources must resolve to a dictionary.");
+                if(dictionary.Kind==PdfValueKind.Dictionary)foreach(var pair in dictionary.Entries)
+                {context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);context.Consume(PdfResourceKind.ExpandedBytes,256);if(replacements.ContainsKey(pair.Key))continue;var font=Resolve(pair.Value);if(font.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.SourceDictionary","A named font must resolve to a dictionary.");fonts.Add(pair.Key,new PdfPageFont(pair.Key,font,binding.Document,null,_providers,_options.OperationPolicy,context));}
+            }
+            foreach(var pair in replacements){context.Checkpoint();context.Consume(PdfResourceKind.Objects,1);context.Consume(PdfResourceKind.ExpandedBytes,256);fonts[pair.Key]=new PdfPageFont(pair.Key,null,null,pair.Value,_providers,_options.OperationPolicy,context);}
+            context.Consume(PdfResourceKind.ExpandedBytes,fonts.Count*16L+32);result=new System.Collections.ObjectModel.ReadOnlyCollection<PdfPageFont>(fonts.Values.ToArray());context.EnsureComplete();
+        },"core.fonts");return result!;
     }
     internal void AttachSource(PdfSyntaxDocument source,PdfOperationContext context)
     {

@@ -277,7 +277,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/fonts.md",
+        "implemented": [
+          "Original optional managed static TrueType/OpenType/CFF/Type 1 font reader and subset writer",
+          "Base-14 metrics, authored Type 3 glyph procedures, exact source/resource Unicode maps and explicit simple encodings",
+          "Deterministic caller fallback, embedding restrictions, CID/CJK resources, vertical metrics, immutable font bindings and extraction"
+        ],
+        "pending": [
+          "Clean independent and six-host source evidence",
+          "Complete licensed/profile corpus, actual minimum runtimes, final packages, standards/fidelity, long security/fuzz/endurance qualification",
+          "Explicit instancing/affine and additional font/CMap provider profiles remain release qualification work"
+        ]
+      }
     },
     {
       "id": "FP-009",

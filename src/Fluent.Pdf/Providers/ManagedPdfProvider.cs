@@ -90,6 +90,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
 
         var pageIds = new List<PdfValue>(document.Pages.Count);
         var writeOptions=document.WriteOptions;
+        var embeddedFonts=new Dictionary<PdfFontResource,PdfObjectId>();
         foreach (var page in document.Pages)
         {
             context.Checkpoint();
@@ -97,7 +98,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             PdfObjectId id;
             if (binding != null && !ReferenceEquals(binding.Document, document.SourceDocument))
                 throw PdfWriterCore.Error(context, "Writer.PageImportRequired", "A page from another graph requires the explicit page import operation.");
-            bool changed = binding == null || orderChanged || page.Size != binding.Size || page.Rotation != binding.Rotation || page.Content!=null;
+            bool changed = binding == null || orderChanged || page.Size != binding.Size || page.Rotation != binding.Rotation || page.Content!=null || page.FontResources.Count>0;
             if (binding == null)
                 id = edit.Add(PdfValue.Null);
             else
@@ -129,6 +130,21 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             {
                 entries["Contents"]=PdfValue.Reference(edit.Add(page.Content.ToStream(context)));
                 writeOptions=writeOptions.RequireVersion(page.Content.MinimumVersion);
+            }
+            if(page.FontResources.Count>0)
+            {
+                context.Consume(PdfResourceKind.Objects,page.FontResources.Count);context.Consume(PdfResourceKind.ExpandedBytes,page.FontResources.Count*128L+256);
+                var existing=binding!=null&&binding.EffectiveAttributes.Entries.TryGetValue("Resources",out var inheritedResources)?Resolve(binding.Document,inheritedResources,context):entries.TryGetValue("Resources",out var directResources)?directResources:PdfValue.Null;
+                if(existing.Kind!=PdfValueKind.Null&&existing.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.ResourceDictionary","Page Resources must resolve to a dictionary.");
+                var resources=existing.Kind==PdfValueKind.Dictionary?PdfWriterCore.CopyDictionary(existing.Entries,context):new Dictionary<string,PdfValue>(StringComparer.Ordinal);
+                var oldFonts=resources.TryGetValue("Font",out var fontDictionary)?fontDictionary:PdfValue.Null;if(binding!=null)oldFonts=Resolve(binding.Document,oldFonts,context);
+                if(oldFonts.Kind!=PdfValueKind.Null&&oldFonts.Kind!=PdfValueKind.Dictionary)throw PdfWriterCore.Error(context,"Font.ResourceDictionary","Font resources must resolve to a dictionary.");
+                var fonts=oldFonts.Kind==PdfValueKind.Dictionary?PdfWriterCore.CopyDictionary(oldFonts.Entries,context):new Dictionary<string,PdfValue>(StringComparer.Ordinal);
+                foreach(var pair in page.FontResources.OrderBy(x=>x.Key,StringComparer.Ordinal))
+                {
+                    context.Checkpoint();if(!embeddedFonts.TryGetValue(pair.Value,out var fontId)){fontId=pair.Value.AddTo(edit,context);embeddedFonts.Add(pair.Value,fontId);}fonts[pair.Key]=PdfValue.Reference(fontId);writeOptions=writeOptions.RequireVersion(pair.Value.MinimumVersion);
+                }
+                resources["Font"]=PdfValue.OwnedDictionary(fonts);entries["Resources"]=PdfValue.OwnedDictionary(resources);
             }
             edit.Set(id, PdfValue.OwnedDictionary(entries));
         }

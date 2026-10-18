@@ -26,7 +26,8 @@ public sealed class PdfProviderRegistry
                 if (_providers.ContainsKey(capability)) throw new ArgumentException("Only one provider may supply a capability.", nameof(providers));
                 if (capability == PdfCapability.ReadDocument && provider is not IPdfDocumentReader ||
                     capability == PdfCapability.WriteDocument && provider is not IPdfDocumentWriter ||
-                    capability == PdfCapability.ImageCodecs && provider is not IPdfImageCodecProvider)
+                    capability == PdfCapability.ImageCodecs && provider is not IPdfImageCodecProvider ||
+                    capability == PdfCapability.Fonts && provider is not IPdfFontProvider)
                     throw new ArgumentException("A provider does not implement the interface for its declared service.", nameof(providers));
                 _providers.Add(capability, provider);
                 _identifiers.Add(capability, descriptor.Id);

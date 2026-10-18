@@ -4,6 +4,21 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteFontPdf(fontInput As Stream, output As Stream, text As String) As PdfOperationReport
+        Dim providers As New PdfProviderRegistry(ManagedPdfProvider.Instance, Fluent.Pdf.Fonts.ManagedFontProvider.Instance)
+        Dim font = PdfFont.Read(fontInput, providers)
+        Dim resource = PdfFontResource.CreateText(font, text)
+        Using document = PdfFacade.Create(providers:=providers).AddPage()
+            document.Pages(0).SetFont("F1", resource)
+            document.Pages(0).Content = PdfContentProgram.Create({
+                New PdfContentOperation(PdfOperator.BeginText),
+                New PdfContentOperation(PdfOperator.Font, PdfValue.Name("F1"), PdfValue.Integer(24)),
+                New PdfContentOperation(PdfOperator.MoveText, PdfValue.Integer(20), PdfValue.Integer(60)),
+                New PdfContentOperation(PdfOperator.ShowText, resource.EncodedText),
+                New PdfContentOperation(PdfOperator.EndText)})
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function WriteRectangle(output As Stream) As PdfOperationReport
         Using document = PdfFacade.Create().AddPage()
             document.Pages(0).Content = PdfContentProgram.Create({
