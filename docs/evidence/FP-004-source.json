@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirements": [
+    "FP-085",
+    "FP-003",
+    "FP-004"
+  ],
+  "branchCommit": "b978bce49b1fe2734d3398840f1bd7b5ceb182cb",
+  "testedMergeCommit": "1a463baaffe335d9c8fb9d398ed1da4bac53dec0",
+  "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39081296892",
+  "conclusion": "success",
+  "testCasesPerLane": 304,
+  "executionLanes": 20,
+  "totalPassed": 6080,
+  "failed": 0,
+  "skipped": 0,
+  "hosts": [
+    "win-x64",
+    "win-arm64",
+    "linux-x64",
+    "linux-arm64",
+    "osx-x64",
+    "osx-arm64"
+  ],
+  "runtimeLanes": "net8/net10/netstandard2.0 fallback on six hosts; current Framework x86/x64 on Windows x64",
+  "packageSha256": null,
+  "productionQualified": false,
+  "artifacts": [
+    {
+      "name": "source-contracts-osx-x64",
+      "id": 12119380788,
+      "digestFromGitHub": "sha256:acf0f11493f1ce557b1c5a4b191c9ecb51c22569b5aa0ddd8e148e00e191782f",
+      "sizeBytes": 223772,
+      "expiresAt": "2027-01-16T00:02:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39081296892/artifacts/12119380788"
+    },
+    {
+      "name": "source-contracts-osx-arm64",
+      "id": 12119111891,
+      "digestFromGitHub": "sha256:7bf43feffb8974ef59da77d5ac215504a1205d7ae7077536b8ce4f532b8b258c",
+      "sizeBytes": 222906,
+      "expiresAt": "2027-01-16T00:02:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39081296892/artifacts/12119111891"
+    },
+    {
+      "name": "source-contracts-win-x64",
+      "id": 12118624696,
+      "digestFromGitHub": "sha256:bc5943ee85f96be9565af33f76d36e5ebae722f96e5eac8d976bf8d01c5a4e2a",
+      "sizeBytes": 363143,
+      "expiresAt": "2027-01-16T00:02:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39081296892/artifacts/12118624696"
+    },
+    {
+      "name": "source-contracts-linux-x64",
+      "id": 12118089475,
+      "digestFromGitHub": "sha256:f874f6f8a07f5c43c820fcf97a27dda89e542c00f37cc0c31a6453798c266521",
+      "sizeBytes": 221262,
+      "expiresAt": "2027-01-16T00:02:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39081296892/artifacts/12118089475"
+    },
+    {
+      "name": "source-contracts-win-arm64",
+      "id": 12118019883,
+      "digestFromGitHub": "sha256:b39097f040bc3677cfc2b920be5d76cd594d85ea21fba33f8b5bad2a7980d00f",
+      "sizeBytes": 221848,
+      "expiresAt": "2027-01-16T00:02:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39081296892/artifacts/12118019883"
+    },
+    {
+      "name": "source-contracts-linux-arm64",
+      "id": 12117999647,
+      "digestFromGitHub": "sha256:120a5c723e3a30d8be0d528f4726edc45a141d10dff2fd265d9e589a6d01ba45",
+      "sizeBytes": 221531,
+      "expiresAt": "2027-01-16T00:02:42Z",
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39081296892/artifacts/12117999647"
+    }
+  ],
+  "pending": [
+    "Actual minimum .NET Framework 4.7.2 and complete production platform/runtime applicability",
+    "Final qualified NuGet packages and package-only consumers",
+    "Complete image profile/security/license review and independent corpus; RGB JPEG interpolation fidelity assessment",
+    "Full SDK conformance, concurrency, endurance, fuzz and resource qualification; all 111 SDK release requirements remain mandatory"
+  ]
+}

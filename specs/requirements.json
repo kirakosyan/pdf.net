@@ -133,9 +133,9 @@
           "Explicit optional isolated DCT/JPX/JBIG2 provider, pinned NativeAOT bridge and bounded image contracts"
         ],
         "pending": [
-          "Native bridge runtime initialization on macOS under unchanged hard limits",
-          "Complete codec profiles, security/license audit, independent corpus, native/runtime and exact-package production qualification"
-        ]
+          "Complete codec profiles, security/license audit, independent fidelity/corpus, minimum-runtime and exact-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-004-source.json"
       }
     },
     {
