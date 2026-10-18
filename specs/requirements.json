@@ -243,9 +243,11 @@
           "Feature-driven version floors, developer extension policies and PDF 2.0 feature facts"
         ],
         "pending": [
-          "Clean cross-platform source evidence and independent output verification",
+          "Full production qualification beyond passing source/runtime and independent original-fixture evidence",
           "Full standards/fidelity, named inline resource interpretation, final packages, minimum runtimes, endurance and fuzz qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-007-source.json",
+        "independentEvidence": "docs/evidence/FP-007-independent.json"
       }
     },
     {
