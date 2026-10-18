@@ -181,8 +181,9 @@ internal static class PdfMetadataValues
         void Reach(PdfValue value)
         {
             context.Checkpoint();
-            if (value.Kind == PdfValueKind.Reference)
+            while (value.Kind == PdfValueKind.Reference)
             {
+                context.Checkpoint();
                 context.Consume(PdfResourceKind.ExpandedBytes, 48);
                 if (!reachable.Add(value.ReferenceId))
                     return;

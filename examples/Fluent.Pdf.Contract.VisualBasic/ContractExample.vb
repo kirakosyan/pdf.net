@@ -4,6 +4,15 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteAttachmentPdf(payload As Stream, output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage()
+            Using document = PdfAttachments.Add(blank.CreateSnapshot(), payload,
+                New PdfAttachmentOptions("data.json", "application/json", modificationTime:=New DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero), relationship:="Data"))
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
+
     Public Function WriteMetadataPdf(output As Stream) As PdfOperationReport
         Using blank = PdfFacade.Create().AddPage()
             Using document = PdfMetadata.Edit(blank.CreateSnapshot(),

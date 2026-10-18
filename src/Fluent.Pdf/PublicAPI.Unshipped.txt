@@ -124,6 +124,30 @@ Fluent.Pdf.PdfAnnotationView
 Fluent.Pdf.PdfAnnotationView.Print = 1 -> Fluent.Pdf.PdfAnnotationView
 Fluent.Pdf.PdfAnnotationView.Screen = 0 -> Fluent.Pdf.PdfAnnotationView
 Fluent.Pdf.PdfAnnotations
+Fluent.Pdf.PdfAttachment
+Fluent.Pdf.PdfAttachment.Description.get -> string?
+Fluent.Pdf.PdfAttachment.FileName.get -> string!
+Fluent.Pdf.PdfAttachment.Id.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfAttachment.Name.get -> string?
+Fluent.Pdf.PdfAttachment.Relationship.get -> string?
+Fluent.Pdf.PdfAttachment.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfAttachment.Specification.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfAttachment.Variants.get -> System.Collections.Generic.IReadOnlyDictionary<string!, Fluent.Pdf.PdfValue!>!
+Fluent.Pdf.PdfAttachmentOptions
+Fluent.Pdf.PdfAttachmentOptions.CreationTime.get -> System.DateTimeOffset?
+Fluent.Pdf.PdfAttachmentOptions.Description.get -> string?
+Fluent.Pdf.PdfAttachmentOptions.FileName.get -> string!
+Fluent.Pdf.PdfAttachmentOptions.MimeType.get -> string!
+Fluent.Pdf.PdfAttachmentOptions.ModificationTime.get -> System.DateTimeOffset?
+Fluent.Pdf.PdfAttachmentOptions.PdfAttachmentOptions(string! fileName, string! mimeType = "application/octet-stream", string? description = null, System.DateTimeOffset? creationTime = null, System.DateTimeOffset? modificationTime = null, string? relationship = null) -> void
+Fluent.Pdf.PdfAttachmentOptions.Relationship.get -> string?
+Fluent.Pdf.PdfAttachmentSet
+Fluent.Pdf.PdfAttachmentSet.Collection.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfAttachmentSet.EmbeddedStreams.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfValue!>!
+Fluent.Pdf.PdfAttachmentSet.Items.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAttachment!>!
+Fluent.Pdf.PdfAttachmentSet.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfAttachmentSet.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfAttachments
 Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AL = 2 -> Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AN = 6 -> Fluent.Pdf.PdfBidiClass
@@ -1542,6 +1566,13 @@ static Fluent.Pdf.PdfAnnotation.CreateMarkup(Fluent.Pdf.PdfAnnotationKind kind, 
 static Fluent.Pdf.PdfAnnotationSet.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotationSet!
 static Fluent.Pdf.PdfAnnotationSet.ReadXfdf(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotationSet!
 static Fluent.Pdf.PdfAnnotations.Add(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfAnnotation!>! annotations, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAttachments.Add(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! input, Fluent.Pdf.PdfAttachmentOptions! attachment, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAttachments.Extract(Fluent.Pdf.PdfAttachment! attachment, System.IO.Stream! output, string? variant = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfAttachments.ExtractToDirectory(Fluent.Pdf.PdfAttachment! attachment, string! directory, string? fileName = null, bool overwrite = false, string? variant = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfAttachments.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAttachmentSet!
+static Fluent.Pdf.PdfAttachments.RemoveAll(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAttachments.SetCollection(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue? collection, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAttachments.SetCollectionItem(Fluent.Pdf.PdfAttachment! attachment, Fluent.Pdf.PdfValue? item, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfCanvas.Create(Fluent.Pdf.PdfPageGeometry! geometry, System.Action<Fluent.Pdf.PdfCanvas!>! draw, Fluent.Pdf.PdfCanvasOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfCanvasResult!
 static Fluent.Pdf.PdfCanvasStyle.Default.get -> Fluent.Pdf.PdfCanvasStyle!
 static Fluent.Pdf.PdfColorSpace.CalGray(double whiteX, double whiteZ, double gamma = 1, double blackX = 0, double blackY = 0, double blackZ = 0) -> Fluent.Pdf.PdfColorSpace!

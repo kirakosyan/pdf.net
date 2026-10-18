@@ -43,3 +43,5 @@ FP-002 policy, decoder-lease, deadline and accounting tests run on these same so
 The optional isolated worker now has [passing source boundary evidence](evidence/FP-085-source.json) on the six modern hosts and current Framework x86/x64. Its [OS prerequisites and limits](native-deployment.md) apply; source success does not qualify an engine, minimum runtime or package.
 
 FP-022 metadata inspection/editing is managed and targets all four core frameworks on the applicable Windows/Linux/macOS lanes. No XML schema is downloaded. Full production qualification and exact final package consumers remain pending.
+
+FP-023 attachments/collections use managed APIs on all four target frameworks. Payload processing is offline and bounded; native rendering and a portfolio UI are not dependencies. Source validation does not qualify complete archival or final-package behavior.

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "purpose": "primary-source-facts-not-production-qualification",
+  "requirement": "FP-023",
+  "sources": [
+    {
+      "sourceId": "P23-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "7.11 file specifications and embedded file streams",
+        "12.3.5 collections"
+      ]
+    },
+    {
+      "sourceId": "P23-AF-NOTE-2018",
+      "issuer": "PDF Association",
+      "title": "Application Note 002: Associated Files",
+      "retrieval": "web text, not the original PDF bytes",
+      "retrievedTextSha256": "4b5bc900adac73553de441b33aef6855096e38bc417e34460bd2c3ee41869817"
+    }
+  ],
+  "facts": [
+    "EmbeddedFiles names map to file specifications; EF carries stream variants and RF pairs related filenames with streams.",
+    "The Size parameter measures decoded payload bytes; CheckSum is the legacy 16-byte MD5 field, not an authenticity guarantee.",
+    "Collections use the EmbeddedFiles tree for membership, with optional initial document, schema, view and sorting.",
+    "Associated-file authoring needs an AF link and AFRelationship; embedded payloads require a MIME subtype and supplied Params requires a modification date.",
+    "PDF/A-3 introduces further constraints; associated-file structures alone do not establish archival conformance."
+  ],
+  "rawSourcesRetainedOutsideRepository": true,
+  "limitations": [
+    "Source facts do not establish implementation behavior or complete standards qualification.",
+    "Direct PDF retrieval of the association note returned HTTP 403; only the available web text and its digest are retained."
+  ]
+}

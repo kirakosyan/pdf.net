@@ -879,7 +879,9 @@
           "Complete metadata interoperability/corpus review and production qualification",
           "Actual minimum runtimes and exact final package consumers; publication remains blocked"
         ],
-        "standardsEvidence": "docs/evidence/FP-022-standards.json"
+        "standardsEvidence": "docs/evidence/FP-022-standards.json",
+        "sourceEvidence": "docs/evidence/FP-022-source.json",
+        "independentEvidence": "docs/evidence/FP-022-independent.json"
       }
     },
     {
@@ -908,7 +910,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/attachments.md",
+        "implemented": [
+          "Passive all-active-object file/variant/orphan inventory and bounded Size/MD5-checked extraction",
+          "Unicode embedding with explicit MIME/dates and PDF 2.0 catalog associated-file relationships",
+          "Standard collection schema/sort/item authoring and full-rewrite embedded-file/revision removal"
+        ],
+        "pending": [
+          "Complete portfolio, archival and associated-file interoperability corpora and review",
+          "Actual minimum runtimes, exact final package consumers and every production qualification gate"
+        ],
+        "standardsEvidence": "docs/evidence/FP-023-standards.json"
+      }
     },
     {
       "id": "FP-024",

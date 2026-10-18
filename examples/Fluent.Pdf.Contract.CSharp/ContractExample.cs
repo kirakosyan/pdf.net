@@ -5,6 +5,13 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteAttachmentPdf(Stream payload, Stream output)
+    {
+        using var blank = PdfFacade.Create().AddPage();
+        using var document = PdfAttachments.Add(blank.CreateSnapshot(), payload, new PdfAttachmentOptions("data.json", "application/json", modificationTime: new DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero), relationship: "Data"));
+        return document.Save(output);
+    }
+
     public static PdfOperationReport WriteMetadataPdf(Stream output)
     {
         using var blank=PdfFacade.Create().AddPage();
