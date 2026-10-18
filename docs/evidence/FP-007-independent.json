@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source content/version independent verification, not production qualification",
+  "sourceCommit": "c9b18f4004be59560427f1d0e38393c3200edf30",
+  "sourceWorkingTreeDirty": false,
+  "pypdfVersion": "6.10.0",
+  "pdfinfoVersion": "pdfinfo version 26.05.0",
+  "pdftoppmVersion": "pdftoppm version 26.05.0",
+  "outputs": [
+    {
+      "file": "black-point-compensation.pdf",
+      "sha256": "401b050b9e0a1f54b0ea31da877f2d7d66c2eda5e344d3efbdf1112c73ffb953",
+      "bytes": 592,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "gs",
+        "rg",
+        "re",
+        "f",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "renderedPixelChecks": 16384,
+      "pixelMismatches": 0
+    },
+    {
+      "file": "extension-stream.pdf",
+      "sha256": "c434d5ab5bc00834fcef20b5fc6fab72844c9bd65ead97227d21729bb4525581",
+      "bytes": 577,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "rg",
+        "re",
+        "f",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "renderedPixelChecks": 16384,
+      "pixelMismatches": 0
+    },
+    {
+      "file": "extension-table.pdf",
+      "sha256": "4435eab67c08f15c290c19d664470f48193c12b2506083d63183b97cbdf12037",
+      "bytes": 545,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "rg",
+        "re",
+        "f",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "renderedPixelChecks": 16384,
+      "pixelMismatches": 0
+    },
+    {
+      "file": "incremental-stream.pdf",
+      "sha256": "54c2b8126e342867d339472b0edf6bc039f57cc436705c2a9fc8a4e459ce4a5a",
+      "bytes": 973,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "rg",
+        "re",
+        "f",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "renderedPixelChecks": 16384,
+      "pixelMismatches": 0,
+      "originalPrefixPreserved": true
+    },
+    {
+      "file": "incremental-table.pdf",
+      "sha256": "7849476ef7fac1607e18de7a18e955e4b3c44be0c57603c0eba94b59a44d2b68",
+      "bytes": 900,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "rg",
+        "re",
+        "f",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "renderedPixelChecks": 16384,
+      "pixelMismatches": 0,
+      "originalPrefixPreserved": true
+    },
+    {
+      "file": "inline-binary.pdf",
+      "sha256": "3fb46c7a3ba32a4b8a12b7d943a298ee517c6b31cd2144eaf6d0f3f2c4309b96",
+      "bytes": 515,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "cm",
+        "INLINE IMAGE",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "inlineDataPreserved": true
+    },
+    {
+      "file": "rectangle-stream.pdf",
+      "sha256": "29f6a5473980252c62af3e6fa0f073400b9a237b597a1aa11d05b14ec77ae9f5",
+      "bytes": 512,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "rg",
+        "re",
+        "f",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "renderedPixelChecks": 16384,
+      "pixelMismatches": 0
+    },
+    {
+      "file": "rectangle-table.pdf",
+      "sha256": "673948551ee6eaf5d31461ecdeaeccfb3386a078842de275d55ce7a7952271b7",
+      "bytes": 480,
+      "pages": 1,
+      "pypdfStrict": true,
+      "operators": [
+        "q",
+        "rg",
+        "re",
+        "f",
+        "Q"
+      ],
+      "pdfinfoExit": 0,
+      "renderedPixelChecks": 16384,
+      "pixelMismatches": 0
+    }
+  ],
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Original small syntax/raster fixtures only; complete fidelity, standards, fuzz/endurance, minimum runtimes and exact final packages remain unqualified."
+  ]
+}
