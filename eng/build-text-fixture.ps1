@@ -37,7 +37,7 @@ exit /b %errorlevel%
         [IO.File]::WriteAllText($script,$command.Replace("`n","`r`n"))
         & cmd.exe /d /c $script
     }else{
-        $shared=if($IsMacOS){@('-dynamiclib')}else{@('-shared','-fPIC')}
+        $shared=@(if($IsMacOS){'-dynamiclib'}else{'-shared';'-fPIC'})
         $origin=if($IsMacOS){'@loader_path'}else{'$ORIGIN'}
         & cc -std=c11 -O2 -Wall -Wextra -Werror @shared native/text/bridge.c $dependency "-Wl,-rpath,$origin" -o (Join-Path $Directory "fluent-pdf-text.$extension")
     }
