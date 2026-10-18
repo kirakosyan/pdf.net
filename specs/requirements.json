@@ -332,7 +332,8 @@
         "pending": [
           "Complete production multilingual visual/copy/search/accessibility corpus and additional provider profiles",
           "Actual minimum runtimes, exact final packages and full standards/security/fuzz/endurance qualification"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-009-independent.json"
       }
     },
     {

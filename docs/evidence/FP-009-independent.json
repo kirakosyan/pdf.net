@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-009 development interoperability; not full production qualification",
+  "sourceCommit": "ed9de0cb25b68e4c157004036099ff047da6cac0",
+  "workingTreeDirty": false,
+  "method": "PDF drawing from independent stored HarfBuzz answers; direct C bridge is checked separately; no isolated execution claim",
+  "tools": {
+    "pypdf": "6.10.0",
+    "FontTools": "4.61.1",
+    "Poppler": "25.03.0",
+    "Pillow": "12.3.0"
+  },
+  "cases": [
+    {
+      "case": 0,
+      "fontFixture": "latin.ttf",
+      "pdfSha256": "24c5afa421a5cbe4020c507518bfb87c212258da1dca94a714a05cb056dff7a5",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    },
+    {
+      "case": 1,
+      "fontFixture": "latin.ttf",
+      "pdfSha256": "2eb2bf5f929f439c038bab56228c0f2072cc387be170de13eaec405f68246323",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    },
+    {
+      "case": 2,
+      "fontFixture": "arabic.ttf",
+      "pdfSha256": "9050d0782e621a20ca2c58279bb2ef4298abe47472516146a5f026628867cfc6",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    },
+    {
+      "case": 3,
+      "fontFixture": "arabic.ttf",
+      "pdfSha256": "4e9fa9c329485f301eec523fdad8e4ca011fb33a931bc80a61f4fa4fb5b2cefd",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    },
+    {
+      "case": 4,
+      "fontFixture": "devanagari.ttf",
+      "pdfSha256": "d7db59771973e25e17e553482485d2a55b73c41befd51a7fbea9452d1ffe60f2",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    },
+    {
+      "case": 5,
+      "fontFixture": "devanagari.ttf",
+      "pdfSha256": "c8fdff600657bc64dd829cf2744a1b40cbddbca468963a8b64f068a3074e317a",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    },
+    {
+      "case": 6,
+      "fontFixture": "bengali.ttf",
+      "pdfSha256": "038f237ce280ade5da0b15a7c46398c7f10f17a63c777850a97575bd2c430157",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    },
+    {
+      "case": 7,
+      "fontFixture": "../fonts/licensed-cjk.otf",
+      "pdfSha256": "d66c092c9775bca5b264ea2a1fea3db25766d0aa10b742f66ef70b7cdfd1bf59",
+      "logicalActualText": "exact",
+      "glyphMatrices": "exact to 1e-10 user units",
+      "rasterPixels": 115200,
+      "differentPixels": 0
+    }
+  ],
+  "productionQualified": false,
+  "pending": [
+    "Isolated native runtime matrix retained separately",
+    "Complete licensed multilingual visual/copy/search/accessibility corpus",
+    "Minimum runtimes, final packages, standards/security/fuzz/endurance qualification"
+  ],
+  "runtime": {
+    "sdk": "10.0.402",
+    "runtime": "10.0.13",
+    "rid": "linux-x64",
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41"
+  },
+  "analysisTools": [
+    {
+      "tool": "original-reference-drawing-probe",
+      "sha256": "bd06e704b6ecd8262dcbde96cfed10d98d6e7d96629d2a9f42558908b16b1c56"
+    },
+    {
+      "tool": "independent-pdf-verifier",
+      "sha256": "bcf10b23ae9476d8524f35e545e1fa6f7e09d6432397c81cade475f1c4e38884"
+    },
+    {
+      "tool": "independent-native-bridge-probe",
+      "sha256": "d96a2523a1d0ea0c6e618f023f47805c1fb7b73a027a68ac30e0f86b11ddb4b5"
+    }
+  ],
+  "directBridge": {
+    "knownAnswers": 8,
+    "passed": 8,
+    "failed": 0,
+    "isolationExercised": false,
+    "note": "Direct development probe only; source CI separately requires the isolated worker on every supported host",
+    "originalBridgeSourceSha256": "9b8463f25dcfffc051478aa7a3ff0ef8ee81cc88db45f8e09e7079ce92bd61b4",
+    "pinnedNativeSha256": "4bd4d846aab1a0fd8333f96c70a564005dc3ca1becda52c3c4e8d093b46c1273"
+  },
+  "copySearchObservations": [
+    "Every independently parsed ActualText span equals unchanged logical input Unicode.",
+    "Poppler 25.03.0 emits RTL display-order Arabic with embedding controls.",
+    "pypdf 6.10.0 recovers Arabic logical order and Latin ligatures/marks; its positioning heuristics insert spaces in some Indic output and newlines for vertical CJK.",
+    "Full copy/search and accessible-text qualification remains pending; heuristic reader differences are not hidden."
+  ],
+  "unicodeConformance": {
+    "snapshotCommit": "4fd8eca90b30aa4c72543ccddb4c15d05becdf8d",
+    "dataVersion": "18.0.0",
+    "bidiClassVectors": 490846,
+    "bidiCharacterVectors": 91707,
+    "extendedGraphemeVectors": 853,
+    "passed": true,
+    "requiredRuntimeMatrix": "reported separately by source CI"
+  }
+}
