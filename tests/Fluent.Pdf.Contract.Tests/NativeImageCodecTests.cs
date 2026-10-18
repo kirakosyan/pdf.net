@@ -13,7 +13,7 @@ public sealed class NativeImageCodecTests
     {
         using var fixture = new CodecFixture(_output, defaults: true);
         byte[] valid = File.ReadAllBytes(ImagePath("l.jpg")), expected = File.ReadAllBytes(ImagePath("l.jpg.samples"));
-        var report = PolicyTests.Run(context =>
+        var report = fixture.RunContext(context =>
         {
             var codec = fixture.Registry.GetRequired<IPdfImageCodecProvider>(PdfCapability.ImageCodecs);
             for (int i = 0; i < 12; i++)
@@ -138,9 +138,15 @@ public sealed class NativeImageCodecTests
         private byte[] Run(Func<PdfOperationContext, byte[]> action, PdfResourceLimits? limits = null)
         {
             byte[]? result = null;
+            RunContext(c => result = action(c), limits ?? new PdfResourceLimits(maximumExpandedBytes: 2147483648));
+            return result!;
+        }
+
+        internal PdfOperationReport RunContext(Action<PdfOperationContext> action, PdfResourceLimits? limits = null)
+        {
             try
             {
-                PolicyTests.Run(c => result = action(c), limits ?? new PdfResourceLimits(maximumExpandedBytes: 2147483648));
+                return PolicyTests.Run(action, limits);
             }
             catch (PdfException failure)
             {
@@ -160,8 +166,6 @@ public sealed class NativeImageCodecTests
                     _output.WriteLine(detail);
                 throw;
             }
-
-            return result!;
         }
 
         private static byte[] Copy(Stream input)

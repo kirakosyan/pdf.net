@@ -90,7 +90,7 @@ Linux thread creation remains disabled by default. `AllowInProcessThreads` permi
 
 In both Linux modes seccomp denies `setrlimit` and any `prlimit64` call that supplies a new limit. Only a query of the worker's own limits is allowed. A privileged non-threaded bridge therefore cannot raise its hard limits after sandbox installation.
 
-Child .NET runtime settings are recomputed per job: a GC heap cap of one quarter of the process envelope, workstation/nonconcurrent GC, diagnostic IPC disabled and two reported processors. Caller settings are not inherited. NativeAOT code still runs only after sandbox installation.
+Child .NET runtime settings are recomputed per job: a GC heap cap of one eighth of the process envelope, a region range of one quarter (at least 32 MiB), 1 MiB GC regions, workstation/nonconcurrent GC, diagnostic IPC disabled and two reported processors. The smaller region size lets the runtime initialize within a reduced process envelope; 4 MiB regions could not initialize in the approximately 64 MiB range of a default-budget codec worker. Caller settings are not inherited. NativeAOT code still runs only after sandbox installation.
 
 `CaptureWorkerDiagnostics` is false by default. Explicit opt-in may retain at most 8 KiB of stderr in failure `Exception.Data["Native.WorkerDiagnostics"]`; engine output can contain sensitive content, so the caller controls that disclosure. It never changes default error messages. Loader details remain separately bounded metadata from loading before document input is read.
 

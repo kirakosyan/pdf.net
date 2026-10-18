@@ -102,7 +102,7 @@ public sealed class NativeWorkerHost
             // GC auxiliary mappings also consume the OS address-space envelope.
             start.EnvironmentVariables["DOTNET_GCHeapHardLimit"] = (options.MaximumMemoryBytes / 8).ToString("X", CultureInfo.InvariantCulture);
             start.EnvironmentVariables["DOTNET_GCRegionRange"] = Math.Max(33554432, options.MaximumMemoryBytes / 4).ToString("X", CultureInfo.InvariantCulture);
-            start.EnvironmentVariables["DOTNET_GCRegionSize"] = "400000";
+            start.EnvironmentVariables["DOTNET_GCRegionSize"] = "100000";
             start.EnvironmentVariables["DOTNET_GCConserveMemory"] = "9";
             start.EnvironmentVariables["DOTNET_gcServer"] = "0";
             start.EnvironmentVariables["DOTNET_gcConcurrent"] = "0";
