@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "purpose": "partial-failed-source-ci-not-production-qualification",
+  "runId": 39151895771,
+  "sourceCommit": "df121d6593fab897798a0c39879fcbcd99f2d030",
+  "testedMergeCommit": "7ac6205f8d1eb41348511d843a0649a30d73948a",
+  "testedTree": "fd450bcab6a11b250386f9ec427c08cd99cb3863",
+  "exactMergeTreeVerified": true,
+  "completedPlatformJobs": 5,
+  "platformJobsInProgress": [
+    "osx-x64"
+  ],
+  "completedRuntimeLanes": 15,
+  "passed": 15569,
+  "failed": 1,
+  "skipped": 0,
+  "notExecutedLanes": [
+    "win-x64/currentFramework-x86",
+    "win-x64/netstandard-on-net10"
+  ],
+  "pendingLanes": [
+    "osx-x64/net8",
+    "osx-x64/net10",
+    "osx-x64/netstandard-on-net10"
+  ],
+  "failure": "Existing NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope exceeds the unchanged30second operation deadline in currentFrameworkx64. Modern Windows net8/net10 and all WinARM lanes pass the corrected TLS fixtures.",
+  "followup": "Retain cumulative timing for every one of the same64decodes on the next source run. No native memory, deadline, loop count or publication gate changes.",
+  "jobs": [
+    {
+      "jobId": 117747074934,
+      "logSha256": "d55580d36e8640ebf3d09cd59a95305777dd58c859d081fcb87e6ff851874da7",
+      "completedLaneTotals": [
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        }
+      ]
+    },
+    {
+      "jobId": 117747074977,
+      "logSha256": "51b6d7c304332b6e57dcd54f91c6d14719d0519f854a536f1822be3e958ceee0",
+      "completedLaneTotals": [
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1037,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1038
+        }
+      ]
+    },
+    {
+      "jobId": 117747075005,
+      "logSha256": "5d2705251b4bffb599a5d843969ea1fb8e8ff96697ebeb66ecfa029f989dde53",
+      "completedLaneTotals": [
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        }
+      ]
+    },
+    {
+      "jobId": 117747075049,
+      "logSha256": "a89994f20945c012c7f57170ff0a38e9a5da3438e806d721febae0198f0b6e83",
+      "completedLaneTotals": [
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        }
+      ]
+    },
+    {
+      "jobId": 117747075071,
+      "logSha256": "f1f94fc16ba05cee6b358c3ba273fb88d975608b220af13597d6ff6f50244bfe",
+      "completedLaneTotals": [
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        },
+        {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1038
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12145940895,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:3730de711998ea8f15bd7ba150b5d2491dc02bc387e8628cec8393ea4b79d55d",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145940895"
+    },
+    {
+      "id": 12145721871,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:8e3c36b3d62f0075dc845ebca313b8b6093b006d3123022077bdf290726c3761",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145721871"
+    },
+    {
+      "id": 12145643055,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:5d53ec81efe79971083a9c5d0e0185f447a467eb8b3d8c601d1ca5c17e37176d",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145643055"
+    },
+    {
+      "id": 12145409158,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:0795b12f80b2d9b8752e8d603cca3c4c27ffad0b6f4d3ae0f9b334ccb988ae9d",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145409158"
+    },
+    {
+      "id": 12144619913,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:2a4b9cf7220257374e71a3989c0ec921b4b2b465de5b2a29fe21662703e80cf9",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12144619913"
+    }
+  ],
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

@@ -27,7 +27,7 @@ using var document = PdfHtml.Render(source, new PdfProviderRegistry(renderer),
 document.SaveFile(destination);
 ```
 
-Load completion uses native lifecycle events and a private isolated-world synchronous font-state check, including when page JavaScript is disabled. Advanced readiness, navigation/worker lifecycle and explicit script profiles belong to FP-046. Print-media/accessibility controls belong to FP-047. Current paper size is a browser print request: the imported model retains actual engine page boxes. The observed candidate rounds A4 to approximately 595.91998 × 841.91998 points. Exact print/page negotiation and its complete corpus remain mandatory; no exact A4-box or PDF/UA claim is made by this source profile.
+FP-046 adds [finite readiness and lifecycle controls](html-readiness.md): explicit selectors/promises, isolated synchronous font/image checks and bounded observed network quietness under a shared phase deadline. Locale, timezone and print/screen media are explicit. Child-frame/worker/replacement-navigation profiles remain mandatory. FP-047 owns complete print-media/accessibility controls. Current paper size remains a browser print request; imported boxes retain engine precision (the observed A4 candidate rounds to approximately 595.91998 × 841.91998 points).
 
 ## Source evidence and applicability
 

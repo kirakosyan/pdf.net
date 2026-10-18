@@ -13,6 +13,7 @@ public sealed class NativeImageCodecTests
     {
         using var fixture = new CodecFixture(_output, defaults: true);
         byte[] valid = File.ReadAllBytes(ImagePath("l.jpg")), expected = File.ReadAllBytes(ImagePath("l.jpg.samples"));
+        var elapsed = System.Diagnostics.Stopwatch.StartNew();
         var report = fixture.RunContext(context =>
         {
             var codec = fixture.Registry.GetRequired<IPdfImageCodecProvider>(PdfCapability.ImageCodecs);
@@ -22,6 +23,7 @@ public sealed class NativeImageCodecTests
                 using var output = new MemoryStream();
                 codec.Decode(PdfImageCodec.Dct, new(64, 16, 1, 8), PdfValue.Null, PdfValue.Null, input, output, context);
                 Assert.Equal(expected, output.ToArray());
+                _output.WriteLine("Default-envelope decode " + (i + 1).ToString(System.Globalization.CultureInfo.InvariantCulture) + "/64; cumulative milliseconds=" + elapsed.Elapsed.TotalMilliseconds.ToString("F3", System.Globalization.CultureInfo.InvariantCulture));
             }
         });
         Assert.True(report.Resources.Single(x => x.Resource == PdfResourceKind.ExpandedBytes).Consumed < 268435456);

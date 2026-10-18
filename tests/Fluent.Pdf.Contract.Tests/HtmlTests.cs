@@ -330,13 +330,15 @@ public sealed class HtmlTests
     }
 
     // A protocol peer, not a browser engine. Actual Chromium observations are separately retained.
-    private sealed class Peer : IChromiumConnection
+    internal sealed class Peer : IChromiumConnection
     {
         internal const string Version = "154.0.8037.57", Revision = "@original-source-revision";
         private readonly Queue<string> _messages = new();
         private readonly byte[] _pdf = PdfBytes();
         internal string Behavior = "";
-        internal bool WrongVersion, Disposed, ScriptDisabled;
+        internal bool WrongVersion, Disposed, ScriptDisabled, PromiseObserved;
+        internal int ReadinessChecks;
+        internal string? ObservedLocale, ObservedTimeZone, ObservedMedia;
         internal readonly List<string> Commands = new(), Bodies = new(), ResponseHeaders = new();
         public void Send(string message, PdfOperationContext context)
         {
@@ -395,10 +397,23 @@ public sealed class HtmlTests
                         sessionId = "private-session"
                     };
                     break;
+                case "Emulation.setLocaleOverride":
+                    ObservedLocale = p.GetProperty("locale").GetString();
+                    break;
+                case "Emulation.setTimezoneOverride":
+                    ObservedTimeZone = p.GetProperty("timezoneId").GetString();
+                    break;
+                case "Emulation.setEmulatedMedia":
+                    ObservedMedia = p.GetProperty("media").GetString();
+                    break;
                 case "Emulation.setScriptExecutionDisabled":
                     ScriptDisabled = p.GetProperty("value").GetBoolean();
                     break;
                 case "Page.navigate":
+                    if (Behavior == "networkNever" || Behavior == "networkChurn")
+                        Event("Network.requestWillBeSent", new { requestId = "background-poll" });
+                    if (Behavior == "frame")
+                        Event("Page.frameAttached", new { frameId = "child-frame" });
                     Event("Fetch.requestPaused", new { requestId = "main-request", request = new { url = p.GetProperty("url").GetString(), method = "GET" } });
                     if (Behavior == "resource")
                         Event("Fetch.requestPaused", new { requestId = "large-resource", resourceType = "Other", request = new { url = "https://fluent-pdf.invalid/large.bin", method = "GET" } });
@@ -430,6 +445,36 @@ public sealed class HtmlTests
                     };
                     break;
                 case "Runtime.evaluate":
+                    if (p.TryGetProperty("awaitPromise", out var promise) && promise.GetBoolean())
+                    {
+                        PromiseObserved = true;
+                        if (Behavior == "promiseNever")
+                            return;
+                        result = Behavior == "promiseRejected" ? new
+                        {
+                            exceptionDetails = new
+                            {
+                                text = "private-fixture-data"
+                            }
+                        }
+
+                        : (object)new
+                        {
+                            result = new
+                            {
+                                type = "undefined"
+                            }
+                        };
+                        break;
+                    }
+
+                    ReadinessChecks++;
+                    if (Behavior == "networkChurn")
+                    {
+                        Event("Network.loadingFinished", new { requestId = "background-poll" });
+                        Event("Network.requestWillBeSent", new { requestId = "background-poll" });
+                    }
+
                     result = new
                     {
                         result = new
@@ -437,7 +482,12 @@ public sealed class HtmlTests
                             type = "object",
                             value = new
                             {
-                                fontsReady = true,
+                                documentReady = true,
+                                selectorsReady = Behavior != "selectorNever" && (Behavior != "late" || ReadinessChecks >= 3),
+                                fontsReady = Behavior != "fontNever" && (Behavior != "late" || ReadinessChecks >= 3),
+                                imagesReady = Behavior != "imageNever" && (Behavior != "late" || ReadinessChecks >= 3),
+                                failedImages = Behavior == "imageFailure" ? 1 : 0,
+                                pendingImages = Behavior == "imageNever" || Behavior == "late" && ReadinessChecks < 3 ? 1 : 0,
                                 failedFonts = Behavior == "font" ? 1 : 0
                             }
                         }
@@ -476,13 +526,25 @@ public sealed class HtmlTests
 
             _messages.Enqueue(JsonSerializer.Serialize(new { id, result }));
             if (method == "Page.navigate")
+            {
+                if (Behavior != "domNever")
+                    Event("Page.lifecycleEvent", new { frameId = "main-frame", loaderId = "main-loader", name = "DOMContentLoaded" });
                 Event("Page.lifecycleEvent", new { frameId = "main-frame", loaderId = "main-loader", name = "networkIdle" });
+            }
         }
 
         private void Event(string method, object parameters) => _messages.Enqueue(JsonSerializer.Serialize(new { method, sessionId = "private-session", @params = parameters }));
         public string Receive(PdfOperationContext context)
         {
             context.Checkpoint();
+            if (Behavior == "io" && Commands.Contains("Page.navigate"))
+                throw new EndOfStreamException("private-transport-fixture");
+            while (_messages.Count == 0 && (Behavior == "promiseNever" || Behavior == "domNever"))
+            {
+                context.CancellationToken.WaitHandle.WaitOne(10);
+                context.Checkpoint();
+            }
+
             return _messages.Dequeue();
         }
 

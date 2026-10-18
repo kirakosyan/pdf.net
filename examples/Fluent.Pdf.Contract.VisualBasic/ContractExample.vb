@@ -10,6 +10,9 @@ Public Module ContractExample
     Public Function HtmlRendererWithResources(host As Fluent.Pdf.Html.ChromiumConnectionFactory, exactVersion As String, exactRevision As String, resources As Fluent.Pdf.Html.HtmlResourceLoader) As PdfProviderRegistry
         Return New PdfProviderRegistry(New Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision, AddressOf resources.OpenSession))
     End Function
+    Public Function HtmlOptions(readiness As PdfHtmlReadinessOptions, enableJavaScript As Boolean, locale As String, timeZone As String, media As PdfHtmlMedia) As PdfHtmlOptions
+        Return New PdfHtmlOptions(readiness:=readiness, enableJavaScript:=enableJavaScript, locale:=locale, timeZone:=timeZone, media:=media)
+    End Function
     Public Function ConvertHtml(source As PdfHtmlSource, providers As PdfProviderRegistry, options As PdfHtmlOptions) As PdfDocument
         Return PdfHtml.Render(source, providers, options)
     End Function

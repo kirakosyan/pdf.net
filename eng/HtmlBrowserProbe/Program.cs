@@ -77,6 +77,8 @@ foreach (bool enabled in new[]
 File.WriteAllText(Path.Combine(outputRoot, "observations.json"), JsonSerializer.Serialize(new { purpose = "trusted-original-source-fixtures-not-security-or-production-qualification", runtime = RuntimeInformation.FrameworkDescription, os = RuntimeInformation.OSDescription, architecture = RuntimeInformation.ProcessArchitecture.ToString(), version, revision, observations, productionQualified = false }, new JsonSerializerOptions { WriteIndented = true }));
 if (settings.TryGetProperty("includeResourceFixtures", out var resourceFixtures) && resourceFixtures.GetBoolean())
     await ResourceFixture.ObserveAsync(outputRoot, context => new FixtureConnection(node, browser, temporaryParent, context), fontPath, version, revision);
+if (settings.TryGetProperty("includeReadinessFixtures", out var readinessFixtures) && readinessFixtures.GetBoolean())
+    ReadinessFixture.Observe(outputRoot, context => new FixtureConnection(node, browser, temporaryParent, context), fontPath, version, revision);
 static string Hash(string path)
 {
     using var input = File.OpenRead(path);
@@ -125,6 +127,12 @@ sealed class FixtureConnection : IChromiumConnection
         context.Checkpoint();
     }
 
+    internal void TerminateForOriginalFixture()
+    {
+        if (!_process.HasExited)
+            _process.Kill(entireProcessTree: true);
+    }
+
     public string Receive(PdfOperationContext context)
     {
         _reading = Task.Run(() =>
@@ -144,16 +152,19 @@ sealed class FixtureConnection : IChromiumConnection
                 builder.Append((char)c);
             }
         });
-        while (!_reading.IsCompleted)
-        {
-            context.CancellationToken.WaitHandle.WaitOne(25);
-            context.Checkpoint();
-        }
-
+        context.Consume(PdfResourceKind.ExpandedBytes, 4096);
+        // Wait for completion or cancellation directly; a fixed delay per protocol message cannot keep up with active pages.
+        System.Threading.WaitHandle.WaitAny(new[] { ((IAsyncResult)_reading).AsyncWaitHandle, context.CancellationToken.WaitHandle });
         context.Checkpoint();
-        string result = _reading.GetAwaiter().GetResult();
-        _reading = null;
-        return result;
+        try
+        {
+            return _reading.GetAwaiter().GetResult();
+        }
+        finally
+        {
+            _reading.Dispose();
+            _reading = null;
+        }
     }
 
     public void Dispose()
@@ -181,6 +192,9 @@ sealed class FixtureConnection : IChromiumConnection
             catch (AggregateException)
             { /* A prior read failure remains the enclosing operation's failure. All owned work is joined. */
             }
+
+            _reading.Dispose();
+            _reading = null;
         }
 
         _output.Dispose();

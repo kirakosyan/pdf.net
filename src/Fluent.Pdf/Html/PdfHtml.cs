@@ -6,8 +6,23 @@ namespace Fluent.Pdf;
 public sealed class PdfHtmlOptions
 {
     /// <summary>Captures page size, bounded viewport, script execution, background painting and imported page ceiling.</summary>
-    public PdfHtmlOptions(PdfPageSize? pageSize = null, int viewportWidth = 1280, int viewportHeight = 720, bool enableJavaScript = false, bool printBackground = true, int maximumPages = 1000)
+    public PdfHtmlOptions(PdfPageSize? pageSize, int viewportWidth, int viewportHeight, bool enableJavaScript, bool printBackground, int maximumPages) : this(pageSize, viewportWidth, viewportHeight, enableJavaScript, printBackground, maximumPages, null, "en-US", "UTC", PdfHtmlMedia.Print)
     {
+    }
+
+    /// <summary>Captures explicit finite readiness, browser locale/timezone/media and the ordinary bounded layout/print options. Unknown engine locale/timezone values reject.</summary>
+    public PdfHtmlOptions(PdfPageSize? pageSize = null, int viewportWidth = 1280, int viewportHeight = 720, bool enableJavaScript = false, bool printBackground = true, int maximumPages = 1000, PdfHtmlReadinessOptions? readiness = null, string locale = "en-US", string timeZone = "UTC", PdfHtmlMedia media = PdfHtmlMedia.Print)
+    {
+        Readiness = readiness ?? PdfHtmlReadinessOptions.Default;
+        if (string.IsNullOrEmpty(locale) || locale.Length > 64 || locale.Split('-').Any(part => part.Length == 0 || part.Any(c => !(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9'))))
+            throw new ArgumentException("An explicit bounded locale identifier is required.", nameof(locale));
+        if (string.IsNullOrEmpty(timeZone) || timeZone.Length > 128 || timeZone.Any(c => !(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9' || "/_+-".IndexOf(c) >= 0)))
+            throw new ArgumentException("An explicit bounded timezone identifier is required.", nameof(timeZone));
+        if (!Enum.IsDefined(typeof(PdfHtmlMedia), media))
+            throw new ArgumentOutOfRangeException(nameof(media));
+        Locale = locale;
+        TimeZone = timeZone;
+        Media = media;
         PageSize = pageSize ?? PdfPageSize.A4;
         Guard.Size(PageSize, nameof(pageSize));
         if (viewportWidth < 16 || viewportWidth > 16384 || viewportHeight < 16 || viewportHeight > 16384)
@@ -33,6 +48,14 @@ public sealed class PdfHtmlOptions
     public bool PrintBackground { get; }
     /// <summary>Gets the maximum accepted generated page count.</summary>
     public int MaximumPages { get; }
+    /// <summary>Gets the immutable finite main-document readiness policy.</summary>
+    public PdfHtmlReadinessOptions Readiness { get; }
+    /// <summary>Gets the explicit browser locale, independent of the host account.</summary>
+    public string Locale { get; }
+    /// <summary>Gets the explicit browser timezone, independent of the host account.</summary>
+    public string TimeZone { get; }
+    /// <summary>Gets the explicit CSS media selected before navigation/readiness.</summary>
+    public PdfHtmlMedia Media { get; }
 }
 
 /// <summary>An explicitly registered optional HTML engine. Implementations must use a private job, supplied resources and the mandatory shared context.</summary>

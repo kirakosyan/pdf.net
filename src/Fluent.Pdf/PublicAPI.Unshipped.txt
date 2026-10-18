@@ -956,14 +956,33 @@ Fluent.Pdf.PdfGraphicsState.Resource.get -> Fluent.Pdf.PdfGraphicsResource!
 Fluent.Pdf.PdfGraphicsState.SoftMask.get -> Fluent.Pdf.PdfSoftMask?
 Fluent.Pdf.PdfGraphicsState.StrokeAlpha.get -> double
 Fluent.Pdf.PdfHtml
+Fluent.Pdf.PdfHtmlMedia
+Fluent.Pdf.PdfHtmlMedia.Print = 0 -> Fluent.Pdf.PdfHtmlMedia
+Fluent.Pdf.PdfHtmlMedia.Screen = 1 -> Fluent.Pdf.PdfHtmlMedia
 Fluent.Pdf.PdfHtmlOptions
 Fluent.Pdf.PdfHtmlOptions.EnableJavaScript.get -> bool
+Fluent.Pdf.PdfHtmlOptions.Locale.get -> string!
 Fluent.Pdf.PdfHtmlOptions.MaximumPages.get -> int
+Fluent.Pdf.PdfHtmlOptions.Media.get -> Fluent.Pdf.PdfHtmlMedia
 Fluent.Pdf.PdfHtmlOptions.PageSize.get -> Fluent.Pdf.PdfPageSize
-Fluent.Pdf.PdfHtmlOptions.PdfHtmlOptions(Fluent.Pdf.PdfPageSize? pageSize = null, int viewportWidth = 1280, int viewportHeight = 720, bool enableJavaScript = false, bool printBackground = true, int maximumPages = 1000) -> void
+Fluent.Pdf.PdfHtmlOptions.PdfHtmlOptions(Fluent.Pdf.PdfPageSize? pageSize = null, int viewportWidth = 1280, int viewportHeight = 720, bool enableJavaScript = false, bool printBackground = true, int maximumPages = 1000, Fluent.Pdf.PdfHtmlReadinessOptions? readiness = null, string! locale = "en-US", string! timeZone = "UTC", Fluent.Pdf.PdfHtmlMedia media = Fluent.Pdf.PdfHtmlMedia.Print) -> void
+Fluent.Pdf.PdfHtmlOptions.PdfHtmlOptions(Fluent.Pdf.PdfPageSize? pageSize, int viewportWidth, int viewportHeight, bool enableJavaScript, bool printBackground, int maximumPages) -> void
 Fluent.Pdf.PdfHtmlOptions.PrintBackground.get -> bool
+Fluent.Pdf.PdfHtmlOptions.Readiness.get -> Fluent.Pdf.PdfHtmlReadinessOptions!
+Fluent.Pdf.PdfHtmlOptions.TimeZone.get -> string!
 Fluent.Pdf.PdfHtmlOptions.ViewportHeight.get -> int
 Fluent.Pdf.PdfHtmlOptions.ViewportWidth.get -> int
+Fluent.Pdf.PdfHtmlReadinessOptions
+Fluent.Pdf.PdfHtmlReadinessOptions.JavaScriptPromise.get -> string?
+Fluent.Pdf.PdfHtmlReadinessOptions.MaximumInFlightRequests.get -> int
+Fluent.Pdf.PdfHtmlReadinessOptions.NetworkQuietPeriod.get -> System.TimeSpan
+Fluent.Pdf.PdfHtmlReadinessOptions.PdfHtmlReadinessOptions(System.TimeSpan? timeout = null, System.Collections.Generic.IEnumerable<string!>? selectors = null, string? javaScriptPromise = null, bool waitForDocumentComplete = true, bool waitForFonts = true, bool waitForImages = true, System.TimeSpan? networkQuietPeriod = null, int maximumInFlightRequests = 0, System.TimeSpan? pollingInterval = null) -> void
+Fluent.Pdf.PdfHtmlReadinessOptions.PollingInterval.get -> System.TimeSpan
+Fluent.Pdf.PdfHtmlReadinessOptions.Selectors.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.PdfHtmlReadinessOptions.Timeout.get -> System.TimeSpan
+Fluent.Pdf.PdfHtmlReadinessOptions.WaitForDocumentComplete.get -> bool
+Fluent.Pdf.PdfHtmlReadinessOptions.WaitForFonts.get -> bool
+Fluent.Pdf.PdfHtmlReadinessOptions.WaitForImages.get -> bool
 Fluent.Pdf.PdfHtmlResource
 Fluent.Pdf.PdfHtmlResource.Address.get -> System.Uri!
 Fluent.Pdf.PdfHtmlResource.Length.get -> long
@@ -1165,6 +1184,7 @@ Fluent.Pdf.PdfOperationContext.Checkpoint() -> void
 Fluent.Pdf.PdfOperationContext.Consume(Fluent.Pdf.PdfResourceKind resource, long amount) -> void
 Fluent.Pdf.PdfOperationContext.ConsumePixels(long width, long height) -> void
 Fluent.Pdf.PdfOperationContext.EnterScope(Fluent.Pdf.PdfResourceKind resource) -> System.IDisposable!
+Fluent.Pdf.PdfOperationContext.EnterTimeLimit(System.TimeSpan maximumElapsedTime) -> System.IDisposable!
 Fluent.Pdf.PdfOperationContext.Operation.get -> string!
 Fluent.Pdf.PdfOperationContext.Policy.get -> Fluent.Pdf.PdfOperationPolicy!
 Fluent.Pdf.PdfOperationContext.ProviderId.get -> string!
@@ -2034,6 +2054,7 @@ static Fluent.Pdf.PdfGraphicsResource.Font(Fluent.Pdf.PdfFontResource! font) -> 
 static Fluent.Pdf.PdfGraphicsState.Create(string! blendMode = "Normal", double fillAlpha = 1, double strokeAlpha = 1, Fluent.Pdf.PdfSoftMask? softMask = null, bool alphaIsShape = false, bool textKnockout = true, bool strokeOverprint = false, bool fillOverprint = false, int overprintMode = 0, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfGraphicsState!
 static Fluent.Pdf.PdfGraphicsState.SupportedBlendModes.get -> System.Collections.Generic.IReadOnlyList<string!>!
 static Fluent.Pdf.PdfHtml.Render(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfHtmlOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfHtmlReadinessOptions.Default.get -> Fluent.Pdf.PdfHtmlReadinessOptions!
 static Fluent.Pdf.PdfHtmlResource.Read(System.Uri! address, string! mediaType, System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
 static Fluent.Pdf.PdfHtmlSource.FromHtml(string! markup, System.Uri? address = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!
 static Fluent.Pdf.PdfHtmlSource.FromResource(System.Uri! address, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>! resources, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!

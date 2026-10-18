@@ -1744,7 +1744,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-readiness.md",
+        "implemented": [
+          "Immutable bounded selectors/promises/document/font/image/network readiness and explicit locale/timezone/media controls",
+          "Shared nested phase deadlines across resource/browser I/O, permanent expiry latching, cancellation and private-host failure/fresh-job behavior",
+          "C#/VB consumers, source deadline/lifecycle/asset/error cases and actual pinned trusted-original browser/independent output observations"
+        ],
+        "pending": [
+          "Complete child-frame, worker/OOPIF, replacement-navigation, interactive and full dynamic site/font/image profiles remain mandatory",
+          "Complete deployable browser host isolation/termination and actual supported RID/runtime/minimum/fallback/final-package consumers remain mandatory",
+          "Full fidelity/security/fuzz/resource/concurrency/endurance/performance qualification remains mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-046-source.json",
+        "standardsEvidence": "docs/evidence/FP-046-standards.json",
+        "independentEvidence": "docs/evidence/FP-046-independent.json"
+      }
     },
     {
       "id": "FP-047",

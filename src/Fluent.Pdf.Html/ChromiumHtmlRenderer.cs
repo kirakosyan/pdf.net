@@ -1,4 +1,5 @@
 using System.IO;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using static Fluent.Pdf.Html.ChromiumProtocol;
@@ -48,6 +49,8 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
         if (context == null)
             throw new ArgumentNullException(nameof(context));
         context.Checkpoint();
+        if (options.Readiness.JavaScriptPromise != null && !options.EnableJavaScript)
+            throw PdfWriterCore.Error(context, "Html.PromiseRequiresJavaScript", "An explicit readiness promise requires source JavaScript execution to be enabled.");
         context.Consume(PdfResourceKind.ExpandedBytes, 4096);
         context.Consume(PdfResourceKind.Objects, 8);
         using var worker = context.EnterScope(PdfResourceKind.Workers);
@@ -77,7 +80,11 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
             session = protocol.String(Result(attached), "sessionId");
         context.Consume(PdfResourceKind.ExpandedBytes, source.Resources.Count * 256L + 2048);
         var resources = source.Resources.ToDictionary(r => r.Address.AbsoluteUri, r => r, StringComparer.Ordinal);
-        var idleLoaders = new HashSet<string>(StringComparer.Ordinal);
+        var domLoaders = new HashSet<string>(StringComparer.Ordinal);
+        var pendingRequests = new HashSet<string>(StringComparer.Ordinal);
+        var quietClock = Stopwatch.StartNew();
+        bool quietCandidate = true;
+        string frame = "", loader = "";
         var mainRequests = new HashSet<string>(StringComparer.Ordinal);
         protocol.Notification = Notify;
         Command("Target.setAutoAttach", P(("autoAttach", true), ("waitForDebuggerOnStart", true), ("flatten", true)));
@@ -88,41 +95,27 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
         Command("Network.setCacheDisabled", P(("cacheDisabled", true)));
         Command("Network.setBypassServiceWorker", P(("bypass", true)));
         Command("Emulation.setDeviceMetricsOverride", P(("width", options.ViewportWidth), ("height", options.ViewportHeight), ("deviceScaleFactor", 1), ("mobile", false)));
-        Command("Emulation.setLocaleOverride", P(("locale", "en-US")));
-        Command("Emulation.setTimezoneOverride", P(("timezoneId", "UTC")));
+        Command("Emulation.setLocaleOverride", P(("locale", options.Locale)));
+        Command("Emulation.setTimezoneOverride", P(("timezoneId", options.TimeZone)));
+        Command("Emulation.setEmulatedMedia", P(("media", options.Media == PdfHtmlMedia.Print ? "print" : "screen")));
         Command("Emulation.setScriptExecutionDisabled", P(("value", !options.EnableJavaScript)));
         Command("Fetch.enable", P(("patterns", new object[] { P(("urlPattern", "*"), ("requestStage", "Request")) })));
-        string frame, loader;
-        using (var navigated = protocol.Call("Page.navigate", P(("url", source.Address.AbsoluteUri)), session))
+        using (context.EnterTimeLimit(options.Readiness.Timeout))
         {
-            var navigation = Result(navigated);
-            if (navigation.TryGetProperty("errorText", out _))
-                throw protocol.Error("Navigation", "The explicitly supplied document could not be navigated.");
-            frame = protocol.String(navigation, "frameId");
-            loader = protocol.String(navigation, "loaderId");
+            using (var navigated = protocol.Call("Page.navigate", P(("url", source.Address.AbsoluteUri)), session))
+            {
+                var navigation = Result(navigated);
+                if (navigation.TryGetProperty("errorText", out _))
+                    throw protocol.Error("Navigation", "The explicitly supplied document could not be navigated.");
+                frame = protocol.String(navigation, "frameId");
+                loader = protocol.String(navigation, "loaderId");
+            }
+
+            protocol.PumpUntil(() => domLoaders.Contains(frame + ":" + loader));
+            ChromiumReadiness.Wait(protocol, session, frame, options.Readiness, context, () => options.Readiness.NetworkQuietPeriod == TimeSpan.Zero || quietCandidate && quietClock.Elapsed >= options.Readiness.NetworkQuietPeriod);
         }
 
-        protocol.PumpUntil(() => idleLoaders.Contains(frame + ":" + loader));
-        int world;
-        using (var isolated = protocol.Call("Page.createIsolatedWorld", P(("frameId", frame), ("worldName", "fluent-pdf-readiness")), session))
-        {
-            var result = Result(isolated);
-            if (!result.TryGetProperty("executionContextId", out var id) || id.ValueKind != JsonValueKind.Number || !id.TryGetInt32(out world))
-                throw protocol.Error("Readiness", "The browser did not create the private inspection world.");
-        }
-
-        using (var ready = protocol.Call("Runtime.evaluate", P(("expression", "({fontsReady:document.fonts.status==='loaded',failedFonts:Array.from(document.fonts).filter(f=>f.status==='error').length})"), ("contextId", world), ("returnByValue", true)), session))
-        {
-            var result = Result(ready);
-            if (result.TryGetProperty("exceptionDetails", out _))
-                throw protocol.Error("Readiness", "The browser did not complete the explicit document/font readiness boundary.");
-            var value = protocol.Object(protocol.Object(result, "result"), "value");
-            if (!value.TryGetProperty("fontsReady", out var complete) || complete.ValueKind != JsonValueKind.True || !value.TryGetProperty("failedFonts", out var failed) || failed.ValueKind != JsonValueKind.Number || !failed.TryGetInt32(out int count) || count < 0)
-                throw protocol.Error("Readiness", "The browser did not complete the explicit document/font readiness boundary.");
-            if (count != 0)
-                context.Report(new("Html.FontUnavailable", "A declared web font failed to load; the browser would substitute its fallback.", lossCategory: PdfLossCategory.SubstitutedContent));
-        }
-
+        context.Checkpoint();
         string handle;
         using (var printed = protocol.Call("Page.printToPDF", P(("transferMode", "ReturnAsStream"), ("printBackground", options.PrintBackground), ("paperWidth", options.PageSize.Width / 72d), ("paperHeight", options.PageSize.Height / 72d), ("marginTop", 0), ("marginBottom", 0), ("marginLeft", 0), ("marginRight", 0), ("displayHeaderFooter", false)), session))
             handle = protocol.String(Result(printed), "stream");
@@ -187,15 +180,54 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
             if (method == "Page.lifecycleEvent")
             {
                 var state = protocol.Object(message, "params");
-                if (protocol.String(state, "name") == "networkIdle")
+                if (protocol.String(state, "name") == "DOMContentLoaded")
                 {
-                    if (idleLoaders.Count == 128)
+                    if (domLoaders.Count == 128)
                         throw protocol.Error("NavigationExtent", "The browser lifecycle inventory exceeded its source profile.");
                     context.Consume(PdfResourceKind.ExpandedBytes, 512);
-                    idleLoaders.Add(protocol.String(state, "frameId") + ":" + protocol.String(state, "loaderId"));
+                    domLoaders.Add(protocol.String(state, "frameId") + ":" + protocol.String(state, "loaderId"));
                 }
 
                 return;
+            }
+
+            if (method == "Network.requestWillBeSent" || method == "Network.loadingFinished" || method == "Network.loadingFailed")
+            {
+                var state = protocol.Object(message, "params");
+                string id = protocol.String(state, "requestId");
+                if (id.Length > 256 || id.Length == 0)
+                    throw protocol.Error("NetworkIdentity", "A browser network request has an invalid identity extent.");
+                if (method == "Network.requestWillBeSent")
+                {
+                    if (pendingRequests.Count == 4096 && !pendingRequests.Contains(id))
+                        throw protocol.Error("NetworkExtent", "The browser's in-flight request inventory was exhausted.");
+                    context.Consume(PdfResourceKind.ExpandedBytes, 1024);
+                    context.Consume(PdfResourceKind.Objects, 1);
+                    pendingRequests.Add(id);
+                }
+                else
+                    pendingRequests.Remove(id);
+                if (pendingRequests.Count > options.Readiness.MaximumInFlightRequests)
+                {
+                    quietClock.Reset();
+                    quietCandidate = false;
+                }
+                else if (!quietCandidate)
+                {
+                    quietClock.Restart();
+                    quietCandidate = true;
+                }
+
+                return;
+            }
+
+            if (method == "Page.frameAttached")
+                throw protocol.Error("SubframeReadinessUnsupported", "Complete child-frame readiness requires an explicit supported frame lifecycle profile.");
+            if (method == "Page.frameNavigated" && frame.Length != 0)
+            {
+                var changed = protocol.Object(protocol.Object(message, "params"), "frame");
+                if (protocol.String(changed, "id") == frame && protocol.String(changed, "loaderId") != loader)
+                    throw protocol.Error("NavigationChanged", "A new top-level document replaced the explicit readiness navigation.");
             }
 
             if (method == "Inspector.detached" || method == "Inspector.targetCrashed" || method == "Target.targetCrashed")

@@ -13,6 +13,7 @@ public sealed class PdfOperationContext
     private readonly long[] _reserved = new long[7];
     private readonly bool[] _probing = new bool[7];
     private readonly List<PdfDiagnostic> _diagnostics = new();
+    private readonly Dictionary<TimeLimitScope, TimeSpan> _timeLimits = new();
     private readonly CancellationToken _callerToken;
     private readonly CancellationTokenSource _deadline = new();
     private readonly CancellationTokenSource _linked;
@@ -203,6 +204,39 @@ public sealed class PdfOperationContext
         }
     }
 
+    /// <summary>Temporarily tightens the shared cancellation/deadline to a bounded phase. Disposal restores only the remaining original/outer time; an expired phase latches failure permanently.</summary>
+    /// <remarks>Durations are 1 ms through one day; at most 128 simultaneous scopes are supported. Every scope must be disposed before the provider returns. All providers retain the same context and cancellation token.</remarks>
+    public IDisposable EnterTimeLimit(TimeSpan maximumElapsedTime)
+    {
+        if (maximumElapsedTime < TimeSpan.FromMilliseconds(1) || maximumElapsedTime > TimeSpan.FromDays(1))
+            throw new ArgumentOutOfRangeException(nameof(maximumElapsedTime));
+        lock (_gate)
+        {
+            CheckCore();
+            if (_timeLimits.Count == 128)
+                Fail("Limit.TimeScopes", "The simultaneous phase deadline inventory was exhausted.");
+            Charge(PdfResourceKind.ExpandedBytes, 256);
+            Charge(PdfResourceKind.Objects, 1);
+            var scope = new TimeLimitScope(this, _elapsed() + maximumElapsedTime);
+            _timeLimits.Add(scope, scope.Deadline);
+            ScheduleDeadline();
+            return scope;
+        }
+    }
+
+    private void ScheduleDeadline()
+    {
+        if (!_active || _deadline.IsCancellationRequested)
+            return;
+        TimeSpan elapsed = _elapsed();
+        TimeSpan end = Policy.Limits.MaximumElapsedTime;
+        foreach (TimeSpan phase in _timeLimits.Values)
+            if (phase < end)
+                end = phase;
+        TimeSpan remaining = end - elapsed;
+        _deadline.CancelAfter(_fatal != null || remaining <= TimeSpan.Zero ? TimeSpan.Zero : remaining);
+    }
+
     /// <summary>Records a diagnostic with SDK-bound provenance. Strict losses and error severity latch a fatal failure.</summary>
     public void Report(PdfDiagnostic diagnostic) => ReportCore(diagnostic, null, null);
     // Attach bounded operation-owned details before publishing/throwing a latched failure on every runtime.
@@ -336,7 +370,7 @@ public sealed class PdfOperationContext
         lock (_gate)
         {
             CheckCore();
-            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 || _reserved.Any(value => value != 0) || _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
+            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 || _timeLimits.Count != 0 || _reserved.Any(value => value != 0) || _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
                 Fail("Operation.ScopeLeaked", "Provider scopes and reads must finish before returning.");
         }
     }
@@ -367,8 +401,12 @@ public sealed class PdfOperationContext
         if (_fatal is not null)
             throw _fatal;
         _callerToken.ThrowIfCancellationRequested();
-        if (_elapsed() >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
+        TimeSpan elapsed = _elapsed();
+        if (elapsed >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
             Fail("Limit.ElapsedTime", "The operation deadline elapsed.");
+        foreach (TimeSpan end in _timeLimits.Values)
+            if (elapsed >= end)
+                Fail("Limit.ElapsedTime", "The operation phase deadline elapsed.");
     }
 
     private void Charge(PdfResourceKind resource, long amount)
@@ -390,6 +428,35 @@ public sealed class PdfOperationContext
     {
         if (!Enum.IsDefined(typeof(PdfResourceKind), resource))
             throw new ArgumentOutOfRangeException(nameof(resource));
+    }
+
+    private sealed class TimeLimitScope : IDisposable
+    {
+        private PdfOperationContext? _owner;
+        internal readonly TimeSpan Deadline;
+        internal TimeLimitScope(PdfOperationContext owner, TimeSpan deadline)
+        {
+            _owner = owner;
+            Deadline = deadline;
+        }
+
+        public void Dispose()
+        {
+            var owner = _owner;
+            if (owner == null)
+                return;
+            lock (owner._gate)
+            {
+                if (!ReferenceEquals(_owner, owner))
+                    return;
+                _owner = null;
+                // Expiry cannot be hidden by disposing the scope before the next provider checkpoint.
+                if (owner._active && owner._fatal == null && (owner._elapsed() >= Deadline || owner._deadline.IsCancellationRequested))
+                    owner._fatal = new PdfException(new PdfDiagnostic("Limit.ElapsedTime", "The operation phase deadline elapsed.", owner.Capability, owner.ProviderId, operation: owner.Operation));
+                owner._timeLimits.Remove(this);
+                owner.ScheduleDeadline();
+            }
+        }
     }
 
     private sealed class Scope : IDisposable

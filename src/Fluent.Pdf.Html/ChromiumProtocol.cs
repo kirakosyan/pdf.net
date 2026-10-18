@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using System.IO;
 
 namespace Fluent.Pdf.Html;
 // Original bounded synchronous DevTools dispatch. Intercepted requests receive asynchronous acknowledgements while another command is awaited.
@@ -102,7 +103,21 @@ internal sealed class ChromiumProtocol
         string json = JsonSerializer.Serialize(message);
         if (json.Length > 67108864)
             throw Error("ProtocolExtent", "The serialized browser command exceeds the bounded transport profile.");
-        _connection.Send(json, _context);
+        try
+        {
+            _connection.Send(json, _context);
+        }
+        catch (OperationCanceledException)
+        {
+            _context.Checkpoint();
+            throw Error("BrowserConnection", "The private browser connection stopped unexpectedly.");
+        }
+        catch (IOException)
+        {
+            _context.Checkpoint();
+            throw Error("BrowserConnection", "The private browser connection failed; transport and document data are omitted.");
+        }
+
         _context.Checkpoint();
         return id;
     }
@@ -126,7 +141,22 @@ internal sealed class ChromiumProtocol
 
     private JsonDocument Read()
     {
-        string text = _connection.Receive(_context);
+        string text;
+        try
+        {
+            text = _connection.Receive(_context);
+        }
+        catch (OperationCanceledException)
+        {
+            _context.Checkpoint();
+            throw Error("BrowserConnection", "The private browser connection stopped unexpectedly.");
+        }
+        catch (IOException)
+        {
+            _context.Checkpoint();
+            throw Error("BrowserConnection", "The private browser connection closed; transport and document data are omitted.");
+        }
+
         _context.Checkpoint();
         if (text == null || text.Length == 0 || text.Length > 67108864)
             throw Error("ProtocolExtent", "The browser message has an invalid transport extent.");

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-design-observations-not-production-qualification",
+  "requirement": "FP-046",
+  "sources": [
+    {
+      "id": "S46-CDP13",
+      "kind": "previously retained official DevTools protocol schema snapshot",
+      "sha256": "6264789eaa959f489c5edb2e5db337282ff0883278d5f5c424bf5a845ada5500",
+      "observations": [
+        "Explicit runtime evaluation/await, lifecycle and network inventories",
+        "Browser environment/media overrides, isolated inspection worlds and private target lifecycle"
+      ]
+    }
+  ],
+  "decisions": [
+    "Tighten the same operation context/token through a phase; never extend original/outer time or suppress expiry by disposing",
+    "Keep default document scripts disabled; caller promise execution is explicit, bounded and source-redacted",
+    "Use synchronous isolated native DOM/font/image snapshots and observed in-flight thresholds, avoiding script-disabled internal promise hangs",
+    "Preserve strict/permissive known asset losses; unsupported child-frame/worker/navigation profiles fail explicitly",
+    "Abort broken/crashed private hosts and create a fresh job without automatic authenticated/script replay",
+    "Keep the original six-argument binary constructor; only the expanded constructor has optional parameters, without analyzer suppression"
+  ],
+  "limitations": [
+    "A protocol snapshot and original fixtures are not a complete browser semantic/site or OS host qualification",
+    "Complete frame/worker/environment/corpus and exact supported-runtime/package qualification remain mandatory"
+  ],
+  "productionQualified": false
+}

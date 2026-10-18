@@ -128,7 +128,7 @@
     "notExecutedRuntimeLanes": 6
   },
   "pendingWindowsCorrection": {
-    "sourceCommit": null,
+    "sourceCommit": "df121d6593fab897798a0c39879fcbcd99f2d030",
     "sourceFileHashes": {
       "src/Fluent.Pdf.Html/Resources/PinnedHtmlHttpTransport.cs": "7de3d145034bed47223bafd1f4b9452528616df2aad014835fcdd8405b6d3a34",
       "tests/Fluent.Pdf.Contract.Tests/HtmlHttpTransportTests.cs": "59edcbb95a731330818fc0c8cd5935bf728f68d45e91c9d927e89522b98377c8"
@@ -150,6 +150,8 @@
       "Sanitized numeric transport error metadata and joined server work on fixture failure",
       "Avoid vulnerable direct client-certificate contexts on Windows; fail closed for certificate-less/general PKI-chain Windows TLS; full isolated/runtime-serviced Windows TLS remains mandatory"
     ],
-    "windowsRuntimeProof": "Pending fresh CI. Local Linux results do not qualify Windows TLS."
+    "windowsRuntimeProof": "CI99 modern Windows net8/net10 transport fixtures pass; WinARM completes all three lanes. A later existing Framework x64 native64-decode deadline case fails; complete matrix remains unqualified.",
+    "sourceTree": "fd450bcab6a11b250386f9ec427c08cd99cb3863",
+    "ciEvidence": "docs/evidence/PR-118-CI-99-source-partial.json"
   }
 }
