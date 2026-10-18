@@ -750,7 +750,8 @@
           "Full viewer/conformance/fidelity/XFDF corpus and additional ownership/compositing/view-dependent/media/regeneration profiles",
           "Actual minimum runtimes, final package consumers and every production qualification gate"
         ],
-        "independentEvidence": "docs/evidence/FP-019-independent.json"
+        "independentEvidence": "docs/evidence/FP-019-independent.json",
+        "sourceEvidence": "docs/evidence/FP-020-source.json"
       }
     },
     {
@@ -791,7 +792,9 @@
         "pending": [
           "Full navigation/action interoperability, fuzzing, foreign active content and production corpus",
           "Actual minimum runtimes, exact final packages and all production qualification gates"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-020-independent.json",
+        "sourceEvidence": "docs/evidence/FP-020-source.json"
       }
     },
     {
@@ -820,7 +823,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/presentation.md",
+        "standardsEvidence": "docs/evidence/FP-021-standards.json",
+        "implemented": [
+          "Nested styled Unicode bookmarks with real indirect links, signed visible counts, passive actions and page-identity remapping",
+          "Page-label range authoring and bounded source number-tree/formatter inspection with unknown-setting retention",
+          "Catalog layout/mode/initial view, standard viewer preferences and all twelve passive transition styles; C#/VB consumers"
+        ],
+        "pending": [
+          "Complete viewer/conformance/presentation corpus and additional source formatting/extension profiles",
+          "Actual minimum runtimes, exact final packages and every production qualification gate"
+        ]
+      }
     },
     {
       "id": "FP-022",

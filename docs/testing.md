@@ -73,3 +73,5 @@ FP-017 tests cover exact PNG predictor/JPEG/container preservation, RGBA/palette
 FP-019 source tests cover all authored annotation subtypes, generated vector/shaped text appearances, Unicode/dates/states/replies/popups, passive valid PCM payloads, imports, screen/print flattening, transformed BBox/Matrix mapping, XML/byte round trips and finite depth/output/cancellation boundaries. Full viewer/XFDF/conformance and all production lanes remain required.
 
 FP-020 tests cover all destination modes, Unicode names, page moves/imports and removed targets, passive document/page actions, URI permissions, chains/cycles/shared nodes, indirect additional actions, widgets/outlines/scripts/orphans, sanitization, budgets and C#/VB output. Full qualification remains pending.
+
+FP-021 source contracts cover nested/deep/cyclic outlines, visible counts/link consistency, Unicode/style, target remapping, label restarts and number-tree cycles, all twelve transition names and parameter profiles, preferences/initial view/version floors, unsupported-setting diagnostics, C#/VB examples and operation limits.

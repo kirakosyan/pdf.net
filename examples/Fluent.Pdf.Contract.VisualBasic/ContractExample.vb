@@ -4,6 +4,20 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WritePresentationPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage().AddPage()
+            Dim items = {New PdfBookmark("Report", New PdfDestination(0)).WithChildren(New PdfBookmark("Details", New PdfDestination(1)))}
+            Using outlines = PdfPresentation.SetOutlines(blank.CreateSnapshot(), items)
+                Using labels = PdfPresentation.SetPageLabels(outlines.CreateSnapshot(), New PdfPageNumbering(New PdfPageNumberRange(0, PdfPageLabelStyle.LowerRoman), New PdfPageNumberRange(1, prefix:="Report-")))
+                    Using viewed = PdfPresentation.SetView(labels.CreateSnapshot(), PdfPageLayout.OneColumn, PdfPageMode.UseOutlines)
+                        Using document = PdfPresentation.SetPageTransition(viewed.CreateSnapshot(), 1, New PdfPageTransition(PdfTransitionStyle.Fade, .5), 8)
+                            Return document.Save(output)
+                        End Using
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Function
     Public Function WriteNavigationPdf(output As Stream) As PdfOperationReport
         Using blank = PdfFacade.Create().AddPage().AddPage()
             Using named = PdfNavigation.SetNamedDestination(blank.CreateSnapshot(), "chapter", New PdfDestination(1))
