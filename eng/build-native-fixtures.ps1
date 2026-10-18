@@ -10,6 +10,8 @@ $architectures=if($IsWindows -and $architecture -eq 'x64'){@('x64','x86')}else{@
 $records=[Collections.Generic.List[object]]::new()
 Push-Location $root
 try {
+    & dotnet restore native/text/Assets.csproj --locked-mode
+    if($LASTEXITCODE -ne 0){throw "Locked text asset restore failed."}
     foreach($arch in $architectures) {
         $rid="$os-$arch"
         $directory=Join-Path $destination $rid
@@ -66,10 +68,11 @@ exit /b %errorlevel%
             & dotnet publish 'native/codecs/Fluent.Pdf.Codecs.Native.csproj' -c Release -r $rid --no-restore -o $directory
             if($LASTEXITCODE -ne 0) { throw "Image codec bridge build failed: $rid" }
         }
-        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required|native-aot-fixture|fluent-pdf-codecs)\.(dll|so|dylib))$' } | ForEach-Object {
+        & "$PSScriptRoot/build-text-fixture.ps1" -Directory $directory -Rid $rid -Developer $(if($IsWindows){$developer}else{''}) -HostArchitecture $architecture
+        $files=@(Get-ChildItem -LiteralPath $directory -File | Where-Object { $_.Name -match '^(worker(\.exe)?|(bridge|wrong-abi|dependent|required|native-aot-fixture|fluent-pdf-codecs|fluent-pdf-text|libHarfBuzzSharp)\.(dll|so|dylib)(\.0\.61421\.0)?)$' } | ForEach-Object {
             [ordered]@{name=$_.Name;length=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
         })
-        $records.Add([ordered]@{rid=$rid;files=$files})
+        $records.Add([ordered]@{rid=$rid;files=$files;textAsset=(Get-Content -LiteralPath (Join-Path $directory 'text-asset.json') -Raw | ConvertFrom-Json)})
     }
     [ordered]@{schemaVersion=1;purpose='original-native-test-fixtures';sourceCommit=(& git rev-parse HEAD).Trim();
         nativeAot=[ordered]@{sdk=(& dotnet --version).Trim();lockSha256=(Get-FileHash -LiteralPath (Join-Path $root 'tests/native-aot/packages.lock.json')).Hash};

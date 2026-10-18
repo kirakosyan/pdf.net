@@ -3,8 +3,10 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace Fluent.Pdf.Fonts;
-internal sealed class SfntFont : IPdfFontProgram, IPdfVerticalFontProgram
+internal sealed class SfntFont : IPdfFontProgram, IPdfVerticalFontProgram, IPdfFontShapingSource
 {
+    public int ShapingFaceIndex => _faceIndex;
+    public void CopyShapingSource(System.IO.Stream output, PdfOperationContext context) { context.Checkpoint(); output.Write(_source,0,_source.Length); }
     private readonly byte[] _source;
     private readonly Dictionary<string, (int Offset, int Length)> _tables;
     private readonly FontCmap _cmap;

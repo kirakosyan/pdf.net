@@ -1,0 +1,41 @@
+{
+  "fixtures": [
+    {
+      "file": "latin.ttf",
+      "sourceId": "NOTO-CORE-Latin",
+      "sourceSha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d",
+      "fixtureSha256": "3424acb7bd832cbbb2913003c9b89ff7c1c07fceba1c1dccb235d00251cc725f",
+      "license": "SIL-OFL-1.1",
+      "derivation": "FontTools 4.61.1 retain GIDs; OpenType layout closure; renamed family/PostScript names; fixed timestamps",
+      "fontVersion": "Version 2.004; ttfautohint (v1.8.3) -l 8 -r 50 -G 200 -x 14 -D latn -f none -a qsq -X \"\""
+    },
+    {
+      "file": "arabic.ttf",
+      "sourceId": "NOTO-CORE-Arabic",
+      "sourceSha256": "504d7407d86875acf7d04dfaa0fd7524d0b8797723bc4aa18022f29db25b0b6e",
+      "fixtureSha256": "cfa46e71b709ee286071c6fa57c5ce08cd9d5c9e6319ff6c24b62bc319474a5e",
+      "license": "SIL-OFL-1.1",
+      "derivation": "FontTools 4.61.1 retain GIDs; OpenType layout closure; renamed family/PostScript names; fixed timestamps",
+      "fontVersion": "Version 2.005; ttfautohint (v1.8.3) -l 8 -r 50 -G 200 -x 14 -D arab -f none -a qsq -X \"\""
+    },
+    {
+      "file": "devanagari.ttf",
+      "sourceId": "NOTO-CORE-Devanagari",
+      "sourceSha256": "79a470365ccb210fa3c7d8d8ff2e005ef9d983cfd067f735a0caf7e15070ca9f",
+      "fixtureSha256": "bd1b7bca812b9fdbf488c3a153f12a9f18d2bb0b3b531638e5a9fc98e170e99b",
+      "license": "SIL-OFL-1.1",
+      "derivation": "FontTools 4.61.1 retain GIDs; OpenType layout closure; renamed family/PostScript names; fixed timestamps",
+      "fontVersion": "Version 2.001; ttfautohint (v1.8.3) -l 8 -r 50 -G 200 -x 14 -D deva -f none -a qsq -X \"\""
+    },
+    {
+      "file": "bengali.ttf",
+      "sourceId": "NOTO-CORE-Bengali",
+      "sourceSha256": "9bb35b3547829ecc42041b6017e87fd4c5f1da1edcd00f59171777050f346018",
+      "fixtureSha256": "4305d45dbbbf8f15e1505059e396de5ae6ea6aa33818f6f15e3a4e7baa6eadb1",
+      "license": "SIL-OFL-1.1",
+      "derivation": "FontTools 4.61.1 retain GIDs; OpenType layout closure; renamed family/PostScript names; fixed timestamps",
+      "fontVersion": "Version 2.001; ttfautohint (v1.8.3) -l 8 -r 50 -G 200 -x 14 -D beng -f none -a qsq -X \"\""
+    }
+  ],
+  "referenceAssetSha256": "4bd4d846aab1a0fd8333f96c70a564005dc3ca1becda52c3c4e8d093b46c1273"
+}

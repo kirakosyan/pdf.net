@@ -90,7 +90,7 @@ public sealed class PdfFontResource
     /// <summary>Gets the minimum required PDF version.</summary>
     public string MinimumVersion => Font.Program is PdfType3FontProgram type3 ? type3.MinimumVersion : _written.FontFileSubtype == "OpenType" ? "1.6" : "1.2";
     /// <summary>Gets the successful eager font-resource creation report.</summary>
-    public PdfOperationReport OperationReport { get; private set; } = null!;
+    public PdfOperationReport OperationReport { get; internal set; } = null!;
 
     /// <summary>Maps unshaped Unicode scalars through one exact font. Complex shaping belongs to the text-shaping service.</summary>
     public static PdfFontResource CreateText(PdfFont font, string text, bool subset = true, bool vertical = false, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
@@ -136,7 +136,7 @@ public sealed class PdfFontResource
         return resource;
     }
 
-    private static PdfFontResource CreateCore(PdfFont font, IEnumerable<PdfGlyphMapping> mappings, bool subset, bool vertical, PdfOperationContext context)
+    internal static PdfFontResource CreateCore(PdfFont font, IEnumerable<PdfGlyphMapping> mappings, bool subset, bool vertical, PdfOperationContext context)
     {
         font.EmbeddingAllowed(subset, context);
         var entries = new List<Entry>();

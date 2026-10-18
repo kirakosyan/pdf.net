@@ -5,6 +5,11 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfTextDrawing ShapeText(string text,PdfFontFallback fonts,IPdfTextShaper shaper,PdfOperationPolicy? policy=null)
+    {
+        var shaped=PdfText.Shape(text,fonts,new PdfProviderRegistry(shaper),policy:policy);
+        return PdfTextDrawing.Create(shaped,20,80,24);
+    }
     public static PdfOperationReport WriteFontPdf(Stream fontInput,Stream output,string text)
     {
         var providers=new PdfProviderRegistry(ManagedPdfProvider.Instance,Fluent.Pdf.Fonts.ManagedFontProvider.Instance);

@@ -1,0 +1,30 @@
+{
+  "nativeEngine": "HarfBuzz",
+  "nativeVersion": "14.2.1",
+  "assetPackageVersion": "14.2.1.301",
+  "isolation": "required fresh process; no in-process or automatic binary download fallback",
+  "runtimeRids": [
+    "win-x64",
+    "win-arm64",
+    "linux-x64",
+    "linux-arm64",
+    "osx-x64",
+    "osx-arm64"
+  ],
+  "macDerivation": "thin universal source with lipo; private install identity; ad-hoc signature; record original and derived asset digests",
+  "qualification": "source integration in progress; minimum OS/dependency runtimes, complete corpus and final packages remain mandatory",
+  "packages": [
+    {
+      "name": "harfbuzzsharp.nativeassets.linux",
+      "sha256": "1e22d3bc6765ae70d227a61a30af88b94ae646dc26ec03c26e7487f9752cbf38"
+    },
+    {
+      "name": "harfbuzzsharp.nativeassets.macos",
+      "sha256": "1e952b7472a56b5df53a830a491b3614ee004a7b51557d2c32d53d73a2a4c651"
+    },
+    {
+      "name": "harfbuzzsharp.nativeassets.win32",
+      "sha256": "20518a559c120cb322b57d8986de49c5dca4eca2547ee69f756b38211b7dd10e"
+    }
+  ]
+}

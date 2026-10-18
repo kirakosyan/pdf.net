@@ -4,6 +4,10 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function ShapeText(text As String, fonts As PdfFontFallback, shaper As IPdfTextShaper, Optional policy As PdfOperationPolicy = Nothing) As PdfTextDrawing
+        Dim shaped = PdfText.Shape(text, fonts, New PdfProviderRegistry(shaper), policy:=policy)
+        Return PdfTextDrawing.Create(shaped, 20, 80, 24)
+    End Function
     Public Function WriteFontPdf(fontInput As Stream, output As Stream, text As String) As PdfOperationReport
         Dim providers As New PdfProviderRegistry(ManagedPdfProvider.Instance, Fluent.Pdf.Fonts.ManagedFontProvider.Instance)
         Dim font = PdfFont.Read(fontInput, providers)

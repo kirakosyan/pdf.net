@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "HarfBuzzSharp.NativeAssets.Linux": {
+        "type": "Direct",
+        "requested": "[14.2.1.301, )",
+        "resolved": "14.2.1.301",
+        "contentHash": "z9+VeNETkwp+raqhEfS+6aAfDl1MLxZxmE9GE/edhTIIwkXhZbPn0JUfhpqqjNy1Q0rQrZCzaJ2VNgVbQR+2MQ=="
+      },
+      "HarfBuzzSharp.NativeAssets.macOS": {
+        "type": "Direct",
+        "requested": "[14.2.1.301, )",
+        "resolved": "14.2.1.301",
+        "contentHash": "NHHoxkjGkU6BnWyksKjM7TrIReXzpgXuss+ahhUgby0oJuYR9/HaxkfezYe3abpmWDN1PYWM5SBZWob3TzpkKA=="
+      },
+      "HarfBuzzSharp.NativeAssets.Win32": {
+        "type": "Direct",
+        "requested": "[14.2.1.301, )",
+        "resolved": "14.2.1.301",
+        "contentHash": "mL1atDEKtJSqutOFjLP/hiA8rTGqOQCHBpfkG3rXnTFJCqN94oAKhR8a7+bhxxxvSgj4soJXUBICSYGte5odNA=="
+      }
+    }
+  }
+}

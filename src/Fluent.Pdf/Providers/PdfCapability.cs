@@ -16,5 +16,7 @@ public enum PdfCapability
     /// <summary>Explicit optional image stream codecs; algorithm/direction support is reported by their provider.</summary>
     ImageCodecs = 5,
     /// <summary>Explicit offline font parsing, embedding and standard-font metrics.</summary>
-    Fonts = 6
+    Fonts = 6,
+    /// <summary>Explicit Unicode-aware glyph shaping with logical cluster provenance.</summary>
+    ShapeText = 7
 }

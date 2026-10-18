@@ -131,9 +131,9 @@ public sealed partial class PdfFont
             throw PdfWriterCore.Error(context, "Font.SubsettingRestricted", "The font's declared rights forbid subsetting.");
     }
 
-    internal static PdfOperationReport Run(string operation, string providerId, PdfOperationPolicy? policy, CancellationToken token, Action<PdfOperationContext> action)
+    internal static PdfOperationReport Run(string operation, string providerId, PdfOperationPolicy? policy, CancellationToken token, Action<PdfOperationContext> action, PdfCapability capability = PdfCapability.Fonts)
     {
-        var context = new PdfOperationContext(operation, providerId, PdfCapability.Fonts, policy ?? PdfOperationPolicy.Default, token);
+        var context = new PdfOperationContext(operation, providerId, capability, policy ?? PdfOperationPolicy.Default, token);
         bool success = false;
         PdfOperationReport report;
         try

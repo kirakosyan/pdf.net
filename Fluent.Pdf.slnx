@@ -8,6 +8,7 @@
     <Project Path="src/Fluent.Pdf.Workers/Fluent.Pdf.Workers.csproj" />
     <Project Path="src/Fluent.Pdf.Codecs/Fluent.Pdf.Codecs.csproj" />
     <Project Path="src/Fluent.Pdf.Fonts/Fluent.Pdf.Fonts.csproj" />
+    <Project Path="src/Fluent.Pdf.Text/Fluent.Pdf.Text.csproj" />
   </Folder>
   <Folder Name="/apps/">
     <Project Path="apps/PdfReader/PdfReader.csproj" />

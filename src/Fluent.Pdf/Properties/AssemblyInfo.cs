@@ -4,3 +4,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Fluent.Pdf.Codecs")]
 [assembly: InternalsVisibleTo("fluent-pdf-codecs")]
 [assembly: InternalsVisibleTo("Fluent.Pdf.Fonts")]
+
+[assembly: InternalsVisibleTo("Fluent.Pdf.Text")]
