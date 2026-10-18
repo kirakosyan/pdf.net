@@ -174,9 +174,10 @@
           "Original signed-byte protection, atomic file saves and bounded caller-owned streams"
         ],
         "pending": [
-          "Actual supported-runtime source evidence and full production qualification",
+          "Full production qualification beyond passing source runtime evidence",
           "Actual minimum Framework 4.7.2, exact final package, complete standards/security/endurance/fuzz consumers"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-005-source.json"
       }
     },
     {
@@ -232,7 +233,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/content-operators.md",
+        "implemented": [
+          "Typed standard operators, complete state/operand validation and immutable content editing",
+          "Deterministic bounded inline image boundaries and page Contents integration",
+          "Feature-driven version floors, developer extension policies and PDF 2.0 feature facts"
+        ],
+        "pending": [
+          "Clean cross-platform source evidence and independent output verification",
+          "Full standards/fidelity, named inline resource interpretation, final packages, minimum runtimes, endurance and fuzz qualification"
+        ]
+      }
     },
     {
       "id": "FP-008",

@@ -46,7 +46,7 @@ internal static class PdfWriterCore
         bool incremental = options.Mode == PdfWriteMode.Incremental;
         if (incremental && source == null)
             throw Error(context, "Writer.IncrementalBaseRequired", "An incremental revision requires an immutable original file.");
-        if (incremental && changes.Count == 0 && removed.Count == 0 && !trailerChanged && options.Version == null && options.CrossReferenceFormat == PdfCrossReferenceFormat.Auto)
+        if (incremental && changes.Count == 0 && removed.Count == 0 && !trailerChanged && options.Version == null && options.CrossReferenceFormat == PdfCrossReferenceFormat.Auto && options.MinimumVersion==null && options.Extensions.Count==0 && options.UnknownExtensions==PdfUnknownExtensionPolicy.Preserve)
         {
             context.Consume(PdfResourceKind.InputBytes, source!.Source.Length);
             var exact = new Sink(output, context);
@@ -85,6 +85,42 @@ internal static class PdfWriterCore
         if (!trailer.Entries.TryGetValue("Root", out var root) || root.Kind != PdfValueKind.Reference)
             throw Error(context, "Writer.InvalidRoot", "The trailer must reference an active Catalog dictionary.");
         var catalog = Catalog(objects, root, context);
+        int extensionFloor=17; // The Extensions catalog mechanism was introduced in PDF 1.7.
+        bool extensionChanged=false;
+        var sourceExtensions=catalog.Value.Entries.TryGetValue("Extensions",out var ext)?Dereference(objects,ext,context):PdfValue.Null;
+        Dictionary<string,PdfValue>? mergedExtensions=null;
+        if(sourceExtensions.Kind!=PdfValueKind.Null)
+        {
+            if(sourceExtensions.Kind!=PdfValueKind.Dictionary)throw Error(context,"Writer.ExtensionDictionary","Catalog Extensions must resolve to a dictionary.");
+            foreach(var pair in sourceExtensions.Entries)
+            {
+                context.Checkpoint();
+                if(options.UnknownExtensions==PdfUnknownExtensionPolicy.Reject&&!options.Extensions.Any(item=>item.Prefix==pair.Key))throw Error(context,"Writer.UnknownExtension","An undeclared source developer extension was rejected by policy.");
+                var value=Dereference(objects,pair.Value,context);
+                if(value.Kind!=PdfValueKind.Dictionary||!value.Entries.TryGetValue("BaseVersion",out var baseVersion)||!value.Entries.TryGetValue("ExtensionLevel",out var level))throw Error(context,"Writer.ExtensionDictionary","A developer extension requires BaseVersion and ExtensionLevel.");
+                baseVersion=Dereference(objects,baseVersion,context);level=Dereference(objects,level,context);
+                if(baseVersion.Kind!=PdfValueKind.Name||!level.TryGetInteger(out long extensionLevel)||extensionLevel<=0)throw Error(context,"Writer.ExtensionDictionary","A developer extension declares an invalid base version or level.");
+                try{extensionFloor=Math.Max(extensionFloor,PdfVersionNumber.Parse(baseVersion.NameValue));}
+                catch(ArgumentException){throw Error(context,"Writer.ExtensionVersion","The developer extension's base version is unsupported.");}
+            }
+        }
+        foreach(var extension in options.Extensions)
+        {
+            mergedExtensions??=sourceExtensions.Kind==PdfValueKind.Null?new Dictionary<string,PdfValue>(StringComparer.Ordinal):CopyDictionary(sourceExtensions.Entries,context);
+            extensionFloor=Math.Max(extensionFloor,PdfVersionNumber.Parse(extension.BaseVersion));
+            var declaration=new Dictionary<string,PdfValue>(StringComparer.Ordinal);
+            if(mergedExtensions.TryGetValue(extension.Prefix,out var previous))
+            {
+                previous=Dereference(objects,previous,context);declaration=CopyDictionary(previous.Entries,context);
+                if(PdfVersionNumber.Parse(Dereference(objects,declaration["BaseVersion"],context).NameValue)>PdfVersionNumber.Parse(extension.BaseVersion)||Dereference(objects,declaration["ExtensionLevel"],context).IntegerValue>extension.ExtensionLevel)throw Error(context,"Writer.ExtensionDowngrade","A declared developer extension cannot lower an existing base version or extension level.");
+            }
+            context.Consume(PdfResourceKind.Objects,3);context.Consume(PdfResourceKind.ExpandedBytes,512);
+            declaration["BaseVersion"]=PdfValue.Name(extension.BaseVersion);declaration["ExtensionLevel"]=PdfValue.Integer(extension.ExtensionLevel);mergedExtensions[extension.Prefix]=PdfValue.OwnedDictionary(declaration);extensionChanged=true;
+        }
+        if(extensionChanged)
+        {
+            var updated=CopyDictionary(catalog.Value.Entries,context);updated["Extensions"]=PdfValue.OwnedDictionary(mergedExtensions!);catalog=(catalog.Id,PdfValue.OwnedDictionary(updated));objects[catalog.Id.Number]=catalog;
+        }
         int originalVersion = source == null ? 12 : PdfVersionNumber.Parse(source.Version);
         if (catalog.Value.Entries.TryGetValue("Version", out var declared))
         {
@@ -106,9 +142,17 @@ internal static class PdfWriterCore
         if (source != null && version < originalVersion)
             throw Error(context, "Writer.VersionDowngrade", "A version downgrade requires explicit content conversion.");
         bool signature = source?.HasSignatureByteRanges ?? false;
+        PdfValue ResolveFeature(PdfValue value)=>Dereference(objects,value,context);
+        int requiredVersion=options.MinimumVersion==null?12:PdfVersionNumber.Parse(options.MinimumVersion);
+        if(sourceExtensions.Kind!=PdfValueKind.Null||options.Extensions.Count>0)requiredVersion=Math.Max(requiredVersion,extensionFloor);
         foreach (var item in objects.Values)
-            Inspect(item.Value, context, true, ref signature);
-        Inspect(trailer, context, false, ref signature);
+            Inspect(item.Value, context, true, ref signature,ref requiredVersion,ResolveFeature);
+        Inspect(trailer, context, false, ref signature,ref requiredVersion,ResolveFeature);
+        if(version<requiredVersion)
+        {
+            if(options.Version!=null)throw Error(context,"Writer.VersionTooLow","The exact target version is below a required emitted feature version.");
+            version=requiredVersion;
+        }
         var format = options.CrossReferenceFormat;
         if (format == PdfCrossReferenceFormat.Auto)
             format = context.Policy.Limits.MaximumOutputBytes > 9999999999 || (!incremental && (long)maximum + 1 > context.Available(PdfResourceKind.Objects)) ? PdfCrossReferenceFormat.Stream : PdfCrossReferenceFormat.Table;
@@ -131,6 +175,7 @@ internal static class PdfWriterCore
         {
             foreach (var pair in changes)
                 selected.Add(pair.Key.Number, (pair.Key, pair.Value));
+            if(extensionChanged)selected[catalog.Id.Number]=catalog;
         }
         else
             foreach (var pair in objects)
@@ -361,7 +406,7 @@ internal static class PdfWriterCore
         return value;
     }
 
-    private static void Inspect(PdfValue value, PdfOperationContext context, bool topLevel, ref bool signature)
+    private static void Inspect(PdfValue value, PdfOperationContext context, bool topLevel, ref bool signature,ref int requiredVersion,Func<PdfValue,PdfValue> resolve)
     {
         context.Consume(PdfResourceKind.Objects, 1);
         using var scope = context.EnterScope(PdfResourceKind.Depth);
@@ -369,13 +414,14 @@ internal static class PdfWriterCore
             throw Error(context, "Writer.DirectStream", "A PDF stream must be an indirect object.");
         if (value.Kind == PdfValueKind.Array)
             foreach (var item in value.Items)
-                Inspect(item, context, false, ref signature);
+                Inspect(item, context, false, ref signature,ref requiredVersion,resolve);
         if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
         {
+            requiredVersion=Math.Max(requiredVersion,PdfFeatureVersion.Dictionary(value,resolve));
             if (value.Entries.ContainsKey("ByteRange") && value.Entries.ContainsKey("Contents"))
                 signature = true;
             foreach (var item in value.Entries.Values)
-                Inspect(item, context, false, ref signature);
+                Inspect(item, context, false, ref signature,ref requiredVersion,resolve);
         }
     }
 
@@ -399,7 +445,7 @@ internal static class PdfWriterCore
         internal bool Free { get; }
     }
 
-    private sealed class Sink
+    internal sealed class Sink
     {
         private readonly Stream _output;
         private readonly PdfOperationContext _context;

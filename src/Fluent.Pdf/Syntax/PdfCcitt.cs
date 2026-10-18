@@ -24,10 +24,11 @@ internal static class PdfCcitt
         return result;
     }
 
-    internal static PdfByteStore Decode(Stream source, PdfValue parameters, PdfValue image, PdfOperationContext context)
+    internal static PdfByteStore Decode(Stream source, PdfValue parameters, PdfValue image, PdfOperationContext context, bool requireEnd = true)
     {
         var options = new Options(parameters, image, context, false);
         context.ConsumePixels(options.Columns, options.Rows == 0 ? 1 : options.Rows);
+        long sourceStart = requireEnd ? 0 : source.Position;
         var data = PdfByteStore.Read(source, context);
         var input = new Reader(data, context);
         int columns = options.Columns, rowSize = (int)(((long)columns + 7) / 8);
@@ -184,7 +185,8 @@ internal static class PdfCcitt
             throw Error(context, "A required fax end-of-block marker is missing.");
         if (rows == 0)
             throw Error(context, "A fax stream contains no image rows.");
-        input.Padding();
+        input.Padding(requireEnd);
+        if (!requireEnd) source.Position = sourceStart + input.BytesConsumed;
         return output.Build();
     }
 
@@ -478,8 +480,10 @@ internal static class PdfCcitt
             throw Error(_context, "A two-dimensional fax mode is malformed.");
         }
 
-        internal void Padding()
+        internal long BytesConsumed => (_position + 7) / 8;
+        internal void Padding(bool requireEnd)
         {
+            if (!requireEnd) { Align(); return; }
             if (_data.Length * 8 - _position > 7)
                 throw Error(_context, "Unexpected data follows the fax image.");
             while (_position < _data.Length * 8)

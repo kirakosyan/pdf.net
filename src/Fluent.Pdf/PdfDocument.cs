@@ -52,7 +52,7 @@ public sealed class PdfDocument : IDisposable
         int count=_pages.Count;
         if(count>0){_context?.Consume(PdfResourceKind.Objects,count);_context?.Consume(PdfResourceKind.ExpandedBytes,count*64L+32);}
         var pages = count==0?Array.Empty<PdfPageSnapshot>():new PdfPageSnapshot[count];
-        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source);
+        for (int i = 0; i < pages.Length; i++) pages[i] = new PdfPageSnapshot(_pages[i].Size, _pages[i].Rotation,_pages[i].Source,_pages[i].Content);
         return new PdfDocumentSnapshot(_options, pages,_source,_originalOrder,writeOptions);
     }
 
@@ -138,14 +138,14 @@ public sealed class PdfDocument : IDisposable
     }
 
     private PdfOperationReport RunOperation(bool writing, string operation, PdfCapability capability,
-        CancellationToken token, Action<PdfOperationContext> action)
+        CancellationToken token, Action<PdfOperationContext> action,string? providerId=null)
     {
         BeginOperation(writing);
         PdfOperationContext? context = null;
         bool succeeded = false;
         try
         {
-            context = new PdfOperationContext(operation, _providers.GetIdentifier(capability), capability, _options.OperationPolicy, token);
+            context = new PdfOperationContext(operation, providerId??_providers.GetIdentifier(capability), capability, _options.OperationPolicy, token);
             _context = context;
             context.Checkpoint();
             action(context);
@@ -190,6 +190,20 @@ public sealed class PdfDocument : IDisposable
 
     internal void EnsureAlive() { if (_disposed) throw new ObjectDisposedException(nameof(PdfDocument)); }
     internal void BeforePageAllocation(PdfOperationContext? context=null){var selected=context??_context;selected?.Consume(PdfResourceKind.Objects,1);selected?.Consume(PdfResourceKind.ExpandedBytes,96);}
+    internal PdfContentProgram ReadPageContent(PdfPage page,PdfUnknownOperatorPolicy unknown,string? version,CancellationToken token)
+    {
+        EnsureNoActiveOperation();if(!Enum.IsDefined(typeof(PdfUnknownOperatorPolicy),unknown))throw new ArgumentOutOfRangeException(nameof(unknown));
+        if(unknown==PdfUnknownOperatorPolicy.Preserve&&version==null)throw new ArgumentException("Preservation requires an explicit extension version floor.",nameof(version));
+        if(version!=null)PdfVersionNumber.Parse(version);
+        PdfContentProgram? result=null;
+        var report=RunOperation(false,"ReadPageContent",PdfCapability.ReadDocument,token,context=>
+        {
+            if(page.Content!=null)result=PdfContentProgram.CreateCore(page.Content.Operations,PdfContentKind.Page,context);
+            else result=PdfPageContent.Read(page.Source,unknown,version,_providers,context);
+            context.EnsureComplete();
+        },"managed.content");
+        result!.OperationReport=report;return result;
+    }
     internal void AttachSource(PdfSyntaxDocument source,PdfOperationContext context)
     {
         EnsureEditable();context.Consume(PdfResourceKind.ExpandedBytes,_pages.Count*16L+32);

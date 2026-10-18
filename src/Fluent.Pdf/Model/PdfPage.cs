@@ -10,6 +10,16 @@ public sealed class PdfPage
 
     internal PdfPage(PdfDocument owner, PdfPageSize size) { _owner = owner; _size = size; }
     private PdfPageSource? _source;
+    private PdfContentProgram? _content;
+    /// <summary>Gets or sets replacement decoded content. Null retains original content; an empty program clears it.</summary>
+    public PdfContentProgram? Content
+    {
+        get{EnsureAttached();return _content;}
+        set{EnsureEditable();if(value!=null&&value.Kind!=PdfContentKind.Page)throw new ArgumentException("Page content cannot be a Type 3 glyph program.",nameof(value));_content=value;}
+    }
+    /// <summary>Reads original or replacement operators under the document's operation policy without executing document actions.</summary>
+    public PdfContentProgram ReadContent(PdfUnknownOperatorPolicy unknownOperators=PdfUnknownOperatorPolicy.Reject,string? unknownOperatorVersion=null,System.Threading.CancellationToken cancellationToken=default)
+    {EnsureAttached();return _owner.ReadPageContent(this,unknownOperators,unknownOperatorVersion,cancellationToken);}
     /// <summary>Gets the immutable original binding, or null for a newly authored page.</summary>
     public PdfPageSource? Source{get{EnsureAttached();return _source;}}
     internal void Bind(PdfPageSource source){_source=source;_rotation=source.Rotation;}

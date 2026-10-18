@@ -4,6 +4,16 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteRectangle(output As Stream) As PdfOperationReport
+        Using document = PdfFacade.Create().AddPage()
+            document.Pages(0).Content = PdfContentProgram.Create({
+                New PdfContentOperation(PdfOperator.SaveState),
+                New PdfContentOperation(PdfOperator.Rectangle, PdfValue.Integer(20), PdfValue.Integer(20), PdfValue.Integer(100), PdfValue.Integer(50)),
+                New PdfContentOperation(PdfOperator.Fill),
+                New PdfContentOperation(PdfOperator.RestoreState)})
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function WriteManagedPdf(output As Stream) As PdfOperationReport
         Using document = PdfFacade.Create().AddPage(PdfPageSize.Letter)
             Return document.Save(output)

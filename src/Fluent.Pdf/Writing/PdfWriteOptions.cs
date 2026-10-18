@@ -23,7 +23,7 @@ public enum PdfCrossReferenceFormat
 public sealed class PdfWriteOptions
 {
     /// <summary>Captures revision/xref choices, an optional exact target version and explicit permission to invalidate signatures during a full rewrite.</summary>
-    public PdfWriteOptions(PdfWriteMode mode = PdfWriteMode.Full, PdfCrossReferenceFormat crossReferenceFormat = PdfCrossReferenceFormat.Auto, string? version = null, bool allowSignatureInvalidation = false)
+    public PdfWriteOptions(PdfWriteMode mode = PdfWriteMode.Full, PdfCrossReferenceFormat crossReferenceFormat = PdfCrossReferenceFormat.Auto, string? version = null, bool allowSignatureInvalidation = false, string? minimumVersion = null, IEnumerable<PdfExtensionRequirement>? extensions = null, PdfUnknownExtensionPolicy unknownExtensions = PdfUnknownExtensionPolicy.Preserve)
     {
         if (!Enum.IsDefined(typeof(PdfWriteMode), mode))
             throw new ArgumentOutOfRangeException(nameof(mode));
@@ -35,6 +35,13 @@ public sealed class PdfWriteOptions
         CrossReferenceFormat = crossReferenceFormat;
         Version = version;
         AllowSignatureInvalidation = allowSignatureInvalidation;
+        if(minimumVersion!=null)PdfVersionNumber.Parse(minimumVersion);
+        if(!Enum.IsDefined(typeof(PdfUnknownExtensionPolicy),unknownExtensions))throw new ArgumentOutOfRangeException(nameof(unknownExtensions));
+        MinimumVersion=minimumVersion;UnknownExtensions=unknownExtensions;
+        var declared=new Dictionary<string,PdfExtensionRequirement>(StringComparer.Ordinal);
+        if(extensions!=null)foreach(var extension in extensions)
+        {if(extension==null||declared.ContainsKey(extension.Prefix))throw new ArgumentException("Extensions must be nonnull with distinct prefixes.",nameof(extensions));declared.Add(extension.Prefix,extension);}
+        Extensions=new System.Collections.ObjectModel.ReadOnlyCollection<PdfExtensionRequirement>(declared.Values.ToArray());
     }
 
     /// <summary>Gets shared full-rewrite defaults.</summary>
@@ -47,7 +54,15 @@ public sealed class PdfWriteOptions
     public string? Version { get; }
     /// <summary>Gets explicit permission for a full rewrite of a document containing signature dictionaries.</summary>
     public bool AllowSignatureInvalidation { get; }
-    internal bool IsDefault => Mode == PdfWriteMode.Full && CrossReferenceFormat == PdfCrossReferenceFormat.Auto && Version == null && !AllowSignatureInvalidation;
+    /// <summary>Gets an explicitly declared feature version floor, or null.</summary>
+    public string? MinimumVersion{get;}
+    /// <summary>Gets explicit developer extension requirements.</summary>
+    public IReadOnlyList<PdfExtensionRequirement> Extensions{get;}
+    /// <summary>Gets the source developer-extension preservation policy.</summary>
+    public PdfUnknownExtensionPolicy UnknownExtensions{get;}
+    internal PdfWriteOptions RequireVersion(string version)
+    {int floor=Math.Max(PdfVersionNumber.Parse(version),MinimumVersion==null?12:PdfVersionNumber.Parse(MinimumVersion));return new(Mode,CrossReferenceFormat,Version,AllowSignatureInvalidation,PdfVersionNumber.Text(floor),Extensions,UnknownExtensions);}
+    internal bool IsDefault => Mode == PdfWriteMode.Full && CrossReferenceFormat == PdfCrossReferenceFormat.Auto && Version == null && !AllowSignatureInvalidation && MinimumVersion==null && Extensions.Count==0 && UnknownExtensions==PdfUnknownExtensionPolicy.Preserve;
 }
 
 internal static class PdfVersionNumber

@@ -135,7 +135,7 @@ internal static class PdfInflate
         13,
         13
     };
-    internal static PdfByteStore Decode(Stream source, PdfOperationContext context)
+    internal static PdfByteStore Decode(Stream source, PdfOperationContext context, bool requireEnd = true)
     {
         var bits = new Bits(source, context);
         int cmf = bits.Byte(), flg = bits.Byte();
@@ -303,7 +303,7 @@ internal static class PdfInflate
             checksum = (checksum << 8) | (uint)bits.Byte();
         if (checksum != (b << 16 | a))
             throw Bad(context, "The zlib checksum disagrees with the decoded stream.");
-        if (source.ReadByte() != -1)
+        if (requireEnd && source.ReadByte() != -1)
             throw Bad(context, "Unexpected bytes follow the zlib stream.");
         return output.Build();
     }

@@ -27,11 +27,13 @@ public sealed class PdfDocumentSnapshot
 /// <summary>A detached, immutable page geometry value.</summary>
 public readonly struct PdfPageSnapshot
 {
-    internal PdfPageSnapshot(PdfPageSize size, PdfPageRotation rotation,PdfPageSource? source=null) { Size = size; Rotation = rotation;Source=source; }
+    internal PdfPageSnapshot(PdfPageSize size, PdfPageRotation rotation,PdfPageSource? source=null,PdfContentProgram? content=null) { Size = size; Rotation = rotation;Source=source;Content=content; }
     /// <summary>Gets the unrotated physical size.</summary>
     public PdfPageSize Size { get; }
     /// <summary>Gets the clockwise display rotation.</summary>
     public PdfPageRotation Rotation { get; }
     /// <summary>Gets the immutable original page binding, or null for a newly authored page.</summary>
     public PdfPageSource? Source{get;}
+    /// <summary>Gets immutable replacement content, or null to retain original bytes.</summary>
+    public PdfContentProgram? Content{get;}
 }

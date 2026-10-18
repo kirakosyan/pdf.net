@@ -3,7 +3,7 @@ using System.IO;
 namespace Fluent.Pdf;
 internal static class PdfLzw
 {
-    internal static PdfByteStore Decode(Stream source, int early, PdfOperationContext context)
+    internal static PdfByteStore Decode(Stream source, int early, PdfOperationContext context, bool requireEnd = true)
     {
         CheckEarly(early, context);
         context.Consume(PdfResourceKind.ExpandedBytes, 4096 * 4);
@@ -63,7 +63,7 @@ internal static class PdfLzw
             previous = code;
         }
 
-        PdfStreamFilters.Trailing(source, context);
+        if (requireEnd) PdfStreamFilters.Trailing(source, context);
         return output.Build();
     }
 

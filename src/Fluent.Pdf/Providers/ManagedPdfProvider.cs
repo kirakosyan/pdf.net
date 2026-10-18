@@ -89,6 +89,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
                 }
 
         var pageIds = new List<PdfValue>(document.Pages.Count);
+        var writeOptions=document.WriteOptions;
         foreach (var page in document.Pages)
         {
             context.Checkpoint();
@@ -96,7 +97,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
             PdfObjectId id;
             if (binding != null && !ReferenceEquals(binding.Document, document.SourceDocument))
                 throw PdfWriterCore.Error(context, "Writer.PageImportRequired", "A page from another graph requires the explicit page import operation.");
-            bool changed = binding == null || orderChanged || page.Size != binding.Size || page.Rotation != binding.Rotation;
+            bool changed = binding == null || orderChanged || page.Size != binding.Size || page.Rotation != binding.Rotation || page.Content!=null;
             if (binding == null)
                 id = edit.Add(PdfValue.Null);
             else
@@ -124,6 +125,11 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
                 entries["Resources"] = Dictionary();
             if (binding == null || page.Rotation != binding.Rotation)
                 entries["Rotate"] = PdfValue.Integer((int)page.Rotation);
+            if(page.Content!=null)
+            {
+                entries["Contents"]=PdfValue.Reference(edit.Add(page.Content.ToStream(context)));
+                writeOptions=writeOptions.RequireVersion(page.Content.MinimumVersion);
+            }
             edit.Set(id, PdfValue.OwnedDictionary(entries));
         }
 
@@ -150,7 +156,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
 
         if (document.SourceDocument == null)
             edit.Set(catalogId, Dictionary(("Type", PdfValue.Name("Catalog")), ("Pages", PdfValue.Reference(pagesId))));
-        edit.WriteCore(output, document.WriteOptions, context);
+        edit.WriteCore(output, writeOptions, context);
     }
 
     private static void Visit(PdfSyntaxDocument source, PdfObjectId id, PdfObjectId? parent, Dictionary<string, PdfValue> inherited, HashSet<PdfObjectId> visited, PdfDocument target, PdfOperationContext context)

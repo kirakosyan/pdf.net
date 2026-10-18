@@ -187,6 +187,8 @@ public sealed class PdfValue
     internal static PdfValue StreamValue(PdfValue dictionary, PdfByteStore bytes, long start, long length) => new(PdfValueKind.Stream, dictionary: dictionary.Entries, bytes: bytes, start: start, length: length);
     internal PdfValue WithDictionary(PdfValue dictionary) => Kind == PdfValueKind.Stream ? new(PdfValueKind.Stream, dictionary: dictionary.Entries, bytes: _bytes, start: _start, length: _length) : dictionary;
     internal long IntegerValue => Kind == PdfValueKind.Number && long.TryParse(NumberText, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out long n) ? n : throw new InvalidDataException("A bounded integer is required.");
+    internal bool TryGetInteger(out long value)
+    { value = 0; return Kind == PdfValueKind.Number && long.TryParse(NumberText, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out value); }
 
     private static InvalidOperationException WrongKind() => new("The PDF value has a different kind or numeric range.");
 }

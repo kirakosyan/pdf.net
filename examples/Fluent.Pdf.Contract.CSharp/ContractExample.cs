@@ -5,6 +5,16 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteRectangle(Stream output)
+    {
+        using var document=PdfFacade.Create().AddPage();
+        document.Pages[0].Content=PdfContentProgram.Create(new[]{
+            new PdfContentOperation(PdfOperator.SaveState),
+            new PdfContentOperation(PdfOperator.Rectangle,PdfValue.Integer(20),PdfValue.Integer(20),PdfValue.Integer(100),PdfValue.Integer(50)),
+            new PdfContentOperation(PdfOperator.Fill),
+            new PdfContentOperation(PdfOperator.RestoreState)});
+        return document.Save(output);
+    }
     public static PdfOperationReport WriteManagedPdf(Stream output)
     {
         using var document=PdfFacade.Create().AddPage(PdfPageSize.Letter);
