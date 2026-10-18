@@ -131,7 +131,7 @@ public sealed class NativeWorkerHost
                         if (process.WorkingSet64 > options.MaximumMemoryBytes) throw Fail(context,"Native.MemoryLimit","The native worker exceeded its resident-memory ceiling.");
                     }
                     catch(InvalidOperationException) when(process.WaitForExit(50)) { }
-                    catch(System.ComponentModel.Win32Exception) when(process.WaitForExit(50))
+                    catch(System.ComponentModel.Win32Exception) when(process.WaitForExit(50)) { }
                     catch(IOException) when(process.WaitForExit(50)) { }
                 }
             }
