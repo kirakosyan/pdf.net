@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-013 independent development table verification; not complete production qualification",
+  "sourceCommit": "8e9f545afd912fc02d3280e1b728b63fa3436d8d",
+  "workingTreeDirty": false,
+  "method": "Separate original Python invoice grid/metric/pagination model and literal PDF serializer; strict pypdf table logical text and independent Poppler raster comparison",
+  "fontSha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+  "tools": {
+    "FontTools": "4.61.1",
+    "pypdf": "6.10.0",
+    "Poppler": "25.03.0",
+    "Pillow": "12.3.0",
+    "NumPy": "2.3.5",
+    "SciPy": "1.17.0"
+  },
+  "cases": [
+    {
+      "case": "invoice",
+      "pdfSha256": "25561efa26c7965977d59094288e648d8071410faf773f0735315c736d3b8b88",
+      "pages": 3,
+      "logicalRowsAndRepeatedHeaders": "exact",
+      "numericCultureAndAlignment": "exact",
+      "glyphOutlines": "exact against original font",
+      "glyphMatrices": "exact to 1e-9 points",
+      "verifiedGlyphs": 278,
+      "rasterPixels": 691200,
+      "differentPixels": 894,
+      "pageSSIM": [
+        0.9996898996562453,
+        0.9996898996562453,
+        0.9996898996562453
+      ],
+      "minimumSSIM": 0.9996898996562453,
+      "requiredSSIM": 0.995,
+      "visualLimit": "Font-name-dependent header hinting differs from the full-font reference; used outlines and positions checked separately; complete visual qualification pending"
+    },
+    {
+      "case": "nested",
+      "pdfSha256": "9b81ca0ca9a1447d5613972a965fa57097f0e1b87d1c57f1c977cffd4b2233d6",
+      "pages": 4,
+      "logicalBodyRows": "exactly once in source order",
+      "nestedHeaders": "exactly once at start of every continuation page",
+      "rasterComparison": "pending separate nested reference geometry"
+    }
+  ],
+  "productionQualified": false,
+  "renderer": {
+    "path": "/usr/bin/pdftoppm",
+    "version": "25.03.0",
+    "sha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "SSIMMethod": "Luminance SSIM, 11x11 Gaussian window sigma 1.5, population covariance, 5-pixel border excluded, constants K1=.01 K2=.03 L=255; existing .995 threshold unchanged",
+  "pending": [
+    "Complete nested/merged/styled table golden and labeled data corpus",
+    "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance workloads"
+  ]
+}

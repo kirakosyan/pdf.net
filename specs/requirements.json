@@ -501,7 +501,8 @@
         "pending": [
           "Complete styled/merged/nested business goldens and labeled data corpus",
           "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-013-independent.json"
       }
     },
     {
