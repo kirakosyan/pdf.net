@@ -419,6 +419,13 @@ static int worker_main(int argc, char **argv) {
 #else
     void *library; char library_path[8192];
 #endif
+#ifdef __APPLE__
+    uint64_t startup_rusage_peak=0;
+    {
+        struct rusage startup;
+        if(getrusage(RUSAGE_SELF,&startup)==0 && startup.ru_maxrss>=0) startup_rusage_peak=(uint64_t)startup.ru_maxrss;
+    }
+#endif
     if(argc-offset!=11) return 92;
     p=argv+offset;
     if(!parse_nonce(p[8])||!parse_limit(p[4],&max_input)||!parse_limit(p[5],&max_output)||
@@ -476,7 +483,20 @@ static int worker_main(int argc, char **argv) {
     {
         struct rusage usage;
         if(getrusage(RUSAGE_SELF,&usage)!=0) status=FP_MEMORY;
-        else if((uint64_t)usage.ru_maxrss>memory) status=FP_MEMORY;
+        else if((uint64_t)usage.ru_maxrss>memory) {
+            struct mach_task_basic_info basic;
+            struct task_vm_info vm;
+            mach_msg_type_number_t basic_count=MACH_TASK_BASIC_INFO_COUNT,vm_count=TASK_VM_INFO_COUNT;
+            int basic_ok,vm_ok;
+            memset(&basic,0,sizeof(basic));memset(&vm,0,sizeof(vm));
+            basic_ok=task_info(mach_task_self(),MACH_TASK_BASIC_INFO,(task_info_t)&basic,&basic_count)==KERN_SUCCESS;
+            vm_ok=task_info(mach_task_self(),TASK_VM_INFO,(task_info_t)&vm,&vm_count)==KERN_SUCCESS;
+            fprintf(stderr,"worker resident limit=%llu startup-rusage-peak=%llu final-rusage-peak=%llu current-rss=%llu mach-peak=%llu vm-peak=%llu\n",
+                (unsigned long long)memory,(unsigned long long)startup_rusage_peak,(unsigned long long)usage.ru_maxrss,
+                (unsigned long long)(basic_ok?basic.resident_size:0),(unsigned long long)(basic_ok?basic.resident_size_max:0),
+                (unsigned long long)(vm_ok?vm.resident_size_peak:0));
+            status=FP_MEMORY;
+        }
     }
 #endif
     free(input);

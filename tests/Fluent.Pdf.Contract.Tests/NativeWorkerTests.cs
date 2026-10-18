@@ -163,6 +163,19 @@ public sealed class NativeWorkerTests
     }
 
     [Fact]
+    public void NativeWorkerMemoryAccountingIsIndependentOfTheCallersResidentSet()
+    {
+        using var fixture=new WorkerFixture(_output,captureDiagnostics:true);
+        var parentPages=new byte[128*1024*1024];
+        for(int i=0;i<parentPages.Length;i+=4096) parentPages[i]=1;
+        using(var process=Process.GetCurrentProcess())
+            _output.WriteLine("Caller resident bytes after touching its own pages: "+process.WorkingSet64);
+        Assert.Equal(new byte[]{4,5,6},fixture.Run(new byte[]{0,4,5,6}));
+        GC.KeepAlive(parentPages);
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
+    [Fact]
     public void NativeMemoryAndOutputBoundariesCannotReturnUnboundedResults()
     {
         using var fixture=new WorkerFixture(_output);
