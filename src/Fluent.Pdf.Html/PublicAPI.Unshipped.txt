@@ -1,0 +1,11 @@
+#nullable enable
+Fluent.Pdf.Html.ChromiumConnectionFactory
+Fluent.Pdf.Html.ChromiumHtmlRenderer
+Fluent.Pdf.Html.ChromiumHtmlRenderer.ChromiumHtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory! factory, string! exactVersion, string! exactRevision) -> void
+Fluent.Pdf.Html.ChromiumHtmlRenderer.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Html.ChromiumHtmlRenderer.ExpectedRevision.get -> string!
+Fluent.Pdf.Html.ChromiumHtmlRenderer.ExpectedVersion.get -> string!
+Fluent.Pdf.Html.ChromiumHtmlRenderer.Render(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.PdfHtmlOptions! options, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Html.IChromiumConnection
+Fluent.Pdf.Html.IChromiumConnection.Receive(Fluent.Pdf.PdfOperationContext! context) -> string!
+Fluent.Pdf.Html.IChromiumConnection.Send(string! message, Fluent.Pdf.PdfOperationContext! context) -> void

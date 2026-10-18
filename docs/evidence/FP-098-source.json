@@ -65,5 +65,15 @@
     "pypdf and PDFBox do not decode the original UTF-8 title correctly; MuPDF and Poppler do. UTF-8 remains explicit, UTF-16BE remains default",
     "Complete normative/schema/extension/linguistic corpus, resource/fuzz/concurrency/endurance, actual minimum runtimes and final packages remain mandatory"
   ],
-  "apiComparisons": 24
+  "apiComparisons": 24,
+  "passingSourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-96-source.json",
+    "sourceCommit": "b52f91b5dc6be985ce82530cefef47e4a0a9b041",
+    "testedTree": "9475b187e67b61ee0115f2ae53401b950ec01c87",
+    "passed": 19380,
+    "failed": 0,
+    "skipped": 0,
+    "runtimeLanes": 20,
+    "productionQualified": false
+  }
 }

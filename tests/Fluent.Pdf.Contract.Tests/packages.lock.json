@@ -46,6 +46,14 @@
           "Microsoft.TestPlatform.ObjectModel": "17.13.0"
         }
       },
+      "Microsoft.Bcl.AsyncInterfaces": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "PEC80XidOaP1vyHWiSIOHOfh6MpkFln/gkLXKaSmjrAdBSwcAaowvOaVBKvnb+HAb2UTGrZqROajIKMVFu2jdw==",
+        "dependencies": {
+          "System.Threading.Tasks.Extensions": "4.6.3"
+        }
+      },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
         "resolved": "18.11.0",
@@ -87,6 +95,16 @@
         "type": "Transitive",
         "resolved": "4.3.0",
         "contentHash": "3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg=="
+      },
+      "System.IO.Pipelines": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "KyPO1f2rgg2GK211d0khYeqWtVsV8Veu/3dvl9V+vml9uLVc9AkxfQg7ay3fi0Nfznf6LNltPSe06VefT+hLVA==",
+        "dependencies": {
+          "System.Buffers": "4.6.1",
+          "System.Memory": "4.6.3",
+          "System.Threading.Tasks.Extensions": "4.6.3"
+        }
       },
       "System.Memory": {
         "type": "Transitive",
@@ -149,6 +167,39 @@
         "type": "Transitive",
         "resolved": "4.3.0",
         "contentHash": "7bDIyVFNL/xKeFHjhobUAQqSpJq9YTOpbEs6mR233Et01STBMXNAc/V+BM6dwYGc95gVh/Zf+iVXWzj3mE8DWg=="
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "rNYrJlPi22TM3PhkWdgB0jPYw/umbURQWlu1kg1nbsu3wP6LHsCBdG7NOG3Jf/8/CaC7WjE7tSH+TiQepPbOVQ==",
+        "dependencies": {
+          "System.Buffers": "4.6.1",
+          "System.Memory": "4.6.3",
+          "System.Runtime.CompilerServices.Unsafe": "6.1.2"
+        }
+      },
+      "System.Text.Json": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "IjBLCOgNyv48I7G69EWDUalJ0mVHyZdiH1drbPrNsQRJssvjmGVn0Q/CoZSG1RGUCCCgpdiQbZI4i9Z6Q5jnWQ==",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "10.0.13",
+          "System.Buffers": "4.6.1",
+          "System.IO.Pipelines": "10.0.13",
+          "System.Memory": "4.6.3",
+          "System.Runtime.CompilerServices.Unsafe": "6.1.2",
+          "System.Text.Encodings.Web": "10.0.13",
+          "System.Threading.Tasks.Extensions": "4.6.3",
+          "System.ValueTuple": "4.6.2"
+        }
+      },
+      "System.Threading.Tasks.Extensions": {
+        "type": "Transitive",
+        "resolved": "4.6.3",
+        "contentHash": "7sCiwilJLYbTZELaKnc7RecBBXWXA+xMLQWZKWawBxYjp6DBlSE3v9/UcvKBvr1vv2tTOhipiogM8rRmxlhrVA==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.1.2"
+        }
       },
       "System.ValueTuple": {
         "type": "Transitive",
@@ -219,6 +270,7 @@
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Html": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
@@ -232,6 +284,7 @@
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Html": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
@@ -249,6 +302,13 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.html": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "System.Text.Json": "[10.0.13, )"
         }
       },
       "fluent.pdf.rendering": {
@@ -388,6 +448,7 @@
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Html": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
@@ -401,6 +462,7 @@
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Html": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
@@ -413,6 +475,12 @@
         }
       },
       "fluent.pdf.fonts": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.html": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
@@ -496,10 +564,29 @@
         "resolved": "10.0.13",
         "contentHash": "uwKFGyJaUQ8xsf+wddv512+UIU1O4reOveom3y0gpQr86P1ReAKcQa/UdOZtg1etTIHgb01/grXp00tgeGBxqA=="
       },
+      "System.IO.Pipelines": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "KyPO1f2rgg2GK211d0khYeqWtVsV8Veu/3dvl9V+vml9uLVc9AkxfQg7ay3fi0Nfznf6LNltPSe06VefT+hLVA=="
+      },
       "System.Security.Cryptography.Cng": {
         "type": "Transitive",
         "resolved": "5.0.0",
         "contentHash": "jIMXsKn94T9JY7PvPq/tMfqa6GAaHpElRDpmG+SuL+D3+sTw2M8VhnibKnN8Tq+4JqbPJ/f+BwtLeDMEnzAvRg=="
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "rNYrJlPi22TM3PhkWdgB0jPYw/umbURQWlu1kg1nbsu3wP6LHsCBdG7NOG3Jf/8/CaC7WjE7tSH+TiQepPbOVQ=="
+      },
+      "System.Text.Json": {
+        "type": "Transitive",
+        "resolved": "10.0.13",
+        "contentHash": "IjBLCOgNyv48I7G69EWDUalJ0mVHyZdiH1drbPrNsQRJssvjmGVn0Q/CoZSG1RGUCCCgpdiQbZI4i9Z6Q5jnWQ==",
+        "dependencies": {
+          "System.IO.Pipelines": "10.0.13",
+          "System.Text.Encodings.Web": "10.0.13"
+        }
       },
       "xunit.abstractions": {
         "type": "Transitive",
@@ -565,6 +652,7 @@
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Html": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
@@ -578,6 +666,7 @@
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
+          "Fluent.Pdf.Html": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
@@ -595,6 +684,13 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.html": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )",
+          "System.Text.Json": "[10.0.13, )"
         }
       },
       "fluent.pdf.rendering": {

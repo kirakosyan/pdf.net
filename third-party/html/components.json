@@ -1,0 +1,230 @@
+{
+  "purpose": "locked-source-dependency-inventory-not-release-SBOM",
+  "sdkRedistributesBrowserOrNode": false,
+  "qualification": "Complete release SBOM, notices, vulnerability/license/engine review and exact-package qualification remain mandatory.",
+  "components": [
+    {
+      "name": "Microsoft.Bcl.AsyncInterfaces",
+      "version": "10.0.13",
+      "packageSha256": "6b5580a4250caa42abe7c6938444283d04ea28fe956634648efafc291a935a78",
+      "licenseExpression": "MIT",
+      "notices": [
+        {
+          "entry": "THIRD-PARTY-NOTICES.TXT",
+          "rawSha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21",
+          "length": 78041,
+          "path": "third-party/html/THIRD-PARTY-NOTICES.Microsoft.NET.txt",
+          "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54"
+        }
+      ],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "Microsoft.CodeAnalysis.PublicApiAnalyzers",
+      "version": "3.3.4",
+      "packageSha256": "5a61b7ae142ccabf2e47ad89e0c75f27d6fd2f1eda12ee802fd9cd4acd157611",
+      "licenseExpression": "MIT",
+      "notices": [
+        {
+          "entry": "ThirdPartyNotices.txt",
+          "rawSha256": "0eabe2880daf9bfb25ac160b1e779c5da95a88406dd06cdb570ec7edb5eabb76",
+          "length": 14230,
+          "path": "third-party/html/Microsoft.CodeAnalysis.PublicApiAnalyzers-ThirdPartyNotices.txt",
+          "sha256": "d3541d7e650299bc9abfe9d0398d800a543666eb0058d1370fd22d05fee6d89c"
+        }
+      ],
+      "role": "source build/reference",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "Microsoft.NETCore.Platforms",
+      "version": "1.1.0",
+      "packageSha256": "15e338d24b5c39b4099389cc612841eb51ff13c07bb4829f97d39b27420e7023",
+      "licenseExpression": null,
+      "notices": [
+        {
+          "entry": "dotnet_library_license.txt",
+          "rawSha256": "f1db688d8481c91a452fabcea5060a23da9ea5088329b58c478a040e2e426297",
+          "length": 9451,
+          "path": "third-party/html/Microsoft.NETCore.Platforms-dotnet_library_license.txt",
+          "sha256": "b7d43d08f59637129c482c63dcd4811077101ac41cc763b3b58490137f741977"
+        },
+        {
+          "entry": "ThirdPartyNotices.txt",
+          "rawSha256": "0684b2349427ee28e392ae8914645832e59731dba8a38a984f72b3fb8769c76b",
+          "length": 1617,
+          "path": "third-party/html/THIRD-PARTY-NOTICES.NETStandard.txt",
+          "sha256": "fd880d29a522f238c178452b38cbf196bb5c0dab7ebfdc590b02b8e5019ebc71"
+        }
+      ],
+      "role": "source build/reference",
+      "packageCopyright": "\u00a9 Microsoft Corporation.  All rights reserved."
+    },
+    {
+      "name": "Microsoft.NETFramework.ReferenceAssemblies",
+      "version": "1.0.3",
+      "packageSha256": "141a093f90c7645d101ccd312e6f727781c965540eb92a52280f95411a698441",
+      "licenseExpression": null,
+      "notices": [],
+      "role": "source build/reference",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "Microsoft.NETFramework.ReferenceAssemblies.net472",
+      "version": "1.0.3",
+      "packageSha256": "ffa0a5570a39f911399164d0581ffddef99b5e3dfbaa5f220e5ce22969bcf57c",
+      "licenseExpression": null,
+      "notices": [],
+      "role": "source build/reference",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "NETStandard.Library",
+      "version": "2.0.3",
+      "packageSha256": "3eb87644f79bcffb3c0331dbdac3c7837265f2cdf58a7bfd93e431776f77c9ba",
+      "licenseExpression": null,
+      "notices": [
+        {
+          "entry": "LICENSE.TXT",
+          "rawSha256": "fc95de1436a321aadbfafd21f8a8506a2f4678bfc003bd806d6b59d3088efadc",
+          "length": 1115,
+          "path": "third-party/html/NETStandard.Library-LICENSE.TXT",
+          "sha256": "18647d26bc4c4d892a5fd29de1264d10906b3124cafa98313300ff300441c7f0"
+        },
+        {
+          "entry": "THIRD-PARTY-NOTICES.TXT",
+          "rawSha256": "0684b2349427ee28e392ae8914645832e59731dba8a38a984f72b3fb8769c76b",
+          "length": 1617,
+          "path": "third-party/html/THIRD-PARTY-NOTICES.NETStandard.txt",
+          "sha256": "fd880d29a522f238c178452b38cbf196bb5c0dab7ebfdc590b02b8e5019ebc71"
+        }
+      ],
+      "role": "source build/reference",
+      "packageCopyright": ".NET Foundation and Contributors"
+    },
+    {
+      "name": "System.Buffers",
+      "version": "4.6.1",
+      "packageSha256": "b00451e91d016fbec091ad1e361f3a7015e1d91d4047f7e48a74455b2a673d79",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.IO.Pipelines",
+      "version": "10.0.13",
+      "packageSha256": "5cab29bacbeee21ff054dcca2f40a20530752671aa96dd8514bb695773317220",
+      "licenseExpression": "MIT",
+      "notices": [
+        {
+          "entry": "THIRD-PARTY-NOTICES.TXT",
+          "rawSha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21",
+          "length": 78041,
+          "path": "third-party/html/THIRD-PARTY-NOTICES.Microsoft.NET.txt",
+          "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54"
+        }
+      ],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.Memory",
+      "version": "4.6.3",
+      "packageSha256": "26078aeb758c9ae985e8bf851f973026061da6a5eb4837204d0c2d2204c72955",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.Numerics.Vectors",
+      "version": "4.6.1",
+      "packageSha256": "2bc500a86dcb02f2032d6d877f9e2d6e9e4a79080e57239b4198679d4031f2c7",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.Runtime.CompilerServices.Unsafe",
+      "version": "6.1.2",
+      "packageSha256": "5f6a7f53af3465f92beb6da873ebe0e496206c313313b98badee4355a6b25937",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.Text.Encodings.Web",
+      "version": "10.0.13",
+      "packageSha256": "6ea32156a8c5bd877a6cf109cc5c3482f98df4a0715d4f8dcdb3a50ba1a9a137",
+      "licenseExpression": "MIT",
+      "notices": [
+        {
+          "entry": "THIRD-PARTY-NOTICES.TXT",
+          "rawSha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21",
+          "length": 78041,
+          "path": "third-party/html/THIRD-PARTY-NOTICES.Microsoft.NET.txt",
+          "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54"
+        }
+      ],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.Text.Json",
+      "version": "10.0.13",
+      "packageSha256": "c36743c19c6e9d3e1f9ea8b38f724487b9fb8a959be53c621c9cc8ae93ba0b93",
+      "licenseExpression": "MIT",
+      "notices": [
+        {
+          "entry": "THIRD-PARTY-NOTICES.TXT",
+          "rawSha256": "6d15e10a101c6bfff2ab4429ed061bf76c456fc4b23ad6b03e0d0f8377148a21",
+          "length": 78041,
+          "path": "third-party/html/THIRD-PARTY-NOTICES.Microsoft.NET.txt",
+          "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54"
+        }
+      ],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.Threading.Tasks.Extensions",
+      "version": "4.6.3",
+      "packageSha256": "1abc92c7517a021ead7e79d0b7f3c70be75bce0fac7cfe3b38e157d32245ff1a",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    },
+    {
+      "name": "System.ValueTuple",
+      "version": "4.6.2",
+      "packageSha256": "76fd0e366a2b90655fd15d557b0b79504197748358cb578fe3193f6d97bdd9aa",
+      "licenseExpression": "MIT",
+      "notices": [],
+      "role": "runtime dependency on applicable target frameworks",
+      "sharedMicrosoftMitNotice": "third-party/cryptography/LICENSE.Microsoft.NET.txt",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved."
+    }
+  ],
+  "vulnerabilityObservation": {
+    "command": "dotnet list src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj package --vulnerable --include-transitive --no-restore --format json",
+    "exitCode": 0,
+    "knownVulnerabilitiesReported": 0,
+    "reportSha256": "a6ac2eea80dfcdda7d1a82fad5eff9ba63ef5cf724c1763e32113ef77d6980dd",
+    "completeSecurityAudit": false
+  }
+}

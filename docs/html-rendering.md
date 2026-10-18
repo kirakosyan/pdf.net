@@ -1,0 +1,43 @@
+# Optional Chromium HTML conversion
+
+FP-044 has a managed source contract and an optional original `Fluent.Pdf.Html` DevTools adapter. `PdfHtml.Render` stages browser PDF bytes privately, imports them through the ordinary managed reader under the same operation context, and returns the normal editable `PdfDocument`. Metadata edits, extraction and full/incremental/atomic saves keep their existing contracts. The managed core links no browser, Node.js, GUI or native package.
+
+## Sources and resources
+
+`PdfHtmlSource.FromHtml` captures well-formed logical Unicode, with a reserved virtual HTTPS document address by default. `Read` accepts UTF-8 HTML from the current position of a borrowed file/document stream; a UTF-8 BOM is allowed. `FromResource` selects an explicitly addressed main HTML resource. `PdfHtmlResource.Read` captures immutable resource bytes and an explicit Content-Type from a borrowed stream. Resource URLs are matching keys and relative-resource bases; these APIs fetch nothing.
+
+The source profile bounds markup to 4 Mi UTF-16 code units, file markup to 8 MiB UTF-8, each captured resource to 16 MiB, and the inventory to 128 uniquely addressed resources/64 MiB. Main addresses must be absolute HTTP(S), without user information or fragments. Captured bytes survive input disposal. Preparation and rendering are separate explicit operations with their own supplied policies.
+
+The adapter intercepts GET requests and fulfills only supplied markup/resources, including web fonts and local images/styles/scripts. Strict mode rejects missing subresources; permissive mode records `Html.ResourceMissing` and fails that request without a network fallback. Missing main content always rejects. Inline data/blob resources stay within the explicit document job. The browser's own tab favicon may receive an empty response; explicit image requests still follow the resource policy. URL acquisition, filesystem roots, authentication and network authorization belong to FP-045 and remain mandatory.
+
+## Engine and job boundary
+
+Register `ChromiumHtmlRenderer` with a `ChromiumConnectionFactory`, an exact four-part browser version and exact source revision. The adapter checks the actual `Browser.getVersion` product/revision and DevTools 1.3 protocol **before sending document input**. `Descriptor`, `ExpectedVersion` and `ExpectedRevision` expose the pins. An exact pin is not a blanket support claim for every Chromium build.
+
+Each conversion requires a fresh caller-provisioned supervised process/connection, then creates a new off-the-record browser context and target. The SDK disables downloads/cache and bypasses service workers, configures a fixed locale/timezone, and explicitly selects whether source JavaScript executes. JavaScript is disabled by default. Browser output streams in bounded 64 KiB chunks; malformed JSON, duplicate keys, unexpected command/session identities, unsupported child targets, script errors, dialogs and authentication fail with stable `Html.*` diagnostics. Failed web fonts produce a reported substitution; strict mode rejects it. Context/target cleanup is intentional, while unexpected crashes remain errors.
+
+The supplied host is a trusted provider boundary. It must pin/provision the complete engine/assets/fonts, expose only permitted read-only files, prevent unauthorized network access, enforce memory/process/time bounds, and terminate/join all owned work within five seconds after cancellation/deadline. It must bound and charge transport allocations before creating them. The adapter does not install, discover or download a host. A complete deployable SDK host and its OS/RID/runtime security qualification remain mandatory work; an arbitrary callback is not proof of those guarantees.
+
+```csharp
+var source = PdfHtmlSource.FromHtml(html, resources: explicitResources);
+var renderer = new Fluent.Pdf.Html.ChromiumHtmlRenderer(
+    qualifiedPrivateHost, exactBrowserVersion, exactBrowserRevision);
+using var document = PdfHtml.Render(source, new PdfProviderRegistry(renderer),
+    new PdfHtmlOptions(enableJavaScript: false), explicitPolicy);
+document.SaveFile(destination);
+```
+
+Load completion uses native lifecycle events and a private isolated-world synchronous font-state check, including when page JavaScript is disabled. Advanced readiness, navigation/worker lifecycle and explicit script profiles belong to FP-046. Print-media/accessibility controls belong to FP-047. Current paper size is a browser print request: the imported model retains actual engine page boxes. The observed candidate rounds A4 to approximately 595.91998 × 841.91998 points. Exact print/page negotiation and its complete corpus remain mandatory; no exact A4-box or PDF/UA claim is made by this source profile.
+
+## Source evidence and applicability
+
+Core contracts, optional adapter and C#/VB consumers target net472, netstandard2.0, net8.0 and net10.0. Source unit tests exercise protocol/ownership/failure/resource boundaries; a protocol peer does not qualify Chromium layout. Complete actual browser behavior on all six modern RIDs, actual minimum Framework bitness lanes, fallback and final-package consumers remains required.
+
+`eng/HtmlBrowserProbe` is an explicit Linux/.NET 10 trusted-original-fixture observer. Its manifest pins browser/Node/font SHA-256, version/revision, temporary parent and output directory. It never downloads assets or disables Chromium's sandbox. It runs a fixed original grid/flex/SVG/canvas/web-font/dynamic-text fixture with JavaScript enabled and disabled, imports each PDF, edits metadata and extracts text through the SDK. The development host uses private profiles and bounded framed I/O but **does not qualify the SDK OS network/memory/security boundary**. Owned profiles and observations remain retained for source evidence.
+
+```text
+dotnet run --project eng/HtmlBrowserProbe -c Release -- \
+  --trusted-original-fixtures /absolute/path/to/fixture-manifest.json
+```
+
+The manifest has `browserExecutable`, `nodeExecutable`, `fontFile`, corresponding `*Sha256` properties, `browserVersion`, `browserRevision`, `temporaryParent` and `outputDirectory`. No source path is inferred. The checked source fixture uses the repository's original font, not machine-selected font goldens. Actual independent reports cover exact Unicode, declared grid/flex positions, SVG dimensions, canvas/script behavior and retention after SDK editing. Complete visual/semantic/accessibility, font policy, engine/dependency review, browser security/fuzz/concurrency/endurance and production host/package qualification remain mandatory. Packing/publication stay blocked.

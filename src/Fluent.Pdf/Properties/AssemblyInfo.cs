@@ -10,3 +10,4 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Fluent.Pdf.Cryptography")]
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Fluent.Pdf.Compliance")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Fluent.Pdf.Html")]

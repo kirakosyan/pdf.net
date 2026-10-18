@@ -1654,7 +1654,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-rendering.md",
+        "implemented": [
+          "Bounded immutable HTML/file-stream/addressed-resource capture, explicit script/print options and shared-context browser-PDF import into the editable model",
+          "Original optional version/revision-bound DevTools adapter with fresh private contexts, explicit resource interception, native lifecycle/isolated font readiness and bounded streamed output",
+          "C#/VB consumers, protocol/resource/ownership/failure tests and an explicit pinned trusted-original Linux browser fixture observer"
+        ],
+        "pending": [
+          "Complete HTML/layout/font/script/subtarget/resource/print profiles remain mandatory through their owning requirements",
+          "Qualified deployable OS host, complete engine/assets/fonts/license/security adoption and actual browser behavior on every required RID/runtime remain mandatory",
+          "Full fidelity/accessibility/security/fuzz/concurrency/endurance, actual minimum runtimes and exact final-package consumers remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-044-source.json",
+        "standardsEvidence": "docs/evidence/FP-044-standards.json",
+        "independentEvidence": "docs/evidence/FP-044-independent.json"
+      }
     },
     {
       "id": "FP-045",

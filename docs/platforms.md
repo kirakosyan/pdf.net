@@ -63,3 +63,5 @@ FP-066 archival contracts and the optional report bridge target all four library
 The FP-006 managed structural repair/ledger profile targets all four library TFMs and introduces no platform/native dependency. Independent source observations use unrelated PDF readers; complete damaged-corpus, actual minimum runtime and final-package qualification remain mandatory.
 
 FP-098 text encoding and passive compatibility inventory use only managed core on all four target frameworks. Independent source fixtures do not qualify complete PDF 2.0, actual minimum runtimes or final packages. See the [version matrix](pdf-compatibility.md).
+
+FP-044 HTML contracts and optional managed DevTools adapter target all four library frameworks. Protocol source tests exercise every applicable source CI lane; actual browser observations currently use a pinned Linux x64 Chromium candidate on .NET 10. Complete browser/host behavior on all six RIDs, actual minimum Framework/fallback and final packages remains mandatory. A connection factory and a source build are not platform qualification. See [HTML applicability](html-rendering.md).

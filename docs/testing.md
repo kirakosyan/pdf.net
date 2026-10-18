@@ -18,6 +18,8 @@ Run the build before each full contract script invocation. The fallback lane del
 
 The test script fails on a failed test, zero tests, skipped/not-executed tests, absent identity output or process architecture mismatch. It runs .NET 8, .NET 10 and the explicit fallback lane everywhere. On Windows x64 it additionally runs current Framework in separate x64 and x86 processes. Test applicability is declared by the script; other OS/architectures do not report Framework tests as skips. Passing source tests do not populate production release evidence.
 
+The HTML protocol peer covers shared contexts, exact engine/session/command identities, bounded JSON/chunks, explicit resources, failures and ownership; it is not a browser-layout implementation. `eng/HtmlBrowserProbe` separately requires an explicit pinned local-asset manifest and runs trusted original fixtures on Linux/.NET 10. Retain its generated/edited PDFs, SDK extraction and independent reader/raster reports. This source observation does not replace any browser production lane or qualify an OS isolation host.
+
 CI runs these checks on Windows, Linux and macOS, each with x64 and ARM64 native runners. `-ExpectedArchitecture X64|Arm64` asserts the intended process architecture. Each CI job retains its own `source-contracts-<platform>` artifact containing:
 
 - TRX reports with test totals and actual runtime/OS/process architecture/library TFM output.

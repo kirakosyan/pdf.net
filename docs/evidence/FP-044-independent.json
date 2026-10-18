@@ -1,0 +1,229 @@
+{
+  "purpose": "original-HTML-source-interoperability-observations-not-production-qualification",
+  "tools": {
+    "pypdf": "6.10.0",
+    "MuPDF": "1.26.6",
+    "Poppler": "26.05.0"
+  },
+  "observations": [
+    {
+      "fixture": "enabled",
+      "pdfSha256": "0b90683cddad60e56826a2bb7c98b62e8ab16c3ff67b3fd8870f71390f4f7afd",
+      "pageCount": 1,
+      "expectedLogicalUnicodeWithoutLayoutWhitespace": "ABAB一😀B",
+      "pypdfText": "A B\nA B\n一😀\nB",
+      "mupdfText": "A\nB\nA\nB\n一😀\nB\n",
+      "popplerText": "A\n\nB\n\nA\n\nB\n\n一😀\n\nB\n\n\f",
+      "pageBox": [
+        595.9199829101562,
+        841.9199829101562
+      ],
+      "gridSecondColumnX": 90.0,
+      "flexSecondColumnX": 97.5,
+      "expectedGridSecondColumnX": 90,
+      "expectedFlexSecondColumnX": 97.5,
+      "columnXTolerancePoints": 0.1,
+      "expectedSolidRectangleSizePoints": [
+        75,
+        30
+      ],
+      "vectorSizeTolerancePoints": 0.05,
+      "fonts": [
+        "/AAAAAA+FluentOriginalTrueType"
+      ],
+      "rasterChecks": {
+        "MuPDF": {
+          "counts": {
+            "red": 4348,
+            "green": 2250,
+            "blue": 2250
+          },
+          "rasterSha256": "0f2b99c91b6e72d3e8c430d63718f0266fb9c7b89b1b8e89ea52d2e322d774ba",
+          "size": [
+            596,
+            842
+          ]
+        },
+        "Poppler": {
+          "counts": {
+            "red": 4348,
+            "green": 2175,
+            "blue": 2325
+          },
+          "rasterSha256": "7f605faeb349aaafc6dea5841acbe664f979a063d49a0ee00eb2d59b8ca5fe37",
+          "size": [
+            596,
+            842
+          ]
+        }
+      }
+    },
+    {
+      "fixture": "disabled",
+      "pdfSha256": "713694e399868e4a2530ef32616d3a63fd0009b8e8750e31065fdfc1a176b580",
+      "pageCount": 1,
+      "expectedLogicalUnicodeWithoutLayoutWhitespace": "ABAB一😀",
+      "pypdfText": "A B\nA B\n一😀",
+      "mupdfText": "A\nB\nA\nB\n一😀\n",
+      "popplerText": "A\n\nB\n\nA\n\nB\n\n一😀\n\n\f",
+      "pageBox": [
+        595.9199829101562,
+        841.9199829101562
+      ],
+      "gridSecondColumnX": 90.0,
+      "flexSecondColumnX": 97.5,
+      "expectedGridSecondColumnX": 90,
+      "expectedFlexSecondColumnX": 97.5,
+      "columnXTolerancePoints": 0.1,
+      "expectedSolidRectangleSizePoints": [
+        75,
+        30
+      ],
+      "vectorSizeTolerancePoints": 0.05,
+      "fonts": [
+        "/AAAAAA+FluentOriginalTrueType"
+      ],
+      "rasterChecks": {
+        "MuPDF": {
+          "counts": {
+            "red": 4348,
+            "green": 2250,
+            "blue": 0
+          },
+          "rasterSha256": "c626cf9684ac326b2c127f36c3bffacbf3f5c43cebe441eadb66089a3c196368",
+          "size": [
+            596,
+            842
+          ]
+        },
+        "Poppler": {
+          "counts": {
+            "red": 4348,
+            "green": 2250,
+            "blue": 0
+          },
+          "rasterSha256": "b783c88435157e454e87f7c68cbb9813314e6d0790c3b3668387e951029f70ba",
+          "size": [
+            596,
+            842
+          ]
+        }
+      }
+    },
+    {
+      "fixture": "enabled-edited",
+      "pdfSha256": "e61fbd3a3c4e3b780f140f0718f8994767fea19b56d4c006b1400c5ec9b8c105",
+      "pageCount": 1,
+      "expectedLogicalUnicodeWithoutLayoutWhitespace": "ABAB一😀B",
+      "pypdfText": "A B\nA B\n一😀\nB",
+      "mupdfText": "A\nB\nA\nB\n一😀\nB\n",
+      "popplerText": "A\n\nB\n\nA\n\nB\n\n一😀\n\nB\n\n\f",
+      "pageBox": [
+        595.9199829101562,
+        841.9199829101562
+      ],
+      "gridSecondColumnX": 90.0,
+      "flexSecondColumnX": 97.5,
+      "expectedGridSecondColumnX": 90,
+      "expectedFlexSecondColumnX": 97.5,
+      "columnXTolerancePoints": 0.1,
+      "expectedSolidRectangleSizePoints": [
+        75,
+        30
+      ],
+      "vectorSizeTolerancePoints": 0.05,
+      "fonts": [
+        "/AAAAAA+FluentOriginalTrueType"
+      ],
+      "rasterChecks": {
+        "MuPDF": {
+          "counts": {
+            "red": 4348,
+            "green": 2250,
+            "blue": 2250
+          },
+          "rasterSha256": "0f2b99c91b6e72d3e8c430d63718f0266fb9c7b89b1b8e89ea52d2e322d774ba",
+          "size": [
+            596,
+            842
+          ]
+        },
+        "Poppler": {
+          "counts": {
+            "red": 4348,
+            "green": 2175,
+            "blue": 2325
+          },
+          "rasterSha256": "7f605faeb349aaafc6dea5841acbe664f979a063d49a0ee00eb2d59b8ca5fe37",
+          "size": [
+            596,
+            842
+          ]
+        }
+      }
+    },
+    {
+      "fixture": "disabled-edited",
+      "pdfSha256": "e73cbe154c935356eaad11c5b65dcc4d8ee58ed3b7f3363af67aba85b57d2aaa",
+      "pageCount": 1,
+      "expectedLogicalUnicodeWithoutLayoutWhitespace": "ABAB一😀",
+      "pypdfText": "A B\nA B\n一😀",
+      "mupdfText": "A\nB\nA\nB\n一😀\n",
+      "popplerText": "A\n\nB\n\nA\n\nB\n\n一😀\n\n\f",
+      "pageBox": [
+        595.9199829101562,
+        841.9199829101562
+      ],
+      "gridSecondColumnX": 90.0,
+      "flexSecondColumnX": 97.5,
+      "expectedGridSecondColumnX": 90,
+      "expectedFlexSecondColumnX": 97.5,
+      "columnXTolerancePoints": 0.1,
+      "expectedSolidRectangleSizePoints": [
+        75,
+        30
+      ],
+      "vectorSizeTolerancePoints": 0.05,
+      "fonts": [
+        "/AAAAAA+FluentOriginalTrueType"
+      ],
+      "rasterChecks": {
+        "MuPDF": {
+          "counts": {
+            "red": 4348,
+            "green": 2250,
+            "blue": 0
+          },
+          "rasterSha256": "c626cf9684ac326b2c127f36c3bffacbf3f5c43cebe441eadb66089a3c196368",
+          "size": [
+            596,
+            842
+          ]
+        },
+        "Poppler": {
+          "counts": {
+            "red": 4348,
+            "green": 2250,
+            "blue": 0
+          },
+          "rasterSha256": "b783c88435157e454e87f7c68cbb9813314e6d0790c3b3668387e951029f70ba",
+          "size": [
+            596,
+            842
+          ]
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Trusted original fixture host; not an SDK OS network/memory/isolation or supported-platform qualification",
+    "Chromium rounded A4 page boxes are retained; exact print/page negotiation remains mandatory",
+    "Small deterministic fixture, not a calibrated full visual/linguistic/fidelity corpus"
+  ],
+  "productionQualified": false,
+  "schemaVersion": 1,
+  "requirement": "FP-044",
+  "sourceCommit": null,
+  "rawReportSha256": "63da7dfc3c308192967be7414184c2eead87d0fc3bba11dbf12b0b1ff0d698b8",
+  "packingAndPublicationBlocked": true
+}

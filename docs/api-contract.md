@@ -137,3 +137,5 @@ FP-066 adds explicit archival profiles, common structural preflight, conversion 
 FP-006 adds separate strict structural inspection and explicit recovery, immutable source/output views and digests, exact stream and active-identity authority, explicit orphan/signature policies and a machine-readable ledger. The ordinary parser never repairs. See [repair behavior and remaining profiles](repair.md).
 
 FP-098 adds explicit PDF text encodings and passive version/extension/namespace/associated-file inventory, typed UTF-8 Info authoring and reserved extension Type handling. See the [read/write/preserve matrix](pdf-compatibility.md) and qualification limits.
+
+FP-044 adds bounded immutable HTML/resources, explicit script/print requests and optional renderer contracts. The original optional Chromium protocol adapter checks exact version/revision pins, creates a private context, serves supplied resources and streams its result into the ordinary editable model. See [HTML source profiles and required host qualification](html-rendering.md).

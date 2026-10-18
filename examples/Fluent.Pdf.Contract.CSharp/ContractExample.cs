@@ -5,6 +5,9 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfProviderRegistry HtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory host, string exactVersion, string exactRevision) => new(new Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision));
+    public static PdfDocument ConvertHtml(PdfHtmlSource source, PdfProviderRegistry providers, PdfHtmlOptions options) => PdfHtml.Render(source, providers, options);
+
     public static PdfCompatibilityInspection InspectCompatibility(PdfDocumentSnapshot source) => PdfCompatibility.Inspect(source);
     public static PdfOperationReport WriteUtf8MetadataPdf(Stream output)
     {

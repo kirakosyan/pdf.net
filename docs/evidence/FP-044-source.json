@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-044",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "runtime": ".NET10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "htmlSourceCasesIncludedInFullSuite": 26,
+  "selectedTests": {
+    "passed": 933,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeRenderingTests"
+  },
+  "apiComparisons": 27,
+  "actualBrowserSourceProfiles": [
+    "sourceJavaScriptEnabled",
+    "sourceJavaScriptDisabled"
+  ],
+  "actualBrowserSourceObservations": {
+    "purpose": "trusted-original-source-fixtures-not-security-or-production-qualification",
+    "runtime": ".NET 10.0.13",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "architecture": "X64",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "observations": [
+      {
+        "javascript": true,
+        "pageCount": 1,
+        "width": 595.91998,
+        "height": 841.91998,
+        "text": "A B\nA B\n一😀\nB",
+        "rawSha256": "0b90683cddad60e56826a2bb7c98b62e8ab16c3ff67b3fd8870f71390f4f7afd",
+        "editedSha256": "e61fbd3a3c4e3b780f140f0718f8994767fea19b56d4c006b1400c5ec9b8c105"
+      },
+      {
+        "javascript": false,
+        "pageCount": 1,
+        "width": 595.91998,
+        "height": 841.91998,
+        "text": "A B\nA B\n一😀",
+        "rawSha256": "713694e399868e4a2530ef32616d3a63fd0009b8e8750e31065fdfc1a176b580",
+        "editedSha256": "e73cbe154c935356eaad11c5b65dcc4d8ee58ed3b7f3363af67aba85b57d2aaa"
+      }
+    ],
+    "productionQualified": false
+  },
+  "explicitFixtureAssetPins": {
+    "browserExecutableSha256": "4dc9f9f9b20e9bd95bf201f43d2d643f48938f36a70ddcb6fce3dd611a178180",
+    "nodeExecutableSha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+    "fontFileSha256": "300a09abebb8c2b2bbee36c2d55a8b9a57f94c1a61eae2644cb99c8451b3ce35",
+    "browserVersion": "154.0.8037.57",
+    "browserRevision": "@73c14f6228d7cd537c855007e8f88678969cc0eb"
+  },
+  "sourceFileHashes": {
+    "eng/ContractProjectReference.props": "2338b3fa581a3d23fc9ba169761e77e219f7bd96199c3b9f16397e2acf80b750",
+    "eng/HtmlBrowserProbe/HtmlBrowserProbe.csproj": "963ce8cb65edcbd0926d630a4427fdd30e70ef61d424990acaf6c0e5d9370a96",
+    "eng/HtmlBrowserProbe/Program.cs": "8c42521d0281226117bbd56507b69ff6db9ce162a16700cfa46f5af3e78f5ce2",
+    "eng/HtmlBrowserProbe/chromium-pipe-host.mjs": "8fd41a71b8181bb67abbc388ee2f864117895bda3ab9ec808bb847545a8ac152",
+    "eng/HtmlBrowserProbe/packages.lock.json": "135c67f4ba11b4706308fb01bfff62aa7e5c12dd2d9ab094d911619981e796ff",
+    "eng/check-api.ps1": "62b47e355371fc4ab21c4640265feadf38748bbd7470d05c59ca27df2061ca57",
+    "eng/test-contracts.ps1": "50e4f4b2700c9a7fab53b0d3ec4514c5a1de1831c3544f183a8e2b46d7d1d4d4",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "e11cde5fecff6e45626d2072d2f94f60f10a7ba43d404919b4bf3b13f48c9ae2",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "2d1839f59636e80dc1caa0aa92a5533cbe6ebbea9d7b7f834a3fe39e25444598",
+    "src/Fluent.Pdf/Html/PdfHtml.cs": "a156802a2536f678552e301ba7f996202dda112ccb36f82691714c0ec799d777",
+    "src/Fluent.Pdf/Html/PdfHtmlSource.cs": "d25aa25e7b2f44b4446659273e4daebdbd3431714fbf986bc7e590ca959bd9bd",
+    "src/Fluent.Pdf/Properties/AssemblyInfo.cs": "b3e9c16d9c6d2b302e561cd1ae6c7979bb253df6fa289280d2fbf27982771a79",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "a5cc2e8a001411af6444581f1403144dc3238ebdc398d3794db2c186cf76da5a",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "f5ba17e853f6a9df00c8a542250023a16afa36135051c5d548df13219b4f2d55",
+    "src/Fluent.Pdf.Html/ChromiumHtmlRenderer.cs": "8237cee68a2ab789d09b507446901fde8f1e4248b8802379a7594ad335918c0a",
+    "src/Fluent.Pdf.Html/ChromiumProtocol.cs": "4a1f43a44a3817ef79963ca5fc2dcc6d998c679bf08ff84d8097dea893812341",
+    "src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj": "30119f7bcee8c8ce92172294f772a20840d6b86215d54a43293a0e27f2be46a5",
+    "src/Fluent.Pdf.Html/IChromiumConnection.cs": "0c708a89ecdac208c3fe467471470d94e494b25a30ffcc790da90f8756acd09b",
+    "src/Fluent.Pdf.Html/PublicAPI.Shipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Fluent.Pdf.Html/PublicAPI.Unshipped.txt": "461fbe2cfe6f5979171a57d3c7d06fd9504abc9f3ea7ac4301263e5a93417609",
+    "src/Fluent.Pdf.Html/packages.lock.json": "c549fd425f5221201193929fbe17df3b05b4374f2412c8a60372e6755c325f0a",
+    "tests/Fluent.Pdf.Contract.Tests/ContractProvider.cs": "a1473aa63eb6d453e8d8b2d05263665f6ded239ca49ecd8a7eae4a31379ca83f",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlTests.cs": "cc6890d539e69037681800435eb0953b9f1b1b9e00798ff19e63e329e7c00515",
+    "tests/Fluent.Pdf.Contract.Tests/RuntimeIdentityTests.cs": "ae485bd3e9588a04ef9c03e4348fd633e85b8609190474b5abb57acae79a723e"
+  },
+  "reportSha256": {
+    "html-final-build1.log": "119eff43b2b652b6e9f3bf8e4f0459b5a8d0e65088584811bc05aae0c1a87478",
+    "html-final-tests.log": "954082d0a521e004e52454a6ea0c6f760775eccc1d175c84dc2f608420734da9",
+    "html-api-check.log": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "html-api-comparisons.json": "6282863c784811f76fd4c2ced201bcfbf92f5c95b5b5f1ce547cf5386f3a49d5",
+    "html-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "html-tracked-real-probe.log": "6a6199ee853162751ed276aa3ac0243d3d8f7d2610848e603a4ab21d156db59b",
+    "html-dependency-vulnerabilities.json": "a6ac2eea80dfcdda7d1a82fad5eff9ba63ef5cf724c1763e32113ef77d6980dd",
+    "html-final-build2.log": "65915ef421e667c2d58bc6b7f543160538938f26349c6aa9707bb0aee6a62852",
+    "html-final-tests2.log": "58a076b21c58f5434e5507a97909849607c94e944a395aa245493e3c067bacad",
+    "html-api-check2.log": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "html-final-api-comparisons.json": "b26a2f8b5f30293ef55291f47831f71310e9c959f5946fc1db111ec64da502fa",
+    "html-targeted-final-tests.log": "66be450b6e45a9e004a3c5c7baa412cfc5de7e468b23b62f7d2addd0d8937112",
+    "html-net8-final-tests.log": "3424ef113efe2e62ee05d2cfc70f642a2d5c4e6c8002143bfd418abc232b3b97",
+    "html-fallback-final-tests.log": "473f3e073ded89561449456e72fec1443d5c2a29ed55bd650f9ebb0dfe8f89e9",
+    "html-final-real-probe.log": "921a331bdc3248a495ffb1f3d6acff9a80bab568075ced2c283ce62ec7db9d55",
+    "html-spec-check.log": "e23b0de2628787deeb3b5500bcf560233b6b951319adb245fd7cfb095f2971f4"
+  },
+  "retainedInitialFailures": [
+    {
+      "reportSha256": "d2788f62a9a72a23d84c2a1ce0a2af685112a4143f13975765b941305b07c5e9",
+      "observation": "The initial promise-based readiness path timed out with source JavaScript disabled. Native lifecycle events and isolated synchronous font inspection now pass both actual browser profiles; no execution deadline was raised."
+    },
+    {
+      "reportSha256": "ebb0e04ad2b8c74b8e431a72864a7128056241f793b588df75886329940c901f",
+      "observation": "Test lifetime fixture field was never assigned; corrected to implement an actual disposable provider lifetime."
+    },
+    {
+      "reportSha256": "fbb7057535639e10424069e8628c1e263a2a9dd930ca93fc842a9ceea8088b93",
+      "observation": "Concurrent test used blocking task operations and a redundant assertion filter. Corrected to async await and the filtering assertion overload without analyzer suppression."
+    },
+    {
+      "reportSha256": "a359d7e76330ccac19b8af7294750886fb354725d73d385b424228949b19517d",
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "observation": "The original conservative parameter-size check rejected a captured 9 MiB asset before the documented 64 MiB transport bound. The fix reserves worst-case serialization/transcoding before allocation and validates the actual serialized frame against the unchanged 64 MiB bound. The regression now passes with an explicit 1 GiB operation memory budget."
+    }
+  ],
+  "packageSha256": null,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "limitations": [
+    "Local native-positive SDK worker/render/codec tests cannot execute: Landlock ENOSYS; CI remains unfiltered",
+    "Actual Chromium observations use trusted original fixtures on Linux x64/.NET10 only; the fixture host does not qualify SDK OS network/memory/process/termination boundaries",
+    "Browser rounds A4 page boxes; exact print/page negotiation and complete fonts/scripts/subtarget/resource/readiness profiles remain mandatory",
+    "All browser/RID/minimum-runtime/security/fuzz/concurrency/endurance/fidelity and exact final-package qualification remains mandatory"
+  ],
+  "baseCommit": "b52f91b5dc6be985ce82530cefef47e4a0a9b041",
+  "workingTreeDirty": true,
+  "additionalActualRuntimeChecks": [
+    {
+      "runtime": ".NET8.0.32",
+      "libraryAsset": "net8.0",
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "runtime": ".NET10.0.13",
+      "libraryAsset": "netstandard2.0 explicit fallback, all nine identities checked",
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0
+    }
+  ]
+}

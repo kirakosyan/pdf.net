@@ -109,3 +109,5 @@ Archival generation/conversion uses the managed graph/writer and an explicit ind
 Structural recovery has a separate scanner, explicit identity/stream authority, immutable original bytes and ledger. It does not catch ordinary parse errors or guess markers inside stream payloads. Reconstructed output passes the normal strict reader before final copying; this is structural validation rather than PDF standards or content-fidelity qualification.
 
 PDF compatibility inspection retains raw immutable graph values and explicit version provenance; text encoding remains separate from binary/font-code strings. Typed text placement carries a version floor while low-level callers declare it explicitly.
+
+HTML source capture stays managed and immutable. Optional Fluent.Pdf.Html owns original version-bound DevTools commands, private context/target creation, resource interception and streamed printing over an explicit supervised-host connection. Browser PDF imports through the normal reader under the same operation context. The qualified OS process/network/memory boundary remains a separate mandatory host obligation; the development fixture host is not its qualification.

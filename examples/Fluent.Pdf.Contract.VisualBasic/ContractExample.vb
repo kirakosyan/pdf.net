@@ -4,6 +4,13 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function HtmlRenderer(host As Fluent.Pdf.Html.ChromiumConnectionFactory, exactVersion As String, exactRevision As String) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision))
+    End Function
+    Public Function ConvertHtml(source As PdfHtmlSource, providers As PdfProviderRegistry, options As PdfHtmlOptions) As PdfDocument
+        Return PdfHtml.Render(source, providers, options)
+    End Function
+
     Public Function InspectCompatibility(source As PdfDocumentSnapshot) As PdfCompatibilityInspection
         Return PdfCompatibility.Inspect(source)
     End Function
