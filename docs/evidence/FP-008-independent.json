@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source font independent verification, not production qualification",
+  "sourceCommit": "84210d95d1ed8ae1b3e7ee02fc7c614231d06180",
+  "sourceWorkingTreeDirty": true,
+  "fontToolsVersion": "4.61.1",
+  "pypdfVersion": "6.10.0",
+  "pdfinfoVersion": "pdfinfo version 26.05.0",
+  "pdftotextVersion": "pdftotext version 25.03.0",
+  "pdftoppmVersion": "pdftoppm version 26.05.0",
+  "outputs": [
+    {
+      "file": "licensed-cjk.otf-Stream.pdf",
+      "sha256": "621929e0d08325a5b32b8ba4a3c5f753b3a38bd02cabadf1f7be7ca715209c63",
+      "bytes": 5521,
+      "logicalUnicode": "中文一AB",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "licensed-cjk.otf-Table.pdf",
+      "sha256": "617b8eb2ac5e82b8e81170297e4a072e44a1b6a7034334f5ae06ff19156f7891",
+      "bytes": 5532,
+      "logicalUnicode": "中文一AB",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original-seac.otf-Stream.pdf",
+      "sha256": "7c3562cce4fb4950f93309ee6b32a113123265ff4ddee64bc34d0b5c88023a7c",
+      "bytes": 3066,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original-seac.otf-Table.pdf",
+      "sha256": "26f818060185b9fed237bd6dde8e925bc559fd6acdbe4f53275ad344da06fe51",
+      "bytes": 3077,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.cff-Stream.pdf",
+      "sha256": "69bf78a5c743246d4a761bd72d357d63a29ff082296044ccbcbc7959f111b18c",
+      "bytes": 2045,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.cff-Table.pdf",
+      "sha256": "cef175e6d58bf5f0a2b447e9f0ce74c0d10ac9895ffd302254409a26095a5a8c",
+      "bytes": 2056,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.otf-Stream.pdf",
+      "sha256": "e55de4f7e2a4142f18c465722a12f781ea8440469fac9b776ad02c426a393eb3",
+      "bytes": 3120,
+      "logicalUnicode": "AB一😀",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.otf-Table.pdf",
+      "sha256": "abcac327f0e00c5d7a2dc7fe65f04743240dfb1f9ed59ee5ff3964e122c1be07",
+      "bytes": 3131,
+      "logicalUnicode": "AB一😀",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.pfa-Stream.pdf",
+      "sha256": "630e59aa3ae0a694705f655b62ad79eb0c273432534ceff98764e0559f6dd88e",
+      "bytes": 2907,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.pfa-Table.pdf",
+      "sha256": "87110d081169a2ce9210ad3cbc4423954a54ba0f00808b0ea71fd6a734746878",
+      "bytes": 2908,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.pfb-Stream.pdf",
+      "sha256": "c1e62d63150c9df8d24a5d250024792f23b5688020963e06a58f03b8a245c86c",
+      "bytes": 2907,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.pfb-Table.pdf",
+      "sha256": "f57f23fbf5e902d5a0edac336d2257281d3eaa36457761a416f1237714145c7d",
+      "bytes": 2908,
+      "logicalUnicode": "AÁ",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.ttf-Stream.pdf",
+      "sha256": "5d97d91a61e934e366d67bb46ceba879a46ee982e553a0b861c6c35485e44dfc",
+      "bytes": 3037,
+      "logicalUnicode": "AB一😀",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    },
+    {
+      "file": "original.ttf-Table.pdf",
+      "sha256": "142647c41aa4fbea51012c902269c478826eabc1d85de11f8dc2fd940a8daf1d",
+      "bytes": 3057,
+      "logicalUnicode": "AB一😀",
+      "pypdfStrict": true,
+      "popplerTextExact": true,
+      "renderedSize": [
+        800,
+        240
+      ],
+      "renderErrors": 0
+    }
+  ],
+  "outlines": [
+    {
+      "font": "original.ttf",
+      "usedGlyphsCompared": 4,
+      "outlineMismatches": 0,
+      "subsetSha256": "7fa6cdacd957ece6a8f015d948b9695d15c5e6de4cac01cfcbbcb51ef650124f"
+    },
+    {
+      "font": "original.otf",
+      "usedGlyphsCompared": 4,
+      "outlineMismatches": 0,
+      "subsetSha256": "e6fb117c2ba3ada5c89d320a1d9e3b8228a000b30b0ccadea518bcb9ceb1e31a"
+    },
+    {
+      "font": "original.cff",
+      "usedGlyphsCompared": 2,
+      "outlineMismatches": 0,
+      "subsetSha256": "ac96bea28972596814e0f78a3535d69c742229a5a5478a364210a43845a3edcb"
+    },
+    {
+      "font": "original-seac.otf",
+      "usedGlyphsCompared": 2,
+      "outlineMismatches": 0,
+      "subsetSha256": "402f52098b89c3b3c185fd29e237783f716ada4ffee118f5d1bff3f2a321f6ff"
+    },
+    {
+      "font": "original.pfb",
+      "usedGlyphsCompared": 2,
+      "outlineMismatches": 0,
+      "subsetSha256": "f68e61d2f4915329a47432bb1e49805ce1903772b2b5d7d6e48db335fdb50eed"
+    },
+    {
+      "font": "original.pfa",
+      "usedGlyphsCompared": 2,
+      "outlineMismatches": 0,
+      "subsetSha256": "91e0be74edf4a9d0fd5cbac16219e913e910409fa56f0aac50f8ea52b5995901"
+    },
+    {
+      "font": "licensed-cjk.otf",
+      "usedGlyphsCompared": 5,
+      "outlineMismatches": 0,
+      "subsetSha256": "55d150609bfabb3cc2934bf2a6cfc80a4091048c3a6a251ec3be2ccf4389c996"
+    }
+  ],
+  "seacRasterComparison": "exact match with independently authored explicit outlines",
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Small original geometric and licensed CJK source fixtures; complete standards/fidelity, minimum runtimes, final packages, long fuzzing/endurance and complete font/profile qualification remain pending."
+  ]
+}
