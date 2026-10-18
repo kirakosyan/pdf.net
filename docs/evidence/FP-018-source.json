@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-018",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "newSourceCases": 15,
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1044,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "5ff02ffbaacdbf75b10ae4212c1aa94f505ef8c0af99feeda03f926e5c0c6f45"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 81,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "21e91f099fc17b4d61d4c1f593e05e429c578e7af8afb64facc967dc83d2f742"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 81,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "a50a845a6c3cc4d2d5c19b14f09ce742dbc66f2e9b6a6de94987bad54cb698f8"
+    }
+  ],
+  "apiComparisons": 27,
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Stamps/PdfStampContracts.cs": "08afaca504915cdb756c5c07ff026ad0985c404f6e5ae2ea8f6ad019694c886d",
+    "src/Fluent.Pdf/Stamps/PdfStampContent.cs": "e087927a56936744200adf543cca83332deb020c1235848ecb68831129bc870f",
+    "src/Fluent.Pdf/Stamps/PdfStamps.cs": "4ba03db7377b7c78f9cf29c6a2461f1d78d1905d5150ac79b0aac754c617cff2",
+    "src/Fluent.Pdf/Html/PdfHtml.cs": "0601c0a97c61367496c0b4ab6401a2c5a0345244a3c41f99240be2f82817b1bb",
+    "tests/Fluent.Pdf.Contract.Tests/StampTests.cs": "ac49a016723082d536a2d68bfe922f746491ace6f95a4bd6ab78514aab53c9ae",
+    "tests/Fluent.Pdf.Contract.Tests/PhaseDeadlineTests.cs": "0c5e77244faa13d03d61f835a492f8969da320712a2ea18f55ec03be2170e4d0",
+    "eng/HtmlBrowserProbe/StampFixture.cs": "a3f604e05e7598b523779059438dac3c7d67f29d55389585c534f0e795042143",
+    "eng/HtmlBrowserProbe/Program.cs": "e1f8764ff90a79b8f4a4448e4e060e11c157068d08ed1bd3e95bb206ba607035",
+    "eng/HtmlBrowserProbe/HtmlBrowserProbe.csproj": "75ce20001e7bcf7a8a467b9cbf5baa966045e039a9a83095e9eba7d52f4d44f3",
+    "eng/HtmlBrowserProbe/packages.lock.json": "57d0ad8fb9088b7c8ec0d8f4fbc130fd5cd4fc750ebfb5fa74a43d5e63a5b417",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "e123ab775d031b90346e2423c979da070d1818cc71241b1c0036fb61b16b7924",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "07354f0903f718857dd738f4cf456a2f8854181c9300192ca7bcbe566f0a1d6e"
+  },
+  "commands": [
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1",
+    "dotnet test actual net10.0 selected source contracts; four local native-positive classes excluded becauseLandlockENOSYS, required CI remains unfiltered",
+    "dotnet test actual net8.0 and netstandard2.0-on-net10.0 targeted stamp/HTML/print/deadline/runtime contracts",
+    "pwsh eng/check-api.ps1",
+    "pwsh eng/test-release-block.ps1",
+    "pwsh eng/validate-spec.ps1",
+    "Trusted-original pinned browser/stamp probe and independent pypdf/MuPDF/Poppler analytic/text/byte/structure/removal observations"
+  ],
+  "localNativeLimitation": "Workspace kernel lacks required Landlock support for native-positive worker/codec/text/rendering tests. No mandatory source CI lane is waived.",
+  "actualOriginalSourceObservations": {
+    "purpose": "trusted-original-stamping-source-observations-not-production-qualification",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "fontProvider": {
+      "Id": "managed.fonts",
+      "Version": "1.0.0",
+      "Capabilities": [
+        6
+      ]
+    },
+    "observations": [
+      {
+        "mode": "foreground",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "e3e4b1f83f6afbd54a47aad91bb8ef113e4f7dc82329cb76b5709f1184086fd4",
+        "removedSha256": "2a3952147495d8ad0d9becfb10966e9ca2cbaef21640712da768bf8479cac6c8",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "background",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "ed163b17581823d9f39e67b808cf133cbbf073645f1e6e9d27134b23a4f5e546",
+        "removedSha256": "85867fcb0e37d5b587011a61325ca7b9ed1f77fd49cce4c4e0ebff8b4c70e4f0",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "group-alpha",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "2795e37e020ffa079cf4c9aec8c151af2913178d61e96186cb9dbfc4acfc421e",
+        "removedSha256": "d8b25097ac87e2755ef94b173aa112e4dc05f5eb141ac84935bb08d87fc1a5f7",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "repeated",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "b8d27398c5de611fb0b65559ee989a9d33c914b5365c585a76f57a175444dc1e",
+        "removedSha256": "d8c79ed825815fa57c268c7f87606ff1fb8e369adee7427e9d67c28245c7f5f9",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "rotated",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "117a678743cf2f2c11dd023e0aede54c81eb55acfc3abe7beac0bc85e06b12a8",
+        "removedSha256": "30eb70a19cb6b30b2d643e9de937e9ecc09e1cce5bc923cef9e2a93f3c1025fd",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "clipped",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "bd0632a2259177eb714212507608970bb0afbc55ebcf58126434da97d5aa85e9",
+        "removedSha256": "e08a5b0e895ae9bb9c02b611fd3269ce14fc5e9092d32fe93435bb24aea45a73",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "image",
+        "kind": "Image",
+        "pageCount": 1,
+        "outputSha256": "5280afca38784c5fb1939eeb0553d42a2342aa3ce6eaa9cf9ad8b1e3748cf398",
+        "removedSha256": "7edf3634db8860ed07acb2dfe9dccda2e3f42c9cc54bc5ea408d1c583c5bafe9",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "text",
+        "kind": "Text",
+        "pageCount": 1,
+        "outputSha256": "b0d2f74d57328c19969f0c0886dcf08c245b942a9f053d635671b2d06a4cc075",
+        "removedSha256": "f53853f2b828412e71bc5616055316ef86fee417c4c5ef0930e9b93d9f220f3a",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "page",
+        "kind": "PdfPage",
+        "pageCount": 1,
+        "outputSha256": "de51564e6983b1009ee05961a290a79d88e90e6215e1321d9ec4a03a36b5f63b",
+        "removedSha256": "a4ccb6bed3916bff33aaafd767a59c5028df03beb3896ef5882f876756954768",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "html",
+        "kind": "Html",
+        "pageCount": 1,
+        "outputSha256": "2d204b075e05b1eea9b75db1a5a7d2f45d70f721f7577f8a1a0f909fb4f1a763",
+        "removedSha256": "e719ddf31da48fff5a7816255830e8ef79aaab04bde470c7be634b21f05c3590",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      }
+    ],
+    "taggedOutputs": [
+      "stamp-tagged-decoration.pdf",
+      "stamp-tagged-updated.pdf"
+    ],
+    "stampBlending": "isolated DeviceRGB group; explicit outer opacity multiplies captured inner alpha",
+    "productionQualified": false
+  },
+  "independentReportSha256": "b532e350a5dae8e023d82f849748efeaff1ea7ac36aa39bfa1c5a4a941cce605",
+  "independentSummary": {
+    "stampOutputs": 10,
+    "removedOutputs": 10,
+    "taggedOutputs": 2,
+    "removedRastersExactlyMatchOriginalOnBothRenderers": true,
+    "standalonePageGroupIsolationAndDeclaredColorPreserved": true,
+    "productionQualified": false
+  },
+  "retainedReportSha256": {
+    "stamp-state-final-build2.log": "0ea1d635ddd407ae94deaf95eb3fd36d2b4975d8e895fba06edfda48d676fffc",
+    "stamp-state-final-tests.log": "87a1294121868e349aec9bc83ceac4ee8a8e1a9e48e59f85b960d54fac71c30e",
+    "stamp-state-net8-tests.log": "dc306a06f86c1835636f747102af296bd55858e56e77adf84820de3b281dd314",
+    "stamp-state-fallback-tests.log": "ae084d76527b6d22909277f981d89450bc92a3822fd6bd718a81ee40f3a97728",
+    "stamp-state-normal-build.log": "e9abb4b58e428bf69ab4b212b0456dcdfa9d4b968448a23a6e23ee3791610095",
+    "stamp-state-api.log": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "stamp-state-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "stamp-state-final-probe.log": "0bf4a1e1af65ddbb86944d0146eb883ff09cea8494504e9f1914060add3ade31",
+    "stamp-state-final-independent.log": "d3921c15cb1b32ebb05412cadacf7e01329a41c6936cb4f54ed1d20da2e889a8",
+    "stamp-format-metadata.json": "549edf764a7ec5d4cb9bf3ab1ce3060d22958cb0fbaaaefd9a9b0d2eb6ad8682"
+  },
+  "phaseMeasurementFollowup": {
+    "failedSourceCI": "docs/evidence/PR-118-CI-102-source.json",
+    "correction": "Await both callback observation and synchronous task-completion timestamps before checking their unchanged one-second requirements",
+    "actualLocalObservations": [
+      {
+        "profile": "net10.0",
+        "observation": "Phase signal=52.382ms; awaited-task completion=52.839ms; test-continuation observation=55.456ms."
+      },
+      {
+        "profile": "net8.0",
+        "observation": "Phase signal=49.816ms; awaited-task completion=57.318ms; test-continuation observation=63.925ms."
+      },
+      {
+        "profile": "netstandard2.0-on-net10.0",
+        "observation": "Phase signal=50.186ms; awaited-task completion=55.544ms; test-continuation observation=58.401ms."
+      }
+    ],
+    "freshSourceCIRequired": true
+  },
+  "mandatoryPending": [
+    "Complete owner-dependent tag/annotation/optional-content imports and semantic stamp structure authoring remain mandatory",
+    "Complete blending-space/color/font/HTML/content corpus and qualified cleanup/performance/endurance profiles remain mandatory",
+    "All actual required RIDs/minimum/current/fallback runtimes, exact final packages and full security/fuzz/resource/visual/concurrency/endurance/performance gates remain mandatory",
+    "Visible removal retains historical/unreachable definitions and is not secure redaction"
+  ],
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "stateAliasRegression": {
+    "reportSha256": "05217afb7bad3ad6f1c9b69bc44c785c2aa07f92e70917c39f898f25e73588fe",
+    "behavior": "Later unrelated content outside an owned isolation pair retains the exact state operators as ordinary content, with private scope markers relinquished; the unrelated invocation retains its original transform.",
+    "sourceContractRegression": "The surviving resource invocation remains at identity transform after an original0.5CTM program inside the owned pair.",
+    "independentObservation": "MuPDF confirms20..100point red frames before(twoinvocations) andafter(oneunrelatedinvocation) removal; pypdf finds no remaining owned markers."
+  }
+}

@@ -144,3 +144,5 @@ Reconcile delivered code, public API/capability baseline, requirement status, is
 A milestone or roadmap issue closes only when its constituent evidence is reconciled. Publication remains blocked until the complete SDK scope and final-package gate pass.
 
 Source progress through #35 now includes [bounded HTML print layout and structure associations](html-printing.md). Full FP-047 scope and production qualification remain mandatory; no issue or dependent requirement is completed by association.
+
+Source progress through #36 now includes [owned watermarks/stamps and artifact classification](stamps.md). Full FP-018 profiles and production qualification remain mandatory; dependent requirements remain independently scoped.

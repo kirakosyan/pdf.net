@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "purpose": "failed-source-ci-not-production-qualification",
+  "runId": 39155516154,
+  "sourceCommit": "5ae0041b0b749c6338fe8022242f7008f0c937b3",
+  "testedMergeCommit": "a85e1867b921859fec629a4021baf0044c2010e6",
+  "testedTree": "72681c2c2a59aa7b4d86d26c7f35731c08ba5f8e",
+  "exactMergeTreeVerified": true,
+  "completedPlatformJobs": 6,
+  "platformJobsInProgress": [],
+  "completedRuntimeLanes": 16,
+  "passed": 17454,
+  "failed": 2,
+  "skipped": 0,
+  "notExecutedLanes": [
+    "osx-x64/net10",
+    "osx-x64/netstandard-on-net10",
+    "osx-arm64/net10",
+    "osx-arm64/netstandard-on-net10"
+  ],
+  "pendingLanes": [],
+  "failure": "The first timing instrumentation reads the separately registered cancellation observer before it has completed. Both macOS net8 lanes fail the nonnegative signal-slot assertion while actual awaited-task completion is120.657ms on ARM and196.125ms on Intel, below the unchanged one-second requirement. The unobserved -1tick slot rounds to the printed0.000ms; this is not a measured zero signal latency.",
+  "correction": "Await an asynchronously continued task-completion source for signal observation plus the synchronous task-completion timestamp before asserting either bound. No SDK policy/timer/deadline/release gate is changed. Fresh source CI remains required.",
+  "jobs": [
+    {
+      "jobId": 117757823943,
+      "logSha256": "938eea871a5cf2c848033fa936057a25b069a68c80755443e1cdd6f510a0bdfa",
+      "completedLaneTotals": [
+        {
+          "failed": 1,
+          "passed": 1090,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117757824027,
+      "logSha256": "bedce0cad834432936fd9c9c7de38586bf93917f3a346792b1b6246bfb67a227",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117757824048,
+      "logSha256": "54e4374a567846050ee3c549e66903d9e69eeecb02f34b03efe4b60f60388804",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117757824051,
+      "logSha256": "f9e46ded67d03a36ad39721e184123808b3492544bc053e7263fd77a1fb83deb",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117757824058,
+      "logSha256": "238d71f823548c4c491c6019775ae9086e9ef12669f6a0ed9333e0b14ed22f8b",
+      "completedLaneTotals": [
+        {
+          "failed": 1,
+          "passed": 1090,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117757824086,
+      "logSha256": "9fca9d63aafef20a1377d487e38e1b52c0b4eaeeb7397e4bd3e57c58a080d068",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12147162640,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:11fda90e7134b106cc8be95c0c41573612ececa842d49b74edba1da36324ba0e",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12147162640"
+    },
+    {
+      "id": 12146702285,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:caa76794991346707aa6bf1ba875a87d5de1bab4a5ed249ba0f1247f1dc11a0c",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146702285"
+    },
+    {
+      "id": 12146579449,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:64bd4b7a4c8e1a7b2ca23288452a23fc5f2c5ee6a18b1a3cbbc7dd08fa573e08",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146579449"
+    },
+    {
+      "id": 12146253590,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:87f2e0d867ade6f393c0a6c7850aca14bf1e056954d6c81a23c7f6313d8b4be9",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146253590"
+    },
+    {
+      "id": 12146079930,
+      "name": "source-contracts-osx-x64",
+      "digest": "sha256:003eb7e94e5487171a97da8a412653d29c8962de1d9b3074346a8e49a888fe90",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146079930"
+    },
+    {
+      "id": 12146064250,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:3ea883f14572f8b43b70a555eb90d52473b21be34f36565be1ada1b2367cfcc0",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146064250"
+    }
+  ],
+  "artifactRetention": "Complete decoded logs, run metadata and six artifact URLs/digests retained; ZIPs not retrieved locally.",
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

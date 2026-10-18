@@ -87,23 +87,14 @@ public static class PdfHtml
             throw new ArgumentNullException(nameof(source));
         if (providers == null)
             throw new ArgumentNullException(nameof(providers));
-        var renderer = providers.GetRequired<IPdfHtmlRenderer>(PdfCapability.RenderHtml);
+        providers.GetRequired<IPdfHtmlRenderer>(PdfCapability.RenderHtml);
         options ??= new();
         PdfDocument? document = null;
         try
         {
             var report = PdfFont.Run("RenderHtml", providers.GetIdentifier(PdfCapability.RenderHtml), policy, cancellationToken, context =>
             {
-                context.Consume(PdfResourceKind.Objects, source.Resources.Count + 1L);
-                context.Consume(PdfResourceKind.ExpandedBytes, (source.Markup?.Length ?? 0) * 2L + source.Resources.Count * 128L + 512);
-                context.ConsumePixels(options.ViewportWidth, options.ViewportHeight);
-                using var buffer = new PdfCodecBufferStream(context, context.Available(PdfResourceKind.ExpandedBytes));
-                using (var lease = new BorrowedStream(buffer, false, context))
-                    renderer.Render(source, options, lease, context);
-                context.Checkpoint();
-                document = PdfPageOrganization.Read(buffer.Finish(), options.MaximumPages, context, options.PageSize);
-                if (options.Print.Tagged)
-                    PdfHtmlTagStructure.Validate(document.CreateSnapshot(), providers, context);
+                document = RenderCore(source, providers, options, context);
             }, PdfCapability.RenderHtml);
             document!.SetCompositionReport(report);
             return document;
@@ -111,6 +102,29 @@ public static class PdfHtml
         catch
         {
             document?.Dispose();
+            throw;
+        }
+    }
+
+    internal static PdfDocument RenderCore(PdfHtmlSource source, PdfProviderRegistry providers, PdfHtmlOptions options, PdfOperationContext context)
+    {
+        context.Consume(PdfResourceKind.Objects, source.Resources.Count + 1L);
+        context.Consume(PdfResourceKind.ExpandedBytes, (source.Markup?.Length ?? 0) * 2L + source.Resources.Count * 128L + 512);
+        context.ConsumePixels(options.ViewportWidth, options.ViewportHeight);
+        using var buffer = new PdfCodecBufferStream(context, context.Available(PdfResourceKind.ExpandedBytes));
+        using (var lease = new BorrowedStream(buffer, false, context))
+            providers.GetRequired<IPdfHtmlRenderer>(PdfCapability.RenderHtml).Render(source, options, lease, context);
+        context.Checkpoint();
+        var document = PdfPageOrganization.Read(buffer.Finish(), options.MaximumPages, context, options.PageSize);
+        try
+        {
+            if (options.Print.Tagged)
+                PdfHtmlTagStructure.Validate(document.CreateSnapshot(), providers, context);
+            return document;
+        }
+        catch
+        {
+            document.Dispose();
             throw;
         }
     }

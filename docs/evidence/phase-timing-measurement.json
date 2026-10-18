@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "purpose": "source-test-measurement-correction-not-runtime-or-production-qualification",
-  "sourceCommit": null,
+  "sourceCommit": "5ae0041b0b749c6338fe8022242f7008f0c937b3",
   "failedSourceCI": "docs/evidence/PR-118-CI-101-source.json",
   "observedFailure": "Post-await stopwatch assertion exceeds one second on macOS Intel/net10; CI101 did not record signal/task-completion timestamps separately, so the delayed component is not established.",
   "correction": "Measure original shared-token cancellation and awaited-task completion on their signaling/completing thread; record test-continuation observation separately. The operation policy/timer code and both one-second latency requirements remain unchanged.",
@@ -21,5 +21,28 @@
     "limitation": "Executed against the working tree containing in-progress stamp sources; operation-policy implementation is unchanged. Fresh clean-commit source CI remains required."
   },
   "productionQualified": false,
-  "packingAndPublicationBlocked": true
+  "packingAndPublicationBlocked": true,
+  "sourceTree": "72681c2c2a59aa7b4d86d26c7f35731c08ba5f8e",
+  "followup": {
+    "sourceCommit": null,
+    "failure": "CI102 macOS ARM/net8 reports awaited-task completion120.657ms but the independently registered signal slot is still unobserved at the assertion; its -1tick sentinel rounds to the printed0.000ms. The first instrumentation assumed callback completion order.",
+    "correction": "Use an asynchronously continued task-completion source for the signal observer and await both observations before checking timestamps. Do not depend on cancellation callback ordering or the test continuation queue.",
+    "maximumSignalAndTaskCompletionMilliseconds": 1000,
+    "policyOrTimerChanged": false,
+    "actualLocalObservations": [
+      {
+        "profile": "net10.0",
+        "observation": "Phase signal=52.382ms; awaited-task completion=52.839ms; test-continuation observation=55.456ms."
+      },
+      {
+        "profile": "net8.0",
+        "observation": "Phase signal=49.816ms; awaited-task completion=57.318ms; test-continuation observation=63.925ms."
+      },
+      {
+        "profile": "netstandard2.0-on-net10.0",
+        "observation": "Phase signal=50.186ms; awaited-task completion=55.544ms; test-continuation observation=58.401ms."
+      }
+    ],
+    "freshCleanCommitCIRequired": true
+  }
 }

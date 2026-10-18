@@ -5,6 +5,7 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfDocument Stamp(PdfDocumentSnapshot source, string identifier, PdfStampContent content, int[] pages, PdfStampOptions options) => PdfStamps.Apply(source, identifier, content, pages, options);
     public static PdfProviderRegistry HtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory host, string exactVersion, string exactRevision) => new(new Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision));
     public static PdfProviderRegistry HtmlRendererWithResources(Fluent.Pdf.Html.ChromiumConnectionFactory host, string exactVersion, string exactRevision, Fluent.Pdf.Html.HtmlResourceLoader resources) => new(new Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision, resources.OpenSession));
     public static PdfHtmlOptions HtmlOptions(PdfHtmlReadinessOptions readiness, bool enableJavaScript, string locale, string timeZone, PdfHtmlMedia media) => new(readiness: readiness, enableJavaScript: enableJavaScript, locale: locale, timeZone: timeZone, media: media);

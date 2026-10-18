@@ -145,3 +145,5 @@ FP-045 adds explicit per-job resource sessions, exact-origin/IP/redirect admissi
 FP-046 adds immutable finite HTML readiness, locale/timezone/media controls and shared `PdfOperationContext.EnterTimeLimit` phase scopes. The same context/token applies through resource acquisition, browser waits and output. Expired/leaked scopes fail closed; original/outer time is never extended. See [readiness and lifecycle contracts](html-readiness.md).
 
 FP-047 adds immutable `PdfHtmlPrintOptions` through `PdfHtmlOptions.WithPrint`, preserving existing constructor signatures. Explicit paper/CSS fitting, orientation, scale, point margins, bounded passive print templates and requested page-MCID structure validation share the original operation context. See [HTML print contracts](html-printing.md).
+
+FP-018 adds immutable detached stamp sources/options plus transactional `PdfStamps.Apply`, `Inspect`, `Update` and `Remove`. Exact page/group ownership and canonical private streams distinguish removable stamps from unrelated content; decoration classification remains separate from semantic tag authoring. See [stamp contracts](stamps.md).

@@ -725,7 +725,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/stamps.md",
+        "implemented": [
+          "Immutable drawing/shaped-text/image/passive-page/explicit HTML capture and shared-context rendering/import/detachment",
+          "Exact page/group application, foreground/background, isolated RGB group opacity, rotation/fitting/repetition and Artifact classification",
+          "Canonical owned stream/scope validation, persistence/update/removal with unrelated resource preservation, source contracts and independent original output observations"
+        ],
+        "pending": [
+          "Complete interactive/structure/optional-content owner imports and semantic tagged authoring remain mandatory",
+          "Complete blending-space/color, font/HTML/content and qualified cleanup/performance/endurance profiles remain mandatory",
+          "All actual mandatory RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-018-source.json",
+        "standardsEvidence": "docs/evidence/FP-018-standards.json",
+        "independentEvidence": "docs/evidence/FP-018-independent.json"
+      }
     },
     {
       "id": "FP-019",

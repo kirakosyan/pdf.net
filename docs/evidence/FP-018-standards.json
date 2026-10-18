@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-design-observations-not-production-qualification",
+  "requirement": "FP-018",
+  "sources": [
+    {
+      "id": "S18-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "8.10 Form XObjects, private resources, BBox and Matrix",
+        "11.4.5 isolated transparency groups",
+        "11.6.6 transparency group attributes and standalone page-group isolation/color-space semantics",
+        "14.8.2.2 real content and generic Artifact marked-content classification"
+      ]
+    },
+    {
+      "id": "S18-CDP13",
+      "documentSha256": "6264789eaa959f489c5edb2e5db337282ff0883278d5f5c424bf5a845ada5500",
+      "observations": [
+        "Previously retained exact browser protocol profile used through explicit same-context HTML rendering/capture"
+      ]
+    }
+  ],
+  "decisions": [
+    "Use exact caller-owned identifier groups and canonical private invocation/scope streams rather than visible-content heuristics",
+    "Preserve unrelated uses of a resource name; remove exact owned guard pairs without accumulating scopes",
+    "Isolate original page state and use an explicit DeviceRGB compositing group so outer opacity multiplies captured inner alpha",
+    "Capture standalone page-group appearance as an isolated Form, preserving declared CS even when the page-only I flag was false",
+    "Keep arbitrary ownership metadata separate from authenticated provenance; semantic stamps on tagged output require explicit structure authoring",
+    "Retain historical/unreachable bytes and keep visible stamp removal separate from irreversible redaction",
+    "When later unrelated content exists outside an owned isolation pair, relinquish its private ownership marker and retain the exact state operators so that removal preserves the later content transform"
+  ],
+  "mandatoryPending": [
+    "Complete owner-dependent tag/annotation/optional-content imports and semantic stamp structure authoring remain mandatory",
+    "Complete blending-space/color/font/HTML/content corpus and qualified cleanup/performance/endurance profiles remain mandatory",
+    "All actual required RIDs/minimum/current/fallback runtimes, exact final packages and full security/fuzz/resource/visual/concurrency/endurance/performance gates remain mandatory",
+    "Visible removal retains historical/unreachable definitions and is not secure redaction"
+  ],
+  "rawSourcesRetainedOutsideRepository": true,
+  "productionQualified": false
+}

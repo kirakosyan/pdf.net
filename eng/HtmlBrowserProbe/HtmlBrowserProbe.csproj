@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><IsPackable>false</IsPackable></PropertyGroup>
-  <ItemGroup><ProjectReference Include="../../src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="../../src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj" /><ProjectReference Include="../../src/Fluent.Pdf.Fonts/Fluent.Pdf.Fonts.csproj" /></ItemGroup>
   <ItemGroup><None Include="chromium-pipe-host.mjs" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
 </Project>

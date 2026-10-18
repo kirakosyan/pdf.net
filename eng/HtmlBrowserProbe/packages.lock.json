@@ -5,6 +5,12 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.fonts": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.html": {
         "type": "Project",
         "dependencies": {
