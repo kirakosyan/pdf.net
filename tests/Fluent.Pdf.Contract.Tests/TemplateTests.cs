@@ -73,6 +73,42 @@ public sealed class TemplateTests
         Assert.Equal(first.Entries.Select(e => e.PageIndex), second.Entries.Select(e => e.PageIndex));
     }
 
+    [Fact]
+    public void TrialPaginationDoesNotEmbedBodyFontsAndTheConvergedBodyIsPaintedOnce()
+    {
+        var original = TextTests.Read("business.ttf");
+        var program = new CountedFontProgram(original.Program);
+        var font = new PdfFont(program, original.ProviderId);
+        var style = new PdfFlowTextStyle(new(font), 10);
+        PdfFlowBlock[] Blocks(int sections) => new PdfFlowBlock[]
+        {
+            new PdfFlowContents(Style())
+        }.Concat(Enumerable.Range(1, sections).SelectMany(i => new PdfFlowBlock[] { new PdfFlowHeading("s" + i, "Section " + i, Style()), new PdfFlowParagraph(string.Join(" ", Enumerable.Repeat("office", 50)), style) })).ToArray();
+        Assert.Equal("Template.PaginationConvergence", Assert.Throws<PdfException>(() => PdfTemplateLayout.Layout(Blocks(12), Options(), Providers(), new(maximumPasses: 2, numbering: new PdfPageNumbering(new(0), new(1, prefix: "Section label "))))).Diagnostic.Code);
+        Assert.Equal(0, program.WriteCalls);
+        var result = PdfTemplateLayout.Layout(Blocks(2), Options(), Providers(), new());
+        int runs = result.Body.Pages.SelectMany(p => p.Lines).Sum(l => l.ShapedText.Runs.Count(r => ReferenceEquals(r.Request.Font, font)));
+        Assert.InRange(program.WriteCalls, 1, runs);
+        Assert.Contains(result.Body.Pages, p => p.Canvas.Drawing.Resources.Bindings.Count > 0);
+    }
+
+    private sealed class CountedFontProgram : IPdfFontProgram
+    {
+        private readonly IPdfFontProgram _inner;
+        internal CountedFontProgram(IPdfFontProgram inner) => _inner = inner;
+        internal int WriteCalls { get; private set; }
+        public PdfFontInfo Info => _inner.Info;
+
+        public int MapGlyph(int scalar, PdfOperationContext context) => _inner.MapGlyph(scalar, context);
+        public double GetAdvance(int glyph, PdfOperationContext context) => _inner.GetAdvance(glyph, context);
+        public string GetGlyphName(int glyph, PdfOperationContext context) => _inner.GetGlyphName(glyph, context);
+        public PdfFontProgramWriteResult Write(Stream output, IReadOnlyList<int> glyphs, bool subset, PdfOperationContext context)
+        {
+            WriteCalls++;
+            return _inner.Write(output, glyphs, subset, context);
+        }
+    }
+
     private sealed class CountedShaper : IPdfTextShaper
     {
         private readonly PdfSimpleTextShaper _inner = new();

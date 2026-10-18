@@ -79,7 +79,7 @@ public static class PdfTemplateLayout
                 context.Checkpoint();
                 var expanded = Materialize(source, definitions, targets, template.Numbering, bodyOptions, context);
                 var engine = new PdfFlowEngine(bodyOptions, shaper, context, paragraphs);
-                var current = engine.Layout(expanded);
+                var current = engine.Layout(expanded, render: false);
                 var next = new Dictionary<string, PdfFlowHeadingPlacement>(StringComparer.Ordinal);
                 foreach (var heading in current.Pages.SelectMany(p => p.Headings))
                     if (!next.ContainsKey(heading.Heading.Id))
@@ -109,6 +109,7 @@ public static class PdfTemplateLayout
 
             if (body == null || !converged)
                 throw Error("Template.PaginationConvergence", "The bounded contents/index pagination did not converge.");
+            body = finalEngine!.PaintPlannedPages();
             context.Consume(PdfResourceKind.ExpandedBytes, body!.Pages.Count * 128L + definitions.Count * 256L + 256);
             var decorations = new PdfCanvasResult[body.Pages.Count];
             var display = options.Geometry.DisplayBounds();

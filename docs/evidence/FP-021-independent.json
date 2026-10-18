@@ -694,7 +694,9 @@
   "analysisToolAudit": {
     "initialVerifierSha256": "450d6b2f3bef99a653a6d2d63c44c0751d24a8fe7bea184be95b215ffbe113a3",
     "initialLogSha256": "5f5c2bc2dbc1437fc93e5496fd4bb033e2456a16567fde3a7efa4cd55dbd41b6",
-    "observation": "pypdf 6.10.0 formats alphabetic page labels as spreadsheet columns, conflicting with ISO 32000-1 Table 159. PDFium 153 reports the unchanged expected repeated-letter labels. Raw emitted style/counter dictionaries were also inspected; no SDK output, expected labels or global analysis tool was changed."
+    "observation": "pypdf 6.10.0 formats alphabetic page labels as spreadsheet columns, conflicting with ISO 32000-1 Table 159. PDFium 153 reports the unchanged expected repeated-letter labels. Raw emitted style/counter dictionaries were also inspected; no SDK output, expected labels or global analysis tool was changed.",
+    "verifierAdjustmentDiffSha256": "f9f85e5ed9c8e250001b072568526cbe6621584689d179287d810367bad3d91b",
+    "globalToolsModified": false
   },
   "packageSha256": null,
   "productionQualified": false,

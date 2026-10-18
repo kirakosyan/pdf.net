@@ -31,3 +31,5 @@ Both directions have a 16 MiB XML and 10,000-page ceiling in addition to operati
 Source tests exercise all authored subtypes, original generated markup, shaped text/fonts, valid embedded PCM bytes, metadata/dates/states, forward replies/popups, source disposal, imports, transformed appearance geometry, visibility, signed/structured policies, XML round trips, cancellation and resource limits. C# and VB examples emit actual annotated PDFs. Neutral primary-standard fact IDs and capture hashes are retained separately from external raw research.
 
 Full viewer/conformance/semantic/visual and external XFDF corpora, additional compositing/view-dependent/ownership/media/regeneration profiles, actual minimum Framework runtimes, final packages and all security/fuzz/concurrency/endurance gates remain mandatory. No requirement status is promoted to qualified. NuGet candidate creation and public publication remain blocked.
+
+Import ownership and local-navigation checks resolve indirect Type, S and Subtype names under the same context. Indirection cannot turn a document/catalog ownership graph or a named-navigation profile into an ordinary detached property.

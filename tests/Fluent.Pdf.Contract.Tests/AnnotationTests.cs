@@ -152,6 +152,27 @@ public sealed class AnnotationTests
     }
 
     [Fact]
+    public void ImportRejectsDocumentOwnershipEvenWhenTypeNamesAreIndirect()
+    {
+        using var blank = Pdf.Create().AddPage();
+        using var annotated = PdfAnnotations.Add(blank.CreateSnapshot(), 0, new[] { Annotation("owner") });
+        var set = PdfAnnotationSet.Inspect(annotated.CreateSnapshot());
+        using var edit = new PdfTransaction(set.Source.SourceDocument);
+        var root = edit.Trailer.Entries["Root"].ReferenceId;
+        var pages = edit.Resolve(root).Entries["Pages"].ReferenceId;
+        NavigationTests.Put(edit, root, "Type", PdfValue.Reference(edit.Add(PdfValue.Name("Catalog"))));
+        NavigationTests.Put(edit, pages, "Type", PdfValue.Reference(edit.Add(PdfValue.Name("Pages"))));
+        NavigationTests.Put(edit, set.Annotations[0].ObjectId!.Value, "Owner", PdfValue.Reference(root));
+        using var bytes = new MemoryStream();
+        edit.Save(bytes);
+        bytes.Position = 0;
+        using var reopened = Pdf.Open(bytes);
+        var source = PdfAnnotationSet.Inspect(reopened.CreateSnapshot());
+        using var target = Pdf.Create().AddPage();
+        Assert.Equal("Graph.DocumentOwnershipImport", Assert.Throws<PdfException>(() => source.ImportTo(target.CreateSnapshot(), 0, new[] { 0 })).Diagnostic.Code);
+    }
+
+    [Fact]
     public void FlattenUsesTransformedAppearanceBoundsAndLeavesOriginalContentStateIsolated()
     {
         using var blank = Pdf.Create().AddPage(new PdfPageGeometry(new(new(-20, 10, 200, 100)), PdfPageRotation.Clockwise90, 2));

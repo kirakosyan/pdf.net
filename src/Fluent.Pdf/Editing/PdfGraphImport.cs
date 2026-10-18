@@ -41,11 +41,11 @@ internal sealed class PdfGraphImport
         if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
         {
             var entries = _target.Copy(value);
-            string? ownerType = PdfPageImportSource.Name(value, "Type");
+            string? ownerType = ResolvedName(value, "Type");
             if (ownerType == "Catalog" || ownerType == "Pages" || ownerType == "Page")
                 throw _target.Error("Graph.DocumentOwnershipImport", "Importing document/catalog ownership requires an explicit mapping profile.");
-            bool localAction = PdfPageImportSource.Name(value, "S") == "GoTo";
-            bool localLink = PdfPageImportSource.Name(value, "Subtype") == "Link";
+            bool localAction = ResolvedName(value, "S") == "GoTo";
+            bool localLink = ResolvedName(value, "Subtype") == "Link";
             string destinationKey = localAction ? "D" : "Dest";
             if ((localAction || localLink) && entries.TryGetValue(destinationKey, out var declared))
             {
@@ -63,6 +63,14 @@ internal sealed class PdfGraphImport
         }
 
         return value;
+    }
+
+    private string? ResolvedName(PdfValue dictionary, string key)
+    {
+        if (!dictionary.Entries.TryGetValue(key, out var value))
+            return null;
+        value = ManagedPdfProvider.Resolve(_source, value, _target.Context);
+        return value.Kind == PdfValueKind.Name ? value.NameValue : null;
     }
 
     internal static int ValidateDetached(PdfValue value, PdfOperationContext context)

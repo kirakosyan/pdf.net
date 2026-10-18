@@ -49,6 +49,7 @@ internal sealed partial class PdfFlowEngine
     private readonly List<Action<PdfOperationReport>> _finish = new();
     private readonly Dictionary<int, PdfFlowParagraphData> _prepared = new();
     private readonly Dictionary<PdfFlowParagraph, PdfFlowParagraphData>? _paragraphCache;
+    private bool _planned, _painted;
     private int _page;
     private double _y;
     internal PdfFlowEngine(PdfFlowOptions options, IPdfTextShaper shaper, PdfOperationContext context, Dictionary<PdfFlowParagraph, PdfFlowParagraphData>? paragraphCache = null)
@@ -77,7 +78,7 @@ internal sealed partial class PdfFlowEngine
         internal bool Last { get; }
     }
 
-    internal PdfFlowResult Layout(IReadOnlyList<PdfFlowBlock> blocks)
+    internal PdfFlowResult Layout(IReadOnlyList<PdfFlowBlock> blocks, bool render = true)
     {
         using var layoutDepth = _context.EnterScope(PdfResourceKind.Depth);
         blocks = ExpandComponents(blocks);
@@ -137,6 +138,23 @@ internal sealed partial class PdfFlowEngine
         }
 
         AppendEndnotes();
+        _planned = true;
+        return BuildPages(render);
+    }
+
+    internal PdfFlowResult PaintPlannedPages()
+    {
+        if (!_planned || _painted)
+            throw new InvalidOperationException("A completed unpainted flow plan is required.");
+        using var depth = _context.EnterScope(PdfResourceKind.Depth);
+        return BuildPages(true);
+    }
+
+    private PdfFlowResult BuildPages(bool render)
+    {
+        _context.Checkpoint();
+        if (render)
+            _painted = true;
         _context.Consume(PdfResourceKind.ExpandedBytes, (_page + 1L) * 256 + _lines.Count * 32L + _floats.Count * 32L);
         var pages = new PdfFlowPage[_page + 1];
         for (int p = 0; p < pages.Length; p++)
@@ -151,6 +169,8 @@ internal sealed partial class PdfFlowEngine
             var notes = NotesForPage(p);
             var canvas = PdfCanvas.CreateCore(_options.Geometry, c =>
             {
+                if (!render)
+                    return;
                 var paint = new List<(int Block, Action Draw)>();
                 foreach (var table in tables)
                     paint.Add((table.BlockIndex, () => PdfTablePainter.Paint(c, table, _context)));
