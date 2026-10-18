@@ -5,6 +5,15 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport FillAndFlattenForm(Stream input, Stream output, PdfFormData data, PdfFont font, PdfWriteMode writeMode = PdfWriteMode.Full)
+    {
+        using var source = PdfFacade.Open(input);
+        var style = new PdfFormTextStyle(new PdfFontFallback(font), new PdfProviderRegistry(new PdfSimpleTextShaper()));
+        using var filled = PdfForms.FillData(source.CreateSnapshot(), data, style, writeMode: writeMode);
+        using var flattened = PdfForms.Flatten(filled.CreateSnapshot(), data.Fields.Select(f => f.Name), writeMode: writeMode);
+        return flattened.Save(output, writeOptions: new PdfWriteOptions(writeMode));
+    }
+
     public static PdfOperationReport WriteFormPdf(Stream output, PdfFont font)
     {
         var text = PdfText.Shape("office", new PdfFontFallback(font), new PdfProviderRegistry(new PdfSimpleTextShaper()));

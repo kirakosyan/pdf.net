@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-profile-not-release-qualification",
+  "requirement": "FP-036",
+  "sourceCommit": "234d8da2dbc5423b4ab7d483f51909d357e847ef",
+  "sourceFileHashes": {
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "30414d9a6281e2ae1ed8271fc97cf0e06cd3a4d107da0657be7239d31cd9e0ad",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "3cb08649e4db49c6903beaa9f242c9ca88a14705fd629c646aa788caceced944",
+    "src/Fluent.Pdf/Forms/PdfFormContracts.cs": "f6de4528e97aac198335ba70a9cc0d466c874792c608778705212b2ae4828bc0",
+    "src/Fluent.Pdf/Forms/PdfFormReader.cs": "6fc9e86345ec3bc7779d6c17bb9df2cf0386d946e35bda77fec16530a89950c6",
+    "src/Fluent.Pdf/Forms/PdfFormValues.cs": "96509474b92c532865f03c86b9390dacb88428158712f3f2715511d95585c4aa",
+    "src/Fluent.Pdf/Forms/PdfForms.Editing.cs": "7afc63dca83150b631a2bfd255f6912d02b595966b7f65dc6459ae878f240af5",
+    "src/Fluent.Pdf/Forms/PdfForms.cs": "0467fd205eef1062210902e92d95bb400b0cac81edeb32236c95d8d6560b42ac",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "b994367fb4e8a2918892bef2c9ef927491acaae9b530f8b00ef5bcc607a42da3",
+    "tests/Fluent.Pdf.Contract.Tests/FormTests.cs": "f286a37c35629c5820147aa8e9f0db2163e53b622d8299de9769a50a48b6d4de"
+  },
+  "toolVersions": {
+    "pypdf": "6.10.0",
+    "poppler": "25.03.0",
+    "secondReader": "1.26.6"
+  },
+  "profileResults": {
+    "passed": true,
+    "fields": [
+      "Customer.Անուն",
+      "Agree",
+      "Radio",
+      "Choice",
+      "Sign"
+    ],
+    "widgets": 6,
+    "unicodeValue": "office –",
+    "renamePixelDifferences": 0,
+    "appearancePixelsAgainstBlank": 1174,
+    "independentFilledChangedPixels": 1200,
+    "independentTextEdit": {
+      "passed": false,
+      "failure": "AttributeError in independent CID-font appearance regeneration; cause/SDK interoperability remains unqualified",
+      "retainedLog": "independent-text-edit-failure.log"
+    },
+    "limits": [
+      "Small original fixture; not full AcroForm conformance, dynamic font coverage or interactive GUI qualification."
+    ],
+    "sha256": {
+      "forms.pdf": "5914758dd4bf807344afb9b09c1dd05f48731075e87a0c9ca756528739f7f37a",
+      "renamed.pdf": "8eea6efe103491fc417ace1339315cb0a355d98abe36b159ec86ea14c89f12c4",
+      "second-reader-filled.pdf": "3024cc42bf77fd211a1253fa2b8485fb30b5a9a88d68bce5370591ad2cab5dc5",
+      "blank.pdf": "3f1da488b151b767c18412df5401ba283630d3b8aaf79fdfd9ededc081daab55",
+      "independent-filled.pdf": "c7d96697262c5e462d0a04a5844d0121b582bc763244a9db8eff6ffbe24a485a"
+    }
+  },
+  "secondReader": {
+    "toolVersion": "1.26.6",
+    "passed": true,
+    "sourceWidgets": [
+      {
+        "name": "Customer.Անուն",
+        "type": "Text",
+        "font": "FF4",
+        "value": "office –"
+      },
+      {
+        "name": "Agree",
+        "type": "CheckBox",
+        "font": "Helv",
+        "value": "Yes"
+      },
+      {
+        "name": "Radio",
+        "type": "RadioButton",
+        "font": "Helv",
+        "value": "Off"
+      },
+      {
+        "name": "Radio",
+        "type": "RadioButton",
+        "font": "Helv",
+        "value": "B"
+      },
+      {
+        "name": "Choice",
+        "type": "ListBox",
+        "font": "FF30",
+        "value": "export"
+      },
+      {
+        "name": "Sign",
+        "type": "Signature",
+        "font": "Helv",
+        "value": ""
+      }
+    ],
+    "editedValue": "officec",
+    "limitation": "Independent reader can replace appearance resources; does not qualify arbitrary viewer use of the original editing-font encoding.",
+    "sha256": "a2e9913212e643447ddecc03402eb9d085404b9302c8db3b725e73f85fd4b84d"
+  },
+  "artifacts": {
+    "Program.cs": "09c1e4ec35da44cc5e93ec31efbc3ec91b6c312aebee9bfad2abe4f5e2555650",
+    "verify.py": "a27fee75eb6a768467e28700cc682c65cf552cba1a30ff12f95a90bd301e7afb",
+    "verify-second-reader.py": "cc13483cf1e81125b2621fc85b28679dd11f927b601337f163320f7df3f8f757",
+    "report.json": "91ec807f6cf68e849b443dda8308d0ef1867235d3f2e035f42c9facd7791f99f",
+    "second-reader-report.json": "ad4c19dd2254193b9d7d25bd5cc78ef9ec5afdec4b3e743c372c8226065f47e2",
+    "independent-text-edit-failure.log": "b997ea1effd09fe69fc379c962a198b3bf37ea4092fa78ba3132ae4093a3caa2",
+    "forms.pdf": "5914758dd4bf807344afb9b09c1dd05f48731075e87a0c9ca756528739f7f37a",
+    "renamed.pdf": "8eea6efe103491fc417ace1339315cb0a355d98abe36b159ec86ea14c89f12c4",
+    "blank.pdf": "3f1da488b151b767c18412df5401ba283630d3b8aaf79fdfd9ededc081daab55",
+    "independent-filled.pdf": "c7d96697262c5e462d0a04a5844d0121b582bc763244a9db8eff6ffbe24a485a",
+    "second-reader-filled.pdf": "a2e9913212e643447ddecc03402eb9d085404b9302c8db3b725e73f85fd4b84d",
+    "forms.png": "8cbb26157e586ca9788fdfbcb6d4931f2144097c793958ca568cb033e9fb6038",
+    "renamed.png": "8cbb26157e586ca9788fdfbcb6d4931f2144097c793958ca568cb033e9fb6038",
+    "independent-filled.png": "a693763512b2e26583228c0e7efc833b3c8cd63bf081f3b45cd6c3f8f595219a",
+    "second-reader-filled.png": "d5cc2a25d86716eb8c71c24826500154bce877e674bcd32624fed26d5cb20c32"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "The first independent reader text-regeneration exception is retained as an unresolved interoperability qualification gap.",
+    "The second reader can replace appearance fonts; its successful edit does not prove arbitrary original editing-font coverage.",
+    "Full GUI/viewer/subtype/standards corpus, actual runtimes and final-package qualification remain mandatory."
+  ]
+}

@@ -127,3 +127,5 @@ FP-024 adds `PdfLayers`, registered group inventories, explicit configuration/us
 FP-025 adds `PdfTextExtraction.ReadPage`, source-code/ActualText provenance and separate raw/semantic/geometric result views. [text-extraction.md](text-extraction.md) defines advance-cell coordinates, mapping certainty, layer selection and current profile limits.
 
 FP-036 adds passive `PdfForms` field/widget inventories, original hierarchy/state/choice authoring, shaped Unicode appearances, common-flag/widget/tab edits and explicit passive calculation metadata. See [forms.md](forms.md) for ownership, encoding, structure and interactive viewer profile limits.
+
+FP-037 adds immutable field-value packets, explicit FDF/XFDF/XML/JSON profiles, transactional filling with shared-context appearances, field copying/default-font rebinding, widget decoration and selective flattening. [form-workflows.md](form-workflows.md) defines format, inheritance, ownership and signature limits.

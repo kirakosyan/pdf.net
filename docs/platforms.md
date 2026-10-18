@@ -51,3 +51,5 @@ FP-024 layer graph/evaluation/flattening is managed on all four target framework
 FP-025 page/Form extraction is managed on the four core frameworks. Optional standard-font encoding/metrics come from explicitly registered providers; complete source mappings and metrics need no machine fonts or native renderer. Full production geometry/linguistic/package qualification remains pending.
 
 The FP-036 AcroForm source profile uses only the managed core on all four TFMs. Shaped appearances use explicitly selected font/shaping providers; the form API adds no native dependency. Interactive viewer regeneration, additional tagged creation/relocation profiles and full production qualification remain pending.
+
+FP-037 field-data and static workflow profiles run in the managed core on all four TFMs. Automatic text appearances use explicitly provisioned font/shaping services; no new native/runtime dependency is added. Full corpus, minimum-runtime and final-package qualification remains pending.

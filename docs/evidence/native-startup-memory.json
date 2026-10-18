@@ -242,5 +242,177 @@
     }
   ],
   "rawSourcesRetainedOutsideRepository": true,
-  "productionQualified": false
+  "productionQualified": false,
+  "mitigationSourceCI": {
+    "runId": 39131643482,
+    "sourceCommit": "ee653b07358cd5f39248a9fb0f2a9314f3bd103f",
+    "sourceTree": "d9d0897aeed7c1d9469e6341cac2cd952d43b5e4",
+    "testedMerge": "cb1822cf0bfd0e0a64f4cc5891850d24e1734956",
+    "treeMatchesSource": true,
+    "conclusion": "success",
+    "testsPerLane": 785,
+    "runtimeLanes": 20,
+    "passed": 15700,
+    "failed": 0,
+    "skipped": 0,
+    "realDefaultBudgetSequentialDecodesPerLane": 64,
+    "jobs": [
+      {
+        "id": 117687858194,
+        "name": "Contracts (linux-arm64)",
+        "runtimeLanes": 3,
+        "logSha256": "74c3549ea082805116df3fdfc18ec7b523567359edc6914898ea739600862298"
+      },
+      {
+        "id": 117687858325,
+        "name": "Contracts (osx-x64)",
+        "runtimeLanes": 3,
+        "logSha256": "6866e390265303de233ea3b6ae46bb5a0e45bb9cf0b25047e56ae7d42c4c49c6"
+      },
+      {
+        "id": 117687858450,
+        "name": "Contracts (win-arm64)",
+        "runtimeLanes": 3,
+        "logSha256": "c78bef141ef46ce4175145d2cca6adcab71dc5ec0ca03aea80636c50c24e3b1d"
+      },
+      {
+        "id": 117687858455,
+        "name": "Contracts (osx-arm64)",
+        "runtimeLanes": 3,
+        "logSha256": "7d01984c7573dddfb906ad060ef18c58aaf1aaae0fd4b6879e47c7bd35e80521"
+      },
+      {
+        "id": 117687858489,
+        "name": "Contracts (win-x64)",
+        "runtimeLanes": 5,
+        "logSha256": "4edd6298a12bcc44f989e0dacc66544b8cc3d9f6b8b9d30ff68c4b5c5a6983d6"
+      },
+      {
+        "id": 117687858680,
+        "name": "Contracts (linux-x64)",
+        "runtimeLanes": 3,
+        "logSha256": "55639ea470912cad9ee79eeb6b0fe52236e9c7e40ce8beb799d091f8dc190585"
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 12138760618,
+        "name": "source-contracts-win-x64",
+        "size_in_bytes": 1028983,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12138760618",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12138760618/zip",
+        "expired": false,
+        "created_at": "2026-10-18T13:36:00Z",
+        "expires_at": "2027-01-16T13:27:45Z",
+        "updated_at": "2026-10-18T13:36:00Z",
+        "digest": "sha256:f3d86d7396136aa3750ac012b13a4aa7dd00fb188eafffea589501602a598ba1",
+        "workflow_run": {
+          "id": 39131643482,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "ee653b07358cd5f39248a9fb0f2a9314f3bd103f"
+        }
+      },
+      {
+        "id": 12138735111,
+        "name": "source-contracts-linux-x64",
+        "size_in_bytes": 629880,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12138735111",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12138735111/zip",
+        "expired": false,
+        "created_at": "2026-10-18T13:30:25Z",
+        "expires_at": "2027-01-16T13:27:45Z",
+        "updated_at": "2026-10-18T13:30:25Z",
+        "digest": "sha256:9b16d4b96f3b2358d5649d1680eb8a76e0e9f2cdeb1c1cccfb66a6c78e44d8cd",
+        "workflow_run": {
+          "id": 39131643482,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "ee653b07358cd5f39248a9fb0f2a9314f3bd103f"
+        }
+      },
+      {
+        "id": 12137608931,
+        "name": "source-contracts-osx-x64",
+        "size_in_bytes": 647359,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137608931",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137608931/zip",
+        "expired": false,
+        "created_at": "2026-10-18T13:34:10Z",
+        "expires_at": "2027-01-16T13:27:45Z",
+        "updated_at": "2026-10-18T13:34:10Z",
+        "digest": "sha256:ba418e56e2356ba039d92db03df134890dbe89fca267da14fe97191cf41d37a2",
+        "workflow_run": {
+          "id": 39131643482,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "ee653b07358cd5f39248a9fb0f2a9314f3bd103f"
+        }
+      },
+      {
+        "id": 12137598756,
+        "name": "source-contracts-osx-arm64",
+        "size_in_bytes": 642934,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137598756",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137598756/zip",
+        "expired": false,
+        "created_at": "2026-10-18T13:32:34Z",
+        "expires_at": "2027-01-16T13:27:45Z",
+        "updated_at": "2026-10-18T13:32:34Z",
+        "digest": "sha256:27c1fbd89b5876862241e2336ce3b0130dd7c5dfb5ea32a9a8ee35befaffbbfc",
+        "workflow_run": {
+          "id": 39131643482,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "ee653b07358cd5f39248a9fb0f2a9314f3bd103f"
+        }
+      },
+      {
+        "id": 12137549026,
+        "name": "source-contracts-win-arm64",
+        "size_in_bytes": 630385,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137549026",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137549026/zip",
+        "expired": false,
+        "created_at": "2026-10-18T13:34:09Z",
+        "expires_at": "2027-01-16T13:27:45Z",
+        "updated_at": "2026-10-18T13:34:09Z",
+        "digest": "sha256:4cdf266aa942cccee31f923f86942bbc15250ec61b17febf0d5ebad7e12b00c4",
+        "workflow_run": {
+          "id": 39131643482,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "ee653b07358cd5f39248a9fb0f2a9314f3bd103f"
+        }
+      },
+      {
+        "id": 12137359764,
+        "name": "source-contracts-linux-arm64",
+        "size_in_bytes": 629479,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137359764",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137359764/zip",
+        "expired": false,
+        "created_at": "2026-10-18T13:30:26Z",
+        "expires_at": "2027-01-16T13:27:45Z",
+        "updated_at": "2026-10-18T13:30:26Z",
+        "digest": "sha256:bfe895c9b029e8ed7ec06613db670c41663e548d1e6025b505f710afe4afaa6e",
+        "workflow_run": {
+          "id": 39131643482,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "ee653b07358cd5f39248a9fb0f2a9314f3bd103f"
+        }
+      }
+    ],
+    "limitations": [
+      "Source contracts and synthetic repeated decoding are not complete endurance/runtime/package qualification.",
+      "Earlier failures and exploratory initialization controls remain retained; no required case was skipped or weakened."
+    ]
+  }
 }

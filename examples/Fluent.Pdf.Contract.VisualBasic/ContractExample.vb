@@ -4,6 +4,17 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function FillAndFlattenForm(input As Stream, output As Stream, data As PdfFormData, font As PdfFont, Optional writeMode As PdfWriteMode = PdfWriteMode.Full) As PdfOperationReport
+        Using source = PdfFacade.Open(input)
+            Dim style As New PdfFormTextStyle(New PdfFontFallback(font), New PdfProviderRegistry(New PdfSimpleTextShaper()))
+            Using filled = PdfForms.FillData(source.CreateSnapshot(), data, style, writeMode:=writeMode)
+                Using flattened = PdfForms.Flatten(filled.CreateSnapshot(), data.Fields.Select(Function(field) field.Name), writeMode:=writeMode)
+                    Return flattened.Save(output, writeOptions:=New PdfWriteOptions(writeMode))
+                End Using
+            End Using
+        End Using
+    End Function
+
     Public Function WriteFormPdf(output As Stream, font As PdfFont) As PdfOperationReport
         Dim text = PdfText.Shape("office", New PdfFontFallback(font), New PdfProviderRegistry(New PdfSimpleTextShaper()))
         Dim appearance = PdfForms.CreateTextAppearance(text, New PdfRect(0, 0, 160, 40), 12)

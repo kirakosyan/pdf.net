@@ -69,18 +69,20 @@ public static partial class PdfForms
         if (fontSize <= 0 || padding < 0 || bounds.Width <= 0 || bounds.Height <= 0)
             throw new ArgumentOutOfRangeException(nameof(fontSize));
         PdfGraphicsResource? result = null;
-        var report = PdfFont.Run("CreateFormTextAppearance", "managed.forms", policy, cancellationToken, context =>
-        {
-            var ink = PdfTextGeometry.Bounds(text, fontSize, 1.2, context);
-            if (ink.Width + padding * 2 > bounds.Width || ink.Height + padding * 2 > bounds.Height)
-                throw PdfWriterCore.Error(context, "Forms.TextOverflow", "The shaped-text envelope exceeds the padded appearance rectangle.");
-            var positioned = PdfTextDrawing.CreateCore(text, bounds.X + padding - ink.X, bounds.Top - padding - ink.Top, fontSize, 1.2, "FormText", true, context);
-            context.Consume(PdfResourceKind.ExpandedBytes, positioned.Fonts.Count * 192L + 256);
-            var resources = new PdfResourceSet(positioned.Fonts.Select(f => new PdfResourceBinding(f.Key, PdfGraphicsResource.Font(f.Value))).ToArray());
-            result = PdfGraphicsObjects.FormCore(PdfDrawing.CreateCore(positioned.Content.Operations, resources, context), bounds, null, null, context);
-        }, PdfCapability.WriteDocument);
+        var report = PdfFont.Run("CreateFormTextAppearance", "managed.forms", policy, cancellationToken, context => result = TextAppearance(text, bounds, fontSize, padding, context), PdfCapability.WriteDocument);
         result!.OperationReport = report;
         return result;
+    }
+
+    private static PdfGraphicsResource TextAppearance(PdfShapedText text, PdfRect bounds, double fontSize, double padding, PdfOperationContext context)
+    {
+        var ink = PdfTextGeometry.Bounds(text, fontSize, 1.2, context);
+        if (ink.Width + padding * 2 > bounds.Width || ink.Height + padding * 2 > bounds.Height)
+            throw PdfWriterCore.Error(context, "Forms.TextOverflow", "The shaped-text envelope exceeds the padded appearance rectangle.");
+        var positioned = PdfTextDrawing.CreateCore(text, bounds.X + padding - ink.X, bounds.Top - padding - ink.Top, fontSize, 1.2, "FormText", true, context);
+        context.Consume(PdfResourceKind.ExpandedBytes, positioned.Fonts.Count * 192L + 256);
+        var resources = new PdfResourceSet(positioned.Fonts.Select(f => new PdfResourceBinding(f.Key, PdfGraphicsResource.Font(f.Value))).ToArray());
+        return PdfGraphicsObjects.FormCore(PdfDrawing.CreateCore(positioned.Content.Operations, resources, context), bounds, null, null, context);
     }
 
     /// <summary>Changes only ReadOnly, Required and NoExport, preserving every kind-specific source flag, widget identity and structure association.</summary>
@@ -96,10 +98,8 @@ public static partial class PdfForms
             reader.Editable();
             foreach (var id in field.Representations)
             {
-                if (!reader.ById.TryGetValue(id, out var current))
-                    throw reader.Error("FieldIdentity", "The source field is unavailable.");
                 var entries = graph.Copy(graph.Edit.Resolve(id));
-                entries["Ff"] = PdfValue.Integer((current.Flags & ~7u) | (uint)flags);
+                entries["Ff"] = PdfValue.Integer((field.Flags & ~7u) | (uint)flags);
                 graph.Edit.Set(id, PdfValue.OwnedDictionary(entries));
             }
 

@@ -67,11 +67,11 @@ internal sealed class PdfGraphEdit : IDisposable
             throw Error("Structure.SourceEditPolicy", "Editing source content requires an explicit structure-association preservation profile.");
     }
 
-    internal PdfDocument Finish(PdfOrganizationOptions options, string minimumVersion = "1.2")
+    internal PdfDocument Finish(PdfOrganizationOptions options, string minimumVersion = "1.2", PdfWriteMode writeMode = PdfWriteMode.Full)
     {
         using var buffer = new PdfCodecBufferStream(Context, Context.Available(PdfResourceKind.ExpandedBytes));
         using (var output = new BorrowedStream(buffer, false, Context))
-            Edit.WriteCore(output, new(allowSignatureInvalidation: options.AllowSignatureInvalidation, minimumVersion: minimumVersion), Context);
+            Edit.WriteCore(output, new(mode: writeMode, allowSignatureInvalidation: options.AllowSignatureInvalidation, minimumVersion: minimumVersion), Context);
         return PdfPageOrganization.Read(buffer.Finish(), Snapshot.Options.MaximumPages, Context, Snapshot.Options.DefaultPageSize);
     }
 
@@ -114,10 +114,12 @@ internal sealed class PdfGraphEdit : IDisposable
     }
 
     public void Dispose() => Edit.Dispose();
-    internal static PdfDocument Run(string operation, PdfDocumentSnapshot source, PdfOrganizationOptions? options, PdfOperationPolicy? policy, CancellationToken token, Action<PdfGraphEdit> action, string minimumVersion = "1.2")
+    internal static PdfDocument Run(string operation, PdfDocumentSnapshot source, PdfOrganizationOptions? options, PdfOperationPolicy? policy, CancellationToken token, Action<PdfGraphEdit> action, string minimumVersion = "1.2", PdfWriteMode writeMode = PdfWriteMode.Full)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
+        if (!Enum.IsDefined(typeof(PdfWriteMode), writeMode))
+            throw new ArgumentOutOfRangeException(nameof(writeMode));
         options ??= new();
         PdfDocument? result = null;
         try
@@ -126,7 +128,7 @@ internal sealed class PdfGraphEdit : IDisposable
             {
                 using var graph = new PdfGraphEdit(source, options, c);
                 action(graph);
-                result = graph.Finish(options, minimumVersion);
+                result = graph.Finish(options, minimumVersion, writeMode);
             }, PdfCapability.WriteDocument);
             result!.SetCompositionReport(report);
             return result;

@@ -35,6 +35,8 @@ internal static class PdfFormValues
             throw graph.Error("Forms.CombFlags", "Comb requires MaxLen and excludes multiline, password and file-selection behavior.");
         if ((flags & 1048576) != 0 && (flags & (4096 | 8192)) != 0)
             throw graph.Error("Forms.FileSelectFlags", "File-selection text cannot be multiline or password text.");
+        if (definition.Kind == PdfFormFieldKind.ComboBox && (flags & 4194304) != 0 && (flags & 262144) == 0)
+            throw graph.Error("Forms.ChoiceFlags", "Combo spell-check suppression requires an editable combo.");
         if (definition.MaximumLength.HasValue && definition.Kind != PdfFormFieldKind.Text)
             throw graph.Error("Forms.MaxLenKind", "MaxLen applies only to text fields.");
         if (definition.Choices.Count != 0 && definition.Kind != PdfFormFieldKind.ComboBox && definition.Kind != PdfFormFieldKind.ListBox)
@@ -50,6 +52,14 @@ internal static class PdfFormValues
         {
             case PdfFormFieldKind.Text:
                 string text = PdfTextStrings.Decode(value, graph.Context);
+                if ((flags & 4096) == 0)
+                    foreach (char c in text)
+                    {
+                        graph.Context.Checkpoint();
+                        if (c == '\r' || c == '\n' || c == '\u2028' || c == '\u2029')
+                            throw graph.Error("Forms.MultilineValue", "A single-line text field cannot contain paragraph/line breaks.");
+                    }
+
                 if (maximum.HasValue)
                 {
                     int scalars = 0;
@@ -138,7 +148,7 @@ internal static class PdfFormValues
         return PdfValue.OwnedArray(values);
     }
 
-    internal static void Selection(Dictionary<string, PdfValue> field, PdfValue value, IReadOnlyList<PdfFormChoice> choices, PdfGraphEdit graph)
+    internal static void Selection(Dictionary<string, PdfValue> field, PdfValue value, IReadOnlyList<PdfFormChoice> choices, uint flags, PdfGraphEdit graph)
     {
         field.Remove("I");
         if (value.Kind == PdfValueKind.Null)
@@ -165,7 +175,8 @@ internal static class PdfFormValues
 
         if (selected.Count != values.Count)
             return; // Editable combo custom text has no option index.
-        field["I"] = PdfValue.Array(selected.Keys.Select(i => PdfValue.Integer(i)).ToArray());
+        if ((flags & 2097152) != 0)
+            field["I"] = PdfValue.Array(selected.Keys.Select(i => PdfValue.Integer(i)).ToArray());
         if (value.Kind == PdfValueKind.Array)
             field["V"] = PdfValue.Array(selected.Values.ToArray());
     }

@@ -99,3 +99,5 @@ Optional-content decisions are operation-local and passive. Configuration evalua
 Text extraction interprets page/Form text state in the shared context, caching source mappings/metrics per operation. It preserves source code order and declared ActualText independently of bounded geometric grouping. Coordinate records retain native user space and the existing displayed CropBox/rotation/UserUnit transform.
 
 AcroForm capture resolves inherited field attributes under the graph operation context and keeps logical fields separate from exact terminal/widget identities. Edits preserve source object and structure links; authored private appearances and explicit default editing fonts have separate ownership. Scripts/XFA are never run during capture or editing.
+
+Field-data parsing remains independent from document mutation. Filling/appearance generation shares the graph context; copy operations map exact ownership/resources and flattening removes both field-tree and page-widget relationships before validating surviving references. Incremental graph output preserves original bytes without asserting signature validity.

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-source-facts-not-implementation-or-qualification",
+  "requirement": "FP-037",
+  "sourceId": "P37-ISO1-2008",
+  "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+  "sections": ["7.3.7 dictionary null semantics", "12.5.5 appearance transforms", "12.7.3 field inheritance and variable text", "12.7.4 button/choice value rules", "12.7.7 FDF file structure and field dictionaries"],
+  "facts": [
+    "Null-valued dictionary entries are equivalent to absent entries; they do not suppress inherited field values.",
+    "Nonterminal fields provide inheritable defaults and have no logical field type of their own.",
+    "Common FT/Ff/V/DV and variable-text DA/Q/MaxLen are inheritable; choice Opt/I/TI and RV/DS are not declared inheritable, while checkbox/radio Opt is.",
+    "Button V and widget AS identify appearance states; optional indexed button Opt retains separate label data.",
+    "Choice multi-selection indices follow option order; I should not be used for single-selection fields.",
+    "FDF cross references are optional, objects have generation zero and unique object numbers, incremental updates are forbidden and stream lengths are direct.",
+    "FDF contains additional field/option/action/file/appearance instructions beyond a field-value-only profile; those instructions must not be silently applied or discarded as supported behavior."
+  ],
+  "limitations": ["The primary XFDF document download was denied by the configured network path. The bounded field/value implementation and independent XML checks do not establish complete XFDF conformance.", "Normative facts and synthetic fixtures do not qualify complete data exchange, signature transforms or production behavior."],
+  "rawSourcesRetainedOutsideRepository": true
+}

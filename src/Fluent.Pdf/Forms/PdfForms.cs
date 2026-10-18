@@ -100,6 +100,8 @@ public static partial class PdfForms
                 siblings = children.Items.ToList();
             }
 
+            if (definition.Value.Kind == PdfValueKind.Null && HasInheritedValue(parent, "V", graph) || definition.DefaultValue.Kind == PdfValueKind.Null && HasInheritedValue(parent, "DV", graph))
+                throw reader.Error("InheritedValueProfile", "An absent authored value/reset would inherit source data; provide an explicit supported value or a separate inheritance profile.");
             var field = new Dictionary<string, PdfValue>
             {
                 {
@@ -130,7 +132,7 @@ public static partial class PdfForms
             if (definition.Kind == PdfFormFieldKind.ComboBox || definition.Kind == PdfFormFieldKind.ListBox)
             {
                 field["Opt"] = PdfFormValues.Options(choices, graph);
-                PdfFormValues.Selection(field, definition.Value, choices, graph);
+                PdfFormValues.Selection(field, definition.Value, choices, flags, graph);
             }
 
             if (definition.EditingFont != null)
@@ -278,6 +280,8 @@ public static partial class PdfForms
             }
 
             var form = graph.Copy(reader.Dictionary);
+            if (reader.Dictionary.Kind == PdfValueKind.Null && order.Count == 0)
+                return;
             if (order.Count == 0)
                 form.Remove("CO");
             else

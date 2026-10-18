@@ -714,6 +714,19 @@ Fluent.Pdf.PdfFormChoice
 Fluent.Pdf.PdfFormChoice.DisplayValue.get -> string!
 Fluent.Pdf.PdfFormChoice.ExportValue.get -> string!
 Fluent.Pdf.PdfFormChoice.PdfFormChoice(string! exportValue, string? displayValue = null) -> void
+Fluent.Pdf.PdfFormData
+Fluent.Pdf.PdfFormData.Fields.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfFormDataField!>!
+Fluent.Pdf.PdfFormData.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfFormData.Write(System.IO.Stream! output, Fluent.Pdf.PdfFormDataFormat format, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfFormDataField
+Fluent.Pdf.PdfFormDataField.Name.get -> string!
+Fluent.Pdf.PdfFormDataField.PdfFormDataField(string! name, Fluent.Pdf.PdfValue! value) -> void
+Fluent.Pdf.PdfFormDataField.Value.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfFormDataFormat
+Fluent.Pdf.PdfFormDataFormat.Fdf = 0 -> Fluent.Pdf.PdfFormDataFormat
+Fluent.Pdf.PdfFormDataFormat.Json = 3 -> Fluent.Pdf.PdfFormDataFormat
+Fluent.Pdf.PdfFormDataFormat.Xfdf = 1 -> Fluent.Pdf.PdfFormDataFormat
+Fluent.Pdf.PdfFormDataFormat.Xml = 2 -> Fluent.Pdf.PdfFormDataFormat
 Fluent.Pdf.PdfFormField
 Fluent.Pdf.PdfFormField.DefaultValue.get -> Fluent.Pdf.PdfValue!
 Fluent.Pdf.PdfFormField.Flags.get -> uint
@@ -773,6 +786,21 @@ Fluent.Pdf.PdfFormTabOrder
 Fluent.Pdf.PdfFormTabOrder.Columns = 1 -> Fluent.Pdf.PdfFormTabOrder
 Fluent.Pdf.PdfFormTabOrder.Rows = 0 -> Fluent.Pdf.PdfFormTabOrder
 Fluent.Pdf.PdfFormTabOrder.Structure = 2 -> Fluent.Pdf.PdfFormTabOrder
+Fluent.Pdf.PdfFormTextStyle
+Fluent.Pdf.PdfFormTextStyle.FontSize.get -> double
+Fluent.Pdf.PdfFormTextStyle.Fonts.get -> Fluent.Pdf.PdfFontFallback!
+Fluent.Pdf.PdfFormTextStyle.Padding.get -> double
+Fluent.Pdf.PdfFormTextStyle.PasswordMask.get -> string?
+Fluent.Pdf.PdfFormTextStyle.PdfFormTextStyle(Fluent.Pdf.PdfFontFallback! fonts, Fluent.Pdf.PdfProviderRegistry! providers, double fontSize = 12, double padding = 2, Fluent.Pdf.PdfTextOptions? textOptions = null, string? passwordMask = null) -> void
+Fluent.Pdf.PdfFormTextStyle.Providers.get -> Fluent.Pdf.PdfProviderRegistry!
+Fluent.Pdf.PdfFormTextStyle.TextOptions.get -> Fluent.Pdf.PdfTextOptions!
+Fluent.Pdf.PdfFormUpdate
+Fluent.Pdf.PdfFormUpdate.Appearances.get -> System.Collections.Generic.IReadOnlyDictionary<Fluent.Pdf.PdfObjectId, Fluent.Pdf.PdfGraphicsResource!>!
+Fluent.Pdf.PdfFormUpdate.DefaultValue.get -> Fluent.Pdf.PdfValue?
+Fluent.Pdf.PdfFormUpdate.Name.get -> string!
+Fluent.Pdf.PdfFormUpdate.PdfFormUpdate(string! name, Fluent.Pdf.PdfValue! value, Fluent.Pdf.PdfFormTextStyle? textStyle = null, System.Collections.Generic.IReadOnlyDictionary<Fluent.Pdf.PdfObjectId, Fluent.Pdf.PdfGraphicsResource!>? appearances = null, Fluent.Pdf.PdfValue? defaultValue = null) -> void
+Fluent.Pdf.PdfFormUpdate.TextStyle.get -> Fluent.Pdf.PdfFormTextStyle?
+Fluent.Pdf.PdfFormUpdate.Value.get -> Fluent.Pdf.PdfValue!
 Fluent.Pdf.PdfFormWidget
 Fluent.Pdf.PdfFormWidget.Bounds.get -> Fluent.Pdf.PdfRect
 Fluent.Pdf.PdfFormWidget.Definition.get -> Fluent.Pdf.PdfValue!
@@ -1758,11 +1786,19 @@ static Fluent.Pdf.PdfFont.Standard(string! postScriptName, Fluent.Pdf.PdfProvide
 static Fluent.Pdf.PdfFont.Type3(string! postScriptName, Fluent.Pdf.PdfFontMetrics metrics, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfType3Glyph!>! glyphs, Fluent.Pdf.PdfValue? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFont!
 static Fluent.Pdf.PdfFontResource.Create(Fluent.Pdf.PdfFont! font, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfGlyphMapping!>! mappings, bool subset = true, bool vertical = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFontResource!
 static Fluent.Pdf.PdfFontResource.CreateText(Fluent.Pdf.PdfFont! font, string! text, bool subset = true, bool vertical = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFontResource!
+static Fluent.Pdf.PdfFormData.Create(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFormDataField!>! fields, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFormData!
+static Fluent.Pdf.PdfFormData.Read(System.IO.Stream! input, Fluent.Pdf.PdfFormDataFormat format, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFormData!
 static Fluent.Pdf.PdfForms.Add(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfFormFieldDefinition! definition, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfForms.AddWidget(Fluent.Pdf.PdfFormField! field, Fluent.Pdf.PdfFormWidgetDefinition! widget, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfForms.CopyField(Fluent.Pdf.PdfFormField! field, Fluent.Pdf.PdfDocumentSnapshot! target, string! partialName, System.Collections.Generic.IReadOnlyDictionary<int, int>! pageMap, bool retainOpaqueNameReferences = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfForms.CreateTextAppearance(Fluent.Pdf.PdfShapedText! text, Fluent.Pdf.PdfRect bounds, double fontSize, double padding = 2, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfGraphicsResource!
+static Fluent.Pdf.PdfForms.DecorateWidget(Fluent.Pdf.PdfFormField! field, Fluent.Pdf.PdfObjectId widgetId, Fluent.Pdf.PdfGraphicsResource! decoration, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfForms.EditWidget(Fluent.Pdf.PdfFormField! field, Fluent.Pdf.PdfObjectId widgetId, Fluent.Pdf.PdfFormWidgetDefinition! definition, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfForms.Fill(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFormUpdate!>! updates, bool retainSourceRegenerationRequest = false, Fluent.Pdf.PdfWriteMode writeMode = Fluent.Pdf.PdfWriteMode.Full, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfForms.FillData(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfFormData! data, Fluent.Pdf.PdfFormTextStyle? textStyle = null, bool retainSourceRegenerationRequest = false, Fluent.Pdf.PdfWriteMode writeMode = Fluent.Pdf.PdfWriteMode.Full, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfForms.Flatten(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<string!>? fieldNames = null, Fluent.Pdf.PdfAnnotationView view = Fluent.Pdf.PdfAnnotationView.Screen, bool acceptRequestedRegeneration = false, bool retainOpaqueNameReferences = false, Fluent.Pdf.PdfWriteMode writeMode = Fluent.Pdf.PdfWriteMode.Full, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfForms.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFormSet!
+static Fluent.Pdf.PdfForms.ReadValues(Fluent.Pdf.PdfDocumentSnapshot! source, bool includeNoExport = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFormData!
 static Fluent.Pdf.PdfForms.Rename(Fluent.Pdf.PdfFormField! field, string! partialName, bool retainOpaqueNameReferences = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfForms.SetCalculationAction(Fluent.Pdf.PdfFormField! field, Fluent.Pdf.PdfAction? action, Fluent.Pdf.PdfActionPolicy? actionPolicy = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfForms.SetCalculationOrder(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfObjectId>! fields, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!

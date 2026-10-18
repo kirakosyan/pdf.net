@@ -7,8 +7,10 @@ internal sealed class PdfFormReader
     internal readonly List<PdfFormField> Fields = new();
     internal readonly Dictionary<PdfObjectId, PdfFormField> ById = new();
     internal readonly Dictionary<PdfObjectId, int> Pages = new();
+    internal readonly Dictionary<PdfObjectId, PdfObjectId?> Parents = new();
     internal readonly Dictionary<string, PdfObjectId> NameOwners = new(StringComparer.Ordinal);
     private readonly HashSet<PdfObjectId> _visited = new();
+    internal bool IsFieldIdentity(PdfObjectId id) => _visited.Contains(id);
     private readonly HashSet<PdfValue> _definitions = new();
     private readonly Dictionary<string, MutableField> _names = new(StringComparer.Ordinal);
     private PdfOperationContext Context => Graph.Context;
@@ -45,6 +47,12 @@ internal sealed class PdfFormReader
         var need = graph.Get(Dictionary, "NeedAppearances");
         if (need.Kind != PdfValueKind.Null && need.Kind != PdfValueKind.Boolean)
             throw Error("NeedAppearances", "NeedAppearances must be Boolean.");
+        var defaults = graph.Get(Dictionary, "DR");
+        if (defaults.Kind != PdfValueKind.Null && defaults.Kind != PdfValueKind.Dictionary)
+            throw Error("DefaultResources", "AcroForm DR must be a dictionary.");
+        var defaultFonts = graph.Get(defaults, "Font");
+        if (defaultFonts.Kind != PdfValueKind.Null && defaultFonts.Kind != PdfValueKind.Dictionary)
+            throw Error("DefaultFonts", "Default font resources must be a dictionary.");
         var roots = graph.Get(Dictionary, "Fields");
         if (roots.Kind != PdfValueKind.Array)
             throw Error("Fields", "AcroForm requires an array of root fields.");
@@ -126,7 +134,7 @@ internal sealed class PdfFormReader
         }
     }
 
-    private void Visit(PdfValue reference, PdfValue? parent, string prefix, Dictionary<string, PdfValue> inherited, PdfObjectId? namedAncestor)
+    private void Visit(PdfValue reference, PdfValue? parent, string prefix, Dictionary<string, PdfValue> inherited, PdfObjectId? namedAncestor, PdfObjectId? parentIdentity = null)
     {
         Context.Checkpoint();
         using var depth = Context.EnterScope(PdfResourceKind.Depth);
@@ -134,6 +142,8 @@ internal sealed class PdfFormReader
         Context.Consume(PdfResourceKind.ExpandedBytes, 192);
         if (reference.Kind != PdfValueKind.Reference || !_visited.Add(reference.ReferenceId))
             throw Error("FieldCycle", "Fields require a finite tree of unique indirect nodes.");
+        Context.Consume(PdfResourceKind.ExpandedBytes, 64);
+        Parents.Add(reference.ReferenceId, parentIdentity);
         var value = Graph.Resolve(reference);
         if (value.Kind != PdfValueKind.Dictionary || !_definitions.Add(value))
             throw Error("FieldIdentity", "A field node must be a unique dictionary.");
@@ -159,7 +169,15 @@ internal sealed class PdfFormReader
 
         )
             if (value.Entries.TryGetValue(key, out var attribute))
-                properties[key] = Graph.Resolve(attribute);
+            {
+                var resolved = Graph.Resolve(attribute);
+                if (resolved.Kind != PdfValueKind.Null)
+                    properties[key] = resolved;
+            }
+
+        bool ownButtonScope = properties.TryGetValue("FT", out var optionType) && optionType.Kind == PdfValueKind.Name && optionType.NameValue == "Btn" && (Flags(properties.TryGetValue("Ff", out var optionFlags) ? optionFlags : PdfValue.Null) & 65536) == 0;
+        if (!ownButtonScope && (!value.Entries.TryGetValue("Opt", out var ownOptions) || Graph.Resolve(ownOptions).Kind == PdfValueKind.Null))
+            properties.Remove("Opt");
         var partial = Graph.Get(value, "T");
         string name = prefix;
         if (partial.Kind != PdfValueKind.Null)
@@ -184,8 +202,21 @@ internal sealed class PdfFormReader
             CheckSiblings(kids.Items);
             if (kids.Items.Any(raw => PureWidget(Graph.Resolve(raw))))
                 throw Error("MixedKids", "A field cannot mix child fields and pure widget children.");
+            var descendants = Graph.Copy(PdfValue.OwnedDictionary(properties));
+            foreach (string key in new[]
+            {
+                "I",
+                "TI",
+                "RV",
+                "DS"
+            }
+
+            )
+                descendants.Remove(key);
+            if (!ownButtonScope)
+                descendants.Remove("Opt");
             foreach (var child in kids.Items)
-                Visit(child, value, name, properties, namedAncestor);
+                Visit(child, value, name, descendants, namedAncestor, reference.ReferenceId);
             return;
         }
 
@@ -213,6 +244,8 @@ internal sealed class PdfFormReader
             {
                 if (child.Kind != PdfValueKind.Reference || !_visited.Add(child.ReferenceId))
                     throw Error("WidgetCycle", "Widget children require unique indirect identities.");
+                Context.Consume(PdfResourceKind.ExpandedBytes, 64);
+                Parents.Add(child.ReferenceId, reference.ReferenceId);
                 var dictionary = Graph.Resolve(child);
                 if (!_definitions.Add(dictionary))
                     throw Error("SharedWidget", "One widget cannot occur under several field nodes.");
@@ -248,6 +281,13 @@ internal sealed class PdfFormReader
     {
         if (Dictionary.Kind != PdfValueKind.Null && Dictionary.Entries.ContainsKey("XFA"))
             throw Error("XfaProfile", "AcroForm edits require an explicit XFA synchronization/removal profile.");
+        foreach (var id in _visited)
+        {
+            Context.Checkpoint();
+            Context.Consume(PdfResourceKind.Objects, 1);
+            if (Graph.Edit.Resolve(id).Kind != PdfValueKind.Dictionary)
+                throw Error("FieldAliasProfile", "Editing aliased field/widget identities requires an explicit canonical ownership profile.");
+        }
     }
 
     internal string Name(PdfValue value, string key)

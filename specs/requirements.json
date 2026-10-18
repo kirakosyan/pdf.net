@@ -1349,7 +1349,9 @@
           "Interactive multilingual appearance regeneration, merged/legacy consolidation, new tagged field creation and cross-page structure relocation profiles remain mandatory",
           "Full subtype/viewer fill/edit corpus, actual minimum runtimes, exact final packages and all production qualification gates"
         ],
-        "standardsEvidence": "docs/evidence/FP-036-standards.json"
+        "standardsEvidence": "docs/evidence/FP-036-standards.json",
+        "sourceEvidence": "docs/evidence/FP-036-source.json",
+        "independentEvidence": "docs/evidence/FP-036-independent.json"
       }
     },
     {
@@ -1379,7 +1381,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/form-workflows.md",
+        "implemented": [
+          "Immutable field-value extraction and explicit bounded FDF/XFDF/XML/JSON profiles with entity/schema/ownership rejection",
+          "Transactional filling, exact button states, choice index synchronization, shared-context Unicode appearances and C#/VB workflows",
+          "Separate field/widget copying with font/page rebinding, appearance decoration and selective static flattening with retained remaining identities and explicit incremental byte preservation"
+        ],
+        "pending": [
+          "Additional full FDF/choice/file-selection, arbitrary XFDF byte-name, text-stream/rich-text and automatic list/comb/alignment/state appearance profiles remain mandatory",
+          "Legacy/merged/tagged ownership conversion, broader default-resource rebinding and inheritance materialization profiles remain mandatory",
+          "Independent signature/transform verification and full corpus/fidelity/viewer, actual minimum-runtime, exact-package and production qualification remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-037-standards.json"
+      }
     },
     {
       "id": "FP-038",
