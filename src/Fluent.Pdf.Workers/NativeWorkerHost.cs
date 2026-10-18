@@ -100,8 +100,17 @@ public sealed class NativeWorkerHost
             // Fixed per-process runtime bounds for self-contained managed native bridges.
             // These are recomputed from this job's envelope, never inherited from the caller.
             // GC auxiliary mappings also consume the OS address-space envelope.
-            start.EnvironmentVariables["DOTNET_GCHeapHardLimit"] = (options.MaximumMemoryBytes / 8).ToString("X", CultureInfo.InvariantCulture);
-            start.EnvironmentVariables["DOTNET_GCRegionRange"] = Math.Max(33554432, options.MaximumMemoryBytes / 4).ToString("X", CultureInfo.InvariantCulture);
+            const long gcRegion = 1048576;
+            // Fit whole heap regions and round the address range up to contain them.
+            // A fractional range below the next region can reject NativeAOT initialization.
+            bool macArm = options.Deployment.RuntimeIdentifier == "osx-arm64";
+            // Retain additional native-runtime headroom on the 16 KiB-page platform.
+            long gcHeap = macArm
+                ? (options.MaximumMemoryBytes / 16 + gcRegion - 1) / gcRegion * gcRegion
+                : options.MaximumMemoryBytes / 8 / gcRegion * gcRegion;
+            long gcRange = Math.Max(33554432, (options.MaximumMemoryBytes / 4 + gcRegion - 1) / gcRegion * gcRegion);
+            start.EnvironmentVariables["DOTNET_GCHeapHardLimit"] = gcHeap.ToString("X", CultureInfo.InvariantCulture);
+            start.EnvironmentVariables["DOTNET_GCRegionRange"] = gcRange.ToString("X", CultureInfo.InvariantCulture);
             start.EnvironmentVariables["DOTNET_GCRegionSize"] = "100000";
             start.EnvironmentVariables["DOTNET_GCConserveMemory"] = "9";
             start.EnvironmentVariables["DOTNET_gcServer"] = "0";
