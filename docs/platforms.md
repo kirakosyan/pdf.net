@@ -41,3 +41,5 @@ Actual Framework 4.7.2 execution and the complete production runtime/provider ma
 FP-002 policy, decoder-lease, deadline and accounting tests run on these same source lanes, with no new platform/native dependency. They do not qualify a PDF parser/renderer or forced termination of native work; each future provider must integrate and qualify the mandatory operation context.
 
 The optional isolated worker now has [passing source boundary evidence](evidence/FP-085-source.json) on the six modern hosts and current Framework x86/x64. Its [OS prerequisites and limits](native-deployment.md) apply; source success does not qualify an engine, minimum runtime or package.
+
+FP-022 metadata inspection/editing is managed and targets all four core frameworks on the applicable Windows/Linux/macOS lanes. No XML schema is downloaded. Full production qualification and exact final package consumers remain pending.

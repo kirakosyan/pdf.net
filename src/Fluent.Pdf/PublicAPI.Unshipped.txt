@@ -163,6 +163,7 @@ Fluent.Pdf.PdfBookmark.IsOpen.get -> bool
 Fluent.Pdf.PdfBookmark.Italic.get -> bool
 Fluent.Pdf.PdfBookmark.PdfBookmark(string! title, Fluent.Pdf.PdfDestination? destination = null, Fluent.Pdf.PdfAction? action = null, bool isOpen = true, bool bold = false, bool italic = false, Fluent.Pdf.PdfColor? color = null, params Fluent.Pdf.PdfBookmark![]! children) -> void
 Fluent.Pdf.PdfBookmark.Title.get -> string!
+Fluent.Pdf.PdfBookmark.WithChildren(params Fluent.Pdf.PdfBookmark![]! children) -> Fluent.Pdf.PdfBookmark!
 Fluent.Pdf.PdfCanvas
 Fluent.Pdf.PdfCanvas.Bounds.get -> Fluent.Pdf.PdfRect
 Fluent.Pdf.PdfCanvas.Clip(Fluent.Pdf.PdfPath! path, bool evenOdd = false) -> void
@@ -787,6 +788,35 @@ Fluent.Pdf.PdfMatrix.Multiply(Fluent.Pdf.PdfMatrix right) -> Fluent.Pdf.PdfMatri
 Fluent.Pdf.PdfMatrix.PdfMatrix() -> void
 Fluent.Pdf.PdfMatrix.PdfMatrix(double a, double b, double c, double d, double e, double f) -> void
 Fluent.Pdf.PdfMatrix.Transform(Fluent.Pdf.PdfPoint point) -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfMetadata
+Fluent.Pdf.PdfMetadataEditor
+Fluent.Pdf.PdfMetadataEditor.GetInformation(string! name) -> string?
+Fluent.Pdf.PdfMetadataEditor.RemoveIdentity() -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEditor.SetCreationTime(System.DateTimeOffset? value) -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEditor.SetIdentity(byte[]! permanent, byte[]? revision = null) -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEditor.SetInformation(string! name, string? value) -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEditor.SetModificationTime(System.DateTimeOffset? value) -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEditor.SetXmp(string? xml) -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEditor.SetXmpProperty(string! namespaceUri, string! localName, string? value) -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEditor.Synchronize(Fluent.Pdf.PdfMetadataSynchronization authority) -> Fluent.Pdf.PdfMetadataEditor!
+Fluent.Pdf.PdfMetadataEmbeddedFilePolicy
+Fluent.Pdf.PdfMetadataEmbeddedFilePolicy.Reject = 0 -> Fluent.Pdf.PdfMetadataEmbeddedFilePolicy
+Fluent.Pdf.PdfMetadataEmbeddedFilePolicy.Retain = 1 -> Fluent.Pdf.PdfMetadataEmbeddedFilePolicy
+Fluent.Pdf.PdfMetadataRemovalOptions
+Fluent.Pdf.PdfMetadataRemovalOptions.EmbeddedFiles.get -> Fluent.Pdf.PdfMetadataEmbeddedFilePolicy
+Fluent.Pdf.PdfMetadataRemovalOptions.PdfMetadataRemovalOptions(bool removeIdentifiers = true, Fluent.Pdf.PdfMetadataEmbeddedFilePolicy embeddedFiles = Fluent.Pdf.PdfMetadataEmbeddedFilePolicy.Reject) -> void
+Fluent.Pdf.PdfMetadataRemovalOptions.RemoveIdentifiers.get -> bool
+Fluent.Pdf.PdfMetadataSet
+Fluent.Pdf.PdfMetadataSet.Identity.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfMetadataSet.Information.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfMetadataSet.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfMetadataSet.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfMetadataSet.Text.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+Fluent.Pdf.PdfMetadataSet.XmpXml.get -> string?
+Fluent.Pdf.PdfMetadataSynchronization
+Fluent.Pdf.PdfMetadataSynchronization.InformationToXmp = 0 -> Fluent.Pdf.PdfMetadataSynchronization
+Fluent.Pdf.PdfMetadataSynchronization.PreferNewest = 2 -> Fluent.Pdf.PdfMetadataSynchronization
+Fluent.Pdf.PdfMetadataSynchronization.XmpToInformation = 1 -> Fluent.Pdf.PdfMetadataSynchronization
 Fluent.Pdf.PdfMissingDestinationPolicy
 Fluent.Pdf.PdfMissingDestinationPolicy.OmitWithDiagnostic = 1 -> Fluent.Pdf.PdfMissingDestinationPolicy
 Fluent.Pdf.PdfMissingDestinationPolicy.Reject = 0 -> Fluent.Pdf.PdfMissingDestinationPolicy
@@ -1558,6 +1588,9 @@ static Fluent.Pdf.PdfImages.WithColorKey(Fluent.Pdf.PdfImageAsset! image, int[]!
 static Fluent.Pdf.PdfImages.WithHardMask(Fluent.Pdf.PdfImageAsset! image, Fluent.Pdf.PdfImageAsset! stencil, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageAsset!
 static Fluent.Pdf.PdfMargins.Uniform(double value) -> Fluent.Pdf.PdfMargins
 static Fluent.Pdf.PdfMatrix.Identity.get -> Fluent.Pdf.PdfMatrix
+static Fluent.Pdf.PdfMetadata.Edit(Fluent.Pdf.PdfDocumentSnapshot! source, System.Action<Fluent.Pdf.PdfMetadataEditor!>! edit, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfMetadata.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfMetadataSet!
+static Fluent.Pdf.PdfMetadata.Remove(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfMetadataRemovalOptions? removal = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfNativeDeploymentInspector.CurrentRuntimeIdentifier.get -> string?
 static Fluent.Pdf.PdfNativeDeploymentInspector.Inspect(Fluent.Pdf.PdfNativeDeployment! deployment, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfNativeDeploymentReport!
 static Fluent.Pdf.PdfNativeDeploymentInspector.InspectWorker(Fluent.Pdf.PdfNativeDeployment! deployment, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfNativeDeploymentReport!
@@ -1646,4 +1679,3 @@ static Fluent.Pdf.PdfValue.String(params byte[]! bytes) -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfValues.Real(double value) -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfValues.Stream(Fluent.Pdf.PdfValue! dictionary, System.IO.Stream! encodedInput, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfValue!
 static Fluent.Pdf.PdfWriteOptions.Default.get -> Fluent.Pdf.PdfWriteOptions!
-Fluent.Pdf.PdfBookmark.WithChildren(params Fluent.Pdf.PdfBookmark![]! children) -> Fluent.Pdf.PdfBookmark!

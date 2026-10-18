@@ -82,6 +82,20 @@ internal static class PdfWriterCore
             objects.Remove(id.Number);
         foreach (var pair in changes)
             objects[pair.Key.Number] = (pair.Key, pair.Value);
+        if(incremental&&source!.Revisions[0].Trailer.Entries.TryGetValue("ID",out var oldIdentity))
+        {
+            oldIdentity=ManagedPdfProvider.Resolve(source,oldIdentity,context);
+            if(oldIdentity.Kind==PdfValueKind.Array&&oldIdentity.Items.Count==2)
+            {
+                var permanent=ManagedPdfProvider.Resolve(source,oldIdentity.Items[0],context);
+                if(permanent.Kind==PdfValueKind.String)
+                {
+                    var currentIdentity=trailer.Entries.TryGetValue("ID",out var identity)?Dereference(objects,identity,context):PdfValue.Null;
+                    if(currentIdentity.Kind!=PdfValueKind.Array||currentIdentity.Items.Count!=2||Dereference(objects,currentIdentity.Items[0],context).Kind!=PdfValueKind.String||!permanent.StringBytes.SequenceEqual(Dereference(objects,currentIdentity.Items[0],context).StringBytes))
+                        throw Error(context,"Metadata.PermanentIdentifierChanged","An incremental revision must preserve the original permanent file identifier.");
+                }
+            }
+        }
         if (!incremental)
             foreach (var number in objects.Where(pair => pair.Value.Value.Kind == PdfValueKind.Stream && pair.Value.Value.Entries.TryGetValue("Type", out var type) && type.Kind == PdfValueKind.Name && (type.NameValue == "ObjStm" || type.NameValue == "XRef")).Select(pair => pair.Key).ToArray())
                 objects.Remove(number);

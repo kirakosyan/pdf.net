@@ -117,3 +117,5 @@ FP-019 adds immutable annotation definitions/source manifests, generated markup 
 FP-020 adds managed `PdfDestination`, immutable `PdfAction`/`PdfActionPolicy` and `PdfNavigation` editing/inspection/sanitization. Source records and explicit profile limits are in [navigation.md](navigation.md).
 
 FP-021 adds `PdfBookmark`, `PdfPresentation`, passive transition contracts and source outline/label/preference inventories. See [presentation.md](presentation.md) for indices, standard names and supported value/formatter profiles.
+
+FP-022 adds `PdfMetadata`, its synchronous editor and explicit synchronization/removal policies. See [metadata.md](metadata.md) for XML limits, authority, timestamp precision and privacy boundaries.

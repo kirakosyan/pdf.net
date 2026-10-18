@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-source-facts-not-implementation-or-qualification",
+  "sourceId": "P22-ISO1-2008",
+  "primaryDocumentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+  "textExtractionSha256": "84ec11e8849f4ce4f91386556dd59d678efa548d729f0bc3846d6bcca8958285",
+  "sections": [
+    "14.3 metadata",
+    "14.4 file identifiers",
+    "7.9.4 dates"
+  ],
+  "facts": [
+    "Metadata streams use Type Metadata and Subtype XML from PDF 1.4.",
+    "Info custom entries use text strings; Trapped is a name with True/False/Unknown values.",
+    "XMP MetadataDate at least as recent as Info ModDate establishes XMP authority; a later Info ModDate establishes Info authority.",
+    "A trailer ID has two byte strings: permanent and revision identifiers. First-write identifiers are equal; incremental updates retain the permanent identifier."
+  ],
+  "limitations": [
+    "Primary source facts do not establish full XMP schema validity, implementation correctness or production qualification."
+  ],
+  "rawSourcesRetainedOutsideRepository": true
+}

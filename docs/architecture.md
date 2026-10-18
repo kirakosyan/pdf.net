@@ -89,3 +89,5 @@ Annotation operations preserve source graphs through staged transactions and rem
 Navigation binds local destinations to native page identities and validates reachable targets before document writes. Action inventory walks active object definitions and physical attachment edges without executing content; explicit sanitization stages a full graph overlay.
 
 Presentation edits share the navigation graph boundary and retain indirect page identities. Outline link/count construction, number-tree inspection and preference validation remain managed and passive; unknown settings stay observable with diagnostics.
+
+Metadata edits use the shared managed graph transaction. XML is preflighted and charged before bounded tree construction, with external resolution and DTDs disabled. Synchronization uses caller-selected authority and dates; removal rewrites the graph and requires an embedded-file decision. No system clock or random identity is introduced.

@@ -866,7 +866,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/metadata.md",
+        "implemented": [
+          "Passive Unicode Info and bounded offline XML/XMP inspection and editing with custom namespace retention",
+          "Explicit dates, caller-selected identifiers and authority-controlled Info/XMP synchronization",
+          "Full-rewrite metadata removal including old revisions, unreachable objects and explicit embedded-file retention decision"
+        ],
+        "pending": [
+          "Complete metadata interoperability/corpus review and production qualification",
+          "Actual minimum runtimes and exact final package consumers; publication remains blocked"
+        ],
+        "standardsEvidence": "docs/evidence/FP-022-standards.json"
+      }
     },
     {
       "id": "FP-023",

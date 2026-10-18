@@ -5,6 +5,12 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteMetadataPdf(Stream output)
+    {
+        using var blank=PdfFacade.Create().AddPage();
+        using var document=PdfMetadata.Edit(blank.CreateSnapshot(),e=>e.SetInformation("Title","Metadata example").SetInformation("Author","Example writer").SetCreationTime(new DateTimeOffset(2024,1,2,3,4,5,TimeSpan.Zero)).SetModificationTime(new DateTimeOffset(2024,1,2,3,4,5,TimeSpan.Zero)).SetIdentity(new byte[]{1,2,3,4}).Synchronize(PdfMetadataSynchronization.InformationToXmp));
+        return document.Save(output);
+    }
     public static PdfOperationReport WritePresentationPdf(Stream output)
     {
         using var blank = PdfFacade.Create().AddPage().AddPage();

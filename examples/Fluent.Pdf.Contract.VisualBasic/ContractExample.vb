@@ -4,6 +4,19 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteMetadataPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage()
+            Using document = PdfMetadata.Edit(blank.CreateSnapshot(),
+                Sub(editor)
+                    editor.SetInformation("Title", "Metadata example").SetInformation("Author", "Example writer").
+                        SetCreationTime(New DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero)).
+                        SetModificationTime(New DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero)).
+                        SetIdentity(New Byte() {1, 2, 3, 4}).Synchronize(PdfMetadataSynchronization.InformationToXmp)
+                End Sub)
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
     Public Function WritePresentationPdf(output As Stream) As PdfOperationReport
         Using blank = PdfFacade.Create().AddPage().AddPage()
             Dim items = {New PdfBookmark("Report", New PdfDestination(0)).WithChildren(New PdfBookmark("Details", New PdfDestination(1)))}
