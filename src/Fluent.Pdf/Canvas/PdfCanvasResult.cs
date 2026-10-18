@@ -12,6 +12,8 @@ public sealed class PdfCanvasPlacement
         Resource = resource;
         LocalBounds = bounds;
         Transform = matrix.Multiply(own);
+        LocalEmission = matrix;
+        OwnMatrix = own;
         ToUser = toUser;
         Geometry = geometry;
         Clips = clips;
@@ -43,6 +45,8 @@ public sealed class PdfCanvasPlacement
     public PdfRect VisibleBounds { get; }
     /// <summary>Gets the transformed frame in native PDF user coordinates.</summary>
     public PdfRect UserBounds { get; }
+    internal PdfMatrix LocalEmission { get; }
+    internal PdfMatrix OwnMatrix { get; }
     internal PdfCanvasClip[] Clips { get; }
     internal PdfMatrix UserEmission { get; }
     internal PdfMatrix ToUser { get; }

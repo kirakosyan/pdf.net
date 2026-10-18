@@ -322,9 +322,11 @@ Fluent.Pdf.PdfFlowOverflow.Clip = 2 -> Fluent.Pdf.PdfFlowOverflow
 Fluent.Pdf.PdfFlowOverflow.Error = 0 -> Fluent.Pdf.PdfFlowOverflow
 Fluent.Pdf.PdfFlowPage
 Fluent.Pdf.PdfFlowPage.Canvas.get -> Fluent.Pdf.PdfCanvasResult!
+Fluent.Pdf.PdfFlowPage.ContentHeight.get -> double
 Fluent.Pdf.PdfFlowPage.Floats.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfFlowFloatPlacement!>!
 Fluent.Pdf.PdfFlowPage.Index.get -> int
 Fluent.Pdf.PdfFlowPage.Lines.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfFlowLine!>!
+Fluent.Pdf.PdfFlowPage.Tables.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTableFragment!>!
 Fluent.Pdf.PdfFlowPageBreak
 Fluent.Pdf.PdfFlowPageBreak.PdfFlowPageBreak() -> void
 Fluent.Pdf.PdfFlowParagraph
@@ -899,6 +901,76 @@ Fluent.Pdf.PdfSyntaxDocument.OperationReport.get -> Fluent.Pdf.PdfOperationRepor
 Fluent.Pdf.PdfSyntaxDocument.Resolve(Fluent.Pdf.PdfObjectId id, int revisionIndex = 0) -> Fluent.Pdf.PdfValue!
 Fluent.Pdf.PdfSyntaxDocument.Revisions.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRevision!>!
 Fluent.Pdf.PdfSyntaxDocument.Version.get -> string!
+Fluent.Pdf.PdfTable
+Fluent.Pdf.PdfTable.AllowRowSplit.get -> bool
+Fluent.Pdf.PdfTable.Columns.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTableColumn!>!
+Fluent.Pdf.PdfTable.HeaderRows.get -> int
+Fluent.Pdf.PdfTable.Layout(Fluent.Pdf.PdfFlowOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfFlowResult!
+Fluent.Pdf.PdfTable.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfTable.Rows.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTableRow!>!
+Fluent.Pdf.PdfTableBorder
+Fluent.Pdf.PdfTableBorder.Color.get -> Fluent.Pdf.PdfColor!
+Fluent.Pdf.PdfTableBorder.PdfTableBorder(double width = 0.5, Fluent.Pdf.PdfColor? color = null) -> void
+Fluent.Pdf.PdfTableBorder.Width.get -> double
+Fluent.Pdf.PdfTableCell
+Fluent.Pdf.PdfTableCell.ColumnSpan.get -> int
+Fluent.Pdf.PdfTableCell.Content.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfFlowBlock!>!
+Fluent.Pdf.PdfTableCell.PdfTableCell(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! content, int columnSpan = 1, int rowSpan = 1, Fluent.Pdf.PdfTableCellStyle? style = null) -> void
+Fluent.Pdf.PdfTableCell.RowSpan.get -> int
+Fluent.Pdf.PdfTableCell.Style.get -> Fluent.Pdf.PdfTableCellStyle!
+Fluent.Pdf.PdfTableCellFragment
+Fluent.Pdf.PdfTableCellFragment.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfTableCellFragment.Cell.get -> Fluent.Pdf.PdfTableCell!
+Fluent.Pdf.PdfTableCellFragment.Column.get -> int
+Fluent.Pdf.PdfTableCellFragment.IsContinuation.get -> bool
+Fluent.Pdf.PdfTableCellFragment.IsRepeatedHeader.get -> bool
+Fluent.Pdf.PdfTableCellFragment.Row.get -> int
+Fluent.Pdf.PdfTableCellStyle
+Fluent.Pdf.PdfTableCellStyle.Background.get -> Fluent.Pdf.PdfColor?
+Fluent.Pdf.PdfTableCellStyle.Bottom.get -> Fluent.Pdf.PdfTableBorder!
+Fluent.Pdf.PdfTableCellStyle.Left.get -> Fluent.Pdf.PdfTableBorder!
+Fluent.Pdf.PdfTableCellStyle.Padding.get -> Fluent.Pdf.PdfMargins
+Fluent.Pdf.PdfTableCellStyle.PdfTableCellStyle(Fluent.Pdf.PdfMargins? padding = null, Fluent.Pdf.PdfColor? background = null, Fluent.Pdf.PdfTableBorder? left = null, Fluent.Pdf.PdfTableBorder? top = null, Fluent.Pdf.PdfTableBorder? right = null, Fluent.Pdf.PdfTableBorder? bottom = null, Fluent.Pdf.PdfTableVerticalAlignment verticalAlignment = Fluent.Pdf.PdfTableVerticalAlignment.Top) -> void
+Fluent.Pdf.PdfTableCellStyle.Right.get -> Fluent.Pdf.PdfTableBorder!
+Fluent.Pdf.PdfTableCellStyle.Top.get -> Fluent.Pdf.PdfTableBorder!
+Fluent.Pdf.PdfTableCellStyle.VerticalAlignment.get -> Fluent.Pdf.PdfTableVerticalAlignment
+Fluent.Pdf.PdfTableColumn
+Fluent.Pdf.PdfTableColumn.IsFixed.get -> bool
+Fluent.Pdf.PdfTableColumn.Maximum.get -> double
+Fluent.Pdf.PdfTableColumn.Minimum.get -> double
+Fluent.Pdf.PdfTableColumn.Weight.get -> double
+Fluent.Pdf.PdfTableData
+Fluent.Pdf.PdfTableDataColumn<T>
+Fluent.Pdf.PdfTableDataColumn<T>.CellStyle.get -> Fluent.Pdf.PdfTableCellStyle!
+Fluent.Pdf.PdfTableDataColumn<T>.Format.get -> string?
+Fluent.Pdf.PdfTableDataColumn<T>.NullText.get -> string!
+Fluent.Pdf.PdfTableDataColumn<T>.ParagraphStyle.get -> Fluent.Pdf.PdfFlowParagraphStyle!
+Fluent.Pdf.PdfTableDataColumn<T>.PdfTableDataColumn(Fluent.Pdf.PdfTableColumn! width, System.Func<T, object?>! value, Fluent.Pdf.PdfFlowTextStyle! textStyle, string? format = null, string! nullText = "", Fluent.Pdf.PdfTableCellStyle? cellStyle = null, Fluent.Pdf.PdfFlowParagraphStyle? paragraphStyle = null) -> void
+Fluent.Pdf.PdfTableDataColumn<T>.TextStyle.get -> Fluent.Pdf.PdfFlowTextStyle!
+Fluent.Pdf.PdfTableDataColumn<T>.Value.get -> System.Func<T, object?>!
+Fluent.Pdf.PdfTableDataColumn<T>.Width.get -> Fluent.Pdf.PdfTableColumn!
+Fluent.Pdf.PdfTableFragment
+Fluent.Pdf.PdfTableFragment.BlockIndex.get -> int
+Fluent.Pdf.PdfTableFragment.BodyEnd.get -> double
+Fluent.Pdf.PdfTableFragment.BodyStart.get -> double
+Fluent.Pdf.PdfTableFragment.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfTableFragment.Cells.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTableCellFragment!>!
+Fluent.Pdf.PdfTableFragment.IsRepeatedHeader.get -> bool
+Fluent.Pdf.PdfTableFragment.NestedHeaderBandHeight.get -> double
+Fluent.Pdf.PdfTableFragment.NestedHeaders.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTableHeaderRepeat!>!
+Fluent.Pdf.PdfTableFragment.Table.get -> Fluent.Pdf.PdfTable!
+Fluent.Pdf.PdfTableHeaderRepeat
+Fluent.Pdf.PdfTableHeaderRepeat.Bounds.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.PdfTableHeaderRepeat.Table.get -> Fluent.Pdf.PdfTable!
+Fluent.Pdf.PdfTableRow
+Fluent.Pdf.PdfTableRow.AllowSplit.get -> bool
+Fluent.Pdf.PdfTableRow.Cells.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfTableCell!>!
+Fluent.Pdf.PdfTableRow.MinimumHeight.get -> double
+Fluent.Pdf.PdfTableRow.PdfTableRow(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfTableCell!>! cells, double minimumHeight = 0, bool allowSplit = true) -> void
+Fluent.Pdf.PdfTableVerticalAlignment
+Fluent.Pdf.PdfTableVerticalAlignment.Bottom = 2 -> Fluent.Pdf.PdfTableVerticalAlignment
+Fluent.Pdf.PdfTableVerticalAlignment.Center = 1 -> Fluent.Pdf.PdfTableVerticalAlignment
+Fluent.Pdf.PdfTableVerticalAlignment.Top = 0 -> Fluent.Pdf.PdfTableVerticalAlignment
 Fluent.Pdf.PdfText
 Fluent.Pdf.PdfTextDirection
 Fluent.Pdf.PdfTextDirection.LeftToRight = 0 -> Fluent.Pdf.PdfTextDirection
@@ -1089,6 +1161,12 @@ static Fluent.Pdf.PdfShading.Functional(Fluent.Pdf.PdfColorSpace! colorSpace, Fl
 static Fluent.Pdf.PdfShading.Mesh(Fluent.Pdf.PdfColorSpace! colorSpace, int shadingType, System.IO.Stream! packedData, int bitsPerCoordinate, int bitsPerComponent, double[]! decode, int bitsPerFlag = 2, int verticesPerRow = 0, Fluent.Pdf.PdfFunction? function = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Radial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfPoint start, double startRadius, Fluent.Pdf.PdfPoint end, double endRadius, Fluent.Pdf.PdfFunction! function, bool extendStart = false, bool extendEnd = false, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfSyntax.Read(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSyntaxDocument!
+static Fluent.Pdf.PdfTable.Create(Fluent.Pdf.PdfTableColumn![]! columns, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfTableRow!>! rows, int headerRows = 0, bool allowRowSplit = true, int maximumRows = 100000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTable!
+static Fluent.Pdf.PdfTableBorder.None.get -> Fluent.Pdf.PdfTableBorder!
+static Fluent.Pdf.PdfTableCell.Text(string! text, Fluent.Pdf.PdfFlowTextStyle! textStyle, int columnSpan = 1, int rowSpan = 1, Fluent.Pdf.PdfTableCellStyle? style = null) -> Fluent.Pdf.PdfTableCell!
+static Fluent.Pdf.PdfTableColumn.Auto(double minimum = 0, double maximum = 14400, double weight = 1) -> Fluent.Pdf.PdfTableColumn!
+static Fluent.Pdf.PdfTableColumn.Fixed(double width) -> Fluent.Pdf.PdfTableColumn!
+static Fluent.Pdf.PdfTableData.Bind<T>(System.Collections.Generic.IEnumerable<T>! source, Fluent.Pdf.PdfTableDataColumn<T>![]! columns, System.Globalization.CultureInfo! culture, int maximumRows = 100000, Fluent.Pdf.PdfTableRow![]? headerRows = null, bool allowRowSplit = true, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTable!
 static Fluent.Pdf.PdfText.Shape(string! text, Fluent.Pdf.PdfFontFallback! fonts, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfTextOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShapedText!
 static Fluent.Pdf.PdfTextDrawing.Create(Fluent.Pdf.PdfShapedText! text, double x, double y, double fontSize, double lineHeight = 1.2, string! resourcePrefix = "FT", bool subset = true, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextDrawing!
 static Fluent.Pdf.PdfTransparencyGroup.Create(Fluent.Pdf.PdfDrawing! drawing, Fluent.Pdf.PdfRect bounds, Fluent.Pdf.PdfColorSpace! colorSpace, bool isolated = false, bool knockout = false, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTransparencyGroup!

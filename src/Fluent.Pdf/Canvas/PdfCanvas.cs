@@ -273,6 +273,17 @@ public sealed class PdfCanvas
         return Add(resource, localBounds, _transform.Multiply(map), ownMatrix, zIndex, clips);
     }
 
+    internal PdfCanvasPlacement CopyPlacement(PdfCanvasPlacement source, PdfMatrix baseTransform)
+    {
+        Check();
+        _context.Consume(PdfResourceKind.ExpandedBytes, (_clips.Count + source.Clips.Length) * 48L + 128);
+        var clips = new List<PdfCanvasClip>(_clips);
+        var map = _transform.Multiply(baseTransform);
+        foreach (var clip in source.Clips)
+            clips.Add(CreateClip(clip.Path, clip.EvenOdd, map.Multiply(clip.Matrix)));
+        return Add(source.Resource, source.LocalBounds, map.Multiply(source.LocalEmission), source.OwnMatrix, source.ZIndex, clips);
+    }
+
     private PdfCanvasPlacement Add(PdfGraphicsResource resource, PdfRect bounds, PdfMatrix matrix, PdfMatrix own, int z, IReadOnlyList<PdfCanvasClip> clips)
     {
         Check();

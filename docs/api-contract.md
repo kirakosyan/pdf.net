@@ -101,3 +101,5 @@ FP-005 also adds `PdfTransaction`, `PdfWriteOptions`, immutable original page bi
 FP-011 adds immutable five-box page geometry, explicit units, rotated coordinate conversions, scoped canvas transforms/clips, vector/text/image placement frames and atomic page canvas application. See [page canvas and geometry](page-canvas.md).
 
 FP-012 adds immutable styled paragraphs/runs, explicit line/tab/overflow and pagination policies, floating vectors, detached line/page geometry and shared-context canvas output. See [flow layout and pagination](flow-layout.md).
+
+FP-013 adds immutable merged/nested table grids, bounded typed scalar binding with explicit culture, automatic/fixed widths, repeated headers and safe row fragments integrated into flow. See [tables and binding](tables.md).

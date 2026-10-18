@@ -7,3 +7,5 @@ Build and run using [docs/testing.md](../docs/testing.md). The examples currentl
 `WriteCanvasPdf` in both languages uses millimeters, margins, a scoped rotation and nonzero-origin page geometry. It writes a real vector PDF through the managed provider. These project-reference consumers must become exact final-package consumers at qualification.
 
 `WriteFlowPdf` in C# and VB reads a caller-supplied font, uses an explicitly supplied shaper, wraps logical text into page canvases and writes a real PDF. Borrowed font/output streams remain open. Exact final-package consumers remain gated.
+
+`WriteTablePdf` in both languages binds a finite typed source with explicit culture, uses fixed columns and end alignment, repeats header rows across real PDF pages, and preserves both borrowed streams. Final-package consumer qualification remains blocked.

@@ -39,7 +39,7 @@ public static class PdfFlow
     }
 }
 
-internal sealed class PdfFlowEngine
+internal sealed partial class PdfFlowEngine
 {
     private readonly PdfFlowOptions _options;
     private readonly IPdfTextShaper _shaper;
@@ -88,6 +88,9 @@ internal sealed class PdfFlowEngine
                 case PdfFlowFloat value:
                     PlaceFloat(i, value);
                     break;
+                case PdfTable table:
+                    PlaceTable(i, table);
+                    break;
                 case PdfFlowParagraph value:
                     var data = Prepare(i, value);
                     var style = value.Style;
@@ -122,15 +125,21 @@ internal sealed class PdfFlowEngine
             _context.Consume(PdfResourceKind.Objects, 1);
             var lines = _lines.Where(l => l.Page == p).ToArray();
             var floats = _floats.Where(f => f.Page == p).Select(f => f.Value).ToArray();
+            var tables = _tableFragments.Where(t => t.Page == p).Select(t => t.Fragment).ToArray();
             var canvas = PdfCanvas.CreateCore(_options.Geometry, c =>
             {
+                foreach (var table in tables)
+                    PdfTablePainter.Paint(c, table, _context);
                 foreach (var f in floats)
                     c.DrawDrawing(f.Float.Drawing, f.Float.SourceBounds, f.Bounds, PdfCanvasFit.Stretch);
                 foreach (var line in lines)
                     PdfFlowLinePainter.Paint(c, line.Line, line.Measured, line.Style, line.Last, _options, _context, _finish);
             }, new(PdfLengthUnit.Point, margins: _options.Margins), _context, out var finish);
             _finish.Add(finish);
-            pages[p] = new(p, canvas, lines.Select(l => l.Line).ToArray(), floats);
+            double used = Math.Max(lines.Select(l => l.Line.Bounds.Top).DefaultIfEmpty(0).Max(), Math.Max(floats.Select(f => f.Bounds.Top).DefaultIfEmpty(0).Max(), tables.Select(t => t.Bounds.Top).DefaultIfEmpty(0).Max()));
+            if (p == _page)
+                used = Math.Max(used, Math.Min(_options.Frame.Height, _y));
+            pages[p] = new(p, canvas, lines.Select(l => l.Line).ToArray(), floats, tables, used);
         }
 
         return new(_options, pages);

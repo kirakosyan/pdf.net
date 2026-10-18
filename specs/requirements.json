@@ -489,7 +489,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/tables.md",
+        "implemented": [
+          "Immutable merged/nested grids, explicit cell styles and fixed/automatic column sizing",
+          "Repeated top-level/nested header bands and safe row/content fragments with body-placement preservation",
+          "Bounded single-pass typed data binding with explicit culture/null/format profiles and shared-context flow composition"
+        ],
+        "pending": [
+          "Complete styled/merged/nested business goldens and labeled data corpus",
+          "Actual minimum runtimes, final packages and complete standards/fidelity/security/fuzz/endurance gates"
+        ]
+      }
     },
     {
       "id": "FP-014",

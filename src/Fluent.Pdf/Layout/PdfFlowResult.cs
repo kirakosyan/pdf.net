@@ -61,12 +61,14 @@ public sealed class PdfFlowFloatPlacement
 /// <summary>An immutable page with line/float geometry and its complete reusable canvas.</summary>
 public sealed class PdfFlowPage
 {
-    internal PdfFlowPage(int index, PdfCanvasResult canvas, PdfFlowLine[] lines, PdfFlowFloatPlacement[] floats)
+    internal PdfFlowPage(int index, PdfCanvasResult canvas, PdfFlowLine[] lines, PdfFlowFloatPlacement[] floats, PdfTableFragment[] tables, double contentHeight)
     {
         Index = index;
         Canvas = canvas;
         Lines = new ReadOnlyCollection<PdfFlowLine>(lines);
         Floats = new ReadOnlyCollection<PdfFlowFloatPlacement>(floats);
+        Tables = new ReadOnlyCollection<PdfTableFragment>(tables);
+        ContentHeight = contentHeight;
     }
 
     /// <summary>Gets the zero-based output page index.</summary>
@@ -77,6 +79,10 @@ public sealed class PdfFlowPage
     public IReadOnlyList<PdfFlowLine> Lines { get; }
     /// <summary>Gets immutable floating rectangles.</summary>
     public IReadOnlyList<PdfFlowFloatPlacement> Floats { get; }
+    /// <summary>Gets immutable table header/body slices on this page.</summary>
+    public IReadOnlyList<PdfTableFragment> Tables { get; }
+    /// <summary>Gets the occupied vertical extent below the page content top, in physical points.</summary>
+    public double ContentHeight { get; }
 }
 
 /// <summary>A detached deterministic layout, ready for independent page inspection and managed writing.</summary>

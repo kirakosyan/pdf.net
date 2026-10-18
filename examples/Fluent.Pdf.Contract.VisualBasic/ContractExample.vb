@@ -4,6 +4,19 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteTablePdf(fontInput As Stream, output As Stream, shaper As IPdfTextShaper) As PdfOperationReport
+        Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
+        Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)
+        Dim columns = {New PdfTableDataColumn(Of String)(PdfTableColumn.Fixed(108), Function(value) value, style),
+                       New PdfTableDataColumn(Of String)(PdfTableColumn.Fixed(108), Function(value) value, style, paragraphStyle:=New PdfFlowParagraphStyle(PdfFlowAlignment.End))}
+        Dim header = New PdfTableRow({PdfTableCell.Text("A", style), PdfTableCell.Text("office", style)})
+        Dim table = PdfTableData.Bind(System.Linq.Enumerable.Repeat("office", 8), columns, System.Globalization.CultureInfo.InvariantCulture, headerRows:={header})
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 240, 140)))
+        Dim result = table.Layout(New PdfFlowOptions(geometry, PdfMargins.Uniform(12)), New PdfProviderRegistry(shaper))
+        Using document = result.CreateDocument()
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function WriteFlowPdf(fontInput As Stream, output As Stream, text As String, shaper As IPdfTextShaper) As PdfOperationReport
         Dim font = PdfFont.Read(fontInput, New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance))
         Dim style = New PdfFlowTextStyle(New PdfFontFallback(font), 12)
