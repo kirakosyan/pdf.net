@@ -6,6 +6,61 @@ using Xunit;
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class SyntaxTests
 {
+    [Fact]
+    public void OctalEscapesCannotSkipTheLiteralStringDeadlineCheckpoints()
+    {
+        byte[] bytes = Encoding.ASCII.GetBytes("(" + string.Concat(Enumerable.Repeat("\\123", 10000)) + ")");
+        var blocks = new List<byte[]>();
+        for (int i = 0; i < bytes.Length; i += 4096)
+            blocks.Add(bytes.Skip(i).Take(4096).ToArray());
+        PdfSyntaxCursor? cursor = null;
+        var context = new PdfOperationContext("Literal", "fixture", PdfCapability.ReadDocument, PdfOperationPolicy.Default, CancellationToken.None, () => TimeSpan.FromSeconds(cursor != null && cursor.Position >= 4000 ? 31 : 0));
+        try
+        {
+            cursor = new PdfSyntaxCursor(PdfByteStore.TakeBlocks(blocks, bytes.Length), context);
+            Assert.Equal("Limit.ElapsedTime", Assert.Throws<PdfException>(() => cursor.Value()).Diagnostic.Code);
+            Assert.InRange(cursor.Position, 4000, 4100);
+        }
+        finally
+        {
+            context.Finish(false);
+            context.DisposeSources();
+        }
+    }
+
+    [Fact]
+    public void UnchangedXrefEntriesShareValuesAcrossManyIncrementalRevisions()
+    {
+        using var fixture = new SyntaxFixtures();
+        var entries = new List<(int, int, long, bool)>();
+        for (int i = 1; i <= 200; i++)
+            entries.Add((i, 0, fixture.Object(i, "<< /A [1 2 3 4 5] /Text (shared) >>"), false));
+        long previous = fixture.Classic(entries.ToArray(), size: 201);
+        for (int i = 0; i < 5; i++)
+            previous = fixture.Classic(Array.Empty<(int, int, long, bool)>(), "/Prev " + previous, size: 201);
+        fixture.Bytes.Position = 0;
+        var syntax = PdfSyntax.Read(fixture.Bytes, new PdfOperationPolicy(limits: new PdfResourceLimits(maximumObjects: 4000)));
+        for (int i = 1; i <= 200; i++)
+            for (int revision = 1; revision < 6; revision++)
+                Assert.Same(syntax.Resolve(new(i)), syntax.Resolve(new(i), revision));
+    }
+
+    [Fact]
+    public void SharedStreamEntryResolvesIndirectLengthInEachRevision()
+    {
+        using var fixture = new SyntaxFixtures();
+        long length = fixture.Object(2, "1");
+        long stream = fixture.Object(1, "<< /Length 2 0 R >>\nstream\nA\nendstream");
+        long previous = fixture.Classic(new[] { (1, 0, stream, false), (2, 0, length, false) });
+        long changed = fixture.Object(2, "2");
+        fixture.Classic(new[] { (2, 0, changed, false) }, "/Prev " + previous);
+        fixture.Bytes.Position = 0;
+        var syntax = PdfSyntax.Read(fixture.Bytes);
+        Assert.Equal(2, syntax.Resolve(new(1)).RawStreamLength);
+        Assert.Equal(1, syntax.Resolve(new(1), 1).RawStreamLength);
+        Assert.NotSame(syntax.Resolve(new(1)), syntax.Resolve(new(1), 1));
+    }
+
     [Theory]
     [InlineData("1.2")]
     [InlineData("1.3")]

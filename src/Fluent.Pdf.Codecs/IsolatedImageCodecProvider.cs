@@ -78,10 +78,25 @@ public sealed class IsolatedImageCodecProvider : IPdfImageCodecProvider
         if (requestLength > _worker.MaximumInputBytes)
             throw Error(context, "Native.InputLimit", "The codec request exceeds its configured envelope.");
         context.Consume(PdfResourceKind.ExpandedBytes, requestLength);
-        // Reserve the complete isolated allocation envelope before any third-party code runs.
-        // This intentionally requires an operation budget that can cover the configured process.
-        context.Consume(PdfResourceKind.ExpandedBytes, _worker.MaximumMemoryBytes);
-        using var objects = context.ReserveRemainingObjects();
+        long objectWork = encode && codec == PdfImageCodec.Jbig2 ? (long)info.Height + 1 : 0;
+        if (!encode)
+        {
+            using var header = new MemoryStream(data, false);
+            try
+            {
+                CodecHeaders.Inspect(codec, header, context, out objectWork);
+            }
+            catch (InvalidDataException)
+            {
+                throw Error(context, "Codec.Malformed", "The encoded image header is malformed or truncated.");
+            }
+            catch (NotSupportedException)
+            {
+                throw Error(context, "Codec.UnsupportedProfile", "The image profile is outside this codec provider's supported sample representation.");
+            }
+        }
+
+        using var objects = context.Reserve(PdfResourceKind.Objects, Math.Max(1, objectWork));
         var request = new byte[(int)requestLength];
         request[0] = 70;
         request[1] = 80;
@@ -106,7 +121,7 @@ public sealed class IsolatedImageCodecProvider : IPdfImageCodecProvider
         byte[] reply;
         try
         {
-            reply = new NativeWorkerHost().Execute(_worker, request, context);
+            reply = new NativeWorkerHost().Execute(_worker, request, context, encode ? _worker.MaximumOutputBytes : checked((int)info.ByteLength + 48));
         }
         finally
         {

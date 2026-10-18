@@ -177,6 +177,14 @@ public sealed class CanvasTests
         canvas.ApplyTo(document.Pages[0], PdfCanvasApplyMode.Replace);
         Assert.Empty(document.Pages[0].CanvasLayers);
         Assert.Single(document.Pages[0].ReadContent().Operations, x => x.Operation == PdfOperator.DrawObject);
+        Assert.Single(document.Pages[0].GraphicsResources.Bindings);
+        canvas.ApplyTo(document.Pages[0], PdfCanvasApplyMode.Replace);
+        Assert.Single(document.Pages[0].GraphicsResources.Bindings);
+        document.Pages[0].Content = PdfContentProgram.Create(Array.Empty<PdfContentOperation>());
+        Assert.Empty(document.Pages[0].GraphicsResources.Bindings);
+        canvas.ApplyTo(document.Pages[0]);
+        document.Pages[0].Content = null;
+        Assert.Empty(document.Pages[0].GraphicsResources.Bindings);
     }
 
     [Fact]
@@ -279,7 +287,11 @@ public sealed class CanvasTests
         Assert.Throws<ArgumentOutOfRangeException>(() => new PdfPoint(double.NaN, 0));
         Assert.Throws<ArgumentOutOfRangeException>(() => new PdfRect(0, 0, double.PositiveInfinity, 1));
         Assert.Throws<ArgumentOutOfRangeException>(() => PdfCanvas.Create(SimpleGeometry(), c => c.Rotate(double.NaN)));
-        var singular = PdfCanvas.Create(SimpleGeometry(), c => { c.Scale(0, 1); c.DrawImage(Image(), new(0, 0, 20, 20)); });
+        var singular = PdfCanvas.Create(SimpleGeometry(), c =>
+        {
+            c.Scale(0, 1);
+            c.DrawImage(Image(), new(0, 0, 20, 20));
+        });
         Assert.False(singular.Placements[0].HitTest(new(0, 10)));
         var canvas = PdfCanvas.Create(SimpleGeometry(), _ =>
         {

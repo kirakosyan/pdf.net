@@ -144,8 +144,14 @@ static int linux_sandbox(const char *root, int threaded) {
         BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ALLOW),
         /* Permit only the single-process bridge's memory, read-only loader,
            clock and inherited-pipe operations. Unknown/new syscalls fail closed. */
-        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,__NR_prlimit64,0,4),
+        /* Query only: even a privileged bridge must never raise hard limits. */
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,__NR_prlimit64,0,9),
         BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[0])),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,0,1,0),
+        BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM),
+        BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[2])),
+        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,0,0,2),
+        BPF_STMT(BPF_LD|BPF_W|BPF_ABS,offsetof(struct seccomp_data,args[2])+4),
         BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K,0,1,0),
         BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ERRNO|EPERM),
         BPF_STMT(BPF_RET|BPF_K,SECCOMP_RET_ALLOW),
@@ -166,7 +172,7 @@ static int linux_sandbox(const char *root, int threaded) {
         ALLOW_CALL(__NR_rt_sigpending), ALLOW_CALL(__NR_rt_sigtimedwait), ALLOW_CALL(__NR_rt_sigsuspend),
         ALLOW_CALL(__NR_eventfd2), ALLOW_CALL(__NR_pipe2), ALLOW_CALL(__NR_ppoll), ALLOW_CALL(__NR_pselect6),
         ALLOW_CALL(__NR_epoll_create1), ALLOW_CALL(__NR_epoll_ctl), ALLOW_CALL(__NR_epoll_pwait), ALLOW_CALL(__NR_mincore),
-        ALLOW_CALL(__NR_getrlimit), ALLOW_CALL(__NR_setrlimit), ALLOW_CALL(__NR_getrusage),
+        ALLOW_CALL(__NR_getrlimit), ALLOW_CALL(__NR_getrusage),
         ALLOW_CALL(__NR_exit), ALLOW_CALL(__NR_exit_group),
 #ifdef __NR_open
         ALLOW_CALL(__NR_open), ALLOW_CALL(__NR_access), ALLOW_CALL(__NR_stat), ALLOW_CALL(__NR_lstat),

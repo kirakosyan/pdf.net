@@ -22,6 +22,7 @@ public sealed class WriterTests
         Assert.Equal(PdfValueKind.Dictionary, updated.Revisions[0].Trailer.Kind);
         Assert.False(updated.Revisions[0].Trailer.Entries.ContainsKey("W"));
         Assert.False(updated.Revisions[0].Trailer.Entries.ContainsKey("Type"));
+        Assert.DoesNotContain(updated.Revisions[0].Entries.Where(x => x.Kind != PdfCrossReferenceKind.Free), x => updated.Resolve(x.Id).Kind == PdfValueKind.Stream && updated.Resolve(x.Id).Entries.TryGetValue("Type", out var type) && type.Kind == PdfValueKind.Name && type.NameValue == "XRef");
         Assert.Equal(new byte[] { 0, 255 }, updated.Revisions[0].Trailer.Entries["ID"].Items[0].StringBytes);
     }
 
@@ -46,6 +47,30 @@ public sealed class WriterTests
         Assert.Equal(Content, Copy(raw));
         Assert.Equal(output.Length, report.Resources.Single(x => x.Resource == PdfResourceKind.OutputBytes).Consumed);
         Assert.Equal(Content.Length, report.Resources.Single(x => x.Resource == PdfResourceKind.InputBytes).Consumed);
+    }
+
+    [Fact]
+    public void LargestAcceptedTrailerSizeProducesAnObjectNumberDiagnostic()
+    {
+        using var fixture = new SyntaxFixtures();
+        long root = fixture.Object(1, "<< /Type /Catalog >>");
+        fixture.Classic(new[] { (1, 0, root, false) },"/Root 1 0 R");
+        string text = Encoding.ASCII.GetString(fixture.Bytes.ToArray()).Replace("/Size 16", "/Size 2147483648");
+        using var input = new MemoryStream(Encoding.ASCII.GetBytes(text));
+        using var edit = new PdfTransaction(PdfSyntax.Read(input));
+        Assert.Equal("Writer.ObjectNumberLimit", Assert.Throws<PdfException>(() => edit.Add(PdfValue.Null)).Diagnostic.Code);
+        using var output = new MemoryStream();
+        Assert.Equal("Writer.ObjectNumberLimit", Assert.Throws<PdfException>(() => edit.Save(output)).Diagnostic.Code);
+    }
+
+    [Theory]
+    [InlineData(0.1, "0.1")]
+    [InlineData(595.28, "595.28")]
+    [InlineData(1.2345678901234567, "1.2345678901234567")]
+    public void GeneratedDecimalTokensUseTheShortestPortableRoundTrip(double value, string token)
+    {
+        Assert.Equal(token, PdfValues.Real(value).NumberText);
+        Assert.Equal(value, PdfValues.Real(value).NumberValue);
     }
 
     [Theory]

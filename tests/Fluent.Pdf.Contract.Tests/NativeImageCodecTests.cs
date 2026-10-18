@@ -8,6 +8,26 @@ using Xunit.Abstractions;
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class NativeImageCodecTests
 {
+    [Fact]
+    public void SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope()
+    {
+        using var fixture = new CodecFixture(_output, defaults: true);
+        byte[] valid = File.ReadAllBytes(ImagePath("l.jpg")), expected = File.ReadAllBytes(ImagePath("l.jpg.samples"));
+        var report = PolicyTests.Run(context =>
+        {
+            var codec = fixture.Registry.GetRequired<IPdfImageCodecProvider>(PdfCapability.ImageCodecs);
+            for (int i = 0; i < 12; i++)
+            {
+                using var input = new MemoryStream(valid);
+                using var output = new MemoryStream();
+                codec.Decode(PdfImageCodec.Dct, new(64, 16, 1, 8), PdfValue.Null, PdfValue.Null, input, output, context);
+                Assert.Equal(expected, output.ToArray());
+            }
+        });
+        Assert.True(report.Resources.Single(x => x.Resource == PdfResourceKind.ExpandedBytes).Consumed < 268435456);
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
     private readonly ITestOutputHelper _output;
     public NativeImageCodecTests(ITestOutputHelper output) => _output = output;
     [Theory]
@@ -77,9 +97,10 @@ public sealed class NativeImageCodecTests
         private readonly ITestOutputHelper _output;
         private readonly string _root = Path.Combine(Path.GetTempPath(), "fluent-pdf-image-codecs-" + Guid.NewGuid().ToString("N"));
         private readonly PdfProviderRegistry _registry;
+        internal PdfProviderRegistry Registry => _registry;
         internal string Jobs { get; }
 
-        internal CodecFixture(ITestOutputHelper output)
+        internal CodecFixture(ITestOutputHelper output, bool defaults = false)
         {
             _output = output;
             Jobs = Path.Combine(_root, "jobs");
@@ -90,7 +111,7 @@ public sealed class NativeImageCodecTests
             string rid = PdfNativeDeploymentInspector.OperatingSystemRuntimeIdentifier ?? throw new InvalidOperationException();
             string root = Path.Combine(repo!.FullName, "artifacts", "native-fixtures", rid), exe = rid.StartsWith("win-", StringComparison.Ordinal) ? "worker.exe" : "worker", library = "fluent-pdf-codecs." + (rid.StartsWith("win-", StringComparison.Ordinal) ? "dll" : rid.StartsWith("osx-", StringComparison.Ordinal) ? "dylib" : "so");
             var deployment = new PdfNativeDeployment(root, rid, "image.codecs", IsolatedImageCodecProvider.BridgeVersion, IsolatedImageCodecProvider.BridgeAbi, 67108864, Asset(root, exe), Asset(root, library));
-            var worker = new NativeWorkerOptions(deployment, exe, library, Jobs, 1073741824, 1048576, 1048576, TimeSpan.FromSeconds(10), allowInProcessThreads: true, captureWorkerDiagnostics: true);
+            var worker = defaults ? new NativeWorkerOptions(deployment, exe, library, Jobs, allowInProcessThreads: true, captureWorkerDiagnostics: true) : new NativeWorkerOptions(deployment, exe, library, Jobs, 1073741824, 1048576, 1048576, TimeSpan.FromSeconds(10), allowInProcessThreads: true, captureWorkerDiagnostics: true);
             _registry = new PdfProviderRegistry(new IsolatedImageCodecProvider(worker));
         }
 
@@ -124,7 +145,17 @@ public sealed class NativeImageCodecTests
             catch (PdfException failure)
             {
                 _output.WriteLine(failure.Diagnostic.Code);
-                foreach(string key in new[]{"Native.FailureType","Native.FailureHResult","Native.FailureErrorCode","Native.WorkerFailureDetail"})if(failure.Data[key] is object value)_output.WriteLine(key+": "+value);
+                foreach (string key in new[]
+                {
+                    "Native.FailureType",
+                    "Native.FailureHResult",
+                    "Native.FailureErrorCode",
+                    "Native.WorkerFailureDetail"
+                }
+
+                )
+                    if (failure.Data[key] is object value)
+                        _output.WriteLine(key + ": " + value);
                 if (failure.Data["Native.WorkerDiagnostics"] is string detail)
                     _output.WriteLine(detail);
                 throw;

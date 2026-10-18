@@ -23,7 +23,7 @@ public sealed class PdfTransaction : IDisposable
                 foreach (var entry in revision.Entries)
                     _maximum = Math.Max(_maximum, entry.Id.Number);
                 if (revision.Trailer.Entries.TryGetValue("Size", out var size))
-                    _maximum = Math.Max(_maximum, checked((int)size.IntegerValue - 1));
+                    _maximum = Math.Max(_maximum, checked((int)(size.IntegerValue - 1)));
             }
     }
 
@@ -189,18 +189,25 @@ public sealed class PdfTransaction : IDisposable
         var seen = new HashSet<int>();
         foreach (var id in _changes.Keys)
         {
-            context.Checkpoint(); context.Consume(PdfResourceKind.ExpandedBytes, 48);
+            context.Checkpoint();
+            context.Consume(PdfResourceKind.ExpandedBytes, 48);
             seen.Add(id.Number);
-            if (!_removed.Contains(id)) yield return id;
+            if (!_removed.Contains(id))
+                yield return id;
         }
+
         if (Source != null)
             foreach (var revision in Source.Revisions)
                 foreach (var entry in revision.Entries)
                 {
-                    context.Checkpoint(); context.Consume(PdfResourceKind.Objects, 1);
-                    if (seen.Contains(entry.Id.Number)) continue;
-                    context.Consume(PdfResourceKind.ExpandedBytes, 48); seen.Add(entry.Id.Number);
-                    if (entry.Kind != PdfCrossReferenceKind.Free && !_removed.Contains(entry.Id)) yield return entry.Id;
+                    context.Checkpoint();
+                    context.Consume(PdfResourceKind.Objects, 1);
+                    if (seen.Contains(entry.Id.Number))
+                        continue;
+                    context.Consume(PdfResourceKind.ExpandedBytes, 48);
+                    seen.Add(entry.Id.Number);
+                    if (entry.Kind != PdfCrossReferenceKind.Free && !_removed.Contains(entry.Id))
+                        yield return entry.Id;
                 }
     }
 

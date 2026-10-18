@@ -39,7 +39,6 @@ public sealed class IsolatedTextShaper : IPdfTextShaper
         if (maximum < 1)
             throw PdfWriterCore.Error(context, "Native.OutputLimit", "The shaping response envelope cannot hold a glyph.");
         context.Consume(PdfResourceKind.ExpandedBytes, length);
-        context.Consume(PdfResourceKind.ExpandedBytes, _worker.MaximumMemoryBytes);
         var bytes = new byte[(int)length];
         bytes[0] = 70;
         bytes[1] = 80;
@@ -81,7 +80,7 @@ public sealed class IsolatedTextShaper : IPdfTextShaper
         byte[] reply;
         try
         {
-            reply = new NativeWorkerHost().Execute(_worker, bytes, context);
+            reply = new NativeWorkerHost().Execute(_worker, bytes, context, 16 + maximum * 24);
         }
         finally
         {

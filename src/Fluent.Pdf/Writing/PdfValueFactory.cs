@@ -45,7 +45,14 @@ public static class PdfValues
     {
         if (double.IsInfinity(value) || double.IsNaN(value))
             throw new ArgumentOutOfRangeException(nameof(value));
-        string text = value.ToString("G17", CultureInfo.InvariantCulture);
+        string text = value.ToString("G15", CultureInfo.InvariantCulture);
+        if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out double parsed) || parsed != value)
+        {
+            text = value.ToString("G16", CultureInfo.InvariantCulture);
+            if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out parsed) || parsed != value)
+                text = value.ToString("G17", CultureInfo.InvariantCulture);
+        }
+
         int e = text.IndexOfAny(new[] { 'e', 'E' });
         if (e < 0)
             return PdfValue.Number(text);

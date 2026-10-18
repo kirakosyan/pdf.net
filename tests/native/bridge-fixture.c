@@ -1,3 +1,6 @@
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
 #include "../../native/worker/bridge.h"
 #include <stdlib.h>
 #include <string.h>
@@ -13,6 +16,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/wait.h>
+#ifdef __linux__
+#include <errno.h>
+#include <sys/resource.h>
+#include <sys/syscall.h>
+#endif
 #endif
 #ifndef FIXTURE_ABI
 #define FIXTURE_ABI "fluent-pdf-fixture-1"
@@ -117,6 +125,19 @@ FP_EXPORT int fluent_pdf_bridge_execute_v1(const unsigned char *input,size_t len
             *written=2; return 0;
         }
         case 8: fputs("owned-fixture-diagnostic",stderr); fflush(stderr); return 99;
+        case 9: {
+            if(capacity<3)return 99;
+#ifdef __linux__
+            struct rlimit limit;int query=getrlimit(RLIMIT_AS,&limit);
+            if(query!=0)return 99;
+            output[0]=(unsigned char)(setrlimit(RLIMIT_AS,&limit)==-1&&errno==EPERM);
+            output[1]=(unsigned char)(syscall(__NR_prlimit64,0,RLIMIT_AS,&limit,NULL)==-1&&errno==EPERM);
+            output[2]=(unsigned char)(syscall(__NR_prlimit64,0,RLIMIT_AS,NULL,&limit)==0);
+#else
+            output[0]=output[1]=output[2]=1;
+#endif
+            *written=3;return 0;
+        }
         default:
             if(length-1>capacity) return 99;
             memcpy(output,input+1,length-1); *written=length-1; return 0;

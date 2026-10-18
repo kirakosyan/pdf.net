@@ -21,9 +21,11 @@ internal sealed class PdfSyntaxCursor
     internal static bool Delimiter(int c) => c < 0 || White(c) || c == '(' || c == ')' || c == '<' || c == '>' || c == '[' || c == ']' || c == '{' || c == '}' || c == '/' || c == '%';
     internal void Skip()
     {
+        Context.Checkpoint();
         while (Position < End)
         {
-            Context.Checkpoint();
+            if ((Position & 1023) == 0)
+                Context.Checkpoint();
             int c = Peek();
             if (White(c))
             {
@@ -35,6 +37,8 @@ internal sealed class PdfSyntaxCursor
                 break;
             do
             {
+                if ((Position & 1023) == 0)
+                    Context.Checkpoint();
                 Position++;
                 c = Peek();
             }
@@ -224,7 +228,8 @@ internal sealed class PdfSyntaxCursor
         int digits = 0;
         while (Peek() != '>')
         {
-            Context.Checkpoint();
+            if ((Position & 1023) == 0)
+                Context.Checkpoint();
             int c = Peek();
             if (c < 0)
                 throw Error("Syntax.Truncated", "A hex string is truncated.");
@@ -243,6 +248,8 @@ internal sealed class PdfSyntaxCursor
         int index = 0, high = -1;
         for (long i = start; i < Position; i++)
         {
+            if ((i & 1023) == 0)
+                Context.Checkpoint();
             int c = Source.At(i);
             if (White(c))
                 continue;
@@ -278,13 +285,14 @@ internal sealed class PdfSyntaxCursor
     private int ReadLiteral(byte[]? output)
     {
         var nesting = new Stack<IDisposable>();
-        int count = 0;
+        int count = 0, polls = 0;
         try
         {
             nesting.Push(Context.EnterScope(PdfResourceKind.Depth));
             while (true)
             {
-                Context.Checkpoint();
+                if ((polls++ & 1023) == 0)
+                    Context.Checkpoint();
                 int c = Peek();
                 if (c < 0)
                     throw Error("Syntax.Truncated", "A literal string is truncated.");

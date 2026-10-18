@@ -8,6 +8,22 @@ using Xunit.Abstractions;
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class NativeTextTests
 {
+    [Fact]
+    public void ManyShapingRunsReuseTheWorkerEnvelopeUnderTheDefaultOperationBudget()
+    {
+        using var fixture = new Fixture(_output);
+        var font = TextTests.Read("latin.ttf");
+        var request = new PdfShapingRequest("office", 0, 6, font, PdfTextDirection.LeftToRight, 0x4c61746e, "en", Array.Empty<PdfTextFeature>());
+        var report = PolicyTests.Run(context =>
+        {
+            var shaper = fixture.Providers.GetRequired<IPdfTextShaper>(PdfCapability.ShapeText);
+            for (int i = 0; i < 24; i++)
+                Assert.NotEmpty(shaper.Shape(request, context));
+        });
+        Assert.True(report.Resources.Single(x => x.Resource == PdfResourceKind.ExpandedBytes).Consumed < 268435456);
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
+
     private readonly ITestOutputHelper _output;
     public NativeTextTests(ITestOutputHelper output) => _output = output;
     public static IEnumerable<object[]> KnownAnswers() => ShapingKnownAnswers.Vectors();

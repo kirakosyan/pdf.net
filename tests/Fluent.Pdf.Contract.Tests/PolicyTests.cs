@@ -6,31 +6,81 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace Fluent.Pdf.Contract.Tests;
-
 public sealed class PolicyTests
 {
     [Fact]
+    public void TemporaryReservationsReleaseMemoryAndAllowOverlappingObjectWork()
+    {
+        var report = Run(context =>
+        {
+            for (int i = 0; i < 50; i++)
+                using (context.Reserve(PdfResourceKind.ExpandedBytes, 80))
+                    context.Consume(PdfResourceKind.ExpandedBytes, 1);
+            using var first = context.Reserve(PdfResourceKind.Objects, 2);
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                using var second = context.Reserve(PdfResourceKind.Objects, 2);
+                context.Consume(PdfResourceKind.Objects, 1);
+                second.Complete(1);
+            }).GetAwaiter().GetResult();
+            first.Complete(2);
+        }, new PdfResourceLimits(maximumExpandedBytes: 130, maximumObjects: 5));
+        Assert.Equal(50, report.Resources.Single(x => x.Resource == PdfResourceKind.ExpandedBytes).Consumed);
+        Assert.Equal(130, report.Resources.Single(x => x.Resource == PdfResourceKind.ExpandedBytes).Peak);
+        Assert.Equal(4, report.Resources.Single(x => x.Resource == PdfResourceKind.Objects).Consumed);
+        Assert.Equal("Operation.ScopeLeaked", Assert.Throws<PdfException>(() => Run(c => c.Reserve(PdfResourceKind.ExpandedBytes, 1))).Diagnostic.Code);
+        Assert.Equal("Limit.ExpandedBytes", Assert.Throws<PdfException>(() => Run(c =>
+        {
+            using var lease = c.Reserve(PdfResourceKind.ExpandedBytes, 3);
+            try
+            {
+                c.Consume(PdfResourceKind.ExpandedBytes, 1);
+            }
+            catch (PdfException)
+            {
+            }
+        }, new PdfResourceLimits(maximumExpandedBytes: 3))).Diagnostic.Code);
+    }
+
+    [Fact]
     public void IsolatedObjectReservationsReconcileUseAndDetectUnfinishedJobs()
     {
-        var report=Run(context=>
+        var report = Run(context =>
         {
-            context.Consume(PdfResourceKind.Objects,2);
-            using(var reservation=context.ReserveRemainingObjects())reservation.Complete(1);
-            context.Consume(PdfResourceKind.Objects,2);
-        },new PdfResourceLimits(maximumObjects:5));
-        Assert.Equal(5,report.Resources.Single(x=>x.Resource==PdfResourceKind.Objects).Consumed);
-        Run(context=>{using(var abandoned=context.ReserveRemainingObjects()){}context.Consume(PdfResourceKind.Objects,5);},new PdfResourceLimits(maximumObjects:5));
-        Assert.Equal("Operation.ScopeLeaked",Assert.Throws<PdfException>(()=>Run(context=>context.ReserveRemainingObjects())).Diagnostic.Code);
-        Assert.Equal("Limit.Objects",Assert.Throws<PdfException>(()=>Run(context=>
+            context.Consume(PdfResourceKind.Objects, 2);
+            using (var reservation = context.Reserve(PdfResourceKind.Objects, context.Available(PdfResourceKind.Objects)))
+                reservation.Complete(1);
+            context.Consume(PdfResourceKind.Objects, 2);
+        }, new PdfResourceLimits(maximumObjects: 5));
+        Assert.Equal(5, report.Resources.Single(x => x.Resource == PdfResourceKind.Objects).Consumed);
+        Run(context =>
         {
-            using var reservation=context.ReserveRemainingObjects();
-            try{context.Consume(PdfResourceKind.Objects,1);}catch(PdfException){}
+            using (var abandoned = context.Reserve(PdfResourceKind.Objects, context.Available(PdfResourceKind.Objects)))
+            {
+            }
+
+            context.Consume(PdfResourceKind.Objects, 5);
+        }, new PdfResourceLimits(maximumObjects: 5));
+        Assert.Equal("Operation.ScopeLeaked", Assert.Throws<PdfException>(() => Run(context => context.Reserve(PdfResourceKind.Objects, context.Available(PdfResourceKind.Objects)))).Diagnostic.Code);
+        Assert.Equal("Limit.Objects", Assert.Throws<PdfException>(() => Run(context =>
+        {
+            using var reservation = context.Reserve(PdfResourceKind.Objects, context.Available(PdfResourceKind.Objects));
+            try
+            {
+                context.Consume(PdfResourceKind.Objects, 1);
+            }
+            catch (PdfException)
+            {
+            }
         })).Diagnostic.Code);
     }
-    internal static PdfOperationReport Run(Action<PdfOperationContext> action, PdfResourceLimits? limits = null,
-        PdfProcessingMode mode = PdfProcessingMode.Strict)
+
+    internal static PdfOperationReport Run(Action<PdfOperationContext> action, PdfResourceLimits? limits = null, PdfProcessingMode mode = PdfProcessingMode.Strict)
     {
-        var provider = new ContractProvider { OnWriteContext = (_, _, context) => action(context) };
+        var provider = new ContractProvider
+        {
+            OnWriteContext = (_, _, context) => action(context)
+        };
         using var document = Pdf.Create(new PdfOptions(operationPolicy: new PdfOperationPolicy(mode, limits)), new PdfProviderRegistry(provider));
         using var output = new MemoryStream();
         var report = document.Save(output);
@@ -41,11 +91,16 @@ public sealed class PolicyTests
     [Fact]
     public void PoliciesAndDiagnosticConfigurationRejectInvalidBounds()
     {
-        Action[] invalid = {
-            () => new PdfResourceLimits(maximumInputBytes: 0), () => new PdfResourceLimits(maximumExpandedBytes: -1),
-            () => new PdfResourceLimits(maximumOutputBytes: 0), () => new PdfResourceLimits(maximumObjects: -1),
-            () => new PdfResourceLimits(maximumPixels: 0), () => new PdfResourceLimits(maximumDepth: 0),
-            () => new PdfResourceLimits(maximumWorkers: -1), () => new PdfResourceLimits(maximumDiagnostics: 0),
+        Action[] invalid =
+        {
+            () => new PdfResourceLimits(maximumInputBytes: 0),
+            () => new PdfResourceLimits(maximumExpandedBytes: -1),
+            () => new PdfResourceLimits(maximumOutputBytes: 0),
+            () => new PdfResourceLimits(maximumObjects: -1),
+            () => new PdfResourceLimits(maximumPixels: 0),
+            () => new PdfResourceLimits(maximumDepth: 0),
+            () => new PdfResourceLimits(maximumWorkers: -1),
+            () => new PdfResourceLimits(maximumDiagnostics: 0),
             () => new PdfResourceLimits(maximumElapsedTime: TimeSpan.Zero),
             () => new PdfResourceLimits(maximumElapsedTime: TimeSpan.FromDays(2)),
             () => new PdfOperationPolicy((PdfProcessingMode)999),
@@ -54,7 +109,8 @@ public sealed class PolicyTests
             () => new PdfDiagnostic("code", "message", pageIndex: -1),
             () => new PdfDiagnostic("code", "message", objectId: -1)
         };
-        foreach (var action in invalid) Assert.Throws<ArgumentOutOfRangeException>(action);
+        foreach (var action in invalid)
+            Assert.Throws<ArgumentOutOfRangeException>(action);
         Assert.Equal(PdfProcessingMode.Strict, PdfOperationPolicy.Default.Mode);
         var limits = new PdfResourceLimits();
         var policy = new PdfOperationPolicy(limits: limits);
@@ -65,7 +121,19 @@ public sealed class PolicyTests
     public static IEnumerable<object[]> ResourceBoundaries()
     {
         foreach (PdfResourceKind resource in Enum.GetValues(typeof(PdfResourceKind)))
-            foreach (int amount in new[] { 1, 2, 3 }) yield return new object[] { resource, amount };
+            foreach (int amount in new[]
+            {
+                1,
+                2,
+                3
+            }
+
+            )
+                yield return new object[]
+                {
+                    resource,
+                    amount
+                };
     }
 
     [Theory]
@@ -78,10 +146,23 @@ public sealed class PolicyTests
             if (resource == PdfResourceKind.Depth || resource == PdfResourceKind.Workers)
             {
                 var scopes = new Stack<IDisposable>();
-                try { for (int i = 0; i < amount; i++) scopes.Push(context.EnterScope(resource)); }
-                finally { while (scopes.Count > 0) { var scope = scopes.Pop(); scope.Dispose(); scope.Dispose(); } }
+                try
+                {
+                    for (int i = 0; i < amount; i++)
+                        scopes.Push(context.EnterScope(resource));
+                }
+                finally
+                {
+                    while (scopes.Count > 0)
+                    {
+                        var scope = scopes.Pop();
+                        scope.Dispose();
+                        scope.Dispose();
+                    }
+                }
             }
-            else context.Consume(resource, amount);
+            else
+                context.Consume(resource, amount);
         };
         if (amount > 2)
         {
@@ -122,8 +203,13 @@ public sealed class PolicyTests
     {
         var error = Assert.Throws<PdfException>(() => Run(context =>
         {
-            try { context.Consume(PdfResourceKind.Objects, 3); }
-            catch (PdfException) { }
+            try
+            {
+                context.Consume(PdfResourceKind.Objects, 3);
+            }
+            catch (PdfException)
+            {
+            }
         }, new PdfResourceLimits(maximumObjects: 2)));
         Assert.Equal("Limit.Objects", error.Diagnostic.Code);
     }
@@ -137,8 +223,8 @@ public sealed class PolicyTests
     {
         if (width > 2 || height > 2)
             Assert.Equal("Limit.Pixels", Assert.Throws<PdfException>(() => Run(context => context.ConsumePixels(width, height), new PdfResourceLimits(maximumPixels: 2))).Diagnostic.Code);
-        else Assert.Equal(width * height, Run(context => context.ConsumePixels(width, height), new PdfResourceLimits(maximumPixels: 2))
-            .Resources.Single(item => item.Resource == PdfResourceKind.Pixels).Consumed);
+        else
+            Assert.Equal(width * height, Run(context => context.ConsumePixels(width, height), new PdfResourceLimits(maximumPixels: 2)).Resources.Single(item => item.Resource == PdfResourceKind.Pixels).Consumed);
     }
 
     [Fact]
@@ -146,8 +232,13 @@ public sealed class PolicyTests
     {
         var error = Assert.Throws<PdfException>(() => Run(context =>
         {
-            try { context.Report(Loss(0, 42)); }
-            catch (PdfException) { }
+            try
+            {
+                context.Report(Loss(0, 42));
+            }
+            catch (PdfException)
+            {
+            }
         }));
         Assert.Equal("Content.Unsupported", error.Diagnostic.Code);
         Assert.Equal(PdfDiagnosticSeverity.Error, error.Diagnostic.Severity);
@@ -163,8 +254,14 @@ public sealed class PolicyTests
         var replacement = new IOException("Replacement fixture failure.");
         var error = Assert.Throws<PdfException>(() => Run(context =>
         {
-            try { context.Report(Loss(0, 42)); }
-            catch (PdfException) { throw replacement; }
+            try
+            {
+                context.Report(Loss(0, 42));
+            }
+            catch (PdfException)
+            {
+                throw replacement;
+            }
         }));
         Assert.Equal("Content.Unsupported", error.Diagnostic.Code);
         Assert.Same(replacement, error.Data["Fluent.Pdf.UnderlyingFailure"]);
@@ -182,7 +279,7 @@ public sealed class PolicyTests
         }, mode: PdfProcessingMode.Permissive);
         Assert.True(report.Succeeded);
         Assert.Equal(2, report.Diagnostics.Count);
-        Assert.Equal(new int?[] { 0, 1 }, report.Diagnostics.Select(item => item.PageIndex));
+        Assert.Equal(new int? [] { 0, 1 }, report.Diagnostics.Select(item => item.PageIndex));
         Assert.All(report.Diagnostics, item =>
         {
             Assert.Equal(PdfDiagnosticSeverity.Warning, item.Severity);
@@ -207,10 +304,13 @@ public sealed class PolicyTests
     {
         Action<PdfOperationContext> work = context =>
         {
-            for (int i = 0; i < count; i++) context.Report(new PdfDiagnostic("Input.Notice", "Fixture notice.", severity: PdfDiagnosticSeverity.Information));
+            for (int i = 0; i < count; i++)
+                context.Report(new PdfDiagnostic("Input.Notice", "Fixture notice.", severity: PdfDiagnosticSeverity.Information));
         };
-        if (count > 2) Assert.Equal("Limit.Diagnostics", Assert.Throws<PdfException>(() => Run(work, new PdfResourceLimits(maximumDiagnostics: 2))).Diagnostic.Code);
-        else Assert.Equal(count, Run(work, new PdfResourceLimits(maximumDiagnostics: 2)).Diagnostics.Count);
+        if (count > 2)
+            Assert.Equal("Limit.Diagnostics", Assert.Throws<PdfException>(() => Run(work, new PdfResourceLimits(maximumDiagnostics: 2))).Diagnostic.Code);
+        else
+            Assert.Equal(count, Run(work, new PdfResourceLimits(maximumDiagnostics: 2)).Diagnostics.Count);
     }
 
     [Theory]
@@ -242,7 +342,8 @@ public sealed class PolicyTests
             Parallel.For(0, 64, _ =>
             {
                 using var worker = context.EnterScope(PdfResourceKind.Workers);
-                for (int i = 0; i < 200; i++) context.Consume(PdfResourceKind.Objects, 1);
+                for (int i = 0; i < 200; i++)
+                    context.Consume(PdfResourceKind.Objects, 1);
             });
         }, new PdfResourceLimits(maximumObjects: 12800, maximumWorkers: 64));
         Assert.Equal(12800, report.Resources.Single(item => item.Resource == PdfResourceKind.Objects).Consumed);
@@ -257,15 +358,20 @@ public sealed class PolicyTests
     {
         var limit = TimeSpan.FromSeconds(30);
         TimeSpan elapsed = TimeSpan.Zero;
-        var context = new PdfOperationContext("Fixture", "local", PdfCapability.ReadDocument,
-            new PdfOperationPolicy(limits: new PdfResourceLimits(maximumElapsedTime: limit)), CancellationToken.None, () => elapsed);
+        var context = new PdfOperationContext("Fixture", "local", PdfCapability.ReadDocument, new PdfOperationPolicy(limits: new PdfResourceLimits(maximumElapsedTime: limit)), CancellationToken.None, () => elapsed);
         try
         {
             elapsed = limit + TimeSpan.FromTicks(tickOffset);
-            if (tickOffset < 0) context.Checkpoint();
-            else Assert.Equal("Limit.ElapsedTime", Assert.Throws<PdfException>(context.Checkpoint).Diagnostic.Code);
+            if (tickOffset < 0)
+                context.Checkpoint();
+            else
+                Assert.Equal("Limit.ElapsedTime", Assert.Throws<PdfException>(context.Checkpoint).Diagnostic.Code);
         }
-        finally { context.Finish(false); context.DisposeSources(); }
+        finally
+        {
+            context.Finish(false);
+            context.DisposeSources();
+        }
     }
 
     [Fact]
@@ -274,13 +380,16 @@ public sealed class PolicyTests
         var error = Assert.Throws<PdfException>(() => Run(context =>
         {
             Assert.True(context.CancellationToken.WaitHandle.WaitOne(TimeSpan.FromSeconds(5)));
-            try { context.CancellationToken.ThrowIfCancellationRequested(); }
-            catch (OperationCanceledException) { }
+            try
+            {
+                context.CancellationToken.ThrowIfCancellationRequested();
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }, new PdfResourceLimits(maximumElapsedTime: TimeSpan.FromMilliseconds(50))));
         Assert.Equal("Limit.ElapsedTime", error.Diagnostic.Code);
     }
 
-    internal static PdfDiagnostic Loss(int page, long objectId) => new("Content.Unsupported", "Fixture behavior is unsupported.",
-        providerId: "untrusted.provenance", lossCategory: PdfLossCategory.UnsupportedContent, operation: "different",
-        pageIndex: page, objectId: objectId, remediation: "Provide supported content.");
+    internal static PdfDiagnostic Loss(int page, long objectId) => new("Content.Unsupported", "Fixture behavior is unsupported.", providerId: "untrusted.provenance", lossCategory: PdfLossCategory.UnsupportedContent, operation: "different", pageIndex: page, objectId: objectId, remediation: "Provide supported content.");
 }

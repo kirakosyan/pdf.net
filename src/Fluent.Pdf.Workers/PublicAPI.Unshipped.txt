@@ -14,3 +14,4 @@ Fluent.Pdf.Workers.NativeWorkerOptions.MaximumMemoryBytes.get -> long
 Fluent.Pdf.Workers.NativeWorkerOptions.MaximumOutputBytes.get -> int
 Fluent.Pdf.Workers.NativeWorkerOptions.NativeWorkerOptions(Fluent.Pdf.PdfNativeDeployment! deployment, string! executableFileName, string! libraryFileName, string! temporaryDirectory, long maximumMemoryBytes = 268435456, int maximumInputBytes = 67108864, int maximumOutputBytes = 67108864, System.TimeSpan? maximumElapsedTime = null, bool allowInProcessThreads = false, bool captureWorkerDiagnostics = false) -> void
 Fluent.Pdf.Workers.NativeWorkerOptions.TemporaryDirectory.get -> string!
+Fluent.Pdf.Workers.NativeWorkerHost.Execute(Fluent.Pdf.Workers.NativeWorkerOptions! options, byte[]! request, Fluent.Pdf.PdfOperationContext! context, int maximumResponseBytes) -> byte[]!

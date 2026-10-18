@@ -4,15 +4,18 @@ namespace Fluent.Pdf.Codecs;
 // Original header inspection. No decoder is allowed to allocate pixels here.
 internal static class CodecHeaders
 {
-    internal static PdfImageInfo Inspect(PdfImageCodec codec, Stream stream, PdfOperationContext context)
+    internal static PdfImageInfo Inspect(PdfImageCodec codec, Stream stream, PdfOperationContext context) => Inspect(codec, stream, context, out _);
+    internal static PdfImageInfo Inspect(PdfImageCodec codec, Stream stream, PdfOperationContext context, out long objectWork)
     {
         var r = new Reader(stream, context);
-        return codec switch
+        var info = codec switch
         {
             PdfImageCodec.Dct => Jpeg(r),
             PdfImageCodec.Jpx => Jpx(r),
             PdfImageCodec.Jbig2 => Jbig2(r),
             _ => throw new ArgumentOutOfRangeException(nameof(codec))};
+        objectWork = r.ObjectWork;
+        return info;
     }
 
     private static PdfImageInfo Jpeg(Reader r)
@@ -21,7 +24,7 @@ internal static class CodecHeaders
             throw new InvalidDataException();
         for (int count = 0; count < 65536; count++)
         {
-            r.Context.Consume(PdfResourceKind.Objects, 1);
+            r.ChargeObjects(1);
             if (r.Byte() != 255)
                 throw new InvalidDataException();
             int marker;
@@ -62,7 +65,7 @@ internal static class CodecHeaders
             bool found = false;
             while (r.Stream.Position < end)
             {
-                r.Context.Consume(PdfResourceKind.Objects, 1);
+                r.ChargeObjects(1);
                 long start = r.Stream.Position, length = r.U32();
                 uint type = r.U32();
                 int header = 8;
@@ -105,7 +108,7 @@ internal static class CodecHeaders
         long tilesX = ((long)x - tx0 + tileX - 1) / tileX, tilesY = ((long)y - ty0 + tileY - 1) / tileY;
         if (tilesX > long.MaxValue / tilesY / count)
             throw new InvalidDataException();
-        r.Context.Consume(PdfResourceKind.Objects, tilesX * tilesY * count);
+        r.ChargeObjects(tilesX * tilesY * count);
         int bits = 0;
         for (int i = 0; i < count; i++)
         {
@@ -148,14 +151,14 @@ internal static class CodecHeaders
 
         while (r.Stream.Position < r.Stream.Length)
         {
-            r.Context.Consume(PdfResourceKind.Objects, 1);
+            r.ChargeObjects(1);
             uint number = r.U32();
             int flags = r.Byte(), referred = r.Byte(), count = referred >> 5;
             if (count == 7)
             {
                 uint extended = ((uint)referred << 24) | ((uint)r.Byte() << 16) | ((uint)r.Byte() << 8) | (uint)r.Byte();
                 long n = extended & 0x1fffffff;
-                r.Context.Consume(PdfResourceKind.Objects, n);
+                r.ChargeObjects(n);
                 r.Skip((n + 8) / 8);
                 if (n > int.MaxValue)
                     throw new InvalidDataException();
@@ -190,6 +193,14 @@ internal static class CodecHeaders
         internal readonly Stream Stream;
         internal readonly PdfOperationContext Context;
         private readonly byte[] _one;
+        internal long ObjectWork { get; private set; }
+
+        internal void ChargeObjects(long count)
+        {
+            Context.Consume(PdfResourceKind.Objects, count);
+            ObjectWork = checked(ObjectWork + count);
+        }
+
         internal Reader(Stream stream, PdfOperationContext context)
         {
             Stream = stream;

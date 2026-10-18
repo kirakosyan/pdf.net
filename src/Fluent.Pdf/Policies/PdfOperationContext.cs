@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 
 namespace Fluent.Pdf;
-
 /// <summary>A synchronized per-operation policy, diagnostic and budget boundary, owned by the SDK.</summary>
 /// <remarks>Providers must charge resources before allocating, poll checkpoints, and finish all workers/scopes before returning.</remarks>
 public sealed class PdfOperationContext
@@ -27,14 +26,14 @@ public sealed class PdfOperationContext
         lock (_gate)
         {
             CheckCore();
-            if (_unicodeResidentCharged) return;
+            if (_unicodeResidentCharged)
+                return;
             Consume(PdfResourceKind.ExpandedBytes, bytes);
             _unicodeResidentCharged = true;
         }
     }
 
-    internal PdfOperationContext(string operation, string providerId, PdfCapability capability, PdfOperationPolicy policy, CancellationToken token,
-        Func<TimeSpan>? elapsedTime = null)
+    internal PdfOperationContext(string operation, string providerId, PdfCapability capability, PdfOperationPolicy policy, CancellationToken token, Func<TimeSpan>? elapsedTime = null)
     {
         Operation = operation;
         ProviderId = providerId;
@@ -58,44 +57,85 @@ public sealed class PdfOperationContext
     /// <summary>Gets cancellation combining the caller token and the operation deadline.</summary>
     public CancellationToken CancellationToken { get; }
 
-    internal bool IsActive { get { lock (_gate) return _active; } }
-    internal long Available(PdfResourceKind resource)
-    {ValidateResource(resource);lock(_gate){CheckCore();return Policy.Limits.GetLimit(resource)-_used[(int)resource]-_reserved[(int)resource];}}
-
-    internal ResourceReservation ReserveRemainingObjects()
+    internal bool IsActive
     {
-        lock(_gate)
+        get
         {
-            CheckCore();int i=(int)PdfResourceKind.Objects;long available=Policy.Limits.MaximumObjects-_used[i]-_reserved[i];
-            if(available==0)Fail("Limit.Objects","No object budget remains for an isolated operation.");
-            _reserved[i]+=available;return new ResourceReservation(this,available);
+            lock (_gate)
+                return _active;
         }
     }
 
-    internal sealed class ResourceReservation:IDisposable
+    internal long Available(PdfResourceKind resource)
+    {
+        ValidateResource(resource);
+        lock (_gate)
+        {
+            CheckCore();
+            return Policy.Limits.GetLimit(resource) - _used[(int)resource] - _reserved[(int)resource];
+        }
+    }
+
+    internal ResourceReservation Reserve(PdfResourceKind resource, long amount)
+    {
+        if (resource != PdfResourceKind.Objects && resource != PdfResourceKind.ExpandedBytes)
+            throw new ArgumentException("Only objects and expanded bytes support reservations.", nameof(resource));
+        if (amount < 0)
+            throw new ArgumentOutOfRangeException(nameof(amount));
+        lock (_gate)
+        {
+            CheckCore();
+            int i = (int)resource;
+            if (amount > Policy.Limits.GetLimit(resource) - _used[i] - _reserved[i])
+                Fail("Limit." + resource, "The isolated resource reservation exceeds the remaining budget.");
+            _reserved[i] += amount;
+            _peaks[i] = Math.Max(_peaks[i], _used[i] + _reserved[i]);
+            return new ResourceReservation(this, resource, amount);
+        }
+    }
+
+    internal sealed class ResourceReservation : IDisposable
     {
         private PdfOperationContext? _owner;
-        internal ResourceReservation(PdfOperationContext owner,long amount){_owner=owner;Amount=amount;}
-        internal long Amount{get;}
+        private readonly PdfResourceKind _resource;
+        internal ResourceReservation(PdfOperationContext owner, PdfResourceKind resource, long amount)
+        {
+            _owner = owner;
+            _resource = resource;
+            Amount = amount;
+        }
+
+        internal long Amount { get; }
+
         internal void Complete(long consumed)
         {
-            var owner=_owner??throw new ObjectDisposedException(nameof(ResourceReservation));
-            lock(owner._gate)
+            var owner = _owner ?? throw new ObjectDisposedException(nameof(ResourceReservation));
+            lock (owner._gate)
             {
-                if(!ReferenceEquals(_owner,owner))throw new ObjectDisposedException(nameof(ResourceReservation));
+                if (!ReferenceEquals(_owner, owner))
+                    throw new ObjectDisposedException(nameof(ResourceReservation));
                 owner.CheckCore();
-                if(consumed<0||consumed>Amount)owner.Fail("Limit.Objects","An isolated operation exceeded its object reservation.");
-                owner._reserved[(int)PdfResourceKind.Objects]-=Amount;_owner=null;owner.Charge(PdfResourceKind.Objects,consumed);
+                if (consumed < 0 || consumed > Amount)
+                    owner.Fail("Limit." + _resource, "An isolated operation exceeded its resource reservation.");
+                owner._reserved[(int)_resource] -= Amount;
+                _owner = null;
+                owner.Charge(_resource, consumed);
+                Monitor.PulseAll(owner._gate);
             }
         }
+
         public void Dispose()
         {
-            var owner=_owner;
-            if(owner!=null)lock(owner._gate)
-            {
-                if(!ReferenceEquals(_owner,owner))return;
-                _owner=null;owner._reserved[(int)PdfResourceKind.Objects]-=Amount;Monitor.PulseAll(owner._gate);
-            }
+            var owner = _owner;
+            if (owner != null)
+                lock (owner._gate)
+                {
+                    if (!ReferenceEquals(_owner, owner))
+                        return;
+                    _owner = null;
+                    owner._reserved[(int)_resource] -= Amount;
+                    Monitor.PulseAll(owner._gate);
+                }
         }
     }
 
@@ -103,8 +143,10 @@ public sealed class PdfOperationContext
     /// <remarks>The caller owns the decoder. The lease never closes it and expires with this operation. No codec is selected implicitly.</remarks>
     public Stream BorrowExpandedInput(Stream decodedInput)
     {
-        if (decodedInput is null) throw new ArgumentNullException(nameof(decodedInput));
-        if (!decodedInput.CanRead) throw new ArgumentException("A readable decoded stream is required.", nameof(decodedInput));
+        if (decodedInput is null)
+            throw new ArgumentNullException(nameof(decodedInput));
+        if (!decodedInput.CanRead)
+            throw new ArgumentException("A readable decoded stream is required.", nameof(decodedInput));
         Checkpoint();
         return new BorrowedStream(decodedInput, true, this, PdfResourceKind.ExpandedBytes);
     }
@@ -112,8 +154,10 @@ public sealed class PdfOperationContext
     /// <summary>Charges positive pixel dimensions before allocation, without allowing multiplication or cumulative overflow.</summary>
     public void ConsumePixels(long width, long height)
     {
-        if (width <= 0) throw new ArgumentOutOfRangeException(nameof(width));
-        if (height <= 0) throw new ArgumentOutOfRangeException(nameof(height));
+        if (width <= 0)
+            throw new ArgumentOutOfRangeException(nameof(width));
+        if (height <= 0)
+            throw new ArgumentOutOfRangeException(nameof(height));
         lock (_gate)
         {
             CheckCore();
@@ -124,39 +168,60 @@ public sealed class PdfOperationContext
     }
 
     /// <summary>Checks cancellation, deadline and previously latched failures. A provider cannot suppress a fatal policy failure.</summary>
-    public void Checkpoint() { lock (_gate) CheckCore(); }
+    public void Checkpoint()
+    {
+        lock (_gate)
+            CheckCore();
+    }
 
     /// <summary>Charges a nonnegative cumulative resource amount before allocation; Depth/Workers require scoped acquisition.</summary>
     public void Consume(PdfResourceKind resource, long amount)
     {
         ValidateResource(resource);
-        if (resource == PdfResourceKind.Depth || resource == PdfResourceKind.Workers) throw new ArgumentException("Use EnterScope for this resource.", nameof(resource));
-        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
-        lock (_gate) { CheckCore(); Charge(resource, amount); }
+        if (resource == PdfResourceKind.Depth || resource == PdfResourceKind.Workers)
+            throw new ArgumentException("Use EnterScope for this resource.", nameof(resource));
+        if (amount < 0)
+            throw new ArgumentOutOfRangeException(nameof(amount));
+        lock (_gate)
+        {
+            CheckCore();
+            Charge(resource, amount);
+        }
     }
 
     /// <summary>Acquires one Depth or Workers unit until the returned idempotent lease is disposed.</summary>
     public IDisposable EnterScope(PdfResourceKind resource)
     {
         ValidateResource(resource);
-        if (resource != PdfResourceKind.Depth && resource != PdfResourceKind.Workers) throw new ArgumentException("Only Depth and Workers are scoped.", nameof(resource));
-        lock (_gate) { CheckCore(); Charge(resource, 1); return new Scope(this, resource); }
+        if (resource != PdfResourceKind.Depth && resource != PdfResourceKind.Workers)
+            throw new ArgumentException("Only Depth and Workers are scoped.", nameof(resource));
+        lock (_gate)
+        {
+            CheckCore();
+            Charge(resource, 1);
+            return new Scope(this, resource);
+        }
     }
 
     /// <summary>Records a diagnostic with SDK-bound provenance. Strict losses and error severity latch a fatal failure.</summary>
     public void Report(PdfDiagnostic diagnostic)
     {
-        if (diagnostic is null) throw new ArgumentNullException(nameof(diagnostic));
+        if (diagnostic is null)
+            throw new ArgumentNullException(nameof(diagnostic));
         lock (_gate)
         {
             CheckCore();
-            if (_diagnostics.Count >= Policy.Limits.MaximumDiagnostics) Fail("Limit.Diagnostics", "The diagnostic retention limit was reached.");
+            if (_diagnostics.Count >= Policy.Limits.MaximumDiagnostics)
+                Fail("Limit.Diagnostics", "The diagnostic retention limit was reached.");
             bool loss = diagnostic.LossCategory != PdfLossCategory.None;
             var severity = loss ? (Policy.Mode == PdfProcessingMode.Strict ? PdfDiagnosticSeverity.Error : PdfDiagnosticSeverity.Warning) : diagnostic.Severity;
-            var bound = new PdfDiagnostic(diagnostic.Code, diagnostic.Message, Capability, ProviderId, severity,
-                diagnostic.LossCategory, Operation, diagnostic.PageIndex, diagnostic.ObjectId, diagnostic.Remediation);
+            var bound = new PdfDiagnostic(diagnostic.Code, diagnostic.Message, Capability, ProviderId, severity, diagnostic.LossCategory, Operation, diagnostic.PageIndex, diagnostic.ObjectId, diagnostic.Remediation);
             _diagnostics.Add(bound);
-            if (severity == PdfDiagnosticSeverity.Error) { _fatal = new PdfException(bound); throw _fatal; }
+            if (severity == PdfDiagnosticSeverity.Error)
+            {
+                _fatal = new PdfException(bound);
+                throw _fatal;
+            }
         }
     }
 
@@ -170,7 +235,8 @@ public sealed class PdfOperationContext
             while (true)
             {
                 CheckCore();
-                if (count == 0) return 0;
+                if (count == 0)
+                    return 0;
                 long available = Policy.Limits.GetLimit(resource) - _used[index] - _reserved[index];
                 if (available > 0)
                 {
@@ -179,6 +245,7 @@ public sealed class PdfOperationContext
                     probe = false;
                     break;
                 }
+
                 if (_reserved[index] == 0 && !_probing[index])
                 {
                     // Only one lookahead can consume a byte after the shared delivered-byte limit.
@@ -187,25 +254,31 @@ public sealed class PdfOperationContext
                     probe = true;
                     break;
                 }
+
                 // Release the lock while other I/O completes. Check cancel/deadline at bounded intervals.
                 Monitor.Wait(_gate, 50);
             }
         }
+
         bool released = false;
         try
         {
             // Never hold the context lock across external stream I/O.
             int read = input.Read(buffer, offset, request);
-            if (read < 0 || read > request) throw new IOException("The input stream returned an invalid byte count.");
+            if (read < 0 || read > request)
+                throw new IOException("The input stream returned an invalid byte count.");
             lock (_gate)
             {
-                if (probe) _probing[index] = false;
-                else _reserved[index] -= request;
+                if (probe)
+                    _probing[index] = false;
+                else
+                    _reserved[index] -= request;
                 released = true;
                 Monitor.PulseAll(_gate);
                 CheckCore();
                 Charge(resource, read);
             }
+
             return read;
         }
         finally
@@ -214,8 +287,10 @@ public sealed class PdfOperationContext
             {
                 lock (_gate)
                 {
-                    if (probe) _probing[index] = false;
-                    else _reserved[index] -= request;
+                    if (probe)
+                        _probing[index] = false;
+                    else
+                        _reserved[index] -= request;
                     Monitor.PulseAll(_gate);
                 }
             }
@@ -235,7 +310,11 @@ public sealed class PdfOperationContext
 
     internal void RejectLimit(PdfResourceKind resource)
     {
-        lock (_gate) { CheckCore(); Fail("Limit." + resource, "The configured resource limit was reached."); }
+        lock (_gate)
+        {
+            CheckCore();
+            Fail("Limit." + resource, "The configured resource limit was reached.");
+        }
     }
 
     internal void EnsureComplete()
@@ -243,9 +322,7 @@ public sealed class PdfOperationContext
         lock (_gate)
         {
             CheckCore();
-            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 ||
-                _reserved.Any(value=>value!=0) ||
-                _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
+            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 || _reserved.Any(value => value != 0) || _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
                 Fail("Operation.ScopeLeaked", "Provider scopes and reads must finish before returning.");
         }
     }
@@ -257,17 +334,24 @@ public sealed class PdfOperationContext
             _active = false;
             _clock.Stop();
             var resources = new PdfResourceUsage[_used.Length];
-            for (int i = 0; i < resources.Length; i++) resources[i] = new PdfResourceUsage((PdfResourceKind)i, _used[i], _peaks[i]);
+            for (int i = 0; i < resources.Length; i++)
+                resources[i] = new PdfResourceUsage((PdfResourceKind)i, _used[i], _peaks[i]);
             return new PdfOperationReport(Operation, ProviderId, succeeded, _elapsed(), _diagnostics.ToArray(), resources, _fatal?.Diagnostic);
         }
     }
 
-    internal void DisposeSources() { _linked.Dispose(); _deadline.Dispose(); }
+    internal void DisposeSources()
+    {
+        _linked.Dispose();
+        _deadline.Dispose();
+    }
 
     private void CheckCore()
     {
-        if (!_active) throw new ObjectDisposedException(nameof(PdfOperationContext));
-        if (_fatal is not null) throw _fatal;
+        if (!_active)
+            throw new ObjectDisposedException(nameof(PdfOperationContext));
+        if (_fatal is not null)
+            throw _fatal;
         _callerToken.ThrowIfCancellationRequested();
         if (_elapsed() >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
             Fail("Limit.ElapsedTime", "The operation deadline elapsed.");
@@ -276,9 +360,10 @@ public sealed class PdfOperationContext
     private void Charge(PdfResourceKind resource, long amount)
     {
         int index = (int)resource;
-        if (amount > Policy.Limits.GetLimit(resource) - _used[index] - _reserved[index]) Fail("Limit." + resource, "The configured resource limit was reached.");
+        if (amount > Policy.Limits.GetLimit(resource) - _used[index] - _reserved[index])
+            Fail("Limit." + resource, "The configured resource limit was reached.");
         _used[index] += amount;
-        _peaks[index] = Math.Max(_peaks[index], _used[index]);
+        _peaks[index] = Math.Max(_peaks[index], _used[index] + _reserved[index]);
     }
 
     private void Fail(string code, string message)
@@ -289,18 +374,28 @@ public sealed class PdfOperationContext
 
     private static void ValidateResource(PdfResourceKind resource)
     {
-        if (!Enum.IsDefined(typeof(PdfResourceKind), resource)) throw new ArgumentOutOfRangeException(nameof(resource));
+        if (!Enum.IsDefined(typeof(PdfResourceKind), resource))
+            throw new ArgumentOutOfRangeException(nameof(resource));
     }
 
     private sealed class Scope : IDisposable
     {
         private PdfOperationContext? _owner;
         private readonly PdfResourceKind _resource;
-        internal Scope(PdfOperationContext owner, PdfResourceKind resource) { _owner = owner; _resource = resource; }
+        internal Scope(PdfOperationContext owner, PdfResourceKind resource)
+        {
+            _owner = owner;
+            _resource = resource;
+        }
+
         public void Dispose()
         {
             var owner = Interlocked.Exchange(ref _owner, null);
-            if (owner is not null) { lock (owner._gate) owner._used[(int)_resource]--; }
+            if (owner is not null)
+            {
+                lock (owner._gate)
+                    owner._used[(int)_resource]--;
+            }
         }
     }
 }
