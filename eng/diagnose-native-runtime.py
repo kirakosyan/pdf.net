@@ -1,4 +1,4 @@
-"""Failure-only trusted ABI initialization probes; never a processing fallback."""
+"""Trusted ABI initialization diagnostics; never a processing fallback."""
 import hashlib
 import json
 import os
@@ -24,6 +24,11 @@ profiles += [(268291082, 33554432, 67108864, 4194304),
              (268291082, 268291082 // 8, 268291082 // 4, 1048576),
              (268291082, 32505856, 67108864, 1048576),
              (1073741824, 134217728, 268435456, 4194304)]
+# Compare the actual envelopes retained from failed default-memory sequential jobs.
+# These independent empty-request probes do not retry an executed SDK request.
+for memory in (268291082, 268054568, 267975730):
+    for region in (33554432, 67108864):
+        profiles += [(memory, 16777216, region, 1048576)] * 32
 records = []
 for memory, heap, region, size in profiles:
     with tempfile.TemporaryDirectory(prefix="fluent-pdf-runtime-probe-", dir=temporary) as directory:
@@ -31,10 +36,12 @@ for memory, heap, region, size in profiles:
         if not job.is_relative_to(temporary):
             raise RuntimeError("A probe directory escaped the owned runner root.")
         hashes = {}
+        asset_sizes = {}
         for name in ("worker", library):
             source, target = assets / name, job / name
             shutil.copyfile(source, target)
             hashes[name] = hashlib.sha256(source.read_bytes()).hexdigest()
+            asset_sizes[name] = source.stat().st_size
             if hashlib.sha256(target.read_bytes()).hexdigest() != hashes[name]:
                 raise RuntimeError("A probe asset changed during staging.")
             target.chmod(0o500 if name == "worker" else 0o400)
@@ -52,10 +59,11 @@ for memory, heap, region, size in profiles:
         records.append({"memoryBytes": memory, "gcHeapBytes": heap, "gcRangeBytes": region,
                         "gcRegionBytes": size, "exitCode": process.returncode,
                         "status": status, "stderr": process.stderr.decode("utf-8", errors="replace")[:8192],
-                        "assetSha256": hashes})
+                        "assetSha256": hashes, "assetBytes": asset_sizes})
 
 report = {"schemaVersion": 1, "runtimeIdentifier": rid,
           "scope": "Separate fresh sandboxed ABI initialization probes with empty requests; no PDF processing or qualification claim.",
+          "initializationFailures": sum(record["exitCode"] != 0 or record["status"] != 7 for record in records),
           "records": records}
 output = root / "artifacts" / "contracts" / "native-runtime-init.json"
 output.parent.mkdir(parents=True, exist_ok=True)
