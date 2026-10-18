@@ -4,6 +4,15 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteImagePdf(imageInput As Stream, output As Stream, Optional allowLosslessTranscode As Boolean = False) As PdfOperationReport
+        Dim image = PdfImages.Read(imageInput, New PdfImageReadOptions(allowLosslessTranscode))
+        Dim geometry = New PdfPageGeometry(New PdfPageBoxes(New PdfRect(0, 0, 200, 160)))
+        Dim canvas = PdfCanvas.Create(geometry, Sub(c) c.DrawImageAsset(image, New PdfRect(10, 10, 180, 140)))
+        Using document = PdfFacade.Create().AddPage(geometry)
+            canvas.ApplyTo(document.Pages(0))
+            Return document.Save(output)
+        End Using
+    End Function
     Public Function CombinePages(firstInput As Stream, secondInput As Stream, output As Stream) As PdfOperationReport
         Using first = PdfFacade.Open(firstInput), second = PdfFacade.Open(secondInput)
             Using combined = PdfPageOrganization.Merge({New PdfPageInput(first.CreateSnapshot()), New PdfPageInput(second.CreateSnapshot())})

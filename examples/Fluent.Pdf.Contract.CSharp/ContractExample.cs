@@ -5,6 +5,14 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteImagePdf(Stream imageInput, Stream output, bool allowLosslessTranscode = false)
+    {
+        var image = PdfImages.Read(imageInput, new PdfImageReadOptions(allowLosslessTranscode));
+        var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 200, 160)));
+        var canvas = PdfCanvas.Create(geometry, c => c.DrawImageAsset(image, new PdfRect(10, 10, 180, 140)));
+        using var document = PdfFacade.Create().AddPage(geometry);
+        canvas.ApplyTo(document.Pages[0]); return document.Save(output);
+    }
     public static PdfOperationReport CombinePages(Stream firstInput, Stream secondInput, Stream output)
     {
         using var first = PdfFacade.Open(firstInput);
