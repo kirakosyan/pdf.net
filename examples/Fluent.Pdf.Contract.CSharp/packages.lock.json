@@ -104,6 +104,12 @@
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
+      "fluent.pdf.compliance": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.cryptography": {
         "type": "Project",
         "dependencies": {
@@ -202,6 +208,12 @@
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
+      "fluent.pdf.compliance": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.cryptography": {
         "type": "Project",
         "dependencies": {
@@ -246,6 +258,12 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.compliance": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
         }
       },
       "fluent.pdf.cryptography": {
@@ -300,6 +318,12 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Workers": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.compliance": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
         }
       },
       "fluent.pdf.cryptography": {

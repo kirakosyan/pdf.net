@@ -40,10 +40,11 @@ internal static class PdfWriterCore
         return result;
     }
 
-    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null)
+    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null, bool validatedArchivalDowngrade = false)
     {
         context.Checkpoint();
         bool incremental = options.Mode == PdfWriteMode.Incremental;
+        if (incremental && validatedArchivalDowngrade) throw Error(context, "Archival.IncrementalProfile", "Validated archival conversion requires a full rewrite.");
         if (incremental && (crypt != null || source?.DecryptionApplied == true)) throw Error(context, "Security.IncrementalProfile", "Security transformations require a full rewrite in this profile.");
         if (incremental && source == null)
             throw Error(context, "Writer.IncrementalBaseRequired", "An incremental revision requires an immutable original file.");
@@ -181,7 +182,7 @@ internal static class PdfWriterCore
         }
 
         int version = options.Version == null ? (source == null ? 17 : originalVersion) : PdfVersionNumber.Parse(options.Version);
-        if (source != null && version < originalVersion)
+        if (source != null && version < originalVersion && !validatedArchivalDowngrade)
             throw Error(context, "Writer.VersionDowngrade", "A version downgrade requires explicit content conversion.");
         bool signature = source?.HasSignatureByteRanges ?? false;
         PdfValue ResolveFeature(PdfValue value) => Dereference(objects, value, context);

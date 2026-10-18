@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-066",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "archivalTargetedTests": 29,
+  "managedAndExplicitExternalValidatorTests": {
+    "passed": 862,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeRenderingTests"
+  },
+  "apiComparisons": 24,
+  "sourceFileHashes": {
+    ".github/workflows/ci.yml": "dfbef3cabaa0fb4c12928b8c238d7cc60f4dd58312bec20af7cf620acb479e07",
+    "eng/build-archival-fixture.ps1": "b6937a3bd9067d9aa2af1630e6ac2bac5561f79032ae4638da47f5fa56c7f94f",
+    "eng/check-api.ps1": "ccd9feae9c9d6d9cb2ae06c70be1b8029a6e6f1050c0407f0c27a65c927dda9d",
+    "eng/test-contracts.ps1": "c8be564631804b1fa23d65a20112aae9b4c20b2ac2df953071f031aa4ee99eff",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "9d88385d0da9020febc3d3906eb2b3b3037d8f2d754b14df58d3ece4a8416905",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "5c305c9f504a18b9bbb00239d820b252b778ca9cf55fb69c65c1106f697a8e0d",
+    "src/Fluent.Pdf/Archival/PdfArchival.Fonts.cs": "3c1924ff4ca54f1260446da8bc6c48a5d2d7555b2bfd90c2916109d2f319596f",
+    "src/Fluent.Pdf/Archival/PdfArchival.Preflight.cs": "7eae43040d50d939af331d69d91e9cf107a295198c10446fb126359d32911a5d",
+    "src/Fluent.Pdf/Archival/PdfArchival.cs": "90b7ac1c4e10ea8c0385bc5eb1b58cd57268080a1da56327e6bee44fed5aa47e",
+    "src/Fluent.Pdf/Archival/PdfArchivalContracts.cs": "bd48af3d452b610618efaa17d595a5d823c5250c0c0b49980c2d9e80ceb681a2",
+    "src/Fluent.Pdf/Providers/PdfCapability.cs": "5bfa23502664b8bf21836882c42b1d29f36351d9c5bb05c44059114a18a356e1",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "c97c5ff2a075b82e3232adeee01212b1a95a752ed84b06d384d572b446f0f45f",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "7b3a3af5925a5d6a184ca2dbfc5b09f2ba6c518c2a708d548283283dfc4f518f",
+    "src/Fluent.Pdf/Writing/PdfTransaction.cs": "1c59181ac60a4ac94c37ed1a8a60dc45cab439a375d2ed7f2e2d388fb44a6f6f",
+    "src/Fluent.Pdf/Writing/PdfWriterCore.cs": "8d29b2e4914062565c2ef469cc53c15e21ddba7cfcad05086adf3ff1c718140a",
+    "src/Fluent.Pdf.Compliance/Fluent.Pdf.Compliance.csproj": "76ff50e9268d669b395c37f197925dd0ec142f003d4bec130e361ec0628bb371",
+    "src/Fluent.Pdf.Compliance/PublicAPI.Shipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Fluent.Pdf.Compliance/PublicAPI.Unshipped.txt": "026b4c2a471f92521f8c44a126c9efd47c3b4f689eed8b6deb664f466860dbe9",
+    "src/Fluent.Pdf.Compliance/VeraPdfReportValidator.cs": "833c6b2e1a1b186c42b135a078b6d94d876540451ebd1c14cd10d5a66ee7837e",
+    "src/Fluent.Pdf.Compliance/packages.lock.json": "02b6e7778b288cfce28ff172638ef3fa0a3d740e4cf79e97b746b432a325957e",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalFixture.cs": "694e1c273edc8cd682e60093ac6362e53a34db8be939855faed175eb4bbdc97d",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalReportTests.cs": "a8c2e17edb09a4849510476c29a9550247dfd75e368ae4ca831a633cdcdbf5ea",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalTests.cs": "7be17f5a7a120359779df9b16ed08ad6cf210524442c64d4a06b9d37b746efc2"
+  },
+  "reportSha256": {
+    "archival-final-build3.log": "5a68fe6a2d985d439dc678efaec2995396357f26a2150ed871b603b892e04cb3",
+    "archival-final-tests2.log": "b5b2fbfb09fa212f80782bef94279eb6d1f1aabdf9c8a1ec818f5d0f9a7ccb38",
+    "archival-api-check2.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67",
+    "archival-release-check2.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "archival-spec-check.log": "80514e09658557ac40036d1d8bbb490a9d433525a15794413b042b00390e8d28",
+    "api-comparisons.json": "e9a636462c451e1149d9073cf59d88e4f70699b5bad7d74aa24efcb22361c33b"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "limitations": [
+    "Local native-positive SDK worker/render/codec tests cannot run: Landlock ENOSYS. CI remains unfiltered",
+    "Explicit external validator fixtures exercise real validation; their caller-owned host does not qualify SDK isolation or the complete conformance corpus",
+    "Actual minimum runtimes and exact final packages are not qualified; all mandatory profiles and production gates remain open"
+  ]
+}

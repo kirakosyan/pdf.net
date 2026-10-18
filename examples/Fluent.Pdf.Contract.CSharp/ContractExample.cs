@@ -5,6 +5,9 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfProviderRegistry ArchivalValidator(Fluent.Pdf.Compliance.PdfArchivalValidationRunner host) => new(new Fluent.Pdf.Compliance.VeraPdfReportValidator(host));
+    public static PdfArchivalConversion ConvertToArchive(PdfDocumentSnapshot source, Stream output, PdfArchivalOptions options, PdfProviderRegistry providers) => PdfArchival.Convert(source, output, options, providers);
+
     public static PdfProviderRegistry CertificateSecurity() => new(new Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider());
     public static PdfSecurityResult ProtectWithPassword(PdfDocumentSnapshot source, Stream output, byte[] preparedUser, byte[] preparedOwner)
     {

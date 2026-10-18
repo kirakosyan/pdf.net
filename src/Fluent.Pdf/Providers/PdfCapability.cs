@@ -20,5 +20,7 @@ public enum PdfCapability
     /// <summary>Explicit Unicode-aware glyph shaping with logical cluster provenance.</summary>
     ShapeText = 7,
     /// <summary>Explicit offline CMS seed envelopes for certificate encryption.</summary>
-    CmsEnvelopes = 8
+    CmsEnvelopes = 8,
+    /// <summary>Explicit complete independent PDF/A profile validation.</summary>
+    ValidateArchival = 9
 }

@@ -1,0 +1,6 @@
+#nullable enable
+Fluent.Pdf.Compliance.PdfArchivalValidationRunner
+Fluent.Pdf.Compliance.VeraPdfReportValidator
+Fluent.Pdf.Compliance.VeraPdfReportValidator.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Compliance.VeraPdfReportValidator.Validate(Fluent.Pdf.PdfArchivalProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfArchivalValidation!
+Fluent.Pdf.Compliance.VeraPdfReportValidator.VeraPdfReportValidator(Fluent.Pdf.Compliance.PdfArchivalValidationRunner! runner) -> void

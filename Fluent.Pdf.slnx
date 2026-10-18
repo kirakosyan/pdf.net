@@ -11,6 +11,7 @@
     <Project Path="src/Fluent.Pdf.Text/Fluent.Pdf.Text.csproj" />
     <Project Path="src/Fluent.Pdf.Rendering/Fluent.Pdf.Rendering.csproj" />
     <Project Path="src/Fluent.Pdf.Cryptography/Fluent.Pdf.Cryptography.csproj" />
+    <Project Path="src/Fluent.Pdf.Compliance/Fluent.Pdf.Compliance.csproj" />
   </Folder>
   <Folder Name="/apps/">
     <Project Path="apps/PdfReader/PdfReader.csproj" />

@@ -8,3 +8,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Fluent.Pdf.Workers")]
 [assembly: InternalsVisibleTo("Fluent.Pdf.Rendering")]
 [assembly: InternalsVisibleTo("Fluent.Pdf.Cryptography")]
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Fluent.Pdf.Compliance")]

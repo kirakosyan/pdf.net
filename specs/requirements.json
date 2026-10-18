@@ -2299,7 +2299,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/archival.md",
+        "implemented": [
+          "Explicit selection for all11 archival profiles; managed common preflight and full rewrite with synchronized XMP, IDs, caller ICC output intents and explicit-map CIDSet repair",
+          "Mandatory complete independent validation bound to exact output bytes/profile before any converted output; malformed/incomplete/mismatched observations fail closed",
+          "Optional bounded pinned report bridge with explicit caller host; actual independent source fixtures, repair diagnostics, C#/VB consumers and shared-context resource policies"
+        ],
+        "pending": [
+          "Complete source/font/color/form/attachment/extension conversions and repairs, recursive archival attachments and full level-A semantic/human review remain mandatory",
+          "SDK-owned isolated validation host, complete engine/dependency and actual minimum runtime qualification remain mandatory",
+          "Complete independent standards/fidelity corpus, fuzz/concurrency/endurance, exact final packages and every production gate remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-066-standards.json",
+        "sourceEvidence": "docs/evidence/FP-066-source.json",
+        "independentEvidence": "docs/evidence/FP-066-independent.json"
+      }
     },
     {
       "id": "FP-067",

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-031",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "575e617465276146211dba78ae1602150ad8950b",
+  "sourceTree": "ef6dd93a93521ae348cbb61a3fa0316c43874a1e",
   "localLane": {
     "os": "Linux",
     "architecture": "x64",
@@ -75,5 +75,239 @@
     "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeRenderingTests"
   },
   "apiComparisons": 21,
-  "sourceDependencyVulnerabilityObservation": "Pinned public feed scan reported no known vulnerable direct/transitive packages for this project at the time of the source check; complete release security review remains mandatory."
+  "sourceDependencyVulnerabilityObservation": "Pinned public feed scan reported no known vulnerable direct/transitive packages for this project at the time of the source check; complete release security review remains mandatory.",
+  "sourceCI": {
+    "runId": 39139118817,
+    "runNumber": 89,
+    "conclusion": "success",
+    "headCommit": "575e617465276146211dba78ae1602150ad8950b",
+    "headTree": "ef6dd93a93521ae348cbb61a3fa0316c43874a1e",
+    "testedMergeCommit": "593ce538f80f6da795dd8da806f2c64020b6cbff",
+    "testedMergeTree": "ef6dd93a93521ae348cbb61a3fa0316c43874a1e",
+    "runtimeLanes": 20,
+    "passedPerLane": 895,
+    "totalPassed": 17900,
+    "failed": 0,
+    "skipped": 0,
+    "jobs": [
+      {
+        "jobId": 117709685754,
+        "logSha256": "6ec219872dfc150ecce5539a3b33a12c464c895a811ee3f0b4df708df031b56b",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          }
+        ]
+      },
+      {
+        "jobId": 117709685836,
+        "logSha256": "e109168a1ced1f9c4598098e31fde2c085215894cc0f130e8d0c18648f6c8ad5",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          }
+        ]
+      },
+      {
+        "jobId": 117709685843,
+        "logSha256": "b308ad8b7bec916064a9e09555cd19041c27b3f0a6e6bfd78c4fbf7ef4551756",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net472",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net472",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          }
+        ]
+      },
+      {
+        "jobId": 117709685877,
+        "logSha256": "2e091801e694c7d825ed399349787180c9a3cedcaf5e5378c123163cc84bc931",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          }
+        ]
+      },
+      {
+        "jobId": 117709685932,
+        "logSha256": "7ee3cca1bcca8f4d40ba2c8f1cc8450335e448066fb41a977c4a18d82b3bb5e9",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          }
+        ]
+      },
+      {
+        "jobId": 117709685943,
+        "logSha256": "7d5c0063531b49a088c92a14a1af3aaa78592ec3d7283ffb26437ed86bb35b4f",
+        "lanes": [
+          {
+            "target": "net8.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          },
+          {
+            "target": "net10.0",
+            "failed": 0,
+            "passed": 895,
+            "skipped": 0,
+            "total": 895
+          }
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 12141460281,
+        "name": "source-contracts-linux-x64",
+        "size_in_bytes": 792929,
+        "digest": "sha256:c3005b2323f41ed03e696ca68e1c1f82d9616f9cdd4647c6eeb0dd169d9aecb5"
+      },
+      {
+        "id": 12141256711,
+        "name": "source-contracts-win-arm64",
+        "size_in_bytes": 793037,
+        "digest": "sha256:a6ddf1d22af5b8f24492d8e5bf116c7358f9000d5293dcf862a491a1062dcf41"
+      },
+      {
+        "id": 12141197114,
+        "name": "source-contracts-win-x64",
+        "size_in_bytes": 1259185,
+        "digest": "sha256:740f8cd6e65016d36bfec9d526fcfb8b0e4c96e6b85ac445bcc05913efc10c80"
+      },
+      {
+        "id": 12141126833,
+        "name": "source-contracts-osx-arm64",
+        "size_in_bytes": 805680,
+        "digest": "sha256:9020f4c2edf8a8b513d6e58bcb533420bc837cb42c5835b8a96faa92ef2a4156"
+      },
+      {
+        "id": 12140918050,
+        "name": "source-contracts-osx-x64",
+        "size_in_bytes": 810525,
+        "digest": "sha256:e0f61221f923d8443d1acb5afe7ee25ab156d757acb7d3bb3942d743f5eaaf26"
+      },
+      {
+        "id": 12140378575,
+        "name": "source-contracts-linux-arm64",
+        "size_in_bytes": 793575,
+        "digest": "sha256:5e0406303e1c41ad6b644f55627da19f6400811112e39008e05acbcd66ecd136"
+      }
+    ],
+    "limitations": [
+      "Source fixtures only; complete security profiles, actual minimum runtimes, final packages and all production qualification remain mandatory",
+      "Earlier native startup/API-tool/deadline failures remain retained; this passing source run is not full reliability qualification"
+    ]
+  }
 }

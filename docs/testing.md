@@ -1,10 +1,11 @@
 # Source contract testing and evidence
 
-Use PowerShell 7, .NET SDK 10, the .NET 8 runtime and NativeAOT platform prerequisites (C/C++ compiler, linker and development libraries). Windows x64 also needs installed current .NET Framework and its x86 runtime. Restore uses committed lock files; API tooling is pinned in the repository tool manifest.
+Use PowerShell 7, .NET SDK 10, the .NET 8 runtime, an explicit Java 21 runtime for independent archival source fixtures and NativeAOT platform prerequisites (C/C++ compiler, linker and development libraries). Windows x64 also needs installed current .NET Framework and its x86 runtime. Restore uses committed lock files; API tooling is pinned in the repository tool manifest.
 
 ```powershell
 pwsh -File eng/validate-spec.ps1
 pwsh -File eng/build-native-fixtures.ps1
+pwsh -File eng/build-archival-fixture.ps1
 dotnet restore Fluent.Pdf.slnx --locked-mode
 dotnet tool restore
 dotnet build Fluent.Pdf.slnx -c Release --no-restore
@@ -85,3 +86,5 @@ FP-023 tests cover Unicode names and explicit metadata, AF persistence, caller s
 FP-024 source contracts exercise Unicode groups, immutable inventories, all membership policies, nested expressions/depth, intents, configurations/usage, hidden text/state/path behavior, unsupported dependencies, Form/annotation removal, page extraction, passive actions, resource limits/cancellation and executable C#/VB canvas examples. Full renderer and optional-content qualification remains pending.
 
 FP-025 source fixtures cover mapped Unicode/ligatures/supplementary characters, explicit/inferred/unmapped text, source order versus line/paragraph inference, ActualText visibility, spacing/scaling/TJ/quotes, CTM/Forms/state restoration, crop/rotation/UserUnit, Identity-V W2 metrics, hidden advances/invisible text, declared-encoding standard widths, embedded multilingual fonts, cancellation/resource failure and C#/VB consumers.
+
+The archival source fixtures use a SHA-256-pinned veraPDF 1.28.2 distribution and an explicit test-only external host. Reports, exact candidate PDFs and Java/runtime identity are retained under artifacts/contracts/archival. They exercise actual independent profile validation; they do not qualify a shipping isolated validation host, full semantic/fidelity corpus, actual minimum runtimes or final packages. The SDK report bridge itself installs/launches no engine and creates no staging files.

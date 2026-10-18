@@ -205,11 +205,18 @@
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
+      "fluent.pdf.compliance": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
@@ -222,6 +229,7 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
@@ -366,11 +374,18 @@
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
+      "fluent.pdf.compliance": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
@@ -383,6 +398,7 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
@@ -535,11 +551,18 @@
           "Fluent.Pdf.Workers": "[1.0.0, )"
         }
       },
+      "fluent.pdf.compliance": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.contract.csharp": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
@@ -552,6 +575,7 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
+          "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",

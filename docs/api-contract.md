@@ -131,3 +131,5 @@ FP-036 adds passive `PdfForms` field/widget inventories, original hierarchy/stat
 FP-037 adds immutable field-value packets, explicit FDF/XFDF/XML/JSON profiles, transactional filling with shared-context appearances, field copying/default-font rebinding, widget decoration and selective flattening. [form-workflows.md](form-workflows.md) defines format, inheritance, ownership and signature limits.
 
 FP-031 adds explicit full-rewrite password/certificate security, owner/user/recipient results, disposable prepared-byte credentials, permission/cipher/metadata choices and an optional offline CMS boundary. [Security contracts](security.md) describe source applicability, ownership, permission semantics and mandatory gaps.
+
+FP-066 adds explicit archival profiles, common structural preflight, conversion gated on complete independent exact-byte validation, detached findings and mandatory shared validation-host contracts. Optional Fluent.Pdf.Compliance supplies a bounded pinned report bridge; it launches no engine. See [archival behavior and qualification gaps](archival.md).

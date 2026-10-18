@@ -1,4 +1,6 @@
 #nullable enable
+Fluent.Pdf.IPdfArchivalValidator
+Fluent.Pdf.IPdfArchivalValidator.Validate(Fluent.Pdf.PdfArchivalProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfArchivalValidation!
 Fluent.Pdf.IPdfCidFontProgram
 Fluent.Pdf.IPdfCidFontProgram.MapCid(int cid, Fluent.Pdf.PdfOperationContext! context) -> int
 Fluent.Pdf.IPdfCmsEnvelopeProvider
@@ -131,6 +133,45 @@ Fluent.Pdf.PdfAnnotationView
 Fluent.Pdf.PdfAnnotationView.Print = 1 -> Fluent.Pdf.PdfAnnotationView
 Fluent.Pdf.PdfAnnotationView.Screen = 0 -> Fluent.Pdf.PdfAnnotationView
 Fluent.Pdf.PdfAnnotations
+Fluent.Pdf.PdfArchival
+Fluent.Pdf.PdfArchivalConversion
+Fluent.Pdf.PdfArchivalConversion.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfArchivalConversion.Validation.get -> Fluent.Pdf.PdfArchivalValidation!
+Fluent.Pdf.PdfArchivalFinding
+Fluent.Pdf.PdfArchivalFinding.Location.get -> string!
+Fluent.Pdf.PdfArchivalFinding.Message.get -> string!
+Fluent.Pdf.PdfArchivalFinding.PdfArchivalFinding(string! rule, string! location, string! message) -> void
+Fluent.Pdf.PdfArchivalFinding.Rule.get -> string!
+Fluent.Pdf.PdfArchivalInspection
+Fluent.Pdf.PdfArchivalInspection.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfArchivalFinding!>!
+Fluent.Pdf.PdfArchivalInspection.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfArchivalOptions
+Fluent.Pdf.PdfArchivalOptions.AllowSignatureInvalidation.get -> bool
+Fluent.Pdf.PdfArchivalOptions.OutputColorSpace.get -> Fluent.Pdf.PdfColorSpace?
+Fluent.Pdf.PdfArchivalOptions.OutputCondition.get -> string!
+Fluent.Pdf.PdfArchivalOptions.PdfArchivalOptions(Fluent.Pdf.PdfArchivalProfile profile, Fluent.Pdf.PdfColorSpace? outputColorSpace = null, string! outputCondition = "Explicit output condition", bool replaceMetadata = false, bool allowSignatureInvalidation = false) -> void
+Fluent.Pdf.PdfArchivalOptions.Profile.get -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalOptions.ReplaceMetadata.get -> bool
+Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A1A = 0 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A1B = 1 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A2A = 2 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A2B = 3 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A2U = 4 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A3A = 5 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A3B = 6 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A3U = 7 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A4 = 8 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A4E = 9 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalProfile.A4F = 10 -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalValidation
+Fluent.Pdf.PdfArchivalValidation.Completed.get -> bool
+Fluent.Pdf.PdfArchivalValidation.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfArchivalFinding!>!
+Fluent.Pdf.PdfArchivalValidation.IsCompliant.get -> bool
+Fluent.Pdf.PdfArchivalValidation.OperationReport.get -> Fluent.Pdf.PdfOperationReport?
+Fluent.Pdf.PdfArchivalValidation.PdfArchivalValidation(Fluent.Pdf.PdfArchivalProfile profile, string! sourceSha256, bool completed, bool isCompliant, Fluent.Pdf.PdfArchivalFinding![]! findings) -> void
+Fluent.Pdf.PdfArchivalValidation.Profile.get -> Fluent.Pdf.PdfArchivalProfile
+Fluent.Pdf.PdfArchivalValidation.SourceSha256.get -> string!
 Fluent.Pdf.PdfAttachment
 Fluent.Pdf.PdfAttachment.Description.get -> string?
 Fluent.Pdf.PdfAttachment.FileName.get -> string!
@@ -292,6 +333,7 @@ Fluent.Pdf.PdfCapability.RecognizeText = 4 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderHtml = 3 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderPages = 2 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ShapeText = 7 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.ValidateArchival = 9 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.WriteDocument = 1 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCertificateCredential
 Fluent.Pdf.PdfCertificateCredential.OpenCertificate() -> System.IO.Stream!
@@ -1847,6 +1889,10 @@ static Fluent.Pdf.PdfAnnotation.CreateMarkup(Fluent.Pdf.PdfAnnotationKind kind, 
 static Fluent.Pdf.PdfAnnotationSet.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotationSet!
 static Fluent.Pdf.PdfAnnotationSet.ReadXfdf(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAnnotationSet!
 static Fluent.Pdf.PdfAnnotations.Add(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfAnnotation!>! annotations, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfArchival.Convert(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfArchivalOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfArchivalConversion!
+static Fluent.Pdf.PdfArchival.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfArchivalProfile profile, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfArchivalInspection!
+static Fluent.Pdf.PdfArchival.ProfileIdentifier(Fluent.Pdf.PdfArchivalProfile profile) -> string!
+static Fluent.Pdf.PdfArchival.Validate(System.IO.Stream! input, Fluent.Pdf.PdfArchivalProfile profile, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfArchivalValidation!
 static Fluent.Pdf.PdfAttachments.Add(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! input, Fluent.Pdf.PdfAttachmentOptions! attachment, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfAttachments.Extract(Fluent.Pdf.PdfAttachment! attachment, System.IO.Stream! output, string? variant = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfAttachments.ExtractToDirectory(Fluent.Pdf.PdfAttachment! attachment, string! directory, string? fileName = null, bool overwrite = false, string? variant = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!

@@ -30,7 +30,8 @@ public sealed class PdfProviderRegistry
                     capability == PdfCapability.Fonts && provider is not IPdfFontProvider ||
                     capability == PdfCapability.ShapeText && provider is not IPdfTextShaper ||
                     capability == PdfCapability.RenderPages && provider is not IPdfPageRenderer ||
-                    capability == PdfCapability.CmsEnvelopes && provider is not IPdfCmsEnvelopeProvider)
+                    capability == PdfCapability.CmsEnvelopes && provider is not IPdfCmsEnvelopeProvider ||
+                    capability == PdfCapability.ValidateArchival && provider is not IPdfArchivalValidator)
                     throw new ArgumentException("A provider does not implement the interface for its declared service.", nameof(providers));
                 _providers.Add(capability, provider);
                 _identifiers.Add(capability, descriptor.Id);

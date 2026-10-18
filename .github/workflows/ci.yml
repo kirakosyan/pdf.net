@@ -28,6 +28,13 @@ jobs:
           dotnet-version: |
             10.0.4xx
             8.0.x
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21.0.12.1+1'
+      - name: Provision pinned independent archival source validator
+        shell: pwsh
+        run: ./eng/build-archival-fixture.ps1
       - name: Validate specification and naming
         shell: pwsh
         run: ./eng/validate-spec.ps1

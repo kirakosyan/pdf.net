@@ -4,6 +4,13 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function ArchivalValidator(host As Fluent.Pdf.Compliance.PdfArchivalValidationRunner) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Compliance.VeraPdfReportValidator(host))
+    End Function
+    Public Function ConvertToArchive(source As PdfDocumentSnapshot, output As Stream, options As PdfArchivalOptions, providers As PdfProviderRegistry) As PdfArchivalConversion
+        Return PdfArchival.Convert(source, output, options, providers)
+    End Function
+
     Public Function CertificateSecurity() As PdfProviderRegistry
         Return New PdfProviderRegistry(New Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider())
     End Function
