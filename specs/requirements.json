@@ -1789,7 +1789,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-printing.md",
+        "implemented": [
+          "Immutable print policy preserving existing constructors; explicit paper/CSS fit, landscape, scale and point margins",
+          "Bounded resource-free template normalization and final-page native counters",
+          "Passive same-context page-MCID/structure/parent-tree association validation, original contracts and independent actual-browser print observations"
+        ],
+        "pending": [
+          "Complete print CSS/long-report/clipping/template assets and deterministic template-font profiles remain mandatory",
+          "Full tagged Form/object/role/attribute/namespace profiles and independent PDF/UA plus semantic/human accessibility review remain mandatory",
+          "Complete host isolation, actual mandatory RIDs/minimum/current/fallback/final packages and production quality gates remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-047-source.json",
+        "standardsEvidence": "docs/evidence/FP-047-standards.json",
+        "independentEvidence": "docs/evidence/FP-047-independent.json"
+      }
     },
     {
       "id": "FP-048",

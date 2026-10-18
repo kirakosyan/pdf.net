@@ -334,11 +334,13 @@ public sealed class HtmlTests
     {
         internal const string Version = "154.0.8037.57", Revision = "@original-source-revision";
         private readonly Queue<string> _messages = new();
-        private readonly byte[] _pdf = PdfBytes();
+        private readonly byte[] _pdf;
+        internal Peer(byte[]? pdf = null) => _pdf = pdf ?? PdfBytes();
         internal string Behavior = "";
         internal bool WrongVersion, Disposed, ScriptDisabled, PromiseObserved;
         internal int ReadinessChecks;
         internal string? ObservedLocale, ObservedTimeZone, ObservedMedia;
+        internal JsonElement PrintParameters;
         internal readonly List<string> Commands = new(), Bodies = new(), ResponseHeaders = new();
         public void Send(string message, PdfOperationContext context)
         {
@@ -494,6 +496,7 @@ public sealed class HtmlTests
                     };
                     break;
                 case "Page.printToPDF":
+                    PrintParameters = p.Clone();
                     result = new
                     {
                         stream = "private-pdf"

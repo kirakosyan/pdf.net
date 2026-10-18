@@ -49,6 +49,8 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
         if (context == null)
             throw new ArgumentNullException(nameof(context));
         context.Checkpoint();
+        string header = ChromiumPrintTemplate.Normalize(options.Print.HeaderHtml, context);
+        string footer = ChromiumPrintTemplate.Normalize(options.Print.FooterHtml, context);
         if (options.Readiness.JavaScriptPromise != null && !options.EnableJavaScript)
             throw PdfWriterCore.Error(context, "Html.PromiseRequiresJavaScript", "An explicit readiness promise requires source JavaScript execution to be enabled.");
         context.Consume(PdfResourceKind.ExpandedBytes, 4096);
@@ -117,7 +119,7 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
 
         context.Checkpoint();
         string handle;
-        using (var printed = protocol.Call("Page.printToPDF", P(("transferMode", "ReturnAsStream"), ("printBackground", options.PrintBackground), ("paperWidth", options.PageSize.Width / 72d), ("paperHeight", options.PageSize.Height / 72d), ("marginTop", 0), ("marginBottom", 0), ("marginLeft", 0), ("marginRight", 0), ("displayHeaderFooter", false)), session))
+        using (var printed = protocol.Call("Page.printToPDF", P(("transferMode", "ReturnAsStream"), ("printBackground", options.PrintBackground), ("paperWidth", options.PageSize.Width / 72d), ("paperHeight", options.PageSize.Height / 72d), ("marginTop", options.Print.MarginTop / 72d), ("marginBottom", options.Print.MarginBottom / 72d), ("marginLeft", options.Print.MarginLeft / 72d), ("marginRight", options.Print.MarginRight / 72d), ("landscape", options.Print.Landscape), ("scale", options.Print.Scale), ("preferCSSPageSize", options.Print.PreferCssPageSize), ("displayHeaderFooter", options.Print.HeaderHtml != null || options.Print.FooterHtml != null), ("headerTemplate", header), ("footerTemplate", footer), ("generateTaggedPDF", options.Print.Tagged)), session))
             handle = protocol.String(Result(printed), "stream");
         while (true)
         {

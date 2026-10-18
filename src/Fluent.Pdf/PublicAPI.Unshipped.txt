@@ -967,11 +967,25 @@ Fluent.Pdf.PdfHtmlOptions.Media.get -> Fluent.Pdf.PdfHtmlMedia
 Fluent.Pdf.PdfHtmlOptions.PageSize.get -> Fluent.Pdf.PdfPageSize
 Fluent.Pdf.PdfHtmlOptions.PdfHtmlOptions(Fluent.Pdf.PdfPageSize? pageSize = null, int viewportWidth = 1280, int viewportHeight = 720, bool enableJavaScript = false, bool printBackground = true, int maximumPages = 1000, Fluent.Pdf.PdfHtmlReadinessOptions? readiness = null, string! locale = "en-US", string! timeZone = "UTC", Fluent.Pdf.PdfHtmlMedia media = Fluent.Pdf.PdfHtmlMedia.Print) -> void
 Fluent.Pdf.PdfHtmlOptions.PdfHtmlOptions(Fluent.Pdf.PdfPageSize? pageSize, int viewportWidth, int viewportHeight, bool enableJavaScript, bool printBackground, int maximumPages) -> void
+Fluent.Pdf.PdfHtmlOptions.Print.get -> Fluent.Pdf.PdfHtmlPrintOptions!
 Fluent.Pdf.PdfHtmlOptions.PrintBackground.get -> bool
 Fluent.Pdf.PdfHtmlOptions.Readiness.get -> Fluent.Pdf.PdfHtmlReadinessOptions!
 Fluent.Pdf.PdfHtmlOptions.TimeZone.get -> string!
 Fluent.Pdf.PdfHtmlOptions.ViewportHeight.get -> int
 Fluent.Pdf.PdfHtmlOptions.ViewportWidth.get -> int
+Fluent.Pdf.PdfHtmlOptions.WithPrint(Fluent.Pdf.PdfHtmlPrintOptions! print) -> Fluent.Pdf.PdfHtmlOptions!
+Fluent.Pdf.PdfHtmlPrintOptions
+Fluent.Pdf.PdfHtmlPrintOptions.FooterHtml.get -> string?
+Fluent.Pdf.PdfHtmlPrintOptions.HeaderHtml.get -> string?
+Fluent.Pdf.PdfHtmlPrintOptions.Landscape.get -> bool
+Fluent.Pdf.PdfHtmlPrintOptions.MarginBottom.get -> double
+Fluent.Pdf.PdfHtmlPrintOptions.MarginLeft.get -> double
+Fluent.Pdf.PdfHtmlPrintOptions.MarginRight.get -> double
+Fluent.Pdf.PdfHtmlPrintOptions.MarginTop.get -> double
+Fluent.Pdf.PdfHtmlPrintOptions.PdfHtmlPrintOptions(bool preferCssPageSize = false, bool landscape = false, double scale = 1, double marginTop = 0, double marginBottom = 0, double marginLeft = 0, double marginRight = 0, string? headerHtml = null, string? footerHtml = null, bool tagged = false) -> void
+Fluent.Pdf.PdfHtmlPrintOptions.PreferCssPageSize.get -> bool
+Fluent.Pdf.PdfHtmlPrintOptions.Scale.get -> double
+Fluent.Pdf.PdfHtmlPrintOptions.Tagged.get -> bool
 Fluent.Pdf.PdfHtmlReadinessOptions
 Fluent.Pdf.PdfHtmlReadinessOptions.JavaScriptPromise.get -> string?
 Fluent.Pdf.PdfHtmlReadinessOptions.MaximumInFlightRequests.get -> int
@@ -2054,6 +2068,7 @@ static Fluent.Pdf.PdfGraphicsResource.Font(Fluent.Pdf.PdfFontResource! font) -> 
 static Fluent.Pdf.PdfGraphicsState.Create(string! blendMode = "Normal", double fillAlpha = 1, double strokeAlpha = 1, Fluent.Pdf.PdfSoftMask? softMask = null, bool alphaIsShape = false, bool textKnockout = true, bool strokeOverprint = false, bool fillOverprint = false, int overprintMode = 0, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfGraphicsState!
 static Fluent.Pdf.PdfGraphicsState.SupportedBlendModes.get -> System.Collections.Generic.IReadOnlyList<string!>!
 static Fluent.Pdf.PdfHtml.Render(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfHtmlOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfHtmlPrintOptions.Default.get -> Fluent.Pdf.PdfHtmlPrintOptions!
 static Fluent.Pdf.PdfHtmlReadinessOptions.Default.get -> Fluent.Pdf.PdfHtmlReadinessOptions!
 static Fluent.Pdf.PdfHtmlResource.Read(System.Uri! address, string! mediaType, System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
 static Fluent.Pdf.PdfHtmlSource.FromHtml(string! markup, System.Uri? address = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!

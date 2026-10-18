@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-047",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "newSourceCases": 27,
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1029,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "dfa79da6e83455deabf14c20d0af3bf3386e191b0248a03c2905e6a4e7cb5da0"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "76653249095bca7d1395a207a36d5edb7f6e7bb6d8563e87f26481ad6ac995ae"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "37cd05143518cdaaaa8a51202d762cba21d289eae0de9e858926b5527817090f"
+    }
+  ],
+  "apiComparisons": 27,
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Html/PdfHtml.cs": "21c92628b56a8c4c54fdfc9aed1697849f3f932e1ebddbe0698dcffd1c29c050",
+    "src/Fluent.Pdf/Html/PdfHtmlPrintOptions.cs": "88b593efd29c068afaf298521f72c98112f958fb92351b40d77fb40fd95214ac",
+    "src/Fluent.Pdf/Html/PdfHtmlTagStructure.cs": "3b27a37cdb43313f0a666495788bc073ada7dc959a1e54b53ca1ca678855af2b",
+    "src/Fluent.Pdf.Html/ChromiumHtmlRenderer.cs": "5135cd8e4d9ee2d552038f7559806055deee3e2f74b396aaddce1b8e5d630d38",
+    "src/Fluent.Pdf.Html/ChromiumPrintTemplate.cs": "9a24af2f40b541b5b533d4a116741d9bf012e00ed9708d22edc505914d69103f",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlPrintTests.cs": "1b020417159d9e10363d34486e53ede55d049f0221f25ab83da87fb59ea038d2",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlTests.cs": "9dbf72a6822f7fcdb6448b3d948e1750ab1dab50a62c726cdc3132f3fc1bf175",
+    "eng/HtmlBrowserProbe/PrintFixture.cs": "06268286a04c82b59e312dc586bfb66ca5f5ab46d47bac5f215f4f0ae1df7bef",
+    "eng/HtmlBrowserProbe/Program.cs": "0942e732dd9373bbfc906261c1249ba6623d904cd7c5279782b23fe56e959049",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "fb191bb16222c192799dc46f406e6a6dbf93640e9e55cd58d69e8629569669b1",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "62f0206452336331a324713ea0ae176fe0945cbfd46dab52061ef9a8644f938b"
+  },
+  "actualBrowserSourceObservations": {
+    "purpose": "trusted-original-print-source-observations-not-production-qualification",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "paperTolerancePoints": 1,
+    "headerFooterFont": "explicit generic monospace; host font identity requires separate qualification",
+    "observations": [
+      {
+        "mode": "breaks",
+        "pageCount": 3,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "B\n2/3\n2/3",
+            "extractionDiagnostic": null
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B\n3/3\n3/3",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": true,
+        "outputSha256": "ea2d96fe393b711a559c7adf4ddc47953b586fb6508d02398ec0d103b464728d"
+      },
+      {
+        "mode": "css-size",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 240,
+            "height": 360,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "810f192f50aa367362d70faad0a5eee29a272cdfe5493d29ba7ac943cb06f81a"
+      },
+      {
+        "mode": "fit",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "4e2fe2ed81c4a6ef6fbab6275b0f3ab7ca028f583df7eb721ace138c61339587"
+      },
+      {
+        "mode": "landscape",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 400.07999,
+            "height": 300,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "81cb98b121466608871be6acbc1648f4213d8eb212e2448b77de2fd5f5d5b0ec"
+      },
+      {
+        "mode": "scale-one",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "ceac5ee3e235b0e3b13967a83792ba5ef08b1b5773be024dc6317eca430df55d"
+      },
+      {
+        "mode": "scale-half",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "c7dca010d988f91de3a39f51498f403a6d60499801757a8f56f8d09a5f682f50"
+      },
+      {
+        "mode": "table",
+        "pageCount": 6,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": true,
+        "outputSha256": "670158c90b00fc9ef3fa98e2881368ced2bdb0cbfd5df2f5ba018bad3f44e2d7"
+      }
+    ],
+    "productionQualified": false
+  },
+  "independentReportSha256": "ec8726f319b97aa75770316de63bb0a8bb6fdad279f2f011d04d8741e27463d2",
+  "commands": [
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1",
+    "dotnet test source contracts on actual net10.0 with four local native-positive classes excluded becauseLandlockENOSYS; required CI remains unfiltered",
+    "dotnet test targeted HTML/print/runtime contracts on actual net8.0 and netstandard2.0 fallback on net10.0",
+    "pwsh eng/check-api.ps1",
+    "pwsh eng/test-release-block.ps1",
+    "pwsh eng/validate-spec.ps1",
+    "Original trusted pinned browser probe and independent pypdf/MuPDF/Poppler spatial-layout/structure observations"
+  ],
+  "retainedReportSha256": {
+    "print-final-all-build.log": "b741210f2effaa8db957007c96561ac3c6d3a056bca2ab8dc462cb5bfc63fd03",
+    "print-final-tests.log": "8a0d34f8a09cd0a3c112a1e33b71bf3561f0615a7d8b3eed09502b937e5a6e65",
+    "print-net8-tests.log": "b0c5713d5ff802186677cee7da078556140b062619de46316b7123682f2a49b0",
+    "print-fallback-tests.log": "6d2e7e8df3b9bd9c4a3c9f91b8321a5a0ccfaf8771bd0d76339294718308a47b",
+    "print-final-normal-build.log": "e9c2ea2d47d3817d07b0e6485790fad57dddb233ace50b173fbe2cd0d26ff678",
+    "print-final-api.log": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "print-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "print-final-browser.log": "919c72d188536c67fec33e3c1da9b16408095c11d2abb73de86af19ad1e54559",
+    "print-first-browser.log": "2d03251409b0eac96cb48722882007bd3d4e0ea2459195c35b4d2af961017031",
+    "print-second-browser.log": "31dd4df9d6069fbc7ce94b42a596dcbaff775109e306d9631fef8ac77614e06b",
+    "print-format-metadata.json": "b40e71248080550de2ef3e32f3136287a3953498328608a1730707a2b43ee0b9"
+  },
+  "failedObservations": [
+    "Initial original browser observer stopped on existing Extraction.Type3MatrixProfile; typed failure retained, later observer records the exact known limitation and requires independent text/counter verification",
+    "Initial independent assertions exposed source-order versus spatial/default column-grouping differences; independent tool records both modes without declaring the default grouping qualified"
+  ],
+  "mandatoryPending": [
+    "Complete print CSS/long-report/clipping and arbitrary HTML template/resource profiles remain mandatory",
+    "Full Form/object-reference/role/attribute/namespace structure profiles and independent PDF/UA plus semantic/human review remain mandatory",
+    "Deterministic qualified template fonts, complete actual RID/minimum/current/fallback runtimes and exact final packages remain mandatory",
+    "Full host isolation, resource/fuzz/visual/concurrency/endurance/performance gates remain mandatory",
+    "Browser Type3 font-matrix extraction and Poppler default table reading-order interoperability remain unqualified"
+  ],
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

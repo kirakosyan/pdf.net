@@ -16,6 +16,9 @@ Public Module ContractExample
     Public Function ConvertHtml(source As PdfHtmlSource, providers As PdfProviderRegistry, options As PdfHtmlOptions) As PdfDocument
         Return PdfHtml.Render(source, providers, options)
     End Function
+    Public Function HtmlPrintOptions(options As PdfHtmlOptions, print As PdfHtmlPrintOptions) As PdfHtmlOptions
+        Return options.WithPrint(print)
+    End Function
 
     Public Function InspectCompatibility(source As PdfDocumentSnapshot) As PdfCompatibilityInspection
         Return PdfCompatibility.Inspect(source)

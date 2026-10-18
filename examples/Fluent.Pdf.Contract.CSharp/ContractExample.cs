@@ -8,6 +8,7 @@ public static class ContractExample
     public static PdfProviderRegistry HtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory host, string exactVersion, string exactRevision) => new(new Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision));
     public static PdfProviderRegistry HtmlRendererWithResources(Fluent.Pdf.Html.ChromiumConnectionFactory host, string exactVersion, string exactRevision, Fluent.Pdf.Html.HtmlResourceLoader resources) => new(new Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision, resources.OpenSession));
     public static PdfHtmlOptions HtmlOptions(PdfHtmlReadinessOptions readiness, bool enableJavaScript, string locale, string timeZone, PdfHtmlMedia media) => new(readiness: readiness, enableJavaScript: enableJavaScript, locale: locale, timeZone: timeZone, media: media);
+    public static PdfHtmlOptions HtmlPrintOptions(PdfHtmlOptions options, PdfHtmlPrintOptions print) => options.WithPrint(print);
     public static PdfDocument ConvertHtml(PdfHtmlSource source, PdfProviderRegistry providers, PdfHtmlOptions options) => PdfHtml.Render(source, providers, options);
 
     public static PdfCompatibilityInspection InspectCompatibility(PdfDocumentSnapshot source) => PdfCompatibility.Inspect(source);

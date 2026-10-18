@@ -142,3 +142,5 @@ Milestones are sequencing aids. They do not remove later capabilities from the r
 Reconcile delivered code, public API/capability baseline, requirement status, issue acceptance checkboxes, evidence links and version-specific README claims. Run the affected source/package checks and the specification validator. Keep other requirements planned until their own evidence exists.
 
 A milestone or roadmap issue closes only when its constituent evidence is reconciled. Publication remains blocked until the complete SDK scope and final-package gate pass.
+
+Source progress through #35 now includes [bounded HTML print layout and structure associations](html-printing.md). Full FP-047 scope and production qualification remain mandatory; no issue or dependent requirement is completed by association.

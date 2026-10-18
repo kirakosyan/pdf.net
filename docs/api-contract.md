@@ -143,3 +143,5 @@ FP-044 adds bounded immutable HTML/resources, explicit script/print requests and
 FP-045 adds explicit per-job resource sessions, exact-origin/IP/redirect admission, private origin cookies/headers, explicit proxies/client certificates and bounded file/data snapshots in the optional HTML adapter. [Resource contracts and runtime applicability](html-resources.md) distinguish modern transport observations from mandatory legacy/host qualification.
 
 FP-046 adds immutable finite HTML readiness, locale/timezone/media controls and shared `PdfOperationContext.EnterTimeLimit` phase scopes. The same context/token applies through resource acquisition, browser waits and output. Expired/leaked scopes fail closed; original/outer time is never extended. See [readiness and lifecycle contracts](html-readiness.md).
+
+FP-047 adds immutable `PdfHtmlPrintOptions` through `PdfHtmlOptions.WithPrint`, preserving existing constructor signatures. Explicit paper/CSS fitting, orientation, scale, point margins, bounded passive print templates and requested page-MCID structure validation share the original operation context. See [HTML print contracts](html-printing.md).

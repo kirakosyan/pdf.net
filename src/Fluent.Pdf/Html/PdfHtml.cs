@@ -56,6 +56,18 @@ public sealed class PdfHtmlOptions
     public string TimeZone { get; }
     /// <summary>Gets the explicit CSS media selected before navigation/readiness.</summary>
     public PdfHtmlMedia Media { get; }
+    /// <summary>Gets the immutable explicit print policy.</summary>
+    public PdfHtmlPrintOptions Print { get; } = PdfHtmlPrintOptions.Default;
+
+    /// <summary>Returns an independent immutable options snapshot with the supplied print policy. Existing source/binary constructor signatures remain available.</summary>
+    public PdfHtmlOptions WithPrint(PdfHtmlPrintOptions print) => new(this, print ?? throw new ArgumentNullException(nameof(print)));
+    private PdfHtmlOptions(PdfHtmlOptions source, PdfHtmlPrintOptions print) : this(source.PageSize, source.ViewportWidth, source.ViewportHeight, source.EnableJavaScript, source.PrintBackground, source.MaximumPages, source.Readiness, source.Locale, source.TimeZone, source.Media)
+    {
+        double width = print.Landscape ? PageSize.Height : PageSize.Width, height = print.Landscape ? PageSize.Width : PageSize.Height;
+        if (print.MarginLeft + print.MarginRight >= width || print.MarginTop + print.MarginBottom >= height)
+            throw new ArgumentException("The requested fallback paper must retain a positive content rectangle.", nameof(print));
+        Print = print;
+    }
 }
 
 /// <summary>An explicitly registered optional HTML engine. Implementations must use a private job, supplied resources and the mandatory shared context.</summary>
@@ -90,6 +102,8 @@ public static class PdfHtml
                     renderer.Render(source, options, lease, context);
                 context.Checkpoint();
                 document = PdfPageOrganization.Read(buffer.Finish(), options.MaximumPages, context, options.PageSize);
+                if (options.Print.Tagged)
+                    PdfHtmlTagStructure.Validate(document.CreateSnapshot(), providers, context);
             }, PdfCapability.RenderHtml);
             document!.SetCompositionReport(report);
             return document;

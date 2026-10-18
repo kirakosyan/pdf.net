@@ -79,6 +79,8 @@ if (settings.TryGetProperty("includeResourceFixtures", out var resourceFixtures)
     await ResourceFixture.ObserveAsync(outputRoot, context => new FixtureConnection(node, browser, temporaryParent, context), fontPath, version, revision);
 if (settings.TryGetProperty("includeReadinessFixtures", out var readinessFixtures) && readinessFixtures.GetBoolean())
     ReadinessFixture.Observe(outputRoot, context => new FixtureConnection(node, browser, temporaryParent, context), fontPath, version, revision);
+if (settings.TryGetProperty("includePrintFixtures", out var printFixtures) && printFixtures.GetBoolean())
+    PrintFixture.Observe(outputRoot, context => new FixtureConnection(node, browser, temporaryParent, context), fontPath, version, revision);
 static string Hash(string path)
 {
     using var input = File.OpenRead(path);
