@@ -203,6 +203,7 @@ public sealed class ManagedPdfProvider : IPdfDocumentReader, IPdfRevisionWriter
         PdfBasicStructure.Write(edit,catalogId,pageIds,document.Pages,context);
         PdfDeferredNavigation.Write(edit,catalogId,pageIds,document,context);
         if(document.PageNumbering!=null)writeOptions=writeOptions.RequireVersion("1.3");
+        PdfNavigationReader.ValidateTargets(edit, PdfValue.Reference(catalogId), pageIds, context);
         edit.WriteCore(output, writeOptions, context);
     }
 

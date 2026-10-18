@@ -749,7 +749,8 @@
         "pending": [
           "Full viewer/conformance/fidelity/XFDF corpus and additional ownership/compositing/view-dependent/media/regeneration profiles",
           "Actual minimum runtimes, final package consumers and every production qualification gate"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-019-independent.json"
       }
     },
     {
@@ -778,7 +779,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/navigation.md",
+        "implemented": [
+          "Native-coordinate local destinations and Unicode/legacy named destination editing with page identity validation",
+          "Passive typed actions, explicit URI/remote/launch/script retention policy, document/page actions and links",
+          "All-active-object action/attachment inspection and explicit sanitization with cycle/resource/cancellation checks; C#/VB consumers"
+        ],
+        "pending": [
+          "Full navigation/action interoperability, fuzzing, foreign active content and production corpus",
+          "Actual minimum runtimes, exact final packages and all production qualification gates"
+        ]
+      }
     },
     {
       "id": "FP-021",

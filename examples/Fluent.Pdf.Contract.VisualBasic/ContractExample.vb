@@ -4,6 +4,17 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function WriteNavigationPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage().AddPage()
+            Using named = PdfNavigation.SetNamedDestination(blank.CreateSnapshot(), "chapter", New PdfDestination(1))
+                Using linked = PdfNavigation.AddLink(named.CreateSnapshot(), 0, New PdfRect(20, 30, 100, 24), PdfAction.GoToNamed("chapter"))
+                    Using document = PdfNavigation.SetDocumentAction(linked.CreateSnapshot(), "OpenAction", PdfAction.GoToNamed("chapter"))
+                        Return document.Save(output)
+                    End Using
+                End Using
+            End Using
+        End Using
+    End Function
     Public Function WriteAnnotationPdf(output As Stream) As PdfOperationReport
         Using blank = PdfFacade.Create().AddPage(New PdfPageSize(240, 160))
             Dim note = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Text, "note", New PdfRect(20, 90, 40, 40), New PdfColor(PdfColorSpace.Rgb, 1, .85, .2), metadata:=New PdfAnnotationMetadata("Review this page", "Reviewer"))

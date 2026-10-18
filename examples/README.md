@@ -11,3 +11,5 @@ Build and run using [docs/testing.md](../docs/testing.md). The examples currentl
 `WriteTablePdf` in both languages binds a finite typed source with explicit culture, uses fixed columns and end alignment, repeats header rows across real PDF pages, and preserves both borrowed streams. Final-package consumer qualification remains blocked.
 
 `WriteCompositionPdf` in C# and VB combines typed lists, a fixed-height column region and an explicit footnote. It emits basic column structure and retains caller font/output streams. It does not declare PDF/UA conformance.
+
+`WriteNavigationPdf` in C# and VB emits two pages, a named destination, an internal Link and catalog OpenAction without executing navigation.

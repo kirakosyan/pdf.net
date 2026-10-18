@@ -184,6 +184,26 @@ public sealed class PdfTransaction : IDisposable
         return LastOperationReport!;
     }
 
+    internal IEnumerable<PdfObjectId> ActiveIds(PdfOperationContext context)
+    {
+        var seen = new HashSet<int>();
+        foreach (var id in _changes.Keys)
+        {
+            context.Checkpoint(); context.Consume(PdfResourceKind.ExpandedBytes, 48);
+            seen.Add(id.Number);
+            if (!_removed.Contains(id)) yield return id;
+        }
+        if (Source != null)
+            foreach (var revision in Source.Revisions)
+                foreach (var entry in revision.Entries)
+                {
+                    context.Checkpoint(); context.Consume(PdfResourceKind.Objects, 1);
+                    if (seen.Contains(entry.Id.Number)) continue;
+                    context.Consume(PdfResourceKind.ExpandedBytes, 48); seen.Add(entry.Id.Number);
+                    if (entry.Kind != PdfCrossReferenceKind.Free && !_removed.Contains(entry.Id)) yield return entry.Id;
+                }
+    }
+
     private bool Exists(PdfObjectId id)
     {
         if (id.Number == 0 || _removed.Contains(id))

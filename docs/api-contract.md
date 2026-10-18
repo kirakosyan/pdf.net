@@ -113,3 +113,5 @@ FP-016 adds explicit page selections, detached page organization and vector impo
 FP-017 adds immutable image assets, bounded PNG/JPEG packaging, masks/orientation, per-operation exact deduplication and captured graphics invocation extraction/editing. See [images and reusable graphics](images.md).
 
 FP-019 adds immutable annotation definitions/source manifests, generated markup and shaped text appearances, metadata/relationships, staged editing/import, explicit flattening and owned-graph XFDF. See [annotations](annotations.md).
+
+FP-020 adds managed `PdfDestination`, immutable `PdfAction`/`PdfActionPolicy` and `PdfNavigation` editing/inspection/sanitization. Source records and explicit profile limits are in [navigation.md](navigation.md).

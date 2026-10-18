@@ -5,6 +5,14 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static PdfOperationReport WriteNavigationPdf(Stream output)
+    {
+        using var blank = PdfFacade.Create().AddPage().AddPage();
+        using var named = PdfNavigation.SetNamedDestination(blank.CreateSnapshot(), "chapter", new PdfDestination(1));
+        using var linked = PdfNavigation.AddLink(named.CreateSnapshot(), 0, new PdfRect(20, 30, 100, 24), PdfAction.GoToNamed("chapter"));
+        using var document = PdfNavigation.SetDocumentAction(linked.CreateSnapshot(), "OpenAction", PdfAction.GoToNamed("chapter"));
+        return document.Save(output);
+    }
     public static PdfOperationReport WriteAnnotationPdf(Stream output)
     {
         using var blank = PdfFacade.Create().AddPage(new PdfPageSize(240, 160));
