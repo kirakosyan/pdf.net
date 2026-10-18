@@ -287,10 +287,12 @@
           "Deterministic caller fallback, embedding restrictions, CID/CJK resources, vertical metrics, immutable font bindings and extraction"
         ],
         "pending": [
-          "Clean independent and six-host source evidence",
+          "Complete production qualification beyond passing source/runtime and original-fixture independent evidence",
           "Complete licensed/profile corpus, actual minimum runtimes, final packages, standards/fidelity, long security/fuzz/endurance qualification",
           "Explicit instancing/affine and additional font/CMap provider profiles remain release qualification work"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-008-source.json",
+        "independentEvidence": "docs/evidence/FP-008-independent.json"
       }
     },
     {
