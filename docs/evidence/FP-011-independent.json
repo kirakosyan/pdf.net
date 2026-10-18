@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-011 independent page geometry/canvas development verification; not complete production qualification",
+  "sourceCommit": "3e032e6f61562276247e986a506cd8d81e694861",
+  "workingTreeDirty": false,
+  "method": "Independent direct PDF models and inverse coordinate equations; strict pypdf geometry checks and Poppler raster comparisons across all rotations, nonzero origins and UserUnit 1/2",
+  "tools": {
+    "pypdf": "6.10.0",
+    "FontTools": "4.61.1",
+    "Poppler": "25.03.0",
+    "Pillow": "12.3.0"
+  },
+  "cases": [
+    {
+      "case": "unit-1-rotation-0",
+      "pdfSha256": "880f7f03464509cdad1f0c4af9e88b8300c8eb5695ac4a1f099a5858cb2b1ded",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        320,
+        160
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    },
+    {
+      "case": "unit-1-rotation-90",
+      "pdfSha256": "4f98037e24522c360cb585718619fc47cf59e8826b30a36b46ae62caf58a3b91",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        160,
+        320
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    },
+    {
+      "case": "unit-1-rotation-180",
+      "pdfSha256": "7621f3edda7f7bcafcf2b3415ed0a7bb7db6bf97aa37be2f1df39a087b584ef2",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        320,
+        160
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    },
+    {
+      "case": "unit-1-rotation-270",
+      "pdfSha256": "ef9551abf3df8b50301912f730b90a81182e655053201d4e76004567b7a90d18",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        160,
+        320
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    },
+    {
+      "case": "unit-2-rotation-0",
+      "pdfSha256": "46ecacf361e84c4774d3045091d65fbf6f51438993616cd8372da2ef01adaa86",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        320,
+        160
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    },
+    {
+      "case": "unit-2-rotation-90",
+      "pdfSha256": "510f40af942c1e93a2e6def623a5854b4a1447bd25311c7d000d7f4d5a8c091e",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        160,
+        320
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    },
+    {
+      "case": "unit-2-rotation-180",
+      "pdfSha256": "c26a7f7947896d648809da3d6dbeab07281dc2946c3e53306136c24915ff9667",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        320,
+        160
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    },
+    {
+      "case": "unit-2-rotation-270",
+      "pdfSha256": "57d2a1924ac0beda21a25b215d98ffe94a2123e8a2cc6e218655347d3285c515",
+      "pageBoxesRotationAndUserUnit": "exact",
+      "rasterDimensions": [
+        160,
+        320
+      ],
+      "rasterPixels": 51200,
+      "differentPixels": 0
+    }
+  ],
+  "productionQualified": false,
+  "pending": [
+    "Complete geometry/clipping/font/image corpus and minimum runtimes",
+    "Final packages, standards/fidelity/security and long fuzz/endurance qualification"
+  ]
+}
