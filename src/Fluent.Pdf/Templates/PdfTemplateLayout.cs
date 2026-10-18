@@ -21,135 +21,151 @@ public static class PdfTemplateLayout
         var finish = new List<Action<PdfOperationReport>>();
         var report = PdfFont.Run("LayoutPageTemplate", "managed.templates", policy, cancellationToken, context =>
         {
-            var source = new List<PdfFlowBlock>();
-            foreach (var block in blocks)
+            context.Consume(PdfResourceKind.ExpandedBytes, 256);
+            var timing = new TemplateTiming();
+            try
             {
-                context.Checkpoint();
-                context.Consume(PdfResourceKind.Objects, 1);
-                context.Consume(PdfResourceKind.ExpandedBytes, 64);
-                source.Add(block ?? throw new ArgumentException("Blocks cannot contain null.", nameof(blocks)));
-            }
-
-            var definitions = new List<PdfFlowHeading>();
-            bool placeholders = false;
-            var identities = new HashSet<string>(StringComparer.Ordinal);
-            void Inspect(IReadOnlyList<PdfFlowBlock> content)
-            {
-                using var depth = context.EnterScope(PdfResourceKind.Depth);
-                foreach (var block in content)
+                var source = new List<PdfFlowBlock>();
+                foreach (var block in blocks)
                 {
                     context.Checkpoint();
                     context.Consume(PdfResourceKind.Objects, 1);
-                    if (block is PdfFlowHeading heading)
+                    context.Consume(PdfResourceKind.ExpandedBytes, 64);
+                    source.Add(block ?? throw new ArgumentException("Blocks cannot contain null.", nameof(blocks)));
+                }
+
+                var definitions = new List<PdfFlowHeading>();
+                bool placeholders = false;
+                var identities = new HashSet<string>(StringComparer.Ordinal);
+                void Inspect(IReadOnlyList<PdfFlowBlock> content)
+                {
+                    using var depth = context.EnterScope(PdfResourceKind.Depth);
+                    foreach (var block in content)
                     {
-                        if (!identities.Add(heading.Id))
-                            throw Error("Template.DuplicateHeading", "Body heading destination IDs must be unique.");
-                        definitions.Add(heading);
+                        context.Checkpoint();
+                        context.Consume(PdfResourceKind.Objects, 1);
+                        if (block is PdfFlowHeading heading)
+                        {
+                            if (!identities.Add(heading.Id))
+                                throw Error("Template.DuplicateHeading", "Body heading destination IDs must be unique.");
+                            definitions.Add(heading);
+                        }
+
+                        if (block is PdfFlowContents || block is PdfFlowIndex)
+                            placeholders = true;
+                        if (block is PdfFlowComponent component)
+                            Inspect(component.Content);
+                        if (block is PdfFlowColumns columns)
+                            Inspect(columns.Content);
+                        if (block is PdfFlowList list)
+                            foreach (var item in list.Items)
+                                Inspect(item.Content);
+                        if (block is PdfTable table)
+                            foreach (var cell in table.Grid)
+                                Inspect(cell.Cell.Content);
                     }
-
-                    if (block is PdfFlowContents || block is PdfFlowIndex)
-                        placeholders = true;
-                    if (block is PdfFlowComponent component)
-                        Inspect(component.Content);
-                    if (block is PdfFlowColumns columns)
-                        Inspect(columns.Content);
-                    if (block is PdfFlowList list)
-                        foreach (var item in list.Items)
-                            Inspect(item.Content);
-                    if (block is PdfTable table)
-                        foreach (var cell in table.Grid)
-                            Inspect(cell.Cell.Content);
-                }
-            }
-
-            Inspect(source);
-            var margins = options.Margins;
-            var bodyOptions = new PdfFlowOptions(options.Geometry, new(margins.Left, margins.Top + template.HeaderHeight + (template.HeaderHeight > 0 ? template.Gap : 0), margins.Right, margins.Bottom + template.FooterHeight + (template.FooterHeight > 0 ? template.Gap : 0)), options.Overflow, options.MaximumPages, options.TabInterval, options.TabStops.ToArray());
-            var targets = new Dictionary<string, PdfFlowHeadingPlacement>(StringComparer.Ordinal);
-            string? previous = null;
-            var signatures = new HashSet<string>(StringComparer.Ordinal);
-            PdfFlowResult? body = null;
-            int passes = 0;
-            bool converged = false;
-            // Only these engines share the exact immutable options, shaper and operation context.
-            // Header/footer and nested-layout engines retain their own measurements.
-            var paragraphs = new Dictionary<PdfFlowParagraph, PdfFlowParagraphData>();
-            for (; passes < template.MaximumPasses; passes++)
-            {
-                context.Checkpoint();
-                var expanded = Materialize(source, definitions, targets, template.Numbering, bodyOptions, context);
-                var engine = new PdfFlowEngine(bodyOptions, shaper, context, paragraphs);
-                var current = engine.Layout(expanded, render: false);
-                var next = new Dictionary<string, PdfFlowHeadingPlacement>(StringComparer.Ordinal);
-                foreach (var heading in current.Pages.SelectMany(p => p.Headings))
-                    if (!next.ContainsKey(heading.Heading.Id))
-                        next.Add(heading.Heading.Id, heading);
-                foreach (var definition in definitions)
-                    if (!next.ContainsKey(definition.Id))
-                        throw Error("Template.HeadingDestination", "A declared body heading has no final visible placement.");
-                string signature = current.Pages.Count.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + string.Join(";", definitions.Select(h =>
-                {
-                    var target = next[h.Id];
-                    return h.Id + "=" + target.PageIndex + "," + target.Bounds.X.ToString("R", System.Globalization.CultureInfo.InvariantCulture) + "," + target.Bounds.Y.ToString("R", System.Globalization.CultureInfo.InvariantCulture);
-                }));
-                body = current;
-                finalEngine = engine;
-                targets = next;
-                if (!placeholders || signature == previous)
-                {
-                    converged = true;
-                    passes++;
-                    break;
                 }
 
-                if (!signatures.Add(signature))
-                    throw Error("Template.PaginationCycle", "Contents/index pagination entered a repeated nonconvergent state.");
-                previous = signature;
-            }
-
-            if (body == null || !converged)
-                throw Error("Template.PaginationConvergence", "The bounded contents/index pagination did not converge.");
-            body = finalEngine!.PaintPlannedPages();
-            context.Consume(PdfResourceKind.ExpandedBytes, body!.Pages.Count * 128L + definitions.Count * 256L + 256);
-            var decorations = new PdfCanvasResult[body.Pages.Count];
-            var display = options.Geometry.DisplayBounds();
-            double width = display.Width - margins.Left - margins.Right;
-            for (int i = 0; i < decorations.Length; i++)
-            {
-                var pageContext = new PdfPageTemplateContext(i, body.Pages.Count, template.Numbering.GetLabel(i), body.Pages[i], context);
-                var header = template.Header?.Invoke(pageContext);
-                context.Checkpoint();
-                var footer = template.Footer?.Invoke(pageContext);
-                context.Checkpoint();
-                decorations[i] = PdfCanvas.CreateCore(options.Geometry, canvas =>
-                {
-                    if (header != null)
-                        DrawDecoration(canvas, header, new(margins.Left, margins.Top, width, template.HeaderHeight), bodyOptions, shaper, context, finish);
-                    if (footer != null)
-                        DrawDecoration(canvas, footer, new(margins.Left, display.Height - margins.Bottom - template.FooterHeight, width, template.FooterHeight), bodyOptions, shaper, context, finish);
-                }, new(PdfLengthUnit.Point, clipToContent: false), context, out var complete);
-                finish.Add(complete);
-            }
-
-            var entries = definitions.Select(h =>
-            {
-                var placement = targets[h.Id];
-                var point = body.Pages[placement.PageIndex].Canvas.ToUser.Transform(new(placement.Bounds.X, placement.Bounds.Y));
-                return new PdfContentsEntry(h.Id, h.Title, placement.PageIndex, point);
-            }).ToArray();
-            var links = new List<PdfTemplateLink>();
-            for (int i = 0; i < body.Pages.Count; i++)
-                foreach (var locator in body.Pages[i].TemplateLocators)
+                Inspect(source);
+                var margins = options.Margins;
+                var bodyOptions = new PdfFlowOptions(options.Geometry, new(margins.Left, margins.Top + template.HeaderHeight + (template.HeaderHeight > 0 ? template.Gap : 0), margins.Right, margins.Bottom + template.FooterHeight + (template.FooterHeight > 0 ? template.Gap : 0)), options.Overflow, options.MaximumPages, options.TabInterval, options.TabStops.ToArray());
+                var targets = new Dictionary<string, PdfFlowHeadingPlacement>(StringComparer.Ordinal);
+                string? previous = null;
+                var signatures = new HashSet<string>(StringComparer.Ordinal);
+                PdfFlowResult? body = null;
+                int passes = 0;
+                bool converged = false;
+                // Only these engines share the exact immutable options, shaper and operation context.
+                // Header/footer and nested-layout engines retain their own measurements.
+                var paragraphs = new Dictionary<PdfFlowParagraph, PdfFlowParagraphData>();
+                for (; passes < template.MaximumPasses; passes++)
                 {
                     context.Checkpoint();
-                    context.Consume(PdfResourceKind.ExpandedBytes, 96);
-                    var target = targets[locator.Id];
-                    var point = body.Pages[target.PageIndex].Canvas.ToUser.Transform(new(target.Bounds.X, target.Bounds.Y));
-                    var bounds = PdfGeometryMath.Transform(locator.Bounds, body.Pages[i].Canvas.ToUser).Bounds;
-                    links.Add(new(i, bounds, target.PageIndex, point));
+                    timing.Switch(1);
+                    var expanded = Materialize(source, definitions, targets, template.Numbering, bodyOptions, context);
+                    var engine = new PdfFlowEngine(bodyOptions, shaper, context, paragraphs);
+                    timing.Switch(2);
+                    var current = engine.Layout(expanded, render: false);
+                    var next = new Dictionary<string, PdfFlowHeadingPlacement>(StringComparer.Ordinal);
+                    foreach (var heading in current.Pages.SelectMany(p => p.Headings))
+                        if (!next.ContainsKey(heading.Heading.Id))
+                            next.Add(heading.Heading.Id, heading);
+                    foreach (var definition in definitions)
+                        if (!next.ContainsKey(definition.Id))
+                            throw Error("Template.HeadingDestination", "A declared body heading has no final visible placement.");
+                    string signature = current.Pages.Count.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + string.Join(";", definitions.Select(h =>
+                    {
+                        var target = next[h.Id];
+                        return h.Id + "=" + target.PageIndex + "," + target.Bounds.X.ToString("R", System.Globalization.CultureInfo.InvariantCulture) + "," + target.Bounds.Y.ToString("R", System.Globalization.CultureInfo.InvariantCulture);
+                    }));
+                    body = current;
+                    finalEngine = engine;
+                    targets = next;
+                    if (!placeholders || signature == previous)
+                    {
+                        converged = true;
+                        passes++;
+                        break;
+                    }
+
+                    if (!signatures.Add(signature))
+                        throw Error("Template.PaginationCycle", "Contents/index pagination entered a repeated nonconvergent state.");
+                    previous = signature;
                 }
 
-            result = new(body, decorations, template, entries, links.ToArray(), passes);
+                if (body == null || !converged)
+                    throw Error("Template.PaginationConvergence", "The bounded contents/index pagination did not converge.");
+                timing.Switch(3);
+                body = finalEngine!.PaintPlannedPages();
+                timing.Switch(4);
+                context.Consume(PdfResourceKind.ExpandedBytes, body!.Pages.Count * 128L + definitions.Count * 256L + 256);
+                var decorations = new PdfCanvasResult[body.Pages.Count];
+                var display = options.Geometry.DisplayBounds();
+                double width = display.Width - margins.Left - margins.Right;
+                for (int i = 0; i < decorations.Length; i++)
+                {
+                    var pageContext = new PdfPageTemplateContext(i, body.Pages.Count, template.Numbering.GetLabel(i), body.Pages[i], context);
+                    var header = template.Header?.Invoke(pageContext);
+                    context.Checkpoint();
+                    var footer = template.Footer?.Invoke(pageContext);
+                    context.Checkpoint();
+                    decorations[i] = PdfCanvas.CreateCore(options.Geometry, canvas =>
+                    {
+                        if (header != null)
+                            DrawDecoration(canvas, header, new(margins.Left, margins.Top, width, template.HeaderHeight), bodyOptions, shaper, context, finish);
+                        if (footer != null)
+                            DrawDecoration(canvas, footer, new(margins.Left, display.Height - margins.Bottom - template.FooterHeight, width, template.FooterHeight), bodyOptions, shaper, context, finish);
+                    }, new(PdfLengthUnit.Point, clipToContent: false), context, out var complete);
+                    finish.Add(complete);
+                }
+
+                timing.Switch(5);
+                var entries = definitions.Select(h =>
+                {
+                    var placement = targets[h.Id];
+                    var point = body.Pages[placement.PageIndex].Canvas.ToUser.Transform(new(placement.Bounds.X, placement.Bounds.Y));
+                    return new PdfContentsEntry(h.Id, h.Title, placement.PageIndex, point);
+                }).ToArray();
+                var links = new List<PdfTemplateLink>();
+                for (int i = 0; i < body.Pages.Count; i++)
+                    foreach (var locator in body.Pages[i].TemplateLocators)
+                    {
+                        context.Checkpoint();
+                        context.Consume(PdfResourceKind.ExpandedBytes, 96);
+                        var target = targets[locator.Id];
+                        var point = body.Pages[target.PageIndex].Canvas.ToUser.Transform(new(target.Bounds.X, target.Bounds.Y));
+                        var bounds = PdfGeometryMath.Transform(locator.Bounds, body.Pages[i].Canvas.ToUser).Bounds;
+                        links.Add(new(i, bounds, target.PageIndex, point));
+                    }
+
+                result = new(body, decorations, template, entries, links.ToArray(), passes);
+            }
+            catch (PdfException failure)
+            {
+                timing.Attach(failure);
+                throw;
+            }
+
             PdfException Error(string code, string message) => PdfWriterCore.Error(context, code, message);
         }, PdfCapability.WriteDocument);
         finalEngine!.Complete(report);
@@ -158,6 +174,38 @@ public static class PdfTemplateLayout
             complete(report);
         result.OperationReport = report;
         return result;
+    }
+
+    private sealed class TemplateTiming
+    {
+        private readonly System.Diagnostics.Stopwatch _clock = System.Diagnostics.Stopwatch.StartNew();
+        private readonly long[] _milliseconds = new long[6];
+        private int _phase;
+        private long _previous;
+        internal void Switch(int phase)
+        {
+            long current = _clock.ElapsedMilliseconds;
+            _milliseconds[_phase] += current - _previous;
+            _previous = current;
+            _phase = phase;
+        }
+
+        internal void Attach(PdfException failure)
+        {
+            Switch(_phase);
+            string[] names =
+            {
+                "capture",
+                "materialize",
+                "plan",
+                "paint",
+                "decorations",
+                "finalize"
+            };
+            failure.Data["Template.Stage"] = names[_phase];
+            failure.Data["Template.ElapsedMilliseconds"] = _clock.ElapsedMilliseconds;
+            failure.Data["Template.PhaseMilliseconds"] = string.Join(";", names.Select((name, index) => name + "=" + _milliseconds[index].ToString(System.Globalization.CultureInfo.InvariantCulture)));
+        }
     }
 
     private static IReadOnlyList<PdfFlowBlock> Materialize(IReadOnlyList<PdfFlowBlock> blocks, IReadOnlyList<PdfFlowHeading> headings, IReadOnlyDictionary<string, PdfFlowHeadingPlacement> targets, PdfPageNumbering numbering, PdfFlowOptions options, PdfOperationContext context)

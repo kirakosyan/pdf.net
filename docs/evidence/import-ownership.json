@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-import-ownership-regression-not-production-qualification",
+  "sourceCommit": "81bcf674d9bb54060e2da5e088bc68116a822dd3",
+  "baselineSourceCommit": "bd46dd493bad3666eb3e6da8558f3ab9cb559335",
+  "test": "AnnotationTests.ImportRejectsDocumentOwnershipEvenWhenTypeNamesAreIndirect",
+  "before": "An annotation property could clone Catalog/Pages ownership when both Type names were indirect. The new regression failed because no exception was thrown.",
+  "after": "Type, S and Subtype names are resolved under the shared context before ownership/navigation checks; the ownership graph fails with Graph.DocumentOwnershipImport.",
+  "beforeLogSha256": "5d6b91510fb1c3cb8e30638a994a0299244dc7f423f18310da1d6b734a1570dc",
+  "afterLogSha256": "c6d95e62dadcba33bde2df6bacacfdb5f1bf8a3ebadc9bde48889a4162843992",
+  "testSourceSha256": "97252789f211d657d2e86d94e3dc22aaa5e0667f04cb02cc3ba30a92a807e508",
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "This targeted regression is not the complete foreign-object/import fuzz or standards corpus.",
+    "Full required profiles and all production qualification gates remain mandatory."
+  ]
+}

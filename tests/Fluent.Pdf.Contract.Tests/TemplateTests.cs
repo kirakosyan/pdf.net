@@ -6,6 +6,8 @@ using Xunit;
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class TemplateTests
 {
+    private readonly Xunit.Abstractions.ITestOutputHelper _output;
+    public TemplateTests(Xunit.Abstractions.ITestOutputHelper output) => _output = output;
     private static PdfFlowTextStyle Style(double size = 10) => new(new(TextTests.Read("business.ttf")), size);
     private static PdfProviderRegistry Providers() => new(new PdfSimpleTextShaper());
     private static PdfFlowOptions Options() => new(new(new(new(0, 0, 220, 160))), PdfMargins.Uniform(10));
@@ -24,7 +26,25 @@ public sealed class TemplateTests
             calls.Add((c.PageIndex, c.TotalPages, c.PageLabel, variant));
             return PdfPageDecoration.Flow(new[] { new PdfFlowParagraph(variant, Style(8)) });
         }, footer: c => PdfPageDecoration.Flow(new[] { new PdfFlowParagraph(c.PageLabel + " of " + c.TotalPages.ToString(CultureInfo.InvariantCulture), Style(8)) }), numbering: numbers);
-        var result = PdfTemplateLayout.Layout(Body(), Options(), Providers(), template);
+        PdfPageTemplateResult result;
+        try
+        {
+            result = PdfTemplateLayout.Layout(Body(), Options(), Providers(), template);
+        }
+        catch (PdfException failure)
+        {
+            foreach (string key in new[]
+            {
+                "Template.Stage",
+                "Template.ElapsedMilliseconds",
+                "Template.PhaseMilliseconds"
+            }
+
+            )
+                _output.WriteLine(key + ": " + failure.Data[key]);
+            throw;
+        }
+
         Assert.InRange(result.Passes, 2, 8);
         Assert.Equal(result.Body.Pages.Count, calls.Count);
         Assert.All(calls, c => Assert.Equal(c.Total, calls.Count));
