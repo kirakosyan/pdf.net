@@ -108,7 +108,7 @@
     }
   ],
   "priorDependencyCI": "docs/evidence/PR-118-CI-97-source.json",
-  "currentSourceCI": "CI98 failed on the two Windows positive mutual-TLS fixtures; six later Windows lanes did not execute. Correction and qualified Windows TLS profiles remain required.",
+  "currentSourceCI": "CI100 passes all20 source runtime lanes including the corrected bounded Windows TLS fixtures. Full Windows anonymous/general-chain TLS, minimum runtimes and final-package qualification remain mandatory.",
   "packageSha256": null,
   "packingBlocked": true,
   "publicationBlocked": true,
@@ -150,8 +150,17 @@
       "Sanitized numeric transport error metadata and joined server work on fixture failure",
       "Avoid vulnerable direct client-certificate contexts on Windows; fail closed for certificate-less/general PKI-chain Windows TLS; full isolated/runtime-serviced Windows TLS remains mandatory"
     ],
-    "windowsRuntimeProof": "CI99 modern Windows net8/net10 transport fixtures pass; WinARM completes all three lanes. A later existing Framework x64 native64-decode deadline case fails; complete matrix remains unqualified.",
+    "windowsRuntimeProof": "Corrected bounded source fixtures pass Windows net8/net10/currentFramework/fallback source lanes in CI100; full Windows TLS and actual minimum/final-package qualification remain mandatory.",
     "sourceTree": "fd450bcab6a11b250386f9ec427c08cd99cb3863",
     "ciEvidence": "docs/evidence/PR-118-CI-99-source-partial.json"
+  },
+  "latestSourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-100-source.json",
+    "testedSourceCommit": "acb7f0c219d7745855523e542d26efeceb1c77e1",
+    "passed": 21280,
+    "failed": 0,
+    "skipped": 0,
+    "completedRuntimeLanes": 20,
+    "scope": "Corrected bounded TLS fixtures including current Framework lanes; full Windows anonymous/general-chain TLS remains mandatory and unqualified"
   }
 }

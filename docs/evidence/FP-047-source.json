@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-047",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "f1f25fd900e73a82ecd26064bd1452dc7447a3f2",
+  "sourceTree": "f66cf5ff00bfc906dc3fde1036c519e9743c120f",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -241,5 +241,14 @@
     "Browser Type3 font-matrix extraction and Poppler default table reading-order interoperability remain unqualified"
   ],
   "productionQualified": false,
-  "packingAndPublicationBlocked": true
+  "packingAndPublicationBlocked": true,
+  "sourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-101-source.json",
+    "passed": 20728,
+    "failed": 1,
+    "skipped": 0,
+    "completedRuntimeLanes": 19,
+    "notExecutedRuntimeLanes": 1,
+    "failure": "An existing phase-deadline timing assertion fails after await on macOS Intel/net10. Print fixtures pass in all executed lanes; this is not a green source run."
+  }
 }

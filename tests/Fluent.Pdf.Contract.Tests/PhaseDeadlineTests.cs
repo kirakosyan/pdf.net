@@ -1,10 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class PhaseDeadlineTests
 {
+    private readonly ITestOutputHelper _output;
+    public PhaseDeadlineTests(ITestOutputHelper output) => _output = output;
     private static PdfOperationReport Run(Action<PdfOperationContext> action, PdfResourceLimits? limits = null) => PdfFont.Run("OriginalPhaseDeadline", "original.fixture", new(limits: limits), default, action);
     private static void Mock(Action<PdfOperationContext, Action<TimeSpan>> action)
     {
@@ -94,10 +97,22 @@ public sealed class PhaseDeadlineTests
         var clock = System.Diagnostics.Stopwatch.StartNew();
         try
         {
+            long signaledTicks = -1, completedTicks = -1;
+            using var signal = token.Register(() => Interlocked.Exchange(ref signaledTicks, clock.ElapsedTicks));
+            var work = Task.Delay(Timeout.Infinite, token);
+            // Measure completion on its completing thread, independently of the test runner's await queue.
+            var completed = work.ContinueWith(_ => Interlocked.Exchange(ref completedTicks, clock.ElapsedTicks), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            clock.Restart();
             using var phase = context.EnterTimeLimit(TimeSpan.FromMilliseconds(50));
-            await Assert.ThrowsAsync<TaskCanceledException>(() => Task.Delay(Timeout.Infinite, token));
+            await Assert.ThrowsAsync<TaskCanceledException>(() => work);
+            await completed;
+            var signalElapsed = TimeSpan.FromSeconds(Interlocked.Read(ref signaledTicks) / (double)System.Diagnostics.Stopwatch.Frequency);
+            var completionElapsed = TimeSpan.FromSeconds(Interlocked.Read(ref completedTicks) / (double)System.Diagnostics.Stopwatch.Frequency);
+            _output.WriteLine("Phase signal={0:F3}ms; awaited-task completion={1:F3}ms; test-continuation observation={2:F3}ms.", signalElapsed.TotalMilliseconds, completionElapsed.TotalMilliseconds, clock.Elapsed.TotalMilliseconds);
             Assert.Equal(token, context.CancellationToken);
-            Assert.True(clock.Elapsed < TimeSpan.FromSeconds(1));
+            Assert.True(signaledTicks >= 0 && signalElapsed < TimeSpan.FromSeconds(1));
+            Assert.True(completedTicks >= 0 && completionElapsed < TimeSpan.FromSeconds(1));
+            Assert.True(work.IsCanceled);
             Assert.Equal("Limit.ElapsedTime", Assert.Throws<PdfException>(context.Checkpoint).Diagnostic.Code);
         }
         finally

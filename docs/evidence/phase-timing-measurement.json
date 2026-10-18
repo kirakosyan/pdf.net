@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-test-measurement-correction-not-runtime-or-production-qualification",
+  "sourceCommit": null,
+  "failedSourceCI": "docs/evidence/PR-118-CI-101-source.json",
+  "observedFailure": "Post-await stopwatch assertion exceeds one second on macOS Intel/net10; CI101 did not record signal/task-completion timestamps separately, so the delayed component is not established.",
+  "correction": "Measure original shared-token cancellation and awaited-task completion on their signaling/completing thread; record test-continuation observation separately. The operation policy/timer code and both one-second latency requirements remain unchanged.",
+  "maximumSignalAndTaskCompletionMilliseconds": 1000,
+  "sourcePolicyFile": "src/Fluent.Pdf/Policies/PdfOperationContext.cs",
+  "sourcePolicySha256": "c6ce546e7be54b64c6d6f118c743639f6cb1d2fbff550f72c9aa33a15be3eb9a",
+  "testDiffSha256": "cc180b324a0f6fd64c0cb09793ff595ee6c9071d21a3ac40a58c1be20b287450",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "actualRuntime": ".NET10.0.13",
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "trxSha256": "d1319c1c6d7ac1ba1e58c5cacebb12f05945b1ff140849a9fd7331f4d6737900",
+    "timingObservation": "Phase signal=49.773ms; awaited-task completion=49.979ms; test-continuation observation=52.236ms.",
+    "limitation": "Executed against the working tree containing in-progress stamp sources; operation-policy implementation is unchanged. Fresh clean-commit source CI remains required."
+  },
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

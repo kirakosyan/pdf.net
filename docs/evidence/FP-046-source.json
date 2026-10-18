@@ -193,5 +193,14 @@
     "timingOnlySourceSha256": "cfaebeb6513becb2f0ca67898e4375f184217b18e9086dd1b87a3c6d32751926",
     "compiledCheckSha256": "b175f2eb17e0b09ceb059edfaa1f69e1228e214d47c29192d44653a448b8e270",
     "status": "Retain cumulative per-decode timing on the next unfiltered source CI; no native qualification inferred."
+  },
+  "sourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-100-source.json",
+    "sourceCommit": "acb7f0c219d7745855523e542d26efeceb1c77e1",
+    "testedMergeCommit": "cf1d8d32a3f9fb50776eb8bf75e35be528bf31df",
+    "passed": 21280,
+    "failed": 0,
+    "skipped": 0,
+    "completedRuntimeLanes": 20
   }
 }
