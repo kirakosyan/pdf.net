@@ -8,7 +8,8 @@ internal static class PdfPageContent
         var builder = new PdfByteBuilder(context);
         if (binding != null && binding.Dictionary.Entries.TryGetValue("Contents", out var contents))
             Append(contents, new HashSet<PdfObjectId>());
-        return PdfContentProgram.ParseCore(builder.Build(), PdfContentKind.Page, unknown, version, context);
+        PdfValue resources = binding != null && binding.EffectiveAttributes.Entries.TryGetValue("Resources", out var declaredResources) ? declaredResources : PdfValue.Null;
+        return PdfContentProgram.ParseCore(builder.Build(), PdfContentKind.Page, unknown, version, context, binding == null ? null : color => PdfImageColorResolver.Components(color, resources, v => ManagedPdfProvider.Resolve(binding.Document, v, context), context));
         void Append(PdfValue value, HashSet<PdfObjectId> path)
         {
             context.Checkpoint();

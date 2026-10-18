@@ -51,6 +51,8 @@ public sealed class IsolatedImageCodecProvider : IPdfImageCodecProvider
     private void Execute(bool encode, PdfImageCodec codec, PdfImageInfo info, PdfValue parameters, Stream input, Stream output, PdfOperationContext context)
     {
         context.Checkpoint();
+        if (info.Components > 4 || codec == PdfImageCodec.Dct && (info.BitsPerComponent != 8 || info.Components != 1 && info.Components != 3 && info.Components != 4) || codec == PdfImageCodec.Jbig2 && (info.Components != 1 || info.BitsPerComponent != 1))
+            throw Error(context, "Codec.Geometry", "The selected isolated codec does not support this component/precision profile.");
         if (!encode && info.ByteLength > _worker.MaximumOutputBytes - 48L)
             throw Error(context, "Native.OutputLimit", "Decoded image samples exceed the configured worker response envelope.");
         int quality = PdfStreamFilters.Parameter(parameters, "Quality", 90, context), transform = PdfStreamFilters.Parameter(parameters, "ColorTransform", -1, context);

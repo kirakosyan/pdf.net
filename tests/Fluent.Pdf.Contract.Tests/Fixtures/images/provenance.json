@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Original synthetic color/mask/orientation fixtures; no third-party document/image content",
+  "license": "MIT",
+  "tools": {
+    "Python": "3.12.14",
+    "Pillow": "12.3.0"
+  },
+  "generation": "Original constant samples; Pillow PNG/JPEG encoding; separate literal PNG/Adam7 encoder for interlace and 16-bit cases",
+  "files": [
+    {
+      "file": "adam7-rgb.png",
+      "bytes": 76,
+      "sha256": "5154953f99613d3a2283807db75587909dd4f3609d6754aea1d2a72cdafef904"
+    },
+    {
+      "file": "cmyk.jpg",
+      "bytes": 595,
+      "sha256": "42153007684f95aaf6084222990c0a7b27d863f7424914f7aa3b1f8fc49044fd"
+    },
+    {
+      "file": "icc.jpg",
+      "bytes": 9609,
+      "sha256": "038a83948807a5baa28748ebb5d9ea1504e692f94bcb7589d6d59d92f7d3e7c4"
+    },
+    {
+      "file": "icc.png",
+      "bytes": 8593,
+      "sha256": "efd5a07d4a282d931aea57dcf5a2fc52e00395e1e3e2ac48615f9c21015cddab"
+    },
+    {
+      "file": "mono.png",
+      "bytes": 69,
+      "sha256": "664b0f87912fc228b69a083e3fd98c7c917c602289f0bdcebb7def2185641eb5"
+    },
+    {
+      "file": "orientation-1.jpg",
+      "bytes": 827,
+      "sha256": "bb8f3fcd7e076f72e4638fffe7ce2e316181ab7e078145d48ed010158aa089bc"
+    },
+    {
+      "file": "orientation-2.jpg",
+      "bytes": 827,
+      "sha256": "8e244d9e744f7166743abbd86782bcb01e78e74dab65f691aeffc0a15a994664"
+    },
+    {
+      "file": "orientation-3.jpg",
+      "bytes": 827,
+      "sha256": "eae7b4b483f0efe36a5c7a56d738ef3c57c87a2287c6db233b3a39cbff1db098"
+    },
+    {
+      "file": "orientation-4.jpg",
+      "bytes": 827,
+      "sha256": "2c7b53d5539e18b23855af661a4ad94530873571b2bc9d923b516ab0a6ecd288"
+    },
+    {
+      "file": "orientation-5.jpg",
+      "bytes": 827,
+      "sha256": "9bab91655dbb7b0143791d7d7a61f494dad6edcfbd1899a9ff70320cc3f2cf94"
+    },
+    {
+      "file": "orientation-6.jpg",
+      "bytes": 827,
+      "sha256": "ff49a7ec6173429516b1d59380dc5b37e2b54e24563a6042d4941b5f0b4de557"
+    },
+    {
+      "file": "orientation-7.jpg",
+      "bytes": 827,
+      "sha256": "c941776b89f293f0a75e58f62bc07206eb70b5169978a16d893ba0545c69cbf8"
+    },
+    {
+      "file": "orientation-8.jpg",
+      "bytes": 827,
+      "sha256": "2506f7ec9fe2f2ecdd5699567885f6ed96d5050d0091129a16477ee47455c3a7"
+    },
+    {
+      "file": "palette-alpha.png",
+      "bytes": 109,
+      "sha256": "89cc4fd4d66d0f7e0711c02431b2464fa2c463b4e73901c52b952f824c98c15e"
+    },
+    {
+      "file": "rgb.png",
+      "bytes": 81,
+      "sha256": "3d0ac15f6c6ddbbffa0a50dc5dfbf661ce86c33f4d387003f7464d49434dd320"
+    },
+    {
+      "file": "rgb16.png",
+      "bytes": 84,
+      "sha256": "a92d9ce5a7ceae8ef3b6bf6730ca5fd792df68ad40649fde58be658f68114b5e"
+    },
+    {
+      "file": "rgba.png",
+      "bytes": 85,
+      "sha256": "1bf64b821b9746c86fab918b660df18922f01dce174f53862b0873304889a67d"
+    },
+    {
+      "file": "srgb.png",
+      "bytes": 94,
+      "sha256": "0816933844eaa402d603186ce3b6116e4fb908632db2fc4abf0242ef33a02ebe"
+    }
+  ],
+  "generator": "eng/generate-image-fixtures.py",
+  "generatorSha256": "286f1a61ee33e178b6718abd38710929d6437c37a8c72eae67bd3053af7c2523"
+}

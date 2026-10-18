@@ -22,6 +22,7 @@
     <AdditionalFiles Include="PublicAPI.Shipped.txt" />
     <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
     <EmbeddedResource Include="Text/Data/*" />
+    <EmbeddedResource Include="Images/Data/*.icc" LogicalName="Fluent.Pdf.Images.Data.%(Filename)%(Extension)" />
     <None Include="../../README.md" Pack="true" PackagePath="/" />
     <None Include="../../LICENSE" Pack="true" PackagePath="/" />
   </ItemGroup>

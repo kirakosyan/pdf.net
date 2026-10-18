@@ -15,6 +15,9 @@ internal static class PdfFeatureVersion
         }
 
         string type = Name("Type"), subtype = Name("Subtype");
+        if (subtype == "Image" && entries.ContainsKey("Mask")) floor = Math.Max(floor, 13);
+        if (type == "Metadata") floor = Math.Max(floor, 14);
+        if (subtype == "Image" && entries.TryGetValue("BitsPerComponent", out var precision) && resolve(precision).Kind == PdfValueKind.Number && resolve(precision).TryGetInteger(out long bits) && bits == 16) floor = Math.Max(floor, 15);
         if (type == "ObjStm" || type == "XRef" || type == "OCG" || type == "OCMD")
             floor = 15;
         if(entries.ContainsKey("ShadingType")||entries.ContainsKey("OPM")||entries.TryGetValue("PatternType",out var patternType)&&patternType.Kind==PdfValueKind.Number&&patternType.NumberValue==2)floor=Math.Max(floor,13);

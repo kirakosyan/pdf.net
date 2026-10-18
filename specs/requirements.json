@@ -632,7 +632,8 @@
           "Complete interactive duplicate/tile/annotation, structure-root metadata, text-string encoding and encrypted-source profiles and mixed-document corpora",
           "Full independent fidelity/conformance/accessibility, actual minimum runtimes, final packages and all production gates"
         ],
-        "independentEvidence": "docs/evidence/FP-016-independent.json"
+        "independentEvidence": "docs/evidence/FP-016-independent.json",
+        "sourceEvidence": "docs/evidence/FP-016-source.json"
       }
     },
     {
@@ -662,7 +663,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/images.md",
+        "implemented": [
+          "Exact raw/encoded images, PNG/JPEG metadata, profiles, orientation, palette/alpha/masks and explicit lossless reconstruction",
+          "Bounded invoked Form/image inspection, detached extraction and occurrence-specific replacement/removal",
+          "Conservative per-operation graph-and-byte-verified safe deduplication; C#/VB consumers"
+        ],
+        "pending": [
+          "Additional file/codec/owner-dependent resource profiles and full independent image/color/visual/conformance corpus",
+          "Actual minimum runtimes, final packages and all production qualification gates"
+        ]
+      }
     },
     {
       "id": "FP-018",

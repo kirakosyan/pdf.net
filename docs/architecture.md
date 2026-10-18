@@ -81,3 +81,5 @@ Flow layout preserves paragraph bidi resolution and reshapes each wrapped line b
 Tables share the flow context for grid measurement, nested content, safe intervals and canvas output. Fragment painting copies individual placements with their captured clips, preserving one body text instance per fragment and intentional repeated headers. Nested continuation headers reserve ordered common bands.
 
 Composition paints logical block order, including physical right-to-left columns. Basic column tagging wraps page-level content segments with MCIDs and builds ordered standard Div elements plus a parent number tree. This is separate from complete accessibility/conformance and explicit source-structure remapping. Footnotes reserve body space before committing their references; immutable definitions remain job-local in the planner.
+
+Image assets retain immutable encoded byte stores and display metadata. Inspection captures source-owned resource scopes; occurrence editing clones the selected Form path in a transaction. Image decoding stays behind explicit provider interfaces; the managed core performs no color conversion or PDF rendering.

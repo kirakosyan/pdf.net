@@ -15,14 +15,14 @@ public enum PdfImageCodec
 /// <summary>Immutable interleaved image geometry. Samples are packed most-significant bit first, with each row byte-aligned.</summary>
 public sealed class PdfImageInfo
 {
-    /// <summary>Creates positive geometry with 1–4 components and 1–16 bits per component; arithmetic overflow is rejected.</summary>
+    /// <summary>Creates positive geometry with 1–32 components and 1–16 bits per component; arithmetic overflow is rejected.</summary>
     public PdfImageInfo(int width, int height, int components, int bitsPerComponent)
     {
         if (width <= 0)
             throw new ArgumentOutOfRangeException(nameof(width));
         if (height <= 0)
             throw new ArgumentOutOfRangeException(nameof(height));
-        if (components < 1 || components > 4)
+        if (components < 1 || components > 32)
             throw new ArgumentOutOfRangeException(nameof(components));
         if (bitsPerComponent < 1 || bitsPerComponent > 16)
             throw new ArgumentOutOfRangeException(nameof(bitsPerComponent));

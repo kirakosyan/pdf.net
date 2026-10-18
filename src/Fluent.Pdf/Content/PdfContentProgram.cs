@@ -98,7 +98,7 @@ public sealed class PdfContentProgram
         }
     }
 
-    internal static PdfContentProgram CreateCore(IEnumerable<PdfContentOperation> operations, PdfContentKind kind, PdfOperationContext context)
+    internal static PdfContentProgram CreateCore(IEnumerable<PdfContentOperation> operations, PdfContentKind kind, PdfOperationContext context, bool inlinePixelsPreflighted = false)
     {
         var items = new List<PdfContentOperation>();
         int version = 12;
@@ -113,11 +113,11 @@ public sealed class PdfContentProgram
             version = Math.Max(version, PdfVersionNumber.Parse(operation.MinimumVersion));
         }
 
-        ValidateCore(items, kind, context);
+        ValidateCore(items, kind, context, !inlinePixelsPreflighted);
         return new PdfContentProgram(items, kind, PdfVersionNumber.Text(version));
     }
 
-    internal static PdfContentProgram ParseCore(PdfByteStore bytes, PdfContentKind kind, PdfUnknownOperatorPolicy unknown, string? version, PdfOperationContext context)
+    internal static PdfContentProgram ParseCore(PdfByteStore bytes, PdfContentKind kind, PdfUnknownOperatorPolicy unknown, string? version, PdfOperationContext context, Func<PdfValue, int>? inlineComponents = null)
     {
         var cursor = new PdfSyntaxCursor(bytes, context);
         var operations = new List<PdfContentOperation>();
@@ -164,7 +164,7 @@ public sealed class PdfContentProgram
                 {
                     if (operands.Count != 0)
                         throw PdfContentState.Error(context, "Content.InlineOperands", "BI cannot have preceding operands.");
-                    operation = PdfInlineImage.Read(cursor);
+                    operation = PdfInlineImage.Read(cursor, inlineComponents);
                 }
                 else if (PdfOperatorGrammar.TryGet(token, out var code))
                     operation = new PdfContentOperation(code, operands.ToArray());
@@ -184,17 +184,17 @@ public sealed class PdfContentProgram
 
         if (operands.Count != 0)
             throw PdfContentState.Error(context, "Content.MissingOperator", "The program ends with operands without an operator.");
-        return CreateCore(operations, kind, context);
+        return CreateCore(operations, kind, context, true);
     }
 
-    internal static void ValidateCore(IReadOnlyList<PdfContentOperation> operations, PdfContentKind kind, PdfOperationContext context)
+    internal static void ValidateCore(IReadOnlyList<PdfContentOperation> operations, PdfContentKind kind, PdfOperationContext context, bool chargeInlinePixels = true)
     {
         foreach (var operation in operations)
         {
             foreach (var operand in operation.Operands)
                 Inspect(operand, context);
             if (operation.Operation == PdfOperator.InlineImage)
-                PdfInlineImage.Validate(operation, context);
+                PdfInlineImage.Validate(operation, context, chargeInlinePixels);
         }
 
         PdfContentState.Validate(operations, kind, context);

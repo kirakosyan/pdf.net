@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Original generated ICC v2.1 matrix/shaper profiles; no third-party profile bytes or implementation copied",
+  "license": "MIT",
+  "generator": "eng/generate-image-profiles.py",
+  "generatorSha256": "afa45aef64b0304bba77ef7caa869aaf961ff7056664f06c35fd1f41948fa51b",
+  "generationPython": "3.12.14",
+  "profileFacts": {
+    "standardIds": [
+      "STD-IMAGE-PNG3",
+      "STD-IMAGE-TIFF6",
+      "STD-COLOR-RGB",
+      "STD-COLOR-ICC"
+    ],
+    "curveEntries": 4096,
+    "curvePrecision": "unsigned 16-bit",
+    "white": "exact ICC D50 header encoding",
+    "adaptation": "original Bradford matrix computation from normative RGB chromaticities"
+  },
+  "assets": [
+    {
+      "file": "standard-gray-v2.icc",
+      "bytes": 8680,
+      "sha256": "3871b8d5389bb1225896064477524c1807d1f7e4414e9d18221b807a0051838f"
+    },
+    {
+      "file": "standard-rgb-v2.icc",
+      "bytes": 8800,
+      "sha256": "1d6dc237618bcc3814610377d7a1abb3b4e7df3f1f6dccb4dc6abd7dd94b1f25"
+    }
+  ],
+  "productionQualified": false,
+  "externalPrimarySourceCaptureSha256": "ea2d1a7a6c3f2fcead6e6a757df84e78c4fdaf7ca9ecea5686ee16308d0d9dd0"
+}

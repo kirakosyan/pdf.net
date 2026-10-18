@@ -261,7 +261,7 @@ internal static class PdfStreamFilters
         return output.Build();
     }
 
-    internal static PdfByteStore Predict(PdfByteStore input, PdfValue parameters, PdfOperationContext context)
+    internal static PdfByteStore Predict(PdfByteStore input, PdfValue parameters, PdfOperationContext context, long startOffset = 0, long byteLength = -1)
     {
         int predictor = Parameter(parameters, "Predictor", 1, context);
         if (predictor == 1)
@@ -277,7 +277,7 @@ internal static class PdfStreamFilters
         var row = new byte[rowSize];
         var previous = new byte[rowSize];
         var output = new PdfByteBuilder(context);
-        using var source = input.Open(0, input.Length);
+        using var source = input.Open(startOffset, byteLength < 0 ? input.Length - startOffset : byteLength);
         while (true)
         {
             context.Checkpoint();

@@ -122,16 +122,37 @@ public sealed class PdfColorSpace
         {
             using var lease = new BorrowedStream(input, true, context);
             var bytes = PdfByteStore.Read(lease, context);
-            int components = PdfIccHeader.Validate(bytes, context);
-            var selected = alternate ?? (components == 1 ? Gray : components == 3 ? Rgb : Cmyk);
-            if (selected.Components != components || selected.IsPattern || !selected.SupportsBlending)
-                throw PdfWriterCore.Error(context, "Graphics.IccAlternate", "The explicit ICC alternate must have the same channel count and a nonspecial blending color space.");
-            var dictionary = PdfGraphicsNumbers.Dict(("N", PdfValue.Integer(components)), ("Alternate", selected.Definition));
-            var profile = PdfValue.StreamValue(dictionary, bytes, 0, bytes.Length);
-            result = new PdfColorSpace(PdfValue.Array(PdfValue.Name("ICCBased"), profile), components, UnitRanges(components), PdfIccHeader.MinimumVersion(bytes));
+            result = IccCore(bytes, alternate, context);
         }, PdfCapability.WriteDocument);
         result!.OperationReport = report;
         return result;
+    }
+
+    internal static PdfColorSpace IccCore(PdfByteStore bytes, PdfColorSpace? alternate, PdfOperationContext context)
+    {
+        int components = PdfIccHeader.Validate(bytes, context);
+        var selected = alternate ?? (components == 1 ? Gray : components == 3 ? Rgb : Cmyk);
+        if (selected.Components != components || selected.IsPattern || !selected.SupportsBlending)
+            throw PdfWriterCore.Error(context, "Graphics.IccAlternate", "The explicit ICC alternate must have the same channel count and a nonspecial blending color space.");
+        var dictionary = PdfGraphicsNumbers.Dict(("N", PdfValue.Integer(components)), ("Alternate", selected.Definition));
+        var profile = PdfValue.StreamValue(dictionary, bytes, 0, bytes.Length);
+        return new(PdfValue.Array(PdfValue.Name("ICCBased"), profile), components, UnitRanges(components), PdfIccHeader.MinimumVersion(bytes));
+    }
+    /// <summary>Creates an exact eight-bit palette over an explicit non-indexed, non-pattern base space.</summary>
+    public static PdfColorSpace Indexed(PdfColorSpace baseSpace, int highValue, byte[] palette, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
+    {
+        if (baseSpace == null) throw new ArgumentNullException(nameof(baseSpace));
+        if (palette == null) throw new ArgumentNullException(nameof(palette));
+        PdfColorSpace? result = null;
+        var report = PdfFont.Run("CreateIndexedColorSpace", "managed.graphics", policy, cancellationToken, c => result = IndexedCore(baseSpace, highValue, palette, c), PdfCapability.WriteDocument);
+        result!.OperationReport = report; return result;
+    }
+    internal static PdfColorSpace IndexedCore(PdfColorSpace baseSpace, int highValue, byte[] palette, PdfOperationContext context)
+    {
+        if (highValue < 0 || highValue > 255 || baseSpace.IsPattern || baseSpace.Definition.Kind == PdfValueKind.Array && baseSpace.Definition.Items[0].NameValue == "Indexed" || palette.Length != (highValue + 1) * baseSpace.Components)
+            throw PdfWriterCore.Error(context, "Graphics.IndexedPalette", "An indexed palette requires exact byte entries for zero through hival over a non-indexed base.");
+        context.Consume(PdfResourceKind.ExpandedBytes, palette.Length * 2L + 256);
+        return new(PdfValue.Array(PdfValue.Name("Indexed"), baseSpace.Definition, PdfValue.Integer(highValue), PdfValue.String(palette)), 1, new double[] { 0, highValue }, baseSpace.MinimumVersion, blending: false);
     }
 
     /// <summary>Captures this exact color space as a named graphics resource with a bounded validation report.</summary>

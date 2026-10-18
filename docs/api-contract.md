@@ -109,3 +109,5 @@ FP-014 adds immutable list counters/restarts, reusable components, section parit
 FP-015 adds final page template callbacks, explicit decorations, stable heading destinations, linked contents/index locators and standard numbering ranges. See [page templates](page-templates.md).
 
 FP-016 adds explicit page selections, detached page organization and vector imposition with shared budgets, reference remapping and explicit interactive profiles. See [page organization](page-organization.md).
+
+FP-017 adds immutable image assets, bounded PNG/JPEG packaging, masks/orientation, per-operation exact deduplication and captured graphics invocation extraction/editing. See [images and reusable graphics](images.md).

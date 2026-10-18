@@ -215,6 +215,20 @@ public sealed class PdfCanvas
         return Place(image, new(0, 0, 1, 1), PdfMatrix.Identity, destination, (double)width / height, fit, anchor, zIndex);
     }
 
+    /// <summary>Fits an immutable image using its physical pixel aspect and Exif orientation without rewriting encoded samples.</summary>
+    public PdfCanvasPlacement DrawImageAsset(PdfImageAsset image, PdfRect destination, PdfCanvasFit fit = PdfCanvasFit.Contain, PdfCanvasAnchor anchor = PdfCanvasAnchor.Center, int zIndex = 0)
+    {
+        Check();
+        if (image == null) throw new ArgumentNullException(nameof(image));
+        PdfGraphicsResource resource = image.Resource;
+        if (image.Metadata.Orientation != PdfImageOrientation.Normal)
+        {
+            var drawing = Drawing(new[] { new PdfContentOperation(PdfOperator.Transform, image.OrientationMatrix.Value.Items.ToArray()), new PdfContentOperation(PdfOperator.DrawObject, PdfValue.Name("Image")) }, new(new PdfResourceBinding("Image", resource)));
+            resource = Form(drawing, new(0, 0, 1, 1));
+        }
+        return Place(resource, new(0, 0, 1, 1), PdfMatrix.Identity, destination, image.DisplayAspect, fit, anchor, zIndex);
+    }
+
     /// <summary>Places immutable shaped text at a baseline in canvas units. Font size remains in typographic points.</summary>
     public PdfCanvasPlacement DrawText(PdfShapedText text, PdfPoint baseline, double fontSizePoints, double lineHeight = 1.2, bool subset = true, int zIndex = 0)
     {

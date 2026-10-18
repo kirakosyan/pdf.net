@@ -15,7 +15,7 @@ internal static class PdfInlineImage
         ["IM"] = "ImageMask",
         ["I"] = "Interpolate"
     };
-    internal static PdfContentOperation Read(PdfSyntaxCursor cursor)
+    internal static PdfContentOperation Read(PdfSyntaxCursor cursor, Func<PdfValue, int>? colorComponents = null)
     {
         var context = cursor.Context;
         var entries = new Dictionary<string, PdfValue>(StringComparer.Ordinal);
@@ -43,7 +43,7 @@ internal static class PdfInlineImage
         long start = cursor.Position;
         var preliminary = PdfContentOperation.ImageOperation(PdfValue.StreamValue(dictionary, cursor.Source, start, 0));
         Validate(preliminary, context);
-        long length = DataLength(dictionary, cursor.Source, start, context);
+        long length = DataLength(dictionary, cursor.Source, start, context, colorComponents);
         cursor.Position = start + length;
         if (!PdfSyntaxCursor.White(cursor.Peek()))
             throw PdfContentState.Error(context, "Content.InlineTerminator", "Encoded inline data requires whitespace before EI.");
@@ -72,11 +72,11 @@ internal static class PdfInlineImage
         return integer;
     }
 
-    internal static void Validate(PdfContentOperation operation, PdfOperationContext context)
+    internal static void Validate(PdfContentOperation operation, PdfOperationContext context, bool chargePixels = true)
     {
         var image = operation.Image!;
         long width = Positive(image, "Width", context), height = Positive(image, "Height", context);
-        context.ConsumePixels(width, height);
+        if (chargePixels) context.ConsumePixels(width, height);
         var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var pair in image.Entries)
         {
@@ -108,7 +108,7 @@ internal static class PdfInlineImage
         return value.BooleanValue;
     }
 
-    internal static long DataLength(PdfValue dictionary, PdfByteStore source, long start, PdfOperationContext context)
+    internal static long DataLength(PdfValue dictionary, PdfByteStore source, long start, PdfOperationContext context, Func<PdfValue, int>? colorComponents = null)
     {
         long width = Positive(dictionary, "Width", context), height = Positive(dictionary, "Height", context);
         var filter = Entry(dictionary, "Filter");
@@ -124,7 +124,7 @@ internal static class PdfInlineImage
         {
             bool mask = Mask(dictionary, context);
             long bits = mask ? 1 : Positive(dictionary, "BitsPerComponent", context);
-            int components = mask ? 1 : Components(Entry(dictionary, "ColorSpace"), context);
+            int components = mask ? 1 : Components(Entry(dictionary, "ColorSpace"), context, colorComponents);
             long length;
             try
             {
@@ -202,7 +202,7 @@ internal static class PdfInlineImage
         return input.Position;
     }
 
-    private static int Components(PdfValue color, PdfOperationContext context)
+    private static int Components(PdfValue color, PdfOperationContext context, Func<PdfValue, int>? colorComponents)
     {
         if (color.Kind == PdfValueKind.Name)
         {
@@ -228,6 +228,7 @@ internal static class PdfInlineImage
                 return color.Items[1].Items.Count;
         }
 
+        if (colorComponents != null) return colorComponents(color);
         throw PdfContentState.Error(context, "Content.InlineColorSpaceRequired", "Raw inline image boundaries require a direct color space with a known component count.");
     }
 
