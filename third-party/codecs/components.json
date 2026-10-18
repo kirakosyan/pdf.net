@@ -38,11 +38,11 @@
     },
     {
       "path": "third-party/codecs/LICENSE.CoreJ2K.txt",
-      "sha256": "35a83c4263d514f83a5006bb9ed9ea309e5069b272791aa99c405c8439282c8b"
+      "sha256": "2b718cb2d9c117bc0744a9f421083e8b282765e920b71d547a683d257e8cea77"
     },
     {
       "path": "third-party/codecs/LICENSE.LibJpeg.NET.txt",
-      "sha256": "9c3ef45b3f1fdfc2e470a8e3a08ed1a170e8a5b7f1d286bd2a899f64274fdf46"
+      "sha256": "5fe40a8717cae6aac9ab4d93908550603ca8fb901cba6cf52785b328e4dd89ff"
     },
     {
       "path": "third-party/codecs/NOTICE.JBIG2.txt",
