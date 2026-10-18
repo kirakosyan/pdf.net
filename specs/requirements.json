@@ -631,7 +631,8 @@
         "pending": [
           "Complete interactive duplicate/tile/annotation, structure-root metadata, text-string encoding and encrypted-source profiles and mixed-document corpora",
           "Full independent fidelity/conformance/accessibility, actual minimum runtimes, final packages and all production gates"
-        ]
+        ],
+        "independentEvidence": "docs/evidence/FP-016-independent.json"
       }
     },
     {

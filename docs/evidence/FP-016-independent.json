@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "purpose": "FP-016 independent development vector imposition/selection checks; not full organization or production qualification",
+  "sourceCommit": "b434bef5f0d0e49a642e48b7549e40f9d678f900",
+  "workingTreeDirty": false,
+  "method": "Original separate physical geometry/polygon model and literal PDF reference encoder; strict independent reader and renderer",
+  "tools": {
+    "pypdf": "6.10.0",
+    "Pillow": "12.3.0",
+    "NumPy": "2.3.5",
+    "SciPy": "1.17.0"
+  },
+  "renderer": {
+    "path": "/usr/bin/pdftoppm",
+    "version": "25.03.0",
+    "sha256": "f22d753dfb4c31c9f0198d608982dac5b06a3c5d9a08d7d9bf0c6004f08a1a56"
+  },
+  "cases": [
+    {
+      "case": "nup",
+      "pages": 2,
+      "pdfSha256": "0e1ac29b1babe6e9399f2412e561df080546a92817e6f5b17be98e4137f2b37f",
+      "rasterPixels": 1440000,
+      "differentPixels": 0,
+      "minimumSSIM": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "booklet",
+      "pages": 2,
+      "pdfSha256": "3ee2f7741d98f87359019ff0b17b9a86f9d2f276c66b4964ed47d1f265721950",
+      "rasterPixels": 1440000,
+      "differentPixels": 0,
+      "minimumSSIM": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "tiles",
+      "pages": 6,
+      "pdfSha256": "7d1bdde7a3b10de48a69109b852b7d53a6998c0d9b72127bc8df2483507dec60",
+      "rasterPixels": 720000,
+      "differentPixels": 0,
+      "minimumSSIM": 1.0,
+      "requiredSSIM": 0.995
+    },
+    {
+      "case": "selected",
+      "pages": 4,
+      "pdfSha256": "f3121ae5eba6e2a17bd2039ac090d49eb3c1b14f24642696e942488789b805af",
+      "readerChecks": "exact requested duplicate order, native content, boxes, UserUnit and rotations"
+    },
+    {
+      "case": "tagged-nup",
+      "pages": 2,
+      "pdfSha256": "0cfd0ff8682e6a963dcbf9cd277855d5363986937cb3570d6b563e6890be5662",
+      "readerChecks": "exact physical page, actually invoked form stream, MCID and parent-tree element associations",
+      "verifiedAssociations": 7
+    }
+  ],
+  "productionQualified": false,
+  "pending": [
+    "Complete interactive duplicate/tile/annotation, structure metadata and encrypted-source profiles",
+    "Full independent conformance/fidelity/accessibility and mixed-document corpus",
+    "Actual minimum runtimes, final packages and complete security/fuzz/endurance workloads"
+  ]
+}
