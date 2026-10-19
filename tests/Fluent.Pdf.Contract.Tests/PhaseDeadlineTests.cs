@@ -98,18 +98,26 @@ public sealed class PhaseDeadlineTests
         try
         {
             var signaled = new TaskCompletionSource<long>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var work = Task.Delay(Timeout.Infinite, token);
-            // Measure completion on its completing thread, independently of the test runner's await queue.
-            var completed = work.ContinueWith(_ => clock.ElapsedTicks, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            var canceledState = new TaskCompletionSource<(long Ticks, bool Canceled)>(TaskCreationOptions.RunContinuationsAsynchronously);
+            Task? work = null;
+            // Cancellation callbacks run synchronously in LIFO order. Register this observer before
+            // Task.Delay so it samples the promise state after the delay's cancellation callback.
+            // A continuation can be queued despite ExecuteSynchronously when the promise forces async continuations.
+            using var completion = token.Register(() => canceledState.TrySetResult((clock.ElapsedTicks, work != null && work.IsCanceled)));
+            work = Task.Delay(Timeout.Infinite, token);
+            var continuationObserved = work.ContinueWith(_ => clock.ElapsedTicks, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
             using var signal = token.Register(() => signaled.TrySetResult(clock.ElapsedTicks));
             clock.Restart();
             using var phase = context.EnterTimeLimit(TimeSpan.FromMilliseconds(50));
             await Assert.ThrowsAsync<TaskCanceledException>(() => work);
-            long completedTicks = await completed;
+            var actualCompletion = await canceledState.Task;
+            long completedTicks = actualCompletion.Ticks;
+            long continuationTicks = await continuationObserved;
             long signaledTicks = await signaled.Task;
             var signalElapsed = TimeSpan.FromSeconds(signaledTicks / (double)System.Diagnostics.Stopwatch.Frequency);
             var completionElapsed = TimeSpan.FromSeconds(completedTicks / (double)System.Diagnostics.Stopwatch.Frequency);
-            _output.WriteLine("Phase signal={0:F3}ms; awaited-task completion={1:F3}ms; test-continuation observation={2:F3}ms.", signalElapsed.TotalMilliseconds, completionElapsed.TotalMilliseconds, clock.Elapsed.TotalMilliseconds);
+            _output.WriteLine("Phase signal={0:F3}ms; canceled-task state={1:F3}ms; task-continuation observation={2:F3}ms; test-continuation observation={3:F3}ms.", signalElapsed.TotalMilliseconds, completionElapsed.TotalMilliseconds, continuationTicks * 1000d / System.Diagnostics.Stopwatch.Frequency, clock.Elapsed.TotalMilliseconds);
+            Assert.True(actualCompletion.Canceled);
             Assert.Equal(token, context.CancellationToken);
             Assert.True(signaledTicks >= 0 && signalElapsed < TimeSpan.FromSeconds(1));
             Assert.True(completedTicks >= 0 && completionElapsed < TimeSpan.FromSeconds(1));

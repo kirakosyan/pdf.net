@@ -83,10 +83,10 @@
   ],
   "sourceCI": {
     "report": "docs/evidence/PR-118-CI-114-source.json",
-    "snapshotStatus": "in_progress",
-    "completedRuntimeLanes": 15,
+    "snapshotStatus": "completed",
+    "completedRuntimeLanes": 18,
     "knownFailedCases": 1,
-    "scope": "Exact47source. Five completed hosts include four green and one failed original-UA2 report; MacIntel pending. No remaining lane success inferred."
+    "scope": "Linuxx64first.NET8 original prepared-UA2 validator report was rejected as malformed XML; underlying raw host output unavailable locally and cause unconfirmed."
   },
   "productionQualified": false,
   "packageSha256": null,

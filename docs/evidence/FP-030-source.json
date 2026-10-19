@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-030",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1277,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "e80157cfcf4c88e6e31f01ad8a90027f140fef79f314486727dc12c2cbc7e913"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 180,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "8b41991a66465afcfc1e459ba43ef46bbf4778df209923700b72df5accfdf6f5"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 180,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "aa0237ac5d860129ad996bb3c51bdc4485ba74fe05fb7f50f2698d426964417b"
+    }
+  ],
+  "sdkLibraries": 11,
+  "apiComparisons": 33,
+  "apiComparisonReportSha256": "64366bd95217b48f5ea2b232b111522c69aaa607ae663d84c0d548e1297783ad",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Redaction/PdfRedactionContracts.cs": "2f6358cf543ad388d2dfb074b1b85a6d134aba827367bd2ef7272d2af08ac512",
+    "src/Fluent.Pdf/Redaction/PdfRedaction.cs": "33161460a8081a11e188122a4856bf86a88f8e24fdd3efcbf03805b754535ce0",
+    "src/Fluent.Pdf/Redaction/PdfRedactionRle.cs": "46f1ecee86ef4f80ef98a3235e379b425b9c9cb06550da00ebdd4cee830b2b45",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "d8941a8636ede3f36503343d0044c6cb903a46d0e7b4d3a3ea11220d1473abd8",
+    "tests/Fluent.Pdf.Contract.Tests/RedactionTests.cs": "a5244153112216ace07d399d2986caabe0842e27bd4d14459f3ebea6e6b48fbb",
+    "tests/Fluent.Pdf.Contract.Tests/PhaseDeadlineTests.cs": "f097f4f64ae4120ce056b374fc84e8a2924bea7efe19374f41fb72928bf09a4b",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "b2fd251854d98ce47c169c9dec5e5b5c2aab21dc3e5634f8c9335aa346d36db4",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "c7e10f8f673ab223795ab0583269c682808025ce9477a31ebb070badb8205bab"
+  },
+  "reports": {
+    "redaction-final-net10.log": "88a31ae4150c1a5aad20555792eebfe31044a36e6ba3566c4b96c938cae430ef",
+    "redaction-final-spec.log": "c2cc35e75a881ac2ab86d202f8b8ff5f739913df97b63728d1dd641d49b79ff6",
+    "redaction-final-fallback.log": "2ddea3f37df4332691d8303c7abd2598d2c947c5f416d4e311c7f6ea89da0bfe",
+    "redaction-final-build.log": "ecb1370f6f42776b1217480a17ea5819c47cc5c7699abaaa49ddbe880fcf03f9",
+    "redaction-final-net8.log": "52d30f85bda725eec15d877867bf9d846d88839ac754b77e98f9c91f4d5e47b9",
+    "redaction-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "redaction-final-api.log": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c",
+    "redaction-fallback-build.log": "51197349a7281305758762d899f4223d9633b528a17c0afc1c719ce0b1301ebf",
+    "redaction-normal-build.log": "2f959cfa7f71fde1a320d60023e752296168dabc35b24e2f3d2d3acb87c47464",
+    "redaction-first-net10.log": "4afd545654cbb17858a5d64558d040dbe24425cb1c028d043c793bcd1184098a",
+    "redaction-second-net10.log": "2a9fa7bff6887967a706e49ae1c40bb1dffd9f8fa07a20246b990d5b3247f2a6"
+  },
+  "independentReportSha256": "af168c6db38d2475f072430539f65fe28d1e9322db07f40e0aa9e3673cec7bcc",
+  "sourceFindings": [
+    "Initial local signed-structure fixture hit the correct writer invalidation rejection while constructing its dummy signature. Fixed fixture-only explicit invalidation authority; it never claims valid CMS.",
+    "Historical115sourceCI19/20lanespass, one phase test measured queued continuation.49test measures already-canceled Task state in synchronous token callback, preserving all deadlines/assertions/SDK behavior. Full historical failure retained."
+  ],
+  "sourceCI": "Final exact-head unfiltered20lane CI required; historical114/115 failure audits are retained.",
+  "localNativeExclusions": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeTextTests",
+    "NativeRenderingTests",
+    "NativeOcrContractTests"
+  ],
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete selective editable-content preservation, original rendering/security/recovery corpora and native/RID/runtime qualification remain mandatory.",
+    "Full independent standards/fidelity/security/concurrency/fuzz/endurance/performance and actual minimum/runtime qualification remain mandatory.",
+    "Exact final SDK packages and every production gate remain mandatory."
+  ]
+}

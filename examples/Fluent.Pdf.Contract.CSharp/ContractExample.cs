@@ -322,4 +322,6 @@ public static class ContractExample
     public static PdfOcrModelSelection SelectOcrModels(PdfOcrModelCatalog catalog, string language) => catalog.Select(language);
     public static PdfOcrAccuracyReport MeasureOcrAccuracy(PdfOcrAccuracySample[] samples, PdfOcrAccuracyOptions options) => PdfOcrAccuracy.Evaluate(samples, "caller-labeled-corpus", "1", options);
     public static PdfOcrResult RecognizeOcr(PdfOcrRaster image, PdfOcrOptions options, PdfProviderRegistry providers) => PdfOcr.Recognize(image, options, providers);
+    public static PdfRedactionResult RedactPdf(PdfDocumentSnapshot source, PdfRedactionRegion[] regions, PdfProviderRegistry providers, int dpi) => PdfRedaction.RasterRewrite(source, regions, providers, new(dpi));
+
 }

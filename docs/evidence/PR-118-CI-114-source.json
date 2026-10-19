@@ -1,18 +1,17 @@
 {
   "schemaVersion": 1,
-  "purpose": "historical-source-ci-snapshot-not-production-qualification",
+  "purpose": "historical-source-ci-not-production-qualification",
   "runId": 39173163898,
   "sourceCommit": "58741165aa5a3825b29fb81358b1144dc490b96a",
   "testedMergeCommit": "f87f5f993c62d4666889deb74c8937e52a249de0",
   "testedTree": "f9b4bdede835f1faea76db19a7ab1af7fa3b3e2d",
   "exactMergeTreeVerified": true,
-  "snapshotStatus": "in_progress",
-  "conclusion": null,
-  "knownFailure": "Linuxx64first.NET8lane:1312pass/1fail on the original prepared-UA2 independent-validator report, rejected as malformed XML. Underlying host output is unavailable locally; cause is unconfirmed.",
+  "snapshotStatus": "completed",
+  "conclusion": "failure",
   "platformJobs": 6,
-  "completedRuntimeLanes": 15,
+  "completedRuntimeLanes": 18,
   "expectedRuntimeLanes": 20,
-  "passed": 19694,
+  "passed": 23633,
   "failed": 1,
   "skipped": 0,
   "jobs": [
@@ -112,10 +111,29 @@
     {
       "jobId": 117810281842,
       "name": "Contracts (osx-x64)",
-      "status": "in_progress",
-      "conclusion": null,
-      "logSha256": null,
-      "completedLaneTotals": []
+      "status": "completed",
+      "conclusion": "success",
+      "logSha256": "8b2d7f5ab1958af12834ecc06c5d9d7bd425a8261ae9456940d2fa035c946c6f",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        },
+        {
+          "failed": 0,
+          "passed": 1313,
+          "skipped": 0,
+          "total": 1313
+        }
+      ]
     },
     {
       "jobId": 117810281858,
@@ -160,7 +178,7 @@
       ]
     }
   ],
-  "metadataSha256": "b52f5e941948089a5c266eb4b60331890716c7f147f26ce5c26e29038f5db2f6",
+  "metadataSha256": "bdf778aeb3aebe68f9da2d0b47c4dd0062e4474d2f21bde6692798dc8e18f36f",
   "artifacts": [
     {
       "id": 12153905660,
@@ -175,6 +193,13 @@
       "digestFromGitHub": "sha256:7cfeb350d568dc80325018df9e91d939c59c59986a2f0cb73bf9391dbfbaa8ce",
       "sizeBytes": 2132522,
       "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12153810743"
+    },
+    {
+      "id": 12153796763,
+      "name": "source-contracts-osx-x64",
+      "digestFromGitHub": "sha256:8f6aef257cca7dfc132ee5bc94b3fa744edf14e39c1b4b6751cd8b33572daa85",
+      "sizeBytes": 2137453,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12153796763"
     },
     {
       "id": 12153661159,
@@ -198,12 +223,13 @@
       "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39173163898/artifacts/12152884948"
     }
   ],
-  "retention": "Five completed decoded logs and exact workflow/artifact metadata retained outside Git. Archive download returns proxy CONNECT403; no ZIP payload retrieved/extracted. Pending MacIntel job is not counted as successful. Exact tested merge/tree/parents verified locally.",
-  "followup": "Subsequent48source test host retains exit/byte-count diagnostics and exposes bounded original stdout/stderr prefixes on malformed XML. No SDK report filtering, retries, deadline changes or relaxed acceptance. Final exact-headCIremainsmandatory.",
+  "retention": "All six decoded logs and exact workflow/artifact metadata retained outside Git. Archive payload retrieval is blocked by local proxy CONNECT403; no ZIP retrieved/extracted.",
+  "knownFailure": "Linuxx64first.NET8 original prepared-UA2 validator report was rejected as malformed XML; underlying raw host output unavailable locally and cause unconfirmed.",
+  "followup": "48source fixture retains bounded original stdout/stderr/exit diagnostics.115Linuxx64UAchecks pass; no claim of confirmed historical root cause.",
   "productionQualified": false,
   "packageSha256": null,
   "limitations": [
-    "Snapshot remains incomplete while MacIntel runs; remaining runtime lanes must not be inferred successful.",
-    "Historical source CI is not actual minimum Framework, final-package or production qualification."
+    "Historical source CI does not qualify final packages or actual minimum Framework.",
+    "Final exact-head unfiltered20lane CI remains mandatory."
   ]
 }

@@ -364,7 +364,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -1240,12 +1240,28 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/FP-030-source.json",
+        "docs/evidence/FP-030-independent.json",
+        "docs/evidence/FP-030-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/redaction.md",
+        "sourceEvidence": "docs/evidence/FP-030-source.json",
+        "implemented": [
+          "Explicit sample replacement before encoding; fresh raster-only graph discards all original programs, metadata, attachments, actions, layers, signatures and revisions",
+          "Bounded shared-context rendering/masking/encoding/full writing, payload-free coverage audit, empty borrowed sinks and atomic files"
+        ],
+        "pending": [
+          "Complete selective editable-content preservation and rendering/security/recovery corpora remain mandatory",
+          "All actual minimum/runtime/native/final-package and production qualification gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-031",

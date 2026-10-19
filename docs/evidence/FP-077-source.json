@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-077",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "4f5d6defefcf36b560b9631bf50b88840e5e1fbf",
+  "sourceTree": "deee33880b0c8f8503e3fcbeefa04422a1200662",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -88,7 +88,13 @@
     "NativeRenderingTests",
     "NativeOcrContractTests"
   ],
-  "sourceCI": "New exact-head/final-head unfiltered CI required. Historical47run114failure and precise later observations remain retained.",
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-115-source.json",
+    "snapshotStatus": "completed",
+    "completedRuntimeLanes": 20,
+    "knownFailedCases": 1,
+    "scope": "MacARMnetstandardfallback phase test measured its scheduled observer at1245.810ms although phase token signaled110.488ms.19otherlanes pass."
+  },
   "productionQualified": false,
   "packageSha256": null,
   "pending": [

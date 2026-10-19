@@ -408,4 +408,7 @@ Public Module ContractExample
     Public Function RecognizeOcr(image As PdfOcrRaster, options As PdfOcrOptions, providers As PdfProviderRegistry) As PdfOcrResult
         Return PdfOcr.Recognize(image, options, providers)
     End Function
+    Public Function RedactPdf(source As PdfDocumentSnapshot, regions As PdfRedactionRegion(), providers As PdfProviderRegistry, dpi As Integer) As PdfRedactionResult
+        Return PdfRedaction.RasterRewrite(source, regions, providers, New PdfRedactionRasterOptions(dpi))
+    End Function
 End Module
