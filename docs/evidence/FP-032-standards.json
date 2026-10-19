@@ -27,7 +27,7 @@
     "Exact owned Contents reservation and complete revision boundaries, cryptographic self-verification and immutable complete signed bytes.",
     "Only pre-created unlocked-field signing is certified as a permitted source edit profile. Broader generic edits reject unless signature invalidation is explicitly authorized.",
     "Trust/revocation/expiry/identity/PAdES and arbitrary external modification permission validation are distinct from intact CMS.",
-    "PKCS12 native import and borrowed store/hardware key execution require complete hostile/native/runtime qualification. Explicit ephemeral flag32 is runtime-validated, including the older netstandard2.0 enum contract."
+    "PKCS12 native import and borrowed store/hardware key execution require complete hostile/native/runtime qualification. The original DER parser authenticates MAC and enforce finite KDF/bag/key profiles before owned RSA parameter import; private PFX data never reaches a native X509 loader or persisted-key fallback."
   ],
   "independentReportSha256": "1db2371551c459655b2bcf37a6628e67ca265c41051fc4a00181db674caedce1",
   "productionQualified": false

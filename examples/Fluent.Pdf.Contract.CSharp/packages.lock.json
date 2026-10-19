@@ -19,6 +19,11 @@
           "System.Text.Encoding.CodePages": "8.0.0"
         }
       },
+      "BouncyCastle.Cryptography": {
+        "type": "Transitive",
+        "resolved": "2.7.0",
+        "contentHash": "U+12df8UEWHgBi04YVf/Lgi2dy3SItlIYvHjjEVa/BngCQIzDCDRBk50DDByCfDvSbe5pRNFr3b7UrVK2kMcLw=="
+      },
       "Markdig": {
         "type": "Transitive",
         "resolved": "1.4.0",
@@ -241,6 +246,7 @@
       "fluent.pdf.cryptography": {
         "type": "Project",
         "dependencies": {
+          "BouncyCastle.Cryptography": "[2.7.0, )",
           "Fluent.Pdf": "[1.0.0, )",
           "System.Formats.Asn1": "[10.0.13, )",
           "System.Security.Cryptography.Cng": "[5.0.0, )"
@@ -311,6 +317,11 @@
         "dependencies": {
           "System.Text.Encoding.CodePages": "8.0.0"
         }
+      },
+      "BouncyCastle.Cryptography": {
+        "type": "Transitive",
+        "resolved": "2.7.0",
+        "contentHash": "U+12df8UEWHgBi04YVf/Lgi2dy3SItlIYvHjjEVa/BngCQIzDCDRBk50DDByCfDvSbe5pRNFr3b7UrVK2kMcLw=="
       },
       "Markdig": {
         "type": "Transitive",
@@ -492,6 +503,7 @@
       "fluent.pdf.cryptography": {
         "type": "Project",
         "dependencies": {
+          "BouncyCastle.Cryptography": "[2.7.0, )",
           "Fluent.Pdf": "[1.0.0, )",
           "System.Formats.Asn1": "[10.0.13, )",
           "System.Security.Cryptography.Cng": "[5.0.0, )"
@@ -550,6 +562,11 @@
         "type": "Transitive",
         "resolved": "1.8.4",
         "contentHash": "lbwt3oqjyxI6x01NT0kRqnudE+gxLqRAs/X49/iVWyguj6OtRfYCanV1mL+jYZgeeAqnGqWzqi7+s5gdtBF1Ag=="
+      },
+      "BouncyCastle.Cryptography": {
+        "type": "Transitive",
+        "resolved": "2.7.0",
+        "contentHash": "U+12df8UEWHgBi04YVf/Lgi2dy3SItlIYvHjjEVa/BngCQIzDCDRBk50DDByCfDvSbe5pRNFr3b7UrVK2kMcLw=="
       },
       "Markdig": {
         "type": "Transitive",
@@ -611,6 +628,7 @@
       "fluent.pdf.cryptography": {
         "type": "Project",
         "dependencies": {
+          "BouncyCastle.Cryptography": "[2.7.0, )",
           "Fluent.Pdf": "[1.0.0, )"
         }
       },
@@ -666,6 +684,11 @@
         "type": "Transitive",
         "resolved": "1.8.4",
         "contentHash": "lbwt3oqjyxI6x01NT0kRqnudE+gxLqRAs/X49/iVWyguj6OtRfYCanV1mL+jYZgeeAqnGqWzqi7+s5gdtBF1Ag=="
+      },
+      "BouncyCastle.Cryptography": {
+        "type": "Transitive",
+        "resolved": "2.7.0",
+        "contentHash": "U+12df8UEWHgBi04YVf/Lgi2dy3SItlIYvHjjEVa/BngCQIzDCDRBk50DDByCfDvSbe5pRNFr3b7UrVK2kMcLw=="
       },
       "Markdig": {
         "type": "Transitive",
@@ -756,6 +779,7 @@
       "fluent.pdf.cryptography": {
         "type": "Project",
         "dependencies": {
+          "BouncyCastle.Cryptography": "[2.7.0, )",
           "Fluent.Pdf": "[1.0.0, )",
           "System.Formats.Asn1": "[10.0.13, )",
           "System.Security.Cryptography.Cng": "[5.0.0, )"

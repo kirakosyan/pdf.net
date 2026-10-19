@@ -1,6 +1,12 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Formats.Asn1;
+using Org.BouncyCastle.Asn1.Nist;
+using Org.BouncyCastle.Asn1.Pkcs;
+using Org.BouncyCastle.Pkcs;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.X509;
 using System.Text;
 using System.Threading;
 using Fluent.Pdf.Cryptography;
@@ -423,5 +429,105 @@ public sealed class SignatureTests
         Assert.Equal("Signature.FormProfile", Assert.Throws<PdfException>(() => PdfSignatures.Sign(document.SourceDocument!, new("First"), new(observer))).Diagnostic.Code);
         Assert.Equal(0, observer.Calls);
         Assert.True(document.SourceDocument!.Resolve(form).Entries["NeedAppearances"].BooleanValue);
+    }
+
+    private static byte[] Credential(CertificateSecurityTests.Certificate certificate, bool legacy = false, int macIterations = 2048, bool secondKey = false)
+    {
+        const string password = "original-managed-password";
+        var builder = new Pkcs12StoreBuilder().SetUseDerEncoding(true);
+        if (legacy)
+        {
+            builder.SetKeyAlgorithm(PkcsObjectIdentifiers.PbeWithShaAnd3KeyTripleDesCbc);
+            builder.SetCertAlgorithm(PkcsObjectIdentifiers.PbeWithShaAnd3KeyTripleDesCbc);
+        }
+        else
+        {
+            builder.SetKeyAlgorithm(NistObjectIdentifiers.IdAes256Cbc, PkcsObjectIdentifiers.IdHmacWithSha256);
+            builder.SetCertAlgorithm(NistObjectIdentifiers.IdAes256Cbc, PkcsObjectIdentifiers.IdHmacWithSha256);
+        }
+
+        var store = builder.Build();
+        var pair = DotNetUtilities.GetRsaKeyPair(certificate.Key);
+        var chain = new[]
+        {
+            new X509CertificateEntry(new X509CertificateParser().ReadCertificate(certificate.Value.RawData))
+        };
+        store.SetKeyEntry("Original First", new AsymmetricKeyEntry(pair.Private), chain);
+        if (secondKey)
+            store.SetKeyEntry("Original Second", new AsymmetricKeyEntry(pair.Private), chain);
+        using var output = new MemoryStream();
+        store.Save(output, password.ToCharArray(), new SecureRandom());
+        var encoded = output.ToArray();
+        if (macIterations == 2048)
+            return encoded;
+        // Change only the encoded work declaration; the boundary must reject before trying its now-invalid MAC.
+        var input = new AsnReader(encoded, AsnEncodingRules.DER);
+        var pfx = input.ReadSequence();
+        var version = pfx.ReadEncodedValue();
+        var content = pfx.ReadEncodedValue();
+        var mac = pfx.ReadSequence();
+        var digest = mac.ReadEncodedValue();
+        var salt = mac.ReadEncodedValue();
+        var writer = new AsnWriter(AsnEncodingRules.DER);
+        writer.PushSequence();
+        writer.WriteEncodedValue(version.Span);
+        writer.WriteEncodedValue(content.Span);
+        writer.PushSequence();
+        writer.WriteEncodedValue(digest.Span);
+        writer.WriteEncodedValue(salt.Span);
+        writer.WriteInteger(macIterations);
+        writer.PopSequence();
+        writer.PopSequence();
+        return writer.Encode();
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void ExplicitModernAndLegacyPkcs12ImportsUseManagedBagsAndMemoryOnlyRsa(bool legacy)
+    {
+        using var certificate = new CertificateSecurityTests.Certificate("Original managed credential");
+        using var input = new MemoryStream(Credential(certificate, legacy));
+        using var provider = ManagedCmsSignatureProvider.FromPkcs12(input, "original-managed-password");
+        var result = PdfSignatures.Sign(Prepared(), new("First"), new(provider));
+        Assert.True(Assert.Single(PdfSignatures.Inspect(Parsed(result), new(provider))).CryptographicallyValid);
+        Assert.True(input.CanRead);
+    }
+
+    [Fact]
+    public void ExcessivePkcs12KdfWorkRejectsBeforePasswordVerificationOrKeyImport()
+    {
+        using var certificate = new CertificateSecurityTests.Certificate("Original KDF limit");
+        using var input = new MemoryStream(Credential(certificate, macIterations: 100001));
+        Assert.Equal("Signature.Pkcs12Profile", Assert.Throws<PdfException>(() => ManagedCmsSignatureProvider.FromPkcs12(input, "wrong-password")).Diagnostic.Code);
+        Assert.True(input.CanRead);
+    }
+
+    [Fact]
+    public void Pkcs12MacTamperingCannotProduceASigningProvider()
+    {
+        using var certificate = new CertificateSecurityTests.Certificate("Original integrity boundary");
+        var bytes = Credential(certificate);
+        bytes[bytes.Length - 1] ^= 1;
+        using var input = new MemoryStream(bytes);
+        Assert.Equal("Signature.Pkcs12Import", Assert.Throws<PdfException>(() => ManagedCmsSignatureProvider.FromPkcs12(input, "original-managed-password")).Diagnostic.Code);
+    }
+
+    [Fact]
+    public void MultiplePkcs12PrivateKeysRequireExplicitIdentitySelectionAndDoNotDisposeCallerKeys()
+    {
+        using var certificate = new CertificateSecurityTests.Certificate("Original multiple keys");
+        using var input = new MemoryStream(Credential(certificate, secondKey: true));
+        Assert.Equal("Signature.Pkcs12KeyProfile", Assert.Throws<PdfException>(() => ManagedCmsSignatureProvider.FromPkcs12(input, "original-managed-password")).Diagnostic.Code);
+        Assert.True(certificate.Key.SignHash(new byte[32], HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1).Length > 0);
+    }
+
+    [Fact]
+    public void CredentialImportHonorsTheCallerRawInputBudgetAndLeavesTheStreamOpen()
+    {
+        using var certificate = new CertificateSecurityTests.Certificate("Original raw input boundary");
+        using var input = new MemoryStream(Credential(certificate));
+        Assert.Equal("Limit.InputBytes", Assert.Throws<PdfException>(() => ManagedCmsSignatureProvider.FromPkcs12(input, "original-managed-password", new(limits: new(maximumInputBytes: 1)))).Diagnostic.Code);
+        Assert.True(input.CanRead);
     }
 }

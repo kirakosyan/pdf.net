@@ -9,8 +9,6 @@ namespace Fluent.Pdf.Cryptography;
 public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDisposable
 {
     private const string Data = "1.2.840.113549.1.7.1", SignedData = "1.2.840.113549.1.7.2", Sha256 = "2.16.840.1.101.3.4.2.1", Rsa = "1.2.840.113549.1.1.1";
-    // The netstandard2.0 reference enum predates the named value; supported actual runtimes expose flag32.
-    private const X509KeyStorageFlags EphemeralKeys = (X509KeyStorageFlags)32;
     private static readonly Asn1Tag Explicit = new(TagClass.ContextSpecific, 0, true);
     private readonly PdfCertificateCredential? _credential;
     private X509Certificate2? _ownedCertificate;
@@ -32,7 +30,7 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
     /// <summary>Gets the bounded PKCS12 import report, or null for a borrowed credential/verifier.</summary>
     public PdfOperationReport? ImportReport { get; private set; }
 
-    /// <summary>Imports a bounded explicit PKCS12 with an ephemeral RSA key. The password is never logged; this returned provider owns the imported certificate/key and must be disposed.</summary>
+    /// <summary>Imports a bounded explicit PKCS12 through managed codecs and a memory-only RSA import. The password is never logged; this returned provider owns the imported certificate/key and must be disposed.</summary>
     public static ManagedCmsSignatureProvider FromPkcs12(Stream input, string password, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (input == null || password == null)
@@ -42,22 +40,17 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
         {
             var report = PdfFont.Run("ImportSignaturePkcs12", "managed.cms-signatures", policy, cancellationToken, c =>
             {
-                var bytes = Read(input, 1048576, c);
+                using var rawInput = new BorrowedStream(input, true, c);
+                var bytes = Read(rawInput, 1048576, c);
                 X509Certificate2? certificate = null;
                 RSA? key = null;
                 try
                 {
                     c.Consume(PdfResourceKind.ExpandedBytes, bytes.Length * 8L + 1048576);
-                    if (!Enum.IsDefined(typeof(X509KeyStorageFlags), EphemeralKeys)) throw Error(c, "Pkcs12RuntimeProfile", "This actual runtime cannot guarantee ephemeral PKCS12 key storage.");
-#if NET9_0_OR_GREATER
-                certificate=X509CertificateLoader.LoadPkcs12(bytes,password,EphemeralKeys);
-#else
-                    certificate = new X509Certificate2(bytes, password, EphemeralKeys);
-#endif
+                    var imported = ManagedPkcs12Import.Read(bytes, password, c);
+                    certificate = imported.Certificate;
+                    key = imported.Key;
                     c.Checkpoint();
-                    key = certificate.GetRSAPrivateKey();
-                    if (key == null || key.KeySize < 2048 || key.KeySize > 8192)
-                        throw Error(c, "KeyProfile", "An explicit RSA2048–8192 private key is required.");
                     result = new(new PdfCertificateCredential(certificate, key))
                     {
                         _ownedCertificate = certificate,
@@ -65,6 +58,26 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
                     };
                     certificate = null;
                     key = null;
+                }
+                catch (AsnContentException)
+                {
+                    c.Checkpoint();
+                    throw Error(c, "Pkcs12Import", "The explicit PKCS12 encoding is invalid.");
+                }
+                catch (PlatformNotSupportedException)
+                {
+                    c.Checkpoint();
+                    throw Error(c, "Pkcs12Profile", "This runtime does not implement the explicit credential cipher or key profile.");
+                }
+                catch (Org.BouncyCastle.Crypto.CryptoException)
+                {
+                    c.Checkpoint();
+                    throw Error(c, "Pkcs12Import", "The explicit PKCS12 credential cipher or integrity check failed.");
+                }
+                catch (System.Text.EncoderFallbackException)
+                {
+                    c.Checkpoint();
+                    throw Error(c, "Pkcs12Profile", "The explicit PBES2 password is not valid Unicode.");
                 }
                 catch (CryptographicException)
                 {
