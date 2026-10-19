@@ -69,7 +69,7 @@ public sealed class PdfOperationContext
                     // Fixed observer infrastructure: one bounded stack only when a consumer requests the token.
                     // Never queue deadline cancellation behind arbitrary provider work in the thread pool.
                     Charge(PdfResourceKind.ExpandedBytes, 512);
-                    Charge(PdfResourceKind.Objects, 1);
+                    // Observer infrastructure is not a PDF/codec logical object and must not consume its exact work inventory.
                     var worker = new Thread(ObserveDeadline, 131072)
                     {
                         IsBackground = true,

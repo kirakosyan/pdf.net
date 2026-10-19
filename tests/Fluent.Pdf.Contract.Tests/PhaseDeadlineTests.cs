@@ -236,4 +236,23 @@ public sealed class PhaseDeadlineTests
         Assert.NotNull(observer);
         Assert.False(observer!.IsAlive);
     }
+
+    [Fact]
+    public void ObservingCancellationDoesNotConsumeAnExactDocumentObjectInventory()
+    {
+        var context = new PdfOperationContext("ExactCodecObjectInventory", "original.fixture", PdfCapability.ImageCodecs, new(limits: new(maximumObjects: 1)), default);
+        try
+        {
+            context.Consume(PdfResourceKind.Objects, 1);
+            var token = context.CancellationToken;
+            Assert.False(token.IsCancellationRequested);
+            Assert.Equal(0, context.Available(PdfResourceKind.Objects));
+            context.EnsureComplete();
+        }
+        finally
+        {
+            context.Finish(true);
+            context.DisposeSources();
+        }
+    }
 }
