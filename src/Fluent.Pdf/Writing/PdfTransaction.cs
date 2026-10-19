@@ -138,7 +138,7 @@ public sealed class PdfTransaction : IDisposable
         _disposed = true;
     }
 
-    internal void WriteCore(Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null, bool validatedArchivalDowngrade = false) => PdfWriterCore.Write(Source, _trailer, _changes, _removed, _maximum, _trailerChanged, output, options, context, crypt, validatedArchivalDowngrade);
+    internal void WriteCore(Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null, bool validatedArchivalDowngrade = false, bool validatedSignatureEdit = false) => PdfWriterCore.Write(Source, _trailer, _changes, _removed, _maximum, _trailerChanged, output, options, context, crypt, validatedArchivalDowngrade, validatedSignatureEdit);
     private PdfOperationReport Run(string operation, PdfWriteOptions options, CancellationToken token, Action<PdfOperationContext> action)
     {
         Editable();

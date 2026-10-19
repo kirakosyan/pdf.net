@@ -1333,12 +1333,29 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/FP-032-source.json",
+        "docs/evidence/FP-032-independent.json",
+        "docs/evidence/FP-032-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/signatures.md",
+        "sourceEvidence": "docs/evidence/FP-032-source.json",
+        "implemented": [
+          "Exact incremental detached CMS byte-range reservation, earlier signed-prefix preservation, immutable results and atomic signing files",
+          "Pre-created visible/invisible fields, shared-context explicit PKCS12/borrowed RSA providers and cryptographic self-verification",
+          "DocMDP first-signature order, FieldMDP selections, validated unlocked-field signing and conservative generic writer protection"
+        ],
+        "pending": [
+          "Complete signature/trust/revocation/PAdES, general certification-permitted edit classes and key/PKCS12/store/native/RID/runtime corpora remain mandatory",
+          "Every actual minimum/runtime/final-package and production gate remains mandatory"
+        ]
+      }
     },
     {
       "id": "FP-033",

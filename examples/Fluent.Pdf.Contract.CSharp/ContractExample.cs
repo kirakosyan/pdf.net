@@ -324,4 +324,6 @@ public static class ContractExample
     public static PdfOcrResult RecognizeOcr(PdfOcrRaster image, PdfOcrOptions options, PdfProviderRegistry providers) => PdfOcr.Recognize(image, options, providers);
     public static PdfRedactionResult RedactPdf(PdfDocumentSnapshot source, PdfRedactionRegion[] regions, PdfProviderRegistry providers, int dpi) => PdfRedaction.RasterRewrite(source, regions, providers, new(dpi));
 
+    public static PdfSignedResult SignPdf(PdfSyntaxDocument source, string fieldName, PdfProviderRegistry providers) => PdfSignatures.Sign(source, new(fieldName), providers);
+
 }

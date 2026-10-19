@@ -411,4 +411,7 @@ Public Module ContractExample
     Public Function RedactPdf(source As PdfDocumentSnapshot, regions As PdfRedactionRegion(), providers As PdfProviderRegistry, dpi As Integer) As PdfRedactionResult
         Return PdfRedaction.RasterRewrite(source, regions, providers, New PdfRedactionRasterOptions(dpi))
     End Function
+    Public Function SignPdf(source As PdfSyntaxDocument, fieldName As String, providers As PdfProviderRegistry) As PdfSignedResult
+        Return PdfSignatures.Sign(source, New PdfSignatureOptions(fieldName), providers)
+    End Function
 End Module

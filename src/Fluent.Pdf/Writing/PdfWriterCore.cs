@@ -40,7 +40,7 @@ internal static class PdfWriterCore
         return result;
     }
 
-    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null, bool validatedArchivalDowngrade = false)
+    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null, bool validatedArchivalDowngrade = false, bool validatedSignatureEdit = false)
     {
         context.Checkpoint();
         bool incremental = options.Mode == PdfWriteMode.Incremental;
@@ -59,6 +59,7 @@ internal static class PdfWriterCore
             return;
         }
 
+        PdfSignaturePolicy.RequireWriter(source, options, context, validatedSignatureEdit);
         if (Encrypted(trailer) && crypt == null || source != null && source.Revisions.Any(revision => Encrypted(revision.Trailer)) && !source.DecryptionApplied)
             throw Error(context, "Writer.EncryptionProviderRequired", "Changing or rewriting encrypted objects requires an explicitly configured encryption implementation.");
         long estimate = changes.Count + removed.Count + 1L;

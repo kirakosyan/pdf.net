@@ -85,3 +85,5 @@ FP-027 has a [table extraction source profile](table-extraction.md); complete de
 FP-099 has a [typed generation/event source profile](data-generation.md); complete event/model/callback/data coverage and production qualification remain mandatory.
 
 Explicit raster/full-rewrite redaction and sanitization now have a source profile: selected samples are replaced before encoding and no original graph/history is adopted. Complete selective editable-content preservation, independent renderer/security corpora and production qualification remain mandatory. See [redaction](redaction.md).
+
+Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](signatures.md).

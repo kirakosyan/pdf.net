@@ -4,3 +4,12 @@ Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.Descriptor.get -> Fluent.Pdf.
 Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.Encrypt(System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCertificateRecipient!>! recipients, System.IO.Stream! plaintext, System.IO.Stream! envelope, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.ManagedCmsEnvelopeProvider() -> void
 Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.TryDecrypt(Fluent.Pdf.PdfCertificateCredential! credential, bool allowLegacyKeyTransport, System.IO.Stream! envelope, System.IO.Stream! plaintext, Fluent.Pdf.PdfOperationContext! context) -> bool
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.Dispose() -> void
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.ImportReport.get -> Fluent.Pdf.PdfOperationReport?
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.ManagedCmsSignatureProvider() -> void
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.ManagedCmsSignatureProvider(Fluent.Pdf.PdfCertificateCredential! credential) -> void
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.Sign(System.IO.Stream! signedBytes, System.IO.Stream! cmsOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.Verify(System.IO.Stream! signedBytes, System.IO.Stream! cms, Fluent.Pdf.PdfOperationContext! context) -> bool
+static Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.FromPkcs12(System.IO.Stream! input, string! password, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider!

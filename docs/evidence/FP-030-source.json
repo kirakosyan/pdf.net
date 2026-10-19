@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-030",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "ae8c7f9ab58c8171b4b6cf0df2e3537bb41b7e58",
+  "sourceTree": "e32a0473a95088624f5fc768286c59eb5ad6adaf",
   "localLane": {
     "os": "Debian GNU/Linux13",
     "architecture": "x64",
@@ -72,7 +72,14 @@
     "Initial local signed-structure fixture hit the correct writer invalidation rejection while constructing its dummy signature. Fixed fixture-only explicit invalidation authority; it never claims valid CMS.",
     "Historical115sourceCI19/20lanespass, one phase test measured queued continuation.49test measures already-canceled Task state in synchronous token callback, preserving all deadlines/assertions/SDK behavior. Full historical failure retained."
   ],
-  "sourceCI": "Final exact-head unfiltered20lane CI required; historical114/115 failure audits are retained.",
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-116-source.json",
+    "conclusion": "success",
+    "completedRuntimeLanes": 20,
+    "passed": 27020,
+    "failed": 0,
+    "skipped": 0
+  },
   "localNativeExclusions": [
     "NativeWorkerTests",
     "NativeImageCodecTests",

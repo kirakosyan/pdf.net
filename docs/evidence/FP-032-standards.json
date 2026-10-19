@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-comparison-and-signature-decisions-not-production-qualification",
+  "requirement": "FP-032",
+  "sources": [
+    {
+      "id": "S32-ISO32000-2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "7.5.6",
+        "12.7.4.5",
+        "12.8.1",
+        "12.8.2.2",
+        "12.8.2.4",
+        "12.8.4"
+      ],
+      "scope": "Signature fields, complete byte-range coverage except Contents, incremental signed-byte preservation, DocMDP and FieldMDP."
+    },
+    {
+      "id": "S32-ORIGINAL-SIGNATURE-CORPUS",
+      "sha256": "2d60ca5908a0645beefb8bbaf8da2308f01e18fd98aadc99be247c03a529b240",
+      "scope": "Prior original page/appearance/field/certification/lock/byte-tamper expectations."
+    }
+  ],
+  "decisions": [
+    "Original detached DER SignedData with SHA256/RSA-PKCS1, one explicit signer certificate and no synthesized signed attributes or timestamp. Independently verified with OpenSSL and Poppler.",
+    "Exact owned Contents reservation and complete revision boundaries, cryptographic self-verification and immutable complete signed bytes.",
+    "Only pre-created unlocked-field signing is certified as a permitted source edit profile. Broader generic edits reject unless signature invalidation is explicitly authorized.",
+    "Trust/revocation/expiry/identity/PAdES and arbitrary external modification permission validation are distinct from intact CMS.",
+    "PKCS12 native import and borrowed store/hardware key execution require complete hostile/native/runtime qualification. Explicit ephemeral flag32 is runtime-validated, including the older netstandard2.0 enum contract."
+  ],
+  "independentReportSha256": "1db2371551c459655b2bcf37a6628e67ca265c41051fc4a00181db674caedce1",
+  "productionQualified": false
+}
