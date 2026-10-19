@@ -130,3 +130,7 @@ Opt-in bounded scan correction, original-image preservation, inverse word-bounda
 Explicit raster/full-rewrite redaction and sanitization now have a source profile: selected samples are replaced before encoding and no original graph/history is adopted. Complete selective editable-content preservation, independent renderer/security corpora and production qualification remain mandatory. See [redaction](redaction.md).
 
 Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](signatures.md).
+
+The historical final-signing CI run has all20runtime lanes executed and one actual Windowsfallback phase signal beyond1second. The deadline observer follow-up retains that failure and keeps the original assertions. Root/phase cases require cancellation outside the pool and a joined observer at cleanup. See [retained timing](evidence/PR-118-CI-118-source.json); new exact-head CI and all production gates remain mandatory.
+
+The [deadline observer source regression](evidence/phase-deadline-observer.json) binds the current policy implementation, lifecycle cases and completed actual-runtime/API reports. It is source regression evidence, with complete production qualification still pending.

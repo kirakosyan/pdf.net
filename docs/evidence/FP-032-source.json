@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "purpose": "source-implementation-summary-not-release-qualification",
   "requirement": "FP-032",
-  "sourceCommit": null,
-  "sourceTree": null,
+  "sourceCommit": "6070fb0e2edb98b3e8e8dc8883bc1765ca8b4a19",
+  "sourceTree": "d5b36f100bdf169a07c288d432a1b2afc0d154c4",
   "commitBinding": "The final exact-head CI report and delivery PR bind this pre-commit source file set to the tested commit; no self-referential commit hash is invented.",
   "localLane": {
     "os": "Debian GNU/Linux13",
@@ -102,8 +102,9 @@
     "Original visual checker used MuPDF unsigned-widget placeholder as signed baseline. Retained original failure and exact checker diff/hashes; use unchanged prior geometry/color/page-size labels. No SDK output/label/permission/threshold changed."
   ],
   "sourceCI": {
-    "historicalReport": "docs/evidence/PR-118-CI-117-source.json",
-    "scope": "Native Apple PFX failures are retained; the portable DER parser and managed primitives require a new exact-head unfiltered20lane CI."
+    "report": "docs/evidence/PR-118-CI-118-source.json",
+    "completedRuntimeLanes": 20,
+    "credentialCases": "All28signature/credentialcasespassonall20lanes; one independent phase deadline case fails on Windowsfallback."
   },
   "localNativeExclusions": [
     "NativeWorkerTests",

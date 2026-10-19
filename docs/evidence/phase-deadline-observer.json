@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "purpose": "deadline-source-regression-not-production-qualification",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "commitBinding": "Final delivery CI/PR binds this pre-commit file set to the exact tested commit.",
+  "historicalFailure": "docs/evidence/PR-118-CI-118-source.json",
+  "observedFailure": "Real Windowsfallback phase signal1864.294ms/canceled-state1869.026ms exceeded the unchanged1second requirement. Nineteen other lanes passed; all28credential/signaturecases passedall20lanes.",
+  "change": [
+    "Observe the earliest root/phase deadline on a lazy per-operation managed observer, outside the thread pool; retain one original linked token.",
+    "Fixed128KiB observer stack and512charged managed infrastructure bytes, one charged object, no global mutable scheduler or pool settings.",
+    "Never hold the context lock while invoking callbacks. Phase changes and Finish wake the observer; DisposeSources joins outside the lock before disposing sources.",
+    "Keep existing50msphase/5sroot/1sassertions and all latched-error/deadline semantics. Add root/phase tests requiring non-pool delivery and joined cleanup."
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1307,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "7cfb1ab8f2f1a15119f46d20a2a07433bff0157060eb7bb482b9b9ed76c1cec8"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 214,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "6c8ae897cd7419f1048dd5342971a0ea342bc8c23f24ed0f708993f3d1db8f45"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 214,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "7d3b301a07af7f04d12d8bc61b4d39cf09d4cfeb09e8bf0c73b0846c4a00a051"
+    }
+  ],
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Policies/PdfOperationContext.cs": "b381c38b36d08a1187bd5fed5f3e695a3f544dc2821c1927bcd3250c3f72e5e7",
+    "tests/Fluent.Pdf.Contract.Tests/PhaseDeadlineTests.cs": "0ec35441e97cc143baa12b2e44d38358bf2484c99308f507fe43919330c449ea"
+  },
+  "sdkLibraries": 11,
+  "apiComparisons": 33,
+  "apiComparisonReportSha256": "06548e6e5837a647913c63673b654f77ed7d7d5c405f5e3eb5ce6de5f4535557",
+  "reports": {
+    "deadline-final-net10.log": "2d15bd6b2187b6d394b9453e6f2fe35f4ddef1d59f85db3d0cb461ab29208476",
+    "deadline-final-fallback.log": "5490394a7b4883e0d583b8b1dadf13756533a53fa644253ebc46cfd0b777b307",
+    "deadline-final-api.log": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c",
+    "deadline-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "deadline-final-build.log": "ea2a82189f3a3ad0b200b07094395a7c62d0750d94a1f6ff7956cbcb07cabca1",
+    "deadline-final-spec.log": "8e2c353b9b82c92fadac0a748be2c1d807ed8b9bd27f549ef7e95a772b0e311e",
+    "deadline-final-net8.log": "0df83782ea3a721dd22982e11997e4e0764c6ed6b679d485d0117f88c563b594",
+    "deadline-fallback-build.log": "11c58178a5dc2968dc1cd97477e5de59f2087ad17dc4068db1a3797038444343",
+    "deadline-normal-build.log": "7a3835ca6e36924a95647c77d95b7b5f1e68498b13c26002b7672f75d09fdf8c",
+    "deadline-observer-first.log": "ca05b0a05b254729dea38aa525cef9a92a0308debd2add53a5dff4ab1460ed30"
+  },
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "New exact-head unfiltered20lane source CI is mandatory.",
+    "Full cancellation/performance/concurrency/endurance, actual minimum runtime and final-package production qualification remain mandatory.",
+    "Caller/provider callbacks, like other caller code at SDK boundaries, must cooperate; no uncooperative-code isolation claim."
+  ]
+}

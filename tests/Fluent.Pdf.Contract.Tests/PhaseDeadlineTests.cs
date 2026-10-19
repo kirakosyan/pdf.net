@@ -198,4 +198,42 @@ public sealed class PhaseDeadlineTests
             Assert.Throws<ArgumentOutOfRangeException>(() => c.EnterTimeLimit(TimeSpan.FromMilliseconds(milliseconds)));
         }).Succeeded);
     }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void RootAndPhaseCancellationRunOutsideThePoolAndTheObserverIsJoined(bool phaseDeadline)
+    {
+        var context = new PdfOperationContext("IndependentDeadlineObserver", "original.fixture", PdfCapability.RenderHtml, new(limits: new(maximumElapsedTime: phaseDeadline ? TimeSpan.FromSeconds(5) : TimeSpan.FromMilliseconds(50))), default);
+        using var signal = new ManualResetEventSlim();
+        Thread? observer = null;
+        bool pooled = true;
+        IDisposable? phase = null;
+        try
+        {
+            var token = context.CancellationToken;
+            using var registration = token.Register(() =>
+            {
+                observer = Thread.CurrentThread;
+                pooled = observer.IsThreadPoolThread;
+                signal.Set();
+            });
+            if (phaseDeadline)
+                phase = context.EnterTimeLimit(TimeSpan.FromMilliseconds(50));
+            Assert.True(signal.Wait(TimeSpan.FromSeconds(1)));
+            Assert.False(pooled);
+            Assert.True(token.IsCancellationRequested);
+            Assert.Equal(token, context.CancellationToken);
+            Assert.Equal("Limit.ElapsedTime", Assert.Throws<PdfException>(context.Checkpoint).Diagnostic.Code);
+        }
+        finally
+        {
+            phase?.Dispose();
+            context.Finish(false);
+            context.DisposeSources();
+        }
+
+        Assert.NotNull(observer);
+        Assert.False(observer!.IsAlive);
+    }
 }
