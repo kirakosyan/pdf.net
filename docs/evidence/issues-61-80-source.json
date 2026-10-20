@@ -564,5 +564,33 @@
       "path": "artifacts/contracts/queue-61-80/final/independent/invoice-schema-initial.json",
       "sha256": "fb1518403f7b0bfb38347a0624854ceea73295ef544e28a75b3ded84275ff633"
     }
-  ]
+  ],
+  "commands": {
+    "lockedRestore": "dotnet restore Fluent.Pdf.slnx --locked-mode --disable-parallel -m:1",
+    "cleanBuild": "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "managedRegressions": [
+      "FLUENT_PDF_EXPECTED_ARCH=X64 dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net8.0 --no-build --no-restore --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=corrected-managed-net8.trx' --results-directory artifacts/contracts/queue-61-80/final/corrected-managed-net8",
+      "FLUENT_PDF_EXPECTED_ARCH=X64 dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net10.0 --no-build --no-restore --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=corrected-managed-net10.trx' --results-directory artifacts/contracts/queue-61-80/final/corrected-managed-net10",
+      "FLUENT_PDF_EXPECTED_ARCH=X64 dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net10.0 --no-restore -m:1 -p:UseNetStandardAssembly=true -p:UseSharedCompilation=false --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=corrected-managed-netstandard-fallback.trx' --results-directory artifacts/contracts/queue-61-80/final/corrected-managed-netstandard-fallback"
+    ],
+    "api": "pwsh -NoProfile -File eng/check-api.ps1",
+    "specification": "pwsh -NoProfile -File eng/validate-spec.ps1",
+    "releaseGuard": "pwsh -NoProfile -File eng/test-release-block.ps1",
+    "hostedWebBoundary": "dotnet run --project examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj -c Release --no-build --no-restore -- --self-test",
+    "independent": [
+      "PYTHONPATH=/workspace/.tools/format-validators python3 -O eng/verify-format-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/formats.json",
+      "python3 -O eng/verify-eps-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/eps",
+      "python3 -O eng/verify-xps-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/xps --reader /workspace/.tools/ghostxps-10.05.1-build/bin/gxps",
+      "python3 -O eng/verify-tex-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/tex",
+      "python3 -O eng/verify-emf-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/emf",
+      "python3 -O eng/verify-ofd-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/ofd --lib-directory /workspace/.tools/ofd-reader-2.3.7/lib",
+      "python3 -O eng/verify-epub-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/epub --lib-directory /workspace/.tools/epubcheck-5.3.0/lib",
+      "python3 -O eng/test-epub-validation-boundary.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/epub-negative --lib-directory /workspace/.tools/epubcheck-5.3.0/lib",
+      "python3 -O eng/verify-invoice-source-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/invoices.json --schema-directory /workspace/.tools/invoice-validation/older-minimum-schema",
+      "python3 -O eng/verify-preflight-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/preflight.json",
+      "dotnet build eng/format-checks/OpenXmlCheck.csproj --no-restore -p:UseSharedCompilation=false",
+      "dotnet run --project eng/format-checks/OpenXmlCheck.csproj --no-build --no-restore -- artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/table.xlsx artifacts/contracts/queue-61-80/final/corrected-independent/openxml-xlsx.json",
+      "dotnet run --project eng/format-checks/OpenXmlCheck.csproj --no-build --no-restore -- artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-slides.pptx artifacts/contracts/queue-61-80/final/corrected-independent/openxml-pptx.json"
+    ]
+  }
 }
