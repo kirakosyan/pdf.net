@@ -2432,7 +2432,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/ebooks.md",
+        "implemented": [
+          "Original bounded EPUB3 fixed-raster/reflow packages, passive text-only spine import and documented escaped MobiXML source output now have explicit identities, navigation and loss/DRM diagnostics."
+        ],
+        "pending": [
+          "Fixed-layout input, complete fonts/RTL/reader/semantic reconstruction and book compiler coverage",
+          "Full independent fidelity, host and package qualification"
+        ]
+      }
     },
     {
       "id": "FP-058",

@@ -119,3 +119,5 @@ Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX a
 Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets. Full coverage and production qualification remain mandatory; see [presentations](presentations.md).
 
 Offline HTML5 export now provides explicitly rendered self-contained pages or declared-loss inferred text, with static CSP, escaped markup and page provenance. Full coverage and production qualification remain mandatory; see [html-export](html-export.md).
+
+Original bounded EPUB3 fixed-raster/reflow packages, passive text-only spine import and documented escaped MobiXML source output now have explicit identities, navigation and loss/DRM diagnostics. Full coverage and production qualification remain mandatory; see [ebooks](ebooks.md).

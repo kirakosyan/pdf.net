@@ -47,4 +47,26 @@ public sealed class SpreadsheetTests
         using var output = new MemoryStream(); Assert.Equal("Limit.Objects", Assert.Throws<PdfException>(() => PdfSpreadsheets.WriteData(Fixture(), PdfSpreadsheetFormat.Xlsx, output, new(limits: new(maximumObjects: 2)))).Diagnostic.Code); Assert.Equal(0, output.Length);
         using var cancelled = new CancellationTokenSource(); cancelled.Cancel(); Assert.Throws<OperationCanceledException>(() => PdfSpreadsheets.WriteData(Fixture(), PdfSpreadsheetFormat.Xlsx, output, cancellationToken: cancelled.Token)); Assert.Equal(0, output.Length);
     }
+    [Theory]
+    [InlineData("case", "Format.PackageIdentity")]
+    [InlineData("main", "Format.PackageProfile")]
+    [InlineData("type", "Format.PackageProfile")]
+    public void OpcIdentityAliasesAndConflictingMainPartsCannotSelectAnotherWorkbook(string change, string code)
+    {
+        using var original = new MemoryStream(); PdfSpreadsheets.WriteData(Fixture(), PdfSpreadsheetFormat.Xlsx, original); original.Position = 0; var parts = new Dictionary<string, byte[]>(StringComparer.Ordinal);
+        using (var zip = new ZipArchive(original, ZipArchiveMode.Read, true)) foreach (var entry in zip.Entries) { using var input = entry.Open(); using var captured = new MemoryStream(); input.CopyTo(captured); parts.Add(entry.FullName, captured.ToArray()); }
+        if (change == "case") parts.Add("XL/WORKBOOK.XML", parts["xl/workbook.xml"]);
+        else { string path = change == "main" ? "_rels/.rels" : "[Content_Types].xml"; var xml = XDocument.Parse(Encoding.UTF8.GetString(parts[path])); if (change == "main") xml.Root!.Elements().Single().SetAttributeValue("Target", "xl/other.xml"); else xml.Root!.Elements().Single(e => (string?)e.Attribute("PartName") == "/xl/workbook.xml").SetAttributeValue("ContentType", "application/octet-stream"); parts[path] = Encoding.UTF8.GetBytes(xml.ToString()); }
+        using var modified = new MemoryStream(); using (var zip = new ZipArchive(modified, ZipArchiveMode.Create, true)) foreach (var part in parts) { using var output = zip.CreateEntry(part.Key).Open(); output.Write(part.Value, 0, part.Value.Length); } modified.Position = 0; Assert.Equal(code, Assert.Throws<PdfException>(() => PdfSpreadsheets.ReadData(modified, PdfSpreadsheetFormat.Xlsx, "Data")).Diagnostic.Code);
+    }
+
+    [Fact]
+    public void ExplicitInternalOpcRelationshipsKeepDataReadable()
+    {
+        using var original = new MemoryStream(); PdfSpreadsheets.WriteData(Fixture(), PdfSpreadsheetFormat.Xlsx, original); original.Position = 0; var parts = new Dictionary<string, byte[]>(StringComparer.Ordinal);
+        using (var zip = new ZipArchive(original, ZipArchiveMode.Read, true)) foreach (var entry in zip.Entries) { using var input = entry.Open(); using var captured = new MemoryStream(); input.CopyTo(captured); parts.Add(entry.FullName, captured.ToArray()); }
+        foreach (string name in parts.Keys.Where(name => name.EndsWith(".rels", StringComparison.Ordinal)).ToArray()) { var xml = XDocument.Parse(Encoding.UTF8.GetString(parts[name])); foreach (var item in xml.Root!.Elements()) item.SetAttributeValue("TargetMode", "Internal"); parts[name] = Encoding.UTF8.GetBytes(xml.ToString()); }
+        using var modified = new MemoryStream(); using (var zip = new ZipArchive(modified, ZipArchiveMode.Create, true)) foreach (var part in parts) { using var output = zip.CreateEntry(part.Key).Open(); output.Write(part.Value, 0, part.Value.Length); } modified.Position = 0; var sheet = PdfSpreadsheets.ReadData(modified, PdfSpreadsheetFormat.Xlsx, "Data"); Assert.Equal("=SUM(A1:A2)", sheet.Cells[0].Value);
+    }
+
 }

@@ -113,6 +113,40 @@ def html_data(root):
             "artifacts": [{"file": name, "sha256": digest(root / name)} for name in ["fixed-pages.html", "inferred-text.html"]]}
 
 
+def ebook_data(root):
+    import zipfile
+    import xml.etree.ElementTree as ET
+    ns = {"o": "http://www.idpf.org/2007/opf", "h": "http://www.w3.org/1999/xhtml", "d": "http://purl.org/dc/elements/1.1/"}
+    for name in ["fixed-book.epub", "reflow-book.epub"]:
+        with zipfile.ZipFile(root / name) as package:
+            first = package.infolist()[0]
+            require(first.filename == "mimetype" and first.header_offset == 0 and first.compress_type == zipfile.ZIP_STORED, "EPUB stored first mimetype changed")
+            require(package.read("mimetype") == b"application/epub+zip" and package.testzip() is None, "EPUB identity/CRC failed")
+            opf = ET.fromstring(package.read("EPUB/package.opf"))
+            require(opf.find("o:metadata/d:identifier", ns).text == "urn:uuid:11111111-2222-4333-8444-555555555555", "Explicit ebook identifier changed")
+            require(opf.find("o:metadata/d:language", ns).text == "en", "Explicit ebook language changed")
+            manifest = {item.get("id"): item.get("href") for item in opf.findall("o:manifest/o:item", ns)}
+            spine = [manifest[item.get("idref")] for item in opf.findall("o:spine/o:itemref", ns)]
+            nav = ET.fromstring(package.read("EPUB/nav.xhtml"))
+            require([link.get("href") for link in nav.findall(".//h:nav/h:ol/h:li/h:a", ns)] == spine, "EPUB navigation/spine order changed")
+            for index, path in enumerate(spine):
+                chapter = ET.fromstring(package.read("EPUB/" + path))
+                require(not chapter.findall(".//h:script", ns), "Source text became active ebook markup")
+                if name == "fixed-book.epub":
+                    image_path = chapter.find("h:body/h:img", ns).get("src")
+                    image = Image.open(io.BytesIO(package.read("EPUB/" + image_path)))
+                    require(image.size == ((20, 10) if index == 1 else (10, 20)), "EPUB raster page dimensions changed")
+                    require(image.getpixel((0, 0)) == ((0, 0, 0, 255) if index == 1 else (40, 0, 0, 255)), "EPUB raster page order/samples changed")
+                else:
+                    require(chapter.find("h:body/h:pre", ns).text == "</pre><script>x</script>&", "EPUB inferred literal text changed")
+    mobi = ET.parse(root / "book-source.xml")
+    require(not mobi.findall(".//script"), "MobiXML source text became active markup")
+    require(len(mobi.findall(".//{http://mobipocket.com/ns/mbp}pagebreak")) == 1, "MobiXML page break syntax changed")
+    require([p.text for p in mobi.findall(".//pre")] == ["</pre><script>x</script>&"] * 2, "MobiXML literal text changed")
+    return {"validators": ["Python zipfile/ElementTree", "Pillow"], "orderedPackageAndLiteralSourceData": "passed", "mobiCompilerAndCompleteReaderQualification": "pending", "productionQualified": False,
+            "artifacts": [{"file": name, "sha256": digest(root / name)} for name in ["fixed-book.epub", "reflow-book.epub", "book-source.xml"]]}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("fixture_directory", type=Path)
@@ -149,6 +183,8 @@ def main():
         report["presentations"] = presentation_data(root)
     if (root / "fixed-pages.html").exists():
         report["htmlExport"] = html_data(root)
+    if (root / "fixed-book.epub").exists():
+        report["ebooks"] = ebook_data(root)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + "\n")
     print("Independent controlled format fixture checks passed.")

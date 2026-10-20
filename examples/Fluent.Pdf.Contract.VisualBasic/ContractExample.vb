@@ -468,4 +468,7 @@ Public Module ContractExample
     Public Function WriteRasterHtml(source As PdfDocumentSnapshot, output As Stream, providers As PdfProviderRegistry) As PdfOperationReport
         Return Fluent.Pdf.Formats.PdfHtmlExport.Write(source, New Integer() {0}, output, New Fluent.Pdf.Formats.PdfHtmlExportOptions(Fluent.Pdf.Formats.PdfHtmlExportMode.FixedRaster, "Document", "en"), providers)
     End Function
+    Public Function ImportEpubText(source As Stream, text As Fluent.Pdf.Formats.PdfFormatTextOptions, providers As PdfProviderRegistry, policy As PdfOperationPolicy) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfEbooks.ImportReflowText(source, text, providers, policy)
+    End Function
 End Module
