@@ -6,7 +6,10 @@ namespace Fluent.Pdf;
 /// <summary>An immutable, explicitly loaded font face with fresh budgets for each public operation.</summary>
 public sealed partial class PdfFont
 {
-    internal IPdfFontProgram Program { get; }
+    internal IPdfFontProgram Program
+    {
+        get;
+    }
 
     internal PdfFont(IPdfFontProgram program, string providerId)
     {
@@ -16,9 +19,15 @@ public sealed partial class PdfFont
     }
 
     /// <summary>Gets immutable font identity, rights and metrics.</summary>
-    public PdfFontInfo Info { get; }
+    public PdfFontInfo Info
+    {
+        get;
+    }
     /// <summary>Gets the selected font provider identity.</summary>
-    public string ProviderId { get; }
+    public string ProviderId
+    {
+        get;
+    }
     /// <summary>Gets the successful loading report.</summary>
     public PdfOperationReport OperationReport { get; internal set; } = null!;
 
@@ -90,7 +99,7 @@ public sealed partial class PdfFont
         return glyph;
     }
 
-    internal double? VerticalCore(int glyph, PdfOperationContext context) => Program is IPdfVerticalFontProgram vertical && vertical.SupportsVerticalMetrics ? vertical.GetVerticalMetrics(glyph, context).Advance : (double? )null;
+    internal double? VerticalCore(int glyph, PdfOperationContext context) => Program is IPdfVerticalFontProgram vertical && vertical.SupportsVerticalMetrics ? vertical.GetVerticalMetrics(glyph, context).Advance : (double?)null;
     /// <summary>Writes a full or dependency-complete subset font to borrowed output under the declared embedding restrictions.</summary>
     public PdfFontWriteResult WriteProgram(Stream output, IEnumerable<int> glyphs, bool subset = true, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
@@ -157,6 +166,23 @@ public sealed partial class PdfFont
         return report;
     }
 
+    internal static async System.Threading.Tasks.Task<PdfOperationReport> RunAsync(string operation, string providerId, PdfOperationPolicy? policy, CancellationToken token, Func<PdfOperationContext, System.Threading.Tasks.Task> action, PdfCapability capability)
+    {
+        var context = new PdfOperationContext(operation, providerId, capability, policy ?? PdfOperationPolicy.Default, token);
+        bool success = false;
+        PdfOperationReport report;
+        try
+        {
+            context.Checkpoint();
+            await action(context).ConfigureAwait(false);
+            context.EnsureComplete();
+            success = true;
+        }
+        catch { context.Checkpoint(); throw; }
+        finally { report = context.Finish(success); context.DisposeSources(); }
+        return report;
+    }
+
     internal static void Scalar(int scalar)
     {
         if (scalar < 0 || scalar > 0x10ffff || scalar >= 0xd800 && scalar <= 0xdfff)
@@ -178,17 +204,35 @@ public sealed class PdfFontGlyph
     }
 
     /// <summary>Gets the explicitly selected font.</summary>
-    public PdfFont Font { get; }
+    public PdfFont Font
+    {
+        get;
+    }
     /// <summary>Gets the queried Unicode scalar.</summary>
-    public int UnicodeScalar { get; }
+    public int UnicodeScalar
+    {
+        get;
+    }
     /// <summary>Gets its glyph identity, or zero when unavailable.</summary>
-    public int GlyphIndex { get; }
+    public int GlyphIndex
+    {
+        get;
+    }
     /// <summary>Gets the unscaled horizontal advance.</summary>
-    public double Advance { get; }
+    public double Advance
+    {
+        get;
+    }
     /// <summary>Gets the unscaled vertical advance.</summary>
-    public double? VerticalAdvance { get; }
+    public double? VerticalAdvance
+    {
+        get;
+    }
     /// <summary>Gets the provider's glyph name.</summary>
-    public string GlyphName { get; }
+    public string GlyphName
+    {
+        get;
+    }
     /// <summary>Gets the successful query or fallback-resolution report.</summary>
     public PdfOperationReport OperationReport { get; internal set; } = null!;
 }
@@ -203,9 +247,15 @@ public sealed class PdfFontWriteResult
     }
 
     /// <summary>Gets the emitted program format details.</summary>
-    public PdfFontProgramWriteResult Program { get; }
+    public PdfFontProgramWriteResult Program
+    {
+        get;
+    }
     /// <summary>Gets the successful bounded-write report.</summary>
-    public PdfOperationReport OperationReport { get; }
+    public PdfOperationReport OperationReport
+    {
+        get;
+    }
 }
 
 /// <summary>An immutable caller-ordered font fallback list; resolution never consults operating-system font order.</summary>
@@ -222,7 +272,10 @@ public sealed class PdfFontFallback
     }
 
     /// <summary>Gets the captured preference order.</summary>
-    public IReadOnlyList<PdfFont> Fonts { get; }
+    public IReadOnlyList<PdfFont> Fonts
+    {
+        get;
+    }
 
     /// <summary>Resolves one scalar to the first actual glyph and fails explicitly when every font lacks it.</summary>
     public PdfFontGlyph Resolve(int unicodeScalar, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)

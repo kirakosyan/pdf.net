@@ -364,7 +364,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -1207,12 +1207,25 @@
       "validation": "Labeled changed-document corpus; precision/recall, rotated pages and unchanged-document zero-diff tests.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/document-comparison.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Document comparison and change reports source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "General alignment, table/structure/semantic diffing, richer visual regions and labeled precision/recall corpora remain mandatory. Zero differences covers only selected dimensions and tolerances, never whole-document equivalence.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-030",
@@ -1378,12 +1391,25 @@
       "evidence": [
         "A01",
         "B01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/signature-verification.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Signature verification and explicit trust source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "General PKIX path construction, real OCSP/CRL authorities, TSA trust and semantic permitted-edit validation remain mandatory production work. A pin/status fixture is not a general trust-chain qualification.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-034",
@@ -1406,12 +1432,25 @@
       "evidence": [
         "B01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/external-signing.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "External and hardware signing sessions source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "The caller owns key/session implementations and their credential/network/module policy. Native PKCS#11 module loading, actual software-token/HSM provisioning, device login/error matrices and production session/endurance qualification remain mandatory. The included session fixture exercises this boundary with a local RSA key; it does not qualify hardware.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-035",
@@ -1436,12 +1475,25 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/pades.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "PAdES upgrades and offline timestamp verification source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "Endpoints, credentials, trust anchors, network authority, freshness and timeouts belong to explicitly configured providers. SDK limits/cancellation are mandatory. The report-gate fixture is deliberately not a PAdES conformance fixture. Complete B/B-T/B-LT/B-LTA production adapters, independent PAdES validation, real TSA/revocation evidence and renewal corpora remain mandatory.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-036",
@@ -1556,12 +1608,25 @@
       "validation": "Licensed static/dynamic XFA corpus with expected field data, page counts and visual outputs.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/xfa.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Passive XFA packets and explicit static conversion source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "Full static/dynamic XFA layout, indexed SOM/binding/template constructs, flattened conversion and licensed independent visual/data corpus qualification remain mandatory.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-039",
@@ -1586,12 +1651,25 @@
       "evidence": [
         "A01",
         "D01",
-        "B01"
+        "B01",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/scripts.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Passive scripts and opt-in bounded calculations source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "General JavaScript, event triggers, validation semantics and isolated general-engine/sandbox corpus qualification remain mandatory. This finite subset does not claim compatibility with arbitrary document scripts.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-040",
@@ -1664,12 +1742,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/color-rendering.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Explicit ICC color operations and production-rendering contracts source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "Process CMYK/separations, general LUT/perceptual/absolute gamut mapping, black-point compensation, complete overprint/spot/transparency implementations and independent production color-chart/page qualification remain mandatory.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-042",
@@ -1692,12 +1783,25 @@
       "evidence": [
         "B01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/viewing.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Headless viewing sessions and exact tiles source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "True progressive/incremental input loading, general accessibility/view integration, asynchronous renderer supervision and production scroll/zoom/selection/performance/concurrency qualification remain mandatory. The ordinary syntax reader still eagerly captures input.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-043",
@@ -2436,12 +2540,25 @@
         "B01",
         "D01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/raster-export.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Bounded lossless raster containers source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "Explicit render options cover DPI, region, alpha/matte, RGB/gray, annotations and print/layer usage. No quantization or lossy conversion is hidden. JPEG/GIF/WebP, bitonal/fax and additional TIFF compression/precision profiles remain mandatory separate work; requesting an undefined container rejects. Independent Pillow and LibTiff decoding cover the source fixtures, not complete image/container/security qualification.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-065",
@@ -3854,12 +3971,25 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/issues-51-60-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/revision-audit.md",
+        "sourceEvidence": "docs/evidence/issues-51-60-source.json",
+        "implemented": [
+          "Signed revisions and conservative edit preflight source profile with explicit supported behavior, shared budgets and executable consumers"
+        ],
+        "pending": [
+          "General permitted form/annotation edit classes, malicious-update semantic classification, structure/appearance reconciliation and independent signature-preservation qualification remain mandatory. An appearance, unchanged prefix or successful preflight alone never proves signature preservation.",
+          "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-103",

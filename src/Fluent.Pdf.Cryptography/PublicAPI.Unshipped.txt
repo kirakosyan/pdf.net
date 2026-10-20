@@ -1,4 +1,10 @@
 #nullable enable
+Fluent.Pdf.Cryptography.ExternalCmsSignatureProvider
+Fluent.Pdf.Cryptography.ExternalCmsSignatureProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Cryptography.ExternalCmsSignatureProvider.ExternalCmsSignatureProvider(byte[]! certificate, Fluent.Pdf.IPdfExternalSigningKey! key, int maximumSessions = 1) -> void
+Fluent.Pdf.Cryptography.ExternalCmsSignatureProvider.Sign(System.IO.Stream! signedBytes, System.IO.Stream! cmsOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Cryptography.ExternalCmsSignatureProvider.SignAsync(System.IO.Stream! signedBytes, System.IO.Stream! cmsOutput, Fluent.Pdf.PdfOperationContext! context) -> System.Threading.Tasks.Task!
+Fluent.Pdf.Cryptography.ExternalCmsSignatureProvider.Verify(System.IO.Stream! signedBytes, System.IO.Stream! cms, Fluent.Pdf.PdfOperationContext! context) -> bool
 Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider
 Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider.Encrypt(System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCertificateRecipient!>! recipients, System.IO.Stream! plaintext, System.IO.Stream! envelope, Fluent.Pdf.PdfOperationContext! context) -> void
@@ -12,4 +18,10 @@ Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.ManagedCmsSignatureProvider(
 Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.ManagedCmsSignatureProvider(Fluent.Pdf.PdfCertificateCredential! credential) -> void
 Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.Sign(System.IO.Stream! signedBytes, System.IO.Stream! cmsOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.Verify(System.IO.Stream! signedBytes, System.IO.Stream! cms, Fluent.Pdf.PdfOperationContext! context) -> bool
+Fluent.Pdf.Cryptography.PinnedSignatureTrustProvider
+Fluent.Pdf.Cryptography.PinnedSignatureTrustProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Cryptography.PinnedSignatureTrustProvider.Evaluate(System.IO.Stream! cms, Fluent.Pdf.PdfSignatureTrustOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfSignatureTrustDecision!
+Fluent.Pdf.Cryptography.PinnedSignatureTrustProvider.PinnedSignatureTrustProvider(System.Collections.Generic.IEnumerable<byte[]!>! trustedSignerCertificates, Fluent.Pdf.IPdfCertificateStatusProvider? statusProvider = null) -> void
+Fluent.Pdf.Cryptography.Rfc3161TimestampVerifier
 static Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider.FromPkcs12(System.IO.Stream! input, string! password, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Cryptography.ManagedCmsSignatureProvider!
+static Fluent.Pdf.Cryptography.Rfc3161TimestampVerifier.Verify(System.IO.Stream! token, byte[]! tsaCertificate, byte[]! sha256Imprint, byte[]! nonce, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.DateTimeOffset

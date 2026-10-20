@@ -1,6 +1,7 @@
 using System.IO;
 
 namespace Fluent.Pdf;
+
 public static partial class PdfSignatures
 {
     private static PdfException UnsupportedProfile(string message) => new(new PdfDiagnostic("Signature.ByteRangeProfile", message, severity: PdfDiagnosticSeverity.Warning));
@@ -22,11 +23,11 @@ public static partial class PdfSignatures
         throw UnsupportedProfile("The signature token exceeds the bounded direct-object profile.");
     }
 
-    private static (long[] Ranges, byte[] Cms) Ranges(PdfSyntaxDocument source, PdfObjectId id, PdfValue signature, PdfOperationContext c)
+    private static (long[] Ranges, byte[] Cms) Ranges(PdfSyntaxDocument source, PdfObjectId id, PdfValue signature, PdfOperationContext c, int revisionIndex = 0)
     {
         if (source.Source.Length > int.MaxValue - 32)
             throw Error(c, "Extent", "The contiguous signature inspection profile exceeds its finite extent.");
-        PdfValue Resolve(PdfValue v) => ResolveCore(source, v, c);
+        PdfValue Resolve(PdfValue v) => ResolveCore(source, v, c, revisionIndex);
         var declared = Get(signature, "ByteRange", Resolve);
         var contents = Get(signature, "Contents", Resolve);
         var sub = Get(signature, "SubFilter", Resolve);
@@ -41,7 +42,7 @@ public static partial class PdfSignatures
                 throw Error(c, "ByteRange", "Signature ranges must be nonnegative integers.");
         if (ranges[0] != 0 || ranges[1] >= ranges[2] || ranges[2] > source.Source.Length || ranges[3] > source.Source.Length - ranges[2])
             throw Error(c, "ByteRange", "Signature ranges must cover a complete revision with one Contents gap.");
-        var entry = source.Revisions.SelectMany(r => r.Entries).FirstOrDefault(e => e.Id.Number == id.Number);
+        var entry = source.Revisions.Skip(revisionIndex).SelectMany(r => r.Entries).FirstOrDefault(e => e.Id.Number == id.Number);
         if (entry == null || entry.Id != id || entry.Kind != PdfCrossReferenceKind.Offset)
             throw UnsupportedProfile("An uncompressed indirect signature object is required.");
         var cursor = new PdfSyntaxCursor(source.Source, c, entry.Offset, Math.Min(source.Source.Length, entry.Offset + 4194304));
@@ -56,7 +57,8 @@ public static partial class PdfSignatures
         while (true)
         {
             cursor.Skip();
-            if (cursor.Peek() == '>') break;
+            if (cursor.Peek() == '>')
+                break;
             var key = cursor.Value();
             if (key.Kind != PdfValueKind.Name)
                 throw UnsupportedProfile("Signature dictionary keys must be names.");
@@ -95,6 +97,8 @@ public static partial class PdfSignatures
         {
             using var prefix = source.Source.Open(0, end);
             var revision = new PdfSyntaxReader(PdfByteStore.Read(prefix, c), c).Read();
+            if (!source.Revisions.Skip(revisionIndex).Any(r => r.StartXref == revision.Revisions[0].StartXref))
+                throw Error(c, "RevisionExtent", "The signed prefix must be a linked source revision.");
             var original = revision.Resolve(id);
             if (original.Kind != PdfValueKind.Dictionary || !original.Entries.TryGetValue("Contents", out var oldContents) || oldContents.Kind != PdfValueKind.String || !oldContents.StringBytes.SequenceEqual(contents.StringBytes))
                 throw Error(c, "RevisionExtent", "The covered prefix must resolve this exact signature in a complete signed PDF revision.");
@@ -210,7 +214,8 @@ public static partial class PdfSignatures
                 int extent = (int)Math.Min(count, firstRemaining > 0 ? firstRemaining : Length - _position);
                 using var input = _open(start, extent);
                 int read = input.Read(buffer, offset, extent);
-                if (read == 0) throw new EndOfStreamException();
+                if (read == 0)
+                    throw new EndOfStreamException();
                 _position += read;
                 offset += read;
                 count -= read;

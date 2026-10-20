@@ -29,16 +29,21 @@ public static class PdfRendering
         return new(samples!, request!, report);
     }
 
-    internal static (PdfByteStore Samples, PdfRasterRequest Request) RenderCore(PdfGraphEdit graph, int pageIndex, PdfProviderRegistry providers, PdfRenderOptions options, PdfOperationContext context)
+    internal static (PdfByteStore Samples, PdfRasterRequest Request) RenderCore(PdfGraphEdit graph, int pageIndex, PdfProviderRegistry providers, PdfRenderOptions options, PdfOperationContext context, PdfColorRenderOptions? colorManagement = null)
     {
         context.Consume(PdfResourceKind.Objects, 1);
         context.Consume(PdfResourceKind.ExpandedBytes, 256);
-        var provider = providers.GetRequired<IPdfPageRenderer>(PdfCapability.RenderPages);
+        IPdfPageRenderer? provider = colorManagement == null ? providers.GetRequired<IPdfPageRenderer>(PdfCapability.RenderPages) : null;
         var request = new PdfRasterRequest(pageIndex, graph.Snapshot.Pages[pageIndex].Source!, options, context);
         context.ConsumePixels(request.Width, request.Height);
         using var output = new PdfCodecBufferStream(context, request.ByteLength);
         using (var lease = new BorrowedStream(output, false, context))
-            provider.Render(request, lease, context);
+        {
+            if (colorManagement == null)
+                provider!.Render(request, lease, context);
+            else
+                providers.GetRequired<IPdfColorManagedPageRenderer>(PdfCapability.RenderColorManaged).Render(request, colorManagement, lease, context);
+        }
         context.Checkpoint();
         if (output.BufferedLength != request.ByteLength)
             throw PdfWriterCore.Error(context, "Render.OutputLength", "The renderer did not return the exact planned sample extent.");

@@ -414,4 +414,34 @@ Public Module ContractExample
     Public Function SignPdf(source As PdfSyntaxDocument, fieldName As String, providers As PdfProviderRegistry) As PdfSignedResult
         Return PdfSignatures.Sign(source, New PdfSignatureOptions(fieldName), providers)
     End Function
+    Public Function VerifySignatures(source As PdfSyntaxDocument, providers As PdfProviderRegistry, instant As DateTimeOffset) As System.Collections.Generic.IReadOnlyList(Of PdfSignatureVerification)
+        Return PdfSignatures.Verify(source, providers, New PdfSignatureTrustOptions(instant))
+    End Function
+    Public Function SignExternalAsync(source As PdfSyntaxDocument, fieldName As String, providers As PdfProviderRegistry) As System.Threading.Tasks.Task(Of PdfSignedResult)
+        Return PdfSignatures.SignAsync(source, New PdfSignatureOptions(fieldName), providers)
+    End Function
+    Public Function UpgradePades(source As PdfSyntaxDocument, profile As PdfPadesProfile, providers As PdfProviderRegistry) As PdfSignedResult
+        Return PdfPades.Upgrade(source, profile, providers)
+    End Function
+    Public Function AuditSignatures(source As PdfSyntaxDocument, providers As PdfProviderRegistry) As System.Collections.Generic.IReadOnlyList(Of PdfRevisionAuditRecord)
+        Return PdfSignatures.AuditRevisions(source, providers)
+    End Function
+    Public Function CompareDocuments(before As PdfDocumentSnapshot, after As PdfDocumentSnapshot) As PdfComparisonResult
+        Return PdfComparison.Compare(before, after)
+    End Function
+    Public Function ReadXfa(source As PdfDocumentSnapshot) As PdfXfaSet
+        Return PdfXfa.Inspect(source)
+    End Function
+    Public Function Calculate(source As String, values As System.Collections.Generic.IReadOnlyDictionary(Of String, Decimal)) As Decimal
+        Return PdfScripts.EvaluateCalculation(source, values, enableExecution:=True).Value
+    End Function
+    Public Function RenderColor(source As PdfDocumentSnapshot, providers As PdfProviderRegistry, colors As PdfColorRenderOptions) As PdfRaster
+        Return PdfColorRendering.RenderPage(source, 0, providers, colors)
+    End Function
+    Public Function ExportRaster(source As PdfDocumentSnapshot, output As Stream, providers As PdfProviderRegistry) As PdfOperationReport
+        Return PdfRasterExport.Write(source, New Integer() {0}, output, New PdfRasterExportOptions(PdfRasterFormat.Png), providers)
+    End Function
+    Public Function CreateViewer(source As PdfDocumentSnapshot, providers As PdfProviderRegistry) As PdfViewSession
+        Return New PdfViewSession(source, providers, maximumCachedBytes:=4 * 1024 * 1024)
+    End Function
 End Module

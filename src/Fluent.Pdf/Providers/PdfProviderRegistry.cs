@@ -12,18 +12,23 @@ public sealed class PdfProviderRegistry
     /// <summary>Captures provider identities/capabilities; the supplied array is not retained.</summary>
     public PdfProviderRegistry(params IPdfProvider[] providers)
     {
-        if (providers is null) throw new ArgumentNullException(nameof(providers));
-        if (providers.Length > 64) throw new ArgumentException("At most 64 providers may be registered.", nameof(providers));
+        if (providers is null)
+            throw new ArgumentNullException(nameof(providers));
+        if (providers.Length > 64)
+            throw new ArgumentException("At most 64 providers may be registered.", nameof(providers));
         var identities = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var descriptors = new List<PdfProviderDescriptor>(providers.Length);
         foreach (var provider in providers)
         {
-            if (provider is null) throw new ArgumentException("Providers cannot contain null.", nameof(providers));
+            if (provider is null)
+                throw new ArgumentException("Providers cannot contain null.", nameof(providers));
             var descriptor = provider.Descriptor ?? throw new ArgumentException("A provider has no descriptor.", nameof(providers));
-            if (!identities.Add(descriptor.Id)) throw new ArgumentException("Provider identities must be unique.", nameof(providers));
+            if (!identities.Add(descriptor.Id))
+                throw new ArgumentException("Provider identities must be unique.", nameof(providers));
             foreach (var capability in descriptor.Capabilities)
             {
-                if (_providers.ContainsKey(capability)) throw new ArgumentException("Only one provider may supply a capability.", nameof(providers));
+                if (_providers.ContainsKey(capability))
+                    throw new ArgumentException("Only one provider may supply a capability.", nameof(providers));
                 if (capability == PdfCapability.ReadDocument && provider is not IPdfDocumentReader ||
                     capability == PdfCapability.WriteDocument && provider is not IPdfDocumentWriter ||
                     capability == PdfCapability.ImageCodecs && provider is not IPdfImageCodecProvider ||
@@ -33,6 +38,10 @@ public sealed class PdfProviderRegistry
                     capability == PdfCapability.RenderPages && provider is not IPdfPageRenderer ||
                     capability == PdfCapability.RenderHtml && provider is not IPdfHtmlRenderer ||
                     capability == PdfCapability.Signatures && provider is not IPdfSignatureProvider ||
+                    capability == PdfCapability.SignatureTrust && provider is not IPdfSignatureTrustProvider ||
+                    capability == PdfCapability.Pades && provider is not IPdfPadesProvider ||
+                    capability == PdfCapability.ValidatePades && provider is not IPdfPadesValidator ||
+                    capability == PdfCapability.RenderColorManaged && provider is not IPdfColorManagedPageRenderer ||
                     capability == PdfCapability.ConvertWord && provider is not IPdfWordConverter ||
                     capability == PdfCapability.CmsEnvelopes && provider is not IPdfCmsEnvelopeProvider ||
                     capability == PdfCapability.ValidateArchival && provider is not IPdfArchivalValidator ||
@@ -52,11 +61,17 @@ public sealed class PdfProviderRegistry
     /// <summary>Gets the shared empty immutable registry.</summary>
     public static PdfProviderRegistry Empty { get; } = new();
     /// <summary>Gets the shared original managed reader/writer registry. Optional native/image services remain explicitly configured.</summary>
-    public static PdfProviderRegistry Default{get;}=new(ManagedPdfProvider.Instance);
+    public static PdfProviderRegistry Default { get; } = new(ManagedPdfProvider.Instance);
     /// <summary>Gets captured provider metadata in registration order.</summary>
-    public IReadOnlyList<PdfProviderDescriptor> Descriptors { get; }
+    public IReadOnlyList<PdfProviderDescriptor> Descriptors
+    {
+        get;
+    }
     /// <summary>Gets the declared capability inventory in enum order.</summary>
-    public IReadOnlyList<PdfCapability> Capabilities { get; }
+    public IReadOnlyList<PdfCapability> Capabilities
+    {
+        get;
+    }
 
     internal string GetIdentifier(PdfCapability capability) => _identifiers[capability];
 
@@ -72,8 +87,10 @@ public sealed class PdfProviderRegistry
     public T GetRequired<T>(PdfCapability capability) where T : class, IPdfProvider
     {
         Guard.Capability(capability);
-        if (!_providers.TryGetValue(capability, out var provider)) throw new PdfProviderUnavailableException(capability);
-        if (provider is T typed) return typed;
+        if (!_providers.TryGetValue(capability, out var provider))
+            throw new PdfProviderUnavailableException(capability);
+        if (provider is T typed)
+            return typed;
         throw new PdfException(new PdfDiagnostic("Provider.ContractMismatch",
             "The registered provider does not implement the requested service contract.", capability, _identifiers[capability]));
     }
