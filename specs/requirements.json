@@ -2311,7 +2311,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/spreadsheets.md",
+        "implemented": [
+          "Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance."
+        ],
+        "pending": [
+          "Binary XLS and complete sheet/chart/print-area fidelity",
+          "Full independent format, host and package qualification"
+        ]
+      }
     },
     {
       "id": "FP-055",

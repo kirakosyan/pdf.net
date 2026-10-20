@@ -110,3 +110,5 @@ An original [authenticated render-worker protocol](docs/render-service.md) now h
 Original [raster-document import](docs/raster-import.md) now composes managed PNG/JPEG and explicitly supplied frame codecs with exact selection and preserved density/color/alpha. Complete codec/host and production qualification remain pending.
 
 The optional [SVG/vector format profile](docs/svg.md) now has original static import and editable opaque-vector export, with explicit unsupported-content failures and independent round-trip fixtures. Complete format/host and production qualification remain pending.
+
+Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](docs/spreadsheets.md).

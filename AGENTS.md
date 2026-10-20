@@ -98,3 +98,5 @@ The Workers assembly now contains an original HMAC-authenticated static-HTML cli
 Raster-document import now has a shared-context managed PNG/JPEG and explicit optional complete-frame codec profile. APNG rejects rather than silently dropping animation. Actual extra codecs, animation/color/precision and host/package qualification remain mandatory; see docs/raster-import.md.
 
 The optional Formats assembly contains original bounded static SVG import and opaque vector/Form SVG export. Unsupported paths/styles/text/image/effects reject without raster substitution; explicit-font text and authorized local image import share the context. Complete format/host/package qualification remains mandatory; see docs/svg.md.
+
+Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](docs/spreadsheets.md).

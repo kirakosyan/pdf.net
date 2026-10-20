@@ -30,6 +30,43 @@ def pdf_pixels(path):
         return Image.frombytes("RGB", (pixel.width, pixel.height), pixel.samples)
 
 
+def spreadsheet_data(root):
+    import openpyxl
+    import zipfile
+    import xml.etree.ElementTree as ET
+    from odf.opendocument import load
+    from odf.table import Table, TableCell
+    from odf import teletype
+    import importlib.metadata as metadata
+    workbook = openpyxl.load_workbook(root / "table.xlsx", data_only=False)
+    require(workbook.sheetnames == ["Data"], "XLSX sheet identity changed")
+    sheet = workbook["Data"]
+    require(sheet["A1"].value == "=SUM(A1:A2)" and sheet["A1"].data_type == "s", "Literal formula text became executable")
+    require(str(sheet["A2"].value) == "12.5" and sheet["B2"].value is True, "XLSX scalar types changed")
+    require(sheet["C2"].value.strftime("%Y-%m-%d") == "2026-10-20", "XLSX ISO date changed")
+    require("A1:B1" in [str(r) for r in sheet.merged_cells.ranges], "XLSX merged rectangle changed")
+    with zipfile.ZipFile(root / "table.xlsx") as package:
+        for name in package.namelist():
+            if name.startswith("xl/worksheets/"):
+                xml = ET.fromstring(package.read(name))
+                require(not xml.findall(".//{http://schemas.openxmlformats.org/spreadsheetml/2006/main}f"), "Executable XLSX formula emitted")
+    ods = load(str(root / "table.ods"))
+    tables = ods.spreadsheet.getElementsByType(Table)
+    require(len(tables) == 1 and tables[0].getAttribute("name") == "Data", "ODS table identity changed")
+    cells = tables[0].getElementsByType(TableCell)
+    require(cells[0].getAttribute("valuetype") == "string" and teletype.extractText(cells[0]) == "=SUM(A1:A2)", "ODS literal text changed")
+    require(cells[0].getAttribute("numbercolumnsspanned") == "2", "ODS merge changed")
+    require(all(cell.getAttribute("formula") is None for cell in cells), "Executable ODS formula emitted")
+    xml = ET.parse(root / "table.xml")
+    ns = {"s": "urn:schemas-microsoft-com:office:spreadsheet"}
+    first = xml.find(".//s:Data", ns)
+    require(first.text == "=SUM(A1:A2)" and first.get("{" + ns["s"] + "}Type") == "String", "SpreadsheetML literal type changed")
+    require(not any("{" + ns["s"] + "}Formula" in cell.attrib for cell in xml.findall(".//s:Cell", ns)), "Executable SpreadsheetML formula emitted")
+    return {"validators": {"openpyxl": openpyxl.__version__, "odfpy": metadata.version("odfpy"), "xml": "Python ElementTree"},
+            "typedValuesMergesAndLiteralFormulas": "passed", "productionQualified": False,
+            "artifacts": [{"file": name, "sha256": digest(root / name)} for name in ["table.xlsx", "table.ods", "table.xml"]]}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("fixture_directory", type=Path)
@@ -60,6 +97,8 @@ def main():
               "crossRendererMeanAbsoluteRgbDifference": cross_engine_error,
               "crossRendererMetricScope": "Reported raw antialiasing difference; this is not a production visual-threshold qualification.",
               "artifacts": [{"file": name, "sha256": digest(path)} for name, path in paths.items()], "productionQualified": False}
+    if (root / "table.xlsx").exists():
+        report["spreadsheets"] = spreadsheet_data(root)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + "\n")
     print("Independent SVG vectors/clips/styles and PDF round-trip fixture checks passed.")

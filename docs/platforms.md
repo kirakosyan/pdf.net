@@ -113,3 +113,5 @@ Application-view library contracts span the four managed targets. The actual com
 The authenticated worker protocol spans the four managed targets. The hosted HTTP/container source sample targets modern .NET 10; actual rootless/read-only/engine/TLS/serverless and minimum-runtime qualification remains mandatory. See [render service](render-service.md).
 
 The optional Formats assembly targets net472/netstandard2.0/net8.0/net10.0 with managed format parsers and no GUI/native/browser dependency. Providers/fonts remain explicit where needed; compiling these assets does not qualify format/runtime behavior.
+
+Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](spreadsheets.md).

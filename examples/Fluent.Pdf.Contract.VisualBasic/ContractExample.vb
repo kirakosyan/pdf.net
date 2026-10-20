@@ -459,4 +459,7 @@ Public Module ContractExample
     Public Function ImportSvg(source As Stream) As PdfDocument
         Return Fluent.Pdf.Formats.PdfSvg.Import(source)
     End Function
+    Public Function ReadSpreadsheet(input As Stream, format As Fluent.Pdf.Formats.PdfSpreadsheetFormat, name As String) As Fluent.Pdf.Formats.PdfSheetData
+        Return Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(input, format, name)
+    End Function
 End Module

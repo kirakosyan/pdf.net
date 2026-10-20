@@ -146,3 +146,5 @@ python3 eng/verify-queue-fixtures.py tests/Fluent.Pdf.Contract.Tests/bin/Release
 ```
 
 This checks the original pixel formula, effective DPI, TIFF frame order and exact RFC3161 imprint/signature under the fixture certificate. It does not supply general PKIX/revocation, complete PAdES or renderer qualification. See [the exact source evidence](evidence/issues-51-60-source.json) for counts, hashes, commands, observed environment failures and pending runtime/final-package work.
+
+Queue #61–#80 format fixtures are controlled original sources. `eng/verify-format-fixtures.py` requires explicitly provisioned CairoSVG 2.8.2, PyMuPDF 1.26.6, Pillow, openpyxl 3.1.5 and odfpy 1.4.1 as analysis tools only; none is a runtime/package dependency. It independently compares SVG/PDF pixels and opens typed spreadsheet outputs, rejects failed checks even under Python `-O`, archives prior reports by digest and records exact artifact hashes/tool versions. These checks do not qualify arbitrary formats or final packages.
