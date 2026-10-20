@@ -65,7 +65,17 @@ internal static class BoundedSignatureDer
         var tbs = certificate.ReadSequence();
         var version = new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true);
         if (tbs.PeekTag().HasSameClassAndValue(version)) _ = tbs.ReadEncodedValue();
-        for (int i = 0; i < 6; i++) _ = tbs.ReadEncodedValue();
+        for (int i = 0; i < 5; i++) _ = tbs.ReadEncodedValue();
+        var spki = tbs.ReadSequence();
+        var keyAlgorithm = spki.ReadSequence();
+        string keyOid = keyAlgorithm.ReadObjectIdentifier();
+        c.Consume(PdfResourceKind.ExpandedBytes, spki.PeekEncodedValue().Length);
+        var key = spki.ReadBitString(out int unusedBits);
+        spki.ThrowIfNotEmpty();
+        if (unusedBits != 0) throw new System.Formats.Asn1.AsnContentException();
+        // RSA/DSA/GOST public keys contain a separate DER tree inside the BIT STRING.
+        if (keyOid == "1.2.840.113549.1.1.1" || keyOid == "1.2.840.113549.1.1.10" || keyOid == "1.2.840.10040.4.1" || keyOid == "1.2.643.2.2.19" || keyOid == "1.2.643.7.1.1.1.1" || keyOid == "1.2.643.7.1.1.1.2")
+            Validate(key, key.Length, c);
         var extensionsTag = new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 3, true);
         while (tbs.HasData && !tbs.PeekTag().HasSameClassAndValue(extensionsTag)) _ = tbs.ReadEncodedValue();
         if (!tbs.HasData) return;

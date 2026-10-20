@@ -94,4 +94,31 @@ public sealed class TimestampTests
         Assert.Equal("Limit.Depth", Assert.Throws<PdfException>(() => Rfc3161TimestampVerifier.Verify(input, certificate.Value.RawData, new byte[32], new byte[] { 1 }, new(limits: new(maximumDepth: 16)))).Diagnostic.Code);
     }
 
+    [Fact]
+    public void CertificatePublicKeyDerIsDepthCheckedBeforeOptionalKeyParsing()
+    {
+        var inner = new System.Formats.Asn1.AsnWriter(System.Formats.Asn1.AsnEncodingRules.DER);
+        for (int i = 0; i < 2000; i++) inner.PushSequence();
+        for (int i = 0; i < 2000; i++) inner.PopSequence();
+        using var certificate = new CertificateSecurityTests.Certificate("Public key DER depth fixture");
+        var reader = new System.Formats.Asn1.AsnReader(certificate.Value.RawData, System.Formats.Asn1.AsnEncodingRules.DER);
+        var original = reader.ReadSequence(); var tbs = original.ReadSequence();
+        var w = new System.Formats.Asn1.AsnWriter(System.Formats.Asn1.AsnEncodingRules.DER);
+        w.PushSequence(); w.PushSequence();
+        var versionTag = new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true);
+        if (tbs.PeekTag().HasSameClassAndValue(versionTag)) w.WriteEncodedValue(tbs.ReadEncodedValue().Span);
+        for (int i = 0; i < 5; i++) w.WriteEncodedValue(tbs.ReadEncodedValue().Span);
+        _ = tbs.ReadEncodedValue();
+        w.PushSequence(); w.PushSequence(); w.WriteObjectIdentifier("1.2.840.113549.1.1.1"); w.WriteNull(); w.PopSequence(); w.WriteBitString(inner.Encode()); w.PopSequence();
+        while (tbs.HasData) w.WriteEncodedValue(tbs.ReadEncodedValue().Span);
+        w.PopSequence(); while (original.HasData) w.WriteEncodedValue(original.ReadEncodedValue().Span); w.PopSequence();
+        var token = new System.Formats.Asn1.AsnWriter(System.Formats.Asn1.AsnEncodingRules.DER);
+        token.PushSequence(); token.WriteObjectIdentifier("1.2.840.113549.1.7.2"); token.PushSequence(versionTag); token.PushSequence();
+        token.WriteInteger(3); token.PushSetOf(); token.PopSetOf(); token.PushSequence(); token.WriteObjectIdentifier("1.2.840.113549.1.9.16.1.4");
+        token.PushSequence(versionTag); token.WriteOctetString(new byte[] { 0x30, 0 }); token.PopSequence(versionTag); token.PopSequence();
+        token.PushSetOf(); token.PopSetOf(); token.PopSequence(); token.PopSequence(versionTag); token.PopSequence();
+        using var input = new MemoryStream(token.Encode());
+        Assert.Equal("Limit.Depth", Assert.Throws<PdfException>(() => Rfc3161TimestampVerifier.Verify(input, w.Encode(), new byte[32], new byte[] { 1 }, new(limits: new(maximumDepth: 16)))).Diagnostic.Code);
+    }
+
 }
