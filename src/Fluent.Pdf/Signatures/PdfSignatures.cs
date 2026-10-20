@@ -157,7 +157,12 @@ public static partial class PdfSignatures
         _ = providers.GetRequired<IPdfSignatureProvider>(PdfCapability.Signatures);
     }
 
-    private static PdfByteStore Build(PdfSyntaxDocument source, PdfSignatureOptions options, PdfProviderRegistry providers, PdfOperationContext c) => BuildAsync(source, options, providers, c).GetAwaiter().GetResult();
+    private static PdfByteStore Build(PdfSyntaxDocument source, PdfSignatureOptions options, PdfProviderRegistry providers, PdfOperationContext c)
+    {
+        if (providers.GetRequired<IPdfSignatureProvider>(PdfCapability.Signatures) is IPdfAsyncSignatureProvider)
+            throw Error(c, "AsyncRequired", "Asynchronous signature providers require SignAsync or SignFileAsync.");
+        return BuildAsync(source, options, providers, c).GetAwaiter().GetResult();
+    }
 
     private static async System.Threading.Tasks.Task<PdfByteStore> BuildAsync(PdfSyntaxDocument source, PdfSignatureOptions options, PdfProviderRegistry providers, PdfOperationContext c)
     {

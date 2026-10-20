@@ -24,8 +24,12 @@ public sealed class ExternalCmsSignatureProvider : IPdfAsyncSignatureProvider
     }
     /// <summary>Gets external signing service metadata; does not qualify any hardware module.</summary>
     public PdfProviderDescriptor Descriptor { get; } = new("managed.external-cms-signatures", "1.0.0", PdfCapability.Signatures);
-    /// <summary>Synchronously waits for explicit external signing. Prefer SignAsync for remote/hardware latency.</summary>
-    public void Sign(Stream signedBytes, Stream cmsOutput, PdfOperationContext context) => SignAsync(signedBytes, cmsOutput, context).GetAwaiter().GetResult();
+    /// <summary>Rejects synchronous external signing before invoking the key. Use SignAsync to avoid blocking caller synchronization contexts.</summary>
+    public void Sign(Stream signedBytes, Stream cmsOutput, PdfOperationContext context)
+    {
+        if (context == null) throw new ArgumentNullException(nameof(context));
+        throw PdfSignatures.Error(context, "AsyncRequired", "External signing requires SignAsync.");
+    }
     /// <summary>Signs one digest in one session, clears temporary digest/signature bytes, and disposes the session on every path. Authentication exceptions are redacted.</summary>
     public async Task SignAsync(Stream signedBytes, Stream cmsOutput, PdfOperationContext context)
     {

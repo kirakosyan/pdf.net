@@ -18,6 +18,12 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+    return bool(condition)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("fixture_directory", type=Path)
@@ -34,14 +40,17 @@ def main():
                 image.load()
                 rgba = image.convert("RGBA")
                 page = 1 - index if name.endswith("tiff") else 0
-                assert rgba.size == ((5, 4) if page == 1 else (8, 6))
+                require(rgba.size == ((5, 4) if page == 1 else (8, 6)), f"{name}: unexpected frame dimensions")
+                pixels_match = True
                 for y in range(rgba.height):
                     for x in range(rgba.width):
-                        assert rgba.getpixel((x, y)) == (page * 40, y, x, 255)
+                        pixels_match = pixels_match and rgba.getpixel((x, y)) == (page * 40, y, x, 255)
+                require(pixels_match, f"{name}: unexpected pixels in frame {index}")
                 dpi = [float(value) for value in image.info["dpi"]]
-                assert all(abs(value - 72) < 0.02 for value in dpi)
+                require(len(dpi) == 2 and all(abs(value - 72) < 0.02 for value in dpi), f"{name}: unexpected DPI")
                 frames.append({"frame": index, "size": list(image.size), "dpi": dpi,
-                               "allPixelsMatchOriginalFormula": True})
+                               "allPixelsMatchOriginalFormula": pixels_match})
+        require(len(frames) == (2 if name.endswith("tiff") else 1), f"{name}: unexpected frame count")
         rasters.append({"file": name, "sha256": sha256(path), "frames": frames})
 
     signatures = args.fixture_directory / "signature-fixtures"
@@ -53,14 +62,14 @@ def main():
         command = ["openssl", "ts", "-verify", "-token_in", "-in", str(token),
                    "-digest", bytes(range(32)).hex(), "-untrusted", str(pem), "-CAfile", str(pem)]
         verification = subprocess.run(command, capture_output=True, check=True)
-        assert b"Verification: OK" in verification.stdout + verification.stderr
+        verified = require(b"Verification: OK" in verification.stdout + verification.stderr, "OpenSSL did not confirm verification")
         version = subprocess.run(["openssl", "version"], capture_output=True, check=True)
     report = {
         "schemaVersion": 1,
         "purpose": "independent-original-source-fixtures-not-production-qualification",
         "rasterValidator": {"name": "Pillow", "version": PIL.__version__, "results": rasters},
         "timestampValidator": {
-            "name": version.stdout.decode().strip(), "verification": "OK",
+            "name": version.stdout.decode().strip(), "verification": "OK" if verified else "FAILED",
             "tokenSha256": sha256(token), "publicCertificateSha256": sha256(certificate),
             "outputSha256": hashlib.sha256(verification.stdout + verification.stderr).hexdigest(),
             "scope": "Exact SHA256 imprint and token signature using an explicitly trusted self-issued fixture TSA certificate; no general PKIX, revocation or PAdES qualification.",

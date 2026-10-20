@@ -293,7 +293,7 @@ public static class PdfComparison
                     var right = new PdfTextExtractionEngine(b, new(), providers).Read(page);
                     if (options.Text && left.Text != right.Text)
                         Add(PdfDifferenceKind.Text, page, left.Text, right.Text);
-                    if (options.Geometry && left.Characters.Count == right.Characters.Count && left.Characters.Where((ch, i) => !Near(ch.Quad.Bounds, right.Characters[i].Quad.Bounds, options.GeometryTolerance)).Any())
+                    if (options.Geometry && (left.Characters.Count != right.Characters.Count || left.Characters.Where((ch, i) => !Near(ch.Quad.Bounds, right.Characters[i].Quad.Bounds, options.GeometryTolerance)).Any()))
                         Add(PdfDifferenceKind.Geometry, page, "original advance cells", "revised advance cells");
                 }
                 if (options.Visual)

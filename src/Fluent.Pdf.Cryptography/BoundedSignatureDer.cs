@@ -3,6 +3,62 @@ namespace Fluent.Pdf.Cryptography;
 // Preflight recursive DER before passing untrusted timestamp/certificate data to the optional ASN.1 engine.
 internal static class BoundedSignatureDer
 {
+    // CMS eContent and X509 extension values are OCTET STRINGs whose contents
+    // the downstream engine reparses as ASN.1. Check those separate DER trees too.
+    internal static void TimestampContent(ReadOnlyMemory<byte> encoded, byte[] certificate, PdfOperationContext c)
+    {
+        var reader = new System.Formats.Asn1.AsnReader(encoded, System.Formats.Asn1.AsnEncodingRules.DER);
+        var outer = reader.ReadSequence();
+        reader.ThrowIfNotEmpty();
+        if (outer.ReadObjectIdentifier() != "1.2.840.113549.1.7.2") throw new System.Formats.Asn1.AsnContentException();
+        var wrapper = outer.ReadSequence(new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true));
+        outer.ThrowIfNotEmpty();
+        var signed = wrapper.ReadSequence();
+        wrapper.ThrowIfNotEmpty();
+        _ = signed.ReadInteger();
+        _ = signed.ReadSetOf();
+        var content = signed.ReadSequence();
+        if (content.ReadObjectIdentifier() != "1.2.840.113549.1.9.16.1.4") throw new System.Formats.Asn1.AsnContentException();
+        var explicitContent = content.ReadSequence(new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true));
+        c.Consume(PdfResourceKind.ExpandedBytes, explicitContent.PeekEncodedValue().Length);
+        var inner = explicitContent.ReadOctetString();
+        explicitContent.ThrowIfNotEmpty();
+        content.ThrowIfNotEmpty();
+        Validate(inner, inner.Length, c);
+        if (signed.HasData && signed.PeekTag().HasSameClassAndValue(new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0)))
+        {
+            var certificates = signed.ReadSetOf(new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true));
+            while (certificates.HasData) CertificateExtensions(certificates.ReadEncodedValue(), c);
+        }
+        CertificateExtensions(certificate, c);
+    }
+    private static void CertificateExtensions(ReadOnlyMemory<byte> encoded, PdfOperationContext c)
+    {
+        var reader = new System.Formats.Asn1.AsnReader(encoded, System.Formats.Asn1.AsnEncodingRules.DER);
+        var certificate = reader.ReadSequence();
+        reader.ThrowIfNotEmpty();
+        var tbs = certificate.ReadSequence();
+        var version = new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true);
+        if (tbs.PeekTag().HasSameClassAndValue(version)) _ = tbs.ReadEncodedValue();
+        for (int i = 0; i < 6; i++) _ = tbs.ReadEncodedValue();
+        var extensionsTag = new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 3, true);
+        while (tbs.HasData && !tbs.PeekTag().HasSameClassAndValue(extensionsTag)) _ = tbs.ReadEncodedValue();
+        if (!tbs.HasData) return;
+        var wrapper = tbs.ReadSequence(extensionsTag);
+        var extensions = wrapper.ReadSequence();
+        wrapper.ThrowIfNotEmpty();
+        while (extensions.HasData)
+        {
+            c.Checkpoint();
+            var extension = extensions.ReadSequence();
+            _ = extension.ReadObjectIdentifier();
+            if (extension.PeekTag().HasSameClassAndValue(System.Formats.Asn1.Asn1Tag.Boolean)) _ = extension.ReadBoolean();
+            c.Consume(PdfResourceKind.ExpandedBytes, extension.PeekEncodedValue().Length);
+            var value = extension.ReadOctetString();
+            extension.ThrowIfNotEmpty();
+            Validate(value, value.Length, c);
+        }
+    }
     internal static void Validate(byte[] bytes, int length, PdfOperationContext context)
     {
         int position = 0;

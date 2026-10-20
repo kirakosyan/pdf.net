@@ -110,4 +110,25 @@ public sealed class PadesRevisionTests
             return new(_exact ? digest : new string('0', 64), profile, _complete, _valid);
         }
     }
+    [Fact]
+    public void EncryptedSyntaxIsRejectedBeforePadesProducerOrSigningPreflight()
+    {
+        var signed = SignatureVerificationTests.Signed();
+        var raw = SignatureTests.Bytes(signed.OpenOriginalStream()).ToList();
+        string ascii = System.Text.Encoding.ASCII.GetString(raw.ToArray());
+        int trailerAt = ascii.LastIndexOf("trailer", StringComparison.Ordinal);
+        int at = ascii.IndexOf("<<", trailerAt, StringComparison.Ordinal) + 2;
+        raw.InsertRange(at, System.Text.Encoding.ASCII.GetBytes(" /Encrypt <<>> "));
+        using var bytes = new MemoryStream(raw.ToArray());
+        var source = PdfSyntax.Read(bytes);
+        Assert.False(source.DecryptionApplied);
+        var producer = new GateProducer();
+        Assert.Equal("Pades.SourceProfile", Assert.Throws<PdfException>(() => PdfPades.Upgrade(source, PdfPadesProfile.T, new(producer, new GateValidator(true, true, true)))).Diagnostic.Code);
+        Assert.Null(producer.Context);
+        var plan = PdfSignatures.PreflightEdit(source, new(PdfWriteMode.Incremental), new("Second"));
+        Assert.False(plan.Allowed);
+        Assert.Equal("Signature.EncryptedProfile", plan.Reason);
+        Assert.Equal("Signature.UnsignedEditAllowed", PdfSignatures.PreflightEdit(SignatureTests.Prepared(), new()).Reason);
+    }
+
 }

@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Fluent.Pdf;
-/// <summary>An explicitly asynchronous detached signer using the same cryptographic verifier.</summary>
+/// <summary>An explicitly asynchronous detached signer using the same cryptographic verifier. PdfSignatures synchronous entry points reject this interface; callers must use SignAsync or SignFileAsync.</summary>
 public interface IPdfAsyncSignatureProvider : IPdfSignatureProvider
 {
     /// <summary>Signs once; all borrowed streams and sessions must finish before completion.</summary>

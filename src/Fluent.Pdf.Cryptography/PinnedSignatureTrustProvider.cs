@@ -37,7 +37,16 @@ public sealed class PinnedSignatureTrustProvider : IPdfSignatureTrustProvider
         var raw = SignerCertificate(cms, c);
         c.Consume(PdfResourceKind.ExpandedBytes, raw.Length * 16L + 65536);
         BoundedSignatureDer.Validate(raw, raw.Length, c);
-        var certificate = new Org.BouncyCastle.X509.X509CertificateParser().ReadCertificate(raw);
+        Org.BouncyCastle.X509.X509Certificate certificate;
+        try
+        {
+            certificate = new Org.BouncyCastle.X509.X509CertificateParser().ReadCertificate(raw) ?? throw new Org.BouncyCastle.Security.Certificates.CertificateException("Unsupported certificate choice.");
+        }
+        catch (Org.BouncyCastle.Security.Certificates.CertificateException)
+        {
+            c.Checkpoint();
+            throw new PdfException(new PdfDiagnostic("Signature.UnsupportedProfile", "Trust requires a supported DER X509 certificate."));
+        }
         bool time = options.EvaluationTime.UtcDateTime >= certificate.NotBefore.ToUniversalTime() && options.EvaluationTime.UtcDateTime <= certificate.NotAfter.ToUniversalTime();
         bool trusted = _pins.Any(p => p.SequenceEqual(raw));
         var status = PdfRevocationStatus.Unknown;
@@ -82,7 +91,7 @@ public sealed class PinnedSignatureTrustProvider : IPdfSignatureTrustProvider
             _ = data.ReadSequence();
             var certificates = data.ReadSetOf(new Asn1Tag(TagClass.ContextSpecific, 0, true));
             var certificate = certificates.ReadEncodedValue();
-            if (certificates.HasData || certificate.Length > 65536)
+            if (certificates.HasData || certificate.Length > 65536 || certificate.Span[0] != 0x30)
                 throw new AsnContentException();
             return certificate.ToArray();
         }

@@ -144,7 +144,7 @@ public static partial class PdfSignatures
             var protection = PdfSignaturePolicy.Protection(source, signing?.FieldName, c);
             if (signing != null)
             {
-                string? rejection = protection.NoChanges || protection.Locked ? "Signature.CertificationPermission" : signing.Certification != PdfCertificationPermission.None && (source.HasSignatureByteRanges || protection.Protected) ? "Signature.CertificationOrder" : null;
+                string? rejection = source.DecryptionApplied || source.Revisions.Any(r => r.Trailer.Entries.ContainsKey("Encrypt")) ? "Signature.EncryptedProfile" : protection.NoChanges || protection.Locked ? "Signature.CertificationPermission" : signing.Certification != PdfCertificationPermission.None && (source.HasSignatureByteRanges || protection.Protected) ? "Signature.CertificationOrder" : null;
                 plan = new(rejection == null, rejection == null, rejection ?? "Signature.SigningPolicyAllowed");
             }
             else
@@ -155,7 +155,7 @@ public static partial class PdfSignatures
                 else if (source.HasSignatureByteRanges && !prefix && !writeOptions.AllowSignatureInvalidation)
                     plan = new(false, false, "Signature.FullRewriteInvalidates");
                 else
-                    plan = new(true, prefix, prefix ? "Signature.LaterEditsNotValidated" : "Signature.FullRewriteInvalidates");
+                    plan = new(true, prefix, !source.HasSignatureByteRanges ? "Signature.UnsignedEditAllowed" : prefix ? "Signature.LaterEditsNotValidated" : "Signature.FullRewriteInvalidates");
             }
         }, PdfCapability.Signatures);
         return plan!;

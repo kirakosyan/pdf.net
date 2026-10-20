@@ -82,7 +82,7 @@ public static class PdfPades
         var selected = policy ?? source.ReadPolicy;
         var report = PdfFont.Run("UpgradePades", "managed.pades", selected, cancellationToken, c =>
         {
-            if (!source.HasSignatureByteRanges || source.DecryptionApplied)
+            if (!source.HasSignatureByteRanges || source.DecryptionApplied || source.Revisions.Any(r => r.Trailer.Entries.ContainsKey("Encrypt")))
                 throw Error(c, "SourceProfile", "An unencrypted existing signed document is required.");
             using var buffer = new PdfCodecBufferStream(c, c.Available(PdfResourceKind.ExpandedBytes));
             using (var input = c.BorrowExpandedInput(source.OpenOriginalStream()))
@@ -141,11 +141,11 @@ public static class PdfPades
                 hashes.Add(PdfArchival.Digest(PdfByteStore.Read(decoded, c), c));
             }
             if (value.Kind == PdfValueKind.Array)
-            foreach (var child in value.Items)
-                Walk(child);
+                foreach (var child in value.Items)
+                    Walk(child);
             if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
-            foreach (var child in value.Entries.Values)
-                Walk(child);
+                foreach (var child in value.Entries.Values)
+                    Walk(child);
         }
     }
     private static PdfException Error(PdfOperationContext c, string code, string message) => PdfWriterCore.Error(c, "Pades." + code, message);

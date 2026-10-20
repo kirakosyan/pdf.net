@@ -106,4 +106,26 @@ public sealed class ComparisonXfaScriptTests
         using var source = XfaFixture(template);
         Assert.Equal("Xfa.UnsupportedTemplate", Assert.Throws<PdfException>(() => PdfXfa.ConvertToAcroForm(source.CreateSnapshot(), Array.Empty<PdfFormFieldDefinition>())).Diagnostic.Code);
     }
+    [Fact]
+    public void GeometryOnlyComparisonReportsInsertedAndDeletedGlyphs()
+    {
+        using var a = ExtractionTests.Fixture("BT /F1 10 Tf 1 0 0 1 20 100 Tm (A) Tj ET");
+        using var b = ExtractionTests.Fixture("BT /F1 10 Tf 1 0 0 1 20 100 Tm (AB) Tj ET");
+        Assert.Contains(PdfComparison.Compare(a.CreateSnapshot(), b.CreateSnapshot(), new(text: false, geometry: true, metadata: false)).Differences, d => d.Kind == PdfDifferenceKind.Geometry);
+        Assert.Contains(PdfComparison.Compare(b.CreateSnapshot(), a.CreateSnapshot(), new(text: false, geometry: true, metadata: false)).Differences, d => d.Kind == PdfDifferenceKind.Geometry);
+    }
+    [Theory]
+    [InlineData(1)]
+    [InlineData(0xd800)]
+    [InlineData(0xdfff)]
+    public void XfaFillRejectsInvalidXmlCharactersWithStableDiagnostics(int codePoint)
+    {
+        using var source = XfaFixture();
+        var captured = PdfXfa.Inspect(source.CreateSnapshot());
+        string value = new((char)codePoint, 1);
+        Assert.Equal("Xfa.XmlValue", Assert.Throws<PdfException>(() => PdfXfa.Fill(source.CreateSnapshot(), new Dictionary<string, string> { { "form.name", value } })).Diagnostic.Code);
+        Assert.Equal("Արամ", captured.Data["form.name"]);
+        Assert.Equal("Արամ", PdfXfa.Inspect(source.CreateSnapshot()).Data["form.name"]);
+    }
+
 }

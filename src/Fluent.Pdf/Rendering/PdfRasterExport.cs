@@ -195,13 +195,19 @@ public static class PdfRasterExport
         Big(tail, 0, crc ^ 0xffffffff);
         output.Write(tail, 0, 4);
     }
-    private static uint Crc(uint crc, byte value)
+    private static readonly uint[] CrcTable = BuildCrcTable();
+    private static uint[] BuildCrcTable()
     {
-        crc ^= value;
-        for (int i = 0; i < 8; i++)
-            crc = (crc & 1) == 0 ? crc >> 1 : (crc >> 1) ^ 0xedb88320;
-        return crc;
+        var table = new uint[256];
+        for (uint i = 0; i < table.Length; i++)
+        {
+            uint value = i;
+            for (int bit = 0; bit < 8; bit++) value = (value & 1) == 0 ? value >> 1 : (value >> 1) ^ 0xedb88320;
+            table[i] = value;
+        }
+        return table;
     }
+    private static uint Crc(uint crc, byte value) => (crc >> 8) ^ CrcTable[(crc ^ value) & 255];
     private static void Bmp(Stream output, PdfRasterRequest r, PdfByteStore samples, PdfOperationContext c)
     {
         long row = ((long)r.Width * 3 + 3) & ~3L, total = 54 + row * r.Height;
@@ -223,20 +229,31 @@ public static class PdfRasterExport
         U32(output, Density(r.EffectiveDpiY));
         U32(output, 0);
         U32(output, 0);
+        c.Consume(PdfResourceKind.ExpandedBytes, r.Stride + row);
+        var inputRow = new byte[r.Stride];
+        var outputRow = new byte[(int)row];
         for (int y = r.Height - 1; y >= 0; y--)
         {
             c.Checkpoint();
+            using (var input = samples.Open((long)y * r.Stride, r.Stride)) ReadRow(input, inputRow);
             for (int x = 0; x < r.Width; x++)
             {
-                if ((x & 1023) == 0)
-                    c.Checkpoint();
-                long at = (long)y * r.Stride + x * 4L;
-                output.WriteByte((byte)samples.At(at));
-                output.WriteByte((byte)samples.At(at + 1));
-                output.WriteByte((byte)samples.At(at + 2));
+                if ((x & 1023) == 0) c.Checkpoint();
+                outputRow[x * 3] = inputRow[x * 4];
+                outputRow[x * 3 + 1] = inputRow[x * 4 + 1];
+                outputRow[x * 3 + 2] = inputRow[x * 4 + 2];
             }
-            for (long i = r.Width * 3L; i < row; i++)
-                output.WriteByte(0);
+            output.Write(outputRow, 0, outputRow.Length);
+        }
+    }
+    private static void ReadRow(Stream input, byte[] row)
+    {
+        int position = 0;
+        while (position < row.Length)
+        {
+            int n = input.Read(row, position, row.Length - position);
+            if (n == 0) throw new EndOfStreamException();
+            position += n;
         }
     }
     private static void Tiff(Stream output, PdfRasterRequest r, PdfByteStore samples, byte[]? profile, int frame, int count, PdfOperationContext c)
@@ -297,33 +314,60 @@ public static class PdfRasterExport
     }
     private sealed class RgbaRows : Stream
     {
-        private readonly PdfByteStore _samples; private readonly PdfRasterRequest _r; private readonly bool _filter; private readonly PdfOperationContext _c; private long _position;
+        private readonly PdfByteStore _samples;
+        private readonly PdfRasterRequest _r;
+        private readonly bool _filter;
+        private readonly PdfOperationContext _c;
+        private readonly byte[] _row;
+        private int _rowPosition, _nextRow;
+        private long _position;
         internal RgbaRows(PdfByteStore samples, PdfRasterRequest request, bool filter, PdfOperationContext c)
         {
             _samples = samples;
             _r = request;
             _filter = filter;
             _c = c;
+            c.Consume(PdfResourceKind.ExpandedBytes, request.Stride + (filter ? 1L : 0));
+            _row = new byte[request.Stride + (filter ? 1 : 0)];
+            _rowPosition = _row.Length;
         }
         public override int Read(byte[] buffer, int offset, int count)
         {
-            int n = (int)Math.Min(count, Length - _position);
-            for (int i = 0; i < n; i++)
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (offset < 0 || count < 0 || offset > buffer.Length - count) throw new ArgumentOutOfRangeException(nameof(count));
+            int copied = 0;
+            while (copied < count && _position < Length)
             {
-                if ((i & 4095) == 0)
-                    _c.Checkpoint();
-                long row = _position / (_r.Stride + (_filter ? 1L : 0)), column = _position % (_r.Stride + (_filter ? 1L : 0));
-                if (_filter && column == 0)
-                    buffer[offset + i] = 0;
-                else
+                _c.Checkpoint();
+                if (_rowPosition == _row.Length)
                 {
-                    long at = row * _r.Stride + column - (_filter ? 1 : 0);
-                    int channel = (int)(at % 4);
-                    buffer[offset + i] = (byte)_samples.At(at + (channel == 0 ? 2 : channel == 2 ? -2 : 0));
+                    int prefix = _filter ? 1 : 0;
+                    using (var input = _samples.Open((long)_nextRow++ * _r.Stride, _r.Stride))
+                    {
+                        int at = prefix;
+                        while (at < _row.Length)
+                        {
+                            int n = input.Read(_row, at, _row.Length - at);
+                            if (n == 0) throw new EndOfStreamException();
+                            at += n;
+                        }
+                    }
+                    for (int at = prefix; at < _row.Length; at += 4)
+                    {
+                        if ((at & 4095) < 4) _c.Checkpoint();
+                        byte blue = _row[at];
+                        _row[at] = _row[at + 2];
+                        _row[at + 2] = blue;
+                    }
+                    _rowPosition = 0;
                 }
-                _position++;
+                int size = Math.Min(count - copied, _row.Length - _rowPosition);
+                Buffer.BlockCopy(_row, _rowPosition, buffer, offset + copied, size);
+                _rowPosition += size;
+                _position += size;
+                copied += size;
             }
-            return n;
+            return copied;
         }
         public override long Length => _r.ByteLength + (_filter ? _r.Height : 0); public override long Position
         {

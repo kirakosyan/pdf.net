@@ -112,17 +112,22 @@ public static class PdfScripts
             var pairs = tree.Kind == PdfValueKind.Null ? new List<(PdfValue Key, PdfValue Value)>() : reader.NameTree(tree);
             int matches = 0;
             for (int i = pairs.Count - 1; i >= 0; i--)
-            if (PdfTextStrings.Decode(pairs[i].Key, g.Context) == name)
-            {
-                matches++;
-                pairs.RemoveAt(i);
-            }
+                if (PdfTextStrings.Decode(pairs[i].Key, g.Context) == name)
+                {
+                    matches++;
+                    pairs.RemoveAt(i);
+                }
             if (matches > 1)
                 throw g.Error("Script.NameIdentity", "Decoded script names must be unambiguous.");
             if (source != null)
                 pairs.Add((PdfTextStrings.Encode(name, g.Context), PdfValue.Reference(g.Edit.Add(PdfGraphicsNumbers.Dict(("S", PdfValue.Name("JavaScript")), ("JS", PdfTextStrings.Encode(source, g.Context)))))));
             g.Context.Consume(PdfResourceKind.ExpandedBytes, pairs.Count * 64L + 256);
-            pairs.Sort((a, b) => { for (int i = 0; i < Math.Min(a.Key.StringBytes.Count, b.Key.StringBytes.Count); i++) { g.Context.Checkpoint(); int d = a.Key.StringBytes[i] - b.Key.StringBytes[i]; if (d != 0) return d; } return a.Key.StringBytes.Count.CompareTo(b.Key.StringBytes.Count); });
+            foreach (var pair in pairs)
+                if (pair.Key.Kind != PdfValueKind.String)
+                    throw g.Error("Script.NameIdentity", "Script name-tree keys must be strings.");
+            g.Context.Checkpoint();
+            pairs.Sort((a, b) => { for (int i = 0; i < Math.Min(a.Key.StringBytes.Count, b.Key.StringBytes.Count); i++) { int d = a.Key.StringBytes[i] - b.Key.StringBytes[i]; if (d != 0) return d; } return a.Key.StringBytes.Count.CompareTo(b.Key.StringBytes.Count); });
+            g.Context.Checkpoint();
             var values = new List<PdfValue>();
             foreach (var pair in pairs)
             {

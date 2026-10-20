@@ -91,4 +91,30 @@ public sealed class ExternalSigningTests
             }
         }
     }
+    [Fact]
+    public void SynchronousExternalSigningRejectsBeforeOpeningCallerSessions()
+    {
+        using var certificate = new CertificateSecurityTests.Certificate("Async context fixture");
+        var key = new Key(certificate.Key);
+        var provider = new ExternalCmsSignatureProvider(certificate.Value.RawData, key);
+        var previous = SynchronizationContext.Current;
+        SynchronizationContext.SetSynchronizationContext(new NeverPump());
+        try
+        {
+            Assert.Equal("Signature.AsyncRequired", Assert.Throws<PdfException>(() => PdfSignatures.Sign(SignatureTests.Prepared(), new("First"), new(provider))).Diagnostic.Code);
+            Assert.Equal("Signature.AsyncRequired", Assert.Throws<PdfException>(() => PolicyTests.Run(c =>
+            {
+                using var input = new MemoryStream();
+                using var output = new MemoryStream();
+                provider.Sign(input, output, c);
+            })).Diagnostic.Code);
+            Assert.Equal(0, key.Opened);
+        }
+        finally { SynchronizationContext.SetSynchronizationContext(previous); }
+    }
+    private sealed class NeverPump : SynchronizationContext
+    {
+        public override void Post(SendOrPostCallback callback, object? state) => throw new InvalidOperationException("Synchronous signing must not post work.");
+    }
+
 }

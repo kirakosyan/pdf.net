@@ -40,7 +40,8 @@ public static class Rfc3161TimestampVerifier
                 var der = new System.Formats.Asn1.AsnReader(encoded, System.Formats.Asn1.AsnEncodingRules.DER);
                 _ = der.ReadSequence();
                 der.ThrowIfNotEmpty();
-                var cms = new CmsSignedData(bytes.Take(at).ToArray());
+                BoundedSignatureDer.TimestampContent(encoded, tsaCertificate, c);
+                var cms = new CmsSignedData(encoded.ToArray());
                 var timestamp = new TimeStampToken(cms);
                 var certificate = new Org.BouncyCastle.X509.X509CertificateParser().ReadCertificate(tsaCertificate);
                 timestamp.Validate(certificate);

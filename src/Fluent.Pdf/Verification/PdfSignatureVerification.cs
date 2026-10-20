@@ -136,13 +136,22 @@ public static partial class PdfSignatures
                         valid = integrity.Verify(bytes, cms, c);
                     c.Checkpoint();
                     PdfSignatureTrustDecision? decision = null;
+                    string? diagnostic = null;
                     if (valid)
                     {
-                        using var cms = c.BorrowExpandedInput(new MemoryStream(validated.Cms, false));
-                        decision = trust.Evaluate(cms, options, c) ?? throw Error(c, "TrustResult", "The trust provider returned no identity decision.");
+                        try
+                        {
+                            using var cms = c.BorrowExpandedInput(new MemoryStream(validated.Cms, false));
+                            decision = trust.Evaluate(cms, options, c) ?? throw Error(c, "TrustResult", "The trust provider returned no identity decision.");
+                        }
+                        catch (PdfException failure) when (failure.Diagnostic.Code == "Signature.UnsupportedProfile")
+                        {
+                            c.Checkpoint();
+                            diagnostic = failure.Diagnostic.Code;
+                        }
                         c.Checkpoint();
                     }
-                    results.Add(new(new(id, validated.Ranges, valid, validated.Ranges[2] + validated.Ranges[3]), decision, source.Source.Length));
+                    results.Add(new(new(id, validated.Ranges, valid, validated.Ranges[2] + validated.Ranges[3], diagnostic), decision, source.Source.Length));
                 }
                 catch (PdfException failure) when (failure.Diagnostic.Code == "Signature.UnsupportedProfile" || failure.Diagnostic.Code == "Signature.ByteRangeProfile")
                 {

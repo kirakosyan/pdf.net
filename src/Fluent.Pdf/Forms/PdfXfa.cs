@@ -8,12 +8,14 @@ namespace Fluent.Pdf;
 /// <summary>One immutable original XFA XML packet and exact source stream identity.</summary>
 public sealed class PdfXfaPacket
 {
-    internal PdfXfaPacket(string name, PdfObjectId? id, string xml)
+    internal PdfXfaPacket(string name, PdfObjectId? id, string xml, XDocument document)
     {
         Name = name;
         ObjectId = id;
         Xml = xml;
+        Document = document;
     }
+    internal XDocument Document { get; }
     /// <summary>Gets exact packet name.</summary>
     public string Name
     {
@@ -84,10 +86,12 @@ public static class PdfXfa
                 if (pair.Value == null || !fields.TryGetValue(pair.Key, out var element))
                     throw g.Error("Xfa.DataPath", "Every update must name an existing unique scalar data path.");
                 g.Context.Consume(PdfResourceKind.ExpandedBytes, pair.Value.Length * 8L + 256);
+                try { XmlConvert.VerifyXmlChars(pair.Value); }
+                catch (XmlException) { g.Context.Checkpoint(); throw g.Error("Xfa.XmlValue", "Dataset values must contain valid XML characters."); }
                 element.Value = pair.Value;
             }
             var packet = packets.Single(p => p.Name == "datasets");
-            var root = fields.Count > 0 ? fields.First().Value.Document : Parse(packet.Xml, g.Context);
+            var root = packet.Document;
             // All XElement views belong to the same parsed immutable-input tree; unrelated packet bytes stay untouched.
             string xml = root!.ToString(SaveOptions.DisableFormatting);
             g.Context.Consume(PdfResourceKind.ExpandedBytes, xml.Length * 4L + 128);
@@ -109,7 +113,7 @@ public static class PdfXfa
             var packets = Read(g);
             var data = Dataset(packets, g.Context);
             var template = packets.SingleOrDefault(p => p.Name == "template") ?? throw g.Error("Xfa.Template", "One explicit template packet is required.");
-            var xml = Parse(template.Xml, g.Context);
+            var xml = template.Document;
             string templateNamespace = xml.Root?.Name.NamespaceName ?? "";
             if (xml.Root?.Name.LocalName != "template" || templateNamespace != "" && templateNamespace != "http://www.xfa.org/schema/xfa-template/2.8/" && templateNamespace != "http://www.xfa.org/schema/xfa-template/3.3/")
                 throw g.Error("Xfa.UnsupportedTemplate", "Only explicit unnamespaced, XFA2.8 or XFA3.3 static template roots are supported.");
@@ -205,15 +209,15 @@ public static class PdfXfa
                 xml = reader.ReadToEnd();
             }
             catch (DecoderFallbackException) { g.Context.Checkpoint(); throw g.Error("Xfa.XmlEncoding", "XFA packet text encoding is invalid."); }
-            _ = Parse(xml, g.Context);
-            packets.Add(new(name, reference.ReferenceId, xml));
+            var document = Parse(xml, g.Context);
+            packets.Add(new(name, reference.ReferenceId, xml, document));
         }
         return packets;
     }
     private static Dictionary<string, XElement> Dataset(List<PdfXfaPacket> packets, PdfOperationContext c)
     {
         var packet = packets.SingleOrDefault(p => p.Name == "datasets") ?? throw PdfWriterCore.Error(c, "Xfa.Datasets", "One datasets packet is required.");
-        var xml = Parse(packet.Xml, c);
+        var xml = packet.Document;
         var root = xml.Root;
         if (root == null || root.Name.LocalName != "datasets")
             throw PdfWriterCore.Error(c, "Xfa.Datasets", "The datasets root is required.");
@@ -269,18 +273,18 @@ public static class PdfXfa
         if (xml.Length > 8388608)
             throw PdfWriterCore.Error(c, "Xfa.XmlExtent", "XFA XML exceeds its finite extent.");
         c.Consume(PdfResourceKind.ExpandedBytes, xml.Length * 8L + 4096);
-        var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null, MaxCharactersInDocument = 8388608, MaxCharactersFromEntities = 0 };
+        var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null, MaxCharactersInDocument = 8388608, MaxCharactersFromEntities = 1024 };
         try
         {
             using (var preflight = XmlReader.Create(new StringReader(xml), settings))
-            while (preflight.Read())
-            {
-                c.Checkpoint();
-                if (preflight.Depth >= c.Policy.Limits.MaximumDepth)
-                    c.RejectLimit(PdfResourceKind.Depth);
-                c.Consume(PdfResourceKind.Objects, 1 + preflight.AttributeCount);
-                c.Consume(PdfResourceKind.ExpandedBytes, 256L * (1 + preflight.AttributeCount) + preflight.Value.Length * 2L);
-            }
+                while (preflight.Read())
+                {
+                    c.Checkpoint();
+                    if (preflight.Depth >= c.Policy.Limits.MaximumDepth)
+                        c.RejectLimit(PdfResourceKind.Depth);
+                    c.Consume(PdfResourceKind.Objects, 1 + preflight.AttributeCount);
+                    c.Consume(PdfResourceKind.ExpandedBytes, 256L * (1 + preflight.AttributeCount) + preflight.Value.Length * 2L);
+                }
             using var reader = XmlReader.Create(new StringReader(xml), settings);
             return XDocument.Load(reader, LoadOptions.PreserveWhitespace);
         }
