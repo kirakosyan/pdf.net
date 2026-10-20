@@ -41,6 +41,14 @@ public static class PdfTableData
     /// <summary>Enumerates at most maximumRows plus one lookahead, disposes the source, and snapshots rows under one operation budget.</summary>
     public static PdfTable Bind<T>(IEnumerable<T> source, PdfTableDataColumn<T>[] columns, CultureInfo culture, int maximumRows = 100000, PdfTableRow[]? headerRows = null, bool allowRowSplit = true, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
+        PdfTable? result = null;
+        var report = PdfFont.Run("BindTable", "managed.table", policy, cancellationToken, context => result = BindCore(source, columns, culture, maximumRows, headerRows, allowRowSplit, context), PdfCapability.WriteDocument);
+        result!.OperationReport = report;
+        return result;
+    }
+
+    internal static PdfTable BindCore<T>(IEnumerable<T> source, PdfTableDataColumn<T>[] columns, CultureInfo culture, int maximumRows, PdfTableRow[]? headerRows, bool allowRowSplit, PdfOperationContext context)
+    {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
         if (columns == null || columns.Length < 1 || columns.Length > 1024 || columns.Any(c => c == null))
@@ -54,57 +62,54 @@ public static class PdfTableData
         var headers = headerRows ?? Array.Empty<PdfTableRow>();
         if (headers.Length > 4096 || headers.Any(r => r == null) || headers.Length > 1000000 - maximumRows)
             throw new ArgumentException("Header rows must be bounded and nonnull.", nameof(headerRows));
+        context.Consume(PdfResourceKind.ExpandedBytes, 4096);
         var formatting = CultureInfo.ReadOnly((CultureInfo)culture.Clone());
         PdfTable? result = null;
-        var report = PdfFont.Run("BindTable", "managed.table", policy, cancellationToken, context =>
+        context.Consume(PdfResourceKind.ExpandedBytes, columns.Length * 32L + headers.Length * 16L + 128);
+        ValidateCulture(formatting, context);
+        var captured = (PdfTableDataColumn<T>[])columns.Clone();
+        var capturedHeaders = (PdfTableRow[])headers.Clone();
+        IEnumerable<PdfTableRow> Rows()
         {
-            context.Consume(PdfResourceKind.ExpandedBytes, columns.Length * 32L + headers.Length * 16L + 128);
-            ValidateCulture(formatting, context);
-            var captured = (PdfTableDataColumn<T>[])columns.Clone();
-            var capturedHeaders = (PdfTableRow[])headers.Clone();
-            IEnumerable<PdfTableRow> Rows()
+            foreach (var header in capturedHeaders)
+                yield return header;
+            int count = 0;
+            using var enumerator = source.GetEnumerator();
+            while (true)
             {
-                foreach (var header in capturedHeaders)
-                    yield return header;
-                int count = 0;
-                using var enumerator = source.GetEnumerator();
-                while (true)
+                context.Checkpoint();
+                context.Consume(PdfResourceKind.Objects, 1);
+                if (!enumerator.MoveNext())
+                    yield break;
+                if (count++ == maximumRows)
+                    throw PdfWriterCore.Error(context, "Table.RowLimit", "The data source exceeds its explicit finite row limit.");
+                T record = enumerator.Current;
+                if (ReferenceEquals(record, source))
+                    throw PdfWriterCore.Error(context, "Table.DataCycle", "The data source directly contains itself.");
+                context.Consume(PdfResourceKind.ExpandedBytes, captured.Length * 256L + 128);
+                var cells = new PdfTableCell[captured.Length];
+                for (int i = 0; i < cells.Length; i++)
                 {
                     context.Checkpoint();
-                    context.Consume(PdfResourceKind.Objects, 1);
-                    if (!enumerator.MoveNext())
-                        yield break;
-                    if (count++ == maximumRows)
-                        throw PdfWriterCore.Error(context, "Table.RowLimit", "The data source exceeds its explicit finite row limit.");
-                    T record = enumerator.Current;
-                    if (ReferenceEquals(record, source))
-                        throw PdfWriterCore.Error(context, "Table.DataCycle", "The data source directly contains itself.");
-                    context.Consume(PdfResourceKind.ExpandedBytes, captured.Length * 256L + 128);
-                    var cells = new PdfTableCell[captured.Length];
-                    for (int i = 0; i < cells.Length; i++)
-                    {
-                        context.Checkpoint();
-                        var column = captured[i];
-                        object? value = record is null ? null : column.Value(record);
-                        if (ReferenceEquals(value, source) || value is not null && ReferenceEquals(value, record) && !Scalar(value))
-                            throw PdfWriterCore.Error(context, "Table.DataCycle", "A scalar binding points back to its source or record.");
-                        string text = Format(value, column.Format, column.NullText, formatting, context);
-                        context.Consume(PdfResourceKind.InputBytes, text.Length * 2L);
-                        context.Consume(PdfResourceKind.ExpandedBytes, text.Length * 4L + 128);
-                        cells[i] = new PdfTableCell(new[] { new PdfFlowParagraph(text, column.TextStyle, column.ParagraphStyle) }, style: column.CellStyle);
-                    }
-
-                    yield return new PdfTableRow(cells);
+                    var column = captured[i];
+                    object? value = record is null ? null : column.Value(record);
+                    if (ReferenceEquals(value, source) || value is not null && ReferenceEquals(value, record) && !Scalar(value))
+                        throw PdfWriterCore.Error(context, "Table.DataCycle", "A scalar binding points back to its source or record.");
+                    string text = Format(value, column.Format, column.NullText, formatting, context);
+                    context.Consume(PdfResourceKind.InputBytes, text.Length * 2L);
+                    context.Consume(PdfResourceKind.ExpandedBytes, text.Length * 4L + 128);
+                    cells[i] = new PdfTableCell(new[] { new PdfFlowParagraph(text, column.TextStyle, column.ParagraphStyle) }, style: column.CellStyle);
                 }
-            }
 
-            result = PdfTable.CreateCore(captured.Select(c => c.Width).ToArray(), Rows(), capturedHeaders.Length, allowRowSplit, maximumRows + capturedHeaders.Length, context);
-        }, PdfCapability.WriteDocument);
-        result!.OperationReport = report;
-        return result;
+                yield return new PdfTableRow(cells);
+            }
+        }
+
+        result = PdfTable.CreateCore(captured.Select(c => c.Width).ToArray(), Rows(), capturedHeaders.Length, allowRowSplit, maximumRows + capturedHeaders.Length, context);
+        return result!;
     }
 
-    private static string Format(object? value, string? format, string nullText, CultureInfo culture, PdfOperationContext context)
+    internal static string Format(object? value, string? format, string nullText, CultureInfo culture, PdfOperationContext context)
     {
         if (value == null)
             return nullText;
@@ -160,7 +165,7 @@ public static class PdfTableData
         return result;
     }
 
-    private static void ValidateCulture(CultureInfo culture, PdfOperationContext context)
+    internal static void ValidateCulture(CultureInfo culture, PdfOperationContext context)
     {
         if (culture.GetType() != typeof(CultureInfo))
             throw PdfWriterCore.Error(context, "Table.CultureType", "Binding requires a captured standard CultureInfo instance.");

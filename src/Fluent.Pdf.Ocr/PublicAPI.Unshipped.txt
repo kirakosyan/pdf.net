@@ -1,0 +1,9 @@
+#nullable enable
+Fluent.Pdf.Ocr.IsolatedTesseractOcr
+Fluent.Pdf.Ocr.IsolatedTesseractOcr.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Ocr.IsolatedTesseractOcr.IsolatedTesseractOcr(Fluent.Pdf.Workers.NativeWorkerOptions! worker, string! exactEngineVersion) -> void
+Fluent.Pdf.Ocr.IsolatedTesseractOcr.IsolatedTesseractOcr(Fluent.Pdf.Workers.NativeWorkerOptions! worker, string! exactEngineVersion, Fluent.Pdf.PdfOcrModelCatalog? modelCatalog) -> void
+Fluent.Pdf.Ocr.IsolatedTesseractOcr.ModelCatalog.get -> Fluent.Pdf.PdfOcrModelCatalog?
+Fluent.Pdf.Ocr.IsolatedTesseractOcr.Recognize(Fluent.Pdf.PdfOcrRaster! raster, Fluent.Pdf.PdfOcrOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfOcrResult!
+const Fluent.Pdf.Ocr.IsolatedTesseractOcr.BridgeAbi = "fluent-pdf-ocr-1" -> string!
+const Fluent.Pdf.Ocr.IsolatedTesseractOcr.BridgeVersion = "1.0" -> string!

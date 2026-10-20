@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-027",
+  "sourceCommit": "30e8b910dd7815f286828f42ba522a3fb772927c",
+  "sourceTree": "2e126d7a0ff964243341e7dd5f6d50436753d365",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "newSourceCases": 14,
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1078,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "779faddf68d8b98bb1cddc9466b43c6f3ec5bf9df20182b9cecafd3e9bcbfcc2"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "fa59ea740c3bec5b4127c449915608473c185dad5c247d61eab4ab2e527ca75a"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "3fcecf8015d456f829d5b8c12e8656a815c6f8f788b44594ef870843f6c5e227"
+    }
+  ],
+  "apiComparisons": 27,
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Extraction/PdfTableExtraction.cs": "197b746ed3551d437efa572968f7edd7216cbc9bd096062f8cf8846cc9eb0613",
+    "src/Fluent.Pdf/Extraction/PdfTableExtractionContracts.cs": "3b5dfe8dce9b84ef951bd5fd5688faeaf2b2d45e62c13fa578916c7b67b0647d",
+    "src/Fluent.Pdf/Extraction/PdfTableExport.cs": "05a4a51c7c6f6714f4cd25f30711074348b04760e9b3f8a9931295bfdc66341c",
+    "src/Fluent.Pdf/Extraction/PdfResourceExtraction.cs": "20431f4edd67ed502d815ed309736697bae61214de3078fb93f3f67f9e895841",
+    "tests/Fluent.Pdf.Contract.Tests/TableExtractionTests.cs": "5456af3309232ad11f68356928867d7ad100eaceee2719a17934a300c8c635cb",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "bc19e0eab1e01d4614bea0101c1a912cbdc66e07078634be43fa517d76be7055",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "1004d661a4f0b560ec881865f69147914b327914ccbd388698c873d13795fa83"
+  },
+  "reports": {
+    "build": "f8c80f7bfc37ce07e12e0ccc5e80782d187c1be3d7a083427e325580515b7501",
+    "normal-build": "3411c091b7e3a79b7c37135f834828671e463113e6daa390a3e1a64c55451d78",
+    "targeted": "d0898592c19a11d60d42a08731cb702abc0df932983ee89b4e2d9db2adf0bd29",
+    "net10": "26b1463572f488ddb934eacdae3478ba0c80e70800a6e695571141a82dbbc92c",
+    "net8": "a65d909a7d7a859c87ab76da5655e3d7d898e40ecd1e4e6bcf926bf2f9ad4344",
+    "fallback": "68e453f279dc19360c04818666de385a231b09572a34cf75d2940710bf3220b8",
+    "api": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "release": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "observerReportSha256": "42691b4a52a718f331d394f3d5971c54ddc7f5c64f9855276fe81c12a74dd15b",
+  "independentReportSha256": "b88459c27244eb02dc336ab32153771a6d9b91f30642835b96e9e0d8e7361394",
+  "commands": [
+    "Locked four-framework solution build",
+    "Selected managed source net10 contracts; actual net8 and netstandard2.0 fallback table/resource/runtime contracts",
+    "27 API comparisons; negative packing/publication guards; specification validation",
+    "Seven original labeled fixtures; independent pypdf/MuPDF source observations and standard CSV/JSON parsing/cell provenance/coordinates/culture/continuation comparisons"
+  ],
+  "reviewCorrection": {
+    "change": "Explicit horizontal-forward/LTR cell text guard inside candidate membership; rotated/RTL cell rejection and unrelated rotated page-text regression",
+    "earlierLocalPassed": {
+      "net10Selected": 1075,
+      "net8Targeted": 22,
+      "fallbackTargeted": 22,
+      "newSourceCases": 11
+    },
+    "interruptedOwnedBuild": {
+      "logSha256": "fed2cd6e2ae2b8f6c3b39c747a47b8c35adf2ab3161e72cc9600f97f4f9ceb52",
+      "reason": "Intentionally canceled during compilation to move the new guard inside candidate-cell membership; no validation result is claimed for that interrupted run. Final verification restarts all required source checks."
+    }
+  },
+  "localNativeLimitation": "LandlockENOSYS prevents four local native-positive classes; mandatory source CI remains unfiltered",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete multiple/irregular/rotated/conditional/clip/owner, borderless-merge, automatic header and wrapped continuation profiles remain mandatory",
+    "Complete typed cultural/schema/date/boolean profiles and full labeled precision/recall/continuation corpora remain mandatory",
+    "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+  ],
+  "failedSourceCI": "docs/evidence/PR-118-CI-106-source.json"
+}

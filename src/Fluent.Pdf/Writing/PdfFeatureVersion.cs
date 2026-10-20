@@ -15,11 +15,18 @@ internal static class PdfFeatureVersion
         }
 
         string type = Name("Type"), subtype = Name("Subtype");
+        if (type == "EmbeddedFile" || entries.ContainsKey("EF")) floor = Math.Max(floor, 13);
+        if (entries.ContainsKey("EmbeddedFiles")) floor = Math.Max(floor, 14);
+        if (type == "Filespec" && entries.ContainsKey("Desc")) floor = Math.Max(floor, 16);
+        if (type == "Collection" || entries.ContainsKey("Collection") || type == "Filespec" && (entries.ContainsKey("UF") || entries.ContainsKey("CI"))) floor = Math.Max(floor, 17);
+        if (entries.ContainsKey("AF") || entries.ContainsKey("AFRelationship")) floor = Math.Max(floor, 20);
         if (subtype == "Image" && entries.ContainsKey("Mask")) floor = Math.Max(floor, 13);
         if (type == "Metadata") floor = Math.Max(floor, 14);
+        if(entries.ContainsKey("Trapped"))floor=Math.Max(floor,13);
         if (subtype == "Image" && entries.TryGetValue("BitsPerComponent", out var precision) && resolve(precision).Kind == PdfValueKind.Number && resolve(precision).TryGetInteger(out long bits) && bits == 16) floor = Math.Max(floor, 15);
         if (type == "ObjStm" || type == "XRef" || type == "OCG" || type == "OCMD")
-            floor = 15;
+            floor = Math.Max(floor, 15);
+        if (type == "OCMD" && entries.ContainsKey("VE")) floor = Math.Max(floor, 16);
         if(entries.ContainsKey("ShadingType")||entries.ContainsKey("OPM")||entries.TryGetValue("PatternType",out var patternType)&&patternType.Kind==PdfValueKind.Number&&patternType.NumberValue==2)floor=Math.Max(floor,13);
         if(entries.ContainsKey("ActualText"))floor=Math.Max(floor,14);
         if (entries.ContainsKey("CA") || entries.ContainsKey("ca") || entries.ContainsKey("BM") || entries.ContainsKey("SMask"))

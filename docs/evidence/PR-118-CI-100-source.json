@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-ci-not-production-qualification",
+  "runId": 39152967102,
+  "sourceCommit": "acb7f0c219d7745855523e542d26efeceb1c77e1",
+  "testedMergeCommit": "cf1d8d32a3f9fb50776eb8bf75e35be528bf31df",
+  "testedTree": "4cefa2f86e8320d33cc6831b93c2964b37e92394",
+  "exactMergeTreeVerified": true,
+  "platformJobs": 6,
+  "completedRuntimeLanes": 20,
+  "passed": 21280,
+  "failed": 0,
+  "skipped": 0,
+  "jobs": [
+    {
+      "jobId": 117750211722,
+      "logSha256": "92847952049fc23d79d5e4a8969acd9a81ebc53c872a44f7cbc6f24715c0a687",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        }
+      ]
+    },
+    {
+      "jobId": 117750211843,
+      "logSha256": "f71c5faa5227b564ecfe6636f2de725d05720712e139e4942f843c324f56fcfe",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        }
+      ]
+    },
+    {
+      "jobId": 117750211906,
+      "logSha256": "db05993be339734b1be7bf79f876c0cf2bca4c49722305019e3f83f0d57f6e7a",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        }
+      ]
+    },
+    {
+      "jobId": 117750211924,
+      "logSha256": "5550cd767d5146e7d476e2bf23ac8212a6fe503cb5ba6619a8133b47bf7552a9",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        }
+      ]
+    },
+    {
+      "jobId": 117750211985,
+      "logSha256": "32713fa790ef9ee61803e44e64b940875e889655b4c24d886c829847de347113",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        }
+      ]
+    },
+    {
+      "jobId": 117750211990,
+      "logSha256": "09f0895e69e9d106d88d37675c90d7edc855ba24755e64f182c860ffc05090cd",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        },
+        {
+          "failed": 0,
+          "passed": 1064,
+          "skipped": 0,
+          "total": 1064
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12146136806,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:711b1692686edc6782d27b4445700dddc0065c3fa687c05ad234c594dd1129dd",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146136806"
+    },
+    {
+      "id": 12146017260,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:71edc26e9e487b54ad63ef5c97900d531f8048ae881ebfc4626a591462bf2e54",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146017260"
+    },
+    {
+      "id": 12145784052,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:7149d414c772983145790166543759bb3106e72cce25dd96a5285afe9433cf23",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145784052"
+    },
+    {
+      "id": 12145759925,
+      "name": "source-contracts-osx-x64",
+      "digest": "sha256:1a7e370b0450526bc1e2319f882ed9fe6a09d64819a1a0711726fc187d5c6c28",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145759925"
+    },
+    {
+      "id": 12145508553,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:2e7ca1d7df9a54bd0fffcbb814432dc7d1290543d9519da78f7b92fe2095f66a",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145508553"
+    },
+    {
+      "id": 12145268979,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:5fdd8b0fd5cd5f5601afc4650adcbc77dc37c723c5d786c3b0265adca89c2587",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12145268979"
+    }
+  ],
+  "artifactRetention": "Complete decoded logs, run metadata and artifact URLs/digests retained; artifact ZIPs not retrieved locally.",
+  "limitations": [
+    "Source contracts and current Framework lanes do not qualify actual minimum Framework, deployable browser/native hosts or final packages",
+    "Earlier native sequential deadline failure remains retained in CI99; this run passes the unchanged64-decode/default-deadline workload; no unproven root-cause claim"
+  ],
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

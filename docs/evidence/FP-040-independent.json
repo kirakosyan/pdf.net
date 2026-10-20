@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-interoperability-observations-not-release-qualification",
+  "requirement": "FP-040",
+  "directBridgeChecks": {
+    "kind": "direct-native-ABI-probe-not-SDK-isolation-proof",
+    "engine": "153.0.7999.0",
+    "sourceVsFlattenChangedPixels": 0,
+    "regionVsFullChangedPixels": 0,
+    "annotationExcludedChangedPixels": 732,
+    "blankAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sampleSha256": "bae70da46a5152b2cbd89de574c80e5f01a17da15eccbb4d5f2655d4e6cca08f"
+  },
+  "independentComparison": {
+    "kind": "independent-renderer-observation-not-complete-fidelity-qualification",
+    "engine": "candidate PDFium 153.0.7999.0 AGG",
+    "independentRenderer": "Poppler 25.03.0",
+    "fixture": "original Unicode text/check/radio AcroForm filled by SDK #26 source",
+    "dimensions": [
+      400,
+      300,
+      3
+    ],
+    "maxChannelDelta": 241,
+    "meanAbsoluteChannelDelta": 0.28470833333333334,
+    "changedPixels": 419,
+    "changedPixelsAbove8": 375,
+    "totalPixels": 120000,
+    "nativePngSha256": "c5e34954c279bf5d7e78f41c93f1f934f7e56ece6733ddc9a7c7f0e1a500b59e",
+    "independentPngSha256": "f66f8c43f1e55396cf7c81a3f3deaaf48bbf99cf427ca6f1e3b2c73ed3d229e5",
+    "limitations": [
+      "Single fixture only; observed text/outline rendering differences are retained without a complete causal or full-corpus/color/conformance qualification conclusion.",
+      "Direct native ABI probe executed outside the SDK worker because local Landlock is unavailable; not native isolation proof."
+    ]
+  },
+  "productionQualified": false,
+  "packageSha256": null,
+  "packingAndPublicationBlocked": true,
+  "widgetVisibilityRegression": {
+    "purpose": "direct-ABI-regression-probe-not-SDK-isolation-or-production-qualification",
+    "bridgeSourceSha256": "5c303ea4394b7d49a7724cbcd5680a2f623d74b92a6e388030c40d033b5782de",
+    "engineVersion": "153.0.7999.0",
+    "engineSha256": "224f8ece41f7e35891f11c10073b7b7062d7a18e9ef870586162a85c46130f7d",
+    "checks": [
+      {
+        "flags": 0,
+        "screenPixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "printPixel": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "fixtureSha256": "438a162c04aa9faee8a4d9e46e945a978ba006db85a1f20d4c7f9f8ec8599559"
+      },
+      {
+        "flags": 4,
+        "screenPixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "printPixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "fixtureSha256": "8a66acad8766ccd76d27250e5bf83390887cb6713b4e28928da4bcd65f711574"
+      },
+      {
+        "flags": 36,
+        "screenPixel": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "printPixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "fixtureSha256": "1506262faba3cfcf66e7dc9fa42c43f850cfa11ab57147563aa4208690de2bfe"
+      },
+      {
+        "flags": 6,
+        "screenPixel": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "printPixel": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "fixtureSha256": "0e0f240e53949a0a2631b5eabea57a517f5f40fd2a5594eed6e96b96b445e78f"
+      },
+      {
+        "flags": 5,
+        "screenPixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "printPixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "fixtureSha256": "3cf8e1b4bcf6512965ebea4f2fbe46e5cd8ad64f7540a8e6b673ac588ebb5c7f"
+      }
+    ]
+  }
+}

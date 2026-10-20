@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-design-observations-not-production-qualification",
+  "requirement": "FP-044",
+  "sources": [
+    {
+      "id": "S44-CDP13",
+      "kind": "retained official browser DevTools protocol schema snapshot",
+      "sha256": "6264789eaa959f489c5edb2e5db337282ff0883278d5f5c424bf5a845ada5500",
+      "observations": [
+        "Version1.3 Target browser-context/target/session lifecycle",
+        "Fetch request interception and explicit fulfillment/failure",
+        "Native page lifecycle, isolated worlds and streamed print-to-PDF/IO"
+      ]
+    },
+    {
+      "id": "S44-PDF17",
+      "kind": "retained ISO32000-1:2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "observations": [
+        "Normal managed PDF import, object/stream identity and physical user-space points"
+      ]
+    },
+    {
+      "id": "S44-RUNTIME-PIN",
+      "kind": "retained actual version-only browser probe over private pipes before document input",
+      "sha256": "5dfcfc3e44bc1ccd4d037762aa564819d837c853228aa91bd777a6840d25300c",
+      "observations": [
+        "Actual Chrome154.0.8037.57, protocol1.3, source revision@73c14f6228d7cd537c855007e8f88678969cc0eb"
+      ]
+    }
+  ],
+  "decisions": [
+    "Check exact engine product/revision/protocol before sending document data",
+    "Create a fresh host and off-the-record browser context per job; default source scripts off",
+    "Never fetch unknown resources implicitly; strict losses latch and permissive losses remain observable",
+    "Use native lifecycle plus isolated synchronous font inspection, including when source scripts are disabled",
+    "Stream bounded PDF chunks and import with the ordinary managed reader under the same context"
+  ],
+  "limitations": [
+    "Protocol/schema and small actual fixtures do not qualify complete HTML/script/font/print semantics",
+    "Qualified deployable OS host, every actual supported browser lane, complete asset/license/security/fuzz/endurance and final packages remain mandatory"
+  ]
+}

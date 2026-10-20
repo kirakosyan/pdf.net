@@ -1,0 +1,875 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-output-observations-not-production-qualification",
+  "requirement": "FP-047",
+  "actualBrowser": {
+    "purpose": "trusted-original-print-source-observations-not-production-qualification",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "paperTolerancePoints": 1,
+    "headerFooterFont": "explicit generic monospace; host font identity requires separate qualification",
+    "observations": [
+      {
+        "mode": "breaks",
+        "pageCount": 3,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "B\n2/3\n2/3",
+            "extractionDiagnostic": null
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B\n3/3\n3/3",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": true,
+        "outputSha256": "ea2d96fe393b711a559c7adf4ddc47953b586fb6508d02398ec0d103b464728d"
+      },
+      {
+        "mode": "css-size",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 240,
+            "height": 360,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "810f192f50aa367362d70faad0a5eee29a272cdfe5493d29ba7ac943cb06f81a"
+      },
+      {
+        "mode": "fit",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "4e2fe2ed81c4a6ef6fbab6275b0f3ab7ca028f583df7eb721ace138c61339587"
+      },
+      {
+        "mode": "landscape",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 400.07999,
+            "height": 300,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "81cb98b121466608871be6acbc1648f4213d8eb212e2448b77de2fd5f5d5b0ec"
+      },
+      {
+        "mode": "scale-one",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "ceac5ee3e235b0e3b13967a83792ba5ef08b1b5773be024dc6317eca430df55d"
+      },
+      {
+        "mode": "scale-half",
+        "pageCount": 1,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": "A B",
+            "extractionDiagnostic": null
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": false,
+        "outputSha256": "c7dca010d988f91de3a39f51498f403a6d60499801757a8f56f8d09a5f682f50"
+      },
+      {
+        "mode": "table",
+        "pageCount": 6,
+        "pages": [
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          },
+          {
+            "width": 300,
+            "height": 400.07999,
+            "text": null,
+            "extractionDiagnostic": "Extraction.Type3MatrixProfile"
+          }
+        ],
+        "taggedRequestedAndStructurallyValidated": true,
+        "outputSha256": "670158c90b00fc9ef3fa98e2881368ced2bdb0cbfd5df2f5ba018bad3f44e2d7"
+      }
+    ],
+    "productionQualified": false
+  },
+  "assetPins": {
+    "browserExecutableSha256": "4dc9f9f9b20e9bd95bf201f43d2d643f48938f36a70ddcb6fce3dd611a178180",
+    "nodeExecutableSha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+    "fontFileSha256": "300a09abebb8c2b2bbee36c2d55a8b9a57f94c1a61eae2644cb99c8451b3ce35",
+    "browserVersion": "154.0.8037.57",
+    "browserRevision": "@73c14f6228d7cd537c855007e8f88678969cc0eb"
+  },
+  "independentReportSha256": "ec8726f319b97aa75770316de63bb0a8bb6fdad279f2f011d04d8741e27463d2",
+  "independentScriptSha256": "76a40729a13cbaa8f2b9cfe2b3054912ebf80501e55030c694d31f364dc1a8b4",
+  "independentObservations": {
+    "purpose": "independent-original-print-profile-observations-not-standards-or-production-qualification",
+    "readers": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6",
+      "Poppler": "pdftotext version 25.03.0"
+    },
+    "expectationBasis": "Hand-authored HTML: three explicit sections; 90 rows of18pt plus18pt repeated header within328pt =>17 rows per full page and5 final rows. Native counters equal final3 pages. Fixed SVG75x30pt and half scale.",
+    "paperTolerancePoints": 1,
+    "paperToleranceReason": "Observed browser physical paper rounding/quantization; no page-box correction. This exception concerns paper extent only.",
+    "vectorTolerancePoints": 0.05,
+    "observations": [
+      {
+        "mode": "breaks",
+        "pages": 3,
+        "sourceOrderTokens": [
+          [
+            "A",
+            "1/3",
+            "1/3"
+          ],
+          [
+            "B",
+            "2/3",
+            "2/3"
+          ],
+          [
+            "A",
+            "B",
+            "3/3",
+            "3/3"
+          ]
+        ],
+        "popplerSpatialLayoutTokens": [
+          [
+            "1/3",
+            "A",
+            "1/3"
+          ],
+          [
+            "2/3",
+            "B",
+            "2/3"
+          ],
+          [
+            "3/3",
+            "A",
+            "B",
+            "3/3"
+          ]
+        ],
+        "popplerDefaultTokens": [
+          [
+            "1/3",
+            "A",
+            "1/3"
+          ],
+          [
+            "2/3",
+            "B",
+            "2/3"
+          ],
+          [
+            "3/3",
+            "A",
+            "B",
+            "3/3"
+          ]
+        ],
+        "popplerDefaultOrderMatchesSource": false,
+        "actualBoxes": [
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ],
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ],
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ]
+        ],
+        "redRectangles": [],
+        "tagged": true,
+        "structureElements": 10,
+        "pageMcids": 3,
+        "roles": {
+          "/Document": 1,
+          "/NonStruct": 6,
+          "/H1": 1,
+          "/P": 2
+        },
+        "sha256": "ea2d96fe393b711a559c7adf4ddc47953b586fb6508d02398ec0d103b464728d"
+      },
+      {
+        "mode": "table",
+        "pages": 6,
+        "sourceOrderTokens": [
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "popplerSpatialLayoutTokens": [
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "popplerDefaultTokens": [
+          [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "A"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B",
+            "B",
+            "A"
+          ]
+        ],
+        "popplerDefaultOrderMatchesSource": false,
+        "actualBoxes": [
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ],
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ],
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ],
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ],
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ],
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ]
+        ],
+        "redRectangles": [],
+        "tagged": true,
+        "structureElements": 275,
+        "pageMcids": 96,
+        "roles": {
+          "/Document": 1,
+          "/Table": 1,
+          "/TR": 91,
+          "/TH": 1,
+          "/NonStruct": 91,
+          "/TD": 90
+        },
+        "sha256": "670158c90b00fc9ef3fa98e2881368ced2bdb0cbfd5df2f5ba018bad3f44e2d7"
+      },
+      {
+        "mode": "css-size",
+        "pages": 1,
+        "sourceOrderTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerSpatialLayoutTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultOrderMatchesSource": true,
+        "actualBoxes": [
+          [
+            0.0,
+            0.0,
+            240.0,
+            360.0
+          ]
+        ],
+        "redRectangles": [],
+        "tagged": false,
+        "structureElements": 0,
+        "pageMcids": 0,
+        "roles": {},
+        "sha256": "810f192f50aa367362d70faad0a5eee29a272cdfe5493d29ba7ac943cb06f81a"
+      },
+      {
+        "mode": "fit",
+        "pages": 1,
+        "sourceOrderTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerSpatialLayoutTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultOrderMatchesSource": true,
+        "actualBoxes": [
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ]
+        ],
+        "redRectangles": [],
+        "tagged": false,
+        "structureElements": 0,
+        "pageMcids": 0,
+        "roles": {},
+        "sha256": "4e2fe2ed81c4a6ef6fbab6275b0f3ab7ca028f583df7eb721ace138c61339587"
+      },
+      {
+        "mode": "landscape",
+        "pages": 1,
+        "sourceOrderTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerSpatialLayoutTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultOrderMatchesSource": true,
+        "actualBoxes": [
+          [
+            0.0,
+            0.0,
+            400.0799865722656,
+            300.0
+          ]
+        ],
+        "redRectangles": [
+          [
+            0.0,
+            45.0,
+            75.0,
+            75.0
+          ]
+        ],
+        "tagged": false,
+        "structureElements": 0,
+        "pageMcids": 0,
+        "roles": {},
+        "sha256": "81cb98b121466608871be6acbc1648f4213d8eb212e2448b77de2fd5f5d5b0ec"
+      },
+      {
+        "mode": "scale-one",
+        "pages": 1,
+        "sourceOrderTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerSpatialLayoutTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultOrderMatchesSource": true,
+        "actualBoxes": [
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ]
+        ],
+        "redRectangles": [
+          [
+            0.0,
+            45.0,
+            75.0,
+            75.0
+          ]
+        ],
+        "tagged": false,
+        "structureElements": 0,
+        "pageMcids": 0,
+        "roles": {},
+        "sha256": "ceac5ee3e235b0e3b13967a83792ba5ef08b1b5773be024dc6317eca430df55d"
+      },
+      {
+        "mode": "scale-half",
+        "pages": 1,
+        "sourceOrderTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerSpatialLayoutTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultTokens": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "popplerDefaultOrderMatchesSource": true,
+        "actualBoxes": [
+          [
+            0.0,
+            0.0,
+            300.0,
+            400.0799865722656
+          ]
+        ],
+        "redRectangles": [
+          [
+            0.0,
+            22.5,
+            37.5,
+            37.5
+          ]
+        ],
+        "tagged": false,
+        "structureElements": 0,
+        "pageMcids": 0,
+        "roles": {},
+        "sha256": "c7dca010d988f91de3a39f51498f403a6d60499801757a8f56f8d09a5f682f50"
+      }
+    ],
+    "productionQualified": false,
+    "limitations": [
+      "Original trusted fixtures only; no PDF/UA claim or human accessibility review",
+      "Browser Type3 font matrices reject in managed text extraction; independently parsed text remains exact",
+      "Poppler default column grouping places the centered table header after left-aligned body rows; explicit spatial-layout mode preserves visual order. Default reading-order interoperability is unqualified",
+      "Complete print corpus, host/font/runtime/package, fuzz/concurrency/endurance and full structure profiles remain mandatory"
+    ]
+  },
+  "mandatoryPending": [
+    "Complete print CSS/long-report/clipping and arbitrary HTML template/resource profiles remain mandatory",
+    "Full Form/object-reference/role/attribute/namespace structure profiles and independent PDF/UA plus semantic/human review remain mandatory",
+    "Deterministic qualified template fonts, complete actual RID/minimum/current/fallback runtimes and exact final packages remain mandatory",
+    "Full host isolation, resource/fuzz/visual/concurrency/endurance/performance gates remain mandatory",
+    "Browser Type3 font-matrix extraction and Poppler default table reading-order interoperability remain unqualified"
+  ],
+  "productionQualified": false
+}

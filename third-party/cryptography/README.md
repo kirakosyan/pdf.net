@@ -1,0 +1,5 @@
+# Optional CMS dependencies
+
+System.Formats.Asn110.0.13 supplies published DER parsing/writing. BouncyCastle.Cryptography2.7.0 supplies managed PKCS12/PBKDF2 derivation, HMAC and credential-cipher primitives. System.Security.Cryptography.Cng5.0.0 supplies guarded Windows RSA operations on older targets. The MIT licenses, notices, exact package hashes and resolved dependency inventory are retained in components.json. Complete release SBOM, vulnerability/license review and actual-package/runtime qualification remain mandatory.
+
+The detached signature provider uses original bounded orchestration for DER SignedData, SHA256/RSA-PKCS1 and explicit borrowed certificate/RSA handles. The original DER PKCS12 parser verifies MAC, bounds KDF/bag/key work, selects exactly one matching identity and imports RSA parameters into owned memory-only handles. Public certificate DER may use native parsing; private PFX data never enters the native certificate loader or a key store. No private key, runtime binary or package binary is distributed here. Full signing/trust/revocation/PAdES and hostile key-import/runtime qualification remain mandatory.

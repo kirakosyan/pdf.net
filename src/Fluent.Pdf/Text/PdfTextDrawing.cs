@@ -48,7 +48,7 @@ public sealed class PdfTextDrawing
         return result;
     }
 
-    internal static PdfTextDrawing CreateCore(PdfShapedText text, double x, double y, double size, double lineHeight, string prefix, bool subset, PdfOperationContext context)
+    internal static PdfTextDrawing CreateCore(PdfShapedText text, double x, double y, double size, double lineHeight, string prefix, bool subset, PdfOperationContext context, IReadOnlyDictionary<PdfFont, PdfFontResource>? sharedFonts = null)
     {
         context.Consume(PdfResourceKind.ExpandedBytes, text.Unicode.Text.Length * 4L + 256);
         var actual = new byte[text.Unicode.Text.Length * 2 + 2];
@@ -78,27 +78,14 @@ public sealed class PdfTextDrawing
                 penY = text.Options.Vertical ? y : y - paragraph * size * lineHeight;
             }
 
-            var clusters = run.Glyphs.Select(g => g.Cluster).Distinct().OrderBy(v => v).ToArray();
-            var ends = new Dictionary<int, int>();
-            for (int i = 0; i < clusters.Length; i++)
-                ends.Add(clusters[i], i + 1 < clusters.Length ? clusters[i + 1] : run.Request.Start + run.Request.Length);
-            var seen = new HashSet<int>();
-            var mappings = new List<PdfGlyphMapping>();
-            foreach (var glyph in run.Glyphs)
-            {
-                context.Checkpoint();
-                int length = ends[glyph.Cluster] - glyph.Cluster;
-                if (length > 512)
-                    throw PdfWriterCore.Error(context, "Text.ClusterEncodingLimit", "A logical glyph cluster exceeds the font resource mapping limit.");
-                mappings.Add(new PdfGlyphMapping(glyph.GlyphIndex, seen.Add(glyph.Cluster) ? run.Request.Text.Substring(glyph.Cluster, length) : string.Empty));
-            }
+            var mappings = Mappings(run, context);
 
             // Positions already include vertical origins; horizontal CID encoding avoids applying a second origin displacement.
-            var resource = PdfFontResource.CreateCore(run.Request.Font, mappings, subset, false, context);
+            var resource = sharedFonts == null ? PdfFontResource.CreateCore(run.Request.Font, mappings, subset, false, context) : sharedFonts[run.Request.Font];
             string name = prefix + fonts.Count.ToString(CultureInfo.InvariantCulture);
             fonts.Add(name, resource);
             operations.Add(new PdfContentOperation(PdfOperator.Font, PdfValue.Name(name), Number(size)));
-            var bytes = resource.EncodedText.StringBytes;
+            var bytes = sharedFonts == null ? resource.EncodedText.StringBytes : resource.EncodeMappings(mappings, context).StringBytes;
             int width = bytes.Count / run.Glyphs.Count;
             double scale = size / run.Request.Font.Info.Metrics.UnitsPerEm;
             for (int i = 0; i < run.Glyphs.Count; i++)
@@ -119,6 +106,47 @@ public sealed class PdfTextDrawing
         operations.Add(new PdfContentOperation(PdfOperator.EndMarkedContent));
         operations.Add(new PdfContentOperation(PdfOperator.RestoreState));
         return new PdfTextDrawing(PdfContentProgram.CreateCore(operations, PdfContentKind.Page, context), fonts);
+    }
+
+    internal static IReadOnlyDictionary<PdfFont, PdfFontResource> SharedFonts(IEnumerable<PdfShapedText> texts, PdfOperationContext context)
+    {
+        var mappings = new Dictionary<PdfFont, List<PdfGlyphMapping>>();
+        foreach (var text in texts)
+            foreach (var run in text.Runs)
+            {
+                context.Checkpoint();
+                if (!mappings.TryGetValue(run.Request.Font, out var items))
+                {
+                    context.Consume(PdfResourceKind.ExpandedBytes, 128);
+                    mappings.Add(run.Request.Font, items = new());
+                }
+                items.AddRange(Mappings(run, context));
+            }
+        var resources = new Dictionary<PdfFont, PdfFontResource>();
+        foreach (var pair in mappings)
+            resources.Add(pair.Key, PdfFontResource.CreateCore(pair.Key, pair.Value, true, false, context));
+        return resources;
+    }
+
+    private static List<PdfGlyphMapping> Mappings(PdfShapedRun run, PdfOperationContext context)
+    {
+        context.Consume(PdfResourceKind.ExpandedBytes, run.Glyphs.Count * 128L + 256);
+        var clusters = run.Glyphs.Select(g => g.Cluster).Distinct().OrderBy(v => v).ToArray();
+        var ends = new Dictionary<int, int>();
+        for (int i = 0; i < clusters.Length; i++)
+            ends.Add(clusters[i], i + 1 < clusters.Length ? clusters[i + 1] : run.Request.Start + run.Request.Length);
+        var seen = new HashSet<int>();
+        var mappings = new List<PdfGlyphMapping>();
+        foreach (var glyph in run.Glyphs)
+        {
+            context.Checkpoint();
+            int length = ends[glyph.Cluster] - glyph.Cluster;
+            if (length > 512)
+                throw PdfWriterCore.Error(context, "Text.ClusterEncodingLimit", "A logical glyph cluster exceeds the font resource mapping limit.");
+            mappings.Add(new PdfGlyphMapping(glyph.GlyphIndex, seen.Add(glyph.Cluster) ? run.Request.Text.Substring(glyph.Cluster, length) : string.Empty));
+        }
+
+        return mappings;
     }
 
     private static PdfValue Number(double value) => PdfValues.Real(value);

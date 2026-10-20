@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-112",
+  "sourceCommit": "545bfdd506be4f0d0f1f51c03a68c81e2c99ff6c",
+  "sourceTree": "a50e03e2c80980daf707923b4bf2883f3bc3ce9a",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1166,
+      "failed": 0,
+      "skipped": 0,
+      "newMergeCases": 16,
+      "trxSha256": "813af356368e1260b55756e75819ad0364e2b134bf46e81a4fd6aa71151b3c23"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "newMergeCases": 16,
+      "trxSha256": "ab7b3531bba5cb80b37637e6335307d1109135b44dcd534b9423537b81b1f3c9"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "newMergeCases": 16,
+      "trxSha256": "24aa28e43a549cb29fbdc2075b3e7daedecfc2438d7f9696d47bf76bde1f5927"
+    }
+  ],
+  "newSourceCases": 16,
+  "sdkLibraries": 10,
+  "apiComparisons": 30,
+  "apiComparisonReportSha256": "395b525eb00beff26365fb2a6b575183b2faec4d846cca067bfb3f85db920ad2",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Merge/PdfMergeData.cs": "f40c8dd3dfcbd5c4a4c3a6c02b0f1e5b7f5b5c9976138db84c80eb24f774ebad",
+    "src/Fluent.Pdf/Merge/PdfMergeEvaluation.cs": "e41a8c5a19e50a3891403d7c43169420d9d909668bd179857e425e129b848104",
+    "src/Fluent.Pdf/Merge/PdfMergeTemplate.cs": "d929ae0f8485205d22d3b80ecd53ce17bfdd9795600cdc8f89f594350fc0dd84",
+    "src/Fluent.Pdf/Merge/PdfMailMerge.cs": "d3a66f773edfd54e2291824fd613b9ff754dc60791588051708b4eaee9cf63e3",
+    "src/Fluent.Pdf.Word/PdfDocxMailMerge.cs": "6835198f4286780105c39b47b59e9f503ebe4ccf2c941480ba58294748ec054b",
+    "src/Fluent.Pdf.Word/WordOpenXml.cs": "9d4762eed8626788fa5f879e9e650f951905d68c6ed5b300a48ed7013acf6781",
+    "src/Fluent.Pdf/Generation/PdfGenerationContext.cs": "f8bd113c9e944dd607e104c084b74a4bb687477069899457c61d127ed137f0be",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "ae1f3a6cff3f02408441705a976a1232b9963262b8728270bc0a5d76e4471027",
+    "src/Fluent.Pdf.Word/PublicAPI.Unshipped.txt": "8fd86d847e20c285e2c0255bcec1850abd818043ae062dafbb8a7b05d7f1f0d4",
+    "tests/Fluent.Pdf.Contract.Tests/MailMergeTests.cs": "f391ba48c851eac124b7a9261f640d1e35ac7cc9f85799cf579b6e03bcf29804",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "1920a296c00bdc5d061f037f2c44627fc48a4992475c765d22c6bab706f49ae6",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "7c414bad8648c3920d5790e67c3bb1714494c8e170aceabc05a83d00e654b2f9"
+  },
+  "reports": {
+    "merge-final-build.log": "f2c629df75691ab671c074fdcc52bbe7c2858eefcb19487a312145e67f681ce3",
+    "merge-final-net10.log": "1df12b15c9ab4bbb31b09fa6d6192879f9afd46c262b090e92148667e981a73b",
+    "merge-final-net8.log": "6dace7f2430c5363dd16047fe470b6724a5247ac7a90358c27f6cae3524be47f",
+    "merge-fallback-build.log": "e3fcd93ddf76742722501728ec57fc34f78f513fd9ecad568085f50388791ecd",
+    "merge-final-fallback.log": "f7fc63ffe7feb314d2e7892188fc973a07a6a065a0114114e480162e7697b618",
+    "merge-normal-build.log": "587553c9cfade52e7a3e5840b9f846220c4164f0017b8de11eb76285ae50ec4c",
+    "merge-final-api.log": "973a15dc75d811cbc7e27c170e3e2af8fc0601ae956a4756461ca0d639d120f6",
+    "merge-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "merge-observer-build2.log": "0c7ebcfd01618eb2ef827d9e3e5d2967d824adb8e613ea49111027a48645e984",
+    "merge-observer-run2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "independentReportSha256": "36ee221871cd673c6012202eaf1b67e35de1c582f4d845ede9908051f1416e88",
+  "scope": [
+    "Closed immutable explicit native PDF paragraph/table/repeat/boolean/image data and template models with no reflection/script/evaluation of inserted text",
+    "Original passive bounded DOCX split-run/content-control binding and package/image preservation; actual optional pinned Word semantics for filled-PDF export",
+    "Shared root context across parse/evaluate/format/layout/model/provider/write; finite global visits/expanded records and existing root budgets; explicit missing policies and culture; cancellation/open streams/atomic files"
+  ],
+  "fixtureAudit": [
+    "Initial11pass1failure from actual Word strict loss for retained unrelated package part. DOCX preserves it; permissive PDF consumer now explicitly asserts the upstream omission diagnostic, without changing strict SDK behavior.",
+    "Original template fixture now declares its retained binary part content type before independent package/schema checks.",
+    "Forbidden XML scalar characters have typed diagnostics before output; inserted marker-like/markup data is never reevaluated.",
+    "All16new source cases pass on actual modern8/10 and explicit portableSDKasset; C#/VB public consumers execute."
+  ],
+  "dependency": "Uses previously adopted pinned wordnet1.1.0 through optional adapter; no new SDK dependencies or native/model/font downloads.",
+  "localNativeLimitation": "Four native-positive classes cannot run on this local Landlock-unsupported host; full CI remains unfiltered and final-headCIrequired.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete DOCX/native field/control/story/identity/layout/linguistic/fidelity profiles remain mandatory",
+    "Complete hostile-input, independent corpus, fuzz, concurrency, endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
+    "Exact final SDK packages and all production gates remain mandatory"
+  ],
+  "sourceCI": "docs/evidence/PR-118-CI-110-source.json"
+}

@@ -45,6 +45,12 @@ internal static class PdfFlowLinePainter
 
             var run = entry.Run;
             var textStyle = entry.Style!;
+            if (line.IsClipped && textStyle.SourceUri != null)
+                throw PdfInputConversion.Error(context, "LinkClip", "A clipped linked run requires an explicit visible-link geometry profile.");
+            if (textStyle.SourceRole != null)
+                operations.Add(new(PdfOperator.BeginMarkedContent, PdfValue.Name(textStyle.SourceRole)));
+            if (textStyle.SourceUri != null)
+                operations.Add(new(PdfOperator.BeginMarkedContentProperties, PdfValue.Name("Link"), PdfGraphicsNumbers.Dict(("FPLinkURI", PdfDeferredNavigation.Text(textStyle.SourceUri, context)))));
             var clusters = run.Glyphs.Select(g => g.Cluster).Distinct().OrderBy(c => c).ToArray();
             context.Consume(PdfResourceKind.ExpandedBytes, clusters.Length * 64L + run.Glyphs.Count * 384L + 512);
             var ends = new Dictionary<int, int>();
@@ -94,6 +100,11 @@ internal static class PdfFlowLinePainter
                         if (line.Text[c] == ' ')
                             x += expansion;
             }
+
+            if (textStyle.SourceUri != null)
+                operations.Add(new(PdfOperator.EndMarkedContent));
+            if (textStyle.SourceRole != null)
+                operations.Add(new(PdfOperator.EndMarkedContent));
         }
 
         operations.Add(new(PdfOperator.EndText));

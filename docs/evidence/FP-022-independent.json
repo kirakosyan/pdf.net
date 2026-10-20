@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-profile-not-release-qualification",
+  "requirement": "FP-022",
+  "pypdf": "6.10.0",
+  "renderer": "pdftoppm version 25.03.0",
+  "passedAssertions": [
+    "strict independent Unicode/custom Info read",
+    "explicit date offsets and caller-selected ID bytes",
+    "independent XML custom namespace and structured value retention",
+    "standard RDF title representation",
+    "Info/ID/XMP absence after removal",
+    "unchanged page pixels before/after metadata edit/removal"
+  ],
+  "artifacts": {
+    "blank.png": "0e4009b09b3aa1a1f28bf0187bd5853c5e53fa7192c0042d48dcf75d72b23523",
+    "metadata.pdf": "7699b74b61b1263088a429a4ac3311a29266871a39b63dc4265a6deed0f1c5a5",
+    "Program.cs": "e683f9aea5b967c30b08a7ef13d91b735eb102f324e929be365260cb89b4cdc6",
+    "removed.pdf": "bce785858cd0aca984c4f0a495c511b1df8e9141849bb9e76f481ceead945576",
+    "verify.py": "020b1e60843d2df77955234f6c1100f49a07875abe8b4967261fe22eb7be823b",
+    "removed.png": "0e4009b09b3aa1a1f28bf0187bd5853c5e53fa7192c0042d48dcf75d72b23523",
+    "metadata.png": "0e4009b09b3aa1a1f28bf0187bd5853c5e53fa7192c0042d48dcf75d72b23523",
+    "blank.pdf": "3f1da488b151b767c18412df5401ba283630d3b8aaf79fdfd9ededc081daab55"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "limitations": [
+    "Small one-page synthetic fixture; not full XMP schema validation or complete metadata/privacy corpus",
+    "Local Linux x64 source assembly; no package or minimum-runtime qualification"
+  ],
+  "sourceCommit": "a391768ee0c4669f2308f22162a6772d277e9659",
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Metadata/PdfMetadata.cs": "101fc6bc21d12e90c3680ade2faccc41cf6100e3092dbdaf1ff4c7d88561ba37",
+    "src/Fluent.Pdf/Metadata/PdfMetadataEditor.cs": "ec5b381aa12a8ad916ddf7120617dab07be81691e45012d3984a599b4e43a021",
+    "src/Fluent.Pdf/Metadata/PdfMetadataXml.cs": "8baa265fdcd45e4d1e312b9f343e9afdb47b85a094cd645cf135a2095704c206",
+    "src/Fluent.Pdf/Metadata/PdfMetadataDates.cs": "b55c236f86075381c4c379bd049bd5bce4018910ef31d1d6224a713b925c84c8",
+    "src/Fluent.Pdf/Metadata/PdfMetadataValues.cs": "80581bbd73446c32d5e30ceeb7f81570d0152f10acf12aa89f792f97dcb36e86",
+    "src/Fluent.Pdf/Writing/PdfWriterCore.cs": "d372c5f8270429181140d1321870b627f84d036d4f4bec26fe31393d2ba5cdbd",
+    "src/Fluent.Pdf/Writing/PdfFeatureVersion.cs": "33b83efed2faf8bea55974c530e007fc9b39a661bc4dd5c872c699a4ce4daa0c",
+    "tests/Fluent.Pdf.Contract.Tests/MetadataTests.cs": "b6a361b9234d720f21f79ecc4791c709ddc0819753f8eb84da44cbbea7b14365"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-022",
+  "sourceCommit": "a391768ee0c4669f2308f22162a6772d277e9659",
+  "sourceTree": "d1640b1f62605ea88a8b8f9f8ebb7c6e94e923d3",
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "managedTests": {
+    "passed": 652,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests"
+  },
+  "metadataTests": 19,
+  "apiComparisons": 15,
+  "packingAndPublicationBlocked": true,
+  "packageSha256": null,
+  "productionQualified": false,
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Metadata/PdfMetadata.cs": "101fc6bc21d12e90c3680ade2faccc41cf6100e3092dbdaf1ff4c7d88561ba37",
+    "src/Fluent.Pdf/Metadata/PdfMetadataEditor.cs": "ec5b381aa12a8ad916ddf7120617dab07be81691e45012d3984a599b4e43a021",
+    "src/Fluent.Pdf/Metadata/PdfMetadataXml.cs": "8baa265fdcd45e4d1e312b9f343e9afdb47b85a094cd645cf135a2095704c206",
+    "src/Fluent.Pdf/Metadata/PdfMetadataDates.cs": "b55c236f86075381c4c379bd049bd5bce4018910ef31d1d6224a713b925c84c8",
+    "src/Fluent.Pdf/Metadata/PdfMetadataValues.cs": "80581bbd73446c32d5e30ceeb7f81570d0152f10acf12aa89f792f97dcb36e86",
+    "src/Fluent.Pdf/Writing/PdfWriterCore.cs": "d372c5f8270429181140d1321870b627f84d036d4f4bec26fe31393d2ba5cdbd",
+    "src/Fluent.Pdf/Writing/PdfFeatureVersion.cs": "33b83efed2faf8bea55974c530e007fc9b39a661bc4dd5c872c699a4ce4daa0c",
+    "tests/Fluent.Pdf.Contract.Tests/MetadataTests.cs": "b6a361b9234d720f21f79ecc4791c709ddc0819753f8eb84da44cbbea7b14365"
+  },
+  "reportSha256": {
+    "metadata-complete-build.log": "0d4541bada46c0166c6684684d861405f3ae12fb34fec28ece963b1b231ddb8b",
+    "metadata-complete-tests.log": "1af03d23ea8fe504af3f7542a46ddbaed292bdbe709a0df4eb6c2b9ac4326b2a",
+    "metadata-api-check.log": "5073dfc2e5e4dd12d29239fc06b2c6a93ae4886614c13328541e6a55ce67e8a3",
+    "metadata-final-spec.log": "eb994e1134cfef143fdce0905b71334a7f7f66b0bb8127a6a2d6470ada40631f",
+    "metadata-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "limitations": [
+    "Native-positive local tests cannot run because this host lacks required Landlock support; source CI remains unfiltered.",
+    "Actual minimum Framework runtimes, exact final packages and all production gates remain mandatory.",
+    "API compatibility and release-block checks preceded final internal XML/date edge-case fixes; public API and publication gates did not change."
+  ],
+  "sourceCi": {
+    "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39125085399",
+    "testedMergeCommit": "5b452133ba2f08aea8ee7815534e60a10e9e85d3",
+    "conclusion": "success",
+    "testsPerLane": 698,
+    "executionLanes": 20,
+    "passed": 13960,
+    "failed": 0,
+    "skipped": 0,
+    "hosts": [
+      "win-x64",
+      "win-arm64",
+      "linux-x64",
+      "linux-arm64",
+      "osx-x64",
+      "osx-arm64"
+    ],
+    "runtimeLanes": "net8/net10/netstandard fallback on six hosts and current Framework x86/x64 on Windows x64",
+    "artifacts": [
+      {
+        "name": "source-contracts-win-x64",
+        "id": 12136361168,
+        "digest": "sha256:36f77e6e993afaf08126d143db7db8759f5753f9ded3bc0662ab2a131ad1fe63",
+        "sizeBytes": 908903,
+        "expiresAt": "2027-01-16T11:54:01Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125085399/artifacts/12136361168"
+      },
+      {
+        "name": "source-contracts-osx-arm64",
+        "id": 12136360595,
+        "digest": "sha256:3dfa5296cb159dedc9c54cc90480fb37ef795a7477931f1d9593326bb6131f50",
+        "sizeBytes": 556054,
+        "expiresAt": "2027-01-16T11:54:01Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125085399/artifacts/12136360595"
+      },
+      {
+        "name": "source-contracts-linux-x64",
+        "id": 12136350087,
+        "digest": "sha256:1b576c40190304e3325bee7d959c9f5eb89acb211b02700a859c529340655ead",
+        "sizeBytes": 555916,
+        "expiresAt": "2027-01-16T11:54:01Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125085399/artifacts/12136350087"
+      },
+      {
+        "name": "source-contracts-osx-x64",
+        "id": 12135768265,
+        "digest": "sha256:4a7c9d2fe8b22ce52b3f5c05e7b060e98f537a715d79d97ad9e73098f4b8746e",
+        "sizeBytes": 557797,
+        "expiresAt": "2027-01-16T11:54:01Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125085399/artifacts/12135768265"
+      },
+      {
+        "name": "source-contracts-linux-arm64",
+        "id": 12135668036,
+        "digest": "sha256:c2d8aec29f9c3e759cab4704363e4a88e812325a793d7cdef2483edac5e80978",
+        "sizeBytes": 556172,
+        "expiresAt": "2027-01-16T11:54:01Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125085399/artifacts/12135668036"
+      },
+      {
+        "name": "source-contracts-win-arm64",
+        "id": 12135618447,
+        "digest": "sha256:e22c2f841bbc98afb7d50391c0e88d44c075cb1247246ec06f3c15be052a66c9",
+        "sizeBytes": 555912,
+        "expiresAt": "2027-01-16T11:54:01Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125085399/artifacts/12135618447"
+      }
+    ],
+    "retainedLogs": {
+      "pr118-metadata-ci-117668399535.log": "2572e757841558ded6ec1fd5e9280e83f95a517f2171c50c7924b2200ad0e7e0",
+      "pr118-metadata-ci-117668399516.log": "56bfa19e4179751aeeefa838c9190634532b47e54d0afc20a414747321c5f40c",
+      "pr118-metadata-ci-117668399567.log": "93051d71c69f41fad9c68245f5a7346c504e9b46e488e10250778fbdb139fb61",
+      "pr118-metadata-ci-117668399521.log": "27a522b8c05736031b00d9d6f5ebc4e07328a8eda47125eda975c8c3afeb0788",
+      "pr118-metadata-ci-117668399542.log": "badf3f27ca35e514e5109f529adec6980b7f7b42a405063371b49cced5828570",
+      "pr118-metadata-ci-117668399369.log": "9064b2316806b1a4a5987a7b9283760b3e0c7b662444aad849016c2bc659b834"
+    }
+  }
+}

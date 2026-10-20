@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "purpose": "design-and-normative-output-observations-not-production-qualification",
+  "requirement": "FP-099",
+  "sources": [
+    {
+      "id": "S99-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "8.3-8.5 explicit page geometry and content isolation",
+        "9.4 text positions and9.10Unicode extraction",
+        "14.6marked content,14.8.2.2Artifacts and14.9.4ActualText"
+      ]
+    }
+  ],
+  "decisions": [
+    "Keep event views immutable and all user callbacks before successful return/atomic publication",
+    "Specify source-record/template/layout/final-page/write-prepared order rather than announce an already committed destination",
+    "Use one mandatory context through all SDK-owned binding/layout/model/provider/write work and attach it during model mutation",
+    "Reject caught reentrant/cross-thread mutations through permanent diagnostics; expire contexts and require closed workers/scopes before publication",
+    "Keep explicit culture/field/font/provider/resource choices and reference-identity cycle checks separate from arbitrary callback behavior",
+    "Treat opaque synchronous/uncooperative extensions as an unqualified host-isolation profile; do not claim hard termination for caller code"
+  ],
+  "productionQualified": false
+}

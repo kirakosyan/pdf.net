@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-original-raster-redaction-recovery-source-observations",
+  "requirement": "FP-030",
+  "reportSha256": "af168c6db38d2475f072430539f65fe28d1e9322db07f40e0aa9e3673cec7bcc",
+  "observations": {
+    "purpose": "original-raster-full-rewrite-independent-recovery-observations",
+    "labelsSha256": "a6218695b8a60d3438324a4a06ad60ce42144c8034c5b0629ce18c37f9f7e1a9",
+    "checkerSha256": "a6449ddd808e2dc206c8c8e11775702ba14349fde813214c78611b1a8ed654c8",
+    "sdkObservationsSha256": "f3e9ff7048e37e1c1fc8216bb8704b06cc1fadcbc7f6f4fbaefcafb5a86fa75a",
+    "cases": [
+      {
+        "id": "basic",
+        "sourceSha256": "b77b02b7d5286f5a6c0d2adcc099b31e906d99fcdb256dc7692a3b793baad987",
+        "outputSha256": "2ac3d7adcaeed7b0e3a563a7dee05f908950ef9389ce7238a16efa9fde0a21c8",
+        "auditSha256": "f96b27b03a51af8fec588ac916354b04fecb303fc30dfe1fd52f116ee0a33754",
+        "decodedImageAndIndependentRasterExact": true,
+        "originalMaskPixelsDiscarded": 55704,
+        "outsideMaskExact": true,
+        "rawObjectDecodedStreamTextPriorRevisionRecovery": "No predeclared removed payload recovered",
+        "independentTextReaders": [
+          "pypdf6.10",
+          "MuPDF1.26.6",
+          "Poppler25.03"
+        ],
+        "ocrExit": 0,
+        "ocrText": "PUBLIC49",
+        "freshRevisionCount": 1
+      },
+      {
+        "id": "rotated-cropped",
+        "sourceSha256": "6a9b434fa157e46e9e7cdb6e467aefa0041f5c62994ba9ad26e91c8482fe9e41",
+        "outputSha256": "977856e193f4c063d93cce0cd7b68996e09b2e54319d411f06888245ea9a7103",
+        "auditSha256": "1b8a63a5fb2ef613a865163b676a84528ab43e7077f60d37733ea5affb258ac9",
+        "decodedImageAndIndependentRasterExact": true,
+        "originalMaskPixelsDiscarded": 55704,
+        "outsideMaskExact": true,
+        "rawObjectDecodedStreamTextPriorRevisionRecovery": "No predeclared removed payload recovered",
+        "independentTextReaders": [
+          "pypdf6.10",
+          "MuPDF1.26.6",
+          "Poppler25.03"
+        ],
+        "ocrExit": 0,
+        "ocrText": "",
+        "freshRevisionCount": 1
+      },
+      {
+        "id": "history",
+        "sourceSha256": "88a2e0ec938241cebd18a8890b5625c6d9b4e3fbd896a1c80c2866d35eca4626",
+        "outputSha256": "2ac3d7adcaeed7b0e3a563a7dee05f908950ef9389ce7238a16efa9fde0a21c8",
+        "auditSha256": "4c0bfe63b537b84c9acbcb50c94f846e06412b1119a635dd9dad424a53927d92",
+        "decodedImageAndIndependentRasterExact": true,
+        "originalMaskPixelsDiscarded": 55704,
+        "outsideMaskExact": true,
+        "rawObjectDecodedStreamTextPriorRevisionRecovery": "No predeclared removed payload recovered",
+        "independentTextReaders": [
+          "pypdf6.10",
+          "MuPDF1.26.6",
+          "Poppler25.03"
+        ],
+        "ocrExit": 0,
+        "ocrText": "PUBLIC49",
+        "freshRevisionCount": 1
+      }
+    ],
+    "sourceToolCapture": "Explicit MuPDF raster capture bound by exact original PDF SHA; fixture provider is not a qualified SDK native renderer",
+    "toolModifications": "No checker/labels/threshold changes after execution",
+    "productionQualified": false
+  },
+  "labelsSha256": "a6218695b8a60d3438324a4a06ad60ce42144c8034c5b0629ce18c37f9f7e1a9",
+  "observerSha256": "2c9dd085b01503c8805f4dff1f82d74bc0d484cb53ac42e1dd2b2d2063dce276",
+  "productionQualified": false
+}

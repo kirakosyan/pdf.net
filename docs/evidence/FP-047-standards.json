@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-and-protocol-design-observations-not-production-qualification",
+  "requirement": "FP-047",
+  "sources": [
+    {
+      "id": "S47-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "14.7.2 structure hierarchy, root/element dictionaries",
+        "14.7.4.2 page MCIDs and content associations",
+        "14.7.4.4 structural parent tree and next-key rules"
+      ]
+    },
+    {
+      "id": "S47-CDP13",
+      "documentSha256": "6264789eaa959f489c5edb2e5db337282ff0883278d5f5c424bf5a845ada5500",
+      "observations": [
+        "Exact Page.printToPDF point/inch/paper/scale/margin/template/totalPages and experimental generateTaggedPDF declarations; actual behavior bound to exact browser version/revision"
+      ]
+    }
+  ],
+  "decisions": [
+    "Retain original public constructors and add immutable print snapshot rather than optional overload ambiguity",
+    "Validate resource-free print fragments before host creation; source content omitted from diagnostic text",
+    "Request tagging explicitly and validate page/element/parent-tree associations under the original context before returning a document",
+    "Keep structural association checks separate from complete PDF/UA semantics and human accessibility qualification",
+    "Retain actual physical page boxes, native final-page counters and independent reader differences"
+  ],
+  "limitations": [
+    "Complete print CSS/long-report/clipping and arbitrary HTML template/resource profiles remain mandatory",
+    "Full Form/object-reference/role/attribute/namespace structure profiles and independent PDF/UA plus semantic/human review remain mandatory",
+    "Deterministic qualified template fonts, complete actual RID/minimum/current/fallback runtimes and exact final packages remain mandatory",
+    "Full host isolation, resource/fuzz/visual/concurrency/endurance/performance gates remain mandatory",
+    "Browser Type3 font-matrix extraction and Poppler default table reading-order interoperability remain unqualified"
+  ],
+  "rawSourcesRetainedOutsideRepository": true,
+  "productionQualified": false
+}

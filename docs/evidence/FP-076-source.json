@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-076",
+  "sourceCommit": "58741165aa5a3825b29fb81358b1144dc490b96a",
+  "sourceTree": "f9b4bdede835f1faea76db19a7ab1af7fa3b3e2d",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1239,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "3e792bb94f02cac7d75f8c8035147beb07d77952b12b4b65ec60d88c3146d4de"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 115,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "bbfc3e394cf0fe588259f54707b736ad175fa2201abd94646a6e444f2295c0ec"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 115,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "b33c2988396136f9511385ff94c9a8065cf87b38c8b7cdb6c564c80c03f31cb1"
+    }
+  ],
+  "newManagedSearchableCases": 21,
+  "sdkLibraries": 11,
+  "apiComparisons": 33,
+  "apiComparisonReportSha256": "8b8e5be1ccbd219c507869d42cf0beacc445265a653b575445b522f6685aa659",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Ocr/PdfOcrPageFrame.cs": "b594040e331d2c441fe1c6303217974a69fa6432ebd87f01f65ffce190e53c9b",
+    "src/Fluent.Pdf/Ocr/PdfOcrSearchable.cs": "052a288e703561efa90d628dd63ec2749181db5956c2429a3d8ab1c4b5c05b73",
+    "src/Fluent.Pdf/Ocr/PdfOcrOutput.cs": "5d722fbcbc321f4d78e02f81039242dc8e7dbf0dc85a158d58605e8bff55996b",
+    "src/Fluent.Pdf/Ocr/PdfOcrContracts.cs": "3b535efc34c351283e3a66b07437e6ef1b11600a388c0313198c60863fe07ce6",
+    "src/Fluent.Pdf/Rendering/PdfRendering.cs": "c0fb9999d81b7f2b74b47ae6dc5d1b1d83414a8442cc6890f136d2ebf611f17f",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "aefb44361cd7761eface1a72e01771dc89e7e991b32f509acda4cd6d3842c18f",
+    "tests/Fluent.Pdf.Contract.Tests/OcrSearchableTests.cs": "3fcd92282784e553d0fc9634ab67839c3acb143b1f50eb15843316909b3b9934",
+    "tests/Fluent.Pdf.Contract.Tests/NativeOcrContractTests.cs": "df29769efc0e6dcc3f66e28a10154fc2b6d594e89a621dbc172676efd170162c",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "43ee6049d4f86eea09f1ef683168779f5d99f1a4a03d15e72cd4ab455ea219b4",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "506dd07330e5d3c6b251ede0e2d9df4d7460536a30d5e2c39d2a2370a9367b9c"
+  },
+  "reports": {
+    "searchable-final-net8.log": "5916f8b4628e11675fabc6c78807fb9b955170883045e1542a5f64a38e50761b",
+    "searchable-final-api.log": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c",
+    "searchable-final-fallback.log": "7ee68e8c5871bb6a421b86b183464775d7e5d77f4bb830de51e74dc9ada3e111",
+    "searchable-final-net10.log": "5ecdfa03e581a53e5400332d6e5d1daf5b5fbc7cc48789639cbe4e9c6814f00a",
+    "searchable-final-build.log": "5dfe0e2824acbbd9f66602b13e839d2d9395f5b7fc09e1e877160b5f923beaea",
+    "searchable-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "searchable-final-spec.log": "bf6dcba38de4463b48232cff7f3b329a7a0b4dc4eda801ef118a0854f1dd22f9",
+    "searchable-fallback-build.log": "8f19855ad8db84f5ca5f6521ed40fb03604c774b37eb844fb38f44311f1cd637",
+    "searchable-normal-build.log": "7ec7c911e8e3adfe4e282387bb27fdfe3f2174fab36e1fe78e8edd1b7ff752a1"
+  },
+  "independentReportSha256": "af7cfc28a427d214f528e2d49631b2214040ed9d561a751fbf39ccb153b765a5",
+  "sourceFindings": [
+    "Initial graphics-isolation drafts incorrectly tried to validate single q/Q streams as complete programs; corrected before delivery to explicitly bounded raw scope streams around the existing balanced program. The complete assembled program remains validated.",
+    "New46native model tests requested default100k-character/word ceilings exceeding their64KiBfixture envelope; corrected test inputs to explicit1000characters/100words, retaining SDK output-limit checks and exact binding assertions.",
+    "Initial independent coordinate conversion combined MuPDF physical text coordinates with its native-unit rotation translation; exact local tool diff/hashes/failure retained, expected labels and tolerance unchanged."
+  ],
+  "localNativeExclusions": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeTextTests",
+    "NativeRenderingTests",
+    "NativeOcrContractTests"
+  ],
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-114-source.json",
+    "snapshotStatus": "completed",
+    "completedRuntimeLanes": 18,
+    "knownFailedCases": 1,
+    "scope": "Linuxx64first.NET8 original prepared-UA2 validator report was rejected as malformed XML; underlying raw host output unavailable locally and cause unconfirmed."
+  },
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete explicit tagged-content associations, real OCR/script/scan/native/RID and visual/semantic fidelity profiles remain mandatory.",
+    "Independent full corpora, security, concurrency/endurance/performance and actual minimum/runtime/fallback qualification remain mandatory.",
+    "Exact final SDK packages and all production gates remain mandatory."
+  ]
+}

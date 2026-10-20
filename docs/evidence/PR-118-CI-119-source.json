@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "purpose": "historical-source-ci-not-production-qualification",
+  "runId": 39211569712,
+  "sourceCommit": "0a42fe8635dd3c815ea45531c2ec1dc241c884c3",
+  "testedMergeCommit": "777e1ca0881c3979dd1de322dd796312a38d0091",
+  "testedTree": "80318bc8ad9a9e92ddfe4abedf97d6d450bcd093",
+  "exactMergeTreeVerified": true,
+  "conclusion": "failure",
+  "platformJobs": 6,
+  "completedRuntimeLanes": 6,
+  "expectedRuntimeLanes": 20,
+  "unexecutedRuntimeLanes": 14,
+  "passed": 8250,
+  "failed": 36,
+  "skipped": 0,
+  "jobs": [
+    {
+      "jobId": 117925922045,
+      "name": "Contracts (osx-arm64)",
+      "conclusion": "failure",
+      "logSha256": "a54623980b94bcfa295f19391bdd01e02cd1003609dd6b45d7e1ad02e45f552c",
+      "completedLaneTotals": [
+        {
+          "failed": 6,
+          "passed": 1375,
+          "skipped": 0,
+          "total": 1381
+        }
+      ]
+    },
+    {
+      "jobId": 117925922312,
+      "name": "Contracts (linux-arm64)",
+      "conclusion": "failure",
+      "logSha256": "37a0cbdea4aa0bbf430384686646a9146e55f3d7ee797476b267fb9f41c499fe",
+      "completedLaneTotals": [
+        {
+          "failed": 6,
+          "passed": 1375,
+          "skipped": 0,
+          "total": 1381
+        }
+      ]
+    },
+    {
+      "jobId": 117925922320,
+      "name": "Contracts (linux-x64)",
+      "conclusion": "failure",
+      "logSha256": "ccdeb0d4e52fa133c43d128989e2dd34e7edecb122026c51b4cc14fba1a48ab9",
+      "completedLaneTotals": [
+        {
+          "failed": 6,
+          "passed": 1375,
+          "skipped": 0,
+          "total": 1381
+        }
+      ]
+    },
+    {
+      "jobId": 117925922343,
+      "name": "Contracts (osx-x64)",
+      "conclusion": "failure",
+      "logSha256": "ab13bb7d6efd01a3d7d42b76548ae2d2939f2bf5247e73205aa3ae2beb2a3daa",
+      "completedLaneTotals": [
+        {
+          "failed": 6,
+          "passed": 1375,
+          "skipped": 0,
+          "total": 1381
+        }
+      ]
+    },
+    {
+      "jobId": 117925922360,
+      "name": "Contracts (win-arm64)",
+      "conclusion": "failure",
+      "logSha256": "f04fbc9741821a07d9619b2146ec83370fab873b5e44cdb848c7390547356d22",
+      "completedLaneTotals": [
+        {
+          "failed": 6,
+          "passed": 1375,
+          "skipped": 0,
+          "total": 1381
+        }
+      ]
+    },
+    {
+      "jobId": 117925923080,
+      "name": "Contracts (win-x64)",
+      "conclusion": "failure",
+      "logSha256": "0bce84edd3d1e4c922782a30ec507fad6d69e797f64057a99f751adfdeac059d",
+      "completedLaneTotals": [
+        {
+          "failed": 6,
+          "passed": 1375,
+          "skipped": 0,
+          "total": 1381
+        }
+      ]
+    }
+  ],
+  "metadataSha256": "79b9fd9f26da0454ff84fe02aa77a733389cee007a295e36e9699d7752ce5765",
+  "artifacts": [
+    {
+      "id": 12168092388,
+      "name": "source-contracts-win-arm64",
+      "digestFromGitHub": "sha256:6694fa9c5c257201de2db52d29874272a8123e27bcadc43cb537f90db82f54ea",
+      "sizeBytes": 770693,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39211569712/artifacts/12168092388"
+    },
+    {
+      "id": 12167854714,
+      "name": "source-contracts-osx-x64",
+      "digestFromGitHub": "sha256:9c53bc0dad85832aab378d00bc8ac574100dc6a898cc585320d9b43a6d8a29b6",
+      "sizeBytes": 785561,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39211569712/artifacts/12167854714"
+    },
+    {
+      "id": 12167729236,
+      "name": "source-contracts-win-x64",
+      "digestFromGitHub": "sha256:bfc6d5a4d28d9d1954bcce672410b9db2afe76d9d473ad3f328b48d8dc9bdec6",
+      "sizeBytes": 770866,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39211569712/artifacts/12167729236"
+    },
+    {
+      "id": 12167678694,
+      "name": "source-contracts-linux-arm64",
+      "digestFromGitHub": "sha256:3fff6c0f13709d37f6c83dacdb549da898f332e53a46674facd36044a164469e",
+      "sizeBytes": 768876,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39211569712/artifacts/12167678694"
+    },
+    {
+      "id": 12167609398,
+      "name": "source-contracts-linux-x64",
+      "digestFromGitHub": "sha256:f52e54d598ff04b64dc9fbddf60a4b28bc0780c47bee43fa7c3714362fbd07cb",
+      "sizeBytes": 768901,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39211569712/artifacts/12167609398"
+    },
+    {
+      "id": 12167254025,
+      "name": "source-contracts-osx-arm64",
+      "digestFromGitHub": "sha256:bb50d11d5ee6f3393bf6bb7035d99ebad7c6deea8268a76b08a4a61cbeffcbc1",
+      "sizeBytes": 781296,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39211569712/artifacts/12167254025"
+    }
+  ],
+  "retention": "All six complete decoded job logs, exact tested merge/tree/parents and workflow/artifact metadata are retained outside Git. ZIP payload retrieval remains blocked by the local proxy; no archive payload is claimed.",
+  "knownFailure": "Each host first NET8lane failed the same six JPX decode cases. The newly introduced observer consumed one logical object after CodecHeaders.Inspect had consumed the exact native tile/component object inventory. Remaining lanes were not executed.",
+  "followup": "Remove the observer logical-object charge, retain512charged managed infrastructure bytes and the fixed128KiBstack. Add an exact-inventory policy test. The original codec limits, fixtures and sample assertions are unchanged. Six targeted exact-algorithm bridge cases pass locally; new exact-head unfilteredCI remains mandatory.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "nugetPublishingBlocked": true,
+  "limitations": [
+    "Targeted managed analysis does not qualify isolated native SDK execution.",
+    "Actual minimum runtimes, final packages and every full production gate remain mandatory."
+  ]
+}

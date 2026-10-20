@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-output-observations-not-production-qualification",
+  "requirement": "FP-018",
+  "actualOriginalObservations": {
+    "purpose": "trusted-original-stamping-source-observations-not-production-qualification",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "fontProvider": {
+      "Id": "managed.fonts",
+      "Version": "1.0.0",
+      "Capabilities": [
+        6
+      ]
+    },
+    "observations": [
+      {
+        "mode": "foreground",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "e3e4b1f83f6afbd54a47aad91bb8ef113e4f7dc82329cb76b5709f1184086fd4",
+        "removedSha256": "2a3952147495d8ad0d9becfb10966e9ca2cbaef21640712da768bf8479cac6c8",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "background",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "ed163b17581823d9f39e67b808cf133cbbf073645f1e6e9d27134b23a4f5e546",
+        "removedSha256": "85867fcb0e37d5b587011a61325ca7b9ed1f77fd49cce4c4e0ebff8b4c70e4f0",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "group-alpha",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "2795e37e020ffa079cf4c9aec8c151af2913178d61e96186cb9dbfc4acfc421e",
+        "removedSha256": "d8b25097ac87e2755ef94b173aa112e4dc05f5eb141ac84935bb08d87fc1a5f7",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "repeated",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "b8d27398c5de611fb0b65559ee989a9d33c914b5365c585a76f57a175444dc1e",
+        "removedSha256": "d8c79ed825815fa57c268c7f87606ff1fb8e369adee7427e9d67c28245c7f5f9",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "rotated",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "117a678743cf2f2c11dd023e0aede54c81eb55acfc3abe7beac0bc85e06b12a8",
+        "removedSha256": "30eb70a19cb6b30b2d643e9de937e9ecc09e1cce5bc923cef9e2a93f3c1025fd",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "clipped",
+        "kind": "Drawing",
+        "pageCount": 1,
+        "outputSha256": "bd0632a2259177eb714212507608970bb0afbc55ebcf58126434da97d5aa85e9",
+        "removedSha256": "e08a5b0e895ae9bb9c02b611fd3269ce14fc5e9092d32fe93435bb24aea45a73",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "image",
+        "kind": "Image",
+        "pageCount": 1,
+        "outputSha256": "5280afca38784c5fb1939eeb0553d42a2342aa3ce6eaa9cf9ad8b1e3748cf398",
+        "removedSha256": "7edf3634db8860ed07acb2dfe9dccda2e3f42c9cc54bc5ea408d1c583c5bafe9",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "text",
+        "kind": "Text",
+        "pageCount": 1,
+        "outputSha256": "b0d2f74d57328c19969f0c0886dcf08c245b942a9f053d635671b2d06a4cc075",
+        "removedSha256": "f53853f2b828412e71bc5616055316ef86fee417c4c5ef0930e9b93d9f220f3a",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "page",
+        "kind": "PdfPage",
+        "pageCount": 1,
+        "outputSha256": "de51564e6983b1009ee05961a290a79d88e90e6215e1321d9ec4a03a36b5f63b",
+        "removedSha256": "a4ccb6bed3916bff33aaafd767a59c5028df03beb3896ef5882f876756954768",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      },
+      {
+        "mode": "html",
+        "kind": "Html",
+        "pageCount": 1,
+        "outputSha256": "2d204b075e05b1eea9b75db1a5a7d2f45d70f721f7577f8a1a0f909fb4f1a763",
+        "removedSha256": "e719ddf31da48fff5a7816255830e8ef79aaab04bde470c7be634b21f05c3590",
+        "originalStampCount": 1,
+        "removedStampCount": 0
+      }
+    ],
+    "taggedOutputs": [
+      "stamp-tagged-decoration.pdf",
+      "stamp-tagged-updated.pdf"
+    ],
+    "stampBlending": "isolated DeviceRGB group; explicit outer opacity multiplies captured inner alpha",
+    "productionQualified": false
+  },
+  "assetPins": {
+    "browserExecutableSha256": "4dc9f9f9b20e9bd95bf201f43d2d643f48938f36a70ddcb6fce3dd611a178180",
+    "nodeExecutableSha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+    "fontFileSha256": "300a09abebb8c2b2bbee36c2d55a8b9a57f94c1a61eae2644cb99c8451b3ce35",
+    "browserVersion": "154.0.8037.57",
+    "browserRevision": "@73c14f6228d7cd537c855007e8f88678969cc0eb"
+  },
+  "independentReportSha256": "b532e350a5dae8e023d82f849748efeaff1ea7ac36aa39bfa1c5a4a941cce605",
+  "independentScriptSha256": "50d8d66ba4f24bc8bb7410cd598eb609e63c4f099db70ece425f9891be830750",
+  "independentObservations": {
+    "purpose": "independent-original-stamp-output-observations-not-production-qualification",
+    "readers": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6",
+      "Poppler": "pdftotext version 25.03.0"
+    },
+    "basis": "Original200x200pt white page with blue40..160pt rectangle; explicit hand-authored stamp frames, alpha multiplication and EXIF6 two-pixel colors; analytic goldens are independent of SDK output.",
+    "rasterResolutionDpi": 72,
+    "analyticInteriorChannelTolerance": 2,
+    "fixedBoundaryMask": "One pixel on either side of declared rectangle boundaries only, to exclude antialiasing; source observation/calibration, not a production visual qualification.",
+    "vectorTolerancePoints": 0.05,
+    "standalonePageGroupInputSha256": "c33eaedd8dffdfb83d53f4c06b6ac2ca6de66fe50dc24f3238b48af809f9dd06",
+    "standalonePageGroupCapture": "Original standalone page I=false/CS=DeviceRGB becomes a valid isolated Form with the declared CS preserved",
+    "observations": [
+      {
+        "mode": "foreground",
+        "sha256": "e3e4b1f83f6afbd54a47aad91bb8ef113e4f7dc82329cb76b5709f1184086fd4",
+        "removedSha256": "2a3952147495d8ad0d9becfb10966e9ca2cbaef21640712da768bf8479cac6c8",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": {
+          "MuPDF": 2,
+          "Poppler": 1
+        },
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "background",
+        "sha256": "ed163b17581823d9f39e67b808cf133cbbf073645f1e6e9d27134b23a4f5e546",
+        "removedSha256": "85867fcb0e37d5b587011a61325ca7b9ed1f77fd49cce4c4e0ebff8b4c70e4f0",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": {
+          "MuPDF": 1,
+          "Poppler": 1
+        },
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "group-alpha",
+        "sha256": "2795e37e020ffa079cf4c9aec8c151af2913178d61e96186cb9dbfc4acfc421e",
+        "removedSha256": "d8b25097ac87e2755ef94b173aa112e4dc05f5eb141ac84935bb08d87fc1a5f7",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": {
+          "MuPDF": 2,
+          "Poppler": 0
+        },
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "repeated",
+        "sha256": "b8d27398c5de611fb0b65559ee989a9d33c914b5365c585a76f57a175444dc1e",
+        "removedSha256": "d8c79ed825815fa57c268c7f87606ff1fb8e369adee7427e9d67c28245c7f5f9",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": {
+          "MuPDF": 0,
+          "Poppler": 0
+        },
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "rotated",
+        "sha256": "117a678743cf2f2c11dd023e0aede54c81eb55acfc3abe7beac0bc85e06b12a8",
+        "removedSha256": "30eb70a19cb6b30b2d643e9de937e9ecc09e1cce5bc923cef9e2a93f3c1025fd",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": {
+          "MuPDF": 0,
+          "Poppler": 0
+        },
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "clipped",
+        "sha256": "bd0632a2259177eb714212507608970bb0afbc55ebcf58126434da97d5aa85e9",
+        "removedSha256": "e08a5b0e895ae9bb9c02b611fd3269ce14fc5e9092d32fe93435bb24aea45a73",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": {
+          "MuPDF": 0,
+          "Poppler": 0
+        },
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "image",
+        "sha256": "5280afca38784c5fb1939eeb0553d42a2342aa3ce6eaa9cf9ad8b1e3748cf398",
+        "removedSha256": "7edf3634db8860ed07acb2dfe9dccda2e3f42c9cc54bc5ea408d1c583c5bafe9",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": {
+          "MuPDF": 0,
+          "Poppler": 0
+        },
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "text",
+        "sha256": "b0d2f74d57328c19969f0c0886dcf08c245b942a9f053d635671b2d06a4cc075",
+        "removedSha256": "f53853f2b828412e71bc5616055316ef86fee417c4c5ef0930e9b93d9f220f3a",
+        "exactText": [
+          "AB"
+        ],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": false,
+        "analyticInteriorMaximumChannelError": null,
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "page",
+        "sha256": "de51564e6983b1009ee05961a290a79d88e90e6215e1321d9ec4a03a36b5f63b",
+        "removedSha256": "a4ccb6bed3916bff33aaafd767a59c5028df03beb3896ef5882f876756954768",
+        "exactText": [],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB",
+          "/DeviceRGB"
+        ],
+        "artifact": true,
+        "analyticInteriorMaximumChannelError": null,
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      },
+      {
+        "mode": "html",
+        "sha256": "2d204b075e05b1eea9b75db1a5a7d2f45d70f721f7577f8a1a0f909fb4f1a763",
+        "removedSha256": "e719ddf31da48fff5a7816255830e8ef79aaab04bde470c7be634b21f05c3590",
+        "exactText": [
+          "A",
+          "B"
+        ],
+        "ownedInvocations": 1,
+        "ownedScopes": 2,
+        "isolatedFormGroupColorSpaces": [
+          "/DeviceRGB"
+        ],
+        "artifact": false,
+        "analyticInteriorMaximumChannelError": null,
+        "removedRasterExactlyEqualsOriginalOnBothRenderers": true
+      }
+    ],
+    "tagged": [
+      {
+        "name": "stamp-tagged-decoration.pdf",
+        "sha256": "ac48f3b05977efbce6dd39f284e6ab59c77877c109375031b77846d14b5bb16d",
+        "structure": {
+          "elements": 3,
+          "pageMcids": 1
+        }
+      },
+      {
+        "name": "stamp-tagged-updated.pdf",
+        "sha256": "305132e1640441c4e38f300cdbe315b90fba76657d7ecc0af65ef1a1dfd7724c",
+        "structure": {
+          "elements": 3,
+          "pageMcids": 1
+        }
+      }
+    ],
+    "productionQualified": false,
+    "limitations": [
+      "Trusted small original corpus only",
+      "DeviceRGB group profile only; complete calibrated color/visual/semantic/standard corpus remains mandatory",
+      "Full actual runtimes/RIDs/minimum/fallback/final packages, host/security/resources/concurrency/endurance/performance remain mandatory",
+      "Visible stamp removal does not erase historical or unreachable definitions and is not redaction"
+    ]
+  },
+  "mandatoryPending": [
+    "Complete owner-dependent tag/annotation/optional-content imports and semantic stamp structure authoring remain mandatory",
+    "Complete blending-space/color/font/HTML/content corpus and qualified cleanup/performance/endurance profiles remain mandatory",
+    "All actual required RIDs/minimum/current/fallback runtimes, exact final packages and full security/fuzz/resource/visual/concurrency/endurance/performance gates remain mandatory",
+    "Visible removal retains historical/unreachable definitions and is not secure redaction"
+  ],
+  "productionQualified": false,
+  "stateAliasRegression": {
+    "purpose": "independent-original-state-alias-removal-regression-not-production-qualification",
+    "basis": "Original0.5 page CTM is inside the owned isolation pair; a later unrelated invocation of the same resource is outside it. Removal must preserve the unrelated invocation at its original20..100point frame.",
+    "MuPDF": "1.26.6",
+    "pypdf": "6.10.0",
+    "observations": [
+      {
+        "sha256": "51587c9d0abc48d81dc75ed3a4478500572cfae4905985dac23777cf9b52b0b0",
+        "redRectangles": [
+          [
+            20.0,
+            20.0,
+            100.0,
+            100.0
+          ],
+          [
+            20.0,
+            20.0,
+            100.0,
+            100.0
+          ]
+        ]
+      },
+      {
+        "sha256": "aa77879b5df6f5a708e2dffed69572470787635b4e6ec9295d7a578171f38c37",
+        "redRectangles": [
+          [
+            20.0,
+            20.0,
+            100.0,
+            100.0
+          ]
+        ]
+      }
+    ],
+    "productionQualified": false
+  },
+  "stateAliasRegressionSha256": "05217afb7bad3ad6f1c9b69bc44c785c2aa07f92e70917c39f898f25e73588fe",
+  "stateAliasObserverSourceSha256": "697e50b09fbaac4640113e23e7891bcbf0580ed13c5439d6a7085ed5e5819325"
+}

@@ -253,7 +253,23 @@ static int mac_sandbox(const char *root) {
 #endif
 
 #ifndef _WIN32
-static void fatal_signal(int number) { _exit(128+number); }
+static void fatal_signal(int number) {
+#ifdef __APPLE__
+    /* Only async-signal-safe writes: retain errno without allocating or invoking Mach APIs. */
+    int saved_errno=errno; char message[96]; size_t at=0,i; unsigned values[2];
+    const char prefix[]="worker fatal signal="; const char separator[]=" errno=";
+    for(i=0;i<sizeof(prefix)-1;i++)message[at++]=prefix[i];
+    values[0]=(unsigned)number;values[1]=(unsigned)(saved_errno<0?0:saved_errno);
+    for(i=0;i<2;i++) {
+        char digits[16];size_t count=0;unsigned value=values[i];
+        do {digits[count++]=(char)('0'+value%10);value/=10;} while(value&&count<sizeof(digits));
+        while(count)message[at++]=digits[--count];
+        if(i==0){size_t j;for(j=0;j<sizeof(separator)-1;j++)message[at++]=separator[j];}
+    }
+    message[at++]='\n';(void)write(STDERR_FILENO,message,at);
+#endif
+    _exit(128+number);
+}
 static int install_fault_boundary(void) {
     stack_t stack; struct sigaction action; int signals[]={SIGSEGV,SIGBUS,SIGILL,SIGFPE,SIGABRT}; unsigned i;
     memset(&stack,0,sizeof(stack)); stack.ss_sp=malloc(65536); stack.ss_size=65536;
@@ -434,7 +450,7 @@ static void mac_memory_diagnostics(const char *phase,uint64_t memory,uint64_t st
     basic_ok=task_info(mach_task_self(),MACH_TASK_BASIC_INFO,(task_info_t)&basic,&basic_count)==KERN_SUCCESS;
     vm_ok=task_info(mach_task_self(),TASK_VM_INFO,(task_info_t)&vm,&vm_count)==KERN_SUCCESS;
     usage_ok=getrusage(RUSAGE_SELF,&usage)==0;data_ok=getrlimit(RLIMIT_DATA,&data)==0;
-    fprintf(stderr,"worker memory phase=%s errno=%d limit=%llu startup-rusage-peak=%llu final-rusage-peak=%llu current-rss=%llu mach-peak=%llu vm-peak=%llu current-vm=%llu data-limit=%llu\n",
+    fprintf(stderr,"worker memory phase=%s errno=%d limit=%llu startup-rusage-peak=%llu final-rusage-peak=%llu current-rss=%llu mach-peak=%llu task-vm-resident-peak=%llu current-vm=%llu data-limit=%llu\n",
         phase,failure_errno,(unsigned long long)memory,(unsigned long long)startup_peak,
         (unsigned long long)(usage_ok?usage.ru_maxrss:0),(unsigned long long)(basic_ok?basic.resident_size:0),
         (unsigned long long)(basic_ok?basic.resident_size_max:0),(unsigned long long)(vm_ok?vm.resident_size_peak:0),
@@ -495,6 +511,15 @@ static int worker_main(int argc, char **argv) {
         if(length<0 || (size_t)length>=sizeof(candidate) || !realpath(candidate,library_path)) return respond(FP_DEPENDENCY,NULL,0);
     }
     if(!unix_limits(p[0],memory,milliseconds,parent_id,(int)threaded)) return respond(FP_SANDBOX,NULL,0);
+#ifdef __APPLE__
+    if(threaded) {
+        mac_memory_diagnostics("before-library-load",memory,startup_rusage_peak,0);
+        fprintf(stderr,"worker GC heap=%s range=%s region=%s\n",
+            getenv("DOTNET_GCHeapHardLimit")?getenv("DOTNET_GCHeapHardLimit"):"unset",
+            getenv("DOTNET_GCRegionRange")?getenv("DOTNET_GCRegionRange"):"unset",
+            getenv("DOTNET_GCRegionSize")?getenv("DOTNET_GCRegionSize"):"unset");
+    }
+#endif
     library=dlopen(library_path,RTLD_LOCAL|RTLD_NOW);
     if(!library) {
         const char *detail=dlerror(); size_t length=0;
@@ -507,8 +532,14 @@ static int worker_main(int argc, char **argv) {
     *(void **)(&execute_alloc_fn)=dlsym(library,"fluent_pdf_bridge_execute_alloc_v1");
 #endif
     if(!abi_fn||!version_fn||!execute_fn) return respond(FP_EXPORT_MISSING,NULL,0);
+#ifdef __APPLE__
+    if(threaded)mac_memory_diagnostics("before-abi-initialization",memory,startup_rusage_peak,0);
+#endif
     if(!same_identity(abi_fn(),p[2])) return respond(FP_ABI,NULL,0);
     if(!same_identity(version_fn(),p[3])) return respond(FP_VERSION,NULL,0);
+#ifdef __APPLE__
+    if(threaded)mac_memory_diagnostics("after-abi-initialization",memory,startup_rusage_peak,0);
+#endif
     if(fread(size_bytes,1,4,stdin)!=4) return respond(FP_INPUT,NULL,0);
     input_size=get32(size_bytes); if(input_size>max_input) return respond(FP_INPUT,NULL,0);
     input=(unsigned char *)malloc(input_size?input_size:1);

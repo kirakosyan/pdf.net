@@ -8,7 +8,7 @@ Each issue is unassigned at creation and has scope, dependencies, acceptance cri
 
 FP-001 source contracts are merged through [PR #115](https://github.com/kirakosyan/pdf.net/pull/115). FP-002 is merged through [PR #116](https://github.com/kirakosyan/pdf.net/pull/116) and implements [operation policies and budgets](operation-policies.md), with [runtime/API tests](testing.md). Both tracking issues remain open for production qualification, including actual minimum-runtime and final-package consumers. The foundation milestone and all later SDK requirements remain incomplete; passing source tests does not authorize publication.
 
-FP-085 (#3) now has an original [offline deployment and isolated worker implementation](native-deployment.md), including actual ABI/version/dependency probes, platform loading restrictions, process supervision and crash recovery. [Source CI](evidence/FP-085-source.json) passed its native boundaries on all six hosts; production qualification and final-package consumers remain incomplete. Managed syntax, filters, writer and typed content/version handling now have source implementations. The writer baseline passed [6,740 source test executions](evidence/FP-005-source.json); complete SDK qualification remains pending. Issues #4–#20 continue in dependency order in [PR #117](https://github.com/kirakosyan/pdf.net/pull/117); they are not complete by association.
+FP-085 (#3) now has an original [offline deployment and isolated worker implementation](native-deployment.md), including actual ABI/version/dependency probes, platform loading restrictions, process supervision and crash recovery. [Source CI](evidence/FP-085-source.json) passed its native boundaries on all six hosts; production qualification and final-package consumers remain incomplete. Managed syntax, filters, writer and typed content/version handling now have source implementations. The writer baseline passed [6,740 source test executions](evidence/FP-005-source.json); complete SDK qualification remains pending. Issues #3–#20 were merged in [PR #117](https://github.com/kirakosyan/pdf.net/pull/117) at `8df53a3922fdabfb095ca5565b03898c3c93d54e`. Its final source CI passed 679 tests in each of 20 runtime lanes; an earlier Framework x64 worker deadline observation remains unresolved for production performance qualification. Their tracking issues remain open for complete qualification. Issues #21–#50 continue in dependency order in [PR #118](https://github.com/kirakosyan/pdf.net/pull/118). Metadata source CI passed 698 tests per runtime lane (13,960 executions); later work requires its own evidence.
 
 ## Milestones
 
@@ -142,3 +142,31 @@ Milestones are sequencing aids. They do not remove later capabilities from the r
 Reconcile delivered code, public API/capability baseline, requirement status, issue acceptance checkboxes, evidence links and version-specific README claims. Run the affected source/package checks and the specification validator. Keep other requirements planned until their own evidence exists.
 
 A milestone or roadmap issue closes only when its constituent evidence is reconciled. Publication remains blocked until the complete SDK scope and final-package gate pass.
+
+Source progress through #35 now includes [bounded HTML print layout and structure associations](html-printing.md). Full FP-047 scope and production qualification remain mandatory; no issue or dependent requirement is completed by association.
+
+Source progress through #36 now includes [owned watermarks/stamps and artifact classification](stamps.md). Full FP-018 profiles and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #37 now includes [resource extraction](resource-extraction.md). Full FP-028 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #38 now includes [search and text replacement](text-search.md). Full FP-026 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #39 now includes [table/structured-data extraction](table-extraction.md). Full FP-027 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #40 now includes [document events and typed generation](data-generation.md). Full FP-099 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #41 now includes [text and structured conversion](input-conversion.md). Full FP-050 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #42 now includes [optional Word interchange](word-conversion.md). Full FP-053 scope and production qualification remain mandatory; dependent requirements remain independently scoped.
+
+Source progress through #43 includes [document templates/mail merge](mail-merge.md). Full FP-112 scope and production qualification remain mandatory; #44–#50 remain in progress.
+
+Source progress through #44 includes [logical structure/accessibility](accessibility.md). Full FP-067 scope and production qualification remain mandatory; #45–#50 remain in progress.
+
+Source progress through #45 includes [explicit local OCR](local-ocr.md). Full FP-074 scope and production qualification remain mandatory; #46–#50 remain in progress.
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](searchable-ocr.md).
+
+Opt-in bounded scan correction, original-image preservation, inverse word-boundary geometry and separate prose/table/form reading-order evidence now have a source profile. Complete automatic curve/semantic/native/corpus and production qualification remain pending. See [scan processing](scan-processing.md).

@@ -9,6 +9,23 @@ namespace Fluent.Pdf.Contract.Tests;
 public sealed class PolicyTests
 {
     [Fact]
+    public void FailureDetailsSurviveLatchedRethrowAndOperationCompletion()
+    {
+        var details = new PdfArchivalValidation(PdfArchivalProfile.A2B, new string('0', 64), true, false, new[] { new PdfArchivalFinding("original.rule", "original.location", "Original bounded finding.") });
+        PdfException? original = null;
+        var failure = Assert.Throws<PdfException>(() => PdfFont.Run("FailureDetails", "fixture.details", null, default, context =>
+        {
+            original = Assert.Throws<PdfException>(() => context.ReportFailure(new("Fixture.Details", "Original bounded details."), "fixture.details", details));
+            Assert.Same(details, original.Data["fixture.details"]);
+            var repeated = Assert.Throws<PdfException>(context.Checkpoint);
+            Assert.Same(original, repeated);
+            Assert.Same(details, repeated.Data["fixture.details"]);
+        }));
+        Assert.Same(original, failure);
+        Assert.Same(details, failure.Data["fixture.details"]);
+    }
+
+    [Fact]
     public void TemporaryReservationsReleaseMemoryAndAllowOverlappingObjectWork()
     {
         var report = Run(context =>
@@ -358,7 +375,9 @@ public sealed class PolicyTests
     {
         var limit = TimeSpan.FromSeconds(30);
         TimeSpan elapsed = TimeSpan.Zero;
-        var context = new PdfOperationContext("Fixture", "local", PdfCapability.ReadDocument, new PdfOperationPolicy(limits: new PdfResourceLimits(maximumElapsedTime: limit)), CancellationToken.None, () => elapsed);
+        var policy = new PdfOperationPolicy();
+        Assert.Equal(limit, policy.Limits.MaximumElapsedTime);
+        var context = new PdfOperationContext("Fixture", "local", PdfCapability.ReadDocument, policy, CancellationToken.None, () => elapsed);
         try
         {
             elapsed = limit + TimeSpan.FromTicks(tickOffset);

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-design-observations-not-production-qualification",
+  "requirement": "FP-006",
+  "sources": [
+    {
+      "id": "S06-ISO-PDF17",
+      "kind": "retained ISO32000-1:2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "7.3.10 indirect object identities",
+        "7.5 file structure, xref active/free state and generations",
+        "7.3.8 streams and exact Length"
+      ]
+    }
+  ],
+  "decisions": [
+    "Never invoke recovery during normal parsing or swallow a latched failure",
+    "Require recoverable active/free identities or a complete explicit caller inventory; do not resurrect bodies from source position",
+    "Require exact declared/caller stream extents; never scan payload markers",
+    "Keep the exact source and record every selected/excluded/discarded object and structural decision",
+    "Stage a full rewrite and apply ordinary strict syntax post-validation before copying output"
+  ],
+  "limitations": [
+    "Advanced revision/hybrid/compressed/encrypted/codec recovery remains mandatory work",
+    "Independent small fixtures are not a complete damaged/ambiguous corpus or production qualification"
+  ]
+}

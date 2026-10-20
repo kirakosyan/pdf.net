@@ -1,0 +1,134 @@
+{
+  "purpose": "pinned-independent-source-tool-inventory-not-release-SBOM",
+  "sdkRedistributesEngine": false,
+  "bridge": "original report parser over platform XML; no linked Java dependency",
+  "engine": {
+    "name": "veraPDF",
+    "version": "1.28.2",
+    "fixtureJarSha256": "687d4d8bcfec48c9f7e931cf78ed061f1eeccfba55d4cdc000ba9b4d8aa46ce6",
+    "projectDeclaredLicense": "GPL-3.0-or-later OR MPL-2.0",
+    "jarNoticeInventory": [
+      {
+        "entry": "META-INF/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "entry": "META-INF/NOTICE",
+        "sha256": "612b14bc77c944ce229cbba0d14919162cfea8ed802cbf06a8e865e032d03201"
+      },
+      {
+        "entry": "META-INF/LICENSE.txt",
+        "sha256": "5c9d2d07ef2e47ae9c2af9f192c30549b148b9b57a06043ac2fd236250ef8521"
+      }
+    ],
+    "embeddedMavenMetadata": [
+      {
+        "groupId": "org.verapdf",
+        "artifactId": "verapdf-xmp-core",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "org.verapdf",
+        "artifactId": "validation-model",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "com.fasterxml.jackson.core",
+        "artifactId": "jackson-core",
+        "version": "2.15.0"
+      },
+      {
+        "groupId": "org.verapdf",
+        "artifactId": "feature-reporting",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "javax.xml.bind",
+        "artifactId": "jaxb-api",
+        "version": "2.3.1"
+      },
+      {
+        "groupId": "com.fasterxml.jackson.core",
+        "artifactId": "jackson-annotations",
+        "version": "2.15.0"
+      },
+      {
+        "groupId": "javax.activation",
+        "artifactId": "javax.activation-api",
+        "version": "1.2.0"
+      },
+      {
+        "groupId": "org.verapdf",
+        "artifactId": "metadata-fixer",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "org.verapdf.apps",
+        "artifactId": "gui",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "com.sun.istack",
+        "artifactId": "istack-commons-runtime",
+        "version": "3.0.5"
+      },
+      {
+        "groupId": "org.glassfish.jaxb",
+        "artifactId": "jaxb-core",
+        "version": "2.3.0.1"
+      },
+      {
+        "groupId": "org.glassfish.jaxb",
+        "artifactId": "txw2",
+        "version": "2.3.0.1"
+      },
+      {
+        "groupId": "com.sun.xml.bind",
+        "artifactId": "jaxb-core",
+        "version": "2.3.0.1"
+      },
+      {
+        "groupId": "org.verapdf",
+        "artifactId": "core",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "org.glassfish.jaxb",
+        "artifactId": "jaxb-runtime",
+        "version": "2.3.2"
+      },
+      {
+        "groupId": "com.sun.xml.bind",
+        "artifactId": "jaxb-impl",
+        "version": "2.3.2"
+      },
+      {
+        "groupId": "org.verapdf",
+        "artifactId": "pdf-model",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "com.fasterxml.jackson.core",
+        "artifactId": "jackson-databind",
+        "version": "2.15.0"
+      },
+      {
+        "groupId": "org.verapdf",
+        "artifactId": "parser",
+        "version": "1.28.2"
+      },
+      {
+        "groupId": "org.verapdf.apps",
+        "artifactId": "greenfield-apps",
+        "version": "1.28.2"
+      }
+    ]
+  },
+  "ciJava": {
+    "distribution": "Temurin",
+    "requestedMajor": 21,
+    "selection": "supported setup-action major selector; exact resolved runtime identity retained in each engine.json",
+    "runtimeIdentityRetained": true
+  },
+  "qualification": "Candidate source tool only. Complete licensing, security, transitive/runtime inventory, isolated SDK host and production qualification remain mandatory."
+}

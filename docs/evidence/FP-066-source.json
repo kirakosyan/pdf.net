@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-066",
+  "sourceCommit": "5d6cff42e7bfd5174af5ea0cc2eaa3d2a60ee99e",
+  "sourceTree": "aa1504141611505f9924461748847c9d3891910d",
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "archivalTargetedTests": 29,
+  "managedAndExplicitExternalValidatorTests": {
+    "passed": 862,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeRenderingTests"
+  },
+  "apiComparisons": 24,
+  "sourceFileHashes": {
+    ".github/workflows/ci.yml": "dfbef3cabaa0fb4c12928b8c238d7cc60f4dd58312bec20af7cf620acb479e07",
+    "eng/build-archival-fixture.ps1": "b6937a3bd9067d9aa2af1630e6ac2bac5561f79032ae4638da47f5fa56c7f94f",
+    "eng/check-api.ps1": "ccd9feae9c9d6d9cb2ae06c70be1b8029a6e6f1050c0407f0c27a65c927dda9d",
+    "eng/test-contracts.ps1": "c8be564631804b1fa23d65a20112aae9b4c20b2ac2df953071f031aa4ee99eff",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "9d88385d0da9020febc3d3906eb2b3b3037d8f2d754b14df58d3ece4a8416905",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "5c305c9f504a18b9bbb00239d820b252b778ca9cf55fb69c65c1106f697a8e0d",
+    "src/Fluent.Pdf/Archival/PdfArchival.Fonts.cs": "3c1924ff4ca54f1260446da8bc6c48a5d2d7555b2bfd90c2916109d2f319596f",
+    "src/Fluent.Pdf/Archival/PdfArchival.Preflight.cs": "7eae43040d50d939af331d69d91e9cf107a295198c10446fb126359d32911a5d",
+    "src/Fluent.Pdf/Archival/PdfArchival.cs": "90b7ac1c4e10ea8c0385bc5eb1b58cd57268080a1da56327e6bee44fed5aa47e",
+    "src/Fluent.Pdf/Archival/PdfArchivalContracts.cs": "bd48af3d452b610618efaa17d595a5d823c5250c0c0b49980c2d9e80ceb681a2",
+    "src/Fluent.Pdf/Providers/PdfCapability.cs": "5bfa23502664b8bf21836882c42b1d29f36351d9c5bb05c44059114a18a356e1",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "c97c5ff2a075b82e3232adeee01212b1a95a752ed84b06d384d572b446f0f45f",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "7b3a3af5925a5d6a184ca2dbfc5b09f2ba6c518c2a708d548283283dfc4f518f",
+    "src/Fluent.Pdf/Writing/PdfTransaction.cs": "1c59181ac60a4ac94c37ed1a8a60dc45cab439a375d2ed7f2e2d388fb44a6f6f",
+    "src/Fluent.Pdf/Writing/PdfWriterCore.cs": "8d29b2e4914062565c2ef469cc53c15e21ddba7cfcad05086adf3ff1c718140a",
+    "src/Fluent.Pdf.Compliance/Fluent.Pdf.Compliance.csproj": "76ff50e9268d669b395c37f197925dd0ec142f003d4bec130e361ec0628bb371",
+    "src/Fluent.Pdf.Compliance/PublicAPI.Shipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Fluent.Pdf.Compliance/PublicAPI.Unshipped.txt": "026b4c2a471f92521f8c44a126c9efd47c3b4f689eed8b6deb664f466860dbe9",
+    "src/Fluent.Pdf.Compliance/VeraPdfReportValidator.cs": "833c6b2e1a1b186c42b135a078b6d94d876540451ebd1c14cd10d5a66ee7837e",
+    "src/Fluent.Pdf.Compliance/packages.lock.json": "02b6e7778b288cfce28ff172638ef3fa0a3d740e4cf79e97b746b432a325957e",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalFixture.cs": "694e1c273edc8cd682e60093ac6362e53a34db8be939855faed175eb4bbdc97d",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalReportTests.cs": "a8c2e17edb09a4849510476c29a9550247dfd75e368ae4ca831a633cdcdbf5ea",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalTests.cs": "7be17f5a7a120359779df9b16ed08ad6cf210524442c64d4a06b9d37b746efc2"
+  },
+  "reportSha256": {
+    "archival-final-build3.log": "5a68fe6a2d985d439dc678efaec2995396357f26a2150ed871b603b892e04cb3",
+    "archival-final-tests2.log": "b5b2fbfb09fa212f80782bef94279eb6d1f1aabdf9c8a1ec818f5d0f9a7ccb38",
+    "archival-api-check2.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67",
+    "archival-release-check2.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "archival-spec-check.log": "80514e09658557ac40036d1d8bbb490a9d433525a15794413b042b00390e8d28",
+    "api-comparisons.json": "e9a636462c451e1149d9073cf59d88e4f70699b5bad7d74aa24efcb22361c33b"
+  },
+  "packageSha256": null,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "limitations": [
+    "Local native-positive SDK worker/render/codec tests cannot run: Landlock ENOSYS. CI remains unfiltered",
+    "Explicit external validator fixtures exercise real validation; their caller-owned host does not qualify SDK isolation or the complete conformance corpus",
+    "Actual minimum runtimes and exact final packages are not qualified; all mandatory profiles and production gates remain open"
+  ],
+  "initialCI": {
+    "runId": 39141112777,
+    "runNumber": 90,
+    "headCommit": "5d6cff42e7bfd5174af5ea0cc2eaa3d2a60ee99e",
+    "headTree": "aa1504141611505f9924461748847c9d3891910d",
+    "conclusion": "failure",
+    "sdkTestsExecuted": 0,
+    "requiredRuntimeLanesNotExecuted": 20,
+    "cause": "The setup action rejected Java patch input 21.0.12.1+1 as invalid SemVer before SDK or standards fixtures ran.",
+    "correction": "Use the documented Java major21 selector and retain exact resolved runtime identity. The validator jar digest and complete source test matrix remain unchanged.",
+    "jobs": [
+      {
+        "jobId": 117715568441,
+        "logSha256": "f5d711e092b11b45d71b40efa045420892e19e06907d557d6d0918db34462e7a",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568604,
+        "logSha256": "01d8155531bfb87bd9930bde96b98c9af3d4b6dad6976d108e843aea19984194",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568674,
+        "logSha256": "10ffb364011477ad9601196a6c212a9a2cf52b64f68bf17fcda1948034a95515",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568699,
+        "logSha256": "bb474afcc57c0c7e1a68d4c429785069d089cabbbfeb798d8cac866181310c24",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568749,
+        "logSha256": "5757a186639f72aad2a4b71bcb7a12500014ffb80e4e3be5efb12aa2d91016a9",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      },
+      {
+        "jobId": 117715568773,
+        "logSha256": "333b4b41a52f3d8e5d178fc063ab07f326a5ce374f6b41f7a2a7f49576e82430",
+        "failureStep": "setup-java",
+        "sdkTestsExecuted": 0
+      }
+    ],
+    "artifacts": [],
+    "limitations": [
+      "Early setup failure also prevented source artifact creation and macOS runtime diagnostics because fixtures did not exist. All six complete raw job logs are retained."
+    ]
+  },
+  "runtimeFailureCI": {
+    "runId": 39141390767,
+    "runNumber": 91,
+    "headCommit": "c0044bef812669e8963c835bb5f729354f8418c5",
+    "headTree": "01a7566ccca2b7f7073e0aced6b07eeef81f2dc6",
+    "snapshotComplete": true,
+    "pendingJobs": [],
+    "failedJob": 117716383906,
+    "failedCase": "ArchivalTests.FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
+    "frameworkX64Result": {
+      "passed": 923,
+      "failed": 1,
+      "skipped": 0,
+      "total": 924
+    },
+    "failure": "Correct Archival.IndependentValidation diagnostic, but the detached observation was absent from Exception.Data on current Framework x64.",
+    "requiredFrameworkX86AndFallbackNotExecuted": true,
+    "correction": "Create and attach bounded operation-owned failure details before the context publishes/throws the latched failure. Existing diagnostic provenance, policy severity and failure latching remain enforced.",
+    "rootCauseLimit": "The underlying runtime difference is unproven; this records the observed failure and the concrete attachment change, not a runtime-cause claim.",
+    "jobs": [
+      {
+        "jobId": 117716383876,
+        "logSha256": "45087d51f964e05f4bc8ac8f495c678e0284d418461d3aa972e891d694ab45ba",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716383906,
+        "logSha256": "1cfcca67271abd75e371d6d0e56121a61c4394a1c2f66c6c86e930fbe982bf50",
+        "passingLaneTotals": [
+          924,
+          924
+        ],
+        "failedFrameworkLane": true
+      },
+      {
+        "jobId": 117716384029,
+        "logSha256": "01957debaa80ac7273ee046eaeac1944a37982c78960ffec4018529cff64a8fb",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716384055,
+        "logSha256": "9e2262631dcd9f218aa72b51f6e6a2dc45d623bf30884fe03709b6e35f923320",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716384130,
+        "logSha256": "0001a6429fc7b32fdb384fbd1585db7e9996d8f2c4a07fab23ccd524337e2332",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      },
+      {
+        "jobId": 117716383673,
+        "logSha256": "a517d4e5183fecc3219ad60b84d861a130022bbfc662d6b3b2888fbe1556de6d",
+        "passingLaneTotals": [
+          924,
+          924,
+          924
+        ],
+        "failedFrameworkLane": false
+      }
+    ],
+    "artifactSnapshot": [
+      {
+        "id": 12142675302,
+        "name": "source-contracts-osx-x64",
+        "size_in_bytes": 1687003,
+        "digest": "sha256:45524c444673b21080aac76bf4fc9d7a79db76ac0cf03d99ed9c1638487f7923"
+      },
+      {
+        "id": 12142335412,
+        "name": "source-contracts-osx-arm64",
+        "size_in_bytes": 1680679,
+        "digest": "sha256:b3ec6ca0fc436613c2e3b992457da676a903795ea44de18d8168bc485de8c6f2"
+      },
+      {
+        "id": 12142016200,
+        "name": "source-contracts-win-arm64",
+        "size_in_bytes": 1669455,
+        "digest": "sha256:12c65fb68f643886320ca9b820abd42ebee3af900ab4409a2705434bf59a719a"
+      },
+      {
+        "id": 12141658300,
+        "name": "source-contracts-linux-x64",
+        "size_in_bytes": 1668597,
+        "digest": "sha256:be029166e69cbdd27e1b8dabc2dca0dd5121a3bc5a733c57b5eddef4cbe8de3d"
+      },
+      {
+        "id": 12141644196,
+        "name": "source-contracts-win-x64",
+        "size_in_bytes": 1641141,
+        "digest": "sha256:a5c54bd6d77709a50819bd64dd05d6b258ec6a3a74e062e6c2aef4a3e9ec5ad7"
+      },
+      {
+        "id": 12141284974,
+        "name": "source-contracts-linux-arm64",
+        "size_in_bytes": 1668428,
+        "digest": "sha256:d197d48f57352e23e913a11bfa6ab8f89ef2841d44457ba1b587725f1b73db2c"
+      }
+    ],
+    "conclusion": "failure",
+    "testedMergeCommit": "b93ace1731a92a4f91b4eb6454b9220233d34470",
+    "testedMergeTree": "01a7566ccca2b7f7073e0aced6b07eeef81f2dc6",
+    "runtimeLanesExecuted": 18,
+    "passed": 16631,
+    "failed": 1,
+    "skipped": 0,
+    "requiredLanesNotExecuted": 2
+  },
+  "failureDetailFixLocalChecks": {
+    "sourceFileHashes": {
+      "src/Fluent.Pdf/Policies/PdfOperationContext.cs": "d2e04bcfeeda8e69ffa8abdab48392d8b9b7614cb7a278edd22c97d623f14a32",
+      "src/Fluent.Pdf/Archival/PdfArchival.cs": "1a575040fbe5cc59d21c233a54414a801c8e34eeae0a319ee216f67bcecb9a22"
+    },
+    "buildTargetFrameworks": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "selectedWorkspaceTests": {
+      "passed": 883,
+      "failed": 0,
+      "skipped": 0,
+      "includesUncommittedRepairTests": 21
+    },
+    "apiComparisons": 24,
+    "reportSha256": {
+      "archival-failure-details-build.log": "e890e584fcd0243768e5687157e597c31048d01cdcb30fbefafa4123555616ac",
+      "archival-failure-details-tests.log": "eac379c8fc76421a878b2407a6e330dc48a1ca82c8decb5c4787d623d05e51f3",
+      "archival-failure-details-api.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67"
+    },
+    "frameworkRuntimeVerification": "Pending corrected full platform CI; local Framework execution is unavailable."
+  },
+  "failureDetailsInvestigation": {
+    "failedRun": 39142512682,
+    "head": "6623d1544b06c560450d8fc29857bc9a7b75c550",
+    "failedJob": 117719641396,
+    "runtime": "current .NET Framework x64",
+    "failedCase": "FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
+    "observation": "The same missing Data finding remains after attachment-before-throw. No root cause established. Added a direct shared-context rethrow contract and detailed failure-key/stack reporting without weakening the archival assertion.",
+    "retainedLogSha256": "d5cb840bc021bc08df345f04de8bd1ed9fef829c50b7ef477456cdcc8909bc59",
+    "localTargetedTests": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "runtime": ".NET10.0.13"
+    },
+    "localTestsIncludeUncommittedCompatibilitySource": true,
+    "productionQualified": false
+  },
+  "attachmentTimingFailureCI": {
+    "runId": 39142512682,
+    "headSha": "6623d1544b06c560450d8fc29857bc9a7b75c550",
+    "testedMergeSha": "fe3cb3247b9942186afa2153620ed5544ccdd127",
+    "testedTree": "df5e973f4922ebf1cbae11fcbc15994b28439c3e",
+    "exactTreeVerified": true,
+    "jobs": [
+      {
+        "jobId": 117719641218,
+        "logSha256": "270000f8b6410de4c59fd662af4a68cc45bfd9d32ddf2d9f03a85290f8d6acab",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641393,
+        "logSha256": "c137b67a4d5d9245c0460ddf589b988a704c13e779d9c0de86485f4c2518197e",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641396,
+        "logSha256": "d5cb840bc021bc08df345f04de8bd1ed9fef829c50b7ef477456cdcc8909bc59",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 923,
+            "failed": 1,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641405,
+        "logSha256": "3182c24301d46737d3c3e081f23b430a6505d9c6d26288367b879b6c43f39bc0",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641408,
+        "logSha256": "f7a5c9862821fc0b8f20ddf538a3401d1b4fb3855345c0949facbeb2f624fc1a",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      },
+      {
+        "jobId": 117719641429,
+        "logSha256": "169d2d731466e42b65796cf18eaded25260367f4148f59dae46e216f8185da49",
+        "lanes": [
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          },
+          {
+            "passed": 924,
+            "failed": 0,
+            "skipped": 0,
+            "total": 924
+          }
+        ]
+      }
+    ],
+    "executedLanes": 18,
+    "passed": 16631,
+    "failed": 1,
+    "skipped": 0,
+    "notExecutedLanes": [
+      "current Framework x86",
+      "Windows x64 netstandard fallback"
+    ],
+    "failure": "Framework x64 archival findings Data entry rejected because the DTO lacked serializable metadata; correction pending CI",
+    "artifacts": [
+      {
+        "id": 12142791810,
+        "name": "source-contracts-osx-x64",
+        "digest": "sha256:814d3a757ac7e90eee4448b0de2048c29a8dfd8c8baea589e87315e7d2930882"
+      },
+      {
+        "id": 12142745570,
+        "name": "source-contracts-osx-arm64",
+        "digest": "sha256:6e49266da9ced9ec7c05be94b887f03476d0fe44480fe38518be8f8d32ce6e07"
+      },
+      {
+        "id": 12142540814,
+        "name": "source-contracts-linux-x64",
+        "digest": "sha256:5abe002f0862bdf46572b521ac9e08dd9a0b2e2300cfe3b429630969d8930947"
+      },
+      {
+        "id": 12142233080,
+        "name": "source-contracts-win-x64",
+        "digest": "sha256:4b60b3b58c162f093c4ff8f8057d2003b4827248668f94de4ee4de194419349a"
+      },
+      {
+        "id": 12142041825,
+        "name": "source-contracts-linux-arm64",
+        "digest": "sha256:b178b198a8f903ba63360b6f781c4af662434fa0d49657f144b3fc05e493e43d"
+      },
+      {
+        "id": 12142023966,
+        "name": "source-contracts-win-arm64",
+        "digest": "sha256:4e097030383f906457023efb290a93526670542d847e3ddbf35279a40cf5ab87"
+      }
+    ],
+    "productionQualified": false
+  },
+  "serializableFailureDetailsCorrection": {
+    "rootCause": ".NET Framework Exception.Data uses ListDictionaryInternal, whose FEATURE_SERIALIZATION path rejects a value without serializable metadata. PdfArchivalValidation lacked that metadata. The resulting ArgumentException was replaced by the already latched archival failure during the required operation checkpoint. The direct System.Object test passed because System.Object is serializable.",
+    "sources": [
+      {
+        "id": "S66-FRAMEWORK-EXCEPTION",
+        "sha256": "789b2e58e21de99d64ab95600f314aa30a36f23d7f2537b6d293d3d6242047ed",
+        "observation": "Exception.Data creates ListDictionaryInternal"
+      },
+      {
+        "id": "S66-FRAMEWORK-DATA",
+        "sha256": "e11f6104b29e144d6a195a900c0a7dbc8efacae42621feeb8e98a4f93b6807a1",
+        "observation": "Data assignment checks key/value serializability and rejects a nonserializable value"
+      }
+    ],
+    "investigationRun": 39143402467,
+    "failedJob": 117722240028,
+    "retainedLogSha256": "930879ef528d3298c973a729309e5ea5714d32e4a8a503579b18487ebea6aa0b",
+    "change": "Detached finding/validation/diagnostic/resource-report types carry serializable metadata. Regression uses actual PdfArchivalValidation rather than System.Object. No formatter or deserialization is invoked.",
+    "buildTargetFrameworks": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "localTargetedTests": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "runtime": ".NET10.0.13"
+    },
+    "apiComparisons": 24,
+    "reports": {
+      "archival-serializable-build.log": "aed0adfdec027e0a7b24e67f4a5e014e1fd2c19fb4552d0b23f627fe1fbea8bc",
+      "archival-serializable-tests.log": "0f73d2f86062290dc8ceea59040b7e80d69f6a5d300a188abf737031b85bb8da",
+      "archival-serializable-api.log": "0749f6c4da7c35a02773f7d33359636ced104a2efa16a20c97c734710c26fd67"
+    },
+    "frameworkConfirmation": "Confirmed by CI96 on current Framework x64/x86 and explicit fallback, with all 20 source runtime lanes passing",
+    "productionQualified": false,
+    "sourceCommit": "b52f91b5dc6be985ce82530cefef47e4a0a9b041"
+  },
+  "passingSourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-96-source.json",
+    "sourceCommit": "b52f91b5dc6be985ce82530cefef47e4a0a9b041",
+    "testedTree": "9475b187e67b61ee0115f2ae53401b950ec01c87",
+    "passed": 19380,
+    "failed": 0,
+    "skipped": 0,
+    "runtimeLanes": 20,
+    "productionQualified": false
+  }
+}

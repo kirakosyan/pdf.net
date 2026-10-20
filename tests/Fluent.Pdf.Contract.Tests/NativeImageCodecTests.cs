@@ -13,17 +13,29 @@ public sealed class NativeImageCodecTests
     {
         using var fixture = new CodecFixture(_output, defaults: true);
         byte[] valid = File.ReadAllBytes(ImagePath("l.jpg")), expected = File.ReadAllBytes(ImagePath("l.jpg.samples"));
+        var elapsed = System.Diagnostics.Stopwatch.StartNew();
         var report = fixture.RunContext(context =>
         {
+            var defaults = new PdfResourceLimits();
+            Assert.Equal(defaults.MaximumInputBytes, context.Policy.Limits.MaximumInputBytes);
+            Assert.Equal(defaults.MaximumExpandedBytes, context.Policy.Limits.MaximumExpandedBytes);
+            Assert.Equal(defaults.MaximumOutputBytes, context.Policy.Limits.MaximumOutputBytes);
+            Assert.Equal(defaults.MaximumObjects, context.Policy.Limits.MaximumObjects);
+            Assert.Equal(defaults.MaximumPixels, context.Policy.Limits.MaximumPixels);
+            Assert.Equal(defaults.MaximumDepth, context.Policy.Limits.MaximumDepth);
+            Assert.Equal(defaults.MaximumWorkers, context.Policy.Limits.MaximumWorkers);
             var codec = fixture.Registry.GetRequired<IPdfImageCodecProvider>(PdfCapability.ImageCodecs);
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 64; i++)
             {
                 using var input = new MemoryStream(valid);
                 using var output = new MemoryStream();
                 codec.Decode(PdfImageCodec.Dct, new(64, 16, 1, 8), PdfValue.Null, PdfValue.Null, input, output, context);
                 Assert.Equal(expected, output.ToArray());
+                _output.WriteLine("Default-memory decode " + (i + 1).ToString(System.Globalization.CultureInfo.InvariantCulture) + "/64; cumulative milliseconds=" + elapsed.Elapsed.TotalMilliseconds.ToString("F3", System.Globalization.CultureInfo.InvariantCulture));
             }
-        });
+        // This fixture checks default memory reuse across 64 process launches, not batch throughput.
+        // The SDK's default 30-second deadline is independently asserted below/at/above its boundary.
+        }, new PdfResourceLimits(maximumElapsedTime: TimeSpan.FromMinutes(2)));
         Assert.True(report.Resources.Single(x => x.Resource == PdfResourceKind.ExpandedBytes).Consumed < 268435456);
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }

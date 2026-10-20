@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-source-facts-not-implementation-or-qualification",
+  "requirement": "FP-025",
+  "sourceId": "P25-ISO1-2008",
+  "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+  "sections": [
+    "9.3 text state",
+    "9.4 text objects, positioning and showing",
+    "9.6 simple-font character codes and widths",
+    "9.7 CID horizontal/vertical metrics",
+    "9.10 Unicode mapping",
+    "14.9.4 replacement text"
+  ],
+  "facts": [
+    "Simple fonts use single-byte character codes; Identity CID encodings use two-byte codes. ToUnicode maps source codes independently of rendered glyph identity.",
+    "Text and text-line matrices are distinct from saved graphics state; each BT initializes both matrices.",
+    "Character/word spacing, horizontal scale and TJ adjustments contribute to the writing-mode-specific advance. Word spacing applies to a single-byte code 32.",
+    "CID horizontal/vertical metrics are declared through W/DW and W2/DW2; vertical glyph origins differ from horizontal origins.",
+    "Source ActualText supplies replacement logical text for a marked-content range rather than independent physical geometry for every replacement scalar."
+  ],
+  "limitations": [
+    "These facts do not qualify a source implementation, infer original reading order or establish ink/fidelity accuracy."
+  ],
+  "rawSourcesRetainedOutsideRepository": true
+}

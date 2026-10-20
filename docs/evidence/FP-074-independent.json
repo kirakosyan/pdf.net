@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "purpose": "actual-original-CAPI-source-observation-not-SDK-isolation-or-production-qualification",
+  "requirement": "FP-074",
+  "observations": {
+    "purpose": "actual-original-Tesseract-CAPI-source-observation-not-SDK-host-qualification",
+    "engineVersion": "5.5.0",
+    "nativeBridgeSha256": "80c77d3f24629936c694d911236b1c26c9f16b62affb2276e2f82c17670d7868",
+    "engineSha256": "66b27d857aa90bb7a31059c65bb624e918e96a7c276699bd5ac5dca4cf1ba322",
+    "modelSha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+    "labelsSha256": "07fb779e4c8a8f96b823e3cc58f329cb66825a339924d550d94ffade9d1a7db2",
+    "checkerSha256": "983c8258c09a3a385a776a275e291b19027c8daccd94609dbe2f6942eb8ed0b3",
+    "text": "ORIGINAL OCR TEST 12345\n",
+    "words": [
+      {
+        "text": "ORIGINAL",
+        "box": [
+          43,
+          56,
+          258,
+          41
+        ],
+        "confidence": 96.485931
+      },
+      {
+        "text": "OCR",
+        "box": [
+          330,
+          56,
+          113,
+          41
+        ],
+        "confidence": 96.457092
+      },
+      {
+        "text": "TEST",
+        "box": [
+          470,
+          56,
+          134,
+          41
+        ],
+        "confidence": 96.258965
+      },
+      {
+        "text": "12345",
+        "box": [
+          636,
+          56,
+          161,
+          41
+        ],
+        "confidence": 96.634102
+      }
+    ],
+    "meanConfidence": 96,
+    "CER": 0,
+    "WER": 0,
+    "actualCliAgrees": true,
+    "independentEngine": false,
+    "sourceFixtureGeometryMaximumErrorPixels": 1,
+    "SDKisolatedHostExecuted": false,
+    "limitation": "Independent tool invokes the original bridge C ABI directly on a controlled original raster. Local SDK isolated host remains unavailable because Landlock is unsupported; no unrestricted SDK fallback is added or qualified. One labeled printed fixture is not a qualified language corpus.",
+    "productionQualified": false
+  },
+  "reportSha256": "a5942898a4475917f79926dd3af0be083c7c48f67a0943847f8e71bd80968ca1",
+  "predeclaredLabelsSha256": "07fb779e4c8a8f96b823e3cc58f329cb66825a339924d550d94ffade9d1a7db2",
+  "checkerSha256": "983c8258c09a3a385a776a275e291b19027c8daccd94609dbe2f6942eb8ed0b3",
+  "nativeBridgeSourceSha256": "a8bad90e27435dcc1b1fa5d3d6620cf1421e0fec40a53cb6b2a2fd5feca63e24",
+  "firstFailedProbeLogSha256": "296682d8f95570b69fb8ac6075a0bf6b39ed704f962eb0b9a928379315a02175",
+  "toolModifications": "No independent checker, tool or labels modified after execution. The SDK bridge was corrected to normalize headerless C-API TSV into its canonical wire profile.",
+  "limits": [
+    "One pre-labeled original printed fixture and same-engine CLI agreement do not qualify a language/scan corpus, independent recognizer agreement, SDK isolated execution, a RID, minimum runtime or final package.",
+    "No actual engine/model binaries or source font are added to Git or SDK packages; complete provenance/license/redistribution/vulnerability and model accuracy qualification remain mandatory."
+  ],
+  "productionQualified": false
+}

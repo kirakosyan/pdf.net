@@ -1,0 +1,3 @@
+# HTML adapter source dependencies
+
+The original managed DevTools adapter uses pinned System.Text.Json 10.0.13 and its locked framework-specific dependencies. Package digests and original/LF-normalized notice digests are recorded in components.json. Microsoft MIT notice text is shared with the existing repository notice inventory. No Chromium, Node.js, font or host binary is redistributed by the SDK adapter. Source fixture binaries are explicitly caller-provisioned and separately pinned. Complete release SBOM, notices, security/licensing review, engine/host adoption and final-package qualification remain mandatory.

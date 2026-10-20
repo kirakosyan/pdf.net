@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-028",
+  "sourceCommit": "8e3f9cadedeeec1840e70c0d5654aa1082b395b7",
+  "sourceTree": "2a1498e2f6beb421b23e151e02e3f67cc7f58c66",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "newSourceCases": 10,
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1054,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "ea2fa4f8f333f89046070e9a697cb58822eeb669169c53a769d3067d7b8ac3c9"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "f314164fd532be7d5a216ca7fe7732e93dc34c99c633e7f31c0a7604f7efbc2a"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "1896f847eab44affc5a0d9659eb1fb10c39349c7642c62a1a2e37f7193bfbf4d"
+    }
+  ],
+  "apiComparisons": 27,
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Extraction/PdfResourceExtraction.cs": "2d326327537da2479da69467f047c7111faeee02782c515c75e8ea2101652d5c",
+    "src/Fluent.Pdf/Extraction/PdfResourceExtractionContracts.cs": "34bde50e2aacf40f1cde4a851d95112f2316cb9cfbcf3838fb7615829b949306",
+    "src/Fluent.Pdf/Stamps/PdfStamps.cs": "9fd3c3f0eea8b6d6163183cf2c6f991c9aab851ec20516661aabc1799c76f663",
+    "tests/Fluent.Pdf.Contract.Tests/ResourceExtractionTests.cs": "3905c7f36fc9f84d2fa3ed6474bd361b52d885f816795a1395625937fb0a93f7",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "5614acdc43dfeae83853af0ae1b5be47b93a93fb218879ead69f1633cddcd3bf",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "38089199489c59d9a47121d184bbae2c3898ac5d088ca38e7e91e850f5e0ae21"
+  },
+  "reports": {
+    "final-build": "4abb56cde54a90b3898ad8c729e5d12ddeb6ea799e8215de41ddb17288b30d2f",
+    "normal-build": "d6eceacdcd0f656bfee7740757420af0b2f0ac0a73f66e85060b55e0899a8db2",
+    "final-net10": "ed0590ca1332b1c8e013619ce7b888dc659c88928a57cea701b6f89f4371e73f",
+    "final-net8": "3411c9e5575808b18d5e264ce221627344547f44087b1175bced70097f8e035e",
+    "final-fallback": "dab2464064f6ffdb0f7b07a88d8e5723df28ad9cdf3ed605a0830171131ea6c6",
+    "final-api": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "final-release": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "observerReportSha256": "8de3097e9cff93f4fa10f3d0e5155eae5caecb29558a461f8d9e78731152dc8d",
+  "independentReportSha256": "e456f07a36db84a007a55dbd19168d5c4a083a89072b3429b91967a2384925a7",
+  "commands": [
+    "Locked four-framework solution build",
+    "Selected net10 managed source contracts; actual net8 and netstandard2.0 fallback resource/stamp/runtime contracts",
+    "27 API comparisons; negative packing/publication guard; specification validation",
+    "Original source observer and independent pypdf/MuPDF/FontTools byte/operator/path/transform/font crosschecks"
+  ],
+  "localNativeLimitation": "LandlockENOSYS prevents four local native-positive classes; mandatory source CI remains unfiltered",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete pattern/glyph/soft-mask program expansion, resource/font/image and visibility/color/clip profiles remain mandatory",
+    "Complete stamp/decoration classification and full content/corpus coverage remain mandatory",
+    "All actual mandatory RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
+  ],
+  "incompleteSourceCI": "docs/evidence/PR-118-CI-104-source.json"
+}

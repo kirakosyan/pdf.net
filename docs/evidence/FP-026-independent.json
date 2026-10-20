@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-026",
+  "observations": {
+    "purpose": "independent-original-text-replacement-observations-not-production-qualification",
+    "versions": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6"
+    },
+    "observations": [
+      {
+        "mode": "cross-run",
+        "sourceSha256": "371fc83149f0529c4b4f3242e7f602ebaeb73318f99252563a84edb9f0af34e2",
+        "editedSha256": "df5d399840ac00fdb7011fe607cae36a2e2f3e55bac7eb93427833c11f7738bd",
+        "exactNormalizedText": {
+          "pypdf": "AFGAB",
+          "MuPDF": "AFGAB"
+        },
+        "preservedOriginalCharacters": [
+          {
+            "text": "A",
+            "x": 20.0,
+            "y": 100.0
+          },
+          {
+            "text": "F",
+            "x": 55.0,
+            "y": 100.0
+          },
+          {
+            "text": "G",
+            "x": 61.8,
+            "y": 100.0
+          }
+        ],
+        "rasterDifferencesOutsideAnalyticSourceCells": 0,
+        "changedPixels": 127,
+        "productionQualified": false
+      },
+      {
+        "mode": "shrink",
+        "sourceSha256": "371fc83149f0529c4b4f3242e7f602ebaeb73318f99252563a84edb9f0af34e2",
+        "editedSha256": "4b555a4a1a6a781fa93792ecb9fd437512f1a3c0ae967f822c44e5df554f176a",
+        "exactNormalizedText": {
+          "pypdf": "ACDEFGBBBB",
+          "MuPDF": "ACDEFGBBBB"
+        },
+        "preservedOriginalCharacters": [
+          {
+            "text": "A",
+            "x": 20.0,
+            "y": 100.0
+          },
+          {
+            "text": "C",
+            "x": 34.0,
+            "y": 100.0
+          },
+          {
+            "text": "D",
+            "x": 41.0,
+            "y": 100.0
+          },
+          {
+            "text": "E",
+            "x": 48.0,
+            "y": 100.0
+          },
+          {
+            "text": "F",
+            "x": 55.0,
+            "y": 100.0
+          },
+          {
+            "text": "G",
+            "x": 61.8,
+            "y": 100.0
+          }
+        ],
+        "rasterDifferencesOutsideAnalyticSourceCells": 0,
+        "changedPixels": 39,
+        "productionQualified": false
+      },
+      {
+        "mode": "deletion",
+        "sourceSha256": "b9a412fecd71b78e105b91fbd68bf27e809af2b9c12b7705d4d675a28b49b739",
+        "editedSha256": "dc673298362f54f564a02d788228b149ada74330643ee6f8edc4da7ba6246e7e",
+        "exactNormalizedText": {
+          "pypdf": "AFG",
+          "MuPDF": "AFG"
+        },
+        "preservedOriginalCharacters": [
+          {
+            "text": "A",
+            "x": 20.0,
+            "y": 100.0
+          },
+          {
+            "text": "F",
+            "x": 29.0,
+            "y": 80.0
+          },
+          {
+            "text": "G",
+            "x": 38.0,
+            "y": 80.0
+          }
+        ],
+        "rasterDifferencesOutsideAnalyticSourceCells": 0,
+        "changedPixels": 105,
+        "productionQualified": false
+      }
+    ],
+    "productionQualified": false,
+    "limitations": [
+      "Three small original source fixtures only",
+      "Advance-cell replacement in explicit black foreground; complete color/ink/owner/reflow/accessibility profiles remain mandatory",
+      "Content editing retains historical/unreachable bytes and is not secure redaction",
+      "Actual minimum runtimes, complete corpora, final packages and all production gates remain mandatory"
+    ]
+  },
+  "sourceObserverSha256": "ea1ab453608b7de1cd428a90a4c4118d3c5687b224f734e1ec482a5a0c42da4e",
+  "independentReportSha256": "bf1e07bc53f33b194383341240af005a2af010895fa82914bc40c0ed288ac668",
+  "retainedTools": {
+    "observerSourceSha256": "6859098b136233a8895fda1b389317ac80e5fd9f9e778d1b2e79dc5a7299be96",
+    "independentToolSha256": "6e49ba4d391fe56f7b1096e3262c2459ea2abe06322a44a839a1b06a7ea5fe58",
+    "formatManifestSha256": "09b05fa6f645ec0797bd28636b62d2e1c6646f9eb70d4ecf69b066b45e822c18"
+  },
+  "productionQualified": false
+}

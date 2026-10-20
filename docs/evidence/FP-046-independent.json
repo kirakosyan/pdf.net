@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-output-observations-not-production-qualification",
+  "requirement": "FP-046",
+  "actualBrowser": {
+    "purpose": "trusted-original-readiness-source-observations-not-production-qualification",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "observations": [
+      {
+        "mode": "late-assets",
+        "text": "A B 一😀",
+        "pageCount": 1,
+        "inspectionCalls": 11,
+        "delayedAssets": 2,
+        "elapsedMilliseconds": 1302.1325,
+        "pendingAssetObserved": true,
+        "promiseCalls": 0,
+        "outputSha256": "dfa92d17b09a72bb61660432eaa6addc43b8d6b728de7ec956eb1af7ce611921",
+        "outcome": "expected-success"
+      },
+      {
+        "mode": "promise",
+        "text": "A B",
+        "pageCount": 1,
+        "inspectionCalls": 1,
+        "delayedAssets": 0,
+        "elapsedMilliseconds": 736.395,
+        "pendingAssetObserved": false,
+        "promiseCalls": 1,
+        "outputSha256": "a3d93efc6ae6944b6c1f610a8f314fcc6084b7cb1bf96ccf0c206b911381c6bf",
+        "outcome": "expected-success"
+      },
+      {
+        "mode": "polling",
+        "text": "A B",
+        "pageCount": 1,
+        "inspectionCalls": 5,
+        "delayedAssets": 0,
+        "elapsedMilliseconds": 709.7208,
+        "pendingAssetObserved": false,
+        "promiseCalls": 0,
+        "outputSha256": "882f764e6f91f3a183d892eeae84de440004aadc222cb4161d4307044679d9bd",
+        "outcome": "expected-success"
+      },
+      {
+        "mode": "image-failure",
+        "diagnostic": "Html.ImageUnavailable",
+        "outcome": "expected-failure-no-output"
+      },
+      {
+        "mode": "timeout",
+        "diagnostic": "Limit.ElapsedTime",
+        "outcome": "expected-failure-no-output"
+      },
+      {
+        "mode": "cancellation",
+        "outcome": "expected-caller-cancellation-no-output",
+        "signalToExitMilliseconds": 104.885
+      },
+      {
+        "mode": "crash",
+        "diagnostic": "Html.BrowserConnection",
+        "outcome": "expected-failure-no-output"
+      },
+      {
+        "mode": "after-crash",
+        "text": "A",
+        "pageCount": 1,
+        "inspectionCalls": 6,
+        "delayedAssets": 0,
+        "elapsedMilliseconds": 775.6149,
+        "pendingAssetObserved": false,
+        "promiseCalls": 0,
+        "outputSha256": "3ea6420e123419b39bc5318fd570f12a4300aa1e6d20d8588e2b1e6740982774",
+        "outcome": "expected-success"
+      }
+    ],
+    "productionQualified": false
+  },
+  "assetPins": {
+    "browserExecutableSha256": "4dc9f9f9b20e9bd95bf201f43d2d643f48938f36a70ddcb6fce3dd611a178180",
+    "nodeExecutableSha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+    "fontFileSha256": "300a09abebb8c2b2bbee36c2d55a8b9a57f94c1a61eae2644cb99c8451b3ce35",
+    "browserVersion": "154.0.8037.57",
+    "browserRevision": "@73c14f6228d7cd537c855007e8f88678969cc0eb"
+  },
+  "independentReportSha256": "9c1b83604e6f25356299fe1cca1a063a4a80acaf436aae19ddc8330c1bee3f8b",
+  "independentObservations": {
+    "purpose": "independent-original-readiness-source-output-observations-not-production-qualification",
+    "tools": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6",
+      "Poppler": "26.05.0"
+    },
+    "observations": [
+      {
+        "mode": "late-assets",
+        "pdfSha256": "dfa92d17b09a72bb61660432eaa6addc43b8d6b728de7ec956eb1af7ce611921",
+        "pageCount": 1,
+        "expectedUnicodeWithoutLayoutWhitespace": "AB一😀",
+        "text": {
+          "pypdf": "A B 一😀",
+          "MuPDF": "A B 一😀\n",
+          "Poppler": "A B 一😀\n\n\f"
+        },
+        "fonts": [
+          "/AAAAAA+FluentOriginalTrueType"
+        ],
+        "redRectangles": [
+          [
+            0.0,
+            18.0,
+            75.0,
+            48.0
+          ]
+        ],
+        "expectedRedRectanglePoints": [
+          75,
+          30
+        ],
+        "vectorTolerancePoints": 0.05,
+        "rasters": {
+          "mupdf": {
+            "redPixelCount": 2250,
+            "rasterSha256": "61f91e9f28b1e69e8eff83e77b7b0c259fc7c299755a53258ced5797967e6035"
+          },
+          "poppler": {
+            "redPixelCount": 2250,
+            "rasterSha256": "807ba8001f35ee7bc8cc87d714a96c19441e5e3b10045ac6343bd508f5abb5a7"
+          }
+        }
+      },
+      {
+        "mode": "promise",
+        "pdfSha256": "a3d93efc6ae6944b6c1f610a8f314fcc6084b7cb1bf96ccf0c206b911381c6bf",
+        "pageCount": 1,
+        "expectedUnicodeWithoutLayoutWhitespace": "AB",
+        "text": {
+          "pypdf": "A B",
+          "MuPDF": "A B\n",
+          "Poppler": "A B\n\n\f"
+        },
+        "fonts": [
+          "/AAAAAA+FluentOriginalTrueType"
+        ],
+        "redRectangles": [],
+        "expectedRedRectanglePoints": null,
+        "vectorTolerancePoints": null,
+        "rasters": {}
+      },
+      {
+        "mode": "polling",
+        "pdfSha256": "882f764e6f91f3a183d892eeae84de440004aadc222cb4161d4307044679d9bd",
+        "pageCount": 1,
+        "expectedUnicodeWithoutLayoutWhitespace": "AB",
+        "text": {
+          "pypdf": "A B",
+          "MuPDF": "A B\n",
+          "Poppler": "A B\n\n\f"
+        },
+        "fonts": [
+          "/AAAAAA+FluentOriginalTrueType"
+        ],
+        "redRectangles": [],
+        "expectedRedRectanglePoints": null,
+        "vectorTolerancePoints": null,
+        "rasters": {}
+      },
+      {
+        "mode": "after-crash",
+        "pdfSha256": "3ea6420e123419b39bc5318fd570f12a4300aa1e6d20d8588e2b1e6740982774",
+        "pageCount": 1,
+        "expectedUnicodeWithoutLayoutWhitespace": "A",
+        "text": {
+          "pypdf": "A",
+          "MuPDF": "A\n",
+          "Poppler": "A\n\n\f"
+        },
+        "fonts": [
+          "/AAAAAA+FluentOriginalTrueType"
+        ],
+        "redRectangles": [],
+        "expectedRedRectanglePoints": null,
+        "vectorTolerancePoints": null,
+        "rasters": {}
+      }
+    ],
+    "limitations": [
+      "Small fixed trusted original corpus only; not calibrated full visual/semantic/readiness corpus",
+      "Development observer does not qualify the OS isolation/memory/network boundary",
+      "Complete all-RID/runtime/final-package qualification remains mandatory"
+    ],
+    "productionQualified": false
+  },
+  "limitations": [
+    "Trusted original observer only; not a deployable SDK isolation host",
+    "Four small positive outputs and four expected failure/cancellation scenarios do not qualify the full site/fidelity/security corpus",
+    "All production qualification and release gates remain mandatory"
+  ],
+  "productionQualified": false
+}

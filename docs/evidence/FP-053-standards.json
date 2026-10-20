@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "purpose": "schema-and-format-source-observations-not-production-qualification",
+  "requirement": "FP-053",
+  "sources": [
+    {
+      "id": "S53-PUBLISHED-PACKAGE",
+      "version": "1.1.0",
+      "sourceRevision": "bc6ada467dd4626dd23dfbee5f848b21e9f67dc5",
+      "packageSha256": "073bc06d91367c340f6f031e8cf2066f8a18d735cd93968d37f346d77c7bd4e5"
+    },
+    {
+      "id": "S53-OPENXML-SCHEMA-TOOL",
+      "version": "3.5.1",
+      "profile": "Office2007schema",
+      "originalOutputs": 2,
+      "errors": 0
+    },
+    {
+      "id": "S53-PDF-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "scope": "PDF text/geometry observations reuse existing managed foundation; source actions remain passive."
+    }
+  ],
+  "decisions": [
+    "Original RTF control parsing and XML/package serialization expose explicit finite source profiles; no complete RTF/ISO29500/binary Word conformance claim is inferred from schema or declaration checks.",
+    "Independent Word97 piece-table interpretation is bounded to the original generated documents; unsupported document structures and full corpus validation remain mandatory.",
+    "Exact PNG pixels from an original synthetic renderer prove serialization/geometry contracts, not actual engine rendering or Word pagination/visual fidelity.",
+    "Explicit recovered Unicode and inferred page paragraphs carry distinct provenance; full editable reconstruction and fixed-layout fidelity remain mandatory."
+  ],
+  "independentReportSha256": "b808419f5a0d10248520513b5d2f27e830144fc2f161259c88c3ca490cfe8096",
+  "productionQualified": false
+}

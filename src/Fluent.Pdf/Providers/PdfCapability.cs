@@ -18,5 +18,15 @@ public enum PdfCapability
     /// <summary>Explicit offline font parsing, embedding and standard-font metrics.</summary>
     Fonts = 6,
     /// <summary>Explicit Unicode-aware glyph shaping with logical cluster provenance.</summary>
-    ShapeText = 7
+    ShapeText = 7,
+    /// <summary>Explicit offline CMS seed envelopes for certificate encryption.</summary>
+    CmsEnvelopes = 8,
+    /// <summary>Explicit complete independent PDF/A profile validation.</summary>
+    ValidateArchival = 9,
+    /// <summary>Explicit optional Word interchange with direction, reconstruction and fidelity diagnostics.</summary>
+    ConvertWord = 10,
+    /// <summary>Explicit complete independent PDF/UA validation, separate from human semantic review.</summary>
+    ValidateAccessibility = 11,
+    /// <summary>Explicit detached CMS signing and cryptographic integrity verification; trust is separate.</summary>
+    Signatures = 12
 }

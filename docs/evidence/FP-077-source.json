@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-077",
+  "sourceCommit": "4f5d6defefcf36b560b9631bf50b88840e5e1fbf",
+  "sourceTree": "deee33880b0c8f8503e3fcbeefa04422a1200662",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1262,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "05015fc5c5327de46f69e1bd7dcb62c69937f71a3e988a3be5640451f81dfa1a"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 180,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "95af175f65af463f191d982d4beaeb6cb975ec0866114bd4ab8b8821b89f62e5"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 180,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "37c44c5d1400b0f5b27665794b211cb2d3515b847c3cef95e1421f36a1374729"
+    }
+  ],
+  "newManagedScanCases": 23,
+  "sdkLibraries": 11,
+  "apiComparisons": 33,
+  "apiComparisonReportSha256": "519b8e47c6a6165bef42f93a451abbeaddc230e2aee1952db7781f9371f95c38",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Ocr/PdfScanContracts.cs": "cfaf5cec945f044e3b739bb9364b0a7edc4dd0784618ed9673733798e81ae070",
+    "src/Fluent.Pdf/Ocr/PdfScanDewarpGrid.cs": "ca4e33b4b0a22a0e4ca68513bfed62cf8889d64faacc1afb36742f96c7188a6e",
+    "src/Fluent.Pdf/Ocr/PdfScanGeometry.cs": "58e582e07a76aedc41d25e6a4f8d073752e0b2483793a16c5e65f70525bf774c",
+    "src/Fluent.Pdf/Ocr/PdfScanPreprocessing.cs": "1fe23bb9bf205b27fecefdaf6b6c9b01cd4d0c3933fb38d9546aff0f70513e19",
+    "src/Fluent.Pdf/Ocr/PdfScanLayoutContracts.cs": "47bc41be6bbeada47a4080196f5535e56a06a12c56a4cdddca196f7b2a180f02",
+    "src/Fluent.Pdf/Ocr/PdfScanLayout.cs": "f49ee5c6c8b76f1753998c9e890e36cd988692d4e3b304a87d2e5da2629fab23",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "940ce46b8a8165e94411ae6a7543234ece01b777a37db0f56f7b7034c781e2b1",
+    "tests/Fluent.Pdf.Contract.Tests/ScanTests.cs": "5a81c7c466613c9b972caccaad1b7c039ea423456ff1ad111bf00a85c545679c",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalFixture.cs": "cf92a5e57f9760ae46a5637923c4f7e56a702c3506c68670b71e070e5b265d82",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "5bfed422ffd570a0b0ed896f0ce6be280746dec329e8701f6f0254454eb86f00",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "677d2c5e12d03f839fc1a917d39f1cb9aa77bc791293b9fda73a58defc3b27f6"
+  },
+  "reports": {
+    "scan-final-spec.log": "26794619356fd563615fe0d8f89fe3d60e6e9697f7fc34a403ce4df15d601be6",
+    "scan-final-api.log": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c",
+    "scan-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "scan-final-fallback.log": "3e0d7e544e88dab6f0763b1c6c6eb8a7ad6e3a8875849ee33cd5fdba86ff60aa",
+    "scan-final-net8.log": "81c97b5b65686459a167f3251d1ac7c75b8384701aa2d7b97013f2b4d7cff492",
+    "scan-final-build.log": "7229cb69a1ce6ac94029c95fe98c70c0ccbffeb16d5dceb76dbc960e6c6f3808",
+    "scan-final-net10.log": "17966817bd38de5fda130a81fb39b1b026f43479bedefe3f9ce89d72663dede4",
+    "scan-fallback-build.log": "dce82417af908c75fcc3fcd59f0a73727e321bc290022d4bbf498f77c565e471",
+    "scan-normal-build.log": "fd92c2ce7ff4b2afa8bee01cf969b07b1f815e83e372ae9d2fcf0f99aace3461"
+  },
+  "independentReportSha256": "89f92af364575b44dd926973322a7db4f6b2a9f7cd31e213d8a8cfee7123ef90",
+  "orientationReportSha256": "ab8e76efd92903e92833efde53892511b657fefd086b0a1ca0f5932767ea4958",
+  "scope": [
+    "Explicit opt-in finite gray/median/contrast/threshold/orientation/deskew and caller-control vertical-curvature dewarping, preserving original samples",
+    "Exact inverse affine/nonlinear boundary mapping with prior error/point ceilings and same-context preprocessing/recognition/layout",
+    "Distinct bounded prose-column/heading order, declared table/form authority and unresolved closed-grid semantics; raw engine order remains immutable"
+  ],
+  "sourceFindings": [
+    "Core compile diagnostics were expected new public API declarations only; synchronized109declarations across the scan profiles.",
+    "Focused first20scan cases plus independent UA1/UA2 positives passed; final source includes C#/VB consumers and independent-job isolation.",
+    "Historical47Linuxx64CI had one malformed UA2 report while other completed hosts passed. Artifact ZIP retrieval is blocked by the local download proxy403. Added bounded test-host exit/byte-count and malformed-output prefix diagnostics; no SDK XML filtering, retry, deadline or acceptance weakening. Historical cause remains unconfirmed."
+  ],
+  "localNativeExclusions": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeTextTests",
+    "NativeRenderingTests",
+    "NativeOcrContractTests"
+  ],
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-115-source.json",
+    "snapshotStatus": "completed",
+    "completedRuntimeLanes": 20,
+    "knownFailedCases": 1,
+    "scope": "MacARMnetstandardfallback phase test measured its scheduled observer at1245.810ms although phase token signaled110.488ms.19otherlanes pass."
+  },
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete automatic curve/general deformation/semantic/table/form/reading-order profiles and labeled multilingual/scan/native/RID/runtime corpora remain mandatory.",
+    "Full independent fidelity/geometry/security/concurrency/endurance/performance and actual minimum/runtime/fallback qualification remain mandatory.",
+    "Exact final SDK packages, model/font/provenance qualification and every production gate remain mandatory."
+  ]
+}

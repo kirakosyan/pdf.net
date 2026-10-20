@@ -1,0 +1,3 @@
+# Independent archival source tool
+
+The optional SDK report bridge is original managed XML code and links no Java engine. Source tests explicitly provision a SHA-256-pinned veraPDF 1.28.2 distribution and Java runtime, and retain exact candidate/report/runtime evidence. The validator project declares dual GPLv3+/MPLv2+ licensing. The pinned jar retains its own notices; component and notice-entry digests are recorded in components.json. The engine is not redistributed in SDK packages. Complete release SBOM, licensing/security review, isolated-host deployment and runtime qualification remain mandatory.

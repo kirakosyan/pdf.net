@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-design-observations-not-production-qualification",
+  "requirement": "FP-026",
+  "sources": [
+    {
+      "id": "S26-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "9.3.2 character spacing and 9.3.3 single-byte code32 word spacing",
+        "9.4.2 text positioning; 9.4.3 quote/TJ operators and thousandth-text-unit signed displacement",
+        "9.10 Unicode mapping/extraction and 14.9.4 ActualText replacement",
+        "14.6 marked content and 14.8 structural associations"
+      ]
+    }
+  ],
+  "decisions": [
+    "Match source-order semantic Unicode without inventing separators or per-scalar ligature geometry",
+    "Require finite at-most-250ms regex calls and shared operation cancellation/deadline checkpoints",
+    "Remove exact complete source codes and compensate glyph plus spacing advances through signed TJ values",
+    "Keep unrelated source operators/ActualText and explicit source position; foreground black replacement is an explicit bounded profile",
+    "Reject unsupported target ActualText, tags, Forms and reflow rather than claiming accessibility/owner preservation",
+    "Retain historical/unreachable bytes and distinguish content editing from secure redaction"
+  ],
+  "productionQualified": false
+}

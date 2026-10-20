@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "purpose": "historical-source-ci-not-production-qualification",
+  "runId": 39205554152,
+  "sourceCommit": "b22fe20434ef595094848e0a4abcaf5617a93931",
+  "testedMergeCommit": "f2f1c1f5ce0ea604a68790f270e321d007e8308f",
+  "testedTree": "cd27b16d91488cde41c911afd1b08ff469a2836e",
+  "exactMergeTreeVerified": true,
+  "conclusion": "failure",
+  "platformJobs": 6,
+  "completedRuntimeLanes": 16,
+  "expectedRuntimeLanes": 20,
+  "passed": 21966,
+  "failed": 2,
+  "skipped": 0,
+  "jobs": [
+    {
+      "jobId": 117907490780,
+      "name": "Contracts (win-x64)",
+      "conclusion": "success",
+      "logSha256": "dd4c5cc9fb2fba93672090ef8ee899499ffdafcf60724a278b65f25d94bee684",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        }
+      ]
+    },
+    {
+      "jobId": 117907490931,
+      "name": "Contracts (osx-arm64)",
+      "conclusion": "failure",
+      "logSha256": "eeb4adc67402650f613a5b6fd180ff12e552235e843fae17d265ed1e2c1a6d91",
+      "completedLaneTotals": [
+        {
+          "failed": 1,
+          "passed": 1372,
+          "skipped": 0,
+          "total": 1373
+        }
+      ]
+    },
+    {
+      "jobId": 117907490941,
+      "name": "Contracts (linux-arm64)",
+      "conclusion": "success",
+      "logSha256": "b8263e576ec344c21dac8c5a5c5344eb65dd4c1cb04922cc046f319f983952fc",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        }
+      ]
+    },
+    {
+      "jobId": 117907490946,
+      "name": "Contracts (osx-x64)",
+      "conclusion": "failure",
+      "logSha256": "2202d810a476ec3ca8365f6b8b060765c56a8e219793f8fcb4ca188307f98048",
+      "completedLaneTotals": [
+        {
+          "failed": 1,
+          "passed": 1372,
+          "skipped": 0,
+          "total": 1373
+        }
+      ]
+    },
+    {
+      "jobId": 117907490998,
+      "name": "Contracts (win-arm64)",
+      "conclusion": "success",
+      "logSha256": "48c4ad712ebdd2caed59dc2c6fd2eac00e38fcf0a7d26d70b94fe0b5e6a594c0",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        }
+      ]
+    },
+    {
+      "jobId": 117907491035,
+      "name": "Contracts (linux-x64)",
+      "conclusion": "success",
+      "logSha256": "3f7fccd67f2d2773ecb3528329bf0b2f29453bbd4393c829b854d4e0ebc74437",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        },
+        {
+          "failed": 0,
+          "passed": 1373,
+          "skipped": 0,
+          "total": 1373
+        }
+      ]
+    }
+  ],
+  "metadataSha256": "6cefd68fb923c0368fddea253b1d759b98d768f70bf6b0b5f8df92e5d2f93975",
+  "artifacts": [
+    {
+      "id": 12166286153,
+      "name": "source-contracts-win-x64",
+      "digestFromGitHub": "sha256:a220407e58eaad9150d89071eef5cca4a411c3ad0ae0845d3a6576acdda32941",
+      "sizeBytes": 3583356,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39205554152/artifacts/12166286153"
+    },
+    {
+      "id": 12165896262,
+      "name": "source-contracts-osx-x64",
+      "digestFromGitHub": "sha256:1e020de8067d22d0b37a02b7e3ee0f14636e97d28b5a438fba00a29f3ea4f5d9",
+      "sizeBytes": 780582,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39205554152/artifacts/12165896262"
+    },
+    {
+      "id": 12165328951,
+      "name": "source-contracts-osx-arm64",
+      "digestFromGitHub": "sha256:d3a2d965a0b97488039f88c9f0f245de4599424310a42f8f53ca1939cddb01b9",
+      "sizeBytes": 775391,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39205554152/artifacts/12165328951"
+    },
+    {
+      "id": 12164953976,
+      "name": "source-contracts-linux-x64",
+      "digestFromGitHub": "sha256:a50acbb32431a32acaae78176f3cfbebc8a060102c59a9ee484bcd5addfe3d43",
+      "sizeBytes": 2190661,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39205554152/artifacts/12164953976"
+    },
+    {
+      "id": 12164859836,
+      "name": "source-contracts-win-arm64",
+      "digestFromGitHub": "sha256:0ee62d3f3b3083c38b5e92c3891d6023860982e79a6c3c3a07a39a09e0444624",
+      "sizeBytes": 2193449,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39205554152/artifacts/12164859836"
+    },
+    {
+      "id": 12164724662,
+      "name": "source-contracts-linux-arm64",
+      "digestFromGitHub": "sha256:85e8794739d2d8f222f92692b4c036b60d95b66870c533ec31483cd9a4c3d1d9",
+      "sizeBytes": 2192107,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39205554152/artifacts/12164724662"
+    }
+  ],
+  "retention": "All six decoded logs and exact workflow/artifact metadata retained outside Git. ZIP payload retrieval remains unavailable through the local proxy; no ZIP payload is claimed retained.",
+  "knownFailure": "Both macOS first.NET8 lanes fail the original PKCS12 import/signing contract because AppleCertificatePal rejects EphemeralKeySet. Fourteen other executed lanes pass; four later macOS lanes were unexecuted.",
+  "followup": "Replace native private-PFX loading with an original bounded DER parser over pinned BouncyCastle.Cryptography2.7.0 managed KDF/HMAC/cipher primitives. Verify MAC, bound encoded KDF work/bags/keys, import RSA parameters into an owned memory-only handle and load only public certificate DER. The same path supports all four frameworks. No persisted-key fallback, skip, weakened assertion or conditional expected failure. Six new credential/security cases supplement the unchanged original contract.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "limitations": [
+    "New exact-head unfiltered20lane CI remains mandatory.",
+    "Source fixtures and managed positive probes do not qualify final packages, minimum runtimes or full crypto/trust/security suites."
+  ]
+}

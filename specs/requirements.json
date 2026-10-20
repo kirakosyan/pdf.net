@@ -206,7 +206,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/repair.md",
+        "implemented": [
+          "Separate strict structural inspection and explicit one-revision classic-index recovery with unique exact lexical frames and authoritative active/free identities",
+          "Caller-authorized exact stream lengths and active inventories, explicit orphan/signature/null-reference policies, complete object ledger and unchanged original-source views",
+          "Shared-context private full rewrite and strict post-validation before output; C#/VB consumers and two independent reader observations"
+        ],
+        "pending": [
+          "Revision/hybrid/compressed/encrypted recovery and additional stream/codec/content repair profiles remain mandatory",
+          "Complete damaged/ambiguous corpus, resource/fuzz/concurrency/endurance campaigns and actual minimum runtimes remain mandatory",
+          "Exact final-package consumers and every production qualification gate remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-006-standards.json",
+        "sourceEvidence": "docs/evidence/FP-006-source.json",
+        "independentEvidence": "docs/evidence/FP-006-independent.json"
+      }
     },
     {
       "id": "FP-007",
@@ -708,7 +725,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/stamps.md",
+        "implemented": [
+          "Immutable drawing/shaped-text/image/passive-page/explicit HTML capture and shared-context rendering/import/detachment",
+          "Exact page/group application, foreground/background, isolated RGB group opacity, rotation/fitting/repetition and Artifact classification",
+          "Canonical owned stream/scope validation, persistence/update/removal with unrelated resource preservation, source contracts and independent original output observations"
+        ],
+        "pending": [
+          "Complete interactive/structure/optional-content owner imports and semantic tagged authoring remain mandatory",
+          "Complete blending-space/color, font/HTML/content and qualified cleanup/performance/endurance profiles remain mandatory",
+          "All actual mandatory RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-018-source.json",
+        "standardsEvidence": "docs/evidence/FP-018-standards.json",
+        "independentEvidence": "docs/evidence/FP-018-independent.json"
+      }
     },
     {
       "id": "FP-019",
@@ -866,7 +900,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/metadata.md",
+        "implemented": [
+          "Passive Unicode Info and bounded offline XML/XMP inspection and editing with custom namespace retention",
+          "Explicit dates, caller-selected identifiers and authority-controlled Info/XMP synchronization",
+          "Full-rewrite metadata removal including old revisions, unreachable objects and explicit embedded-file retention decision"
+        ],
+        "pending": [
+          "Complete metadata interoperability/corpus review and production qualification",
+          "Actual minimum runtimes and exact final package consumers; publication remains blocked"
+        ],
+        "standardsEvidence": "docs/evidence/FP-022-standards.json",
+        "sourceEvidence": "docs/evidence/FP-022-source.json",
+        "independentEvidence": "docs/evidence/FP-022-independent.json"
+      }
     },
     {
       "id": "FP-023",
@@ -894,7 +944,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/attachments.md",
+        "implemented": [
+          "Passive all-active-object file/variant/orphan inventory and bounded Size/MD5-checked extraction",
+          "Unicode embedding with explicit MIME/dates and PDF 2.0 catalog associated-file relationships",
+          "Standard collection schema/sort/item authoring and full-rewrite embedded-file/revision removal"
+        ],
+        "pending": [
+          "Complete portfolio, archival and associated-file interoperability corpora and review",
+          "Actual minimum runtimes, exact final package consumers and every production qualification gate"
+        ],
+        "standardsEvidence": "docs/evidence/FP-023-standards.json",
+        "sourceEvidence": "docs/evidence/FP-023-source.json",
+        "independentEvidence": "docs/evidence/FP-023-independent.json"
+      }
     },
     {
       "id": "FP-024",
@@ -921,7 +987,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/layers.md",
+        "implemented": [
+          "Passive registered group/configuration inventory, explicit intent/usage state evaluation and nested membership expressions",
+          "Unicode group/configuration authoring, selected initial view and cloned page XObject membership binding",
+          "Managed bounded page/Form/image/appearance flattening with explicit state-dependency rejection and page extraction retention"
+        ],
+        "pending": [
+          "Additional glyph/pattern/mask, interactive/structure and text-state flattening profiles remain mandatory",
+          "SDK renderer integration, full optional-content/fidelity corpus and all actual-runtime/final-package production qualification"
+        ],
+        "standardsEvidence": "docs/evidence/FP-024-standards.json",
+        "sourceEvidence": "docs/evidence/FP-024-source.json",
+        "independentEvidence": "docs/evidence/FP-024-independent.json"
+      }
     },
     {
       "id": "FP-025",
@@ -952,7 +1034,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/text-extraction.md",
+        "implemented": [
+          "Bounded page/Form text-state interpretation with Unicode mapping provenance, ActualText and explicit layer/nonpainting selection",
+          "Raw code order, semantic text and separate geometric word/line/paragraph inference",
+          "Declared simple/CID/vertical metrics and native/display advance cells, plus explicit standard encoding-metrics provider and C#/VB consumers"
+        ],
+        "pending": [
+          "Additional source CMap/CID, arbitrary glyph-matrix and linguistic/column/ink/appearance extraction profiles remain mandatory",
+          "Complete multilingual/geometry/fidelity corpus, all actual runtimes, exact final packages and every production qualification gate"
+        ],
+        "standardsEvidence": "docs/evidence/FP-025-standards.json",
+        "sourceEvidence": "docs/evidence/FP-025-source.json",
+        "independentEvidence": "docs/evidence/FP-025-independent.json"
+      }
     },
     {
       "id": "FP-026",
@@ -980,7 +1078,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/text-search.md",
+        "implemented": [
+          "Finite literal/regex/case/region/font search across runs/streams/Forms with semantic ActualText and honest cluster provenance",
+          "Explicit font/shaping/overflow and exact source-code removal/TJ advance compensation; source snapshot/unrelated accessibility retention",
+          "Meaningful source contracts, executable C#/VB consumers and independent original output text/position/raster observations"
+        ],
+        "pending": [
+          "Complete Form/structure/MCID/ActualText replacement, color/z-order and all text geometry profiles remain mandatory",
+          "Complete paragraph/run reflow, ink/font/shaping/overflow profiles and full deterministic corpora remain mandatory",
+          "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-026-source.json",
+        "standardsEvidence": "docs/evidence/FP-026-standards.json",
+        "independentEvidence": "docs/evidence/FP-026-independent.json"
+      }
     },
     {
       "id": "FP-027",
@@ -1006,7 +1121,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/table-extraction.md",
+        "implemented": [
+          "Explicit literal ruled/aligned borderless inference with inferred bounds/scores and rectangular merged-cell spans",
+          "Semantic/source-character/rule provenance, explicit decimal culture and opt-in page/header continuation retaining original tables",
+          "Bounded explicit merged-cell CSV and typed JSON/atomic JSON files; source/runtime consumers and independent original labeled observations"
+        ],
+        "pending": [
+          "Complete multiple/irregular/rotated/conditional/clip/owner, borderless-merge, automatic header and wrapped continuation profiles remain mandatory",
+          "Complete typed cultural/schema/date/boolean profiles and full labeled precision/recall/continuation corpora remain mandatory",
+          "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-027-source.json",
+        "standardsEvidence": "docs/evidence/FP-027-standards.json",
+        "independentEvidence": "docs/evidence/FP-027-independent.json"
+      }
     },
     {
       "id": "FP-028",
@@ -1035,7 +1167,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/resource-extraction.md",
+        "implemented": [
+          "Shared definitions separate from effective bindings and actual page/Form operator occurrences",
+          "Nested/per-segment transforms, explicit artifact associations and owned stamp integration",
+          "Exact encoded stream export, explicit decoding and explicit provider font/restriction inspection; source contracts and independent original-fixture observations"
+        ],
+        "pending": [
+          "Complete pattern/glyph/soft-mask program expansion, resource/font/image and visibility/color/clip profiles remain mandatory",
+          "Complete stamp/decoration classification and full content/corpus coverage remain mandatory",
+          "All actual mandatory RIDs/minimum/current/fallback runtimes, exact final packages and full production gates remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-028-source.json",
+        "standardsEvidence": "docs/evidence/FP-028-standards.json",
+        "independentEvidence": "docs/evidence/FP-028-independent.json"
+      }
     },
     {
       "id": "FP-029",
@@ -1091,12 +1240,28 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/FP-030-source.json",
+        "docs/evidence/FP-030-independent.json",
+        "docs/evidence/FP-030-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/redaction.md",
+        "sourceEvidence": "docs/evidence/FP-030-source.json",
+        "implemented": [
+          "Explicit sample replacement before encoding; fresh raster-only graph discards all original programs, metadata, attachments, actions, layers, signatures and revisions",
+          "Bounded shared-context rendering/masking/encoding/full writing, payload-free coverage audit, empty borrowed sinks and atomic files"
+        ],
+        "pending": [
+          "Complete selective editable-content preservation and rendering/security/recovery corpora remain mandatory",
+          "All actual minimum/runtime/native/final-package and production qualification gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-031",
@@ -1126,7 +1291,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/security.md",
+        "implemented": [
+          "Original standard R6/AES256 and explicit R4/AES128 protection, owner/user authentication, opt-in legacy input and bounded object crypt filters",
+          "Explicit certificate/RSA credentials, optional offline CMS provider, effective recipient permission grouping and AES public-key protection",
+          "Shared-context parsing/full rewrites, encrypted object streams and stable history, signature rewrite controls, C#/VB consumers and independent interoperability observations"
+        ],
+        "pending": [
+          "Complete prepared-Unicode, independently keyed/multiple/embedded-only filters, additional CMS/bootstrap/history and key-provider profiles remain mandatory",
+          "Full independent security corpus, fuzzing, concurrency/endurance, actual minimum runtimes and exact final-package consumers remain mandatory",
+          "All production qualification and dependency/security review remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-031-standards.json",
+        "independentEvidence": "docs/evidence/FP-031-independent.json",
+        "sourceEvidence": "docs/evidence/FP-031-source.json"
+      }
     },
     {
       "id": "FP-032",
@@ -1151,12 +1333,29 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/FP-032-source.json",
+        "docs/evidence/FP-032-independent.json",
+        "docs/evidence/FP-032-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/signatures.md",
+        "sourceEvidence": "docs/evidence/FP-032-source.json",
+        "implemented": [
+          "Exact incremental detached CMS byte-range reservation, earlier signed-prefix preservation, immutable results and atomic signing files",
+          "Pre-created visible/invisible fields, shared-context explicit PKCS12/borrowed RSA providers and cryptographic self-verification",
+          "DocMDP first-signature order, FieldMDP selections, validated unlocked-field signing and conservative generic writer protection"
+        ],
+        "pending": [
+          "Complete signature/trust/revocation/PAdES, general certification-permitted edit classes and key/PKCS12/store/native/RID/runtime corpora remain mandatory",
+          "Every actual minimum/runtime/final-package and production gate remains mandatory"
+        ]
+      }
     },
     {
       "id": "FP-033",
@@ -1272,7 +1471,23 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/forms.md",
+        "implemented": [
+          "Passive inherited field/widget inventories and valid logical duplicate representations",
+          "Seven standard field kinds, explicit private appearances/default editing fonts, hierarchy, state/choice synchronization and C#/VB consumers",
+          "Identity-preserving common-flag/same-page widget/tab edits and policy-checked passive calculation metadata"
+        ],
+        "pending": [
+          "Interactive multilingual appearance regeneration, merged/legacy consolidation, new tagged field creation and cross-page structure relocation profiles remain mandatory",
+          "Full subtype/viewer fill/edit corpus, actual minimum runtimes, exact final packages and all production qualification gates"
+        ],
+        "standardsEvidence": "docs/evidence/FP-036-standards.json",
+        "sourceEvidence": "docs/evidence/FP-036-source.json",
+        "independentEvidence": "docs/evidence/FP-036-independent.json"
+      }
     },
     {
       "id": "FP-037",
@@ -1301,7 +1516,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/form-workflows.md",
+        "implemented": [
+          "Immutable field-value extraction and explicit bounded FDF/XFDF/XML/JSON profiles with entity/schema/ownership rejection",
+          "Transactional filling, exact button states, choice index synchronization, shared-context Unicode appearances and C#/VB workflows",
+          "Separate field/widget copying with font/page rebinding, appearance decoration and selective static flattening with retained remaining identities and explicit incremental byte preservation"
+        ],
+        "pending": [
+          "Additional full FDF/choice/file-selection, arbitrary XFDF byte-name, text-stream/rich-text and automatic list/comb/alignment/state appearance profiles remain mandatory",
+          "Legacy/merged/tagged ownership conversion, broader default-resource rebinding and inheritance materialization profiles remain mandatory",
+          "Independent signature/transform verification and full corpus/fidelity/viewer, actual minimum-runtime, exact-package and production qualification remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-037-standards.json",
+        "sourceEvidence": "docs/evidence/FP-037-source.json",
+        "independentEvidence": "docs/evidence/FP-037-independent.json"
+      }
     },
     {
       "id": "FP-038",
@@ -1392,7 +1624,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/rendering.md",
+        "implemented": [
+          "Optional isolated candidate engine adapter with immutable request/result contracts, explicit integer-grid DPI/crop/alpha/device-color semantics and headless operation",
+          "Shared-context source preparation, page/Form/resource validation, explicit existing appearance/print visibility and offline embedded-font policy",
+          "Bounded fresh-process IPC with exact asset/version inventory, OS isolation, pixel/output/memory limits, cancellation and original C ABI bridge; C#/VB consumers"
+        ],
+        "pending": [
+          "Complete rendering/font/appearance/color/extension profiles and independent large visual/semantic fidelity corpus remain mandatory",
+          "Engine source/build provenance and license/security audit, transitive dependency and actual minimum OS/runtime validation remain mandatory",
+          "All-platform concurrency, fuzzing, endurance and exact final-package consumers and production qualification remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-040-standards.json",
+        "independentEvidence": "docs/evidence/FP-040-independent.json",
+        "sourceEvidence": "docs/evidence/FP-040-source.json"
+      }
     },
     {
       "id": "FP-041",
@@ -1506,7 +1755,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-rendering.md",
+        "implemented": [
+          "Bounded immutable HTML/file-stream/addressed-resource capture, explicit script/print options and shared-context browser-PDF import into the editable model",
+          "Original optional version/revision-bound DevTools adapter with fresh private contexts, explicit resource interception, native lifecycle/isolated font readiness and bounded streamed output",
+          "C#/VB consumers, protocol/resource/ownership/failure tests and an explicit pinned trusted-original Linux browser fixture observer"
+        ],
+        "pending": [
+          "Complete HTML/layout/font/script/subtarget/resource/print profiles remain mandatory through their owning requirements",
+          "Qualified deployable OS host, complete engine/assets/fonts/license/security adoption and actual browser behavior on every required RID/runtime remain mandatory",
+          "Full fidelity/accessibility/security/fuzz/concurrency/endurance, actual minimum runtimes and exact final-package consumers remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-044-source.json",
+        "standardsEvidence": "docs/evidence/FP-044-standards.json",
+        "independentEvidence": "docs/evidence/FP-044-independent.json"
+      }
     },
     {
       "id": "FP-045",
@@ -1534,7 +1800,25 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-resources.md",
+        "implemented": [
+          "Explicit offline default, exact-origin and every-DNS-answer admission, numeric endpoint transport and unique bounded browser redirects",
+          "Private per-job/per-origin cookies/headers, explicit CONNECT proxy and TLS client/pinned server certificates; modern owned cancellable HTTP transport",
+          "Bounded protected-file/data snapshots, same-context browser acquisition, C#/VB source consumers and source/actual local protocol fixtures"
+        ],
+        "pending": [
+          "Complete legacy/portable transport and decoding profiles, race-safe protected-file OS adapters and complete authentication/site/proxy profiles remain mandatory",
+          "Qualified browser host isolation, certificate/IDNA/address-registry review and every actual supported runtime/RID remain mandatory",
+          "Complete security/fuzz/resource/concurrency/endurance/performance and exact final-package consumers remain mandatory",
+          "Complete Windows certificate-less/PKI-chain TLS and runtime credential-cache isolation/servicing remain mandatory; restricted built-in source profiles do not waive Windows support"
+        ],
+        "sourceEvidence": "docs/evidence/FP-045-source.json",
+        "standardsEvidence": "docs/evidence/FP-045-standards.json",
+        "independentEvidence": "docs/evidence/FP-045-independent.json"
+      }
     },
     {
       "id": "FP-046",
@@ -1561,7 +1845,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-readiness.md",
+        "implemented": [
+          "Immutable bounded selectors/promises/document/font/image/network readiness and explicit locale/timezone/media controls",
+          "Shared nested phase deadlines across resource/browser I/O, permanent expiry latching, cancellation and private-host failure/fresh-job behavior",
+          "C#/VB consumers, source deadline/lifecycle/asset/error cases and actual pinned trusted-original browser/independent output observations"
+        ],
+        "pending": [
+          "Complete child-frame, worker/OOPIF, replacement-navigation, interactive and full dynamic site/font/image profiles remain mandatory",
+          "Complete deployable browser host isolation/termination and actual supported RID/runtime/minimum/fallback/final-package consumers remain mandatory",
+          "Full fidelity/security/fuzz/resource/concurrency/endurance/performance qualification remains mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-046-source.json",
+        "standardsEvidence": "docs/evidence/FP-046-standards.json",
+        "independentEvidence": "docs/evidence/FP-046-independent.json"
+      }
     },
     {
       "id": "FP-047",
@@ -1589,7 +1890,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/html-printing.md",
+        "implemented": [
+          "Immutable print policy preserving existing constructors; explicit paper/CSS fit, landscape, scale and point margins",
+          "Bounded resource-free template normalization and final-page native counters",
+          "Passive same-context page-MCID/structure/parent-tree association validation, original contracts and independent actual-browser print observations"
+        ],
+        "pending": [
+          "Complete print CSS/long-report/clipping/template assets and deterministic template-font profiles remain mandatory",
+          "Full tagged Form/object/role/attribute/namespace profiles and independent PDF/UA plus semantic/human accessibility review remain mandatory",
+          "Complete host isolation, actual mandatory RIDs/minimum/current/fallback/final packages and production quality gates remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-047-source.json",
+        "standardsEvidence": "docs/evidence/FP-047-standards.json",
+        "independentEvidence": "docs/evidence/FP-047-independent.json"
+      }
     },
     {
       "id": "FP-048",
@@ -1678,7 +1996,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/input-conversion.md",
+        "implemented": [
+          "Strict BOM-aware Unicode and original bounded Markdown/version-one JSON/XML conversion under one shared parse/bind/layout/provider/write context",
+          "Explicit culture, styles, captured named drawings, scalar templates and passive ASCII URI annotations through nested Form geometry",
+          "DTD/resolver/action/resource denial, strict/permissive loss diagnostics, atomic files, executable C#/VB consumers and independent original outputs"
+        ],
+        "pending": [
+          "Complete Markdown and structured-document schema/semantic/accessibility/resource/culture/language fidelity profiles remain mandatory",
+          "Complete malformed/fuzz/large/concurrency/endurance/security/provider and independent corpus qualification remain mandatory",
+          "All required RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-050-source.json",
+        "standardsEvidence": "docs/evidence/FP-050-standards.json",
+        "independentEvidence": "docs/evidence/FP-050-independent.json"
+      }
     },
     {
       "id": "FP-051",
@@ -1768,7 +2103,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/word-conversion.md",
+        "implemented": [
+          "Explicit core Word interchange provider contracts and optional exact published wordnet1.1.0 adapter with pinned source/package identities and no core dependency cycle",
+          "Original bounded RTF/WordprocessingML conversion, passive package preflight and explicit fixed-raster/editable-text reconstruction with recovered-versus-inferred provenance and all-loss diagnostics",
+          "Shared context across capture/preflight/font/provider/extraction/render/write boundaries, atomic files, executable C#/VB consumers and independent original-format observations"
+        ],
+        "pending": [
+          "Complete bidirectional DOC/DOCX/RTF feature, fixed/editable reconstruction, story/field/table/floating/linguistic/resource/fidelity profiles remain mandatory",
+          "Complete opaque dependency/host/resource/security/fuzz/concurrency/endurance and independent invoice/floating/table/scanned/multilingual corpus qualification remain mandatory",
+          "All required RIDs/minimum/current/fallback runtimes, exact final SDK packages and every production gate remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-053-source.json",
+        "standardsEvidence": "docs/evidence/FP-053-standards.json",
+        "independentEvidence": "docs/evidence/FP-053-independent.json"
+      }
     },
     {
       "id": "FP-054",
@@ -2168,7 +2520,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/archival.md",
+        "implemented": [
+          "Explicit selection for all11 archival profiles; managed common preflight and full rewrite with synchronized XMP, IDs, caller ICC output intents and explicit-map CIDSet repair",
+          "Mandatory complete independent validation bound to exact output bytes/profile before any converted output; malformed/incomplete/mismatched observations fail closed",
+          "Optional bounded pinned report bridge with explicit caller host; actual independent source fixtures, repair diagnostics, C#/VB consumers and shared-context resource policies"
+        ],
+        "pending": [
+          "Complete source/font/color/form/attachment/extension conversions and repairs, recursive archival attachments and full level-A semantic/human review remain mandatory",
+          "SDK-owned isolated validation host, complete engine/dependency and actual minimum runtime qualification remain mandatory",
+          "Complete independent standards/fidelity corpus, fuzz/concurrency/endurance, exact final packages and every production gate remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-066-standards.json",
+        "sourceEvidence": "docs/evidence/FP-066-source.json",
+        "independentEvidence": "docs/evidence/FP-066-independent.json"
+      }
     },
     {
       "id": "FP-067",
@@ -2202,7 +2571,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/accessibility.md",
+        "implemented": [
+          "Explicit native logical structure plans with roles/language/author descriptions/table IDs and page/Form/annotation associations",
+          "Passive bounded MCID/parent-tree consistency inspection and identity-preserving semantic/reading-order remediation",
+          "Optional complete exact-input UA1/UA2 report validation with separate explicit human review observations"
+        ],
+        "pending": [
+          "Complete PDF/UA1/UA2 semantic/role/namespace/class-map/attribute/font/language/table/form/appearance profiles and tag-aware content/edit/merge fidelity remain mandatory",
+          "Independent full corpus, human and screen-reader review, security/fuzz/concurrency/endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
+          "Exact final SDK packages and all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-068",
@@ -2416,7 +2799,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/local-ocr.md",
+        "implemented": [
+          "Explicit immutable raster/recognition/Unicode/word geometry/confidence contracts and same-context provider validation",
+          "Optional original bounded isolated Tesseract5 C API/TSV bridge with explicit pinned engine/model paths, version and precise export/error diagnostics",
+          "Reviewed narrow MIT attribution and finite API/monitor/text/raster/worker ownership; no Word/OCR package cycle or implicit download"
+        ],
+        "pending": [
+          "Complete actual native Tesseract/model integration on every required RID/runtime, cancellation/allocation/handle/concurrency/endurance and security qualification remain mandatory",
+          "Pinned labeled language/scan corpus CER/WER, independent geometry/accuracy/fidelity and every required minimum/current/fallback runtime qualification remain mandatory",
+          "Exact final SDK packages, dependency/model provenance qualification and all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-075",
@@ -2438,12 +2835,29 @@
       "validation": "Labeled multilingual corpus with character/word error rates and per-language release thresholds.",
       "evidence": [
         "WN01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-075-source.json",
+        "docs/evidence/FP-075-independent.json",
+        "docs/evidence/FP-075-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/ocr-models.md",
+        "implemented": [
+          "Explicit immutable local model provenance/catalog selection and exact ordered version/content identities",
+          "Optional same-context native mixed-language selection with exact loaded-model binding; no model discovery/download/fallback",
+          "Bounded Unicode-scalar CER/ordinal-word WER with prior per-language thresholds, exact corpus digests and separate model-version groups"
+        ],
+        "pending": [
+          "Complete multilingual/script/scan corpora and actual native-engine/RID/runtime qualification remain mandatory; retained mixed-language subset fails prior thresholds",
+          "Independent fidelity/geometry, security, concurrency/endurance/performance and minimum/runtime/fallback qualification remain mandatory",
+          "Exact final SDK packages, model provenance/licensing qualification and all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-076",
@@ -2467,12 +2881,29 @@
       "validation": "Pixel and text-position comparisons, mixed scanned/digital pages and independent extraction tests.",
       "evidence": [
         "WN01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-076-source.json",
+        "docs/evidence/FP-076-independent.json",
+        "docs/evidence/FP-076-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/searchable-ocr.md",
+        "implemented": [
+          "Explicit raster-to-page frames across crop, rotation and UserUnit; original raster-preserving invisible text with embedded mappings",
+          "Finite geometric existing-digital-word policies and same-context render/capture/recognize/shape/write workflow",
+          "Bounded exact text/versionedJSON/hOCR/ALTO4 output with confidence provenance and atomic file saves"
+        ],
+        "pending": [
+          "Complete explicit tagged-content associations, real OCR/script/scan/native/RID and visual/semantic fidelity profiles remain mandatory",
+          "Independent full corpora, security, concurrency/endurance/performance, actual minimum/runtime/fallback qualification remain mandatory",
+          "Exact final SDK packages and every production gate remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-077",
@@ -2496,12 +2927,29 @@
       "validation": "Rotated, skewed, noisy, low-resolution and multi-column labeled corpus; accuracy and geometry reports.",
       "evidence": [
         "WN01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-077-source.json",
+        "docs/evidence/FP-077-independent.json",
+        "docs/evidence/FP-077-standards.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/scan-processing.md",
+        "implemented": [
+          "Opt-in bounded gray/median/contrast/threshold/orientation/deskew and explicit bilinear vertical-curvature dewarping with exact original preservation",
+          "Inverse affine/nonlinear word-boundary mapping with prior certified chord error and finite point limits",
+          "Separate bounded prose-column/heading order, explicit table/form authority and unresolved literal-grid semantics, with same-context preprocessing/OCR/layout"
+        ],
+        "pending": [
+          "Complete automatic curve/general deformation/semantic/table/form/reading-order profiles and labeled multilingual/scan/native/RID/runtime corpora remain mandatory",
+          "Full independent fidelity/geometry/security/concurrency/endurance/performance and actual minimum/runtime/fallback qualification remain mandatory",
+          "Exact final SDK packages, model/font/provenance qualification and every production gate remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-078",
@@ -3252,7 +3700,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/pdf-compatibility.md",
+        "implemented": [
+          "Explicit strict PDFDocEncoding/UTF-16BE/UTF-8 text values, typed PDF 2.0 Info output and passive version/extension/namespace/associated-file inventory",
+          "Reserved Extensions Type handling, direct ASCII documentation URL/revision authoring, version negotiation and exact opaque source graph/stream retention tests",
+          "C#/VB consumers, source matrix and independent reader observations"
+        ],
+        "pending": [
+          "Complete normative PDF 1.x/2.0 and extension schema/directness/semantics corpus remains mandatory",
+          "Complete text-placement/language-escape coverage, resource/fuzz/concurrency/endurance campaigns and actual minimum runtimes remain mandatory",
+          "Exact final-package consumers and every production qualification gate remain mandatory"
+        ],
+        "standardsEvidence": "docs/evidence/FP-098-standards.json",
+        "sourceEvidence": "docs/evidence/FP-098-source.json",
+        "independentEvidence": "docs/evidence/FP-098-independent.json"
+      }
     },
     {
       "id": "FP-099",
@@ -3283,7 +3748,24 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "state": "source-validation",
+        "contract": "docs/data-generation.md",
+        "implemented": [
+          "Typed finite record/template generation and explicit culture/scalar/table binding under one shared operation context",
+          "Ordered immutable precommit record/layout/final-page/save observations with phase/thread/lifetime/cycle/resource guards",
+          "Atomic same-context generation/writing, reusable page decorations, executable C#/VB consumers and independent original outputs"
+        ],
+        "pending": [
+          "Complete document-wide editing/page/layout/save integration and asynchronous/uncooperative callback/host profiles remain mandatory",
+          "Complete deterministic schema/culture/resource/provider/large-data corpora and callback/concurrency/endurance validation remain mandatory",
+          "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+        ],
+        "sourceEvidence": "docs/evidence/FP-099-source.json",
+        "standardsEvidence": "docs/evidence/FP-099-standards.json",
+        "independentEvidence": "docs/evidence/FP-099-independent.json"
+      }
     },
     {
       "id": "FP-100",
@@ -3679,7 +4161,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/mail-merge.md",
+        "implemented": [
+          "Closed immutable scalar/record/finite-collection/image values and native paragraph/repeat/boolean/table templates",
+          "Original bounded DOCX split-run/scalar/content-control binding with explicit culture/missing policies and passive package preservation",
+          "Shared-context native generation and optional pinned Word PDF export; stable limits, cancellation and atomic ownership"
+        ],
+        "pending": [
+          "Complete DOCX/native field/control/story/identity/layout/linguistic/fidelity profiles remain mandatory",
+          "Complete hostile-input, independent corpus, fuzz, concurrency, endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
+          "Exact final SDK packages and all production gates remain mandatory"
+        ]
+      }
     }
   ]
 }

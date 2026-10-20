@@ -1,0 +1,7 @@
+#nullable enable
+Fluent.Pdf.Rendering.IsolatedPdfRenderer
+Fluent.Pdf.Rendering.IsolatedPdfRenderer.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Rendering.IsolatedPdfRenderer.IsolatedPdfRenderer(Fluent.Pdf.Workers.NativeWorkerOptions! worker) -> void
+Fluent.Pdf.Rendering.IsolatedPdfRenderer.Render(Fluent.Pdf.PdfRasterRequest! request, System.IO.Stream! bgraOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+const Fluent.Pdf.Rendering.IsolatedPdfRenderer.BridgeAbi = "fluent-pdf-render-1" -> string!
+const Fluent.Pdf.Rendering.IsolatedPdfRenderer.BridgeVersion = "153.0.7999.0" -> string!

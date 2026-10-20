@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "purpose": "passing-source-ci-not-production-qualification",
+  "runId": 39147687640,
+  "sourceCommit": "bc5dae21b7a0a56d4943aeea361d32b4801e8f2e",
+  "testedMergeCommit": "c567b4b958980ae6ba9b6d9ce829893c45c412c8",
+  "testedTree": "b25c87da960bdb56ac2273ee841b9cb44ad812aa",
+  "exactMergeTreeVerified": true,
+  "platformJobs": 6,
+  "runtimeLanes": 20,
+  "passed": 19900,
+  "failed": 0,
+  "skipped": 0,
+  "notExecutedLanes": [],
+  "apiComparisonsPerJob": 27,
+  "jobs": [
+    {
+      "jobId": 117734762330,
+      "logSha256": "a99bab186b56866b2f5a9ae88c1dfe0036c305585bc01735ec5b84a7790d8059",
+      "runtimeLaneTotals": [
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        }
+      ]
+    },
+    {
+      "jobId": 117734762424,
+      "logSha256": "9538786490a283ce0c5ae83ed1d67725dcff67f1dd7893e41cec7fd51261f8fd",
+      "runtimeLaneTotals": [
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        }
+      ]
+    },
+    {
+      "jobId": 117734762435,
+      "logSha256": "eaeb16e9c2a5898475cb82cb4f757615d90362eeb4bd8a3fbbe8dbb3f73dcd73",
+      "runtimeLaneTotals": [
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        }
+      ]
+    },
+    {
+      "jobId": 117734762456,
+      "logSha256": "160656f06b209afae7f0c0ff33101d139a5080534dd6057577d0d60d46e97c3c",
+      "runtimeLaneTotals": [
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        }
+      ]
+    },
+    {
+      "jobId": 117734762461,
+      "logSha256": "cf831dbf74d459be928c544298855d0b290a30662f1957fb8c104987d918fb8d",
+      "runtimeLaneTotals": [
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        }
+      ]
+    },
+    {
+      "jobId": 117734762504,
+      "logSha256": "5e4a62a3f63929bb02a991bf816b9cb5323d07f5e96b357ac51c1e06f3c8f988",
+      "runtimeLaneTotals": [
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        },
+        {
+          "passed": 995,
+          "failed": 0,
+          "skipped": 0,
+          "total": 995
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12144525937,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:6397130e6778b972a65a998eb6c5aa51e4c1e28395f1a82024eae78e384ffcc8",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12144525937"
+    },
+    {
+      "id": 12144072891,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:a1831442bd7ea3fe86a86b41ea9f9e413871a4c5431b364dc6eee87da4c3623a",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12144072891"
+    },
+    {
+      "id": 12144059231,
+      "name": "source-contracts-osx-x64",
+      "digest": "sha256:d20d7591e38fa8201fbb9a7e965a2344667a0cd5896ac182c4946f7134cf44f8",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12144059231"
+    },
+    {
+      "id": 12143989700,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:18c0321a9c99417e868cb00ce0a8f66d99933be6f0566775394204bf26bfcbcd",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12143989700"
+    },
+    {
+      "id": 12143879351,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:0e57d0cf6f2d778fb8437976893eff90ed0881f0528dc7a8fc666296a461d57d",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12143879351"
+    },
+    {
+      "id": 12143808989,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:73de504f984923818ffbb534c14d88b1b7051e8ae7d35bb60cc2ec5ce4891f04",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12143808989"
+    }
+  ],
+  "artifactRetention": "Complete decoded job logs and GitHub artifact URLs/digests retained. ZIPs were not retrieved locally; exact runtime/OS/assembly records remain in retained TRX/aggregate artifacts.",
+  "actualMinimumFrameworkQualified": false,
+  "exactFinalPackagesQualified": false,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

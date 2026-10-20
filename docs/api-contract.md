@@ -1,6 +1,6 @@
 # FP-001 public API contract
 
-FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). The [syntax inspection API](pdf-syntax.md) reads low-level values and revisions. FP-005 adds the original managed [page reader and full/incremental writer](pdf-writing.md). FP-007 adds [typed content and version selection](content-operators.md). FP-008 adds explicit [font providers, embedding and mappings](fonts.md). FP-009 adds [Unicode analysis, shaping and positioned text](text-shaping.md), with an optional isolated native provider. FP-010 adds [vector paths, color resources and transparency](vector-graphics.md). Rendering, HTML and OCR remain later capabilities. A registered capability is provider metadata, not a production qualification claim.
+FP-001 implements an in-memory page model and explicit provider-backed I/O boundary. FP-002 adds [operation policies, diagnostics and budgets](operation-policies.md). The [syntax inspection API](pdf-syntax.md) reads low-level values and revisions. FP-005 adds the original managed [page reader and full/incremental writer](pdf-writing.md). FP-007 adds [typed content and version selection](content-operators.md). FP-008 adds explicit [font providers, embedding and mappings](fonts.md). FP-009 adds [Unicode analysis, shaping and positioned text](text-shaping.md), with an optional isolated native provider. FP-010 adds [vector paths, color resources and transparency](vector-graphics.md). FP-040 adds optional [isolated headless rendering](rendering.md) with an explicit pixel-grid/alpha contract and a candidate engine profile. Optional HTML and OCR source profiles are also available through explicit providers; complete production qualification remains pending. A registered capability is provider metadata, not a production qualification claim.
 
 ## Facade and editing
 
@@ -50,7 +50,7 @@ Serialize all access to a single mutable document. Reentrant I/O is rejected, an
 
 `PdfProviderRegistry` captures immutable descriptors once and accepts up to 64 caller-owned providers. IDs and version strings are nonempty and limited to 128 characters. IDs compare ordinally without case. Duplicate IDs, duplicate services, invalid capabilities, null entries and read/write declarations lacking the matching service interface are rejected during registration. Lists are defensively copied and exposed read-only. There is no global registry, engine discovery, fallback or automatic download.
 
-`PdfProviderRegistry.Default` contains the managed reader/writer; `Empty` disables all services. Custom registries retain their explicitly declared services. `Supports` reports registration. `GetRequired<T>` resolves the requested contract. `ReadDocument` uses `IPdfDocumentReader`; `WriteDocument` uses `IPdfDocumentWriter`. `RenderPages`, `RenderHtml` and `RecognizeText` reserve capability identities; their operation interfaces and implementations belong to later requirements. The separate [native deployment and worker adapter](native-deployment.md) checks caller-pinned local assets and supplies bounded isolated ABI/dependency execution. It grants no PDF capability. Native validation and production qualification remain pending; descriptor version text alone proves neither.
+`PdfProviderRegistry.Default` contains the managed reader/writer; `Empty` disables all services. Custom registries retain their explicitly declared services. `Supports` reports registration. `GetRequired<T>` resolves the requested contract. `ReadDocument` uses `IPdfDocumentReader`; `WriteDocument` uses `IPdfDocumentWriter`. `RenderPages` uses `IPdfPageRenderer`; `CmsEnvelopes` uses `IPdfCmsEnvelopeProvider` for explicit certificate security. `RenderHtml` and `RecognizeText` reserve capability identities for later requirements. The separate [native deployment and worker adapter](native-deployment.md) checks caller-pinned local assets and supplies bounded isolated ABI/dependency execution. It grants no PDF capability. Native validation and production qualification remain pending; descriptor version text alone proves neither.
 
 Readers synchronously populate an empty document, honoring its options and mandatory `PdfOperationContext`. Writers receive a detached immutable snapshot, borrowed output and the same operation context. They must finish all work and release depth/worker scopes before returning, without retaining live documents or leases. Context accounting is synchronized; each I/O stream still requires serialized access. Provider execution is trusted extension code; these contracts do not isolate or forcibly interrupt a provider that ignores cancellation. Native/browser supervision belongs to the relevant worker requirements.
 
@@ -117,3 +117,61 @@ FP-019 adds immutable annotation definitions/source manifests, generated markup 
 FP-020 adds managed `PdfDestination`, immutable `PdfAction`/`PdfActionPolicy` and `PdfNavigation` editing/inspection/sanitization. Source records and explicit profile limits are in [navigation.md](navigation.md).
 
 FP-021 adds `PdfBookmark`, `PdfPresentation`, passive transition contracts and source outline/label/preference inventories. See [presentation.md](presentation.md) for indices, standard names and supported value/formatter profiles.
+
+FP-022 adds `PdfMetadata`, its synchronous editor and explicit synchronization/removal policies. See [metadata.md](metadata.md) for XML limits, authority, timestamp precision and privacy boundaries.
+
+FP-023 adds `PdfAttachments`, detached file inventories and explicit embedding/extraction options. [attachments.md](attachments.md) specifies portable filenames, variant selection, collection types and privacy boundaries.
+
+FP-024 adds `PdfLayers`, registered group inventories, explicit configuration/usage evaluation, page XObject binding and a state-preserving flattening profile. See [layers.md](layers.md) for supported behavior and rejected state dependencies.
+
+FP-025 adds `PdfTextExtraction.ReadPage`, source-code/ActualText provenance and separate raw/semantic/geometric result views. [text-extraction.md](text-extraction.md) defines advance-cell coordinates, mapping certainty, layer selection and current profile limits.
+
+FP-036 adds passive `PdfForms` field/widget inventories, original hierarchy/state/choice authoring, shaped Unicode appearances, common-flag/widget/tab edits and explicit passive calculation metadata. See [forms.md](forms.md) for ownership, encoding, structure and interactive viewer profile limits.
+
+FP-037 adds immutable field-value packets, explicit FDF/XFDF/XML/JSON profiles, transactional filling with shared-context appearances, field copying/default-font rebinding, widget decoration and selective flattening. [form-workflows.md](form-workflows.md) defines format, inheritance, ownership and signature limits.
+
+FP-031 adds explicit full-rewrite password/certificate security, owner/user/recipient results, disposable prepared-byte credentials, permission/cipher/metadata choices and an optional offline CMS boundary. [Security contracts](security.md) describe source applicability, ownership, permission semantics and mandatory gaps.
+
+FP-066 adds explicit archival profiles, common structural preflight, conversion gated on complete independent exact-byte validation, detached findings and mandatory shared validation-host contracts. Optional Fluent.Pdf.Compliance supplies a bounded pinned report bridge; it launches no engine. See [archival behavior and qualification gaps](archival.md).
+
+FP-006 adds separate strict structural inspection and explicit recovery, immutable source/output views and digests, exact stream and active-identity authority, explicit orphan/signature policies and a machine-readable ledger. The ordinary parser never repairs. See [repair behavior and remaining profiles](repair.md).
+
+FP-098 adds explicit PDF text encodings and passive version/extension/namespace/associated-file inventory, typed UTF-8 Info authoring and reserved extension Type handling. See the [read/write/preserve matrix](pdf-compatibility.md) and qualification limits.
+
+FP-044 adds bounded immutable HTML/resources, explicit script/print requests and optional renderer contracts. The original optional Chromium protocol adapter checks exact version/revision pins, creates a private context, serves supplied resources and streams its result into the ordinary editable model. See [HTML source profiles and required host qualification](html-rendering.md).
+
+FP-045 adds explicit per-job resource sessions, exact-origin/IP/redirect admission, private origin cookies/headers, explicit proxies/client certificates and bounded file/data snapshots in the optional HTML adapter. [Resource contracts and runtime applicability](html-resources.md) distinguish modern transport observations from mandatory legacy/host qualification.
+
+FP-046 adds immutable finite HTML readiness, locale/timezone/media controls and shared `PdfOperationContext.EnterTimeLimit` phase scopes. The same context/token applies through resource acquisition, browser waits and output. Expired/leaked scopes fail closed; original/outer time is never extended. See [readiness and lifecycle contracts](html-readiness.md).
+
+FP-047 adds immutable `PdfHtmlPrintOptions` through `PdfHtmlOptions.WithPrint`, preserving existing constructor signatures. Explicit paper/CSS fitting, orientation, scale, point margins, bounded passive print templates and requested page-MCID structure validation share the original operation context. See [HTML print contracts](html-printing.md).
+
+FP-018 adds immutable detached stamp sources/options plus transactional `PdfStamps.Apply`, `Inspect`, `Update` and `Remove`. Exact page/group ownership and canonical private streams distinguish removable stamps from unrelated content; decoration classification remains separate from semantic tag authoring. See [stamp contracts](stamps.md).
+
+FP-028 adds `PdfResourceExtraction.ReadPage`, immutable `PdfPageResourceManifest` and explicit resource stream/font-program export/inspection. See [resource extraction](resource-extraction.md) for coordinate, identity and encoded-byte semantics.
+
+FP-026 adds `PdfTextQuery`, `PdfTextSearch.FindPage`, provenance-rich matches and `ReplacePage` with explicit fonts/shaping/overflow. See [search and replacement contracts](text-search.md).
+
+FP-027 adds `PdfTableExtraction.Read`, explicit options and immutable cells/tables/sequences, plus explicit merged-cell CSV and versioned typed JSON exports. See [table extraction contracts](table-extraction.md).
+
+FP-099 adds `PdfDataGeneration`, `PdfGenerationTemplate<T>`, explicit immutable options, a guarded synchronous context and immutable precommit event/page views. See [generation contracts](data-generation.md).
+
+FP-050 adds `PdfInputConversion`, explicit format/options/named drawing contracts and passive URI page-link snapshots. Parsing, binding, layout, link geometry and writing share the operation budget. See [input conversion contracts](input-conversion.md).
+
+FP-053 adds `PdfWordConversion`, explicit format/reconstruction/limit contracts and `IPdfWordConverter`. The optional `Fluent.Pdf.Word` adapter pins the actual published dependency and requires explicit font-pack adoption. See [Word contracts](word-conversion.md).
+
+FP-112 adds immutable merge data/blocks, explicit culture/missing-field/visit policies, native `PdfMailMerge` and optional `PdfDocxMailMerge` contracts. See [mail merge](mail-merge.md).
+
+FP-067 adds explicit immutable structure plans, passive association inspection, identity-preserving semantic/reading-order remediation and exact-input independent UA validation with separate human review. See [accessibility](accessibility.md).
+
+FP-074 adds explicit immutable OCR rasters/options/words/results, mandatory-context providers and optional isolated Tesseract5 recognition. Source checks cover eleven SDK assemblies and thirty-three API comparisons; see [local OCR](local-ocr.md).
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](searchable-ocr.md).
+
+Opt-in bounded scan correction, original-image preservation, inverse word-boundary geometry and separate prose/table/form reading-order evidence now have a source profile. Complete automatic curve/semantic/native/corpus and production qualification remain pending. See [scan processing](scan-processing.md).
+
+Explicit raster/full-rewrite redaction and sanitization now have a source profile: selected samples are replaced before encoding and no original graph/history is adopted. Complete selective editable-content preservation, independent renderer/security corpora and production qualification remain mandatory. See [redaction](redaction.md).
+
+Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](signatures.md).

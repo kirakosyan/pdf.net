@@ -2,7 +2,7 @@ using System.IO;
 
 namespace Fluent.Pdf.Fonts;
 /// <summary>Original managed offline font parsing, embedding/subsetting and exact standard-font metrics. No machine font discovery occurs.</summary>
-public sealed class ManagedFontProvider : IPdfFontProvider, IPdfFontEncodingProvider
+public sealed class ManagedFontProvider : IPdfFontProvider, IPdfFontEncodingProvider, IPdfFontEncodingMetricsProvider
 {
     /// <summary>Creates a stateless provider shareable by independent jobs.</summary>
     public ManagedFontProvider()
@@ -74,5 +74,19 @@ public sealed class ManagedFontProvider : IPdfFontProvider, IPdfFontEncodingProv
         if (context == null)
             throw new ArgumentNullException(nameof(context));
         return SimpleFontEncoding.Decode(encoding, encodedText, baseFont, context);
+    }
+
+    /// <summary>Gets exact declared-encoding advances from pinned base-14 glyph-name metrics, independent of ToUnicode replacements.</summary>
+    public IReadOnlyList<double?> GetSimpleAdvances(PdfValue encoding, string baseFont, PdfOperationContext context)
+    {
+        if (context == null)
+            throw new ArgumentNullException(nameof(context));
+        var names = SimpleFontEncoding.Names(encoding, baseFont, context, out var normalized);
+        var font = new StandardFont(normalized, context);
+        context.Consume(PdfResourceKind.ExpandedBytes, 8192);
+        var widths = new double? [256];
+        for (int i = 0; i < widths.Length; i++)
+            widths[i] = font.AdvanceForName(names[i], context);
+        return Array.AsReadOnly(widths);
     }
 }

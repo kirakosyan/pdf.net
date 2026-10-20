@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-099",
+  "sourceCommit": "998b2211592ce1cec2bdcda199eef961451cc801",
+  "sourceTree": "9aa078f1cffe6a831275107c8747c482587134a3",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "newSourceCases": 14,
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1092,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "86ba91a487bb5f0f65c1d683fe5ae5b03bf25a1a74cdfb5c760745f6d6aaa6b7"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 61,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "952e0eab840025627bcdb458af1a0c907a2e06aba23aca704189ae7bfb20fb26"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 61,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "a75674bd7bb9c5c4c0d571438fd8f473374c2fb76449e8ed0e5b2be1b98517a5"
+    }
+  ],
+  "apiComparisons": 27,
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Generation/PdfDataGeneration.cs": "86ea5762997679893b7f01a816a6a865946ce2da3eb12310522a00a7405ffdba",
+    "src/Fluent.Pdf/Generation/PdfGenerationContracts.cs": "8cb320ee469542134f14c5d2da3578e825e6589a9a641206b52e4be7c4c2f6c3",
+    "src/Fluent.Pdf/Generation/PdfGenerationContext.cs": "9879e95f4ff446f5683a2d9d3bbd54a8701c69d44d8764b0e1ed5655c762528a",
+    "src/Fluent.Pdf/Layout/PdfFlow.cs": "735a790363aba37e415f837be87051c9931115d2af1f4556fa22d2e317c9788c",
+    "src/Fluent.Pdf/Layout/PdfFlowResult.cs": "d0dc43ecb9c5e1e9056d60ff1b7ea02cfc84056282537f2ec30794f8f2a33a19",
+    "src/Fluent.Pdf/Templates/PdfTemplateLayout.cs": "2d4155b0f6107746418622cef7fed8b410ee8fed7608b7609603a93ca34723d5",
+    "src/Fluent.Pdf/Templates/PdfPageTemplate.cs": "53bd227196126137a6b4385515fa5221ca40d1c67bc5abe7d256be342da67f9c",
+    "src/Fluent.Pdf/Tables/PdfTableData.cs": "94b005d2a2df9397d187767d73b37dfb5420405998b3804327b0470be8c799f7",
+    "src/Fluent.Pdf/PdfDocument.cs": "159045937c0748c7b07d73ded519a446bd58d1044ddef3c1a4c9682c818aa29a",
+    "tests/Fluent.Pdf.Contract.Tests/GenerationTests.cs": "05b2253d47404ab41fc83a4ac1abf8a3b3d3deb549381d609d2ec3ede8bdb304",
+    "tests/Fluent.Pdf.Contract.Tests/PolicyTests.cs": "94eeb4c42d348c15a72a60626a6d5c85cb2dafe7b17dd3f6f83f6f56e8b34d7c",
+    "tests/Fluent.Pdf.Contract.Tests/NativeImageCodecTests.cs": "daf4ee60a514655efed16bc22ebbaa0cf019343b2ece61d2f8b5b6d751f4ae4f",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "97c38cdce2c8a7130e6ab82ec38dee273f50e57206d594308b7c01d70eb5901d",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "f2731c217328bf4fff7450e1f9f961af9b471baad8d7281148a2339b3f8ba0c8",
+    ".github/workflows/ci.yml": "ba862c682a10c5a85eab4b79f607123e2897a8425e02ab6aa43572b429e07249"
+  },
+  "reports": {
+    "final-build2": "40924a633a6395fb6c7c0eefea11542adcf7b9004bc6a4f4b672a7db70751f68",
+    "normal-build": "9134d973c02a8a3cb7e030e9ddd616503eeb704a34f29025de84f91fcbfa1bc2",
+    "final-net10": "c0c5b5fbd21c059db820a2a79b4b5d231d774ec3189df78b7fc5ef7bb7b1cff8",
+    "final-net8": "abb4c077c1334665e0b156f8968532500261f57dbd6f7629112e0973c0289e17",
+    "final-fallback": "5214cee545a1c8849e62c495444f1a9c8008326dc6b0aaab3f36a126c270709a",
+    "final-api": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "final-release": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "observerReportSha256": "9df96f058e2153342c140275b7b4a158a1c0af076e7dbe96266d32d9dc97f916",
+  "independentReportSha256": "057d42a8a5cb9e22d35d59d78afb182676658792ec475407d7ae05e073fbeb74",
+  "commands": [
+    "Locked four-framework solution build",
+    "Selected managed net10 contracts; actual net8 and netstandard2.0 fallback generation/policy/runtime contracts",
+    "27 API comparisons; negative packing/publication guards; specification validation",
+    "Original typed/template/table/culture generation and precommit failure observations; independent pypdf/MuPDF/Poppler text/page/artifact/trace checks"
+  ],
+  "sharedContextCorrection": "Binding, flow/convergent layout, body/decorated model assembly, page/resource mutation and writing share the mandatory root context. Public APIs retain signatures; template document body/decorations no longer reset budgets.",
+  "fixtureAudit": [
+    "First broad legacy filter included one native-positive host test blocked by LandlockENOSYS;123passed1hostfailure retained. Corrected managed legacy159passed. Required source CI remains unfiltered.",
+    "Initial new integration86cases85passed1font-fixturemissingglyph;correctSDKrejection. Explicit standardCourier fixture correction yielded14/14newgenerationpass.",
+    "Initial compile-only fixes were internal callback variable shadowing, test assertion style and use of a nonexistent report-limit property; final four-framework builds are clean."
+  ],
+  "ciFollowup": {
+    "successfulPreviousSource": "docs/evidence/PR-118-CI-105-source.json",
+    "failedPreviousSource": "docs/evidence/PR-118-CI-106-source.json",
+    "nativeMemoryWorkload": "Same64default-worker decodes and one context/default byte/object/pixel/depth/worker ceilings, with explicit test-only2-minutebatchdeadline; no default-time throughput assertion. Actual SDKdefault30s verified below/at/above by existing tests. SDKdefaults/per-workerdeadlines and production gates unchanged.",
+    "apiToolMitigation": "Gracefully release completed build servers on disposable CI runners before all27unchangedAPI comparisons. Exit137cause not established; no comparison skipped or retried."
+  },
+  "localNativeLimitation": "LandlockENOSYS prevents four local native-positive classes; required source CI remains unfiltered",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete document-wide editing/page/layout/save integration and asynchronous/uncooperative callback/host profiles remain mandatory",
+    "Complete deterministic schema/culture/resource/provider/large-data corpora and callback/concurrency/endurance validation remain mandatory",
+    "All mandatory actual RIDs/minimum/current/fallback runtimes, exact final packages and every production gate remain mandatory"
+  ],
+  "successfulSourceCI": "docs/evidence/PR-118-CI-107-source.json"
+}

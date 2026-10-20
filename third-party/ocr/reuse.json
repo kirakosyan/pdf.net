@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "component": "WN01 narrow OCR source-pattern reuse",
+  "sourceCommit": "141236a3fe890d220b807a270cec2d86a8f7e3b5",
+  "license": "MIT",
+  "licenseNotice": "WN01-MIT.txt",
+  "licenseSha256": "32d3e9dc9a8edb9aed2eddb4b26464d9c1b2663a9dd5ee73de5119efbb974314",
+  "sourceSha256": {
+    "LICENSE": "32d3e9dc9a8edb9aed2eddb4b26464d9c1b2663a9dd5ee73de5119efbb974314",
+    "OcrReadingOrder.cs": "6fbba2278b5363cc39549bf37e2e9d2d4a5862be9b818fd18e01e74c3fd328e0",
+    "project.csproj": "9a9870127700e6630bdb892e73c187c629450a17b3a5a10a8a05f0aa2d73d4c1",
+    "EnglishOcr.cs": "a5a5604d0579f073a0b914d5fa9466f48fecd2aa04ca653338af667511684693",
+    "NativeModule.cs": "0c8b9722bc1189874ad036695ab0a6689e7bcadb13b0a2f27e9ff5226aaf3411"
+  },
+  "approvedAssessment": "docs/ocr-reuse.md",
+  "scope": "Adapt reviewed explicit loading/export binding, process-lifetime module ownership, API/monitor/text cleanup and bounded pixel/Unicode/geometry/cancellation patterns. Original closed SDK API and native IPC implementation; no mandatory upstream document-model/OCR package dependency.",
+  "binaryOrModelIncluded": false,
+  "productionQualified": false
+}

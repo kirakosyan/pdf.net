@@ -48,7 +48,7 @@ public sealed class PresentationTests
         Assert.Equal("Presentation.OutlineCycle", Assert.Throws<PdfException>(() => PdfPresentation.Inspect(cyclic.CreateSnapshot())).Diagnostic.Code);
         using var blank = Pdf.Create().AddPage();
         PdfBookmark deep = new("leaf", new(0));
-        for (int i = 0; i < 80; i++)
+        for (int i = 0; i < 130; i++)
             deep = new("level " + i, children: new[] { deep });
         Assert.Equal("Limit.Depth", Assert.Throws<PdfException>(() => PdfPresentation.SetOutlines(blank.CreateSnapshot(), new[] { deep })).Diagnostic.Code);
         Assert.Throws<OperationCanceledException>(() => PdfPresentation.SetOutlines(blank.CreateSnapshot(), new[] { deep }, cancellationToken: new CancellationToken(true)));

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-067",
+  "sourceCommit": "aab746f225780fe050f79a557eae2b7871279532",
+  "sourceTree": "bfedb6f419ef90edbaa6ec7d8f0050b92b534c74",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1188,
+      "failed": 0,
+      "skipped": 0,
+      "newAccessibilityCases": 22,
+      "trxSha256": "d00856917bf66bfd7d2c729098e6e354845c9e6dda6c8736e3628b87a861e336"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 124,
+      "failed": 0,
+      "skipped": 0,
+      "newAccessibilityCases": 22,
+      "trxSha256": "67119eae5e6ed57e1ee9cd3506f3ee2c74587b53c72ff2e9ac716d99f572e03e"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 124,
+      "failed": 0,
+      "skipped": 0,
+      "newAccessibilityCases": 22,
+      "trxSha256": "d8946c64f944689abde32063fdeb68816dc38424933ac7101d42ca32c6955b8e"
+    }
+  ],
+  "newSourceCases": 22,
+  "sdkLibraries": 10,
+  "apiComparisons": 30,
+  "apiComparisonReportSha256": "176535172188e3190d497aa82207f0cdad301e9a2427b323a6dc621190913c1a",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Accessibility/PdfStructureReader.cs": "0b969ee177bd758a4f1709c542414acfb9824f13b73d4d974578a0c4c5b218e8",
+    "src/Fluent.Pdf/Accessibility/PdfStructureWriter.cs": "3275664e599cb714a384ba5d884e0e4d4cbbf2dbaf9f6f36ab83bc5c22f330ce",
+    "src/Fluent.Pdf/Accessibility/PdfAccessibility.cs": "8da1df2b4d4941c0a02346433c4b6bb8f411fa8fd2a61dc26387a2382920dfa5",
+    "src/Fluent.Pdf/Accessibility/PdfAccessibilityValidation.cs": "c7f0eb8c97ac85da9c5ce8c52ddc035e3a38c38719a16b386f0961b3381e1586",
+    "src/Fluent.Pdf/Accessibility/PdfStructureContracts.cs": "d8727387884609c95b6387b7323844613c691db4580d34fc8c508e422194fc7a",
+    "src/Fluent.Pdf.Compliance/VeraPdfReport.cs": "d698127eb765d960f5853d08bb19a584916a90555731c7f4780b047e9c13f39b",
+    "src/Fluent.Pdf.Compliance/VeraPdfReportValidator.cs": "e6fab59326744b3dbd9050fe91d0d5b00b5e724667a0ee28ec9c42d058ea7718",
+    "src/Fluent.Pdf.Compliance/VeraPdfAccessibilityReportValidator.cs": "20f3fa4d902c2c4fa0ee49a480fa0723c9714f4330a2f02a179a9800ec050791",
+    "src/Fluent.Pdf/Providers/PdfCapability.cs": "773b1ff2f8033da4f25c34a41906ccecb3b33d745fe2acf9261338f6417401ae",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "3d345a23fb30a8243c987334e05c2fc6f0cc13119ac9a38a95fce0afc9866bbc",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "d7d2ccb9aeff80024c6688771b61db0217edb4c76a1038b81a6d24c375a6469f",
+    "src/Fluent.Pdf.Compliance/PublicAPI.Unshipped.txt": "7a850bc4bddc9a72440a2e9359e4340dcc48590949ba21fab5e08249a2fd7947",
+    "tests/Fluent.Pdf.Contract.Tests/AccessibilityTests.cs": "07aa15aa71405b19d58e5812a4f8f1509213f47cff2acf431e7233e08f1dd5ae",
+    "tests/Fluent.Pdf.Contract.Tests/ArchivalFixture.cs": "3e35c50b58bd8572f8e5c95400ff78f95a6de80ae5eb85c0621db8d6077309e6",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "3f5dd4de66f01d531b50ab1067d88d1bdc6d75fceeb044ef4b9fd69afbc87f44",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "afbeeb50a05210aac92434dad5ce2ee8c2f71767c4e37f9940b25dc13c73c0f6"
+  },
+  "reports": {
+    "structure-final-build.log": "4524d09a56c591ca79bdcba6d7b691712e16c4476df2b7811f28cf842e98dc72",
+    "structure-final-net10.log": "b2cf41a7f592b8629c3718dfdbd4685daa4b362205f1b81415d5dee0d0f1a0d2",
+    "structure-final-net8.log": "4dc5888186956ddc8cc1604cf3b7fbdfc75269bc8e5178b7806056ad859b6cb6",
+    "structure-fallback-build.log": "a8dc1608c7cf1468c1aa6b992a58869bcd0d393f99752b96f8b73f7ca963e273",
+    "structure-final-fallback.log": "2afc5c6f6aafc4a761ed23728775e9bf010c7cd50eb7abed51ba0621729182eb",
+    "structure-normal-build.log": "d81bbe42831c45d627641cde64b0d4b056c39b306f50551136bf24b2be13d1ce",
+    "structure-final-api.log": "973a15dc75d811cbc7e27c170e3e2af8fc0601ae956a4756461ca0d639d120f6",
+    "structure-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "structure-observer-build2.log": "ab82581f18587636720dffbfb92db4ac012a6cb020a411c615ef574cd024c981",
+    "structure-observer-run2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "structure-observer-bridge2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "independentReportSha256": "bdee600b1937c8023e44ff1537ff77c23802dd6a5d1229fe3fcb988f74a9fab5",
+  "scope": [
+    "Explicit immutable role/language/description/reading-order/table plans over actual page/Form MCIDs and exact annotation identities; unique complete parent-tree/ID/header relationships and cycle checks",
+    "Passive bounded inspection and identity-preserving semantic/reading-order remediation; explicit strict/permissive semantic replacement losses and source preservation",
+    "Same root context across parse/filter/Form traversal/evaluate/graph/model/write and independent exact-input UA validation, with separate optional matching human review observations",
+    "Optional pinned complete independent UA1/UA2 report bridge; shared exact-engine report parser preserves archival behavior"
+  ],
+  "fixtureAudit": [
+    "First core compile required three owned-array/list type corrections; final builds have zero warnings/errors.",
+    "First combined32case run31pass1UA2ReportProfile rejection: actual pinned engine names the full profile PDF/UA-2 + Tagged PDF validation profile. Bridge now requires that exact full profile rather than the incorrectly assumed name; no gate weakened.",
+    "Combined46case accessibility/archival/report regression run passed after exact-name correction. Expanded32case accessibility/report run passed including source limits, repeated/nestedForm denial, header cycles, both public language consumers and actual positive/negative UA profiles.",
+    "Independent checker and tools were not modified after first execution. Seven original outputs pass exact association/namespace/geometry/raster checks; explicit original figures pass full automated UA1/UA2 profiles while unprepared documents fail as expected.",
+    "No human or screen-reader review has been performed; automated observations never supply review or full SDK qualification."
+  ],
+  "dependency": "Previously pinned veraPDF1.28.2 is an explicit source test tool/optional report host, not an implicit core/runtime dependency. No new SDK package/native/model/font dependency.",
+  "localNativeLimitation": "Four native-positive classes cannot run on this local Landlock-unsupported host; CI remains unfiltered and final-headCIrequired.",
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete PDF/UA1/UA2 semantic/role/namespace/class-map/attribute/font/language/table/form/appearance profiles and tag-aware content/edit/merge fidelity remain mandatory",
+    "Independent full corpus, human and screen-reader review, security/fuzz/concurrency/endurance and every required OS/minimum/current/fallback runtime qualification remain mandatory",
+    "Exact final SDK packages and all production gates remain mandatory"
+  ],
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-111-source.json",
+    "conclusion": "success",
+    "runtimeLanes": 20,
+    "passed": 25000,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Exact44source tree only; later source needs its own CI."
+  }
+}

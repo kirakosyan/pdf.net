@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-original-CMS-and-certification-source-observations",
+  "requirement": "FP-032",
+  "reportSha256": "1db2371551c459655b2bcf37a6628e67ca265c41051fc4a00181db674caedce1",
+  "observations": {
+    "purpose": "original-independent-detached-CMS-and-certification-source-observations",
+    "labelsSha256": "2d60ca5908a0645beefb8bbaf8da2308f01e18fd98aadc99be247c03a529b240",
+    "checkerSha256": "93754e8463d2930e20d9780553b3d78ef5dbb1a232dc11f77f6df8f6ddf1279c",
+    "observerSha256": "225e8068cbd8b3c441ef1c7c0342c356af16e540ac67901aa05de53e9cff332e",
+    "sdkObservationsSha256": "d5b1e5b7fbb7c3df19b3c0e2fa847a85f7da7a12cf1fe85622ac27c06cad7244",
+    "cases": [
+      {
+        "id": "certified",
+        "sha256": "042ec7ae75ee707856f3d028b5a3ac8cfdc34f6d783c72bd24d2a75df77a62f5",
+        "originalPrefixExact": true,
+        "visibleAppearanceAndAllPixelsMatchPriorGeometry": true,
+        "signatures": [
+          {
+            "field": "First",
+            "byteRange": [
+              0,
+              1545,
+              34315,
+              671
+            ],
+            "opensslExit": 0,
+            "intact": true,
+            "valid": true,
+            "trustedOnlyToExplicitFixtureRoot": true,
+            "docMdpOk": true,
+            "modificationLevel": "ModificationLevel.NONE",
+            "reportSha256": "f8f1f8d0213f30d07934a0eae823e1f1a48befca580218d11abf6efa88c2deb5"
+          }
+        ],
+        "popplerReportSha256": "02d63dc6a9354fd41c8aa239256012b4f60d46334cabe69272d982d3ad16935e"
+      },
+      {
+        "id": "twice-signed",
+        "sha256": "72339a0e550ea95225d604581c3efa285bb18781f3c9706a0a679b930bfe7228",
+        "originalPrefixExact": true,
+        "visibleAppearanceAndAllPixelsMatchPriorGeometry": true,
+        "signatures": [
+          {
+            "field": "First",
+            "byteRange": [
+              0,
+              1545,
+              34315,
+              671
+            ],
+            "opensslExit": 0,
+            "intact": true,
+            "valid": true,
+            "trustedOnlyToExplicitFixtureRoot": true,
+            "docMdpOk": true,
+            "modificationLevel": "ModificationLevel.FORM_FILLING",
+            "reportSha256": "e440f75eb62585fb95c4b8009338ef8a63d20826da95be8fb1cff00397324ca7"
+          },
+          {
+            "field": "Second",
+            "byteRange": [
+              0,
+              35224,
+              67994,
+              395
+            ],
+            "opensslExit": 0,
+            "intact": true,
+            "valid": true,
+            "trustedOnlyToExplicitFixtureRoot": true,
+            "docMdpOk": true,
+            "modificationLevel": "ModificationLevel.NONE",
+            "reportSha256": "f8f1f8d0213f30d07934a0eae823e1f1a48befca580218d11abf6efa88c2deb5"
+          }
+        ],
+        "popplerReportSha256": "e826ca2c8a8c1a5f117d35857a2c5671d4bbbdba1743dd60988f2ca47807362b"
+      }
+    ],
+    "forbiddenPageEdit": {
+      "cryptographicBytesStillIntact": true,
+      "independentDocMdpRejected": true,
+      "reportSha256": "89b291f5a8c43d716d3ea42323a232d4c137b501c5e46a7efbff4b3565f04cf7"
+    },
+    "coveredByteTamperIndependentCmsRejected": true,
+    "tools": {
+      "openssl": "3.5.7",
+      "poppler": "25.03.0",
+      "pyhanko": "0.31.0",
+      "pypdf": "6.10.0",
+      "mupdf": "1.26.6"
+    },
+    "trustScope": "Only explicit original fixture root, digitalSignature key usage, no network and soft-fail unavailable revocation. No public trust/revocation/PAdES qualification.",
+    "toolModifications": {
+      "reason": "Original checker incorrectly treated MuPDF unsigned signature-widget placeholder as the signed appearance baseline. Signed outputs correctly display the prior red Form. Compare to unchanged prior rectangle/color/page-size labels instead. No SDK output, label, permission or threshold changed.",
+      "originalCheckerSha256": "f293e6757a734600ec96b473e9cc5b6b4c241ffb1ead2c6df3dddc784285365e",
+      "adaptedCheckerSha256": "93754e8463d2930e20d9780553b3d78ef5dbb1a232dc11f77f6df8f6ddf1279c",
+      "diffSha256": "27c0b2bb4b1cd33293d5ef8254160493cf52e92f8df02531e7e4be107bd58490",
+      "originalFailureSha256": "d3d04e826bb742e680af80921f001128f6f2f4c68534d7f6580b73c0afa5e8d3",
+      "unsignedPlaceholderEvidence": {
+        "sourceSha256": "5df9b027d9d440c03436a194da450eebf43efb479bf350e2899382b1ea66e538",
+        "signedSha256": "c0f2180ebfc46b1be7288a0ad25e89ed8e211846f49a1ec3eb1c3f97ac5449fc"
+      }
+    },
+    "productionQualified": false
+  },
+  "labelsSha256": "2d60ca5908a0645beefb8bbaf8da2308f01e18fd98aadc99be247c03a529b240",
+  "observerSha256": "225e8068cbd8b3c441ef1c7c0342c356af16e540ac67901aa05de53e9cff332e",
+  "productionQualified": false
+}

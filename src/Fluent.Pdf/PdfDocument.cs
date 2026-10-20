@@ -131,6 +131,33 @@ public sealed class PdfDocument : IDisposable
         context.Checkpoint();
     }
 
+    internal IDisposable UseModelContext(PdfOperationContext context)
+    {
+        context.Consume(PdfResourceKind.ExpandedBytes, 128);
+        var scope = new ModelContextScope(this);
+        BeginOperation(false);
+        _context = context;
+        return scope;
+    }
+    private sealed class ModelContextScope : IDisposable
+    {
+        private PdfDocument? _owner;
+        internal ModelContextScope(PdfDocument owner) { _owner = owner; }
+        public void Dispose()
+        {
+            var owner = _owner; if (owner == null) return; _owner = null;
+            owner._context = null; owner.EndOperation();
+        }
+    }
+
+    internal void WriteWithinContext(IPdfDocumentWriter writer, Stream output, PdfOperationContext context, PdfWriteOptions writeOptions)
+    {
+        BeginOperation(true);
+        _context = context;
+        try { Write(writer, output, context, writeOptions); }
+        finally { _context = null; EndOperation(); }
+    }
+
     private void Write(IPdfDocumentWriter writer, Stream output, PdfOperationContext context,PdfWriteOptions writeOptions)
     {
         context.Checkpoint();

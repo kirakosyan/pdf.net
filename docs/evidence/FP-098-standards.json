@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-design-observations-not-production-qualification",
+  "requirement": "FP-098",
+  "sources": [
+    {
+      "id": "S98-ISO-PDF17",
+      "kind": "retained ISO32000-1:2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "7.3 objects and binary strings",
+        "7.5 file structure and incremental updates",
+        "7.9 text strings"
+      ]
+    },
+    {
+      "id": "S98-PDF20-ERRATA",
+      "kind": "retained official PDF 2.0 syntax errata at reviewed source tree bc1c686b5ef0bbb5e424736818e4f1430cf2e682",
+      "sha256": "8efbdad284ad9d1e6923cc6bda1dedf3b26dda5522e4662ebfbbb8f4177e98f8",
+      "sections": [
+        "7.9.2 text strings and UTF-8",
+        "7.12 Extensions Type, required direct URL and ordinary string encryption",
+        "7.12 direct extension data excludes metadata/associated-file streams"
+      ]
+    }
+  ],
+  "decisions": [
+    "Never infer text/version requirements from arbitrary byte-string BOMs",
+    "Make UTF-8 explicit and carry PDF 2.0 version floors through typed Info authoring; retain UTF-16BE default",
+    "Preserve opaque unknown binary/stream graph payloads and reject unsupported namespace remapping",
+    "Treat reserved Extensions Type separately from developer prefixes; author ASCII URL bytes without network requests",
+    "Retain independent reader failures alongside successful exact-byte and Unicode observations"
+  ],
+  "limitations": [
+    "Errata observations do not substitute for the complete normative PDF 2.0/schema/directness audit",
+    "Complete PDF 1.x/2.0, text language escapes and extension-specific semantics corpus remains mandatory"
+  ]
+}

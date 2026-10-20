@@ -13,9 +13,13 @@ public sealed class PdfOperationContext
     private readonly long[] _reserved = new long[7];
     private readonly bool[] _probing = new bool[7];
     private readonly List<PdfDiagnostic> _diagnostics = new();
+    private readonly Dictionary<TimeLimitScope, TimeSpan> _timeLimits = new();
     private readonly CancellationToken _callerToken;
     private readonly CancellationTokenSource _deadline = new();
     private readonly CancellationTokenSource _linked;
+    private readonly CancellationToken _sharedToken;
+    private readonly DeadlineScheduler.Registration _deadlineRegistration;
+    private bool _observingDeadline;
     private readonly Stopwatch _clock = Stopwatch.StartNew();
     private readonly Func<TimeSpan> _elapsed;
     private PdfException? _fatal;
@@ -42,8 +46,9 @@ public sealed class PdfOperationContext
         _elapsed = elapsedTime ?? (() => _clock.Elapsed);
         _callerToken = token;
         _linked = CancellationTokenSource.CreateLinkedTokenSource(token, _deadline.Token);
-        CancellationToken = _linked.Token;
-        _deadline.CancelAfter(policy.Limits.MaximumElapsedTime);
+        _sharedToken = _linked.Token;
+        _deadlineRegistration = new DeadlineScheduler.Registration(this);
+        ScheduleDeadline();
     }
 
     /// <summary>Gets the operation name assigned by the SDK.</summary>
@@ -54,8 +59,9 @@ public sealed class PdfOperationContext
     public PdfCapability Capability { get; }
     /// <summary>Gets the immutable policy.</summary>
     public PdfOperationPolicy Policy { get; }
+
     /// <summary>Gets cancellation combining the caller token and the operation deadline.</summary>
-    public CancellationToken CancellationToken { get; }
+    public CancellationToken CancellationToken => _sharedToken;
 
     internal bool IsActive
     {
@@ -203,8 +209,157 @@ public sealed class PdfOperationContext
         }
     }
 
+    /// <summary>Temporarily tightens the shared cancellation/deadline to a bounded phase. Disposal restores only the remaining original/outer time; an expired phase latches failure permanently.</summary>
+    /// <remarks>Durations are 1 ms through one day; at most 128 simultaneous scopes are supported. Every scope must be disposed before the provider returns. All providers retain the same context and cancellation token.</remarks>
+    public IDisposable EnterTimeLimit(TimeSpan maximumElapsedTime)
+    {
+        if (maximumElapsedTime < TimeSpan.FromMilliseconds(1) || maximumElapsedTime > TimeSpan.FromDays(1))
+            throw new ArgumentOutOfRangeException(nameof(maximumElapsedTime));
+        lock (_gate)
+        {
+            CheckCore();
+            if (_timeLimits.Count == 128)
+                Fail("Limit.TimeScopes", "The simultaneous phase deadline inventory was exhausted.");
+            Charge(PdfResourceKind.ExpandedBytes, 256);
+            Charge(PdfResourceKind.Objects, 1);
+            var scope = new TimeLimitScope(this, _elapsed() + maximumElapsedTime);
+            _timeLimits.Add(scope, scope.Deadline);
+            ScheduleDeadline();
+            return scope;
+        }
+    }
+
+    private void ScheduleDeadline()
+    {
+        if (!_active || _sharedToken.IsCancellationRequested) return;
+        TimeSpan end = Policy.Limits.MaximumElapsedTime;
+        foreach (var phase in _timeLimits.Values)
+            if (phase < end) end = phase;
+        DeadlineScheduler.Schedule(_deadlineRegistration, _fatal == null ? end - _elapsed() : TimeSpan.Zero);
+    }
+
+    private void ObserveDeadline()
+    {
+        lock (_gate)
+        {
+            if (!_active || _sharedToken.IsCancellationRequested) return;
+            TimeSpan end = Policy.Limits.MaximumElapsedTime;
+            foreach (var phase in _timeLimits.Values)
+                if (phase < end) end = phase;
+            if (_fatal == null && _elapsed() < end)
+            {
+                ScheduleDeadline();
+                return;
+            }
+            _observingDeadline = true;
+        }
+        // Cancellation callbacks run outside both scheduler and operation locks.
+        try
+        {
+            _deadline.Cancel();
+        }
+        catch (Exception failure)
+        {
+            lock (_gate)
+            {
+                if (_fatal == null)
+                    _fatal = new PdfException(new PdfDiagnostic("Limit.ElapsedTime", "The operation deadline elapsed.", Capability, ProviderId, operation: Operation));
+                _fatal.Data["Fluent.Pdf.CancellationCallbackFailure"] = failure;
+            }
+        }
+        finally
+        {
+            lock (_gate)
+            {
+                _observingDeadline = false;
+                Monitor.PulseAll(_gate);
+            }
+        }
+    }
+
+    // A single process-wide monotonic priority queue avoids thread-pool starvation
+    // without allocating an OS thread or charging document budgets per operation.
+    private static class DeadlineScheduler
+    {
+        internal sealed class Registration
+        {
+            internal readonly PdfOperationContext Owner;
+            internal readonly long Id = Interlocked.Increment(ref _nextId);
+            internal long Due;
+            internal Registration(PdfOperationContext owner) => Owner = owner;
+        }
+        private static long _nextId;
+        private static readonly object Gate = new();
+        private static readonly SortedSet<Registration> Pending = new(Comparer<Registration>.Create((a, b) => a.Due != b.Due ? a.Due.CompareTo(b.Due) : a.Id.CompareTo(b.Id)));
+        private static readonly Thread Worker = Start();
+        internal static bool IsWorker => ReferenceEquals(Thread.CurrentThread, Worker);
+        private static Thread Start()
+        {
+            var worker = new Thread(Run, 131072) { IsBackground = true, Name = "Fluent.Pdf.Deadlines" };
+            worker.Start();
+            return worker;
+        }
+        internal static void Schedule(Registration entry, TimeSpan remaining)
+        {
+            lock (Gate)
+            {
+                Pending.Remove(entry);
+                double ticks = Math.Max(0, remaining.TotalSeconds) * Stopwatch.Frequency;
+                long now = Stopwatch.GetTimestamp();
+                entry.Due = ticks >= long.MaxValue - now ? long.MaxValue : now + (long)ticks;
+                Pending.Add(entry);
+                Monitor.PulseAll(Gate);
+            }
+        }
+        internal static void Remove(Registration entry)
+        {
+            lock (Gate)
+            {
+                Pending.Remove(entry);
+                Monitor.PulseAll(Gate);
+            }
+        }
+        private static void Run()
+        {
+            while (true)
+            {
+                Registration entry;
+                lock (Gate)
+                {
+                    while (true)
+                    {
+                        if (Pending.Count == 0) { Monitor.Wait(Gate); continue; }
+                        entry = Pending.Min!;
+                        long remaining = entry.Due - Stopwatch.GetTimestamp();
+                        if (remaining > 0)
+                        {
+                            Monitor.Wait(Gate, (int)Math.Max(1, Math.Min(int.MaxValue, Math.Ceiling(remaining * 1000.0 / Stopwatch.Frequency))));
+                            continue;
+                        }
+                        Pending.Remove(entry);
+                        break;
+                    }
+                }
+                entry.Owner.ObserveDeadline();
+            }
+        }
+    }
+
+
     /// <summary>Records a diagnostic with SDK-bound provenance. Strict losses and error severity latch a fatal failure.</summary>
-    public void Report(PdfDiagnostic diagnostic)
+    public void Report(PdfDiagnostic diagnostic) => ReportCore(diagnostic, null, null);
+    // Attach bounded operation-owned details before publishing/throwing a latched failure on every runtime.
+    internal void ReportFailure(PdfDiagnostic diagnostic, string dataKey, object details)
+    {
+        if (string.IsNullOrEmpty(dataKey) || dataKey.Length > 128)
+            throw new ArgumentException("A bounded failure-data key is required.", nameof(dataKey));
+        if (details == null)
+            throw new ArgumentNullException(nameof(details));
+        Consume(PdfResourceKind.ExpandedBytes, 512);
+        ReportCore(diagnostic, dataKey, details);
+    }
+
+    private void ReportCore(PdfDiagnostic diagnostic, string? dataKey, object? details)
     {
         if (diagnostic is null)
             throw new ArgumentNullException(nameof(diagnostic));
@@ -220,6 +375,8 @@ public sealed class PdfOperationContext
             if (severity == PdfDiagnosticSeverity.Error)
             {
                 _fatal = new PdfException(bound);
+                if (dataKey != null)
+                    _fatal.Data[dataKey] = details;
                 throw _fatal;
             }
         }
@@ -322,7 +479,7 @@ public sealed class PdfOperationContext
         lock (_gate)
         {
             CheckCore();
-            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 || _reserved.Any(value => value != 0) || _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
+            if (_used[(int)PdfResourceKind.Depth] != 0 || _used[(int)PdfResourceKind.Workers] != 0 || _timeLimits.Count != 0 || _reserved.Any(value => value != 0) || _probing[(int)PdfResourceKind.InputBytes] || _probing[(int)PdfResourceKind.ExpandedBytes])
                 Fail("Operation.ScopeLeaked", "Provider scopes and reads must finish before returning.");
         }
     }
@@ -332,6 +489,8 @@ public sealed class PdfOperationContext
         lock (_gate)
         {
             _active = false;
+            DeadlineScheduler.Remove(_deadlineRegistration);
+            Monitor.PulseAll(_gate);
             _clock.Stop();
             var resources = new PdfResourceUsage[_used.Length];
             for (int i = 0; i < resources.Length; i++)
@@ -342,6 +501,12 @@ public sealed class PdfOperationContext
 
     internal void DisposeSources()
     {
+        DeadlineScheduler.Remove(_deadlineRegistration);
+        lock (_gate)
+        {
+            while (_observingDeadline && !DeadlineScheduler.IsWorker)
+                Monitor.Wait(_gate);
+        }
         _linked.Dispose();
         _deadline.Dispose();
     }
@@ -353,8 +518,12 @@ public sealed class PdfOperationContext
         if (_fatal is not null)
             throw _fatal;
         _callerToken.ThrowIfCancellationRequested();
-        if (_elapsed() >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
+        TimeSpan elapsed = _elapsed();
+        if (elapsed >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
             Fail("Limit.ElapsedTime", "The operation deadline elapsed.");
+        foreach (TimeSpan end in _timeLimits.Values)
+            if (elapsed >= end)
+                Fail("Limit.ElapsedTime", "The operation phase deadline elapsed.");
     }
 
     private void Charge(PdfResourceKind resource, long amount)
@@ -376,6 +545,35 @@ public sealed class PdfOperationContext
     {
         if (!Enum.IsDefined(typeof(PdfResourceKind), resource))
             throw new ArgumentOutOfRangeException(nameof(resource));
+    }
+
+    private sealed class TimeLimitScope : IDisposable
+    {
+        private PdfOperationContext? _owner;
+        internal readonly TimeSpan Deadline;
+        internal TimeLimitScope(PdfOperationContext owner, TimeSpan deadline)
+        {
+            _owner = owner;
+            Deadline = deadline;
+        }
+
+        public void Dispose()
+        {
+            var owner = _owner;
+            if (owner == null)
+                return;
+            lock (owner._gate)
+            {
+                if (!ReferenceEquals(_owner, owner))
+                    return;
+                _owner = null;
+                // Expiry cannot be hidden by disposing the scope before the next provider checkpoint.
+                if (owner._active && owner._fatal == null && (owner._elapsed() >= Deadline || owner._deadline.IsCancellationRequested))
+                    owner._fatal = new PdfException(new PdfDiagnostic("Limit.ElapsedTime", "The operation phase deadline elapsed.", owner.Capability, owner.ProviderId, operation: owner.Operation));
+                owner._timeLimits.Remove(this);
+                owner.ScheduleDeadline();
+            }
+        }
     }
 
     private sealed class Scope : IDisposable

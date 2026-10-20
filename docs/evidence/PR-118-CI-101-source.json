@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "purpose": "failed-source-ci-not-production-qualification",
+  "runId": 39154213841,
+  "sourceCommit": "f1f25fd900e73a82ecd26064bd1452dc7447a3f2",
+  "testedMergeCommit": "43cfa4f794fe359388b8847853857474ea29ef1a",
+  "testedTree": "f66cf5ff00bfc906dc3fde1036c519e9743c120f",
+  "exactMergeTreeVerified": true,
+  "platformJobs": 6,
+  "completedRuntimeLanes": 19,
+  "passed": 20728,
+  "failed": 1,
+  "skipped": 0,
+  "notExecutedLanes": [
+    "osx-x64/netstandard-on-net10"
+  ],
+  "failure": "PhaseDeadlineTests.PhaseExpiryCancelsTheOriginalSharedTokenAndTerminatesItsAwaitedWork fails its post-await one-second Stopwatch assertion on macOS Intel/net10. All other executed contracts pass, including all print contracts. Signal/task-completion latency was not separately recorded, so the failure alone does not establish which part was delayed.",
+  "proposedCorrection": "Measure original token signal and underlying awaited-task completion using synchronous completion timestamps; retain the same one-second requirement and report post-await observation separately. No operation deadline, timer or release gate is changed. Fresh source CI remains required.",
+  "jobs": [
+    {
+      "jobId": 117753955342,
+      "logSha256": "f4a2d6cf72098ffade91725b062358f7d6102d74da9acd45fbbd51e2e3b78efe",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117753955451,
+      "logSha256": "a4e6f329ca3c0f8b1c235f1f6e5ebc6931cf8c79b627d4223d86977adae0fc65",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117753955482,
+      "logSha256": "7229806da59434b0191b29c29d99927e198e189b59861cdc1a754a60f4fffd9d",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117753955491,
+      "logSha256": "abeb7a683f515c7e06eba539828faa2cc95334ad4d2f353ff7b26832b1d410fb",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117753955553,
+      "logSha256": "2e7c5b604a8a8fd005a125b6cf382f20cfc4de7f91727bedb6dc280e0076c7c7",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 1,
+          "passed": 1090,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    },
+    {
+      "jobId": 117753955557,
+      "logSha256": "705f111049343e0185a2429ae76c8af3871e924bdce9b300c0861b3e849281d2",
+      "completedLaneTotals": [
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        },
+        {
+          "failed": 0,
+          "passed": 1091,
+          "skipped": 0,
+          "total": 1091
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12147015108,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:52f02225ec4082e5300edb38fd2257599be81de4a7ca23077d9ad453a52baf37",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12147015108"
+    },
+    {
+      "id": 12146786060,
+      "name": "source-contracts-osx-x64",
+      "digest": "sha256:4b1f87fa08ca891df4167c764aa37dc43bc6a88facba101654454c9fd15bcfef",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146786060"
+    },
+    {
+      "id": 12146632773,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:4869e116beb4a35b2e3ce234fb267632bed6a8cf994075755c3c960de4e6918d",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146632773"
+    },
+    {
+      "id": 12146541976,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:3680e0b205654aa71dbab7e4610f61a6dd59a1c8be20c55d07a0de0514b501c9",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146541976"
+    },
+    {
+      "id": 12146462926,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:1cf89a72ebfa90c3012feb3623bb14aef0cb2dd5749779979a4c8856f52780f9",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146462926"
+    },
+    {
+      "id": 12146198589,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:8dc5f214d1b1ba3fb4626dfb3c5f23ad43092bb224da69869c196bd79dbb0402",
+      "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12146198589"
+    }
+  ],
+  "artifactRetention": "Complete decoded logs, run metadata and artifact URLs/digests retained; ZIPs not retrieved locally.",
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

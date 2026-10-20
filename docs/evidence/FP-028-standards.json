@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-design-observations-not-production-qualification",
+  "requirement": "FP-028",
+  "sources": [
+    {
+      "id": "S28-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "7.3.8 stream objects and filters",
+        "8.3 coordinate systems and CTM",
+        "8.4 graphics state; 8.5 paths",
+        "8.9 images and 8.10 Form XObjects",
+        "9.6-9.9 font dictionaries and embedded font programs",
+        "14.6 marked content and 14.8.2.2 artifacts"
+      ]
+    }
+  ],
+  "decisions": [
+    "Separate resolved resource identity, effective bindings and operator occurrences",
+    "Retain exact encoded PDF stream bytes without claiming reconstructed image containers",
+    "Retain per-construction-operator CTMs for mixed-transform paths",
+    "Expose explicit Artifact scopes and validated private stamp provenance without guessing semantic decorations",
+    "Inspect font rights only through an explicit compatible provider; do not infer substitution permission",
+    "Do not claim rendered ink/effective clip/color/visibility or expansion of pattern/glyph/soft-mask paint programs in this source profile"
+  ],
+  "productionQualified": false
+}

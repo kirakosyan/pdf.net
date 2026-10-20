@@ -40,10 +40,14 @@ internal static class PdfWriterCore
         return result;
     }
 
-    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context)
+    internal static void Write(PdfSyntaxDocument? source, PdfValue trailer, IReadOnlyDictionary<PdfObjectId, PdfValue> changes, ISet<PdfObjectId> removed, int maximum, bool trailerChanged, Stream output, PdfWriteOptions options, PdfOperationContext context, PdfObjectCrypt? crypt = null, bool validatedArchivalDowngrade = false, bool validatedSignatureEdit = false)
     {
         context.Checkpoint();
         bool incremental = options.Mode == PdfWriteMode.Incremental;
+        if (incremental && validatedArchivalDowngrade)
+            throw Error(context, "Archival.IncrementalProfile", "Validated archival conversion requires a full rewrite.");
+        if (incremental && (crypt != null || source?.DecryptionApplied == true))
+            throw Error(context, "Security.IncrementalProfile", "Security transformations require a full rewrite in this profile.");
         if (incremental && source == null)
             throw Error(context, "Writer.IncrementalBaseRequired", "An incremental revision requires an immutable original file.");
         if (incremental && changes.Count == 0 && removed.Count == 0 && !trailerChanged && options.Version == null && options.CrossReferenceFormat == PdfCrossReferenceFormat.Auto && options.MinimumVersion == null && options.Extensions.Count == 0 && options.UnknownExtensions == PdfUnknownExtensionPolicy.Preserve)
@@ -55,7 +59,8 @@ internal static class PdfWriterCore
             return;
         }
 
-        if (Encrypted(trailer) || (source != null && source.Revisions.Any(revision => Encrypted(revision.Trailer))))
+        PdfSignaturePolicy.RequireWriter(source, options, context, validatedSignatureEdit);
+        if (Encrypted(trailer) && crypt == null || source != null && source.Revisions.Any(revision => Encrypted(revision.Trailer)) && !source.DecryptionApplied)
             throw Error(context, "Writer.EncryptionProviderRequired", "Changing or rewriting encrypted objects requires an explicitly configured encryption implementation.");
         long estimate = changes.Count + removed.Count + 1L;
         if (source != null)
@@ -82,6 +87,21 @@ internal static class PdfWriterCore
             objects.Remove(id.Number);
         foreach (var pair in changes)
             objects[pair.Key.Number] = (pair.Key, pair.Value);
+        if (incremental && source!.Revisions[0].Trailer.Entries.TryGetValue("ID", out var oldIdentity))
+        {
+            oldIdentity = ManagedPdfProvider.Resolve(source, oldIdentity, context);
+            if (oldIdentity.Kind == PdfValueKind.Array && oldIdentity.Items.Count == 2)
+            {
+                var permanent = ManagedPdfProvider.Resolve(source, oldIdentity.Items[0], context);
+                if (permanent.Kind == PdfValueKind.String)
+                {
+                    var currentIdentity = trailer.Entries.TryGetValue("ID", out var identity) ? Dereference(objects, identity, context) : PdfValue.Null;
+                    if (currentIdentity.Kind != PdfValueKind.Array || currentIdentity.Items.Count != 2 || Dereference(objects, currentIdentity.Items[0], context).Kind != PdfValueKind.String || !permanent.StringBytes.SequenceEqual(Dereference(objects, currentIdentity.Items[0], context).StringBytes))
+                        throw Error(context, "Metadata.PermanentIdentifierChanged", "An incremental revision must preserve the original permanent file identifier.");
+                }
+            }
+        }
+
         if (!incremental)
             foreach (var number in objects.Where(pair => pair.Value.Value.Kind == PdfValueKind.Stream && pair.Value.Value.Entries.TryGetValue("Type", out var type) && type.Kind == PdfValueKind.Name && (type.NameValue == "ObjStm" || type.NameValue == "XRef")).Select(pair => pair.Key).ToArray())
                 objects.Remove(number);
@@ -99,6 +119,13 @@ internal static class PdfWriterCore
             foreach (var pair in sourceExtensions.Entries)
             {
                 context.Checkpoint();
+                if (pair.Key == "Type")
+                {
+                    if (pair.Value.Kind != PdfValueKind.Name || pair.Value.NameValue != "Extensions")
+                        throw Error(context, "Writer.ExtensionDictionary", "Extensions Type must be the direct name Extensions.");
+                    continue;
+                }
+
                 if (options.UnknownExtensions == PdfUnknownExtensionPolicy.Reject && !options.Extensions.Any(item => item.Prefix == pair.Key))
                     throw Error(context, "Writer.UnknownExtension", "An undeclared source developer extension was rejected by policy.");
                 var value = Dereference(objects, pair.Value, context);
@@ -136,6 +163,15 @@ internal static class PdfWriterCore
             context.Consume(PdfResourceKind.ExpandedBytes, 512);
             declaration["BaseVersion"] = PdfValue.Name(extension.BaseVersion);
             declaration["ExtensionLevel"] = PdfValue.Integer(extension.ExtensionLevel);
+            if (extension.DocumentationUrl != null)
+            {
+                extensionFloor = Math.Max(extensionFloor, 20);
+                context.Consume(PdfResourceKind.ExpandedBytes, extension.DocumentationUrl.Length + 64L);
+                declaration["URL"] = PdfValue.OwnedString(System.Text.Encoding.ASCII.GetBytes(extension.DocumentationUrl));
+                if (extension.Revision != null)
+                    declaration["ExtensionRevision"] = PdfTextStrings.Encode(extension.Revision, context);
+            }
+
             mergedExtensions[extension.Prefix] = PdfValue.OwnedDictionary(declaration);
             extensionChanged = true;
         }
@@ -166,7 +202,7 @@ internal static class PdfWriterCore
         }
 
         int version = options.Version == null ? (source == null ? 17 : originalVersion) : PdfVersionNumber.Parse(options.Version);
-        if (source != null && version < originalVersion)
+        if (source != null && version < originalVersion && !validatedArchivalDowngrade)
             throw Error(context, "Writer.VersionDowngrade", "A version downgrade requires explicit content conversion.");
         bool signature = source?.HasSignatureByteRanges ?? false;
         PdfValue ResolveFeature(PdfValue value) => Dereference(objects, value, context);
@@ -241,7 +277,8 @@ internal static class PdfWriterCore
             context.Checkpoint();
             written.Add(pair.Key, new Row(sink.Position, pair.Value.Id.Generation, false));
             sink.Text(pair.Value.Id.Number.ToString(CultureInfo.InvariantCulture) + " " + pair.Value.Id.Generation.ToString(CultureInfo.InvariantCulture) + " obj\n");
-            sink.Value(pair.Value.Value, true);
+            var emitted = crypt == null ? pair.Value.Value : crypt.Transform(pair.Value.Value, pair.Value.Id, true, ResolveFeature);
+            sink.Value(emitted, true);
             sink.Text("\nendobj\n");
         }
 

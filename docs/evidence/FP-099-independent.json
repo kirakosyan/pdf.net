@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-099",
+  "observations": {
+    "purpose": "independent-original-generation-observations-not-production-qualification",
+    "readers": {
+      "pypdf": "6.10.0",
+      "MuPDF": "1.26.6",
+      "Poppler": "pdftotext version 25.03.0"
+    },
+    "labelSha256": "f1843b6d626a243946fe4c5b68344b5dab6ce38840012a32f4ee3f5e29d95ba5",
+    "observations": [
+      {
+        "mode": "basic",
+        "sourceSha256": "de3581e5f3efe00daad2749d86d31a6a6c47f8aaedb05f92680d64555dae4578",
+        "contextIdentityCount": 1,
+        "hookCount": 16,
+        "pages": [
+          {
+            "page": 0,
+            "exactNormalizedText": {
+              "pypdf": "AB",
+              "MuPDF": "AB",
+              "Poppler-layout": "AB"
+            },
+            "ordering": "pypdf/MuPDF source stream order; Poppler-layout geometric top-to-bottom order",
+            "artifactWrappers": 0,
+            "mediaBox": [
+              0,
+              0,
+              200,
+              100
+            ]
+          },
+          {
+            "page": 1,
+            "exactNormalizedText": {
+              "pypdf": "BA",
+              "MuPDF": "BA",
+              "Poppler-layout": "BA"
+            },
+            "ordering": "pypdf/MuPDF source stream order; Poppler-layout geometric top-to-bottom order",
+            "artifactWrappers": 0,
+            "mediaBox": [
+              0,
+              0,
+              200,
+              100
+            ]
+          }
+        ],
+        "productionQualified": false
+      },
+      {
+        "mode": "culture",
+        "sourceSha256": "53c2ec419e823f3e18ce50123d11a42b87c65411b69a8e9e7e083ff7c5cf6b76",
+        "contextIdentityCount": 1,
+        "hookCount": 15,
+        "pages": [
+          {
+            "page": 0,
+            "exactNormalizedText": {
+              "pypdf": "1.234,50-2,50",
+              "MuPDF": "1.234,50-2,50",
+              "Poppler-layout": "1.234,50-2,50"
+            },
+            "ordering": "pypdf/MuPDF source stream order; Poppler-layout geometric top-to-bottom order",
+            "artifactWrappers": 0,
+            "mediaBox": [
+              0,
+              0,
+              200,
+              100
+            ]
+          }
+        ],
+        "productionQualified": false
+      },
+      {
+        "mode": "table",
+        "sourceSha256": "6b5fd87a7455c0de1da836070d78a64a791d16b5b931511b3929bf17cc207ae8",
+        "contextIdentityCount": 1,
+        "hookCount": 11,
+        "pages": [
+          {
+            "page": 0,
+            "exactNormalizedText": {
+              "pypdf": "ABBAAB",
+              "MuPDF": "ABBAAB",
+              "Poppler-layout": "ABBAAB"
+            },
+            "ordering": "pypdf/MuPDF source stream order; Poppler-layout geometric top-to-bottom order",
+            "artifactWrappers": 0,
+            "mediaBox": [
+              0,
+              0,
+              200,
+              100
+            ]
+          }
+        ],
+        "productionQualified": false
+      },
+      {
+        "mode": "template",
+        "sourceSha256": "0ccee994ff35b1b9de391376927d36170235eb83695b531a6e31c23ce21cb753",
+        "contextIdentityCount": 1,
+        "hookCount": 16,
+        "pages": [
+          {
+            "page": 0,
+            "exactNormalizedText": {
+              "pypdf": "ABH1/2P1",
+              "MuPDF": "ABH1/2P1",
+              "Poppler-layout": "H1/2ABP1"
+            },
+            "ordering": "pypdf/MuPDF source stream order; Poppler-layout geometric top-to-bottom order",
+            "artifactWrappers": 1,
+            "mediaBox": [
+              0,
+              0,
+              200,
+              100
+            ]
+          },
+          {
+            "page": 1,
+            "exactNormalizedText": {
+              "pypdf": "BAH2/2P2",
+              "MuPDF": "BAH2/2P2",
+              "Poppler-layout": "H2/2BAP2"
+            },
+            "ordering": "pypdf/MuPDF source stream order; Poppler-layout geometric top-to-bottom order",
+            "artifactWrappers": 1,
+            "mediaBox": [
+              0,
+              0,
+              200,
+              100
+            ]
+          }
+        ],
+        "productionQualified": false
+      },
+      {
+        "mode": "nested",
+        "sourceSha256": "7766f2d261689895baa270be0fa57169d5b40e0a3cf6b018d98fce7cb19ad00a",
+        "contextIdentityCount": 1,
+        "hookCount": 13,
+        "pages": [
+          {
+            "page": 0,
+            "exactNormalizedText": {
+              "pypdf": "ABBA",
+              "MuPDF": "ABBA",
+              "Poppler-layout": "ABBA"
+            },
+            "ordering": "pypdf/MuPDF source stream order; Poppler-layout geometric top-to-bottom order",
+            "artifactWrappers": 0,
+            "mediaBox": [
+              0,
+              0,
+              200,
+              100
+            ]
+          }
+        ],
+        "productionQualified": false
+      }
+    ],
+    "failedPrecommitHookPreservedFile": true,
+    "productionQualified": false,
+    "limitations": [
+      "Five small original source fixtures only",
+      "Explicit original embedded AB face and explicitly selected standard Courier; no archival/accessibility conformance claim",
+      "Cooperative in-process template/observer/data callbacks are not a qualified isolation boundary",
+      "Complete events/model/provider/culture/data corpora, actual minimum runtimes, final packages and all production gates remain mandatory"
+    ]
+  },
+  "sourceObserverSha256": "9df96f058e2153342c140275b7b4a158a1c0af076e7dbe96266d32d9dc97f916",
+  "independentReportSha256": "057d42a8a5cb9e22d35d59d78afb182676658792ec475407d7ae05e073fbeb74",
+  "retainedTools": {
+    "observerSourceSha256": "4ab45156eaba30f62a3955ae24273d0176243c5ea26e60b7f78aa6d9e6d4b844",
+    "observerInterfaceCorrectionSha256": "49371959821ecca8f6e1d47d8511ba07ecc7f9336db37be482b6f17087ba27e4",
+    "independentToolSha256": "74968a73bb9a90320827d9a7bd55995fceee2e351f0253e4186039ad421203ca",
+    "orderingCorrectionSha256": "e6a34794bad614b98aada1842182ed29487c300260b0263ec225752ac8bbcc15",
+    "labelsSha256": "f1843b6d626a243946fe4c5b68344b5dab6ce38840012a32f4ee3f5e29d95ba5",
+    "formatManifestSha256": "8c8b0796c8161d4e2465e71491debfb34aa32dcc5fc0df03f6fc378747a0aafe",
+    "coreRefactorBeforeAfterSha256": "4088146765c719bc71926b2258e1966d22400ea162bfdea61c30cfe65e0e0e2a"
+  },
+  "orderingObservation": "The page template appends Artifact decorations after body content: source-stream extraction yields body/header/footer; geometric Poppler-layout yields header/body/footer. Each view has independently specified expected text and preserved mismatch/tool-diff history.",
+  "productionQualified": false
+}

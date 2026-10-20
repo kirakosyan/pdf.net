@@ -29,6 +29,12 @@ public sealed class RuntimeIdentityTests
         Assert.Equal(expected,typeof(Fluent.Pdf.Codecs.IsolatedImageCodecProvider).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
         Assert.Equal(expected,typeof(Fluent.Pdf.Fonts.ManagedFontProvider).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
         Assert.Equal(expected,typeof(Fluent.Pdf.Text.IsolatedTextShaper).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Rendering.IsolatedPdfRenderer).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Compliance.VeraPdfReportValidator).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Html.ChromiumHtmlRenderer).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Word.WordnetPdfConverter).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Ocr.IsolatedTesseractOcr).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
         var expectedArchitecture = Environment.GetEnvironmentVariable("FLUENT_PDF_EXPECTED_ARCH");
         if (!string.IsNullOrEmpty(expectedArchitecture))
             Assert.Equal(expectedArchitecture, RuntimeInformation.ProcessArchitecture.ToString(), ignoreCase: true);

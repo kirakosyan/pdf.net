@@ -1,10 +1,11 @@
 # Source contract testing and evidence
 
-Use PowerShell 7, .NET SDK 10, the .NET 8 runtime and NativeAOT platform prerequisites (C/C++ compiler, linker and development libraries). Windows x64 also needs installed current .NET Framework and its x86 runtime. Restore uses committed lock files; API tooling is pinned in the repository tool manifest.
+Use PowerShell 7, .NET SDK 10, the .NET 8 runtime, an explicit Java 21 runtime for independent archival source fixtures and NativeAOT platform prerequisites (C/C++ compiler, linker and development libraries). Windows x64 also needs installed current .NET Framework and its x86 runtime. Restore uses committed lock files; API tooling is pinned in the repository tool manifest.
 
 ```powershell
 pwsh -File eng/validate-spec.ps1
 pwsh -File eng/build-native-fixtures.ps1
+pwsh -File eng/build-archival-fixture.ps1
 dotnet restore Fluent.Pdf.slnx --locked-mode
 dotnet tool restore
 dotnet build Fluent.Pdf.slnx -c Release --no-restore
@@ -16,6 +17,8 @@ pwsh -File eng/test-release-block.ps1
 Run the build before each full contract script invocation. The fallback lane deliberately rebuilds the net10.0 test consumer and both examples against the **netstandard2.0 library asset**, so the last test output directory contains that asset. A runtime identity test checks the actual loaded assembly attribute; merely selecting a compatible TFM is insufficient. The next ordinary build restores the normal per-TFM references.
 
 The test script fails on a failed test, zero tests, skipped/not-executed tests, absent identity output or process architecture mismatch. It runs .NET 8, .NET 10 and the explicit fallback lane everywhere. On Windows x64 it additionally runs current Framework in separate x64 and x86 processes. Test applicability is declared by the script; other OS/architectures do not report Framework tests as skips. Passing source tests do not populate production release evidence.
+
+The HTML protocol peer covers shared contexts, exact engine/session/command identities, bounded JSON/chunks, explicit resources, failures and ownership; it is not a browser-layout implementation. `eng/HtmlBrowserProbe` separately requires an explicit pinned local-asset manifest and runs trusted original fixtures on Linux/.NET 10. Retain its generated/edited PDFs, SDK extraction and independent reader/raster reports. This source observation does not replace any browser production lane or qualify an OS isolation host.
 
 CI runs these checks on Windows, Linux and macOS, each with x64 and ARM64 native runners. `-ExpectedArchitecture X64|Arm64` asserts the intended process architecture. Each CI job retains its own `source-contracts-<platform>` artifact containing:
 
@@ -77,3 +80,59 @@ FP-020 tests cover all destination modes, Unicode names, page moves/imports and 
 FP-021 source contracts cover nested/deep/cyclic outlines, visible counts/link consistency, Unicode/style, target remapping, label restarts and number-tree cycles, all twelve transition names and parameter profiles, preferences/initial view/version floors, unsupported-setting diagnostics, C#/VB examples and operation limits.
 
 Source functional test collections use two concurrent collection threads per test host, matching local source validation and avoiding uncontrolled oversubscription of shared runners. Test-contained parallel workloads (including 64-way stream/policy checks, 32-way text/graphics checks and concurrent native staging) retain their own explicit concurrency. No required test or SDK deadline is removed. This scheduler setting does not satisfy or replace the separate mandatory production 64-worker × 200-iteration and endurance gates. Template failures retain bounded stage/phase timing metadata without document contents.
+
+FP-022 source contracts cover Unicode/custom Info and XMP, namespace/structured-property and translation retention, explicit deterministic timestamps/IDs, authority selection, malformed/prohibited XML, cancellation/resource limits, editor ownership, revision removal, embedded-file decisions and C#/VB examples. Exact final package and full production qualification remain blocked.
+
+FP-023 tests cover Unicode names and explicit metadata, AF persistence, caller stream position/ownership, duplicate names, unsafe portable paths, atomic no-overwrite extraction, Size/CheckSum mismatches before output, cancellation/resource limits, collection schema/sort/subitems, external-file passivity, orphan/related stream and revision removal, unrelated alias retention and C#/VB consumers.
+
+FP-024 source contracts exercise Unicode groups, immutable inventories, all membership policies, nested expressions/depth, intents, configurations/usage, hidden text/state/path behavior, unsupported dependencies, Form/annotation removal, page extraction, passive actions, resource limits/cancellation and executable C#/VB canvas examples. Full renderer and optional-content qualification remains pending.
+
+FP-025 source fixtures cover mapped Unicode/ligatures/supplementary characters, explicit/inferred/unmapped text, source order versus line/paragraph inference, ActualText visibility, spacing/scaling/TJ/quotes, CTM/Forms/state restoration, crop/rotation/UserUnit, Identity-V W2 metrics, hidden advances/invisible text, declared-encoding standard widths, embedded multilingual fonts, cancellation/resource failure and C#/VB consumers.
+
+The archival source fixtures use a SHA-256-pinned veraPDF 1.28.2 distribution and an explicit test-only external host. Reports, exact candidate PDFs and Java/runtime identity are retained under artifacts/contracts/archival. They exercise actual independent profile validation; they do not qualify a shipping isolated validation host, full semantic/fidelity corpus, actual minimum runtimes or final packages. The SDK report bridge itself installs/launches no engine and creates no staging files.
+
+FP-045 source fixtures cover origin/address admission, DNS rebinding, redirect identity/hops, private authentication, decoding/path/data boundaries and redaction. Modern actual loopback fixtures exercise HTTP, mutual TLS, wrong pin/name, CONNECT and stalled-body cancellation; legacy/fallback assets explicitly assert unsupported built-in transport before any connection. Those applicability assertions do not qualify legacy HTTP. The optional trusted-original browser observer adds authenticated redirects and final-base-relative SVG, with independent output observations. See [resource evidence and mandatory gaps](html-resources.md).
+
+FP-046 adds eleven shared phase-deadline cases and fifteen HTML readiness/transport/lifecycle cases, plus C#/VB options consumers. The actual trusted browser observer covers delayed assets, explicit promise/environment, infinite polling, failed image, bounded never-promise, caller cancellation, owned host termination and fresh next job. Four positive outputs have independent text/geometry/color observations. Its original per-message 25 ms polling delay was replaced with completion/cancellation signaling; exact diff/hashes and failed runs are retained without changing SDK limits. The observer remains outside production host qualification.
+
+FP-047 adds explicit print-policy/template/structure fixtures and C#/VB snapshot consumers. Seven actual browser outputs cover 14 pages, final counters, repeated headers, CSS/fallback paper, landscape, full/half vector scale and page-MCID structures. Independent readers retain Poppler default reading-order differences and a managed Type 3 matrix extraction limit. Complete standards/visual/runtime/package and production gates remain mandatory.
+
+FP-018 adds owned stream/scope, exact page, persistence, update/removal cycle, resource alias, malformed provenance, tagged decoration, captured-source/provider/latch/ownership and budget/cancellation contracts, plus C#/VB consumers. Original analytic/vector/image/text/page/HTML fixtures use independent pypdf/MuPDF/Poppler checks. Source tests do not qualify final packages or the complete production corpus. The phase-deadline CI101 failure and timing-measurement correction are separately retained without changing the one-second signal/task-completion requirement.
+
+FP-028 source contracts exercise shared resources/occurrences, nested/mixed transforms, exact encoded/decoded exports, explicit font restrictions, artifacts/stamps, unknown resources/operators, cycles and budget/cancellation/atomic-output boundaries, and both language consumers. Independent original-fixture observations do not constitute production qualification.
+
+FP-026 source contracts cover semantic/cross-stream/Form/regex/region/style search, ligature/ActualText provenance, denial deadlines, match/resource/cancellation bounds, source-position-preserving replacement, missing glyphs, overflow, explicit unsupported owners/reflow and C#/VB execution. Independent original outputs do not qualify the full mandatory corpus.
+
+FP-027 source contracts cover ruled/borderless/merged cells, explicit culture, source geometry/provenance, matching/mismatched page headers, ActualText, CSV/JSON, malformed merges, resource/cancellation boundaries, atomic files and C#/VB execution. Independent measurements cover 32 small pre-labeled cells; full precision/recall/continuation qualification remains mandatory.
+
+The macOS Intel source CI job allows 40 minutes for setup/build/API comparison and all three required runtime lanes; other jobs allow 20 minutes. CI104 completed two Intel runtime lanes before cancellation near the previous 20-minute cap. This is a CI job duration setting; SDK operation limits, deadline assertions, required checks and production qualification remain mandatory.
+
+FP-099 adds 14 source contracts for event order/root context identity, real pagination, stale/thread/reentrant guards, exceptions, finite/cyclic/large sources, explicit culture, typed binding, both language consumers and atomic failures including outstanding workers. Five original outputs/seven pages have independent reader/text/trace checks; full production qualification remains mandatory.
+
+CI106 retained a 30-second default-operation deadline during a 64-process decode MEMORY fixture and an unrelated API-tool exit137. That memory fixture now keeps all64decodes, the same shared context/default worker and byte/object/pixel/depth/worker ceilings, with an explicit two-minute batch test deadline; it makes no default-time throughput claim. The existing below/at/above tests assert the actual SDK default30-second deadline directly. SDK defaults/per-worker deadlines and production thresholds are unchanged. CI releases completed compiler/MSBuild servers before all27API comparisons; the exit137cause remains unproven and no comparison is skipped or retried.
+
+FP-050 source checks cover BOM encodings, source layout/roles and nested URI bounds, exact scalar/schema binding, malformed/unknown inputs, XML entity denial, explicit resource/culture/ownership/atomic/budget/concurrent-job behavior and executable C#/VB consumers. Independent original outputs use pypdf/MuPDF/Poppler. These checks do not qualify full formats or final packages.
+
+FP-053 source fixtures exercise actual published-dependency DOC/DOCX/RTF round trips, Unicode/style/table/pixel content, passive package and malformed/active input denial, strict/permissive diagnostics, cancellation/budgets/atomic ownership and executable C#/VB consumers. Independent readers and Open XML validator inspect original outputs. The complete SDK assembly inventory requires cross-framework API comparisons and actual portable-asset identity checks.
+
+FP-112 fixtures exercise invoice tables, culture, scalar/repeat/boolean/image binding, split DOCX runs, XML escaping/no reevaluation, missing/type policies, finite limits, atomic/cancellation behavior and executable C#/VB consumers. Independent Open XML and unrelated PDF readers inspect original outputs. Full mandatory qualification remains pending.
+
+FP-067 source fixtures exercise explicit page/Form/annotation MCID ownership, parent trees, language/description/table IDs/cycles, reading-order identity preservation, missing/duplicate associations, cancellation/budgets, actual pinned UA1/UA2 positive and negative validation, report binding/DTD/completeness denial and executable C#/VB consumers. Human/screen-reader and complete accessibility qualification remain pending.
+
+FP-074 cases exercise exact raster capture/EOF/geometry/ownership, contexts, provider binding, Unicode/word budgets, latched failures and C#/VB consumers. Original isolated C API fixtures check lifetime/error/cancel boundaries without claiming recognition. One independently labeled actual Tesseract5.5.0 C-API tool fixture checks text/boxes and same-engine CLI agreement. Five native-positive classes require unavailable local Landlock; CI stays unfiltered and required real-engine/RID/language qualification remains blocked.
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](searchable-ocr.md).
+
+Opt-in bounded scan correction, original-image preservation, inverse word-boundary geometry and separate prose/table/form reading-order evidence now have a source profile. Complete automatic curve/semantic/native/corpus and production qualification remain pending. See [scan processing](scan-processing.md).
+
+Explicit raster/full-rewrite redaction and sanitization now have a source profile: selected samples are replaced before encoding and no original graph/history is adopted. Complete selective editable-content preservation, independent renderer/security corpora and production qualification remain mandatory. See [redaction](redaction.md).
+
+Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](signatures.md).
+
+The historical final-signing CI run has all20runtime lanes executed and one actual Windowsfallback phase signal beyond1second. The deadline observer follow-up retains that failure and keeps the original assertions. Root/phase cases require cancellation outside the pool and a joined observer at cleanup. See [retained timing](evidence/PR-118-CI-118-source.json); new exact-head CI and all production gates remain mandatory.
+
+The [deadline observer source regression](evidence/phase-deadline-observer.json) binds the current policy implementation, lifecycle cases and completed actual-runtime/API reports. It is source regression evidence, with complete production qualification still pending.
+
+The first observer implementation also consumed a logical object, exhausting the native JPX decoder's exact tile/component inventory. The [retained six-host failure](evidence/PR-118-CI-119-source.json) records all six decode cases on each host and the unexecuted later lanes. The correction retains the original codec limits and fixtures, charges observer managed infrastructure separately and adds an exact-inventory policy regression. A six-case managed bridge probe is limited source evidence; the full unfiltered native CI matrix remains mandatory.

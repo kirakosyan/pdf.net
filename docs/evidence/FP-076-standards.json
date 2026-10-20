@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-standard-observations-not-production-qualification",
+  "requirement": "FP-076",
+  "sources": [
+    {
+      "id": "S76-ALTO44",
+      "sourceCommit": "1a67f01c3689e5ff4b1714c4395b9fdcf668d93b",
+      "gitBlob": "c6cd8cc6c3639270326bce01b5c4d8008c28164a",
+      "sha256": "2d1ba4b0ce268c4ed763f718cfb9b1ab67ac952caf5bcffa5fc314179cb0866b",
+      "scope": "Unmodified primary ALTO4.4 XSD validation, using an explicit no-network resolver for its XLink import."
+    },
+    {
+      "id": "S76-XLINK-MIRROR",
+      "sourceCommit": "a6b596906db2c8a1b960666c5fb833492219c9d7",
+      "gitBlob": "f55eb6dae160927069b929d288c0a5bf9855f40d",
+      "sha256": "f1f5bb6003165cdd8f6c1fcc32f8fd1f965e1681010f3b9806d9460bcffa8a3c",
+      "scope": "Pinned mirrored LOC XLink schema. Live primary URL403 retained; no XLink/schema content rewritten."
+    },
+    {
+      "id": "S76-HOCR12",
+      "sourceCommit": "70e12781939644370a2a72c509449c475caeb604",
+      "gitBlob": "0d22814139cf5e7799bc8b278ae347f07cbe41ce",
+      "sha256": "48b7e5f325629d7d0a2219a475d8ae68a2e0463d68c328cbe09ddd51e5986093",
+      "scope": "Primary metadata, boxes, word confidence and explicit generated-element capabilities."
+    },
+    {
+      "id": "S76-PDF-ISO2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "scope": "Native user coordinates, crop/rotation/UserUnit, text rendering mode3, ActualText and ToUnicode."
+    }
+  ],
+  "decisions": [
+    "Preserve original encoded raster/content; add isolated invisible mapped text rather than re-rendering/recompressing the source.",
+    "Bounded explicit geometric existing-text policy reports skipped overlaps without declaring OCR/digital text correctness.",
+    "Tagged source requires an explicit structural association profile; source implementation rejects rather than inventing accessibility semantics."
+  ],
+  "independentReportSha256": "af7cfc28a427d214f528e2d49631b2214040ed9d561a751fbf39ccb153b765a5",
+  "productionQualified": false
+}

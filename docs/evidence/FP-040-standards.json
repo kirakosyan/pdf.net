@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-and-ABI-design-observations-not-production-qualification",
+  "requirement": "FP-040",
+  "sources": [
+    {
+      "id": "R40-ISO-PDF17",
+      "kind": "retained ISO 32000-1:2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "7.7.3 page geometry",
+        "8 graphics",
+        "9 text",
+        "11 transparency",
+        "12.5 annotations",
+        "12.7 interactive forms"
+      ]
+    },
+    {
+      "id": "R40-ABI-1",
+      "kind": "upstream public C ABI header inspected as interface documentation only",
+      "sha256": "4d1e76b2bdc6d4f830b85c75e7a3a56c38164bb55cd7226ba6825b6bbc3fe402",
+      "limitation": "Retrieved main headers; not proof of exact engine build/source provenance. No implementation bodies copied."
+    },
+    {
+      "id": "R40-ABI-2",
+      "kind": "upstream public C ABI header inspected as interface documentation only",
+      "sha256": "7340dcbe4f12771ae5bb1cc3009b46ee139c132f118d0bcd0cba900b74aa1e47",
+      "limitation": "Retrieved main headers; not proof of exact engine build/source provenance. No implementation bodies copied."
+    },
+    {
+      "id": "R40-ABI-3",
+      "kind": "upstream public C ABI header inspected as interface documentation only",
+      "sha256": "ca596613053f4f168acafe0c9469c83a7ef94eb6cb5e59fe5e959308d428d90e",
+      "limitation": "Retrieved main headers; not proof of exact engine build/source provenance. No implementation bodies copied."
+    },
+    {
+      "id": "R40-ABI-4",
+      "kind": "upstream public C ABI header inspected as interface documentation only",
+      "sha256": "0e99f7e7d2a818ed56ff8529f7a90a121cc86cdecda6b1682eadd60259021b16",
+      "limitation": "Retrieved main headers; not proof of exact engine build/source provenance. No implementation bodies copied."
+    },
+    {
+      "id": "R40-ABI-5",
+      "kind": "upstream public annotation C ABI header inspected as interface documentation only",
+      "sha256": "16d2e4359af3e54572e77a80baae0312bf0c9664dac313e6a7d2f0769d44d2e8",
+      "limitation": "Retrieved main public header; actual functions also exercised against the exact pinned candidate asset."
+    }
+  ],
+  "decisions": [
+    "Displayed CropBox/native rotation/UserUnit physical-point geometry; stable full-page integer grid and outward-snapped windows",
+    "Straight-alpha top-down BGRA; explicit opaque RGB or transparent background; device-gray samples and gray matte",
+    "Existing passive annotation/widget appearances; no JavaScript/XFA, action execution, network callbacks or machine-font discovery",
+    "Mandatory shared context and existing fresh-process native isolation; no runtime asset download or in-process fallback"
+  ],
+  "pending": [
+    "Exact engine source/build provenance, complete license/security review, actual minimum OS/runtime and transitive dependencies",
+    "Independent complete fidelity/color/appearance/extension corpus, fuzz/endurance/concurrency and exact final packages"
+  ]
+}

@@ -42,6 +42,18 @@ public sealed class PdfPage
         StructureRoles = roles;
     }
 
+    private readonly List<(PdfRect Bounds, string Uri)> _uriLinks = new();
+    internal void AddUriLink(PdfRect bounds, string uri, PdfOperationContext context)
+    {
+        EnsureEditable();
+        PdfInputLinks.ValidateUri(uri, context);
+        if (bounds.Width <= 0 || bounds.Height <= 0)
+            return;
+        context.Consume(PdfResourceKind.Objects, 1);
+        context.Consume(PdfResourceKind.ExpandedBytes, uri.Length * 2L + 128);
+        _uriLinks.Add((bounds, uri));
+    }
+
     private readonly List<(PdfRect Bounds, PdfPage Target, PdfPoint Point)> _deferredLinks = new();
     internal void AddDeferredLink(PdfRect bounds, PdfPage target, PdfPoint point, PdfOperationContext context)
     {
@@ -58,9 +70,11 @@ public sealed class PdfPage
 
     internal IReadOnlyList<PdfPageLinkSnapshot> SnapshotLinks(IReadOnlyDictionary<PdfPage, int> indices, PdfOperationContext? context)
     {
-        context?.Consume(PdfResourceKind.ExpandedBytes, _deferredLinks.Count * 64L + 32);
-        var values = new PdfPageLinkSnapshot[_deferredLinks.Count];
-        for (int i = 0; i < values.Length; i++)
+        context?.Consume(PdfResourceKind.ExpandedBytes, (_deferredLinks.Count + _uriLinks.Count) * 80L + 32);
+        var values = new PdfPageLinkSnapshot[_deferredLinks.Count + _uriLinks.Count];
+        for (int i = 0; i < _uriLinks.Count; i++)
+            values[i + _deferredLinks.Count] = new(_uriLinks[i].Bounds, _uriLinks[i].Uri);
+        for (int i = 0; i < _deferredLinks.Count; i++)
         {
             if (!indices.TryGetValue(_deferredLinks[i].Target, out int target))
                 throw new InvalidOperationException("An internal destination page has been removed.");

@@ -1,6 +1,7 @@
 namespace Fluent.Pdf;
 
 /// <summary>An immutable, provider-neutral failure description with a stable code.</summary>
+[Serializable]
 public sealed class PdfDiagnostic
 {
     /// <summary>Creates a diagnostic; code/message/provider identifiers are bounded configuration text.</summary>

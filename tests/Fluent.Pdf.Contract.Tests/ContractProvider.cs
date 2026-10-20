@@ -38,10 +38,11 @@ internal sealed class ContractProvider : IPdfDocumentReader, IPdfDocumentWriter,
     public void Dispose() => Disposed = true;
 }
 
-internal sealed class ServiceProvider : IPdfProvider
+internal sealed class ServiceProvider : IPdfHtmlRenderer
 {
     internal ServiceProvider(PdfProviderDescriptor descriptor) => Descriptor = descriptor;
     public PdfProviderDescriptor Descriptor { get; }
+    public void Render(PdfHtmlSource source, PdfHtmlOptions options, Stream pdfOutput, PdfOperationContext context) => throw new NotSupportedException("This registry-only fixture does not execute document work.");
 }
 
 internal sealed class NonSeekableStream : Stream

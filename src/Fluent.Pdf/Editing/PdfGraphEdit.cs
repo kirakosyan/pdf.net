@@ -26,7 +26,9 @@ internal sealed class PdfGraphEdit : IDisposable
         else
         {
             using var normalized = PdfPageOrganization.Normalize(source, options, context);
-            var captured = normalized.CreateSnapshot();
+            PdfDocumentSnapshot captured;
+            using (normalized.UseModelContext(context))
+                captured = normalized.CreateSnapshot();
             context.Consume(PdfResourceKind.ExpandedBytes, captured.Pages.Count * 16L + 64);
             Snapshot = new(source.Options, captured.Pages.ToArray(), captured.SourceDocument, captured.OriginalOrder, captured.WriteOptions, captured.PageNumbering);
         }
@@ -67,20 +69,70 @@ internal sealed class PdfGraphEdit : IDisposable
             throw Error("Structure.SourceEditPolicy", "Editing source content requires an explicit structure-association preservation profile.");
     }
 
-    internal PdfDocument Finish(PdfOrganizationOptions options, string minimumVersion = "1.2")
+    internal PdfDocument Finish(PdfOrganizationOptions options, string minimumVersion = "1.2", PdfWriteMode writeMode = PdfWriteMode.Full)
     {
         using var buffer = new PdfCodecBufferStream(Context, Context.Available(PdfResourceKind.ExpandedBytes));
         using (var output = new BorrowedStream(buffer, false, Context))
-            Edit.WriteCore(output, new(allowSignatureInvalidation: options.AllowSignatureInvalidation, minimumVersion: minimumVersion), Context);
+            Edit.WriteCore(output, new(mode: writeMode, allowSignatureInvalidation: options.AllowSignatureInvalidation, minimumVersion: minimumVersion), Context);
         return PdfPageOrganization.Read(buffer.Finish(), Snapshot.Options.MaximumPages, Context, Snapshot.Options.DefaultPageSize);
     }
 
     internal PdfException Error(string code, string message) => PdfWriterCore.Error(Context, code, message);
+    internal void PruneUnreachable()
+    {
+        var reachable = new HashSet<PdfObjectId>();
+        var pending = new Queue<PdfValue>();
+        Enqueue(Edit.Trailer);
+        while (pending.Count != 0)
+        {
+            Context.Checkpoint();
+            Visit(pending.Dequeue());
+        }
+
+        var remove = new List<PdfObjectId>();
+        foreach (var id in Edit.ActiveIds(Context))
+            if (!reachable.Contains(id))
+            {
+                Context.Consume(PdfResourceKind.ExpandedBytes, 32);
+                remove.Add(id);
+            }
+        foreach (var id in remove)
+            Edit.Remove(id);
+
+        void Enqueue(PdfValue value)
+        {
+            Context.Consume(PdfResourceKind.ExpandedBytes, 16);
+            pending.Enqueue(value);
+        }
+
+        void Visit(PdfValue value)
+        {
+            Context.Checkpoint();
+            Context.Consume(PdfResourceKind.Objects, 1);
+            if (value.Kind == PdfValueKind.Reference)
+            {
+                Context.Consume(PdfResourceKind.ExpandedBytes, 48);
+                if (reachable.Add(value.ReferenceId))
+                    Enqueue(Edit.Resolve(value.ReferenceId));
+                return;
+            }
+            using var depth = Context.EnterScope(PdfResourceKind.Depth);
+            if (value.Kind == PdfValueKind.Array)
+                foreach (var child in value.Items)
+                    Visit(child);
+            else if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
+                foreach (var child in value.Entries.Values)
+                    Visit(child);
+        }
+    }
+
     public void Dispose() => Edit.Dispose();
-    internal static PdfDocument Run(string operation, PdfDocumentSnapshot source, PdfOrganizationOptions? options, PdfOperationPolicy? policy, CancellationToken token, Action<PdfGraphEdit> action, string minimumVersion = "1.2")
+    internal static PdfDocument Run(string operation, PdfDocumentSnapshot source, PdfOrganizationOptions? options, PdfOperationPolicy? policy, CancellationToken token, Action<PdfGraphEdit> action, string minimumVersion = "1.2", PdfWriteMode writeMode = PdfWriteMode.Full)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
+        if (!Enum.IsDefined(typeof(PdfWriteMode), writeMode))
+            throw new ArgumentOutOfRangeException(nameof(writeMode));
         options ??= new();
         PdfDocument? result = null;
         try
@@ -89,7 +141,7 @@ internal sealed class PdfGraphEdit : IDisposable
             {
                 using var graph = new PdfGraphEdit(source, options, c);
                 action(graph);
-                result = graph.Finish(options, minimumVersion);
+                result = graph.Finish(options, minimumVersion, writeMode);
             }, PdfCapability.WriteDocument);
             result!.SetCompositionReport(report);
             return result;

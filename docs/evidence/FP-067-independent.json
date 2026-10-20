@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-067",
+  "observations": {
+    "purpose": "original-accessibility-independent-observations-not-production-qualification",
+    "labelsSha256": "8d9804f47f0a23bfb4cbd1d5bfebc71c0a43ebfee38199e3ec32c5ab9a475ca1",
+    "checkerSha256": "da52fdef2c340b6dbd3f95b0e08ed0b12f33a646513d514faef7acb97951e8e1",
+    "tools": {
+      "pypdf": "6.10.0",
+      "pymupdf": "1.26.6",
+      "veraPDF": "1.28.2"
+    },
+    "results": {
+      "ua1": {
+        "sha256": "f6b160e6dd3f05ceb1e97d4eb422772fc2b828244b0d2951d445b805b03ee57a",
+        "roles": [
+          "Document",
+          "H1",
+          "P"
+        ],
+        "contentOrder": [
+          0,
+          1
+        ],
+        "parentEntries": 1,
+        "rasterSha256": "d9dd5a2477090975fe137a97cc35e9a5148c93ed13fd18ed163dd84f4505f2f8",
+        "productionQualified": false,
+        "independentAutomatedCompliance": false,
+        "validationReportSha256": "67bb719ec69fbd04ba0d83f331775906ac2885796c26cee5ea0497fb0063023f",
+        "failedRules": 2
+      },
+      "ua2": {
+        "sha256": "af4c84850335a51bdd6e0078821697f4e33aa2726b6d0e6cc598c280c3257be4",
+        "roles": [
+          "Document",
+          "H1",
+          "P"
+        ],
+        "contentOrder": [
+          0,
+          1
+        ],
+        "parentEntries": 1,
+        "rasterSha256": "d9dd5a2477090975fe137a97cc35e9a5148c93ed13fd18ed163dd84f4505f2f8",
+        "productionQualified": false,
+        "independentAutomatedCompliance": false,
+        "validationReportSha256": "1e68b98a80dc3b36ef838bd2e32206b397c038d058244cf077f40e56215792af",
+        "failedRules": 2
+      },
+      "reordered": {
+        "sha256": "6185afc5927c99f7f7fc3d65377579ca723d22f08b65d9f3926b3dd1c3bcbcd1",
+        "roles": [
+          "Document",
+          "P",
+          "H1"
+        ],
+        "contentOrder": [
+          1,
+          0
+        ],
+        "parentEntries": 1,
+        "rasterSha256": "d9dd5a2477090975fe137a97cc35e9a5148c93ed13fd18ed163dd84f4505f2f8",
+        "productionQualified": false
+      },
+      "form": {
+        "sha256": "c021986bfbc46f250655e120faef1d8017b77c085c727f584cafaab21324326b",
+        "roles": [
+          "Document",
+          "Figure"
+        ],
+        "contentOrder": [
+          0
+        ],
+        "parentEntries": 1,
+        "rasterSha256": "0e2cc083b4fef93161b77c7f783f46b1eb678f99bdc0de679558089ef83dba9d",
+        "productionQualified": false
+      },
+      "link": {
+        "sha256": "54859c1d4489f4ed849993097a012d04a81f2a24978f02c1958d86e1b6c34c9b",
+        "roles": [
+          "Document",
+          "Link",
+          "P"
+        ],
+        "contentOrder": [
+          0,
+          1
+        ],
+        "parentEntries": 2,
+        "rasterSha256": "d9dd5a2477090975fe137a97cc35e9a5148c93ed13fd18ed163dd84f4505f2f8",
+        "productionQualified": false
+      },
+      "prepared-ua1": {
+        "sha256": "17ee38a3dac16a37fab8a0d0b79e01092b25d101d09bcee9edd0f14903eb927d",
+        "roles": [
+          "Document",
+          "Figure",
+          "Figure"
+        ],
+        "contentOrder": [
+          0,
+          1
+        ],
+        "parentEntries": 1,
+        "rasterSha256": "d9dd5a2477090975fe137a97cc35e9a5148c93ed13fd18ed163dd84f4505f2f8",
+        "productionQualified": false,
+        "independentAutomatedCompliance": true,
+        "validationReportSha256": "f0da73053a6f0c1426eec287b3c725728617cf3c1d3931a3c552b23cdcd94b92",
+        "failedRules": 0
+      },
+      "prepared-ua2": {
+        "sha256": "65c364c188f0bbad5161af99179480296b839033400dff33f9d3e8018eebc4ae",
+        "roles": [
+          "Document",
+          "Figure",
+          "Figure"
+        ],
+        "contentOrder": [
+          0,
+          1
+        ],
+        "parentEntries": 1,
+        "rasterSha256": "d9dd5a2477090975fe137a97cc35e9a5148c93ed13fd18ed163dd84f4505f2f8",
+        "productionQualified": false,
+        "independentAutomatedCompliance": true,
+        "validationReportSha256": "0ebcc1e2e4bb78099f2aa960db54d8d11691403b2f369e192166ef3ae077cb19",
+        "failedRules": 0
+      }
+    },
+    "humanReviewPerformed": false,
+    "productionQualified": false
+  },
+  "reportSha256": "bdee600b1937c8023e44ff1537ff77c23802dd6a5d1229fe3fcb988f74a9fab5",
+  "originalObserverSha256": "2b926bc197015bf89a45a778bdf8164909c6a372b6b7a91d7eca22d83f600ce6",
+  "predeclaredLabelsSha256": "8d9804f47f0a23bfb4cbd1d5bfebc71c0a43ebfee38199e3ec32c5ab9a475ca1",
+  "checkerSha256": "da52fdef2c340b6dbd3f95b0e08ed0b12f33a646513d514faef7acb97951e8e1",
+  "validatorJarSha256": "687d4d8bcfec48c9f7e931cf78ed061f1eeccfba55d4cdc000ba9b4d8aa46ce6",
+  "toolModifications": "No independent tool or checker modified after execution. Original bounded observer creates only explicitly labeled source fixtures.",
+  "limits": [
+    "No human/screen-reader review, complete semantic/font/language/table/form/namespace corpus or all-runtime/final-package qualification is inferred from finite automated observations."
+  ],
+  "productionQualified": false
+}

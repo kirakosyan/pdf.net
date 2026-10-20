@@ -1,0 +1,810 @@
+{
+  "engine": "PDFium",
+  "version": "153.0.7999.0",
+  "assetContainer": "pypdfium2",
+  "containerVersion": "5.13.0",
+  "engineFlags": [],
+  "engineFeatures": "AGG; JavaScript/V8 and XFA are absent from the selected asset build. No Python runtime is used by the SDK.",
+  "qualification": "candidate source integration only; engine build/source provenance, security/license audit, actual minimum OS/runtime, full fidelity/endurance/fuzz corpus and exact final packages remain mandatory",
+  "notices": "All exact upstream engine/dependency notices are verified and retained alongside each CI engine asset. They must accompany any eventual approved redistribution; no native binary is committed or packaged here.",
+  "deployments": [
+    {
+      "rid": "win-x64",
+      "wheel": "pypdfium2-5.13.0-py3-none-win_amd64.whl",
+      "wheelSha256": "47dcca2a8d507b5fd24f94c3c9d48fb379430f097bc20f01beff6c963ffbcedb",
+      "files": [
+        {
+          "archivePath": "pypdfium2_raw/pdfium.dll",
+          "name": "pdfium.dll",
+          "size": 7260672,
+          "sha256": "fb898a1f5ace57805834f390407500bdb6ef93eff326a252ad334a8aae809d8e"
+        },
+        {
+          "archivePath": "pypdfium2_raw/version.json",
+          "name": "version.json",
+          "size": 152,
+          "sha256": "2b991c18a17ecbc862e5464aaad30ebdde2d5c9fbd1a65b0e9e2e1e57cf99194"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/Apache-2.0.txt",
+          "name": "Apache-2.0.txt",
+          "size": 11560,
+          "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/BSD-3-Clause.txt",
+          "name": "BSD-3-Clause.txt",
+          "size": 1485,
+          "sha256": "ad9a9e823df025f42389c1812eae28019f657d1ed7b3a4ebfd5010b0736a0da4"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/CC-BY-4.0.txt",
+          "name": "CC-BY-4.0.txt",
+          "size": 14844,
+          "sha256": "f1b1748301cd4274f46733c218d510929661b4990855de5fc645dacd69c4371c"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/abseil.txt",
+          "name": "abseil.txt",
+          "size": 11564,
+          "sha256": "f54fff0b905df5b3464527c652a30e903b172d6dcab4d89b5e6f105d5e4a4603"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/agg23.txt",
+          "name": "agg23.txt",
+          "size": 725,
+          "sha256": "c110d3ea2ad77467ce0dcff7d3337e6c8be8049a5103f4b9bd5fd911a77972e5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/fast_float.txt",
+          "name": "fast_float.txt",
+          "size": 1106,
+          "sha256": "bf1b57355feca8fce77ee95f48002f8d4789fb71b30ec7599c06cda4901fbb2b"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/freetype.txt",
+          "name": "freetype.txt",
+          "size": 6741,
+          "sha256": "f4b133e25df1f86ad3ffea453aa0e613f0474f34778dbbb3e437e7b2724937d8"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/icu.txt",
+          "name": "icu.txt",
+          "size": 28286,
+          "sha256": "93679f4389d53b6835d89843f251844fb9bc455b35bab036d3c8e7abe497a47a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/lcms.txt",
+          "name": "lcms.txt",
+          "size": 1353,
+          "sha256": "7312b68c5b25e9bf2b828706fb4e29588f22705112f411fd42e1f7d84c3d139a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/libjpeg_turbo.ijg",
+          "name": "libjpeg_turbo.ijg",
+          "size": 13059,
+          "sha256": "db16a04128171879c60708d171b88d97345a2dd20f9bfc173680a4497c73f704"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/libjpeg_turbo.md",
+          "name": "libjpeg_turbo.md",
+          "size": 5755,
+          "sha256": "be2b2b5ab168bce87bc3e31f2a5c5adba4b7f6e9e51d618e958d1d46972ebd95"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/libopenjpeg.txt",
+          "name": "libopenjpeg.txt",
+          "size": 1794,
+          "sha256": "c5ab0890a737c2dfa7ba675036554f6d17741d98629b0c2a145354d00617e6b2"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/libpng.txt",
+          "name": "libpng.txt",
+          "size": 5479,
+          "sha256": "452390433ba0f88aa3e2b122c647741b72a0c117cd6ed7a329b49785aecb5511"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/libtiff.txt",
+          "name": "libtiff.txt",
+          "size": 1139,
+          "sha256": "92b72ba97e6c2749c2a94bc0ef646b47080217f1e772a482b33cf5a5f98a6506"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/llvm-libc.txt",
+          "name": "llvm-libc.txt",
+          "size": 15418,
+          "sha256": "3b6226c32e168c83b891d8d6f0d3c29c2116dc3ef93dc93c307b54f279ecf383"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/pdfium-binaries.txt",
+          "name": "pdfium-binaries.txt",
+          "size": 1184,
+          "sha256": "8854f4388f1ca13b3ad9baa42e95f5546b4c0b17109c159256d3eca7be39b09b"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/pdfium.txt",
+          "name": "pdfium.txt",
+          "size": 12818,
+          "sha256": "961eacd9633fff6d051db7208b755e9210e30efac7adec3e6a6d52798f0ccf0e"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/simdutf.txt",
+          "name": "simdutf.txt",
+          "size": 1077,
+          "sha256": "c172a0ba936ff31230febb5dad869e25cb7c1a07480c7a381be8cf011bb52719"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_x64/BUILD_LICENSES/zlib.txt",
+          "name": "zlib.txt",
+          "size": 1332,
+          "sha256": "33fd641c9f3b0e0be64bc78fea9e94807674cdd70c48477599226cb8956565fe"
+        }
+      ]
+    },
+    {
+      "rid": "win-arm64",
+      "wheel": "pypdfium2-5.13.0-py3-none-win_arm64.whl",
+      "wheelSha256": "554a0b23376460af1410e3c915906895e2dac67a086b9e6ccde0643a795d3b0d",
+      "files": [
+        {
+          "archivePath": "pypdfium2_raw/pdfium.dll",
+          "name": "pdfium.dll",
+          "size": 6705152,
+          "sha256": "8644d3b7e3d8999cef35de74ba8172ac0aeac75b90e6556b62e4dfadac2ca815"
+        },
+        {
+          "archivePath": "pypdfium2_raw/version.json",
+          "name": "version.json",
+          "size": 152,
+          "sha256": "2b991c18a17ecbc862e5464aaad30ebdde2d5c9fbd1a65b0e9e2e1e57cf99194"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/Apache-2.0.txt",
+          "name": "Apache-2.0.txt",
+          "size": 11560,
+          "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/BSD-3-Clause.txt",
+          "name": "BSD-3-Clause.txt",
+          "size": 1485,
+          "sha256": "ad9a9e823df025f42389c1812eae28019f657d1ed7b3a4ebfd5010b0736a0da4"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/CC-BY-4.0.txt",
+          "name": "CC-BY-4.0.txt",
+          "size": 14844,
+          "sha256": "f1b1748301cd4274f46733c218d510929661b4990855de5fc645dacd69c4371c"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/abseil.txt",
+          "name": "abseil.txt",
+          "size": 11564,
+          "sha256": "f54fff0b905df5b3464527c652a30e903b172d6dcab4d89b5e6f105d5e4a4603"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/agg23.txt",
+          "name": "agg23.txt",
+          "size": 725,
+          "sha256": "c110d3ea2ad77467ce0dcff7d3337e6c8be8049a5103f4b9bd5fd911a77972e5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/fast_float.txt",
+          "name": "fast_float.txt",
+          "size": 1106,
+          "sha256": "bf1b57355feca8fce77ee95f48002f8d4789fb71b30ec7599c06cda4901fbb2b"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/freetype.txt",
+          "name": "freetype.txt",
+          "size": 6741,
+          "sha256": "f4b133e25df1f86ad3ffea453aa0e613f0474f34778dbbb3e437e7b2724937d8"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/icu.txt",
+          "name": "icu.txt",
+          "size": 28286,
+          "sha256": "93679f4389d53b6835d89843f251844fb9bc455b35bab036d3c8e7abe497a47a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/lcms.txt",
+          "name": "lcms.txt",
+          "size": 1353,
+          "sha256": "7312b68c5b25e9bf2b828706fb4e29588f22705112f411fd42e1f7d84c3d139a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/libjpeg_turbo.ijg",
+          "name": "libjpeg_turbo.ijg",
+          "size": 13059,
+          "sha256": "db16a04128171879c60708d171b88d97345a2dd20f9bfc173680a4497c73f704"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/libjpeg_turbo.md",
+          "name": "libjpeg_turbo.md",
+          "size": 5755,
+          "sha256": "be2b2b5ab168bce87bc3e31f2a5c5adba4b7f6e9e51d618e958d1d46972ebd95"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/libopenjpeg.txt",
+          "name": "libopenjpeg.txt",
+          "size": 1794,
+          "sha256": "c5ab0890a737c2dfa7ba675036554f6d17741d98629b0c2a145354d00617e6b2"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/libpng.txt",
+          "name": "libpng.txt",
+          "size": 5479,
+          "sha256": "452390433ba0f88aa3e2b122c647741b72a0c117cd6ed7a329b49785aecb5511"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/libtiff.txt",
+          "name": "libtiff.txt",
+          "size": 1139,
+          "sha256": "92b72ba97e6c2749c2a94bc0ef646b47080217f1e772a482b33cf5a5f98a6506"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/llvm-libc.txt",
+          "name": "llvm-libc.txt",
+          "size": 15418,
+          "sha256": "3b6226c32e168c83b891d8d6f0d3c29c2116dc3ef93dc93c307b54f279ecf383"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/pdfium-binaries.txt",
+          "name": "pdfium-binaries.txt",
+          "size": 1184,
+          "sha256": "8854f4388f1ca13b3ad9baa42e95f5546b4c0b17109c159256d3eca7be39b09b"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/pdfium.txt",
+          "name": "pdfium.txt",
+          "size": 12818,
+          "sha256": "961eacd9633fff6d051db7208b755e9210e30efac7adec3e6a6d52798f0ccf0e"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/simdutf.txt",
+          "name": "simdutf.txt",
+          "size": 1077,
+          "sha256": "c172a0ba936ff31230febb5dad869e25cb7c1a07480c7a381be8cf011bb52719"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/windows_arm64/BUILD_LICENSES/zlib.txt",
+          "name": "zlib.txt",
+          "size": 1332,
+          "sha256": "33fd641c9f3b0e0be64bc78fea9e94807674cdd70c48477599226cb8956565fe"
+        }
+      ]
+    },
+    {
+      "rid": "osx-x64",
+      "wheel": "pypdfium2-5.13.0-py3-none-macosx_13_0_x86_64.whl",
+      "wheelSha256": "2abedfb5c70992b19c780ed58d7f7b929e8ce8ee52c9140158f44317c90ec6c7",
+      "files": [
+        {
+          "archivePath": "pypdfium2_raw/libpdfium.dylib",
+          "name": "libpdfium.dylib",
+          "size": 7490088,
+          "sha256": "bbd84063a8d475c4b433056cce13451c65c2ef41e643cccbf22ba9dcc220a90d"
+        },
+        {
+          "archivePath": "pypdfium2_raw/version.json",
+          "name": "version.json",
+          "size": 143,
+          "sha256": "8be60fa03b8fc8da9850a5366c19538532cc44183256c4fad72b06416fba0fb9"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/Apache-2.0.txt",
+          "name": "Apache-2.0.txt",
+          "size": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/BSD-3-Clause.txt",
+          "name": "BSD-3-Clause.txt",
+          "size": 1459,
+          "sha256": "a6d11f0694c0137e9b02924b9d33a159f6c72f220fa4655bb2e1ea3654377d39"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/CC-BY-4.0.txt",
+          "name": "CC-BY-4.0.txt",
+          "size": 14527,
+          "sha256": "419896aea50c15d6e40c5b4baf4bd346f78223b9a354c7357ad00262afdc08ec"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/abseil.txt",
+          "name": "abseil.txt",
+          "size": 11361,
+          "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/agg23.txt",
+          "name": "agg23.txt",
+          "size": 725,
+          "sha256": "c110d3ea2ad77467ce0dcff7d3337e6c8be8049a5103f4b9bd5fd911a77972e5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/fast_float.txt",
+          "name": "fast_float.txt",
+          "size": 1079,
+          "sha256": "e562f3f974ced7e69dd1db77b820b36bcf8f30377f1aa105723fba449c53c4e6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/freetype.txt",
+          "name": "freetype.txt",
+          "size": 6741,
+          "sha256": "f4b133e25df1f86ad3ffea453aa0e613f0474f34778dbbb3e437e7b2724937d8"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/icu.txt",
+          "name": "icu.txt",
+          "size": 27718,
+          "sha256": "e55522d81edc687a341a4411e0776e54ca654e90147f354a90458aaced4116af"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/lcms.txt",
+          "name": "lcms.txt",
+          "size": 1353,
+          "sha256": "7312b68c5b25e9bf2b828706fb4e29588f22705112f411fd42e1f7d84c3d139a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/libjpeg_turbo.ijg",
+          "name": "libjpeg_turbo.ijg",
+          "size": 12799,
+          "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/libjpeg_turbo.md",
+          "name": "libjpeg_turbo.md",
+          "size": 5620,
+          "sha256": "96f5b328adbb78eeaaec6980d73fd558cb1e4d62560ed615646bc3cf5e532430"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/libopenjpeg.txt",
+          "name": "libopenjpeg.txt",
+          "size": 1794,
+          "sha256": "c5ab0890a737c2dfa7ba675036554f6d17741d98629b0c2a145354d00617e6b2"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/libpng.txt",
+          "name": "libpng.txt",
+          "size": 5345,
+          "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/libtiff.txt",
+          "name": "libtiff.txt",
+          "size": 1139,
+          "sha256": "92b72ba97e6c2749c2a94bc0ef646b47080217f1e772a482b33cf5a5f98a6506"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/llvm-libc.txt",
+          "name": "llvm-libc.txt",
+          "size": 15140,
+          "sha256": "ebcd9bbf783a73d05c53ba4d586b8d5813dcdf3bbec50265860ccc885e606f47"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/pdfium-binaries.txt",
+          "name": "pdfium-binaries.txt",
+          "size": 1177,
+          "sha256": "ba26c1263131696b86c10496b5066b918a20b7161822a80c274d0080105f6c93"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/pdfium.txt",
+          "name": "pdfium.txt",
+          "size": 12896,
+          "sha256": "1fe9dea718fbd75cf149adaf4d8a22a4335604d964ddb76d1b45383dec8668c9"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/simdutf.txt",
+          "name": "simdutf.txt",
+          "size": 1059,
+          "sha256": "fc8dbc04e03ad4efc08a647ffe7f995b811a95bc04c0e85a56d5277c6593fa5f"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_x64/BUILD_LICENSES/zlib.txt",
+          "name": "zlib.txt",
+          "size": 1332,
+          "sha256": "33fd641c9f3b0e0be64bc78fea9e94807674cdd70c48477599226cb8956565fe"
+        }
+      ]
+    },
+    {
+      "rid": "osx-arm64",
+      "wheel": "pypdfium2-5.13.0-py3-none-macosx_13_0_arm64.whl",
+      "wheelSha256": "da5c7b74eebf40b5c1fbe1de01aa1edc8827a79fb1efd999616bc20dcaf77ba4",
+      "files": [
+        {
+          "archivePath": "pypdfium2_raw/libpdfium.dylib",
+          "name": "libpdfium.dylib",
+          "size": 7191008,
+          "sha256": "33c98063af28c0b7cbf8227f4422bf5c15942df2455cf7f0a5dce3dc601d52b0"
+        },
+        {
+          "archivePath": "pypdfium2_raw/version.json",
+          "name": "version.json",
+          "size": 143,
+          "sha256": "8be60fa03b8fc8da9850a5366c19538532cc44183256c4fad72b06416fba0fb9"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/Apache-2.0.txt",
+          "name": "Apache-2.0.txt",
+          "size": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/BSD-3-Clause.txt",
+          "name": "BSD-3-Clause.txt",
+          "size": 1459,
+          "sha256": "a6d11f0694c0137e9b02924b9d33a159f6c72f220fa4655bb2e1ea3654377d39"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/CC-BY-4.0.txt",
+          "name": "CC-BY-4.0.txt",
+          "size": 14527,
+          "sha256": "419896aea50c15d6e40c5b4baf4bd346f78223b9a354c7357ad00262afdc08ec"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/abseil.txt",
+          "name": "abseil.txt",
+          "size": 11361,
+          "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/agg23.txt",
+          "name": "agg23.txt",
+          "size": 725,
+          "sha256": "c110d3ea2ad77467ce0dcff7d3337e6c8be8049a5103f4b9bd5fd911a77972e5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/fast_float.txt",
+          "name": "fast_float.txt",
+          "size": 1079,
+          "sha256": "e562f3f974ced7e69dd1db77b820b36bcf8f30377f1aa105723fba449c53c4e6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/freetype.txt",
+          "name": "freetype.txt",
+          "size": 6741,
+          "sha256": "f4b133e25df1f86ad3ffea453aa0e613f0474f34778dbbb3e437e7b2724937d8"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/icu.txt",
+          "name": "icu.txt",
+          "size": 27718,
+          "sha256": "e55522d81edc687a341a4411e0776e54ca654e90147f354a90458aaced4116af"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/lcms.txt",
+          "name": "lcms.txt",
+          "size": 1353,
+          "sha256": "7312b68c5b25e9bf2b828706fb4e29588f22705112f411fd42e1f7d84c3d139a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/libjpeg_turbo.ijg",
+          "name": "libjpeg_turbo.ijg",
+          "size": 12799,
+          "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/libjpeg_turbo.md",
+          "name": "libjpeg_turbo.md",
+          "size": 5620,
+          "sha256": "96f5b328adbb78eeaaec6980d73fd558cb1e4d62560ed615646bc3cf5e532430"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/libopenjpeg.txt",
+          "name": "libopenjpeg.txt",
+          "size": 1794,
+          "sha256": "c5ab0890a737c2dfa7ba675036554f6d17741d98629b0c2a145354d00617e6b2"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/libpng.txt",
+          "name": "libpng.txt",
+          "size": 5345,
+          "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/libtiff.txt",
+          "name": "libtiff.txt",
+          "size": 1139,
+          "sha256": "92b72ba97e6c2749c2a94bc0ef646b47080217f1e772a482b33cf5a5f98a6506"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/llvm-libc.txt",
+          "name": "llvm-libc.txt",
+          "size": 15140,
+          "sha256": "ebcd9bbf783a73d05c53ba4d586b8d5813dcdf3bbec50265860ccc885e606f47"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/pdfium-binaries.txt",
+          "name": "pdfium-binaries.txt",
+          "size": 1177,
+          "sha256": "ba26c1263131696b86c10496b5066b918a20b7161822a80c274d0080105f6c93"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/pdfium.txt",
+          "name": "pdfium.txt",
+          "size": 12896,
+          "sha256": "1fe9dea718fbd75cf149adaf4d8a22a4335604d964ddb76d1b45383dec8668c9"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/simdutf.txt",
+          "name": "simdutf.txt",
+          "size": 1059,
+          "sha256": "fc8dbc04e03ad4efc08a647ffe7f995b811a95bc04c0e85a56d5277c6593fa5f"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/darwin_arm64/BUILD_LICENSES/zlib.txt",
+          "name": "zlib.txt",
+          "size": 1332,
+          "sha256": "33fd641c9f3b0e0be64bc78fea9e94807674cdd70c48477599226cb8956565fe"
+        }
+      ]
+    },
+    {
+      "rid": "linux-x64",
+      "wheel": "pypdfium2-5.13.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "wheelSha256": "81df25c1ab4c13ff773102d3cbea1967511d079123b067fc077bd0c4d57d91d8",
+      "files": [
+        {
+          "archivePath": "pypdfium2_raw/libpdfium.so",
+          "name": "libpdfium.so",
+          "size": 7669256,
+          "sha256": "224f8ece41f7e35891f11c10073b7b7062d7a18e9ef870586162a85c46130f7d"
+        },
+        {
+          "archivePath": "pypdfium2_raw/version.json",
+          "name": "version.json",
+          "size": 143,
+          "sha256": "8be60fa03b8fc8da9850a5366c19538532cc44183256c4fad72b06416fba0fb9"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/Apache-2.0.txt",
+          "name": "Apache-2.0.txt",
+          "size": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/BSD-3-Clause.txt",
+          "name": "BSD-3-Clause.txt",
+          "size": 1459,
+          "sha256": "a6d11f0694c0137e9b02924b9d33a159f6c72f220fa4655bb2e1ea3654377d39"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/CC-BY-4.0.txt",
+          "name": "CC-BY-4.0.txt",
+          "size": 14527,
+          "sha256": "419896aea50c15d6e40c5b4baf4bd346f78223b9a354c7357ad00262afdc08ec"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/abseil.txt",
+          "name": "abseil.txt",
+          "size": 11361,
+          "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/agg23.txt",
+          "name": "agg23.txt",
+          "size": 725,
+          "sha256": "c110d3ea2ad77467ce0dcff7d3337e6c8be8049a5103f4b9bd5fd911a77972e5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/fast_float.txt",
+          "name": "fast_float.txt",
+          "size": 1079,
+          "sha256": "e562f3f974ced7e69dd1db77b820b36bcf8f30377f1aa105723fba449c53c4e6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/freetype.txt",
+          "name": "freetype.txt",
+          "size": 6741,
+          "sha256": "f4b133e25df1f86ad3ffea453aa0e613f0474f34778dbbb3e437e7b2724937d8"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/icu.txt",
+          "name": "icu.txt",
+          "size": 27718,
+          "sha256": "e55522d81edc687a341a4411e0776e54ca654e90147f354a90458aaced4116af"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/lcms.txt",
+          "name": "lcms.txt",
+          "size": 1353,
+          "sha256": "7312b68c5b25e9bf2b828706fb4e29588f22705112f411fd42e1f7d84c3d139a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/libjpeg_turbo.ijg",
+          "name": "libjpeg_turbo.ijg",
+          "size": 12799,
+          "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/libjpeg_turbo.md",
+          "name": "libjpeg_turbo.md",
+          "size": 5620,
+          "sha256": "96f5b328adbb78eeaaec6980d73fd558cb1e4d62560ed615646bc3cf5e532430"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/libopenjpeg.txt",
+          "name": "libopenjpeg.txt",
+          "size": 1794,
+          "sha256": "c5ab0890a737c2dfa7ba675036554f6d17741d98629b0c2a145354d00617e6b2"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/libpng.txt",
+          "name": "libpng.txt",
+          "size": 5345,
+          "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/libtiff.txt",
+          "name": "libtiff.txt",
+          "size": 1139,
+          "sha256": "92b72ba97e6c2749c2a94bc0ef646b47080217f1e772a482b33cf5a5f98a6506"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/llvm-libc.txt",
+          "name": "llvm-libc.txt",
+          "size": 15140,
+          "sha256": "ebcd9bbf783a73d05c53ba4d586b8d5813dcdf3bbec50265860ccc885e606f47"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/pdfium-binaries.txt",
+          "name": "pdfium-binaries.txt",
+          "size": 1177,
+          "sha256": "ba26c1263131696b86c10496b5066b918a20b7161822a80c274d0080105f6c93"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/pdfium.txt",
+          "name": "pdfium.txt",
+          "size": 12818,
+          "sha256": "961eacd9633fff6d051db7208b755e9210e30efac7adec3e6a6d52798f0ccf0e"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/simdutf.txt",
+          "name": "simdutf.txt",
+          "size": 1059,
+          "sha256": "fc8dbc04e03ad4efc08a647ffe7f995b811a95bc04c0e85a56d5277c6593fa5f"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_x64/BUILD_LICENSES/zlib.txt",
+          "name": "zlib.txt",
+          "size": 1332,
+          "sha256": "33fd641c9f3b0e0be64bc78fea9e94807674cdd70c48477599226cb8956565fe"
+        }
+      ]
+    },
+    {
+      "rid": "linux-arm64",
+      "wheel": "pypdfium2-5.13.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "wheelSha256": "9ee8c2bb2e68b396ab4a763215ac100dacb6b96d0da5bebeb239a021aecc3a7e",
+      "files": [
+        {
+          "archivePath": "pypdfium2_raw/libpdfium.so",
+          "name": "libpdfium.so",
+          "size": 7867192,
+          "sha256": "95a4d8cde3500f57f486478d27795d411b531a14712df08379f4793538a24a88"
+        },
+        {
+          "archivePath": "pypdfium2_raw/version.json",
+          "name": "version.json",
+          "size": 143,
+          "sha256": "8be60fa03b8fc8da9850a5366c19538532cc44183256c4fad72b06416fba0fb9"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/Apache-2.0.txt",
+          "name": "Apache-2.0.txt",
+          "size": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/BSD-3-Clause.txt",
+          "name": "BSD-3-Clause.txt",
+          "size": 1459,
+          "sha256": "a6d11f0694c0137e9b02924b9d33a159f6c72f220fa4655bb2e1ea3654377d39"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/LICENSES/CC-BY-4.0.txt",
+          "name": "CC-BY-4.0.txt",
+          "size": 14527,
+          "sha256": "419896aea50c15d6e40c5b4baf4bd346f78223b9a354c7357ad00262afdc08ec"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/abseil.txt",
+          "name": "abseil.txt",
+          "size": 11361,
+          "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/agg23.txt",
+          "name": "agg23.txt",
+          "size": 725,
+          "sha256": "c110d3ea2ad77467ce0dcff7d3337e6c8be8049a5103f4b9bd5fd911a77972e5"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/fast_float.txt",
+          "name": "fast_float.txt",
+          "size": 1079,
+          "sha256": "e562f3f974ced7e69dd1db77b820b36bcf8f30377f1aa105723fba449c53c4e6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/freetype.txt",
+          "name": "freetype.txt",
+          "size": 6741,
+          "sha256": "f4b133e25df1f86ad3ffea453aa0e613f0474f34778dbbb3e437e7b2724937d8"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/icu.txt",
+          "name": "icu.txt",
+          "size": 27718,
+          "sha256": "e55522d81edc687a341a4411e0776e54ca654e90147f354a90458aaced4116af"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/lcms.txt",
+          "name": "lcms.txt",
+          "size": 1353,
+          "sha256": "7312b68c5b25e9bf2b828706fb4e29588f22705112f411fd42e1f7d84c3d139a"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/libjpeg_turbo.ijg",
+          "name": "libjpeg_turbo.ijg",
+          "size": 12799,
+          "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/libjpeg_turbo.md",
+          "name": "libjpeg_turbo.md",
+          "size": 5620,
+          "sha256": "96f5b328adbb78eeaaec6980d73fd558cb1e4d62560ed615646bc3cf5e532430"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/libopenjpeg.txt",
+          "name": "libopenjpeg.txt",
+          "size": 1794,
+          "sha256": "c5ab0890a737c2dfa7ba675036554f6d17741d98629b0c2a145354d00617e6b2"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/libpng.txt",
+          "name": "libpng.txt",
+          "size": 5345,
+          "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/libtiff.txt",
+          "name": "libtiff.txt",
+          "size": 1139,
+          "sha256": "92b72ba97e6c2749c2a94bc0ef646b47080217f1e772a482b33cf5a5f98a6506"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/llvm-libc.txt",
+          "name": "llvm-libc.txt",
+          "size": 15140,
+          "sha256": "ebcd9bbf783a73d05c53ba4d586b8d5813dcdf3bbec50265860ccc885e606f47"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/pdfium-binaries.txt",
+          "name": "pdfium-binaries.txt",
+          "size": 1177,
+          "sha256": "ba26c1263131696b86c10496b5066b918a20b7161822a80c274d0080105f6c93"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/pdfium.txt",
+          "name": "pdfium.txt",
+          "size": 12818,
+          "sha256": "961eacd9633fff6d051db7208b755e9210e30efac7adec3e6a6d52798f0ccf0e"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/simdutf.txt",
+          "name": "simdutf.txt",
+          "size": 1059,
+          "sha256": "fc8dbc04e03ad4efc08a647ffe7f995b811a95bc04c0e85a56d5277c6593fa5f"
+        },
+        {
+          "archivePath": "pypdfium2-5.13.0.dist-info/licenses/data/linux_arm64/BUILD_LICENSES/zlib.txt",
+          "name": "zlib.txt",
+          "size": 1332,
+          "sha256": "33fd641c9f3b0e0be64bc78fea9e94807674cdd70c48477599226cb8956565fe"
+        }
+      ]
+    }
+  ]
+}

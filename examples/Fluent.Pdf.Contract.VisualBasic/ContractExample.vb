@@ -4,6 +4,153 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function GenerateData(rows As System.Collections.Generic.IEnumerable(Of String), layout As PdfFlowOptions, style As PdfFlowTextStyle, providers As PdfProviderRegistry) As PdfDocument
+        Dim template = New PdfGenerationTemplate(Of String)("sample-data", Sub(context, row) context.Paragraph(row, style))
+        Return PdfDataGeneration.Generate(rows, template, New PdfGenerationOptions(layout, ""), providers)
+    End Function
+    Public Function ExtractTables(source As PdfDocumentSnapshot, mode As PdfTableDetectionMode) As PdfTableExtractionResult
+        Return PdfTableExtraction.Read(source, New Integer() {0}, New PdfTableExtractionOptions(mode))
+    End Function
+    Public Function Search(source As PdfDocumentSnapshot, literal As String) As PdfTextSearchResult
+        Return PdfTextSearch.FindPage(source, 0, New PdfTextQuery(literal))
+    End Function
+    Public Function ExtractResources(source As PdfDocumentSnapshot, page As Integer) As PdfPageResourceManifest
+        Return PdfResourceExtraction.ReadPage(source, page)
+    End Function
+    Public Function Stamp(source As PdfDocumentSnapshot, identifier As String, content As PdfStampContent, pages As Integer(), options As PdfStampOptions) As PdfDocument
+        Return PdfStamps.Apply(source, identifier, content, pages, options)
+    End Function
+    Public Function HtmlRenderer(host As Fluent.Pdf.Html.ChromiumConnectionFactory, exactVersion As String, exactRevision As String) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision))
+    End Function
+    Public Function HtmlRendererWithResources(host As Fluent.Pdf.Html.ChromiumConnectionFactory, exactVersion As String, exactRevision As String, resources As Fluent.Pdf.Html.HtmlResourceLoader) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Html.ChromiumHtmlRenderer(host, exactVersion, exactRevision, AddressOf resources.OpenSession))
+    End Function
+    Public Function HtmlOptions(readiness As PdfHtmlReadinessOptions, enableJavaScript As Boolean, locale As String, timeZone As String, media As PdfHtmlMedia) As PdfHtmlOptions
+        Return New PdfHtmlOptions(readiness:=readiness, enableJavaScript:=enableJavaScript, locale:=locale, timeZone:=timeZone, media:=media)
+    End Function
+    Public Function ConvertHtml(source As PdfHtmlSource, providers As PdfProviderRegistry, options As PdfHtmlOptions) As PdfDocument
+        Return PdfHtml.Render(source, providers, options)
+    End Function
+    Public Function HtmlPrintOptions(options As PdfHtmlOptions, print As PdfHtmlPrintOptions) As PdfHtmlOptions
+        Return options.WithPrint(print)
+    End Function
+
+    Public Function InspectCompatibility(source As PdfDocumentSnapshot) As PdfCompatibilityInspection
+        Return PdfCompatibility.Inspect(source)
+    End Function
+    Public Function WriteUtf8MetadataPdf(output As Stream) As PdfOperationReport
+        Dim title = PdfTextString.Create("Original title 一😀", PdfTextStringEncoding.Utf8)
+        Using blank = PdfFacade.Create().AddPage(), document = PdfMetadata.Edit(blank.CreateSnapshot(), Function(e) e.SetInformationText("Title", title))
+            Return document.Save(output)
+        End Using
+    End Function
+
+    Public Function InspectStructure(input As Stream) As PdfStructuralInspection
+        Return PdfStructuralValidation.Inspect(input)
+    End Function
+    Public Function RecoverPdf(input As Stream, output As Stream, ledger As Stream, options As PdfRepairOptions) As PdfRepairResult
+        Dim result = PdfRepair.Recover(input, output, options)
+        result.WriteLedger(ledger)
+        Return result
+    End Function
+
+    Public Function ArchivalValidator(host As Fluent.Pdf.Compliance.PdfArchivalValidationRunner) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Compliance.VeraPdfReportValidator(host))
+    End Function
+    Public Function ConvertToArchive(source As PdfDocumentSnapshot, output As Stream, options As PdfArchivalOptions, providers As PdfProviderRegistry) As PdfArchivalConversion
+        Return PdfArchival.Convert(source, output, options, providers)
+    End Function
+
+    Public Function CertificateSecurity() As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Cryptography.ManagedCmsEnvelopeProvider())
+    End Function
+    Public Function ProtectWithPassword(source As PdfDocumentSnapshot, output As Stream, preparedUser As Byte(), preparedOwner As Byte()) As PdfSecurityResult
+        Using user As New PdfPassword(preparedUser), owner As New PdfPassword(preparedOwner)
+            Return PdfSecurity.EncryptWithPassword(source, output, New PdfPasswordProtection(user, owner))
+        End Using
+    End Function
+    Public Function DecryptWithPassword(input As Stream, output As Stream, preparedPassword As Byte()) As PdfSecurityResult
+        Using password As New PdfPassword(preparedPassword)
+            Return PdfSecurity.DecryptWithPassword(input, output, password)
+        End Using
+    End Function
+
+    Public Function PageRenderer(worker As Fluent.Pdf.Workers.NativeWorkerOptions) As PdfProviderRegistry
+        Return New PdfProviderRegistry(New Fluent.Pdf.Rendering.IsolatedPdfRenderer(worker))
+    End Function
+    Public Function RenderPagePreview(input As Stream, providers As PdfProviderRegistry, options As PdfRenderOptions) As PdfRaster
+        Using document = PdfFacade.Open(input)
+            Return PdfRendering.RenderPage(document.CreateSnapshot(), 0, providers, options)
+        End Using
+    End Function
+    Public Function FillAndFlattenForm(input As Stream, output As Stream, data As PdfFormData, font As PdfFont, Optional writeMode As PdfWriteMode = PdfWriteMode.Full) As PdfOperationReport
+        Using source = PdfFacade.Open(input)
+            Dim style As New PdfFormTextStyle(New PdfFontFallback(font), New PdfProviderRegistry(New PdfSimpleTextShaper()))
+            Using filled = PdfForms.FillData(source.CreateSnapshot(), data, style, writeMode:=writeMode)
+                Using flattened = PdfForms.Flatten(filled.CreateSnapshot(), data.Fields.Select(Function(field) field.Name), writeMode:=writeMode)
+                    Return flattened.Save(output, writeOptions:=New PdfWriteOptions(writeMode))
+                End Using
+            End Using
+        End Using
+    End Function
+
+    Public Function WriteFormPdf(output As Stream, font As PdfFont) As PdfOperationReport
+        Dim text = PdfText.Shape("office", New PdfFontFallback(font), New PdfProviderRegistry(New PdfSimpleTextShaper()))
+        Dim appearance = PdfForms.CreateTextAppearance(text, New PdfRect(0, 0, 160, 40), 12)
+        Dim editingFont = PdfFontResource.CreateText(font, "office", subset:=False)
+        Using blank = PdfFacade.Create().AddPage()
+            Dim widget As New PdfFormWidgetDefinition(0, New PdfRect(20, 50, 160, 40), appearance)
+            Dim unicodeValue = System.Text.Encoding.BigEndianUnicode.GetPreamble().Concat(System.Text.Encoding.BigEndianUnicode.GetBytes("office")).ToArray()
+            Using document = PdfForms.Add(blank.CreateSnapshot(), New PdfFormFieldDefinition("Customer.Name", PdfFormFieldKind.Text, {widget}, PdfValue.String(unicodeValue), editingFont:=editingFont))
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
+
+    Public Function ExtractPageText(input As Stream) As String
+        Using document = PdfFacade.Open(input)
+            Return PdfTextExtraction.ReadPage(document.CreateSnapshot(), 0,
+                providers:=New PdfProviderRegistry(Fluent.Pdf.Fonts.ManagedFontProvider.Instance)).Text
+        End Using
+    End Function
+
+    Public Function WriteLayerPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage()
+            Dim path = PdfPath.Create({PdfPathSegment.Rectangle(New PdfRect(20, 20, 80, 40))})
+            PdfCanvas.Create(blank.Pages(0).Geometry, Sub(canvas) canvas.DrawPath(path)).ApplyTo(blank.Pages(0))
+            Dim resource = blank.CreateSnapshot().Pages(0).CanvasLayers(0).ResourceName
+            Using grouped = PdfLayers.AddGroup(blank.CreateSnapshot(), "Details", visible:=False)
+                Dim group = PdfLayers.Inspect(grouped.CreateSnapshot()).Groups(0)
+                Using document = PdfLayers.BindXObject(grouped.CreateSnapshot(), 0, resource, PdfValue.Reference(group.Id))
+                    Return document.Save(output)
+                End Using
+            End Using
+        End Using
+    End Function
+
+    Public Function WriteAttachmentPdf(payload As Stream, output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage()
+            Using document = PdfAttachments.Add(blank.CreateSnapshot(), payload,
+                New PdfAttachmentOptions("data.json", "application/json", modificationTime:=New DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero), relationship:="Data"))
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
+
+    Public Function WriteMetadataPdf(output As Stream) As PdfOperationReport
+        Using blank = PdfFacade.Create().AddPage()
+            Using document = PdfMetadata.Edit(blank.CreateSnapshot(),
+                Sub(editor)
+                    editor.SetInformation("Title", "Metadata example").SetInformation("Author", "Example writer").
+                        SetCreationTime(New DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero)).
+                        SetModificationTime(New DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero)).
+                        SetIdentity(New Byte() {1, 2, 3, 4}).Synchronize(PdfMetadataSynchronization.InformationToXmp)
+                End Sub)
+                Return document.Save(output)
+            End Using
+        End Using
+    End Function
     Public Function WritePresentationPdf(output As Stream) As PdfOperationReport
         Using blank = PdfFacade.Create().AddPage().AddPage()
             Dim items = {New PdfBookmark("Report", New PdfDestination(0)).WithChildren(New PdfBookmark("Details", New PdfDestination(1)))}
@@ -190,6 +337,18 @@ Public Module ContractExample
         End Using
     End Function
 
+    Public Function ConvertInput(input As Stream, format As PdfInputFormat, options As PdfInputConversionOptions, providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
+        Return PdfInputConversion.Write(input, format, options, providers, output)
+    End Function
+
+    Public Function ExportWord(source As PdfDocumentSnapshot, format As PdfWordFormat, options As PdfWordConversionOptions, providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
+        Return PdfWordConversion.Write(source, format, options, providers, output, New PdfOperationPolicy(PdfProcessingMode.Permissive))
+    End Function
+
+    Public Function MergePdf(template As PdfMergeTemplate, data As PdfMergeRecord, options As PdfMailMergeOptions, providers As PdfProviderRegistry, output As Stream) As PdfOperationReport
+        Return PdfMailMerge.Write(template, data, options, providers, output)
+    End Function
+
     Public Function Run() As Integer
         Dim options As New PdfOptions(PdfPageSize.Letter, maximumPages:=10)
         Using document As PdfDocument = PdfFacade.Create(options, PdfProviderRegistry.Empty).
@@ -218,5 +377,41 @@ Public Module ContractExample
             End If
             Return snapshot.Pages.Count
         End Using
+    End Function
+    Public Function TagPdf(source As PdfDocumentSnapshot, plan As PdfStructurePlan) As PdfDocument
+        Return PdfAccessibility.Author(source, plan)
+    End Function
+    Public Function PreprocessScan(original As PdfOcrRaster, options As PdfScanPreprocessingOptions) As PdfScanPreprocessingResult
+        Return PdfScanPreprocessing.Process(original, options)
+    End Function
+
+    Public Function AnalyzeScanLayout(recognition As PdfOcrResult, width As Integer, height As Integer, options As PdfScanLayoutOptions) As PdfScanLayoutResult
+        Return PdfScanLayout.Analyze(recognition, width, height, options)
+    End Function
+
+    Public Function ApplyOcrLayer(source As PdfDocumentSnapshot, result As PdfOcrResult, frame As PdfOcrPageFrame, fonts As PdfFontFallback, providers As PdfProviderRegistry) As PdfDocument
+        Return PdfOcrSearchable.Apply(source, 0, result, frame, fonts, providers)
+    End Function
+
+    Public Function WriteOcrJson(result As PdfOcrResult, width As Integer, height As Integer, output As Stream) As PdfOperationReport
+        Return PdfOcrOutput.Write(result, width, height, PdfOcrOutputFormat.Json, output)
+    End Function
+
+    Public Function SelectOcrModels(catalog As PdfOcrModelCatalog, language As String) As PdfOcrModelSelection
+        Return catalog.Select(language)
+    End Function
+
+    Public Function MeasureOcrAccuracy(samples As PdfOcrAccuracySample(), options As PdfOcrAccuracyOptions) As PdfOcrAccuracyReport
+        Return PdfOcrAccuracy.Evaluate(samples, "caller-labeled-corpus", "1", options)
+    End Function
+
+    Public Function RecognizeOcr(image As PdfOcrRaster, options As PdfOcrOptions, providers As PdfProviderRegistry) As PdfOcrResult
+        Return PdfOcr.Recognize(image, options, providers)
+    End Function
+    Public Function RedactPdf(source As PdfDocumentSnapshot, regions As PdfRedactionRegion(), providers As PdfProviderRegistry, dpi As Integer) As PdfRedactionResult
+        Return PdfRedaction.RasterRewrite(source, regions, providers, New PdfRedactionRasterOptions(dpi))
+    End Function
+    Public Function SignPdf(source As PdfSyntaxDocument, fieldName As String, providers As PdfProviderRegistry) As PdfSignedResult
+        Return PdfSignatures.Sign(source, New PdfSignatureOptions(fieldName), providers)
     End Function
 End Module

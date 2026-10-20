@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "purpose": "passing-source-ci-not-production-qualification",
+  "runId": 39144552865,
+  "sourceCommit": "b52f91b5dc6be985ce82530cefef47e4a0a9b041",
+  "testedMergeCommit": "931cdf54957e0cbb93eb47ea70678cb9376c9f30",
+  "testedTree": "9475b187e67b61ee0115f2ae53401b950ec01c87",
+  "exactMergeTreeVerified": true,
+  "platformJobs": 6,
+  "runtimeLanes": 20,
+  "passed": 19380,
+  "failed": 0,
+  "skipped": 0,
+  "notExecutedLanes": [],
+  "apiComparisonsPerJob": 24,
+  "jobs": [
+    {
+      "jobId": 117725630424,
+      "logSha256": "c4dc6ce35844c377c217cc2844aa080dafe4ff5bace4c2dc6567703d6414c79a",
+      "runtimeLaneTotals": [
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        }
+      ]
+    },
+    {
+      "jobId": 117725630577,
+      "logSha256": "ccde18f1ee0fb3ae816e34e34771991b7dac2145e5c1f3ff045a3451b2739b25",
+      "runtimeLaneTotals": [
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        }
+      ]
+    },
+    {
+      "jobId": 117725630607,
+      "logSha256": "28ea0940582697c1aaef49c05ed2418d0b0f2f598db61bb8a9939a05b525d9d5",
+      "runtimeLaneTotals": [
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        }
+      ]
+    },
+    {
+      "jobId": 117725630648,
+      "logSha256": "91d2d1be4fc5651522f5220ed3c25b640a205ce580374e0e030b0342482592b6",
+      "runtimeLaneTotals": [
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        }
+      ]
+    },
+    {
+      "jobId": 117725630673,
+      "logSha256": "aaa5b74185d54938b14e6a7fda09fd7a87ff9898e04952e98bcdc61a851c2a31",
+      "runtimeLaneTotals": [
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        }
+      ]
+    },
+    {
+      "jobId": 117725630757,
+      "logSha256": "690b4377ea3192866b41e48e0fe9eb4f09dcdf29cc902c40064530eb686bda48",
+      "runtimeLaneTotals": [
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        },
+        {
+          "passed": 969,
+          "failed": 0,
+          "skipped": 0,
+          "total": 969
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12143715320,
+      "name": "source-contracts-osx-x64",
+      "digest": "sha256:9483791e9c45344579509a22b1cb72eec851f410a861b11968f2db00c2a21d67"
+    },
+    {
+      "id": 12143675005,
+      "name": "source-contracts-win-arm64",
+      "digest": "sha256:41342bbdd59af5790853595af98f18f4fb3071661526f16311783c7868a54406"
+    },
+    {
+      "id": 12143526038,
+      "name": "source-contracts-win-x64",
+      "digest": "sha256:57e9c9407827fbd2a7f5cfdd9b3e9d8337bba32ee340fa35487c74b6f4195c96"
+    },
+    {
+      "id": 12143320804,
+      "name": "source-contracts-linux-arm64",
+      "digest": "sha256:3e0e1ec75a5b54d03c2ae0826bf41b06a05e78f4f361b4357150812d3acd1ae9"
+    },
+    {
+      "id": 12143280577,
+      "name": "source-contracts-osx-arm64",
+      "digest": "sha256:dfb5abde9310404630a849fb5887097f3ceb61e64a0a2e140944c30f202641d4"
+    },
+    {
+      "id": 12142099362,
+      "name": "source-contracts-linux-x64",
+      "digest": "sha256:e6cbfe6fcab1bd684a6f958495586b0d668f57fde3d9cb37a30e83041bc4544a"
+    }
+  ],
+  "artifactRetention": "GitHub artifact links/digests and complete job logs retained. Workspace retrieval of the ZIP file reference was blocked by HTTP 403; exact runtime/OS/assembly records remain in the retained TRX/aggregate artifacts.",
+  "actualMinimumFrameworkQualified": false,
+  "exactFinalPackagesQualified": false,
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true
+}

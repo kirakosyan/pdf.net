@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-observations-not-production-qualification",
+  "requirement": "FP-112",
+  "observations": {
+    "purpose": "original-source-independent-mail-merge-observations",
+    "labelsSha256": "3d999af7ef999729bc195d7b64d678ed180782581ea74e76f6a6c562508886e2",
+    "checkerSha256": "e02a4c1c6c7f46053aec2d5706f7d369acf98f7ad670f3389162e6742b661d63",
+    "tools": {
+      "pypdf": "6.10.0",
+      "pymupdf": "1.26.6",
+      "python-docx": "1.2.0",
+      "Pillow": "12.3.0",
+      "openXmlValidator": "3.5.1"
+    },
+    "results": {
+      "invoice.pdf": {
+        "sha256": "36ab6fa0a9ea62e73c4122d150df5cdad461368a5262c8b5ecf8bcc96336889a",
+        "pages": 1,
+        "independentText": [
+          "AB\nPAID\nITEM\nVALUE\nAB\n1.234,50\nBA\n-2,50\n",
+          "AB\nPAID\nITEM\nVALUE\nAB\n1.234,50\nBA\n-2,50\n",
+          "AB\nPAID\nITEM   VALUE\n\nAB     1.234,50\n\nBA     -2,50\n\f"
+        ],
+        "productionQualified": false
+      },
+      "filled.pdf": {
+        "sha256": "d5a331b9c10d50eaf771aecfe70de42911715bed5db3a344078b44597543f2f6",
+        "pages": 1,
+        "independentText": [
+          "AéB <&>{{literal}}\nAB 1.234,50\nBA -2,50\nEND\n",
+          "AéB <&>{{literal}}\nAB 1.234,50\nBA -2,50\nEND\n",
+          "AéB <&>{{literal}}\n\nAB 1.234,50\n\nBA -2,50\n\nEND\n\f"
+        ],
+        "productionQualified": false
+      },
+      "filled.docx": {
+        "sha256": "77c9d9ee4338fde6a9bed7ed6b822bb50ff162abb3a679a128019c48d11ab9a4",
+        "paragraphs": [
+          "AéB <&>{{literal}}",
+          "AB 1.234,50",
+          "BA -2,50",
+          "END"
+        ],
+        "schemaErrors": 0,
+        "imageSha256": "3d0ac15f6c6ddbbffa0a50dc5dfbf661ce86c33f4d387003f7464d49434dd320",
+        "imageSize": [
+          3,
+          2
+        ],
+        "productionQualified": false
+      }
+    },
+    "productionQualified": false
+  },
+  "reportSha256": "36ee221871cd673c6012202eaf1b67e35de1c582f4d845ede9908051f1416e88",
+  "originalObserverSha256": "b6eb1f0541fa1b1c813ffc05ea9b823a0f8ed863eae3e45f00e5970112f98d6d",
+  "predeclaredLabelsSha256": "3d999af7ef999729bc195d7b64d678ed180782581ea74e76f6a6c562508886e2",
+  "checkerSha256": "e02a4c1c6c7f46053aec2d5706f7d369acf98f7ad670f3389162e6742b661d63",
+  "toolModifications": "No independent tool or checker modified after execution. Standalone OpenXML3.5.1 validator is a tool dependency, not SDK dependency.",
+  "limits": [
+    "Original finite invoice/DOCX/image fixtures do not qualify full DOCX/native template semantics, language/culture/layout fidelity, screen readers, hostile corpus or all required runtimes/packages."
+  ],
+  "productionQualified": false
+}

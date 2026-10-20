@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-032",
+  "sourceCommit": "6070fb0e2edb98b3e8e8dc8883bc1765ca8b4a19",
+  "sourceTree": "d5b36f100bdf169a07c288d432a1b2afc0d154c4",
+  "commitBinding": "The final exact-head CI report and delivery PR bind this pre-commit source file set to the tested commit; no self-referential commit hash is invented.",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1305,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "afb4d1e1f7ac96f5456ac1a95d1fc6f439ded593a8bc7288552de3be88c6addd"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 200,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "8aa41584ba3e6ad49de0e3d99b7e588db96061de9e421def7d502a281db8858f"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 200,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "ee1f355d8ffba664e175c35b71d65d6483d2fd13b717df46fb9222f0b6731f07"
+    }
+  ],
+  "newManagedSignatureCases": 28,
+  "sdkLibraries": 11,
+  "apiComparisons": 33,
+  "apiComparisonReportSha256": "be81c31f51541e14382fd1a0b2ee752334ba4a2e27c8da735b62465ffb61d73b",
+  "sourceFileSha256": {
+    "src/Fluent.Pdf/Signatures/PdfSignatures.cs": "cdbc013570b9a5ab7b2db22156f0e49db065b1b1634bf115c49ffa1e01c3b92a",
+    "src/Fluent.Pdf/Signatures/PdfSignatures.Bytes.cs": "dbd5581dba5f087cfebaffe4a4d2b88f7f496ff3940768c3cc25c04733fea8e5",
+    "src/Fluent.Pdf/Signatures/PdfSignaturePolicy.cs": "50513cf9b2b501c436a81ab381286801b37dc361c9df8f5be82fd5874199afdb",
+    "src/Fluent.Pdf/Signatures/PdfSignatureContracts.cs": "ab803dc871e84ddee73ede42a569cbfcc4ae19b91a3eb76fae70a861e2506de1",
+    "src/Fluent.Pdf/Providers/PdfCapability.cs": "1aae931efb371e27deee058d64c9f5d26bb157aa4a4d08e13d954ba4c78d1b73",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "974d8855f83190c50a534f73d7087c1ccc7706aac8d60d1f4a13e96426f56534",
+    "src/Fluent.Pdf/Writing/PdfWriterCore.cs": "4cac3eff842a82ca523f26c6c8f7f784d51a7dde8319caba2c37b8a26a6226f1",
+    "src/Fluent.Pdf/Writing/PdfTransaction.cs": "579f7326d83ff971ecce43650a991a44b5a199d5e2aad4f56f330d348e11f4e8",
+    "src/Fluent.Pdf.Cryptography/ManagedCmsSignatureProvider.cs": "4256c190f4b8d631e4d826cdd792d6f7dec6d9504129e18a91673fcb45666461",
+    "src/Fluent.Pdf.Cryptography/ManagedPkcs12Import.cs": "0289fd92c7ef51f3ed7e01799d3a5710d32e3bf8938ad4f2249d6a7114bbea8d",
+    "src/Fluent.Pdf.Cryptography/Fluent.Pdf.Cryptography.csproj": "f10c373dc8253b0e3fa5b1da161498573a85fde4862bbb7da225721c408671d9",
+    "src/Fluent.Pdf.Cryptography/packages.lock.json": "8be87b9c2b692581dbc786dbd013d76091dda9d8d760b76307ffefea7937b76f",
+    "tests/Fluent.Pdf.Contract.Tests/packages.lock.json": "11f52f911d1f42acfc138882693af9fce83aedcab64a2d9f81ce07765d0cb53b",
+    "examples/Fluent.Pdf.Contract.CSharp/packages.lock.json": "8c2a9a1686fbb0a2276268700995dacb05c4cb1a267c4fd0f5c599b9265f9d2d",
+    "examples/Fluent.Pdf.Contract.VisualBasic/packages.lock.json": "8c2a9a1686fbb0a2276268700995dacb05c4cb1a267c4fd0f5c599b9265f9d2d",
+    "third-party/cryptography/components.json": "c10f8de2ead8193a0e548e5b3b0b2340da1b52524b0d003c2ad78791459ad1c3",
+    "third-party/cryptography/BouncyCastle.Cryptography-LICENSE.md": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd",
+    "src/Fluent.Pdf.Cryptography/PublicAPI.Unshipped.txt": "542846d28ecaba18e577f5e92985c8b1dbb410a4e295c465b94e375d3b529b41",
+    "tests/Fluent.Pdf.Contract.Tests/SignatureTests.cs": "ff09847698e9f23c3c9ad241741341dfffa01e5524ccbeda9b48f3344dd2d764",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "8f705d53a8197e5f7c9c6d914154baca0754e1338d71e863c23cfbc7e7afd4d5",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "63efeefb00974e7f621af6856e9dc51c9234435ef345529dec197bdb4a1d21ef"
+  },
+  "reports": {
+    "signature-final-build.log": "d9b1179485e070eb5235d9b859ac931a20de1641c5e2db1afed7395ffad996e1",
+    "signature-final-release.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "signature-final-build3.log": "3a62c631d0602ef455ff895b8edc4bc127bd79b593b8ad54c6e82dcbf2ea3401",
+    "signature-final-net8.log": "c4e14bb13d00c6176d6a5fdbcc7c10ce7fcfac53a6991f4b0f65d3fd7546366e",
+    "signature-final-fallback.log": "efdd5bf197c5afe61d9e8cc1086651f9b143feea98cd192b278ead1e6b365031",
+    "signature-final-independent.log": "f2676b5c53a9715e637e08695a5c992cf22c57f0ab517036470740026c61518b",
+    "signature-final-build4.log": "78d44aa9d0d4df772410df68f6ecf5c42d58df49ee1299cff1fa94d9195d2daa",
+    "signature-final-observer.log": "aca5a9934b3e9e5a4b8df2ab04255e3b70ef57de198866aad2a291ba93270f0a",
+    "signature-final-net10.log": "29d5878bbe505e7080549cbb548a1140fca9adc5a3264f403a65da87cc170071",
+    "signature-final-api.log": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c",
+    "signature-final-build2.log": "adb9a6e311a07e12e483af1eced15e8236a6f06d16434b23a8bd9f1756f844e1",
+    "signature-final-spec.log": "c97f18befe89dd04a5aa0b0993ed9cbf14fec127302ca322e4691020aad7beb3",
+    "signature-fallback-build.log": "c86e050c4b9ed779ef87aac9711cae59af8937c9f36127c1f4b7040d8551a479",
+    "signature-normal-build.log": "4a38b8ae760a57afea2a03ad003a2415bdc955000966760b4da3d6c8cebc2266",
+    "signature-first-net10.log": "c7aed43ca73b2046e53d092a4f6c2a206c98854e404cd301062df657f3e99a56",
+    "signature-second-net10.log": "51f849cf3ac6d7df97c99d50f4cd7ba103a06bfd039a6c62aff5b302c3088a6d",
+    "signature-provider-build1.log": "d33e7a0edd67835c67fccc1adf6f8ce129069ceb37093c942ed1e7eab2cfbb7b",
+    "signature-core-build1.log": "c8b355f8688dfa4221c9e57d546a84bcd772303b324eb4e19679a298835e3d8a",
+    "signature-portable-final-build2.log": "6d10d0aeb7148acf16ae0a5a0f88105ecce97527417b3b8a795f89066a9e71ce",
+    "signature-portable-vulnerability.json": "75dc514c6624d2d379ff6fa9a9db5f8e5e43475a28e1eb3d45047f02a377f48e"
+  },
+  "independentReportSha256": "1db2371551c459655b2bcf37a6628e67ca265c41051fc4a00181db674caedce1",
+  "sourceFindings": [
+    "First focused run retained5self-verification failures caused by public certificate serial leading-zero normalization. Fixed the unsigned comparison and added deterministic low/high-bit serial cases;15focusedcases then passed.",
+    "The native PFX path initially used a runtime-validated flag32 because Standard2.0 lacks its name; CI117 proved Apple rejects that flag despite its enum presence. Replace native private-PFX loading with an original bounded DER parser over managed KDF/HMAC/cipher primitives; original positive assertions remain unchanged and six security/credential cases are added.",
+    "Credential import now charges the raw input lease as well as expanded allocations; a caller-budget boundary case verifies early rejection and borrowed-stream ownership.",
+    "Existing appearance-regeneration requests reject before preparation/signing instead of silently clearing the form-wide flag.",
+    "Certification inspection now covers direct nested signature dictionaries and rejects malformed catalog protection; two structural-policy cases prevent a writer bypass.",
+    "Microsoft PKCS12 codec APIs are absent on Standard2.0/Framework; one pinned portable managed primitive dependency replaces the temporary newer-runtime codec attempt.",
+    "Original visual checker used MuPDF unsigned-widget placeholder as signed baseline. Retained original failure and exact checker diff/hashes; use unchanged prior geometry/color/page-size labels. No SDK output/label/permission/threshold changed."
+  ],
+  "sourceCI": {
+    "report": "docs/evidence/PR-118-CI-118-source.json",
+    "completedRuntimeLanes": 20,
+    "credentialCases": "All28signature/credentialcasespassonall20lanes; one independent phase deadline case fails on Windowsfallback."
+  },
+  "localNativeExclusions": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeTextTests",
+    "NativeRenderingTests",
+    "NativeOcrContractTests"
+  ],
+  "productionQualified": false,
+  "packageSha256": null,
+  "pending": [
+    "Complete signature/trust/revocation/PAdES/expiry/timestamp and general permitted certification edit classes remain mandatory.",
+    "Hostile PKCS12/KDF/key-provider memory/time, hardware/store/RID/runtime and full security/fuzz/fidelity/concurrency/endurance corpora remain mandatory.",
+    "Actual minimum Framework, exact final SDK packages and every production gate remain mandatory."
+  ]
+}

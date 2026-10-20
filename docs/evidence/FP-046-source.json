@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-046",
+  "sourceCommit": "acb7f0c219d7745855523e542d26efeceb1c77e1",
+  "sourceTree": "4cefa2f86e8320d33cc6831b93c2964b37e92394",
+  "localLane": {
+    "os": "Debian GNU/Linux13",
+    "architecture": "x64",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "newSourceCases": {
+    "phaseDeadlines": 11,
+    "readinessAndTransport": 15
+  },
+  "runtimeReports": [
+    {
+      "libraryProfile": "net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 1002,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "fd2eb281b0c1172abbe82d5a3da2725df9a784d0674205ed301fb6d52dfd90fb"
+    },
+    {
+      "libraryProfile": "net8.0",
+      "actualRuntime": ".NET8.0.32",
+      "passed": 142,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "a64f4224d6824457fe9a6818a86118cf824cbc8a3243ace0ab3780292a9ea966"
+    },
+    {
+      "libraryProfile": "netstandard2.0-on-net10.0",
+      "actualRuntime": ".NET10.0.13",
+      "passed": 142,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "27ec33cbe6a829b051098280706083818544a979cb5427eb67f03e795a919f44"
+    }
+  ],
+  "apiComparisons": 27,
+  "localNativeLimitation": "Landlock ENOSYS prevents local SDK native-positive worker/codec/text/rendering tests; required source CI remains unfiltered. No mandatory lane is waived.",
+  "actualBrowserSourceObservations": {
+    "purpose": "trusted-original-readiness-source-observations-not-production-qualification",
+    "version": "154.0.8037.57",
+    "revision": "@73c14f6228d7cd537c855007e8f88678969cc0eb",
+    "observations": [
+      {
+        "mode": "late-assets",
+        "text": "A B 一😀",
+        "pageCount": 1,
+        "inspectionCalls": 11,
+        "delayedAssets": 2,
+        "elapsedMilliseconds": 1302.1325,
+        "pendingAssetObserved": true,
+        "promiseCalls": 0,
+        "outputSha256": "dfa92d17b09a72bb61660432eaa6addc43b8d6b728de7ec956eb1af7ce611921",
+        "outcome": "expected-success"
+      },
+      {
+        "mode": "promise",
+        "text": "A B",
+        "pageCount": 1,
+        "inspectionCalls": 1,
+        "delayedAssets": 0,
+        "elapsedMilliseconds": 736.395,
+        "pendingAssetObserved": false,
+        "promiseCalls": 1,
+        "outputSha256": "a3d93efc6ae6944b6c1f610a8f314fcc6084b7cb1bf96ccf0c206b911381c6bf",
+        "outcome": "expected-success"
+      },
+      {
+        "mode": "polling",
+        "text": "A B",
+        "pageCount": 1,
+        "inspectionCalls": 5,
+        "delayedAssets": 0,
+        "elapsedMilliseconds": 709.7208,
+        "pendingAssetObserved": false,
+        "promiseCalls": 0,
+        "outputSha256": "882f764e6f91f3a183d892eeae84de440004aadc222cb4161d4307044679d9bd",
+        "outcome": "expected-success"
+      },
+      {
+        "mode": "image-failure",
+        "diagnostic": "Html.ImageUnavailable",
+        "outcome": "expected-failure-no-output"
+      },
+      {
+        "mode": "timeout",
+        "diagnostic": "Limit.ElapsedTime",
+        "outcome": "expected-failure-no-output"
+      },
+      {
+        "mode": "cancellation",
+        "outcome": "expected-caller-cancellation-no-output",
+        "signalToExitMilliseconds": 104.885
+      },
+      {
+        "mode": "crash",
+        "diagnostic": "Html.BrowserConnection",
+        "outcome": "expected-failure-no-output"
+      },
+      {
+        "mode": "after-crash",
+        "text": "A",
+        "pageCount": 1,
+        "inspectionCalls": 6,
+        "delayedAssets": 0,
+        "elapsedMilliseconds": 775.6149,
+        "pendingAssetObserved": false,
+        "promiseCalls": 0,
+        "outputSha256": "3ea6420e123419b39bc5318fd570f12a4300aa1e6d20d8588e2b1e6740982774",
+        "outcome": "expected-success"
+      }
+    ],
+    "productionQualified": false
+  },
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Policies/PdfOperationContext.cs": "c6ce546e7be54b64c6d6f118c743639f6cb1d2fbff550f72c9aa33a15be3eb9a",
+    "src/Fluent.Pdf/Html/PdfHtml.cs": "4ad483f244e159827e707b7d9381c6be60dc1b86cbdf633690b852c6224fe7e1",
+    "src/Fluent.Pdf/Html/PdfHtmlReadinessOptions.cs": "67f9125e268eb623cc833cde27d7f1751637e02dbe669d69a6547e555aa13ffe",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "1974fb3ddcf90a6f5159e081026274abd94ca0daeddf456377b7b11dc4fcdacc",
+    "src/Fluent.Pdf.Html/ChromiumHtmlRenderer.cs": "ae53102b65f06e91be91abc9e7a5e21a2534277ca6f4d53865aa2b68c4472241",
+    "src/Fluent.Pdf.Html/ChromiumProtocol.cs": "052bbbf0078f68bcfda2d28dfdca0b69d3eb8188aa2aff457603a1ca770ca73e",
+    "src/Fluent.Pdf.Html/ChromiumReadiness.cs": "aed037070eb46fbb524e00799f4cf52a28219f1dad52d93d4a5e4ef96690ccba",
+    "tests/Fluent.Pdf.Contract.Tests/PhaseDeadlineTests.cs": "cef66745e55faac0f0d8835c0669eae143abd96ad9071ef3153dd578e204e1ce",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlReadinessTests.cs": "78360abf9a07caf49a60b6d00051fd48b3337321460bcfa99eb59bcee5a2e86e",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlTests.cs": "ed0a31287d6657deca5e22e74c1c365ca9ace8b1658afde9780a61cef9f3ddc6",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "c4756418ac3d302fd0d4f9412b9e2a09c4756594d11a6860854f228242dcf50e",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "6648083ba1bc317e2b5b873170332de8ab1d8f8c01a42fa1680c0477dacdcf79",
+    "eng/HtmlBrowserProbe/Program.cs": "90a9f05add72c064801933dab23576d863e4eaf0d1e0e81accc007ec7a43f177",
+    "eng/HtmlBrowserProbe/ReadinessFixture.cs": "8e4f517caeb522f3775731acda244a868bef436b49e9f9ae094d068a8e727961"
+  },
+  "reportSha256": {
+    "readiness-final-all-build.log": "c52c4c66f412eece06a162f0b10e4508e730106a818ff3a4decb3ebcae763329",
+    "readiness-final-normal-build.log": "0ad3b7c31cae62e383abc974a5c1d31c3213c4c4a38d3266d98bf6224eccbe61",
+    "readiness-final-tests.log": "0282f1453c28bbad8abee85f953997af1ffad8ebdedd4e58004b2532ed53e1ef",
+    "readiness-net8-tests.log": "3b22fc73137a786715038dbfcaee9ace4645d97bd117894f6322628b255414a9",
+    "readiness-fallback-tests.log": "acf8e448bf63ab49a87041976a2c33dc2c54b45ce94c4d386ff8a4d7029bd83a",
+    "readiness-final-api.log": "9b29747350d7b44c6e6d0df187352b8649525a7fd84fb0df7b4b6ca2d62bb557",
+    "readiness-complete-browser.log": "f1595e2281d5d0cc2780603e46f413133088e29d0067da9d028772b4be9c4ff2"
+  },
+  "retainedFailures": [
+    {
+      "report": "readiness-contract-build.log",
+      "sha256": "d51c8a777c27e60434e7a516013a24132bb6a481e2f1a45ec26d111d976ac380",
+      "observation": "Two optional constructor overloads triggered RS0026. Retained the original six-argument binary signature without optional metadata and put defaults on the expanded overload; no analyzer suppression."
+    },
+    {
+      "report": "readiness-diagnostics-browser.log",
+      "sha256": "063c68a480240dda6f7b2f937206c97c082d322f5ce853004bedc64397b07db4",
+      "observation": "Original fixture incorrectly required a transient pending-asset observation while the slow host processed synchronous resource fulfillment. Expected Unicode/page count passed. Original assertion was restored after fixing host latency; final source observer sees pending assets and preserves delayed asset/timing criteria."
+    },
+    {
+      "report": "readiness-network-browser.log",
+      "sha256": "875a5df3edc2e052df3cef2bcc987ab0d39917a17e56d9dc16be0025f271928d",
+      "observation": "A fixed25ms host wait per protocol message could not keep up with30ms background polling. Resource responses completed but pending inventory grew; the unchanged phase deadline stopped the job. Completion/cancellation signaling fixes host throughput; no SDK budget, timeout or sandbox change."
+    }
+  ],
+  "observerModification": {
+    "originalSha256": "210015fdd9b978e30021b3ca7ecd16b76e1652d78038080aa2742827d0a9eb55",
+    "finalProgramSha256": "90a9f05add72c064801933dab23576d863e4eaf0d1e0e81accc007ec7a43f177",
+    "retainedDiffSha256": "184071f7abf7af47821a04ee643e02a9217348a57aedb0725d213f4a5e0c0453",
+    "purpose": "Original trusted fixture host completion/cancellation signaling; completed/cancelled read work is joined/disposed",
+    "limitsUnchanged": true,
+    "productionHostQualified": false
+  },
+  "dependencySourceCommit": "df121d6593fab897798a0c39879fcbcd99f2d030",
+  "dependencyCI": "CI99 transport fixtures pass modern Windows; the run later fails an existing Framework64-decode native codec deadline case. Complete failed report retained separately; no current34 CI qualification claimed.",
+  "currentSourceCI": "Pending after this source commit.",
+  "packageSha256": null,
+  "packingBlocked": true,
+  "publicationBlocked": true,
+  "productionQualified": false,
+  "mandatoryPending": [
+    "Complete child-frame/worker/OOPIF/replacement-navigation/interactive/full dynamic-site/font/image readiness profiles",
+    "Qualified deployable OS browser host and all supported RID/minimum-runtime/fallback/final-package consumers",
+    "Full fidelity/accessibility/resource/security/fuzz/concurrency/endurance/performance and supervised termination qualification"
+  ],
+  "dependencyCIEvidence": "docs/evidence/PR-118-CI-99-source-partial.json",
+  "nativeDeadlineInvestigation": {
+    "test": "NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+    "unchangedIterations": 64,
+    "unchangedOperationDeadlineSeconds": 30,
+    "timingOnlySourceSha256": "cfaebeb6513becb2f0ca67898e4375f184217b18e9086dd1b87a3c6d32751926",
+    "compiledCheckSha256": "b175f2eb17e0b09ceb059edfaa1f69e1228e214d47c29192d44653a448b8e270",
+    "status": "Retain cumulative per-decode timing on the next unfiltered source CI; no native qualification inferred."
+  },
+  "sourceCI": {
+    "evidence": "docs/evidence/PR-118-CI-100-source.json",
+    "sourceCommit": "acb7f0c219d7745855523e542d26efeceb1c77e1",
+    "testedMergeCommit": "cf1d8d32a3f9fb50776eb8bf75e35be528bf31df",
+    "passed": 21280,
+    "failed": 0,
+    "skipped": 0,
+    "completedRuntimeLanes": 20
+  }
+}

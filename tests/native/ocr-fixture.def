@@ -1,0 +1,19 @@
+EXPORTS
+    TessVersion
+    TessBaseAPICreate
+    TessBaseAPIDelete
+    TessBaseAPIInit3
+    TessBaseAPISetImage
+    TessBaseAPISetSourceResolution
+    TessBaseAPISetPageSegMode
+    TessBaseAPIRecognize
+    TessBaseAPIGetUTF8Text
+    TessBaseAPIGetTsvText
+    TessBaseAPIMeanTextConf
+    TessDeleteText
+    TessMonitorCreate
+    TessMonitorDelete
+    TessMonitorSetCancelFunc
+    TessMonitorSetDeadlineMSecs
+    TessBaseAPIGetLoadedLanguagesAsVector
+    TessDeleteTextArray

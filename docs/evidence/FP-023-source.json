@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-023",
+  "sourceCommit": "40fd05b0e0057e6f2ce93e8eb4fc9c20a46e78fc",
+  "sourceTree": "430c6ff0a50ea146444dab8247bccbc8b4288a48",
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "managedTests": {
+    "passed": 679,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests"
+  },
+  "attachmentTests": 27,
+  "apiComparisons": 15,
+  "packingAndPublicationBlocked": true,
+  "packageSha256": null,
+  "productionQualified": false,
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Attachments/PdfAttachmentCollection.cs": "fe073ef013581a890ae60c908478b143ada4bebf44a7d354769e1dc52ad73a5e",
+    "src/Fluent.Pdf/Attachments/PdfAttachments.cs": "be2df1c28b728f62f703224e0d98396a3110af407214bd21a9e91466b6926909",
+    "src/Fluent.Pdf/Attachments/PdfAttachmentOptions.cs": "98fae32d1b777fa58cba91e263a998a0957c8a0e49182505553adda3abbdb138",
+    "src/Fluent.Pdf/Attachments/PdfAttachmentGraph.cs": "1260f9e2ef3c9d05eeb2a3e0f9c0d9069bc6c085a186d8394d9c344cebd506bf",
+    "src/Fluent.Pdf/Metadata/PdfMetadataValues.cs": "9f5fb1cb2fe47d80fd33c874beeb7d6830146f9e34e5d238794b1771b94fc3de",
+    "src/Fluent.Pdf/Writing/PdfFeatureVersion.cs": "d7e0d84dc73917bb30c6b513e851cf395ae450f1c1a0477fc8c2a33883e3d07a",
+    "tests/Fluent.Pdf.Contract.Tests/AttachmentTests.cs": "f2f636f5c8264c47faa76d876a71afd1faa746812084b2916817d8e3113a9043"
+  },
+  "reportSha256": {
+    "attachments-complete-build.log": "8dea6677e408d4efd8cf60a9dacd027a1d05cbe9430da73882b9679e9b0673ae",
+    "attachments-complete-tests.log": "6413f647f5b2406c2495862f95737ffe34d336d5f73d48316455ce28a4a6cfaf",
+    "attachments-api-check.log": "5073dfc2e5e4dd12d29239fc06b2c6a93ae4886614c13328541e6a55ce67e8a3",
+    "attachments-delivery-spec.log": "40f35450f64c528f68d1739d45c6155bb64ff41725ff704b1aef68060124e1e3",
+    "attachments-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "limitations": [
+    "Source validation only; actual minimum Framework, exact final packages and complete production qualification remain mandatory.",
+    "Local native-positive tests are unavailable because Landlock is not supported here; CI remains unfiltered.",
+    "The API/release-block checks preceded an internal name-sort allocation fix; public API and publication gates did not change."
+  ],
+  "sourceCiFailureAudit": {
+    "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455",
+    "failedJob": 117670556199,
+    "host": "osx-arm64",
+    "runtime": ".NET 10",
+    "case": "SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+    "observation": "The original macOS ARM64 net10 codec case failed during native runtime initialization. Five hosts and the macOS ARM64 net8 lane passed. An unchanged-job retry then passed all three macOS ARM64 lanes. Cause remains unproven and blocks production reliability qualification.",
+    "workerVmBaseline": 420054368256,
+    "workerMemoryGrowthLimit": 267975730,
+    "failureLogSha256": "b72cc5d7441728f49a92aaf6e45cc093ed6d9250a1e0a13519da3df5cd4ba7f4",
+    "freshInitializationProbeReportSha256": "57d309d085d158e599541027eb34072a4ceed0730af30683ca6e7b62f70dd01f",
+    "retryChangesTestsOrLimits": false,
+    "retainedOutsideRepository": true,
+    "retryJob": 117672958669
+  },
+  "sourceCi": {
+    "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455",
+    "testedMergeCommit": "1cb2e97941381a9751d038441c25a78a8451b257",
+    "conclusion": "success-after-one-recorded-job-retry",
+    "testsPerLane": 725,
+    "executionLanes": 20,
+    "passedSelectedAttempts": 14500,
+    "failedSelectedAttempts": 0,
+    "skippedSelectedAttempts": 0,
+    "allEarlierAttemptsRetained": true,
+    "artifacts": [
+      {
+        "name": "source-contracts-osx-arm64",
+        "id": 12136408174,
+        "digest": "sha256:40d75df8eda0af43c19c580d71d7866545f35c038f5cb87034be11006a045bec",
+        "sizeBytes": 577665,
+        "expiresAt": "2027-01-16T12:16:35Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136408174"
+      },
+      {
+        "name": "source-contracts-linux-arm64",
+        "id": 12136355992,
+        "digest": "sha256:924f7cd39aada10ccbfe416dd5d869dba9746462b35dcc9503b3376ab64bb2c8",
+        "sizeBytes": 575300,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136355992"
+      },
+      {
+        "name": "source-contracts-linux-x64",
+        "id": 12136306983,
+        "digest": "sha256:354f6edbf31d2fc5b98c240e4be95b6b24bff335cff150b90845ffd817355f81",
+        "sizeBytes": 576520,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136306983"
+      },
+      {
+        "name": "source-contracts-win-x64",
+        "id": 12136262619,
+        "digest": "sha256:606b3ce317f5097795a5711ae8cc7306c88c22b9e0cf5a76a083c1a03dd9a0ab",
+        "sizeBytes": 942530,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136262619"
+      },
+      {
+        "name": "source-contracts-osx-arm64",
+        "id": 12136197234,
+        "digest": "sha256:8d16e17959cfaa97ef3e49d52b69450e1a8f2df4af3126ba7a2edf9fd7bda82a",
+        "sizeBytes": 373141,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12136197234"
+      },
+      {
+        "name": "source-contracts-osx-x64",
+        "id": 12135957421,
+        "digest": "sha256:65adbafed70ec531ededdfc11ddfbcc9ab3a853c9b88a6161514b04fdb826b0d",
+        "sizeBytes": 579310,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12135957421"
+      },
+      {
+        "name": "source-contracts-win-arm64",
+        "id": 12135304299,
+        "digest": "sha256:0b3ea5023a42a83f0e0680a66e438c2fac5a46104af534527a9895cd9d60e6f0",
+        "sizeBytes": 577002,
+        "expiresAt": "2027-01-16T12:04:46Z",
+        "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39125804455/artifacts/12135304299"
+      }
+    ],
+    "retainedLogs": {
+      "pr118-attachments-ci-117670556403.log": "5f7e0aaa31143d7c84486589d72124e97d0bf468e066f687e978ae374efeb9d6",
+      "pr118-attachments-ci-117670556290.log": "c014005b9fa85e5fc7ac329a1c670d94b314b6b0c6dce792db2304270e7b9370",
+      "pr118-attachments-ci-117672958669.log": "ec0528784afceb978a7d2615345e9baad1fcc2aef1cf750686c3d049e4448cd8",
+      "pr118-attachments-ci-117670556209.log": "91333cbcc832ed5c1c46a60b30f49f072f823e7e773ce86bded571b97cc0e65a",
+      "pr118-attachments-ci-117670556223.log": "63aa6723a05fc803cf686641f79f560128bdebbe06437e5ec713853621b2490d",
+      "pr118-attachments-ci-117670556030.log": "522e5e62d175c971824dde0c2528c7dc830d517ec2cb43098c82afbee585fd88"
+    }
+  }
+}

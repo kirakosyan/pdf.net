@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-source-fixtures-not-production-qualification",
+  "requirement": "FP-066",
+  "sourceCommit": null,
+  "validator": {
+    "name": "veraPDF",
+    "version": "1.28.2",
+    "jarSha256": "687d4d8bcfec48c9f7e931cf78ed061f1eeccfba55d4cdc000ba9b4d8aa46ce6"
+  },
+  "icc": {
+    "purpose": "original generated sRGB v2.1 profile, not a copied third-party profile",
+    "tool": "LittleCMS public profile API",
+    "sha256": "31c69882a9f7802e4f6b6fc67e4333644a7a5dd8489c43414e54216d1260af32"
+  },
+  "profilePositiveCoverage": [
+    "PDF/A-1A validation profile",
+    "PDF/A-1B validation profile",
+    "PDF/A-2A validation profile",
+    "PDF/A-2B validation profile",
+    "PDF/A-2U validation profile",
+    "PDF/A-3A validation profile",
+    "PDF/A-3B validation profile",
+    "PDF/A-3U validation profile",
+    "PDF/A-4 validation profile",
+    "PDF/A-4E validation profile",
+    "PDF/A-4F validation profile"
+  ],
+  "finalSourceValidationObservations": [
+    {
+      "observedFileTime": 1792337512.7294703,
+      "profile": "PDF/A-2U validation profile",
+      "isCompliant": true,
+      "candidateSha256": "5d1500c480b31195ad5014208ea65ae981b1354d079d820385779334c2cb6b9a",
+      "reportSha256": "aa263dd9324af9daf35605fb69741443532e7bb987f33d34e2a7a7b3ab8ea5ff",
+      "passedRules": 146,
+      "failedRules": 0,
+      "passedChecks": 260,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337515.893325,
+      "profile": "PDF/A-1B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "6efdf404721120eacde24d519c16eca3e1ae9ffc131e46c96bd9698512c1c8b2",
+      "reportSha256": "3d70beb15b0b7e2f1f6601fb7a50fc8dc1c549d8c651b8d8546a56f1c1b76272",
+      "passedRules": 129,
+      "failedRules": 0,
+      "passedChecks": 300,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337518.8971872,
+      "profile": "PDF/A-3U validation profile",
+      "isCompliant": true,
+      "candidateSha256": "3b3e2cff9e3bf4773074119c075697cc2a9691dbab75acbf196ee1459d6fc32b",
+      "reportSha256": "7ed78bfa19be2999a0ac7461eca5b70a757da12d05d8672695ff44a803e3e311",
+      "passedRules": 148,
+      "failedRules": 0,
+      "passedChecks": 260,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337520.2411256,
+      "profile": "PDF/A-2B validation profile",
+      "isCompliant": false,
+      "candidateSha256": "6d2c18f382f9da93a271724ab2198bad3c21949b4068c8968cc66d404f30b481",
+      "reportSha256": "9f80f8b55ec8792de95c61cb97300c90f65757dfd634b54d1069d323687e3805",
+      "passedRules": 143,
+      "failedRules": 1,
+      "passedChecks": 114,
+      "failedChecks": 2,
+      "failedRuleIds": [
+        {
+          "specification": "ISO 19005-2:2011",
+          "clause": "6.2.4.3",
+          "testNumber": "2"
+        }
+      ]
+    },
+    {
+      "observedFileTime": 1792337522.0170438,
+      "profile": "PDF/A-3A validation profile",
+      "isCompliant": true,
+      "candidateSha256": "94bd1c0a33a4d230b37413390e081c9bf7701673e4c48109c0be37088e551082",
+      "reportSha256": "3336c70296b652fd7a5ff0585e7eaff1e39dcfcbe89b3eb036fc588df17aa8df",
+      "passedRules": 155,
+      "failedRules": 0,
+      "passedChecks": 160,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337524.06495,
+      "profile": "PDF/A-3A validation profile",
+      "isCompliant": true,
+      "candidateSha256": "94bd1c0a33a4d230b37413390e081c9bf7701673e4c48109c0be37088e551082",
+      "reportSha256": "cbdcaa7c7572b82d91376800e6b4718ed406d46595ea24214fe9555dc909b307",
+      "passedRules": 155,
+      "failedRules": 0,
+      "passedChecks": 160,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337526.000861,
+      "profile": "PDF/A-4E validation profile",
+      "isCompliant": true,
+      "candidateSha256": "0d3d4fb3049c4b2d34be64ca353fa409edfe3dd1e283bec7fb4f181181cfbfe6",
+      "reportSha256": "ba9a78f5338b536b105f14156e0b2cfa515b0f82fbd03ccbf2ce29f12b0b8580",
+      "passedRules": 109,
+      "failedRules": 0,
+      "passedChecks": 52,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337527.852776,
+      "profile": "PDF/A-4E validation profile",
+      "isCompliant": true,
+      "candidateSha256": "0d3d4fb3049c4b2d34be64ca353fa409edfe3dd1e283bec7fb4f181181cfbfe6",
+      "reportSha256": "8cd92559479929924e2ca110516255002519e7f793f12af734a56e65b8429425",
+      "passedRules": 109,
+      "failedRules": 0,
+      "passedChecks": 52,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337529.9326804,
+      "profile": "PDF/A-3B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "865c50393b024704ea0c4e5af7f67e10662c4bf9677ea0d46c9f56f885627278",
+      "reportSha256": "aea73958f15619b18449b5ec569340daab8106bdae2e25ffcb6ec58427c7b464",
+      "passedRules": 146,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337532.056583,
+      "profile": "PDF/A-3B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "865c50393b024704ea0c4e5af7f67e10662c4bf9677ea0d46c9f56f885627278",
+      "reportSha256": "a107958842c470324cae49fa9b8477d769617e217260b444c4c07a534a331115",
+      "passedRules": 146,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337534.1084888,
+      "profile": "PDF/A-3U validation profile",
+      "isCompliant": true,
+      "candidateSha256": "e15390ab870e388c242d52add685b5c8c9784260e35f0ed27ef9edcc1aeed4fc",
+      "reportSha256": "1885489553221a84422a62de47a78c2a76ab7d050de41ab4d59c19f14ff66d91",
+      "passedRules": 148,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337536.25639,
+      "profile": "PDF/A-3U validation profile",
+      "isCompliant": true,
+      "candidateSha256": "e15390ab870e388c242d52add685b5c8c9784260e35f0ed27ef9edcc1aeed4fc",
+      "reportSha256": "4e85f6f07758c8af272186074aceed29fc0066404ea23e0692b9026471c56c72",
+      "passedRules": 148,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337537.7083235,
+      "profile": "PDF/A-2U validation profile",
+      "isCompliant": true,
+      "candidateSha256": "80bde4577eca6f7658b42c0184ccb5e2d4ebf8dde305f19ff8406999791c7bd5",
+      "reportSha256": "db39d16dac66eca8d3643d0c0509e9ed568b08d46984b947141f303ba8e0463a",
+      "passedRules": 146,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337539.0362625,
+      "profile": "PDF/A-2U validation profile",
+      "isCompliant": true,
+      "candidateSha256": "80bde4577eca6f7658b42c0184ccb5e2d4ebf8dde305f19ff8406999791c7bd5",
+      "reportSha256": "2ae806abef2d4e488d729f8da58ee91d34c14c162894534721e2240f2f3db34b",
+      "passedRules": 146,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337540.4561975,
+      "profile": "PDF/A-1A validation profile",
+      "isCompliant": true,
+      "candidateSha256": "de1c01ad21cccced324180cd8a5c73684908f7b770abb9aa915ac2e6890284a4",
+      "reportSha256": "345f761ebe3c59c6fdd0f659e3c2d902ecfd82ce08b6ffd4b4beec2fb2889f53",
+      "passedRules": 135,
+      "failedRules": 0,
+      "passedChecks": 169,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337542.3481104,
+      "profile": "PDF/A-1A validation profile",
+      "isCompliant": true,
+      "candidateSha256": "de1c01ad21cccced324180cd8a5c73684908f7b770abb9aa915ac2e6890284a4",
+      "reportSha256": "5fdca1e6300a19e60216321956c652302a6f3d3e1c54b43fd9a1b3f88136bce9",
+      "passedRules": 135,
+      "failedRules": 0,
+      "passedChecks": 169,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337543.7400463,
+      "profile": "PDF/A-2B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "eedce46ef4ee94b1b5689da1df5f66063cc6944df6b2371b987d5c12719d146b",
+      "reportSha256": "baa456345bb3047c7c109b450468f39ca271b629f03e46eef242ad7d8b68c222",
+      "passedRules": 144,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337545.2079785,
+      "profile": "PDF/A-2B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "eedce46ef4ee94b1b5689da1df5f66063cc6944df6b2371b987d5c12719d146b",
+      "reportSha256": "a711a608d54c5585e153a1c0794a9b4a418dce6c99c6aaf2bf69cf09e8dd790d",
+      "passedRules": 144,
+      "failedRules": 0,
+      "passedChecks": 140,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337546.3759246,
+      "profile": "PDF/A-4F validation profile",
+      "isCompliant": true,
+      "candidateSha256": "2dd1769ce78300342b1bf097accbdeabae15ebfdc9148f07abee1a91f5a4cce6",
+      "reportSha256": "e3458652ec77aaffcfa1ce4df64d97240b6cdcb45e10b03504bb5ee8c4b6e4c1",
+      "passedRules": 109,
+      "failedRules": 0,
+      "passedChecks": 84,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337547.6038682,
+      "profile": "PDF/A-4F validation profile",
+      "isCompliant": true,
+      "candidateSha256": "2dd1769ce78300342b1bf097accbdeabae15ebfdc9148f07abee1a91f5a4cce6",
+      "reportSha256": "ba886f8fded445bb0a27b7b22d739ab2bf85612fb1876c6710e67355d912146a",
+      "passedRules": 109,
+      "failedRules": 0,
+      "passedChecks": 84,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337548.743816,
+      "profile": "PDF/A-2A validation profile",
+      "isCompliant": true,
+      "candidateSha256": "131be52be2d8cbb81c0f26138b32e7b9b5f1d9f11fe4ec79a733290e50e22ae3",
+      "reportSha256": "cd583f266e8e83a27cd607944aa79eb59441c079f6503bac7b411ffeb3f6a36a",
+      "passedRules": 153,
+      "failedRules": 0,
+      "passedChecks": 160,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337550.0397563,
+      "profile": "PDF/A-2A validation profile",
+      "isCompliant": true,
+      "candidateSha256": "131be52be2d8cbb81c0f26138b32e7b9b5f1d9f11fe4ec79a733290e50e22ae3",
+      "reportSha256": "e13aca836defefe41282e3b6253c8a5caea748272615bbe6d398881f978e8fe6",
+      "passedRules": 153,
+      "failedRules": 0,
+      "passedChecks": 160,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337551.219702,
+      "profile": "PDF/A-1B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "6751ebd75b0378cd1f9f10d0498a7a7c44381e037bf07f0a86484bbdb8e80558",
+      "reportSha256": "497f19593d6e44a71f6bbb6636568afbe85f75e6ab4503f4f3d32eafb01cb1e6",
+      "passedRules": 129,
+      "failedRules": 0,
+      "passedChecks": 144,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337552.5956388,
+      "profile": "PDF/A-1B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "6751ebd75b0378cd1f9f10d0498a7a7c44381e037bf07f0a86484bbdb8e80558",
+      "reportSha256": "edcf449287797164699ece1b9a75f0ded673d9496282105db762c8414d77fefc",
+      "passedRules": 129,
+      "failedRules": 0,
+      "passedChecks": 144,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337553.7595851,
+      "profile": "PDF/A-4 validation profile",
+      "isCompliant": true,
+      "candidateSha256": "ca19adbbf84461e1cd65ad9709e958a21269710aa0daa0936ad6486b67f457cd",
+      "reportSha256": "204c11546bb5524629efd46565978645aaae33d53864a47cb7bee7bd60288526",
+      "passedRules": 109,
+      "failedRules": 0,
+      "passedChecks": 52,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337554.8635342,
+      "profile": "PDF/A-4 validation profile",
+      "isCompliant": true,
+      "candidateSha256": "ca19adbbf84461e1cd65ad9709e958a21269710aa0daa0936ad6486b67f457cd",
+      "reportSha256": "1b1cdf174e6c558bed91b448b784ba6f21554d919a6c9792d3b8c92460a5c653",
+      "passedRules": 109,
+      "failedRules": 0,
+      "passedChecks": 52,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    },
+    {
+      "observedFileTime": 1792337556.0434802,
+      "profile": "PDF/A-2B validation profile",
+      "isCompliant": true,
+      "candidateSha256": "8b2f90a77426041c9af1fcc0320e968759a11a1d7886230a8f42f282244a8bb2",
+      "reportSha256": "c94db5bf731a87b688d035040738607fcc68660153e1b15a62655d4fa6370e5e",
+      "passedRules": 144,
+      "failedRules": 0,
+      "passedChecks": 150,
+      "failedChecks": 0,
+      "failedRuleIds": []
+    }
+  ],
+  "historicalObservationInventorySha256": "74dca2fc439828bf25420b1b776eb3ecb387b97c5e57845623ed4b88020c3c4d",
+  "reportSha256": {
+    "archival-tests.log": "67e86db296d2bcc843ecbed401ba24cb7a143249e438fca77297d068ccadb349",
+    "archival-cid-tests.log": "fa5ee83846112208a03ee1f519094bff1fc0665bc5878b2554bf526b025adcc4",
+    "archival-probe/run.log": "b0c898b094d17a4615b33798957d6a3dd8b47045eeacb18d859114a3c4ca9aa8",
+    "archival-probe/fix-run.log": "785e72f1e5332ca6c5afa241a6107ea90390a66704477b0899689345ced85706",
+    "archival-probe/fix-build.log": "17595ccc3e9ed927223485c76df791f3e9263a6303405ecd47ccc5f586572006",
+    "archival-probe/corrected-run.log": "c85e300aa8a5d5aee7753e3ee44923a3ac4e55be300bcde06e6cbe86d8051e25",
+    "pdfa-research/engine-inventory.json": "9c4650def365daead712417e7d43f0f51a1e714b1a21fc78ee9f5a9cdf09723c"
+  },
+  "retainedInitialFailures": [
+    "First independent vector candidates lacked required file IDs; original XML/candidates remain in scratch/archival-probe/initial-before-id-and-version",
+    "Generic source-version floor initially refused PDF/A-1; private staged archival downgrade is now gated on full independent validation",
+    "Initial archival target run:27 passed/1 failed/0 skipped; independent validator found missing CIDSet for a referenced TrueType subset. Explicit-map CID inventory repair and an exact bitmap regression were added",
+    "One task-local analysis build child exited prematurely (MSB4166); its log is retained, its suggested diagnostic directory was absent, and cause is unproven. A serial build then passed"
+  ],
+  "limitations": [
+    "Level A fixtures explicitly declare a decorative artifact drawing; full document semantics/accessibility still require corpus and human review",
+    "Positive embedded-font Unicode cases and negative metadata/color/structural cases are small source fixtures, not a complete conversion or standards corpus",
+    "Report bridge trusts an explicitly configured complete host; the test host does not qualify an SDK isolation adapter",
+    "Minimum runtimes, complete host/dependency review, fuzz/endurance/concurrency, exact final packages and every production gate remain mandatory"
+  ],
+  "productionQualified": false,
+  "packingAndPublicationBlocked": true,
+  "independentTextObservation": {
+    "tool": "pypdf 6.10.0",
+    "source": "three final-source embedded TrueType fixtures",
+    "exactUnicodeChecks": [
+      {
+        "candidateSha256": "5d1500c480b31195ad5014208ea65ae981b1354d079d820385779334c2cb6b9a",
+        "text": "AB\u4e00\ud83d\ude00"
+      },
+      {
+        "candidateSha256": "6efdf404721120eacde24d519c16eca3e1ae9ffc131e46c96bd9698512c1c8b2",
+        "text": "AB\u4e00\ud83d\ude00"
+      },
+      {
+        "candidateSha256": "3b3e2cff9e3bf4773074119c075697cc2a9691dbab75acbf196ee1459d6fc32b",
+        "text": "AB\u4e00\ud83d\ude00"
+      }
+    ]
+  }
+}

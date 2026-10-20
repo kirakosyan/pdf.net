@@ -36,6 +36,14 @@ internal static class PdfDeferredNavigation
             foreach (var link in links)
             {
                 context.Checkpoint();
+                if (link.Uri != null)
+                {
+                    PdfInputLinks.ValidateUri(link.Uri, context);
+                    var action = PdfInputLinks.Action(link.Uri, context);
+                    annots.Add(PdfValue.Reference(edit.Add(PdfGraphicsNumbers.Dict(("Type", PdfValue.Name("Annot")), ("Subtype", PdfValue.Name("Link")), ("P", pageIds[i]), ("Rect", link.Bounds.Value), ("Border", PdfGraphicsNumbers.Array(0, 0, 0)), ("A", action)))));
+                    continue;
+                }
+
                 if (link.TargetPageIndex < 0 || link.TargetPageIndex >= pageIds.Count)
                     throw PdfWriterCore.Error(context, "Navigation.TargetPage", "An internal destination no longer identifies a page.");
                 var destination = PdfValue.Array(pageIds[link.TargetPageIndex], PdfValue.Name("XYZ"), PdfValues.Real(link.TargetPoint.X), PdfValues.Real(link.TargetPoint.Y), PdfValue.Null);

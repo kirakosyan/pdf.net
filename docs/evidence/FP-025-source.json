@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-implementation-summary-not-release-qualification",
+  "requirement": "FP-025",
+  "sourceCommit": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7",
+  "sourceTree": "3a83f5684b121352742784f9308cac4d7b6d82a6",
+  "localLane": {
+    "os": "Linux",
+    "architecture": "x64",
+    "runtime": ".NET 10.0.13",
+    "sdk": "10.0.402"
+  },
+  "buildTargetFrameworks": [
+    "net472",
+    "netstandard2.0",
+    "net8.0",
+    "net10.0"
+  ],
+  "managedTests": {
+    "passed": 717,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeTextTests"
+  },
+  "extractionTests": 20,
+  "apiComparisons": 15,
+  "packingAndPublicationBlocked": true,
+  "packageSha256": null,
+  "productionQualified": false,
+  "sourceFileHashes": {
+    "src/Fluent.Pdf/Extraction/PdfExtractionFont.cs": "5d45dc24b69f8ca98d43f4a902c5f384a89dc387c2d160354ddcb05be7166368",
+    "src/Fluent.Pdf/Extraction/PdfTextExtraction.cs": "8713a5efb567112b8be340b4bbb9526b27ab8ce5ba89657e12e34058bbab555a",
+    "src/Fluent.Pdf/Extraction/PdfTextGrouping.cs": "0f1b9599a73ec3af30c4cd288a951022e69eb32664086975140728a26c61a7e8",
+    "src/Fluent.Pdf/Extraction/PdfTextExtractionContracts.cs": "7898a3a62fb5a25efa5e26759791757847e54a968fe57a072c8a93672dc18a96",
+    "src/Fluent.Pdf/Fonts/PdfUnicodeMap.cs": "48a7d0574ce395d0bc5fde7e6cdafa25f9192880dee8eb1472fd60ea6a68c678",
+    "src/Fluent.Pdf/Fonts/PdfFontContracts.cs": "c80f9a31834ff65c36e61943fd2ad88e2df8389998fbfecf842ee57690b1af79",
+    "src/Fluent.Pdf.Fonts/ManagedFontProvider.cs": "946f9dfce316eaf614bfa401571a6dc7b4fe603935c9df309fa8c52bf80ff4e1",
+    "src/Fluent.Pdf.Fonts/SimpleFontEncoding.cs": "c4977bd7fc0f16065a02af121d6c2bc203ecf30b0e7578c3fe023de9dafea292",
+    "src/Fluent.Pdf.Fonts/StandardFont.cs": "57739c6e852d83e307b68f2b17fa81bc065d35a41950a2e27fe00e3681d69c25",
+    "tests/Fluent.Pdf.Contract.Tests/ExtractionTests.cs": "484307171d7cd62bd32314064da005e01fe5e0837aa9a0ded911a2d7380cb187"
+  },
+  "reportSha256": {
+    "extraction-final-build.log": "7929ecc91936634e36eedfb2c53ce29b4c7b809056136a782d7bcae8089a51f2",
+    "extraction-final-tests.log": "6e4262ef606e36302a1559c5256e826de486ad6f36c9b069a4f807719c252a3c",
+    "extraction-api-check.log": "5073dfc2e5e4dd12d29239fc06b2c6a93ae4886614c13328541e6a55ce67e8a3",
+    "extraction-spec-check.log": "0db2527979e144f954345fb431ce118b13849927734f17c494e15315acae7c9f",
+    "extraction-release-check.log": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "limitations": [
+    "Advance cells are not glyph ink; full geometry/linguistic/column/appearance/CMap profiles remain mandatory.",
+    "Actual minimum runtimes, exact final packages and all production qualification remain pending.",
+    "Local native-positive tests cannot run because required Landlock support is unavailable; CI remains unfiltered.",
+    "API compatibility preceded a private overflow-safe distance change; public API did not change afterward."
+  ],
+  "sourceCI": {
+    "runId": 39128006664,
+    "sourceCommit": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7",
+    "testedMerge": "15c4c8ea1c9f2346ee1ef5dcde5e8820f49f0c5a",
+    "testedTree": "3a83f5684b121352742784f9308cac4d7b6d82a6",
+    "treeMatchesSource": true,
+    "testsPerLane": 763,
+    "runtimeLanes": 20,
+    "passed": 15260,
+    "failed": 0,
+    "skipped": 0,
+    "jobs": [
+      {
+        "id": 117677102448,
+        "name": "Contracts (win-arm64)",
+        "conclusion": "success",
+        "logSha256": "354760f0dc7966340abf264ea1929a4470cbcb6b429938e4259ede81fde8a9c2",
+        "runtimeLanes": 3
+      },
+      {
+        "id": 117677102568,
+        "name": "Contracts (linux-arm64)",
+        "conclusion": "success",
+        "logSha256": "92276a2a587ce2dfa3c8a96380d258fcdeec751b661eb1896dcdc936a4b779cd",
+        "runtimeLanes": 3
+      },
+      {
+        "id": 117677102603,
+        "name": "Contracts (osx-arm64)",
+        "conclusion": "success",
+        "logSha256": "aa0fec359755813609d3362593c02c94928492ceb5a94dd439cdbc021b065dec",
+        "runtimeLanes": 3
+      },
+      {
+        "id": 117677102621,
+        "name": "Contracts (win-x64)",
+        "conclusion": "success",
+        "logSha256": "dc23f2577d6ae5c9afe08401d487b6ce4e7e294e45f43a76cd64471600180b91",
+        "runtimeLanes": 5
+      },
+      {
+        "id": 117677102635,
+        "name": "Contracts (linux-x64)",
+        "conclusion": "success",
+        "logSha256": "293b2b54438e91f489478bcfbe9372840fcc6fdf38314a955bac2dc1c48acbc2",
+        "runtimeLanes": 3
+      },
+      {
+        "id": 117677102675,
+        "name": "Contracts (osx-x64)",
+        "conclusion": "success",
+        "logSha256": "c6dc30b30304cce5b693fcd5540aa8a517a776bcf2b0168d6d904dad8c514573",
+        "runtimeLanes": 3
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 12137116267,
+        "name": "source-contracts-win-x64",
+        "size_in_bytes": 994478,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137116267",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137116267/zip",
+        "expired": false,
+        "created_at": "2026-10-18T12:44:06Z",
+        "expires_at": "2027-01-16T12:36:44Z",
+        "updated_at": "2026-10-18T12:44:06Z",
+        "digest": "sha256:4756346ac6ceba417f09f37202dbb4937f9f2ae2efd66ed9d9c5db5ab14308e3",
+        "workflow_run": {
+          "id": 39128006664,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7"
+        }
+      },
+      {
+        "id": 12137006951,
+        "name": "source-contracts-osx-arm64",
+        "size_in_bytes": 608704,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137006951",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12137006951/zip",
+        "expired": false,
+        "created_at": "2026-10-18T12:39:54Z",
+        "expires_at": "2027-01-16T12:36:44Z",
+        "updated_at": "2026-10-18T12:39:54Z",
+        "digest": "sha256:d27bdeaee4603d12a5c247dfe85dfbe3f279a174333565969e99c87bfaca94eb",
+        "workflow_run": {
+          "id": 39128006664,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7"
+        }
+      },
+      {
+        "id": 12136828179,
+        "name": "source-contracts-win-arm64",
+        "size_in_bytes": 607672,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136828179",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136828179/zip",
+        "expired": false,
+        "created_at": "2026-10-18T12:43:46Z",
+        "expires_at": "2027-01-16T12:36:44Z",
+        "updated_at": "2026-10-18T12:43:46Z",
+        "digest": "sha256:feb7a47920c5ef545737998013ae96b5e5e9dc2478bceb1d55e07498320e68d3",
+        "workflow_run": {
+          "id": 39128006664,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7"
+        }
+      },
+      {
+        "id": 12136554003,
+        "name": "source-contracts-linux-x64",
+        "size_in_bytes": 607738,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136554003",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136554003/zip",
+        "expired": false,
+        "created_at": "2026-10-18T12:39:48Z",
+        "expires_at": "2027-01-16T12:36:44Z",
+        "updated_at": "2026-10-18T12:39:48Z",
+        "digest": "sha256:189cad10c9306ec22bf57fba7bca41224deb7bbbf6d196061db6638fdc649b92",
+        "workflow_run": {
+          "id": 39128006664,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7"
+        }
+      },
+      {
+        "id": 12136323788,
+        "name": "source-contracts-linux-arm64",
+        "size_in_bytes": 607862,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136323788",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136323788/zip",
+        "expired": false,
+        "created_at": "2026-10-18T12:39:19Z",
+        "expires_at": "2027-01-16T12:36:44Z",
+        "updated_at": "2026-10-18T12:39:19Z",
+        "digest": "sha256:72e5ad76d57e77055359f4cab8b9073186e761359b94342c3c39a2a2d61715c5",
+        "workflow_run": {
+          "id": 39128006664,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7"
+        }
+      },
+      {
+        "id": 12136204694,
+        "name": "source-contracts-osx-x64",
+        "size_in_bytes": 611145,
+        "url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136204694",
+        "archive_download_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/artifacts/12136204694/zip",
+        "expired": false,
+        "created_at": "2026-10-18T12:46:39Z",
+        "expires_at": "2027-01-16T12:36:44Z",
+        "updated_at": "2026-10-18T12:46:39Z",
+        "digest": "sha256:63b9ce5bb6699a89776a403cf7caa60c6cf622b6c83a11e2cd27003bf39fb874",
+        "workflow_run": {
+          "id": 39128006664,
+          "repository_id": 1423696611,
+          "head_repository_id": 1423696611,
+          "head_branch": "codex/issues-21-50",
+          "head_sha": "9bc0dbb3684e7d33bf0ad29a1fc1e80b0e8a49f7"
+        }
+      }
+    ]
+  }
+}

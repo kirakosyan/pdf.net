@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "purpose": "design-and-normative-output-observations-not-production-qualification",
+  "requirement": "FP-050",
+  "sources": [
+    {
+      "id": "S50-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "12.5.6.5 Link annotations and mutually exclusive action/destination entries",
+        "12.6.4.7 URI actions require7-bitASCII URI bytes",
+        "9.10Unicode extraction;14.6marked content and14.9.4ActualText"
+      ]
+    }
+  ],
+  "decisions": [
+    "Code/Strong/Em private source markers and flow list/table models preserve the documented source profile; no complete accessibility or PDF/UA claim is made.",
+    "Version-one JSON/XML document vocabularies are original explicit SDK schemas. XML DTD/resolver/namespaces/processing-instruction and resource denial are enforced independently of permissive loss handling.",
+    "Exact closed decimal values reject rounding and underflow before scalar binding. Source parsers have shared byte/object/depth/node/time ceilings."
+  ],
+  "referenceAccessLimit": "Direct primary CommonMark and XML specification retrieval returnedHTTP403 in this host. No normative source-format conformance claim is inferred from memory or the source checks. Full Markdown/XML/JSON and standards corpus validation remains mandatory.",
+  "independentOutputReportSha256": "52fafeeb7502ca9d1168b1fce6e43bfc6b6139044bb25e344e3074e412fe3e62",
+  "productionQualified": false
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "purpose": "standards-design-and-independent-rule-observations-not-production-qualification",
+  "requirement": "FP-066",
+  "sources": [
+    {
+      "id": "S66-PDF17",
+      "kind": "retained ISO 32000-1:2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff"
+    },
+    {
+      "id": "S66-INDEPENDENT-PROFILES",
+      "kind": "independent validator rule/profile data; descriptive requirements and actual results observed, no implementation bodies copied",
+      "containerSha256": "687d4d8bcfec48c9f7e931cf78ed061f1eeccfba55d4cdc000ba9b4d8aa46ce6",
+      "profiles": [
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-4F.xml",
+          "sha256": "cc920921c5aa136e38ca168a92671e76ff7a0cccf7e000ee5c0ba5eecad03684"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-3A.xml",
+          "sha256": "689b4316f76d50aee03f575e8baf2a0519336c13ba1a0cdb55cfec90e82be960"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-4.xml",
+          "sha256": "4a865d78dd2f3773bd7bcdc1d146047d3b5396c961c94353faaaa9c77dc57531"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-2A.xml",
+          "sha256": "a7eedbb3d4195dffe5537fd4dc9ab67fb456be8aecd72bbe50f5de2ea5d30f8e"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-2U.xml",
+          "sha256": "e2bfbe4c6d1942cd49c33842a8fc750b7062a79442bc3f807b243e877c1de378"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-2B.xml",
+          "sha256": "9b0203db6c9cf04436913acfd388c8a8b20a247e86286de224dafb2e367f9b31"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-1A.xml",
+          "sha256": "e9bd035e2e9ed08101eeab19fb8b9dac4e25141b84203a831d3c0cbae1083f54"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-3B.xml",
+          "sha256": "a258f336747ef34117920ac8819545b40e53e7a2c30b6a5a1c8d098b2d728062"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-3U.xml",
+          "sha256": "99110c5e7fef25bfe6c951e60f0539b084beec26b4f6345be0d7f0ba341c56ee"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-1B.xml",
+          "sha256": "1fd81cc8002e089a7597967ee607cd1b49744f29219d08a89f79687657fdc75d"
+        },
+        {
+          "entry": "org/verapdf/pdfa/validation/PDFA-4E.xml",
+          "sha256": "780bbba7f8ab69ac0be3933d8e855ab8295fdae8aa6db13872bad0529efea362"
+        }
+      ]
+    },
+    {
+      "id": "S66-ENGINE-DOCUMENTATION",
+      "kind": "public project licensing/runtime documentation",
+      "sha256": "ad94df0c37483ed032faaeab2ecdaee11c05d4c4d3de4767fab9194dc83a068c"
+    }
+  ],
+  "decisions": [
+    "Profile metadata alone never authorizes conversion output; a complete independent exact-input/profile observation is required",
+    "No implicit font substitution, arbitrary semantic tagging, attachment removal, transparency flattening or decryption",
+    "Explicit ICC/metadata/identifier repair; PDF/A-1 CIDSet repair only from a complete explicit source mapping",
+    "Generic version downgrade remains refused; a private candidate path retains typed feature/signature guards and cannot copy output before independent validation"
+  ],
+  "limitations": [
+    "Complete primary ISO 19005 texts and expert review are not retained by this source experiment; full normative/conformance qualification remains mandatory",
+    "Original small fixtures and an external test-only host do not qualify arbitrary repairs, semantics, OS isolation or production readiness"
+  ]
+}

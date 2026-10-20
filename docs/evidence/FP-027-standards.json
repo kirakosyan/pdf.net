@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "purpose": "normative-design-and-interchange-observations-not-production-qualification",
+  "requirement": "FP-027",
+  "sources": [
+    {
+      "id": "S27-ISO1-2008",
+      "documentSha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "8.3-8.5 source coordinate systems and path construction/painting",
+        "9.3-9.4 text state/positioning and 9.10 extraction/mappings",
+        "14.8 table structure and span attributes; 14.9.4 ActualText replacement"
+      ]
+    }
+  ],
+  "decisions": [
+    "Keep literal source-grid/alignment inference separate from semantic structure or rendered rule visibility",
+    "Retain page/character/operator/rule provenance and reject partial ActualText/nonrectangular merges/unsupported cell text directions",
+    "Declare heuristic geometric scores without presenting them as calibrated semantic probability or qualification metrics",
+    "Require explicit culture for decimal interpretation; retain original text and unparsed strings",
+    "Require explicit merged-cell CSV policy, header omission and formula-prefix escaping; retain original page/header tables and sequence decisions",
+    "Use UTF-8 quoted CRLF CSV and versioned JSON with typed values/spans/provenance; independent standard parsers check actual original outputs"
+  ],
+  "limitations": [
+    "Primary CSV/JSON RFC document downloads were denied with HTTP403 on the configured network path. Independent standard-library parsing and small fixtures do not establish complete interchange conformance.",
+    "Complete semantic/visibility/inference/culture/corpus profiles and production qualification remain mandatory."
+  ],
+  "productionQualified": false
+}

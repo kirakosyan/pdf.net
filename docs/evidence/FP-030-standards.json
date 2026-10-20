@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-comparison-and-removal-decisions-not-production-qualification",
+  "requirement": "FP-030",
+  "sources": [
+    {
+      "id": "S30-ISO32000-2008",
+      "sha256": "9de0ca9e8570d6209e8bd48a355be8eb6ec376acfc3fc3ae97cd8730351417ff",
+      "sections": [
+        "12.5.6.23",
+        "7.5.4",
+        "7.5.6"
+      ],
+      "scope": "Identification annotations are separate from removal; selected image samples must be destroyed, hidden content/XMP considered, incremental histories retain bytes."
+    },
+    {
+      "id": "S30-ORIGINAL-RECOVERY-CORPUS",
+      "sha256": "a6218695b8a60d3438324a4a06ad60ce42144c8034c5b0629ce18c37f9f7e1a9",
+      "scope": "Three predeclared owned PDF/raster fixtures, payload markers and recovery expectations."
+    }
+  ],
+  "decisions": [
+    "Explicit raster-only destructive flattening, actual selected sample replacement before encoding, fresh graph without any adopted source object/trailer/history.",
+    "Payload-free removal audit is separate from provider operation diagnostics. Only new output bytes are hashed.",
+    "Empty seekable borrowed destinations prevent old prefix/tail leakage; complete private buffer and atomic file replacement.",
+    "Signature invalidation requires explicit authority before rendering; no validity preservation claim."
+  ],
+  "independentReportSha256": "af168c6db38d2475f072430539f65fe28d1e9322db07f40e0aa9e3673cec7bcc",
+  "productionQualified": false
+}

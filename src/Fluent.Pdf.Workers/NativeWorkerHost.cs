@@ -105,9 +105,7 @@ public sealed class NativeWorkerHost
             // A fractional range below the next region can reject NativeAOT initialization.
             bool macArm = options.Deployment.RuntimeIdentifier == "osx-arm64";
             // Retain additional native-runtime headroom on the 16 KiB-page platform.
-            long gcHeap = macArm
-                ? (options.MaximumMemoryBytes / 16 + gcRegion - 1) / gcRegion * gcRegion
-                : options.MaximumMemoryBytes / 8 / gcRegion * gcRegion;
+            long gcHeap = macArm ? (options.MaximumMemoryBytes / 16 + gcRegion - 1) / gcRegion * gcRegion : options.MaximumMemoryBytes / 8 / gcRegion * gcRegion;
             long gcRange = Math.Max(33554432, (options.MaximumMemoryBytes / 4 + gcRegion - 1) / gcRegion * gcRegion);
             start.EnvironmentVariables["DOTNET_GCHeapHardLimit"] = gcHeap.ToString("X", CultureInfo.InvariantCulture);
             start.EnvironmentVariables["DOTNET_GCRegionRange"] = gcRange.ToString("X", CultureInfo.InvariantCulture);
@@ -119,6 +117,10 @@ public sealed class NativeWorkerHost
             start.EnvironmentVariables["DOTNET_PROCESSOR_COUNT"] = "2";
             if (options.Deployment.RuntimeIdentifier.StartsWith("osx-", StringComparison.Ordinal))
                 start.EnvironmentVariables["MallocNanoZone"] = "0";
+            // Bound allocator magazine reservations as well as the managed heap.
+            // Fresh ARM64 initialization probes otherwise approach the OS VM-growth ceiling.
+            if (macArm)
+                start.EnvironmentVariables["MallocSpaceEfficient"] = "1";
             string[] arguments =
             {
                 job,
@@ -402,35 +404,46 @@ public sealed class NativeWorkerHost
         foreach (var asset in options.Deployment.Assets)
         {
             context.Checkpoint();
-            string path = Path.Combine(options.Deployment.RootDirectory, asset.FileName);
-            if ((File.GetAttributes(path) & (FileAttributes.ReparsePoint | FileAttributes.Directory | FileAttributes.Device)) != 0)
-                throw Fail(context, "Native.UnsafePath", "A deployment asset cannot be a reparse point or device.");
-            using var source = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            using var target = new FileStream(Path.Combine(job, asset.FileName), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
-            using var hash = SHA256.Create();
-            if (source.Length != asset.Length)
-                throw Fail(context, "Native.SizeMismatch", "A native asset changed during private staging.");
-            long remaining = asset.Length;
-            while (remaining > 0)
+            try
             {
-                context.Checkpoint();
-                int count = source.Read(buffer, 0, (int)Math.Min(remaining, buffer.Length));
-                context.Checkpoint();
-                if (count == 0)
+                string path = Path.Combine(options.Deployment.RootDirectory, asset.FileName);
+                if ((File.GetAttributes(path) & (FileAttributes.ReparsePoint | FileAttributes.Directory | FileAttributes.Device)) != 0)
+                    throw Fail(context, "Native.UnsafePath", "A deployment asset cannot be a reparse point or device.");
+                using var source = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                using var target = new FileStream(Path.Combine(job, asset.FileName), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
+                using var hash = SHA256.Create();
+                if (source.Length != asset.Length)
                     throw Fail(context, "Native.SizeMismatch", "A native asset changed during private staging.");
-                hash.TransformBlock(buffer, 0, count, buffer, 0);
-                target.Write(buffer, 0, count);
-                remaining -= count;
-            }
+                long remaining = asset.Length;
+                while (remaining > 0)
+                {
+                    context.Checkpoint();
+                    int count = source.Read(buffer, 0, (int)Math.Min(remaining, buffer.Length));
+                    context.Checkpoint();
+                    if (count == 0)
+                        throw Fail(context, "Native.SizeMismatch", "A native asset changed during private staging.");
+                    hash.TransformBlock(buffer, 0, count, buffer, 0);
+                    target.Write(buffer, 0, count);
+                    remaining -= count;
+                }
 
-            if (source.ReadByte() != -1)
-                throw Fail(context, "Native.SizeMismatch", "A native asset changed during private staging.");
-            hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
-            if (BitConverter.ToString(hash.Hash!).Replace("-", "").ToLowerInvariant() != asset.Sha256)
-                throw Fail(context, "Native.HashMismatch", "A native asset changed during private staging.");
-            target.Flush();
-            if (asset.IsNativeBinary && PdfNativeDeploymentInspector.InspectBinary(target, deployment.RuntimeIdentifier, context.Checkpoint)is string code)
-                throw Fail(context, code, "A pinned asset has an incompatible binary header.");
+                if (source.ReadByte() != -1)
+                    throw Fail(context, "Native.SizeMismatch", "A native asset changed during private staging.");
+                hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
+                if (BitConverter.ToString(hash.Hash!).Replace("-", "").ToLowerInvariant() != asset.Sha256)
+                    throw Fail(context, "Native.HashMismatch", "A native asset changed during private staging.");
+                target.Flush();
+                if (asset.IsNativeBinary && PdfNativeDeploymentInspector.InspectBinary(target, deployment.RuntimeIdentifier, context.Checkpoint)is string code)
+                    throw Fail(context, code, "A pinned asset has an incompatible binary header.");
+            }
+            catch (FileNotFoundException)
+            {
+                throw Fail(context, "Native.AssetMissing", "The pinned asset '" + asset.FileName + "' is unavailable during private staging.");
+            }
+            catch (DirectoryNotFoundException)
+            {
+                throw Fail(context, "Native.AssetMissing", "The pinned asset '" + asset.FileName + "' is unavailable during private staging.");
+            }
         }
     }
 

@@ -2,7 +2,7 @@
 
 Fluent.Pdf is an MIT-licensed .NET PDF SDK being designed for Windows, Linux and macOS. Its production scope combines document generation and editing, browser-quality HTML conversion, rendering, extraction, forms, OCR, security, signatures and independently validated PDF standards.
 
-**Current delivery: document/provider contracts, operation budgets, isolated native workers and bounded [PDF syntax inspection](docs/pdf-syntax.md). The original managed [page reader and full/incremental writer](docs/pdf-writing.md), [content operators/version selection](docs/content-operators.md) optional [fonts/embedding](docs/fonts.md) and [Unicode/shaping](docs/text-shaping.md) and [vector/color/transparency](docs/vector-graphics.md) and [page canvas/geometry](docs/page-canvas.md) and [flow layout/pagination](docs/flow-layout.md) and [tables/data binding](docs/tables.md) and [lists/columns/notes](docs/composition.md) and [page templates/contents](docs/page-templates.md) and [page organization/imposition](docs/page-organization.md) and [images/reusable graphics](docs/images.md) and [annotations/appearances](docs/annotations.md) and [navigation/action policy](docs/navigation.md) and [bookmarks/presentation](docs/presentation.md) are implemented in source; rendering and the remaining SDK features are in progress. The SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
+**Current delivery: document/provider contracts, operation budgets, isolated native workers and bounded [PDF syntax inspection](docs/pdf-syntax.md). The original managed [page reader and full/incremental writer](docs/pdf-writing.md), [content operators/version selection](docs/content-operators.md) optional [fonts/embedding](docs/fonts.md) and [Unicode/shaping](docs/text-shaping.md) and [vector/color/transparency](docs/vector-graphics.md) and [page canvas/geometry](docs/page-canvas.md) and [flow layout/pagination](docs/flow-layout.md) and [tables/data binding](docs/tables.md) and [lists/columns/notes](docs/composition.md) and [page templates/contents](docs/page-templates.md) and [page organization/imposition](docs/page-organization.md) and [images/reusable graphics](docs/images.md) and [annotations/appearances](docs/annotations.md) and [navigation/action policy](docs/navigation.md) and [bookmarks/presentation](docs/presentation.md) and [metadata/identity](docs/metadata.md) and [attachments/collections](docs/attachments.md) and [optional-content layers](docs/layers.md) and [text extraction](docs/text-extraction.md) and [AcroForm editing](docs/forms.md) and [form data/workflows](docs/form-workflows.md) and optional [isolated page rendering](docs/rendering.md) and [password/certificate security](docs/security.md) and [archival conversion/validation](docs/archival.md) and [explicit structural repair](docs/repair.md) and [PDF version/extension preservation](docs/pdf-compatibility.md) and optional [HTML conversion](docs/html-rendering.md) with explicit [resource/authentication policy](docs/html-resources.md) and [finite readiness/lifecycle](docs/html-readiness.md) and [print layout/structure checks](docs/html-printing.md) and [owned stamps/artifacts](docs/stamps.md) have source profiles implemented in source; the remaining SDK features and full qualification are in progress. The SDK is not production-qualified. No NuGet release is published.** The first public package must be a qualified stable release; publishing a placeholder, alpha, beta or name-reservation package is prohibited.
 
 ## Product direction
 
@@ -70,3 +70,31 @@ The reviewed wordnet upstream implementation provides useful Tesseract 5 loading
 ## License
 
 [MIT](LICENSE). Optional dependencies, native engines, fonts and OCR models retain their own licenses and redistribution requirements. Shipping assets require the inventory in [FP-095](docs/requirements/FP-095.md).
+
+FP-028 adds [resource extraction](docs/resource-extraction.md): shared definitions, actual transformed uses, literal paths, artifacts and exact encoded stream export. Complete profiles and production qualification remain mandatory.
+
+FP-026 adds [bounded text search and explicit replacement](docs/text-search.md). Complete profiles and production qualification remain mandatory.
+
+FP-027 adds [table extraction and structured export](docs/table-extraction.md), with explicit inference/culture/merge/continuation decisions. Complete profiles and production qualification remain mandatory.
+
+FP-099 adds [typed generation and bounded events](docs/data-generation.md), with explicit culture/resources, guarded callbacks and precommit serialization. Complete profiles and production qualification remain mandatory.
+
+Text, Markdown and structured input now have an explicit bounded [managed conversion profile](docs/input-conversion.md). Complete source-format fidelity and production qualification remain mandatory; NuGet packing/publishing remain blocked.
+
+An explicit optional [Word conversion source profile](docs/word-conversion.md) adds DOC/DOCX/RTF interchange and diagnostic fixed/editable reconstruction. Complete format/fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.
+
+An explicit [document template and mail-merge source profile](docs/mail-merge.md) adds native PDF/DOCX scalar, repeat, condition, table and captured-image binding. Complete semantics, fidelity and production qualification remain mandatory; SDK packing/publication stay blocked.
+
+An explicit [logical structure/accessibility source profile](docs/accessibility.md) adds author-supplied roles, language, descriptions, tables, Form/annotation associations and identity-preserving reading-order remediation. Complete UA1/UA2 and production qualification remain mandatory; SDK packing/publication stay blocked.
+
+An explicit [local OCR source profile](docs/local-ocr.md) adds bounded raster/Unicode/word contracts and an optional isolated Tesseract5 adapter with pinned caller assets. Complete real-engine/model/language/RID and production qualification remain mandatory; SDK packing/publication stay blocked.
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](docs/ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](docs/searchable-ocr.md).
+
+Opt-in bounded scan correction, original-image preservation, inverse word-boundary geometry and separate prose/table/form reading-order evidence now have a source profile. Complete automatic curve/semantic/native/corpus and production qualification remain pending. See [scan processing](docs/scan-processing.md).
+
+Explicit raster/full-rewrite redaction and sanitization now have a source profile: selected samples are replaced before encoding and no original graph/history is adopted. Complete selective editable-content preservation, independent renderer/security corpora and production qualification remain mandatory. See [redaction](docs/redaction.md).
+
+Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](docs/signatures.md).

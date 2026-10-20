@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-model-and-comparison-contract-not-qualification",
+  "requirement": "FP-075",
+  "sources": [
+    {
+      "id": "S75-MODELS-01",
+      "version": "4.1.0",
+      "sourceCommit": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+      "inventory": "third-party/ocr/models.json",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "S75-UNICODE-WHITESPACE",
+      "version": "15.1",
+      "profile": "Fixed White_Space scalar list, Unicode-scalar CER and ordinal whitespace-delimited WER without normalization"
+    }
+  ],
+  "decisions": [
+    "Model identity binds explicit ordered aliases/version/content digests/length; deployment independently verifies exact assets and native loaded-language set.",
+    "CER/WER thresholds are explicit prior caller declarations; exact model versions stay separate; engine confidence never qualifies correctness.",
+    "All-blank groups cannot pass; insertions and exact Unicode differences remain visible."
+  ],
+  "independentReportSha256": "837616e9e369e7ed01c225bf7e89523d6080c4e00a80eec322ee2cb3d70e57b5",
+  "productionQualified": false
+}

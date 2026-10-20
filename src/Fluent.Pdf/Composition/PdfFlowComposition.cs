@@ -111,44 +111,51 @@ public sealed class PdfFlowList : PdfFlowBlock
         PdfFlowList? result = null;
         var report = PdfFont.Run("CreateList", "managed.composition", policy, cancellationToken, context =>
         {
-            var copy = new List<PdfFlowListItem>();
-            foreach (var item in items)
-            {
-                context.Checkpoint();
-                context.Consume(PdfResourceKind.Objects, 1);
-                context.Consume(PdfResourceKind.ExpandedBytes, 256);
-                if (copy.Count == maximumItems)
-                    throw PdfWriterCore.Error(context, "Composition.ListLimit", "The list exceeds its explicit finite item limit.");
-                copy.Add(item ?? throw new ArgumentException("List items cannot contain null.", nameof(items)));
-            }
-
-            var labels = new string[copy.Count];
-            var values = new int[copy.Count];
-            int counter = start;
-            for (int i = 0; i < copy.Count; i++)
-            {
-                counter = copy[i].CounterValue ?? counter;
-                values[i] = counter;
-                labels[i] = kind == PdfFlowListKind.Bullet ? bullet : prefix + Marker(counter, kind, context) + suffix;
-                if (i + 1 < copy.Count)
-                {
-                    if (counter == int.MaxValue)
-                        throw PdfWriterCore.Error(context, "Composition.CounterOverflow", "The list counter cannot advance within its integer range.");
-                    counter++;
-                }
-            }
-
-            result = new(copy.ToArray(), labels, values, markerStyle, markerWidth, gap);
+            result = CreateCore(items, markerStyle, kind, start, prefix, suffix, bullet, markerWidth, gap, maximumItems, context);
         }, PdfCapability.WriteDocument);
         result!.OperationReport = report;
         return result;
     }
 
+    internal static PdfFlowList CreateCore(IEnumerable<PdfFlowListItem> items, PdfFlowTextStyle markerStyle, PdfFlowListKind kind, int start, string prefix, string suffix, string bullet, double? markerWidth, double gap, int maximumItems, PdfOperationContext context)
+    {
+        var copy = new List<PdfFlowListItem>();
+        foreach (var item in items)
+        {
+            context.Checkpoint();
+            context.Consume(PdfResourceKind.Objects, 1);
+            context.Consume(PdfResourceKind.ExpandedBytes, 256);
+            if (copy.Count == maximumItems)
+                throw PdfWriterCore.Error(context, "Composition.ListLimit", "The list exceeds its explicit finite item limit.");
+            copy.Add(item ?? throw new ArgumentException("List items cannot contain null.", nameof(items)));
+        }
+
+        var labels = new string[copy.Count];
+        var values = new int[copy.Count];
+        int counter = start;
+        for (int i = 0; i < copy.Count; i++)
+        {
+            counter = copy[i].CounterValue ?? counter;
+            values[i] = counter;
+            labels[i] = kind == PdfFlowListKind.Bullet ? bullet : prefix + Marker(counter, kind, context) + suffix;
+            if (i + 1 < copy.Count)
+            {
+                if (counter == int.MaxValue)
+                    throw PdfWriterCore.Error(context, "Composition.CounterOverflow", "The list counter cannot advance within its integer range.");
+                counter++;
+            }
+        }
+
+        return new(copy.ToArray(), labels, values, markerStyle, markerWidth, gap);
+    }
+
     internal PdfFlowList WithContent(Func<IReadOnlyList<PdfFlowBlock>, IReadOnlyList<PdfFlowBlock>> map)
     {
         var value = new PdfFlowList(Items.Select(item => new PdfFlowListItem(map(item.Content), item.CounterValue)).ToArray(), Markers.ToArray(), Counters.ToArray(), MarkerStyle, MarkerWidth, Gap);
-        value.OperationReport = OperationReport; return value;
+        value.OperationReport = OperationReport;
+        return value;
     }
+
     internal PdfTable ToTable(PdfFlowOptions options, IPdfTextShaper shaper, PdfOperationContext context)
     {
         context.Consume(PdfResourceKind.ExpandedBytes, Items.Count * 512L + 256);
