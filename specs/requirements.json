@@ -2222,7 +2222,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/svg.md",
+        "implemented": [
+          "Optional original bounded SVG static import with vectors/transforms/clips/explicit-font text and authorized local images",
+          "Opaque PDF vector/Form SVG export with exact geometry/paint/clip and staged/atomic output; independent original SVG/PDF round-trip fixtures"
+        ],
+        "pending": [
+          "Complete SVG/CSS/path/text/image/paint and PDF-to-SVG reconstruction/export profiles",
+          "Full independent standards/fidelity corpus, actual minimum/runtime/provider and exact final-package production qualification"
+        ]
+      }
     },
     {
       "id": "FP-053",

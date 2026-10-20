@@ -13,6 +13,7 @@
     <Project Path="src/Fluent.Pdf.Rendering/Fluent.Pdf.Rendering.csproj" />
     <Project Path="src/Fluent.Pdf.Cryptography/Fluent.Pdf.Cryptography.csproj" />
     <Project Path="src/Fluent.Pdf.Compliance/Fluent.Pdf.Compliance.csproj" />
+    <Project Path="src/Fluent.Pdf.Formats/Fluent.Pdf.Formats.csproj" />
     <Project Path="src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj" />
     <Project Path="src/Fluent.Pdf.Word/Fluent.Pdf.Word.csproj" />
     <Project Path="src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj" />

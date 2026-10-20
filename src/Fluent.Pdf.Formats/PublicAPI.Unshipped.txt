@@ -1,0 +1,11 @@
+#nullable enable
+Fluent.Pdf.Formats.PdfSvg
+Fluent.Pdf.Formats.PdfSvgImportOptions
+Fluent.Pdf.Formats.PdfSvgImportOptions.AllowDataImages.get -> bool
+Fluent.Pdf.Formats.PdfSvgImportOptions.Fonts.get -> Fluent.Pdf.PdfFontFallback?
+Fluent.Pdf.Formats.PdfSvgImportOptions.Images.get -> Fluent.Pdf.PdfImageReadOptions!
+Fluent.Pdf.Formats.PdfSvgImportOptions.PdfSvgImportOptions(Fluent.Pdf.PdfFontFallback? fonts = null, Fluent.Pdf.PdfTextOptions? text = null, bool allowDataImages = false, Fluent.Pdf.PdfImageReadOptions? images = null) -> void
+Fluent.Pdf.Formats.PdfSvgImportOptions.Text.get -> Fluent.Pdf.PdfTextOptions!
+static Fluent.Pdf.Formats.PdfSvg.Import(System.IO.Stream! input, Fluent.Pdf.Formats.PdfSvgImportOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.Formats.PdfSvg.WritePage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfSvg.WritePageFile(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!

@@ -96,3 +96,5 @@ The optional Html assembly now bridges explicit trusted application-view hosts u
 The Workers assembly now contains an original HMAC-authenticated static-HTML client/service source protocol with explicit tenant quotas and bounded idempotent retries. Host/TLS/OS/engine/container provisioning remains explicit and unqualified; see docs/render-service.md. PR #119 is merged at d9fa26d after all review threads and six source CI hosts passed.
 
 Raster-document import now has a shared-context managed PNG/JPEG and explicit optional complete-frame codec profile. APNG rejects rather than silently dropping animation. Actual extra codecs, animation/color/precision and host/package qualification remain mandatory; see docs/raster-import.md.
+
+The optional Formats assembly contains original bounded static SVG import and opaque vector/Form SVG export. Unsupported paths/styles/text/image/effects reject without raster substitution; explicit-font text and authorized local image import share the context. Complete format/host/package qualification remains mandatory; see docs/svg.md.

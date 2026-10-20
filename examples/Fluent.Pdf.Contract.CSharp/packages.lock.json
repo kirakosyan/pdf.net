@@ -258,6 +258,12 @@
           "Fluent.Pdf": "[1.0.0, )"
         }
       },
+      "fluent.pdf.formats": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.html": {
         "type": "Project",
         "dependencies": {
@@ -515,6 +521,12 @@
           "Fluent.Pdf": "[1.0.0, )"
         }
       },
+      "fluent.pdf.formats": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.html": {
         "type": "Project",
         "dependencies": {
@@ -633,6 +645,12 @@
         }
       },
       "fluent.pdf.fonts": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.formats": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
@@ -786,6 +804,12 @@
         }
       },
       "fluent.pdf.fonts": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.formats": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"

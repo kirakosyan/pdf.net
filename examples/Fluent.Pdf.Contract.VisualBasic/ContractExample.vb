@@ -456,4 +456,7 @@ Public Module ContractExample
     Public Function ImportRaster(inputs As System.Collections.Generic.IEnumerable(Of PdfRasterInput)) As PdfDocument
         Return PdfRasterDocuments.Create(inputs)
     End Function
+    Public Function ImportSvg(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfSvg.Import(source)
+    End Function
 End Module

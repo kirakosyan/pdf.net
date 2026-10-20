@@ -111,3 +111,5 @@ The original IPP protocol profile is headless across the managed targets and req
 Application-view library contracts span the four managed targets. The actual compiled Razor/MVC/Blazor sample runs on modern .NET 10; WebForms requires Windows Framework and XAML requires Windows plus an explicit real host. Complete legacy/UI/browser qualification remains mandatory. See [application views](web-views.md).
 
 The authenticated worker protocol spans the four managed targets. The hosted HTTP/container source sample targets modern .NET 10; actual rootless/read-only/engine/TLS/serverless and minimum-runtime qualification remains mandatory. See [render service](render-service.md).
+
+The optional Formats assembly targets net472/netstandard2.0/net8.0/net10.0 with managed format parsers and no GUI/native/browser dependency. Providers/fonts remain explicit where needed; compiling these assets does not qualify format/runtime behavior.

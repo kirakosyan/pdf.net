@@ -357,4 +357,6 @@ public static class ContractExample
 
     public static PdfDocument ImportRaster(IEnumerable<PdfRasterInput> inputs) => PdfRasterDocuments.Create(inputs);
 
+    public static PdfDocument ImportSvg(Stream source) => Fluent.Pdf.Formats.PdfSvg.Import(source);
+
 }

@@ -185,3 +185,5 @@ Queue issues #51–#60 now have documented source profiles: [signature verificat
 `PdfRenderWorkerClient`/`PdfRenderWorkerService` expose an explicit authenticated static-render profile; caller-owned credentials/transports and service tenant quotas remain separate from engine/host qualification. See [render service](render-service.md).
 
 `PdfRasterDocuments` composes explicitly selected file frames; `IPdfRasterDocumentDecoder` is an optional declared complete-frame RGBA8 boundary. Managed PNG/JPEG reuse the original file profiles. See [raster import](raster-import.md).
+
+Optional `Fluent.Pdf.Formats.PdfSvg` imports a closed static SVG matrix and exports exact supported opaque vectors/Forms. It rejects unsupported content before staged/atomic output; see [SVG](svg.md).
