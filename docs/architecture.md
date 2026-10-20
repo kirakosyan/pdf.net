@@ -46,6 +46,7 @@ Planned names are subject to prefix availability checks:
 | Fluent.Pdf.Ocr | Local OCR, models/provisioning contracts, searchable PDF |
 | Fluent.Pdf.Fonts | Optional redistributable font assets and deterministic resolution |
 | Fluent.Pdf.Documents | Optional wordnet/document conversion adapter |
+| Fluent.Pdf.Formats | Original bounded interchange/data profiles and explicit optional converter contracts; Core-only managed dependency |
 | Fluent.Pdf.Signing | External/HSM signing integrations |
 | Fluent.Pdf.Intelligence | Explicit model/retrieval integrations |
 | Fluent.Pdf.Native.* | Qualified RID-specific assets or provisioning manifests |
@@ -151,3 +152,5 @@ Explicit pre-created signature fields, exact incremental detached CMS signing, b
 Queue issues #51–#60 now have documented source profiles: [signature verification and explicit trust](signature-verification.md), [external and hardware signing sessions](external-signing.md), [pades upgrades and offline timestamp verification](pades.md), [signed revisions and conservative edit preflight](revision-audit.md), [document comparison and change reports](document-comparison.md), [passive xfa packets and explicit static conversion](xfa.md), [passive scripts and opt-in bounded calculations](scripts.md), [explicit icc color operations and production-rendering contracts](color-rendering.md), [bounded lossless raster containers](raster-export.md), [headless viewing sessions and exact tiles](viewing.md). Full requirement scope and actual minimum/runtime/provider/final-package qualification remain mandatory. PR #118 is merged; this batch follows it in the existing dependency order.
 
 The optional Formats assembly depends only on the managed core. Its original bounded static SVG and spreadsheet-data profiles share the caller operation context with font shaping, layout, image capture and PDF writing. A common package boundary preflights ZIP extents/names/expansion before archive allocation and verifies decompressed lengths/CRC; XML has no DTD/resolver/stylesheet execution. Format reconstruction uses explicit typography and geometry, never ambient Office/COM or locale discovery. Capability docs distinguish these closed source profiles from mandatory complete-format qualification.
+
+Exact-byte PDF/X/PDF/E/invoice gates and passive engineering/preflight contracts live in the managed core. Full producers/independent validators remain explicit caller-owned integrations; contract fixtures do not qualify standards. Shared flow, image, vector and ZIP/XML helpers avoid nested operation roots across the source format profiles.

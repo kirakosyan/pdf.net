@@ -369,4 +369,9 @@ public static class ContractExample
     public static PdfDocument ImportRasterEmf(Stream source) => Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(source);
     public static PdfDocument ImportFormattingObjects(Stream source, PdfFlowTextStyle body, PdfProviderRegistry providers) => Fluent.Pdf.Formats.PdfFormattingObjects.Import(source, body, providers);
     public static PdfDocument ImportRasterOfd(Stream source, out Fluent.Pdf.Formats.PdfOfdIdentity identity) => Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(source, out identity);
+    public static PdfOperationReport WriteConversionMatrix(Stream output) => Fluent.Pdf.Formats.PdfConversions.WriteMatrix(output);
+    public static PdfProfileValidation ConvertProfile(Stream input, Stream output, PdfProfileOptions options, IPdfProfileProducer producer, IPdfProfileValidator validator) => PdfProfileConversions.Convert(input, output, options, producer, validator);
+    public static PdfEngineeringInspection InspectEngineering(PdfDocumentSnapshot source) => PdfEngineering.Inspect(source);
+    public static PdfInvoiceValidation WriteInvoice(PdfInvoiceData data, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, IPdfInvoiceProducer producer, IPdfArchivalValidator archival, IPdfInvoiceValidator validator) => PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator);
+    public static PdfPreflightReport InspectPreflight(Stream input) => PdfPreflight.Inspect(input);
 }

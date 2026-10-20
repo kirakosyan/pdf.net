@@ -69,5 +69,12 @@
   "artifactCount": 61,
   "rawProvisioningPom": "/workspace/.tools/ofd-reader-2.3.7/pom.xml",
   "rawProvisioningPomSha256": "51a6fe8f1892f3dc5f15da4f76154f446922c436e671253543b902a2a650cc0b",
-  "limitations": "Every actual transitive JAR is bound by digest. This analysis does not adopt any engine or qualify production hosts."
+  "limitations": "Every actual transitive JAR is bound by digest. This analysis does not adopt any engine or qualify production hosts.",
+  "primaryLicenseEvidence": {
+    "parent": "org.ofdrw:ofdrw:2.3.7",
+    "sha256": "6ada24009724e0f9a6b8b6d5f7d44a792f1ced6724bcbc888780af3db10a247f",
+    "licenses": [
+      "Apache License 2.0"
+    ]
+  }
 }

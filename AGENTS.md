@@ -120,3 +120,11 @@ Closed passive FO page-master/block/table layout and finite literal-child XML tr
 Original bounded OFD1.0 raster-page packages, explicit literal identity, owned resources and signed-package rejection now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [ofd](docs/ofd.md).
 
 Content-family discovery, an exact nine-profile machine-readable save matrix and staged shared-context stream/atomic-file export orchestration now have a source profile. Full coverage and production qualification remain mandatory; see [conversions](docs/conversions.md).
+
+Exact-edition PDF/X producer/independent-validator gates with explicit ICC print conditions, retained page geometry and exact-byte/request binding now have a source profile. Full coverage and production qualification remain mandatory; see [prepress](docs/prepress.md).
+
+Passive advanced-content inventory with encoded payload digests, exact-byte preserve-only copying and exact-edition PDF/E-1 independent conversion gates now have a source profile. Full coverage and production qualification remain mandatory; see [engineering](docs/engineering.md).
+
+Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile. Full coverage and production qualification remain mandatory; see [invoices](docs/invoices.md).
+
+Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](docs/preflight.md).

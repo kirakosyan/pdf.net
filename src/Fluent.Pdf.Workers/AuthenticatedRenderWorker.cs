@@ -4,11 +4,11 @@ using System.Text;
 using System.Threading;
 
 namespace Fluent.Pdf.Workers;
-
 /// <summary>Caller-owned per-tenant shared secret. Authentication does not provide transport confidentiality; use a protected local channel or authenticated TLS transport.</summary>
 public sealed class PdfWorkerCredentials : IDisposable
 {
-    private readonly object _gate = new(); private byte[]? _key;
+    private readonly object _gate = new();
+    private byte[]? _key;
     /// <summary>Captures a 32–64-byte authentication key and a bounded ASCII tenant identity. No credential is discovered or logged.</summary>
     public PdfWorkerCredentials(string tenant, byte[] authenticationKey)
     {
@@ -19,11 +19,10 @@ public sealed class PdfWorkerCredentials : IDisposable
         Tenant = tenant;
         _key = (byte[])authenticationKey.Clone();
     }
+
     /// <summary>Gets the exact tenant identity.</summary>
-    public string Tenant
-    {
-        get;
-    }
+    public string Tenant { get; }
+
     internal byte[] Authenticate(byte[] bytes, int count, PdfOperationContext c)
     {
         c.Checkpoint();
@@ -36,6 +35,7 @@ public sealed class PdfWorkerCredentials : IDisposable
             return hmac.ComputeHash(bytes, 0, count);
         }
     }
+
     /// <summary>Clears the captured key. Drain outstanding work before disposing caller-owned credentials.</summary>
     public void Dispose()
     {
@@ -47,6 +47,7 @@ public sealed class PdfWorkerCredentials : IDisposable
         }
     }
 }
+
 /// <summary>Explicit finite server-side tenant quotas. A new service instance is an explicit quota reset; no clock-driven reset or ambient account discovery occurs.</summary>
 public sealed class PdfWorkerTenant
 {
@@ -64,49 +65,37 @@ public sealed class PdfWorkerTenant
         MaximumInputBytes = maximumInputBytes;
         MaximumOutputBytes = maximumOutputBytes;
     }
+
     /// <summary>Gets caller-owned credentials; the service never disposes them.</summary>
-    public PdfWorkerCredentials Credentials
-    {
-        get;
-    }
+    public PdfWorkerCredentials Credentials { get; }
     /// <summary>Gets active-job ceiling.</summary>
-    public int MaximumConcurrentJobs
-    {
-        get;
-    }
+    public int MaximumConcurrentJobs { get; }
     /// <summary>Gets accepted job/attempt ceiling for this service lifetime.</summary>
-    public int MaximumJobs
-    {
-        get;
-    }
+    public int MaximumJobs { get; }
     /// <summary>Gets exact source-byte ceiling.</summary>
-    public int MaximumInputBytes
-    {
-        get;
-    }
+    public int MaximumInputBytes { get; }
     /// <summary>Gets generated-PDF byte ceiling.</summary>
-    public int MaximumOutputBytes
-    {
-        get;
-    }
+    public int MaximumOutputBytes { get; }
     /// <summary>Gets the tightened job deadline.</summary>
-    public TimeSpan MaximumElapsedTime
-    {
-        get;
-    }
+    public TimeSpan MaximumElapsedTime { get; }
 }
+
 /// <summary>Caller-owned protected worker transport. Route to an explicitly provisioned process/service and map its stable failures; do not download an engine or redirect credentials.</summary>
 public interface IPdfRenderWorkerTransport
 {
     /// <summary>Exchanges one authenticated request/response. Poll the context, preserve endpoint/tenant isolation and expire all stream work before returning.</summary>
     void Exchange(Stream request, Stream response, PdfOperationContext context);
 }
+
 /// <summary>Explicit transient transport marker; only the idempotent static-render operation may retry it, within the caller-selected attempt ceiling.</summary>
 public sealed class PdfWorkerTransientException : IOException
 {
     /// <summary>Creates a credential-free transient marker.</summary>
-    public PdfWorkerTransientException() : base("The configured worker transport reported a transient failure.") { }
+    public PdfWorkerTransientException() : base("The configured worker transport reported a transient failure.")
+    {
+    }
 }
+
 /// <summary>Completed immutable worker PDF and its client operation evidence.</summary>
 public sealed class PdfWorkerPdf
 {
@@ -116,18 +105,20 @@ public sealed class PdfWorkerPdf
         _bytes = bytes;
         OperationReport = report;
     }
+
     /// <summary>Gets completed client evidence; it does not qualify the remote renderer.</summary>
-    public PdfOperationReport OperationReport
-    {
-        get;
-    }
+    public PdfOperationReport OperationReport { get; }
+
     /// <summary>Opens a fresh read-only completed PDF view.</summary>
     public Stream OpenPdfStream() => _bytes.Open(0, _bytes.Length);
 }
+
 /// <summary>Authenticated static-HTML render client with exact request/tenant/nonce/input binding and explicit bounded idempotent retries. Caller owns credentials and transport.</summary>
 public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
 {
-    private readonly PdfWorkerCredentials _credentials; private readonly IPdfRenderWorkerTransport _transport; private readonly int _attempts;
+    private readonly PdfWorkerCredentials _credentials;
+    private readonly IPdfRenderWorkerTransport _transport;
+    private readonly int _attempts;
     /// <summary>Selects explicit credentials/transport and one to three attempts. Retries are disabled by default and apply only to the transient marker.</summary>
     public PdfRenderWorkerClient(PdfWorkerCredentials credentials, IPdfRenderWorkerTransport transport, int maximumAttempts = 1)
     {
@@ -137,8 +128,10 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
             throw new ArgumentOutOfRangeException(nameof(maximumAttempts));
         _attempts = maximumAttempts;
     }
+
     /// <summary>Gets the explicit static-render service identity, without host qualification claims.</summary>
     public PdfProviderDescriptor Descriptor { get; } = new("managed.authenticated-render-client", "1", PdfCapability.RenderHtml);
+
     /// <summary>Authenticates one bounded UTF8 HTML source and returns only an authenticated, nonempty, structurally parsed PDF.</summary>
     public PdfWorkerPdf RenderHtml(Stream markup, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
@@ -148,6 +141,7 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
         var report = PdfFont.Run("RenderWorkerHtml", Descriptor.Id, policy, cancellationToken, c => pdf = Execute(markup, c), PdfCapability.RenderHtml);
         return new(pdf!, report);
     }
+
     /// <summary>Implements only default offline static HTML options and virtual-origin markup without resource maps. Other browser environments/options reject before transport.</summary>
     public void Render(PdfHtmlSource source, PdfHtmlOptions options, Stream output, PdfOperationContext context)
     {
@@ -160,6 +154,7 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
         var pdf = Execute(input, context);
         WorkerWire.Copy(pdf, output, context);
     }
+
     private PdfByteStore Execute(Stream markup, PdfOperationContext c)
     {
         var payload = WorkerWire.Capture(markup, 8388608, c);
@@ -171,7 +166,7 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
         using (var random = RandomNumberGenerator.Create())
             random.GetBytes(nonce);
         var frame = WorkerWire.Encode(1, _credentials, nonce, digest, payload, c);
-        for (int attempt = 1; ; attempt++)
+        for (int attempt = 1;; attempt++)
         {
             c.Checkpoint();
             using var response = new PdfCodecBufferStream(c, 67108864 + 256);
@@ -183,8 +178,17 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
                 using var worker = c.EnterScope(PdfResourceKind.Workers);
                 _transport.Exchange(request, output, c);
             }
-            catch (PdfWorkerTransientException) when (attempt < _attempts) { c.Checkpoint(); continue; }
-            catch (Exception error) when (!(error is PdfException) && !(error is OperationCanceledException)) { c.Checkpoint(); throw PdfWriterCore.Error(c, "Worker.Transport", "The explicit worker transport failed; no credentials or raw transport text are exposed."); }
+            catch (PdfWorkerTransientException)when (attempt < _attempts)
+            {
+                c.Checkpoint();
+                continue;
+            }
+            catch (Exception error)when (!(error is PdfException) && !(error is OperationCanceledException))
+            {
+                c.Checkpoint();
+                throw PdfWriterCore.Error(c, "Worker.Transport", "The explicit worker transport failed; no credentials or raw transport text are exposed.");
+            }
+
             c.Checkpoint();
             var store = response.Finish();
             using var captured = store.Open(0, store.Length);
@@ -199,14 +203,21 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
         }
     }
 }
+
 /// <summary>Original authenticated static-HTML worker protocol handler with finite per-tenant concurrency/jobs/bytes/deadlines. Hosting, transport protection and isolated engine provisioning remain explicit.</summary>
 public sealed class PdfRenderWorkerService
 {
     private sealed class Slot
     {
-        internal readonly PdfWorkerTenant Options; internal int Active, Jobs; internal Slot(PdfWorkerTenant options) => Options = options;
+        internal readonly PdfWorkerTenant Options;
+        internal int Active, Jobs;
+        internal Slot(PdfWorkerTenant options) => Options = options;
     }
-    private readonly Dictionary<string, Slot> _tenants = new(StringComparer.Ordinal); private readonly IPdfHtmlRenderer _renderer; private readonly PdfOperationPolicy _policy; private readonly int _maximumInput;
+
+    private readonly Dictionary<string, Slot> _tenants = new(StringComparer.Ordinal);
+    private readonly IPdfHtmlRenderer _renderer;
+    private readonly PdfOperationPolicy _policy;
+    private readonly int _maximumInput;
     /// <summary>Captures at most64 explicit tenant registrations and one provisioned renderer. It never discovers a process/engine or downloads dependencies.</summary>
     public PdfRenderWorkerService(IEnumerable<PdfWorkerTenant> tenants, PdfProviderRegistry providers, PdfOperationPolicy? policy = null)
     {
@@ -221,9 +232,11 @@ public sealed class PdfRenderWorkerService
             _tenants.Add(tenant.Credentials.Tenant, new(tenant));
             _maximumInput = Math.Max(_maximumInput, tenant.MaximumInputBytes);
         }
+
         if (_tenants.Count == 0)
             throw new ArgumentException("An explicit tenant registration is required.", nameof(tenants));
     }
+
     /// <summary>Authenticates before rendering, enforces quotas and validates the complete PDF before returning an authenticated response. Caller streams stay open; host maps failures without leaking credentials.</summary>
     public PdfOperationReport Process(Stream request, Stream response, CancellationToken cancellationToken = default)
     {
@@ -253,11 +266,12 @@ public sealed class PdfRenderWorkerService
                     using var target = new BorrowedStream(output, false, c);
                     _renderer.Render(source, new PdfHtmlOptions(), target, c);
                 }
-                catch (Exception error) when (!(error is PdfException) && !(error is OperationCanceledException))
+                catch (Exception error)when (!(error is PdfException) && !(error is OperationCanceledException))
                 {
                     c.Checkpoint();
                     throw PdfWriterCore.Error(c, "Worker.RenderFailed", "The provisioned worker renderer failed; source and raw provider exception text are withheld.");
                 }
+
                 c.Checkpoint();
                 var pdf = output.Finish();
                 using var checkedDocument = PdfPageOrganization.Read(pdf, 1000, c);
@@ -268,9 +282,13 @@ public sealed class PdfRenderWorkerService
                 var encoded = WorkerWire.Encode(2, slot.Options.Credentials, message.Nonce, message.Digest, payload, c);
                 WorkerWire.Copy(WorkerWire.Store(encoded, c), response, c);
             }
-            finally { Interlocked.Decrement(ref slot.Active); }
+            finally
+            {
+                Interlocked.Decrement(ref slot.Active);
+            }
         }, PdfCapability.RenderHtml);
     }
+
     private static void Acquire(Slot slot, PdfOperationContext c)
     {
         while (true)
@@ -283,6 +301,7 @@ public sealed class PdfRenderWorkerService
                 return;
         }
     }
+
     private static void ChargeJob(Slot slot, PdfOperationContext c)
     {
         while (true)
@@ -296,12 +315,14 @@ public sealed class PdfRenderWorkerService
         }
     }
 }
+
 internal static class WorkerWire
 {
     internal sealed class Message
     {
         internal byte[] Nonce = null!, Digest = null!, Payload = null!;
     }
+
     internal static byte[] Digest(byte[] bytes, PdfOperationContext c)
     {
         c.Checkpoint();
@@ -311,6 +332,7 @@ internal static class WorkerWire
         c.Checkpoint();
         return result;
     }
+
     internal static bool Equal(byte[] a, byte[] b)
     {
         if (a.Length != b.Length)
@@ -320,6 +342,7 @@ internal static class WorkerWire
             difference |= a[i] ^ b[i];
         return difference == 0;
     }
+
     internal static byte[] Encode(byte kind, PdfWorkerCredentials credentials, byte[] nonce, byte[] digest, byte[] payload, PdfOperationContext c)
     {
         c.Consume(PdfResourceKind.ExpandedBytes, payload.Length + credentials.Tenant.Length + 256L);
@@ -346,6 +369,7 @@ internal static class WorkerWire
         Buffer.BlockCopy(mac, 0, frame, at, mac.Length);
         return frame;
     }
+
     internal static string Tenant(byte[] bytes, PdfOperationContext c)
     {
         if (bytes.Length < 93 || bytes[0] != 70 || bytes[1] != 80 || bytes[2] != 87 || bytes[3] != 83 || bytes[4] != 1 || bytes[6] < 1 || bytes[6] > 64 || bytes.Length < 92 + bytes[6])
@@ -353,6 +377,7 @@ internal static class WorkerWire
         c.Consume(PdfResourceKind.ExpandedBytes, bytes[6] * 4L + 64);
         return Encoding.ASCII.GetString(bytes, 7, bytes[6]);
     }
+
     internal static Message Decode(byte[] bytes, byte kind, PdfWorkerCredentials credentials, PdfOperationContext c)
     {
         string tenant = Tenant(bytes, c);
@@ -365,7 +390,11 @@ internal static class WorkerWire
         if (!Equal(expected, actual))
             throw PdfWriterCore.Error(c, "Worker.Authentication", "The worker frame authentication failed.");
         int at = 7 + bytes[6];
-        var message = new Message { Nonce = new byte[16], Digest = new byte[32] };
+        var message = new Message
+        {
+            Nonce = new byte[16],
+            Digest = new byte[32]
+        };
         Buffer.BlockCopy(bytes, at, message.Nonce, 0, 16);
         at += 16;
         Buffer.BlockCopy(bytes, at, message.Digest, 0, 32);
@@ -379,6 +408,7 @@ internal static class WorkerWire
         Buffer.BlockCopy(bytes, at, message.Payload, 0, (int)count);
         return message;
     }
+
     internal static byte[] Capture(Stream input, int maximum, PdfOperationContext c)
     {
         c.Consume(PdfResourceKind.ExpandedBytes, 8192);
@@ -395,6 +425,7 @@ internal static class WorkerWire
                 throw PdfWriterCore.Error(c, "Worker.Extent", "The explicit worker frame/source ceiling was exceeded.");
             output.Write(chunk, 0, n);
         }
+
         var bytes = output.Finish();
         c.Consume(PdfResourceKind.ExpandedBytes, bytes.Length);
         var result = new byte[(int)bytes.Length];
@@ -408,13 +439,16 @@ internal static class WorkerWire
                 throw new EndOfStreamException();
             position += n;
         }
+
         return result;
     }
+
     internal static PdfByteStore Store(byte[] bytes, PdfOperationContext c)
     {
         using var input = new MemoryStream(bytes, false);
         return PdfByteStore.Read(input, c);
     }
+
     internal static void Copy(PdfByteStore bytes, Stream output, PdfOperationContext c)
     {
         c.Consume(PdfResourceKind.ExpandedBytes, 8192);

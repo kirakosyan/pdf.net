@@ -6,7 +6,6 @@ using Fluent.Pdf.Workers;
 using Xunit;
 
 namespace Fluent.Pdf.Contract.Tests;
-
 public sealed class RenderServiceTests
 {
     private static readonly byte[] Key = Enumerable.Range(0, 32).Select(i => (byte)i).ToArray();
@@ -32,6 +31,7 @@ public sealed class RenderServiceTests
         Assert.Equal("managed.authenticated-render-client", result.OperationReport.ProviderId);
         Assert.Throws<ObjectDisposedException>(() => renderer.Context!.Checkpoint());
     }
+
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
@@ -39,11 +39,16 @@ public sealed class RenderServiceTests
     {
         using var credentials = new PdfWorkerCredentials("tenant_a", Key);
         var renderer = new Renderer();
-        var transport = new Loopback(new(new[] { new PdfWorkerTenant(credentials) }, new(renderer))) { TamperRequest = request, TamperResponse = !request };
+        var transport = new Loopback(new(new[] { new PdfWorkerTenant(credentials) }, new(renderer)))
+        {
+            TamperRequest = request,
+            TamperResponse = !request
+        };
         using var input = Input();
         Assert.Equal("Worker.Authentication", Assert.Throws<PdfException>(() => new PdfRenderWorkerClient(credentials, transport).RenderHtml(input)).Diagnostic.Code);
         Assert.Equal(request ? 0 : 1, renderer.Calls);
     }
+
     [Fact]
     public void ReplayCannotSatisfyANewNonceAndCredentialsCannotCrossTenants()
     {
@@ -62,12 +67,16 @@ public sealed class RenderServiceTests
             Assert.Equal("Worker.Authentication", Assert.Throws<PdfException>(() => new PdfRenderWorkerClient(wrong, transport).RenderHtml(input)).Diagnostic.Code);
         Assert.Equal(1, renderer.Calls);
     }
+
     [Fact]
     public void OnlyExplicitTransientRetriesRepeatTheExactIdempotentRequest()
     {
         using var credentials = new PdfWorkerCredentials("tenant_a", Key);
         var renderer = new Renderer();
-        var transport = new Loopback(new(new[] { new PdfWorkerTenant(credentials) }, new(renderer))) { Transient = 1 };
+        var transport = new Loopback(new(new[] { new PdfWorkerTenant(credentials) }, new(renderer)))
+        {
+            Transient = 1
+        };
         using (var input = Input())
             _ = new PdfRenderWorkerClient(credentials, transport, 2).RenderHtml(input);
         Assert.Equal(2, transport.Calls);
@@ -78,6 +87,7 @@ public sealed class RenderServiceTests
             Assert.Equal("Worker.Transport", Assert.Throws<PdfException>(() => new PdfRenderWorkerClient(credentials, transport).RenderHtml(input)).Diagnostic.Code);
         Assert.Equal(3, transport.Calls);
     }
+
     [Fact]
     public void TenantJobAndInputQuotasRemainIndependent()
     {
@@ -89,19 +99,27 @@ public sealed class RenderServiceTests
             _ = new PdfRenderWorkerClient(a, transport).RenderHtml(input);
         using (var input = Input())
             Assert.Equal("Worker.TenantQuota", Assert.Throws<PdfException>(() => new PdfRenderWorkerClient(a, transport).RenderHtml(input)).Diagnostic.Code);
-        using (var input = Input(new string('a', 65)))
+        using (var input = Input(new string ('a', 65)))
             Assert.Equal("Worker.TenantQuota", Assert.Throws<PdfException>(() => new PdfRenderWorkerClient(b, transport).RenderHtml(input)).Diagnostic.Code);
         using (var input = Input())
             _ = new PdfRenderWorkerClient(b, transport).RenderHtml(input);
         Assert.Equal(2, renderer.Calls);
     }
+
     [Fact]
     public async Task ConcurrentTenantLimitRejectsUntilTheOriginalLeaseCompletes()
     {
         using var credentials = new PdfWorkerCredentials("tenant_a", Key);
         using var release = new ManualResetEventSlim();
         var started = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var renderer = new Renderer { Before = c => { started.TrySetResult(true); release.Wait(c.CancellationToken); } };
+        var renderer = new Renderer
+        {
+            Before = c =>
+            {
+                started.TrySetResult(true);
+                release.Wait(c.CancellationToken);
+            }
+        };
         var transport = new Loopback(new(new[] { new PdfWorkerTenant(credentials) }, new(renderer)));
         var client = new PdfRenderWorkerClient(credentials, transport);
         using var input = Input();
@@ -113,13 +131,18 @@ public sealed class RenderServiceTests
             using var second = Input();
             Assert.Equal("Worker.TenantQuota", Assert.Throws<PdfException>(() => client.RenderHtml(second)).Diagnostic.Code);
         }
-        finally { release.Set(); }
+        finally
+        {
+            release.Set();
+        }
+
         _ = await running;
         renderer.Before = null;
         using var third = Input();
         _ = client.RenderHtml(third);
         Assert.Equal(2, renderer.Calls);
     }
+
     [Fact]
     public void ResourceFailuresCancellationAndDisposedKeysCannotInvokeTheBackend()
     {
@@ -141,13 +164,18 @@ public sealed class RenderServiceTests
         Assert.Equal(0, transport.Calls);
         Assert.Equal(0, renderer.Calls);
     }
+
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
     public void BackendFailureAndInvalidPdfPublishNoAuthenticatedSuccess(bool throws)
     {
         using var credentials = new PdfWorkerCredentials("tenant_a", Key);
-        var renderer = new Renderer { Fail = throws, Invalid = !throws };
+        var renderer = new Renderer
+        {
+            Fail = throws,
+            Invalid = !throws
+        };
         var transport = new Loopback(new(new[] { new PdfWorkerTenant(credentials) }, new(renderer)));
         using var input = Input();
         var failure = Assert.Throws<PdfException>(() => new PdfRenderWorkerClient(credentials, transport).RenderHtml(input));
@@ -156,10 +184,14 @@ public sealed class RenderServiceTests
         Assert.DoesNotContain("secret-worker-model", failure.ToString());
         Assert.Equal(0, transport.LastResponseLength);
     }
+
     private sealed class Renderer : IPdfHtmlRenderer
     {
         internal bool Fail, Invalid;
-        internal int Calls; internal string? Markup; internal PdfOperationContext? Context; internal Action<PdfOperationContext>? Before;
+        internal int Calls;
+        internal string? Markup;
+        internal PdfOperationContext? Context;
+        internal Action<PdfOperationContext>? Before;
         private readonly byte[] _pdf = Create();
         private static byte[] Create()
         {
@@ -168,7 +200,9 @@ public sealed class RenderServiceTests
             document.Save(output);
             return output.ToArray();
         }
+
         public PdfProviderDescriptor Descriptor { get; } = new("fixture.worker-browser", "1", PdfCapability.RenderHtml);
+
         public void Render(PdfHtmlSource source, PdfHtmlOptions options, Stream output, PdfOperationContext context)
         {
             Interlocked.Increment(ref Calls);
@@ -184,14 +218,21 @@ public sealed class RenderServiceTests
                 output.WriteByte(1);
                 return;
             }
+
             output.Write(_pdf, 0, _pdf.Length);
         }
     }
+
     private sealed class Loopback : IPdfRenderWorkerTransport
     {
-        private readonly PdfRenderWorkerService _service; internal int Calls, Transient; internal bool TamperRequest, TamperResponse, Replay; internal Stream? Request, Response; internal byte[]? LastReply;
+        private readonly PdfRenderWorkerService _service;
+        internal int Calls, Transient;
+        internal bool TamperRequest, TamperResponse, Replay;
+        internal Stream? Request, Response;
+        internal byte[]? LastReply;
         internal long LastResponseLength;
-        internal readonly List<byte[]> Requests = new(); private readonly object _gate = new();
+        internal readonly List<byte[]> Requests = new();
+        private readonly object _gate = new();
         internal Loopback(PdfRenderWorkerService service) => _service = service;
         public void Exchange(Stream request, Stream response, PdfOperationContext context)
         {
@@ -208,11 +249,13 @@ public sealed class RenderServiceTests
                 Transient--;
                 throw new PdfWorkerTransientException();
             }
+
             if (Replay)
             {
                 response.Write(LastReply!, 0, LastReply!.Length);
                 return;
             }
+
             if (TamperRequest)
                 bytes[bytes.Length - 1] ^= 1;
             using var source = new MemoryStream(bytes);
@@ -221,7 +264,11 @@ public sealed class RenderServiceTests
             {
                 _service.Process(source, output, context.CancellationToken);
             }
-            finally { LastResponseLength = output.Length; }
+            finally
+            {
+                LastResponseLength = output.Length;
+            }
+
             var reply = output.ToArray();
             if (TamperResponse)
                 reply[reply.Length - 1] ^= 1;

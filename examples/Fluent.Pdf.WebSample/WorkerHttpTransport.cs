@@ -16,13 +16,17 @@ internal sealed class WorkerHttpTransport : IPdfRenderWorkerTransport, IDisposab
         _endpoint = endpoint;
         _client = new(new SocketsHttpHandler { AllowAutoRedirect = false, UseCookies = false, UseProxy = false, AutomaticDecompression = DecompressionMethods.None });
     }
+
     public void Exchange(Stream request, Stream response, PdfOperationContext context)
     {
         // Run asynchronous HTTP away from a potentially blocked UI synchronization context.
         Task.Run(async () =>
         {
             context.Checkpoint();
-            using var message = new HttpRequestMessage(HttpMethod.Post, _endpoint) { Content = new StreamContent(request) };
+            using var message = new HttpRequestMessage(HttpMethod.Post, _endpoint)
+            {
+                Content = new StreamContent(request)
+            };
             message.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.fluent-pdf.worker");
             using var result = await _client.SendAsync(message, HttpCompletionOption.ResponseHeadersRead, context.CancellationToken).ConfigureAwait(false);
             if ((int)result.StatusCode == 429 || (int)result.StatusCode == 502 || (int)result.StatusCode == 503 || (int)result.StatusCode == 504)
@@ -36,5 +40,6 @@ internal sealed class WorkerHttpTransport : IPdfRenderWorkerTransport, IDisposab
             context.Checkpoint();
         }).GetAwaiter().GetResult();
     }
+
     public void Dispose() => _client.Dispose();
 }

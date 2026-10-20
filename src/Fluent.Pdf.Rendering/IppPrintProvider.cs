@@ -2,13 +2,13 @@ using System.IO;
 using System.Text;
 
 namespace Fluent.Pdf.Rendering;
-
 /// <summary>Caller-owned authenticated IPP transport. It must bind the exact printer endpoint, enforce its network/credential policy and terminate on context cancellation/deadline. No redirects or implicit retries are permitted.</summary>
 public interface IPdfIppTransport
 {
     /// <summary>Exchanges exactly one application/ipp request/response over an explicit local or authenticated remote connection. Leases expire on return; SDK response storage is bounded.</summary>
     void Exchange(Uri printer, Stream request, Stream response, PdfOperationContext context);
 }
+
 /// <summary>Original IPP 2.0 PDF print-job adapter for explicit CUPS/IPP endpoints. No printer discovery, host process launch or runtime download occurs.</summary>
 public sealed class IppPrintProvider : IPdfPrintProvider
 {
@@ -17,6 +17,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
     public IppPrintProvider(IPdfIppTransport transport) => _transport = transport ?? throw new ArgumentNullException(nameof(transport));
     /// <summary>Gets the source IPP adapter identity, without hardware/platform qualification claims.</summary>
     public PdfProviderDescriptor Descriptor { get; } = new("managed.ipp-print", "1", PdfCapability.PrintDocument);
+
     /// <summary>Submits a PDF once with attribute fidelity required. A rejected/ambiguous response never triggers a retry.</summary>
     public PdfPrintJob Submit(Stream pdf, int pageCount, PdfPrintOptions options, PdfOperationContext context)
     {
@@ -26,6 +27,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
             throw new ArgumentOutOfRangeException(nameof(pageCount));
         return Exchange(options.Printer, 2, null, pdf, options, pageCount, context);
     }
+
     /// <summary>Queries one spool job; completion is only a spool observation.</summary>
     public PdfPrintJob GetStatus(string printer, int jobId, PdfOperationContext context) => Exchange(printer, 9, jobId, null, null, 0, context);
     /// <summary>Requests cancellation once. An acknowledgment cannot recall physical output.</summary>
@@ -64,6 +66,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
             I32(request, options.FirstPage);
             I32(request, options.LastPage == 0 ? pages : options.LastPage);
         }
+
         request.WriteByte(3);
         if (pdf != null)
         {
@@ -77,6 +80,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
                 request.Write(chunk, 0, n);
             }
         }
+
         var bytes = request.Finish();
         using var source = bytes.Open(0, bytes.Length);
         using var response = new PdfCodecBufferStream(c, 1048576);
@@ -86,16 +90,18 @@ public sealed class IppPrintProvider : IPdfPrintProvider
             using var output = new BorrowedStream(response, false, c);
             _transport.Exchange(endpoint, input, output, c);
         }
-        catch (Exception error) when (!(error is PdfException) && !(error is OperationCanceledException))
+        catch (Exception error)when (!(error is PdfException) && !(error is OperationCanceledException))
         {
             c.Checkpoint();
             throw PdfWriterCore.Error(c, "Print.Transport", "The explicitly configured IPP transport failed; inspect its credential-safe host diagnostics. Submission is never retried.");
         }
+
         c.Checkpoint();
         var result = Parse(response.Finish(), printer, jobId, operation == 8, c);
         c.Checkpoint();
         return result;
     }
+
     private static PdfPrintJob Parse(PdfByteStore bytes, string printer, int? expectedId, bool cancel, PdfOperationContext c)
     {
         long at = 0;
@@ -105,6 +111,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
                 throw PdfWriterCore.Error(c, "Print.Protocol", "The IPP response is truncated.");
             return bytes.At(at++);
         }
+
         int Short() => Byte() * 256 + Byte();
         int Int()
         {
@@ -113,6 +120,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
                 throw PdfWriterCore.Error(c, "Print.Protocol", "The IPP integer is outside this adapter's positive extent.");
             return (int)value;
         }
+
         if (Byte() != 2 || Byte() != 0)
             throw PdfWriterCore.Error(c, "Print.Protocol", "IPP 2.0 response is required.");
         int status = Short();
@@ -133,12 +141,14 @@ public sealed class IppPrintProvider : IPdfPrintProvider
                 ended = true;
                 break;
             }
+
             if (tag < 16)
             {
                 group = tag;
                 name = "";
                 continue;
             }
+
             int length = Short();
             if (length > 0)
             {
@@ -152,8 +162,12 @@ public sealed class IppPrintProvider : IPdfPrintProvider
                 {
                     name = new UTF8Encoding(false, true).GetString(raw);
                 }
-                catch (DecoderFallbackException) { throw PdfWriterCore.Error(c, "Print.Protocol", "An IPP attribute name has invalid UTF8."); }
+                catch (DecoderFallbackException)
+                {
+                    throw PdfWriterCore.Error(c, "Print.Protocol", "An IPP attribute name has invalid UTF8.");
+                }
             }
+
             if (name.Length == 0)
                 throw PdfWriterCore.Error(c, "Print.Protocol", "IPP continuation attributes need a preceding name.");
             int valueLength = Short();
@@ -179,6 +193,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
             else
                 at += valueLength;
         }
+
         if (!ended || at != bytes.Length || !expectedId.HasValue && id < 1 || expectedId.HasValue && hasId && id != expectedId.Value)
             throw PdfWriterCore.Error(c, "Print.Protocol", "A complete matching IPP job response is required.");
         var observed = cancel ? PdfPrintJobState.CancellationRequested : state switch
@@ -194,6 +209,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
         };
         return new(printer, expectedId ?? id, observed);
     }
+
     private static void Attribute(Stream output, byte tag, string name, string value, PdfOperationContext c)
     {
         c.Consume(PdfResourceKind.ExpandedBytes, value.Length * 4L + 32);
@@ -201,11 +217,13 @@ public sealed class IppPrintProvider : IPdfPrintProvider
         Header(output, tag, name, encoded.Length, c);
         output.Write(encoded, 0, encoded.Length);
     }
+
     private static void Integer(Stream output, byte tag, string name, int value, PdfOperationContext c)
     {
         Header(output, tag, name, 4, c);
         I32(output, value);
     }
+
     private static void Header(Stream output, byte tag, string name, int length, PdfOperationContext c)
     {
         c.Consume(PdfResourceKind.ExpandedBytes, name.Length + 32);
@@ -215,11 +233,13 @@ public sealed class IppPrintProvider : IPdfPrintProvider
         output.Write(encoded, 0, encoded.Length);
         U16(output, length);
     }
+
     private static void U16(Stream output, int value)
     {
         output.WriteByte((byte)(value >> 8));
         output.WriteByte((byte)value);
     }
+
     private static void I32(Stream output, int value)
     {
         for (int shift = 24; shift >= 0; shift -= 8)

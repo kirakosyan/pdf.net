@@ -489,4 +489,19 @@ Public Module ContractExample
     Public Function ImportRasterOfd(source As Stream, ByRef identity As Fluent.Pdf.Formats.PdfOfdIdentity) As PdfDocument
         Return Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(source, identity)
     End Function
+    Public Function WriteConversionMatrix(output As Stream) As PdfOperationReport
+        Return Fluent.Pdf.Formats.PdfConversions.WriteMatrix(output)
+    End Function
+    Public Function ConvertProfile(input As Stream, output As Stream, options As PdfProfileOptions, producer As IPdfProfileProducer, validator As IPdfProfileValidator) As PdfProfileValidation
+        Return PdfProfileConversions.Convert(input, output, options, producer, validator)
+    End Function
+    Public Function InspectEngineering(source As PdfDocumentSnapshot) As PdfEngineeringInspection
+        Return PdfEngineering.Inspect(source)
+    End Function
+    Public Function WriteInvoice(data As PdfInvoiceData, output As Stream, body As PdfFlowTextStyle, layout As PdfFlowOptions, providers As PdfProviderRegistry, producer As IPdfInvoiceProducer, archival As IPdfArchivalValidator, validator As IPdfInvoiceValidator) As PdfInvoiceValidation
+        Return PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator)
+    End Function
+    Public Function InspectPreflight(input As Stream) As PdfPreflightReport
+        Return PdfPreflight.Inspect(input)
+    End Function
 End Module

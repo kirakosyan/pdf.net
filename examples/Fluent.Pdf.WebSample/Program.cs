@@ -15,7 +15,11 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 var selfTest = args.Contains("--self-test", StringComparer.Ordinal);
 var builder = WebApplication.CreateBuilder(args.Where(a => a != "--self-test").ToArray());
-builder.WebHost.ConfigureKestrel(options => { options.Limits.MaxRequestBodySize = 8388864; options.Limits.MaxConcurrentConnections = 16; });
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 8388864;
+    options.Limits.MaxConcurrentConnections = 16;
+});
 builder.Services.AddControllersWithViews();
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
 await using var app = builder.Build();
@@ -23,16 +27,25 @@ if (selfTest)
 {
     // The view engines are real. This self-test checks their adapter boundary, not browser fidelity.
     var renderer = new BoundaryRenderer();
-    foreach (var kind in new[] { PdfViewKind.Razor, PdfViewKind.Mvc, PdfViewKind.Blazor })
+    foreach (var kind in new[]
+    {
+        PdfViewKind.Razor,
+        PdfViewKind.Mvc,
+        PdfViewKind.Blazor
+    }
+
+    )
     {
         using var scope = app.Services.CreateScope();
         using var document = await PdfWebViews.RenderAsync(new ApplicationView(scope.ServiceProvider, kind), new(renderer));
         if (document.Pages.Count != 1 || renderer.Markup == null || !renderer.Markup.Contains("Invoice &lt;25&gt;", StringComparison.Ordinal))
             throw new InvalidOperationException("Compiled view rendering/escaping failed.");
     }
+
     Console.WriteLine("Compiled Razor/MVC and Blazor static HTML adapter boundaries passed; browser/legacy/XAML qualification remains pending.");
     return;
 }
+
 app.MapGet("/pdf/{kind}", async (HttpContext request, string kind) =>
 {
     if (!Enum.TryParse<PdfViewKind>(kind, true, out var selected) || selected != PdfViewKind.Razor && selected != PdfViewKind.Mvc && selected != PdfViewKind.Blazor)
@@ -64,22 +77,32 @@ app.MapPost("/worker/static-html", async (HttpContext request) =>
                 return Results.StatusCode(413);
             await input.WriteAsync(chunk.AsMemory(0, n), request.RequestAborted);
         }
+
         input.Position = 0;
         using var response = new MemoryStream();
         // The service has its own authenticated tenant processing context after bounded HTTP ingress.
         await Task.Run(() => service.Process(input, response, request.RequestAborted), request.RequestAborted);
         return Results.Bytes(response.ToArray(), "application/vnd.fluent-pdf.worker");
     }
-    catch (PdfException error) { return Results.Problem(title: error.Diagnostic.Code, statusCode: error.Diagnostic.Code == "Worker.Authentication" ? 403 : error.Diagnostic.Code == "Worker.TenantQuota" ? 429 : 400); }
-    catch (OperationCanceledException) { return Results.StatusCode(408); }
-    catch (Exception) { return Results.Problem(title: "Worker.HostFailed", statusCode: 500); }
+    catch (PdfException error)
+    {
+        return Results.Problem(title: error.Diagnostic.Code, statusCode: error.Diagnostic.Code == "Worker.Authentication" ? 403 : error.Diagnostic.Code == "Worker.TenantQuota" ? 429 : 400);
+    }
+    catch (OperationCanceledException)
+    {
+        return Results.StatusCode(408);
+    }
+    catch (Exception)
+    {
+        return Results.Problem(title: "Worker.HostFailed", statusCode: 500);
+    }
 });
 await app.RunAsync();
-
 internal sealed class ApplicationView(IServiceProvider services, PdfViewKind kind) : IPdfViewHost
 {
     public PdfViewKind Kind => kind;
     public bool IsAvailable => true;
+
     public async Task RenderAsync(Stream output, PdfOperationContext context)
     {
         context.Checkpoint();
@@ -97,23 +120,33 @@ internal sealed class ApplicationView(IServiceProvider services, PdfViewKind kin
         }
         else
         {
-            var http = new DefaultHttpContext { RequestServices = services, RequestAborted = context.CancellationToken };
+            var http = new DefaultHttpContext
+            {
+                RequestServices = services,
+                RequestAborted = context.CancellationToken
+            };
             var action = new ActionContext(http, new Microsoft.AspNetCore.Routing.RouteData(), new ActionDescriptor());
             var view = services.GetRequiredService<ICompositeViewEngine>().GetView(null, "/Views/Report.cshtml", true);
             if (!view.Success)
                 throw new InvalidOperationException("The explicit compiled view is unavailable.");
             await using var writer = new StreamWriter(output, new UTF8Encoding(false), 4096, leaveOpen: true);
-            var data = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary()) { Model = "Invoice <25>" };
+            var data = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
+            {
+                Model = "Invoice <25>"
+            };
             var temp = new TempDataDictionary(http, services.GetRequiredService<ITempDataProvider>());
             await view.View.RenderAsync(new ViewContext(action, view.View, data, temp, writer, new HtmlHelperOptions()));
             await writer.FlushAsync(context.CancellationToken);
         }
+
         context.Checkpoint();
     }
 }
+
 internal sealed class BoundaryRenderer : IPdfHtmlRenderer
 {
     public PdfProviderDescriptor Descriptor { get; } = new("sample.view-boundary", "1", PdfCapability.RenderHtml);
+
     internal string? Markup;
     private readonly byte[] _pdf = Create();
     private static byte[] Create()
@@ -123,6 +156,7 @@ internal sealed class BoundaryRenderer : IPdfHtmlRenderer
         document.Save(output);
         return output.ToArray();
     }
+
     public void Render(PdfHtmlSource source, PdfHtmlOptions options, Stream output, PdfOperationContext context)
     {
         Markup = source.Markup;

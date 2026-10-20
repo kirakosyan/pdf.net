@@ -2,7 +2,6 @@ using System.IO;
 using System.Threading;
 
 namespace Fluent.Pdf;
-
 /// <summary>Explicit physical sheet duplex policy; no printer defaults are inferred.</summary>
 public enum PdfPrintDuplex
 {
@@ -13,6 +12,7 @@ public enum PdfPrintDuplex
     /// <summary>Bind along the short edge.</summary>
     ShortEdge
 }
+
 /// <summary>Explicit print scaling.</summary>
 public enum PdfPrintScaling
 {
@@ -21,6 +21,7 @@ public enum PdfPrintScaling
     /// <summary>Use physical PDF dimensions.</summary>
     None
 }
+
 /// <summary>Observed spool state. Submission does not prove physical printing.</summary>
 public enum PdfPrintJobState
 {
@@ -43,6 +44,7 @@ public enum PdfPrintJobState
     /// <summary>Cancellation acknowledged; physical output may already exist.</summary>
     CancellationRequested
 }
+
 /// <summary>Immutable explicit printer and sheet choices. Page numbers are one-based and inclusive.</summary>
 public sealed class PdfPrintOptions
 {
@@ -63,42 +65,23 @@ public sealed class PdfPrintOptions
         FirstPage = firstPage;
         LastPage = lastPage;
     }
+
     /// <summary>Gets the exact selected printer identity.</summary>
-    public string Printer
-    {
-        get;
-    }
+    public string Printer { get; }
     /// <summary>Gets the number of copies.</summary>
-    public int Copies
-    {
-        get;
-    }
+    public int Copies { get; }
     /// <summary>Gets duplex policy.</summary>
-    public PdfPrintDuplex Duplex
-    {
-        get;
-    }
+    public PdfPrintDuplex Duplex { get; }
     /// <summary>Gets physical scaling policy.</summary>
-    public PdfPrintScaling Scaling
-    {
-        get;
-    }
+    public PdfPrintScaling Scaling { get; }
     /// <summary>Gets logical pages per sheet.</summary>
-    public int NumberUp
-    {
-        get;
-    }
+    public int NumberUp { get; }
     /// <summary>Gets the first one-based page.</summary>
-    public int FirstPage
-    {
-        get;
-    }
+    public int FirstPage { get; }
     /// <summary>Gets the inclusive last page, or zero for the final page.</summary>
-    public int LastPage
-    {
-        get;
-    }
+    public int LastPage { get; }
 }
+
 /// <summary>One bounded spool observation. No output success is inferred from an accepted job.</summary>
 public sealed class PdfPrintJob
 {
@@ -113,22 +96,15 @@ public sealed class PdfPrintJob
         JobId = jobId;
         State = state;
     }
+
     /// <summary>Gets exact printer identity.</summary>
-    public string Printer
-    {
-        get;
-    }
+    public string Printer { get; }
     /// <summary>Gets spooler-assigned job identity.</summary>
-    public int JobId
-    {
-        get;
-    }
+    public int JobId { get; }
     /// <summary>Gets observed state.</summary>
-    public PdfPrintJobState State
-    {
-        get;
-    }
+    public PdfPrintJobState State { get; }
 }
+
 /// <summary>Explicit optional print-system boundary. Implementations must reject unsupported choices, observe the context and never retry submission implicitly.</summary>
 public interface IPdfPrintProvider : IPdfProvider
 {
@@ -139,6 +115,7 @@ public interface IPdfPrintProvider : IPdfProvider
     /// <summary>Requests cancellation of the exact job; does not promise that physical output can be recalled.</summary>
     PdfPrintJob Cancel(string printer, int jobId, PdfOperationContext context);
 }
+
 /// <summary>Explicit headless printing; inspection/opening never selects a printer or submits a job.</summary>
 public static class PdfPrinting
 {
@@ -167,6 +144,7 @@ public static class PdfPrinting
         }, PdfCapability.PrintDocument);
         return result!;
     }
+
     /// <summary>Queries only an exact caller-selected printer/job.</summary>
     public static PdfPrintJob GetStatus(string printer, int jobId, PdfProviderRegistry providers, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default) => Observe(printer, jobId, providers, false, policy, cancellationToken);
     /// <summary>Cancels only an exact caller-selected printer/job.</summary>
@@ -188,6 +166,7 @@ public static class PdfPrinting
         }, PdfCapability.PrintDocument);
         return result!;
     }
+
     private static void Validate(PdfPrintJob? job, string printer, int? jobId, PdfOperationContext c)
     {
         c.Checkpoint();

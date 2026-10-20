@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Fluent.Pdf.Html;
-
 /// <summary>Explicit trusted application-view boundary. These names do not assert that a host/framework is installed.</summary>
 public enum PdfViewKind
 {
@@ -19,22 +18,20 @@ public enum PdfViewKind
     /// <summary>A trusted Windows XAML print host yielding a complete PDF.</summary>
     Xaml
 }
+
 /// <summary>Caller-owned application rendering host. Only trusted application templates/components/models belong here; this boundary does not sandbox arbitrary template code.</summary>
 public interface IPdfViewHost
 {
     /// <summary>Gets the exact view family; XAML emits PDF, other families emit well-formed UTF8 HTML.</summary>
-    PdfViewKind Kind
-    {
-        get;
-    }
+    PdfViewKind Kind { get; }
+
     /// <summary>Reports whether the explicitly provisioned framework/dispatcher/compiled view is available.</summary>
-    bool IsAvailable
-    {
-        get;
-    }
+    bool IsAvailable { get; }
+
     /// <summary>Renders once into an expiring bounded output lease. Forward the shared cancellation token to request/dispatcher work and finish every write before returning.</summary>
     Task RenderAsync(Stream output, PdfOperationContext context);
 }
+
 /// <summary>Optional framework-neutral bridge from explicit trusted application views into the SDK's bounded HTML/PDF import. Core imports no web or XAML types.</summary>
 public static class PdfWebViews
 {
@@ -72,11 +69,12 @@ public static class PdfWebViews
                     using var output = new BorrowedStream(buffer, false, c);
                     await host.RenderAsync(output, c).ConfigureAwait(false);
                 }
-                catch (Exception error) when (!(error is PdfException) && !(error is OperationCanceledException))
+                catch (Exception error)when (!(error is PdfException) && !(error is OperationCanceledException))
                 {
                     c.Checkpoint();
                     throw PdfWriterCore.Error(c, "View.HostFailure", "The explicit trusted view host failed; model, credentials and provider exception text are withheld.");
                 }
+
                 c.Checkpoint();
                 var bytes = buffer.Finish();
                 if (bytes.Length == 0)
@@ -92,12 +90,17 @@ public static class PdfWebViews
                         throw PdfWriterCore.Error(c, "View.PageLimit", "Browser and adapter page ceilings must agree with the explicit maximum.");
                     document = PdfHtml.RenderCore(captured, providers, options, c);
                 }
+
                 c.Checkpoint();
             }, kind == PdfViewKind.Xaml ? PdfCapability.ReadDocument : PdfCapability.RenderHtml).ConfigureAwait(false);
             captured?.Complete(report);
             document!.SetCompositionReport(report);
             return document;
         }
-        catch { document?.Dispose(); throw; }
+        catch
+        {
+            document?.Dispose();
+            throw;
+        }
     }
 }

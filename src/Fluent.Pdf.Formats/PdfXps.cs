@@ -2,6 +2,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Xml.Linq;
+
 namespace Fluent.Pdf.Formats;
 /// <summary>Explicit fixed-layout namespace/package version.</summary>
 public enum PdfXpsFormat
@@ -11,6 +12,7 @@ public enum PdfXpsFormat
     /// <summary>OpenXPS1.0 package.</summary>
     OpenXps
 }
+
 /// <summary>Original bounded raster-page XPS/OpenXPS interchange. General glyph/vector/resource-dictionary and print-ticket processing remain separate mandatory work.</summary>
 public static class PdfXps
 {
@@ -18,36 +20,215 @@ public static class PdfXps
     /// <summary>Renders selected whole pages in explicit order and writes an original OPC fixed-layout package with canonical part names and lossless PNG brushes. Density is normalized to96-DPI image-space defaults; integral96-DPI page dimensions retain source points; fractional dimensions require explicit permissive loss authority.</summary>
     public static PdfOperationReport WriteRasterPages(PdfDocumentSnapshot source, IEnumerable<int> pages, Stream output, PdfXpsFormat format, string language, PdfRenderOptions rendering, PdfProviderRegistry providers, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
-        if (source == null || pages == null || rendering == null || providers == null) throw new ArgumentNullException(nameof(source)); FormatIo.Language(language); Namespace(format); if (output == null || !output.CanWrite) throw new ArgumentException("A writable borrowed XPS stream is required.", nameof(output));
+        if (source == null || pages == null || rendering == null || providers == null)
+            throw new ArgumentNullException(nameof(source));
+        FormatIo.Language(language);
+        Namespace(format);
+        if (output == null || !output.CanWrite)
+            throw new ArgumentException("A writable borrowed XPS stream is required.", nameof(output));
         return PdfFont.Run("ExportRasterXps", "managed.xps-raster", policy ?? source.Options.OperationPolicy, cancellationToken, c => FormatIo.Copy(Build(source, pages, format, language, rendering, providers, c), output, c), PdfCapability.RenderPages);
     }
+
     internal static PdfByteStore Build(PdfDocumentSnapshot source, IEnumerable<int> pages, PdfXpsFormat format, string language, PdfRenderOptions rendering, PdfProviderRegistry providers, PdfOperationContext c)
     {
-        _ = providers.GetRequired<IPdfPageRenderer>(PdfCapability.RenderPages); c.Consume(PdfResourceKind.Objects, 128); c.Consume(PdfResourceKind.ExpandedBytes, 32768); XNamespace ns = Namespace(format); var parts = new List<(string Name, byte[] Bytes, bool Stored)>(); void Add(string path, XElement root) => parts.Add((path, FormatIo.Raw(FormatIo.XmlBytes(root, c), c), false)); var types = new XElement(Ct + "Types", new XElement(Ct + "Default", new XAttribute("Extension", "rels"), new XAttribute("ContentType", "application/vnd.openxmlformats-package.relationships+xml")), new XElement(Ct + "Default", new XAttribute("Extension", "png"), new XAttribute("ContentType", "image/png")), Override("/FixedDocumentSequence.fdseq", Mime(format, "fixeddocumentsequence")), Override("/Documents/1/FixedDocument.fdoc", Mime(format, "fixeddocument"))); var document = new XElement(ns + "FixedDocument"); int count = 0;
-        foreach (int page in pages) { c.Checkpoint(); c.Consume(PdfResourceKind.Objects, 32); c.Consume(PdfResourceKind.ExpandedBytes, 16384); if (count == 512 || page < 0 || page >= source.Pages.Count) throw Error(c, "PageSelection", "Select 1–512 existing pages in explicit order."); var pageBounds = source.Pages[page].Geometry.DisplayBounds(); double unitsWidth = pageBounds.Width * 4 / 3, unitsHeight = pageBounds.Height * 4 / 3, w = Math.Ceiling(unitsWidth), h = Math.Ceiling(unitsHeight); if (Math.Abs(w - unitsWidth) > 1e-7 || Math.Abs(h - unitsHeight) > 1e-7) c.Report(new("Xps.PageGeometryQuantized", "The explicit raster interoperability profile rounds page dimensions upward to complete96-DPI units; physical geometry and image placement can change.", lossCategory: PdfLossCategory.FidelityReduction, pageIndex: page)); var frame = FormatRaster.Capture(source, page, rendering, providers, c); string n = (++count).ToString(CultureInfo.InvariantCulture), pagePath = "Documents/1/Pages/" + n + ".fpage", imagePath = "Documents/1/Resources/Images/" + n + ".png"; c.Report(new("Xps.RasterPage", "This explicit fixed page contains rendered pixels; editable glyphs/vectors and source semantics are not reconstructed.", severity: PdfDiagnosticSeverity.Information, pageIndex: page)); parts.Add((imagePath, FormatIo.Raw(frame.Png, c), false)); var brush = new XElement(ns + "ImageBrush", new XAttribute("ImageSource", "../Resources/Images/" + n + ".png"), new XAttribute("Viewbox", "0,0," + frame.Width.ToString(CultureInfo.InvariantCulture) + "," + frame.Height.ToString(CultureInfo.InvariantCulture)), new XAttribute("Viewport", "0,0," + FormatIo.N(w) + "," + FormatIo.N(h)), new XAttribute("ViewboxUnits", "Absolute"), new XAttribute("ViewportUnits", "Absolute"), new XAttribute("TileMode", "None"));
-            Add(pagePath, new XElement(ns + "FixedPage", new XAttribute("Width", FormatIo.N(w)), new XAttribute("Height", FormatIo.N(h)), new XAttribute(XNamespace.Xml + "lang", language), new XElement(ns + "Path", new XAttribute("Data", Rectangle(w, h)), new XElement(ns + "Path.Fill", brush)))); Add("Documents/1/Pages/_rels/" + n + ".fpage.rels", new XElement(Rel + "Relationships", Link("image1", ResourceRelation(format), "../Resources/Images/" + n + ".png"))); types.Add(Override("/" + pagePath, Mime(format, "fixedpage"))); document.Add(new XElement(ns + "PageContent", new XAttribute("Source", "Pages/" + n + ".fpage"))); }
-        if (count == 0) throw Error(c, "PageSelection", "A nonempty page selection is required."); Add("_rels/.rels", new XElement(Rel + "Relationships", Link("fixed", FixedRelation(format), "/FixedDocumentSequence.fdseq"))); Add("FixedDocumentSequence.fdseq", new XElement(ns + "FixedDocumentSequence", new XElement(ns + "DocumentReference", new XAttribute("Source", "Documents/1/FixedDocument.fdoc")))); Add("Documents/1/FixedDocument.fdoc", document); Add("[Content_Types].xml", types); return FormatPackage.Write(parts, c);
+        _ = providers.GetRequired<IPdfPageRenderer>(PdfCapability.RenderPages);
+        c.Consume(PdfResourceKind.Objects, 128);
+        c.Consume(PdfResourceKind.ExpandedBytes, 32768);
+        XNamespace ns = Namespace(format);
+        var parts = new List<(string Name, byte[] Bytes, bool Stored)>();
+        void Add(string path, XElement root) => parts.Add((path, FormatIo.Raw(FormatIo.XmlBytes(root, c), c), false));
+        var types = new XElement(Ct + "Types", new XElement(Ct + "Default", new XAttribute("Extension", "rels"), new XAttribute("ContentType", "application/vnd.openxmlformats-package.relationships+xml")), new XElement(Ct + "Default", new XAttribute("Extension", "png"), new XAttribute("ContentType", "image/png")), Override("/FixedDocumentSequence.fdseq", Mime(format, "fixeddocumentsequence")), Override("/Documents/1/FixedDocument.fdoc", Mime(format, "fixeddocument")));
+        var document = new XElement(ns + "FixedDocument");
+        int count = 0;
+        foreach (int page in pages)
+        {
+            c.Checkpoint();
+            c.Consume(PdfResourceKind.Objects, 32);
+            c.Consume(PdfResourceKind.ExpandedBytes, 16384);
+            if (count == 512 || page < 0 || page >= source.Pages.Count)
+                throw Error(c, "PageSelection", "Select 1–512 existing pages in explicit order.");
+            var pageBounds = source.Pages[page].Geometry.DisplayBounds();
+            double unitsWidth = pageBounds.Width * 4 / 3, unitsHeight = pageBounds.Height * 4 / 3, w = Math.Ceiling(unitsWidth), h = Math.Ceiling(unitsHeight);
+            if (Math.Abs(w - unitsWidth) > 1e-7 || Math.Abs(h - unitsHeight) > 1e-7)
+                c.Report(new("Xps.PageGeometryQuantized", "The explicit raster interoperability profile rounds page dimensions upward to complete96-DPI units; physical geometry and image placement can change.", lossCategory: PdfLossCategory.FidelityReduction, pageIndex: page));
+            var frame = FormatRaster.Capture(source, page, rendering, providers, c);
+            string n = (++count).ToString(CultureInfo.InvariantCulture), pagePath = "Documents/1/Pages/" + n + ".fpage", imagePath = "Documents/1/Resources/Images/" + n + ".png";
+            c.Report(new("Xps.RasterPage", "This explicit fixed page contains rendered pixels; editable glyphs/vectors and source semantics are not reconstructed.", severity: PdfDiagnosticSeverity.Information, pageIndex: page));
+            parts.Add((imagePath, FormatIo.Raw(frame.Png, c), false));
+            var brush = new XElement(ns + "ImageBrush", new XAttribute("ImageSource", "../Resources/Images/" + n + ".png"), new XAttribute("Viewbox", "0,0," + frame.Width.ToString(CultureInfo.InvariantCulture) + "," + frame.Height.ToString(CultureInfo.InvariantCulture)), new XAttribute("Viewport", "0,0," + FormatIo.N(w) + "," + FormatIo.N(h)), new XAttribute("ViewboxUnits", "Absolute"), new XAttribute("ViewportUnits", "Absolute"), new XAttribute("TileMode", "None"));
+            Add(pagePath, new XElement(ns + "FixedPage", new XAttribute("Width", FormatIo.N(w)), new XAttribute("Height", FormatIo.N(h)), new XAttribute(XNamespace.Xml + "lang", language), new XElement(ns + "Path", new XAttribute("Data", Rectangle(w, h)), new XElement(ns + "Path.Fill", brush))));
+            Add("Documents/1/Pages/_rels/" + n + ".fpage.rels", new XElement(Rel + "Relationships", Link("image1", ResourceRelation(format), "../Resources/Images/" + n + ".png")));
+            types.Add(Override("/" + pagePath, Mime(format, "fixedpage")));
+            document.Add(new XElement(ns + "PageContent", new XAttribute("Source", "Pages/" + n + ".fpage")));
+        }
+
+        if (count == 0)
+            throw Error(c, "PageSelection", "A nonempty page selection is required.");
+        Add("_rels/.rels", new XElement(Rel + "Relationships", Link("fixed", FixedRelation(format), "/FixedDocumentSequence.fdseq")));
+        Add("FixedDocumentSequence.fdseq", new XElement(ns + "FixedDocumentSequence", new XElement(ns + "DocumentReference", new XAttribute("Source", "Documents/1/FixedDocument.fdoc"))));
+        Add("Documents/1/FixedDocument.fdoc", document);
+        Add("[Content_Types].xml", types);
+        return FormatPackage.Write(parts, c);
     }
+
     /// <summary>Imports the documented PNG-brush full-page profile with exact namespace/version and page order. Print tickets, glyphs, vector/effect/resource-dictionary constructs, external URIs and cropped/partial image brushes reject before return.</summary>
     public static PdfDocument ImportRasterPages(Stream input, PdfXpsFormat format, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
-        XNamespace ns = Namespace(format); PdfDocument? result = null; var finish = new List<Action<PdfOperationReport>>(); try { var report = PdfFont.Run("ImportRasterXps", "managed.xps-raster", policy, cancellationToken, c => {
-            using var package = new FormatPackage(input, c); package.RequireOpcMain("FixedDocumentSequence.fdseq", Mime(format, "fixeddocumentsequence"), FixedRelation(format)); CheckRelationships(package, c); var sequence = package.Xml("FixedDocumentSequence.fdseq").Root; Check(sequence, ns + "FixedDocumentSequence", new[] { "" }, new[] { ns + "DocumentReference" }, c); result = Pdf.Create(new(maximumPages: 512, operationPolicy: c.Policy)); int count = 0, documents = 0;
-            foreach (var reference in sequence!.Elements()) { c.Checkpoint(); if (++documents > 64) throw Error(c, "DocumentLimit", "At most64 fixed documents are accepted."); Check(reference, ns + "DocumentReference", new[] { "Source" }, Array.Empty<XName>(), c); string documentPath = FormatPackage.Resolve("FixedDocumentSequence.fdseq", (string?)reference.Attribute("Source") ?? "", c); var document = package.Xml(documentPath).Root; Check(document, ns + "FixedDocument", new[] { "" }, new[] { ns + "PageContent" }, c);
-                foreach (var pageReference in document!.Elements()) { c.Checkpoint(); c.Consume(PdfResourceKind.Objects, 32); c.Consume(PdfResourceKind.ExpandedBytes, 16384); if (count == 512) throw Error(c, "PageSelection", "The fixed page inventory exceeds512."); Check(pageReference, ns + "PageContent", new[] { "Source", "Width", "Height" }, Array.Empty<XName>(), c); string pagePath = FormatPackage.Resolve(documentPath, (string?)pageReference.Attribute("Source") ?? "", c); var page = package.Xml(pagePath).Root; Check(page, ns + "FixedPage", new[] { "Width", "Height", "{http://www.w3.org/XML/1998/namespace}lang" }, new[] { ns + "Path" }, c); double width = Positive(page!, "Width", c), height = Positive(page!, "Height", c); if (width > 19200 || height > 19200 || page!.Elements().Count() != 1) throw Error(c, "Geometry", "One bounded full-page raster path is required."); if (pageReference.Attribute("Width") != null && Math.Abs(Positive(pageReference, "Width", c) - width) > 1e-7 || pageReference.Attribute("Height") != null && Math.Abs(Positive(pageReference, "Height", c) - height) > 1e-7) throw Error(c, "Geometry", "Page reference and fixed-page dimensions disagree.");
-                    var path = page.Elements().Single(); Check(path, ns + "Path", new[] { "Data" }, new[] { ns + "Path.Fill" }, c); if ((string?)path.Attribute("Data") != Rectangle(width, height) || path.Elements().Count() != 1) throw Error(c, "UnsupportedConstruct", "Only the explicit canonical page rectangle is supported."); var fill = path.Elements().Single(); Check(fill, ns + "Path.Fill", new[] { "" }, new[] { ns + "ImageBrush" }, c); if (fill.Elements().Count() != 1) throw Error(c, "UnsupportedConstruct", "One PNG brush is required."); var brush = fill.Elements().Single(); Check(brush, ns + "ImageBrush", new[] { "ImageSource", "Viewbox", "Viewport", "ViewboxUnits", "ViewportUnits", "TileMode" }, Array.Empty<XName>(), c); if ((string?)brush.Attribute("ViewboxUnits") != "Absolute" || (string?)brush.Attribute("ViewportUnits") != "Absolute" || (string?)brush.Attribute("TileMode") != "None") throw Error(c, "UnsupportedConstruct", "Absolute untiled image brushes are required."); PdfRect viewport = Rect((string?)brush.Attribute("Viewport") ?? "", c), viewbox = Rect((string?)brush.Attribute("Viewbox") ?? "", c); if (!Same(viewport, new(0, 0, width, height))) throw Error(c, "Geometry", "The raster brush must fill the fixed page."); string imagePath = FormatPackage.Resolve(pagePath, (string?)brush.Attribute("ImageSource") ?? "", c); string relationPath = pagePath.Substring(0, pagePath.LastIndexOf('/') + 1) + "_rels/" + pagePath.Substring(pagePath.LastIndexOf('/') + 1) + ".rels"; var imageReferences = package.Xml(relationPath).Root!.Elements(Rel + "Relationship").Where(e => (string?)e.Attribute("Type") == ResourceRelation(format) && FormatPackage.Resolve(pagePath, (string?)e.Attribute("Target") ?? "", c) == imagePath).ToArray(); if (imageReferences.Length != 1) throw Error(c, "Relationship", "Every raster source must have one exact required-resource relationship."); var bytes = package.Read(imagePath); var info = FormatRaster.PngInfo(bytes, c); if (!Same(viewbox, new(0, 0, info.Width * 96 / info.DpiX, info.Height * 96 / info.DpiY))) throw Error(c, "Geometry", "Partial/cropped PNG brush viewboxes require another profile."); var image = PdfImages.ReadCore(bytes, new(allowLosslessTranscode: true), c); FormatIo.Page(result, new(width * .75, height * .75), canvas => canvas.DrawImageAsset(image, new(0, 0, width * .75, height * .75), PdfCanvasFit.Stretch), c, finish); c.Report(new("Xps.ImportRasterPage", "A validated fixed-page PNG brush was imported; source fixed-layout semantics are not reconstructed.", severity: PdfDiagnosticSeverity.Information, pageIndex: count++)); }
-            }
-            if (count == 0) throw Error(c, "PageSelection", "A successful XPS import requires at least one supported page.");
-        }, PdfCapability.WriteDocument); foreach (var complete in finish) complete(report); result!.SetCompositionReport(report); return result; } catch { result?.Dispose(); throw; }
+        XNamespace ns = Namespace(format);
+        PdfDocument? result = null;
+        var finish = new List<Action<PdfOperationReport>>();
+        try
+        {
+            var report = PdfFont.Run("ImportRasterXps", "managed.xps-raster", policy, cancellationToken, c =>
+            {
+                using var package = new FormatPackage(input, c);
+                package.RequireOpcMain("FixedDocumentSequence.fdseq", Mime(format, "fixeddocumentsequence"), FixedRelation(format));
+                CheckRelationships(package, c);
+                var sequence = package.Xml("FixedDocumentSequence.fdseq").Root;
+                Check(sequence, ns + "FixedDocumentSequence", new[] { "" }, new[] { ns + "DocumentReference" }, c);
+                result = Pdf.Create(new(maximumPages: 512, operationPolicy: c.Policy));
+                int count = 0, documents = 0;
+                foreach (var reference in sequence!.Elements())
+                {
+                    c.Checkpoint();
+                    if (++documents > 64)
+                        throw Error(c, "DocumentLimit", "At most64 fixed documents are accepted.");
+                    Check(reference, ns + "DocumentReference", new[] { "Source" }, Array.Empty<XName>(), c);
+                    string documentPath = FormatPackage.Resolve("FixedDocumentSequence.fdseq", (string? )reference.Attribute("Source") ?? "", c);
+                    var document = package.Xml(documentPath).Root;
+                    Check(document, ns + "FixedDocument", new[] { "" }, new[] { ns + "PageContent" }, c);
+                    foreach (var pageReference in document!.Elements())
+                    {
+                        c.Checkpoint();
+                        c.Consume(PdfResourceKind.Objects, 32);
+                        c.Consume(PdfResourceKind.ExpandedBytes, 16384);
+                        if (count == 512)
+                            throw Error(c, "PageSelection", "The fixed page inventory exceeds512.");
+                        Check(pageReference, ns + "PageContent", new[] { "Source", "Width", "Height" }, Array.Empty<XName>(), c);
+                        string pagePath = FormatPackage.Resolve(documentPath, (string? )pageReference.Attribute("Source") ?? "", c);
+                        var page = package.Xml(pagePath).Root;
+                        Check(page, ns + "FixedPage", new[] { "Width", "Height", "{http://www.w3.org/XML/1998/namespace}lang" }, new[] { ns + "Path" }, c);
+                        double width = Positive(page!, "Width", c), height = Positive(page!, "Height", c);
+                        if (width > 19200 || height > 19200 || page!.Elements().Count() != 1)
+                            throw Error(c, "Geometry", "One bounded full-page raster path is required.");
+                        if (pageReference.Attribute("Width") != null && Math.Abs(Positive(pageReference, "Width", c) - width) > 1e-7 || pageReference.Attribute("Height") != null && Math.Abs(Positive(pageReference, "Height", c) - height) > 1e-7)
+                            throw Error(c, "Geometry", "Page reference and fixed-page dimensions disagree.");
+                        var path = page.Elements().Single();
+                        Check(path, ns + "Path", new[] { "Data" }, new[] { ns + "Path.Fill" }, c);
+                        if ((string? )path.Attribute("Data") != Rectangle(width, height) || path.Elements().Count() != 1)
+                            throw Error(c, "UnsupportedConstruct", "Only the explicit canonical page rectangle is supported.");
+                        var fill = path.Elements().Single();
+                        Check(fill, ns + "Path.Fill", new[] { "" }, new[] { ns + "ImageBrush" }, c);
+                        if (fill.Elements().Count() != 1)
+                            throw Error(c, "UnsupportedConstruct", "One PNG brush is required.");
+                        var brush = fill.Elements().Single();
+                        Check(brush, ns + "ImageBrush", new[] { "ImageSource", "Viewbox", "Viewport", "ViewboxUnits", "ViewportUnits", "TileMode" }, Array.Empty<XName>(), c);
+                        if ((string? )brush.Attribute("ViewboxUnits") != "Absolute" || (string? )brush.Attribute("ViewportUnits") != "Absolute" || (string? )brush.Attribute("TileMode") != "None")
+                            throw Error(c, "UnsupportedConstruct", "Absolute untiled image brushes are required.");
+                        PdfRect viewport = Rect((string? )brush.Attribute("Viewport") ?? "", c), viewbox = Rect((string? )brush.Attribute("Viewbox") ?? "", c);
+                        if (!Same(viewport, new(0, 0, width, height)))
+                            throw Error(c, "Geometry", "The raster brush must fill the fixed page.");
+                        string imagePath = FormatPackage.Resolve(pagePath, (string? )brush.Attribute("ImageSource") ?? "", c);
+                        string relationPath = pagePath.Substring(0, pagePath.LastIndexOf('/') + 1) + "_rels/" + pagePath.Substring(pagePath.LastIndexOf('/') + 1) + ".rels";
+                        var imageReferences = package.Xml(relationPath).Root!.Elements(Rel + "Relationship").Where(e => (string? )e.Attribute("Type") == ResourceRelation(format) && FormatPackage.Resolve(pagePath, (string? )e.Attribute("Target") ?? "", c) == imagePath).ToArray();
+                        if (imageReferences.Length != 1)
+                            throw Error(c, "Relationship", "Every raster source must have one exact required-resource relationship.");
+                        var bytes = package.Read(imagePath);
+                        var info = FormatRaster.PngInfo(bytes, c);
+                        if (!Same(viewbox, new(0, 0, info.Width * 96 / info.DpiX, info.Height * 96 / info.DpiY)))
+                            throw Error(c, "Geometry", "Partial/cropped PNG brush viewboxes require another profile.");
+                        var image = PdfImages.ReadCore(bytes, new(allowLosslessTranscode: true), c);
+                        FormatIo.Page(result, new(width * .75, height * .75), canvas => canvas.DrawImageAsset(image, new(0, 0, width * .75, height * .75), PdfCanvasFit.Stretch), c, finish);
+                        c.Report(new("Xps.ImportRasterPage", "A validated fixed-page PNG brush was imported; source fixed-layout semantics are not reconstructed.", severity: PdfDiagnosticSeverity.Information, pageIndex: count++));
+                    }
+                }
+
+                if (count == 0)
+                    throw Error(c, "PageSelection", "A successful XPS import requires at least one supported page.");
+            }, PdfCapability.WriteDocument);
+            foreach (var complete in finish)
+                complete(report);
+            result!.SetCompositionReport(report);
+            return result;
+        }
+        catch
+        {
+            result?.Dispose();
+            throw;
+        }
     }
+
     private static void CheckRelationships(FormatPackage package, PdfOperationContext c)
     {
-        var types = package.Xml("[Content_Types].xml"); if (types.Descendants().Any(e => ((string?)e.Attribute("ContentType"))?.IndexOf("printticket", StringComparison.OrdinalIgnoreCase) >= 0)) throw Error(c, "PrintTicketUnsupported", "Print tickets cannot be silently ignored by this profile.");
-        foreach (string name in package.Names.Where(n => n.EndsWith(".rels", StringComparison.Ordinal))) { c.Checkpoint(); c.Consume(PdfResourceKind.ExpandedBytes, 4096); string owner; if (name == "_rels/.rels") owner = ""; else if (name.StartsWith("_rels/", StringComparison.Ordinal)) owner = name.Substring(6, name.Length - 11); else { int marker = name.LastIndexOf("/_rels/", StringComparison.Ordinal); if (marker < 0) throw Error(c, "Relationship", "A canonical OPC relationship part is required."); owner = name.Substring(0, marker + 1) + name.Substring(marker + 7, name.Length - marker - 12); } var root = package.Xml(name).Root; Check(root, Rel + "Relationships", new[] { "" }, new[] { Rel + "Relationship" }, c); var ids = new HashSet<string>(StringComparer.Ordinal); foreach (var item in root!.Elements()) { Check(item, Rel + "Relationship", new[] { "Id", "Type", "Target", "TargetMode" }, Array.Empty<XName>(), c); string id = (string?)item.Attribute("Id") ?? "", type = (string?)item.Attribute("Type") ?? ""; if (id.Length == 0 || id.Length > 256 || !ids.Add(id)) throw Error(c, "Relationship", "Relationship IDs must be unique and bounded."); if (((string?)item.Attribute("TargetMode")) is string mode && mode != "Internal") throw Error(c, "ExternalResource", "External XPS resource references reject."); if (type.IndexOf("printticket", StringComparison.OrdinalIgnoreCase) >= 0) throw Error(c, "PrintTicketUnsupported", "Print tickets require a separately qualified profile."); string target = FormatPackage.Resolve(owner, (string?)item.Attribute("Target") ?? "", c); if (!package.Has(target)) throw Error(c, "Relationship", "A declared internal package relationship is missing its target."); } }
+        var types = package.Xml("[Content_Types].xml");
+        if (types.Descendants().Any(e => ((string? )e.Attribute("ContentType"))?.IndexOf("printticket", StringComparison.OrdinalIgnoreCase) >= 0))
+            throw Error(c, "PrintTicketUnsupported", "Print tickets cannot be silently ignored by this profile.");
+        foreach (string name in package.Names.Where(n => n.EndsWith(".rels", StringComparison.Ordinal)))
+        {
+            c.Checkpoint();
+            c.Consume(PdfResourceKind.ExpandedBytes, 4096);
+            string owner;
+            if (name == "_rels/.rels")
+                owner = "";
+            else if (name.StartsWith("_rels/", StringComparison.Ordinal))
+                owner = name.Substring(6, name.Length - 11);
+            else
+            {
+                int marker = name.LastIndexOf("/_rels/", StringComparison.Ordinal);
+                if (marker < 0)
+                    throw Error(c, "Relationship", "A canonical OPC relationship part is required.");
+                owner = name.Substring(0, marker + 1) + name.Substring(marker + 7, name.Length - marker - 12);
+            }
+
+            var root = package.Xml(name).Root;
+            Check(root, Rel + "Relationships", new[] { "" }, new[] { Rel + "Relationship" }, c);
+            var ids = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var item in root!.Elements())
+            {
+                Check(item, Rel + "Relationship", new[] { "Id", "Type", "Target", "TargetMode" }, Array.Empty<XName>(), c);
+                string id = (string? )item.Attribute("Id") ?? "", type = (string? )item.Attribute("Type") ?? "";
+                if (id.Length == 0 || id.Length > 256 || !ids.Add(id))
+                    throw Error(c, "Relationship", "Relationship IDs must be unique and bounded.");
+                if (((string? )item.Attribute("TargetMode"))is string mode && mode != "Internal")
+                    throw Error(c, "ExternalResource", "External XPS resource references reject.");
+                if (type.IndexOf("printticket", StringComparison.OrdinalIgnoreCase) >= 0)
+                    throw Error(c, "PrintTicketUnsupported", "Print tickets require a separately qualified profile.");
+                string target = FormatPackage.Resolve(owner, (string? )item.Attribute("Target") ?? "", c);
+                if (!package.Has(target))
+                    throw Error(c, "Relationship", "A declared internal package relationship is missing its target.");
+            }
+        }
     }
-    private static void Check(XElement? element, XName name, string[] attributes, XName[] children, PdfOperationContext c) { c.Checkpoint(); if (element?.Name != name || element.Attributes().Any(a => !a.IsNamespaceDeclaration && !attributes.Contains(a.Name.ToString())) || element.Elements().Any(e => !children.Contains(e.Name)) || element.Nodes().OfType<XText>().Any(t => !string.IsNullOrWhiteSpace(t.Value))) throw Error(c, "UnsupportedConstruct", "The fixed-layout source contains unsupported attributes, elements or text."); }
-    private static double Positive(XElement element, string name, PdfOperationContext c) { double value = FormatIo.Number((string?)element.Attribute(name) ?? "", c); if (value <= 0) throw Error(c, "Geometry", "A positive fixed-page dimension is required."); return value; }
-    private static PdfRect Rect(string value, PdfOperationContext c) { if (value.Length > 1024) throw Error(c, "Geometry", "A bounded brush rectangle is required."); c.Consume(PdfResourceKind.ExpandedBytes, 4096); var parts = value.Split(','); if (parts.Length != 4) throw Error(c, "Geometry", "Four absolute brush coordinates are required."); var n = parts.Select(p => FormatIo.Number(p, c)).ToArray(); if (n[2] <= 0 || n[3] <= 0 || n.Any(v => Math.Abs(v) > 1e12)) throw Error(c, "Geometry", "Positive brush extents are required."); return new(n[0], n[1], n[2], n[3]); }
+
+    private static void Check(XElement? element, XName name, string[] attributes, XName[] children, PdfOperationContext c)
+    {
+        c.Checkpoint();
+        if (element?.Name != name || element.Attributes().Any(a => !a.IsNamespaceDeclaration && !attributes.Contains(a.Name.ToString())) || element.Elements().Any(e => !children.Contains(e.Name)) || element.Nodes().OfType<XText>().Any(t => !string.IsNullOrWhiteSpace(t.Value)))
+            throw Error(c, "UnsupportedConstruct", "The fixed-layout source contains unsupported attributes, elements or text.");
+    }
+
+    private static double Positive(XElement element, string name, PdfOperationContext c)
+    {
+        double value = FormatIo.Number((string? )element.Attribute(name) ?? "", c);
+        if (value <= 0)
+            throw Error(c, "Geometry", "A positive fixed-page dimension is required.");
+        return value;
+    }
+
+    private static PdfRect Rect(string value, PdfOperationContext c)
+    {
+        if (value.Length > 1024)
+            throw Error(c, "Geometry", "A bounded brush rectangle is required.");
+        c.Consume(PdfResourceKind.ExpandedBytes, 4096);
+        var parts = value.Split(',');
+        if (parts.Length != 4)
+            throw Error(c, "Geometry", "Four absolute brush coordinates are required.");
+        var n = parts.Select(p => FormatIo.Number(p, c)).ToArray();
+        if (n[2] <= 0 || n[3] <= 0 || n.Any(v => Math.Abs(v) > 1e12))
+            throw Error(c, "Geometry", "Positive brush extents are required.");
+        return new(n[0], n[1], n[2], n[3]);
+    }
+
     private static bool Same(PdfRect a, PdfRect b) => Math.Abs(a.X - b.X) < 1e-7 && Math.Abs(a.Y - b.Y) < 1e-7 && Math.Abs(a.Width - b.Width) < 1e-7 && Math.Abs(a.Height - b.Height) < 1e-7;
     private static string Rectangle(double w, double h) => "M 0,0 L " + FormatIo.N(w) + ",0 L " + FormatIo.N(w) + "," + FormatIo.N(h) + " L 0," + FormatIo.N(h) + " Z";
     private static XNamespace Namespace(PdfXpsFormat format) => format == PdfXpsFormat.Xps ? "http://schemas.microsoft.com/xps/2005/06" : format == PdfXpsFormat.OpenXps ? "http://schemas.openxps.org/oxps/v1.0" : throw new ArgumentOutOfRangeException(nameof(format));
