@@ -59,6 +59,8 @@ internal static class PdfImagePng
                 throw Error("Image.PngCrc", "A PNG chunk has an invalid CRC.");
             if (type < 0 && name != "IHDR")
                 throw Error("Image.PngOrder", "IHDR must be the first PNG chunk.");
+            if (name == "acTL" || name == "fcTL" || name == "fdAT")
+                throw Error("Image.PngAnimation", "Animated PNG requires a separately supported complete-frame decoder profile.");
             bool singleton = name != "IDAT" && new[]
             {
                 "IHDR",

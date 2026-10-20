@@ -183,3 +183,5 @@ Queue issues #51–#60 now have documented source profiles: [signature verificat
 `Fluent.Pdf.Html.PdfWebViews.RenderAsync` captures explicit trusted view hosts and imports bounded HTML/PDF under one operation. Core references no web/UI framework types. See [application views](web-views.md).
 
 `PdfRenderWorkerClient`/`PdfRenderWorkerService` expose an explicit authenticated static-render profile; caller-owned credentials/transports and service tenant quotas remain separate from engine/host qualification. See [render service](render-service.md).
+
+`PdfRasterDocuments` composes explicitly selected file frames; `IPdfRasterDocumentDecoder` is an optional declared complete-frame RGBA8 boundary. Managed PNG/JPEG reuse the original file profiles. See [raster import](raster-import.md).

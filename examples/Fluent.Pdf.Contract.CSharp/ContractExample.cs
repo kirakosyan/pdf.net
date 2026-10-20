@@ -355,4 +355,6 @@ public static class ContractExample
 
     public static Fluent.Pdf.Workers.PdfWorkerPdf RenderWorker(Stream markup, Fluent.Pdf.Workers.PdfRenderWorkerClient client) => client.RenderHtml(markup);
 
+    public static PdfDocument ImportRaster(IEnumerable<PdfRasterInput> inputs) => PdfRasterDocuments.Create(inputs);
+
 }

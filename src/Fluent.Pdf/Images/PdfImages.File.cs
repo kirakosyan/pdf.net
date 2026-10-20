@@ -15,16 +15,21 @@ public static partial class PdfImages
         {
             using var lease = new BorrowedStream(input, true, context);
             var bytes = PdfByteStore.Read(lease, context);
-            if (bytes.Length >= 8 && bytes.At(0) == 137 && bytes.At(1) == 80 && bytes.At(2) == 78 && bytes.At(3) == 71 && bytes.At(4) == 13 && bytes.At(5) == 10 && bytes.At(6) == 26 && bytes.At(7) == 10)
-                result = PdfImagePng.Read(bytes, options, context);
-            else if (bytes.Length >= 4 && bytes.At(0) == 255 && bytes.At(1) == 216)
-                result = PdfImageJpeg.Read(bytes, options, context);
-            else
-                throw Error(context, "Image.FileFormat", "The managed image-file service requires PNG or JPEG; other formats need an explicit adapter.");
+            result = ReadCore(bytes, options, context);
         }, PdfCapability.ImageCodecs);
         Complete(result!, report);
         if (result!.SoftMask != null)
             Complete(result.SoftMask, report);
         return result;
     }
+    internal static PdfImageAsset ReadCore(PdfByteStore bytes, PdfImageReadOptions options, PdfOperationContext context)
+    {
+        if (bytes.Length >= 8 && bytes.At(0) == 137 && bytes.At(1) == 80 && bytes.At(2) == 78 && bytes.At(3) == 71 && bytes.At(4) == 13 && bytes.At(5) == 10 && bytes.At(6) == 26 && bytes.At(7) == 10)
+            return PdfImagePng.Read(bytes, options, context);
+        else if (bytes.Length >= 4 && bytes.At(0) == 255 && bytes.At(1) == 216)
+            return PdfImageJpeg.Read(bytes, options, context);
+        else
+            throw Error(context, "Image.FileFormat", "The managed image-file service requires PNG or JPEG; other formats need an explicit adapter.");
+    }
+
 }

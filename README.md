@@ -106,3 +106,5 @@ Explicit [printing](docs/printing.md) now has a bounded orchestration/IPP protoc
 Optional [trusted application views](docs/web-views.md) now share HTML/PDF import budgets, with a real compiled Razor/MVC/Blazor source sample. Complete legacy/XAML/browser and production qualification remain pending.
 
 An original [authenticated render-worker protocol](docs/render-service.md) now has explicit tenants, bounded static-render retries/quotas and hosted/container source examples. Complete browser/native/host/container and production qualification remain mandatory.
+
+Original [raster-document import](docs/raster-import.md) now composes managed PNG/JPEG and explicitly supplied frame codecs with exact selection and preserved density/color/alpha. Complete codec/host and production qualification remain pending.

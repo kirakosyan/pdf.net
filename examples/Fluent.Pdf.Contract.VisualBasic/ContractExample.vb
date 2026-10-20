@@ -453,4 +453,7 @@ Public Module ContractExample
     Public Function RenderWorker(markup As Stream, client As Fluent.Pdf.Workers.PdfRenderWorkerClient) As Fluent.Pdf.Workers.PdfWorkerPdf
         Return client.RenderHtml(markup)
     End Function
+    Public Function ImportRaster(inputs As System.Collections.Generic.IEnumerable(Of PdfRasterInput)) As PdfDocument
+        Return PdfRasterDocuments.Create(inputs)
+    End Function
 End Module
