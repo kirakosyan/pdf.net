@@ -360,4 +360,5 @@ public static class ContractExample
     public static PdfDocument ImportSvg(Stream source) => Fluent.Pdf.Formats.PdfSvg.Import(source);
 
     public static Fluent.Pdf.Formats.PdfSheetData ReadSpreadsheet(Stream input, Fluent.Pdf.Formats.PdfSpreadsheetFormat format, string name) => Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(input, format, name);
+    public static PdfDocument ImportRasterSlides(Stream source) => Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(source);
 }

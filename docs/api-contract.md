@@ -189,3 +189,5 @@ Queue issues #51–#60 now have documented source profiles: [signature verificat
 Optional `Fluent.Pdf.Formats.PdfSvg` imports a closed static SVG matrix and exports exact supported opaque vectors/Forms. It rejects unsupported content before staged/atomic output; see [SVG](svg.md).
 
 Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](spreadsheets.md).
+
+Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets. Full coverage and production qualification remain mandatory; see [presentations](presentations.md).

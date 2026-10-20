@@ -38,6 +38,8 @@ internal static class FormatIo
         }
         catch (XmlException) { c.Checkpoint(); throw Error(c, "Xml", "Malformed XML, DTDs and external entities are rejected."); }
     }
+    internal static PdfByteStore XmlBytes(XElement root, PdfOperationContext c) { using var output = new PdfCodecBufferStream(c, 16777216); using (var writer = Writer(output)) { root.WriteTo(writer); writer.Flush(); } return output.Finish(); }
+    internal static byte[] Raw(PdfByteStore bytes, PdfOperationContext c) { c.Consume(PdfResourceKind.ExpandedBytes, bytes.Length); var result = new byte[(int)bytes.Length]; using var input = bytes.Open(0, bytes.Length); Exact(input, result, c); return result; }
     internal static XmlWriter Writer(Stream output) => XmlWriter.Create(output, new XmlWriterSettings { Encoding = new UTF8Encoding(false, true), CloseOutput = false, OmitXmlDeclaration = false, Indent = false });
     internal static double Number(string value, PdfOperationContext c)
     {

@@ -3,6 +3,7 @@ Fluent.Pdf.Formats.PdfFormatTextOptions
 Fluent.Pdf.Formats.PdfFormatTextOptions.Body.get -> Fluent.Pdf.PdfFlowTextStyle!
 Fluent.Pdf.Formats.PdfFormatTextOptions.Layout.get -> Fluent.Pdf.PdfFlowOptions!
 Fluent.Pdf.Formats.PdfFormatTextOptions.PdfFormatTextOptions(Fluent.Pdf.PdfFlowTextStyle! body, Fluent.Pdf.PdfFlowOptions? layout = null) -> void
+Fluent.Pdf.Formats.PdfPresentations
 Fluent.Pdf.Formats.PdfSheetCell
 Fluent.Pdf.Formats.PdfSheetCell.Column.get -> int
 Fluent.Pdf.Formats.PdfSheetCell.ColumnSpan.get -> int
@@ -39,6 +40,8 @@ Fluent.Pdf.Formats.PdfSvgImportOptions.Fonts.get -> Fluent.Pdf.PdfFontFallback?
 Fluent.Pdf.Formats.PdfSvgImportOptions.Images.get -> Fluent.Pdf.PdfImageReadOptions!
 Fluent.Pdf.Formats.PdfSvgImportOptions.PdfSvgImportOptions(Fluent.Pdf.PdfFontFallback? fonts = null, Fluent.Pdf.PdfTextOptions? text = null, bool allowDataImages = false, Fluent.Pdf.PdfImageReadOptions? images = null) -> void
 Fluent.Pdf.Formats.PdfSvgImportOptions.Text.get -> Fluent.Pdf.PdfTextOptions!
+static Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.Formats.PdfPresentations.WriteRasterSlides(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, Fluent.Pdf.PdfPageSize slideSize, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfSpreadsheets.FromTable(Fluent.Pdf.PdfExtractedTable! table, string! sheetName, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfSheetData!
 static Fluent.Pdf.Formats.PdfSpreadsheets.ImportData(Fluent.Pdf.Formats.PdfSheetData! sheet, int firstRow, int firstColumn, int rows, int columns, Fluent.Pdf.Formats.PdfFormatTextOptions! text, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(System.IO.Stream! input, Fluent.Pdf.Formats.PdfSpreadsheetFormat format, string! sheetName, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfSheetData!

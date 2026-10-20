@@ -2352,7 +2352,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/presentations.md",
+        "implemented": [
+          "Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets."
+        ],
+        "pending": [
+          "Editable object, font, master, animation and full presentation reconstruction",
+          "Independent complete fidelity, host and package qualification"
+        ]
+      }
     },
     {
       "id": "FP-056",

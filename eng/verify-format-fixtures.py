@@ -67,6 +67,26 @@ def spreadsheet_data(root):
             "artifacts": [{"file": name, "sha256": digest(root / name)} for name in ["table.xlsx", "table.ods", "table.xml"]]}
 
 
+def presentation_data(root):
+    from pptx import Presentation
+    import pptx
+    deck = Presentation(root / "raster-slides.pptx")
+    require((deck.slide_width, deck.slide_height) == (914400, 914400), "PPTX common slide dimensions changed")
+    require(len(deck.slides) == 3, "PPTX selected page count changed")
+    for index, slide in enumerate(deck.slides):
+        require(len(slide.shapes) == 1, "Raster profile emitted unexpected editable objects")
+        picture = slide.shapes[0]
+        image = Image.open(io.BytesIO(picture.image.blob))
+        expected = 0 if index == 1 else 40
+        require(image.getpixel((0, 0)) == (expected, 0, 0, 255), "PPTX page ordering or lossless RGB samples changed")
+        require(picture.width == 914400 and picture.height == (457200 if index == 1 else 914400), "PPTX contain aspect changed")
+        require(picture.top == (228600 if index == 1 else 0), "PPTX contain position changed")
+    with fitz.open(root / "raster-slides.pdf") as pdf:
+        require(pdf.page_count == 3 and all(page.rect.width == 72 and page.rect.height == 72 for page in pdf), "PPTX import changed page order/geometry")
+    return {"validator": "python-pptx", "version": pptx.__version__, "orderedRasterGeometryAndPixels": "passed", "productionQualified": False,
+            "artifacts": [{"file": name, "sha256": digest(root / name)} for name in ["raster-slides.pptx", "raster-slides.pdf"]]}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("fixture_directory", type=Path)
@@ -99,6 +119,8 @@ def main():
               "artifacts": [{"file": name, "sha256": digest(path)} for name, path in paths.items()], "productionQualified": False}
     if (root / "table.xlsx").exists():
         report["spreadsheets"] = spreadsheet_data(root)
+    if (root / "raster-slides.pptx").exists():
+        report["presentations"] = presentation_data(root)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + "\n")
     print("Independent SVG vectors/clips/styles and PDF round-trip fixture checks passed.")

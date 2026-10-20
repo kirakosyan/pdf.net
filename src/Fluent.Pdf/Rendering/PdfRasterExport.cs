@@ -74,7 +74,7 @@ public static class PdfRasterExport
         else
             _ = providers.GetRequired<IPdfColorManagedPageRenderer>(PdfCapability.RenderColorManaged);
     }
-    private static PdfByteStore Build(PdfDocumentSnapshot source, IEnumerable<int> pages, PdfRasterExportOptions options, PdfProviderRegistry providers, PdfOperationContext c)
+    internal static PdfByteStore Build(PdfDocumentSnapshot source, IEnumerable<int> pages, PdfRasterExportOptions options, PdfProviderRegistry providers, PdfOperationContext c)
     {
         using var graph = new PdfGraphEdit(source, new(allowSignatureInvalidation: true), c);
         var selected = new List<int>();

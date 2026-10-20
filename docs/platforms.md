@@ -115,3 +115,5 @@ The authenticated worker protocol spans the four managed targets. The hosted HTT
 The optional Formats assembly targets net472/netstandard2.0/net8.0/net10.0 with managed format parsers and no GUI/native/browser dependency. Providers/fonts remain explicit where needed; compiling these assets does not qualify format/runtime behavior.
 
 Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](spreadsheets.md).
+
+Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets. Full coverage and production qualification remain mandatory; see [presentations](presentations.md).

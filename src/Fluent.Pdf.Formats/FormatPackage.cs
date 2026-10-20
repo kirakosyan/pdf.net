@@ -19,10 +19,15 @@ internal sealed class FormatPackage : IDisposable
                 if (!expected.TryGetValue(entry.FullName, out uint crc) || _entries.ContainsKey(entry.FullName)) throw FormatIo.Error(c, "PackageIdentity", "Ambiguous ZIP part identities reject."); _entries.Add(entry.FullName, (entry, crc));
             }
         }
+        catch (InvalidDataException) { _source.Dispose(); c.Checkpoint(); throw FormatIo.Error(c, "PackageEncoding", "Unsupported or malformed archive encoding rejects."); }
         catch { _source.Dispose(); throw; }
     }
     internal bool Has(string name) => _entries.ContainsKey(name);
     internal PdfByteStore Read(string name)
+    {
+        try { return ReadCore(name); } catch (InvalidDataException) { _c.Checkpoint(); throw FormatIo.Error(_c, "PackageEncoding", "Malformed compressed package data rejects."); }
+    }
+    private PdfByteStore ReadCore(string name)
     {
         if (!_entries.TryGetValue(name, out var captured)) throw FormatIo.Error(_c, "PackageReference", "A declared package part is missing.");
         using var input = captured.Entry.Open(); var bytes = FormatIo.Capture(input, _c, 16777216); uint crc = 0xffffffff;
@@ -41,11 +46,12 @@ internal sealed class FormatPackage : IDisposable
     }
     internal static PdfByteStore Write(IEnumerable<(string Name, byte[] Bytes, bool Stored)> entries, PdfOperationContext c)
     {
-        using var output = new PdfCodecBufferStream(c, 67108864); var names = new HashSet<string>(StringComparer.Ordinal); int count = 0;
+        using var output = new PdfCodecBufferStream(c, 67108864); var names = new HashSet<string>(StringComparer.Ordinal); int count = 0; long expanded = 0;
         using (var zip = new ZipArchive(output, ZipArchiveMode.Create, leaveOpen: true))
         foreach (var item in entries)
         {
             c.Checkpoint(); c.Consume(PdfResourceKind.Objects, 1); c.Consume(PdfResourceKind.ExpandedBytes, item.Name.Length * 4L + 1024);
+            if (item.Bytes.Length > 16777216 || (expanded += item.Bytes.Length) > 67108864) throw FormatIo.Error(c, "PackageLimits", "Package part/total expansion exceeds the declared profile.");
             if (++count > 4096 || !names.Add(item.Name)) throw FormatIo.Error(c, "PackageIdentity", "A finite unique package inventory is required."); Name(item.Name, c);
             var entry = zip.CreateEntry(item.Name, item.Stored ? CompressionLevel.NoCompression : CompressionLevel.Optimal); entry.LastWriteTime = new DateTimeOffset(1980, 1, 1, 0, 0, 0, TimeSpan.Zero);
             using var target = entry.Open(); for (int at = 0; at < item.Bytes.Length;) { c.Checkpoint(); int n = Math.Min(8192, item.Bytes.Length - at); target.Write(item.Bytes, at, n); at += n; }

@@ -462,4 +462,7 @@ Public Module ContractExample
     Public Function ReadSpreadsheet(input As Stream, format As Fluent.Pdf.Formats.PdfSpreadsheetFormat, name As String) As Fluent.Pdf.Formats.PdfSheetData
         Return Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(input, format, name)
     End Function
+    Public Function ImportRasterSlides(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(source)
+    End Function
 End Module

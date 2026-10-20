@@ -100,3 +100,5 @@ Raster-document import now has a shared-context managed PNG/JPEG and explicit op
 The optional Formats assembly contains original bounded static SVG import and opaque vector/Form SVG export. Unsupported paths/styles/text/image/effects reject without raster substitution; explicit-font text and authorized local image import share the context. Complete format/host/package qualification remains mandatory; see docs/svg.md.
 
 Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](docs/spreadsheets.md).
+
+Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets. Full coverage and production qualification remain mandatory; see [presentations](docs/presentations.md).
