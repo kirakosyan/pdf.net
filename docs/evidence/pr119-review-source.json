@@ -288,5 +288,160 @@
     "warnings": 0,
     "errors": 0
   },
-  "apiComparisons": 33
+  "apiComparisons": 33,
+  "finalSupplement": {
+    "sourceCommit": "08bf20873f7dd41eff63447de2667e3c8fba7542",
+    "changes": "Also preflight DSA/ECDSA/SM2 signature octets reparsed as DER before optional verification; retain the prior review-fix evidence unchanged.",
+    "sourceFiles": [
+      {
+        "path": "src/Fluent.Pdf.Cryptography/BoundedSignatureDer.cs",
+        "sha256": "59b244a3ed5b843a7f052629d5501168bf5934a99e37c6af43bd514cc48fc16a"
+      },
+      {
+        "path": "tests/Fluent.Pdf.Contract.Tests/TimestampTests.cs",
+        "sha256": "e3d8d055e1a0a73d6cd9e6786756c34a3c4022b8f5c8615983168056b9cf1c89"
+      }
+    ],
+    "lanes": [
+      {
+        "lane": "fallback",
+        "total": 69,
+        "passed": 69,
+        "failed": 0,
+        "skipped": 0,
+        "report": "artifacts/contracts/pr119-final/fallback.trx",
+        "sha256": "b4dd485449ae7f9d7e3fc6e0c880026bc7f124c6d172626b62c3ed71ed954298"
+      },
+      {
+        "lane": "net10",
+        "total": 69,
+        "passed": 69,
+        "failed": 0,
+        "skipped": 0,
+        "report": "artifacts/contracts/pr119-final/net10.trx",
+        "sha256": "edeedd1e0be0d4dd091bb951e6e32c8826045c1b880f5c1c63473e5f9367dbd7"
+      },
+      {
+        "lane": "net8",
+        "total": 69,
+        "passed": 69,
+        "failed": 0,
+        "skipped": 0,
+        "report": "artifacts/contracts/pr119-final/net8.trx",
+        "sha256": "0b11b1f334331a4bfc4b674be81e9b72e661c5fd4da118426f6b9b30ce17aaae"
+      }
+    ],
+    "checks": [
+      {
+        "path": "/workspace/scratch/pr119-final-framework-build.log",
+        "sha256": "59ad7e087203608032693891bd3e63626681e3ffd265c859a758a27bf12c79c6"
+      },
+      {
+        "path": "/workspace/scratch/pr119-final-api.log",
+        "sha256": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c"
+      },
+      {
+        "path": "/workspace/scratch/pr119-final-python.log",
+        "sha256": "3aabe598ed222790f50c1c076a9ceb65416340899289f0fcff24ad876b54c81f"
+      },
+      {
+        "path": "artifacts/contracts/api/comparisons.json",
+        "sha256": "c4939beddbc76d778475fabefb93994857663dc155f221fa019d661a3a9ba25b"
+      }
+    ],
+    "independent": {
+      "schemaVersion": 1,
+      "purpose": "independent-original-source-fixtures-not-production-qualification",
+      "rasterValidator": {
+        "name": "Pillow",
+        "version": "12.3.0",
+        "results": [
+          {
+            "file": "grid.png",
+            "sha256": "047d5a1ea03461870fe073f7bf661f2f5c5d2333716c1b5d8ce6595675b35aa5",
+            "frames": [
+              {
+                "frame": 0,
+                "size": [
+                  8,
+                  6
+                ],
+                "dpi": [
+                  72.009,
+                  72.009
+                ],
+                "allPixelsMatchOriginalFormula": true
+              }
+            ]
+          },
+          {
+            "file": "grid.bmp",
+            "sha256": "4b3da7e1e17431ace4ba73f50637d47ae1cbc3318f18b0d5a23034960543e3ce",
+            "frames": [
+              {
+                "frame": 0,
+                "size": [
+                  8,
+                  6
+                ],
+                "dpi": [
+                  72.008961115161,
+                  72.008961115161
+                ],
+                "allPixelsMatchOriginalFormula": true
+              }
+            ]
+          },
+          {
+            "file": "grid.tiff",
+            "sha256": "e73f905a83cdfdd5d8e25f16ef3ddd60a8c5bc74e9dbc99dd99cf85d704da9df",
+            "frames": [
+              {
+                "frame": 0,
+                "size": [
+                  5,
+                  4
+                ],
+                "dpi": [
+                  72.0,
+                  72.0
+                ],
+                "allPixelsMatchOriginalFormula": true
+              },
+              {
+                "frame": 1,
+                "size": [
+                  8,
+                  6
+                ],
+                "dpi": [
+                  72.0,
+                  72.0
+                ],
+                "allPixelsMatchOriginalFormula": true
+              }
+            ]
+          }
+        ]
+      },
+      "timestampValidator": {
+        "name": "OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)",
+        "verification": "OK",
+        "tokenSha256": "072e14252e1ea5ca4b2ad96127f6fd1d960e6cd0aacbe614224bed7cb472534b",
+        "publicCertificateSha256": "7ea00a3d3b645bc7bff761f1c38d6a31c952f088a028b3bd3f9c27eab0630727",
+        "outputSha256": "5cdefa76f22b9714abc49b889d703447ba0dca3518db1bab72068d2ff87c3509",
+        "scope": "Exact SHA256 imprint and token signature using an explicitly trusted self-issued fixture TSA certificate; no general PKIX, revocation or PAdES qualification."
+      },
+      "productionQualified": false
+    },
+    "frameworkBuild": "net472 build passes with zero warnings/errors; actual Framework execution is a CI/qualification obligation.",
+    "apiComparisons": 33,
+    "commands": [
+      "Previous focused test filter on net8.0/net10.0 and net8.0 -p:UseNetStandardAssembly=true, -m:1, retained in artifacts/contracts/pr119-final",
+      "dotnet build tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net472 --no-restore -m:1",
+      "pwsh -NoProfile -File eng/check-api.ps1",
+      "python3 eng/test-queue-fixture-verifier.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0",
+      "python3 eng/verify-queue-fixtures.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0 artifacts/contracts/pr119-final/independent.json"
+    ]
+  }
 }
