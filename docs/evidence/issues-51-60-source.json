@@ -1,0 +1,698 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-profiles-and-validation-not-complete-requirements-or-release-qualification",
+  "requirements": [
+    "FP-033",
+    "FP-034",
+    "FP-035",
+    "FP-102",
+    "FP-029",
+    "FP-038",
+    "FP-039",
+    "FP-041",
+    "FP-064",
+    "FP-042"
+  ],
+  "queueIssues": [
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60
+  ],
+  "sourceCommit": "aac708b47613f3e3cd87e96883b3546d36e408ef",
+  "sourceTree": "1895841fada0a326e74a8a55d4c97a925c28e2b9",
+  "commitBinding": "The final code commit and final focused reports are exact. Earlier complete regression runs name their own compiled source commit; the final XFA namespace guard has separate complete focused validation on every available runtime profile. The subsequent documentation/evidence commit retains these source file hashes; no self-referential final hash is invented.",
+  "localLane": {
+    "os": "Debian GNU/Linux 13",
+    "architecture": "x64",
+    "sdk": "10.0.402",
+    "runtimes": [
+      ".NET 8.0.32",
+      ".NET 10.0.13"
+    ]
+  },
+  "build": {
+    "targetFrameworks": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "warnings": 0,
+    "errors": 0,
+    "command": "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1",
+    "logSha256": "bedcfe37445f7a86c8baa9106b5e5c1af7e99da7cd0f3aaf7ffe591ac107b45f"
+  },
+  "runtimeReports": [
+    {
+      "lane": "net8",
+      "counters": {
+        "total": "1446",
+        "executed": "1446",
+        "passed": "1378",
+        "failed": "68",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "regressionSourceCommit": "dda439ae0918d974c80d1dd578deda4fce779fb5",
+      "newFeatureCases": 28,
+      "newFeaturePassed": 28,
+      "newFeatureFailed": 0,
+      "newFeatureSkipped": 0,
+      "failureGroups": {
+        "NativeOcrContractTests": 11,
+        "NativeTextTests": 12,
+        "NativeRenderingTests": 14,
+        "NativeWorkerTests": 19,
+        "NativeImageCodecTests": 12
+      },
+      "runtimeIdentity": "Library: /workspace/pdf.net/tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v8.0\nActual runtime: .NET 8.0.32\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "report": "artifacts/contracts/queue-51-60/net8/contracts.trx",
+      "reportSha256": "80950d4eb7fdc31f0e3bc253a48c079507e8c4de29f91de789de939c4d248422",
+      "failedCases": [
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 3, expected: \"Ocr.WordGeometry\")",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"A\u0301 e\u0301\", script: \"Latn\", language: \"en\", direction: 4, expected: [36, 0, 639, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.IsolatedCapiFixturePreservesGeometryConfidenceAndCheckedModelProvenance",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.CancellationTerminatesThePrivateNativeRecognitionAndReleasesItsStage",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: None)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RequestSpecificResponseCeilingIsEnforcedBeforeReturningOutput",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 36, screenVisible: False, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-abi\", code: \"Native.AbiMismatch\")",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeWorkerMemoryAccountingIsIndependentOfTheCallersResidentSet",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"../fonts/licensed-cjk.otf\", text: \"\u4e2d\u6587\u4e00\", script: \"Hani\", language: \"zh\", direction: 6, expected: [5, 0, 0, -1000, -500, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.TransparentAndOpaqueBackgroundsAndDeviceGrayHaveExplicitSamples",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise180)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"bengali.ttf\", text: \"\u09ac\u09be\u0982\u09b2\u09be \u0995\u09cd\u09b7\", script: \"Beng\", language: \"bn\", direction: 4, expected: [42, 0, 596, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"mmr.jb2\", codec: Jbig2, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ActualNativeVersionAndExplicitModelInitializationCannotSilentlyFallback",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ImagesAndTransparencyRetainKnownColorsAndStraightAlpha",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CancellationDuringSetupAndExecutionReleasesEveryOwnedStage",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 1, expected: \"Ocr.Recognition\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.jpg\", codec: Dct, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"rgb.j2k\", codec: Jpx, components: 3, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CompletePinnedTransitiveDependencyLoadsFromThePrivateDirectory",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.WorkerDiagnosticsRequireExplicitDisclosureOptIn",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 4, screenVisible: True, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.MissingSymbolsHavePreciseExportDiagnosticsBeforeRecognition",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ExplicitMixedModelsReturnExactDeclarationsAndSelectionIdentity",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.MixedFallbackUsesBidiVisualRunsAndPreservesLogicalParagraph",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.j2k\", codec: Jpx, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DctEncodingIsExplicitAndProducesValidIndependentGeometry",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jbig2, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0915\u094d\u0937\u0924\u094d\u0930\u093f\u092f\", script: \"Deva\", language: \"hi\", direction: 4, expected: [179, 0, 712, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ManyShapingRunsReuseTheWorkerEnvelopeUnderTheDefaultOperationBudget",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0928\u092e\u0938\u094d\u0924\u0947\", script: \"Deva\", language: \"hi\", direction: 4, expected: [44, 0, 555, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.RegionSamplesEqualTheSameIntegerWindowOfTheFullRaster",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ExistingWidgetAppearancesMatchStaticFlatteningAndCanBeExcluded",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: False)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.WrappedFlowRetainsOriginalRtlParagraphDirectionOnLatinContinuationLines",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"missing-dependency\", code: \"Native.DependencyLoadFailed\")",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645\", script: \"Arab\", language: \"ar\", direction: 5, expected: [770, 12, 562, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeSandboxRejectsCallerFileWritesAndNetworkAccess",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RealBridgeChecksAbiAndVersionAndReturnsDetachedBytes",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.TotalCharacterCeilingRejectsBeforeReturningARecognitionResult",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.DefaultOptionalContentControlsFormPaintingWithoutFlattening",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DamagedImageRejectsWithPreciseDiagnosticsAndNextJobRecovers",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise90)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeMemoryAndOutputBoundariesCannotReturnUnboundedResults",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"office\", script: \"Latn\", language: \"en\", direction: 4, expected: [82, 0, 605, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 6, expected: \"Ocr.NativeUtf8\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 16)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.SelfContainedManagedBridgeRunsNativeOsArchitectureAndRestrictsNewThreads",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 2, expected: \"Ocr.NativeAllocation\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 5, screenVisible: True, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 3, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise270)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: True)",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.SuccessfulNativeInitializationWithOnlySomeRequestedModelsCannotFallback",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeCrashDoesNotCrashTheCallerOrCommitPartialFileOutput",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-version\", code: \"Native.EngineVersionMismatch\")",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0644\u064e\u0627\", script: \"Arab\", language: \"ar\", direction: 5, expected: [291, 0, 0, 0, 249, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.BridgeCannotChangeHardOrSoftProcessLimitsAfterIsolation",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 6, screenVisible: False, printVisible: False)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ExplicitFeatureOverrideDisablesLigatureWithoutChangingLogicalText",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 0, screenVisible: True, printVisible: False)"
+      ]
+    },
+    {
+      "lane": "net10",
+      "counters": {
+        "total": "1446",
+        "executed": "1446",
+        "passed": "1378",
+        "failed": "68",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "regressionSourceCommit": "dda439ae0918d974c80d1dd578deda4fce779fb5",
+      "newFeatureCases": 28,
+      "newFeaturePassed": 28,
+      "newFeatureFailed": 0,
+      "newFeatureSkipped": 0,
+      "failureGroups": {
+        "NativeWorkerTests": 19,
+        "NativeTextTests": 12,
+        "NativeImageCodecTests": 12,
+        "NativeOcrContractTests": 11,
+        "NativeRenderingTests": 14
+      },
+      "runtimeIdentity": "Library: /workspace/pdf.net/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "report": "artifacts/contracts/queue-51-60/net10/contracts.trx",
+      "reportSha256": "4a3f93088d47aee94d3433d0c02e5c78ed5ecbd230439955159ab29bf4f97a30",
+      "failedCases": [
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CancellationDuringSetupAndExecutionReleasesEveryOwnedStage",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ManyShapingRunsReuseTheWorkerEnvelopeUnderTheDefaultOperationBudget",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.jpg\", codec: Dct, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.SuccessfulNativeInitializationWithOnlySomeRequestedModelsCannotFallback",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.MissingSymbolsHavePreciseExportDiagnosticsBeforeRecognition",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 5, screenVisible: True, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 3, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ExplicitMixedModelsReturnExactDeclarationsAndSelectionIdentity",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0928\u092e\u0938\u094d\u0924\u0947\", script: \"Deva\", language: \"hi\", direction: 4, expected: [44, 0, 555, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.WorkerDiagnosticsRequireExplicitDisclosureOptIn",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.DefaultOptionalContentControlsFormPaintingWithoutFlattening",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise180)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"mmr.jb2\", codec: Jbig2, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DctEncodingIsExplicitAndProducesValidIndependentGeometry",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ImagesAndTransparencyRetainKnownColorsAndStraightAlpha",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.SelfContainedManagedBridgeRunsNativeOsArchitectureAndRestrictsNewThreads",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.MixedFallbackUsesBidiVisualRunsAndPreservesLogicalParagraph",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ExistingWidgetAppearancesMatchStaticFlatteningAndCanBeExcluded",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.TotalCharacterCeilingRejectsBeforeReturningARecognitionResult",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeCrashDoesNotCrashTheCallerOrCommitPartialFileOutput",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeWorkerMemoryAccountingIsIndependentOfTheCallersResidentSet",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.RegionSamplesEqualTheSameIntegerWindowOfTheFullRaster",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 0, screenVisible: True, printVisible: False)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeSandboxRejectsCallerFileWritesAndNetworkAccess",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise90)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise270)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ExplicitFeatureOverrideDisablesLigatureWithoutChangingLogicalText",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 1, expected: \"Ocr.Recognition\")",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"../fonts/licensed-cjk.otf\", text: \"\u4e2d\u6587\u4e00\", script: \"Hani\", language: \"zh\", direction: 6, expected: [5, 0, 0, -1000, -500, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: False)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 36, screenVisible: False, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-version\", code: \"Native.EngineVersionMismatch\")",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.WrappedFlowRetainsOriginalRtlParagraphDirectionOnLatinContinuationLines",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.CancellationTerminatesThePrivateNativeRecognitionAndReleasesItsStage",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"office\", script: \"Latn\", language: \"en\", direction: 4, expected: [82, 0, 605, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DamagedImageRejectsWithPreciseDiagnosticsAndNextJobRecovers",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jbig2, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 2, expected: \"Ocr.NativeAllocation\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RequestSpecificResponseCeilingIsEnforcedBeforeReturningOutput",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.IsolatedCapiFixturePreservesGeometryConfidenceAndCheckedModelProvenance",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ActualNativeVersionAndExplicitModelInitializationCannotSilentlyFallback",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0644\u064e\u0627\", script: \"Arab\", language: \"ar\", direction: 5, expected: [291, 0, 0, 0, 249, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 4, screenVisible: True, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: True)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0915\u094d\u0937\u0924\u094d\u0930\u093f\u092f\", script: \"Deva\", language: \"hi\", direction: 4, expected: [179, 0, 712, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.TransparentAndOpaqueBackgroundsAndDeviceGrayHaveExplicitSamples",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.BridgeCannotChangeHardOrSoftProcessLimitsAfterIsolation",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"missing-dependency\", code: \"Native.DependencyLoadFailed\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 16)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeMemoryAndOutputBoundariesCannotReturnUnboundedResults",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-abi\", code: \"Native.AbiMismatch\")",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 6, screenVisible: False, printVisible: False)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CompletePinnedTransitiveDependencyLoadsFromThePrivateDirectory",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"rgb.j2k\", codec: Jpx, components: 3, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RealBridgeChecksAbiAndVersionAndReturnsDetachedBytes",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645\", script: \"Arab\", language: \"ar\", direction: 5, expected: [770, 12, 562, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 3, expected: \"Ocr.WordGeometry\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"A\u0301 e\u0301\", script: \"Latn\", language: \"en\", direction: 4, expected: [36, 0, 639, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 6, expected: \"Ocr.NativeUtf8\")",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: None)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"bengali.ttf\", text: \"\u09ac\u09be\u0982\u09b2\u09be \u0995\u09cd\u09b7\", script: \"Beng\", language: \"bn\", direction: 4, expected: [42, 0, 596, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.j2k\", codec: Jpx, components: 1, bits: 8)"
+      ]
+    },
+    {
+      "lane": "netstandard-fallback",
+      "counters": {
+        "total": "1448",
+        "executed": "1448",
+        "passed": "1380",
+        "failed": "68",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "regressionSourceCommit": "aac708b47613f3e3cd87e96883b3546d36e408ef",
+      "newFeatureCases": 30,
+      "newFeaturePassed": 30,
+      "newFeatureFailed": 0,
+      "newFeatureSkipped": 0,
+      "failureGroups": {
+        "NativeWorkerTests": 19,
+        "NativeOcrContractTests": 11,
+        "NativeImageCodecTests": 12,
+        "NativeTextTests": 12,
+        "NativeRenderingTests": 14
+      },
+      "runtimeIdentity": "Library: /workspace/pdf.net/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETStandard,Version=v2.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "report": "artifacts/contracts/queue-51-60/netstandard-fallback/contracts.trx",
+      "reportSha256": "29cf2693c7c65681c8dd7d3ae49d030d6fd63d2b68daf33316fda0fb8b1809de",
+      "failedCases": [
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.SelfContainedManagedBridgeRunsNativeOsArchitectureAndRestrictsNewThreads",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 3, expected: \"Ocr.WordGeometry\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"mmr.jb2\", codec: Jbig2, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.MissingSymbolsHavePreciseExportDiagnosticsBeforeRecognition",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.WrappedFlowRetainsOriginalRtlParagraphDirectionOnLatinContinuationLines",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jbig2, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 5, screenVisible: True, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ExistingWidgetAppearancesMatchStaticFlatteningAndCanBeExcluded",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise90)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.RegionSamplesEqualTheSameIntegerWindowOfTheFullRaster",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"rgb.j2k\", codec: Jpx, components: 3, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-version\", code: \"Native.EngineVersionMismatch\")",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DctEncodingIsExplicitAndProducesValidIndependentGeometry",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.TotalCharacterCeilingRejectsBeforeReturningARecognitionResult",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise180)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.BridgeCannotChangeHardOrSoftProcessLimitsAfterIsolation",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ExplicitFeatureOverrideDisablesLigatureWithoutChangingLogicalText",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 0, screenVisible: True, printVisible: False)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeCrashDoesNotCrashTheCallerOrCommitPartialFileOutput",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.IsolatedCapiFixturePreservesGeometryConfidenceAndCheckedModelProvenance",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ActualNativeVersionAndExplicitModelInitializationCannotSilentlyFallback",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 1)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"A\u0301 e\u0301\", script: \"Latn\", language: \"en\", direction: 4, expected: [36, 0, 639, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"../fonts/licensed-cjk.otf\", text: \"\u4e2d\u6587\u4e00\", script: \"Hani\", language: \"zh\", direction: 6, expected: [5, 0, 0, -1000, -500, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.TransparentAndOpaqueBackgroundsAndDeviceGrayHaveExplicitSamples",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RequestSpecificResponseCeilingIsEnforcedBeforeReturningOutput",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.DefaultOptionalContentControlsFormPaintingWithoutFlattening",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 2, expected: \"Ocr.NativeAllocation\")",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ExplicitMixedModelsReturnExactDeclarationsAndSelectionIdentity",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 1, expected: \"Ocr.Recognition\")",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.CancellationTerminatesThePrivateNativeRecognitionAndReleasesItsStage",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"bengali.ttf\", text: \"\u09ac\u09be\u0982\u09b2\u09be \u0995\u09cd\u09b7\", script: \"Beng\", language: \"bn\", direction: 4, expected: [42, 0, 596, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CompletePinnedTransitiveDependencyLoadsFromThePrivateDirectory",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ImagesAndTransparencyRetainKnownColorsAndStraightAlpha",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CancellationDuringSetupAndExecutionReleasesEveryOwnedStage",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: None)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 36, screenVisible: False, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.WorkerDiagnosticsRequireExplicitDisclosureOptIn",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeWorkerMemoryAccountingIsIndependentOfTheCallersResidentSet",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DamagedImageRejectsWithPreciseDiagnosticsAndNextJobRecovers",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.SuccessfulNativeInitializationWithOnlySomeRequestedModelsCannotFallback",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.j2k\", codec: Jpx, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 4, screenVisible: True, printVisible: True)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"missing-dependency\", code: \"Native.DependencyLoadFailed\")",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-abi\", code: \"Native.AbiMismatch\")",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RealBridgeChecksAbiAndVersionAndReturnsDetachedBytes",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden",
+        "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 6, expected: \"Ocr.NativeUtf8\")",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645\", script: \"Arab\", language: \"ar\", direction: 5, expected: [770, 12, 562, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 3, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: True)",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.jpg\", codec: Dct, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeSandboxRejectsCallerFileWritesAndNetworkAccess",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise270)",
+        "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 6, screenVisible: False, printVisible: False)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0915\u094d\u0937\u0924\u094d\u0930\u093f\u092f\", script: \"Deva\", language: \"hi\", direction: 4, expected: [179, 0, 712, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ManyShapingRunsReuseTheWorkerEnvelopeUnderTheDefaultOperationBudget",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0644\u064e\u0627\", script: \"Arab\", language: \"ar\", direction: 5, expected: [291, 0, 0, 0, 249, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: False)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"office\", script: \"Latn\", language: \"en\", direction: 4, expected: [82, 0, 605, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0928\u092e\u0938\u094d\u0924\u0947\", script: \"Deva\", language: \"hi\", direction: 4, expected: [44, 0, 555, 0, 0, \u00b7\u00b7\u00b7])",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 16)",
+        "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeMemoryAndOutputBoundariesCannotReturnUnboundedResults",
+        "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 8)",
+        "Fluent.Pdf.Contract.Tests.NativeTextTests.MixedFallbackUsesBidiVisualRunsAndPreservesLogicalParagraph"
+      ]
+    }
+  ],
+  "finalFocusedRuntimeReports": [
+    {
+      "lane": "net8",
+      "sourceCommit": "aac708b47613f3e3cd87e96883b3546d36e408ef",
+      "counts": {
+        "total": "30",
+        "executed": "30",
+        "passed": "30",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "report": "artifacts/contracts/queue-51-60/focused-net8/contracts.trx",
+      "reportSha256": "d49646e218b85da8c140030a84e57b9005a88611360c3909050b1a98876db27d"
+    },
+    {
+      "lane": "net10",
+      "sourceCommit": "aac708b47613f3e3cd87e96883b3546d36e408ef",
+      "counts": {
+        "total": "30",
+        "executed": "30",
+        "passed": "30",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "report": "artifacts/contracts/queue-51-60/focused-net10/contracts.trx",
+      "reportSha256": "89e1fa31fa1a3341805e73261879ec63759e4a8435e09b07b0fc479e63a38b50"
+    },
+    {
+      "lane": "netstandard-fallback",
+      "sourceCommit": "aac708b47613f3e3cd87e96883b3546d36e408ef",
+      "counts": {
+        "total": "30",
+        "executed": "30",
+        "passed": "30",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "report": "artifacts/contracts/queue-51-60/focused-netstandard-fallback/contracts.trx",
+      "reportSha256": "3eae1a8c08c3bae83e893704bb3acee019585cb7921dfe69c82e730b7dfb0383"
+    }
+  ],
+  "fullSuiteResult": "Blocked on this managed host: Linux native sandbox setup fails closed at stage 9 / errno 38 (ENOSYS), reported as Native.SandboxUnavailable. No isolation gate or assertion was disabled. All non-native/new-feature cases in these unfiltered reports pass. Earlier pre-provisioning validator failures remain retained in artifacts/contracts/net8/contracts.trx and the initial task log.",
+  "api": {
+    "comparisons": 33,
+    "failed": 0,
+    "report": "artifacts/contracts/api/comparisons.json",
+    "reportSha256": "2422168dd1fcfbaae9dfbb4ea23f527f066dc7696ca9a75335d209d0d8d76993"
+  },
+  "independent": {
+    "schemaVersion": 1,
+    "purpose": "independent-original-source-fixtures-not-production-qualification",
+    "rasterValidator": {
+      "name": "Pillow",
+      "version": "12.3.0",
+      "results": [
+        {
+          "file": "grid.png",
+          "sha256": "047d5a1ea03461870fe073f7bf661f2f5c5d2333716c1b5d8ce6595675b35aa5",
+          "frames": [
+            {
+              "frame": 0,
+              "size": [
+                8,
+                6
+              ],
+              "dpi": [
+                72.009,
+                72.009
+              ],
+              "allPixelsMatchOriginalFormula": true
+            }
+          ]
+        },
+        {
+          "file": "grid.bmp",
+          "sha256": "4b3da7e1e17431ace4ba73f50637d47ae1cbc3318f18b0d5a23034960543e3ce",
+          "frames": [
+            {
+              "frame": 0,
+              "size": [
+                8,
+                6
+              ],
+              "dpi": [
+                72.008961115161,
+                72.008961115161
+              ],
+              "allPixelsMatchOriginalFormula": true
+            }
+          ]
+        },
+        {
+          "file": "grid.tiff",
+          "sha256": "e73f905a83cdfdd5d8e25f16ef3ddd60a8c5bc74e9dbc99dd99cf85d704da9df",
+          "frames": [
+            {
+              "frame": 0,
+              "size": [
+                5,
+                4
+              ],
+              "dpi": [
+                72.0,
+                72.0
+              ],
+              "allPixelsMatchOriginalFormula": true
+            },
+            {
+              "frame": 1,
+              "size": [
+                8,
+                6
+              ],
+              "dpi": [
+                72.0,
+                72.0
+              ],
+              "allPixelsMatchOriginalFormula": true
+            }
+          ]
+        }
+      ]
+    },
+    "timestampValidator": {
+      "name": "OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)",
+      "verification": "OK",
+      "tokenSha256": "b0a1af92541a304483822b006720b6f581e2d3edbb9f05237d2b2ae662b0ab6c",
+      "publicCertificateSha256": "2898f45f4191580c0aceee0c219d60b97c0973e8ce81954f968c6d740567a9fb",
+      "outputSha256": "3d0dbc93b5aa676a2f24de8d70f235baae6c0745ed2d06e7c99dc899f1b3550a",
+      "scope": "Exact SHA256 imprint and token signature using an explicitly trusted self-issued fixture TSA certificate; no general PKIX, revocation or PAdES qualification."
+    },
+    "productionQualified": false
+  },
+  "independentReportSha256": "962ed5daaf641c75ec9efd3f6494de86a527daf1828e9d216e628d1a65e13727",
+  "releaseGuard": {
+    "unqualifiedPublishingBlocked": true,
+    "unqualifiedPackingBlocked": true,
+    "logSha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+  },
+  "commands": [
+    {
+      "lane": "net8",
+      "exitCode": 1,
+      "command": [
+        "dotnet",
+        "test",
+        "tests/Fluent.Pdf.Contract.Tests",
+        "-c",
+        "Release",
+        "-f",
+        "net8.0",
+        "--no-restore",
+        "-m:1",
+        "--logger",
+        "trx;LogFileName=contracts.trx",
+        "--results-directory",
+        "/workspace/pdf.net/artifacts/contracts/queue-51-60/net8",
+        "--no-build"
+      ]
+    },
+    {
+      "lane": "net10",
+      "exitCode": 1,
+      "command": [
+        "dotnet",
+        "test",
+        "tests/Fluent.Pdf.Contract.Tests",
+        "-c",
+        "Release",
+        "-f",
+        "net10.0",
+        "--no-restore",
+        "-m:1",
+        "--logger",
+        "trx;LogFileName=contracts.trx",
+        "--results-directory",
+        "/workspace/pdf.net/artifacts/contracts/queue-51-60/net10",
+        "--no-build"
+      ]
+    },
+    {
+      "lane": "netstandard-fallback",
+      "exitCode": 1,
+      "command": [
+        "dotnet",
+        "test",
+        "tests/Fluent.Pdf.Contract.Tests",
+        "-c",
+        "Release",
+        "-f",
+        "net10.0",
+        "--no-restore",
+        "-m:1",
+        "--logger",
+        "trx;LogFileName=contracts.trx",
+        "--results-directory",
+        "/workspace/pdf.net/artifacts/contracts/queue-51-60/netstandard-fallback",
+        "-p:UseNetStandardAssembly=true"
+      ]
+    }
+  ],
+  "sourceFileSha256": {
+    "eng/test-contracts.ps1": "ecba3ad6a82503f5ab0b6fa5c4d92d570ab28829ea54f0eefdc0e0f3293f7d62",
+    "eng/verify-queue-fixtures.py": "f510ee1ff5a1d56af4447705c8b44c1a822108ee430636319b54d6a9e39cf336",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "a05742cb806055a68da5307f962f93d77f66fd0912ebe8e4047ce8b5bd85b125",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "d701f190e56d5de12cea8bb693b452465e8c9b7de092da869734198380a9c094",
+    "src/Fluent.Pdf.Cryptography/BoundedSignatureDer.cs": "fa20eb223cbdef557e003d36ed621281c51aacb40ceb0755dd630cf7317f9218",
+    "src/Fluent.Pdf.Cryptography/ExternalCmsSignatureProvider.cs": "5423a7d01eb1c66d3e237e25e81d19ec403ce7a0cfb94c17e2f6dbf4fb974da8",
+    "src/Fluent.Pdf.Cryptography/ManagedCmsSignatureProvider.cs": "1e3311c0e7f663d4a98451572fdd9680a1a141b3e7251aee71c959772c19e6d6",
+    "src/Fluent.Pdf.Cryptography/PinnedSignatureTrustProvider.cs": "a7ec75f795c909b364d27aa52c6329b8568781181e38eaa15f16297dc9befe9d",
+    "src/Fluent.Pdf.Cryptography/PublicAPI.Unshipped.txt": "60a51fb4d3fd4691217907b9834cd10d191446e307dc9e4f0193defcf607fa08",
+    "src/Fluent.Pdf.Cryptography/Rfc3161TimestampVerifier.cs": "9faac22e1d6e30b61641070425c1a25fed3ff6bdd840d2f5fc8aef3462a173c7",
+    "src/Fluent.Pdf/Comparison/PdfComparison.cs": "cfd60dfd5fa705080ccd3245225601b4d8c20b7f335bff1e5513340ed0e56f73",
+    "src/Fluent.Pdf/Fonts/PdfFont.cs": "94336eb0975f3915051df88cd76e95677c87e8224aa90bab5859bda2d683b766",
+    "src/Fluent.Pdf/Forms/PdfForms.cs": "017589aaf63f1550c243636eff56c5fd2659c91d97541ec6df02315ff4f5cf40",
+    "src/Fluent.Pdf/Forms/PdfXfa.cs": "3cfa9218fa71960ed76761cf95efd4f6f31f94e6cc638f302b7b76f833ad7978",
+    "src/Fluent.Pdf/Providers/PdfCapability.cs": "5081ead23e6ca32ca920a6dbca0a358ee9b0afb0fea5db8ffbb7b79eec3670c4",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "7dcab02cf20801e0ac9e0fe87cf184bfd8f948229bab4bf35cafd1e7f1919b80",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "5b56674feee87eeca0422451948559efc5a7fffff8776e585290d7ed7b3509e9",
+    "src/Fluent.Pdf/Rendering/PdfColorRendering.cs": "42e89e88a8332b9540819e9a2357559779592d5700d55501d485d628cc480db3",
+    "src/Fluent.Pdf/Rendering/PdfMatrixIccTransform.cs": "591429463f5f95b8058d083241de515f7598edbf5c187b1b7ed349cf321e7422",
+    "src/Fluent.Pdf/Rendering/PdfRasterExport.cs": "14e31bda1b3a5dac023cfdd24b4339395716301909fade17cc4488ae3563969f",
+    "src/Fluent.Pdf/Rendering/PdfRasterRequest.cs": "849057866f00d02c4400f83e25fb3b40fe0f0eb8136d33a8425ae9b4eaafedc6",
+    "src/Fluent.Pdf/Rendering/PdfRenderOptions.cs": "cc714d0953f0016c3be9dca2621568e766d7bb1292d3afc4a6d83657df28e862",
+    "src/Fluent.Pdf/Rendering/PdfRendering.cs": "01603f8a73cfaa4cf57cb30d4ca035f22c50b91a02ed4a9abd7ba25d0754e814",
+    "src/Fluent.Pdf/Scripting/PdfScripts.cs": "92d1a9a99eca6b1e222c1ac34ecf24381f99e16791ce6314c82eb549e274c309",
+    "src/Fluent.Pdf/Signatures/PdfExternalSigning.cs": "1f466761796bec3e9e5ff02a80df85c7541f19c921c2fe51ffacf020f08e3df5",
+    "src/Fluent.Pdf/Signatures/PdfPades.cs": "1a2327ac320b039cc389aac4c67dc01d20eb7cf9ce22444224e785e942c860f6",
+    "src/Fluent.Pdf/Signatures/PdfRevisionAudit.cs": "d4043f9784c89585d5e7abdf23d4d93aefb53422f28b875d08b5adc6f34c595e",
+    "src/Fluent.Pdf/Signatures/PdfSignaturePolicy.cs": "56bc5da7a16e47068f9e4e304ecc2bca93776eba75e9b1e437b0f46b1e4102f5",
+    "src/Fluent.Pdf/Signatures/PdfSignatures.Bytes.cs": "506a8ec87df81924ea5cd0960db6eea96e8a045ca3cf65b885a00d673e75e4ba",
+    "src/Fluent.Pdf/Signatures/PdfSignatures.cs": "85c2c925b63f462db8f03a94657978bc5aac47a31eecf3abc935911934c26fb8",
+    "src/Fluent.Pdf/Verification/PdfSignatureVerification.cs": "1e54fbbe4ce320b98821571137714ae3cb0f26e44466bc213001fb48adf48c5f",
+    "src/Fluent.Pdf/Viewing/PdfViewSession.cs": "a82e9de933e7f94e3c14d1d44f809b6147f58a7503341387ddca25afbb546eb4",
+    "tests/Fluent.Pdf.Contract.Tests/ComparisonXfaScriptTests.cs": "343c6b10cf3eb639fc2c622dd3487885e0207150622f6607e9196d3fca799d7c",
+    "tests/Fluent.Pdf.Contract.Tests/ExternalSigningTests.cs": "0e0d802a9f02cc960d5e35fedd7b5997297c37c97f0ea89697af45aab6c8934e",
+    "tests/Fluent.Pdf.Contract.Tests/PadesRevisionTests.cs": "a8bb935252585c85493a40a22eae991638c47e58f079d8abf114134a45da7da7",
+    "tests/Fluent.Pdf.Contract.Tests/RasterViewTests.cs": "c80811cc83c897ae7cbca38f1f175e96f4ec692f28a64ea0ecf841dc6c9236db",
+    "tests/Fluent.Pdf.Contract.Tests/SignatureVerificationTests.cs": "a8b3c615977000ae080dd6b369d06c3b3dfff9e00a67568f2957a9066eb9ddfc",
+    "tests/Fluent.Pdf.Contract.Tests/TimestampTests.cs": "ed6d89ae3bed2b8b2064eac009c1258e38e001ee5888b5fa9e9d3b9087e958b3"
+  },
+  "pendingByRequirement": {
+    "FP-029": [
+      "General alignment, table/structure/semantic diffing, richer visual regions and labeled precision/recall corpora remain mandatory. Zero differences covers only selected dimensions and tolerances, never whole-document equivalence.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-033": [
+      "General PKIX path construction, real OCSP/CRL authorities, TSA trust and semantic permitted-edit validation remain mandatory production work. A pin/status fixture is not a general trust-chain qualification.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-034": [
+      "The caller owns key/session implementations and their credential/network/module policy. Native PKCS#11 module loading, actual software-token/HSM provisioning, device login/error matrices and production session/endurance qualification remain mandatory. The included session fixture exercises this boundary with a local RSA key; it does not qualify hardware.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-035": [
+      "Endpoints, credentials, trust anchors, network authority, freshness and timeouts belong to explicitly configured providers. SDK limits/cancellation are mandatory. The report-gate fixture is deliberately not a PAdES conformance fixture. Complete B/B-T/B-LT/B-LTA production adapters, independent PAdES validation, real TSA/revocation evidence and renewal corpora remain mandatory.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-038": [
+      "Full static/dynamic XFA layout, indexed SOM/binding/template constructs, flattened conversion and licensed independent visual/data corpus qualification remain mandatory.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-039": [
+      "General JavaScript, event triggers, validation semantics and isolated general-engine/sandbox corpus qualification remain mandatory. This finite subset does not claim compatibility with arbitrary document scripts.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-041": [
+      "Process CMYK/separations, general LUT/perceptual/absolute gamut mapping, black-point compensation, complete overprint/spot/transparency implementations and independent production color-chart/page qualification remain mandatory.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-042": [
+      "True progressive/incremental input loading, general accessibility/view integration, asynchronous renderer supervision and production scroll/zoom/selection/performance/concurrency qualification remain mandatory. The ordinary syntax reader still eagerly captures input.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-064": [
+      "Explicit render options cover DPI, region, alpha/matte, RGB/gray, annotations and print/layer usage. No quantization or lossy conversion is hidden. JPEG/GIF/WebP, bitonal/fax and additional TIFF compression/precision profiles remain mandatory separate work; requesting an undefined container rejects. Independent Pillow and LibTiff decoding cover the source fixtures, not complete image/container/security qualification.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ],
+    "FP-102": [
+      "General permitted form/annotation edit classes, malicious-update semantic classification, structure/appearance reconciliation and independent signature-preservation qualification remain mandatory. An appearance, unchanged prefix or successful preflight alone never proves signature preservation.",
+      "Actual minimum/runtime/RID, independent corpus and exact final-package qualification; all production gates remain mandatory"
+    ]
+  },
+  "productionQualified": false,
+  "exactFinalPackagesProduced": false,
+  "trackingIssuesCompleted": false,
+  "unavailableQualification": [
+    "Actual minimum Windows .NET Framework 4.7.2 x86/x64",
+    "Windows/macOS/ARM64 execution in this local environment",
+    "Required native sandbox support in this executor",
+    "Full engine/hardware/corpus/endurance/fuzz/concurrency qualification",
+    "Complete requested profiles and exact final-package consumers"
+  ]
+}

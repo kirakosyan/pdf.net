@@ -136,3 +136,13 @@ The historical final-signing CI run has all20runtime lanes executed and one actu
 The [deadline observer source regression](evidence/phase-deadline-observer.json) binds the current policy implementation, lifecycle cases and completed actual-runtime/API reports. It is source regression evidence, with complete production qualification still pending.
 
 The first observer implementation also consumed a logical object, exhausting the native JPX decoder's exact tile/component inventory. The [retained six-host failure](evidence/PR-118-CI-119-source.json) records all six decode cases on each host and the unexecuted later lanes. The correction retains the original codec limits and fixtures, charges observer managed infrastructure separately and adds an exact-inventory policy regression. A six-case managed bridge probe is limited source evidence; the full unfiltered native CI matrix remains mandatory.
+
+## Queue #51–#60 source checks
+
+The signature verification/external signing/timestamp/revision, comparison/XFA/calculation and color/raster/view cases run in the ordinary source contract suite on each applicable runtime. `TimestampTests` and `RasterViewTests` emit original public timestamp/certificate and lossless image fixtures beside the test assembly. To independently check those outputs with caller-provisioned Pillow/OpenSSL:
+
+```bash
+python3 eng/verify-queue-fixtures.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0 artifacts/contracts/queue-independent.json
+```
+
+This checks the original pixel formula, effective DPI, TIFF frame order and exact RFC3161 imprint/signature under the fixture certificate. It does not supply general PKIX/revocation, complete PAdES or renderer qualification. See [the exact source evidence](evidence/issues-51-60-source.json) for counts, hashes, commands, observed environment failures and pending runtime/final-package work.
