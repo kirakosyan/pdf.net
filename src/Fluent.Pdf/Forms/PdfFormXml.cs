@@ -27,18 +27,45 @@ internal static class PdfFormXml
             {
                 if (empty)
                     throw Profile();
-                reader.MoveToContent();
-                Require("fields");
-                Attrs(Array.Empty<string>());
-                bool noFields = reader.IsEmptyElement;
-                reader.ReadStartElement();
-                if (!noFields)
+                bool foundFields = false;
+                var identifiers = new HashSet<string>(StringComparer.Ordinal);
+                while (reader.MoveToContent() == XmlNodeType.Element)
                 {
-                    Items("");
-                    reader.ReadEndElement();
+                    context.Checkpoint();
+                    context.Consume(PdfResourceKind.Objects, 1);
+                    if (reader.NamespaceURI != ns)
+                        throw Profile();
+                    if (reader.LocalName == "f" || reader.LocalName == "ids")
+                    {
+                        string identifier = reader.LocalName;
+                        if (!identifiers.Add(identifier))
+                            throw Profile();
+                        Attrs(identifier == "f" ? new[] { "href" } : new[] { "original", "modified" });
+                        bool noContent = reader.IsEmptyElement;
+                        reader.ReadStartElement();
+                        if (!noContent)
+                        {
+                            if (reader.MoveToContent() != XmlNodeType.EndElement)
+                                throw Profile();
+                            reader.ReadEndElement();
+                        }
+                        continue;
+                    }
+                    Require("fields");
+                    if (foundFields)
+                        throw Profile();
+                    foundFields = true;
+                    Attrs(Array.Empty<string>());
+                    bool noFields = reader.IsEmptyElement;
+                    reader.ReadStartElement();
+                    if (!noFields)
+                    {
+                        Items("");
+                        reader.ReadEndElement();
+                    }
                 }
-
-                reader.MoveToContent();
+                if (!foundFields)
+                    throw Profile();
                 reader.ReadEndElement();
             }
             else if (!empty)

@@ -208,7 +208,9 @@ public sealed class ResourceExtractionTests
         int shared = Assert.Single(bounded.Resources, r => r.Kind == PdfExtractedResourceKind.Image).Index;
         Assert.Equal(3, bounded.Occurrences.Count(x => x.ResourceIndex == shared));
         using var additionalImage = Open(Fixture(inline: true));
-        Assert.Equal("Limit.Pixels", Assert.Throws<PdfException>(() => PdfResourceExtraction.ReadPage(additionalImage.CreateSnapshot(), 0, policy: new(limits: new(maximumPixels: 1)))).Diagnostic.Code);
+        var passive = PdfResourceExtraction.ReadPage(additionalImage.CreateSnapshot(), 0, policy: new(limits: new(maximumPixels: 1)));
+        // Parsing this inline image decodes one pixel; unused declared XObjects add none.
+        Assert.Equal(1, passive.OperationReport.Resources.Single(x => x.Resource == PdfResourceKind.Pixels).Consumed);
         Assert.Throws<OperationCanceledException>(() => PdfResourceExtraction.ReadPage(document.CreateSnapshot(), 0, cancellationToken: new CancellationToken(true)));
     }
 

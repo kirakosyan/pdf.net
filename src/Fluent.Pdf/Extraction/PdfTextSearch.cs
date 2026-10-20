@@ -361,6 +361,7 @@ public static class PdfTextSearch
         entries["Resources"] = PdfValue.OwnedDictionary(resources);
         entries["Contents"] = PdfValue.Reference(graph.Edit.Add(PdfContentProgram.CreateCore(output, PdfContentKind.Page, c).ToStream(c)));
         graph.Edit.Set(binding.ObjectId, PdfValue.OwnedDictionary(entries));
+        graph.PruneUnreachable();
         PdfValue Slice(PdfValue value, int at, int count)
         {
             c.Consume(PdfResourceKind.ExpandedBytes, count + 64L);

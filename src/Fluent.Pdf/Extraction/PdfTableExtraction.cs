@@ -134,6 +134,8 @@ public static class PdfTableExtraction
         int rows = ys.Count - 1, columns = xs.Count - 1;
         long count = (long)rows * columns;
         CheckCount(count, options, graph);
+        c.Consume(PdfResourceKind.ExpandedBytes, segments.Count * 32L + 64);
+        var orderedSegments = segments.OrderBy(s => s.Start).ToArray();
         if (Cover(true, xs[0], ys[0], ys[rows]) != 1 || Cover(true, xs[columns], ys[0], ys[rows]) != 1 || Cover(false, ys[0], xs[0], xs[columns]) != 1 || Cover(false, ys[rows], xs[0], xs[columns]) != 1)
             throw graph.Error("Tables.RuleGridProfile", "The literal rules do not form one closed candidate; select an explicit region/profile for unrelated or incomplete rules.");
         c.Consume(PdfResourceKind.ExpandedBytes, count * 64 + 1024);
@@ -189,6 +191,7 @@ public static class PdfTableExtraction
             group.Add(i);
         }
 
+        var buckets = BucketCharacters(data, xs, ys, c);
         var cells = new List<PdfExtractedTableCell>();
         c.Consume(PdfResourceKind.ExpandedBytes, segments.Count * 16L + 64);
         var rules = new ReadOnlyCollection<PdfResourceSource>(segments.Select(s => s.Source).Distinct().ToArray());
@@ -198,7 +201,7 @@ public static class PdfTableExtraction
             int r0 = group.Min(i => i / columns), r1 = group.Max(i => i / columns), c0 = group.Min(i => i % columns), c1 = group.Max(i => i % columns);
             if (group.Count != (r1 - r0 + 1) * (c1 - c0 + 1))
                 throw graph.Error("Tables.MergeShapeProfile", "Missing rules create a nonrectangular merged region; no rectangular cell is invented.");
-            cells.Add(Cell(graph, data, options, r0, c0, r1 - r0 + 1, c1 - c0 + 1, new(xs[c0], ys[r0], xs[c1 + 1] - xs[c0], ys[r1 + 1] - ys[r0]), rules, .95));
+            cells.Add(Cell(graph, data, options, r0, c0, r1 - r0 + 1, c1 - c0 + 1, new(xs[c0], ys[r0], xs[c1 + 1] - xs[c0], ys[r1 + 1] - ys[r0]), rules, .95, group.SelectMany(i => buckets.TryGetValue(i, out var items) ? items : Enumerable.Empty<PdfExtractedCharacter>())));
         }
 
         return Table(data.Page, xs, ys, cells, options.Mode, .95, c);
@@ -216,23 +219,22 @@ public static class PdfTableExtraction
 
         int Cover(bool vertical, double position, double start, double end)
         {
-            Tick(c);
-            c.Consume(PdfResourceKind.ExpandedBytes, segments.Count * 16L + 64);
-            var matches = segments.Where(s => s.Vertical == vertical && Math.Abs(s.Position - position) <= options.Tolerance && s.End > start + options.Tolerance * .01 && s.Start < end - options.Tolerance * .01).OrderBy(s => s.Start).ToArray();
-            if (matches.Length == 0)
-                return 0;
+            c.Checkpoint();
             double covered = start;
-            foreach (var segment in matches)
+            bool found = false;
+            foreach (var segment in orderedSegments)
             {
                 c.Checkpoint();
+                if (segment.Vertical != vertical || Math.Abs(segment.Position - position) > options.Tolerance || segment.End <= start + options.Tolerance * .01 || segment.Start >= end - options.Tolerance * .01)
+                    continue;
+                found = true;
                 if (segment.Start > covered + options.Tolerance)
                     return 2;
                 covered = Math.Max(covered, segment.End);
                 if (covered >= end - options.Tolerance)
                     return 1;
             }
-
-            return 2;
+            return found ? 2 : 0;
         }
     }
 
@@ -314,25 +316,58 @@ public static class PdfTableExtraction
                 ys.Add(bottom);
         }
 
+        var buckets = BucketCharacters(data, xs, ys, c);
         var extracted = new List<PdfExtractedTableCell>();
         for (int row = 0; row < rows.Count; row++)
             for (int col = 0; col < columns; col++)
             {
                 Tick(c);
-                extracted.Add(Cell(graph, data, options, row, col, 1, 1, new(xs[col], ys[row], xs[col + 1] - xs[col], ys[row + 1] - ys[row]), Array.Empty<PdfResourceSource>(), .65));
+                extracted.Add(Cell(graph, data, options, row, col, 1, 1, new(xs[col], ys[row], xs[col + 1] - xs[col], ys[row + 1] - ys[row]), Array.Empty<PdfResourceSource>(), .65, buckets.TryGetValue(row * columns + col, out var items) ? items : Enumerable.Empty<PdfExtractedCharacter>()));
             }
 
         return Table(data.Page, xs, ys, extracted, options.Mode, .65, c);
     }
 
-    private static PdfExtractedTableCell Cell(PdfGraphEdit graph, PdfTextPageData data, PdfTableExtractionOptions options, int row, int col, int rowSpan, int colSpan, PdfRect bounds, IReadOnlyList<PdfResourceSource> rules, double confidence)
+    private static Dictionary<int, List<PdfExtractedCharacter>> BucketCharacters(PdfTextPageData data, IReadOnlyList<double> xs, IReadOnlyList<double> ys, PdfOperationContext c)
+    {
+        var buckets = new Dictionary<int, List<PdfExtractedCharacter>>();
+        foreach (var character in data.Characters)
+        {
+            c.Checkpoint();
+            var box = character.Quad.Bounds;
+            int col = Interval(xs, box.X + box.Width / 2), row = Interval(ys, box.Y + box.Height / 2);
+            if (col < 0 || row < 0) continue;
+            int key = row * (xs.Count - 1) + col;
+            if (!buckets.TryGetValue(key, out var items))
+            {
+                c.Consume(PdfResourceKind.ExpandedBytes, 128);
+                buckets.Add(key, items = new());
+            }
+            c.Consume(PdfResourceKind.ExpandedBytes, 32);
+            items.Add(character);
+        }
+        return buckets;
+        static int Interval(IReadOnlyList<double> edges, double point)
+        {
+            if (point < edges[0] || point >= edges[edges.Count - 1]) return -1;
+            int low = 0, high = edges.Count - 1;
+            while (high - low > 1)
+            {
+                int mid = low + (high - low) / 2;
+                if (point < edges[mid]) high = mid; else low = mid;
+            }
+            return low;
+        }
+    }
+
+    private static PdfExtractedTableCell Cell(PdfGraphEdit graph, PdfTextPageData data, PdfTableExtractionOptions options, int row, int col, int rowSpan, int colSpan, PdfRect bounds, IReadOnlyList<PdfResourceSource> rules, double confidence, IEnumerable<PdfExtractedCharacter> candidates)
     {
         var c = graph.Context;
         Tick(c);
         var chars = new List<PdfExtractedCharacter>();
-        foreach (var character in data.Characters)
+        foreach (var character in candidates)
         {
-            Tick(c);
+            c.Checkpoint();
             var box = character.Quad.Bounds;
             var center = new PdfPoint(box.X + box.Width / 2, box.Y + box.Height / 2);
             if (center.X < bounds.X || center.Y < bounds.Y || center.X >= bounds.X + bounds.Width || center.Y >= bounds.Y + bounds.Height)

@@ -118,7 +118,7 @@ internal static class PdfMetadataDates
     {
         if (zone == "")
             return null;
-        if (zone == "Z")
+        if (zone == "Z" || pdf && Regex.IsMatch(zone, @"\AZ00(?:'00'?)?\z", RegexOptions.CultureInvariant))
             return 0;
         string pattern = pdf ? @"\A([+-])([0-9]{2})(?:'([0-9]{2})'?)?\z" : @"\A([+-])([0-9]{2}):([0-9]{2})\z";
         var match = Regex.Match(zone, pattern, RegexOptions.CultureInvariant);

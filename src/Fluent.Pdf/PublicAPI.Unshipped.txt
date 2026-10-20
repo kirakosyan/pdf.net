@@ -2291,10 +2291,11 @@ Fluent.Pdf.PdfSignatureLockAction.Exclude = 2 -> Fluent.Pdf.PdfSignatureLockActi
 Fluent.Pdf.PdfSignatureLockAction.Include = 1 -> Fluent.Pdf.PdfSignatureLockAction
 Fluent.Pdf.PdfSignatureObservation
 Fluent.Pdf.PdfSignatureObservation.ByteRange.get -> System.Collections.Generic.IReadOnlyList<long>!
-Fluent.Pdf.PdfSignatureObservation.CryptographicallyValid.get -> bool
+Fluent.Pdf.PdfSignatureObservation.CryptographicallyValid.get -> bool?
 Fluent.Pdf.PdfSignatureObservation.ObjectId.get -> Fluent.Pdf.PdfObjectId
 Fluent.Pdf.PdfSignatureObservation.SignedRevisionLength.get -> long
 Fluent.Pdf.PdfSignatureObservation.TrustEvaluated.get -> bool
+Fluent.Pdf.PdfSignatureObservation.UnsupportedReason.get -> string?
 Fluent.Pdf.PdfSignatureOptions
 Fluent.Pdf.PdfSignatureOptions.Certification.get -> Fluent.Pdf.PdfCertificationPermission
 Fluent.Pdf.PdfSignatureOptions.FieldLock.get -> Fluent.Pdf.PdfSignatureFieldLock?

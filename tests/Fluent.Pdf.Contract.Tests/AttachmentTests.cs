@@ -202,7 +202,9 @@ public sealed class AttachmentTests
         Assert.DoesNotContain(Encoding.ASCII.GetString(marker), Encoding.ASCII.GetString(output.ToArray()));
         var root = cleaned.SourceDocument.Resolve(cleaned.SourceDocument.Revisions[0].Trailer.Entries["Root"].ReferenceId);
         Assert.False(root.Entries.ContainsKey("AF"));
-        Assert.Equal(2, root.Entries["UnusualAlias"].Items.Count);
+        Assert.Equal(3, root.Entries["UnusualAlias"].Items.Count);
+        Assert.Equal(PdfValueKind.Null, root.Entries["UnusualAlias"].Items[1].Kind);
+        Assert.Equal(7, root.Entries["UnusualAlias"].Items[2].NumberValue);
         Assert.Equal(PdfValueKind.Null, root.Entries["UnusualAlias"].Items[0].Kind);
         var kept = cleaned.SourceDocument.Resolve(cleaned.SourceDocument.Resolve(root.Entries["Keep"].ReferenceId).ReferenceId);
         Assert.Equal("keep me", Encoding.BigEndianUnicode.GetString(kept.StringBytes.Skip(2).ToArray()));

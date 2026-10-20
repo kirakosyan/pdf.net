@@ -36,7 +36,7 @@ internal sealed class PdfFormReader
         }
     }
 
-    internal PdfFormReader(PdfGraphEdit graph)
+    internal PdfFormReader(PdfGraphEdit graph, bool passive = false)
     {
         Graph = graph;
         Dictionary = graph.Get(graph.Catalog, "AcroForm");
@@ -113,12 +113,12 @@ internal sealed class PdfFormReader
         if (order.Kind != PdfValueKind.Null)
         {
             if (order.Kind != PdfValueKind.Array)
-                throw Error("CalculationOrder", "CO must be an array of terminal field references.");
-            foreach (var reference in order.Items)
+                CalculationIssue("CO must be an array of terminal field references.");
+            foreach (var reference in order.Kind == PdfValueKind.Array ? order.Items : Array.Empty<PdfValue>())
             {
                 Context.Consume(PdfResourceKind.ExpandedBytes, 48);
                 if (reference.Kind != PdfValueKind.Reference || !ById.ContainsKey(reference.ReferenceId) || !seen.Add(reference.ReferenceId))
-                    throw Error("CalculationOrder", "CO must reference distinct terminal fields.");
+                    CalculationIssue("CO must reference distinct terminal fields.");
             }
         }
 
@@ -128,9 +128,16 @@ internal sealed class PdfFormReader
             if (actions.Kind != PdfValueKind.Null && actions.Kind != PdfValueKind.Dictionary)
                 throw Error("FieldActions", "Field AA must resolve to a dictionary.");
             if (graph.Get(actions, "C").Kind != PdfValueKind.Null && !seen.Contains(id))
-                throw Error("CalculationOrder", "Every terminal field with a calculation action must appear in CO.");
+                CalculationIssue("Every terminal field with a calculation action must appear in CO.");
             if (seen.Contains(id) && graph.Get(actions, "C").Kind == PdfValueKind.Null)
-                throw Error("CalculationOrder", "CO entries must identify fields with calculation actions.");
+                CalculationIssue("CO entries must identify fields with calculation actions.");
+        }
+
+        void CalculationIssue(string message)
+        {
+            if (!passive)
+                throw Error("CalculationOrder", message);
+            Context.Report(new("Forms.CalculationOrder", message, severity: PdfDiagnosticSeverity.Warning));
         }
     }
 

@@ -31,7 +31,7 @@ public static class PdfResourceExtraction
         graph.Context.Consume(PdfResourceKind.ExpandedBytes, 4096);
         graph.Context.Consume(PdfResourceKind.Objects, 16);
         var engine = new Engine(graph, page, PdfUnknownOperatorPolicy.Reject, providers);
-        engine.Read();
+        engine.Read(includeStamps: false);
         return engine.Paths;
     }
 
@@ -78,7 +78,7 @@ public static class PdfResourceExtraction
             _providers = providers;
         }
 
-        internal void Read()
+        internal void Read(bool includeStamps = true)
         {
             var page = _graph.Snapshot.Pages[_page].Source!;
             var scope = _graph.Get(page.EffectiveAttributes, "Resources");
@@ -87,7 +87,7 @@ public static class PdfResourceExtraction
             Tick();
             _content.Add(new(page.ObjectId, program, scope));
             Walk(program, scope, page.ObjectId, PdfMatrix.Identity);
-            var stamps = PdfStamps.InspectCore(_graph);
+            var stamps = includeStamps ? PdfStamps.InspectCore(_graph, _page) : Array.Empty<PdfStampInfo>();
             C.Consume(PdfResourceKind.ExpandedBytes, stamps.Count * 16L + 64);
             _stamps = new ReadOnlyCollection<PdfStampInfo>(stamps.Where(x => x.PageIndex == _page).ToArray());
             C.Consume(PdfResourceKind.ExpandedBytes, 1024);
@@ -182,7 +182,7 @@ public static class PdfResourceExtraction
                     height = _graph.Get(definition, "H");
                 if (!width.TryGetInteger(out long w) || !height.TryGetInteger(out long h) || w < 1 || h < 1 || w > int.MaxValue || h > int.MaxValue)
                     throw Error("ImageGeometry", "An image requires positive bounded declared dimensions.");
-                C.ConsumePixels((int)w, (int)h);
+                // Declared geometry is passive; pixel budgets apply when samples are decoded.
             }
 
             if (kind == PdfExtractedResourceKind.Unknown)

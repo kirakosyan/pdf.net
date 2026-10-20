@@ -18,6 +18,35 @@ The repository contains research, specification, a backlog, document/provider co
 
 All SDK requirements marked releaseRequired in specs/requirements.json are mandatory for stable publication. The Reader requirement is excluded. Do not silently narrow the required scope to make a release pass. Status changes require reviewed implementation and evidence. Do not publish placeholders, alpha/beta packages or package-name reservations.
 
+Passive resource/path/artifact inventory, exact encoded stream export and explicit embedded-font inspection now have a source profile; complete resource/program profiles and production qualification remain pending.
+
+Bounded literal/regex/region/style search and explicit advance-preserving text replacement now have a source profile; complete replacement/reflow/accessibility profiles and production qualification remain pending.
+
+Explicit literal-grid/aligned-text table inference, rectangular merged cells, continuation provenance and bounded CSV/JSON now have a source profile; complete reconstruction profiles and production qualification remain pending.
+
+Bounded typed generation, reusable record templates and ordered precommit record/layout/page/save hooks now have a shared-context source profile; complete event/model/host coverage and production qualification remain pending.
+
+Bounded Unicode/Markdown/version-one JSON/XML conversion, explicit scalar/style/resource capture and nested passive URI annotations now have a shared-context source profile; complete conversion fidelity and production qualification remain pending.
+
+Explicit optional Word interchange, pinned published dependency identity, original bounded RTF/WordprocessingML bridges and shared-context reconstruction now have a source profile; complete bidirectional format/reconstruction fidelity and production qualification remain pending.
+
+Bounded native PDF/DOCX templates, closed scalar/record/condition/image evaluation and shared-context optional Word export now have a source profile; complete template semantics and production qualification remain pending.
+
+Explicit logical structure authoring/inspection/remediation, exact MCID/parent-tree/annotation associations and optional complete independent UA reports now have a source profile; complete accessibility, human/screen-reader review and production qualification remain pending.
+
+Explicit raster/OCR contracts and an optional isolated Tesseract5 C-API adapter now have a source profile with pinned native/model assets and retained MIT pattern attribution. Complete actual-engine/model/RID/accuracy and production qualification remain pending.
+
+Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](docs/ocr-models.md).
+
+Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](docs/searchable-ocr.md).
+
+Opt-in bounded scan correction, original-image preservation, inverse word-boundary geometry and separate prose/table/form reading-order evidence now have a source profile. Complete automatic curve/semantic/native/corpus and production qualification remain pending. See [scan processing](docs/scan-processing.md).
+
+Explicit raster/full-rewrite redaction and sanitization now have a source profile: selected samples are replaced before encoding and no original graph/history is adopted. Complete selective editable-content preservation, independent renderer/security corpora and production qualification remain mandatory. See [redaction](docs/redaction.md).
+
+Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](docs/signatures.md).
+
+
 ## Architecture rules
 
 - Keep the managed core independent of native/browser/OCR/GUI packages and platform-specific types.
@@ -57,31 +86,3 @@ Use docs/releasing.md and the fail-closed eng/assert-production-ready.ps1. Never
 Archive and verify qualification reports, source/package hashes and release-owned resource inventory before cleanup. Gracefully stop disposable qualification VMs and helper processes; remove only this release's temporary containers, images, networks, volumes, disks, snapshots, downloads and credentials. Protect shared resources and retained OCR/font/model assets. Do not use global Docker pruning.
 
 Before any recursive Windows deletion or move, resolve and verify absolute target paths remain within the explicitly intended workspace/resource directory. Use native PowerShell LiteralPath operations end to end. Report removed, retained and failed resources. Never remove research evidence until it is preserved and the owner has authorized its disposal.
-
-Passive resource/path/artifact inventory, exact encoded stream export and explicit embedded-font inspection now have a source profile; complete resource/program profiles and production qualification remain pending.
-
-Bounded literal/regex/region/style search and explicit advance-preserving text replacement now have a source profile; complete replacement/reflow/accessibility profiles and production qualification remain pending.
-
-Explicit literal-grid/aligned-text table inference, rectangular merged cells, continuation provenance and bounded CSV/JSON now have a source profile; complete reconstruction profiles and production qualification remain pending.
-
-Bounded typed generation, reusable record templates and ordered precommit record/layout/page/save hooks now have a shared-context source profile; complete event/model/host coverage and production qualification remain pending.
-
-Bounded Unicode/Markdown/version-one JSON/XML conversion, explicit scalar/style/resource capture and nested passive URI annotations now have a shared-context source profile; complete conversion fidelity and production qualification remain pending.
-
-Explicit optional Word interchange, pinned published dependency identity, original bounded RTF/WordprocessingML bridges and shared-context reconstruction now have a source profile; complete bidirectional format/reconstruction fidelity and production qualification remain pending.
-
-Bounded native PDF/DOCX templates, closed scalar/record/condition/image evaluation and shared-context optional Word export now have a source profile; complete template semantics and production qualification remain pending.
-
-Explicit logical structure authoring/inspection/remediation, exact MCID/parent-tree/annotation associations and optional complete independent UA reports now have a source profile; complete accessibility, human/screen-reader review and production qualification remain pending.
-
-Explicit raster/OCR contracts and an optional isolated Tesseract5 C-API adapter now have a source profile with pinned native/model assets and retained MIT pattern attribution. Complete actual-engine/model/RID/accuracy and production qualification remain pending.
-
-Explicit local model catalogs, exact mixed-model binding and bounded Unicode CER/WER measurement now have a source profile. Complete multilingual/model/native-host and production qualification remain pending; a retained mixed-language accuracy case fails its prior threshold. See [multilingual OCR](docs/ocr-models.md).
-
-Explicit raster-aligned invisible OCR overlays, finite existing-digital-text handling, shared-context render/recognize/write and bounded text/JSON/hOCR/ALTO exports now have a source profile. Complete structure, real OCR/native/host and production qualification remain pending. See [searchable OCR](docs/searchable-ocr.md).
-
-Opt-in bounded scan correction, original-image preservation, inverse word-boundary geometry and separate prose/table/form reading-order evidence now have a source profile. Complete automatic curve/semantic/native/corpus and production qualification remain pending. See [scan processing](docs/scan-processing.md).
-
-Explicit raster/full-rewrite redaction and sanitization now have a source profile: selected samples are replaced before encoding and no original graph/history is adopted. Complete selective editable-content preservation, independent renderer/security corpora and production qualification remain mandatory. See [redaction](docs/redaction.md).
-
-Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](docs/signatures.md).

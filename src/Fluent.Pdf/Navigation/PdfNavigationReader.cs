@@ -201,23 +201,24 @@ internal sealed class PdfNavigationReader
     {
         var reader = new PdfNavigationReader(edit, context, root, pages);
         var seen = new HashSet<PdfObjectId>();
+        var pending = new Queue<PdfValue>();
         foreach (var pair in reader.NamedDestinations())
             reader.ResolveDestination(pair.Value);
         void Visit(PdfValue value)
         {
             context.Checkpoint();
             context.Consume(PdfResourceKind.Objects, 1);
-            using var depth = context.EnterScope(PdfResourceKind.Depth);
             if (value.Kind == PdfValueKind.Reference)
             {
                 if (seen.Contains(value.ReferenceId))
                     return;
                 context.Consume(PdfResourceKind.ExpandedBytes, 48);
                 seen.Add(value.ReferenceId);
-                Visit(edit.Resolve(value.ReferenceId));
+                pending.Enqueue(edit.Resolve(value.ReferenceId));
                 return;
             }
 
+            using var depth = context.EnterScope(PdfResourceKind.Depth);
             if (value.Kind == PdfValueKind.Array)
             {
                 foreach (var child in value.Items)
@@ -241,6 +242,8 @@ internal sealed class PdfNavigationReader
             }
         }
 
-        Visit(root);
+        pending.Enqueue(root);
+        while (pending.Count != 0)
+            Visit(pending.Dequeue());
     }
 }

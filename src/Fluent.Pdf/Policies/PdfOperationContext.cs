@@ -18,7 +18,8 @@ public sealed class PdfOperationContext
     private readonly CancellationTokenSource _deadline = new();
     private readonly CancellationTokenSource _linked;
     private readonly CancellationToken _sharedToken;
-    private Thread? _deadlineWorker;
+    private readonly DeadlineScheduler.Registration _deadlineRegistration;
+    private bool _observingDeadline;
     private readonly Stopwatch _clock = Stopwatch.StartNew();
     private readonly Func<TimeSpan> _elapsed;
     private PdfException? _fatal;
@@ -46,6 +47,8 @@ public sealed class PdfOperationContext
         _callerToken = token;
         _linked = CancellationTokenSource.CreateLinkedTokenSource(token, _deadline.Token);
         _sharedToken = _linked.Token;
+        _deadlineRegistration = new DeadlineScheduler.Registration(this);
+        ScheduleDeadline();
     }
 
     /// <summary>Gets the operation name assigned by the SDK.</summary>
@@ -58,39 +61,7 @@ public sealed class PdfOperationContext
     public PdfOperationPolicy Policy { get; }
 
     /// <summary>Gets cancellation combining the caller token and the operation deadline.</summary>
-    public CancellationToken CancellationToken
-    {
-        get
-        {
-            lock (_gate)
-            {
-                if (_active && _fatal == null && !_sharedToken.IsCancellationRequested && _deadlineWorker == null)
-                {
-                    // Fixed observer infrastructure: one bounded stack only when a consumer requests the token.
-                    // Never queue deadline cancellation behind arbitrary provider work in the thread pool.
-                    Charge(PdfResourceKind.ExpandedBytes, 512);
-                    // Observer infrastructure is not a PDF/codec logical object and must not consume its exact work inventory.
-                    var worker = new Thread(ObserveDeadline, 131072)
-                    {
-                        IsBackground = true,
-                        Name = "Fluent.Pdf.Deadline"
-                    };
-                    _deadlineWorker = worker;
-                    try
-                    {
-                        worker.Start();
-                    }
-                    catch
-                    {
-                        _deadlineWorker = null;
-                        throw;
-                    }
-                }
-
-                return _sharedToken;
-            }
-        }
-    }
+    public CancellationToken CancellationToken => _sharedToken;
 
     internal bool IsActive
     {
@@ -258,45 +229,122 @@ public sealed class PdfOperationContext
         }
     }
 
-    private void ScheduleDeadline() => Monitor.PulseAll(_gate);
+    private void ScheduleDeadline()
+    {
+        if (!_active || _sharedToken.IsCancellationRequested) return;
+        TimeSpan end = Policy.Limits.MaximumElapsedTime;
+        foreach (var phase in _timeLimits.Values)
+            if (phase < end) end = phase;
+        DeadlineScheduler.Schedule(_deadlineRegistration, _fatal == null ? end - _elapsed() : TimeSpan.Zero);
+    }
+
     private void ObserveDeadline()
     {
-        while (true)
+        lock (_gate)
+        {
+            if (!_active || _sharedToken.IsCancellationRequested) return;
+            TimeSpan end = Policy.Limits.MaximumElapsedTime;
+            foreach (var phase in _timeLimits.Values)
+                if (phase < end) end = phase;
+            if (_fatal == null && _elapsed() < end)
+            {
+                ScheduleDeadline();
+                return;
+            }
+            _observingDeadline = true;
+        }
+        // Cancellation callbacks run outside both scheduler and operation locks.
+        try
+        {
+            _deadline.Cancel();
+        }
+        catch (Exception failure)
         {
             lock (_gate)
             {
-                if (!_active || _sharedToken.IsCancellationRequested)
-                    return;
-                TimeSpan end = Policy.Limits.MaximumElapsedTime;
-                foreach (TimeSpan phase in _timeLimits.Values)
-                    if (phase < end)
-                        end = phase;
-                var remaining = end - _elapsed();
-                if (_fatal == null && remaining > TimeSpan.Zero)
-                {
-                    Monitor.Wait(_gate, (int)Math.Max(1, Math.Min(1000, Math.Ceiling(remaining.TotalMilliseconds))));
-                    continue;
-                }
+                if (_fatal == null)
+                    _fatal = new PdfException(new PdfDiagnostic("Limit.ElapsedTime", "The operation deadline elapsed.", Capability, ProviderId, operation: Operation));
+                _fatal.Data["Fluent.Pdf.CancellationCallbackFailure"] = failure;
             }
-
-            // Cancellation invokes provider/caller callbacks. Never hold the context lock across external code.
-            try
+        }
+        finally
+        {
+            lock (_gate)
             {
-                _deadline.Cancel();
+                _observingDeadline = false;
+                Monitor.PulseAll(_gate);
             }
-            catch (Exception failure)
-            {
-                lock (_gate)
-                {
-                    if (_fatal == null)
-                        _fatal = new PdfException(new PdfDiagnostic("Limit.ElapsedTime", "The operation deadline elapsed.", Capability, ProviderId, operation: Operation));
-                    _fatal.Data["Fluent.Pdf.CancellationCallbackFailure"] = failure;
-                }
-            }
-
-            return;
         }
     }
+
+    // A single process-wide monotonic priority queue avoids thread-pool starvation
+    // without allocating an OS thread or charging document budgets per operation.
+    private static class DeadlineScheduler
+    {
+        internal sealed class Registration
+        {
+            internal readonly PdfOperationContext Owner;
+            internal readonly long Id = Interlocked.Increment(ref _nextId);
+            internal long Due;
+            internal Registration(PdfOperationContext owner) => Owner = owner;
+        }
+        private static long _nextId;
+        private static readonly object Gate = new();
+        private static readonly SortedSet<Registration> Pending = new(Comparer<Registration>.Create((a, b) => a.Due != b.Due ? a.Due.CompareTo(b.Due) : a.Id.CompareTo(b.Id)));
+        private static readonly Thread Worker = Start();
+        internal static bool IsWorker => ReferenceEquals(Thread.CurrentThread, Worker);
+        private static Thread Start()
+        {
+            var worker = new Thread(Run, 131072) { IsBackground = true, Name = "Fluent.Pdf.Deadlines" };
+            worker.Start();
+            return worker;
+        }
+        internal static void Schedule(Registration entry, TimeSpan remaining)
+        {
+            lock (Gate)
+            {
+                Pending.Remove(entry);
+                double ticks = Math.Max(0, remaining.TotalSeconds) * Stopwatch.Frequency;
+                long now = Stopwatch.GetTimestamp();
+                entry.Due = ticks >= long.MaxValue - now ? long.MaxValue : now + (long)ticks;
+                Pending.Add(entry);
+                Monitor.PulseAll(Gate);
+            }
+        }
+        internal static void Remove(Registration entry)
+        {
+            lock (Gate)
+            {
+                Pending.Remove(entry);
+                Monitor.PulseAll(Gate);
+            }
+        }
+        private static void Run()
+        {
+            while (true)
+            {
+                Registration entry;
+                lock (Gate)
+                {
+                    while (true)
+                    {
+                        if (Pending.Count == 0) { Monitor.Wait(Gate); continue; }
+                        entry = Pending.Min!;
+                        long remaining = entry.Due - Stopwatch.GetTimestamp();
+                        if (remaining > 0)
+                        {
+                            Monitor.Wait(Gate, (int)Math.Max(1, Math.Min(int.MaxValue, Math.Ceiling(remaining * 1000.0 / Stopwatch.Frequency))));
+                            continue;
+                        }
+                        Pending.Remove(entry);
+                        break;
+                    }
+                }
+                entry.Owner.ObserveDeadline();
+            }
+        }
+    }
+
 
     /// <summary>Records a diagnostic with SDK-bound provenance. Strict losses and error severity latch a fatal failure.</summary>
     public void Report(PdfDiagnostic diagnostic) => ReportCore(diagnostic, null, null);
@@ -441,6 +489,7 @@ public sealed class PdfOperationContext
         lock (_gate)
         {
             _active = false;
+            DeadlineScheduler.Remove(_deadlineRegistration);
             Monitor.PulseAll(_gate);
             _clock.Stop();
             var resources = new PdfResourceUsage[_used.Length];
@@ -452,16 +501,12 @@ public sealed class PdfOperationContext
 
     internal void DisposeSources()
     {
-        Thread? worker;
+        DeadlineScheduler.Remove(_deadlineRegistration);
         lock (_gate)
         {
-            Monitor.PulseAll(_gate);
-            worker = _deadlineWorker;
+            while (_observingDeadline && !DeadlineScheduler.IsWorker)
+                Monitor.Wait(_gate);
         }
-
-        // Finish wakes the observer. Join outside the context lock so callbacks/checkpoints can finish.
-        if (worker != null && !ReferenceEquals(worker, Thread.CurrentThread))
-            worker.Join();
         _linked.Dispose();
         _deadline.Dispose();
     }

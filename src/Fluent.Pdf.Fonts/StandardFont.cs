@@ -6,6 +6,7 @@ namespace Fluent.Pdf.Fonts;
 internal sealed class StandardFont : IPdfFontProgram
 {
     private readonly Dictionary<int, int> _unicode = new();
+    private readonly Dictionary<string, int> _widths = new(StringComparer.Ordinal) { [".notdef"] = 0 };
     private readonly List<(string Name, int Width)> _glyphs = new()
     {
         (".notdef", 0)
@@ -32,6 +33,8 @@ internal sealed class StandardFont : IPdfFontProgram
             var fields = line.Split('\t');
             int glyph = _glyphs.Count;
             _glyphs.Add((fields[0], Integer(fields[1])));
+            if (!_widths.ContainsKey(fields[0]))
+                _widths.Add(fields[0], Integer(fields[1]));
             string[] scalars = fields[2].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             if (scalars.Length == 1)
             {
@@ -88,15 +91,8 @@ internal sealed class StandardFont : IPdfFontProgram
 
     internal double? AdvanceForName(string name, PdfOperationContext context)
     {
-        for (int i = 0; i < _glyphs.Count; i++)
-        {
-            if ((i & 127) == 0)
-                context.Checkpoint();
-            if (_glyphs[i].Name == name)
-                return _glyphs[i].Width;
-        }
-
-        return null;
+        context.Checkpoint();
+        return _widths.TryGetValue(name, out int width) ? width : null;
     }
 
     public double GetVerticalAdvance(int glyph, PdfOperationContext context)

@@ -39,6 +39,7 @@ public sealed class PdfGlyphMapping
 public sealed class PdfFontResource
 {
     private readonly IReadOnlyList<Entry> _entries;
+    private readonly Dictionary<(int Glyph, string Text), int> _codes = new();
     private readonly PdfValue _program, _toUnicode, _encoding;
     private readonly PdfFontProgramWriteResult _written;
     private readonly bool _simple;
@@ -68,6 +69,8 @@ public sealed class PdfFontResource
     {
         Font = font;
         _entries = entries.AsReadOnly();
+        for (int i = 0; i < entries.Count; i++)
+            _codes.Add((entries[i].Mapping.GlyphIndex, entries[i].Mapping.UnicodeText), identityCff ? entries[i].Mapping.GlyphIndex : i + 1);
         EncodedText = encoded;
         _program = program;
         _written = written;
@@ -229,6 +232,21 @@ public sealed class PdfFontResource
         }
 
         return new PdfFontResource(font, entries, PdfValue.OwnedString(encoded), program, written, unicode, encoding, simple, vertical, identityCff);
+    }
+
+    internal PdfValue EncodeMappings(IReadOnlyList<PdfGlyphMapping> mappings, PdfOperationContext context)
+    {
+        int width = _simple ? 1 : 2;
+        context.Consume(PdfResourceKind.ExpandedBytes, mappings.Count * (long)width + 64);
+        var bytes = new byte[mappings.Count * width];
+        for (int i = 0; i < mappings.Count; i++)
+        {
+            context.Checkpoint();
+            int code = _codes[(mappings[i].GlyphIndex, mappings[i].UnicodeText)];
+            if (width == 1) bytes[i] = (byte)code;
+            else { bytes[i * 2] = (byte)(code >> 8); bytes[i * 2 + 1] = (byte)code; }
+        }
+        return PdfValue.OwnedString(bytes);
     }
 
     private static string MappingIdentity(List<Entry> entries, PdfOperationContext context)

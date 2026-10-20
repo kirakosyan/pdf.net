@@ -232,13 +232,13 @@ internal sealed partial class PdfInputParser
                 continue;
             }
 
-            if (ch == '`' || ch == '*' || ch == '_')
+            if (ch == '`' || (ch == '*' || ch == '_') && i + 1 < text.Length && !char.IsWhiteSpace(text[i + 1]) && !(ch == '_' && i > 0 && char.IsLetterOrDigit(text[i - 1])))
             {
                 string delimiter = ch == '*' && i + 1 < text.Length && text[i + 1] == '*' ? "**" : ch.ToString();
                 int end = text.IndexOf(delimiter, i + delimiter.Length, StringComparison.Ordinal);
-                if (end < 0)
+                if (end < 0 || end == i + delimiter.Length || char.IsWhiteSpace(text[end - 1]) || ch == '_' && end + delimiter.Length < text.Length && char.IsLetterOrDigit(text[end + delimiter.Length]))
                 {
-                    Loss("MarkdownDelimiter", "An unmatched inline delimiter was omitted.");
+                    plain.Append(delimiter);
                     i += delimiter.Length;
                     continue;
                 }
@@ -281,7 +281,7 @@ internal sealed partial class PdfInputParser
                 continue;
             }
 
-            if (ch == '<' || ch == '!' && i + 1 < text.Length && text[i + 1] == '[' || ch == '~' || ch == '&')
+            if (ch == '<' && System.Text.RegularExpressions.Regex.IsMatch(text.Substring(i), @"\A<(?:/?[A-Za-z][^>]*>|!--|[A-Za-z][A-Za-z0-9+.-]*:|[^ <>]+@[^ <>]+>)") || ch == '!' && i + 1 < text.Length && text[i + 1] == '[' || ch == '&' && System.Text.RegularExpressions.Regex.IsMatch(text.Substring(i), @"\A&(?:#[0-9]+|#x[0-9a-fA-F]+|[A-Za-z][A-Za-z0-9]+);"))
             {
                 Loss("MarkdownInline", "Unsupported raw HTML, images, entities or extension syntax was omitted.");
                 i++;

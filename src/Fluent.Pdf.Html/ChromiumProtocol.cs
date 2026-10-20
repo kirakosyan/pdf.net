@@ -99,8 +99,9 @@ internal sealed class ChromiumProtocol
         if (extent > 67108864)
             throw Error("ProtocolExtent", "A browser command exceeds the bounded transport profile.");
         // Reserve worst-case escaping/transcoding before serialization; validate the actual frame separately.
-        _context.Consume(PdfResourceKind.ExpandedBytes, extent * 32L + 1024);
+        using var encodedReservation = _context.Reserve(PdfResourceKind.ExpandedBytes, extent * 12L + 1024);
         string json = JsonSerializer.Serialize(message);
+        encodedReservation.Complete(json.Length * 2L + 1024);
         if (json.Length > 67108864)
             throw Error("ProtocolExtent", "The serialized browser command exceeds the bounded transport profile.");
         try
@@ -160,12 +161,15 @@ internal sealed class ChromiumProtocol
         _context.Checkpoint();
         if (text == null || text.Length == 0 || text.Length > 67108864)
             throw Error("ProtocolExtent", "The browser message has an invalid transport extent.");
-        _context.Consume(PdfResourceKind.ExpandedBytes, text.Length * 12L + 4096);
+        _context.Consume(PdfResourceKind.ExpandedBytes, text.Length * 2L + 4096);
         var scopes = new Stack<IDisposable>();
         var keys = new Stack<HashSet<string>?>();
         try
         {
-            byte[] bytes = new UTF8Encoding(false, true).GetBytes(text);
+            var encoding = new UTF8Encoding(false, true);
+            // The UTF-8 input buffer and JsonDocument each retain this encoded extent.
+            _context.Consume(PdfResourceKind.ExpandedBytes, encoding.GetByteCount(text) * 2L);
+            byte[] bytes = encoding.GetBytes(text);
             var reader = new Utf8JsonReader(bytes, new JsonReaderOptions { MaxDepth = 128 });
             while (reader.Read())
             {

@@ -112,7 +112,7 @@ internal sealed class PdfMetadataXml
             using var parsed = new CheckingReader(Reader(), context);
             var document = XDocument.Load(parsed, LoadOptions.PreserveWhitespace);
             var root = document.Root;
-            if (root == null || !(root.Name == Rdf + "RDF" || root.Name == XName.Get("xmpmeta", "adobe:ns:meta/")) || root.Name != Rdf + "RDF" && root.Elements(Rdf + "RDF").Count() != 1)
+            if (root == null || !(root.Name == Rdf + "RDF" || root.Name == XName.Get("xmpmeta", "adobe:ns:meta/") || root.Name == XName.Get("xapmeta", "adobe:ns:meta/")) || root.Name != Rdf + "RDF" && root.Elements(Rdf + "RDF").Count() != 1)
                 throw PdfWriterCore.Error(context, "Metadata.XmpStructure", "An XMP packet requires an RDF root or an xmpmeta wrapper containing RDF.");
             context.Checkpoint();
             return new(document);

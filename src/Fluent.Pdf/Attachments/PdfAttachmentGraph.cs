@@ -189,11 +189,7 @@ internal static class PdfAttachmentGraph
         var catalog = graph.Copy(graph.Catalog);
         catalog.Remove("Collection");
         graph.SetCatalog(catalog);
-        var reachable = new HashSet<PdfObjectId>();
-        Reach(graph.Edit.Trailer);
-        foreach (var id in ids)
-            if (!purge.Contains(id) && !reachable.Contains(id))
-                graph.Edit.Remove(id);
+        graph.PruneUnreachable();
         bool IsPayload(PdfValue value) => (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream) && (Name(graph, value, "Type") == "EmbeddedFile" || value.Entries.ContainsKey("EF") || Name(graph, value, "Subtype") == "FileAttachment");
         void Mark(PdfValue value)
         {
@@ -209,7 +205,7 @@ internal static class PdfAttachmentGraph
             }
         }
 
-        PdfValue Visit(PdfValue value, bool rewrite)
+        PdfValue Visit(PdfValue value, bool rewrite, bool compact = false)
         {
             context.Checkpoint();
             using var depth = context.EnterScope(PdfResourceKind.Depth);
@@ -228,7 +224,7 @@ internal static class PdfAttachmentGraph
                         changed = value.Items.Take(i).ToList();
                     }
 
-                    if (changed != null && (result.Kind != PdfValueKind.Null || ReferenceEquals(result, value.Items[i])))
+                    if (changed != null && (!compact || result.Kind != PdfValueKind.Null || ReferenceEquals(result, value.Items[i])))
                         changed.Add(result);
                 }
 
@@ -261,7 +257,7 @@ internal static class PdfAttachmentGraph
                 }
             }
 
-            if (rewrite && IsPayload(value))
+            if (rewrite && (IsPayload(value) || Name(graph, value, "Type") == "OBJR" && value.Entries.TryGetValue("Obj", out var obj) && obj.Kind == PdfValueKind.Reference && purge.Contains(obj.ReferenceId)))
                 return PdfValue.Null;
             Dictionary<string, PdfValue>? entries = null;
             foreach (var pair in value.Entries)
@@ -277,7 +273,7 @@ internal static class PdfAttachmentGraph
                     continue;
                 }
 
-                var result = Visit(pair.Value, rewrite);
+                var result = Visit(pair.Value, rewrite, pair.Key == "Annots" || pair.Key == "Kids" || pair.Key == "AF" || pair.Key == "Fields");
                 if (rewrite && !ReferenceEquals(result, pair.Value))
                 {
                     entries ??= graph.Copy(value);
@@ -291,26 +287,5 @@ internal static class PdfAttachmentGraph
             return entries == null ? value : value.WithDictionary(PdfValue.OwnedDictionary(entries));
         }
 
-        void Reach(PdfValue value)
-        {
-            context.Checkpoint();
-            using var depth = context.EnterScope(PdfResourceKind.Depth);
-            context.Consume(PdfResourceKind.Objects, 1);
-            while (value.Kind == PdfValueKind.Reference)
-            {
-                context.Checkpoint();
-                context.Consume(PdfResourceKind.ExpandedBytes, 48);
-                if (!reachable.Add(value.ReferenceId))
-                    return;
-                value = graph.Edit.Resolve(value.ReferenceId);
-            }
-
-            if (value.Kind == PdfValueKind.Array)
-                foreach (var item in value.Items)
-                    Reach(item);
-            else if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
-                foreach (var item in value.Entries.Values)
-                    Reach(item);
-        }
     }
 }

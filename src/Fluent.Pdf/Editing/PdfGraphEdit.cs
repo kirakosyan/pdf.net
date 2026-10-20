@@ -81,7 +81,14 @@ internal sealed class PdfGraphEdit : IDisposable
     internal void PruneUnreachable()
     {
         var reachable = new HashSet<PdfObjectId>();
-        Reach(Edit.Trailer);
+        var pending = new Queue<PdfValue>();
+        Enqueue(Edit.Trailer);
+        while (pending.Count != 0)
+        {
+            Context.Checkpoint();
+            Visit(pending.Dequeue());
+        }
+
         var remove = new List<PdfObjectId>();
         foreach (var id in Edit.ActiveIds(Context))
             if (!reachable.Contains(id))
@@ -89,29 +96,33 @@ internal sealed class PdfGraphEdit : IDisposable
                 Context.Consume(PdfResourceKind.ExpandedBytes, 32);
                 remove.Add(id);
             }
-
         foreach (var id in remove)
             Edit.Remove(id);
-        void Reach(PdfValue value)
+
+        void Enqueue(PdfValue value)
+        {
+            Context.Consume(PdfResourceKind.ExpandedBytes, 16);
+            pending.Enqueue(value);
+        }
+
+        void Visit(PdfValue value)
         {
             Context.Checkpoint();
-            using var depth = Context.EnterScope(PdfResourceKind.Depth);
             Context.Consume(PdfResourceKind.Objects, 1);
-            while (value.Kind == PdfValueKind.Reference)
+            if (value.Kind == PdfValueKind.Reference)
             {
-                Context.Checkpoint();
                 Context.Consume(PdfResourceKind.ExpandedBytes, 48);
-                if (!reachable.Add(value.ReferenceId))
-                    return;
-                value = Edit.Resolve(value.ReferenceId);
+                if (reachable.Add(value.ReferenceId))
+                    Enqueue(Edit.Resolve(value.ReferenceId));
+                return;
             }
-
+            using var depth = Context.EnterScope(PdfResourceKind.Depth);
             if (value.Kind == PdfValueKind.Array)
                 foreach (var child in value.Items)
-                    Reach(child);
+                    Visit(child);
             else if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
                 foreach (var child in value.Entries.Values)
-                    Reach(child);
+                    Visit(child);
         }
     }
 

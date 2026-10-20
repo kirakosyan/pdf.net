@@ -172,8 +172,8 @@ public sealed partial class ManagedCmsEnvelopeProvider
         var issuer = issuerAndSerial.ReadEncodedValue();
         var serial = issuerAndSerial.ReadIntegerBytes();
         issuerAndSerial.ThrowIfNotEmpty();
-        if (serial.Span.Length == 0 || (serial.Span[0] & 128) != 0)
-            throw Error(context, "CmsRecipient", "A CMS recipient serial must be a positive integer.");
+        if (serial.Span.Length == 0 || (serial.Span[0] & 128) != 0 || serial.Span.ToArray().All(b => b == 0))
+            return false;
         var expectedSerial = certificate.GetSerialNumber();
         Array.Reverse(expectedSerial);
         return issuer.Span.SequenceEqual(certificate.IssuerName.RawData) && Positive(serial.Span).SequenceEqual(Positive(expectedSerial));

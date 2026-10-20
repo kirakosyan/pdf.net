@@ -62,13 +62,15 @@ internal sealed class PdfStructureWriter
             Header(header);
         var nums = new List<PdfValue>();
         int key = 0;
+        _r.Tick(_marked.Count * 64L + 256);
+        var claimsByOwner = _marked.ToLookup(x => x.Key.Owner);
         foreach (var pair in _r.Owners)
         {
-            _r.Tick(_marked.Count * 48L + 256);
-            var claims = _marked.Where(x => x.Key.Owner == pair.Key).ToArray();
+            _r.Tick();
+            var claims = claimsByOwner[pair.Key];
             var dictionary = _g.Copy(pair.Value);
             dictionary.Remove("StructParents");
-            if (claims.Length != 0)
+            if (claims.Any())
             {
                 int length = claims.Max(x => x.Key.Mcid) + 1;
                 _r.Tick(length * 16L + 128);

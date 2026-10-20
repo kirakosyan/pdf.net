@@ -13,7 +13,7 @@ public static partial class PdfForms
         var report = PdfFont.Run("ReadFormValues", "managed.forms", policy, cancellationToken, context =>
         {
             using var graph = new PdfGraphEdit(source, new(), context);
-            var reader = new PdfFormReader(graph);
+            var reader = new PdfFormReader(graph, passive: true);
             result = PdfFormData.Capture(Values(), context);
             IEnumerable<PdfFormDataField> Values()
             {

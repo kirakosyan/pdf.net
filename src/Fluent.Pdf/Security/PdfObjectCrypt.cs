@@ -109,7 +109,7 @@ internal sealed class PdfObjectCrypt
                 return item;
             var entries = PdfWriterCore.CopyDictionary(item.Entries, _context);
             string type = Name(Entry(item, "Type"));
-            bool signature = type == "Sig" || type == "DocTimeStamp";
+            bool signature = type == "Sig" || type == "DocTimeStamp" || item.Entries.ContainsKey("ByteRange") && (item.Entries.ContainsKey("Filter") || item.Entries.ContainsKey("SubFilter"));
             foreach (var pair in item.Entries)
                 if (!(signature && pair.Key == "Contents"))
                     entries[pair.Key] = Visit(pair.Value);
@@ -324,7 +324,7 @@ internal sealed class PdfObjectCrypt
             throw Error("LegacyReadBlocked", "Legacy content encryption requires explicit read permission.");
         if (mode == Mode.Aes128 && _security.Key.Length != 16 || mode == Mode.Aes256 && _security.Key.Length != 32 || mode == Mode.Arcfour && (_security.Key.Length < 5 || _security.Key.Length > 16) || _security.Version == 4 && mode == Mode.Aes256 || _security.Version == 5 && mode != Mode.Identity && mode != Mode.Aes256)
             throw Error("CryptFilter", "The selected crypt filter and file key are inconsistent.");
-        if (mode != Mode.Identity && entry.Entries.TryGetValue("Length", out var length) && length.Kind != PdfValueKind.Null && (!length.TryGetInteger(out long n) || n != _security.Key.Length * (_security.PublicKey ? 8 : 1)))
+        if (mode != Mode.Identity && entry.Entries.TryGetValue("Length", out var length) && length.Kind != PdfValueKind.Null && (!length.TryGetInteger(out long n) || (_security.PublicKey ? n != _security.Key.Length * 8 : n != _security.Key.Length && n != _security.Key.Length * 8)))
             throw Error("KeyLength", "The crypt filter length does not match the handler's file key.");
         string auth = entry.Entries.TryGetValue("AuthEvent", out var authValue) && authValue.Kind != PdfValueKind.Null ? authValue.Kind == PdfValueKind.Name ? authValue.NameValue : "" : "DocOpen";
         if (auth != "DocOpen" && auth != "EFOpen")

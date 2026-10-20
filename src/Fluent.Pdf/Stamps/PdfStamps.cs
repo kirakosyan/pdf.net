@@ -11,9 +11,9 @@ public static class PdfStamps
     private const string FormOwner = "FluentPdfStampOwner";
     private const string ScopeMarker = "FluentPdfStampScope";
 
-    internal static IReadOnlyList<PdfStampInfo> InspectCore(PdfGraphEdit graph)
+    internal static IReadOnlyList<PdfStampInfo> InspectCore(PdfGraphEdit graph, int? pageIndex = null)
     {
-        var owned = ReadOwned(graph);
+        var owned = ReadOwned(graph, pageIndex);
         graph.Context.Consume(PdfResourceKind.ExpandedBytes, owned.Count * 16L + 64);
         return new ReadOnlyCollection<PdfStampInfo>(owned.Select(x => x.Info).ToArray());
     }
@@ -230,13 +230,13 @@ public static class PdfStamps
         }
     }
 
-    private static List<Owned> ReadOwned(PdfGraphEdit graph)
+    private static List<Owned> ReadOwned(PdfGraphEdit graph, int? pageIndex = null)
     {
         var c = graph.Context;
         c.Consume(PdfResourceKind.ExpandedBytes, 512);
         c.Consume(PdfResourceKind.Objects, 1);
         var result = new List<Owned>();
-        for (int index = 0; index < graph.Snapshot.Pages.Count; index++)
+        for (int index = pageIndex ?? 0; index < (pageIndex.HasValue ? pageIndex.Value + 1 : graph.Snapshot.Pages.Count); index++)
         {
             Tick(c);
             var page = graph.Snapshot.Pages[index].Source!;

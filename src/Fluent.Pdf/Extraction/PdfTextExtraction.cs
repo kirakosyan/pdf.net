@@ -52,7 +52,7 @@ internal sealed class PdfTextExtractionEngine
     private readonly PdfProviderRegistry _providers;
     private readonly PdfLayerEvaluator _layers;
     private readonly bool _collectSourceLinks;
-    private readonly Dictionary<PdfValue, PdfExtractionFont> _fonts = new();
+    private readonly Dictionary<PdfValue, PdfExtractionFont?> _fonts = new();
     private readonly HashSet<PdfValue> _formPath = new();
     private PdfTextPageData _page = null!;
     private PdfMatrix _display;
@@ -64,6 +64,7 @@ internal sealed class PdfTextExtractionEngine
     {
         internal PdfMatrix Ctm = PdfMatrix.Identity;
         internal PdfExtractionFont? Font;
+        internal bool UnsupportedFont;
         internal double Size, CharacterSpacing, WordSpacing, Leading, Rise;
         internal double Horizontal = 1;
         internal int Mode;
@@ -152,6 +153,7 @@ internal sealed class PdfTextExtractionEngine
                     break;
                 case PdfOperator.Font:
                     state.Font = Font(resources, values[0].NameValue);
+                    state.UnsupportedFont = state.Font == null;
                     state.Size = Number(1);
                     break;
                 case PdfOperator.CharacterSpacing:
@@ -198,6 +200,8 @@ internal sealed class PdfTextExtractionEngine
                             Show(item, state, visible, ordinal, ref text);
                         else
                         {
+                            if (state.UnsupportedFont)
+                                continue;
                             if (state.Font == null)
                                 throw Error("FontRequired", "A TJ displacement requires a selected font.");
                             double displacement = -PdfExtractionData.Number(item, _graph) / 1000 * state.Size;
@@ -272,6 +276,8 @@ internal sealed class PdfTextExtractionEngine
 
     private void Show(PdfValue encoded, State state, bool visible, int ordinal, ref PdfMatrix text)
     {
+        if (state.UnsupportedFont)
+            return;
         var font = state.Font ?? throw Error("FontRequired", "Text showing requires a selected font.");
         if (encoded.Kind != PdfValueKind.String)
             throw Error("TextString", "A text-showing operand must be a byte string.");
@@ -310,7 +316,7 @@ internal sealed class PdfTextExtractionEngine
         }
     }
 
-    private PdfExtractionFont Font(PdfValue resources, string name)
+    private PdfExtractionFont? Font(PdfValue resources, string name)
     {
         var fonts = _graph.Get(resources, "Font");
         if (fonts.Kind != PdfValueKind.Dictionary || !fonts.Entries.TryGetValue(name, out var raw))
@@ -319,9 +325,23 @@ internal sealed class PdfTextExtractionEngine
         if (_fonts.TryGetValue(dictionary, out var existing))
             return existing;
         Context.Consume(PdfResourceKind.ExpandedBytes, 192);
-        var font = new PdfExtractionFont(dictionary, _graph, _providers);
+        var font = CaptureFont(dictionary);
         _fonts.Add(dictionary, font);
         return font;
+    }
+
+    private PdfExtractionFont? CaptureFont(PdfValue dictionary)
+    {
+        try
+        {
+            return new PdfExtractionFont(dictionary, _graph, _providers);
+        }
+        catch (PdfException failure) when (failure.Diagnostic.Code == "Extraction.CidEncodingProfile" || failure.Diagnostic.Code == "Extraction.Type3MatrixProfile" || failure.Diagnostic.Code == "Extraction.CidMetricOverlap" || failure.Diagnostic.Code == "Extraction.FontSubtype")
+        {
+            Context.Checkpoint();
+            Context.Report(new(failure.Diagnostic.Code, "Unsupported font runs were omitted from this page.", lossCategory: PdfLossCategory.OmittedContent));
+            return null;
+        }
     }
 
     private void Extended(PdfValue resources, string name, State state)
@@ -341,11 +361,12 @@ internal sealed class PdfTextExtractionEngine
         if (!_fonts.TryGetValue(fontValue, out var font))
         {
             Context.Consume(PdfResourceKind.ExpandedBytes, 192);
-            font = new(fontValue, _graph, _providers);
+            font = CaptureFont(fontValue);
             _fonts.Add(fontValue, font);
         }
 
         state.Font = font;
+        state.UnsupportedFont = font == null;
         state.Size = PdfExtractionData.Number(_graph.Resolve(value.Items[1]), _graph);
     }
 

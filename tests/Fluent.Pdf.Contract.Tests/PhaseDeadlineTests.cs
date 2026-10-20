@@ -202,7 +202,7 @@ public sealed class PhaseDeadlineTests
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public void RootAndPhaseCancellationRunOutsideThePoolAndTheObserverIsJoined(bool phaseDeadline)
+    public void RootAndPhaseCancellationRunOutsideThePoolOnOneSharedScheduler(bool phaseDeadline)
     {
         var context = new PdfOperationContext("IndependentDeadlineObserver", "original.fixture", PdfCapability.RenderHtml, new(limits: new(maximumElapsedTime: phaseDeadline ? TimeSpan.FromSeconds(5) : TimeSpan.FromMilliseconds(50))), default);
         using var signal = new ManualResetEventSlim();
@@ -234,7 +234,21 @@ public sealed class PhaseDeadlineTests
         }
 
         Assert.NotNull(observer);
-        Assert.False(observer!.IsAlive);
+        Assert.True(observer!.IsAlive);
+        var next = new PdfOperationContext("SharedDeadlineObserver", "original.fixture", PdfCapability.RenderHtml, new(limits: new(maximumElapsedTime: TimeSpan.FromMilliseconds(50))), default);
+        using var nextSignal = new ManualResetEventSlim();
+        Thread? nextObserver = null;
+        try
+        {
+            using var registration = next.CancellationToken.Register(() => { nextObserver = Thread.CurrentThread; nextSignal.Set(); });
+            Assert.True(nextSignal.Wait(TimeSpan.FromSeconds(1)));
+            Assert.Same(observer, nextObserver);
+        }
+        finally
+        {
+            next.Finish(false);
+            next.DisposeSources();
+        }
     }
 
     [Fact]

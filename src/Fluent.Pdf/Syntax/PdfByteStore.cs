@@ -106,8 +106,15 @@ internal sealed class PdfByteStore
             if (offset < 0 || count < 0 || offset > buffer.Length - count)
                 throw new ArgumentOutOfRangeException(nameof(offset));
             int size = (int)Math.Min(count, Math.Max(0, _length - _position));
-            for (int i = 0; i < size; i++)
-                buffer[offset + i] = (byte)_owner.At(_start + _position + i);
+            int copied = 0;
+            while (copied < size)
+            {
+                long source = _start + _position + copied;
+                int inBlock = (int)(source % BlockSize);
+                int extent = Math.Min(size - copied, BlockSize - inBlock);
+                Buffer.BlockCopy(_owner._blocks[(int)(source / BlockSize)], inBlock, buffer, offset + copied, extent);
+                copied += extent;
+            }
             _position += size;
             return size;
         }

@@ -41,19 +41,6 @@ public static class PdfTableData
     /// <summary>Enumerates at most maximumRows plus one lookahead, disposes the source, and snapshots rows under one operation budget.</summary>
     public static PdfTable Bind<T>(IEnumerable<T> source, PdfTableDataColumn<T>[] columns, CultureInfo culture, int maximumRows = 100000, PdfTableRow[]? headerRows = null, bool allowRowSplit = true, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
-        if (columns == null || columns.Length < 1 || columns.Length > 1024 || columns.Any(c => c == null))
-            throw new ArgumentException("Supply one through 1024 nonnull data columns.", nameof(columns));
-        if (culture == null)
-            throw new ArgumentNullException(nameof(culture));
-        if (culture.GetType() != typeof(CultureInfo))
-            throw new ArgumentException("Binding requires a standard CultureInfo instance.", nameof(culture));
-        if (maximumRows < 1 || maximumRows > 1000000)
-            throw new ArgumentOutOfRangeException(nameof(maximumRows));
-        var headers = headerRows ?? Array.Empty<PdfTableRow>();
-        if (headers.Length > 4096 || headers.Any(r => r == null) || headers.Length > 1000000 - maximumRows)
-            throw new ArgumentException("Header rows must be bounded and nonnull.", nameof(headerRows));
         PdfTable? result = null;
         var report = PdfFont.Run("BindTable", "managed.table", policy, cancellationToken, context => result = BindCore(source, columns, culture, maximumRows, headerRows, allowRowSplit, context), PdfCapability.WriteDocument);
         result!.OperationReport = report;

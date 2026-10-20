@@ -266,6 +266,8 @@ public sealed class PdfMetadataEditor
 
             _graph.SetCatalog(catalog);
         }
+        if (_infoDirty || _xmpDirty)
+            _graph.PruneUnreachable();
     }
 
     internal void Expire()

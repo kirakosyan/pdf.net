@@ -199,7 +199,7 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
             var certificates = data.ReadSetOf(Explicit);
             var raw = certificates.ReadEncodedValue().ToArray();
             if (raw.Length > 65536 || certificates.HasData)
-                return false;
+                throw new PdfException(new PdfDiagnostic("Signature.UnsupportedProfile", "CMS certificate sets require a separately supported verification profile.", severity: PdfDiagnosticSeverity.Warning));
             using var certificate = Certificate(raw);
             var signers = data.ReadSetOf();
             var signer = signers.ReadSequence();
@@ -218,7 +218,11 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
                 ownTrim++;
             if (!issuer.SequenceEqual(certificate.IssuerName.RawData) || !serial.Skip(trim).SequenceEqual(ownSerial.Skip(ownTrim)))
                 return false;
-            if (!Algorithm(signer, Sha256) || !Algorithm(signer, Rsa))
+            if (!Algorithm(signer, Sha256))
+                return false;
+            if (signer.PeekTag().HasSameClassAndValue(Explicit))
+                throw new PdfException(new PdfDiagnostic("Signature.UnsupportedProfile", "CMS signed attributes require an explicit verification profile.", severity: PdfDiagnosticSeverity.Warning));
+            if (!Algorithm(signer, Rsa))
                 return false;
             var signature = signer.ReadOctetString();
             signer.ThrowIfNotEmpty();

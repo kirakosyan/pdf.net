@@ -88,6 +88,8 @@ public sealed class PdfSignatureOptions
             throw new ArgumentOutOfRangeException(nameof(reservedCmsBytes));
         if (reason != null)
             Guard.Text(reason, nameof(reason), 4096);
+        if (signingTime.HasValue && signingTime.Value.Ticks % TimeSpan.TicksPerSecond != 0)
+            throw new ArgumentException("Signing time requires an explicit whole-second value.", nameof(signingTime));
         FieldName = fieldName;
         ReservedCmsBytes = reservedCmsBytes;
         Certification = certification;
@@ -115,18 +117,19 @@ public interface IPdfSignatureProvider : IPdfProvider
 {
     /// <summary>Writes one bounded DER detached CMS over the exact concatenated byte ranges. Key/certificate selection belongs to the explicitly configured provider.</summary>
     void Sign(Stream signedBytes, Stream cmsOutput, PdfOperationContext context);
-    /// <summary>Checks detached CMS cryptographic integrity only, without claiming certificate trust, revocation or modification permissions.</summary>
+    /// <summary>Checks detached CMS cryptographic integrity only, without claiming certificate trust, revocation or modification permissions. Unsupported verification profiles throw PdfException with code Signature.UnsupportedProfile.</summary>
     bool Verify(Stream signedBytes, Stream cms, PdfOperationContext context);
 }
 
 /// <summary>One structural and cryptographic signature observation, separate from certificate trust and permitted-edit validation.</summary>
 public sealed class PdfSignatureObservation
 {
-    internal PdfSignatureObservation(PdfObjectId id, long[] ranges, bool valid, long length)
+    internal PdfSignatureObservation(PdfObjectId id, long[] ranges, bool? valid, long length, string? unsupportedReason = null)
     {
         ObjectId = id;
         ByteRange = Array.AsReadOnly(ranges);
         CryptographicallyValid = valid;
+        UnsupportedReason = unsupportedReason;
         SignedRevisionLength = length;
     }
 
@@ -134,8 +137,10 @@ public sealed class PdfSignatureObservation
     public PdfObjectId ObjectId { get; }
     /// <summary>Gets exact two-pair byte range.</summary>
     public IReadOnlyList<long> ByteRange { get; }
-    /// <summary>Gets detached CMS integrity; does not establish trust or permitted later edits.</summary>
-    public bool CryptographicallyValid { get; }
+    /// <summary>Gets detached CMS integrity, or null for an unsupported profile; does not establish trust or permitted later edits.</summary>
+    public bool? CryptographicallyValid { get; }
+    /// <summary>Gets a stable diagnostic code when this signature profile cannot be evaluated; null otherwise.</summary>
+    public string? UnsupportedReason { get; }
     /// <summary>Gets covered revision extent.</summary>
     public long SignedRevisionLength { get; }
     /// <summary>Gets false: trust/revocation validation is a separate explicitly qualified service.</summary>

@@ -32,14 +32,14 @@ internal sealed class PdfExtractionFont
         string subtype = TextName(graph.Get(dictionary, "Subtype"));
         Name = TextName(graph.Get(dictionary, "BaseFont"));
         if (subtype != "Type0" && subtype != "Type1" && subtype != "MMType1" && subtype != "TrueType" && subtype != "Type3")
-            throw Error("FontSubtype", "The source font subtype requires an explicit extraction profile.");
+            throw Unsupported("FontSubtype", "The source font subtype requires an explicit extraction profile.");
         Composite = subtype == "Type0";
         _encoding = Deep(graph.Get(dictionary, "Encoding"));
         var metrics = dictionary;
         if (Composite)
         {
             if (_encoding.Kind != PdfValueKind.Name || _encoding.NameValue != "Identity-H" && _encoding.NameValue != "Identity-V")
-                throw Error("CidEncodingProfile", "CID geometry requires a supported character-code-to-CID encoding profile.");
+                throw Unsupported("CidEncodingProfile", "CID geometry requires a supported character-code-to-CID encoding profile.");
             Vertical = _encoding.NameValue == "Identity-V";
             var descendants = graph.Get(dictionary, "DescendantFonts");
             if (descendants.Kind != PdfValueKind.Array || descendants.Items.Count != 1)
@@ -75,7 +75,7 @@ internal sealed class PdfExtractionFont
                     4,
                     5
                 }.Any(i => Number(graph.Resolve(matrix.Items[i])) != 0))
-                    throw Error("Type3MatrixProfile", "Type 3 extraction requires an explicitly supported font-matrix geometry profile.");
+                    throw Unsupported("Type3MatrixProfile", "Type 3 extraction requires an explicitly supported font-matrix geometry profile.");
             }
 
             var widths = graph.Get(dictionary, "Widths");
@@ -209,7 +209,7 @@ internal sealed class PdfExtractionFont
         uint value = bytes[position++];
         if (Composite)
             value = (value << 8) | bytes[position++];
-        if (!mapText || _simple == null)
+        if (!mapText || Composite || _simple == null)
             return (value, length, "\ufffd", PdfTextMappingConfidence.Unmapped);
         string? text = _decoded[value];
         if (text == null)
@@ -299,7 +299,7 @@ internal sealed class PdfExtractionFont
                 Context.Consume(PdfResourceKind.Objects, 1);
                 Context.Consume(PdfResourceKind.ExpandedBytes, 96);
                 if (_vertical.ContainsKey(code))
-                    throw Error("CidMetricOverlap", "CID metric intervals overlap.");
+                    throw Unsupported("CidMetricOverlap", "CID metric intervals overlap.");
                 _vertical.Add(code, (advance, x, y));
             }
             else
@@ -312,7 +312,7 @@ internal sealed class PdfExtractionFont
         Context.Consume(PdfResourceKind.Objects, 1);
         Context.Consume(PdfResourceKind.ExpandedBytes, 64);
         if (_widths.ContainsKey(code))
-            throw Error("CidMetricOverlap", "Font width intervals overlap.");
+            throw Unsupported("CidMetricOverlap", "Font width intervals overlap.");
         _widths.Add(code, width);
     }
 
@@ -333,6 +333,7 @@ internal sealed class PdfExtractionFont
     }
 
     private double Number(PdfValue value) => PdfExtractionData.Number(value, _graph);
+    private static PdfException Unsupported(string code, string message) => new(new PdfDiagnostic("Extraction." + code, message, severity: PdfDiagnosticSeverity.Warning));
     private PdfException Error(string code, string message) => _graph.Error("Extraction." + code, message);
     private PdfValue Deep(PdfValue value)
     {

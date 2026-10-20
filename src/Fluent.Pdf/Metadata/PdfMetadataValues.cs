@@ -93,11 +93,7 @@ internal static class PdfMetadataValues
         graph.Edit.Trailer = PdfValue.OwnedDictionary(trailer);
         // This privacy operation deliberately drops unreachable active objects as well as previous revisions.
         // An old indirect Info string must not survive merely because its obsolete dictionary was removed.
-        var reachable = new HashSet<PdfObjectId>();
-        Reach(graph.Edit.Trailer);
-        foreach (var id in ids)
-            if (!purge.Contains(id) && !reachable.Contains(id))
-                graph.Edit.Remove(id);
+        graph.PruneUnreachable();
         string Name(PdfValue dictionary, string key)
         {
             var item = graph.Get(dictionary, key);
@@ -178,26 +174,5 @@ internal static class PdfMetadataValues
             return entries == null ? value : value.WithDictionary(PdfValue.OwnedDictionary(entries));
         }
 
-        void Reach(PdfValue value)
-        {
-            context.Checkpoint();
-            while (value.Kind == PdfValueKind.Reference)
-            {
-                context.Checkpoint();
-                context.Consume(PdfResourceKind.ExpandedBytes, 48);
-                if (!reachable.Add(value.ReferenceId))
-                    return;
-                value = graph.Edit.Resolve(value.ReferenceId);
-            }
-
-            using var depth = context.EnterScope(PdfResourceKind.Depth);
-            context.Consume(PdfResourceKind.Objects, 1);
-            if (value.Kind == PdfValueKind.Array)
-                foreach (var item in value.Items)
-                    Reach(item);
-            else if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
-                foreach (var item in value.Entries.Values)
-                    Reach(item);
-        }
     }
 }

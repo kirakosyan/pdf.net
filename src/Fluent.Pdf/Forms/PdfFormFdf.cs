@@ -134,7 +134,7 @@ internal static class PdfFormFdf
         if (catalog.Kind != PdfValueKind.Dictionary || catalog.Entries.Keys.Any(k => k != "FDF" && k != "Version" && k != "Type"))
             throw Error("Profile", "The input is outside the FDF field-value catalog profile.");
         var fdf = Get(catalog, "FDF");
-        if (fdf.Kind != PdfValueKind.Dictionary || fdf.Entries.Keys.Any(k => k != "Fields"))
+        if (fdf.Kind != PdfValueKind.Dictionary || fdf.Entries.Keys.Any(k => k != "Fields" && k != "F" && k != "UF" && k != "ID"))
             throw Error("Profile", "Only FDF field values are imported; actions, files, annotations and appearance instructions require an explicit profile.");
         var fields = Get(fdf, "Fields");
         if (fields.Kind != PdfValueKind.Array)

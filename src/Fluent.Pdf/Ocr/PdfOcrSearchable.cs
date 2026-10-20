@@ -75,6 +75,7 @@ public static class PdfOcrSearchable
         var resources = new List<PdfResourceBinding>();
         int skipped = 0;
         long comparisons = 0;
+        var prepared = new List<(PdfOcrWord Word, PdfShapedText Shaped, PdfRect Bounds)>();
         foreach (var word in result.Words)
         {
             c.Checkpoint();
@@ -89,10 +90,18 @@ public static class PdfOcrSearchable
             if (word.Text.Any(ch => ch == '\r' || ch == '\n'))
                 throw Error("WordLayout", "A positioned OCR word cannot contain a paragraph break.");
             var shaped = PdfText.ShapeCore(word.Text, fonts, shaper, new(), c);
-            var positioned = PdfTextDrawing.CreateCore(shaped, 0, 0, 1, 1, "OcrFont", true, c);
             var bounds = AdvanceBounds(shaped, c);
             if (bounds.Width <= 0 || bounds.Height <= 0)
                 throw Error("WordLayout", "A recognized word requires a nondegenerate shaped advance frame.");
+            prepared.Add((word, shaped, bounds));
+        }
+        var sharedFonts = PdfTextDrawing.SharedFonts(prepared.Select(x => x.Shaped), c);
+        foreach (var item in prepared)
+        {
+            c.Checkpoint();
+            var word = item.Word;
+            var bounds = item.Bounds;
+            var positioned = PdfTextDrawing.CreateCore(item.Shaped, 0, 0, 1, 1, "OcrFont", true, c, sharedFonts);
             c.Consume(PdfResourceKind.Objects, 1);
             c.Consume(PdfResourceKind.ExpandedBytes, positioned.Content.Operations.Count * 48L + 512);
             var invisible = new List<PdfContentOperation>();

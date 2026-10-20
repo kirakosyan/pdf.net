@@ -231,6 +231,8 @@ public static class PdfLayers
             if (pageIndex < 0 || pageIndex >= graph.Snapshot.Pages.Count)
                 throw new ArgumentOutOfRangeException(nameof(pageIndex));
             var reader = new PdfLayerEvaluator(graph);
+            if (graph.Resolve(membership).Kind != PdfValueKind.Dictionary)
+                throw reader.Error("MembershipType", "XObject membership must be an OCG or OCMD dictionary.");
             reader.Visible(membership);
             var page = graph.Snapshot.Pages[pageIndex].Source!;
             var resources = graph.Copy(graph.Get(page.EffectiveAttributes, "Resources"));

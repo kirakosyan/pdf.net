@@ -1,5 +1,7 @@
+using System.IO.Compression;
+
 namespace Fluent.Pdf.Word;
-// Original bounded RGB PNG serialization with stored zlib blocks; no external image/runtime discovery.
+// Original bounded RGB PNG serialization with compressed zlib blocks; no external image/runtime discovery.
 internal static class WordPng
 {
     internal static PdfByteStore Write(PdfByteStore bgra, int width, int height, PdfOperationContext c)
@@ -33,26 +35,27 @@ internal static class WordPng
         var zlib = new PdfByteBuilder(c);
         zlib.Add(120);
         zlib.Add(1);
-        for (int start = 0; start < raw.Length;)
+        using (var compressed = new PdfCodecBufferStream(c, c.Available(PdfResourceKind.ExpandedBytes)))
         {
-            c.Checkpoint();
-            int count = Math.Min(65535, raw.Length - start);
-            zlib.Add((byte)(start + count == raw.Length ? 1 : 0));
-            zlib.Add((byte)count);
-            zlib.Add((byte)(count >> 8));
-            zlib.Add((byte)~count);
-            zlib.Add((byte)(~count >> 8));
-            for (int i = 0; i < count; i++)
-            {
-                if ((i & 4095) == 0)
+            using (var deflate = new DeflateStream(compressed, CompressionLevel.Optimal, leaveOpen: true))
+                for (int start = 0; start < raw.Length;)
+                {
                     c.Checkpoint();
-                byte value = raw[start + i];
-                zlib.Add(value);
-                a = (a + value) % 65521;
-                b = (b + a) % 65521;
+                    int count = Math.Min(65536, raw.Length - start);
+                    deflate.Write(raw, start, count);
+                    for (int i = start; i < start + count; i++)
+                    {
+                        a = (a + raw[i]) % 65521;
+                        b = (b + a) % 65521;
+                    }
+                    start += count;
+                }
+            var encoded = compressed.Finish();
+            for (long i = 0; i < encoded.Length; i++)
+            {
+                if ((i & 4095) == 0) c.Checkpoint();
+                zlib.Add((byte)encoded.At(i));
             }
-
-            start += count;
         }
 
         Big(zlib, b << 16 | a);

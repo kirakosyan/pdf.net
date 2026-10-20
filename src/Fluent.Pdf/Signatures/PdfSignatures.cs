@@ -117,14 +117,34 @@ public static partial class PdfSignatures
                 var value = edit.Resolve(id);
                 if (value.Kind != PdfValueKind.Dictionary || !value.Entries.ContainsKey("ByteRange"))
                     continue;
-                var validated = Ranges(source, id, value, c);
-                using var bytes = new RangeStream(source.Source, validated.Ranges);
-                using var signed = c.BorrowExpandedInput(bytes);
-                using var cms = c.BorrowExpandedInput(new MemoryStream(validated.Cms, false));
-                bool valid = provider.Verify(signed, cms, c);
-                c.Checkpoint();
-                c.Consume(PdfResourceKind.ExpandedBytes, 128);
-                records.Add(new(id, validated.Ranges, valid, validated.Ranges[2] + validated.Ranges[3]));
+                try
+                {
+                    var validated = Ranges(source, id, value, c);
+                    bool? valid;
+                    string? unsupported = null;
+                    using var bytes = new RangeStream(source.Source, validated.Ranges);
+                    using var signed = c.BorrowExpandedInput(bytes);
+                    using var cms = c.BorrowExpandedInput(new MemoryStream(validated.Cms, false));
+                    try
+                    {
+                        valid = provider.Verify(signed, cms, c);
+                    }
+                    catch (PdfException failure) when (failure.Diagnostic.Code == "Signature.UnsupportedProfile")
+                    {
+                        c.Checkpoint();
+                        valid = null;
+                        unsupported = failure.Diagnostic.Code;
+                    }
+                    c.Checkpoint();
+                    c.Consume(PdfResourceKind.ExpandedBytes, 128);
+                    records.Add(new(id, validated.Ranges, valid, validated.Ranges[2] + validated.Ranges[3], unsupported));
+                }
+                catch (PdfException failure) when (failure.Diagnostic.Code == "Signature.ByteRangeProfile")
+                {
+                    c.Checkpoint();
+                    c.Consume(PdfResourceKind.ExpandedBytes, 128);
+                    records.Add(new(id, Array.Empty<long>(), null, 0, failure.Diagnostic.Code));
+                }
             }
         }, PdfCapability.Signatures);
         return records.AsReadOnly();

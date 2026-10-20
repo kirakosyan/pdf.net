@@ -3,6 +3,7 @@ using System.IO;
 namespace Fluent.Pdf;
 public static partial class PdfSignatures
 {
+    private static PdfException UnsupportedProfile(string message) => new(new PdfDiagnostic("Signature.ByteRangeProfile", message, severity: PdfDiagnosticSeverity.Warning));
     private static int Find(byte[] bytes, int start, string text, PdfOperationContext c) => FindAt(i => bytes[i], bytes.Length, start, text, c);
     private static int FindAt(Func<long, int> at, long length, long start, string text, PdfOperationContext c)
     {
@@ -18,7 +19,7 @@ public static partial class PdfSignatures
                 return checked((int)i);
         }
 
-        throw Error(c, "ByteRangeProfile", "The signature token exceeds the bounded direct-object profile.");
+        throw UnsupportedProfile("The signature token exceeds the bounded direct-object profile.");
     }
 
     private static (long[] Ranges, byte[] Cms) Ranges(PdfSyntaxDocument source, PdfObjectId id, PdfValue signature, PdfOperationContext c)
@@ -30,7 +31,7 @@ public static partial class PdfSignatures
         var contents = Get(signature, "Contents", Resolve);
         var sub = Get(signature, "SubFilter", Resolve);
         if (declared.Kind != PdfValueKind.Array || declared.Items.Count != 4 || contents.Kind != PdfValueKind.String || sub.Kind != PdfValueKind.Name || sub.NameValue != "adbe.pkcs7.detached")
-            throw Error(c, "ByteRangeProfile", "Only exact two-pair detached CMS signature ranges are supported.");
+            throw UnsupportedProfile("Only exact two-pair detached CMS signature ranges are supported.");
         if (contents.StringBytes.Count > 1048576)
             throw Error(c, "CmsExtent", "CMS contents exceed the finite signature profile.");
         c.Consume(PdfResourceKind.ExpandedBytes, contents.StringBytes.Count + 512);
@@ -42,8 +43,32 @@ public static partial class PdfSignatures
             throw Error(c, "ByteRange", "Signature ranges must cover a complete revision with one Contents gap.");
         var entry = source.Revisions.SelectMany(r => r.Entries).FirstOrDefault(e => e.Id.Number == id.Number);
         if (entry == null || entry.Id != id || entry.Kind != PdfCrossReferenceKind.Offset)
-            throw Error(c, "ByteRangeProfile", "An uncompressed indirect signature object is required.");
-        long found = FindAt(source.Source.At, source.Source.Length, entry.Offset, "/Contents <", c) + 10;
+            throw UnsupportedProfile("An uncompressed indirect signature object is required.");
+        var cursor = new PdfSyntaxCursor(source.Source, c, entry.Offset, Math.Min(source.Source.Length, entry.Offset + 4194304));
+        cursor.Integer();
+        cursor.Integer();
+        cursor.Require("obj");
+        cursor.Skip();
+        if (cursor.Peek() != '<' || source.Source.At(cursor.Position + 1) != '<')
+            throw UnsupportedProfile("The signature object must be a direct dictionary.");
+        cursor.Position += 2;
+        long found = -1;
+        while (true)
+        {
+            cursor.Skip();
+            if (cursor.Peek() == '>') break;
+            var key = cursor.Value();
+            if (key.Kind != PdfValueKind.Name)
+                throw UnsupportedProfile("Signature dictionary keys must be names.");
+            cursor.Skip();
+            if (key.NameValue == "Contents")
+            {
+                found = cursor.Position;
+                break;
+            }
+            cursor.Value();
+        }
+
         if (found != ranges[1] || ranges[2] - ranges[1] != contents.StringBytes.Count * 2L + 2 || source.Source.At(ranges[1]) != 60 || source.Source.At(ranges[2] - 1) != 62)
             throw Error(c, "ByteRange", "The excluded gap must be exactly this signature's complete hex Contents token.");
         for (int i = 0; i < contents.StringBytes.Count; i++)
@@ -133,19 +158,19 @@ public static partial class PdfSignatures
 
     private sealed class RangeStream : Stream
     {
-        private readonly Func<long, int> _at;
+        private readonly Func<long, long, Stream> _open;
         private readonly long[] _ranges;
         private long _position;
         private bool _disposed;
         internal RangeStream(PdfByteStore source, long[] ranges)
         {
-            _at = source.At;
+            _open = source.Open;
             _ranges = ranges;
         }
 
         internal RangeStream(byte[] source, long[] ranges)
         {
-            _at = i => source[checked((int)i)];
+            _open = (offset, length) => new MemoryStream(source, checked((int)offset), checked((int)length), false);
             _ranges = ranges;
         }
 
@@ -177,14 +202,21 @@ public static partial class PdfSignatures
             Check();
             if (buffer == null || offset < 0 || count < 0 || offset > buffer.Length - count)
                 throw new ArgumentException("A valid read buffer is required.");
-            int n = (int)Math.Min(count, Length - _position);
-            for (int i = 0; i < n; i++)
+            int total = 0;
+            while (count > 0 && _position < Length)
             {
-                long p = _position++;
-                buffer[offset + i] = (byte)_at(p < _ranges[1] ? p : _ranges[2] + p - _ranges[1]);
+                long firstRemaining = _ranges[1] - _position;
+                long start = firstRemaining > 0 ? _position : _ranges[2] + _position - _ranges[1];
+                int extent = (int)Math.Min(count, firstRemaining > 0 ? firstRemaining : Length - _position);
+                using var input = _open(start, extent);
+                int read = input.Read(buffer, offset, extent);
+                if (read == 0) throw new EndOfStreamException();
+                _position += read;
+                offset += read;
+                count -= read;
+                total += read;
             }
-
-            return n;
+            return total;
         }
 
         public override long Seek(long offset, SeekOrigin origin)

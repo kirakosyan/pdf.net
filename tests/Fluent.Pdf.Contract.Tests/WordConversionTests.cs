@@ -97,6 +97,7 @@ public sealed class WordConversionTests
             using var copy = new MemoryStream();
             png.CopyTo(copy);
             var bytes = copy.ToArray();
+            Assert.True(bytes.Length < 5000, "The solid raster must be compressed before Word packaging.");
             Assert.Equal(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 }, bytes.Take(8));
             Assert.Equal(200, (bytes[16] << 24) | (bytes[17] << 16) | (bytes[18] << 8) | bytes[19]);
             Assert.Equal(100, (bytes[20] << 24) | (bytes[21] << 16) | (bytes[22] << 8) | bytes[23]);

@@ -231,7 +231,7 @@ internal sealed class PdfStandardSecurity : IPdfFileSecurity
             throw Error(context, "LegacyReadBlocked", "Legacy password encryption requires explicit read permission.");
         if (revision >= 5)
             return AuthenticateModern();
-        int length = revision == 2 ? 5 : dictionary.Entries.TryGetValue("Length", out var bits) ? Integer(bits) / 8 : 5;
+        int length = revision == 2 ? 5 : revision == 4 ? 16 : dictionary.Entries.TryGetValue("Length", out var bits) ? Integer(bits) / 8 : 5;
         if (length < 5 || length > 16 || revision == 2 && length != 5 || dictionary.Entries.TryGetValue("Length", out var declared) && Integer(declared) != length * 8)
             throw Error(context, "KeyLength", "The legacy file key length is invalid.");
         byte[] o = Array.Empty<byte>(), u = Array.Empty<byte>(), ownerKey = Array.Empty<byte>();
@@ -286,7 +286,7 @@ internal sealed class PdfStandardSecurity : IPdfFileSecurity
 
         PdfStandardSecurity AuthenticateModern()
         {
-            if (Number("Length") != 256)
+            if (dictionary.Entries.TryGetValue("Length", out var modernLength) && Integer(modernLength) != 256)
                 throw Error(context, "KeyLength", "AES-256 requires a 256-bit file key.");
             byte[] p = Array.Empty<byte>(), user = Array.Empty<byte>(), owner = Array.Empty<byte>(), ue = Array.Empty<byte>(), oe = Array.Empty<byte>(), encryptedPerms = Array.Empty<byte>();
             byte[]? key = null;

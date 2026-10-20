@@ -14,7 +14,7 @@ public static partial class PdfForms
         var report = PdfFont.Run("InspectForms", "managed.forms", policy, cancellationToken, context =>
         {
             using var graph = new PdfGraphEdit(source, new(), context);
-            reader = new(graph);
+            reader = new(graph, passive: true);
         }, PdfCapability.ReadDocument);
         return new(reader!.Graph.Snapshot, reader.Dictionary, reader.Fields, report);
     }
