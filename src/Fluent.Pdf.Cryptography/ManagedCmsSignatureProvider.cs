@@ -28,7 +28,10 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
     /// <summary>Gets explicit detached signature service metadata; this is not trust or production qualification.</summary>
     public PdfProviderDescriptor Descriptor { get; } = new("managed.cms-signatures", "1.0.0", PdfCapability.Signatures);
     /// <summary>Gets the bounded PKCS12 import report, or null for a borrowed credential/verifier.</summary>
-    public PdfOperationReport? ImportReport { get; private set; }
+    public PdfOperationReport? ImportReport
+    {
+        get; private set;
+    }
 
     /// <summary>Imports a bounded explicit PKCS12 through managed codecs and a memory-only RSA import. The password is never logged; this returned provider owns the imported certificate/key and must be disposed.</summary>
     public static ManagedCmsSignatureProvider FromPkcs12(Stream input, string password, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
@@ -123,41 +126,7 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
             c.Checkpoint();
             if (!publicKey.VerifyHash(digest, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1))
                 throw Error(c, "KeyMismatch", "The explicit private key does not match the certificate.");
-            var w = new AsnWriter(AsnEncodingRules.DER);
-            w.PushSequence();
-            w.WriteObjectIdentifier(SignedData);
-            w.PushSequence(Explicit);
-            w.PushSequence();
-            w.WriteInteger(1);
-            w.PushSetOf();
-            Algorithm(w, Sha256);
-            w.PopSetOf();
-            w.PushSequence();
-            w.WriteObjectIdentifier(Data);
-            w.PopSequence();
-            w.PushSetOf(Explicit);
-            w.WriteEncodedValue(raw);
-            w.PopSetOf(Explicit);
-            w.PushSetOf();
-            w.PushSequence();
-            w.WriteInteger(1);
-            w.PushSequence();
-            w.WriteEncodedValue(certificate.IssuerName.RawData);
-            var serial = certificate.GetSerialNumber();
-            Array.Reverse(serial);
-            w.WriteIntegerUnsigned(serial);
-            w.PopSequence();
-            Algorithm(w, Sha256);
-            Algorithm(w, Rsa);
-            w.WriteOctetString(signature);
-            w.PopSequence();
-            w.PopSetOf();
-            w.PopSequence();
-            w.PopSequence(Explicit);
-            w.PopSequence();
-            var encoded = w.Encode();
-            using var output = new BorrowedStream(cmsOutput, false, c);
-            output.Write(encoded, 0, encoded.Length);
+            WriteCms(raw, certificate, signature, cmsOutput, c);
             c.Checkpoint();
         }
         catch (CryptographicException)
@@ -268,6 +237,45 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
         _ownedCertificate?.Dispose();
     }
 
+    internal static void WriteCms(byte[] raw, X509Certificate2 certificate, byte[] signature, Stream cmsOutput, PdfOperationContext c)
+    {
+        var w = new AsnWriter(AsnEncodingRules.DER);
+        w.PushSequence();
+        w.WriteObjectIdentifier(SignedData);
+        w.PushSequence(Explicit);
+        w.PushSequence();
+        w.WriteInteger(1);
+        w.PushSetOf();
+        Algorithm(w, Sha256);
+        w.PopSetOf();
+        w.PushSequence();
+        w.WriteObjectIdentifier(Data);
+        w.PopSequence();
+        w.PushSetOf(Explicit);
+        w.WriteEncodedValue(raw);
+        w.PopSetOf(Explicit);
+        w.PushSetOf();
+        w.PushSequence();
+        w.WriteInteger(1);
+        w.PushSequence();
+        w.WriteEncodedValue(certificate.IssuerName.RawData);
+        var serial = certificate.GetSerialNumber();
+        Array.Reverse(serial);
+        w.WriteIntegerUnsigned(serial);
+        w.PopSequence();
+        Algorithm(w, Sha256);
+        Algorithm(w, Rsa);
+        w.WriteOctetString(signature);
+        w.PopSequence();
+        w.PopSetOf();
+        w.PopSequence();
+        w.PopSequence(Explicit);
+        w.PopSequence();
+        var encoded = w.Encode();
+        using var output = new BorrowedStream(cmsOutput, false, c);
+        output.Write(encoded, 0, encoded.Length);
+    }
+
     private void Alive()
     {
         if (_disposed)
@@ -293,7 +301,7 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
         return true;
     }
 
-    private static byte[] Hash(Stream input, PdfOperationContext c)
+    internal static byte[] Hash(Stream input, PdfOperationContext c)
     {
         c.Consume(PdfResourceKind.ExpandedBytes, 65536);
         var buffer = new byte[65536];
@@ -334,7 +342,7 @@ public sealed class ManagedCmsSignatureProvider : IPdfSignatureProvider, IDispos
         return result;
     }
 
-    private static X509Certificate2 Certificate(byte[] raw)
+    internal static X509Certificate2 Certificate(byte[] raw)
     {
 #if NET9_0_OR_GREATER
         return X509CertificateLoader.LoadCertificate(raw);

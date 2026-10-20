@@ -21,7 +21,7 @@ internal static class PdfSignaturePolicy
             throw PdfSignatures.Error(c, "CertificationOrder", "A prior document protection transform already exists.");
     }
 
-    private static (bool Protected, bool NoChanges, bool Locked) Protection(PdfSyntaxDocument source, string? field, PdfOperationContext c)
+    internal static (bool Protected, bool NoChanges, bool Locked) Protection(PdfSyntaxDocument source, string? field, PdfOperationContext c)
     {
         bool protect = false, noChanges = false, locked = false;
         // Historical policies remain authoritative even if a later untrusted revision removed their active objects.

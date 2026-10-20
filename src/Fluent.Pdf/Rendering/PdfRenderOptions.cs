@@ -36,19 +36,50 @@ public sealed class PdfRenderOptions
     }
 
     /// <summary>Gets requested horizontal dots per physical inch.</summary>
-    public double DpiX { get; }
+    public double DpiX
+    {
+        get;
+    }
     /// <summary>Gets requested vertical dots per physical inch.</summary>
-    public double DpiY { get; }
+    public double DpiY
+    {
+        get;
+    }
     /// <summary>Gets the optional region before outward pixel snapping.</summary>
-    public PdfRect? Region { get; }
+    public PdfRect? Region
+    {
+        get;
+    }
     /// <summary>Gets opaque 0xRRGGBB matte, or null for transparency.</summary>
-    public uint? BackgroundRgb { get; }
+    public uint? BackgroundRgb
+    {
+        get;
+    }
     /// <summary>Gets device-color selection.</summary>
-    public PdfRasterColor Color { get; }
+    public PdfRasterColor Color
+    {
+        get;
+    }
     /// <summary>Gets whether annotation and existing widget appearances are painted.</summary>
-    public bool Annotations { get; }
+    public bool Annotations
+    {
+        get;
+    }
     /// <summary>Gets print intent, including print visibility and optional-content usage.</summary>
-    public bool Print { get; }
+    public bool Print
+    {
+        get;
+    }
+
+    internal (int X, int Y, int Width, int Height)? PixelWindow
+    {
+        get; private set;
+    }
+    internal static PdfRenderOptions Tile(double dpi, PdfRect region, int x, int y, int width, int height)
+        => new(dpi, dpi, region)
+        {
+            PixelWindow = (x, y, width, height)
+        };
 
     private static bool Finite(double n) => !double.IsNaN(n) && !double.IsInfinity(n);
 }

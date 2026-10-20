@@ -24,56 +24,59 @@ public static partial class PdfForms
     {
         if (definition == null)
             throw new ArgumentNullException(nameof(definition));
-        return PdfGraphEdit.Run("AddFormField", source, options, policy, cancellationToken, graph =>
-        {
-            var reader = new PdfFormReader(graph);
-            reader.Editable();
-            graph.Context.Consume(PdfResourceKind.Objects, definition.Widgets.Count * 32L + 64);
-            graph.Context.Consume(PdfResourceKind.ExpandedBytes, definition.Widgets.Count * 128L + 4096);
-            if (reader.Fields.Any(f => f.Name == definition.Name))
-                throw reader.Error("DuplicateName", "A logical field with this name already exists.");
-            if (graph.Catalog.Entries.ContainsKey("StructTreeRoot"))
-                throw reader.Error("StructureCreationProfile", "Adding tagged widgets requires an explicit structure creation profile.");
-            uint flags = PdfFormValues.Flags(definition, graph);
-            var choices = PdfFormValues.Choices(definition, graph);
-            var onNames = new List<string>();
-            var resources = new PdfResourceWriter(graph.Edit, graph.Context, new());
-            foreach (var widget in definition.Widgets)
-                ValidateWidget(widget, definition.Kind, graph, onNames);
-            if (definition.Kind == PdfFormFieldKind.RadioButton && (flags & 33554432) == 0 && onNames.Distinct(StringComparer.Ordinal).Count() != onNames.Count)
-                throw reader.Error("RadioExports", "Radio exports must be distinct unless RadiosInUnison is explicit.");
-            if (definition.Kind == PdfFormFieldKind.CheckBox && onNames.Distinct(StringComparer.Ordinal).Count() != 1)
-                throw reader.Error("CheckboxExports", "Shared checkbox widgets must use the same on-state name.");
-            PdfFormValues.Value(definition.Kind, flags, definition.Value, choices, definition.MaximumLength, onNames, graph);
-            PdfFormValues.Value(definition.Kind, flags, definition.DefaultValue, choices, definition.MaximumLength, onNames, graph);
-            var form = graph.Copy(reader.Dictionary);
-            var roots = graph.Get(reader.Dictionary, "Fields");
-            graph.Context.Consume(PdfResourceKind.ExpandedBytes, (roots.Kind == PdfValueKind.Array ? roots.Items.Count : 0) * 32L + definition.Name.Length * 16L + 1024);
-            var rootList = roots.Kind == PdfValueKind.Array ? roots.Items.ToList() : new List<PdfValue>();
-            string[] segments = definition.Name.Split('.');
-            if (segments.Length > graph.Context.Policy.Limits.MaximumDepth)
-                graph.Context.RejectLimit(PdfResourceKind.Depth);
-            PdfObjectId? parent = null;
-            var siblings = rootList;
-            for (int i = 0; i < segments.Length - 1; i++)
-            {
-                graph.Context.Checkpoint();
-                PdfObjectId? found = null;
-                foreach (var child in siblings)
-                {
-                    var value = graph.Resolve(child);
-                    var partial = graph.Get(value, "T");
-                    if (partial.Kind != PdfValueKind.Null && PdfTextStrings.Decode(partial, graph.Context) == segments[i])
-                    {
-                        if (found.HasValue)
-                            throw reader.Error("DuplicateName", "The hierarchical container name is ambiguous.");
-                        found = child.ReferenceId;
-                    }
-                }
+        return PdfGraphEdit.Run("AddFormField", source, options, policy, cancellationToken, graph => AddCore(graph, definition), "1.7");
+    }
 
-                if (!found.HasValue)
+    internal static void AddCore(PdfGraphEdit graph, PdfFormFieldDefinition definition)
+    {
+        var reader = new PdfFormReader(graph);
+        reader.Editable();
+        graph.Context.Consume(PdfResourceKind.Objects, definition.Widgets.Count * 32L + 64);
+        graph.Context.Consume(PdfResourceKind.ExpandedBytes, definition.Widgets.Count * 128L + 4096);
+        if (reader.Fields.Any(f => f.Name == definition.Name))
+            throw reader.Error("DuplicateName", "A logical field with this name already exists.");
+        if (graph.Catalog.Entries.ContainsKey("StructTreeRoot"))
+            throw reader.Error("StructureCreationProfile", "Adding tagged widgets requires an explicit structure creation profile.");
+        uint flags = PdfFormValues.Flags(definition, graph);
+        var choices = PdfFormValues.Choices(definition, graph);
+        var onNames = new List<string>();
+        var resources = new PdfResourceWriter(graph.Edit, graph.Context, new());
+        foreach (var widget in definition.Widgets)
+            ValidateWidget(widget, definition.Kind, graph, onNames);
+        if (definition.Kind == PdfFormFieldKind.RadioButton && (flags & 33554432) == 0 && onNames.Distinct(StringComparer.Ordinal).Count() != onNames.Count)
+            throw reader.Error("RadioExports", "Radio exports must be distinct unless RadiosInUnison is explicit.");
+        if (definition.Kind == PdfFormFieldKind.CheckBox && onNames.Distinct(StringComparer.Ordinal).Count() != 1)
+            throw reader.Error("CheckboxExports", "Shared checkbox widgets must use the same on-state name.");
+        PdfFormValues.Value(definition.Kind, flags, definition.Value, choices, definition.MaximumLength, onNames, graph);
+        PdfFormValues.Value(definition.Kind, flags, definition.DefaultValue, choices, definition.MaximumLength, onNames, graph);
+        var form = graph.Copy(reader.Dictionary);
+        var roots = graph.Get(reader.Dictionary, "Fields");
+        graph.Context.Consume(PdfResourceKind.ExpandedBytes, (roots.Kind == PdfValueKind.Array ? roots.Items.Count : 0) * 32L + definition.Name.Length * 16L + 1024);
+        var rootList = roots.Kind == PdfValueKind.Array ? roots.Items.ToList() : new List<PdfValue>();
+        string[] segments = definition.Name.Split('.');
+        if (segments.Length > graph.Context.Policy.Limits.MaximumDepth)
+            graph.Context.RejectLimit(PdfResourceKind.Depth);
+        PdfObjectId? parent = null;
+        var siblings = rootList;
+        for (int i = 0; i < segments.Length - 1; i++)
+        {
+            graph.Context.Checkpoint();
+            PdfObjectId? found = null;
+            foreach (var child in siblings)
+            {
+                var value = graph.Resolve(child);
+                var partial = graph.Get(value, "T");
+                if (partial.Kind != PdfValueKind.Null && PdfTextStrings.Decode(partial, graph.Context) == segments[i])
                 {
-                    var entries = new Dictionary<string, PdfValue>
+                    if (found.HasValue)
+                        throw reader.Error("DuplicateName", "The hierarchical container name is ambiguous.");
+                    found = child.ReferenceId;
+                }
+            }
+
+            if (!found.HasValue)
+            {
+                var entries = new Dictionary<string, PdfValue>
                     {
                         {
                             "T",
@@ -84,25 +87,25 @@ public static partial class PdfForms
                             PdfValue.Array()
                         }
                     };
-                    if (parent.HasValue)
-                        entries["Parent"] = PdfValue.Reference(parent.Value);
-                    found = graph.Edit.Add(PdfValue.OwnedDictionary(entries));
-                    siblings.Add(PdfValue.Reference(found.Value));
-                    SaveSiblings(parent, siblings);
-                }
-                else if (reader.ById.ContainsKey(found.Value))
-                    throw reader.Error("TerminalNamePrefix", "A terminal field cannot become a hierarchical container implicitly.");
-                parent = found.Value;
-                var children = graph.Get(graph.Edit.Resolve(parent.Value), "Kids");
-                if (children.Kind != PdfValueKind.Array)
-                    throw reader.Error("ContainerKids", "A field container requires Kids.");
-                graph.Context.Consume(PdfResourceKind.ExpandedBytes, children.Items.Count * 32L + 64);
-                siblings = children.Items.ToList();
+                if (parent.HasValue)
+                    entries["Parent"] = PdfValue.Reference(parent.Value);
+                found = graph.Edit.Add(PdfValue.OwnedDictionary(entries));
+                siblings.Add(PdfValue.Reference(found.Value));
+                SaveSiblings(parent, siblings);
             }
+            else if (reader.ById.ContainsKey(found.Value))
+                throw reader.Error("TerminalNamePrefix", "A terminal field cannot become a hierarchical container implicitly.");
+            parent = found.Value;
+            var children = graph.Get(graph.Edit.Resolve(parent.Value), "Kids");
+            if (children.Kind != PdfValueKind.Array)
+                throw reader.Error("ContainerKids", "A field container requires Kids.");
+            graph.Context.Consume(PdfResourceKind.ExpandedBytes, children.Items.Count * 32L + 64);
+            siblings = children.Items.ToList();
+        }
 
-            if (definition.Value.Kind == PdfValueKind.Null && HasInheritedValue(parent, "V", graph) || definition.DefaultValue.Kind == PdfValueKind.Null && HasInheritedValue(parent, "DV", graph))
-                throw reader.Error("InheritedValueProfile", "An absent authored value/reset would inherit source data; provide an explicit supported value or a separate inheritance profile.");
-            var field = new Dictionary<string, PdfValue>
+        if (definition.Value.Kind == PdfValueKind.Null && HasInheritedValue(parent, "V", graph) || definition.DefaultValue.Kind == PdfValueKind.Null && HasInheritedValue(parent, "DV", graph))
+            throw reader.Error("InheritedValueProfile", "An absent authored value/reset would inherit source data; provide an explicit supported value or a separate inheritance profile.");
+        var field = new Dictionary<string, PdfValue>
             {
                 {
                     "T",
@@ -117,76 +120,76 @@ public static partial class PdfForms
                     PdfValue.Integer(flags)
                 }
             };
-            if (parent.HasValue)
-                field["Parent"] = PdfValue.Reference(parent.Value);
-            if (definition.Value.Kind != PdfValueKind.Null)
-                field["V"] = definition.Value;
-            if (definition.DefaultValue.Kind != PdfValueKind.Null)
-                field["DV"] = definition.DefaultValue;
-            if (definition.MaximumLength.HasValue)
-                field["MaxLen"] = PdfValue.Integer(definition.MaximumLength.Value);
-            if (definition.AlternateName != null)
-                field["TU"] = PdfTextStrings.Encode(definition.AlternateName, graph.Context);
-            if (definition.MappingName != null)
-                field["TM"] = PdfTextStrings.Encode(definition.MappingName, graph.Context);
-            if (definition.Kind == PdfFormFieldKind.ComboBox || definition.Kind == PdfFormFieldKind.ListBox)
+        if (parent.HasValue)
+            field["Parent"] = PdfValue.Reference(parent.Value);
+        if (definition.Value.Kind != PdfValueKind.Null)
+            field["V"] = definition.Value;
+        if (definition.DefaultValue.Kind != PdfValueKind.Null)
+            field["DV"] = definition.DefaultValue;
+        if (definition.MaximumLength.HasValue)
+            field["MaxLen"] = PdfValue.Integer(definition.MaximumLength.Value);
+        if (definition.AlternateName != null)
+            field["TU"] = PdfTextStrings.Encode(definition.AlternateName, graph.Context);
+        if (definition.MappingName != null)
+            field["TM"] = PdfTextStrings.Encode(definition.MappingName, graph.Context);
+        if (definition.Kind == PdfFormFieldKind.ComboBox || definition.Kind == PdfFormFieldKind.ListBox)
+        {
+            field["Opt"] = PdfFormValues.Options(choices, graph);
+            PdfFormValues.Selection(field, definition.Value, choices, flags, graph);
+        }
+
+        if (definition.EditingFont != null)
+        {
+            string name = "FF" + graph.Edit.ActiveIds(graph.Context).Count().ToString(CultureInfo.InvariantCulture);
+            var defaults = graph.Copy(graph.Get(reader.Dictionary, "DR"));
+            var fonts = graph.Copy(graph.Get(PdfValue.OwnedDictionary(defaults), "Font"));
+            while (fonts.ContainsKey(name))
             {
-                field["Opt"] = PdfFormValues.Options(choices, graph);
-                PdfFormValues.Selection(field, definition.Value, choices, flags, graph);
+                graph.Context.Checkpoint();
+                if (name.Length >= 127)
+                    throw reader.Error("EditingFontNames", "The generated editing-font namespace is exhausted.");
+                name += "F";
             }
 
-            if (definition.EditingFont != null)
-            {
-                string name = "FF" + graph.Edit.ActiveIds(graph.Context).Count().ToString(CultureInfo.InvariantCulture);
-                var defaults = graph.Copy(graph.Get(reader.Dictionary, "DR"));
-                var fonts = graph.Copy(graph.Get(PdfValue.OwnedDictionary(defaults), "Font"));
-                while (fonts.ContainsKey(name))
-                {
-                    graph.Context.Checkpoint();
-                    if (name.Length >= 127)
-                        throw reader.Error("EditingFontNames", "The generated editing-font namespace is exhausted.");
-                    name += "F";
-                }
+            fonts[name] = resources.Embed(PdfGraphicsResource.Font(definition.EditingFont));
+            defaults["Font"] = PdfValue.OwnedDictionary(fonts);
+            form["DR"] = PdfValue.OwnedDictionary(defaults);
+            field["DA"] = PdfValue.String(System.Text.Encoding.ASCII.GetBytes("/" + name + " " + PdfValues.Real(definition.FontSize).NumberText + " Tf 0 g"));
+        }
+        else if (definition.Kind == PdfFormFieldKind.Text || definition.Kind == PdfFormFieldKind.ComboBox || definition.Kind == PdfFormFieldKind.ListBox)
+            throw reader.Error("EditingFontRequired", "Variable text fields require an explicit editing font in addition to their private appearances.");
+        var id = graph.Edit.Add(PdfValue.Null);
+        var widgets = new List<PdfValue>();
+        graph.Context.Consume(PdfResourceKind.ExpandedBytes, definition.Widgets.Count * 64L + 256);
+        foreach (var widget in definition.Widgets)
+            widgets.Add(PdfValue.Reference(Widget(graph, resources, id, widget, definition.Value)));
+        field["Kids"] = PdfValue.OwnedArray(widgets);
+        graph.Edit.Set(id, PdfValue.OwnedDictionary(field));
+        siblings.Add(PdfValue.Reference(id));
+        SaveSiblings(parent, siblings);
+        form["Fields"] = PdfValue.OwnedArray(rootList);
+        if (!form.ContainsKey("NeedAppearances"))
+            form["NeedAppearances"] = PdfValue.Boolean(false);
+        if (definition.Kind == PdfFormFieldKind.Signature)
+        {
+            var old = graph.Get(reader.Dictionary, "SigFlags");
+            uint signatureFlags = reader.Flags(old);
+            if ((signatureFlags & ~3u) != 0)
+                throw reader.Error("SignatureFlags", "Unknown signature flags require a supported editing profile.");
+            form["SigFlags"] = PdfValue.Integer(signatureFlags | 1u);
+        }
 
-                fonts[name] = resources.Embed(PdfGraphicsResource.Font(definition.EditingFont));
-                defaults["Font"] = PdfValue.OwnedDictionary(fonts);
-                form["DR"] = PdfValue.OwnedDictionary(defaults);
-                field["DA"] = PdfValue.String(System.Text.Encoding.ASCII.GetBytes("/" + name + " " + PdfValues.Real(definition.FontSize).NumberText + " Tf 0 g"));
-            }
-            else if (definition.Kind == PdfFormFieldKind.Text || definition.Kind == PdfFormFieldKind.ComboBox || definition.Kind == PdfFormFieldKind.ListBox)
-                throw reader.Error("EditingFontRequired", "Variable text fields require an explicit editing font in addition to their private appearances.");
-            var id = graph.Edit.Add(PdfValue.Null);
-            var widgets = new List<PdfValue>();
-            graph.Context.Consume(PdfResourceKind.ExpandedBytes, definition.Widgets.Count * 64L + 256);
-            foreach (var widget in definition.Widgets)
-                widgets.Add(PdfValue.Reference(Widget(graph, resources, id, widget, definition.Value)));
-            field["Kids"] = PdfValue.OwnedArray(widgets);
-            graph.Edit.Set(id, PdfValue.OwnedDictionary(field));
-            siblings.Add(PdfValue.Reference(id));
-            SaveSiblings(parent, siblings);
-            form["Fields"] = PdfValue.OwnedArray(rootList);
-            if (!form.ContainsKey("NeedAppearances"))
-                form["NeedAppearances"] = PdfValue.Boolean(false);
-            if (definition.Kind == PdfFormFieldKind.Signature)
-            {
-                var old = graph.Get(reader.Dictionary, "SigFlags");
-                uint signatureFlags = reader.Flags(old);
-                if ((signatureFlags & ~3u) != 0)
-                    throw reader.Error("SignatureFlags", "Unknown signature flags require a supported editing profile.");
-                form["SigFlags"] = PdfValue.Integer(signatureFlags | 1u);
-            }
+        PdfFormValues.Form(graph, form);
+        _ = new PdfFormReader(graph);
+        void SaveSiblings(PdfObjectId? owner, List<PdfValue> values)
+        {
+            if (!owner.HasValue)
+                return;
+            var entries = graph.Copy(graph.Edit.Resolve(owner.Value));
+            entries["Kids"] = PdfValue.OwnedArray(values);
+            graph.Edit.Set(owner.Value, PdfValue.OwnedDictionary(entries));
+        }
 
-            PdfFormValues.Form(graph, form);
-            _ = new PdfFormReader(graph);
-            void SaveSiblings(PdfObjectId? owner, List<PdfValue> values)
-            {
-                if (!owner.HasValue)
-                    return;
-                var entries = graph.Copy(graph.Edit.Resolve(owner.Value));
-                entries["Kids"] = PdfValue.OwnedArray(values);
-                graph.Edit.Set(owner.Value, PdfValue.OwnedDictionary(entries));
-            }
-        }, "1.7");
     }
 
     /// <summary>Adds another widget representation of an existing logical field without creating a duplicate name.</summary>

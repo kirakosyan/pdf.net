@@ -107,8 +107,8 @@ public static class ContractExample
 
     public static PdfOperationReport WriteMetadataPdf(Stream output)
     {
-        using var blank=PdfFacade.Create().AddPage();
-        using var document=PdfMetadata.Edit(blank.CreateSnapshot(),e=>e.SetInformation("Title","Metadata example").SetInformation("Author","Example writer").SetCreationTime(new DateTimeOffset(2024,1,2,3,4,5,TimeSpan.Zero)).SetModificationTime(new DateTimeOffset(2024,1,2,3,4,5,TimeSpan.Zero)).SetIdentity(new byte[]{1,2,3,4}).Synchronize(PdfMetadataSynchronization.InformationToXmp));
+        using var blank = PdfFacade.Create().AddPage();
+        using var document = PdfMetadata.Edit(blank.CreateSnapshot(), e => e.SetInformation("Title", "Metadata example").SetInformation("Author", "Example writer").SetCreationTime(new DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero)).SetModificationTime(new DateTimeOffset(2024, 1, 2, 3, 4, 5, TimeSpan.Zero)).SetIdentity(new byte[] { 1, 2, 3, 4 }).Synchronize(PdfMetadataSynchronization.InformationToXmp));
         return document.Save(output);
     }
     public static PdfOperationReport WritePresentationPdf(Stream output)
@@ -133,7 +133,8 @@ public static class ContractExample
         using var blank = PdfFacade.Create().AddPage(new PdfPageSize(240, 160));
         var note = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Text, "note", new PdfRect(20, 90, 40, 40), new PdfColor(PdfColorSpace.Rgb, 1, .85, .2), metadata: new PdfAnnotationMetadata("Review this page", "Reviewer"));
         var box = PdfAnnotation.CreateMarkup(PdfAnnotationKind.Square, "box", new PdfRect(80, 30, 120, 90), new PdfColor(PdfColorSpace.Rgb, .8, .1, .1));
-        using var document = PdfAnnotations.Add(blank.CreateSnapshot(), 0, new[] { note, box }); return document.Save(output);
+        using var document = PdfAnnotations.Add(blank.CreateSnapshot(), 0, new[] { note, box });
+        return document.Save(output);
     }
     public static PdfOperationReport WriteImagePdf(Stream imageInput, Stream output, bool allowLosslessTranscode = false)
     {
@@ -141,7 +142,8 @@ public static class ContractExample
         var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 200, 160)));
         var canvas = PdfCanvas.Create(geometry, c => c.DrawImageAsset(image, new PdfRect(10, 10, 180, 140)));
         using var document = PdfFacade.Create().AddPage(geometry);
-        canvas.ApplyTo(document.Pages[0]); return document.Save(output);
+        canvas.ApplyTo(document.Pages[0]);
+        return document.Save(output);
     }
     public static PdfOperationReport CombinePages(Stream firstInput, Stream secondInput, Stream output)
     {
@@ -175,7 +177,8 @@ public static class ContractExample
             new PdfFlowNoteReference(new PdfFlowParagraph("reference", style), note) };
         var geometry = new PdfPageGeometry(new PdfPageBoxes(new PdfRect(0, 0, 300, 200)));
         var result = PdfFlow.Layout(blocks, new PdfFlowOptions(geometry, PdfMargins.Uniform(12)), new PdfProviderRegistry(shaper));
-        using var document = result.CreateDocument(); return document.Save(output);
+        using var document = result.CreateDocument();
+        return document.Save(output);
     }
     public static PdfOperationReport WriteTablePdf(Stream fontInput, Stream output, IPdfTextShaper shaper)
     {
@@ -222,26 +225,36 @@ public static class ContractExample
     }
     public static PdfOperationReport WriteVectorPdf(Stream output)
     {
-        var path=PdfPath.Create(new[]{PdfPathSegment.Move(20,20),PdfPathSegment.Curve(40,100,120,100,160,20),PdfPathSegment.Close()});
-        var operations=new List<PdfContentOperation>{new(PdfOperator.FillRgb,PdfValues.Real(.2),PdfValues.Real(.4),PdfValues.Real(.6))};operations.AddRange(path.Operations);operations.Add(new(PdfOperator.FillStroke));
-        var drawing=PdfDrawing.Create(operations);var form=PdfGraphicsObjects.Form(drawing,new(0,0,200,120));using var document=PdfFacade.Create().AddPage(new PdfPageSize(200,120));document.Pages[0].SetResource("Art",form);document.Pages[0].Content=PdfContentProgram.Create(new[]{new PdfContentOperation(PdfOperator.SaveState),new PdfContentOperation(PdfOperator.DrawObject,PdfValue.Name("Art")),new PdfContentOperation(PdfOperator.RestoreState)});return document.Save(output);
+        var path = PdfPath.Create(new[] { PdfPathSegment.Move(20, 20), PdfPathSegment.Curve(40, 100, 120, 100, 160, 20), PdfPathSegment.Close() });
+        var operations = new List<PdfContentOperation> { new(PdfOperator.FillRgb, PdfValues.Real(.2), PdfValues.Real(.4), PdfValues.Real(.6)) };
+        operations.AddRange(path.Operations);
+        operations.Add(new(PdfOperator.FillStroke));
+        var drawing = PdfDrawing.Create(operations);
+        var form = PdfGraphicsObjects.Form(drawing, new(0, 0, 200, 120));
+        using var document = PdfFacade.Create().AddPage(new PdfPageSize(200, 120));
+        document.Pages[0].SetResource("Art", form);
+        document.Pages[0].Content = PdfContentProgram.Create(new[] { new PdfContentOperation(PdfOperator.SaveState), new PdfContentOperation(PdfOperator.DrawObject, PdfValue.Name("Art")), new PdfContentOperation(PdfOperator.RestoreState) });
+        return document.Save(output);
     }
-    public static PdfTextDrawing ShapeText(string text,PdfFontFallback fonts,IPdfTextShaper shaper,PdfOperationPolicy? policy=null)
+    public static PdfTextDrawing ShapeText(string text, PdfFontFallback fonts, IPdfTextShaper shaper, PdfOperationPolicy? policy = null)
     {
-        var shaped=PdfText.Shape(text,fonts,new PdfProviderRegistry(shaper),policy:policy);
-        return PdfTextDrawing.Create(shaped,20,80,24);
+        var shaped = PdfText.Shape(text, fonts, new PdfProviderRegistry(shaper), policy: policy);
+        return PdfTextDrawing.Create(shaped, 20, 80, 24);
     }
-    public static PdfOperationReport WriteFontPdf(Stream fontInput,Stream output,string text)
+    public static PdfOperationReport WriteFontPdf(Stream fontInput, Stream output, string text)
     {
-        var providers=new PdfProviderRegistry(ManagedPdfProvider.Instance,Fluent.Pdf.Fonts.ManagedFontProvider.Instance);
-        var font=PdfFont.Read(fontInput,providers);var resource=PdfFontResource.CreateText(font,text);using var document=PdfFacade.Create(providers:providers).AddPage();document.Pages[0].SetFont("F1",resource);
-        document.Pages[0].Content=PdfContentProgram.Create(new[]{new PdfContentOperation(PdfOperator.BeginText),new PdfContentOperation(PdfOperator.Font,PdfValue.Name("F1"),PdfValue.Integer(24)),new PdfContentOperation(PdfOperator.MoveText,PdfValue.Integer(20),PdfValue.Integer(60)),new PdfContentOperation(PdfOperator.ShowText,resource.EncodedText),new PdfContentOperation(PdfOperator.EndText)});
+        var providers = new PdfProviderRegistry(ManagedPdfProvider.Instance, Fluent.Pdf.Fonts.ManagedFontProvider.Instance);
+        var font = PdfFont.Read(fontInput, providers);
+        var resource = PdfFontResource.CreateText(font, text);
+        using var document = PdfFacade.Create(providers: providers).AddPage();
+        document.Pages[0].SetFont("F1", resource);
+        document.Pages[0].Content = PdfContentProgram.Create(new[] { new PdfContentOperation(PdfOperator.BeginText), new PdfContentOperation(PdfOperator.Font, PdfValue.Name("F1"), PdfValue.Integer(24)), new PdfContentOperation(PdfOperator.MoveText, PdfValue.Integer(20), PdfValue.Integer(60)), new PdfContentOperation(PdfOperator.ShowText, resource.EncodedText), new PdfContentOperation(PdfOperator.EndText) });
         return document.Save(output);
     }
     public static PdfOperationReport WriteRectangle(Stream output)
     {
-        using var document=PdfFacade.Create().AddPage();
-        document.Pages[0].Content=PdfContentProgram.Create(new[]{
+        using var document = PdfFacade.Create().AddPage();
+        document.Pages[0].Content = PdfContentProgram.Create(new[]{
             new PdfContentOperation(PdfOperator.SaveState),
             new PdfContentOperation(PdfOperator.Rectangle,PdfValue.Integer(20),PdfValue.Integer(20),PdfValue.Integer(100),PdfValue.Integer(50)),
             new PdfContentOperation(PdfOperator.Fill),
@@ -250,13 +263,13 @@ public static class ContractExample
     }
     public static PdfOperationReport WriteManagedPdf(Stream output)
     {
-        using var document=PdfFacade.Create().AddPage(PdfPageSize.Letter);
+        using var document = PdfFacade.Create().AddPage(PdfPageSize.Letter);
         return document.Save(output);
     }
-    public static PdfProviderRegistry ImageCodecs(Fluent.Pdf.Workers.NativeWorkerOptions worker)=>
-        new(ManagedPdfProvider.Instance,new Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker));
-    public static PdfSyntaxDocument InspectSyntax(Stream borrowedInput)=>PdfSyntax.Read(borrowedInput);
-    public static PdfDecodedData DecodeStream(PdfSyntaxDocument syntax,PdfObjectId id)=>syntax.DecodeStream(id);
+    public static PdfProviderRegistry ImageCodecs(Fluent.Pdf.Workers.NativeWorkerOptions worker) =>
+        new(ManagedPdfProvider.Instance, new Fluent.Pdf.Codecs.IsolatedImageCodecProvider(worker));
+    public static PdfSyntaxDocument InspectSyntax(Stream borrowedInput) => PdfSyntax.Read(borrowedInput);
+    public static PdfDecodedData DecodeStream(PdfSyntaxDocument syntax, PdfObjectId id) => syntax.DecodeStream(id);
 
     public static byte[] ExecuteNativeWorker(Fluent.Pdf.Workers.NativeWorkerOptions options, byte[] request, PdfOperationContext context) =>
         new Fluent.Pdf.Workers.NativeWorkerHost().Execute(options, request, context);
@@ -288,7 +301,7 @@ public static class ContractExample
     public static int Run()
     {
         var options = new PdfOptions(PdfPageSize.Letter, maximumPages: 10);
-        using var document = PdfFacade.Create(options,PdfProviderRegistry.Empty)
+        using var document = PdfFacade.Create(options, PdfProviderRegistry.Empty)
             .AddPage()
             .AddPage(PdfPageSize.A4);
         document.Pages[0].Rotation = PdfPageRotation.Clockwise90;
@@ -326,4 +339,14 @@ public static class ContractExample
 
     public static PdfSignedResult SignPdf(PdfSyntaxDocument source, string fieldName, PdfProviderRegistry providers) => PdfSignatures.Sign(source, new(fieldName), providers);
 
+    public static IReadOnlyList<PdfSignatureVerification> VerifySignatures(PdfSyntaxDocument source, PdfProviderRegistry providers, DateTimeOffset instant) => PdfSignatures.Verify(source, providers, new(instant));
+    public static System.Threading.Tasks.Task<PdfSignedResult> SignExternalAsync(PdfSyntaxDocument source, string fieldName, PdfProviderRegistry providers) => PdfSignatures.SignAsync(source, new(fieldName), providers);
+    public static PdfSignedResult UpgradePades(PdfSyntaxDocument source, PdfPadesProfile profile, PdfProviderRegistry providers) => PdfPades.Upgrade(source, profile, providers);
+    public static IReadOnlyList<PdfRevisionAuditRecord> AuditSignatures(PdfSyntaxDocument source, PdfProviderRegistry providers) => PdfSignatures.AuditRevisions(source, providers);
+    public static PdfComparisonResult CompareDocuments(PdfDocumentSnapshot before, PdfDocumentSnapshot after) => PdfComparison.Compare(before, after);
+    public static PdfXfaSet ReadXfa(PdfDocumentSnapshot source) => PdfXfa.Inspect(source);
+    public static decimal Calculate(string source, IReadOnlyDictionary<string, decimal> values) => PdfScripts.EvaluateCalculation(source, values, enableExecution: true).Value;
+    public static PdfRaster RenderColor(PdfDocumentSnapshot source, PdfProviderRegistry providers, PdfColorRenderOptions colors) => PdfColorRendering.RenderPage(source, 0, providers, colors);
+    public static PdfOperationReport ExportRaster(PdfDocumentSnapshot source, Stream output, PdfProviderRegistry providers) => PdfRasterExport.Write(source, new[] { 0 }, output, new(PdfRasterFormat.Png), providers);
+    public static PdfViewSession CreateViewer(PdfDocumentSnapshot source, PdfProviderRegistry providers) => new(source, providers, maximumCachedBytes: 4 * 1024 * 1024);
 }

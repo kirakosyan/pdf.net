@@ -157,7 +157,9 @@ public static partial class PdfSignatures
         _ = providers.GetRequired<IPdfSignatureProvider>(PdfCapability.Signatures);
     }
 
-    private static PdfByteStore Build(PdfSyntaxDocument source, PdfSignatureOptions options, PdfProviderRegistry providers, PdfOperationContext c)
+    private static PdfByteStore Build(PdfSyntaxDocument source, PdfSignatureOptions options, PdfProviderRegistry providers, PdfOperationContext c) => BuildAsync(source, options, providers, c).GetAwaiter().GetResult();
+
+    private static async System.Threading.Tasks.Task<PdfByteStore> BuildAsync(PdfSyntaxDocument source, PdfSignatureOptions options, PdfProviderRegistry providers, PdfOperationContext c)
     {
         if (source.DecryptionApplied || source.Revisions.Any(r => r.Trailer.Entries.ContainsKey("Encrypt")))
             throw Error(c, "EncryptedProfile", "Signing encrypted inputs requires a separately qualified crypt-filter profile.");
@@ -268,7 +270,12 @@ public static partial class PdfSignatures
         using var cmsBuffer = new PdfCodecBufferStream(c, options.ReservedCmsBytes);
         using (var signed = c.BorrowExpandedInput(new RangeStream(raw, ranges)))
         using (var output = new BorrowedStream(cmsBuffer, false, c))
-            provider.Sign(signed, output, c);
+        {
+            if (provider is IPdfAsyncSignatureProvider asynchronous)
+                await asynchronous.SignAsync(signed, output, c).ConfigureAwait(false);
+            else
+                provider.Sign(signed, output, c);
+        }
         c.Checkpoint();
         var encoded = cmsBuffer.Finish();
         if (encoded.Length == 0 || encoded.Length > options.ReservedCmsBytes)

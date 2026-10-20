@@ -3,17 +3,27 @@ Fluent.Pdf.IPdfAccessibilityValidator
 Fluent.Pdf.IPdfAccessibilityValidator.Validate(Fluent.Pdf.PdfAccessibilityProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfAccessibilityValidation!
 Fluent.Pdf.IPdfArchivalValidator
 Fluent.Pdf.IPdfArchivalValidator.Validate(Fluent.Pdf.PdfArchivalProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfArchivalValidation!
+Fluent.Pdf.IPdfAsyncSignatureProvider
+Fluent.Pdf.IPdfAsyncSignatureProvider.SignAsync(System.IO.Stream! signedBytes, System.IO.Stream! cmsOutput, Fluent.Pdf.PdfOperationContext! context) -> System.Threading.Tasks.Task!
+Fluent.Pdf.IPdfCertificateStatusProvider
+Fluent.Pdf.IPdfCertificateStatusProvider.Check(System.IO.Stream! certificate, System.DateTimeOffset evaluationTime, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfRevocationStatus
 Fluent.Pdf.IPdfCidFontProgram
 Fluent.Pdf.IPdfCidFontProgram.MapCid(int cid, Fluent.Pdf.PdfOperationContext! context) -> int
 Fluent.Pdf.IPdfCmsEnvelopeProvider
 Fluent.Pdf.IPdfCmsEnvelopeProvider.Encrypt(System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCertificateRecipient!>! recipients, System.IO.Stream! plaintext, System.IO.Stream! envelope, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfCmsEnvelopeProvider.TryDecrypt(Fluent.Pdf.PdfCertificateCredential! credential, bool allowLegacyKeyTransport, System.IO.Stream! envelope, System.IO.Stream! plaintext, Fluent.Pdf.PdfOperationContext! context) -> bool
+Fluent.Pdf.IPdfColorManagedPageRenderer
+Fluent.Pdf.IPdfColorManagedPageRenderer.Render(Fluent.Pdf.PdfRasterRequest! request, Fluent.Pdf.PdfColorRenderOptions! colorManagement, System.IO.Stream! bgraOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfDocumentReader
 Fluent.Pdf.IPdfDocumentReader.Read(System.IO.Stream! input, Fluent.Pdf.PdfDocument! target, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfDocumentReader.RequiresSeekableStream.get -> bool
 Fluent.Pdf.IPdfDocumentWriter
 Fluent.Pdf.IPdfDocumentWriter.RequiresSeekableStream.get -> bool
 Fluent.Pdf.IPdfDocumentWriter.Write(Fluent.Pdf.PdfDocumentSnapshot! document, System.IO.Stream! output, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.IPdfExternalSigningKey
+Fluent.Pdf.IPdfExternalSigningKey.OpenSessionAsync(Fluent.Pdf.PdfOperationContext! context) -> System.Threading.Tasks.Task<Fluent.Pdf.IPdfExternalSigningSession!>!
+Fluent.Pdf.IPdfExternalSigningSession
+Fluent.Pdf.IPdfExternalSigningSession.SignHashAsync(System.IO.Stream! sha256Digest, System.IO.Stream! signatureOutput, Fluent.Pdf.PdfOperationContext! context) -> System.Threading.Tasks.Task!
 Fluent.Pdf.IPdfFontEncodingMetricsProvider
 Fluent.Pdf.IPdfFontEncodingMetricsProvider.GetSimpleAdvances(Fluent.Pdf.PdfValue! encoding, string! baseFont, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<double?>!
 Fluent.Pdf.IPdfFontEncodingProvider
@@ -39,6 +49,10 @@ Fluent.Pdf.IPdfImageCodecProvider.Inspect(Fluent.Pdf.PdfImageCodec codec, System
 Fluent.Pdf.IPdfImageCodecProvider.Supports(Fluent.Pdf.PdfImageCodec codec, bool encoding) -> bool
 Fluent.Pdf.IPdfOcrProvider
 Fluent.Pdf.IPdfOcrProvider.Recognize(Fluent.Pdf.PdfOcrRaster! raster, Fluent.Pdf.PdfOcrOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfOcrResult!
+Fluent.Pdf.IPdfPadesProvider
+Fluent.Pdf.IPdfPadesProvider.Upgrade(System.IO.Stream! source, System.IO.Stream! output, Fluent.Pdf.PdfPadesProfile profile, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.IPdfPadesValidator
+Fluent.Pdf.IPdfPadesValidator.Validate(System.IO.Stream! source, Fluent.Pdf.PdfPadesProfile profile, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPadesValidation!
 Fluent.Pdf.IPdfPageRenderer
 Fluent.Pdf.IPdfPageRenderer.Render(Fluent.Pdf.PdfRasterRequest! request, System.IO.Stream! bgraOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfProvider
@@ -48,6 +62,8 @@ Fluent.Pdf.IPdfRevisionWriter.Supports(Fluent.Pdf.PdfWriteOptions! options) -> b
 Fluent.Pdf.IPdfSignatureProvider
 Fluent.Pdf.IPdfSignatureProvider.Sign(System.IO.Stream! signedBytes, System.IO.Stream! cmsOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfSignatureProvider.Verify(System.IO.Stream! signedBytes, System.IO.Stream! cms, Fluent.Pdf.PdfOperationContext! context) -> bool
+Fluent.Pdf.IPdfSignatureTrustProvider
+Fluent.Pdf.IPdfSignatureTrustProvider.Evaluate(System.IO.Stream! cms, Fluent.Pdf.PdfSignatureTrustOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfSignatureTrustDecision!
 Fluent.Pdf.IPdfTemplateHtmlProvider
 Fluent.Pdf.IPdfTemplateHtmlProvider.Render(string! html, Fluent.Pdf.PdfPageSize viewport, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfDrawing!
 Fluent.Pdf.IPdfTextShaper
@@ -289,6 +305,9 @@ Fluent.Pdf.PdfBookmark.Italic.get -> bool
 Fluent.Pdf.PdfBookmark.PdfBookmark(string! title, Fluent.Pdf.PdfDestination? destination = null, Fluent.Pdf.PdfAction? action = null, bool isOpen = true, bool bold = false, bool italic = false, Fluent.Pdf.PdfColor? color = null, params Fluent.Pdf.PdfBookmark![]! children) -> void
 Fluent.Pdf.PdfBookmark.Title.get -> string!
 Fluent.Pdf.PdfBookmark.WithChildren(params Fluent.Pdf.PdfBookmark![]! children) -> Fluent.Pdf.PdfBookmark!
+Fluent.Pdf.PdfCalculationResult
+Fluent.Pdf.PdfCalculationResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfCalculationResult.Value.get -> decimal
 Fluent.Pdf.PdfCanvas
 Fluent.Pdf.PdfCanvas.Bounds.get -> Fluent.Pdf.PdfRect
 Fluent.Pdf.PdfCanvas.Clip(Fluent.Pdf.PdfPath! path, bool evenOdd = false) -> void
@@ -377,14 +396,18 @@ Fluent.Pdf.PdfCapability.CmsEnvelopes = 8 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ConvertWord = 10 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.Fonts = 6 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ImageCodecs = 5 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.Pades = 14 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ReadDocument = 0 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RecognizeText = 4 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.RenderColorManaged = 16 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderHtml = 3 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderPages = 2 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ShapeText = 7 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.SignatureTrust = 13 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.Signatures = 12 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ValidateAccessibility = 11 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ValidateArchival = 9 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.ValidatePades = 15 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.WriteDocument = 1 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCertificateCredential
 Fluent.Pdf.PdfCertificateCredential.OpenCertificate() -> System.IO.Stream!
@@ -413,6 +436,18 @@ Fluent.Pdf.PdfColor
 Fluent.Pdf.PdfColor.ColorSpace.get -> Fluent.Pdf.PdfColorSpace!
 Fluent.Pdf.PdfColor.Components.get -> System.Collections.Generic.IReadOnlyList<double>!
 Fluent.Pdf.PdfColor.PdfColor(Fluent.Pdf.PdfColorSpace! colorSpace, params double[]! components) -> void
+Fluent.Pdf.PdfColorRenderOptions
+Fluent.Pdf.PdfColorRenderOptions.Intent.get -> Fluent.Pdf.PdfColorRenderingIntent
+Fluent.Pdf.PdfColorRenderOptions.OutputProfile.get -> Fluent.Pdf.PdfColorSpace!
+Fluent.Pdf.PdfColorRenderOptions.PdfColorRenderOptions(Fluent.Pdf.PdfColorSpace! outputProfile, Fluent.Pdf.PdfColorRenderingIntent intent = Fluent.Pdf.PdfColorRenderingIntent.RelativeColorimetric, bool simulateOverprint = false, Fluent.Pdf.PdfSpotColorPolicy spotColors = Fluent.Pdf.PdfSpotColorPolicy.Reject) -> void
+Fluent.Pdf.PdfColorRenderOptions.SimulateOverprint.get -> bool
+Fluent.Pdf.PdfColorRenderOptions.SpotColors.get -> Fluent.Pdf.PdfSpotColorPolicy
+Fluent.Pdf.PdfColorRendering
+Fluent.Pdf.PdfColorRenderingIntent
+Fluent.Pdf.PdfColorRenderingIntent.AbsoluteColorimetric = 3 -> Fluent.Pdf.PdfColorRenderingIntent
+Fluent.Pdf.PdfColorRenderingIntent.Perceptual = 0 -> Fluent.Pdf.PdfColorRenderingIntent
+Fluent.Pdf.PdfColorRenderingIntent.RelativeColorimetric = 1 -> Fluent.Pdf.PdfColorRenderingIntent
+Fluent.Pdf.PdfColorRenderingIntent.Saturation = 2 -> Fluent.Pdf.PdfColorRenderingIntent
 Fluent.Pdf.PdfColorSpace
 Fluent.Pdf.PdfColorSpace.AsResource(Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfGraphicsResource!
 Fluent.Pdf.PdfColorSpace.Components.get -> int
@@ -421,6 +456,26 @@ Fluent.Pdf.PdfColorSpace.IsPattern.get -> bool
 Fluent.Pdf.PdfColorSpace.MinimumVersion.get -> string!
 Fluent.Pdf.PdfColorSpace.OperationReport.get -> Fluent.Pdf.PdfOperationReport?
 Fluent.Pdf.PdfColorSpace.Ranges.get -> System.Collections.Generic.IReadOnlyList<double>!
+Fluent.Pdf.PdfColorTransformation
+Fluent.Pdf.PdfColorTransformation.Color.get -> Fluent.Pdf.PdfColor!
+Fluent.Pdf.PdfColorTransformation.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfComparison
+Fluent.Pdf.PdfComparisonOptions
+Fluent.Pdf.PdfComparisonOptions.Geometry.get -> bool
+Fluent.Pdf.PdfComparisonOptions.GeometryTolerance.get -> double
+Fluent.Pdf.PdfComparisonOptions.IgnoredInformationKeys.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.PdfComparisonOptions.Metadata.get -> bool
+Fluent.Pdf.PdfComparisonOptions.PdfComparisonOptions(bool text = true, bool geometry = true, bool metadata = true, bool visual = false, double geometryTolerance = 0.5, byte pixelTolerance = 0, string![]? ignoredInformationKeys = null, Fluent.Pdf.PdfRenderOptions? rendering = null) -> void
+Fluent.Pdf.PdfComparisonOptions.PixelTolerance.get -> byte
+Fluent.Pdf.PdfComparisonOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions!
+Fluent.Pdf.PdfComparisonOptions.Text.get -> bool
+Fluent.Pdf.PdfComparisonOptions.Visual.get -> bool
+Fluent.Pdf.PdfComparisonResult
+Fluent.Pdf.PdfComparisonResult.CreateAnnotatedDocument(Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfComparisonResult.Differences.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfDifference!>!
+Fluent.Pdf.PdfComparisonResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfComparisonResult.Options.get -> Fluent.Pdf.PdfComparisonOptions!
+Fluent.Pdf.PdfComparisonResult.WriteReport(System.IO.Stream! output, bool html = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfCompatibility
 Fluent.Pdf.PdfCompatibilityInspection
 Fluent.Pdf.PdfCompatibilityInspection.CatalogAssociatedFiles.get -> Fluent.Pdf.PdfValue!
@@ -506,6 +561,19 @@ Fluent.Pdf.PdfDiagnosticSeverity
 Fluent.Pdf.PdfDiagnosticSeverity.Error = 2 -> Fluent.Pdf.PdfDiagnosticSeverity
 Fluent.Pdf.PdfDiagnosticSeverity.Information = 0 -> Fluent.Pdf.PdfDiagnosticSeverity
 Fluent.Pdf.PdfDiagnosticSeverity.Warning = 1 -> Fluent.Pdf.PdfDiagnosticSeverity
+Fluent.Pdf.PdfDifference
+Fluent.Pdf.PdfDifference.After.get -> string!
+Fluent.Pdf.PdfDifference.AfterObject.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfDifference.Before.get -> string!
+Fluent.Pdf.PdfDifference.BeforeObject.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfDifference.Kind.get -> Fluent.Pdf.PdfDifferenceKind
+Fluent.Pdf.PdfDifference.PageIndex.get -> int?
+Fluent.Pdf.PdfDifferenceKind
+Fluent.Pdf.PdfDifferenceKind.Geometry = 2 -> Fluent.Pdf.PdfDifferenceKind
+Fluent.Pdf.PdfDifferenceKind.Metadata = 3 -> Fluent.Pdf.PdfDifferenceKind
+Fluent.Pdf.PdfDifferenceKind.Page = 0 -> Fluent.Pdf.PdfDifferenceKind
+Fluent.Pdf.PdfDifferenceKind.Text = 1 -> Fluent.Pdf.PdfDifferenceKind
+Fluent.Pdf.PdfDifferenceKind.Visual = 4 -> Fluent.Pdf.PdfDifferenceKind
 Fluent.Pdf.PdfDocument
 Fluent.Pdf.PdfDocument.AddPage() -> Fluent.Pdf.PdfDocument!
 Fluent.Pdf.PdfDocument.AddPage(Fluent.Pdf.PdfPageGeometry! geometry) -> Fluent.Pdf.PdfDocument!
@@ -1321,6 +1389,7 @@ Fluent.Pdf.PdfMatrix.Multiply(Fluent.Pdf.PdfMatrix right) -> Fluent.Pdf.PdfMatri
 Fluent.Pdf.PdfMatrix.PdfMatrix() -> void
 Fluent.Pdf.PdfMatrix.PdfMatrix(double a, double b, double c, double d, double e, double f) -> void
 Fluent.Pdf.PdfMatrix.Transform(Fluent.Pdf.PdfPoint point) -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfMatrixIccTransform
 Fluent.Pdf.PdfMergeBlock
 Fluent.Pdf.PdfMergeCondition
 Fluent.Pdf.PdfMergeCondition.Path.get -> string!
@@ -1689,6 +1758,18 @@ Fluent.Pdf.PdfOutlineRecord.IsOpen.get -> bool
 Fluent.Pdf.PdfOutlineRecord.ObjectId.get -> Fluent.Pdf.PdfObjectId
 Fluent.Pdf.PdfOutlineRecord.TargetPageIndex.get -> int?
 Fluent.Pdf.PdfOutlineRecord.Title.get -> string!
+Fluent.Pdf.PdfPades
+Fluent.Pdf.PdfPadesProfile
+Fluent.Pdf.PdfPadesProfile.B = 0 -> Fluent.Pdf.PdfPadesProfile
+Fluent.Pdf.PdfPadesProfile.LT = 2 -> Fluent.Pdf.PdfPadesProfile
+Fluent.Pdf.PdfPadesProfile.LTA = 3 -> Fluent.Pdf.PdfPadesProfile
+Fluent.Pdf.PdfPadesProfile.T = 1 -> Fluent.Pdf.PdfPadesProfile
+Fluent.Pdf.PdfPadesValidation
+Fluent.Pdf.PdfPadesValidation.Completed.get -> bool
+Fluent.Pdf.PdfPadesValidation.Compliant.get -> bool
+Fluent.Pdf.PdfPadesValidation.PdfPadesValidation(string! sourceSha256, Fluent.Pdf.PdfPadesProfile profile, bool completed, bool compliant) -> void
+Fluent.Pdf.PdfPadesValidation.Profile.get -> Fluent.Pdf.PdfPadesProfile
+Fluent.Pdf.PdfPadesValidation.SourceSha256.get -> string!
 Fluent.Pdf.PdfPage
 Fluent.Pdf.PdfPage.CanvasLayers.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfCanvasPageLayer!>!
 Fluent.Pdf.PdfPage.Content.get -> Fluent.Pdf.PdfContentProgram?
@@ -1973,6 +2054,17 @@ Fluent.Pdf.PdfRaster.Request.get -> Fluent.Pdf.PdfRasterRequest!
 Fluent.Pdf.PdfRasterColor
 Fluent.Pdf.PdfRasterColor.Gray = 1 -> Fluent.Pdf.PdfRasterColor
 Fluent.Pdf.PdfRasterColor.Rgb = 0 -> Fluent.Pdf.PdfRasterColor
+Fluent.Pdf.PdfRasterExport
+Fluent.Pdf.PdfRasterExportOptions
+Fluent.Pdf.PdfRasterExportOptions.BitsPerComponent.get -> int
+Fluent.Pdf.PdfRasterExportOptions.ColorManagement.get -> Fluent.Pdf.PdfColorRenderOptions?
+Fluent.Pdf.PdfRasterExportOptions.Format.get -> Fluent.Pdf.PdfRasterFormat
+Fluent.Pdf.PdfRasterExportOptions.PdfRasterExportOptions(Fluent.Pdf.PdfRasterFormat format, Fluent.Pdf.PdfRenderOptions? rendering = null, Fluent.Pdf.PdfColorRenderOptions? colorManagement = null) -> void
+Fluent.Pdf.PdfRasterExportOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions!
+Fluent.Pdf.PdfRasterFormat
+Fluent.Pdf.PdfRasterFormat.Bmp = 1 -> Fluent.Pdf.PdfRasterFormat
+Fluent.Pdf.PdfRasterFormat.Png = 0 -> Fluent.Pdf.PdfRasterFormat
+Fluent.Pdf.PdfRasterFormat.Tiff = 2 -> Fluent.Pdf.PdfRasterFormat
 Fluent.Pdf.PdfRasterRequest
 Fluent.Pdf.PdfRasterRequest.ByteLength.get -> long
 Fluent.Pdf.PdfRasterRequest.EffectiveDpiX.get -> double
@@ -2129,6 +2221,19 @@ Fluent.Pdf.PdfRevision.Entries.get -> System.Collections.Generic.IReadOnlyList<F
 Fluent.Pdf.PdfRevision.IsHybrid.get -> bool
 Fluent.Pdf.PdfRevision.StartXref.get -> long
 Fluent.Pdf.PdfRevision.Trailer.get -> Fluent.Pdf.PdfValue!
+Fluent.Pdf.PdfRevisionAuditRecord
+Fluent.Pdf.PdfRevisionAuditRecord.Changes.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRevisionChange!>!
+Fluent.Pdf.PdfRevisionAuditRecord.RevisionIndex.get -> int
+Fluent.Pdf.PdfRevisionAuditRecord.Signatures.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfSignatureObservation!>!
+Fluent.Pdf.PdfRevisionAuditRecord.StartXref.get -> long
+Fluent.Pdf.PdfRevisionChange
+Fluent.Pdf.PdfRevisionChange.Kind.get -> Fluent.Pdf.PdfCrossReferenceKind
+Fluent.Pdf.PdfRevisionChange.ObjectId.get -> Fluent.Pdf.PdfObjectId
+Fluent.Pdf.PdfRevisionChange.PreviouslyDefined.get -> bool
+Fluent.Pdf.PdfRevocationStatus
+Fluent.Pdf.PdfRevocationStatus.Good = 1 -> Fluent.Pdf.PdfRevocationStatus
+Fluent.Pdf.PdfRevocationStatus.Revoked = 2 -> Fluent.Pdf.PdfRevocationStatus
+Fluent.Pdf.PdfRevocationStatus.Unknown = 0 -> Fluent.Pdf.PdfRevocationStatus
 Fluent.Pdf.PdfScanDewarpGrid
 Fluent.Pdf.PdfScanDewarpGrid.Columns.get -> int
 Fluent.Pdf.PdfScanDewarpGrid.MapPoint(Fluent.Pdf.PdfPoint point) -> Fluent.Pdf.PdfPoint
@@ -2235,6 +2340,11 @@ Fluent.Pdf.PdfScanRegionKind.Form = 2 -> Fluent.Pdf.PdfScanRegionKind
 Fluent.Pdf.PdfScanRegionKind.Prose = 0 -> Fluent.Pdf.PdfScanRegionKind
 Fluent.Pdf.PdfScanRegionKind.RuledTableOrForm = 3 -> Fluent.Pdf.PdfScanRegionKind
 Fluent.Pdf.PdfScanRegionKind.Table = 1 -> Fluent.Pdf.PdfScanRegionKind
+Fluent.Pdf.PdfScriptRecord
+Fluent.Pdf.PdfScriptRecord.IsAttachment.get -> bool
+Fluent.Pdf.PdfScriptRecord.Location.get -> string!
+Fluent.Pdf.PdfScriptRecord.Source.get -> string!
+Fluent.Pdf.PdfScripts
 Fluent.Pdf.PdfSecurity
 Fluent.Pdf.PdfSecurityResult
 Fluent.Pdf.PdfSecurityResult.Cipher.get -> string!
@@ -2304,7 +2414,26 @@ Fluent.Pdf.PdfSignatureOptions.PdfSignatureOptions(string! fieldName, int reserv
 Fluent.Pdf.PdfSignatureOptions.Reason.get -> string?
 Fluent.Pdf.PdfSignatureOptions.ReservedCmsBytes.get -> int
 Fluent.Pdf.PdfSignatureOptions.SigningTime.get -> System.DateTimeOffset?
+Fluent.Pdf.PdfSignatureTrustDecision
+Fluent.Pdf.PdfSignatureTrustDecision.Accepted.get -> bool
+Fluent.Pdf.PdfSignatureTrustDecision.CertificateSha256.get -> string!
+Fluent.Pdf.PdfSignatureTrustDecision.IdentityTrusted.get -> bool
+Fluent.Pdf.PdfSignatureTrustDecision.PdfSignatureTrustDecision(bool identityTrusted, bool timeValid, Fluent.Pdf.PdfRevocationStatus revocation, string! certificateSha256) -> void
+Fluent.Pdf.PdfSignatureTrustDecision.Revocation.get -> Fluent.Pdf.PdfRevocationStatus
+Fluent.Pdf.PdfSignatureTrustDecision.TimeValid.get -> bool
+Fluent.Pdf.PdfSignatureTrustOptions
+Fluent.Pdf.PdfSignatureTrustOptions.EvaluationTime.get -> System.DateTimeOffset
+Fluent.Pdf.PdfSignatureTrustOptions.PdfSignatureTrustOptions(System.DateTimeOffset evaluationTime) -> void
+Fluent.Pdf.PdfSignatureVerification
+Fluent.Pdf.PdfSignatureVerification.Accepted.get -> bool
+Fluent.Pdf.PdfSignatureVerification.LaterByteCount.get -> long
+Fluent.Pdf.PdfSignatureVerification.Signature.get -> Fluent.Pdf.PdfSignatureObservation!
+Fluent.Pdf.PdfSignatureVerification.Trust.get -> Fluent.Pdf.PdfSignatureTrustDecision?
 Fluent.Pdf.PdfSignatures
+Fluent.Pdf.PdfSignedEditPlan
+Fluent.Pdf.PdfSignedEditPlan.Allowed.get -> bool
+Fluent.Pdf.PdfSignedEditPlan.PreservesOriginalPrefix.get -> bool
+Fluent.Pdf.PdfSignedEditPlan.Reason.get -> string!
 Fluent.Pdf.PdfSignedResult
 Fluent.Pdf.PdfSignedResult.ByteLength.get -> long
 Fluent.Pdf.PdfSignedResult.OpenPdfStream() -> System.IO.Stream!
@@ -2324,6 +2453,9 @@ Fluent.Pdf.PdfSoftMask.Transfer.get -> Fluent.Pdf.PdfFunction?
 Fluent.Pdf.PdfSoftMaskKind
 Fluent.Pdf.PdfSoftMaskKind.Alpha = 0 -> Fluent.Pdf.PdfSoftMaskKind
 Fluent.Pdf.PdfSoftMaskKind.Luminosity = 1 -> Fluent.Pdf.PdfSoftMaskKind
+Fluent.Pdf.PdfSpotColorPolicy
+Fluent.Pdf.PdfSpotColorPolicy.CompositeAlternate = 1 -> Fluent.Pdf.PdfSpotColorPolicy
+Fluent.Pdf.PdfSpotColorPolicy.Reject = 0 -> Fluent.Pdf.PdfSpotColorPolicy
 Fluent.Pdf.PdfStampContent
 Fluent.Pdf.PdfStampContent.Kind.get -> Fluent.Pdf.PdfStampContentKind
 Fluent.Pdf.PdfStampContent.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
@@ -2683,6 +2815,19 @@ Fluent.Pdf.PdfValueKind.Reference = 7 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValueKind.Stream = 8 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValueKind.String = 4 -> Fluent.Pdf.PdfValueKind
 Fluent.Pdf.PdfValues
+Fluent.Pdf.PdfViewSession
+Fluent.Pdf.PdfViewSession.CachedBytes.get -> long
+Fluent.Pdf.PdfViewSession.CachedRasterCount.get -> int
+Fluent.Pdf.PdfViewSession.CancelPending() -> void
+Fluent.Pdf.PdfViewSession.ClearCache() -> void
+Fluent.Pdf.PdfViewSession.DisplayToUser(int pageIndex, Fluent.Pdf.PdfPoint point) -> Fluent.Pdf.PdfPoint
+Fluent.Pdf.PdfViewSession.Dispose() -> void
+Fluent.Pdf.PdfViewSession.HitTest(int pageIndex, Fluent.Pdf.PdfPoint point, double radius = 2, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfExtractedCharacter?
+Fluent.Pdf.PdfViewSession.PdfViewSession(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfProviderRegistry! providers, long maximumCachedBytes = 16777216, int maximumOutstandingRequests = 8, Fluent.Pdf.PdfOperationPolicy? policy = null) -> void
+Fluent.Pdf.PdfViewSession.PlanTiles(int pageIndex, double dpi, int tilePixels = 256, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRenderOptions!>!
+Fluent.Pdf.PdfViewSession.RenderAsync(int pageIndex, Fluent.Pdf.PdfRenderOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Fluent.Pdf.PdfRaster!>!
+Fluent.Pdf.PdfViewSession.RenderThumbnailAsync(int pageIndex, int maximumWidth, int maximumHeight, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Fluent.Pdf.PdfRaster!>!
+Fluent.Pdf.PdfViewSession.SelectText(int pageIndex, Fluent.Pdf.PdfRect region, Fluent.Pdf.PdfTextExtractionOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedCharacter!>!
 Fluent.Pdf.PdfWordConversion
 Fluent.Pdf.PdfWordConversionOptions
 Fluent.Pdf.PdfWordConversionOptions.MaximumArchiveEntries.get -> int
@@ -2714,6 +2859,15 @@ Fluent.Pdf.PdfWriteOptions.Mode.get -> Fluent.Pdf.PdfWriteMode
 Fluent.Pdf.PdfWriteOptions.PdfWriteOptions(Fluent.Pdf.PdfWriteMode mode = Fluent.Pdf.PdfWriteMode.Full, Fluent.Pdf.PdfCrossReferenceFormat crossReferenceFormat = Fluent.Pdf.PdfCrossReferenceFormat.Auto, string? version = null, bool allowSignatureInvalidation = false, string? minimumVersion = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfExtensionRequirement!>? extensions = null, Fluent.Pdf.PdfUnknownExtensionPolicy unknownExtensions = Fluent.Pdf.PdfUnknownExtensionPolicy.Preserve) -> void
 Fluent.Pdf.PdfWriteOptions.UnknownExtensions.get -> Fluent.Pdf.PdfUnknownExtensionPolicy
 Fluent.Pdf.PdfWriteOptions.Version.get -> string?
+Fluent.Pdf.PdfXfa
+Fluent.Pdf.PdfXfaPacket
+Fluent.Pdf.PdfXfaPacket.Name.get -> string!
+Fluent.Pdf.PdfXfaPacket.ObjectId.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfXfaPacket.Xml.get -> string!
+Fluent.Pdf.PdfXfaSet
+Fluent.Pdf.PdfXfaSet.Data.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+Fluent.Pdf.PdfXfaSet.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfXfaSet.Packets.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfXfaPacket!>!
 const Fluent.Pdf.PdfOcrAccuracy.ComparisonProfile = "unicode-scalars+whitespace15.1+ordinal-v1" -> string!
 override Fluent.Pdf.PdfObjectId.Equals(object? obj) -> bool
 override Fluent.Pdf.PdfObjectId.GetHashCode() -> int
@@ -2757,6 +2911,7 @@ static Fluent.Pdf.PdfAttachments.SetCollection(Fluent.Pdf.PdfDocumentSnapshot! s
 static Fluent.Pdf.PdfAttachments.SetCollectionItem(Fluent.Pdf.PdfAttachment! attachment, Fluent.Pdf.PdfValue? item, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfCanvas.Create(Fluent.Pdf.PdfPageGeometry! geometry, System.Action<Fluent.Pdf.PdfCanvas!>! draw, Fluent.Pdf.PdfCanvasOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfCanvasResult!
 static Fluent.Pdf.PdfCanvasStyle.Default.get -> Fluent.Pdf.PdfCanvasStyle!
+static Fluent.Pdf.PdfColorRendering.RenderPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfColorRenderOptions! colorManagement, Fluent.Pdf.PdfRenderOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRaster!
 static Fluent.Pdf.PdfColorSpace.CalGray(double whiteX, double whiteZ, double gamma = 1, double blackX = 0, double blackY = 0, double blackZ = 0) -> Fluent.Pdf.PdfColorSpace!
 static Fluent.Pdf.PdfColorSpace.CalRgb(double whiteX, double whiteZ, double[]! gamma, double[]! matrix) -> Fluent.Pdf.PdfColorSpace!
 static Fluent.Pdf.PdfColorSpace.Cmyk.get -> Fluent.Pdf.PdfColorSpace!
@@ -2768,6 +2923,7 @@ static Fluent.Pdf.PdfColorSpace.Lab(double whiteX, double whiteZ, double aMinimu
 static Fluent.Pdf.PdfColorSpace.Pattern(Fluent.Pdf.PdfColorSpace? baseSpace = null) -> Fluent.Pdf.PdfColorSpace!
 static Fluent.Pdf.PdfColorSpace.Rgb.get -> Fluent.Pdf.PdfColorSpace!
 static Fluent.Pdf.PdfColorSpace.Separation(string! name, Fluent.Pdf.PdfColorSpace! alternate, Fluent.Pdf.PdfFunction! tint) -> Fluent.Pdf.PdfColorSpace!
+static Fluent.Pdf.PdfComparison.Compare(Fluent.Pdf.PdfDocumentSnapshot! before, Fluent.Pdf.PdfDocumentSnapshot! after, Fluent.Pdf.PdfComparisonOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfComparisonResult!
 static Fluent.Pdf.PdfCompatibility.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfCompatibilityInspection!
 static Fluent.Pdf.PdfContentOperation.Extension(string! token, string! minimumVersion, params Fluent.Pdf.PdfValue![]! operands) -> Fluent.Pdf.PdfContentOperation!
 static Fluent.Pdf.PdfContentOperation.InlineImage(Fluent.Pdf.PdfValue! dictionary, System.IO.Stream! encodedInput, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfContentOperation!
@@ -2844,6 +3000,7 @@ static Fluent.Pdf.PdfMailMerge.Write(Fluent.Pdf.PdfMergeTemplate! template, Flue
 static Fluent.Pdf.PdfMailMerge.WriteFile(Fluent.Pdf.PdfMergeTemplate! template, Fluent.Pdf.PdfMergeRecord! data, Fluent.Pdf.PdfMailMergeOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, string! path, Fluent.Pdf.PdfWriteOptions? writeOptions = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfMargins.Uniform(double value) -> Fluent.Pdf.PdfMargins
 static Fluent.Pdf.PdfMatrix.Identity.get -> Fluent.Pdf.PdfMatrix
+static Fluent.Pdf.PdfMatrixIccTransform.Transform(Fluent.Pdf.PdfColor! color, Fluent.Pdf.PdfColorSpace! outputProfile, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfColorTransformation!
 static Fluent.Pdf.PdfMergeImage.ReadPng(System.IO.Stream! input, double width, double height, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfMergeImage!
 static Fluent.Pdf.PdfMergeRun.Field(string! path, string! style = "body", string? format = null) -> Fluent.Pdf.PdfMergeRun!
 static Fluent.Pdf.PdfMergeRun.Text(string! text, string! style = "body") -> Fluent.Pdf.PdfMergeRun!
@@ -2878,6 +3035,7 @@ static Fluent.Pdf.PdfOcrSearchable.Apply(Fluent.Pdf.PdfDocumentSnapshot! source,
 static Fluent.Pdf.PdfOcrSearchable.RecognizePage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfOcrOptions! recognition, Fluent.Pdf.PdfFontFallback! fonts, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfRenderOptions? render = null, Fluent.Pdf.PdfOcrOverlayOptions? overlay = null, Fluent.Pdf.PdfOrganizationOptions? organization = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfOperationPolicy.Default.get -> Fluent.Pdf.PdfOperationPolicy!
 static Fluent.Pdf.PdfOptions.Default.get -> Fluent.Pdf.PdfOptions!
+static Fluent.Pdf.PdfPades.Upgrade(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfPadesProfile profile, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSignedResult!
 static Fluent.Pdf.PdfPageDecoration.Flow(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! content) -> Fluent.Pdf.PdfPageDecoration!
 static Fluent.Pdf.PdfPageDecoration.Html(string! html, Fluent.Pdf.IPdfTemplateHtmlProvider? provider = null) -> Fluent.Pdf.PdfPageDecoration!
 static Fluent.Pdf.PdfPageDecoration.Vector(Fluent.Pdf.PdfDrawing! drawing, Fluent.Pdf.PdfRect sourceBounds) -> Fluent.Pdf.PdfPageDecoration!
@@ -2917,6 +3075,8 @@ static Fluent.Pdf.PdfPresentation.SetView(Fluent.Pdf.PdfDocumentSnapshot! source
 static Fluent.Pdf.PdfPresentation.SetViewerPreferences(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue! preferences, bool replace = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfProviderRegistry.Default.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfProviderRegistry.Empty.get -> Fluent.Pdf.PdfProviderRegistry!
+static Fluent.Pdf.PdfRasterExport.Write(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.PdfRasterExportOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfRasterExport.WriteFile(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, string! path, Fluent.Pdf.PdfRasterExportOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfRedaction.RasterRewrite(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfRedactionRegion!>! regions, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfRedactionRasterOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRedactionResult!
 static Fluent.Pdf.PdfRedaction.SanitizeRasterRewrite(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfRedactionRasterOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRedactionResult!
 static Fluent.Pdf.PdfRedaction.WriteRasterRewrite(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfRedactionRegion!>! regions, System.IO.Stream! output, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfRedactionRasterOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRedactionResult!
@@ -2928,6 +3088,9 @@ static Fluent.Pdf.PdfResourceSet.Empty.get -> Fluent.Pdf.PdfResourceSet!
 static Fluent.Pdf.PdfScanLayout.Analyze(Fluent.Pdf.PdfOcrResult! recognition, int rasterWidth, int rasterHeight, Fluent.Pdf.PdfScanLayoutOptions? options = null, Fluent.Pdf.PdfOcrRaster? raster = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfScanLayoutResult!
 static Fluent.Pdf.PdfScanPreprocessing.Process(Fluent.Pdf.PdfOcrRaster! original, Fluent.Pdf.PdfScanPreprocessingOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOcrOptions? orientationRecognition = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfScanPreprocessingResult!
 static Fluent.Pdf.PdfScanPreprocessing.Recognize(Fluent.Pdf.PdfOcrRaster! original, Fluent.Pdf.PdfScanPreprocessingOptions! preprocessing, Fluent.Pdf.PdfOcrOptions! recognition, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfScanLayoutOptions? layout = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfScanRecognitionResult!
+static Fluent.Pdf.PdfScripts.EvaluateCalculation(string! source, System.Collections.Generic.IReadOnlyDictionary<string!, decimal>! values, bool enableExecution = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfCalculationResult!
+static Fluent.Pdf.PdfScripts.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfScriptRecord!>!
+static Fluent.Pdf.PdfScripts.SetDocumentScript(Fluent.Pdf.PdfDocumentSnapshot! document, string! name, string? source, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfSecurity.DecryptWithCertificate(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfCertificateCredential! credential, Fluent.Pdf.PdfProviderRegistry! providers, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfSecurity.DecryptWithPassword(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfPassword! password, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfSecurity.EncryptWithCertificates(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfCertificateProtection! protection, Fluent.Pdf.PdfProviderRegistry! providers, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
@@ -2936,10 +3099,15 @@ static Fluent.Pdf.PdfShading.Axial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.
 static Fluent.Pdf.PdfShading.Functional(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfFunction! function, Fluent.Pdf.PdfRect domain, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Mesh(Fluent.Pdf.PdfColorSpace! colorSpace, int shadingType, System.IO.Stream! packedData, int bitsPerCoordinate, int bitsPerComponent, double[]! decode, int bitsPerFlag = 2, int verticesPerRow = 0, Fluent.Pdf.PdfFunction? function = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Radial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfPoint start, double startRadius, Fluent.Pdf.PdfPoint end, double endRadius, Fluent.Pdf.PdfFunction! function, bool extendStart = false, bool extendEnd = false, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
+static Fluent.Pdf.PdfSignatures.AuditRevisions(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfRevisionAuditRecord!>!
 static Fluent.Pdf.PdfSignatures.Inspect(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfSignatureObservation!>!
+static Fluent.Pdf.PdfSignatures.PreflightEdit(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfWriteOptions! writeOptions, Fluent.Pdf.PdfSignatureOptions? signing = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSignedEditPlan!
 static Fluent.Pdf.PdfSignatures.PrepareFields(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfSignatureFieldDefinition!>! fields, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfSignatures.Sign(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfSignatureOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSignedResult!
+static Fluent.Pdf.PdfSignatures.SignAsync(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfSignatureOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Fluent.Pdf.PdfSignedResult!>!
 static Fluent.Pdf.PdfSignatures.SignFile(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfSignatureOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSignedResult!
+static Fluent.Pdf.PdfSignatures.SignFileAsync(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfSignatureOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Fluent.Pdf.PdfSignedResult!>!
+static Fluent.Pdf.PdfSignatures.Verify(Fluent.Pdf.PdfSyntaxDocument! source, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfSignatureTrustOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfSignatureVerification!>!
 static Fluent.Pdf.PdfStampContent.FromDrawing(Fluent.Pdf.PdfDrawing! drawing, Fluent.Pdf.PdfRect bounds, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfStampContent!
 static Fluent.Pdf.PdfStampContent.FromHtml(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfHtmlOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfStampContent!
 static Fluent.Pdf.PdfStampContent.FromImage(Fluent.Pdf.PdfImageAsset! image, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfStampContent!
@@ -2989,3 +3157,6 @@ static Fluent.Pdf.PdfWordConversion.Import(System.IO.Stream! input, Fluent.Pdf.P
 static Fluent.Pdf.PdfWordConversion.Write(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfWordFormat format, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfWordConversion.WriteFile(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfWordFormat format, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfWriteOptions.Default.get -> Fluent.Pdf.PdfWriteOptions!
+static Fluent.Pdf.PdfXfa.ConvertToAcroForm(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFormFieldDefinition!>! fields, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfXfa.Fill(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! values, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfXfa.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfXfaSet!

@@ -28,5 +28,13 @@ public enum PdfCapability
     /// <summary>Explicit complete independent PDF/UA validation, separate from human semantic review.</summary>
     ValidateAccessibility = 11,
     /// <summary>Explicit detached CMS signing and cryptographic integrity verification; trust is separate.</summary>
-    Signatures = 12
+    Signatures = 12,
+    /// <summary>Explicit signer identity, evaluation-time and revocation decisions.</summary>
+    SignatureTrust = 13,
+    /// <summary>Explicit incremental PAdES producer.</summary>
+    Pades = 14,
+    /// <summary>Complete independent exact-byte PAdES validation.</summary>
+    ValidatePades = 15,
+    /// <summary>Explicit ICC/overprint/spot-aware page rasterization.</summary>
+    RenderColorManaged = 16
 }
