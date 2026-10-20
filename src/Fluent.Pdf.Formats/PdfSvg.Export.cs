@@ -23,20 +23,24 @@ public static partial class PdfSvg
         if (pageIndex < 0 || pageIndex >= source.Pages.Count) throw new ArgumentOutOfRangeException(nameof(pageIndex));
         return PdfFont.Run("ExportVectorSvg", "managed.svg", policy ?? source.Options.OperationPolicy, token, c =>
         {
+            var bytes = BuildVectorPage(source, pageIndex, c); if (path == null) FormatIo.Copy(bytes, output!, c); else PdfAtomicFile.Write(path, c, destination => FormatIo.Copy(bytes, destination, c));
+        }, PdfCapability.ReadDocument);
+    }
+    internal static PdfByteStore BuildVectorPage(PdfDocumentSnapshot source, int pageIndex, PdfOperationContext c, string diagnosticPrefix = "Svg")
+    {
             using var graph = new PdfGraphEdit(source, new(allowSignatureInvalidation: true), c); var binding = graph.Snapshot.Pages[pageIndex].Source!;
             var annotations = graph.Get(binding.Dictionary, "Annots");
-            if (annotations.Kind != PdfValueKind.Null && (annotations.Kind != PdfValueKind.Array || annotations.Items.Count != 0)) throw Error(c, "ExportAnnotations", "Annotation appearance/navigation export requires another profile.");
-            var bounds = binding.Geometry.DisplayBounds(); if (bounds.Width <= 0 || bounds.Height <= 0) throw Error(c, "ExportGeometry", "A nonempty displayed page is required.");
+            if (annotations.Kind != PdfValueKind.Null && (annotations.Kind != PdfValueKind.Array || annotations.Items.Count != 0)) throw PdfWriterCore.Error(c, diagnosticPrefix + ".ExportAnnotations", "Annotation appearance/navigation export requires another profile.");
+            var bounds = binding.Geometry.DisplayBounds(); if (bounds.Width <= 0 || bounds.Height <= 0) throw PdfWriterCore.Error(c, diagnosticPrefix + ".ExportGeometry", "A nonempty displayed page is required.");
             using var buffer = new PdfCodecBufferStream(c, 67108864);
             using (var target = new BorrowedStream(buffer, false, c))
             using (var writer = FormatIo.Writer(target))
             {
                 writer.WriteStartElement("svg", "http://www.w3.org/2000/svg"); writer.WriteAttributeString("width", FormatIo.N(bounds.Width) + "pt"); writer.WriteAttributeString("height", FormatIo.N(bounds.Height) + "pt"); writer.WriteAttributeString("viewBox", "0 0 " + FormatIo.N(bounds.Width) + " " + FormatIo.N(bounds.Height)); writer.WriteAttributeString("overflow", "hidden");
-                var exporter = new SvgWriter(graph, writer, c); exporter.Program(PdfPageContent.Read(binding, PdfUnknownOperatorPolicy.Reject, null, PdfProviderRegistry.Default, c), graph.Get(binding.EffectiveAttributes, "Resources"), new VectorState { Matrix = binding.Geometry.UserToDisplay() });
+                var exporter = new SvgWriter(graph, writer, c, diagnosticPrefix); exporter.Program(PdfPageContent.Read(binding, PdfUnknownOperatorPolicy.Reject, null, PdfProviderRegistry.Default, c), graph.Get(binding.EffectiveAttributes, "Resources"), new VectorState { Matrix = binding.Geometry.UserToDisplay() });
                 writer.WriteEndElement(); writer.Flush();
             }
-            var bytes = buffer.Finish(); if (path == null) FormatIo.Copy(bytes, output!, c); else PdfAtomicFile.Write(path, c, destination => FormatIo.Copy(bytes, destination, c));
-        }, PdfCapability.ReadDocument);
+        return buffer.Finish();
     }
     private sealed class VectorState
     {
@@ -45,9 +49,10 @@ public static partial class PdfSvg
     }
     private sealed class SvgWriter
     {
-        private readonly PdfGraphEdit _g; private readonly XmlWriter _w; private readonly PdfOperationContext _c; private int _clips;
+        private readonly PdfGraphEdit _g; private readonly XmlWriter _w; private readonly PdfOperationContext _c; private readonly string _diagnosticPrefix; private int _clips;
         private readonly HashSet<PdfObjectId> _active = new();
-        internal SvgWriter(PdfGraphEdit graph, XmlWriter writer, PdfOperationContext context) { _g = graph; _w = writer; _c = context; }
+        internal SvgWriter(PdfGraphEdit graph, XmlWriter writer, PdfOperationContext context, string diagnosticPrefix) { _g = graph; _w = writer; _c = context; _diagnosticPrefix = diagnosticPrefix; }
+        private PdfException Error(PdfOperationContext c, string code, string message) => PdfWriterCore.Error(c, _diagnosticPrefix + "." + code, message);
         private static string Matrix(PdfMatrix m) => "matrix(" + string.Join(" ", new[] { m.A, m.B, m.C, m.D, m.E, m.F }.Select(FormatIo.N)) + ")";
         private void Clip(string data, PdfMatrix matrix, bool evenOdd)
         {
@@ -104,6 +109,10 @@ public static partial class PdfSvg
                     case PdfOperator.FillColorSpace: state.FillComponents = Components(a[0], resources); state.Fill = "rgb(0%,0%,0%)"; break; case PdfOperator.StrokeColorSpace: state.StrokeComponents = Components(a[0], resources); state.Stroke = "rgb(0%,0%,0%)"; break;
                     case PdfOperator.FillColor: case PdfOperator.FillColorExtended: if (a.Count != state.FillComponents || a.Any(v => v.Kind != PdfValueKind.Number)) throw Error(_c, "ExportColor", "Patterns or unsupported color components reject."); state.Fill = Color(a.Select(v => v.NumberValue).ToArray()); break;
                     case PdfOperator.StrokeColor: case PdfOperator.StrokeColorExtended: if (a.Count != state.StrokeComponents || a.Any(v => v.Kind != PdfValueKind.Number)) throw Error(_c, "ExportColor", "Patterns or unsupported color components reject."); state.Stroke = Color(a.Select(v => v.NumberValue).ToArray()); break;
+                    case PdfOperator.ExtendedState:
+                        var states = _g.Get(resources, "ExtGState"); if (states.Kind != PdfValueKind.Dictionary || !states.Entries.TryGetValue(a[0].NameValue, out var stateReference)) throw Error(_c, "ExportResource", "An invoked graphics-state resource is missing."); var graphicsState = _g.Resolve(stateReference);
+                        if (graphicsState.Kind != PdfValueKind.Dictionary || graphicsState.Entries.Keys.Any(key => key != "Type" && key != "SA") || (_g.Get(graphicsState, "SA").Kind != PdfValueKind.Boolean || _g.Get(graphicsState, "SA").BooleanValue)) throw Error(_c, "ExportEffect", "Only an explicit neutral stroke-adjustment-false state is supported; other effects require another profile.");
+                        var stateType = _g.Get(graphicsState, "Type"); if (stateType.Kind != PdfValueKind.Null && (stateType.Kind != PdfValueKind.Name || stateType.NameValue != "ExtGState")) throw Error(_c, "ExportEffect", "A standard graphics-state type is required."); break;
                     case PdfOperator.DrawObject:
                         var map = _g.Get(resources, "XObject"); if (map.Kind != PdfValueKind.Dictionary || !map.Entries.TryGetValue(a[0].NameValue, out var reference)) throw Error(_c, "ExportResource", "An invoked Form resource is missing.");
                         bool identity = reference.Kind == PdfValueKind.Reference; if (identity && !_active.Add(reference.ReferenceId)) throw Error(_c, "ExportCycle", "A cyclic Form resource was rejected.");

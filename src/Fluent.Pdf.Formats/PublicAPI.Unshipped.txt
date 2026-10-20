@@ -1,4 +1,8 @@
 #nullable enable
+Fluent.Pdf.Formats.IPdfIsolatedPrinterInterpreter
+Fluent.Pdf.Formats.IPdfIsolatedPrinterInterpreter.Convert(System.IO.Stream! input, Fluent.Pdf.Formats.PdfPrinterLanguageProfile profile, int maximumPages, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Formats.IPdfIsolatedPrinterInterpreter.EngineId.get -> string!
+Fluent.Pdf.Formats.IPdfIsolatedPrinterInterpreter.Supports(Fluent.Pdf.Formats.PdfPrinterLanguageProfile profile) -> bool
 Fluent.Pdf.Formats.PdfEbookLayout
 Fluent.Pdf.Formats.PdfEbookLayout.FixedRaster = 0 -> Fluent.Pdf.Formats.PdfEbookLayout
 Fluent.Pdf.Formats.PdfEbookLayout.ReflowText = 1 -> Fluent.Pdf.Formats.PdfEbookLayout
@@ -31,6 +35,16 @@ Fluent.Pdf.Formats.PdfHtmlExportOptions.Rendering.get -> Fluent.Pdf.PdfRenderOpt
 Fluent.Pdf.Formats.PdfHtmlExportOptions.Text.get -> Fluent.Pdf.PdfTextExtractionOptions!
 Fluent.Pdf.Formats.PdfHtmlExportOptions.Title.get -> string!
 Fluent.Pdf.Formats.PdfPresentations
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.EpsLevel2 = 2 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.EpsLevel3 = 3 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.Pcl5 = 4 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.Pcl5c = 6 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.Pcl5e = 5 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.PclXl = 7 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.PostScriptLevel2 = 0 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguageProfile.PostScriptLevel3 = 1 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
+Fluent.Pdf.Formats.PdfPrinterLanguages
 Fluent.Pdf.Formats.PdfSheetCell
 Fluent.Pdf.Formats.PdfSheetCell.Column.get -> int
 Fluent.Pdf.Formats.PdfSheetCell.ColumnSpan.get -> int
@@ -60,6 +74,7 @@ Fluent.Pdf.Formats.PdfSpreadsheetFormat.SpreadsheetMl = 1 -> Fluent.Pdf.Formats.
 Fluent.Pdf.Formats.PdfSpreadsheetFormat.Xls = 4 -> Fluent.Pdf.Formats.PdfSpreadsheetFormat
 Fluent.Pdf.Formats.PdfSpreadsheetFormat.Xlsx = 2 -> Fluent.Pdf.Formats.PdfSpreadsheetFormat
 Fluent.Pdf.Formats.PdfSpreadsheets
+Fluent.Pdf.Formats.PdfStaticEps
 Fluent.Pdf.Formats.PdfSvg
 Fluent.Pdf.Formats.PdfSvgImportOptions
 Fluent.Pdf.Formats.PdfSvgImportOptions.AllowDataImages.get -> bool
@@ -74,11 +89,15 @@ static Fluent.Pdf.Formats.PdfHtmlExport.Write(Fluent.Pdf.PdfDocumentSnapshot! so
 static Fluent.Pdf.Formats.PdfHtmlExport.WriteFile(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, string! path, Fluent.Pdf.Formats.PdfHtmlExportOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfPresentations.WriteRasterSlides(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, Fluent.Pdf.PdfPageSize slideSize, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfPrinterLanguages.Import(System.IO.Stream! input, Fluent.Pdf.Formats.PdfPrinterLanguageProfile profile, Fluent.Pdf.Formats.IPdfIsolatedPrinterInterpreter? interpreter = null, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfSpreadsheets.FromTable(Fluent.Pdf.PdfExtractedTable! table, string! sheetName, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfSheetData!
 static Fluent.Pdf.Formats.PdfSpreadsheets.ImportData(Fluent.Pdf.Formats.PdfSheetData! sheet, int firstRow, int firstColumn, int rows, int columns, Fluent.Pdf.Formats.PdfFormatTextOptions! text, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(System.IO.Stream! input, Fluent.Pdf.Formats.PdfSpreadsheetFormat format, string! sheetName, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfSheetData!
 static Fluent.Pdf.Formats.PdfSpreadsheets.WriteData(Fluent.Pdf.Formats.PdfSheetData! sheet, Fluent.Pdf.Formats.PdfSpreadsheetFormat format, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfSpreadsheets.WriteProvenance(Fluent.Pdf.Formats.PdfSheetData! sheet, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfStaticEps.Import(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.Formats.PdfStaticEps.WritePage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfStaticEps.WritePageFile(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfSvg.Import(System.IO.Stream! input, Fluent.Pdf.Formats.PdfSvgImportOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfSvg.WritePage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfSvg.WritePageFile(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!

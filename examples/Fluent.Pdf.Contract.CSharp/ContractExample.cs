@@ -363,4 +363,5 @@ public static class ContractExample
     public static PdfDocument ImportRasterSlides(Stream source) => Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(source);
     public static PdfOperationReport WriteRasterHtml(PdfDocumentSnapshot source, Stream output, PdfProviderRegistry providers) => Fluent.Pdf.Formats.PdfHtmlExport.Write(source, new[] { 0 }, output, new(Fluent.Pdf.Formats.PdfHtmlExportMode.FixedRaster, "Document", "en"), providers);
     public static PdfDocument ImportEpubText(Stream source, Fluent.Pdf.Formats.PdfFormatTextOptions text, PdfProviderRegistry providers, PdfOperationPolicy policy) => Fluent.Pdf.Formats.PdfEbooks.ImportReflowText(source, text, providers, policy);
+    public static PdfDocument ImportStaticEps(Stream source) => Fluent.Pdf.Formats.PdfStaticEps.Import(source);
 }

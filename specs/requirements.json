@@ -2472,7 +2472,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/printer-languages.md",
+        "implemented": [
+          "An original closed static EPS vector profile now imports/exports literal drawing data, with a separate exact-version optional isolated interpreter boundary for broader PS/EPS/PCL requests."
+        ],
+        "pending": [
+          "Complete PS/EPS/PCL command, font/resource and engine/version coverage",
+          "Actual isolated interpreter security, host and package qualification"
+        ]
+      }
     },
     {
       "id": "FP-059",

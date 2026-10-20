@@ -471,4 +471,7 @@ Public Module ContractExample
     Public Function ImportEpubText(source As Stream, text As Fluent.Pdf.Formats.PdfFormatTextOptions, providers As PdfProviderRegistry, policy As PdfOperationPolicy) As PdfDocument
         Return Fluent.Pdf.Formats.PdfEbooks.ImportReflowText(source, text, providers, policy)
     End Function
+    Public Function ImportStaticEps(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfStaticEps.Import(source)
+    End Function
 End Module
