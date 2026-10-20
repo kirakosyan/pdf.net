@@ -97,7 +97,8 @@
       "failed": 0,
       "skipped": 0,
       "report": "artifacts/contracts/pr119-review-verified/net10.0.trx",
-      "sha256": "46d660678374995fc583392b85c4363e64dd7d82c8cbb1a117f1689d3016d8e3"
+      "sha256": "46d660678374995fc583392b85c4363e64dd7d82c8cbb1a117f1689d3016d8e3",
+      "sourceBinding": "Historical initial review run; net8/net10 preceded whitespace-only formatting, fallback followed formatting. The finalDerSupplement contains the complete final source matrix."
     },
     {
       "lane": "net8.0",
@@ -106,7 +107,8 @@
       "failed": 0,
       "skipped": 0,
       "report": "artifacts/contracts/pr119-review-verified/net8.0.trx",
-      "sha256": "64087fb725a7ffaac382959257697106a973bc155a7da08d7731e9b5e481e426"
+      "sha256": "64087fb725a7ffaac382959257697106a973bc155a7da08d7731e9b5e481e426",
+      "sourceBinding": "Historical initial review run; net8/net10 preceded whitespace-only formatting, fallback followed formatting. The finalDerSupplement contains the complete final source matrix."
     },
     {
       "lane": "netstandard-fallback",
@@ -115,7 +117,8 @@
       "failed": 0,
       "skipped": 0,
       "report": "artifacts/contracts/pr119-review-verified/netstandard-fallback.trx",
-      "sha256": "c4510a6c9c35b9ec6ff3adfbe8077d6d5528e50588ca32e0dd88fc11318e45a9"
+      "sha256": "c4510a6c9c35b9ec6ff3adfbe8077d6d5528e50588ca32e0dd88fc11318e45a9",
+      "sourceBinding": "Historical initial review run; net8/net10 preceded whitespace-only formatting, fallback followed formatting. The finalDerSupplement contains the complete final source matrix."
     }
   ],
   "pythonCheckerRegression": {
@@ -442,6 +445,157 @@
       "pwsh -NoProfile -File eng/check-api.ps1",
       "python3 eng/test-queue-fixture-verifier.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0",
       "python3 eng/verify-queue-fixtures.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0 artifacts/contracts/pr119-final/independent.json"
+    ]
+  },
+  "finalDerSupplement": {
+    "sourceCommit": "1f05aced10cd7ac21d4cf5b87a78f063222e0afb",
+    "changes": "Also preflight DER public keys inside certificate BIT STRINGs before optional key parsing. Final source preflights CMS/TSTInfo, embedded and supplied certificate extension values/public keys, and DER-encoded signatures.",
+    "sourceFiles": [
+      {
+        "path": "src/Fluent.Pdf.Cryptography/BoundedSignatureDer.cs",
+        "sha256": "29a37918f5fddad49b0d8a1311f058b69bd6f39fd4a159a6075bcbca3f5653bd"
+      },
+      {
+        "path": "tests/Fluent.Pdf.Contract.Tests/TimestampTests.cs",
+        "sha256": "33a8630d2843c50fd60e488fda82ffc814a4a0e46ba08cfdd02ead64cba1ecae"
+      }
+    ],
+    "lanes": [
+      {
+        "lane": "fallback",
+        "total": 70,
+        "passed": 70,
+        "failed": 0,
+        "skipped": 0,
+        "report": "artifacts/contracts/pr119-der-final/fallback.trx",
+        "sha256": "a0a6d8a2ee9c8f1e9da975e579ca70b9d5eab74dba604e0b959d025081a8dda0"
+      },
+      {
+        "lane": "net10",
+        "total": 70,
+        "passed": 70,
+        "failed": 0,
+        "skipped": 0,
+        "report": "artifacts/contracts/pr119-der-final/net10.trx",
+        "sha256": "12437ad3d5d392c9604a937fb0aaa5ce9bb0309d7fbf9d9128101383dcab39c6"
+      },
+      {
+        "lane": "net8",
+        "total": 70,
+        "passed": 70,
+        "failed": 0,
+        "skipped": 0,
+        "report": "artifacts/contracts/pr119-der-final/net8.trx",
+        "sha256": "27441d47f0245c92fff56df76ffef1882660403e59ec503b380645f5b17e2eb9"
+      }
+    ],
+    "apiComparisons": 33,
+    "apiReportSha256": "f2f9441544c078357831b8bdcacdf63c74e2588167cd45c65c75c1f41f74b223",
+    "independent": {
+      "schemaVersion": 1,
+      "purpose": "independent-original-source-fixtures-not-production-qualification",
+      "rasterValidator": {
+        "name": "Pillow",
+        "version": "12.3.0",
+        "results": [
+          {
+            "file": "grid.png",
+            "sha256": "047d5a1ea03461870fe073f7bf661f2f5c5d2333716c1b5d8ce6595675b35aa5",
+            "frames": [
+              {
+                "frame": 0,
+                "size": [
+                  8,
+                  6
+                ],
+                "dpi": [
+                  72.009,
+                  72.009
+                ],
+                "allPixelsMatchOriginalFormula": true
+              }
+            ]
+          },
+          {
+            "file": "grid.bmp",
+            "sha256": "4b3da7e1e17431ace4ba73f50637d47ae1cbc3318f18b0d5a23034960543e3ce",
+            "frames": [
+              {
+                "frame": 0,
+                "size": [
+                  8,
+                  6
+                ],
+                "dpi": [
+                  72.008961115161,
+                  72.008961115161
+                ],
+                "allPixelsMatchOriginalFormula": true
+              }
+            ]
+          },
+          {
+            "file": "grid.tiff",
+            "sha256": "e73f905a83cdfdd5d8e25f16ef3ddd60a8c5bc74e9dbc99dd99cf85d704da9df",
+            "frames": [
+              {
+                "frame": 0,
+                "size": [
+                  5,
+                  4
+                ],
+                "dpi": [
+                  72.0,
+                  72.0
+                ],
+                "allPixelsMatchOriginalFormula": true
+              },
+              {
+                "frame": 1,
+                "size": [
+                  8,
+                  6
+                ],
+                "dpi": [
+                  72.0,
+                  72.0
+                ],
+                "allPixelsMatchOriginalFormula": true
+              }
+            ]
+          }
+        ]
+      },
+      "timestampValidator": {
+        "name": "OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)",
+        "verification": "OK",
+        "tokenSha256": "704d6c55cb51eccb4a55035ffb278412a2a89ddfd9b6aa229005b773e2440379",
+        "publicCertificateSha256": "086da8b869f55e4c5e6d4bfad6c8857bc582400d7866ec32a47c14b90c441810",
+        "outputSha256": "dd6c1729c5a06fe8376b24090bb28c0b6889a9f54fb29cb3869c7ccb373bbfc0",
+        "scope": "Exact SHA256 imprint and token signature using an explicitly trusted self-issued fixture TSA certificate; no general PKIX, revocation or PAdES qualification."
+      },
+      "productionQualified": false
+    },
+    "additionalChecks": [
+      {
+        "path": "/workspace/scratch/pr119-der-framework.log",
+        "sha256": "754d1c6721e8e5758a41069c1ae82b27ad03d1f70652ae50b04721c27106f758"
+      },
+      {
+        "path": "/workspace/scratch/pr119-der-api.log",
+        "sha256": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c"
+      },
+      {
+        "path": "/workspace/scratch/pr119-der-python.log",
+        "sha256": "3aabe598ed222790f50c1c076a9ceb65416340899289f0fcff24ad876b54c81f"
+      }
+    ],
+    "commands": [
+      "Previous exact focused filter with -m:1 on net8.0/net10.0 and net8.0 -p:UseNetStandardAssembly=true; reports in artifacts/contracts/pr119-der-final",
+      "dotnet build tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net472 --no-restore -m:1",
+      "pwsh -NoProfile -File eng/check-api.ps1",
+      "python3 eng/test-queue-fixture-verifier.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0",
+      "python3 eng/verify-queue-fixtures.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0 artifacts/contracts/pr119-der-final/independent.json"
     ]
   }
 }
