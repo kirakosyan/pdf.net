@@ -110,6 +110,9 @@ public static class PdfXfa
             var data = Dataset(packets, g.Context);
             var template = packets.SingleOrDefault(p => p.Name == "template") ?? throw g.Error("Xfa.Template", "One explicit template packet is required.");
             var xml = Parse(template.Xml, g.Context);
+            string templateNamespace = xml.Root?.Name.NamespaceName ?? "";
+            if (xml.Root?.Name.LocalName != "template" || templateNamespace != "" && templateNamespace != "http://www.xfa.org/schema/xfa-template/2.8/" && templateNamespace != "http://www.xfa.org/schema/xfa-template/3.3/")
+                throw g.Error("Xfa.UnsupportedTemplate", "Only explicit unnamespaced, XFA2.8 or XFA3.3 static template roots are supported.");
             var names = new HashSet<string>(StringComparer.Ordinal);
             Walk(xml.Root!, "");
             void Walk(XElement e, string path)
@@ -117,9 +120,11 @@ public static class PdfXfa
                 g.Context.Checkpoint();
                 using var depth = g.Context.EnterScope(PdfResourceKind.Depth);
                 string name = e.Name.LocalName;
+                if (e.Name.NamespaceName != templateNamespace)
+                    throw g.Error("Xfa.UnsupportedTemplate", "Template namespace extensions require a separate conversion profile.");
                 if (name != "template" && name != "subform" && name != "field" && name != "ui" && name != "textEdit" && name != "value" && name != "text")
                     throw g.Error("Xfa.UnsupportedTemplate", "Only explicit static subform/field/textEdit/value/text constructs are supported; dynamic behavior is unavailable.");
-                if (e.Attributes().Any(a => !a.IsNamespaceDeclaration && a.Name.LocalName != "name" && a.Name.LocalName != "layout"))
+                if (e.Attributes().Any(a => !a.IsNamespaceDeclaration && (a.Name.NamespaceName != "" || a.Name.LocalName != "name" && a.Name.LocalName != "layout")))
                     throw g.Error("Xfa.UnsupportedTemplate", "Template attributes require an explicitly supported binding/layout profile.");
                 if (e.Attribute("layout") is XAttribute layout && layout.Value != "position")
                     throw g.Error("Xfa.DynamicLayout", "Dynamic layout is not supported by explicit static conversion.");
@@ -227,6 +232,8 @@ public static class PdfXfa
             using var depth = c.EnterScope(PdfResourceKind.Depth);
             c.Consume(PdfResourceKind.Objects, 1);
             c.Consume(PdfResourceKind.ExpandedBytes, 256 + e.Name.LocalName.Length * 2L);
+            if (e.Attributes().Any(a => !a.IsNamespaceDeclaration))
+                throw PdfWriterCore.Error(c, "Xfa.DataPath", "Attributed scalar/container data requires an explicit binding profile.");
             if (e.Name.LocalName.Contains("."))
                 throw PdfWriterCore.Error(c, "Xfa.DataPath", "Dot-containing names need an indexed SOM profile.");
             string path = parent.Length == 0 ? e.Name.LocalName : parent + "." + e.Name.LocalName;

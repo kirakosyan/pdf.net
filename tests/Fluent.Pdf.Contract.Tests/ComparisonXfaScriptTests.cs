@@ -98,4 +98,12 @@ public sealed class ComparisonXfaScriptTests
         Assert.Equal("Limit.Depth", Assert.Throws<PdfException>(() => PdfScripts.EvaluateCalculation("event.value = (((((1)))));", values, true, new(limits: new(maximumDepth: 3)))).Diagnostic.Code);
         Assert.ThrowsAny<OperationCanceledException>(() => PdfScripts.EvaluateCalculation(code, values, true, cancellationToken: new CancellationToken(true)));
     }
+    [Theory]
+    [InlineData("<template xmlns='urn:unsupported'><subform name='form'><field name='name'/></subform></template>")]
+    [InlineData("<template xmlns='http://www.xfa.org/schema/xfa-template/3.3/'><subform name='form'><field xmlns='urn:unsupported' name='name'/></subform></template>")]
+    public void XfaUnknownNamespacesCannotBeSilentlyConvertedAsKnownStaticConstructs(string template)
+    {
+        using var source = XfaFixture(template);
+        Assert.Equal("Xfa.UnsupportedTemplate", Assert.Throws<PdfException>(() => PdfXfa.ConvertToAcroForm(source.CreateSnapshot(), Array.Empty<PdfFormFieldDefinition>())).Diagnostic.Code);
+    }
 }
