@@ -100,3 +100,9 @@ Explicit raster/full-rewrite redaction and sanitization now have a source profil
 Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](docs/signatures.md).
 
 Queue issues #51–#60 add [explicit signature trust](docs/signature-verification.md), [external signing](docs/external-signing.md), [PAdES orchestration/timestamps](docs/pades.md), [revision audit](docs/revision-audit.md), [comparison](docs/document-comparison.md), [XFA](docs/xfa.md), [bounded calculations](docs/scripts.md), [ICC color operations](docs/color-rendering.md), [raster containers](docs/raster-export.md) and [headless viewing](docs/viewing.md). These are explicit source profiles; complete requirements and production qualification remain pending.
+
+Explicit [printing](docs/printing.md) now has a bounded orchestration/IPP protocol source profile. Complete native spool-system, printer/transport and production qualification remain mandatory.
+
+Optional [trusted application views](docs/web-views.md) now share HTML/PDF import budgets, with a real compiled Razor/MVC/Blazor source sample. Complete legacy/XAML/browser and production qualification remain pending.
+
+An original [authenticated render-worker protocol](docs/render-service.md) now has explicit tenants, bounded static-render retries/quotas and hosted/container source examples. Complete browser/native/host/container and production qualification remain mandatory.

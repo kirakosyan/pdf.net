@@ -1831,7 +1831,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/printing.md",
+        "implemented": [
+          "Explicit print orchestration, immutable copies/ranges/duplex/scaling/N-up, original bounded IPP 2.0 submission/status/cancellation and caller-owned authenticated transport boundary"
+        ],
+        "pending": [
+          "Complete Windows native print-system adapters and controlled CUPS/IPP/virtual/physical-printer integration",
+          "Actual minimum/runtime/RID, transport/authentication/permission and exact final-package production qualification"
+        ]
+      }
     },
     {
       "id": "FP-044",
@@ -2039,7 +2050,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/web-views.md",
+        "implemented": [
+          "Optional trusted view-host bridge with shared HTML/PDF import budget, request cancellation, platform/prerequisite rejection and expired output leases",
+          "Real compiled Razor/MVC and Blazor static HTML hosted source sample; explicit renderer prerequisite on regular endpoint"
+        ],
+        "pending": [
+          "Complete actual ASPX/WebForms and XAML host adapters and hosted concurrency/legacy/UI qualification",
+          "Actual browser fidelity, minimum/runtime/RID and exact final-package production qualification"
+        ]
+      }
     },
     {
       "id": "FP-049",
@@ -2069,7 +2092,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/render-service.md",
+        "implemented": [
+          "Original authenticated static-HTML client/service protocol with tenant/nonce/source binding, bounded idempotent retries and finite per-tenant concurrency/jobs/bytes/deadlines",
+          "Explicit hosted HTTPS ingress/transport example and non-root container recipe; no automatic engine/model downloads"
+        ],
+        "pending": [
+          "Complete general browser/native transports and actual protected process/service/container/serverless host integration",
+          "Real authentication/TLS/tenant isolation, rootless/read-only/restart, engine/RID/minimum-runtime and exact final-package production qualification"
+        ]
+      }
     },
     {
       "id": "FP-050",

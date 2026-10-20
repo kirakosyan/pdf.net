@@ -444,4 +444,13 @@ Public Module ContractExample
     Public Function CreateViewer(source As PdfDocumentSnapshot, providers As PdfProviderRegistry) As PdfViewSession
         Return New PdfViewSession(source, providers, maximumCachedBytes:=4 * 1024 * 1024)
     End Function
+    Public Function PrintPdf(source As PdfDocumentSnapshot, options As PdfPrintOptions, providers As PdfProviderRegistry) As PdfPrintJob
+        Return PdfPrinting.Submit(source, options, providers)
+    End Function
+    Public Function RenderViewAsync(host As Fluent.Pdf.Html.IPdfViewHost, providers As PdfProviderRegistry) As System.Threading.Tasks.Task(Of PdfDocument)
+        Return Fluent.Pdf.Html.PdfWebViews.RenderAsync(host, providers)
+    End Function
+    Public Function RenderWorker(markup As Stream, client As Fluent.Pdf.Workers.PdfRenderWorkerClient) As Fluent.Pdf.Workers.PdfWorkerPdf
+        Return client.RenderHtml(markup)
+    End Function
 End Module

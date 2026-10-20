@@ -88,3 +88,9 @@ Archive and verify qualification reports, source/package hashes and release-owne
 Before any recursive Windows deletion or move, resolve and verify absolute target paths remain within the explicitly intended workspace/resource directory. Use native PowerShell LiteralPath operations end to end. Report removed, retained and failed resources. Never remove research evidence until it is preserved and the owner has authorized its disposal.
 
 Queue #51–#60 adds explicit signature trust/pins, bounded external sessions, independently gated incremental PAdES and offline RFC3161 verification, historical revision audit/preflight, ordinal comparison/reports, passive XFA/static mapping, opt-in closed arithmetic scripts, ICC matrix/TRC operations and color-renderer contracts, lossless raster containers, and bounded headless viewing. See their feature docs and docs/evidence/issues-51-60-source.json for supported profiles and mandatory remaining work.
+
+Explicit printing now has shared-budget orchestration and a bounded original IPP protocol adapter with caller-owned authenticated transport. See docs/printing.md; native Windows spool integration and complete printer/host qualification remain pending.
+
+The optional Html assembly now bridges explicit trusted application-view hosts under one context. The modern web sample uses actual compiled Razor/MVC and Blazor rendering; its self-test browser is a labeled fixture, never a regular endpoint fallback. Legacy/XAML and real browser/host qualification remain mandatory; see docs/web-views.md.
+
+The Workers assembly now contains an original HMAC-authenticated static-HTML client/service source protocol with explicit tenant quotas and bounded idempotent retries. Host/TLS/OS/engine/container provisioning remains explicit and unqualified; see docs/render-service.md. PR #119 is merged at d9fa26d after all review threads and six source CI hosts passed.

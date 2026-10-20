@@ -2,6 +2,7 @@
   <Folder Name="/examples/">
     <Project Path="examples/Fluent.Pdf.Contract.CSharp/Fluent.Pdf.Contract.CSharp.csproj" />
     <Project Path="examples/Fluent.Pdf.Contract.VisualBasic/Fluent.Pdf.Contract.VisualBasic.vbproj" />
+    <Project Path="examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Fluent.Pdf/Fluent.Pdf.csproj" />

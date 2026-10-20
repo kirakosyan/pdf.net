@@ -99,79 +99,82 @@ public sealed class PdfHtmlSource
     {
         AddressValue(address);
         PdfHtmlSource? result = null;
-        var report = PdfFont.Run("PrepareHtml", "managed.html", policy, token, context =>
-        {
-            context.Consume(PdfResourceKind.Objects, 3);
-            if (input != null)
-            {
-                var bytes = PdfHtmlResource.ReadCore(input, 8388608, context);
-                context.Consume(PdfResourceKind.ExpandedBytes, bytes.Length * 4L + 128);
-                var copy = new byte[checked((int)bytes.Length)];
-                using var raw = bytes.Open(0, bytes.Length);
-                int at = 0, count;
-                while ((count = raw.Read(copy, at, Math.Min(65536, copy.Length - at))) != 0)
-                {
-                    at += count;
-                    context.Checkpoint();
-                }
-
-                int start = copy.Length >= 3 && copy[0] == 239 && copy[1] == 187 && copy[2] == 191 ? 3 : 0;
-                try
-                {
-                    markup = new UTF8Encoding(false, true).GetString(copy, start, copy.Length - start);
-                }
-                catch (DecoderFallbackException)
-                {
-                    throw PdfWriterCore.Error(context, "Html.TextEncoding", "HTML file input must contain well-formed UTF-8.");
-                }
-            }
-
-            if (markup != null)
-            {
-                if (markup.Length > 4194304)
-                    throw PdfWriterCore.Error(context, "Html.InputExtent", "The HTML markup exceeds the supported source extent.");
-                context.Consume(PdfResourceKind.ExpandedBytes, markup.Length * 2L + 256);
-                for (int i = 0; i < markup.Length; i++)
-                {
-                    if ((i & 1023) == 0)
-                        context.Checkpoint();
-                    if (char.IsHighSurrogate(markup[i]))
-                    {
-                        if (++i >= markup.Length || !char.IsLowSurrogate(markup[i]))
-                            throw PdfWriterCore.Error(context, "Html.TextEncoding", "HTML markup must contain well-formed Unicode.");
-                    }
-                    else if (char.IsLowSurrogate(markup[i]))
-                        throw PdfWriterCore.Error(context, "Html.TextEncoding", "HTML markup must contain well-formed Unicode.");
-                }
-            }
-
-            context.Consume(PdfResourceKind.ExpandedBytes, 512);
-            var captured = new List<PdfHtmlResource>();
-            var addresses = new HashSet<string>(StringComparer.Ordinal);
-            long total = 0;
-            if (resources != null)
-            {
-                using var enumerator = resources.GetEnumerator();
-                while (true)
-                {
-                    context.Checkpoint();
-                    if (!enumerator.MoveNext())
-                        break;
-                    context.Consume(PdfResourceKind.Objects, 1);
-                    context.Consume(PdfResourceKind.ExpandedBytes, 256);
-                    var resource = enumerator.Current;
-                    if (resource == null || captured.Count == 128 || !addresses.Add(resource.Address.AbsoluteUri) || (total += resource.Length) > 67108864)
-                        throw PdfWriterCore.Error(context, "Html.ResourceInventory", "Resources must be nonnull, uniquely addressed and within the 128-resource/64 MiB source inventory.");
-                    if (markup != null && resource.Address == address)
-                        throw PdfWriterCore.Error(context, "Html.ResourceInventory", "The main markup address cannot also name a supplied resource.");
-                    captured.Add(resource);
-                }
-            }
-
-            result = new(markup, address, new ReadOnlyCollection<PdfHtmlResource>(captured));
-        }, PdfCapability.RenderHtml);
+        var report = PdfFont.Run("PrepareHtml", "managed.html", policy, token, context => result = CreateCore(markup, address, resources, input, context), PdfCapability.RenderHtml);
         result!.OperationReport = report;
         return result;
+    }
+    internal void Complete(PdfOperationReport report) => OperationReport = report;
+    internal static PdfHtmlSource CreateCore(string? markup, Uri address, IEnumerable<PdfHtmlResource>? resources, Stream? input, PdfOperationContext context)
+    {
+        AddressValue(address);
+        context.Consume(PdfResourceKind.Objects, 3);
+        if (input != null)
+        {
+            var bytes = PdfHtmlResource.ReadCore(input, 8388608, context);
+            context.Consume(PdfResourceKind.ExpandedBytes, bytes.Length * 4L + 128);
+            var copy = new byte[checked((int)bytes.Length)];
+            using var raw = bytes.Open(0, bytes.Length);
+            int at = 0, count;
+            while ((count = raw.Read(copy, at, Math.Min(65536, copy.Length - at))) != 0)
+            {
+                at += count;
+                context.Checkpoint();
+            }
+
+            int start = copy.Length >= 3 && copy[0] == 239 && copy[1] == 187 && copy[2] == 191 ? 3 : 0;
+            try
+            {
+                markup = new UTF8Encoding(false, true).GetString(copy, start, copy.Length - start);
+            }
+            catch (DecoderFallbackException)
+            {
+                throw PdfWriterCore.Error(context, "Html.TextEncoding", "HTML file input must contain well-formed UTF-8.");
+            }
+        }
+
+        if (markup != null)
+        {
+            if (markup.Length > 4194304)
+                throw PdfWriterCore.Error(context, "Html.InputExtent", "The HTML markup exceeds the supported source extent.");
+            context.Consume(PdfResourceKind.ExpandedBytes, markup.Length * 2L + 256);
+            for (int i = 0; i < markup.Length; i++)
+            {
+                if ((i & 1023) == 0)
+                    context.Checkpoint();
+                if (char.IsHighSurrogate(markup[i]))
+                {
+                    if (++i >= markup.Length || !char.IsLowSurrogate(markup[i]))
+                        throw PdfWriterCore.Error(context, "Html.TextEncoding", "HTML markup must contain well-formed Unicode.");
+                }
+                else if (char.IsLowSurrogate(markup[i]))
+                    throw PdfWriterCore.Error(context, "Html.TextEncoding", "HTML markup must contain well-formed Unicode.");
+            }
+        }
+
+        context.Consume(PdfResourceKind.ExpandedBytes, 512);
+        var captured = new List<PdfHtmlResource>();
+        var addresses = new HashSet<string>(StringComparer.Ordinal);
+        long total = 0;
+        if (resources != null)
+        {
+            using var enumerator = resources.GetEnumerator();
+            while (true)
+            {
+                context.Checkpoint();
+                if (!enumerator.MoveNext())
+                    break;
+                context.Consume(PdfResourceKind.Objects, 1);
+                context.Consume(PdfResourceKind.ExpandedBytes, 256);
+                var resource = enumerator.Current;
+                if (resource == null || captured.Count == 128 || !addresses.Add(resource.Address.AbsoluteUri) || (total += resource.Length) > 67108864)
+                    throw PdfWriterCore.Error(context, "Html.ResourceInventory", "Resources must be nonnull, uniquely addressed and within the 128-resource/64 MiB source inventory.");
+                if (markup != null && resource.Address == address)
+                    throw PdfWriterCore.Error(context, "Html.ResourceInventory", "The main markup address cannot also name a supplied resource.");
+                captured.Add(resource);
+            }
+        }
+
+        return new(markup, address, new ReadOnlyCollection<PdfHtmlResource>(captured));
     }
 
     internal static void AddressValue(Uri address)

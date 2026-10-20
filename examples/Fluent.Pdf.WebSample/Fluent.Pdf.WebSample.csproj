@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup><TargetFramework>net10.0</TargetFramework><IsPackable>false</IsPackable></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj" /><ProjectReference Include="../../src/Fluent.Pdf.Workers/Fluent.Pdf.Workers.csproj" /></ItemGroup>
+</Project>

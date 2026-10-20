@@ -55,6 +55,10 @@ Fluent.Pdf.IPdfPadesValidator
 Fluent.Pdf.IPdfPadesValidator.Validate(System.IO.Stream! source, Fluent.Pdf.PdfPadesProfile profile, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPadesValidation!
 Fluent.Pdf.IPdfPageRenderer
 Fluent.Pdf.IPdfPageRenderer.Render(Fluent.Pdf.PdfRasterRequest! request, System.IO.Stream! bgraOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.IPdfPrintProvider
+Fluent.Pdf.IPdfPrintProvider.Cancel(string! printer, int jobId, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPrintJob!
+Fluent.Pdf.IPdfPrintProvider.GetStatus(string! printer, int jobId, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPrintJob!
+Fluent.Pdf.IPdfPrintProvider.Submit(System.IO.Stream! pdf, int pageCount, Fluent.Pdf.PdfPrintOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPrintJob!
 Fluent.Pdf.IPdfProvider
 Fluent.Pdf.IPdfProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.IPdfRevisionWriter
@@ -397,6 +401,7 @@ Fluent.Pdf.PdfCapability.ConvertWord = 10 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.Fonts = 6 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ImageCodecs = 5 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.Pades = 14 -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.PrintDocument = 17 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ReadDocument = 0 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RecognizeText = 4 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.RenderColorManaged = 16 -> Fluent.Pdf.PdfCapability
@@ -2019,6 +2024,38 @@ Fluent.Pdf.PdfPresentationSet.Outlines.get -> System.Collections.Generic.IReadOn
 Fluent.Pdf.PdfPresentationSet.PageLabels.get -> System.Collections.Generic.IReadOnlyDictionary<int, Fluent.Pdf.PdfValue!>!
 Fluent.Pdf.PdfPresentationSet.Pages.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfPagePresentationRecord!>!
 Fluent.Pdf.PdfPresentationSet.Source.get -> Fluent.Pdf.PdfDocumentSnapshot!
+Fluent.Pdf.PdfPrintDuplex
+Fluent.Pdf.PdfPrintDuplex.LongEdge = 1 -> Fluent.Pdf.PdfPrintDuplex
+Fluent.Pdf.PdfPrintDuplex.ShortEdge = 2 -> Fluent.Pdf.PdfPrintDuplex
+Fluent.Pdf.PdfPrintDuplex.Simplex = 0 -> Fluent.Pdf.PdfPrintDuplex
+Fluent.Pdf.PdfPrintJob
+Fluent.Pdf.PdfPrintJob.JobId.get -> int
+Fluent.Pdf.PdfPrintJob.PdfPrintJob(string! printer, int jobId, Fluent.Pdf.PdfPrintJobState state) -> void
+Fluent.Pdf.PdfPrintJob.Printer.get -> string!
+Fluent.Pdf.PdfPrintJob.State.get -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Aborted = 6 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Canceled = 5 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.CancellationRequested = 8 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Completed = 7 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Held = 2 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Pending = 1 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Processing = 3 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Stopped = 4 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintJobState.Unknown = 0 -> Fluent.Pdf.PdfPrintJobState
+Fluent.Pdf.PdfPrintOptions
+Fluent.Pdf.PdfPrintOptions.Copies.get -> int
+Fluent.Pdf.PdfPrintOptions.Duplex.get -> Fluent.Pdf.PdfPrintDuplex
+Fluent.Pdf.PdfPrintOptions.FirstPage.get -> int
+Fluent.Pdf.PdfPrintOptions.LastPage.get -> int
+Fluent.Pdf.PdfPrintOptions.NumberUp.get -> int
+Fluent.Pdf.PdfPrintOptions.PdfPrintOptions(string! printer, int copies = 1, Fluent.Pdf.PdfPrintDuplex duplex = Fluent.Pdf.PdfPrintDuplex.Simplex, Fluent.Pdf.PdfPrintScaling scaling = Fluent.Pdf.PdfPrintScaling.Fit, int numberUp = 1, int firstPage = 1, int lastPage = 0) -> void
+Fluent.Pdf.PdfPrintOptions.Printer.get -> string!
+Fluent.Pdf.PdfPrintOptions.Scaling.get -> Fluent.Pdf.PdfPrintScaling
+Fluent.Pdf.PdfPrintScaling
+Fluent.Pdf.PdfPrintScaling.Fit = 0 -> Fluent.Pdf.PdfPrintScaling
+Fluent.Pdf.PdfPrintScaling.None = 1 -> Fluent.Pdf.PdfPrintScaling
+Fluent.Pdf.PdfPrinting
 Fluent.Pdf.PdfProcessingMode
 Fluent.Pdf.PdfProcessingMode.Permissive = 1 -> Fluent.Pdf.PdfProcessingMode
 Fluent.Pdf.PdfProcessingMode.Strict = 0 -> Fluent.Pdf.PdfProcessingMode
@@ -3073,6 +3110,9 @@ static Fluent.Pdf.PdfPresentation.SetPageLabels(Fluent.Pdf.PdfDocumentSnapshot! 
 static Fluent.Pdf.PdfPresentation.SetPageTransition(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfPageTransition? transition, double? displayDuration = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfPresentation.SetView(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageLayout? layout = null, Fluent.Pdf.PdfPageMode? mode = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfPresentation.SetViewerPreferences(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue! preferences, bool replace = false, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPrinting.Cancel(string! printer, int jobId, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPrintJob!
+static Fluent.Pdf.PdfPrinting.GetStatus(string! printer, int jobId, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPrintJob!
+static Fluent.Pdf.PdfPrinting.Submit(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPrintOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPrintJob!
 static Fluent.Pdf.PdfProviderRegistry.Default.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfProviderRegistry.Empty.get -> Fluent.Pdf.PdfProviderRegistry!
 static Fluent.Pdf.PdfRasterExport.Write(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.PdfRasterExportOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!

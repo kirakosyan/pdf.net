@@ -349,4 +349,10 @@ public static class ContractExample
     public static PdfRaster RenderColor(PdfDocumentSnapshot source, PdfProviderRegistry providers, PdfColorRenderOptions colors) => PdfColorRendering.RenderPage(source, 0, providers, colors);
     public static PdfOperationReport ExportRaster(PdfDocumentSnapshot source, Stream output, PdfProviderRegistry providers) => PdfRasterExport.Write(source, new[] { 0 }, output, new(PdfRasterFormat.Png), providers);
     public static PdfViewSession CreateViewer(PdfDocumentSnapshot source, PdfProviderRegistry providers) => new(source, providers, maximumCachedBytes: 4 * 1024 * 1024);
+    public static PdfPrintJob PrintPdf(PdfDocumentSnapshot source, PdfPrintOptions options, PdfProviderRegistry providers) => PdfPrinting.Submit(source, options, providers);
+
+    public static System.Threading.Tasks.Task<PdfDocument> RenderViewAsync(Fluent.Pdf.Html.IPdfViewHost host, PdfProviderRegistry providers) => Fluent.Pdf.Html.PdfWebViews.RenderAsync(host, providers);
+
+    public static Fluent.Pdf.Workers.PdfWorkerPdf RenderWorker(Stream markup, Fluent.Pdf.Workers.PdfRenderWorkerClient client) => client.RenderHtml(markup);
+
 }
