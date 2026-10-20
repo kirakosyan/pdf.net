@@ -1826,7 +1826,8 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -1841,7 +1842,8 @@
         "pending": [
           "Complete Windows native print-system adapters and controlled CUPS/IPP/virtual/physical-printer integration",
           "Actual minimum/runtime/RID, transport/authentication/permission and exact final-package production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2045,7 +2047,8 @@
       "validation": "Minimal hosted sample consumers for each adapter; concurrent request and legacy-runtime qualification.",
       "evidence": [
         "B01",
-        "D02"
+        "D02",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2061,7 +2064,8 @@
         "pending": [
           "Complete actual ASPX/WebForms and XAML host adapters and hosted concurrency/legacy/UI qualification",
           "Actual browser fidelity, minimum/runtime/RID and exact final-package production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2087,7 +2091,8 @@
       "evidence": [
         "B01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2103,7 +2108,8 @@
         "pending": [
           "Complete general browser/native transports and actual protected process/service/container/serverless host integration",
           "Real authentication/TLS/tenant isolation, rootless/read-only/restart, engine/RID/minimum-runtime and exact final-package production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2177,7 +2183,8 @@
         "B01",
         "D01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2192,7 +2199,8 @@
         "pending": [
           "Complete actual BMP/GIF/TIFF/WebP/HEIF/HEIC and other required codec profiles, animation/precision/color fidelity and licensing/RID decisions",
           "Independent visual/semantic, actual minimum/runtime/host and exact final-package production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2217,7 +2225,8 @@
       "evidence": [
         "A01",
         "D01",
-        "B01"
+        "B01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2233,7 +2242,8 @@
         "pending": [
           "Complete SVG/CSS/path/text/image/paint and PDF-to-SVG reconstruction/export profiles",
           "Full independent standards/fidelity corpus, actual minimum/runtime/provider and exact final-package production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2306,7 +2316,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2321,7 +2332,8 @@
         "pending": [
           "Binary XLS and complete sheet/chart/print-area fidelity",
           "Full independent format, host and package qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2347,7 +2359,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2362,7 +2375,8 @@
         "pending": [
           "Editable object, font, master, animation and full presentation reconstruction",
           "Independent complete fidelity, host and package qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2388,7 +2402,8 @@
       "validation": "Browser rendering versus source raster; accessibility checks, CSP/offline asset and text comparisons.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2403,7 +2418,8 @@
         "pending": [
           "Semantic headings/tables/navigation, font/CSS reconstruction and controlled asset callbacks",
           "Actual browser/accessibility, fidelity, host and package qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2427,7 +2443,8 @@
       "validation": "Independent EPUB validators and readers; RTL, embedded-font and malicious archive fixtures.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2442,7 +2459,8 @@
         "pending": [
           "Fixed-layout input, complete fonts/RTL/reader/semantic reconstruction and book compiler coverage",
           "Full independent fidelity, host and package qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2467,7 +2485,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2482,7 +2501,8 @@
         "pending": [
           "Complete PS/EPS/PCL command, font/resource and engine/version coverage",
           "Actual isolated interpreter security, host and package qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2507,7 +2527,8 @@
       "validation": "Independent XPS readers; font obfuscation, color and package traversal fixtures.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2522,7 +2543,8 @@
         "pending": [
           "Full glyph/vector/resource-dictionary, font obfuscation, color and print-ticket profiles",
           "Independent complete format, host and package qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2547,7 +2569,8 @@
       "validation": "Scientific-document fixtures, unavailable-package diagnostics and malicious TeX sandbox tests.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2562,7 +2585,8 @@
         "pending": [
           "Complete scientific/typesetting/font/package and Unicode/math reconstruction profiles",
           "Actual malicious-source isolated-host and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2587,7 +2611,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2602,7 +2627,8 @@
         "pending": [
           "Complete vector/text/raster record and CGM/WMF/EMF+ profiles",
           "Actual record corpus OS/adapter and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2626,7 +2652,8 @@
       "validation": "Formatting-object corpus, malicious stylesheets and page-master/table layout goldens.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2641,7 +2668,8 @@
         "pending": [
           "Complete standards-oriented FO/XSLT adapter formatting/resource/language profiles",
           "Actual layout/security corpus supported-host/package and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2667,7 +2695,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2682,7 +2711,8 @@
         "pending": [
           "Complete OFD text/font/vector metadata extension and signature preservation/verification profiles",
           "Actual independent corpus OS/host/package and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2766,7 +2796,8 @@
         "D01",
         "B01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2781,7 +2812,8 @@
         "pending": [
           "Complete format/direction load/save adapter matrix options progress and host capability coverage",
           "Actual end-to-end application corpus supported-host/package and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2905,7 +2937,8 @@
       "validation": "Prepress validator reports; CMYK/spot/ICC/bleed/font fixtures and output separations.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2920,7 +2953,8 @@
         "pending": [
           "Complete PDF/X conversion repair color/transparency/font/bleed and separation profiles",
           "Actual complete independent prepress validators corpus supported-host/package and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2946,7 +2980,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -2961,7 +2996,8 @@
         "pending": [
           "Complete PDF/E producer/validator and semantic preservation across rewrites",
           "Actual U3D/PRC/media/geospatial corpus supported-host/package and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -2985,7 +3021,8 @@
       "validation": "Independent invoice validators; tax/rounding/currency fixtures and PDF/A-3 validation.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3000,7 +3037,8 @@
         "pending": [
           "Complete invoice version/profile/domain schema business and tax/rounding coverage with real producer/validators",
           "Actual independent invoice/PDF-A corpus supported-host/package and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
@@ -3031,7 +3069,8 @@
       "evidence": [
         "ENH",
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3046,7 +3085,8 @@
         "pending": [
           "Complete capability/conformance aggregation and font/image/color/security repair profiles",
           "Actual independent validators fault corpus semantic preservation supported-host/package and production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
       }
     },
     {
