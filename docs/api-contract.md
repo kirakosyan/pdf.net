@@ -197,3 +197,11 @@ Offline HTML5 export now provides explicitly rendered self-contained pages or de
 Original bounded EPUB3 fixed-raster/reflow packages, passive text-only spine import and documented escaped MobiXML source output now have explicit identities, navigation and loss/DRM diagnostics. Full coverage and production qualification remain mandatory; see [ebooks](ebooks.md).
 
 An original closed static EPS vector profile now imports/exports literal drawing data, with a separate exact-version optional isolated interpreter boundary for broader PS/EPS/PCL requests. Full coverage and production qualification remain mandatory; see [printer-languages](printer-languages.md).
+
+Original bounded XPS/OpenXPS raster-page packages and strict PNG-brush input now preserve page geometry/order with validated internal relationships and explicit unsupported print-ticket/construct diagnostics. Full coverage and production qualification remain mandatory; see [xps](xps.md).
+
+Explicit optional isolated TeX engine/package prerequisites and escaped inferred ASCII LaTeX export now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [tex](tex.md).
+
+Managed explicit EMF24 raster-page interchange and exact optional CGM/WMF/EMF/EMF+ converter boundaries now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [metafiles](metafiles.md).
+
+Closed passive FO page-master/block/table layout and finite literal-child XML transforms now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [formatting-objects](formatting-objects.md).

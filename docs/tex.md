@@ -1,0 +1,9 @@
+# TeX/LaTeX source profile
+
+`PdfTex.Import` requires a caller-owned `IPdfIsolatedTexTypesetter`, an exact pdfLaTeX/LuaLaTeX/XeLaTeX profile and immutable literal package prerequisites. Missing hosts/engines/packages/fonts fail before source capture. It stages8 MiB source and64 MiB PDF, reparses nonempty output within the same operation context/page bound and expires borrowed provider leases. Errors redact backend payloads; latched budgets, unsupported-content losses and cancellation remain observable. Caller streams/providers remain caller-owned.
+
+The host contract requires a separately qualified, pinned offline OS-isolated job with finite CPU/memory/output/time, no shell escape, host-file/network access, subprocess discovery or runtime package installation. Lua execution and TeX file primitives require the same boundary. No typesetter implementation or isolation qualification is supplied by an interface or fixture. A host must explicitly provision fonts, formats and complete package closure; ordinary input processing never invokes a local compiler automatically.
+
+`WriteInferredText` emits a closed ASCII LaTeX article, with every source control character escaped, literal page order and line/paragraph breaks. It requires explicit permissive authority and reports `Tex.InferredText` per page: mathematical semantics, fonts, page geometry, graphics and accessibility are not inferred. Non-ASCII content fails explicitly rather than selecting an ambient Unicode engine. Output stages before a caller stream write. The controlled escape fixture is compiled independently with the installed pdfLaTeX; this checks emitted syntax, not untrusted-input worker isolation.
+
+Full scientific typesetting, package/font distribution policy, Unicode/math reconstruction, malicious-source sandbox/native-host and supported OS/runtime corpus qualification remain mandatory for FP-060, which stays Planned.

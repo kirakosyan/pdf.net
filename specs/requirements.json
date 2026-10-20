@@ -2512,7 +2512,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/xps.md",
+        "implemented": [
+          "Original bounded XPS/OpenXPS raster-page packages and strict PNG-brush input now preserve page geometry/order with validated internal relationships and explicit unsupported print-ticket/construct diagnostics."
+        ],
+        "pending": [
+          "Full glyph/vector/resource-dictionary, font obfuscation, color and print-ticket profiles",
+          "Independent complete format, host and package qualification"
+        ]
+      }
     },
     {
       "id": "FP-060",
@@ -2541,7 +2552,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/tex.md",
+        "implemented": [
+          "Explicit optional isolated TeX engine/package prerequisites and escaped inferred ASCII LaTeX export now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete scientific/typesetting/font/package and Unicode/math reconstruction profiles",
+          "Actual malicious-source isolated-host and production qualification"
+        ]
+      }
     },
     {
       "id": "FP-061",
@@ -2570,7 +2592,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/metafiles.md",
+        "implemented": [
+          "Managed explicit EMF24 raster-page interchange and exact optional CGM/WMF/EMF/EMF+ converter boundaries now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete vector/text/raster record and CGM/WMF/EMF+ profiles",
+          "Actual record corpus OS/adapter and production qualification"
+        ]
+      }
     },
     {
       "id": "FP-062",
@@ -2598,7 +2631,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/formatting-objects.md",
+        "implemented": [
+          "Closed passive FO page-master/block/table layout and finite literal-child XML transforms now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete standards-oriented FO/XSLT adapter formatting/resource/language profiles",
+          "Actual layout/security corpus supported-host/package and production qualification"
+        ]
+      }
     },
     {
       "id": "FP-063",

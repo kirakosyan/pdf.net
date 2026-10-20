@@ -474,4 +474,16 @@ Public Module ContractExample
     Public Function ImportStaticEps(source As Stream) As PdfDocument
         Return Fluent.Pdf.Formats.PdfStaticEps.Import(source)
     End Function
+    Public Function ImportRasterXps(source As Stream, format As Fluent.Pdf.Formats.PdfXpsFormat) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfXps.ImportRasterPages(source, format)
+    End Function
+    Public Function ImportTex(source As Stream, options As Fluent.Pdf.Formats.PdfTexOptions, host As Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfTex.Import(source, options, host)
+    End Function
+    Public Function ImportRasterEmf(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(source)
+    End Function
+    Public Function ImportFormattingObjects(source As Stream, body As PdfFlowTextStyle, providers As PdfProviderRegistry) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfFormattingObjects.Import(source, body, providers)
+    End Function
 End Module

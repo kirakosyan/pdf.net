@@ -1,0 +1,76 @@
+{
+  "purpose": "development-only independent controlled XPS/OpenXPS reader; not an SDK runtime dependency or production qualification",
+  "version": "10.05.1",
+  "sourceCommit": "7f64bc848f6b67ae204182e6e088eec110061490",
+  "license": "AGPL-3.0-or-later; development analysis only",
+  "successfulBuild": {
+    "purpose": "development-only independent XPS reader build",
+    "sourceCommit": "7f64bc848f6b67ae204182e6e088eec110061490",
+    "sourceVersion": "10.05.1",
+    "configuration": [
+      "--without-x",
+      "--disable-cups",
+      "--disable-gtk",
+      "--disable-dbus",
+      "--disable-ocr",
+      "--disable-docs"
+    ],
+    "configurationWarnings": [
+      "Upstream configure did not recognize --disable-ocr or --disable-docs; neither flag is treated as a proof of disabled functionality."
+    ],
+    "files": [
+      {
+        "file": "configure.ac",
+        "sha256": "a6bd479667687d077c004010454762b5cd3f5304db5e6d9440b1b657e888e3fd"
+      },
+      {
+        "file": "configure",
+        "sha256": "9e2823f38f923784577f7af6e093f624dabbc80f393579c63431dbcb3e91ef78"
+      },
+      {
+        "file": "Makefile.in",
+        "sha256": "dd7c54073b4e0ca1ad66413ca164a9d7f806b34818bd6b82a53936493dc0d698"
+      },
+      {
+        "file": "Makefile",
+        "sha256": "ad025cb76ba23066e62ebcdabf1bd1ce0df21fb2d6c4973e7c8f3bcbef97ce64"
+      }
+    ],
+    "limitations": "No parser/render implementation modifications; task-local relocated GNU tool configuration retained separately. No SDK runtime integration or native host qualification."
+  },
+  "retainedArtifacts": [
+    {
+      "path": "/workspace/.tools/ghostpdl-10.05.1-source.tar",
+      "sha256": "f18b46ed286f003c4ec25189d6835746606e134ae7dd862032a71eead69fcca3"
+    },
+    {
+      "path": "/workspace/.tools/ghostxps-10.05.1-build/bin/gxps",
+      "sha256": "11a2d3acab0cbe59e21f2e5df6756b1f69ee092b7d7018587d2cf4b710bc6910"
+    },
+    {
+      "path": "/workspace/.tools/ghostxps-build-tools/inventory.json",
+      "sha256": "babc98f3a96abc2c8ecb1a8429a0a4d784c820a757058a72ead091a9d1aaa9a4"
+    },
+    {
+      "path": "/workspace/.tools/ghostxps-build-tools/autom4te-private.patch",
+      "sha256": "46ec50a911098ebd53764e94c48bb8ff9b0c77d3b112c72a20a37dd609b7b18f"
+    },
+    {
+      "path": "/workspace/.tools/ghostxps-build-tools/configuration-hashes.json",
+      "sha256": "e112ca2dba7398e3497183c215a4e48115cf4d43fc512f8cd03967e33beb10f3"
+    },
+    {
+      "path": "/workspace/scratch/ghostxps-analysis-build.patch",
+      "sha256": "d9a1c2b2ec5440be66f6736c4c03903673e348b0ebe937fadee498417a4cd3b9"
+    },
+    {
+      "path": "/workspace/scratch/ghostxps-build-configuration.json",
+      "sha256": "18f2d2edabb1eac0231fb4d74fbdb8ca88bb0296503de3bf291c10a63a39b05b"
+    }
+  ],
+  "limitations": [
+    "Reader parser/render sources were unmodified. Standard configure-generated files and task-local tool relocation are identified separately.",
+    "The initial traditional Makefile experiment failed and was not used for the passing reader; its exact diff and original/modified hashes are retained.",
+    "Controlled raster fixtures do not qualify full vector, font, print-ticket, arbitrary package or production host behavior."
+  ]
+}
