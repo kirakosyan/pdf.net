@@ -11,6 +11,48 @@ Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter
 Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter.EngineId.get -> string!
 Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter.Supports(Fluent.Pdf.Formats.PdfTexOptions! options) -> bool
 Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter.Typeset(System.IO.Stream! source, Fluent.Pdf.Formats.PdfTexOptions! options, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Formats.PdfConversionOptions
+Fluent.Pdf.Formats.PdfConversionOptions.Language.get -> string?
+Fluent.Pdf.Formats.PdfConversionOptions.OfdIdentity.get -> Fluent.Pdf.Formats.PdfOfdIdentity?
+Fluent.Pdf.Formats.PdfConversionOptions.PdfConversionOptions(Fluent.Pdf.Formats.PdfConversionTarget target, Fluent.Pdf.PdfRenderOptions? rendering = null, string? language = null, string? title = null, Fluent.Pdf.Formats.PdfOfdIdentity? ofdIdentity = null) -> void
+Fluent.Pdf.Formats.PdfConversionOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions!
+Fluent.Pdf.Formats.PdfConversionOptions.Target.get -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionOptions.Title.get -> string?
+Fluent.Pdf.Formats.PdfConversionPhase
+Fluent.Pdf.Formats.PdfConversionPhase.OutputPrepared = 1 -> Fluent.Pdf.Formats.PdfConversionPhase
+Fluent.Pdf.Formats.PdfConversionPhase.Starting = 0 -> Fluent.Pdf.Formats.PdfConversionPhase
+Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.Bmp = 3 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.Png = 2 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.RasterHtml = 5 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.RasterOfd = 8 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.RasterOpenXps = 7 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.RasterXps = 6 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.StaticEps = 1 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.Svg = 0 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversionTarget.Tiff = 4 -> Fluent.Pdf.Formats.PdfConversionTarget
+Fluent.Pdf.Formats.PdfConversions
+Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Bmp = 5 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Docx = 11 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Emf = 17 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Eps = 7 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Epub = 12 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.FormattingObjects = 18 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Html = 19 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Jpeg = 3 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Ods = 13 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Ofd = 16 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.OpenXps = 15 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Pdf = 1 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Png = 2 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.PostScript = 8 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Pptx = 10 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Svg = 6 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Tiff = 4 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Unknown = 0 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Xlsx = 9 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDetectedFormat.Xps = 14 -> Fluent.Pdf.Formats.PdfDetectedFormat
 Fluent.Pdf.Formats.PdfEbookLayout
 Fluent.Pdf.Formats.PdfEbookLayout.FixedRaster = 0 -> Fluent.Pdf.Formats.PdfEbookLayout
 Fluent.Pdf.Formats.PdfEbookLayout.ReflowText = 1 -> Fluent.Pdf.Formats.PdfEbookLayout
@@ -27,6 +69,9 @@ Fluent.Pdf.Formats.PdfEbookOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions!
 Fluent.Pdf.Formats.PdfEbookOptions.RightToLeft.get -> bool
 Fluent.Pdf.Formats.PdfEbookOptions.Text.get -> Fluent.Pdf.PdfTextExtractionOptions!
 Fluent.Pdf.Formats.PdfEbooks
+Fluent.Pdf.Formats.PdfFormatDetection
+Fluent.Pdf.Formats.PdfFormatDetection.Format.get -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfFormatDetection.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.Formats.PdfFormatTextOptions
 Fluent.Pdf.Formats.PdfFormatTextOptions.Body.get -> Fluent.Pdf.PdfFlowTextStyle!
 Fluent.Pdf.Formats.PdfFormatTextOptions.Layout.get -> Fluent.Pdf.PdfFlowOptions!
@@ -49,6 +94,12 @@ Fluent.Pdf.Formats.PdfMetafileFormat.Emf = 2 -> Fluent.Pdf.Formats.PdfMetafileFo
 Fluent.Pdf.Formats.PdfMetafileFormat.EmfPlus = 3 -> Fluent.Pdf.Formats.PdfMetafileFormat
 Fluent.Pdf.Formats.PdfMetafileFormat.Wmf = 1 -> Fluent.Pdf.Formats.PdfMetafileFormat
 Fluent.Pdf.Formats.PdfMetafiles
+Fluent.Pdf.Formats.PdfOfd
+Fluent.Pdf.Formats.PdfOfdIdentity
+Fluent.Pdf.Formats.PdfOfdIdentity.CreationDate.get -> string!
+Fluent.Pdf.Formats.PdfOfdIdentity.DocumentId.get -> string!
+Fluent.Pdf.Formats.PdfOfdIdentity.PdfOfdIdentity(string! documentId, string! title, string! creationDate) -> void
+Fluent.Pdf.Formats.PdfOfdIdentity.Title.get -> string!
 Fluent.Pdf.Formats.PdfPresentations
 Fluent.Pdf.Formats.PdfPrinterLanguageProfile
 Fluent.Pdf.Formats.PdfPrinterLanguageProfile.EpsLevel2 = 2 -> Fluent.Pdf.Formats.PdfPrinterLanguageProfile
@@ -111,6 +162,10 @@ Fluent.Pdf.Formats.PdfXps
 Fluent.Pdf.Formats.PdfXpsFormat
 Fluent.Pdf.Formats.PdfXpsFormat.OpenXps = 1 -> Fluent.Pdf.Formats.PdfXpsFormat
 Fluent.Pdf.Formats.PdfXpsFormat.Xps = 0 -> Fluent.Pdf.Formats.PdfXpsFormat
+static Fluent.Pdf.Formats.PdfConversions.Detect(System.IO.Stream! input, string? extension = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfFormatDetection!
+static Fluent.Pdf.Formats.PdfConversions.Export(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfConversionOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Action<Fluent.Pdf.Formats.PdfConversionPhase, Fluent.Pdf.PdfOperationContext!>? progress = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfConversions.ExportFile(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, string! path, Fluent.Pdf.Formats.PdfConversionOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Action<Fluent.Pdf.Formats.PdfConversionPhase, Fluent.Pdf.PdfOperationContext!>? progress = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfConversions.WriteMatrix(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfEbooks.ImportReflowText(System.IO.Stream! input, Fluent.Pdf.Formats.PdfFormatTextOptions! text, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfEbooks.WriteEpub(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfEbookMetadata! metadata, Fluent.Pdf.Formats.PdfEbookOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfEbooks.WriteMobiSource(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfEbookMetadata! metadata, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
@@ -121,6 +176,8 @@ static Fluent.Pdf.Formats.PdfHtmlExport.WriteFile(Fluent.Pdf.PdfDocumentSnapshot
 static Fluent.Pdf.Formats.PdfMetafiles.Import(System.IO.Stream! input, Fluent.Pdf.Formats.PdfMetafileFormat format, Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter? converter = null, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfMetafiles.WriteRasterEmf(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.IO.Stream! output, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(System.IO.Stream! input, out Fluent.Pdf.Formats.PdfOfdIdentity! identity, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.Formats.PdfOfd.WriteRasterPages(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfOfdIdentity! identity, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfPresentations.WriteRasterSlides(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, Fluent.Pdf.PdfPageSize slideSize, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfPrinterLanguages.Import(System.IO.Stream! input, Fluent.Pdf.Formats.PdfPrinterLanguageProfile profile, Fluent.Pdf.Formats.IPdfIsolatedPrinterInterpreter? interpreter = null, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!

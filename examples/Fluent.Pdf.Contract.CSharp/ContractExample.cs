@@ -368,4 +368,5 @@ public static class ContractExample
     public static PdfDocument ImportTex(Stream source, Fluent.Pdf.Formats.PdfTexOptions options, Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter host) => Fluent.Pdf.Formats.PdfTex.Import(source, options, host);
     public static PdfDocument ImportRasterEmf(Stream source) => Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(source);
     public static PdfDocument ImportFormattingObjects(Stream source, PdfFlowTextStyle body, PdfProviderRegistry providers) => Fluent.Pdf.Formats.PdfFormattingObjects.Import(source, body, providers);
+    public static PdfDocument ImportRasterOfd(Stream source, out Fluent.Pdf.Formats.PdfOfdIdentity identity) => Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(source, out identity);
 }

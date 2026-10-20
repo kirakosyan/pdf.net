@@ -2672,7 +2672,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/ofd.md",
+        "implemented": [
+          "Original bounded OFD1.0 raster-page packages, explicit literal identity, owned resources and signed-package rejection now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete OFD text/font/vector metadata extension and signature preservation/verification profiles",
+          "Actual independent corpus OS/host/package and production qualification"
+        ]
+      }
     },
     {
       "id": "FP-064",
@@ -2760,7 +2771,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/conversions.md",
+        "implemented": [
+          "Content-family discovery, an exact nine-profile machine-readable save matrix and staged shared-context stream/atomic-file export orchestration now have a source profile."
+        ],
+        "pending": [
+          "Complete format/direction load/save adapter matrix options progress and host capability coverage",
+          "Actual end-to-end application corpus supported-host/package and production qualification"
+        ]
+      }
     },
     {
       "id": "FP-066",

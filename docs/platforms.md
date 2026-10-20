@@ -131,3 +131,7 @@ Explicit optional isolated TeX engine/package prerequisites and escaped inferred
 Managed explicit EMF24 raster-page interchange and exact optional CGM/WMF/EMF/EMF+ converter boundaries now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [metafiles](metafiles.md).
 
 Closed passive FO page-master/block/table layout and finite literal-child XML transforms now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [formatting-objects](formatting-objects.md).
+
+Original bounded OFD1.0 raster-page packages, explicit literal identity, owned resources and signed-package rejection now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [ofd](ofd.md).
+
+Content-family discovery, an exact nine-profile machine-readable save matrix and staged shared-context stream/atomic-file export orchestration now have a source profile. Full coverage and production qualification remain mandatory; see [conversions](conversions.md).

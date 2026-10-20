@@ -486,4 +486,7 @@ Public Module ContractExample
     Public Function ImportFormattingObjects(source As Stream, body As PdfFlowTextStyle, providers As PdfProviderRegistry) As PdfDocument
         Return Fluent.Pdf.Formats.PdfFormattingObjects.Import(source, body, providers)
     End Function
+    Public Function ImportRasterOfd(source As Stream, ByRef identity As Fluent.Pdf.Formats.PdfOfdIdentity) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(source, identity)
+    End Function
 End Module
