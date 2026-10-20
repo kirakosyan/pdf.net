@@ -118,6 +118,7 @@ public sealed class InvoiceTests
         Assert.Equal(rsm + "CrossIndustryInvoice", xml.Root!.Name);
         Assert.NotNull(xml.Root.Element(rsm + "ExchangedDocument"));
         Assert.Equal("7.51", xml.Descendants(ram + "GrandTotalAmount").Single().Value);
+        Assert.Equal("7.01", xml.Descendants(ram + "TaxBasisTotalAmount").Single().Value);
         Assert.Equal("Seller & Co", xml.Descendants(ram + "SellerTradeParty").Single().Element(ram + "Name")!.Value);
         output.Position = 0;
         using var doc = Pdf.Open(output);

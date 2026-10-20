@@ -142,7 +142,6 @@ public static class PdfInvoices
             Start("ApplicableHeaderTradeSettlement");
             Text("InvoiceCurrencyCode", invoice.Currency);
             Start("SpecifiedTradeSettlementHeaderMonetarySummation");
-            Text("LineTotalAmount", invoice.Money(invoice.NetTotal));
             Text("TaxBasisTotalAmount", invoice.Money(invoice.NetTotal));
             Start("TaxTotalAmount");
             w.WriteAttributeString("currencyID", invoice.Currency);
