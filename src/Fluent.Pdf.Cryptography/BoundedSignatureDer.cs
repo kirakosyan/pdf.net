@@ -30,7 +30,32 @@ internal static class BoundedSignatureDer
             var certificates = signed.ReadSetOf(new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true));
             while (certificates.HasData) CertificateExtensions(certificates.ReadEncodedValue(), c);
         }
+        if (signed.HasData && signed.PeekTag().HasSameClassAndValue(new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 1)))
+            _ = signed.ReadEncodedValue();
+        var signers = signed.ReadSetOf();
+        signed.ThrowIfNotEmpty();
+        while (signers.HasData)
+        {
+            var signer = signers.ReadSequence();
+            _ = signer.ReadInteger();
+            _ = signer.ReadEncodedValue(); // issuer/serial or subject key identifier
+            _ = signer.ReadSequence(); // digest algorithm
+            if (signer.PeekTag().HasSameClassAndValue(new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0)))
+                _ = signer.ReadEncodedValue();
+            var algorithm = signer.ReadSequence();
+            string oid = algorithm.ReadObjectIdentifier();
+            c.Consume(PdfResourceKind.ExpandedBytes, signer.PeekEncodedValue().Length);
+            var signature = signer.ReadOctetString();
+            // These verifiers interpret the signature itself as a DER pair of integers.
+            if (oid.StartsWith("1.2.840.10045.4.", StringComparison.Ordinal) || oid == "1.2.840.10040.4.3" || IsNistDerSignature(oid) || oid == "1.2.156.10197.1.501")
+                Validate(signature, signature.Length, c);
+        }
         CertificateExtensions(certificate, c);
+    }
+    private static bool IsNistDerSignature(string oid)
+    {
+        const string prefix = "2.16.840.1.101.3.4.3.";
+        return oid.StartsWith(prefix, StringComparison.Ordinal) && int.TryParse(oid.Substring(prefix.Length), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out int algorithm) && algorithm >= 1 && algorithm <= 12;
     }
     private static void CertificateExtensions(ReadOnlyMemory<byte> encoded, PdfOperationContext c)
     {

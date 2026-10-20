@@ -74,4 +74,24 @@ public sealed class TimestampTests
         Assert.Equal("Limit.Depth", Assert.Throws<PdfException>(() => Rfc3161TimestampVerifier.Verify(input, certificate.Value.RawData, new byte[32], new byte[] { 1 }, new(limits: new(maximumDepth: 16)))).Diagnostic.Code);
     }
 
+    [Fact]
+    public void EncapsulatedEcdsaSignatureDerIsDepthCheckedBeforeVerification()
+    {
+        var inner = new System.Formats.Asn1.AsnWriter(System.Formats.Asn1.AsnEncodingRules.DER);
+        for (int i = 0; i < 2000; i++) inner.PushSequence();
+        for (int i = 0; i < 2000; i++) inner.PopSequence();
+        var w = new System.Formats.Asn1.AsnWriter(System.Formats.Asn1.AsnEncodingRules.DER);
+        var tag = new System.Formats.Asn1.Asn1Tag(System.Formats.Asn1.TagClass.ContextSpecific, 0, true);
+        w.PushSequence(); w.WriteObjectIdentifier("1.2.840.113549.1.7.2"); w.PushSequence(tag); w.PushSequence();
+        w.WriteInteger(3); w.PushSetOf(); w.PopSetOf(); w.PushSequence();
+        w.WriteObjectIdentifier("1.2.840.113549.1.9.16.1.4"); w.PushSequence(tag); w.WriteOctetString(new byte[] { 0x30, 0 }); w.PopSequence(tag); w.PopSequence();
+        w.PushSetOf(); w.PushSequence(); w.WriteInteger(1); w.PushSequence(); w.PopSequence();
+        w.PushSequence(); w.WriteObjectIdentifier("2.16.840.1.101.3.4.2.1"); w.PopSequence();
+        w.PushSequence(); w.WriteObjectIdentifier("1.2.840.10045.4.3.2"); w.PopSequence(); w.WriteOctetString(inner.Encode());
+        w.PopSequence(); w.PopSetOf(); w.PopSequence(); w.PopSequence(tag); w.PopSequence();
+        using var input = new MemoryStream(w.Encode());
+        using var certificate = new CertificateSecurityTests.Certificate("Signature DER depth fixture");
+        Assert.Equal("Limit.Depth", Assert.Throws<PdfException>(() => Rfc3161TimestampVerifier.Verify(input, certificate.Value.RawData, new byte[32], new byte[] { 1 }, new(limits: new(maximumDepth: 16)))).Diagnostic.Code);
+    }
+
 }
