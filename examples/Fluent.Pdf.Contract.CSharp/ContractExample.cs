@@ -361,4 +361,5 @@ public static class ContractExample
 
     public static Fluent.Pdf.Formats.PdfSheetData ReadSpreadsheet(Stream input, Fluent.Pdf.Formats.PdfSpreadsheetFormat format, string name) => Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(input, format, name);
     public static PdfDocument ImportRasterSlides(Stream source) => Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(source);
+    public static PdfOperationReport WriteRasterHtml(PdfDocumentSnapshot source, Stream output, PdfProviderRegistry providers) => Fluent.Pdf.Formats.PdfHtmlExport.Write(source, new[] { 0 }, output, new(Fluent.Pdf.Formats.PdfHtmlExportMode.FixedRaster, "Document", "en"), providers);
 }

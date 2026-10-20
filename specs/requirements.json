@@ -2393,7 +2393,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/html-export.md",
+        "implemented": [
+          "Offline HTML5 export now provides explicitly rendered self-contained pages or declared-loss inferred text, with static CSP, escaped markup and page provenance."
+        ],
+        "pending": [
+          "Semantic headings/tables/navigation, font/CSS reconstruction and controlled asset callbacks",
+          "Actual browser/accessibility, fidelity, host and package qualification"
+        ]
+      }
     },
     {
       "id": "FP-057",

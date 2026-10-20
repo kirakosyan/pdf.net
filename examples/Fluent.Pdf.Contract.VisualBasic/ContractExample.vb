@@ -465,4 +465,7 @@ Public Module ContractExample
     Public Function ImportRasterSlides(source As Stream) As PdfDocument
         Return Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(source)
     End Function
+    Public Function WriteRasterHtml(source As PdfDocumentSnapshot, output As Stream, providers As PdfProviderRegistry) As PdfOperationReport
+        Return Fluent.Pdf.Formats.PdfHtmlExport.Write(source, New Integer() {0}, output, New Fluent.Pdf.Formats.PdfHtmlExportOptions(Fluent.Pdf.Formats.PdfHtmlExportMode.FixedRaster, "Document", "en"), providers)
+    End Function
 End Module

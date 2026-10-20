@@ -40,7 +40,7 @@ internal sealed class FormatPackage : IDisposable
     internal static string Resolve(string owner, string target, PdfOperationContext c)
     {
         if (target.Length == 0 || target.Length > 1024 || target.IndexOfAny(new[] { '\\', ':', '%', '?', '#' }) >= 0 || target.StartsWith("//", StringComparison.Ordinal)) throw FormatIo.Error(c, "PackageUri", "Only unambiguous internal package references are supported.");
-        var parts = new List<string>(); if (!target.StartsWith("/", StringComparison.Ordinal)) { int end = owner.LastIndexOf('/'); if (end >= 0) parts.AddRange(owner.Substring(0, end).Split('/')); }
+        c.Consume(PdfResourceKind.Objects, 1); c.Consume(PdfResourceKind.ExpandedBytes, (owner.Length + target.Length) * 48L + 4096); var parts = new List<string>(); if (!target.StartsWith("/", StringComparison.Ordinal)) { int end = owner.LastIndexOf('/'); if (end >= 0) parts.AddRange(owner.Substring(0, end).Split('/')); }
         foreach (string part in target.Split('/')) { if (part == "" || part == ".") continue; if (part == "..") { if (parts.Count == 0) throw FormatIo.Error(c, "PackageTraversal", "A package reference escapes its root."); parts.RemoveAt(parts.Count - 1); } else parts.Add(part); }
         if (parts.Count == 0) throw FormatIo.Error(c, "PackageUri", "A package reference requires a part name."); return string.Join("/", parts);
     }
@@ -50,7 +50,7 @@ internal sealed class FormatPackage : IDisposable
         using (var zip = new ZipArchive(output, ZipArchiveMode.Create, leaveOpen: true))
         foreach (var item in entries)
         {
-            c.Checkpoint(); c.Consume(PdfResourceKind.Objects, 1); c.Consume(PdfResourceKind.ExpandedBytes, item.Name.Length * 4L + 1024);
+            c.Checkpoint(); c.Consume(PdfResourceKind.Objects, 1); c.Consume(PdfResourceKind.ExpandedBytes, item.Name.Length * 32L + 4096);
             if (item.Bytes.Length > 16777216 || (expanded += item.Bytes.Length) > 67108864) throw FormatIo.Error(c, "PackageLimits", "Package part/total expansion exceeds the declared profile.");
             if (++count > 4096 || !names.Add(item.Name)) throw FormatIo.Error(c, "PackageIdentity", "A finite unique package inventory is required."); Name(item.Name, c);
             var entry = zip.CreateEntry(item.Name, item.Stored ? CompressionLevel.NoCompression : CompressionLevel.Optimal); entry.LastWriteTime = new DateTimeOffset(1980, 1, 1, 0, 0, 0, TimeSpan.Zero);
@@ -75,7 +75,7 @@ internal sealed class FormatPackage : IDisposable
             if (atDirectory > end - 46 || U32(atDirectory) != 0x02014b50) throw FormatIo.Error(c, "PackageHeader", "A complete central-directory entry is required.");
             int flags = U16(atDirectory + 8), method = U16(atDirectory + 10), nameLength = U16(atDirectory + 28), extra = U16(atDirectory + 30), comment = U16(atDirectory + 32); long compressed = U32(atDirectory + 20), length = U32(atDirectory + 24), local = U32(atDirectory + 42);
             if ((flags & ~0x0808) != 0 || (method != 0 && method != 8) || nameLength < 1 || nameLength > 1024 || atDirectory + 46 + nameLength + extra + comment > end || length > 16777216 || (expanded += length) > 67108864 || U16(atDirectory + 34) != 0) throw FormatIo.Error(c, "PackageLimits", "Encrypted/unsupported ZIP methods, part extents and expansion limits reject.");
-            c.Consume(PdfResourceKind.ExpandedBytes, nameLength * 4L + length); var nameBytes = new byte[nameLength]; for (int i = 0; i < nameLength; i++) { int value = Byte(atDirectory + 46 + i); if (value < 32 || value > 126) throw FormatIo.Error(c, "PackageName", "This package profile requires bounded canonical ASCII part names."); nameBytes[i] = (byte)value; }
+            c.Consume(PdfResourceKind.ExpandedBytes, nameLength * 32L + length + 4096); var nameBytes = new byte[nameLength]; for (int i = 0; i < nameLength; i++) { int value = Byte(atDirectory + 46 + i); if (value < 32 || value > 126) throw FormatIo.Error(c, "PackageName", "This package profile requires bounded canonical ASCII part names."); nameBytes[i] = (byte)value; }
             string name = Encoding.ASCII.GetString(nameBytes); Name(name, c); if (!all.Add(name)) throw FormatIo.Error(c, "PackageIdentity", "Duplicate package names reject.");
             if (local > directory - 30 || U32(local) != 0x04034b50 || U16(local + 6) != flags || U16(local + 8) != method || U16(local + 26) != nameLength) throw FormatIo.Error(c, "PackageHeader", "Local and central ZIP headers disagree.");
             for (int i = 0; i < nameLength; i++) if (Byte(local + 30 + i) != nameBytes[i]) throw FormatIo.Error(c, "PackageIdentity", "Local and central ZIP names disagree.");

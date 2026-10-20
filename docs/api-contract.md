@@ -191,3 +191,5 @@ Optional `Fluent.Pdf.Formats.PdfSvg` imports a closed static SVG matrix and expo
 Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](spreadsheets.md).
 
 Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets. Full coverage and production qualification remain mandatory; see [presentations](presentations.md).
+
+Offline HTML5 export now provides explicitly rendered self-contained pages or declared-loss inferred text, with static CSP, escaped markup and page provenance. Full coverage and production qualification remain mandatory; see [html-export](html-export.md).

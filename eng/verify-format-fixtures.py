@@ -87,6 +87,32 @@ def presentation_data(root):
             "artifacts": [{"file": name, "sha256": digest(root / name)} for name in ["raster-slides.pptx", "raster-slides.pdf"]]}
 
 
+def html_data(root):
+    from lxml import html, etree
+    import base64
+    fixed = html.fromstring((root / "fixed-pages.html").read_bytes())
+    require(not fixed.xpath("//script|//iframe|//object|//a|//form"), "Active HTML content emitted")
+    csp = fixed.xpath("//meta[@http-equiv='Content-Security-Policy']/@content")
+    require(len(csp) == 1 and "default-src 'none'" in csp[0] and "img-src data:" in csp[0] and "base-uri 'none'" in csp[0], "Offline HTML policy changed")
+    sections = fixed.xpath("//section")
+    require([section.get("data-source-page") for section in sections] == ["1", "0", "1"], "HTML selected page order changed")
+    images = []
+    for index, section in enumerate(sections):
+        values = section.xpath("./img/@src")
+        require(len(values) == 1 and values[0].startswith("data:image/png;base64,"), "HTML page is not self-contained PNG")
+        raw = base64.b64decode(values[0].split(",", 1)[1], validate=True)
+        image = Image.open(io.BytesIO(raw))
+        require(image.size == ((20, 10) if index == 1 else (10, 20)), "HTML raster dimensions changed")
+        require(image.getpixel((0, 0)) == ((0, 0, 0, 255) if index == 1 else (40, 0, 0, 255)), "HTML raster order/samples changed")
+        images.append({"sha256": hashlib.sha256(raw).hexdigest(), "size": list(image.size)})
+    inferred = html.fromstring((root / "inferred-text.html").read_bytes())
+    require(not inferred.xpath("//script|//img|//a|//form"), "Source text became active markup")
+    require(inferred.xpath("//pre/text()") == ["</pre><script>x</script>&"], "Source literal text changed")
+    return {"validator": "lxml HTML parser and Pillow PNG reader", "version": etree.LXML_VERSION, "offlineMarkupAndPixels": "passed", "embeddedImages": images,
+            "actualBrowserAndAccessibilityQualification": "pending", "productionQualified": False,
+            "artifacts": [{"file": name, "sha256": digest(root / name)} for name in ["fixed-pages.html", "inferred-text.html"]]}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("fixture_directory", type=Path)
@@ -121,9 +147,11 @@ def main():
         report["spreadsheets"] = spreadsheet_data(root)
     if (root / "raster-slides.pptx").exists():
         report["presentations"] = presentation_data(root)
+    if (root / "fixed-pages.html").exists():
+        report["htmlExport"] = html_data(root)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + "\n")
-    print("Independent SVG vectors/clips/styles and PDF round-trip fixture checks passed.")
+    print("Independent controlled format fixture checks passed.")
 
 
 if __name__ == "__main__":

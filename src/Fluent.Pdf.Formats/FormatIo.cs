@@ -7,6 +7,26 @@ using System.Xml.Linq;
 namespace Fluent.Pdf.Formats;
 internal static class FormatIo
 {
+    internal static string Language(string language)
+    {
+        Guard.Text(language, nameof(language), 85); string[] parts = language.Split('-'); int at = 0;
+        bool Alpha(string v) => v.Length > 0 && v.All(ch => ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z');
+        bool Digits(string v) => v.Length > 0 && v.All(ch => ch >= '0' && ch <= '9');
+        bool Alnum(string v) => v.Length > 0 && v.All(ch => ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9');
+        void Invalid() => throw new ArgumentException("An explicit bounded modern BCP47 language tag is required.", nameof(language));
+        if (parts[0].Equals("x", StringComparison.OrdinalIgnoreCase)) at = 1;
+        else
+        {
+            if (parts[0].Length < 2 || parts[0].Length > 8 || !Alpha(parts[0])) Invalid(); int primary = parts[at++].Length;
+            if (primary <= 3) for (int count = 0; count < 3 && at < parts.Length && parts[at].Length == 3 && Alpha(parts[at]); count++) at++;
+            if (at < parts.Length && parts[at].Length == 4 && Alpha(parts[at])) at++;
+            if (at < parts.Length && (parts[at].Length == 2 && Alpha(parts[at]) || parts[at].Length == 3 && Digits(parts[at]))) at++;
+            var variants = new HashSet<string>(StringComparer.OrdinalIgnoreCase); while (at < parts.Length && (parts[at].Length >= 5 && parts[at].Length <= 8 && Alnum(parts[at]) || parts[at].Length == 4 && parts[at][0] >= '0' && parts[at][0] <= '9' && Alnum(parts[at]))) { if (!variants.Add(parts[at++])) Invalid(); }
+            var extensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase); while (at < parts.Length && parts[at].Length == 1 && Alnum(parts[at]) && !parts[at].Equals("x", StringComparison.OrdinalIgnoreCase)) { if (!extensions.Add(parts[at++])) Invalid(); int start = at; while (at < parts.Length && parts[at].Length >= 2 && parts[at].Length <= 8 && Alnum(parts[at])) at++; if (at == start) Invalid(); }
+            if (at == parts.Length) return language; if (!parts[at].Equals("x", StringComparison.OrdinalIgnoreCase)) Invalid(); at++;
+        }
+        int privateStart = at; for (; at < parts.Length; at++) if (parts[at].Length > 8 || !Alnum(parts[at])) Invalid(); if (privateStart == at) Invalid(); return language;
+    }
     internal static PdfByteStore Capture(Stream input, PdfOperationContext c, int maximum = 16777216)
     {
         if (input == null || !input.CanRead) throw new ArgumentException("A readable borrowed format stream is required.", nameof(input));
