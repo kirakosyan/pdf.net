@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "purpose": "PR119-review-regressions-not-production-qualification",
+  "sourceCommit": "fd337aa8d4bd1ad9f7d4fd985d8cd5068cd4db62",
+  "sourceFiles": [
+    {
+      "path": "docs/external-signing.md",
+      "sha256": "e88971567f85ddc7c262d908136a9435dd30c3bc841f9a12867715a17f86f3b1"
+    },
+    {
+      "path": "eng/test-queue-fixture-verifier.py",
+      "sha256": "4b64f4acbcd984dca3b43f82044bc08e3d4a3a2efc6381be4c01202e31cea10b"
+    },
+    {
+      "path": "eng/verify-queue-fixtures.py",
+      "sha256": "28cc8c765fd1a48eee69b78924083829873f0ee67b019aee3a6594d793cffad6"
+    },
+    {
+      "path": "src/Fluent.Pdf.Cryptography/BoundedSignatureDer.cs",
+      "sha256": "08a6bc164fc8097b12ce17585c10864b969d1ef037be260ccf438c2e97b4a791"
+    },
+    {
+      "path": "src/Fluent.Pdf.Cryptography/ExternalCmsSignatureProvider.cs",
+      "sha256": "d980a9f4bede18b368a59f2da6740366e1c819972e7dde9fbd45bd5e55f77580"
+    },
+    {
+      "path": "src/Fluent.Pdf.Cryptography/PinnedSignatureTrustProvider.cs",
+      "sha256": "1d7383ba4f56fb631ba76afa2a3f1dfc8c430f25b3968741931d9e40182009a3"
+    },
+    {
+      "path": "src/Fluent.Pdf.Cryptography/Rfc3161TimestampVerifier.cs",
+      "sha256": "543e8a569101f59442cacdf8686a4ed676a15e6611927675e6b6657da6f0f3e8"
+    },
+    {
+      "path": "src/Fluent.Pdf/Comparison/PdfComparison.cs",
+      "sha256": "fc77f59a9deb12d44f5b48bb29cc20db8f7ec74543a02ad0024a536a271cddda"
+    },
+    {
+      "path": "src/Fluent.Pdf/Forms/PdfXfa.cs",
+      "sha256": "bad9be8377ec68617f1a61dcf7a4b671d11630e8996288d2327e2816680eed6a"
+    },
+    {
+      "path": "src/Fluent.Pdf/Rendering/PdfRasterExport.cs",
+      "sha256": "a31e7a05c44adf9c6be56fb1ccdab113823d5c787e66d90b5607ee2d4ad0fe06"
+    },
+    {
+      "path": "src/Fluent.Pdf/Scripting/PdfScripts.cs",
+      "sha256": "df84dd0b0ad760fb06f6b227785256355ca981609369014487b258eca3dc8723"
+    },
+    {
+      "path": "src/Fluent.Pdf/Signatures/PdfExternalSigning.cs",
+      "sha256": "a716a8921e61e9065229c090050449c0089516fe66e6eeccfd678b4d9865eb4e"
+    },
+    {
+      "path": "src/Fluent.Pdf/Signatures/PdfPades.cs",
+      "sha256": "6ec79e06ebdf3fb180c6ff4e6d88c72ea3cf5a7b8bc153822501a5cd19d8d888"
+    },
+    {
+      "path": "src/Fluent.Pdf/Signatures/PdfRevisionAudit.cs",
+      "sha256": "f732416b04cc3d69063cbff8b0080c08963325d9728257da7d52d2bcfa14449a"
+    },
+    {
+      "path": "src/Fluent.Pdf/Signatures/PdfSignatures.cs",
+      "sha256": "b1afc9f0628f089c5b2aa4850f75f8a05b95f0fddb33953f6be8e9ba0a7b33d4"
+    },
+    {
+      "path": "src/Fluent.Pdf/Verification/PdfSignatureVerification.cs",
+      "sha256": "3329ab0b30dd7d0659c11520f8693a6c4999672da6e24d0f52f5b29d6d27457f"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ComparisonXfaScriptTests.cs",
+      "sha256": "b33cb2735206cb57100003626b61104e343f7baa5809a192515d0ac17fec4f53"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ExternalSigningTests.cs",
+      "sha256": "c162fdb885582f0fd49277ea1c80f0d84829b5a8d2dd5415103a6aa80369a7a7"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/PadesRevisionTests.cs",
+      "sha256": "0079a40f0337b641d3e0aa577c26f86ce32f51987cab2be1795228c2ef507751"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/SignatureVerificationTests.cs",
+      "sha256": "c94a72dd332584153f7174f2499a68adf53e745d601541097178c3def97bac0d"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/TimestampTests.cs",
+      "sha256": "b9691111883c5161624ff63876275e388095549bddf32098631f8b08ffd93421"
+    }
+  ],
+  "os": "Debian 13 linux-x64",
+  "runtimeLanes": [
+    {
+      "lane": "net10.0",
+      "total": 68,
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0,
+      "report": "artifacts/contracts/pr119-review-verified/net10.0.trx",
+      "sha256": "46d660678374995fc583392b85c4363e64dd7d82c8cbb1a117f1689d3016d8e3"
+    },
+    {
+      "lane": "net8.0",
+      "total": 68,
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0,
+      "report": "artifacts/contracts/pr119-review-verified/net8.0.trx",
+      "sha256": "64087fb725a7ffaac382959257697106a973bc155a7da08d7731e9b5e481e426"
+    },
+    {
+      "lane": "netstandard-fallback",
+      "total": 68,
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0,
+      "report": "artifacts/contracts/pr119-review-verified/netstandard-fallback.trx",
+      "sha256": "c4510a6c9c35b9ec6ff3adfbe8077d6d5528e50588ca32e0dd88fc11318e45a9"
+    }
+  ],
+  "pythonCheckerRegression": {
+    "command": "python3 eng/test-queue-fixture-verifier.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0",
+    "validRuns": [
+      "normal Python",
+      "Python -O"
+    ],
+    "corruptedFixturesRejectedUnderOptimization": [
+      "pixels",
+      "dimensions",
+      "dpi"
+    ]
+  },
+  "independent": {
+    "schemaVersion": 1,
+    "purpose": "independent-original-source-fixtures-not-production-qualification",
+    "rasterValidator": {
+      "name": "Pillow",
+      "version": "12.3.0",
+      "results": [
+        {
+          "file": "grid.png",
+          "sha256": "047d5a1ea03461870fe073f7bf661f2f5c5d2333716c1b5d8ce6595675b35aa5",
+          "frames": [
+            {
+              "frame": 0,
+              "size": [
+                8,
+                6
+              ],
+              "dpi": [
+                72.009,
+                72.009
+              ],
+              "allPixelsMatchOriginalFormula": true
+            }
+          ]
+        },
+        {
+          "file": "grid.bmp",
+          "sha256": "4b3da7e1e17431ace4ba73f50637d47ae1cbc3318f18b0d5a23034960543e3ce",
+          "frames": [
+            {
+              "frame": 0,
+              "size": [
+                8,
+                6
+              ],
+              "dpi": [
+                72.008961115161,
+                72.008961115161
+              ],
+              "allPixelsMatchOriginalFormula": true
+            }
+          ]
+        },
+        {
+          "file": "grid.tiff",
+          "sha256": "e73f905a83cdfdd5d8e25f16ef3ddd60a8c5bc74e9dbc99dd99cf85d704da9df",
+          "frames": [
+            {
+              "frame": 0,
+              "size": [
+                5,
+                4
+              ],
+              "dpi": [
+                72.0,
+                72.0
+              ],
+              "allPixelsMatchOriginalFormula": true
+            },
+            {
+              "frame": 1,
+              "size": [
+                8,
+                6
+              ],
+              "dpi": [
+                72.0,
+                72.0
+              ],
+              "allPixelsMatchOriginalFormula": true
+            }
+          ]
+        }
+      ]
+    },
+    "timestampValidator": {
+      "name": "OpenSSL 3.5.7 9 Jun 2026 (Library: OpenSSL 3.5.7 9 Jun 2026)",
+      "verification": "OK",
+      "tokenSha256": "4f2bce4409e5e5212933ddb7e374750a25a018f6eb88f30308452618b3e5a7a0",
+      "publicCertificateSha256": "6e4e453a06e0b145418ca33860a7da997cff733f8a35a035d3264b36cef802ca",
+      "outputSha256": "a3f6d88ef1d4cb3cda135d09f531124ab862385a5201829359cd6fa22c477038",
+      "scope": "Exact SHA256 imprint and token signature using an explicitly trusted self-issued fixture TSA certificate; no general PKIX, revocation or PAdES qualification."
+    },
+    "productionQualified": false
+  },
+  "reviewChanges": [
+    "Preflight CMS encapsulated TSTInfo and X509 extension DER before BouncyCastle",
+    "Keep exceptions outside name-tree sort comparator and validate keys",
+    "Report geometry insertion/deletion",
+    "Preserve integrity when explicit trust is unsupported",
+    "Reject synchronous asynchronous signers before caller sessions",
+    "Map invalid X509 choices and parser failures",
+    "Reject encrypted PAdES source and signing preflight",
+    "Use accurate unsigned-edit reason",
+    "Validate XML scalar characters and cache parsed packets per operation",
+    "Use positive entity cap with DTD prohibition",
+    "Use row-buffer raster swizzling/BMP writes and table CRC",
+    "Use exact CMS memory slice",
+    "Require explicit independent checks even under Python optimization"
+  ],
+  "productionQualified": false,
+  "limitations": [
+    "Focused source regression checks only; full requirement and exact final-package qualification remain pending.",
+    "Earlier unfiltered local native suites are blocked by host Landlock ENOSYS; no native gate changed.",
+    "Original PR head 4b6a273 passed all six platform CI jobs in run 39475812976; review-fix head CI must be checked separately."
+  ],
+  "runtimeVersions": {
+    "net8.0": "8.0.32",
+    "net10.0": "10.0.13",
+    "netstandardFallbackHost": "8.0.32"
+  },
+  "commands": [
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1",
+    "dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f {net8.0|net10.0} --no-restore --filter \"FullyQualifiedName~SignatureVerificationTests|FullyQualifiedName~ExternalSigningTests|FullyQualifiedName~PadesRevisionTests|FullyQualifiedName~ComparisonXfaScriptTests|FullyQualifiedName~RasterViewTests|FullyQualifiedName~TimestampTests|FullyQualifiedName~SignatureTests\" --logger trx --results-directory artifacts/contracts/pr119-review-verified",
+    "Same net8.0 filtered command with -p:UseNetStandardAssembly=true -m:1 for fallback",
+    "pwsh -NoProfile -File eng/check-api.ps1",
+    "pwsh -NoProfile -File eng/validate-spec.ps1",
+    "pwsh -NoProfile -File eng/test-release-block.ps1",
+    "python3 eng/test-queue-fixture-verifier.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0",
+    "python3 eng/verify-queue-fixtures.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0 artifacts/contracts/pr119-review-verified/independent.json"
+  ],
+  "checks": [
+    {
+      "name": "build",
+      "path": "/workspace/scratch/review-build-final.log",
+      "sha256": "d79b3f6d475255cc9e1efc58e531791efec64890bb306ebb4396cea082bb292e"
+    },
+    {
+      "name": "api",
+      "path": "/workspace/scratch/review-api-final.log",
+      "sha256": "ec1c417b8900ab942a91111bfcbb84f08fbfb61be76132a266d6b6ceff8f6d8c"
+    },
+    {
+      "name": "spec",
+      "path": "/workspace/scratch/review-spec-final.log",
+      "sha256": "2b72a11e1a3854b9d87198b714e79dea9ac95d67db5e757a1c58ac9edc11aaa5"
+    },
+    {
+      "name": "release",
+      "path": "/workspace/scratch/review-release-final.log",
+      "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+    },
+    {
+      "name": "python",
+      "path": "/workspace/scratch/review-python-final.log",
+      "sha256": "3aabe598ed222790f50c1c076a9ceb65416340899289f0fcff24ad876b54c81f"
+    }
+  ],
+  "build": {
+    "targets": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "warnings": 0,
+    "errors": 0
+  },
+  "apiComparisons": 33
+}

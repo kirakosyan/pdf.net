@@ -15,3 +15,5 @@ var result = await PdfSignatures.SignAsync(source,
 The caller owns key/session implementations and their credential/network/module policy. Native PKCS#11 module loading, actual software-token/HSM provisioning, device login/error matrices and production session/endurance qualification remain mandatory. The included session fixture exercises this boundary with a local RSA key; it does not qualify hardware.
 
 Source validation is recorded in [the queue evidence ledger](evidence/issues-51-60-source.json). All four core target frameworks expose the same API; actual-runtime/final-package limitations remain explicit.
+
+PR #119 review fixes and focused regression evidence are recorded in [the review ledger](evidence/pr119-review-source.json).
