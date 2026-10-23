@@ -26,7 +26,7 @@ Source mode records identity consistency only. It does not establish full test c
 
 These checks establish structural consistency of supplied evidence. Reports still need a trusted execution/provenance chain and complete functional, fidelity, security, resource, concurrency and consumer suites. A report can never attest its own physical host. The checker always retains `productionQualified:false`; it does not change the release switch or create/publish packages. Synthetic checker-unit fixtures are explicitly labeled and are not actual runtime or qualification evidence.
 
-Current source CI covers six native modern hosts and current Framework x86/x64. Exact stable packages, actual minimum Framework 4.7.2 hosts, reviewed complete package-consumer inventories and complete production suites remain missing. The task environment also lacks required local Landlock isolation for five native source classes; selected local source tests do not replace those lanes. No required lane, suite, feature or original production gate is removed or weakened.
+Source CI covers six native modern hosts and current Framework x86/x64. At the earlier cloud tooling checkpoint, actual minimum Framework execution was missing and local Landlock isolation was unavailable for five native source classes. Selected local source tests did not replace those lanes. The Windows continuation below records separate actual-runtime observations. Exact stable packages, independently qualified minimum-runtime hosts, reviewed complete package-consumer inventories and complete production suites remain required. No required lane, suite, feature or original production gate is removed or weakened.
 
 ## Windows PC container preflight
 
@@ -52,3 +52,21 @@ Transfer the artifact from the exact reviewed CI commit into an isolated Windows
 The bundle checks file hashes and rejects additional files before creating a private workspace. The original inputs remain unchanged when tests create fixture outputs. The [offline runner](../eng/run-framework-contracts.ps1) needs no modern SDK or PowerShell installation in the guest. It uses the standalone Framework test platform with no test filter or implicit JIT override, checks actual installed and test-process identities, and fails on any missing, failed or skipped test. Its external deadline terminates only the owned test process tree and retains logs, TRX and `framework-execution.json` even on failure. Synthetic launcher regression reports are explicitly separate from actual SDK execution.
 
 Copy each result directory and its workspace's `artifacts/contracts` back to the analysis host. Run `eng/check-runtime-evidence.py --lane win-x64-framework472 --trx <results>/runtime-contracts.trx --mode source --output <fresh-report>.json` (use `win-x86-framework472` for x86). The bundle origin, input hashes and actual test process must agree. These source results do not qualify exact packages, trusted-host provenance, full production suites or emulated performance. The 22-lane inventory and publication gates remain unchanged.
+
+## Windows source observations, 2026-10-23
+
+The [Windows evidence record](evidence/FP-086-windows-source.json) binds the offline tooling at `dec0d2ce801f979dccbb9163d7c99f0e39d18fa4` to the actual CI merge snapshot `519a016630b0656d1a9c991e2ff1e8e60adc100a`. All five source workflows passed on that branch head. [Source run 40020703771](https://github.com/kirakosyan/pdf.net/actions/runs/40020703771) passed all six hosts and retained the Windows transfer artifact before test execution. Its exact archive SHA-256 is `3bc0bc5627530b409710156b9290fd8afa0434f3f5bf97771401519b82e62cae`; all 1,445 manifest entries were verified before guest execution.
+
+| Actual source execution | Passed / total | Failed / skipped |
+| --- | --- | --- |
+| Hosted current Framework x64, offline runner | 1,734 / 1,734 | 0 / 0 |
+| Hosted current Framework x86, offline runner | 1,734 / 1,734 | 0 / 0 |
+| Hyper-V Framework 4.7.2 x64 | 1,734 / 1,734 | 0 / 0 |
+| Hyper-V Framework 4.7.2 x86 | 1,734 / 1,734 | 0 / 0 |
+| Software-emulated Framework 4.7.2 x64 | 1,707 / 1,734 | 27 / 0 |
+
+The minimum-runtime runs used a separate, logically verified disk copy in an offline Hyper-V Generation 2 guest with two virtual CPUs and 4 GiB RAM. The guest observed Windows Server 2019 build 17763, live Framework release `461814`, and actual test-process runtime/core library `4.7.3946.0`. Both full unfiltered suites passed without JIT overrides or relaxed deadlines. The analysis host independently verified the TRX/report hashes, source bundle origin, runner/test assembly hashes, all 15 loaded SDK hashes, and the complete source test ID/name inventory against the same-binary hosted runs. Both minimum-runtime source consistency checks passed. The guest shut down before report collection; the original VM and disk were preserved.
+
+Failed observations remain retained. The software-emulated x64 run hit 27 operation/native-worker deadlines and was rejected by the checker; its directory transfer failed, so all 105 result/fixture files were recovered through a hash-verified ZIP. Software-emulated x86 was not executed. Earlier local current-Framework x64/x86 runs each passed 1,640 of 1,734 cases and failed 94 because native fixtures and Java were absent. An earlier hosted x86 run retained one native-worker deadline failure. An incomplete transfer artifact missing three dotfiles was correctly rejected before execution; CI now explicitly retains those files. Fifteen synthetic launcher regressions and seven checker tests validate tooling behavior separately from the SDK runs.
+
+These are source observations from the stated commits. The reused evaluation image has not completed independent OS/image/patch/security provenance qualification, and this run does not establish full feature coverage or production performance. Exact final packages and their complete consumers across all 22 lanes, separate integration suites, and every original production gate remain required. FP-086/#90 stays open; no package is created or published.

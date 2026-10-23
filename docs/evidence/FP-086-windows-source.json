@@ -1,0 +1,2345 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-086",
+  "issue": 90,
+  "toolingCommit": "dec0d2ce801f979dccbb9163d7c99f0e39d18fa4",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "toolingFiles": [
+    {
+      "path": "eng/run-framework-contracts.ps1",
+      "bytes": 8298,
+      "sha256": "1760298b954de8d85000b87ba5a3e3dc3c8bc6df83179a0fd0edcf1d87313d2f"
+    },
+    {
+      "path": "eng/run-framework-bundle.ps1",
+      "bytes": 3902,
+      "sha256": "99cf16de2d701c5c50eee4fc608e968d8b4c655d4e759fe3e3187765df1f43a0"
+    },
+    {
+      "path": "eng/new-framework-test-bundle.ps1",
+      "bytes": 4170,
+      "sha256": "e5697a5f688f4c9b7ed3f95eea5e93838d5c3cb1c97e152c32240b01e8ba1461"
+    },
+    {
+      "path": "eng/test-framework-runner.ps1",
+      "bytes": 8477,
+      "sha256": "faea64d9a417c7cca8fe433d00de4a4269bce65034d32b99ce791a51c6fea2e0"
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "bytes": 7902,
+      "sha256": "b24db40b2bbf5f6b7c59decd55258d27b535c3b647ba5e3782465f8852207d9e"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 5730,
+      "sha256": "a0762f021e3b8d515e24a5e017a04c2ac5c72616d69feb9eabee6cb5908a079f"
+    }
+  ],
+  "localCurrentFramework": [
+    {
+      "report": {
+        "path": "artifacts/contracts/windows-handoff/framework-current-x64/runtime-contracts.trx",
+        "bytes": 2910386,
+        "sha256": "d3d28ca731c8fcc077d2d1ef1722080c4717c1e3c9b6d9f81919db6ad700c2f9"
+      },
+      "counters": {
+        "total": 1734,
+        "executed": 1734,
+        "passed": 1640,
+        "failed": 94,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": [
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0644\u064e\u0627\", script: \"Arab\", language: \"ar\", direction: 5, expected: [291, 0, 0, 0, 249, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.SuccessfulNativeInitializationWithOnlySomeRequestedModelsCannotFallback",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0915\u094d\u0937\u0924\u094d\u0930\u093f\u092f\", script: \"Deva\", language: \"hi\", direction: 4, expected: [179, 0, 712, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.MetadataRepairIsExplicitReportedAndStrictModeRejectsItsLoss",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 5, screenVisible: True, printVisible: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeMemoryAndOutputBoundariesCannotReturnUnboundedResults",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ActualNativeVersionAndExplicitModelInitializationCannotSilentlyFallback",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 1, expected: \"Ocr.Recognition\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ActualPinnedIndependentUaValidatorReportsMissingIdentificationInsteadOfInventingConformance(profile: Ua1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"rgb.j2k\", codec: Jpx, components: 3, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ActualPinnedIndependentUaValidatorReportsMissingIdentificationInsteadOfInventingConformance(profile: Ua2)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.WrappedFlowRetainsOriginalRtlParagraphDirectionOnLatinContinuationLines",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4E)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ExplicitlyPreparedOriginalFiguresPassIndependentAutomatedUaChecksWithoutHumanReview(profile: Ua1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 16)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A1A)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise90)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeSandboxRejectsCallerFileWritesAndNetworkAccess",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.NativeAllocationEnvelopeIsChargedBeforeLaunchingWorker",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CancellationDuringSetupAndExecutionReleasesEveryOwnedStage",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A2U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.WorkerDiagnosticsRequireExplicitDisclosureOptIn",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"A\u0301 e\u0301\", script: \"Latn\", language: \"en\", direction: 4, expected: [36, 0, 639, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DamagedImageRejectsWithPreciseDiagnosticsAndNextJobRecovers",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeWorkerMemoryAccountingIsIndependentOfTheCallersResidentSet",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-abi\", code: \"Native.AbiMismatch\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ImagesAndTransparencyRetainKnownColorsAndStraightAlpha",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 2, expected: \"Ocr.NativeAllocation\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.TotalCharacterCeilingRejectsBeforeReturningARecognitionResult",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"../fonts/licensed-cjk.otf\", text: \"\u4e2d\u6587\u4e00\", script: \"Hani\", language: \"zh\", direction: 6, expected: [5, 0, 0, -1000, -500, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 4, screenVisible: True, printVisible: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CompletePinnedTransitiveDependencyLoadsFromThePrivateDirectory",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: False)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4F)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.jpg\", codec: Dct, components: 1, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"office\", script: \"Latn\", language: \"en\", direction: 4, expected: [82, 0, 605, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"bengali.ttf\", text: \"\u09ac\u09be\u0982\u09b2\u09be \u0995\u09cd\u09b7\", script: \"Beng\", language: \"bn\", direction: 4, expected: [42, 0, 596, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A1B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"missing-dependency\", code: \"Native.DependencyLoadFailed\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 0, screenVisible: True, printVisible: False)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 6, screenVisible: False, printVisible: False)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2A)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RealBridgeChecksAbiAndVersionAndReturnsDetachedBytes",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise270)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 6, expected: \"Ocr.NativeUtf8\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.RegionSamplesEqualTheSameIntegerWindowOfTheFullRaster",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ExplicitlyPreparedOriginalFiguresPassIndependentAutomatedUaChecksWithoutHumanReview(profile: Ua2)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.IsolatedCapiFixturePreservesGeometryConfidenceAndCheckedModelProvenance",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.SelfContainedManagedBridgeRunsNativeOsArchitectureAndRestrictsNewThreads",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.BridgeCannotChangeHardOrSoftProcessLimitsAfterIsolation",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.MissingPinnedModelFailsPreflightWithItsExactAssetIdentity",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DctEncodingIsExplicitAndProducesValidIndependentGeometry",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.DefaultOptionalContentControlsFormPaintingWithoutFlattening",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ExplicitMixedModelsReturnExactDeclarationsAndSelectionIdentity",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 36, screenVisible: False, printVisible: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645\", script: \"Arab\", language: \"ar\", direction: 5, expected: [770, 12, 562, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeCrashDoesNotCrashTheCallerOrCommitPartialFileOutput",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ExistingWidgetAppearancesMatchStaticFlatteningAndCanBeExcluded",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A3U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A1B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-version\", code: \"Native.EngineVersionMismatch\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.UnsupportedExternalFontsAndViewerRegenerationFailBeforeAWorkerStarts",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jbig2, components: 1, bits: 1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3A)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 3, expected: \"Ocr.WordGeometry\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.MixedFallbackUsesBidiVisualRunsAndPreservesLogicalParagraph",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 3, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.j2k\", codec: Jpx, components: 1, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ManyShapingRunsReuseTheWorkerEnvelopeUnderTheDefaultOperationBudget",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RequestSpecificResponseCeilingIsEnforcedBeforeReturningOutput",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0928\u092e\u0938\u094d\u0924\u0947\", script: \"Deva\", language: \"hi\", direction: 4, expected: [44, 0, 555, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise180)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"mmr.jb2\", codec: Jbig2, components: 1, bits: 1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ExplicitFeatureOverrideDisablesLigatureWithoutChangingLogicalText",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.MissingSymbolsHavePreciseExportDiagnosticsBeforeRecognition",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: None)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.HostValidatesRequestBeforeStartingAProcessAndCannotHideFailures",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeMemoryEnvelopeIsChargedBeforeLaunch",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.CodecEnvelopeIsChargedBeforeNativeExecution",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.CancellationTerminatesThePrivateNativeRecognitionAndReleasesItsStage",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.TransparentAndOpaqueBackgroundsAndDeviceGrayHaveExplicitSamples",
+          "outcome": "Failed"
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "artifacts/contracts/windows-handoff/framework-current-x86/runtime-contracts.trx",
+        "bytes": 2923540,
+        "sha256": "9ab8fdc1c009492d213a8162a7146e5e9befaedc0091f823a0ad84b12e84fa75"
+      },
+      "counters": {
+        "total": 1734,
+        "executed": 1734,
+        "passed": 1640,
+        "failed": 94,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": [
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DamagedImageRejectsWithPreciseDiagnosticsAndNextJobRecovers",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.WorkerDiagnosticsRequireExplicitDisclosureOptIn",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.TransparentAndOpaqueBackgroundsAndDeviceGrayHaveExplicitSamples",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeMemoryEnvelopeIsChargedBeforeLaunch",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"missing-dependency\", code: \"Native.DependencyLoadFailed\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.UnsupportedExternalFontsAndViewerRegenerationFailBeforeAWorkerStarts",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RequestSpecificResponseCeilingIsEnforcedBeforeReturningOutput",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0644\u064e\u0627\", script: \"Arab\", language: \"ar\", direction: 5, expected: [291, 0, 0, 0, 249, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0928\u092e\u0938\u094d\u0924\u0947\", script: \"Deva\", language: \"hi\", direction: 4, expected: [44, 0, 555, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 3, expected: \"Ocr.WordGeometry\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3A)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2A)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: None)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4E)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ExplicitFeatureOverrideDisablesLigatureWithoutChangingLogicalText",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.RegionSamplesEqualTheSameIntegerWindowOfTheFullRaster",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: False)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.CodecEnvelopeIsChargedBeforeNativeExecution",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 6, expected: \"Ocr.NativeUtf8\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.NativeAllocationEnvelopeIsChargedBeforeLaunchingWorker",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeMemoryAndOutputBoundariesCannotReturnUnboundedResults",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.MetadataRepairIsExplicitReportedAndStrictModeRejectsItsLoss",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"rgb.j2k\", codec: Jpx, components: 3, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 4, screenVisible: True, printVisible: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ExistingWidgetAppearancesMatchStaticFlatteningAndCanBeExcluded",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 2, expected: \"Ocr.NativeAllocation\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.SelfContainedManagedBridgeRunsNativeOsArchitectureAndRestrictsNewThreads",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-abi\", code: \"Native.AbiMismatch\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A1B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ActualPinnedIndependentUaValidatorReportsMissingIdentificationInsteadOfInventingConformance(profile: Ua2)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 0, screenVisible: True, printVisible: False)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"A\u0301 e\u0301\", script: \"Latn\", language: \"en\", direction: 4, expected: [36, 0, 639, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise270)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 3, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.DefaultOptionalContentControlsFormPaintingWithoutFlattening",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jbig2, components: 1, bits: 1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"mmr.jb2\", codec: Jbig2, components: 1, bits: 1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 36, screenVisible: False, printVisible: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"../fonts/licensed-cjk.otf\", text: \"\u4e2d\u6587\u4e00\", script: \"Hani\", language: \"zh\", direction: 6, expected: [5, 0, 0, -1000, -500, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A1A)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.WrappedFlowRetainsOriginalRtlParagraphDirectionOnLatinContinuationLines",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.j2k\", codec: Jpx, components: 1, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ExplicitlyPreparedOriginalFiguresPassIndependentAutomatedUaChecksWithoutHumanReview(profile: Ua1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ExplicitMixedModelsReturnExactDeclarationsAndSelectionIdentity",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.ActualNativeVersionAndExplicitModelInitializationCannotSilentlyFallback",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.IsolatedCapiFixturePreservesGeometryConfidenceAndCheckedModelProvenance",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ManyShapingRunsReuseTheWorkerEnvelopeUnderTheDefaultOperationBudget",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ActualPinnedIndependentUaValidatorReportsMissingIdentificationInsteadOfInventingConformance(profile: Ua1)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ExplicitlyPreparedOriginalFiguresPassIndependentAutomatedUaChecksWithoutHumanReview(profile: Ua2)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A2U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CancellationDuringSetupAndExecutionReleasesEveryOwnedStage",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RealBridgeChecksAbiAndVersionAndReturnsDetachedBytes",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.CompletePinnedTransitiveDependencyLoadsFromThePrivateDirectory",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"latin.ttf\", text: \"office\", script: \"Latn\", language: \"en\", direction: 4, expected: [82, 0, 605, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.BridgeCannotChangeHardOrSoftProcessLimitsAfterIsolation",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeHangIsTerminatedOnDeadlineOrCallerCancellation(cancel: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.NativeErrorsAndMalformedResultsCleanAllOwnedHandlesAndTheNextJobRecovers(mode: 1, expected: \"Ocr.Recognition\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.MissingSymbolsHavePreciseExportDiagnosticsBeforeRecognition",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ActualLoaderRejectsWrongAbiVersionOrMissingTransitiveDependency(scenario: \"wrong-version\", code: \"Native.EngineVersionMismatch\")",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.CancellationTerminatesThePrivateNativeRecognitionAndReleasesItsStage",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.TotalCharacterCeilingRejectsBeforeReturningARecognitionResult",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.DctEncodingIsExplicitAndProducesValidIndependentGeometry",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.ImagesAndTransparencyRetainKnownColorsAndStraightAlpha",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"devanagari.ttf\", text: \"\u0915\u094d\u0937\u0924\u094d\u0930\u093f\u092f\", script: \"Deva\", language: \"hi\", direction: 4, expected: [179, 0, 712, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.SuccessfulNativeInitializationWithOnlySomeRequestedModelsCannotFallback",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 5, screenVisible: True, printVisible: True)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"bengali.ttf\", text: \"\u09ac\u09be\u0982\u09b2\u09be \u0995\u09cd\u09b7\", script: \"Beng\", language: \"bn\", direction: 4, expected: [42, 0, 596, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.IndependentEncodedFixturesDecodeToExactSamples(file: \"l.jpg\", codec: Dct, components: 1, bits: 8)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeWorkerMemoryAccountingIsIndependentOfTheCallersResidentSet",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.HostValidatesRequestBeforeStartingAProcessAndCannotHideFailures",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeCrashDoesNotCrashTheCallerOrCommitPartialFileOutput",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A3U)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ArabicIndicLigaturesMarksAndVerticalCjkMatchIndependentHarfBuzzAnswers(file: \"arabic.ttf\", text: \"\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645\", script: \"Arab\", language: \"ar\", direction: 5, expected: [770, 12, 562, 0, 0, \u00b7\u00b7\u00b7])",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.PrintIntentUsesAnnotationVisibilityWithoutExecutingActions(flags: 6, screenVisible: False, printVisible: False)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeSandboxRejectsCallerFileWritesAndNetworkAccess",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4F)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A1B)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise180)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.LosslessImageEncodersPreserveSamplesAndBitPolarity(codec: Jpx, components: 1, bits: 16)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.MixedFallbackUsesBidiVisualRunsAndPreservesLogicalParagraph",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeRenderingTests.NativeCropOriginUserUnitAndAllRotationsPaintAtKnownDisplayCoordinates(rotation: Clockwise90)",
+          "outcome": "Failed"
+        },
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeOcrContractTests.MissingPinnedModelFailsPreflightWithItsExactAssetIdentity",
+          "outcome": "Failed"
+        }
+      ]
+    }
+  ],
+  "localCurrentFrameworkLimitations": "These binaries were built at 171271f7924330ac679f130cb2b041d7f0cfbe07. Both complete suites fail because required native fixtures and Java are absent on the host. These are not passing lanes.",
+  "launcherRegressions": {
+    "report": {
+      "path": "artifacts/contracts/windows-handoff/runner-regressions-r3/regressions.json",
+      "bytes": 704,
+      "sha256": "b4d9eb8d3d6ccc259bb9ef5164952128d85069ee8cf594e6dfab1c5a0fceee36"
+    },
+    "passed": 15,
+    "syntheticOnly": true
+  },
+  "hostedOfflineExecutions": [
+    {
+      "report": {
+        "path": "artifacts/contracts/windows-handoff/ci-final-win-x64/offline-framework-x64/runtime-contracts.trx",
+        "bytes": 2529669,
+        "sha256": "b48a816ba800bb7dae5157298e7f60a85317d41caf5bb78dbf7ef0e5afc3dfb0"
+      },
+      "counters": {
+        "total": 1734,
+        "executed": 1734,
+        "passed": 1734,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": []
+    },
+    {
+      "report": {
+        "path": "artifacts/contracts/windows-handoff/ci-final-win-x64/offline-framework-x86/runtime-contracts.trx",
+        "bytes": 2529683,
+        "sha256": "97325d7b47b29b3380f41e0354962935240393330baa951833df61b5b95a2004"
+      },
+      "counters": {
+        "total": 1734,
+        "executed": 1734,
+        "passed": 1734,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": []
+    }
+  ],
+  "initialCiObservations": {
+    "branchHead": "07536db8054de6caf2e74b782a350b335e64c507",
+    "workflowRun": 40018092965,
+    "windowsX86": {
+      "report": {
+        "path": "artifacts/contracts/windows-handoff/ci-attempt1/framework-current-x86/contracts.trx",
+        "bytes": 2543229,
+        "sha256": "849bf0883ddb3afb634df935afed5edff8e10ee30a55356eb25c3b2d4bd4e625"
+      },
+      "counters": {
+        "total": 1734,
+        "executed": 1734,
+        "passed": 1733,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": [
+        {
+          "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.BridgeCannotChangeHardOrSoftProcessLimitsAfterIsolation",
+          "outcome": "Failed"
+        }
+      ]
+    },
+    "windowsX64": {
+      "report": {
+        "path": "artifacts/contracts/windows-handoff/ci-attempt1/framework-current-x64/contracts.trx",
+        "bytes": 2540219,
+        "sha256": "c26b9c406561967dcf3e8669bbbc2ba6b1276f36190c94d473ad068c7cbc5454"
+      },
+      "counters": {
+        "total": 1734,
+        "executed": 1734,
+        "passed": 1734,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": []
+    },
+    "limitations": "The x86 native-worker deadline failure remains evidence. Final hosted results belong to their own later commit."
+  },
+  "rejectedTransfer": {
+    "workflowRun": 40019961476,
+    "artifactId": 12529144933,
+    "branchHead": "4d79abc59b8b91dbaf68d9cddfadbadd7b13b9d6",
+    "missingFiles": [
+      "testplatform/_rels/.rels",
+      "testplatform/.signature.p7s",
+      "tests/.msCoverageSourceRootsMapping_Fluent.Pdf.Contract.Tests"
+    ],
+    "rejection": {
+      "path": "artifacts/contracts/windows-handoff/missing-transfer-rejection.log",
+      "bytes": 609,
+      "sha256": "9dbec5ba2a93c8b6815aab4f33e1cc07ac193e4246577bb11148e90fd23a771c"
+    },
+    "executionStarted": false,
+    "correction": "Explicitly include all hashed dotfiles in the CI artifact upload."
+  },
+  "vm": {
+    "image": "dockurr/windows:6.06",
+    "imageDigest": "sha256:16fd7c39a3e48bb946d29c59dc6015942e5b900a1fa5d7e5552053bfc48ee2ea",
+    "virtualization": "QEMU software emulation; no KVM",
+    "network": "task-owned internal Docker network; no published ports",
+    "guestOs": "Windows Server 2019 Standard Evaluation, build 17763",
+    "originalVmPreserved": true,
+    "preflight": [
+      {
+        "release": 461814,
+        "runtime": "4.0.30319.42000",
+        "coreFileVersion": "4.7.3946.0 built by: NET472REL1LAST_B",
+        "coreSha256": "E8DC01A4630882D93DD37275460432906E47DD927349467752CE3993108C9104",
+        "bits": 64,
+        "os": "Microsoft Windows NT 10.0.17763.0",
+        "sdkTestsExecuted": false,
+        "productionQualified": false
+      },
+      {
+        "release": 461814,
+        "runtime": "4.0.30319.42000",
+        "coreFileVersion": "4.7.3946.0 built by: NET472REL1LAST_B",
+        "coreSha256": "00993E539B683014460A5F426397660F7E8971687F377F5AF6CC1F63FBE2BC42",
+        "bits": 32,
+        "os": "Microsoft Windows NT 10.0.17763.0",
+        "sdkTestsExecuted": false,
+        "productionQualified": false
+      }
+    ],
+    "baseCopy": {
+      "path": "artifacts/framework472-vm/base-copy.json",
+      "bytes": 996,
+      "sha256": "353af2fc7e4e030e05302c1809d117e71f129790949f76451ea3161f97a0f498"
+    },
+    "provenanceQualified": false,
+    "analysisToolModification": {
+      "purpose": "Task-container Samba hostname alias needed for the private guest transfer share",
+      "original": {
+        "path": "artifacts/framework472-vm/smb-before.conf",
+        "bytes": 777,
+        "sha256": "aa64c272447a6786ec2cd97bb3588eef6629291206f800be96f78be09868a2cb"
+      },
+      "modified": {
+        "path": "artifacts/framework472-vm/smb-after.conf",
+        "bytes": 808,
+        "sha256": "4077b8cdac9fe8e5f943b4a8f4626b61738f8b744e2d64fe2404dfada553d25b"
+      },
+      "diff": {
+        "path": "artifacts/framework472-vm/smb-config.patch",
+        "bytes": 361,
+        "sha256": "6af7b32320b08254bdd2e3e6ebc8e4695d0dc36ca227d960421f038a2d04f8da"
+      },
+      "limitations": "Changed only the disposable task container; not upstream, the original VM, the Windows Framework or test/JIT settings. Container recreation resets this change."
+    },
+    "retainedGuestFiles": [
+      {
+        "path": "artifacts/framework472-vm/shared/guest/clock-sync.json",
+        "bytes": 296,
+        "sha256": "77a3ce46042bab54f775e39abab4d5efda8586f0eea75d99f7e3048eed9aebfc"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/controller.log",
+        "bytes": 1181,
+        "sha256": "146cbe183ea3691e358bb170ee79abd9d59b8c83370745942fbcf1627d3f5c4b"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/error.txt",
+        "bytes": 495,
+        "sha256": "c1ef0e2a56fb6a2aa2440a69927380a61857645f4d55786c414211b7ce37cfe0"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/jit-settings.json",
+        "bytes": 4399,
+        "sha256": "f947d72421a105693233fd4d63cb24155193547908584f23db4379d0ce964269"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/live-progress.txt",
+        "bytes": 2854,
+        "sha256": "834d4066b03b19ac80e6b5f6c69bb339a97212f7af4efa9eb5435d6579238ef8"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/native-prerequisites.json",
+        "bytes": 1617,
+        "sha256": "bebac773fdb9793c45890e0d990fe90b17e3cd718e2ffb5cbbdee7748a449434"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/preflight.json",
+        "bytes": 802,
+        "sha256": "fdc4570ab29a5360ee448d22478e1ecc933dd4a6217c73c4ae676077be49bc31"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/preparation.json",
+        "bytes": 1540,
+        "sha256": "4bfa0d3153d2b05f56a7fcbc8fabf9ff3fd0447367140e04486e81e4baa4792f"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/testhost-modules-1084.json",
+        "bytes": 1079,
+        "sha256": "731ae77c7b991d7c476c148edb02b9b5af4bf3710b066bd1e1b231c054976716"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/guest/x64-error.txt",
+        "bytes": 517,
+        "sha256": "254e8eb691679236452c767b8803cbfc59ea29046b2963f0a0ede327378fbd93"
+      }
+    ],
+    "controlFiles": [
+      {
+        "path": "artifacts/framework472-vm/shared/clockfix.ps1",
+        "bytes": 562,
+        "sha256": "09dacfef96d8cb58f968d974be530bd7cafef1dee00cfea3a808f3fca290ff85"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/controller.ps1",
+        "bytes": 2647,
+        "sha256": "0fbca5c271bd2db83971f5e6dd6e236196c7afd331786279567ae273d793f184"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/observe.ps1",
+        "bytes": 1945,
+        "sha256": "d366bee20f2fa8d78f10ebf57f8f5e421bdbc99466450e9d1aef0da9c176a736"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/prerequisites.ps1",
+        "bytes": 865,
+        "sha256": "bd5a5230452a6e75b72b2f174d539ac90eca8dfe7a5c247c60a81937458ccf91"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/recover.ps1",
+        "bytes": 1408,
+        "sha256": "da93a7695424c19a255f4afd9947c59e48e75fbd83173364a35a65042876f468"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/stage.ps1",
+        "bytes": 973,
+        "sha256": "15ea1f0ec4e83b279a05af347ccf8b7d532e1fa16269177e2e231cd26b231ffa"
+      },
+      {
+        "path": "artifacts/framework472-vm/shared/watch.ps1",
+        "bytes": 1109,
+        "sha256": "ae053a6cb7da110293dd4418dccdfb859648a0cecc4021952be302a56f14f1ef"
+      }
+    ],
+    "sourceExecutions": [
+      {
+        "report": {
+          "path": "artifacts/framework472-vm/emulated-recovered/fluent-pdf-results-x64/runtime-contracts.trx",
+          "bytes": 2465659,
+          "sha256": "c7cb8f010cba68de4569f042b38ac1e5f820d1f7469a1bdc1d8204f9217acf08"
+        },
+        "counters": {
+          "total": 1734,
+          "executed": 1734,
+          "passed": 1707,
+          "failed": 27,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "failures": [
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.NativeSandboxRejectsCallerFileWritesAndNetworkAccess",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.FailedIndependentValidationReturnsDetachedRuleFindingsWithoutOutput",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A1B)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3A)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.ManyShapingRunsReuseTheWorkerEnvelopeUnderTheDefaultOperationBudget",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2B)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4E)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2U)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.MetadataRepairIsExplicitReportedAndStrictModeRejectsItsLoss",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A1A)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3B)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ActualPinnedIndependentUaValidatorReportsMissingIdentificationInsteadOfInventingConformance(profile: Ua1)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ExplicitlyPreparedOriginalFiguresPassIndependentAutomatedUaChecksWithoutHumanReview(profile: Ua1)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A3U)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A3U)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ExplicitlyPreparedOriginalFiguresPassIndependentAutomatedUaChecksWithoutHumanReview(profile: Ua2)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.NativeTextTests.WrappedFlowRetainsOriginalRtlParagraphDirectionOnLatinContinuationLines",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A4F)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.AccessibilityTests.ActualPinnedIndependentUaValidatorReportsMissingIdentificationInsteadOfInventingConformance(profile: Ua2)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.NativeWorkerTests.RepeatedShortLivedWorkersCompleteWithoutProcessInspectionRaces",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EverySelectedProfileIsIndependentlyValidatedOnAnOriginalDecorativeFixture(profile: A2A)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A1B)",
+            "outcome": "Failed"
+          },
+          {
+            "name": "Fluent.Pdf.Contract.Tests.ArchivalTests.EmbeddedFontAndUnicodeSurviveIndependentProfileValidation(profile: A2U)",
+            "outcome": "Failed"
+          }
+        ]
+      }
+    ],
+    "transferRecovery": {
+      "report": {
+        "path": "artifacts/framework472-vm/shared/emulated-recovery.json",
+        "bytes": 34814,
+        "sha256": "ba214e32a1c76e36a80bc6d213516c9f5b693108cb70883fbb1ecfe7cf20fd21"
+      },
+      "limitations": "The original guest-to-Samba directory copy failed after x64. A ZIP of all completed results and fixture reports was copied and independently verified. Software-emulated x86 was not executed."
+    },
+    "sourceBindingVerification": {
+      "path": "artifacts/framework472-vm/emulated-verification.json",
+      "bytes": 863,
+      "sha256": "9b323fb46b15b2435e08c435263acbf2b7dbf71255dbe5ed757d9831c6fe33f4"
+    },
+    "checkerRejection": {
+      "path": "artifacts/framework472-vm/emulated-consistency-rejection.log",
+      "bytes": 868,
+      "sha256": "56e945a6d96e3a29d45bc60560447fd5df10367b6490dde8f06bc4e8f8ae0b33"
+    }
+  },
+  "originalPreservation": {
+    "originalDisk": "C:\\wordnet-issue4-framework472\\storage\\data.qcow2",
+    "sha256": "366bf8e19a9c1890a1896717b7c81ffb69655b713e90af77b7b436c75f184419",
+    "matchesInitialCopy": true,
+    "verifiedUtc": "2026-10-23T21:45:56.3712885Z"
+  },
+  "hyperv": {
+    "virtualization": "Hardware Hyper-V Generation 2; 2 vCPU; 4 GiB RAM",
+    "network": "No network adapters",
+    "guestOs": "Windows Server 2019 Standard Evaluation, build 17763",
+    "originalVmPreserved": true,
+    "sourceDiskComparison": {
+      "path": "artifacts/framework472-hyperv/verified-copy.json",
+      "bytes": 255,
+      "sha256": "27498d5e06b8db82260c8305a8e303eb9407bd029099d9388243b79a2cc22a70"
+    },
+    "logicalCompare": {
+      "path": "artifacts/framework472-hyperv/compare.log",
+      "bytes": 23,
+      "sha256": "bae0eea3545c4eaba9041aff0cd6965ef809f0ca5cb7903056758960a604f651"
+    },
+    "execution": {
+      "startedUtc": "2026-10-23T21:37:35.9280624Z",
+      "virtualization": "Hyper-V",
+      "network": "disconnected",
+      "productionQualified": false,
+      "lanes": [
+        {
+          "architecture": "x64",
+          "error": null
+        },
+        {
+          "architecture": "x86",
+          "error": null
+        }
+      ],
+      "error": null,
+      "firewall": [
+        {
+          "Name": "Domain",
+          "Enabled": 1
+        },
+        {
+          "Name": "Private",
+          "Enabled": 1
+        },
+        {
+          "Name": "Public",
+          "Enabled": 1
+        }
+      ],
+      "frameworkRelease": 461814,
+      "sourceCommit": "519a016630b0656d1a9c991e2ff1e8e60adc100a",
+      "jitEnvironment": [
+        {
+          "scope": "Process",
+          "useLegacyJit": null
+        },
+        {
+          "scope": "User",
+          "useLegacyJit": null
+        },
+        {
+          "scope": "Machine",
+          "useLegacyJit": null
+        }
+      ],
+      "endedUtc": "2026-10-23T21:45:00.9209293Z"
+    },
+    "sourceExecutions": [
+      {
+        "report": {
+          "path": "artifacts/framework472-hyperv/results/x64/runtime-contracts.trx",
+          "bytes": 2411803,
+          "sha256": "cffc0b1352503b56ffabb1f92931d3eba7267cdb4eb31a253f04e332cf852f90"
+        },
+        "counters": {
+          "total": 1734,
+          "executed": 1734,
+          "passed": 1734,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "failures": []
+      },
+      {
+        "report": {
+          "path": "artifacts/framework472-hyperv/results/x86/runtime-contracts.trx",
+          "bytes": 2411809,
+          "sha256": "b05736e9549c3b5201fa6fa98decc3e2a24256e437be7968bd8d3fe71bc56cc3"
+        },
+        "counters": {
+          "total": 1734,
+          "executed": 1734,
+          "passed": 1734,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "failures": []
+      }
+    ],
+    "controlFiles": [
+      {
+        "path": "artifacts/framework472-hyperv/cleanup-hyperv.ps1",
+        "bytes": 2491,
+        "sha256": "ea1940db2df65d3f8ab2b8299aad142d9bf0fc6f9a5884907b7aa6da5bacd94b"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/guest-run.ps1",
+        "bytes": 2317,
+        "sha256": "93b00c84bec1c4222d7ee95f660333135cc483a1e200816ca62d849febdce525"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/run-hyperv.ps1",
+        "bytes": 5812,
+        "sha256": "1d0cf8785002351ccc333bf6511bf672bc8d9fdb10f3d6284956d9a6126838e0"
+      }
+    ],
+    "reports": [
+      {
+        "path": "artifacts/framework472-hyperv/cleanup-elevation.json",
+        "bytes": 287,
+        "sha256": "9c142abe410d7f15d9a777a42c5f193aed138e00a962e1d655a9b28e9e7f59d1"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/cleanup.json",
+        "bytes": 713,
+        "sha256": "f1df7ebfdd5d70bd3eba0e1108aa3a2d52f71a74dd0d4a92a60c7797906e344e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/conversion.json",
+        "bytes": 435,
+        "sha256": "b03401c2aa3507960c9b4edd29883ab2d02e70e92dfd38418c097632ab1c4cf5"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/elevation.json",
+        "bytes": 283,
+        "sha256": "2fa864003d0a535b1146d4166f41fbb1641ba0dff5798a1b88ff5915e5124ebd"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/execution.json",
+        "bytes": 1621,
+        "sha256": "9f3308430d18c336c105eae64c68017293ad5e4b45be7f4217c5eb30dbc5f073"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/14e92c5c4f8a4c34be9e1453c6adbb37/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/211abb1252f04a80abeb3867e5b44aae/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/26b6acc957fc451db1940bf1f24e565d/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/310af2200b3246d687689177f3ba19f4/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/395f7c4af81341619321409e7481f748/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/3e660e906e654cc89d7a0e4542806327/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/3e7cf3fe8c5b4bce8e3cca46794b195f/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/430b83a08c72446fa8ea8e7be313d182/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/449beb0280314330b4d434c7c2dc99ff/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/548671e395e74422871974510252deec/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/5d838c7eeb4949a4b9f7f7bdbe4d30b2/host-status.json",
+        "bytes": 49,
+        "sha256": "33b24c3216ca048e17ca3e649e2b70949e98a620e6384f0d5e838f90d5d310b0"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/5e883735f80642239a5522ebf0d3b170/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/5edf79d631b140afbaf5aef23b398a92/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/5ffcada5b2fb4d099dc53fef23d06adf/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/6070b28e5fb345969797d00e4afd3362/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/6535eb8e39db486493fdd6624eef2d79/host-status.json",
+        "bytes": 49,
+        "sha256": "30f965fdc8882a4751b803c54ea35d0a1c887c78c3cc69273e59a02d22329fd3"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/74553c3e3fc142bd94b9df5b88b0bda9/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/82f9c6b382aa4be79d1ae51a2f38cd3c/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/839db41e0f7f47e39c41204da52b0ba3/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/8c52bb585bdd4e2b896a44efc165e28b/host-status.json",
+        "bytes": 49,
+        "sha256": "66a21ed9dcc05a762d185c329e8ef31d719b8c41be9e80c2843c47de27ea4d55"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/9b01c3bbdf2941578b039cdc5fcc092f/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/ada2fa3404264ae199e45c207258e68f/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/db61931fc88e4a4fb1ece32947f97599/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/dd6e63bf0e8d443d976724efb210e087/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/e426c0d0ccff43d9993db1e81d700433/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/e8bbb7f6057e4e2eb23e6e08fb53f2d4/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/e8dc14848fe14f7c918eb36c2401fc01/host-status.json",
+        "bytes": 49,
+        "sha256": "df467e2d8433e22f37a8eb1103ce6aae75667a397bafcb0e410b222f0b5832db"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/ee4ba9de88a0485db40e9633823fc701/host-status.json",
+        "bytes": 49,
+        "sha256": "66a21ed9dcc05a762d185c329e8ef31d719b8c41be9e80c2843c47de27ea4d55"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/ef299782d4c94a7a8ded0e9840045c80/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/fac3acba5fdb44e3a95d84856ad20768/host-status.json",
+        "bytes": 49,
+        "sha256": "eb9ecdc762b2fd2c765abc7cdf95c69d89d73bda05517732a492de056dc3ddfd"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x64/archival/ffa2ef0dea73473688797306feec870c/host-status.json",
+        "bytes": 49,
+        "sha256": "66a21ed9dcc05a762d185c329e8ef31d719b8c41be9e80c2843c47de27ea4d55"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/219358985f1f4ffc9216c3e8e1ce2c21/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/356d600eb1134fc8b604e17eb1d7d8db/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/37dd020b0ed14f03a8536fd177ecef09/host-status.json",
+        "bytes": 49,
+        "sha256": "66a21ed9dcc05a762d185c329e8ef31d719b8c41be9e80c2843c47de27ea4d55"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/3da4c1e83432477e895d0cae96b8312e/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/4481272f2d904458bf414cfe68cddf6a/host-status.json",
+        "bytes": 49,
+        "sha256": "df467e2d8433e22f37a8eb1103ce6aae75667a397bafcb0e410b222f0b5832db"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/4cb1d275a5da479fa63d8cba8960730c/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/54a21de961984536bde24fbf04168358/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/579f1252141b44359e24fc860d28c917/host-status.json",
+        "bytes": 49,
+        "sha256": "eb9ecdc762b2fd2c765abc7cdf95c69d89d73bda05517732a492de056dc3ddfd"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/61877004cc924367aee1668dafe284a8/host-status.json",
+        "bytes": 49,
+        "sha256": "30f965fdc8882a4751b803c54ea35d0a1c887c78c3cc69273e59a02d22329fd3"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/6adce69cf5ed47b9a3e84c46dde8ca9e/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/7741dc176fca493bbe3040f31387cd4b/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/8573c33ffad54afbab133aa0d7c5578a/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/86a1a4cb57f34ad5b7c27151cf2a81c5/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/8feb3fdb8ef94ad3ad0165ea02bbf132/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/921c49aa31fe4d30bc40256881a7e0c5/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/a1440d159b8849b4b1f321bfc4071f5c/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/a4b62a947981444bb3e978dc0cbedb99/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/ab38984267e646bd87a4e5d81135456d/host-status.json",
+        "bytes": 49,
+        "sha256": "88cba8f31ac6e5ba620d62e9980db30ff11071293fe312d59d1260c16b1344a7"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/ac94a15bc3c1467cac827851f2e6f914/host-status.json",
+        "bytes": 49,
+        "sha256": "66a21ed9dcc05a762d185c329e8ef31d719b8c41be9e80c2843c47de27ea4d55"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/b7b280a857fa46ac842535298490f311/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/b8f53a2609104dc2a58f93c7e379f3f0/host-status.json",
+        "bytes": 49,
+        "sha256": "33b24c3216ca048e17ca3e649e2b70949e98a620e6384f0d5e838f90d5d310b0"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/be733254b9d14c7f8490d8af5c303521/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/bff4839c64074408bdf2b60b0130ae9a/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/cfa41e85a71145a5893407a2fb9fdf34/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/d387115c952a4812a1c2b7b8730ef16c/host-status.json",
+        "bytes": 49,
+        "sha256": "66a21ed9dcc05a762d185c329e8ef31d719b8c41be9e80c2843c47de27ea4d55"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/d43373323df947c791dc113158fa284c/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/d8cb4cefbcb94c0eba611f3e94c96012/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/d9372c8c09114ac98a227b8618aae2df/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/e714da5e4a7b42bdb99e271e23bd526e/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/f05dcaf660264955bca295eac4cd8fc1/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/fixtures-x86/archival/f1d8dc7132a14e9bb0b16ad91271f46a/host-status.json",
+        "bytes": 49,
+        "sha256": "6a40fe466cbf483b1f98d4a0acabe628720abf61e89da9c145de926ba15d612e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/x64/bundle-origin.json",
+        "bytes": 208,
+        "sha256": "fb9de6bddd58758bda957f94d6549287875ea58d5d577f582b54abb205e03357"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/x64/framework-execution.json",
+        "bytes": 11365,
+        "sha256": "34698ca82a6063f404c652131c6b7f8d169f79d9e3c71aca025d80283518cb65"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/x64/runtime-consistency.json",
+        "bytes": 5653,
+        "sha256": "7e437655f28d263b620938c5861a8d2c5e74d7335cd8647e3b85da48f760a07e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/x86/bundle-origin.json",
+        "bytes": 208,
+        "sha256": "fb9de6bddd58758bda957f94d6549287875ea58d5d577f582b54abb205e03357"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/x86/framework-execution.json",
+        "bytes": 11365,
+        "sha256": "3eaaf312fda1e3515dbf6fef3e3a2e15ab190a7650d6785ce5843e82d600ea1e"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/x86/runtime-consistency.json",
+        "bytes": 5653,
+        "sha256": "f833b1c03878f57f46ef1b4c64eba76414633f36161a4c519bc0cf89d311767f"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/state.json",
+        "bytes": 539,
+        "sha256": "2367c6336c6b901fd05d929c6cb4e64a7d14473d75baace2179708eafddf354d"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/verification.json",
+        "bytes": 1757,
+        "sha256": "4a4360496b4d14e4161e934161c521845c1e9614949863b9e242bcb605f5944f"
+      },
+      {
+        "path": "artifacts/framework472-hyperv/verified-copy.json",
+        "bytes": 255,
+        "sha256": "27498d5e06b8db82260c8305a8e303eb9407bd029099d9388243b79a2cc22a70"
+      }
+    ],
+    "provenanceQualified": false,
+    "sourceBindingVerification": [
+      {
+        "path": "artifacts/framework472-hyperv/results/x64",
+        "reportsVerified": 3,
+        "sdkAssembliesVerified": 15,
+        "testAssemblyVerified": true,
+        "runnerVerified": true,
+        "sourceCommit": "519a016630b0656d1a9c991e2ff1e8e60adc100a",
+        "architecture": "x64",
+        "executionPassed": true,
+        "counters": {
+          "total": 1734,
+          "executed": 1734,
+          "passed": 1734,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "frameworkRelease": 461814,
+        "runtime": ".NET Framework 4.7.3946.0",
+        "productionQualified": false,
+        "sameSourceTestInventoryVerified": true
+      },
+      {
+        "path": "artifacts/framework472-hyperv/results/x86",
+        "reportsVerified": 3,
+        "sdkAssembliesVerified": 15,
+        "testAssemblyVerified": true,
+        "runnerVerified": true,
+        "sourceCommit": "519a016630b0656d1a9c991e2ff1e8e60adc100a",
+        "architecture": "x86",
+        "executionPassed": true,
+        "counters": {
+          "total": 1734,
+          "executed": 1734,
+          "passed": 1734,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "frameworkRelease": 461814,
+        "runtime": ".NET Framework 4.7.3946.0",
+        "productionQualified": false,
+        "sameSourceTestInventoryVerified": true
+      }
+    ],
+    "runtimeConsistency": [
+      {
+        "schemaVersion": 1,
+        "purpose": "runtime-evidence-consistency",
+        "lane": "win-x64-framework472",
+        "mode": "source",
+        "observation": {
+          "schemaVersion": 1,
+          "purpose": "source-runtime-identity",
+          "osFamily": "win",
+          "osDescription": "Microsoft Windows 10.0.17763 ",
+          "processArchitecture": "X64",
+          "osArchitecture": "X64",
+          "runtime": ".NET Framework 4.7.3946.0",
+          "runtimeVersion": "4.0.30319.42000",
+          "rid": "win-x64",
+          "frameworkRelease": 461814,
+          "coreLibrary": {
+            "name": "mscorlib",
+            "fileVersion": "4.7.3946.0 built by: NET472REL1LAST_B",
+            "sha256": "e8dc01a4630882d93dd37275460432906e47dd927349467752ce3993108c9104"
+          },
+          "culture": "en-US",
+          "uiCulture": "en-US",
+          "sdkAssets": [
+            {
+              "name": "Fluent.Pdf",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "4fb5d47041fc15201d79e718dd56ed7178ea6c9040481c843a49bb676a32302d",
+              "moduleVersionId": "7cd7f403-563f-4ae7-af7c-f6a29c7c5fc2"
+            },
+            {
+              "name": "Fluent.Pdf.Workers",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "6f64ec82e794f4232b9262f3ee607745b43ab618cadeb43be4ccd123b3d34b91",
+              "moduleVersionId": "1d067fbb-f980-43cb-b807-82457a8a5bbd"
+            },
+            {
+              "name": "Fluent.Pdf.Codecs",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "ab173a0d7917bd234b54c09c40a6b298c6c2be9ca3c66f9e2e45c425a4a110e1",
+              "moduleVersionId": "cbf603cc-60aa-4263-9121-bbe03bac18c1"
+            },
+            {
+              "name": "Fluent.Pdf.Fonts",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "77a4e0ac2b2937b7f51dea2fb4de9e5ee1c5e5ce3a762b4921b2a8ac02630514",
+              "moduleVersionId": "f72bdd31-3b19-43d9-851e-5b0472b018f3"
+            },
+            {
+              "name": "Fluent.Pdf.Text",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "6c1249bed5f8efd0aac1311f95f45934dd1423348ed956462eada8dcaa4b8426",
+              "moduleVersionId": "df41ca3a-9759-4fcd-aec1-376a6fae6a98"
+            },
+            {
+              "name": "Fluent.Pdf.Rendering",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "24a64df1e500ff80414e8454577949c828fd71791b988ee0e622bc788cab4ee3",
+              "moduleVersionId": "899e2795-ecdf-42fd-93c8-8b77cd8b0d9d"
+            },
+            {
+              "name": "Fluent.Pdf.Cryptography",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "150a4667157f2f3ff6ba7cc798ba680788cd15e0076d65c19b14eb4089abba4e",
+              "moduleVersionId": "8e6970fd-0781-4bd1-a18b-78f21fd70a05"
+            },
+            {
+              "name": "Fluent.Pdf.Compliance",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "f4d0da598aa783665f1447514d247ee045b0a8694b27859dd21af22128c9b3df",
+              "moduleVersionId": "1818508c-cdad-4432-a32b-6e9f79a248bf"
+            },
+            {
+              "name": "Fluent.Pdf.Html",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "16543efb67a4bd518f8696e9ebf47a767f371b6fa32d12641f19d9fad566cbdf",
+              "moduleVersionId": "3129b6ca-569c-43fb-b6d7-5d8c91e796e8"
+            },
+            {
+              "name": "Fluent.Pdf.Word",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "6f6db68ada2d40c62460fa0e1c335949f2f043e64be939d200c6108743393b8f",
+              "moduleVersionId": "ccaa1ac3-84aa-4b36-b3fc-0a0f752bcad2"
+            },
+            {
+              "name": "Fluent.Pdf.Ocr",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "007c6da1caeb8ee6e7e975c7c89d63903c21214a5be573a44cec657abc5bacb0",
+              "moduleVersionId": "8236cc06-b235-44f4-b323-647d97446310"
+            },
+            {
+              "name": "Fluent.Pdf.Formats",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "fa673cb7a8f435406177270a6d43b951557fb61f4f721098025ab54a57a84def",
+              "moduleVersionId": "0a0c8e86-9e61-4d7b-b93d-750bbd5179f4"
+            },
+            {
+              "name": "Fluent.Pdf.Intelligence",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "bd30b68a22c898ab4f0cb0a1657d87244af6a4d2edeab13f0b85d0031c4b6242",
+              "moduleVersionId": "bdadd2fe-8378-4086-bdfd-ad7f2fa1f0c1"
+            },
+            {
+              "name": "Fluent.Pdf.Automation",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "42406089e58b3b8125ac8059e355a5dd2b987a07e1c5d0adfa4146af716ae1ba",
+              "moduleVersionId": "3a6800a4-9c3f-408b-8831-132d27d38a8a"
+            },
+            {
+              "name": "Fluent.Pdf.Applications",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "8609f47a8e9c1e4783b82da2d50d5b6bcfbd19d66609048f3b89ded42df7b30e",
+              "moduleVersionId": "c1323dda-b88a-4cdb-ab89-7c970fee1019"
+            }
+          ],
+          "productionQualified": false
+        },
+        "counters": {
+          "total": 1734,
+          "executed": 1734,
+          "passed": 1734,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "trxSha256": "cffc0b1352503b56ffabb1f92931d3eba7267cdb4eb31a253f04e332cf852f90",
+        "laneMatrixSha256": "86d9d945b67eabdefc58eab8ce356e2c3e73c8582beb387713edba428bfc80b0",
+        "reviewedFullTestInventoryVerified": false,
+        "exactPackageBindingsVerified": false,
+        "trustedHostProvenanceQualified": false,
+        "allRequiredSuitesQualified": false,
+        "productionQualified": false
+      },
+      {
+        "schemaVersion": 1,
+        "purpose": "runtime-evidence-consistency",
+        "lane": "win-x86-framework472",
+        "mode": "source",
+        "observation": {
+          "schemaVersion": 1,
+          "purpose": "source-runtime-identity",
+          "osFamily": "win",
+          "osDescription": "Microsoft Windows 10.0.17763 ",
+          "processArchitecture": "X86",
+          "osArchitecture": "X64",
+          "runtime": ".NET Framework 4.7.3946.0",
+          "runtimeVersion": "4.0.30319.42000",
+          "rid": "win-x86",
+          "frameworkRelease": 461814,
+          "coreLibrary": {
+            "name": "mscorlib",
+            "fileVersion": "4.7.3946.0 built by: NET472REL1LAST_B",
+            "sha256": "00993e539b683014460a5f426397660f7e8971687f377f5af6cc1f63fbe2bc42"
+          },
+          "culture": "en-US",
+          "uiCulture": "en-US",
+          "sdkAssets": [
+            {
+              "name": "Fluent.Pdf",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "4fb5d47041fc15201d79e718dd56ed7178ea6c9040481c843a49bb676a32302d",
+              "moduleVersionId": "7cd7f403-563f-4ae7-af7c-f6a29c7c5fc2"
+            },
+            {
+              "name": "Fluent.Pdf.Workers",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "6f64ec82e794f4232b9262f3ee607745b43ab618cadeb43be4ccd123b3d34b91",
+              "moduleVersionId": "1d067fbb-f980-43cb-b807-82457a8a5bbd"
+            },
+            {
+              "name": "Fluent.Pdf.Codecs",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "ab173a0d7917bd234b54c09c40a6b298c6c2be9ca3c66f9e2e45c425a4a110e1",
+              "moduleVersionId": "cbf603cc-60aa-4263-9121-bbe03bac18c1"
+            },
+            {
+              "name": "Fluent.Pdf.Fonts",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "77a4e0ac2b2937b7f51dea2fb4de9e5ee1c5e5ce3a762b4921b2a8ac02630514",
+              "moduleVersionId": "f72bdd31-3b19-43d9-851e-5b0472b018f3"
+            },
+            {
+              "name": "Fluent.Pdf.Text",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "6c1249bed5f8efd0aac1311f95f45934dd1423348ed956462eada8dcaa4b8426",
+              "moduleVersionId": "df41ca3a-9759-4fcd-aec1-376a6fae6a98"
+            },
+            {
+              "name": "Fluent.Pdf.Rendering",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "24a64df1e500ff80414e8454577949c828fd71791b988ee0e622bc788cab4ee3",
+              "moduleVersionId": "899e2795-ecdf-42fd-93c8-8b77cd8b0d9d"
+            },
+            {
+              "name": "Fluent.Pdf.Cryptography",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "150a4667157f2f3ff6ba7cc798ba680788cd15e0076d65c19b14eb4089abba4e",
+              "moduleVersionId": "8e6970fd-0781-4bd1-a18b-78f21fd70a05"
+            },
+            {
+              "name": "Fluent.Pdf.Compliance",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "f4d0da598aa783665f1447514d247ee045b0a8694b27859dd21af22128c9b3df",
+              "moduleVersionId": "1818508c-cdad-4432-a32b-6e9f79a248bf"
+            },
+            {
+              "name": "Fluent.Pdf.Html",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "16543efb67a4bd518f8696e9ebf47a767f371b6fa32d12641f19d9fad566cbdf",
+              "moduleVersionId": "3129b6ca-569c-43fb-b6d7-5d8c91e796e8"
+            },
+            {
+              "name": "Fluent.Pdf.Word",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "6f6db68ada2d40c62460fa0e1c335949f2f043e64be939d200c6108743393b8f",
+              "moduleVersionId": "ccaa1ac3-84aa-4b36-b3fc-0a0f752bcad2"
+            },
+            {
+              "name": "Fluent.Pdf.Ocr",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "007c6da1caeb8ee6e7e975c7c89d63903c21214a5be573a44cec657abc5bacb0",
+              "moduleVersionId": "8236cc06-b235-44f4-b323-647d97446310"
+            },
+            {
+              "name": "Fluent.Pdf.Formats",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "fa673cb7a8f435406177270a6d43b951557fb61f4f721098025ab54a57a84def",
+              "moduleVersionId": "0a0c8e86-9e61-4d7b-b93d-750bbd5179f4"
+            },
+            {
+              "name": "Fluent.Pdf.Intelligence",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "bd30b68a22c898ab4f0cb0a1657d87244af6a4d2edeab13f0b85d0031c4b6242",
+              "moduleVersionId": "bdadd2fe-8378-4086-bdfd-ad7f2fa1f0c1"
+            },
+            {
+              "name": "Fluent.Pdf.Automation",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "42406089e58b3b8125ac8059e355a5dd2b987a07e1c5d0adfa4146af716ae1ba",
+              "moduleVersionId": "3a6800a4-9c3f-408b-8831-132d27d38a8a"
+            },
+            {
+              "name": "Fluent.Pdf.Applications",
+              "targetFramework": ".NETFramework,Version=v4.7.2",
+              "sha256": "8609f47a8e9c1e4783b82da2d50d5b6bcfbd19d66609048f3b89ded42df7b30e",
+              "moduleVersionId": "c1323dda-b88a-4cdb-ab89-7c970fee1019"
+            }
+          ],
+          "productionQualified": false
+        },
+        "counters": {
+          "total": 1734,
+          "executed": 1734,
+          "passed": 1734,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "trxSha256": "b05736e9549c3b5201fa6fa98decc3e2a24256e437be7968bd8d3fe71bc56cc3",
+        "laneMatrixSha256": "86d9d945b67eabdefc58eab8ce356e2c3e73c8582beb387713edba428bfc80b0",
+        "reviewedFullTestInventoryVerified": false,
+        "exactPackageBindingsVerified": false,
+        "trustedHostProvenanceQualified": false,
+        "allRequiredSuitesQualified": false,
+        "productionQualified": false
+      }
+    ],
+    "cleanup": {
+      "vmId": "6bd108b7-3807-45d4-ab54-84d36bce632b",
+      "vmName": "FluentPdf-FP086-20261023",
+      "archiveSha256": "cd98fbd007cf26b0c447eb7fe2233b2f89df59b868a502f4761e767e6e97637c",
+      "removed": [
+        "Hyper-V VM 6bd108b7-3807-45d4-ab54-84d36bce632b",
+        "C:\\Users\\armen\\source\\repos\\kirakosyan\\pdf.net\\artifacts\\framework472-hyperv\\framework472.vhdx"
+      ],
+      "retained": [
+        "Verified evidence archive",
+        "Raw reports and control scripts",
+        "Original disk and original VM"
+      ],
+      "error": null,
+      "completedUtc": "2026-10-23T21:47:37.9683215Z"
+    }
+  },
+  "transfer": {
+    "schemaVersion": 1,
+    "sourceCommit": "519a016630b0656d1a9c991e2ff1e8e60adc100a",
+    "branchHead": "dec0d2ce801f979dccbb9163d7c99f0e39d18fa4",
+    "artifactId": 12531340398,
+    "workflowRun": 40020703771,
+    "artifactSha256": "3bc0bc5627530b409710156b9290fd8afa0434f3f5bf97771401519b82e62cae",
+    "bundleManifestSha256": "5f81f59434f56d429c0ba622c110da9322c2b898497acd75a5a752f34bce7346",
+    "filesVerified": 1445,
+    "exactPackageConsumers": false,
+    "productionQualified": false
+  },
+  "cleanup": {
+    "archiveSha256": "cd98fbd007cf26b0c447eb7fe2233b2f89df59b868a502f4761e767e6e97637c",
+    "removed": [
+      "Container fluent-pdf-fp086-guestfs df86131570ca526c940ae90f42a257729422799824efea65616f55d02c9dd7c4",
+      "Container fluent-pdf-fp086-20261023 caeef3b95a6084f6ce4fe50ad35eb657d302ba6ab743207bd29ef318cab97037",
+      "Network fluent-pdf-fp086-20261023 3790098d6db767c536b361c5cdcf408fafbf85b7a4ad6e5d7cb98f514858c81d",
+      "C:\\Users\\armen\\source\\repos\\kirakosyan\\pdf.net\\artifacts\\framework472-vm\\storage"
+    ],
+    "retained": [
+      "Original VM and storage",
+      "Container images",
+      "Verified source bundle and evidence archive",
+      "Raw results, control scripts and dependency assets"
+    ],
+    "failed": [],
+    "completedUtc": "2026-10-23T21:47:33.0604514Z"
+  },
+  "ci-results": {
+    "sourceHead": "dec0d2ce801f979dccbb9163d7c99f0e39d18fa4",
+    "testedMergeCommit": "519a016630b0656d1a9c991e2ff1e8e60adc100a",
+    "run": 40020703771,
+    "jobs": [
+      {
+        "id": 120644210455,
+        "name": "Contracts (osx-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120644210582,
+        "name": "Contracts (linux-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120644210594,
+        "name": "Contracts (win-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120644210599,
+        "name": "Contracts (win-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120644210629,
+        "name": "Contracts (linux-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120644210884,
+        "name": "Contracts (osx-arm64)",
+        "conclusion": "success"
+      }
+    ],
+    "workflows": [
+      {
+        "id": 40020703810,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40020703769,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40020703782,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40020703767,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40020703771,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "resource-inventory": {
+    "owned": [
+      {
+        "name": "fluent-pdf-fp086-20261023",
+        "id": "caeef3b95a6084f6ce4fe50ad35eb657d302ba6ab743207bd29ef318cab97037",
+        "image": "sha256:16fd7c39a3e48bb946d29c59dc6015942e5b900a1fa5d7e5552053bfc48ee2ea",
+        "status": "running",
+        "mounts": [
+          {
+            "Source": "C:\\Users\\armen\\source\\repos\\kirakosyan\\pdf.net\\artifacts\\framework472-vm\\shared",
+            "Destination": "/shared",
+            "Type": "bind"
+          },
+          {
+            "Source": "C:\\Users\\armen\\source\\repos\\kirakosyan\\pdf.net\\artifacts\\framework472-vm\\storage",
+            "Destination": "/storage",
+            "Type": "bind"
+          }
+        ],
+        "networks": [
+          "fluent-pdf-fp086-20261023"
+        ]
+      },
+      {
+        "name": "fluent-pdf-fp086-guestfs",
+        "id": "df86131570ca526c940ae90f42a257729422799824efea65616f55d02c9dd7c4",
+        "image": "sha256:0d99ebf1ccad15037b5c98c9fe8979d6b8dbac23812feae2277a0b277b5c5ffa",
+        "status": "exited",
+        "mounts": [
+          {
+            "Source": "C:\\Users\\armen\\source\\repos\\kirakosyan\\pdf.net\\artifacts\\framework472-vm\\shared",
+            "Destination": "/shared",
+            "Type": "bind"
+          },
+          {
+            "Source": "C:\\Users\\armen\\source\\repos\\kirakosyan\\pdf.net\\artifacts\\framework472-vm\\storage",
+            "Destination": "/storage",
+            "Type": "bind"
+          }
+        ],
+        "networks": [
+          "bridge"
+        ]
+      }
+    ],
+    "originalVmStatus": "exited",
+    "originalVmChanged": false
+  },
+  "archive": {
+    "path": "artifacts/framework472-evidence-20261023.zip",
+    "bytes": 12488868,
+    "sha256": "cd98fbd007cf26b0c447eb7fe2233b2f89df59b868a502f4761e767e6e97637c",
+    "verifiedEntries": 2359,
+    "productionQualified": false
+  },
+  "limitations": [
+    "Source tests are not exact-package consumers.",
+    "Software-emulated execution does not qualify production performance or trusted host provenance.",
+    "All 22 mandatory runtime lanes and complete production suites remain required.",
+    "Initial Windows CI x86 native worker deadline failure is retained; a later pass does not erase it.",
+    "No requirement is closed, package created, or production gate weakened."
+  ]
+}
