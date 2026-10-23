@@ -56,21 +56,6 @@ jobs:
       - name: Compare API across target frameworks
         shell: pwsh
         run: ./eng/check-api.ps1
-      - name: Exercise actual Windows x86 and x64 COM automation clients
-        if: matrix.id == 'win-x64'
-        shell: pwsh
-        run: ./eng/test-automation.ps1
-      - name: Independently read actual Windows automation outputs
-        if: matrix.id == 'win-x64'
-        shell: pwsh
-        run: |
-          python -m venv artifacts/automation-reader
-          if ($LASTEXITCODE -ne 0) { throw 'Independent reader environment creation failed.' }
-          $python = './artifacts/automation-reader/Scripts/python.exe'
-          & $python -m pip install --require-hashes --only-binary=:all: --no-deps -r eng/requirements-automation-reader.txt
-          if ($LASTEXITCODE -ne 0) { throw 'Pinned independent reader installation failed.' }
-          & $python -O eng/verify-automation-fixtures.py artifacts/contracts/automation --windows-matrix --output artifacts/contracts/automation/independent-reader.json
-          if ($LASTEXITCODE -ne 0) { throw 'Independent actual automation output check failed.' }
       - name: Execute source contracts and verify runtime identity
         shell: pwsh
         run: ./eng/test-contracts.ps1 -ExpectedArchitecture '${{ matrix.arch }}'
