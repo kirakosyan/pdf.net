@@ -18,6 +18,7 @@
     <Project Path="src/Fluent.Pdf.Word/Fluent.Pdf.Word.csproj" />
     <Project Path="src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj" />
     <Project Path="src/Fluent.Pdf.Intelligence/Fluent.Pdf.Intelligence.csproj" />
+    <Project Path="src/Fluent.Pdf.Automation/Fluent.Pdf.Automation.csproj" />
   </Folder>
   <Folder Name="/apps/">
     <Project Path="apps/PdfReader/PdfReader.csproj" />

@@ -3507,12 +3507,25 @@
       "validation": "VBScript and native COM consumer samples; registration/unregistration and error marshaling tests.",
       "evidence": [
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-081-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/windows-automation.md",
+        "scope": "Separate frozen dual-interface Windows facade, finite private sessions, explicit SAFEARRAY/BSTR/VARIANT_BOOL marshaling, stable redacted HRESULTs and owned bitness-aware registration with actual native/VBScript consumer harness",
+        "productionQualified": false,
+        "remaining": [
+          "Actual minimum Framework4.7.2 and complete Windows/apartment/host/security/concurrency/endurance qualification",
+          "Complete encrypted/form-editing/appearance and broader SDK COM workflow profiles",
+          "Type-library/proxy/installer and servicing qualification",
+          "Exact final packages and fresh package-only consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-081-source.json"
+      }
     },
     {
       "id": "FP-082",

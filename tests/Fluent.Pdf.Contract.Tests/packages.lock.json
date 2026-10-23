@@ -336,6 +336,12 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.automation": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.codecs": {
         "type": "Project",
         "dependencies": {
@@ -353,6 +359,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
@@ -371,6 +378,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
@@ -606,6 +614,12 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.automation": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.codecs": {
         "type": "Project",
         "dependencies": {
@@ -623,6 +637,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
@@ -641,6 +656,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
@@ -902,6 +918,12 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.automation": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.codecs": {
         "type": "Project",
         "dependencies": {
@@ -919,6 +941,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
@@ -937,6 +960,7 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
