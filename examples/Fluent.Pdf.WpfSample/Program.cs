@@ -29,7 +29,7 @@ internal static class Program
                     if (session.IsFixture)
                     {
                         var peer = UIElementAutomationPeer.CreatePeerForElement(control);
-                        if (control.LastDisplayedPage != 0 || control.CapturedText != "Original automation Ω" || peer == null || peer.GetName() != "PDF page viewer")
+                        if (control.LastDisplayedPage != 0 || control.CapturedText != "Original automation Ω" || peer == null || peer.GetName() != "PDF page viewer" || peer.GetAutomationControlType() != AutomationControlType.Document)
                             throw new InvalidOperationException("WPF accessible view boundary failed.");
                         control.Focus();
                         var key = new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(control), 0, Key.PageDown)
