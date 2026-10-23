@@ -16,6 +16,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Runtime evidence checker boundary tests failed
 function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [bool]$fallback = $false) {
     $env:FLUENT_PDF_EXPECTED_ARCH = $architecture
     $directory = Join-Path $resultsRoot $name
+    $null = [IO.Directory]::CreateDirectory($directory)
     [IO.File]::Delete((Join-Path $directory 'runtime-identity.json'))
     $arguments = @('test', $project, '-c', $Configuration, '-f', $tfm, '--no-restore',
         '--logger', 'trx;LogFileName=contracts.trx', '--results-directory', $directory)
