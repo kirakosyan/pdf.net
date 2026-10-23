@@ -69,8 +69,12 @@ def read_trx(path):
         require(counts.get(key, 0) == 0, "required-failure-or-skip")
     results = tree.findall(".//t:UnitTestResult", namespace)
     require(len(results) == counts["total"] and all(r.get("outcome") == "Passed" for r in results), "complete-trx-results")
-    ids = [r.get("testName") for r in results]
-    require(all(ids) and len(set(ids)) == len(ids), "duplicate-or-missing-test-result")
+    ids = [dict(testId=r.get('testId'), testName=r.get('testName')) for r in results]
+    executions = [r.get('executionId') for r in results]
+    require(all(i['testId'] and i['testName'] for i in ids) and len({i['testId'] for i in ids}) == len(ids) and
+            all(executions) and len(set(executions)) == len(executions), "duplicate-or-missing-test-result")
+    for value in [i['testId'] for i in ids] + executions:
+        require(uuid.UUID(value).int != 0, "nonzero-test-execution-identity")
     matches = [r for r in results if r.get("testName", "").endswith("RuntimeIdentityTests.TheRequestedLibraryAssetIsActuallyLoaded")]
     require(len(matches) == 1, "same-process-runtime-test")
     text = matches[0].findtext("t:Output/t:StdOut", namespaces=namespace) or ""
@@ -83,7 +87,9 @@ def exact_test_inventory(path, ids):
     value = json.loads(path.read_bytes())
     require(value.get("schemaVersion") == 1 and value.get("purpose") == "reviewed-runtime-test-inventory", "reviewed-inventory-schema")
     expected = value.get("tests", [])
-    require(expected and len(set(expected)) == len(expected) and set(expected) == set(ids), "full-reviewed-test-inventory")
+    require(expected and all(set(e) == {'testId', 'testName'} and e['testId'] and e['testName'] for e in expected), "reviewed-test-identities")
+    require(len({e['testId'] for e in expected}) == len(expected) and
+            {(e['testId'], e['testName']) for e in expected} == {(e['testId'], e['testName']) for e in ids}, "full-reviewed-test-inventory")
 
 
 def package_bindings(manifest_path, identity, version):
