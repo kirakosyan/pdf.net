@@ -110,7 +110,7 @@ def main():
             report = directory / "batch-result.json"
             config.write_text(json.dumps(dict(schemaVersion=1, jobs=[dict(id="configured", operation="text", input=str(source), output="configured.txt")])))
             result, _ = run(["run", "--config", config])
-            assert not result.stdout and (directory / "configured.txt").read_text() == "Original automation Ω\fSecond automation page"
+            assert not result.stdout and (directory / "configured.txt").read_text(encoding="utf-8") == "Original automation Ω\fSecond automation page"
             config.write_text(json.dumps(dict(schemaVersion=1, parallelism=2, report=report.name, jobs=[
                 dict(id="select", operation="select", input=str(source), output="batch-selected.pdf", pages="2,1"),
                 dict(id="broken", operation="rewrite", input=bad.name, output="failed.pdf"),
