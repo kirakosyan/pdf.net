@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/examples/">
+    <Project Path="examples/Fluent.Pdf.Recipes/Fluent.Pdf.Recipes.csproj" />
     <Project Path="examples/Fluent.Pdf.Contract.CSharp/Fluent.Pdf.Contract.CSharp.csproj" />
     <Project Path="examples/Fluent.Pdf.Contract.VisualBasic/Fluent.Pdf.Contract.VisualBasic.vbproj" />
     <Project Path="examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj" />
@@ -28,5 +29,5 @@
   <Folder Name="/tests/">
     <Project Path="tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj" />
   </Folder>
-  <Folder Name="/eng/"><Project Path="eng/HtmlBrowserProbe/HtmlBrowserProbe.csproj" /></Folder>
+  <Folder Name="/eng/"><Project Path="eng/HtmlBrowserProbe/HtmlBrowserProbe.csproj" /><Project Path="eng/Documentation/Documentation.csproj" /></Folder>
 </Solution>

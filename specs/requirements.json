@@ -3638,7 +3638,17 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/developer-guide.md",
+        "scope": "Version-synchronized metadata-only API reference across15 assemblies, declared source/capability matrix, literal fragment inventory, exact-source executable C#/VB-backed recipes and gated fresh package consumer tooling",
+        "productionQualified": false,
+        "remaining": [
+          "Every narrative fragment requires complete caller/provider bindings and literal compilation/execution against exact published packages",
+          "Complete native/model/font/provider/host/minimum-runtime and accessibility/security/fidelity/performance/fuzz corpus qualification",
+          "Positive exact final-package consumer and publication/indexing evidence"
+        ]
+      }
     },
     {
       "id": "FP-085",

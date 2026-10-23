@@ -156,3 +156,5 @@ A separate frozen Windows automation facade, finite owned sessions, explicit mar
 An optional toolkit-independent controller and WinForms/WPF/ASP.NET browser samples now use shared private viewing sessions with explicit keyboard, accessibility, generation and cancellation contracts. Full host/fidelity/assistive-technology/final-package qualification remains mandatory; see [application views](docs/application-views.md).
 
 An optional modern CLI now consumes the public SDK with separate data/diagnostic channels, stable exit codes, protected password-file input, bounded jobs, atomic publication and retained batch outcomes. Full host/provider/final-distribution qualification remains mandatory; see [command-line automation](docs/command-line.md).
+
+The [developer guide](docs/developer-guide.md) now links a versioned generated source API reference, explicit provider/platform prerequisites and real C#/VB-backed recipe applications. Narrative fragments and published-package qualification remain explicitly distinct.
