@@ -117,7 +117,7 @@ public interface IPdfRasterDocumentDecoder : IPdfProvider
     bool Supports(PdfRasterFileFormat format);
     /// <summary>Checks content/format and finite frame metadata under the context before allocating decoded samples.</summary>
     PdfRasterFileInfo Inspect(Stream file, PdfRasterFileFormat format, PdfOperationContext context);
-    /// <summary>Decodes exactly one inspected complete RGBA8 frame, preserving declared color/alpha and polling the same context. Leases expire on return.</summary>
+    /// <summary>Decodes exactly one inspected complete RGBA8 frame, preserving declared color/alpha and polling the same context. The SDK precharges the final color/alpha pixel planes before this call; charge additional working allocations as expanded bytes. Leases expire on return.</summary>
     void DecodeFrame(Stream file, PdfRasterFileFormat format, int frame, PdfRasterFrameInfo info, Stream rgbaOutput, PdfOperationContext context);
 }
 
@@ -268,6 +268,8 @@ public static class PdfRasterDocuments
                             else if (!plan.Frames.TryGetValue(frame, out image!))
                             {
                                 var info = plan.Info!.Frames[frame];
+                                c.ConsumePixels(info.Samples.Width, info.Samples.Height);
+                                c.ConsumePixels(info.Samples.Width, info.Samples.Height);
                                 using var decoded = new PdfCodecBufferStream(c, info.Samples.ByteLength);
                                 using (var file = plan.Bytes.Open(0, plan.Bytes.Length))
                                 using (var input = c.BorrowExpandedInput(file))
@@ -282,7 +284,7 @@ public static class PdfRasterDocuments
                                 var meta = info.Metadata;
                                 if (!options.ImageOptions.ApplyExifOrientation)
                                     meta = new(PdfImageOrientation.Normal, meta.HorizontalDpi, meta.VerticalDpi, meta.PixelAspectRatio);
-                                image = PdfImages.FromRgbaCore(rgba, info.Samples.Width, info.Samples.Height, 8, info.ColorSpace, meta, c);
+                                image = PdfImages.FromRgbaCore(rgba, info.Samples.Width, info.Samples.Height, 8, info.ColorSpace, meta, c, pixelsAlreadyCharged: true);
                                 plan.Frames.Add(frame, image);
                             }
 

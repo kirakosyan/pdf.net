@@ -60,13 +60,16 @@ public static partial class PdfImages
         return result!;
     }
 
-    internal static PdfImageAsset FromRgbaCore(Stream input, int width, int height, int bitsPerComponent, PdfColorSpace colorSpace, PdfImageMetadata metadata, PdfOperationContext context)
+    internal static PdfImageAsset FromRgbaCore(Stream input, int width, int height, int bitsPerComponent, PdfColorSpace colorSpace, PdfImageMetadata metadata, PdfOperationContext context, bool pixelsAlreadyCharged = false)
     {
         var info = new PdfImageInfo(width, height, 4, bitsPerComponent);
         if (colorSpace.Components != 3 || colorSpace.IsPattern)
             throw Error(context, "Image.ColorComponents", "RGBA input requires an explicit three-component color space.");
-        context.ConsumePixels(width, height);
-        context.ConsumePixels(width, height);
+        if (!pixelsAlreadyCharged)
+        {
+            context.ConsumePixels(width, height);
+            context.ConsumePixels(width, height);
+        }
         using var lease = new BorrowedStream(input, true, context);
         var data = ReadExact(lease, info.ByteLength, context, false);
         var colors = new PdfByteBuilder(context);

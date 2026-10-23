@@ -875,6 +875,39 @@
       "reportSha256": "092e4aa316c52b749d919c2072d2ed402c9bc82423a0835f241d1c843b385bcb",
       "log": "/workspace/scratch/pr120-serializable-tests.log",
       "logSha256": "3c67b5d74e79027294525ce3ccdc2d7e3008ec9c98a1a86b2d678cd816398ae7"
+    },
+    "observedWindowsRecheck": {
+      "sourceCommit": "604f3188d3b46ec5e7f3236381a8abcb4e0bdfa1",
+      "workflow": "https://github.com/kirakosyan/pdf.net/actions/runs/39937002636",
+      "job": "https://github.com/kirakosyan/pdf.net/actions/runs/39937002636/job/120358880021",
+      "result": "success",
+      "lanes": [
+        "net8",
+        "net10",
+        "framework-current-x64",
+        "framework-current-x86",
+        "netstandard-fallback"
+      ],
+      "testsPerLane": 1622,
+      "failedPerLane": 0,
+      "skippedPerLane": 0,
+      "minimumFrameworkQualified": false
     }
+  },
+  "rasterPrechargeFollowup": {
+    "baseCommit": "604f3188d3b46ec5e7f3236381a8abcb4e0bdfa1",
+    "workingTreeDirtyDuringLocalTest": true,
+    "reason": "The pixel ceiling must reject before optional decoder allocation. Precharge the two final planes once, skip the corresponding charges in RGBA conversion, and reuse cached frame assets.",
+    "sourceSha256": {
+      "src/Fluent.Pdf/Images/PdfImages.cs": "767580589c8707b38cd67689a2a4ba47af718ff1e5f7c509fbf1638cdbaa1b85",
+      "src/Fluent.Pdf/Images/PdfRasterDocuments.cs": "b02151065591792865ea32644c0c236e66c23e86b0615715939364ea27567ce6",
+      "tests/Fluent.Pdf.Contract.Tests/RasterImportTests.cs": "baa76551018d059911c5c66c120962f190c96a233c64126345236e0aab5360e1"
+    },
+    "passed": 76,
+    "failed": 0,
+    "skipped": 0,
+    "report": "artifacts/contracts/pr120-review/precharged-frames/precharged-frames.trx",
+    "reportSha256": "61569761941d34abe15b4ed5455ff8b259eb055d29d20950ba0d6e8d68b5727f",
+    "requiredRecheck": "Final clean PR-head four-target build/API and unfiltered six-host CI before merge."
   }
 }

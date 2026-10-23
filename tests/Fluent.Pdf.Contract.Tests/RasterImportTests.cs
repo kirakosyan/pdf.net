@@ -133,6 +133,10 @@ public sealed class RasterImportTests
         var b = document.Pages[1].SnapshotGraphicsResources(null).Bindings.Select(binding => binding.Resource).Single();
         Assert.Same(a.Dependencies.Bindings.Single().Resource, b.Dependencies.Bindings.Single().Resource);
         Assert.Equal(3, document.Pages.Count);
+        using var limited = new MemoryStream(new byte[] { 1 });
+        var blocked = new Decoder();
+        Assert.Equal("Limit.Pixels", Assert.Throws<PdfException>(() => PdfRasterDocuments.Create(new[] { new PdfRasterInput(limited, PdfRasterFileFormat.Tiff, new[] { 0 }) }, codecs: new(blocked), policy: new(limits: new(maximumPixels: 11)))).Diagnostic.Code);
+        Assert.Empty(blocked.Frames);
     }
 
     private sealed class Decoder : IPdfRasterDocumentDecoder

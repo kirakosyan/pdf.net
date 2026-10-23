@@ -11,3 +11,5 @@ Natural physical page size uses source DPI and orientation; unknown density uses
 `Create` returns an owned document only after all frames succeed. `Write` stages complete PDF before copying; `WriteFile` stages before atomic replacement. Failed decoding, geometry, limits, cancellation and later frames preserve prior file destinations. Caller files/providers stay open and provider leases expire.
 
 Contract tests cover actual PNG/JPEG alpha/orientation, explicit optional frame order/DPI/color/alpha, missing codec preflight, animation authority/APNG rejection, frame-size errors, stream/file preservation, source-format mismatch, indices and limits/cancellation. Real extra codecs and independent visual/semantic/platform/package evidence remain required.
+
+Selected codec frames charge their final color and alpha planes before decoding. The RGBA conversion reuses that charge, and repeated selections reuse the decoded asset. A frame exceeding the two-plane pixel budget cannot invoke the decoder.
