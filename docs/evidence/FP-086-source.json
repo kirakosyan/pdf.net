@@ -1,0 +1,614 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-086",
+  "issue": 90,
+  "sourceCommit": "0c9e46eef8344a594c86ac097c322167f96ffebd",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "commitBinding": "Clean source checkpoint; only test/tool/docs/declaration changes. No SDK implementation/public API changed. Runtime observations come from the actual selected test processes; structural consistency never qualifies trusted provenance, complete suites or final packages.",
+  "sourceFiles": [
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "72ce0be421d319d7c1d10f04ff956dd4bdb9d4b30b2d53cc26267fcb32f08a60",
+      "bytes": 15682
+    },
+    {
+      "path": "docs/runtime-qualification.md",
+      "sha256": "1d6f5b70180d919d8fa1a9eb5acb37647105fa8cde598bdb75bb315f1a38f8de",
+      "bytes": 8086
+    },
+    {
+      "path": "docs/testing.md",
+      "sha256": "e8442920a68978895910136fb035a11c7bf80caa0e28b5c28eac41758d742fa0",
+      "bytes": 41277
+    },
+    {
+      "path": "eng/check-runtime-evidence.py",
+      "sha256": "0cf854edb84470c5f970e7c886614ae7d62879c914951918a9a4bf8937d1a343",
+      "bytes": 10950
+    },
+    {
+      "path": "eng/probe-framework-container.ps1",
+      "sha256": "f7c5a5c8e6cb416a5c9014d2f7ec83a255498704a9145b350df6679ab50883f1",
+      "bytes": 6947
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "76e0dcd13a92dd424ccce2d19a74f71a15cdcbea1813a929a28f34625f8e6da8",
+      "bytes": 7846
+    },
+    {
+      "path": "eng/test-runtime-evidence.py",
+      "sha256": "5e6079d94cd6fa2f53428f0e50a4267c91bd5ef71d7768b85ee8e4d5aa9de8b0",
+      "bytes": 11562
+    },
+    {
+      "path": "eng/test-runtime-lane.ps1",
+      "sha256": "59610adf9e8fdad19da6824d9b60569fee6f5482ed5c02aa990e3fda802b58f1",
+      "bytes": 3628
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "8c5bf5669347f5e21888655b82f35f15ce236566aa2b102786216701b443c2ac",
+      "bytes": 212034
+    },
+    {
+      "path": "specs/runtime-lanes.json",
+      "sha256": "86d9d945b67eabdefc58eab8ce356e2c3e73c8582beb387713edba428bfc80b0",
+      "bytes": 8263
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/RuntimeIdentityTests.cs",
+      "sha256": "55d9f8051627d118e0af856670d9f7d79930540c52d9e1c3aad60c2c4636e060",
+      "bytes": 7091
+    }
+  ],
+  "build": {
+    "allFourSdkTargets": true,
+    "zeroWarnings": true,
+    "zeroErrors": true,
+    "log": {
+      "path": "/workspace/scratch/queue-90-clean-build.log",
+      "sha256": "c2e1ea16ba4f10cb4cd3a9783418618b68e97046b8826183953678a94eca6531",
+      "bytes": 9974
+    }
+  },
+  "checkerUnitTests": {
+    "count": 7,
+    "passed": 7,
+    "syntheticFixturesOnly": true,
+    "log": {
+      "path": "/workspace/scratch/queue-90-clean-checker-tests.log",
+      "sha256": "0d628f37216e0a286bb4dc09c3961e6b1490ff1c53d56a39af806e9c2cc5da78",
+      "bytes": 105
+    }
+  },
+  "localSelectedSourceObservations": [
+    {
+      "profile": "net8.0",
+      "consistencyReport": {
+        "path": "artifacts/contracts/remaining/runtime/0c9e46e/net8.0/consistency.json",
+        "sha256": "1cc692a5d9e70a37d28569c00ae17f1bd862c4151869b2879fcb03027bf547c0",
+        "bytes": 5405
+      },
+      "trx": {
+        "path": "artifacts/contracts/remaining/runtime/0c9e46e/net8.0/contracts.trx",
+        "sha256": "73a70f936fbc60b224db065a9d843dace038e33201d6f94aea0dca6a159760d3",
+        "bytes": 2433869
+      },
+      "observation": {
+        "schemaVersion": 1,
+        "purpose": "source-runtime-identity",
+        "osFamily": "linux",
+        "osDescription": "Debian GNU/Linux 13 (trixie)",
+        "processArchitecture": "X64",
+        "osArchitecture": "X64",
+        "runtime": ".NET 8.0.32",
+        "runtimeVersion": "8.0.32",
+        "rid": "linux-x64",
+        "frameworkRelease": null,
+        "coreLibrary": {
+          "name": "System.Private.CoreLib",
+          "fileVersion": "8.0.3226.50405",
+          "sha256": "2786e9c9870006f68284241138bf92b222c8bb8bd255fe83c222f5adbc2e110c"
+        },
+        "culture": "",
+        "uiCulture": "",
+        "sdkAssets": [
+          {
+            "name": "Fluent.Pdf",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "e17e1a5f4b1e7161e4fb34696bf66b725c914836016ba6da02b6fa36bec893f3",
+            "moduleVersionId": "c20e454b-6f0d-4f96-aced-a1e101adb505"
+          },
+          {
+            "name": "Fluent.Pdf.Workers",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "3aa1d7a4f38bcd51b87c841a9f635cf127886e0d855ae9eb9ac71c50327a5955",
+            "moduleVersionId": "9806bdb5-fbfc-44eb-a62f-a47cc5a62a3d"
+          },
+          {
+            "name": "Fluent.Pdf.Codecs",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "9647fe85367a225de0cbae9716c0909c5e0a1e1f91d716ad6e05d35b627595b2",
+            "moduleVersionId": "fe50e5b2-9e79-4f01-9829-aa926d9bf319"
+          },
+          {
+            "name": "Fluent.Pdf.Fonts",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "d6f0629dc708d2cef33b74805a21654131157c676be5d05979c4f7cafb835dd3",
+            "moduleVersionId": "12ff03ba-8a8c-4a12-8521-ac74d3b22a24"
+          },
+          {
+            "name": "Fluent.Pdf.Text",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "026a3f5adcb4a7e1331dc72181a257139b2d5432672339e3bdd56e268a254ad4",
+            "moduleVersionId": "647edf28-a82a-4f87-91f6-54d5c89a58d6"
+          },
+          {
+            "name": "Fluent.Pdf.Rendering",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "b6d37a3f2823113899c8c294815347d212f83fe495653e95b596be70f868d791",
+            "moduleVersionId": "a80116fe-e7e3-42a9-8de7-5cb2cb5d2b4b"
+          },
+          {
+            "name": "Fluent.Pdf.Cryptography",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "1afeb24ada1be9024bc49b50e90414e16ce79305d40a38eed02f5ce87d182461",
+            "moduleVersionId": "c4e6890e-0d58-4e34-a5c6-554146feaf14"
+          },
+          {
+            "name": "Fluent.Pdf.Compliance",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "a86c8c7e0f4358212b376d6eb3c2da531d26e3774275a16cdf6dadf38288b716",
+            "moduleVersionId": "ea2088e6-c3de-4c2e-907c-c28e695e2dd4"
+          },
+          {
+            "name": "Fluent.Pdf.Html",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "f9524105fe93d2b007f1a0567e1286f98ace25eb89ad5d7874898cf746a5e379",
+            "moduleVersionId": "9096df14-9e46-455d-82cd-080d796343b5"
+          },
+          {
+            "name": "Fluent.Pdf.Word",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "53a451a35d9dbd7c36702020808c230aa27d29b583f7049687e334655ce5b32c",
+            "moduleVersionId": "389a7fd5-b911-4ac7-8f9e-c9593cb55d59"
+          },
+          {
+            "name": "Fluent.Pdf.Ocr",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "633f703048f725e597207dfe7116b53edea3c2e3c92b419b083b9441b65ea76b",
+            "moduleVersionId": "52a22bc8-8d79-4ef6-b189-b4b8920f15f2"
+          },
+          {
+            "name": "Fluent.Pdf.Formats",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "7414a1d88aa7ade9c6bae9295a4938177272efe038ecba3cffbd9b307ce5a653",
+            "moduleVersionId": "6d2d977a-54fd-4b41-87f8-2b26b7edb880"
+          },
+          {
+            "name": "Fluent.Pdf.Intelligence",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "2b7b45bcb8b831fd9ee69553175a4821128c885eb6b475c35679a2e2547d4145",
+            "moduleVersionId": "696dd2f0-8946-4b51-84c9-f7da0e55d7b6"
+          },
+          {
+            "name": "Fluent.Pdf.Automation",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "53eff3be32bb87ed0e54124b6506b58c37c0f1bfc07b367ebf472eb82354501a",
+            "moduleVersionId": "2c85ab8d-e49c-4e31-8c0e-0cd033f6c374"
+          },
+          {
+            "name": "Fluent.Pdf.Applications",
+            "targetFramework": ".NETCoreApp,Version=v8.0",
+            "sha256": "753ffa3c9e5a96ae830e945bdd9419e9948908eed025a59ddfd649548fc283d6",
+            "moduleVersionId": "737ef78a-16a2-4c19-b2c1-b5324cca0929"
+          }
+        ],
+        "productionQualified": false
+      },
+      "counters": {
+        "total": 1660,
+        "executed": 1660,
+        "passed": 1660,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "fullRequiredNativeSuiteRun": false
+    },
+    {
+      "profile": "net10.0",
+      "consistencyReport": {
+        "path": "artifacts/contracts/remaining/runtime/0c9e46e/net10.0/consistency.json",
+        "sha256": "4b3453f4ccd0bbb8c3ee14dbae684103d3ece0f9e9ace30fadf9bc98d7ac7f11",
+        "bytes": 5424
+      },
+      "trx": {
+        "path": "artifacts/contracts/remaining/runtime/0c9e46e/net10.0/contracts.trx",
+        "sha256": "7e72fffd5fb9e2d55e2352ea65a2016238fb76fe06329ce75cd692ed86b45d6d",
+        "bytes": 2437211
+      },
+      "observation": {
+        "schemaVersion": 1,
+        "purpose": "source-runtime-identity",
+        "osFamily": "linux",
+        "osDescription": "Debian GNU/Linux 13 (trixie)",
+        "processArchitecture": "X64",
+        "osArchitecture": "X64",
+        "runtime": ".NET 10.0.13",
+        "runtimeVersion": "10.0.13",
+        "rid": "linux-x64",
+        "frameworkRelease": null,
+        "coreLibrary": {
+          "name": "System.Private.CoreLib",
+          "fileVersion": "10.0.1326.50504",
+          "sha256": "11a0f23df9fbb128743f372b0583528aac702f6b534706bfc28bfcd54dae6907"
+        },
+        "culture": "",
+        "uiCulture": "",
+        "sdkAssets": [
+          {
+            "name": "Fluent.Pdf",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "2b008acd576c4213360b897839fb3f0a1f3449cb19f8abcf4138a52973b3ad01",
+            "moduleVersionId": "441396c4-8087-47e5-a399-53addfeb51ea"
+          },
+          {
+            "name": "Fluent.Pdf.Workers",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "5006f99aea524d34901fb62f353303173ef72b65ea913cdd8f051432f6c7a0a0",
+            "moduleVersionId": "3aa416bc-77f8-4cb6-b7bd-f5595ab9c481"
+          },
+          {
+            "name": "Fluent.Pdf.Codecs",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "934e8eb83e6c84e5494ca04e8a4a3d7838b530cf9e32093d1b249f5f244d008e",
+            "moduleVersionId": "3e6b7d15-a67e-42f8-b64a-3cce19385608"
+          },
+          {
+            "name": "Fluent.Pdf.Fonts",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "853b41b4039185245e271ff1f4175aff501c626f4348e344ce802bdc7cd70bef",
+            "moduleVersionId": "d827b452-f7fd-48af-8a6e-75f514254426"
+          },
+          {
+            "name": "Fluent.Pdf.Text",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "a3ba843d113505d9e872840668557bd3155077cbcd62597fa8f8802d6e121330",
+            "moduleVersionId": "cd341da9-2060-4978-9ad7-e87d37778f3d"
+          },
+          {
+            "name": "Fluent.Pdf.Rendering",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "738f7a8cf7e039804b8c441462506ddeba6974cbd29f6db655a5b3c938d74b21",
+            "moduleVersionId": "39f5fb69-a394-4fbd-aad0-b9da0d521344"
+          },
+          {
+            "name": "Fluent.Pdf.Cryptography",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "40385a903830ceb88fc055a8f9af0b5c254d2bff9dd7cc35ba8dbb9f54196cc1",
+            "moduleVersionId": "b4a5efa6-17cc-4e91-a340-0c27fe599a56"
+          },
+          {
+            "name": "Fluent.Pdf.Compliance",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "04995de55483974870746d1fac9e71fc3490f1881cdad82300a1768cd23f48bf",
+            "moduleVersionId": "ed742af0-73d2-402a-9a8b-8c24c85cf806"
+          },
+          {
+            "name": "Fluent.Pdf.Html",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "ff6b6c13b9b37dac8eb59a061293941d106b5c3374c3728e8ab74de895f8bd9a",
+            "moduleVersionId": "0c9586bc-2378-4a65-ae04-26853c44732d"
+          },
+          {
+            "name": "Fluent.Pdf.Word",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "f05057140c8d555542a9819ac7f9f123382f6683eddd58c316f084eac019ced3",
+            "moduleVersionId": "b5613c01-fa33-4198-bdd2-5b89ca03e4f4"
+          },
+          {
+            "name": "Fluent.Pdf.Ocr",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "efc6fbe613b37a6e95f600f1575bad331d71782311985036c09ac8bbaabf1350",
+            "moduleVersionId": "356bb453-b0ee-4666-818a-d82eb48ddcee"
+          },
+          {
+            "name": "Fluent.Pdf.Formats",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "3ee91353ba1ebd52ed3330096334ed0a126f895f4bb05175bb5fbb18b7a8ec45",
+            "moduleVersionId": "8500ae22-ff05-40db-b32b-e09eb8f6cdb4"
+          },
+          {
+            "name": "Fluent.Pdf.Intelligence",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "e13088f99e794a417459125964f53ee81103820a7b894ede3b4367db8fec9133",
+            "moduleVersionId": "50390728-8b1e-40a3-8f66-bb9cb10a1ae5"
+          },
+          {
+            "name": "Fluent.Pdf.Automation",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "cfb19efa9ece73c4bf4a78671d1d40a1ce5ee246f49c4ec189ffac162a9f6734",
+            "moduleVersionId": "1527ac6a-a3ec-4300-9929-7d491bae1e77"
+          },
+          {
+            "name": "Fluent.Pdf.Applications",
+            "targetFramework": ".NETCoreApp,Version=v10.0",
+            "sha256": "16ac76439349e953cb79a0064b6ce8ba9643c2300ac6ee2a57a6a5ad8e75abdc",
+            "moduleVersionId": "df0f336a-0d47-4635-9124-dacf5b8040ab"
+          }
+        ],
+        "productionQualified": false
+      },
+      "counters": {
+        "total": 1660,
+        "executed": 1660,
+        "passed": 1660,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "fullRequiredNativeSuiteRun": false
+    },
+    {
+      "profile": "fallback",
+      "consistencyReport": {
+        "path": "artifacts/contracts/remaining/runtime/0c9e46e/fallback/consistency.json",
+        "sha256": "f38a36e1f406afb279390a31aa9ae64bfd249903470d7539b2a02cf2a317e47c",
+        "bytes": 5440
+      },
+      "trx": {
+        "path": "artifacts/contracts/remaining/runtime/0c9e46e/fallback/contracts.trx",
+        "sha256": "ecb54dbe5a5573fde5bc8143af271f141342b853198406ec562ad3bcc01948d3",
+        "bytes": 2437211
+      },
+      "observation": {
+        "schemaVersion": 1,
+        "purpose": "source-runtime-identity",
+        "osFamily": "linux",
+        "osDescription": "Debian GNU/Linux 13 (trixie)",
+        "processArchitecture": "X64",
+        "osArchitecture": "X64",
+        "runtime": ".NET 10.0.13",
+        "runtimeVersion": "10.0.13",
+        "rid": "linux-x64",
+        "frameworkRelease": null,
+        "coreLibrary": {
+          "name": "System.Private.CoreLib",
+          "fileVersion": "10.0.1326.50504",
+          "sha256": "11a0f23df9fbb128743f372b0583528aac702f6b534706bfc28bfcd54dae6907"
+        },
+        "culture": "",
+        "uiCulture": "",
+        "sdkAssets": [
+          {
+            "name": "Fluent.Pdf",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "12f92212a3ac65cc107dd3e8a41b173c88cf6f00b080c3e0db6b8ac32a86a413",
+            "moduleVersionId": "4f346d94-8138-42f9-9046-91b1bb2f0d4a"
+          },
+          {
+            "name": "Fluent.Pdf.Workers",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "039e1061e3c6debf3a50a4da6f6ad5478f576e18037ff7fe12f66110642bd007",
+            "moduleVersionId": "12a6a3d9-5bd6-406d-b147-8af41f229bd2"
+          },
+          {
+            "name": "Fluent.Pdf.Codecs",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "70031c519b8815f3861428636610d01489af7af4ff5f28fd87b92fe1c7ef6bc9",
+            "moduleVersionId": "76ae4e9d-9f19-4b88-82c9-c9d3f172b815"
+          },
+          {
+            "name": "Fluent.Pdf.Fonts",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "12557f6d4f513c599147474fa8fd285db2bcb7296f3107987c1749a1a667ea56",
+            "moduleVersionId": "cd27c6ab-89bf-4d8a-87d8-8b51d4b3a671"
+          },
+          {
+            "name": "Fluent.Pdf.Text",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "11694e2b9b870efbb910a4edbf76a483c665c2feafed474bf34404b590b9c10f",
+            "moduleVersionId": "5b853326-ee2b-4dd7-aa50-28cdda1dce68"
+          },
+          {
+            "name": "Fluent.Pdf.Rendering",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "256f4cdeaab9ccc9662b5c51483d60071a37c5237b139ec35135b50870129934",
+            "moduleVersionId": "7eedc577-d3e8-4f0a-9dc2-cc4c7edd0b65"
+          },
+          {
+            "name": "Fluent.Pdf.Cryptography",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "2ebd951a773343177bac62f1c6380b9c72452d5b2931e4a0b7ec4ae95d2bfd0c",
+            "moduleVersionId": "084807db-9322-472b-aee0-3c0267100778"
+          },
+          {
+            "name": "Fluent.Pdf.Compliance",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "e52acb40921b7e14436e83c9978a3ea02bd2b5abc143460a00a845e765d94b5d",
+            "moduleVersionId": "40c731b4-a565-4d4f-a54c-14c0e4911e2f"
+          },
+          {
+            "name": "Fluent.Pdf.Html",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "065f64e953372de9b6220dcc5007a3a160ffb746cad2bc09b622f176a94a1d08",
+            "moduleVersionId": "79f8383c-015f-40f9-ba2c-1cde661d66c5"
+          },
+          {
+            "name": "Fluent.Pdf.Word",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "2c088478cce69abdfeccfa182d6f5fa60dad4461483d41c2715094934f0ed6de",
+            "moduleVersionId": "5f77e3e6-8f60-49f5-bb41-fa19be5efc32"
+          },
+          {
+            "name": "Fluent.Pdf.Ocr",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "9162783cfee7d0f0845a8a32e96bdb0d982d1bde7488211a84de17bdf8c1f6ea",
+            "moduleVersionId": "23debdce-0675-4a88-82ee-8c34d9c783bf"
+          },
+          {
+            "name": "Fluent.Pdf.Formats",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "03f67a7680d8b873a27403120e53d158544e95f617792e385efc7de7f636b8b0",
+            "moduleVersionId": "724f14eb-e219-4630-959a-b3e1085dedaf"
+          },
+          {
+            "name": "Fluent.Pdf.Intelligence",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "bff5c46fce5b7f5a669c0a6e4c67a4eae24d3baf999671f08f76eda1b1d58d02",
+            "moduleVersionId": "a6f081ee-2d26-4fac-b378-49aace159021"
+          },
+          {
+            "name": "Fluent.Pdf.Automation",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "09f63f89a0ef896a1f9b5466035cbb313bbfb13f27757871ecdee0d4882cd9dc",
+            "moduleVersionId": "9bb68d15-0c1e-4157-ac40-d88e8994941a"
+          },
+          {
+            "name": "Fluent.Pdf.Applications",
+            "targetFramework": ".NETStandard,Version=v2.0",
+            "sha256": "ce854a72b6141e7f78a0d1980f49b6d3640d943fd0d1f9ade02fbbcbd23428d8",
+            "moduleVersionId": "6e3fc0fc-5ed3-4310-87b3-f4c6d99f9791"
+          }
+        ],
+        "productionQualified": false
+      },
+      "counters": {
+        "total": 1660,
+        "executed": 1660,
+        "passed": 1660,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "fullRequiredNativeSuiteRun": false
+    }
+  ],
+  "excludedNativeTestClasses": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeRenderingTests",
+    "NativeTextTests",
+    "NativeOcrContractTests"
+  ],
+  "exclusionReason": "Required local Landlock isolation is unavailable (ENOSYS). These selected source runs cannot replace complete native/host qualification.",
+  "documentation": {
+    "generatedReference": {
+      "path": "artifacts/contracts/remaining/runtime/0c9e46e/docs/api-reference.json",
+      "sha256": "eb2f6c49d05c28a0c4f8dfb2d5b68c8d8daa0def52d13d10bca29f694fd7adf3",
+      "bytes": 12888
+    },
+    "snippetInventory": {
+      "path": "artifacts/contracts/remaining/runtime/0c9e46e/snippets.json",
+      "sha256": "322d78ad2e2e5139410c2fc750fd8ab0269ac876e3b2b5b3b8cd6bf369389c6e",
+      "bytes": 388
+    }
+  },
+  "gates": {
+    "releaseManifestUnchanged": true,
+    "productionPublicationStillBlocked": true,
+    "releaseBlockLog": {
+      "path": "/workspace/scratch/queue-90-clean-release-block.log",
+      "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+      "bytes": 139
+    },
+    "specificationLog": {
+      "path": "/workspace/scratch/queue-90-clean-spec.log",
+      "sha256": "d24506512929a5019d111266726d6ebac73f31c00b86537b0990ace7f1584117",
+      "bytes": 104
+    }
+  },
+  "pending": [
+    "Actual isolated Windows Framework 4.7.2 x86/x64; the available Linux Docker daemon cannot run Windows containers",
+    "Exact stable candidate packages, fresh restored consumers and reviewed complete test inventories on all 22 lanes",
+    "Trusted native OS/image/patch/provisioning provenance and all full functional/fidelity/security/resource/concurrency/consumer suites",
+    "Actual current Framework and native modern host CI results for this checkpoint; no result inferred from earlier commits",
+    "Positive real-package checker path and Windows minimum-machine lane harness qualification"
+  ],
+  "containerLauncherValidation": {
+    "scriptAndLiteralChildParsing": {
+      "path": "/workspace/scratch/queue-90-clean-container-parse.log",
+      "sha256": "bd28f86219d39aa7913c811ba767ea23650c2aff5c7b997bc165b333df8a2deb",
+      "bytes": 57
+    },
+    "linuxHostRejection": {
+      "path": "/workspace/scratch/queue-90-clean-container-rejection.log",
+      "sha256": "fa3139934cd0e36a187526817b857b13832242b4ae82dc88b50ab439c1e3edc6",
+      "bytes": 101
+    },
+    "actualWindowsHyperVExecutionQualified": false,
+    "sdkOrPackageTestsExecutedByProbe": false
+  },
+  "retainedCheckerCorrection": {
+    "initialCheckerSourceCommit": "402b43c5fd2d07051d421313df4dd561e33116c8",
+    "reason": "The initial checker rejected a passing actual source TRX because distinct xUnit theories share truncated display names. The corrected checker requires unique test IDs and execution IDs, and reviewed ID/name pairs; duplicate identity and display-name collision regression cases pass.",
+    "actualInitialPassingTrx": {
+      "path": "artifacts/contracts/remaining/runtime/402b43c/net8.0/contracts.trx",
+      "sha256": "735c48e61feb8fadd46c0f5357031d4f35c1ed25794838cbab422d77444e383f",
+      "bytes": 2433869
+    }
+  },
+  "ciAtEvidenceCollection": {
+    "sourceCommit": "0c9e46eef8344a594c86ac097c322167f96ffebd",
+    "sourceContracts": {
+      "runId": 40007615985,
+      "status": "queued",
+      "qualified": false
+    },
+    "documentation": {
+      "runId": 40007615996,
+      "status": "queued",
+      "qualified": false
+    },
+    "cli": {
+      "runId": 40007616081,
+      "status": "queued",
+      "qualified": false
+    },
+    "automation": {
+      "runId": 40007616049,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "applicationViews": {
+      "runId": 40007615995,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "qualificationInferred": false
+  }
+}

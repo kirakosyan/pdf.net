@@ -3729,7 +3729,8 @@
           "Actual isolated minimum Framework 4.7.2 x86/x64 and trusted native host/image/patch provenance",
           "Exact stable packages and reviewed complete package-consumer test inventories on all 22 lanes",
           "Complete functional/fidelity/security/resource/concurrency/consumer suites and independent production qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-086-source.json"
       }
     },
     {

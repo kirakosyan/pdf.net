@@ -158,3 +158,5 @@ An optional toolkit-independent controller and WinForms/WPF/ASP.NET browser samp
 An optional modern CLI now consumes the public SDK with separate data/diagnostic channels, stable exit codes, protected password-file input, bounded jobs, atomic publication and retained batch outcomes. Full host/provider/final-distribution qualification remains mandatory; see [command-line automation](docs/command-line.md).
 
 The [developer guide](docs/developer-guide.md) now links a versioned generated source API reference, explicit provider/platform prerequisites and real C#/VB-backed recipe applications. Narrative fragments and published-package qualification remain explicitly distinct.
+
+The [runtime evidence tooling](docs/runtime-qualification.md) records actual process/core-library/Framework-registry/loaded SDK identities against the unchanged 22-lane matrix, with strict test and exact-package consistency checks. A Windows Docker preflight launcher can probe an explicitly resolved candidate image. Actual minimum-runtime hosts, complete package consumers and production qualification remain mandatory; see [source evidence](docs/evidence/FP-086-source.json).
