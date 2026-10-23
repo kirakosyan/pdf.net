@@ -62,8 +62,8 @@ int wmain(int argc, wchar_t** argv) {
             void* memory = nullptr; ok(SafeArrayAccessData(input.value, &memory)); CopyMemory(memory, bytes.data(), bytes.size()); ok(SafeArrayUnaccessData(input.value));
             phase = L"open-bytes"; ok(pdf.value->OpenBytes(input.value)); LONG pages = 0; ok(pdf.value->get_PageCount(&pages)); check(pages == 2);
             phase = L"extract-text"; OwnedBstr text; ok(pdf.value->ExtractText(0, 0, VARIANT_FALSE, 1000, &text.value)); check(std::wstring(text.value) == L"Original automation \u03A9");
-            phase = L"field-array"; OwnedArray fields; ok(pdf.value->GetFieldNames(&fields.value)); VARTYPE type = VT_EMPTY; ok(SafeArrayGetVartype(fields.value, &type)); check(type == VT_BSTR);
-            LONG index = 0; OwnedBstr field; ok(SafeArrayGetElement(fields.value, &index, &field.value)); check(std::wstring(field.value) == L"customer.Name");
+            phase = L"field-array"; OwnedArray fields; ok(pdf.value->GetFieldNames(&fields.value)); VARTYPE type = VT_EMPTY; ok(SafeArrayGetVartype(fields.value, &type)); check(type == VT_VARIANT);
+            LONG index = 0; VARIANT field{}; VariantInit(&field); ok(SafeArrayGetElement(fields.value, &index, &field)); check(field.vt == VT_BSTR && std::wstring(field.bstrVal) == L"customer.Name"); VariantClear(&field);
             // Exercise the same object through IDispatch as well as its native dual vtable.
             phase = L"IDispatch"; LPOLESTR name = const_cast<LPOLESTR>(L"PageCount"); DISPID id = DISPID_UNKNOWN; ok(pdf.value->GetIDsOfNames(IID_NULL, &name, 1, LOCALE_INVARIANT, &id)); check(id == 4);
             DISPPARAMS args{}; VARIANT value{}; VariantInit(&value); ok(pdf.value->Invoke(id, IID_NULL, LOCALE_INVARIANT, DISPATCH_PROPERTYGET, &args, &value, nullptr, nullptr)); check(value.vt == VT_I4 && value.lVal == 2); VariantClear(&value);

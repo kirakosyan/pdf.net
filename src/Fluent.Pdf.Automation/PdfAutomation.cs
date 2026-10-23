@@ -32,10 +32,10 @@ public interface IPdfAutomation
     /// <summary>Writes a caller-selected path atomically under the same finite policy.</summary>
     [DispId(8)]
     void SaveFile([MarshalAs(UnmanagedType.BStr)] string path, [MarshalAs(UnmanagedType.VariantBool)] bool allowSignatureInvalidation);
-    /// <summary>Passively returns at most4096 fully qualified field names as SAFEARRAY(BSTR), without evaluating actions or XFA.</summary>
+    /// <summary>Passively returns at most4096 fully qualified field names as SAFEARRAY(VARIANT) containing BSTR values, without evaluating actions or XFA.</summary>
     [DispId(9)]
-    [return: MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
-    string[] GetFieldNames();
+    [return: MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+    object[] GetFieldNames();
     /// <summary>Requests cooperative cancellation of the active call. Concurrent ordinary calls reject; timeout/deadline remains finite.</summary>
     [DispId(10)]
     void Cancel();
@@ -84,7 +84,7 @@ public sealed class PdfAutomation : IPdfAutomation, IDisposable
     /// <inheritdoc/>
     public void SaveFile(string path, bool allowSignatureInvalidation) => _session.SaveFile(path, allowSignatureInvalidation);
     /// <inheritdoc/>
-    public string[] GetFieldNames() => _session.GetFieldNames();
+    public object[] GetFieldNames() => _session.GetFieldNames();
     /// <inheritdoc/>
     public void Cancel() => _session.Cancel();
     /// <inheritdoc/>

@@ -110,7 +110,7 @@ def inspect(path):
             sequence = row(8, param)[1]
             if (name, sequence) in [("OpenBytes", 1), ("SaveBytes", 0), ("GetFieldNames", 0)]:
                 found[name] = marshals[(param << 1) | 1].hex()
-    require(found == {"OpenBytes": "1d11", "SaveBytes": "1d11", "GetFieldNames": "1d08"}, "Exact SAFEARRAY(UI1/BSTR) native descriptors disagree: " + str(found))
+    require(found == {"OpenBytes": "1d11", "SaveBytes": "1d11", "GetFieldNames": "1d0c"}, "Exact SAFEARRAY(UI1/VARIANT) native descriptors disagree: " + str(found))
     return {"assembly": str(path), "sha256": hashlib.sha256(data).hexdigest(), "fieldMarshal": found, "actualComActivationQualified": False}
 
 

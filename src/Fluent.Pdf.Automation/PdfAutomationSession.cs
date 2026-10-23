@@ -148,10 +148,10 @@ internal sealed class PdfAutomationSession : IDisposable
         Document().SaveFile(path, token, new(allowSignatureInvalidation: signatures));
         return 0;
     });
-    internal string[] GetFieldNames() => Run(token =>
+    internal object[] GetFieldNames() => Run(token =>
     {
         var snapshot = Document().CreateSnapshot();
-        string[]? names = null;
+        object[]? names = null;
         PdfFont.Run("AutomationFieldNames", "windows.automation", _policy, token, c =>
         {
             using var graph = new PdfGraphEdit(snapshot, new(), c);
@@ -159,9 +159,9 @@ internal sealed class PdfAutomationSession : IDisposable
             if (reader.Fields.Count > 4096)
                 throw PdfWriterCore.Error(c, "Automation.FieldLimit", "The field-name array exceeds its finite ceiling.");
             long characters = reader.Fields.Sum(field => (long)field.Name.Length);
-            c.Consume(PdfResourceKind.OutputBytes, characters * 2);
+            c.Consume(PdfResourceKind.OutputBytes, characters * 2 + reader.Fields.Count * 16L);
             c.Consume(PdfResourceKind.ExpandedBytes, characters * 2 + reader.Fields.Count * 32L + 256);
-            names = reader.Fields.Select(field => field.Name).ToArray();
+            names = reader.Fields.Select(field => (object)field.Name).ToArray();
         }, PdfCapability.ReadDocument);
         return names!;
     });
