@@ -87,6 +87,7 @@ public sealed class PdfEmbeddingVector
             throw new ArgumentNullException(nameof(values));
         if (context == null)
             throw new ArgumentNullException(nameof(context));
+        context.Consume(PdfResourceKind.ExpandedBytes, 512);
         var list = new List<double>();
         double maximum = 0;
         foreach (double value in values)
@@ -123,6 +124,7 @@ public sealed class PdfEmbeddingResponse
             throw new ArgumentNullException(nameof(context));
         if (inputTokens < 0 || inputTokens > 2000000)
             throw new ArgumentOutOfRangeException(nameof(inputTokens));
+        context.Consume(PdfResourceKind.ExpandedBytes, 512);
         var list = new List<PdfEmbeddingVector>();
         foreach (var vector in vectors)
         {
@@ -283,7 +285,7 @@ public sealed class PdfJsonEmbeddingProvider : IPdfEmbeddingProvider
                     throw PdfSemanticChunks.Error(c, "Response", "The transport must return an SDK-owned readable response.");
                 var bytes = PdfProfileIo.Capture(response, c, 2097152);
                 string json;
-                c.Consume(PdfResourceKind.ExpandedBytes, bytes.Length * 4 + 256);
+                c.Consume(PdfResourceKind.ExpandedBytes, bytes.Length * 4 + 8192);
                 try
                 {
                     using var input = bytes.Open(0, bytes.Length);

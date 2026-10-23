@@ -319,6 +319,8 @@ public sealed class PdfMemoryVectorStore : IPdfVectorStore
         PdfIntelligenceModel.Identity(principal, nameof(principal));
         if (c == null)
             throw new ArgumentNullException(nameof(c));
+        c.Consume(PdfResourceKind.ExpandedBytes, 4096);
+        c.Consume(PdfResourceKind.Objects, 1);
         c.Checkpoint();
     }
 
