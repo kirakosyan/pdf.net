@@ -36,9 +36,10 @@ foreach ($architecture in @('X86','X64')) {
         $cscript = Join-Path $env:WINDIR $(if ($architecture -eq 'X86') { 'SysWOW64/cscript.exe' } else { 'System32/cscript.exe' })
         $vbsOutput = Join-Path $directory 'vbs-reordered.pdf'
         $vbsLog = Join-Path $directory 'vbs.log'
-        & $cscript //nologo //B (Join-Path $root 'examples/com/automation.vbs') $inputPdf $vbsOutput 2>&1 | Tee-Object -FilePath $vbsLog
+        Set-Content -LiteralPath $vbsLog -Value "" -NoNewline
+        & $cscript //nologo (Join-Path $root 'examples/com/automation.vbs') $inputPdf $vbsOutput 2>&1 | Tee-Object -FilePath $vbsLog
         if ($LASTEXITCODE -ne 0) { throw "Actual VBScript COM consumer failed: $architecture" }
-        $vbs = Get-Content $vbsLog -Raw
+        $vbs = [string](Get-Content $vbsLog -Raw)
         if (!$vbs.Contains('COM_VBS_PASS;') -or !$vbs.Contains(";$architecture;") -or !$vbs.Contains('.NET Framework')) { throw "VBScript CLR/bitness identity is missing: $architecture" }
         $nativeOutput = Join-Path $directory 'native-reordered.pdf'
         $nativeLog = Join-Path $directory 'native.log'
@@ -53,7 +54,7 @@ foreach ($architecture in @('X86','X64')) {
 }
     & (Join-Path $PSScriptRoot 'register-automation.ps1') -Action Unregister -AssemblyPath $assembly -Architecture X86 -Scope LocalMachine | Set-Content (Join-Path $output 'x86/unregistration.json')
     $probeScript = Join-Path $env:WINDIR 'System32/cscript.exe'
-    & $probeScript //nologo //B (Join-Path $root 'examples/com/automation.vbs') $inputPdf (Join-Path $output 'x64/shared-progid-probe.pdf') 2>&1 | Tee-Object -FilePath (Join-Path $output 'x64/shared-progid-probe.log')
+    & $probeScript //nologo (Join-Path $root 'examples/com/automation.vbs') $inputPdf (Join-Path $output 'x64/shared-progid-probe.pdf') 2>&1 | Tee-Object -FilePath (Join-Path $output 'x64/shared-progid-probe.log')
     if ($LASTEXITCODE -ne 0) { throw 'Removing x86 registration damaged the remaining x64 ProgID activation.' }
 } finally {
     foreach ($architecture in $registered) {
