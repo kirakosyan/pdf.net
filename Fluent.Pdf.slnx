@@ -2,6 +2,7 @@
   <Folder Name="/examples/">
     <Project Path="examples/Fluent.Pdf.Contract.CSharp/Fluent.Pdf.Contract.CSharp.csproj" />
     <Project Path="examples/Fluent.Pdf.Contract.VisualBasic/Fluent.Pdf.Contract.VisualBasic.vbproj" />
+    <Project Path="examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Fluent.Pdf/Fluent.Pdf.csproj" />
@@ -12,6 +13,7 @@
     <Project Path="src/Fluent.Pdf.Rendering/Fluent.Pdf.Rendering.csproj" />
     <Project Path="src/Fluent.Pdf.Cryptography/Fluent.Pdf.Cryptography.csproj" />
     <Project Path="src/Fluent.Pdf.Compliance/Fluent.Pdf.Compliance.csproj" />
+    <Project Path="src/Fluent.Pdf.Formats/Fluent.Pdf.Formats.csproj" />
     <Project Path="src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj" />
     <Project Path="src/Fluent.Pdf.Word/Fluent.Pdf.Word.csproj" />
     <Project Path="src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj" />

@@ -136,6 +136,14 @@ public sealed class PdfGraphicsState
         SoftMask = mask;
     }
 
+    internal static PdfGraphicsState StrokeAdjustmentCore(bool enabled, PdfOperationContext context)
+    {
+        context.Consume(PdfResourceKind.Objects, 4); context.Consume(PdfResourceKind.ExpandedBytes, 1024);
+        var definition = PdfGraphicsNumbers.Dict(("Type", PdfValue.Name("ExtGState")), ("SA", PdfValue.Boolean(enabled)));
+        var resource = PdfGraphicsResource.CreateCore(PdfGraphicsResourceCategory.ExtGState, definition, "1.2", PdfResourceSet.Empty, context);
+        return new(resource, "Normal", 1, 1, null);
+    }
+
     /// <summary>Gets its reusable ExtGState resource.</summary>
     public PdfGraphicsResource Resource { get; }
     /// <summary>Gets the actual standard blend mode.</summary>

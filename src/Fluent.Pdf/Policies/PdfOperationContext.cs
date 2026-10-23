@@ -374,10 +374,11 @@ public sealed class PdfOperationContext
             _diagnostics.Add(bound);
             if (severity == PdfDiagnosticSeverity.Error)
             {
-                _fatal = new PdfException(bound);
+                var failure = new PdfException(bound);
                 if (dataKey != null)
-                    _fatal.Data[dataKey] = details;
-                throw _fatal;
+                    failure.Data[dataKey] = details;
+                _fatal = failure;
+                throw failure;
             }
         }
     }

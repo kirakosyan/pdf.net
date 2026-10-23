@@ -105,3 +105,41 @@ Explicit raster/full-rewrite redaction and sanitization now have a source profil
 Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](signatures.md).
 
 Queue issues #51–#60 now have documented source profiles: [signature verification and explicit trust](signature-verification.md), [external and hardware signing sessions](external-signing.md), [pades upgrades and offline timestamp verification](pades.md), [signed revisions and conservative edit preflight](revision-audit.md), [document comparison and change reports](document-comparison.md), [passive xfa packets and explicit static conversion](xfa.md), [passive scripts and opt-in bounded calculations](scripts.md), [explicit icc color operations and production-rendering contracts](color-rendering.md), [bounded lossless raster containers](raster-export.md), [headless viewing sessions and exact tiles](viewing.md). Full requirement scope and actual minimum/runtime/provider/final-package qualification remain mandatory. PR #118 is merged; this batch follows it in the existing dependency order.
+
+The original IPP protocol profile is headless across the managed targets and requires an explicitly provisioned authenticated transport/printer. Windows native spool-system/dialog integration and actual transport/printer/runtime qualification remain pending; see [printing](printing.md).
+
+Application-view library contracts span the four managed targets. The actual compiled Razor/MVC/Blazor sample runs on modern .NET 10; WebForms requires Windows Framework and XAML requires Windows plus an explicit real host. Complete legacy/UI/browser qualification remains mandatory. See [application views](web-views.md).
+
+The authenticated worker protocol spans the four managed targets. The hosted HTTP/container source sample targets modern .NET 10; actual rootless/read-only/engine/TLS/serverless and minimum-runtime qualification remains mandatory. See [render service](render-service.md).
+
+The optional Formats assembly targets net472/netstandard2.0/net8.0/net10.0 with managed format parsers and no GUI/native/browser dependency. Providers/fonts remain explicit where needed; compiling these assets does not qualify format/runtime behavior.
+
+Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](spreadsheets.md).
+
+Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets. Full coverage and production qualification remain mandatory; see [presentations](presentations.md).
+
+Offline HTML5 export now provides explicitly rendered self-contained pages or declared-loss inferred text, with static CSP, escaped markup and page provenance. Full coverage and production qualification remain mandatory; see [html-export](html-export.md).
+
+Original bounded EPUB3 fixed-raster/reflow packages, passive text-only spine import and documented escaped MobiXML source output now have explicit identities, navigation and loss/DRM diagnostics. Full coverage and production qualification remain mandatory; see [ebooks](ebooks.md).
+
+An original closed static EPS vector profile now imports/exports literal drawing data, with a separate exact-version optional isolated interpreter boundary for broader PS/EPS/PCL requests. Full coverage and production qualification remain mandatory; see [printer-languages](printer-languages.md).
+
+Original bounded XPS/OpenXPS raster-page packages and strict PNG-brush input now preserve page geometry/order with validated internal relationships and explicit unsupported print-ticket/construct diagnostics. Full coverage and production qualification remain mandatory; see [xps](xps.md).
+
+Explicit optional isolated TeX engine/package prerequisites and escaped inferred ASCII LaTeX export now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [tex](tex.md).
+
+Managed explicit EMF24 raster-page interchange and exact optional CGM/WMF/EMF/EMF+ converter boundaries now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [metafiles](metafiles.md).
+
+Closed passive FO page-master/block/table layout and finite literal-child XML transforms now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [formatting-objects](formatting-objects.md).
+
+Original bounded OFD1.0 raster-page packages, explicit literal identity, owned resources and signed-package rejection now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [ofd](ofd.md).
+
+Content-family discovery, an exact nine-profile machine-readable save matrix and staged shared-context stream/atomic-file export orchestration now have a source profile. Full coverage and production qualification remain mandatory; see [conversions](conversions.md).
+
+Exact-edition PDF/X producer/independent-validator gates with explicit ICC print conditions, retained page geometry and exact-byte/request binding now have a source profile. Full coverage and production qualification remain mandatory; see [prepress](prepress.md).
+
+Passive advanced-content inventory with encoded payload digests, exact-byte preserve-only copying and exact-edition PDF/E-1 independent conversion gates now have a source profile. Full coverage and production qualification remain mandatory; see [engineering](engineering.md).
+
+Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile. Full coverage and production qualification remain mandatory; see [invoices](invoices.md).
+
+Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](preflight.md).

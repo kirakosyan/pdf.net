@@ -1,6 +1,9 @@
 #nullable enable
+Fluent.Pdf.Workers.IPdfRenderWorkerTransport
+Fluent.Pdf.Workers.IPdfRenderWorkerTransport.Exchange(System.IO.Stream! request, System.IO.Stream! response, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Workers.NativeWorkerHost
 Fluent.Pdf.Workers.NativeWorkerHost.Execute(Fluent.Pdf.Workers.NativeWorkerOptions! options, byte[]! request, Fluent.Pdf.PdfOperationContext! context) -> byte[]!
+Fluent.Pdf.Workers.NativeWorkerHost.Execute(Fluent.Pdf.Workers.NativeWorkerOptions! options, byte[]! request, Fluent.Pdf.PdfOperationContext! context, int maximumResponseBytes) -> byte[]!
 Fluent.Pdf.Workers.NativeWorkerHost.NativeWorkerHost() -> void
 Fluent.Pdf.Workers.NativeWorkerOptions
 Fluent.Pdf.Workers.NativeWorkerOptions.AllowInProcessThreads.get -> bool
@@ -14,4 +17,28 @@ Fluent.Pdf.Workers.NativeWorkerOptions.MaximumMemoryBytes.get -> long
 Fluent.Pdf.Workers.NativeWorkerOptions.MaximumOutputBytes.get -> int
 Fluent.Pdf.Workers.NativeWorkerOptions.NativeWorkerOptions(Fluent.Pdf.PdfNativeDeployment! deployment, string! executableFileName, string! libraryFileName, string! temporaryDirectory, long maximumMemoryBytes = 268435456, int maximumInputBytes = 67108864, int maximumOutputBytes = 67108864, System.TimeSpan? maximumElapsedTime = null, bool allowInProcessThreads = false, bool captureWorkerDiagnostics = false) -> void
 Fluent.Pdf.Workers.NativeWorkerOptions.TemporaryDirectory.get -> string!
-Fluent.Pdf.Workers.NativeWorkerHost.Execute(Fluent.Pdf.Workers.NativeWorkerOptions! options, byte[]! request, Fluent.Pdf.PdfOperationContext! context, int maximumResponseBytes) -> byte[]!
+Fluent.Pdf.Workers.PdfRenderWorkerClient
+Fluent.Pdf.Workers.PdfRenderWorkerClient.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Workers.PdfRenderWorkerClient.PdfRenderWorkerClient(Fluent.Pdf.Workers.PdfWorkerCredentials! credentials, Fluent.Pdf.Workers.IPdfRenderWorkerTransport! transport, int maximumAttempts = 1) -> void
+Fluent.Pdf.Workers.PdfRenderWorkerClient.Render(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.PdfHtmlOptions! options, System.IO.Stream! output, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Workers.PdfRenderWorkerClient.RenderHtml(System.IO.Stream! markup, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Workers.PdfWorkerPdf!
+Fluent.Pdf.Workers.PdfRenderWorkerService
+Fluent.Pdf.Workers.PdfRenderWorkerService.PdfRenderWorkerService(System.Collections.Generic.IEnumerable<Fluent.Pdf.Workers.PdfWorkerTenant!>! tenants, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null) -> void
+Fluent.Pdf.Workers.PdfRenderWorkerService.Process(System.IO.Stream! request, System.IO.Stream! response, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Workers.PdfWorkerCredentials
+Fluent.Pdf.Workers.PdfWorkerCredentials.Dispose() -> void
+Fluent.Pdf.Workers.PdfWorkerCredentials.PdfWorkerCredentials(string! tenant, byte[]! authenticationKey) -> void
+Fluent.Pdf.Workers.PdfWorkerCredentials.Tenant.get -> string!
+Fluent.Pdf.Workers.PdfWorkerPdf
+Fluent.Pdf.Workers.PdfWorkerPdf.OpenPdfStream() -> System.IO.Stream!
+Fluent.Pdf.Workers.PdfWorkerPdf.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Workers.PdfWorkerTenant
+Fluent.Pdf.Workers.PdfWorkerTenant.Credentials.get -> Fluent.Pdf.Workers.PdfWorkerCredentials!
+Fluent.Pdf.Workers.PdfWorkerTenant.MaximumConcurrentJobs.get -> int
+Fluent.Pdf.Workers.PdfWorkerTenant.MaximumElapsedTime.get -> System.TimeSpan
+Fluent.Pdf.Workers.PdfWorkerTenant.MaximumInputBytes.get -> int
+Fluent.Pdf.Workers.PdfWorkerTenant.MaximumJobs.get -> int
+Fluent.Pdf.Workers.PdfWorkerTenant.MaximumOutputBytes.get -> int
+Fluent.Pdf.Workers.PdfWorkerTenant.PdfWorkerTenant(Fluent.Pdf.Workers.PdfWorkerCredentials! credentials, int maximumConcurrentJobs = 1, int maximumJobs = 1000, int maximumInputBytes = 8388608, int maximumOutputBytes = 67108864, System.TimeSpan? maximumElapsedTime = null) -> void
+Fluent.Pdf.Workers.PdfWorkerTransientException
+Fluent.Pdf.Workers.PdfWorkerTransientException.PdfWorkerTransientException() -> void

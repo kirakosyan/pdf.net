@@ -444,4 +444,64 @@ Public Module ContractExample
     Public Function CreateViewer(source As PdfDocumentSnapshot, providers As PdfProviderRegistry) As PdfViewSession
         Return New PdfViewSession(source, providers, maximumCachedBytes:=4 * 1024 * 1024)
     End Function
+    Public Function PrintPdf(source As PdfDocumentSnapshot, options As PdfPrintOptions, providers As PdfProviderRegistry) As PdfPrintJob
+        Return PdfPrinting.Submit(source, options, providers)
+    End Function
+    Public Function RenderViewAsync(host As Fluent.Pdf.Html.IPdfViewHost, providers As PdfProviderRegistry) As System.Threading.Tasks.Task(Of PdfDocument)
+        Return Fluent.Pdf.Html.PdfWebViews.RenderAsync(host, providers)
+    End Function
+    Public Function RenderWorker(markup As Stream, client As Fluent.Pdf.Workers.PdfRenderWorkerClient) As Fluent.Pdf.Workers.PdfWorkerPdf
+        Return client.RenderHtml(markup)
+    End Function
+    Public Function ImportRaster(inputs As System.Collections.Generic.IEnumerable(Of PdfRasterInput)) As PdfDocument
+        Return PdfRasterDocuments.Create(inputs)
+    End Function
+    Public Function ImportSvg(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfSvg.Import(source)
+    End Function
+    Public Function ReadSpreadsheet(input As Stream, format As Fluent.Pdf.Formats.PdfSpreadsheetFormat, name As String) As Fluent.Pdf.Formats.PdfSheetData
+        Return Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(input, format, name)
+    End Function
+    Public Function ImportRasterSlides(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(source)
+    End Function
+    Public Function WriteRasterHtml(source As PdfDocumentSnapshot, output As Stream, providers As PdfProviderRegistry) As PdfOperationReport
+        Return Fluent.Pdf.Formats.PdfHtmlExport.Write(source, New Integer() {0}, output, New Fluent.Pdf.Formats.PdfHtmlExportOptions(Fluent.Pdf.Formats.PdfHtmlExportMode.FixedRaster, "Document", "en"), providers)
+    End Function
+    Public Function ImportEpubText(source As Stream, text As Fluent.Pdf.Formats.PdfFormatTextOptions, providers As PdfProviderRegistry, policy As PdfOperationPolicy) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfEbooks.ImportReflowText(source, text, providers, policy)
+    End Function
+    Public Function ImportStaticEps(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfStaticEps.Import(source)
+    End Function
+    Public Function ImportRasterXps(source As Stream, format As Fluent.Pdf.Formats.PdfXpsFormat) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfXps.ImportRasterPages(source, format)
+    End Function
+    Public Function ImportTex(source As Stream, options As Fluent.Pdf.Formats.PdfTexOptions, host As Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfTex.Import(source, options, host)
+    End Function
+    Public Function ImportRasterEmf(source As Stream) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(source)
+    End Function
+    Public Function ImportFormattingObjects(source As Stream, body As PdfFlowTextStyle, providers As PdfProviderRegistry) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfFormattingObjects.Import(source, body, providers)
+    End Function
+    Public Function ImportRasterOfd(source As Stream, ByRef identity As Fluent.Pdf.Formats.PdfOfdIdentity) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(source, identity)
+    End Function
+    Public Function WriteConversionMatrix(output As Stream) As PdfOperationReport
+        Return Fluent.Pdf.Formats.PdfConversions.WriteMatrix(output)
+    End Function
+    Public Function ConvertProfile(input As Stream, output As Stream, options As PdfProfileOptions, producer As IPdfProfileProducer, validator As IPdfProfileValidator) As PdfProfileValidation
+        Return PdfProfileConversions.Convert(input, output, options, producer, validator)
+    End Function
+    Public Function InspectEngineering(source As PdfDocumentSnapshot) As PdfEngineeringInspection
+        Return PdfEngineering.Inspect(source)
+    End Function
+    Public Function WriteInvoice(data As PdfInvoiceData, output As Stream, body As PdfFlowTextStyle, layout As PdfFlowOptions, providers As PdfProviderRegistry, producer As IPdfInvoiceProducer, archival As IPdfArchivalValidator, validator As IPdfInvoiceValidator) As PdfInvoiceValidation
+        Return PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator)
+    End Function
+    Public Function InspectPreflight(input As Stream) As PdfPreflightReport
+        Return PdfPreflight.Inspect(input)
+    End Function
 End Module

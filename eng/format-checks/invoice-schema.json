@@ -1,0 +1,29 @@
+{
+  "purpose": "Development-only older MINIMUM XSD structural regression, not requested-edition or full invoice/PDF-A qualification",
+  "artifact": "org.mustangproject:validator:2.13.0",
+  "artifactSha256": "aa7e5971b31a1266a6bc8f71f6a0b2758dafc74559c1d1f0b81b5f862937fa50",
+  "selectedBundle": "schema/ZF_221/MINIMUM",
+  "exactRequestedEditionQualified": false,
+  "schemaFiles": [
+    {
+      "name": "FACTUR-X_MINIMUM.xsd",
+      "sha256": "f757df8498471c5813ea44e73cfa394a6229aba7e2961d0f26c380aab4e6b81d"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_QualifiedDataType_100.xsd",
+      "sha256": "61ef7beb6c1fc6d4a5bf59a450fbe8d517cbbf31637e45e4be93a37da82df1b9"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_ReusableAggregateBusinessInformationEntity_100.xsd",
+      "sha256": "5f7dbf2cd6109290e98b4db65d02aa3abcc8bf6df40693cb150c4519eb620743"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_100.xsd",
+      "sha256": "3f95ac7a0432eb7d7b5a4676907bc959a8d9efba82f370f4523ae18d46a288ee"
+    }
+  ],
+  "limitations": [
+    "This older bundle establishes a controlled MINIMUM structural regression only. Complete Factur-X1.0.07 schema/business/metadata/PDF-A validation remains required through explicit independent providers.",
+    "No validator code or schema asset is copied into or deployed by SDK projects. Raw JAR/schemas remain outside the repository."
+  ]
+}

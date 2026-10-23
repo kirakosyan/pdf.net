@@ -100,3 +100,43 @@ Explicit raster/full-rewrite redaction and sanitization now have a source profil
 Explicit pre-created signature fields, exact incremental detached CMS signing, bounded PKCS12/borrowed-key providers and conservative DocMDP/FieldMDP edit barriers now have a source profile. Complete signature/trust/revocation/PAdES/edit-class/native/runtime qualification remains mandatory. See [signatures](docs/signatures.md).
 
 Queue issues #51–#60 add [explicit signature trust](docs/signature-verification.md), [external signing](docs/external-signing.md), [PAdES orchestration/timestamps](docs/pades.md), [revision audit](docs/revision-audit.md), [comparison](docs/document-comparison.md), [XFA](docs/xfa.md), [bounded calculations](docs/scripts.md), [ICC color operations](docs/color-rendering.md), [raster containers](docs/raster-export.md) and [headless viewing](docs/viewing.md). These are explicit source profiles; complete requirements and production qualification remain pending.
+
+Explicit [printing](docs/printing.md) now has a bounded orchestration/IPP protocol source profile. Complete native spool-system, printer/transport and production qualification remain mandatory.
+
+Optional [trusted application views](docs/web-views.md) now share HTML/PDF import budgets, with a real compiled Razor/MVC/Blazor source sample. Complete legacy/XAML/browser and production qualification remain pending.
+
+An original [authenticated render-worker protocol](docs/render-service.md) now has explicit tenants, bounded static-render retries/quotas and hosted/container source examples. Complete browser/native/host/container and production qualification remain mandatory.
+
+Original [raster-document import](docs/raster-import.md) now composes managed PNG/JPEG and explicitly supplied frame codecs with exact selection and preserved density/color/alpha. Complete codec/host and production qualification remain pending.
+
+The optional [SVG/vector format profile](docs/svg.md) now has original static import and editable opaque-vector export, with explicit unsupported-content failures and independent round-trip fixtures. Complete format/host and production qualification remain pending.
+
+Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance. Full coverage and production qualification remain mandatory; see [spreadsheets](docs/spreadsheets.md).
+
+Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets. Full coverage and production qualification remain mandatory; see [presentations](docs/presentations.md).
+
+Offline HTML5 export now provides explicitly rendered self-contained pages or declared-loss inferred text, with static CSP, escaped markup and page provenance. Full coverage and production qualification remain mandatory; see [html-export](docs/html-export.md).
+
+Original bounded EPUB3 fixed-raster/reflow packages, passive text-only spine import and documented escaped MobiXML source output now have explicit identities, navigation and loss/DRM diagnostics. Full coverage and production qualification remain mandatory; see [ebooks](docs/ebooks.md).
+
+An original closed static EPS vector profile now imports/exports literal drawing data, with a separate exact-version optional isolated interpreter boundary for broader PS/EPS/PCL requests. Full coverage and production qualification remain mandatory; see [printer-languages](docs/printer-languages.md).
+
+Original bounded XPS/OpenXPS raster-page packages and strict PNG-brush input now preserve page geometry/order with validated internal relationships and explicit unsupported print-ticket/construct diagnostics. Full coverage and production qualification remain mandatory; see [xps](docs/xps.md).
+
+Explicit optional isolated TeX engine/package prerequisites and escaped inferred ASCII LaTeX export now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [tex](docs/tex.md).
+
+Managed explicit EMF24 raster-page interchange and exact optional CGM/WMF/EMF/EMF+ converter boundaries now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [metafiles](docs/metafiles.md).
+
+Closed passive FO page-master/block/table layout and finite literal-child XML transforms now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [formatting-objects](docs/formatting-objects.md).
+
+Original bounded OFD1.0 raster-page packages, explicit literal identity, owned resources and signed-package rejection now have a shared-context source profile. Full coverage and production qualification remain mandatory; see [ofd](docs/ofd.md).
+
+Content-family discovery, an exact nine-profile machine-readable save matrix and staged shared-context stream/atomic-file export orchestration now have a source profile. Full coverage and production qualification remain mandatory; see [conversions](docs/conversions.md).
+
+Exact-edition PDF/X producer/independent-validator gates with explicit ICC print conditions, retained page geometry and exact-byte/request binding now have a source profile. Full coverage and production qualification remain mandatory; see [prepress](docs/prepress.md).
+
+Passive advanced-content inventory with encoded payload digests, exact-byte preserve-only copying and exact-edition PDF/E-1 independent conversion gates now have a source profile. Full coverage and production qualification remain mandatory; see [engineering](docs/engineering.md).
+
+Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile. Full coverage and production qualification remain mandatory; see [invoices](docs/invoices.md).
+
+Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](docs/preflight.md).

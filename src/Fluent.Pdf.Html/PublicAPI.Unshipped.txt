@@ -65,6 +65,17 @@ Fluent.Pdf.Html.IHtmlNameResolver
 Fluent.Pdf.Html.IHtmlNameResolver.Resolve(string! host, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<System.Net.IPAddress!>!
 Fluent.Pdf.Html.IHtmlResourceSession
 Fluent.Pdf.Html.IHtmlResourceSession.Resolve(Fluent.Pdf.Html.HtmlResourceRequest! request, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Html.HtmlResourceResult?
+Fluent.Pdf.Html.IPdfViewHost
+Fluent.Pdf.Html.IPdfViewHost.IsAvailable.get -> bool
+Fluent.Pdf.Html.IPdfViewHost.Kind.get -> Fluent.Pdf.Html.PdfViewKind
+Fluent.Pdf.Html.IPdfViewHost.RenderAsync(System.IO.Stream! output, Fluent.Pdf.PdfOperationContext! context) -> System.Threading.Tasks.Task!
+Fluent.Pdf.Html.PdfViewKind
+Fluent.Pdf.Html.PdfViewKind.Blazor = 2 -> Fluent.Pdf.Html.PdfViewKind
+Fluent.Pdf.Html.PdfViewKind.Mvc = 1 -> Fluent.Pdf.Html.PdfViewKind
+Fluent.Pdf.Html.PdfViewKind.Razor = 0 -> Fluent.Pdf.Html.PdfViewKind
+Fluent.Pdf.Html.PdfViewKind.WebForms = 3 -> Fluent.Pdf.Html.PdfViewKind
+Fluent.Pdf.Html.PdfViewKind.Xaml = 4 -> Fluent.Pdf.Html.PdfViewKind
+Fluent.Pdf.Html.PdfWebViews
 Fluent.Pdf.Html.PinnedHtmlHttpTransport
 Fluent.Pdf.Html.PinnedHtmlHttpTransport.IsSupported.get -> bool
 Fluent.Pdf.Html.PinnedHtmlHttpTransport.PinnedHtmlHttpTransport() -> void
@@ -77,3 +88,4 @@ static Fluent.Pdf.Html.HtmlAssets.CaptureFile(string! protectedRoot, string! rel
 static Fluent.Pdf.Html.HtmlAssets.ReadDataUri(string! dataUri, System.Uri! address, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
 static Fluent.Pdf.Html.HtmlAssets.ReadFile(string! protectedRoot, string! relativePath, System.Uri! address, string! mediaType, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
 static Fluent.Pdf.Html.HtmlNetworkPolicy.Offline.get -> Fluent.Pdf.Html.HtmlNetworkPolicy!
+static Fluent.Pdf.Html.PdfWebViews.RenderAsync(Fluent.Pdf.Html.IPdfViewHost! host, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfHtmlOptions? htmlOptions = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, System.Uri? baseAddress = null, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Fluent.Pdf.PdfDocument!>!

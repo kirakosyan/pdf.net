@@ -54,27 +54,32 @@ public sealed partial class PdfPath
         PdfPath? result = null;
         var report = PdfFont.Run("CreatePath", "managed.graphics", policy, cancellationToken, context =>
         {
-            var items = new List<PdfPathSegment>();
-            var operations = new List<PdfContentOperation>();
-            bool current = false;
-            foreach (var segment in segments)
-            {
-                context.Checkpoint();
-                context.Consume(PdfResourceKind.Objects, 1);
-                context.Consume(PdfResourceKind.ExpandedBytes, 512);
-                if (segment == null)
-                    throw new ArgumentException("A path segment cannot be null.", nameof(segments));
-                if (!current && segment.Operation != PdfOperator.MoveTo && segment.Operation != PdfOperator.Rectangle)
-                    throw PdfWriterCore.Error(context, "Graphics.PathCurrentPoint", "A path segment requires a current point.");
-                current = true;
-                items.Add(segment);
-                operations.Add(new PdfContentOperation(segment.Operation, segment.Coordinates.Select(PdfValues.Real).ToArray()));
-            }
-
-            result = new PdfPath(items, operations);
+            result = CreateCore(segments, context);
         }, PdfCapability.WriteDocument);
         result!.OperationReport = report;
         return result;
+    }
+
+    internal static PdfPath CreateCore(IEnumerable<PdfPathSegment> segments, PdfOperationContext context)
+    {
+        var items = new List<PdfPathSegment>();
+        var operations = new List<PdfContentOperation>();
+        bool current = false;
+        foreach (var segment in segments)
+        {
+            context.Checkpoint();
+            context.Consume(PdfResourceKind.Objects, 1);
+            context.Consume(PdfResourceKind.ExpandedBytes, 512);
+            if (segment == null)
+                throw new ArgumentException("A path segment cannot be null.", nameof(segments));
+            if (!current && segment.Operation != PdfOperator.MoveTo && segment.Operation != PdfOperator.Rectangle)
+                throw PdfWriterCore.Error(context, "Graphics.PathCurrentPoint", "A path segment requires a current point.");
+            current = true;
+            items.Add(segment);
+            operations.Add(new PdfContentOperation(segment.Operation, segment.Coordinates.Select(PdfValues.Real).ToArray()));
+        }
+
+        return new PdfPath(items, operations);
     }
 
     /// <summary>Returns a separately validated path with a logical segment range replaced.</summary>

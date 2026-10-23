@@ -15,3 +15,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Fluent.Pdf.Word")]
 
 [assembly: InternalsVisibleTo("Fluent.Pdf.Ocr")]
+
+[assembly: InternalsVisibleTo("Fluent.Pdf.Formats")]

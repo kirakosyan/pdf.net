@@ -349,4 +349,29 @@ public static class ContractExample
     public static PdfRaster RenderColor(PdfDocumentSnapshot source, PdfProviderRegistry providers, PdfColorRenderOptions colors) => PdfColorRendering.RenderPage(source, 0, providers, colors);
     public static PdfOperationReport ExportRaster(PdfDocumentSnapshot source, Stream output, PdfProviderRegistry providers) => PdfRasterExport.Write(source, new[] { 0 }, output, new(PdfRasterFormat.Png), providers);
     public static PdfViewSession CreateViewer(PdfDocumentSnapshot source, PdfProviderRegistry providers) => new(source, providers, maximumCachedBytes: 4 * 1024 * 1024);
+    public static PdfPrintJob PrintPdf(PdfDocumentSnapshot source, PdfPrintOptions options, PdfProviderRegistry providers) => PdfPrinting.Submit(source, options, providers);
+
+    public static System.Threading.Tasks.Task<PdfDocument> RenderViewAsync(Fluent.Pdf.Html.IPdfViewHost host, PdfProviderRegistry providers) => Fluent.Pdf.Html.PdfWebViews.RenderAsync(host, providers);
+
+    public static Fluent.Pdf.Workers.PdfWorkerPdf RenderWorker(Stream markup, Fluent.Pdf.Workers.PdfRenderWorkerClient client) => client.RenderHtml(markup);
+
+    public static PdfDocument ImportRaster(IEnumerable<PdfRasterInput> inputs) => PdfRasterDocuments.Create(inputs);
+
+    public static PdfDocument ImportSvg(Stream source) => Fluent.Pdf.Formats.PdfSvg.Import(source);
+
+    public static Fluent.Pdf.Formats.PdfSheetData ReadSpreadsheet(Stream input, Fluent.Pdf.Formats.PdfSpreadsheetFormat format, string name) => Fluent.Pdf.Formats.PdfSpreadsheets.ReadData(input, format, name);
+    public static PdfDocument ImportRasterSlides(Stream source) => Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(source);
+    public static PdfOperationReport WriteRasterHtml(PdfDocumentSnapshot source, Stream output, PdfProviderRegistry providers) => Fluent.Pdf.Formats.PdfHtmlExport.Write(source, new[] { 0 }, output, new(Fluent.Pdf.Formats.PdfHtmlExportMode.FixedRaster, "Document", "en"), providers);
+    public static PdfDocument ImportEpubText(Stream source, Fluent.Pdf.Formats.PdfFormatTextOptions text, PdfProviderRegistry providers, PdfOperationPolicy policy) => Fluent.Pdf.Formats.PdfEbooks.ImportReflowText(source, text, providers, policy);
+    public static PdfDocument ImportStaticEps(Stream source) => Fluent.Pdf.Formats.PdfStaticEps.Import(source);
+    public static PdfDocument ImportRasterXps(Stream source, Fluent.Pdf.Formats.PdfXpsFormat format) => Fluent.Pdf.Formats.PdfXps.ImportRasterPages(source, format);
+    public static PdfDocument ImportTex(Stream source, Fluent.Pdf.Formats.PdfTexOptions options, Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter host) => Fluent.Pdf.Formats.PdfTex.Import(source, options, host);
+    public static PdfDocument ImportRasterEmf(Stream source) => Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(source);
+    public static PdfDocument ImportFormattingObjects(Stream source, PdfFlowTextStyle body, PdfProviderRegistry providers) => Fluent.Pdf.Formats.PdfFormattingObjects.Import(source, body, providers);
+    public static PdfDocument ImportRasterOfd(Stream source, out Fluent.Pdf.Formats.PdfOfdIdentity identity) => Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(source, out identity);
+    public static PdfOperationReport WriteConversionMatrix(Stream output) => Fluent.Pdf.Formats.PdfConversions.WriteMatrix(output);
+    public static PdfProfileValidation ConvertProfile(Stream input, Stream output, PdfProfileOptions options, IPdfProfileProducer producer, IPdfProfileValidator validator) => PdfProfileConversions.Convert(input, output, options, producer, validator);
+    public static PdfEngineeringInspection InspectEngineering(PdfDocumentSnapshot source) => PdfEngineering.Inspect(source);
+    public static PdfInvoiceValidation WriteInvoice(PdfInvoiceData data, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, IPdfInvoiceProducer producer, IPdfArchivalValidator archival, IPdfInvoiceValidator validator) => PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator);
+    public static PdfPreflightReport InspectPreflight(Stream input) => PdfPreflight.Inspect(input);
 }

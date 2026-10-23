@@ -36,5 +36,9 @@ public enum PdfCapability
     /// <summary>Complete independent exact-byte PAdES validation.</summary>
     ValidatePades = 15,
     /// <summary>Explicit ICC/overprint/spot-aware page rasterization.</summary>
-    RenderColorManaged = 16
+    RenderColorManaged = 16,
+    /// <summary>Explicit printer selection, one spool submission and job observations.</summary>
+    PrintDocument = 17,
+    /// <summary>Explicit optional multi-frame raster-file decoding.</summary>
+    DecodeRasterDocuments = 18
 }

@@ -1826,12 +1826,25 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/printing.md",
+        "implemented": [
+          "Explicit print orchestration, immutable copies/ranges/duplex/scaling/N-up, original bounded IPP 2.0 submission/status/cancellation and caller-owned authenticated transport boundary"
+        ],
+        "pending": [
+          "Complete Windows native print-system adapters and controlled CUPS/IPP/virtual/physical-printer integration",
+          "Actual minimum/runtime/RID, transport/authentication/permission and exact final-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-044",
@@ -2034,12 +2047,26 @@
       "validation": "Minimal hosted sample consumers for each adapter; concurrent request and legacy-runtime qualification.",
       "evidence": [
         "B01",
-        "D02"
+        "D02",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/web-views.md",
+        "implemented": [
+          "Optional trusted view-host bridge with shared HTML/PDF import budget, request cancellation, platform/prerequisite rejection and expired output leases",
+          "Real compiled Razor/MVC and Blazor static HTML hosted source sample; explicit renderer prerequisite on regular endpoint"
+        ],
+        "pending": [
+          "Complete actual ASPX/WebForms and XAML host adapters and hosted concurrency/legacy/UI qualification",
+          "Actual browser fidelity, minimum/runtime/RID and exact final-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-049",
@@ -2064,12 +2091,26 @@
       "evidence": [
         "B01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/render-service.md",
+        "implemented": [
+          "Original authenticated static-HTML client/service protocol with tenant/nonce/source binding, bounded idempotent retries and finite per-tenant concurrency/jobs/bytes/deadlines",
+          "Explicit hosted HTTPS ingress/transport example and non-root container recipe; no automatic engine/model downloads"
+        ],
+        "pending": [
+          "Complete general browser/native transports and actual protected process/service/container/serverless host integration",
+          "Real authentication/TLS/tenant isolation, rootless/read-only/restart, engine/RID/minimum-runtime and exact final-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-050",
@@ -2142,12 +2183,25 @@
         "B01",
         "D01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/raster-import.md",
+        "implemented": [
+          "Shared-budget managed PNG/JPEG and explicit optional complete-frame raster composition with exact selection, density/orientation/color/alpha, staged/atomic output and codec-availability preflight"
+        ],
+        "pending": [
+          "Complete actual BMP/GIF/TIFF/WebP/HEIF/HEIC and other required codec profiles, animation/precision/color fidelity and licensing/RID decisions",
+          "Independent visual/semantic, actual minimum/runtime/host and exact final-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-052",
@@ -2171,12 +2225,26 @@
       "evidence": [
         "A01",
         "D01",
-        "B01"
+        "B01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/svg.md",
+        "implemented": [
+          "Optional original bounded SVG static import with vectors/transforms/clips/explicit-font text and authorized local images",
+          "Opaque PDF vector/Form SVG export with exact geometry/paint/clip and staged/atomic output; independent original SVG/PDF round-trip fixtures"
+        ],
+        "pending": [
+          "Complete SVG/CSS/path/text/image/paint and PDF-to-SVG reconstruction/export profiles",
+          "Full independent standards/fidelity corpus, actual minimum/runtime/provider and exact final-package production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-053",
@@ -2248,12 +2316,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/spreadsheets.md",
+        "implemented": [
+          "Bounded typed spreadsheet data interchange now covers CSV, SpreadsheetML, XLSX and ODS with explicit ranges, merges and passive PDF/formula provenance."
+        ],
+        "pending": [
+          "Binary XLS and complete sheet/chart/print-area fidelity",
+          "Full independent format, host and package qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-055",
@@ -2278,12 +2359,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/presentations.md",
+        "implemented": [
+          "Explicit image-based PPTX export and strict picture-only import now preserve selection order, common EMU slide geometry and lossless embedded raster assets."
+        ],
+        "pending": [
+          "Editable object, font, master, animation and full presentation reconstruction",
+          "Independent complete fidelity, host and package qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-056",
@@ -2308,12 +2402,25 @@
       "validation": "Browser rendering versus source raster; accessibility checks, CSP/offline asset and text comparisons.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/html-export.md",
+        "implemented": [
+          "Offline HTML5 export now provides explicitly rendered self-contained pages or declared-loss inferred text, with static CSP, escaped markup and page provenance."
+        ],
+        "pending": [
+          "Semantic headings/tables/navigation, font/CSS reconstruction and controlled asset callbacks",
+          "Actual browser/accessibility, fidelity, host and package qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-057",
@@ -2336,12 +2443,25 @@
       "validation": "Independent EPUB validators and readers; RTL, embedded-font and malicious archive fixtures.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/ebooks.md",
+        "implemented": [
+          "Original bounded EPUB3 fixed-raster/reflow packages, passive text-only spine import and documented escaped MobiXML source output now have explicit identities, navigation and loss/DRM diagnostics."
+        ],
+        "pending": [
+          "Fixed-layout input, complete fonts/RTL/reader/semantic reconstruction and book compiler coverage",
+          "Full independent fidelity, host and package qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-058",
@@ -2365,12 +2485,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/printer-languages.md",
+        "implemented": [
+          "An original closed static EPS vector profile now imports/exports literal drawing data, with a separate exact-version optional isolated interpreter boundary for broader PS/EPS/PCL requests."
+        ],
+        "pending": [
+          "Complete PS/EPS/PCL command, font/resource and engine/version coverage",
+          "Actual isolated interpreter security, host and package qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-059",
@@ -2394,12 +2527,25 @@
       "validation": "Independent XPS readers; font obfuscation, color and package traversal fixtures.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/xps.md",
+        "implemented": [
+          "Original bounded XPS/OpenXPS raster-page packages and strict PNG-brush input now preserve page geometry/order with validated internal relationships and explicit unsupported print-ticket/construct diagnostics."
+        ],
+        "pending": [
+          "Full glyph/vector/resource-dictionary, font obfuscation, color and print-ticket profiles",
+          "Independent complete format, host and package qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-060",
@@ -2423,12 +2569,25 @@
       "validation": "Scientific-document fixtures, unavailable-package diagnostics and malicious TeX sandbox tests.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/tex.md",
+        "implemented": [
+          "Explicit optional isolated TeX engine/package prerequisites and escaped inferred ASCII LaTeX export now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete scientific/typesetting/font/package and Unicode/math reconstruction profiles",
+          "Actual malicious-source isolated-host and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-061",
@@ -2452,12 +2611,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/metafiles.md",
+        "implemented": [
+          "Managed explicit EMF24 raster-page interchange and exact optional CGM/WMF/EMF/EMF+ converter boundaries now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete vector/text/raster record and CGM/WMF/EMF+ profiles",
+          "Actual record corpus OS/adapter and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-062",
@@ -2480,12 +2652,25 @@
       "validation": "Formatting-object corpus, malicious stylesheets and page-master/table layout goldens.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/formatting-objects.md",
+        "implemented": [
+          "Closed passive FO page-master/block/table layout and finite literal-child XML transforms now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete standards-oriented FO/XSLT adapter formatting/resource/language profiles",
+          "Actual layout/security corpus supported-host/package and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-063",
@@ -2510,12 +2695,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/ofd.md",
+        "implemented": [
+          "Original bounded OFD1.0 raster-page packages, explicit literal identity, owned resources and signed-package rejection now have a shared-context source profile."
+        ],
+        "pending": [
+          "Complete OFD text/font/vector metadata extension and signature preservation/verification profiles",
+          "Actual independent corpus OS/host/package and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-064",
@@ -2598,12 +2796,25 @@
         "D01",
         "B01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/conversions.md",
+        "implemented": [
+          "Content-family discovery, an exact nine-profile machine-readable save matrix and staged shared-context stream/atomic-file export orchestration now have a source profile."
+        ],
+        "pending": [
+          "Complete format/direction load/save adapter matrix options progress and host capability coverage",
+          "Actual end-to-end application corpus supported-host/package and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-066",
@@ -2726,12 +2937,25 @@
       "validation": "Prepress validator reports; CMYK/spot/ICC/bleed/font fixtures and output separations.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/prepress.md",
+        "implemented": [
+          "Exact-edition PDF/X producer/independent-validator gates with explicit ICC print conditions, retained page geometry and exact-byte/request binding now have a source profile."
+        ],
+        "pending": [
+          "Complete PDF/X conversion repair color/transparency/font/bleed and separation profiles",
+          "Actual complete independent prepress validators corpus supported-host/package and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-069",
@@ -2756,12 +2980,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/engineering.md",
+        "implemented": [
+          "Passive advanced-content inventory with encoded payload digests, exact-byte preserve-only copying and exact-edition PDF/E-1 independent conversion gates now have a source profile."
+        ],
+        "pending": [
+          "Complete PDF/E producer/validator and semantic preservation across rewrites",
+          "Actual U3D/PRC/media/geospatial corpus supported-host/package and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-070",
@@ -2784,12 +3021,25 @@
       "validation": "Independent invoice validators; tax/rounding/currency fixtures and PDF/A-3 validation.",
       "evidence": [
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/invoices.md",
+        "implemented": [
+          "Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile."
+        ],
+        "pending": [
+          "Complete invoice version/profile/domain schema business and tax/rounding coverage with real producer/validators",
+          "Actual independent invoice/PDF-A corpus supported-host/package and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-071",
@@ -2819,12 +3069,25 @@
       "evidence": [
         "ENH",
         "A01",
-        "D01"
+        "D01",
+        "docs/evidence/issues-61-80-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/preflight.md",
+        "implemented": [
+          "Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile."
+        ],
+        "pending": [
+          "Complete capability/conformance aggregation and font/image/color/security repair profiles",
+          "Actual independent validators fault corpus semantic preservation supported-host/package and production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+      }
     },
     {
       "id": "FP-072",

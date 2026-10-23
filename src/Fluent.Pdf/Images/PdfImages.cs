@@ -53,30 +53,39 @@ public static partial class PdfImages
         PdfImageAsset? result = null;
         var report = PdfFont.Run("CreateAlphaImage", "managed.images", policy, cancellationToken, context =>
         {
-            if (colorSpace.Components != 3 || colorSpace.IsPattern)
-                throw Error(context, "Image.ColorComponents", "RGBA input requires an explicit three-component color space.");
-            context.ConsumePixels(width, height);
-            context.ConsumePixels(width, height);
-            using var lease = new BorrowedStream(input, true, context);
-            var data = ReadExact(lease, info.ByteLength, context, false);
-            var colors = new PdfByteBuilder(context);
-            var alpha = new PdfByteBuilder(context);
-            int componentBytes = bitsPerComponent / 8;
-            for (long p = 0; p < data.Length; p += componentBytes * 4)
-            {
-                context.Checkpoint();
-                for (int i = 0; i < componentBytes * 3; i++)
-                    colors.Add((byte)data.At(p + i));
-                for (int i = 0; i < componentBytes; i++)
-                    alpha.Add((byte)data.At(p + componentBytes * 3 + i));
-            }
-
-            var mask = Build(alpha.Build(), new(width, height, 1, bitsPerComponent), PdfColorSpace.Gray.Definition, null, null, false, new(), false, context);
-            result = Build(colors.Build(), new(width, height, 3, bitsPerComponent), colorSpace.Definition, mask, null, false, metadata ?? new(), false, context, minimumVersion: colorSpace.MinimumVersion);
+            result = FromRgbaCore(input, width, height, bitsPerComponent, colorSpace, metadata ?? new(), context);
         }, PdfCapability.ImageCodecs);
         Complete(result!, report);
         Complete(result!.SoftMask!, report);
         return result!;
+    }
+
+    internal static PdfImageAsset FromRgbaCore(Stream input, int width, int height, int bitsPerComponent, PdfColorSpace colorSpace, PdfImageMetadata metadata, PdfOperationContext context, bool pixelsAlreadyCharged = false)
+    {
+        var info = new PdfImageInfo(width, height, 4, bitsPerComponent);
+        if (colorSpace.Components != 3 || colorSpace.IsPattern)
+            throw Error(context, "Image.ColorComponents", "RGBA input requires an explicit three-component color space.");
+        if (!pixelsAlreadyCharged)
+        {
+            context.ConsumePixels(width, height);
+            context.ConsumePixels(width, height);
+        }
+        using var lease = new BorrowedStream(input, true, context);
+        var data = ReadExact(lease, info.ByteLength, context, false);
+        var colors = new PdfByteBuilder(context);
+        var alpha = new PdfByteBuilder(context);
+        int componentBytes = bitsPerComponent / 8;
+        for (long p = 0; p < data.Length; p += componentBytes * 4)
+        {
+            context.Checkpoint();
+            for (int i = 0; i < componentBytes * 3; i++)
+                colors.Add((byte)data.At(p + i));
+            for (int i = 0; i < componentBytes; i++)
+                alpha.Add((byte)data.At(p + componentBytes * 3 + i));
+        }
+
+        var mask = Build(alpha.Build(), new(width, height, 1, bitsPerComponent), PdfColorSpace.Gray.Definition, null, null, false, new(), false, context);
+        return Build(colors.Build(), new(width, height, 3, bitsPerComponent), colorSpace.Definition, mask, null, false, metadata ?? new(), false, context, minimumVersion: colorSpace.MinimumVersion);
     }
 
     /// <summary>Preserves exact encoded PDF filter bytes with explicit inspected geometry and a bounded standard filter chain.</summary>

@@ -1,0 +1,596 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source-profiles-and-validation-not-complete-requirements-or-release-qualification",
+  "requirements": [
+    "FP-043",
+    "FP-048",
+    "FP-049",
+    "FP-051",
+    "FP-052",
+    "FP-054",
+    "FP-055",
+    "FP-056",
+    "FP-057",
+    "FP-058",
+    "FP-059",
+    "FP-060",
+    "FP-061",
+    "FP-062",
+    "FP-063",
+    "FP-065",
+    "FP-068",
+    "FP-069",
+    "FP-070",
+    "FP-071"
+  ],
+  "queueIssues": [
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80
+  ],
+  "sourceCommit": "4f67e004c2488d2feeff1e64574e18ae9d5fe68b",
+  "sourceTree": "6e4179a999d8f52a9ff8bfb2cbec0f3f2896f539",
+  "commitBinding": "Final clean code checkpoint, compiled assembly metadata, final runtime reports, API binary hashes and corrected independent input hashes are exact. Earlier regression/native reports retain their own source checkpoint. Subsequent documentation/evidence changes preserve these source hashes; no self-referential final commit is invented.",
+  "mergedPriorPr": {
+    "number": 119,
+    "url": "https://github.com/kirakosyan/pdf.net/pull/119",
+    "mergeCommit": "d9fa26d0fbfe93e524b25dcb6712ac8ffa51c502",
+    "reviewThreadsAddressed": 14
+  },
+  "localLane": {
+    "os": "Debian GNU/Linux 13",
+    "architecture": "x86_64",
+    "sdk": "10.0.402",
+    "runtimes": [
+      "Microsoft.AspNetCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.AspNetCore.App]",
+      "Microsoft.NETCore.App 8.0.32 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]",
+      "Microsoft.NETCore.App 10.0.13 [/workspace/.tools/dotnet/shared/Microsoft.NETCore.App]"
+    ]
+  },
+  "runtimeReports": [
+    {
+      "report": {
+        "path": "artifacts/contracts/queue-61-80/final/corrected-managed-net8/corrected-managed-net8.trx",
+        "sha256": "0485f8dfc8362f2e31de26daeaa3a653de29d32f88a00ebb53da10f821753a55"
+      },
+      "sourceCheckpoint": "4f67e004c2488d2feeff1e64574e18ae9d5fe68b",
+      "counters": {
+        "total": "1528",
+        "executed": "1528",
+        "passed": "1528",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "queueCases": 142,
+      "queuePassed": 142,
+      "failureGroups": {},
+      "everyFailureReportsSandboxUnavailable": null,
+      "runtimeIdentity": "\n      \n        Library: /workspace/pdf.net/tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v8.0\nActual runtime: .NET 8.0.32\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64\n      \n    "
+    },
+    {
+      "report": {
+        "path": "artifacts/contracts/queue-61-80/final/corrected-managed-net10/corrected-managed-net10.trx",
+        "sha256": "b56d81d0ea622aaed12a681e15316c9745d241e4cba8a040f09f82d3d9d188ff"
+      },
+      "sourceCheckpoint": "4f67e004c2488d2feeff1e64574e18ae9d5fe68b",
+      "counters": {
+        "total": "1528",
+        "executed": "1528",
+        "passed": "1528",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "queueCases": 142,
+      "queuePassed": 142,
+      "failureGroups": {},
+      "everyFailureReportsSandboxUnavailable": null,
+      "runtimeIdentity": "\n      \n        Library: /workspace/pdf.net/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64\n      \n    "
+    },
+    {
+      "report": {
+        "path": "artifacts/contracts/queue-61-80/final/corrected-managed-netstandard-fallback/corrected-managed-netstandard-fallback.trx",
+        "sha256": "e5271c52c3498653f35080d6fa8787da8700e922ecb389168e6ee4915d5dc107"
+      },
+      "sourceCheckpoint": "4f67e004c2488d2feeff1e64574e18ae9d5fe68b",
+      "counters": {
+        "total": "1528",
+        "executed": "1528",
+        "passed": "1528",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "queueCases": 142,
+      "queuePassed": 142,
+      "failureGroups": {},
+      "everyFailureReportsSandboxUnavailable": null,
+      "runtimeIdentity": "\n      \n        Library: /workspace/pdf.net/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETStandard,Version=v2.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64\n      \n    "
+    }
+  ],
+  "fullSuiteResult": {
+    "report": {
+      "path": "artifacts/contracts/queue-61-80/final/full-net10/full-net10.trx",
+      "sha256": "b3fd5f03651a3ac563121bca6e4ef5822c58d97ae017eb6421a653be5e5e6e9f"
+    },
+    "sourceCheckpoint": "49bb5bdba89cc4964fead21698c2d3d42f7a297c",
+    "counters": {
+      "total": "1602",
+      "executed": "1602",
+      "passed": "1534",
+      "failed": "68",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "queueCases": 142,
+    "queuePassed": 142,
+    "failureGroups": {
+      "NativeImageCodecTests": 12,
+      "NativeTextTests": 12,
+      "NativeRenderingTests": 14,
+      "NativeOcrContractTests": 11,
+      "NativeWorkerTests": 19
+    },
+    "everyFailureReportsSandboxUnavailable": true,
+    "runtimeIdentity": "\n      \n        Library: /workspace/pdf.net/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64\n      \n    "
+  },
+  "managedFilterExclusions": [
+    "NativeWorkerTests",
+    "NativeImageCodecTests",
+    "NativeRenderingTests",
+    "NativeTextTests",
+    "NativeOcrContractTests"
+  ],
+  "exclusionMeaning": "Managed-only runs are separate explicitly filtered evidence. The unfiltered native failure remains a required failed/unqualified lane; no sandbox gate/assertion is weakened.",
+  "api": {
+    "comparisons": 36,
+    "failures": 0,
+    "report": {
+      "path": "artifacts/contracts/api/comparisons.json",
+      "sha256": "ef5fd013936bf34c856fb1259b03bcc7bd24651cd5f6c7f59df65bf0d3b83b6e"
+    }
+  },
+  "build": {
+    "targets": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ],
+    "warnings": 0,
+    "errors": 0,
+    "assemblyMetadata": {
+      "path": "src/Fluent.Pdf/obj/Release/net10.0/Fluent.Pdf.AssemblyInfo.cs",
+      "sha256": "8f138dbe76043884046fbd3c3d71028fe2005a9aae12d35f501cf9dad4389f76"
+    },
+    "log": {
+      "path": "/workspace/scratch/queue-clean-checkpoint-build.log",
+      "sha256": "c4bfdee39b700b4ba829224d4bbf4fbed58aa5113dc6275fe3606c29b9d0a2eb"
+    }
+  },
+  "independent": [
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/formats.json",
+      "sha256": "899fd0ce301db8958bc7e352ab0e0ce330d1cfd9761fc9d55ba55afee99d6f53"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/eps/independent-eps.json",
+      "sha256": "3ae06e8d32c5070f9720e4c07347f7fb60a4a7414ca64b8eb663d2e1fc06e12e"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/xps/independent-xps.json",
+      "sha256": "6e0fa18783898e663b1111512f2e062b576a6aef58894f2985a67d8fca91f052"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/tex/independent-tex.json",
+      "sha256": "630505470f90f9c2c5eed41ad3c1ed578c746905b1512521119935436bbaab87"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/emf/independent-emf.json",
+      "sha256": "cac7ef26e893c76037fd99c93804a0ce375212ca6315838a738a0393c396045b"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/ofd/independent-ofd.json",
+      "sha256": "16da9f98c9eb7d2c51508640b410eb190e3722a505c28fda387ea149ebed0735"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/epub/independent-epub.json",
+      "sha256": "88e6696ccecca217a33f77a9ed641852ad0cda11cb77858ec43ea812825592eb"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/epub-negative/negative-checks.json",
+      "sha256": "66dc28934ba203a7ea2f47b977efe470c3942fbd878dea11913e93d587df0261"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/invoices.json",
+      "sha256": "f4eded41d7d21632df735480804faae5853140ece9a432a4906df3c7442a7bbb"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/preflight.json",
+      "sha256": "402b12533aeba4b3200a786159afdacd6f4d20b09c6a733fb56953f026bf07b9"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/openxml-xlsx.json",
+      "sha256": "b96b72f7398a6d860b090493aa93dbd0eecde1519ac7e36b15605d380f8d76f1"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/openxml-pptx.json",
+      "sha256": "7e91f68f3f034070cc6dbbaf3ef660678ca38338363a0e34dad862dc638d5067"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/corrected-independent/fo.json",
+      "sha256": "87c4ba3029e9a20ae6447d08f742c5572d3f669b36c6eb49bf37b80e76bb709a"
+    }
+  ],
+  "fixtureSha256": {
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/book-source.xml": "4847aaa6d467b6068ccfbc7d295473f1c9bdb524abe603899099b0051b98ca5e",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/eps-original.pdf": "bac1bf91b2b07d5b089f35553f40feb0a87f4e20cf810639a9f1d303360f5e69",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/eps-roundtrip.pdf": "ad01e459ad3d53592d2f1195e2650c44d014f3f97d8be5424e25b4d13b0deeee",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/fixed-book.epub": "b39f4c5f6c8b8140726b9e3057066e7270ab5e876e1443756251fe1b3e58e0d3",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/fixed-pages.html": "f721aaff48fef7c6c9f8426e22e12aa1d0da4ef113fe75aa3d972b9e452bf520",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/formatting-objects.pdf": "0a16befeefa193b973d70a0462257fb29939493d8b62d559b5acabfb972fc0a1",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/inferred-text.html": "c2deed1541affb62bc2917cfcb2da472d6fdf2aa32f79061a37747efc67bec53",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/inferred-text.tex": "9d091419b895b5f223fe58dd702e72c16db117f1680b7fd223de4fe844ba98b2",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/invoice-source.xml": "f17dccfed716979654d9f913c65afa9cc421ee39d512f89792a4be6d27517120",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/invoice-unqualified-draft.pdf": "1123c4ae434452a9c5198e4fb7c09c860bd72e4793f8e3bd712cf74276656a18",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/preflight-atomic.pdf": "9cbc571f74e4750da57c9678d6c4be88ca71ffa55bb0ea5047c5eda7c152596a",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/preflight-audit.json": "7785e6d2379ec1db2d2f319172222800311ed4a5ac01ac4535175aecca926099",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/preflight-fixed.pdf": "9cbc571f74e4750da57c9678d6c4be88ca71ffa55bb0ea5047c5eda7c152596a",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/preflight-original.pdf": "ed590730763521e13e409764b3e5b6738edb6a6024306947bea5d473bc788e6f",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-page.emf": "a4c8c51fe05d08c19dfef244c1dc8f89ba487c1e8fb628cb5b226dd176dea2da",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-page.emf.pdf": "7f25aca7de25118c4acfac5d8cd278212c894b86f63e01bebe2ada8ec49a18a1",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-pages.ofd": "994b1814e0cc4d5d36f61780bfa4bcdee0742cb60504712feea7031fc26d0a33",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-pages.ofd.pdf": "a9b4665913827e7c0e11f848d0984335ec32ab8337a6272026ffe76cce2043ad",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-pages.oxps": "99b05326332c55fbee246e725b1f3eb9662782eb260e40de6af7299228a4a715",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-pages.oxps.pdf": "7caa1f189fdff13761c0782437de8426bf3ee636de3571e0d3faa8a51b3d8a22",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-pages.xps": "a6885735225f1dae9d46614f38e4d500ac0e3f178270ae9e52f8ce8e6cf14930",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-pages.xps.pdf": "7caa1f189fdff13761c0782437de8426bf3ee636de3571e0d3faa8a51b3d8a22",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-slides.pdf": "d49d93dd5fb6ddbcc7d60ea3b33f11fbb2e9c75a6cfeb9dc7e9f675f3def4086",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-slides.pptx": "72d58df68f126bd3b25fd2de9896029a4a7ebc64fe279cf10b5712c512076764",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/reflow-book.epub": "4d15cc8c6f9e01bf743560f15102495328502280fb37fc4d045783b4698e9dd8",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/shifted-eps.pdf": "1fb95497d362cb2786316345488eaf6d2239bbd810e86e670362fdc69f3031ec",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/shifted-source.eps": "af72988f620c1c77fd2ac9c561766484d7c8f49541c053579ee7dacf87b04c44",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/stroke-adjust-default.eps": "228655e9a049e1f3bb359f208e48b38d101756d474007968170455cd94b48a29",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/stroke-adjust-default.pdf": "783111657906fd4111b02eace8b06fb512bde2255b09f565d4aeb9d6dcb65564",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/stroke-adjust-false.eps": "6f017dbcfe3512616f41521da195f87fad62e07237e6627d71a7e9314ae6cca2",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/stroke-adjust-false.pdf": "8c02d567187b81ef3e0b83673b5b9e23dc7975c129b9d23ca7e899c0ee8da97b",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/table.ods": "b3f037eab89686cf64ed4bbb691bb252466a7ead838f99eda6622a91206b315a",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/table.xlsx": "6fb18886f5356a707c10c71b906fd04d9831af430a61f06bd5767ac3d1a24578",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/table.xml": "dffa65330aa73a2f8588a3ddab6329e517fd83b79a4c00dc3f6a18305c4c9d28",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/vectors-export.svg": "f4f83c100de486d87dc3232c91e40727d122903f3dd8ed0e6e89a222550ce217",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/vectors-roundtrip.pdf": "2328f2a48bf1236f0769a2275219b35f264107369b50fac13bf3fbf37066319a",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/vectors-source.svg": "2704cfae876b7b6ca98e19c7c0876798f09e6a8c2923823f9c5ece69ae3b0475",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/vectors.eps": "0ed32482c3d7934c0c85e8a3ac1d4a71f5078e9ff4a7d26b27eb0d18525e1986",
+    "artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/vectors.pdf": "bac1bf91b2b07d5b089f35553f40feb0a87f4e20cf810639a9f1d303360f5e69"
+  },
+  "retainedLogs": [
+    {
+      "path": "/workspace/scratch/queue-final-restore.log",
+      "sha256": "dd2a2635328282457eeed7c3b873f38081dd5b96b3e28a4427ca2a3613515c3a"
+    },
+    {
+      "path": "/workspace/scratch/queue-clean-checkpoint-build.log",
+      "sha256": "c4bfdee39b700b4ba829224d4bbf4fbed58aa5113dc6275fe3606c29b9d0a2eb"
+    },
+    {
+      "path": "/workspace/scratch/queue-current-api.log",
+      "sha256": "e29b155aa9ae73b00f231378531ed458e2aca2285ac4bdd421255db6b2738b24"
+    },
+    {
+      "path": "/workspace/scratch/queue-current-release-block.log",
+      "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55"
+    },
+    {
+      "path": "/workspace/scratch/queue-schema-spec.log",
+      "sha256": "a29d1179090ce9203d0d0deda8b347e786ec418f9f4707bbd50dc4c20af52147"
+    },
+    {
+      "path": "/workspace/scratch/queue-web-self-test.log",
+      "sha256": "d230f0e780e5bf6a98f78a32b967bf7d1ca9fcb888523e14c48f8669a35e06d0"
+    }
+  ],
+  "sourceFileSha256": {
+    "eng/ContractProjectReference.props": "65233d05129c58b9345b893a98036c9d4ea07eeada7b27cdf8bdc8869c04aa37",
+    "eng/check-api.ps1": "84c7ea3ac91f121a16b5af76536df30b4d971c9a16d37746ed7dc6b37d29acc0",
+    "eng/format-checks/OpenXmlCheck.csproj": "8cf41ad600325fce55fa87ef5b0334d6fe30cc37a3c1f81a90dc8205cb6a919c",
+    "eng/format-checks/Program.cs": "1d8f7f3bb828073807da22ebde64a4a306b16bf5b29b348f09137702ccc8d99e",
+    "eng/format-checks/README.md": "bb88178fd2882c54866c2865ae3eb085da88c4e5bbf1e3fc65e57d6d14a3f9db",
+    "eng/format-checks/epubcheck/pom.xml": "d909adb546c51b659f0335c86cb9866e636cd690d950dc24b8c3c07a4fa18fd2",
+    "eng/format-checks/epubcheck/tool-jars.json": "c189116e0b7bb35556bd1b7fd0f57078958878cda130ee8476f9261614bc647a",
+    "eng/format-checks/ghostxps-reader.json": "7579f76d19c0e6919e90eec0940fff90d4cb318ff5ce134655ef38f98e0c0214",
+    "eng/format-checks/invoice-schema.json": "0cab70691881faa9625125b111d8ba9402e0d397db982095e086c2362f21f69b",
+    "eng/format-checks/ofd-reader/OfdCheck.java": "ff170cab5f995197f70309602021fe6d1413badfd9a5eccebcd109b9aede8d2f",
+    "eng/format-checks/ofd-reader/tool-jars.json": "d08005bd70040c1bef3d9f0721be7be35f5f25acbf1fb79c698ea0b84a0bf565",
+    "eng/format-checks/packages.lock.json": "293bd19df0fd080463d5cdf0faaea4b5f1f7ac336b757c56d12c3c81b991e497",
+    "eng/test-contracts.ps1": "01daccf4382fc43bfe5dc7095a22a4a3f092c47f3638179fa00a4f2a3a8fc0df",
+    "eng/test-epub-validation-boundary.py": "a44e13b9e0f28dd88c2e9c0c555beb5c71b69a981dccf20b2ad614735199dcab",
+    "eng/verify-emf-fixture.py": "127a68f439e54d8cbc40e6c09f2bc8e6c2d4f2ea1133398388fc1fc4969c47de",
+    "eng/verify-eps-fixtures.py": "738167e547a418077f92523536e514e9a3563031671be5c0a78a9d7a287e1d2c",
+    "eng/verify-epub-fixtures.py": "964c1895c0042a7a0629e2012b35d027912c9762cb8c697a9a032843cefde825",
+    "eng/verify-format-fixtures.py": "6698633eab59d35a5bd2cdfffe550a3fc5395c1c0f84665f2f668dcba5574611",
+    "eng/verify-invoice-source-fixture.py": "d786cb6e0add4039eed133c6c49ab966899ef10eacdd4586993cc2b1a86d2717",
+    "eng/verify-ofd-fixture.py": "eaaf1ef3e32faeda69d2f99554c1496280422643d0acb25fd7d56bcf9eb033f0",
+    "eng/verify-preflight-fixture.py": "8a16b8d2338069efcae26b02af3a66b12fabd1e56efb27dae9ae65d27b18451d",
+    "eng/verify-tex-fixture.py": "5992abd31b7d5656a580a3c5096c2a13d45890774308ed9eba8ee922db087921",
+    "eng/verify-xps-fixtures.py": "d617694380ac4bdab2a8c0cd148f1a5d045216706d054293248aaa4bb574d90f",
+    "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs": "334459f875404f4f720a7ff47d4dd36b908789f7d5c2862067957a51199187f3",
+    "examples/Fluent.Pdf.Contract.CSharp/packages.lock.json": "609e23a8593f0fb1e42fc77f5b137eec720e8a39f782b25e463fd7546581d048",
+    "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb": "8061dd83ada7841f652dd2c331fdccf8d91c10bf4ba8d0d4ff13cf489ba887e4",
+    "examples/Fluent.Pdf.Contract.VisualBasic/packages.lock.json": "609e23a8593f0fb1e42fc77f5b137eec720e8a39f782b25e463fd7546581d048",
+    "examples/Fluent.Pdf.WebSample/Components/Report.razor": "0ec2eea099afefef21076c948c449308b0b75b62923312ff68d7f16e9cb7b8d0",
+    "examples/Fluent.Pdf.WebSample/Dockerfile": "bec1907d1dd85650a7987d9cf29159b2679966ff29679a593d64f7d0198c1883",
+    "examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj": "6d15744f86ebe1eb31b965afa084af28b8630545c41643636f3bbd8398cc6dbf",
+    "examples/Fluent.Pdf.WebSample/Program.cs": "fa6fbcfe537a56114a4084ee798111adf364ebf24fef01b3d4b21f302d60db78",
+    "examples/Fluent.Pdf.WebSample/Views/Report.cshtml": "2f31743d9ac7265c71516a0e51a3593046fbf1c22e01522893d857e892462590",
+    "examples/Fluent.Pdf.WebSample/WorkerHttpTransport.cs": "a61107d3c96be78757042b335b69a817e12ad8451f752a34bde7037578785082",
+    "examples/Fluent.Pdf.WebSample/packages.lock.json": "47e10428e50a72219aada4544c11f270b4211fa25aec26efc2550175723e6574",
+    "src/Fluent.Pdf.Formats/Fluent.Pdf.Formats.csproj": "9f3025cdf939e5bf65c2ea5200bd30046ef538638d4c22e24d3f7b0b66e82286",
+    "src/Fluent.Pdf.Formats/FormatIo.cs": "5530a039d240c0807cedd4d3a02f019441726a73e6d543f308c5a73e8d5c48b1",
+    "src/Fluent.Pdf.Formats/FormatPackage.cs": "54585e02fa411028dec0cd27a9c02806dd978d94dca5fe20d55e6969557d3f5a",
+    "src/Fluent.Pdf.Formats/FormatRaster.cs": "f3db8ad8af541b81206149dca91df8f7df0c542113ba6c788763e66341d02f4f",
+    "src/Fluent.Pdf.Formats/FormatVectorData.cs": "396f06413e4beb44b3c6cd2514af013ab8fe46328621a1271063ef6db0369af5",
+    "src/Fluent.Pdf.Formats/PdfConversions.cs": "564bad1a6e9bbc0f780cf2b2bb80acd5893f41a26d0715993444f5945342abe7",
+    "src/Fluent.Pdf.Formats/PdfEbooks.cs": "23fdaf5ad4e1ffefb191c9a144a98c0c80e9a4c4a91555b458ebf8869d3871ef",
+    "src/Fluent.Pdf.Formats/PdfFormatTextOptions.cs": "fb13e557e3416ad5c90519f9bead2153e56bc72e450a04413f9b5ce4ccf26daf",
+    "src/Fluent.Pdf.Formats/PdfFormattingObjects.cs": "d9dc449d4dbd77ced485595bcfdbc7187e9353ffbc7efc95fa027f03944f355f",
+    "src/Fluent.Pdf.Formats/PdfHtmlExport.cs": "861c6b720e96b756a3835044de80d36ee50449e18872b81ccca912556c060f9e",
+    "src/Fluent.Pdf.Formats/PdfMetafiles.cs": "27ada08750d23aba2968f14e8a2bb923b586da7949e98792f7ae59c0751ad91f",
+    "src/Fluent.Pdf.Formats/PdfOfd.cs": "d24ab7e3116352cd3129689deaa78f4edc5ecb286b2cd20558ee5a6e55356d4f",
+    "src/Fluent.Pdf.Formats/PdfPresentations.cs": "99568618b75ecd541c5c1b15c60ec76cee0253d2b8be4e6cabcb145c08bdaca5",
+    "src/Fluent.Pdf.Formats/PdfPrinterLanguages.cs": "ccfac2a66d95ca25ac1bd6dc4db2f17f9a3efaa12b2ecbf91ec29676f8aee95d",
+    "src/Fluent.Pdf.Formats/PdfSpreadsheets.cs": "3665555237b3c2dac3d20a0623c0a9ce2899b092c717fc889e42473acd2334f4",
+    "src/Fluent.Pdf.Formats/PdfStaticEps.Export.cs": "30eb1b924bfeb365ca0e806e6ff2f9fac6c02a77e7e495ed3c1a9f5abf9684b5",
+    "src/Fluent.Pdf.Formats/PdfStaticEps.cs": "e433bab39bf288795e1cceb5b41f637a3b7c50b796f15b7beb0f95e5cde48c09",
+    "src/Fluent.Pdf.Formats/PdfSvg.Export.cs": "f54b1a26949a06ebeede84591c604991e130bcfe576d941ac57009e6af3353d9",
+    "src/Fluent.Pdf.Formats/PdfSvg.cs": "8677503e629a815a678f8ea3644967e9132aaf5345e9b4d7739a629343ce0486",
+    "src/Fluent.Pdf.Formats/PdfTex.cs": "f6a04f9b458b76055180e11daa220cce67d13ee2498eb04f49f69a4ca6daf7f1",
+    "src/Fluent.Pdf.Formats/PdfXps.cs": "a6e81d21f20bc274451d8b4ab8423ade2aebda32a266ef8430f9d3d820aec46d",
+    "src/Fluent.Pdf.Formats/PublicAPI.Shipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Fluent.Pdf.Formats/PublicAPI.Unshipped.txt": "da2a299ffab8a2821487f234eb031a9aaef396ee4797101e91981dff24ae3f39",
+    "src/Fluent.Pdf.Formats/packages.lock.json": "02b6e7778b288cfce28ff172638ef3fa0a3d740e4cf79e97b746b432a325957e",
+    "src/Fluent.Pdf.Html/PdfWebViews.cs": "fd5c6650a54b19921d8705326d9b309bbced7f06aa1018ca223d127f7f53e528",
+    "src/Fluent.Pdf.Html/PublicAPI.Unshipped.txt": "b5bd87e650eb67adba8523f88c3cb6447e200004595650ccc6cacc24858fe0a7",
+    "src/Fluent.Pdf.Rendering/IppPrintProvider.cs": "97b2d558a67bb613a7ce1eadc972a4aad58953dfb300ddcca3ec51b91fe2eedb",
+    "src/Fluent.Pdf.Rendering/PublicAPI.Unshipped.txt": "c2a4e37f12c475945d3212b7db963124134367fa38b4a7686d1c9a722d44fde9",
+    "src/Fluent.Pdf.Workers/AuthenticatedRenderWorker.cs": "c4a202da250eca3fd4891a009975433f6847c4a49ea57dd57ec1a61b58c69179",
+    "src/Fluent.Pdf.Workers/PublicAPI.Unshipped.txt": "4f09ece076a0f312237c37a9c5334a14b9d14258de030218aa4587491448a20c",
+    "src/Fluent.Pdf/Archival/PdfArchival.cs": "a88db1ad3ef5301753939574bb91c280e2fc6739b802162b3d170ba4607ce84a",
+    "src/Fluent.Pdf/Conformance/PdfEngineering.cs": "07e4bdc45f4b58cb1079c67d7ab0466b26444e323a313fde444defcc5e516a7b",
+    "src/Fluent.Pdf/Conformance/PdfProfileContracts.cs": "f35b89b7dce053c2769f1497fee77cea5e27e4d1cd144ed85a096816a0ea3f94",
+    "src/Fluent.Pdf/Conformance/PdfProfileConversions.cs": "53fd5b0a8468bd3f6abfd7760ad777eb3e6d4f6d70a43f554f178c14f8fa2956",
+    "src/Fluent.Pdf/Graphics/PdfGraphicsObjects.cs": "f48c509fcf27da67b7ac6e69edf57d58d3d8703dee917798c0dd5071b41fce79",
+    "src/Fluent.Pdf/Graphics/PdfPath.cs": "45392c4f21606077669e8e7ca2e961b190b0b1489a77788c40631081c6353e5a",
+    "src/Fluent.Pdf/Html/PdfHtmlSource.cs": "e01cf1fa1d46429e4fa4a116f0adc649c861541109fb4d75769012f00a25c121",
+    "src/Fluent.Pdf/Images/PdfImagePng.cs": "7d7e899a8ba9b9b51d3e67ea77ff3b28c8c387f752a7b16ba4f56db643941849",
+    "src/Fluent.Pdf/Images/PdfImages.File.cs": "5208b7ad7efc9eb0c7f5b0bd576241aa41500ce847ba0b897e16837e2bd7c18e",
+    "src/Fluent.Pdf/Images/PdfImages.cs": "0d631d09a6a52dfbc8605465eac192f62d363f1559e9925520730c0d462ec759",
+    "src/Fluent.Pdf/Images/PdfRasterDocuments.cs": "dfea0aad890d6ea17ca09962a827e353d3e233ac114325af2887530ee67f6c38",
+    "src/Fluent.Pdf/Invoices/PdfInvoiceContracts.cs": "64105edd9a529fe481202fe28815b108c0654d23a3a54fccbccc0dd14e36ae0b",
+    "src/Fluent.Pdf/Invoices/PdfInvoiceData.cs": "964a4fd3b5cc46a29447ba4d4fc5f12af7c25a38931a5306fd93a47d823114d5",
+    "src/Fluent.Pdf/Invoices/PdfInvoices.cs": "60171f14d6db89d18183fd7538a76ee88b615014907bc565fccf2a23094de546",
+    "src/Fluent.Pdf/Preflight/PdfPreflight.cs": "2ee473f409ec942f18ca459c3ed1c09acf102e828c524e95e2ad8b71c494e3bd",
+    "src/Fluent.Pdf/Preflight/PdfPreflightContracts.cs": "41217d4bdeecd6b21ea381ef66b8f003f431c60a6ddf125c80ba5889e5ff9667",
+    "src/Fluent.Pdf/Printing/PdfPrinting.cs": "676dc014ad59bc8f9fdd2373b28b8d4c9f34c212946d445d419c52073cb6a040",
+    "src/Fluent.Pdf/Properties/AssemblyInfo.cs": "edffe4fdd7e76c63ba5a1de0c5102d820e1f27b0897a136e5ce715a8725fda73",
+    "src/Fluent.Pdf/Providers/PdfCapability.cs": "1a0b771dd4448c688aa4fd9f757b58365aaea5af9edea2b7b79edd7aac24a792",
+    "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs": "eafa5eb1f3d0331b1cc3800fb175a2773a3d92cf9cefea08134d96a1d4acbbdb",
+    "src/Fluent.Pdf/PublicAPI.Unshipped.txt": "ef69b2e23ae746e2e834075d2d5fc816ecf94300a7af5950fc4d49d81ebf3b1c",
+    "src/Fluent.Pdf/Rendering/PdfRasterExport.cs": "e14936552dcf6ad76b10ea65d9f911e69edfc059b3bfefa003b5533e1c638013",
+    "tests/Fluent.Pdf.Contract.Tests/ConversionMatrixTests.cs": "ec8f644c6a17df3834777979e7fad96957078c65aa6062f7a42cd746dff7b86f",
+    "tests/Fluent.Pdf.Contract.Tests/EbookTests.cs": "32ccfd69c1ce474d1f724e0d66010031f4b0bbf56bb6ea75fc56ae408afa22c0",
+    "tests/Fluent.Pdf.Contract.Tests/EngineeringTests.cs": "de669c48616d0e627ab330d8dd21fb766c16d37311a46863ba3eca4e0ebc57b8",
+    "tests/Fluent.Pdf.Contract.Tests/FormattingObjectsTests.cs": "0e00801400463d1cae6966a51b81f456d877b99c32aaf231e52cf60cfa15cb9b",
+    "tests/Fluent.Pdf.Contract.Tests/HtmlExportTests.cs": "a1e62d83bd6dfbb15da80d0b164f66fe1520685038cdb2cbe9092cbbdf68a6ef",
+    "tests/Fluent.Pdf.Contract.Tests/InvoiceTests.cs": "ad5369978c9efc27e9bb65520168224de61f0689cf860bfe0c83570f167d0b42",
+    "tests/Fluent.Pdf.Contract.Tests/MetafileTests.cs": "c0c828358846cd6bb3a51d67b18efd68283ea9478c35964507a805cf77d57837",
+    "tests/Fluent.Pdf.Contract.Tests/OfdTests.cs": "d18a82227e1f1b1f036c7ad0573b39b656346ac604241a778a73bad66096e37d",
+    "tests/Fluent.Pdf.Contract.Tests/PreflightTests.cs": "bc0077968efd33e6f00a7a57162ddfe8c785e08a103f9de876beaefc30dc3169",
+    "tests/Fluent.Pdf.Contract.Tests/PresentationConversionTests.cs": "fedb29735e51b45012c21d3822a6e1ce36f0557139e424eb41e94bbdd98fac4f",
+    "tests/Fluent.Pdf.Contract.Tests/PrinterLanguageTests.cs": "09c728333717c2eb6214a87cc80d8c2e505a17601053f1e0c11a1b27c6436a2a",
+    "tests/Fluent.Pdf.Contract.Tests/PrintingTests.cs": "15f0084e66d26868aca9770e15d1ebe476229da2ac0dec6cf420872ac3de4b9f",
+    "tests/Fluent.Pdf.Contract.Tests/ProfileConversionTests.cs": "dee04730db2bd90c28268d20c830548f3a45529a54a4461933f377a0995d8224",
+    "tests/Fluent.Pdf.Contract.Tests/RasterImportTests.cs": "440575c01853f2612010705166be1e8c7d3bf6a3d48766977e61385f8a7e8946",
+    "tests/Fluent.Pdf.Contract.Tests/RenderServiceTests.cs": "6db356f882c9d6a4c9c21edd5734c57e33afd677ae3b3fc6eaac4582b2c90d50",
+    "tests/Fluent.Pdf.Contract.Tests/RuntimeIdentityTests.cs": "d1e9456e10ad7bd22fccc7eecd97333e1fb4cb2474bdd8e788cd42a6b4560a82",
+    "tests/Fluent.Pdf.Contract.Tests/SpreadsheetTests.cs": "b4ee67f5db3d0feb3626b7eec5c5b49c808ead8fb3ef9e2ac8ae4fefd0be0ac3",
+    "tests/Fluent.Pdf.Contract.Tests/SvgTests.cs": "14ca00790df1ef08648da7d79225d84c4a2e42d833a85c11b8b83732f2852be3",
+    "tests/Fluent.Pdf.Contract.Tests/TexTests.cs": "b72eb8cd7b335622e40ca5672a8e2bb1a6eb0fd7018f80901eec27926bc4ced2",
+    "tests/Fluent.Pdf.Contract.Tests/WebViewTests.cs": "8e6532a239c0d669c3737bc7d28f090d4792c91a043d9ae984e07f298e004d89",
+    "tests/Fluent.Pdf.Contract.Tests/XpsTests.cs": "973e4e411519ebd2d561e2f7027ed0911915ccd563bc16fe73edadf64f106933",
+    "tests/Fluent.Pdf.Contract.Tests/packages.lock.json": "3d856c555edb000b5e72e404a9511bfc22704caa23db1b0cfd2d91fba18f97a3",
+    "Directory.Build.props": "2c89a7a30b5fcebb37efa90170304bc69622a9b69fd063c4b6fe4940f315aba3",
+    "global.json": "b54f95ccc7a0a2199f7f2ce71cef88c853e633b5f6d0c492095cd16bbf4d8506",
+    "Fluent.Pdf.slnx": "75ba68f9dd14b7c8a73bbb94ceec0512231fb74824c87acc43814b6e18ef1780",
+    ".editorconfig": "06cf1d23361fb6b51687a7f82bf94ad3ecb7dc5f1f0204fa58e5be3f0830f310"
+  },
+  "pendingByRequirement": {
+    "FP-043": [
+      "Complete Windows native print-system adapters and controlled CUPS/IPP/virtual/physical-printer integration",
+      "Actual minimum/runtime/RID, transport/authentication/permission and exact final-package production qualification"
+    ],
+    "FP-048": [
+      "Complete actual ASPX/WebForms and XAML host adapters and hosted concurrency/legacy/UI qualification",
+      "Actual browser fidelity, minimum/runtime/RID and exact final-package production qualification"
+    ],
+    "FP-049": [
+      "Complete general browser/native transports and actual protected process/service/container/serverless host integration",
+      "Real authentication/TLS/tenant isolation, rootless/read-only/restart, engine/RID/minimum-runtime and exact final-package production qualification"
+    ],
+    "FP-051": [
+      "Complete actual BMP/GIF/TIFF/WebP/HEIF/HEIC and other required codec profiles, animation/precision/color fidelity and licensing/RID decisions",
+      "Independent visual/semantic, actual minimum/runtime/host and exact final-package production qualification"
+    ],
+    "FP-052": [
+      "Complete SVG/CSS/path/text/image/paint and PDF-to-SVG reconstruction/export profiles",
+      "Full independent standards/fidelity corpus, actual minimum/runtime/provider and exact final-package production qualification"
+    ],
+    "FP-054": [
+      "Binary XLS and complete sheet/chart/print-area fidelity",
+      "Full independent format, host and package qualification"
+    ],
+    "FP-055": [
+      "Editable object, font, master, animation and full presentation reconstruction",
+      "Independent complete fidelity, host and package qualification"
+    ],
+    "FP-056": [
+      "Semantic headings/tables/navigation, font/CSS reconstruction and controlled asset callbacks",
+      "Actual browser/accessibility, fidelity, host and package qualification"
+    ],
+    "FP-057": [
+      "Fixed-layout input, complete fonts/RTL/reader/semantic reconstruction and book compiler coverage",
+      "Full independent fidelity, host and package qualification"
+    ],
+    "FP-058": [
+      "Complete PS/EPS/PCL command, font/resource and engine/version coverage",
+      "Actual isolated interpreter security, host and package qualification"
+    ],
+    "FP-059": [
+      "Full glyph/vector/resource-dictionary, font obfuscation, color and print-ticket profiles",
+      "Independent complete format, host and package qualification"
+    ],
+    "FP-060": [
+      "Complete scientific/typesetting/font/package and Unicode/math reconstruction profiles",
+      "Actual malicious-source isolated-host and production qualification"
+    ],
+    "FP-061": [
+      "Complete vector/text/raster record and CGM/WMF/EMF+ profiles",
+      "Actual record corpus OS/adapter and production qualification"
+    ],
+    "FP-062": [
+      "Complete standards-oriented FO/XSLT adapter formatting/resource/language profiles",
+      "Actual layout/security corpus supported-host/package and production qualification"
+    ],
+    "FP-063": [
+      "Complete OFD text/font/vector metadata extension and signature preservation/verification profiles",
+      "Actual independent corpus OS/host/package and production qualification"
+    ],
+    "FP-065": [
+      "Complete format/direction load/save adapter matrix options progress and host capability coverage",
+      "Actual end-to-end application corpus supported-host/package and production qualification"
+    ],
+    "FP-068": [
+      "Complete PDF/X conversion repair color/transparency/font/bleed and separation profiles",
+      "Actual complete independent prepress validators corpus supported-host/package and production qualification"
+    ],
+    "FP-069": [
+      "Complete PDF/E producer/validator and semantic preservation across rewrites",
+      "Actual U3D/PRC/media/geospatial corpus supported-host/package and production qualification"
+    ],
+    "FP-070": [
+      "Complete invoice version/profile/domain schema business and tax/rounding coverage with real producer/validators",
+      "Actual independent invoice/PDF-A corpus supported-host/package and production qualification"
+    ],
+    "FP-071": [
+      "Complete capability/conformance aggregation and font/image/color/security repair profiles",
+      "Actual independent validators fault corpus semantic preservation supported-host/package and production qualification"
+    ]
+  },
+  "sourceProfilesImplemented": 20,
+  "newQueueCasesPerRuntime": 142,
+  "productionQualified": false,
+  "exactFinalPackagesProduced": false,
+  "trackingIssuesCompleted": false,
+  "unavailableQualification": [
+    "The current host cannot supply the required native sandbox: full run retains68 Native.SandboxUnavailable failures at stage9/status38. Supported-host CI remains required.",
+    "Actual minimum .NET Framework4.7.2 bitness lanes, all required OS/runtime/RID/provider/corpus/endurance/security gates and exact final-package consumers remain mandatory.",
+    "Printing/browser/service/typesetter/metafile/profile/invoice interfaces and boundary fixtures are not complete engine/host/standard qualification.",
+    "The invoice schema regression uses an explicitly pinned older MINIMUM bundle, not complete requested-edition or PDF/A/business-rule validation.",
+    "Initial fractional XPS reader failures and initial invoice-schema rejection are retained with their original input/report hashes."
+  ],
+  "historicalObservations": [
+    {
+      "path": "artifacts/contracts/queue-61-80/xps/fractional-investigation/observations.json",
+      "sha256": "9e6f7522f0a51c2dc3fd87dc750fcd29dd635221f69c1dea77ac17c799adcbf5"
+    },
+    {
+      "path": "artifacts/contracts/queue-61-80/final/independent/invoice-schema-initial.json",
+      "sha256": "fb1518403f7b0bfb38347a0624854ceea73295ef544e28a75b3ded84275ff633"
+    }
+  ],
+  "commands": {
+    "lockedRestore": "dotnet restore Fluent.Pdf.slnx --locked-mode --disable-parallel -m:1",
+    "cleanBuild": "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "managedRegressions": [
+      "FLUENT_PDF_EXPECTED_ARCH=X64 dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net8.0 --no-build --no-restore --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=corrected-managed-net8.trx' --results-directory artifacts/contracts/queue-61-80/final/corrected-managed-net8",
+      "FLUENT_PDF_EXPECTED_ARCH=X64 dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net10.0 --no-build --no-restore --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=corrected-managed-net10.trx' --results-directory artifacts/contracts/queue-61-80/final/corrected-managed-net10",
+      "FLUENT_PDF_EXPECTED_ARCH=X64 dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net10.0 --no-restore -m:1 -p:UseNetStandardAssembly=true -p:UseSharedCompilation=false --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=corrected-managed-netstandard-fallback.trx' --results-directory artifacts/contracts/queue-61-80/final/corrected-managed-netstandard-fallback"
+    ],
+    "api": "pwsh -NoProfile -File eng/check-api.ps1",
+    "specification": "pwsh -NoProfile -File eng/validate-spec.ps1",
+    "releaseGuard": "pwsh -NoProfile -File eng/test-release-block.ps1",
+    "hostedWebBoundary": "dotnet run --project examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj -c Release --no-build --no-restore -- --self-test",
+    "independent": [
+      "PYTHONPATH=/workspace/.tools/format-validators python3 -O eng/verify-format-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/formats.json",
+      "python3 -O eng/verify-eps-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/eps",
+      "python3 -O eng/verify-xps-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/xps --reader /workspace/.tools/ghostxps-10.05.1-build/bin/gxps",
+      "python3 -O eng/verify-tex-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/tex",
+      "python3 -O eng/verify-emf-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/emf",
+      "python3 -O eng/verify-ofd-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/ofd --lib-directory /workspace/.tools/ofd-reader-2.3.7/lib",
+      "python3 -O eng/verify-epub-fixtures.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/epub --lib-directory /workspace/.tools/epubcheck-5.3.0/lib",
+      "python3 -O eng/test-epub-validation-boundary.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/epub-negative --lib-directory /workspace/.tools/epubcheck-5.3.0/lib",
+      "python3 -O eng/verify-invoice-source-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/invoices.json --schema-directory /workspace/.tools/invoice-validation/older-minimum-schema",
+      "python3 -O eng/verify-preflight-fixture.py artifacts/contracts/queue-61-80/final/corrected-net10-fixtures artifacts/contracts/queue-61-80/final/corrected-independent/preflight.json",
+      "dotnet build eng/format-checks/OpenXmlCheck.csproj --no-restore -p:UseSharedCompilation=false",
+      "dotnet run --project eng/format-checks/OpenXmlCheck.csproj --no-build --no-restore -- artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/table.xlsx artifacts/contracts/queue-61-80/final/corrected-independent/openxml-xlsx.json",
+      "dotnet run --project eng/format-checks/OpenXmlCheck.csproj --no-build --no-restore -- artifacts/contracts/queue-61-80/final/corrected-net10-fixtures/format-fixtures/raster-slides.pptx artifacts/contracts/queue-61-80/final/corrected-independent/openxml-pptx.json"
+    ]
+  }
+}

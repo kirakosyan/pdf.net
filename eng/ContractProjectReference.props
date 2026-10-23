@@ -45,5 +45,9 @@
       <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
       <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
     </ProjectReference>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Fluent.Pdf.Formats/Fluent.Pdf.Formats.csproj">
+      <SetTargetFramework Condition="'$(UseNetStandardAssembly)' == 'true'">TargetFramework=netstandard2.0</SetTargetFramework>
+      <SkipGetTargetFrameworkProperties Condition="'$(UseNetStandardAssembly)' == 'true'">true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
   </ItemGroup>
 </Project>

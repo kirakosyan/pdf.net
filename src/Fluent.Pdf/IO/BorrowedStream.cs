@@ -8,10 +8,10 @@ internal sealed class BorrowedStream : Stream
     private readonly bool _reading;
     private readonly PdfOperationContext _context;
     private readonly long _origin;
-    private readonly PdfResourceKind _inputResource;
+    private readonly PdfResourceKind? _inputResource;
     private bool _expired;
 
-    internal BorrowedStream(Stream inner, bool reading, PdfOperationContext context, PdfResourceKind inputResource = PdfResourceKind.InputBytes)
+    internal BorrowedStream(Stream inner, bool reading, PdfOperationContext context, PdfResourceKind? inputResource = PdfResourceKind.InputBytes)
     {
         _inner = inner;
         _reading = reading;
@@ -20,10 +20,10 @@ internal sealed class BorrowedStream : Stream
         context.Checkpoint();
         _origin = inner.CanSeek ? inner.Position : 0;
         if (_origin < 0) throw new IOException("The stream returned an invalid position.");
-        if (reading && inner.CanSeek)
+        if (reading && inner.CanSeek && inputResource.HasValue)
         {
             long available = Math.Max(0, inner.Length - _origin);
-            if (available > context.Policy.Limits.GetLimit(inputResource)) context.Consume(inputResource, available);
+            if (available > context.Policy.Limits.GetLimit(inputResource.Value)) context.Consume(inputResource.Value, available);
         }
     }
 
@@ -51,7 +51,12 @@ internal sealed class BorrowedStream : Stream
         EnsureActive();
         if (!_reading) throw new NotSupportedException("The lease is write-only.");
         ValidateBuffer(buffer, offset, count);
-        return _context.ReadBounded(_inner, buffer, offset, count, _inputResource);
+        if (_inputResource.HasValue)
+            return _context.ReadBounded(_inner, buffer, offset, count, _inputResource.Value);
+        // Only internal, already captured immutable storage may use an uncharged read view.
+        int read = _inner.Read(buffer, offset, count);
+        _context.Checkpoint();
+        return read;
     }
 
     public override void Write(byte[] buffer, int offset, int count)

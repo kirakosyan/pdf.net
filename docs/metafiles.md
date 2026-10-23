@@ -1,0 +1,9 @@
+# Metafile source profiles
+
+`WriteRasterEmf` emits an original EMF1.0 containing exactly HEADER, SRCCOPY STRETCHDIBITS and EOF. The caller selects a whole page, explicit opaque matte, DPI and renderer. The24-bit uncompressed bottom-up bitmap retains rendered samples. Physical frames use0.01 mm units; dimensions requiring quantization report `Metafile.GeometryQuantized` and need explicit permissive authority. Output is staged before caller writes. Raster output is explicit and does not claim editable vector/text preservation.
+
+`ImportRasterEmf` implements this same closed record profile in managed code on all library targets. It checks exact header/record count, geometry, pixel offsets, compression, raster operation and complete extents before allocating/decoding. Unknown records, comments/EMF+, text, GDI objects/transforms and malformed extents reject. It never executes GDI or loads ambient fonts. Source and output, pixel allocations and reconstruction share operation budgets/cancellation; streams remain caller-owned.
+
+Broader CGM/WMF/EMF/EMF+ import uses only an explicitly supplied `IPdfIsolatedMetafileConverter`. Its pinned configuration owns exact version/encoding/record/font/OS support; missing/unsupported platforms fail before input capture. Full converters must preserve supported vector geometry and report unsupported records/resources, run offline under separately qualified isolation and expire stream leases. No converter/Windows COM/GDI+ dependency is included or discovered automatically.
+
+Full vector/text/raster record corpus, CGM/WMF/EMF+ managed/adapter implementations and Windows/Linux/macOS/production qualification remain mandatory for FP-061, which stays Planned. The controlled original EMF24 fixture is independently opened/rendered with the installed Inkscape analysis tool; this does not qualify arbitrary metafiles or production packages.

@@ -1,4 +1,12 @@
 #nullable enable
+Fluent.Pdf.Rendering.IPdfIppTransport
+Fluent.Pdf.Rendering.IPdfIppTransport.Exchange(System.Uri! printer, System.IO.Stream! request, System.IO.Stream! response, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Rendering.IppPrintProvider
+Fluent.Pdf.Rendering.IppPrintProvider.Cancel(string! printer, int jobId, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPrintJob!
+Fluent.Pdf.Rendering.IppPrintProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
+Fluent.Pdf.Rendering.IppPrintProvider.GetStatus(string! printer, int jobId, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPrintJob!
+Fluent.Pdf.Rendering.IppPrintProvider.IppPrintProvider(Fluent.Pdf.Rendering.IPdfIppTransport! transport) -> void
+Fluent.Pdf.Rendering.IppPrintProvider.Submit(System.IO.Stream! pdf, int pageCount, Fluent.Pdf.PdfPrintOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfPrintJob!
 Fluent.Pdf.Rendering.IsolatedPdfRenderer
 Fluent.Pdf.Rendering.IsolatedPdfRenderer.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.Rendering.IsolatedPdfRenderer.IsolatedPdfRenderer(Fluent.Pdf.Workers.NativeWorkerOptions! worker) -> void

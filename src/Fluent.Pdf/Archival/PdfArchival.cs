@@ -118,7 +118,7 @@ public static partial class PdfArchival
         return new(validated, report);
     }
 
-    private static PdfArchivalValidation ValidateCore(PdfByteStore bytes, PdfArchivalProfile profile, IPdfArchivalValidator validator, PdfOperationContext context)
+    internal static PdfArchivalValidation ValidateCore(PdfByteStore bytes, PdfArchivalProfile profile, IPdfArchivalValidator validator, PdfOperationContext context)
     {
         string digest = Digest(bytes, context);
         using var raw = bytes.Open(0, bytes.Length);

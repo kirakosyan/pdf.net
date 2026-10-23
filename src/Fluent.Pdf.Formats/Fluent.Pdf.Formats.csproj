@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFrameworks>net472;netstandard2.0;net8.0;net10.0</TargetFrameworks><AssemblyName>Fluent.Pdf.Formats</AssemblyName><Version>1.0.0</Version><GenerateDocumentationFile>true</GenerateDocumentationFile><IsPackable>false</IsPackable></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Fluent.Pdf/Fluent.Pdf.csproj" /><PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.3.4" PrivateAssets="all" /><AdditionalFiles Include="PublicAPI.Shipped.txt" /><AdditionalFiles Include="PublicAPI.Unshipped.txt" /></ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'"><PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" /><Reference Include="System.IO.Compression" /><Reference Include="System.IO.Compression.FileSystem" /></ItemGroup>
+  <Target Name="RequireProductionQualification" BeforeTargets="GenerateNuspec">
+    <Exec Command="pwsh -NoProfile -File &quot;$(MSBuildThisFileDirectory)../../eng/assert-production-ready.ps1&quot; -Stage BeforePack -EvidenceDirectory &quot;$(FluentPdfEvidenceDirectory)&quot;" />
+  </Target>
+</Project>
