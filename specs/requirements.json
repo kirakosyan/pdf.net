@@ -3597,7 +3597,17 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/command-line.md",
+        "scope": "Optional .NET8/.NET10 process CLI using public Core/Formats APIs, strict closed configuration, separate binary/diagnostic channels, stable exits, protected password-file admission, bounded scheduling and atomic outputs/durable batch results",
+        "productionQualified": false,
+        "remaining": [
+          "Complete provider/conversion/remediation workflows and legacy host bindings",
+          "Full console/signal/filesystem/backpressure/crash/concurrency/endurance/security/fuzz/performance and corpus qualification",
+          "Exact final application/packages and fresh package-only consumers"
+        ]
+      }
     },
     {
       "id": "FP-084",

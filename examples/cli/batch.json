@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "parallelism": 2,
+  "maximumInputBytes": 16777216,
+  "maximumOutputBytes": 16777216,
+  "timeoutMilliseconds": 30000,
+  "report": "batch-result.json",
+  "jobs": [
+    { "id": "capture", "operation": "text", "input": "input.pdf", "output": "captured.txt", "view": "raw" },
+    { "id": "inspection", "operation": "preflight", "input": "input.pdf", "output": "preflight.json" }
+  ]
+}
