@@ -319,7 +319,7 @@ public sealed class RetrievalTests
             Assert.True(chunk.Utf8Bytes <= bytes);
             Assert.False(chunk.Text.EndsWith("\r", StringComparison.Ordinal));
             Assert.False(chunk.Text.StartsWith("\n", StringComparison.Ordinal));
-            Assert.DoesNotContain("\ufffd", chunk.Text);
+            Assert.Equal(-1, chunk.Text.IndexOf("\ufffd", StringComparison.Ordinal));
         });
         Save("unicode-" + bytes, document, capture, null, null);
     }
