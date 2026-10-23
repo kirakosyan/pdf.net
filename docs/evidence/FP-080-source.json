@@ -513,5 +513,81 @@
     "/workspace/.tools/intelligence-validators/bin/python -O eng/verify-retrieval-fixtures.py artifacts/contracts/remaining/retrieval/fixtures-net10 artifacts/contracts/remaining/retrieval/clean-independent",
     "pwsh -NoProfile -File eng/validate-spec.ps1",
     "pwsh -NoProfile -File eng/test-release-block.ps1"
-  ]
+  ],
+  "subsequentSourceHostObservation": {
+    "initial": {
+      "sourceCommit": "b7046b37eca7d63f902a9defec11bc278db53dd0",
+      "workflowRun": 39972996487,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39972996487",
+      "windowsJob": 120480276189,
+      "conclusion": "failure",
+      "successfulOtherHosts": [
+        "linux-x64",
+        "linux-arm64",
+        "osx-x64",
+        "osx-arm64",
+        "win-arm64"
+      ],
+      "windowsPassedModernSummaries": [
+        "2026-10-23T14:56:07.4801097Z Passed!  - Failed:     0, Passed:  1722, Skipped:     0, Total:  1722, Duration: 1 m 34 s - Fluent.Pdf.Contract.Tests.dll (net8.0)",
+        "2026-10-23T14:57:50.3487895Z Passed!  - Failed:     0, Passed:  1722, Skipped:     0, Total:  1722, Duration: 1 m 39 s - Fluent.Pdf.Contract.Tests.dll (net10.0)"
+      ],
+      "failure": "Five Unicode boundary assertions failed in current Framework x64 because the assertion's culture-sensitive replacement-character substring comparison matched even ASCII text; raw captured strings and exact concatenation assertions were correct.",
+      "correctiveTestCommit": "b32c87eeffc8140702170568c7195df03535ca49",
+      "correction": "Use explicit StringComparison.Ordinal for replacement-character absence. No chunker or embedding algorithm changed.",
+      "productionQualified": false
+    },
+    "corrected": {
+      "workflowHeadCommit": "b32c87eeffc8140702170568c7195df03535ca49",
+      "workflowRun": 39977908629,
+      "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39977908629",
+      "jobs": [
+        {
+          "id": 120497247904,
+          "name": "Contracts (win-arm64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120497248308,
+          "name": "Contracts (win-x64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120497248313,
+          "name": "Contracts (linux-arm64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120497248436,
+          "name": "Contracts (linux-x64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120497248476,
+          "name": "Contracts (osx-arm64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120497248555,
+          "name": "Contracts (osx-x64)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "windowsObservedTestSummaries": [
+        "2026-10-23T15:30:09.2645199Z Passed!  - Failed:     0, Passed:  1722, Skipped:     0, Total:  1722, Duration: 1 m 41 s - Fluent.Pdf.Contract.Tests.dll (net8.0)",
+        "2026-10-23T15:32:01.9166776Z Passed!  - Failed:     0, Passed:  1722, Skipped:     0, Total:  1722, Duration: 1 m 49 s - Fluent.Pdf.Contract.Tests.dll (net10.0)",
+        "2026-10-23T15:34:15.3708057Z Passed!  - Failed:     0, Passed:  1722, Skipped:     0, Total:  1722, Duration: 2 m 6 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+        "2026-10-23T15:36:19.5257161Z Passed!  - Failed:     0, Passed:  1722, Skipped:     0, Total:  1722, Duration: 1 m 53 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+        "2026-10-23T15:38:19.6933469Z Passed!  - Failed:     0, Passed:  1722, Skipped:     0, Total:  1722, Duration: 1 m 39 s - Fluent.Pdf.Contract.Tests.dll (net10.0)"
+      ],
+      "productionQualified": false,
+      "scope": "All six actual source hosts passed after the ordinal test correction; Windows observed1722 cases per modern/current Framework x64/current Framework x86/fallback lane. Minimum Framework and final packages remain unqualified."
+    }
+  }
 }
