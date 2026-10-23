@@ -3157,7 +3157,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-073-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3172,7 +3173,8 @@
           "Broader encrypted/progressive editing/rendering integration and representative corpus coverage",
           "Actual authenticated transport/security/concurrency/endurance/first-page latency qualification",
           "All actual runtime/RID/minimum Framework and exact final-package qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-073-source.json"
       }
     },
     {

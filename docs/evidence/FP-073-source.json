@@ -1,0 +1,596 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-073",
+  "issue": 82,
+  "sourceCommit": "49ac99b3c2a207e8af391a2ca43e04b9478d5c63",
+  "commitBinding": "Source, runtime, API and controlled reader evidence was recorded from this clean code checkpoint. Later evidence/docs changes retain these code hashes.",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": ".gitattributes",
+      "sha256": "0a6600ea18b6f76538f39bf5b00f4d713ed46523fdb0d78c16abcca935eb9440",
+      "bytes": 73
+    },
+    {
+      "path": "eng/generate-progressive-fixtures.py",
+      "sha256": "7fdac5221e43f4ed7cda87debce6b1089ca9716809acf918dd791d887dab4bff",
+      "bytes": 1304
+    },
+    {
+      "path": "eng/verify-progressive-fixtures.py",
+      "sha256": "5a5db5b65562453a7cc1906952b3c478158e4b5e251e3336ee37c50b44ed9471",
+      "bytes": 4000
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "78170ee683c411c57b01c80deadb71307d5437b5f49a49e1614aea63f646e476",
+      "bytes": 30910
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "cf9b9a4a5defe84cf8f347eb1730131206bf1dc21d341d0a907c6c12210dc3dd",
+      "bytes": 36107
+    },
+    {
+      "path": "src/Fluent.Pdf/Progressive/PdfLinearization.cs",
+      "sha256": "9e47e196261ed8e74e6f24018ce7b2a8beb6227ada9dd7de09575b47d370bb53",
+      "bytes": 14282
+    },
+    {
+      "path": "src/Fluent.Pdf/Progressive/PdfLinearizationContracts.cs",
+      "sha256": "9744bcfa981337d60d73d7884364a1d85edf6e83a4a0649227fb671019045aa4",
+      "bytes": 6464
+    },
+    {
+      "path": "src/Fluent.Pdf/Progressive/PdfProgressiveDocument.cs",
+      "sha256": "c517b0315f0aff737dfbbec93ad23562b76ca99314cdfc0f2265b5e8970776c3",
+      "bytes": 16011
+    },
+    {
+      "path": "src/Fluent.Pdf/Progressive/PdfRangeSource.cs",
+      "sha256": "d2ba1bc00a2bd0df3521c45dbcf0001c47be017d70a973501ad753319a27257f",
+      "bytes": 5214
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "46c548dda7244e333b568911885aca938da1bde9e4d0d3a6fde24b502b2ca8d2",
+      "bytes": 333501
+    },
+    {
+      "path": "src/Fluent.Pdf/Syntax/PdfByteStore.cs",
+      "sha256": "1f981f11ee8c38821fdfa5c551d66bc734eec544622f55857524728aed045ffc",
+      "bytes": 6611
+    },
+    {
+      "path": "src/Fluent.Pdf/Syntax/PdfSyntaxDocument.cs",
+      "sha256": "10fbe1414db66362f3ccbce9f60fc245f38205b66f1fd87db487e83ff9a78aa3",
+      "bytes": 8067
+    },
+    {
+      "path": "src/Fluent.Pdf/Syntax/PdfSyntaxReader.cs",
+      "sha256": "cac7b3ef82a5495a1b152b691122319ef74148bff824bbd06770ff09148cba37",
+      "bytes": 30348
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/Fixtures/Progressive/linearized.pdf",
+      "sha256": "5df8a76c6c48e8a4c9c2920a0e0e48718c07cf794707c6a4f61422e1fb899cf0",
+      "bytes": 1522
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/Fixtures/Progressive/original.pdf",
+      "sha256": "4e9d8c4c534fff92663e14ac73af910f83c86ec6f970780b2128fc18e493073f",
+      "bytes": 1005
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj",
+      "sha256": "327fdcc922ac229a5ee756edc99487e5af245f3cb76a4c617feb24439f7d0ec3",
+      "bytes": 1449
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ProgressiveHttpTests.cs",
+      "sha256": "571c7be6d8e9dd9ef83ec1b00e8d531bfad3f9ef529210fb65d23c0c3a9a5ae2",
+      "bytes": 7854
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ProgressiveTests.cs",
+      "sha256": "65dbbe912eb819f10dcf96e55f13e0a23b49cf17f913ff0d92bd58d98ff7450a",
+      "bytes": 20277
+    }
+  ],
+  "fourTargetBuild": {
+    "path": "/workspace/scratch/progressive-clean-four-target-build.log",
+    "sha256": "1e6778be0444f69062e2836e42c2ab8a22e63b5b099a55099d8bc23e47994710",
+    "bytes": 7694
+  },
+  "managedLanes": [
+    {
+      "profile": "net8",
+      "counters": {
+        "total": "1575",
+        "executed": "1575",
+        "passed": "1575",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 18,
+      "report": {
+        "path": "artifacts/contracts/remaining/progressive/verified-net8/verified-net8.trx",
+        "sha256": "96c1f35b8bdf1faeaa00dd9e3884596d38ed1d9b72c888489cee2cdca66a46c5",
+        "bytes": 2297169
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v8.0\nActual runtime: .NET 8.0.32\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "controlledFirstPageObservation": "Controlled first-page observation: sourceBytes=600785; fetchedBytes=1745; ranges=2; elapsedMilliseconds=0.2333; productionLatencyQualified=false",
+      "log": {
+        "path": "/workspace/scratch/progressive-verified-net8.log",
+        "sha256": "f484ec11afe7696dab879f9d4013cd794056db7d2276750b3e17e257b400a7f3",
+        "bytes": 454
+      }
+    },
+    {
+      "profile": "net10",
+      "counters": {
+        "total": "1575",
+        "executed": "1575",
+        "passed": "1575",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 18,
+      "report": {
+        "path": "artifacts/contracts/remaining/progressive/verified-net10/verified-net10.trx",
+        "sha256": "c5b14e3d17ca6df93250c4dcf27582db5e9d86e54006c13f548923ebb04e13d8",
+        "bytes": 2300323
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "controlledFirstPageObservation": "Controlled first-page observation: sourceBytes=600785; fetchedBytes=1745; ranges=2; elapsedMilliseconds=0.7586; productionLatencyQualified=false",
+      "log": {
+        "path": "/workspace/scratch/progressive-verified-net10.log",
+        "sha256": "2cb23a6a243f35cde4b9f8238266dda922fb6243ab4687a340f46bec43d513c2",
+        "bytes": 459
+      }
+    },
+    {
+      "profile": "netstandard",
+      "counters": {
+        "total": "1575",
+        "executed": "1575",
+        "passed": "1575",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 18,
+      "report": {
+        "path": "artifacts/contracts/remaining/progressive/verified-netstandard/verified-netstandard.trx",
+        "sha256": "a9080d54e06c5397ce7acfc89ad5bc24ce8b779dd9cefbd1fb0a811fc36e5149",
+        "bytes": 2300325
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETStandard,Version=v2.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "controlledFirstPageObservation": "Controlled first-page observation: sourceBytes=600785; fetchedBytes=1745; ranges=2; elapsedMilliseconds=0.2056; productionLatencyQualified=false",
+      "log": {
+        "path": "/workspace/scratch/progressive-verified-netstandard.log",
+        "sha256": "045d12665ad0fdee5a41864d8f984c5c3ff51b35b7d519675fa849cb77829e1f",
+        "bytes": 2390
+      }
+    }
+  ],
+  "localNativeLimit": "Five native test classes were explicitly filtered because this container lacks the required Landlock sandbox. This does not qualify or waive those required production lanes.",
+  "initialUnprovisionedRuns": [
+    {
+      "profile": "net8",
+      "counters": {
+        "total": "1575",
+        "executed": "1575",
+        "passed": "1555",
+        "failed": "20",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "report": {
+        "path": "artifacts/contracts/remaining/progressive/clean-net8/clean-net8.trx",
+        "sha256": "3017ddb0706aeb7a3a221f10546c9ec9a8dd15addccc77fecc28c93f6909829f",
+        "bytes": 2402868
+      },
+      "reason": "The new worktree initially lacked the pinned archival validator. The verified prerequisite was provisioned and all1575 selected cases reran on unchanged source."
+    },
+    {
+      "profile": "net10",
+      "counters": {
+        "total": "1575",
+        "executed": "1575",
+        "passed": "1555",
+        "failed": "20",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "report": {
+        "path": "artifacts/contracts/remaining/progressive/clean-net10/clean-net10.trx",
+        "sha256": "f3ce9a75e74995c323f1786996b5df9c8ea76127aaf2c30a949e617b748bfcb0",
+        "bytes": 2407182
+      },
+      "reason": "The new worktree initially lacked the pinned archival validator. The verified prerequisite was provisioned and all1575 selected cases reran on unchanged source."
+    }
+  ],
+  "provisioning": {
+    "command": "pwsh -NoProfile -File eng/build-archival-fixture.ps1",
+    "catalog": {
+      "path": "artifacts/contracts/archival/engine.json",
+      "sha256": "c1125bd64cc70aabea4478e329be825f0d19eb9bea4386e0787fe56926bc8d1a",
+      "bytes": 598
+    },
+    "log": {
+      "path": "/workspace/scratch/progressive-archival-provision.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "apiComparisons": {
+    "passed": 36,
+    "report": {
+      "path": "artifacts/contracts/remaining/progressive/api/comparisons.json",
+      "sha256": "401e2883808af6cc005d487639868c60e3e60186e99d8eec43fd5ddc2a3606f9",
+      "bytes": 9693
+    },
+    "binaryBindings": [
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net472",
+        "leftSha256": "780890d536c8b79af3bb81957dfa9cfc992b9e68345f818fc2e27c0c499a67d0",
+        "rightSha256": "cffee8ad99c6994bdb875e5d3412888e891ff244c26c0d579a1877b4ca8ca6f6",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net8.0",
+        "leftSha256": "780890d536c8b79af3bb81957dfa9cfc992b9e68345f818fc2e27c0c499a67d0",
+        "rightSha256": "d6afc428c7e834eb9042fee49dc5e3eab574a96922a1141f5d88569453ce89d2",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net10.0",
+        "leftSha256": "780890d536c8b79af3bb81957dfa9cfc992b9e68345f818fc2e27c0c499a67d0",
+        "rightSha256": "974ceb340937476a8e165b3ee326ec60913f52d79955aaa2def1f7313d7eeaa3",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net472",
+        "leftSha256": "c1d07f2d2ea0384608282c18b56aaad4e13ba689b7fa671b15fa3a3da0733f98",
+        "rightSha256": "4b6c9377a7041aa9afead708d372c6aa555b292131c3a00dce59b07964643a32",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net8.0",
+        "leftSha256": "c1d07f2d2ea0384608282c18b56aaad4e13ba689b7fa671b15fa3a3da0733f98",
+        "rightSha256": "d0f6680c51deaa641337c77380b18446d7a107dfae058e0e9112c8124d6a9d68",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net10.0",
+        "leftSha256": "c1d07f2d2ea0384608282c18b56aaad4e13ba689b7fa671b15fa3a3da0733f98",
+        "rightSha256": "fca6f871509e72883c045c11da44cfd01b562cc68b099d22c50fb2ce0b27a957",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net472",
+        "leftSha256": "9bdb92d90874b31b43f0bf9a125a908a2048087f043e196a7cd701d02cde51c1",
+        "rightSha256": "b8463c4200790fc5cb50e2da2d57425fe94c4d58a32749fdf16a216814296c26",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net8.0",
+        "leftSha256": "9bdb92d90874b31b43f0bf9a125a908a2048087f043e196a7cd701d02cde51c1",
+        "rightSha256": "5098fdf741faedf2e70b8d8cdbe21f2abd9d588d480e4b926d5b422d3689258a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net10.0",
+        "leftSha256": "9bdb92d90874b31b43f0bf9a125a908a2048087f043e196a7cd701d02cde51c1",
+        "rightSha256": "54749309f3dea617f4b25a2328d98c0e56f873e779fd63f4c46674b2f12d3bbe",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net472",
+        "leftSha256": "731c917c7a341d08e1d1df4c3725f7ecdc2df34f3b83797f65ba1d5aad016899",
+        "rightSha256": "a03ac42ea863db00fcb45b2fd7b5862cfca4a4e55c55476f6ba95459cd609355",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net8.0",
+        "leftSha256": "731c917c7a341d08e1d1df4c3725f7ecdc2df34f3b83797f65ba1d5aad016899",
+        "rightSha256": "ea42af28d0c1e69e5576937b281e2a8275620ec270b6a39c8e7f62b57549dc65",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net10.0",
+        "leftSha256": "731c917c7a341d08e1d1df4c3725f7ecdc2df34f3b83797f65ba1d5aad016899",
+        "rightSha256": "293aebf8111661e4239b219a16c85f487299ad4a7b6316f9b18cb663e271e3a2",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net472",
+        "leftSha256": "6ebc5569c94bcee47f5c41ea0641b4554d2dd47cd38f614825771e65555f1aae",
+        "rightSha256": "afcef91c95d86d718620f1eb840928098c149b546ade5099c85f90c4b2c999ba",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net8.0",
+        "leftSha256": "6ebc5569c94bcee47f5c41ea0641b4554d2dd47cd38f614825771e65555f1aae",
+        "rightSha256": "1394486fb03798bb63c2ffb46cc089d6250e7028c72257a0bc5e55900909c7bb",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net10.0",
+        "leftSha256": "6ebc5569c94bcee47f5c41ea0641b4554d2dd47cd38f614825771e65555f1aae",
+        "rightSha256": "1f357776e652a690f576a3044e28137e25fdc80357b0e5e92e06cf2e589d7c4b",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net472",
+        "leftSha256": "72226857f313b2b80ba098f2add541e929c57d1622e8288252f1b698c68495ef",
+        "rightSha256": "75b553ac3da0e850ed97cb34f8b2fea2f72fd2baa556c6ad9fbe5ac56885ef4d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net8.0",
+        "leftSha256": "72226857f313b2b80ba098f2add541e929c57d1622e8288252f1b698c68495ef",
+        "rightSha256": "3fa99f356dfb17e3a392c8bb08c5ab05d09754d59a58762921a4eb58e7ce2654",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net10.0",
+        "leftSha256": "72226857f313b2b80ba098f2add541e929c57d1622e8288252f1b698c68495ef",
+        "rightSha256": "7d82f2bccda5ad46cb2b805be4d7a0da57b1cd01626a2bf22dc7a6c36c02d2e3",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net472",
+        "leftSha256": "62bd4910448661adabed28ae3d9c4324281d76c6952369406deadeb7743ab1b5",
+        "rightSha256": "c163ae12420ced79bf4f4f24f6ec058c87312b0ac70dc73f9a5576cdb35b62d0",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net8.0",
+        "leftSha256": "62bd4910448661adabed28ae3d9c4324281d76c6952369406deadeb7743ab1b5",
+        "rightSha256": "48522800202086da5018b80acee92f13022b6bb28bf0318b6f4f3b36f059d952",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net10.0",
+        "leftSha256": "62bd4910448661adabed28ae3d9c4324281d76c6952369406deadeb7743ab1b5",
+        "rightSha256": "70698c1699bc4106fec737472c07a4aa9d107a06e48b08ae85821cae4322d84f",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net472",
+        "leftSha256": "05fe97421d29c307952a4c6268c24bf9886d852ffed26b0ab32e834b05fbae73",
+        "rightSha256": "b5af607dc134447f7632ea303b58ae9c9a0e0c6fa53289840fc31a3e0520d7c2",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net8.0",
+        "leftSha256": "05fe97421d29c307952a4c6268c24bf9886d852ffed26b0ab32e834b05fbae73",
+        "rightSha256": "e9c0b421643f9da32eff9cfe3ca8abf7bca97fbaeb634068b80137c081db4b40",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net10.0",
+        "leftSha256": "05fe97421d29c307952a4c6268c24bf9886d852ffed26b0ab32e834b05fbae73",
+        "rightSha256": "2064e53f2d821a88d00f84ff7c208639444c83a290592a4bb2b298fba08237c8",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net472",
+        "leftSha256": "5fe6d2b9ff9c6b1ae13d5122aec6c7571c76bc5d001dcaaf657c3f2f246c01e9",
+        "rightSha256": "fea9a29ff93f6c70c94a121dc539389571051d99aae85173d87a3e4779f776fd",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net8.0",
+        "leftSha256": "5fe6d2b9ff9c6b1ae13d5122aec6c7571c76bc5d001dcaaf657c3f2f246c01e9",
+        "rightSha256": "b9b96a8724124e0ff59ff38fed0869576cee5f4f89893d6650a5ff1c99897223",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net10.0",
+        "leftSha256": "5fe6d2b9ff9c6b1ae13d5122aec6c7571c76bc5d001dcaaf657c3f2f246c01e9",
+        "rightSha256": "7c91b7ec8038c6b8b691ef77cc98c412a812f92f52829f271a233e5a3a8f5382",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net472",
+        "leftSha256": "ce5fa3f760c5b918bfb51d85c99610bafed7859acf55ffee48867d08ac93e783",
+        "rightSha256": "4d7985e18a254fcb01e5ee40cc2b1b41ba01f1ede2a0618c1ae03973f3d08aaf",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net8.0",
+        "leftSha256": "ce5fa3f760c5b918bfb51d85c99610bafed7859acf55ffee48867d08ac93e783",
+        "rightSha256": "780cf381c2f0768fb4d8f09f5e07cd36eda24f71595e99cbff0022c9eaa6a62a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net10.0",
+        "leftSha256": "ce5fa3f760c5b918bfb51d85c99610bafed7859acf55ffee48867d08ac93e783",
+        "rightSha256": "c5a7fe89409c13b5f4040a82087b8b43ce780a123f172c14df485b228cd5f4b9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net472",
+        "leftSha256": "ad47ccfe97d2174440def095f964653dac7eb9ccf255ab59b0acc69bb1f279d9",
+        "rightSha256": "62d9d3f35dc65e9bb1527f9d5ece985c261bd7bed5455eabd630de2d4f759210",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net8.0",
+        "leftSha256": "ad47ccfe97d2174440def095f964653dac7eb9ccf255ab59b0acc69bb1f279d9",
+        "rightSha256": "c15923280a9cb197bfe4e3bc3455f46b80637a97d4922dd778cbd12917b32812",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net10.0",
+        "leftSha256": "ad47ccfe97d2174440def095f964653dac7eb9ccf255ab59b0acc69bb1f279d9",
+        "rightSha256": "fce303a7f2f9977c1eb5f97a50e105b23f2788acbd173d0c708a608eb415a25e",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net472",
+        "leftSha256": "8dbce4f583b466705a7375197b8fc93d3920a8df75c0331a2684d5de9c316723",
+        "rightSha256": "cdb625a6a3aee40a97c0554d6cbf0a712ad71315c22707df6aaeb3aa76c21bd8",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net8.0",
+        "leftSha256": "8dbce4f583b466705a7375197b8fc93d3920a8df75c0331a2684d5de9c316723",
+        "rightSha256": "1eff1bd9f23767545125c33b092993e7f6da380698139704bec21254935053d5",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net10.0",
+        "leftSha256": "8dbce4f583b466705a7375197b8fc93d3920a8df75c0331a2684d5de9c316723",
+        "rightSha256": "afcd0038fb058d6a9f24aed3646fadf3d5281ec88f0e07e2bd03a6c6be1e22b8",
+        "exitCode": 0
+      }
+    ],
+    "script": {
+      "path": "/workspace/scratch/progressive-check-api.ps1",
+      "sha256": "deb260abeff2bad2ca488e292455c989661724c33c6fe5154c8a17a30604c6fe",
+      "bytes": 1787
+    },
+    "scriptChanges": "Same eng/check-api.ps1 commands; only repository root and report directory were replaced to preserve FP-072 reports."
+  },
+  "independentObservation": {
+    "report": {
+      "path": "artifacts/contracts/remaining/progressive/clean-independent/independent-progressive.json",
+      "sha256": "bde2e4d1ae29ebe890ae1337c6ac9978cee23db05478d7d85fd1a39384be5719",
+      "bytes": 2358
+    },
+    "readers": {
+      "PyMuPDF": "1.26.6",
+      "Ghostscript": {
+        "version": "10.05.1",
+        "binarySha256": "791baf36ffa6dc66578c3b0feeb9b9d7ebeab5ef52624b7461550f02341b90ed"
+      }
+    },
+    "producerTool": {
+      "pikepdf": "10.17.0",
+      "libqpdf": "12.4.2",
+      "ownHintCheck": true,
+      "independentHintValidation": false
+    },
+    "scope": "Six controlled per-reader original/linearized pixel comparisons and exact three-page geometry; the producer own hint check is not independent hint qualification."
+  },
+  "specification": {
+    "path": "/workspace/scratch/progressive-clean-spec.log",
+    "sha256": "009923ce71c00aa539832a774a58fce1df80de8ccfe63e05b11735812e753e98",
+    "bytes": 104
+  },
+  "releaseBlock": {
+    "path": "/workspace/scratch/progressive-clean-release-block.log",
+    "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "bytes": 139
+  },
+  "remaining": [
+    "Qualified complete producer and independently implemented complete hint/offset validator",
+    "Broader encrypted/progressive editing/rendering integration and representative corpus coverage",
+    "Actual authenticated transport/security/concurrency/endurance/first-page latency qualification",
+    "All actual runtime/RID/minimum Framework and exact final-package qualification"
+  ],
+  "commands": [
+    "source /workspace/.cloud-setup/activate.sh",
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -NoProfile -File /workspace/scratch/progressive-check-api.ps1",
+    "dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f <net8.0|net10.0> --no-build --no-restore --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=verified-<profile>.trx' --results-directory artifacts/contracts/remaining/progressive/verified-<profile>",
+    "The netstandard profile uses net10.0 with -p:UseNetStandardAssembly=true -m:1 -p:UseSharedCompilation=false and the same filter/reports, rebuilding the test consumer; its identity assertion verifies all12 library assets.",
+    "/workspace/.tools/linearization-validators/bin/python -O eng/verify-progressive-fixtures.py tests/Fluent.Pdf.Contract.Tests/Fixtures/Progressive artifacts/contracts/remaining/progressive/clean-independent",
+    "pwsh -NoProfile -File eng/validate-spec.ps1",
+    "pwsh -NoProfile -File eng/test-release-block.ps1"
+  ]
+}
