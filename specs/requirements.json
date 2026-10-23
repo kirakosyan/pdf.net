@@ -3592,7 +3592,8 @@
       ],
       "validation": "Cross-platform CLI consumers, pipe cancellation, partial batch failures and invalid configuration tests.",
       "evidence": [
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-083-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3606,7 +3607,8 @@
           "Complete provider/conversion/remediation workflows and legacy host bindings",
           "Full console/signal/filesystem/backpressure/crash/concurrency/endurance/security/fuzz/performance and corpus qualification",
           "Exact final application/packages and fresh package-only consumers"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-083-source.json"
       }
     },
     {
