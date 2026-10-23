@@ -137,7 +137,7 @@ public static class PdfPrinting
                 ManagedPdfProvider.Instance.Write(printCopy, output, c);
             var bytes = buffer.Finish();
             using var input = bytes.Open(0, bytes.Length);
-            using var lease = c.BorrowExpandedInput(input);
+            using var lease = new BorrowedStream(input, true, c, null);
             using var worker = c.EnterScope(PdfResourceKind.Workers);
             result = provider.Submit(lease, source.Pages.Count, options, c);
             Validate(result, options.Printer, null, c);

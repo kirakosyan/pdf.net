@@ -1384,7 +1384,6 @@ Fluent.Pdf.PdfInvoiceData.GrandTotal.get -> decimal
 Fluent.Pdf.PdfInvoiceData.Identifier.get -> string!
 Fluent.Pdf.PdfInvoiceData.IssueTime.get -> System.DateTimeOffset
 Fluent.Pdf.PdfInvoiceData.LineNetAmounts.get -> System.Collections.Generic.IReadOnlyList<decimal>!
-Fluent.Pdf.PdfInvoiceData.LineTaxAmounts.get -> System.Collections.Generic.IReadOnlyList<decimal>!
 Fluent.Pdf.PdfInvoiceData.Lines.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfInvoiceLine!>!
 Fluent.Pdf.PdfInvoiceData.MinorUnits.get -> int
 Fluent.Pdf.PdfInvoiceData.NetTotal.get -> decimal
@@ -1392,6 +1391,7 @@ Fluent.Pdf.PdfInvoiceData.PdfInvoiceData(Fluent.Pdf.PdfInvoiceProfile profile, s
 Fluent.Pdf.PdfInvoiceData.Profile.get -> Fluent.Pdf.PdfInvoiceProfile
 Fluent.Pdf.PdfInvoiceData.Rounding.get -> System.MidpointRounding
 Fluent.Pdf.PdfInvoiceData.Seller.get -> string!
+Fluent.Pdf.PdfInvoiceData.TaxCategories.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfInvoiceTaxCategory!>!
 Fluent.Pdf.PdfInvoiceData.TaxTotal.get -> decimal
 Fluent.Pdf.PdfInvoiceLine
 Fluent.Pdf.PdfInvoiceLine.Description.get -> string!
@@ -1401,6 +1401,10 @@ Fluent.Pdf.PdfInvoiceLine.TaxRate.get -> decimal
 Fluent.Pdf.PdfInvoiceLine.UnitPrice.get -> decimal
 Fluent.Pdf.PdfInvoiceProfile
 Fluent.Pdf.PdfInvoiceProfile.FacturX107Minimum = 0 -> Fluent.Pdf.PdfInvoiceProfile
+Fluent.Pdf.PdfInvoiceTaxCategory
+Fluent.Pdf.PdfInvoiceTaxCategory.TaxAmount.get -> decimal
+Fluent.Pdf.PdfInvoiceTaxCategory.TaxRate.get -> decimal
+Fluent.Pdf.PdfInvoiceTaxCategory.TaxableAmount.get -> decimal
 Fluent.Pdf.PdfInvoiceValidation
 Fluent.Pdf.PdfInvoiceValidation.ArchivalValidation.get -> Fluent.Pdf.PdfArchivalValidation?
 Fluent.Pdf.PdfInvoiceValidation.Completed.get -> bool

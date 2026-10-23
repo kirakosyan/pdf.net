@@ -23,16 +23,17 @@ public sealed class PdfWorkerCredentials : IDisposable
     /// <summary>Gets the exact tenant identity.</summary>
     public string Tenant { get; }
 
-    internal byte[] Authenticate(byte[] bytes, int count, PdfOperationContext c)
+    internal byte[] Authenticate(Stream input, PdfOperationContext c)
     {
         c.Checkpoint();
-        c.Consume(PdfResourceKind.ExpandedBytes, 512);
+        c.Consume(PdfResourceKind.ExpandedBytes, 8192);
         lock (_gate)
         {
             if (_key == null)
                 throw PdfWriterCore.Error(c, "Worker.CredentialExpired", "The caller-owned worker credential has been disposed.");
             using var hmac = new HMACSHA256(_key);
-            return hmac.ComputeHash(bytes, 0, count);
+            using var lease = new BorrowedStream(input, true, c, null);
+            return hmac.ComputeHash(lease);
         }
     }
 
@@ -172,8 +173,8 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
             using var response = new PdfCodecBufferStream(c, 67108864 + 256);
             try
             {
-                using var input = new MemoryStream(frame, false);
-                using var request = c.BorrowExpandedInput(input);
+                using var input = frame.Open();
+                using var request = new BorrowedStream(input, true, c, null);
                 using var output = new BorrowedStream(response, false, c);
                 using var worker = c.EnterScope(PdfResourceKind.Workers);
                 _transport.Exchange(request, output, c);
@@ -191,11 +192,10 @@ public sealed class PdfRenderWorkerClient : IPdfHtmlRenderer
 
             c.Checkpoint();
             var store = response.Finish();
-            using var captured = store.Open(0, store.Length);
-            var reply = WorkerWire.Decode(WorkerWire.Capture(captured, 67108864 + 256, c), 2, _credentials, c);
+            var reply = WorkerWire.Decode(store, 2, _credentials, c);
             if (!WorkerWire.Equal(nonce, reply.Nonce) || !WorkerWire.Equal(digest, reply.Digest))
                 throw PdfWriterCore.Error(c, "Worker.Binding", "The authenticated response does not match the exact request.");
-            var pdf = WorkerWire.Store(reply.Payload, c);
+            var pdf = reply.Payload;
             using var checkedDocument = PdfPageOrganization.Read(pdf, 1000, c);
             if (checkedDocument.Pages.Count == 0)
                 throw PdfWriterCore.Error(c, "Worker.EmptyOutput", "A worker cannot substitute an empty document.");
@@ -211,6 +211,8 @@ public sealed class PdfRenderWorkerService
     {
         internal readonly PdfWorkerTenant Options;
         internal int Active, Jobs;
+        internal readonly HashSet<string> Nonces = new(StringComparer.Ordinal);
+        internal readonly object Gate = new();
         internal Slot(PdfWorkerTenant options) => Options = options;
     }
 
@@ -253,12 +255,11 @@ public sealed class PdfRenderWorkerService
                 throw PdfWriterCore.Error(c, "Worker.TenantQuota", "The authenticated tenant input quota was reached.");
             if (!WorkerWire.Equal(WorkerWire.Digest(message.Payload, c), message.Digest))
                 throw PdfWriterCore.Error(c, "Worker.Binding", "The authenticated source digest does not match its bytes.");
-            Acquire(slot, c);
+            Accept(slot, message.Nonce, c);
             try
             {
                 using var deadline = c.EnterTimeLimit(slot.Options.MaximumElapsedTime);
-                ChargeJob(slot, c);
-                using var input = new MemoryStream(message.Payload, false);
+                using var input = message.Payload.Open(0, message.Payload.Length);
                 var source = PdfHtmlSource.CreateCore(null, new Uri("https://fluent-pdf.invalid/document"), null, input, c);
                 using var output = new PdfCodecBufferStream(c, slot.Options.MaximumOutputBytes);
                 try
@@ -277,10 +278,9 @@ public sealed class PdfRenderWorkerService
                 using var checkedDocument = PdfPageOrganization.Read(pdf, 1000, c);
                 if (checkedDocument.Pages.Count == 0)
                     throw PdfWriterCore.Error(c, "Worker.EmptyOutput", "A worker cannot substitute an empty document.");
-                using var body = pdf.Open(0, pdf.Length);
-                var payload = WorkerWire.Capture(body, slot.Options.MaximumOutputBytes, c);
-                var encoded = WorkerWire.Encode(2, slot.Options.Credentials, message.Nonce, message.Digest, payload, c);
-                WorkerWire.Copy(WorkerWire.Store(encoded, c), response, c);
+                var encoded = WorkerWire.Encode(2, slot.Options.Credentials, message.Nonce, message.Digest, pdf, c);
+                using var body = encoded.Open();
+                WorkerWire.Copy(body, response, c);
             }
             finally
             {
@@ -289,29 +289,20 @@ public sealed class PdfRenderWorkerService
         }, PdfCapability.RenderHtml);
     }
 
-    private static void Acquire(Slot slot, PdfOperationContext c)
+    private static void Accept(Slot slot, byte[] nonce, PdfOperationContext c)
     {
-        while (true)
+        c.Consume(PdfResourceKind.ExpandedBytes, 256);
+        string identity = BitConverter.ToString(nonce);
+        lock (slot.Gate)
         {
             c.Checkpoint();
-            int current = Volatile.Read(ref slot.Active);
-            if (current >= slot.Options.MaximumConcurrentJobs)
-                throw PdfWriterCore.Error(c, "Worker.TenantQuota", "The authenticated tenant concurrency quota was reached.");
-            if (Interlocked.CompareExchange(ref slot.Active, current + 1, current) == current)
-                return;
-        }
-    }
-
-    private static void ChargeJob(Slot slot, PdfOperationContext c)
-    {
-        while (true)
-        {
-            c.Checkpoint();
-            int current = Volatile.Read(ref slot.Jobs);
-            if (current >= slot.Options.MaximumJobs)
-                throw PdfWriterCore.Error(c, "Worker.TenantQuota", "The authenticated tenant job quota was reached.");
-            if (Interlocked.CompareExchange(ref slot.Jobs, current + 1, current) == current)
-                return;
+            if (slot.Nonces.Contains(identity))
+                throw PdfWriterCore.Error(c, "Worker.Replay", "This authenticated request nonce has already been accepted by this service instance.");
+            if (slot.Jobs >= slot.Options.MaximumJobs || Volatile.Read(ref slot.Active) >= slot.Options.MaximumConcurrentJobs)
+                throw PdfWriterCore.Error(c, "Worker.TenantQuota", "The authenticated tenant job/concurrency quota was reached.");
+            slot.Nonces.Add(identity);
+            slot.Jobs++;
+            Interlocked.Increment(ref slot.Active);
         }
     }
 }
@@ -320,15 +311,25 @@ internal static class WorkerWire
 {
     internal sealed class Message
     {
-        internal byte[] Nonce = null!, Digest = null!, Payload = null!;
+        internal byte[] Nonce = null!, Digest = null!;
+        internal PdfByteStore Payload = null!;
     }
 
-    internal static byte[] Digest(byte[] bytes, PdfOperationContext c)
+    internal sealed class Frame
+    {
+        internal byte[] Header = null!, Mac = null!;
+        internal PdfByteStore Payload = null!;
+        internal Stream Open() => new PdfReadSequenceStream(false, new MemoryStream(Header, false), Payload.Open(0, Payload.Length), new MemoryStream(Mac, false));
+    }
+
+    internal static byte[] Digest(PdfByteStore bytes, PdfOperationContext c)
     {
         c.Checkpoint();
-        c.Consume(PdfResourceKind.ExpandedBytes, 32);
+        c.Consume(PdfResourceKind.ExpandedBytes, 8192);
         using var sha = SHA256.Create();
-        var result = sha.ComputeHash(bytes);
+        using var input = bytes.Open(0, bytes.Length);
+        using var lease = new BorrowedStream(input, true, c, null);
+        var result = sha.ComputeHash(lease);
         c.Checkpoint();
         return result;
     }
@@ -343,73 +344,79 @@ internal static class WorkerWire
         return difference == 0;
     }
 
-    internal static byte[] Encode(byte kind, PdfWorkerCredentials credentials, byte[] nonce, byte[] digest, byte[] payload, PdfOperationContext c)
+    internal static Frame Encode(byte kind, PdfWorkerCredentials credentials, byte[] nonce, byte[] digest, PdfByteStore payload, PdfOperationContext c)
     {
-        c.Consume(PdfResourceKind.ExpandedBytes, payload.Length + credentials.Tenant.Length + 256L);
-        var frame = new byte[91 + credentials.Tenant.Length + payload.Length];
+        c.Consume(PdfResourceKind.ExpandedBytes, credentials.Tenant.Length + 512L);
+        var header = new byte[59 + credentials.Tenant.Length];
         int at = 0;
-        frame[at++] = 70;
-        frame[at++] = 80;
-        frame[at++] = 87;
-        frame[at++] = 83;
-        frame[at++] = 1;
-        frame[at++] = kind;
-        frame[at++] = (byte)credentials.Tenant.Length;
+        header[at++] = 70;
+        header[at++] = 80;
+        header[at++] = 87;
+        header[at++] = 83;
+        header[at++] = 1;
+        header[at++] = kind;
+        header[at++] = (byte)credentials.Tenant.Length;
         foreach (char ch in credentials.Tenant)
-            frame[at++] = (byte)ch;
-        Buffer.BlockCopy(nonce, 0, frame, at, 16);
+            header[at++] = (byte)ch;
+        Buffer.BlockCopy(nonce, 0, header, at, 16);
         at += 16;
-        Buffer.BlockCopy(digest, 0, frame, at, 32);
+        Buffer.BlockCopy(digest, 0, header, at, 32);
         at += 32;
         for (int shift = 0; shift < 32; shift += 8)
-            frame[at++] = (byte)(payload.Length >> shift);
-        Buffer.BlockCopy(payload, 0, frame, at, payload.Length);
-        at += payload.Length;
-        var mac = credentials.Authenticate(frame, at, c);
-        Buffer.BlockCopy(mac, 0, frame, at, mac.Length);
-        return frame;
+            header[at++] = (byte)(payload.Length >> shift);
+        using var input = new PdfReadSequenceStream(false, new MemoryStream(header, false), payload.Open(0, payload.Length));
+        return new()
+        {
+            Header = header,
+            Payload = payload,
+            Mac = credentials.Authenticate(input, c)
+        };
     }
 
-    internal static string Tenant(byte[] bytes, PdfOperationContext c)
+    internal static string Tenant(PdfByteStore bytes, PdfOperationContext c)
     {
-        if (bytes.Length < 93 || bytes[0] != 70 || bytes[1] != 80 || bytes[2] != 87 || bytes[3] != 83 || bytes[4] != 1 || bytes[6] < 1 || bytes[6] > 64 || bytes.Length < 92 + bytes[6])
+        if (bytes.Length < 93 || bytes.At(0) != 70 || bytes.At(1) != 80 || bytes.At(2) != 87 || bytes.At(3) != 83 || bytes.At(4) != 1 || bytes.At(6) < 1 || bytes.At(6) > 64 || bytes.Length < 92 + bytes.At(6))
             throw PdfWriterCore.Error(c, "Worker.Protocol", "A complete finite version-one worker frame is required.");
-        c.Consume(PdfResourceKind.ExpandedBytes, bytes[6] * 4L + 64);
-        return Encoding.ASCII.GetString(bytes, 7, bytes[6]);
+        c.Consume(PdfResourceKind.ExpandedBytes, bytes.At(6) * 4L + 64);
+        var name = new byte[bytes.At(6)];
+        for (int i = 0; i < name.Length; i++)
+            name[i] = (byte)bytes.At(7 + i);
+        return Encoding.ASCII.GetString(name);
     }
 
-    internal static Message Decode(byte[] bytes, byte kind, PdfWorkerCredentials credentials, PdfOperationContext c)
+    internal static Message Decode(PdfByteStore bytes, byte kind, PdfWorkerCredentials credentials, PdfOperationContext c)
     {
         string tenant = Tenant(bytes, c);
-        if (tenant != credentials.Tenant || bytes[5] != kind)
+        if (tenant != credentials.Tenant || bytes.At(5) != kind)
             throw PdfWriterCore.Error(c, "Worker.Authentication", "The worker frame has a different authenticated tenant/direction.");
-        var expected = credentials.Authenticate(bytes, bytes.Length - 32, c);
-        c.Consume(PdfResourceKind.ExpandedBytes, 96);
+        using var signed = bytes.Open(0, bytes.Length - 32);
+        var expected = credentials.Authenticate(signed, c);
+        c.Consume(PdfResourceKind.ExpandedBytes, 256);
         var actual = new byte[32];
-        Buffer.BlockCopy(bytes, bytes.Length - 32, actual, 0, 32);
+        for (int i = 0; i < 32; i++)
+            actual[i] = (byte)bytes.At(bytes.Length - 32 + i);
         if (!Equal(expected, actual))
             throw PdfWriterCore.Error(c, "Worker.Authentication", "The worker frame authentication failed.");
-        int at = 7 + bytes[6];
+        int at = 7 + bytes.At(6);
         var message = new Message
         {
             Nonce = new byte[16],
             Digest = new byte[32]
         };
-        Buffer.BlockCopy(bytes, at, message.Nonce, 0, 16);
-        at += 16;
-        Buffer.BlockCopy(bytes, at, message.Digest, 0, 32);
-        at += 32;
-        uint count = (uint)bytes[at] | (uint)bytes[at + 1] << 8 | (uint)bytes[at + 2] << 16 | (uint)bytes[at + 3] << 24;
-        at += 4;
+        for (int i = 0; i < 16; i++)
+            message.Nonce[i] = (byte)bytes.At(at++);
+        for (int i = 0; i < 32; i++)
+            message.Digest[i] = (byte)bytes.At(at++);
+        uint count = 0;
+        for (int shift = 0; shift < 32; shift += 8)
+            count |= (uint)bytes.At(at++) << shift;
         if (count == 0 || count > int.MaxValue || count != bytes.Length - at - 32)
             throw PdfWriterCore.Error(c, "Worker.Protocol", "The authenticated payload extent is invalid.");
-        c.Consume(PdfResourceKind.ExpandedBytes, count);
-        message.Payload = new byte[(int)count];
-        Buffer.BlockCopy(bytes, at, message.Payload, 0, (int)count);
+        message.Payload = bytes.Slice(at, count);
         return message;
     }
 
-    internal static byte[] Capture(Stream input, int maximum, PdfOperationContext c)
+    internal static PdfByteStore Capture(Stream input, int maximum, PdfOperationContext c)
     {
         c.Consume(PdfResourceKind.ExpandedBytes, 8192);
         var chunk = new byte[8192];
@@ -426,34 +433,19 @@ internal static class WorkerWire
             output.Write(chunk, 0, n);
         }
 
-        var bytes = output.Finish();
-        c.Consume(PdfResourceKind.ExpandedBytes, bytes.Length);
-        var result = new byte[(int)bytes.Length];
-        using var captured = bytes.Open(0, bytes.Length);
-        int position = 0;
-        while (position < result.Length)
-        {
-            c.Checkpoint();
-            int n = captured.Read(result, position, result.Length - position);
-            if (n == 0)
-                throw new EndOfStreamException();
-            position += n;
-        }
-
-        return result;
-    }
-
-    internal static PdfByteStore Store(byte[] bytes, PdfOperationContext c)
-    {
-        using var input = new MemoryStream(bytes, false);
-        return PdfByteStore.Read(input, c);
+        return output.Finish();
     }
 
     internal static void Copy(PdfByteStore bytes, Stream output, PdfOperationContext c)
     {
+        using var input = bytes.Open(0, bytes.Length);
+        Copy(input, output, c);
+    }
+
+    internal static void Copy(Stream input, Stream output, PdfOperationContext c)
+    {
         c.Consume(PdfResourceKind.ExpandedBytes, 8192);
         var chunk = new byte[8192];
-        using var input = bytes.Open(0, bytes.Length);
         using var target = new BorrowedStream(output, false, c);
         int n;
         while ((n = input.Read(chunk, 0, chunk.Length)) > 0)

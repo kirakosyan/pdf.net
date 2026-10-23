@@ -60,7 +60,7 @@ internal static class PdfImagePng
             if (type < 0 && name != "IHDR")
                 throw Error("Image.PngOrder", "IHDR must be the first PNG chunk.");
             if (name == "acTL" || name == "fcTL" || name == "fdAT")
-                throw Error("Image.PngAnimation", "Animated PNG requires a separately supported complete-frame decoder profile.");
+                throw Error("Image.AnimationSelection", "Animated PNG requires an explicit frame-selection service.");
             bool singleton = name != "IDAT" && new[]
             {
                 "IHDR",
@@ -184,8 +184,6 @@ internal static class PdfImagePng
             }
             else if (name == "eXIf")
                 exif = PdfImageExif.Read(bytes, start, n, context);
-            else if (name == "acTL" || name == "fcTL" || name == "fdAT")
-                throw Error("Image.AnimationSelection", "Animated PNG requires an explicit frame-selection service.");
             else if (name == "cICP" || name == "mDCV" || name == "cLLI")
             {
                 if (options.ColorSpaceOverride == null)

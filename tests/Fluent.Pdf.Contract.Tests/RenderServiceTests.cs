@@ -185,6 +185,87 @@ public sealed class RenderServiceTests
         Assert.Equal(0, transport.LastResponseLength);
     }
 
+    [Fact]
+    public async Task AcceptedNonceIsRejectedDuringAndAfterTheJobWithoutSpendingAnotherQuota()
+    {
+        using var credentials = new PdfWorkerCredentials("tenant_a", Key);
+        using var release = new ManualResetEventSlim();
+        var started = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var renderer = new Renderer
+        {
+            Before = c =>
+            {
+                started.TrySetResult(true);
+                release.Wait(c.CancellationToken);
+            }
+        };
+        var service = new PdfRenderWorkerService(new[] { new PdfWorkerTenant(credentials, maximumJobs: 2) }, new(renderer));
+        var transport = new Loopback(service);
+        var client = new PdfRenderWorkerClient(credentials, transport);
+        using var input = Input();
+        var running = Task.Run(() => client.RenderHtml(input));
+        try
+        {
+            await Task.WhenAny(started.Task, running, Task.Delay(10000));
+            Assert.True(started.Task.IsCompleted);
+            using var duplicate = new MemoryStream(transport.Requests[0]);
+            using var response = new MemoryStream();
+            Assert.Equal("Worker.Replay", Assert.Throws<PdfException>(() => service.Process(duplicate, response)).Diagnostic.Code);
+            Assert.Equal(0, response.Length);
+        }
+        finally
+        {
+            release.Set();
+        }
+
+        _ = await running;
+        using (var duplicate = new MemoryStream(transport.Requests[0]))
+        using (var response = new MemoryStream())
+            Assert.Equal("Worker.Replay", Assert.Throws<PdfException>(() => service.Process(duplicate, response)).Diagnostic.Code);
+        renderer.Before = null;
+        using var second = Input();
+        _ = client.RenderHtml(second);
+        Assert.Equal(2, renderer.Calls);
+    }
+
+    [Fact]
+    public void SixtyMebibytePdfFitsDefaultExpandedByteBudgetWithoutFullFrameCopies()
+    {
+        using var credentials = new PdfWorkerCredentials("tenant_a", Key);
+        using var fixture = new SyntaxFixtures();
+        long a = fixture.Object(1, "<< /Type /Catalog /Pages 2 0 R >>");
+        long b = fixture.Object(2, "<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
+        long d = fixture.Object(3, "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 100 100] /Resources << >> >>");
+        long e = fixture.StreamObject(4, "", new byte[60 * 1024 * 1024]);
+        fixture.Classic(new[] { (0, 65535, 0L, true), (1, 0, a, false), (2, 0, b, false), (3, 0, d, false), (4, 0, e, false) }, "/Root 1 0 R", 5);
+        var renderer = new LargeRenderer(fixture.Bytes.ToArray());
+        // Keep the default byte ceilings; allow slow Framework CI hardware more elapsed time.
+        var policy = new PdfOperationPolicy(limits: new(maximumElapsedTime: TimeSpan.FromMinutes(3)));
+        var service = new PdfRenderWorkerService(new[] { new PdfWorkerTenant(credentials, maximumElapsedTime: TimeSpan.FromMinutes(3)) }, new(renderer), policy);
+        using var markup = Input();
+        var result = new PdfRenderWorkerClient(credentials, new DirectTransport(service)).RenderHtml(markup, policy);
+        using var pdf = result.OpenPdfStream();
+        Assert.Equal(renderer.Bytes.Length, pdf.Length);
+        using var hash = System.Security.Cryptography.SHA256.Create();
+        Assert.Equal(hash.ComputeHash(renderer.Bytes), hash.ComputeHash(pdf));
+    }
+
+    private sealed class DirectTransport : IPdfRenderWorkerTransport
+    {
+        private readonly PdfRenderWorkerService _service;
+        internal DirectTransport(PdfRenderWorkerService service) => _service = service;
+        public void Exchange(Stream request, Stream response, PdfOperationContext context) => _service.Process(request, response, context.CancellationToken);
+    }
+
+    private sealed class LargeRenderer : IPdfHtmlRenderer
+    {
+        internal readonly byte[] Bytes;
+        internal LargeRenderer(byte[] bytes) => Bytes = bytes;
+        public PdfProviderDescriptor Descriptor { get; } = new("fixture.large-pdf", "1", PdfCapability.RenderHtml);
+
+        public void Render(PdfHtmlSource source, PdfHtmlOptions options, Stream output, PdfOperationContext context) => output.Write(Bytes, 0, Bytes.Length);
+    }
+
     private sealed class Renderer : IPdfHtmlRenderer
     {
         internal bool Fail, Invalid;

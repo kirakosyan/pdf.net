@@ -34,7 +34,7 @@ public static class PdfMetafiles
     public static PdfOperationReport WriteRasterEmf(PdfDocumentSnapshot source, int pageIndex, Stream output, PdfRenderOptions rendering, PdfProviderRegistry providers, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || rendering == null || providers == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : rendering == null ? nameof(rendering) : nameof(providers));
         if (pageIndex < 0 || pageIndex >= source.Pages.Count)
             throw new ArgumentOutOfRangeException(nameof(pageIndex));
         if (output == null || !output.CanWrite)

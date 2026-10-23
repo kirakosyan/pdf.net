@@ -163,6 +163,7 @@ public static class PdfRasterDocuments
         internal PdfByteStore Bytes = null!;
         internal PdfImageAsset? Image;
         internal PdfRasterFileInfo? Info;
+        internal readonly Dictionary<int, PdfImageAsset> Frames = new();
     }
 
     /// <summary>Creates an owned editable document after every selected frame succeeds. Codec availability is checked before reading any input.</summary>
@@ -264,10 +265,9 @@ public static class PdfRasterDocuments
                             PdfImageAsset image;
                             if (plan.Image != null)
                                 image = plan.Image;
-                            else
+                            else if (!plan.Frames.TryGetValue(frame, out image!))
                             {
                                 var info = plan.Info!.Frames[frame];
-                                c.ConsumePixels(info.Samples.Width, info.Samples.Height);
                                 using var decoded = new PdfCodecBufferStream(c, info.Samples.ByteLength);
                                 using (var file = plan.Bytes.Open(0, plan.Bytes.Length))
                                 using (var input = c.BorrowExpandedInput(file))
@@ -283,6 +283,7 @@ public static class PdfRasterDocuments
                                 if (!options.ImageOptions.ApplyExifOrientation)
                                     meta = new(PdfImageOrientation.Normal, meta.HorizontalDpi, meta.VerticalDpi, meta.PixelAspectRatio);
                                 image = PdfImages.FromRgbaCore(rgba, info.Samples.Width, info.Samples.Height, 8, info.ColorSpace, meta, c);
+                                plan.Frames.Add(frame, image);
                             }
 
                             var captured = image;

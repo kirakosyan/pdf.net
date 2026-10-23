@@ -407,8 +407,8 @@ public static class PdfConversions
             }
 
             using var input = b.Open(0, b.Length);
-            var root = FormatIo.Xml(input, c).Root;
-            return root?.Name.LocalName == "html" && root.Name.NamespaceName == "" ? PdfDetectedFormat.Html : root?.Name.LocalName == "svg" && (root.Name.NamespaceName == "" || root.Name.NamespaceName == "http://www.w3.org/2000/svg") ? PdfDetectedFormat.Svg : root?.Name == System.Xml.Linq.XName.Get("root", "http://www.w3.org/1999/XSL/Format") ? PdfDetectedFormat.FormattingObjects : PdfDetectedFormat.Unknown;
+            var root = FormatIo.TryXml(input, c)?.Root;
+            return root?.Name.LocalName == "html" && (root.Name.NamespaceName == "" || root.Name.NamespaceName == "http://www.w3.org/1999/xhtml") ? PdfDetectedFormat.Html : root?.Name.LocalName == "svg" && (root.Name.NamespaceName == "" || root.Name.NamespaceName == "http://www.w3.org/2000/svg") ? PdfDetectedFormat.Svg : root?.Name == System.Xml.Linq.XName.Get("root", "http://www.w3.org/1999/XSL/Format") ? PdfDetectedFormat.FormattingObjects : PdfDetectedFormat.Unknown;
         }
 
         return PdfDetectedFormat.Unknown;
@@ -419,7 +419,7 @@ public static class PdfConversions
     private static void Check(PdfDocumentSnapshot source, IEnumerable<int> pages, PdfConversionOptions options)
     {
         if (source == null || pages == null || options == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : nameof(options));
     }
 
     private static PdfException Error(PdfOperationContext c, string code, string message) => PdfWriterCore.Error(c, "Conversion." + code, message);

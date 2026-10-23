@@ -105,7 +105,9 @@ internal static class FormatIo
         }
     }
 
-    internal static XDocument Xml(Stream input, PdfOperationContext c, int maximum = 8388608)
+    internal static XDocument Xml(Stream input, PdfOperationContext c, int maximum = 8388608) => XmlCore(input, c, maximum, false)!;
+    internal static XDocument? TryXml(Stream input, PdfOperationContext c) => XmlCore(input, c, 8388608, true);
+    private static XDocument? XmlCore(Stream input, PdfOperationContext c, int maximum, bool tolerateMalformed)
     {
         var bytes = Capture(input, c, maximum);
         c.Consume(PdfResourceKind.ExpandedBytes, bytes.Length * 8L + 4096);
@@ -139,6 +141,8 @@ internal static class FormatIo
         catch (XmlException)
         {
             c.Checkpoint();
+            if (tolerateMalformed)
+                return null;
             throw Error(c, "Xml", "Malformed XML, DTDs and external entities are rejected.");
         }
     }

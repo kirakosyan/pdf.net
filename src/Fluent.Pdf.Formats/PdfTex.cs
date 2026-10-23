@@ -133,7 +133,7 @@ public static class PdfTex
     public static PdfOperationReport WriteInferredText(PdfDocumentSnapshot source, IEnumerable<int> pages, Stream output, PdfTextExtractionOptions? text = null, PdfProviderRegistry? providers = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : nameof(pages));
         if (output == null || !output.CanWrite)
             throw new ArgumentException("A writable borrowed stream is required.", nameof(output));
         providers ??= PdfProviderRegistry.Empty;

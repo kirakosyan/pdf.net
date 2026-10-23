@@ -39,7 +39,7 @@ public sealed class InvoiceTests
             {
                 var old = Encoding.UTF8.GetBytes("INV-1");
                 for (int n = 0; n < Pdf.Length - old.Length; n++)
-                    if (Pdf.Skip(n).Take(old.Length).SequenceEqual(old))
+                    if (Pdf[n] == old[0] && Pdf[n + 1] == old[1] && Pdf[n + 2] == old[2] && Pdf[n + 3] == old[3] && Pdf[n + 4] == old[4])
                     {
                         Pdf[n + 4] = (byte)'2';
                         break;
@@ -98,6 +98,26 @@ public sealed class InvoiceTests
         Assert.Equal(3, Data("BHD").MinorUnits);
         Assert.Throws<ArgumentException>(() => Data("XYZ"));
         Assert.Throws<ArgumentOutOfRangeException>(() => new PdfInvoiceLine("Negative", 1, -1, 20));
+    }
+
+    [Theory]
+    [InlineData(MidpointRounding.AwayFromZero, "0.05")]
+    [InlineData(MidpointRounding.ToEven, "0.04")]
+    public void TaxRoundsOnceOnEachRateCategory(MidpointRounding rounding, string expected)
+    {
+        var lines = Enumerable.Range(0, 3).Select(_ => new PdfInvoiceLine("Small", 1, .10m, 15)).Concat(new[] { new PdfInvoiceLine("Other", 1, .20m, 5) });
+        var data = new PdfInvoiceData(PdfInvoiceProfile.FacturX107Minimum, "INV-1", "Seller", "Buyer", new DateTimeOffset(2026, 10, 23, 0, 0, 0, TimeSpan.Zero), "EUR", rounding, lines);
+        var category = Assert.Single(data.TaxCategories, c => c.TaxRate == 15);
+        Assert.Equal(.30m, category.TaxableAmount);
+        Assert.Equal(decimal.Parse(expected, System.Globalization.CultureInfo.InvariantCulture), category.TaxAmount);
+        Assert.Equal(data.TaxCategories.Sum(c => c.TaxAmount), data.TaxTotal);
+        Assert.Equal(data.NetTotal + data.TaxTotal, data.GrandTotal);
+        using var output = new MemoryStream();
+        var producer = new Producer();
+        Write(data, output, producer, new(), new());
+        XNamespace ram = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100";
+        var xml = XDocument.Parse(Encoding.UTF8.GetString(producer.Xml));
+        Assert.Equal(data.TaxTotal.ToString("F2", System.Globalization.CultureInfo.InvariantCulture), xml.Descendants(ram + "TaxTotalAmount").Single().Value);
     }
 
     [Fact]

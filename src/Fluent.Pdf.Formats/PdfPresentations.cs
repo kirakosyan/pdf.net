@@ -12,7 +12,7 @@ public static class PdfPresentations
     public static PdfOperationReport WriteRasterSlides(PdfDocumentSnapshot source, IEnumerable<int> pages, PdfPageSize slideSize, PdfRenderOptions rendering, PdfProviderRegistry providers, Stream output, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null || rendering == null || providers == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : rendering == null ? nameof(rendering) : nameof(providers));
         Guard.Size(slideSize, nameof(slideSize));
         if (slideSize.Width < 72 || slideSize.Height < 72 || slideSize.Width > 4032 || slideSize.Height > 4032)
             throw new ArgumentOutOfRangeException(nameof(slideSize));

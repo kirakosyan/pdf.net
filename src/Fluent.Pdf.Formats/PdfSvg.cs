@@ -158,6 +158,28 @@ public static partial class PdfSvg
 
         internal double[] Numbers(string value) => new SvgNumbers(value, _c).All();
         internal void Draw(PdfCanvas canvas) => Node(_root, canvas, new Style(), true);
+        private static string NormalizeText(string value)
+        {
+            var output = new StringBuilder();
+            bool space = false;
+            foreach (char ch in value)
+            {
+                if (ch == '\r' || ch == '\n')
+                    continue;
+                if (ch == ' ' || ch == '\t')
+                    space = output.Length > 0;
+                else
+                {
+                    if (space)
+                        output.Append(' ');
+                    output.Append(ch);
+                    space = false;
+                }
+            }
+
+            return output.ToString();
+        }
+
         private void Fields(XElement e, params string[] allowed)
         {
             foreach (var a in e.Attributes())
@@ -363,7 +385,7 @@ public static partial class PdfSvg
                     throw Error(_c, "FontSize", "This SVG text profile requires a positive font size.");
                 if (_options.Fonts == null)
                     throw Error(_c, "Fonts", "SVG text requires caller-selected font bindings; host fonts are never discovered.");
-                var shaped = PdfText.ShapeCore(e.Value, _options.Fonts, _providers.GetRequired<IPdfTextShaper>(PdfCapability.ShapeText), _options.Text, _c);
+                var shaped = PdfText.ShapeCore(NormalizeText(e.Value), _options.Fonts, _providers.GetRequired<IPdfTextShaper>(PdfCapability.ShapeText), _options.Text, _c);
                 _finish.Add(r =>
                 {
                     shaped.OperationReport = r;

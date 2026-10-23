@@ -6,11 +6,13 @@ internal sealed class PdfByteStore
 {
     private const int BlockSize = 4096;
     private readonly byte[][] _blocks;
+    private readonly long _start;
     internal long Length { get; }
 
-    private PdfByteStore(byte[][] blocks, long length)
+    private PdfByteStore(byte[][] blocks, long length, long start = 0)
     {
         _blocks = blocks;
+        _start = start;
         Length = length;
     }
 
@@ -47,7 +49,14 @@ internal sealed class PdfByteStore
         return new(blocks.ToArray(), length);
     }
 
-    internal int At(long position) => position < 0 || position >= Length ? -1 : _blocks[(int)(position / BlockSize)][(int)(position % BlockSize)];
+    internal PdfByteStore Slice(long start, long length)
+    {
+        if (start < 0 || length < 0 || start > Length - length)
+            throw new ArgumentOutOfRangeException(nameof(start));
+        return new(_blocks, length, checked(_start + start));
+    }
+
+    internal int At(long position) => position < 0 || position >= Length ? -1 : _blocks[(int)((_start + position) / BlockSize)][(int)((_start + position) % BlockSize)];
     internal Stream Open(long start, long length)
     {
         if (start < 0 || length < 0 || start > Length - length)
@@ -109,7 +118,7 @@ internal sealed class PdfByteStore
             int copied = 0;
             while (copied < size)
             {
-                long source = _start + _position + copied;
+                long source = _owner._start + _start + _position + copied;
                 int inBlock = (int)(source % BlockSize);
                 int extent = Math.Min(size - copied, BlockSize - inBlock);
                 Buffer.BlockCopy(_owner._blocks[(int)(source / BlockSize)], inBlock, buffer, offset + copied, extent);

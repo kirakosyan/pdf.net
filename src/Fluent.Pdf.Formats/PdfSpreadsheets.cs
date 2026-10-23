@@ -25,7 +25,7 @@ public enum PdfSheetValueKind
 {
     /// <summary>Literal Unicode text.</summary>
     Text,
-    /// <summary>Invariant decimal.</summary>
+    /// <summary>Finite invariant IEEE double.</summary>
     Number,
     /// <summary>Boolean true/false.</summary>
     Boolean,
@@ -47,9 +47,9 @@ public sealed class PdfSheetCell
             throw new ArgumentOutOfRangeException(nameof(kind));
         if (kind == PdfSheetValueKind.Number)
         {
-            if (!decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal number))
-                throw new ArgumentException("A finite invariant decimal is required.", nameof(value));
-            value = number.ToString(CultureInfo.InvariantCulture);
+            if (!double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out double number) || double.IsNaN(number) || double.IsInfinity(number) || number == 0 && value.Split(new[] { 'e', 'E' })[0].Any(ch => ch >= '1' && ch <= '9'))
+                throw new ArgumentException("A finite invariant IEEE double is required.", nameof(value));
+            value = number.ToString("R", CultureInfo.InvariantCulture);
         }
 
         if (kind == PdfSheetValueKind.Boolean && value != "true" && value != "false")
@@ -220,7 +220,7 @@ public static class PdfSpreadsheets
     public static PdfDocument ImportData(PdfSheetData sheet, int firstRow, int firstColumn, int rows, int columns, PdfFormatTextOptions text, PdfProviderRegistry providers, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (sheet == null || text == null || providers == null)
-            throw new ArgumentNullException(nameof(sheet));
+            throw new ArgumentNullException(sheet == null ? nameof(sheet) : text == null ? nameof(text) : nameof(providers));
         if (firstRow < 0 || firstColumn < 0 || rows < 1 || columns < 1 || firstRow > sheet.RowCount - rows || firstColumn > sheet.ColumnCount - columns)
             throw new ArgumentOutOfRangeException(nameof(firstRow));
         PdfDocument? result = null;
@@ -453,17 +453,23 @@ public static class PdfSpreadsheets
             var xml = package.Xml(path);
             if (xml.Root?.Name != X + "worksheet")
                 throw Error(c, "Root", "A worksheet root is required.");
-            var strings = package.Has("xl/sharedStrings.xml") ? package.Xml("xl/sharedStrings.xml").Descendants(X + "si").Select(v => string.Concat(v.Descendants(X + "t").Select(t => t.Value))).ToArray() : Array.Empty<string>();
+            var strings = package.Has("xl/sharedStrings.xml") ? package.Xml("xl/sharedStrings.xml").Descendants(X + "si").Select(v => CellText(v)).ToArray() : Array.Empty<string>();
             var cells = new List<PdfSheetCell>();
+            var empty = new HashSet<(int Row, int Column)>();
+            var addresses = new HashSet<(int Row, int Column)>();
             foreach (var cell in xml.Descendants(X + "sheetData").Elements(X + "row").Elements(X + "c"))
             {
                 var pos = Address((string? )cell.Attribute("r") ?? "", c);
+                if (!addresses.Add(pos))
+                    throw Error(c, "Data", "Duplicate worksheet cell addresses reject.");
                 string type = (string? )cell.Attribute("t") ?? "n";
                 string? formula = cell.Element(X + "f")?.Value;
                 var v = cell.Element(X + "v");
+                if (v == null && cell.Element(X + "is") == null && cell.Element(X + "f") == null)
+                    empty.Add(pos);
                 if (formula != null && v == null)
                     throw Error(c, "FormulaCache", "Formula cells require cached values.");
-                string value = type == "inlineStr" ? string.Concat(cell.Element(X + "is")?.Descendants(X + "t").Select(t => t.Value) ?? Enumerable.Empty<string>()) : v?.Value ?? "";
+                string value = type == "inlineStr" ? CellText(cell.Element(X + "is")) : v?.Value ?? "";
                 if (type == "s")
                 {
                     int index = Nonnegative(value, c);
@@ -487,6 +493,8 @@ public static class PdfSpreadsheets
                 int index = cells.FindIndex(cell => cell.Row == first.Row && cell.Column == first.Column);
                 if (last.Row < first.Row || last.Column < first.Column)
                     throw Error(c, "Merge", "A positive merge is required.");
+                cells.RemoveAll(cell => (cell.Row != first.Row || cell.Column != first.Column) && cell.Row >= first.Row && cell.Row <= last.Row && cell.Column >= first.Column && cell.Column <= last.Column && cell.RowSpan == 1 && cell.ColumnSpan == 1 && empty.Contains((cell.Row, cell.Column)));
+                index = cells.FindIndex(cell => cell.Row == first.Row && cell.Column == first.Column);
                 var old = index >= 0 ? cells[index] : new PdfSheetCell(first.Row, first.Column, "");
                 var merged = new PdfSheetCell(old.Row, old.Column, old.Value, old.Kind, last.Row - first.Row + 1, last.Column - first.Column + 1, old.SourceFormula);
                 if (index >= 0)
@@ -549,6 +557,7 @@ public static class PdfSpreadsheets
         return Grid(name, odsCells, c, Math.Max(1, rr));
     }
 
+    private static string CellText(XElement? value) => value == null ? "" : string.Concat(value.Elements().SelectMany(e => e.Name == X + "t" ? new[] { e } : e.Name == X + "r" ? e.Elements(X + "t") : Enumerable.Empty<XElement>()).Select(t => t.Value));
     private static int Nonnegative(string? value, PdfOperationContext c)
     {
         if (value == null)

@@ -37,6 +37,7 @@ public sealed class PrintingTests
     [InlineData(0x0401, "Print.Permission")]
     [InlineData(0x040b, "Print.SpoolRejected")]
     [InlineData(1, "Print.Substitution")]
+    [InlineData(2, "Print.Substitution")]
     public void IppRejectsSpoolErrorsAndSubstitutionsWithoutRetry(int status, string code)
     {
         using var source = Pdf.Create().AddPage();
@@ -44,8 +45,18 @@ public sealed class PrintingTests
         {
             Status = status
         };
-        Assert.Equal(code, Assert.Throws<PdfException>(() => PdfPrinting.Submit(source.CreateSnapshot(), new(Printer), new(new IppPrintProvider(transport)))).Diagnostic.Code);
-        Assert.Equal(1, transport.Calls);
+        var failure = Assert.Throws<PdfException>(() => PdfPrinting.Submit(source.CreateSnapshot(), new(Printer), new(new IppPrintProvider(transport))));
+        Assert.Equal(code, failure.Diagnostic.Code);
+        if (status < 0x0400)
+        {
+            var job = Assert.IsType<PdfPrintJob>(failure.Data["Fluent.Pdf.PrintJob"]);
+            Assert.Equal(42, job.JobId);
+            Assert.Equal(Printer, job.Printer);
+            transport.Status = 0;
+            Assert.Equal(PdfPrintJobState.CancellationRequested, PdfPrinting.Cancel(job.Printer, job.JobId, new(new IppPrintProvider(transport))).State);
+        }
+
+        Assert.Equal(status < 0x0400 ? 2 : 1, transport.Calls);
     }
 
     [Fact]
@@ -97,6 +108,22 @@ public sealed class PrintingTests
         transport.Oversized = true;
         Assert.Throws<PdfException>(() => PdfPrinting.Submit(source.CreateSnapshot(), new(Printer), providers));
         Assert.Equal(2, transport.Calls);
+    }
+
+    [Fact]
+    public void IppStreamsTheBorrowedPdfWhenOnlyHeaderStorageRemainsInTheBudget()
+    {
+        using var pdf = new MemoryStream(new byte[2 * 1024 * 1024]);
+        var transport = new Transport();
+        var provider = new IppPrintProvider(transport);
+        PdfFont.Run("IppBorrowedPdf", "fixture", new(limits: new(maximumExpandedBytes: pdf.Length + 65536)), default, c =>
+        {
+            c.Consume(PdfResourceKind.ExpandedBytes, pdf.Length);
+            Assert.Equal(42, provider.Submit(pdf, 1, new(Printer), c).JobId);
+        });
+        Assert.True(pdf.CanRead);
+        Assert.True(transport.Request!.Length > pdf.Length);
+        Assert.Throws<ObjectDisposedException>(() => transport.Input!.ReadByte());
     }
 
     private sealed class Transport : IPdfIppTransport

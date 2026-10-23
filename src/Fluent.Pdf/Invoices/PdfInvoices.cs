@@ -12,7 +12,7 @@ public static class PdfInvoices
     public static PdfInvoiceValidation Write(PdfInvoiceData invoice, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, IPdfInvoiceProducer? producer = null, IPdfArchivalValidator? archivalValidator = null, IPdfInvoiceValidator? invoiceValidator = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (invoice == null || body == null || layout == null || providers == null)
-            throw new ArgumentNullException(nameof(invoice));
+            throw new ArgumentNullException(invoice == null ? nameof(invoice) : body == null ? nameof(body) : layout == null ? nameof(layout) : nameof(providers));
         if (output == null || !output.CanWrite)
             throw new ArgumentException("A writable borrowed invoice output is required.", nameof(output));
         PdfInvoiceValidation? result = null;
@@ -190,7 +190,14 @@ public static class PdfInvoices
             c.Checkpoint();
             var line = data.Lines[n];
             c.Consume(PdfResourceKind.ExpandedBytes, line.Description.Length * 8L + 4096);
-            blocks.Add(new PdfFlowParagraph(line.Description + " | Quantity " + line.Quantity.ToString(CultureInfo.InvariantCulture) + " | Unit " + line.UnitPrice.ToString(CultureInfo.InvariantCulture) + " | Net " + data.Money(data.LineNetAmounts[n]) + " | Tax " + data.Money(data.LineTaxAmounts[n]) + " " + data.Currency, body));
+            blocks.Add(new PdfFlowParagraph(line.Description + " | Quantity " + line.Quantity.ToString(CultureInfo.InvariantCulture) + " | Unit " + line.UnitPrice.ToString(CultureInfo.InvariantCulture) + " | Net " + data.Money(data.LineNetAmounts[n]) + " | Tax rate " + line.TaxRate.ToString(CultureInfo.InvariantCulture) + "% " + data.Currency, body));
+        }
+
+        foreach (var category in data.TaxCategories)
+        {
+            c.Checkpoint();
+            c.Consume(PdfResourceKind.ExpandedBytes, 4096);
+            blocks.Add(new PdfFlowParagraph("Tax rate " + category.TaxRate.ToString(CultureInfo.InvariantCulture) + "% | Basis " + data.Money(category.TaxableAmount) + " | Tax " + data.Money(category.TaxAmount) + " " + data.Currency, body));
         }
 
         blocks.Add(new PdfFlowParagraph("Net total " + data.Money(data.NetTotal) + " " + data.Currency, body));

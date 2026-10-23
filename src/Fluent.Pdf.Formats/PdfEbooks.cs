@@ -79,7 +79,7 @@ public static class PdfEbooks
     public static PdfOperationReport WriteEpub(PdfDocumentSnapshot source, IEnumerable<int> pages, Stream output, PdfEbookMetadata metadata, PdfEbookOptions options, PdfProviderRegistry? providers = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null || metadata == null || options == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : metadata == null ? nameof(metadata) : nameof(options));
         if (output == null || !output.CanWrite)
             throw new ArgumentException("A writable borrowed ebook stream is required.", nameof(output));
         providers ??= PdfProviderRegistry.Empty;
@@ -153,7 +153,7 @@ public static class PdfEbooks
     public static PdfDocument ImportReflowText(Stream input, PdfFormatTextOptions text, PdfProviderRegistry providers, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (text == null || providers == null)
-            throw new ArgumentNullException(nameof(text));
+            throw new ArgumentNullException(text == null ? nameof(text) : nameof(providers));
         PdfDocument? result = null;
         var finish = new List<Action<PdfOperationReport>>();
         try
@@ -229,9 +229,7 @@ public static class PdfEbooks
                     }
 
                     c.Consume(PdfResourceKind.ExpandedBytes, units * 8 + nodes * 16 + 4096);
-                    var flat = new StringBuilder();
-                    Flatten(body, flat, c);
-                    var paragraphs = flat.ToString().Split(new[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    var paragraphs = Flatten(body, c);
                     foreach (string paragraph in paragraphs)
                         if (paragraph.Length > 1000000)
                             throw Error(c, "TextExtent", "A text paragraph exceeds the finite flow profile.");
@@ -258,7 +256,7 @@ public static class PdfEbooks
     public static PdfOperationReport WriteMobiSource(PdfDocumentSnapshot source, IEnumerable<int> pages, Stream output, PdfEbookMetadata metadata, PdfTextExtractionOptions? text = null, PdfProviderRegistry? providers = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null || metadata == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : nameof(metadata));
         if (output == null || !output.CanWrite)
             throw new ArgumentException("A writable borrowed source stream is required.", nameof(output));
         text ??= new(includeInvisibleText: false);
@@ -317,29 +315,66 @@ public static class PdfEbooks
         }
     }
 
-    private static void Flatten(XElement element, StringBuilder output, PdfOperationContext c)
+    private static IReadOnlyList<string> Flatten(XElement body, PdfOperationContext c)
     {
-        using var depth = c.EnterScope(PdfResourceKind.Depth);
-        c.Checkpoint();
-        bool block = TextBlocks.Contains(element.Name.LocalName);
-        if (block)
-            output.Append("\n\n");
-        foreach (var node in element.Nodes())
+        var paragraphs = new List<string>();
+        var output = new StringBuilder();
+        bool space = false;
+        void Flush()
         {
-            c.Checkpoint();
-            if (node is XText text)
-                output.Append(text.Value);
-            else if (node is XElement child)
-            {
-                if (child.Name == Html + "br")
-                    output.Append('\n');
-                else
-                    Flatten(child, output, c);
-            }
+            if (output.Length > 0)
+                paragraphs.Add(output.ToString());
+            output.Clear();
+            space = false;
         }
 
-        if (block)
-            output.Append("\n\n");
+        void Walk(XElement element, bool preserve)
+        {
+            using var depth = c.EnterScope(PdfResourceKind.Depth);
+            c.Checkpoint();
+            bool block = TextBlocks.Contains(element.Name.LocalName);
+            if (block)
+                Flush();
+            preserve |= element.Name == Html + "pre";
+            foreach (var node in element.Nodes())
+            {
+                c.Checkpoint();
+                if (node is XText text)
+                {
+                    foreach (char ch in text.Value)
+                    {
+                        if (preserve)
+                            output.Append(ch);
+                        else if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r')
+                            space = output.Length > 0 && output[output.Length - 1] != '\n';
+                        else
+                        {
+                            if (space)
+                                output.Append(' ');
+                            output.Append(ch);
+                            space = false;
+                        }
+                    }
+                }
+                else if (node is XElement child)
+                {
+                    if (child.Name == Html + "br")
+                    {
+                        output.Append('\n');
+                        space = false;
+                    }
+                    else
+                        Walk(child, preserve);
+                }
+            }
+
+            if (block)
+                Flush();
+        }
+
+        Walk(body, false);
+        Flush();
+        return paragraphs;
     }
 
     private static readonly HashSet<string> TextBlocks = new(new[] { "p", "pre", "div", "section", "article", "h1", "h2", "h3", "h4", "h5", "h6" }, StringComparer.Ordinal);

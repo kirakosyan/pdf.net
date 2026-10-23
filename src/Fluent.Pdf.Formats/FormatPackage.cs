@@ -199,31 +199,125 @@ internal sealed class FormatPackage : IDisposable
     {
         using var output = new PdfCodecBufferStream(c, 67108864);
         var names = new HashSet<string>(StringComparer.Ordinal);
-        int count = 0;
+        var directory = new List<(byte[] Name, uint Crc, int Method, int Length, long Compressed, long Offset)>();
         long expanded = 0;
-        using (var zip = new ZipArchive(output, ZipArchiveMode.Create, leaveOpen: true))
-            foreach (var item in entries)
+        c.Consume(PdfResourceKind.ExpandedBytes, 8192);
+        var chunk = new byte[8192];
+        void U16(int value)
+        {
+            output.WriteByte((byte)value);
+            output.WriteByte((byte)(value >> 8));
+        }
+
+        void U32(long value)
+        {
+            U16((int)value);
+            U16((int)(value >> 16));
+        }
+
+        foreach (var item in entries)
+        {
+            c.Checkpoint();
+            c.Consume(PdfResourceKind.Objects, 1);
+            c.Consume(PdfResourceKind.ExpandedBytes, item.Name.Length * 32L + 4096);
+            if (item.Bytes.Length > 16777216 || (expanded += item.Bytes.Length) > 67108864)
+                throw FormatIo.Error(c, "PackageLimits", "Package part/total expansion exceeds the declared profile.");
+            if (directory.Count == 4096 || !names.Add(item.Name))
+                throw FormatIo.Error(c, "PackageIdentity", "A finite unique package inventory is required.");
+            Name(item.Name, c);
+            var name = Encoding.ASCII.GetBytes(item.Name);
+            uint crc = 0xffffffff;
+            for (int at = 0; at < item.Bytes.Length; at++)
             {
-                c.Checkpoint();
-                c.Consume(PdfResourceKind.Objects, 1);
-                c.Consume(PdfResourceKind.ExpandedBytes, item.Name.Length * 32L + 4096);
-                if (item.Bytes.Length > 16777216 || (expanded += item.Bytes.Length) > 67108864)
-                    throw FormatIo.Error(c, "PackageLimits", "Package part/total expansion exceeds the declared profile.");
-                if (++count > 4096 || !names.Add(item.Name))
-                    throw FormatIo.Error(c, "PackageIdentity", "A finite unique package inventory is required.");
-                Name(item.Name, c);
-                var entry = zip.CreateEntry(item.Name, item.Stored ? CompressionLevel.NoCompression : CompressionLevel.Optimal);
-                entry.LastWriteTime = new DateTimeOffset(1980, 1, 1, 0, 0, 0, TimeSpan.Zero);
-                using var target = entry.Open();
-                for (int at = 0; at < item.Bytes.Length;)
+                if ((at & 8191) == 0)
+                    c.Checkpoint();
+                crc = Crc[(crc ^ item.Bytes[at]) & 255] ^ (crc >> 8);
+            }
+
+            crc ^= 0xffffffff;
+            PdfByteStore? compressed = null;
+            if (!item.Stored)
+            {
+                using var buffer = new PdfCodecBufferStream(c, 17825792);
+                using (var deflate = new DeflateStream(buffer, CompressionLevel.Optimal, leaveOpen: true))
+                    for (int at = 0; at < item.Bytes.Length; at += 8192)
+                    {
+                        c.Checkpoint();
+                        deflate.Write(item.Bytes, at, Math.Min(8192, item.Bytes.Length - at));
+                    }
+
+                compressed = buffer.Finish();
+            }
+
+            long length = compressed?.Length ?? item.Bytes.Length, offset = output.BufferedLength;
+            int method = item.Stored ? 0 : 8;
+            U32(0x04034b50);
+            U16(20);
+            U16(0);
+            U16(method);
+            U16(0);
+            U16(33);
+            U32(crc);
+            U32(length);
+            U32(item.Bytes.Length);
+            U16(name.Length);
+            U16(0);
+            output.Write(name, 0, name.Length);
+            if (compressed == null)
+            {
+                for (int at = 0; at < item.Bytes.Length; at += 8192)
                 {
                     c.Checkpoint();
-                    int n = Math.Min(8192, item.Bytes.Length - at);
-                    target.Write(item.Bytes, at, n);
-                    at += n;
+                    output.Write(item.Bytes, at, Math.Min(8192, item.Bytes.Length - at));
+                }
+            }
+            else
+            {
+                using var input = compressed.Open(0, compressed.Length);
+                int n;
+                while ((n = input.Read(chunk, 0, chunk.Length)) > 0)
+                {
+                    c.Checkpoint();
+                    output.Write(chunk, 0, n);
                 }
             }
 
+            directory.Add((name, crc, method, item.Bytes.Length, length, offset));
+        }
+
+        long start = output.BufferedLength;
+        foreach (var item in directory)
+        {
+            c.Checkpoint();
+            U32(0x02014b50);
+            U16(20);
+            U16(20);
+            U16(0);
+            U16(item.Method);
+            U16(0);
+            U16(33);
+            U32(item.Crc);
+            U32(item.Compressed);
+            U32(item.Length);
+            U16(item.Name.Length);
+            U16(0);
+            U16(0);
+            U16(0);
+            U16(0);
+            U32(0);
+            U32(item.Offset);
+            output.Write(item.Name, 0, item.Name.Length);
+        }
+
+        long size = output.BufferedLength - start;
+        U32(0x06054b50);
+        U16(0);
+        U16(0);
+        U16(directory.Count);
+        U16(directory.Count);
+        U32(size);
+        U32(start);
+        U16(0);
         return output.Finish();
     }
 

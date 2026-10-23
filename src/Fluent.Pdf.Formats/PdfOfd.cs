@@ -39,7 +39,7 @@ public static class PdfOfd
     public static PdfOperationReport WriteRasterPages(PdfDocumentSnapshot source, IEnumerable<int> pages, Stream output, PdfOfdIdentity identity, PdfRenderOptions rendering, PdfProviderRegistry providers, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null || identity == null || rendering == null || providers == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : identity == null ? nameof(identity) : rendering == null ? nameof(rendering) : nameof(providers));
         if (output == null || !output.CanWrite)
             throw new ArgumentException("A writable borrowed OFD stream is required.", nameof(output));
         return PdfFont.Run("ExportRasterOfd", "managed.ofd-raster", policy ?? source.Options.OperationPolicy, cancellationToken, c => FormatIo.Copy(Build(source, pages, identity, rendering, providers, c), output, c), PdfCapability.RenderPages);

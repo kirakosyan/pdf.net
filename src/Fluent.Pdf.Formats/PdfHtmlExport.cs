@@ -54,7 +54,7 @@ public static class PdfHtmlExport
     public static PdfOperationReport Write(PdfDocumentSnapshot source, IEnumerable<int> pages, Stream output, PdfHtmlExportOptions options, PdfProviderRegistry? providers = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null || options == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : nameof(options));
         if (output == null || !output.CanWrite)
             throw new ArgumentException("A writable borrowed HTML stream is required.", nameof(output));
         providers ??= PdfProviderRegistry.Empty;
@@ -65,7 +65,7 @@ public static class PdfHtmlExport
     public static PdfOperationReport WriteFile(PdfDocumentSnapshot source, IEnumerable<int> pages, string path, PdfHtmlExportOptions options, PdfProviderRegistry? providers = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null || options == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : nameof(options));
         Guard.Text(path, nameof(path), 32767);
         providers ??= PdfProviderRegistry.Empty;
         return PdfFont.Run("ExportHtmlFile", "managed.html-export", policy ?? source.Options.OperationPolicy, cancellationToken, c =>

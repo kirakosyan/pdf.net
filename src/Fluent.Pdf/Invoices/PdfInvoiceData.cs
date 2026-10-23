@@ -41,10 +41,28 @@ public sealed class PdfInvoiceLine
     }
 }
 
+/// <summary>Immutable tax breakdown for one explicit percentage rate. No tax exemption or jurisdiction is inferred.</summary>
+public sealed class PdfInvoiceTaxCategory
+{
+    internal PdfInvoiceTaxCategory(decimal rate, decimal basis, decimal amount)
+    {
+        TaxRate = rate;
+        TaxableAmount = basis;
+        TaxAmount = amount;
+    }
+
+    /// <summary>Gets the percentage tax rate.</summary>
+    public decimal TaxRate { get; }
+    /// <summary>Gets the sum of rounded line net amounts in this category.</summary>
+    public decimal TaxableAmount { get; }
+    /// <summary>Gets tax rounded once on the category taxable amount.</summary>
+    public decimal TaxAmount { get; }
+}
+
 /// <summary>Immutable source model with explicit edition, parties, UTC issue time, currency and rounding. No discounts, credit notes, prepayments or inferred tax jurisdiction are supported in this source profile.</summary>
 public sealed class PdfInvoiceData
 {
-    /// <summary>Captures1–1000 lines and computes per-line net/tax using the selected midpoint rounding and explicit currency minor units. Supported currency codes are EUR/USD/GBP(two), JPY(zero), BHD(three).</summary>
+    /// <summary>Captures1–1000 lines and computes per-line net and per-rate-category tax using the selected midpoint rounding and explicit currency minor units. Supported currency codes are EUR/USD/GBP(two), JPY(zero), BHD(three).</summary>
     public PdfInvoiceData(PdfInvoiceProfile profile, string identifier, string seller, string buyer, DateTimeOffset issueTime, string currency, MidpointRounding rounding, IEnumerable<PdfInvoiceLine> lines)
     {
         if (!Enum.IsDefined(typeof(PdfInvoiceProfile), profile))
@@ -63,24 +81,28 @@ public sealed class PdfInvoiceData
             throw new ArgumentNullException(nameof(lines));
         var values = new List<PdfInvoiceLine>();
         var net = new List<decimal>();
-        var tax = new List<decimal>();
+        var bases = new SortedDictionary<decimal, decimal>();
         decimal totalNet = 0, totalTax = 0;
         foreach (var line in lines)
         {
             if (line == null || values.Count == 1000)
                 throw new ArgumentException("Invoice lines must be nonnull and bounded to1000.", nameof(lines));
-            decimal n = decimal.Round(line.Quantity * line.UnitPrice, digits, rounding), t = decimal.Round(n * line.TaxRate / 100, digits, rounding);
+            decimal n = decimal.Round(line.Quantity * line.UnitPrice, digits, rounding);
             totalNet += n;
-            totalTax += t;
-            if (totalNet + totalTax > 1000000000000000m)
+            bases.TryGetValue(line.TaxRate, out decimal basis);
+            bases[line.TaxRate] = basis + n;
+            if (totalNet > 1000000000000000m)
                 throw new ArgumentException("Invoice totals exceed the finite amount profile.", nameof(lines));
             values.Add(line);
             net.Add(n);
-            tax.Add(t);
         }
 
         if (values.Count == 0)
             throw new ArgumentException("A nonempty invoice is required.", nameof(lines));
+        var categories = bases.Select(pair => new PdfInvoiceTaxCategory(pair.Key, pair.Value, decimal.Round(pair.Value * pair.Key / 100, digits, rounding))).ToList();
+        totalTax = categories.Sum(category => category.TaxAmount);
+        if (totalNet + totalTax > 1000000000000000m)
+            throw new ArgumentException("Invoice totals exceed the finite amount profile.", nameof(lines));
         Profile = profile;
         Identifier = identifier;
         Seller = seller;
@@ -91,7 +113,7 @@ public sealed class PdfInvoiceData
         Rounding = rounding;
         Lines = new ReadOnlyCollection<PdfInvoiceLine>(values);
         LineNetAmounts = new ReadOnlyCollection<decimal>(net);
-        LineTaxAmounts = new ReadOnlyCollection<decimal>(tax);
+        TaxCategories = new ReadOnlyCollection<PdfInvoiceTaxCategory>(categories);
         NetTotal = totalNet;
         TaxTotal = totalTax;
         GrandTotal = totalNet + totalTax;
@@ -117,11 +139,11 @@ public sealed class PdfInvoiceData
     public IReadOnlyList<PdfInvoiceLine> Lines { get; }
     /// <summary>Gets per-line rounded net amounts.</summary>
     public IReadOnlyList<decimal> LineNetAmounts { get; }
-    /// <summary>Gets per-line rounded tax amounts.</summary>
-    public IReadOnlyList<decimal> LineTaxAmounts { get; }
+    /// <summary>Gets the ordered per-rate tax breakdown.</summary>
+    public IReadOnlyList<PdfInvoiceTaxCategory> TaxCategories { get; }
     /// <summary>Gets the exact sum of rounded line net amounts.</summary>
     public decimal NetTotal { get; }
-    /// <summary>Gets the exact sum of rounded line tax amounts.</summary>
+    /// <summary>Gets the exact sum of rounded category tax amounts.</summary>
     public decimal TaxTotal { get; }
     /// <summary>Gets reconciled gross/due amount; no prepayment or discount is inferred.</summary>
     public decimal GrandTotal { get; }

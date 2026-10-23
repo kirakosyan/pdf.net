@@ -39,7 +39,7 @@ public sealed class RasterImportTests
         Assert.Equal(3, result.Pages.Count);
         Assert.Equal(new PdfPageSize(1, 2), result.Pages[0].Size);
         Assert.Equal(new PdfPageSize(2, 3), result.Pages[1].Size);
-        Assert.Equal(new[] { 1, 0, 1 }, decoder.Frames);
+        Assert.Equal(new[] { 1, 0 }, decoder.Frames);
         Assert.Equal(80, SignatureTests.Bytes(Image(result, 0).OpenSamples())[0]);
         Assert.Equal(40, SignatureTests.Bytes(Image(result, 1).OpenSamples())[0]);
         Assert.All(SignatureTests.Bytes(Image(result, 0).SoftMask!.OpenSamples()), value => Assert.Equal(128, value));
@@ -112,7 +112,7 @@ public sealed class RasterImportTests
         // Original APNG mutation: acTL declares two frames; CRC computed independently.
         var animated = png.Take(33).Concat(Convert.FromBase64String("AAAACGFjVEwAAAACAAAAAPONk3A=")).Concat(png.Skip(33)).ToArray();
         using var apng = new MemoryStream(animated);
-        Assert.Equal("Image.PngAnimation", Assert.Throws<PdfException>(() => PdfRasterDocuments.Create(new[] { new PdfRasterInput(apng, PdfRasterFileFormat.Png, new[] { 0 }, allowAnimationFrames: true) })).Diagnostic.Code);
+        Assert.Equal("Image.AnimationSelection", Assert.Throws<PdfException>(() => PdfRasterDocuments.Create(new[] { new PdfRasterInput(apng, PdfRasterFileFormat.Png, new[] { 0 }, allowAnimationFrames: true) })).Diagnostic.Code);
         using var input = new MemoryStream(png);
         using var csharp = ContractExamples.CSharp.ContractExample.ImportRaster(new[] { new PdfRasterInput(input, PdfRasterFileFormat.Png, new[] { 0 }) });
         Assert.Single(csharp.Pages);
@@ -120,6 +120,19 @@ public sealed class RasterImportTests
         using var vb = ContractExamples.VisualBasic.ContractExample.ImportRaster(new[] { new PdfRasterInput(input, PdfRasterFileFormat.Png, new[] { 0 }) });
         Assert.Single(vb.Pages);
         Assert.True(input.CanRead);
+    }
+
+    [Fact]
+    public void RepeatedFramesReuseOneAssetAndChargeOnlyItsColorAndAlphaPlanes()
+    {
+        using var input = new MemoryStream(new byte[] { 1 });
+        var decoder = new Decoder();
+        using var document = PdfRasterDocuments.Create(new[] { new PdfRasterInput(input, PdfRasterFileFormat.Tiff, new[] { 0, 0, 0 }) }, codecs: new(decoder), policy: new(limits: new(maximumPixels: 12)));
+        Assert.Equal(new[] { 0 }, decoder.Frames);
+        var a = document.Pages[0].SnapshotGraphicsResources(null).Bindings.Select(binding => binding.Resource).Single();
+        var b = document.Pages[1].SnapshotGraphicsResources(null).Bindings.Select(binding => binding.Resource).Single();
+        Assert.Same(a.Dependencies.Bindings.Single().Resource, b.Dependencies.Bindings.Single().Resource);
+        Assert.Equal(3, document.Pages.Count);
     }
 
     private sealed class Decoder : IPdfRasterDocumentDecoder

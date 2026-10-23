@@ -41,7 +41,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
             throw PdfWriterCore.Error(c, "Print.PrinterUri", "An explicit credential-free IPP/IPPS printer URI is required.");
         if (jobId.HasValue && jobId.Value < 1)
             throw new ArgumentOutOfRangeException(nameof(jobId));
-        using var request = new PdfCodecBufferStream(c, c.Available(PdfResourceKind.ExpandedBytes));
+        using var request = new PdfCodecBufferStream(c, 65536);
         request.WriteByte(2);
         request.WriteByte(0);
         U16(request, operation);
@@ -68,25 +68,13 @@ public sealed class IppPrintProvider : IPdfPrintProvider
         }
 
         request.WriteByte(3);
-        if (pdf != null)
-        {
-            c.Consume(PdfResourceKind.ExpandedBytes, 8192);
-            var chunk = new byte[8192];
-            int n;
-            using var input = c.BorrowExpandedInput(pdf);
-            while ((n = input.Read(chunk, 0, chunk.Length)) > 0)
-            {
-                c.Checkpoint();
-                request.Write(chunk, 0, n);
-            }
-        }
-
         var bytes = request.Finish();
-        using var source = bytes.Open(0, bytes.Length);
+        using var header = bytes.Open(0, bytes.Length);
+        using var source = new PdfReadSequenceStream(true, pdf == null ? new[] { header } : new[] { header, pdf });
         using var response = new PdfCodecBufferStream(c, 1048576);
         try
         {
-            using var input = c.BorrowExpandedInput(source);
+            using var input = new BorrowedStream(source, true, c, null);
             using var output = new BorrowedStream(response, false, c);
             _transport.Exchange(endpoint, input, output, c);
         }
@@ -126,7 +114,7 @@ public sealed class IppPrintProvider : IPdfPrintProvider
         int status = Short();
         if (Int() != 1)
             throw PdfWriterCore.Error(c, "Print.Protocol", "The IPP request identifier does not match.");
-        if (status != 0)
+        if (status >= 0x0400)
             throw PdfWriterCore.Error(c, status == 0x0401 || status == 0x0402 || status == 0x0403 ? "Print.Permission" : status < 0x0400 ? "Print.Substitution" : "Print.SpoolRejected", "The spooler rejected the request or substituted requested attributes; inspect the configured spooler for details. Submission is never retried.");
         int group = 0, id = 0, state = 0;
         bool hasId = false, hasState = false, ended = false;
@@ -207,7 +195,10 @@ public sealed class IppPrintProvider : IPdfPrintProvider
             9 => PdfPrintJobState.Completed,
             _ => PdfPrintJobState.Unknown
         };
-        return new(printer, expectedId ?? id, observed);
+        var job = new PdfPrintJob(printer, expectedId ?? id, observed);
+        if (status != 0)
+            c.ReportFailure(new("Print.Substitution", "The spooler accepted the operation with ignored/substituted attributes. The exact job is retained in exception Data[Fluent.Pdf.PrintJob] for explicit status/cancellation; submission is never retried."), "Fluent.Pdf.PrintJob", job);
+        return job;
     }
 
     private static void Attribute(Stream output, byte tag, string name, string value, PdfOperationContext c)

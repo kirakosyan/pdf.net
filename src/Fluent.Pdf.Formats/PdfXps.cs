@@ -21,7 +21,7 @@ public static class PdfXps
     public static PdfOperationReport WriteRasterPages(PdfDocumentSnapshot source, IEnumerable<int> pages, Stream output, PdfXpsFormat format, string language, PdfRenderOptions rendering, PdfProviderRegistry providers, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (source == null || pages == null || rendering == null || providers == null)
-            throw new ArgumentNullException(nameof(source));
+            throw new ArgumentNullException(source == null ? nameof(source) : pages == null ? nameof(pages) : rendering == null ? nameof(rendering) : nameof(providers));
         FormatIo.Language(language);
         Namespace(format);
         if (output == null || !output.CanWrite)

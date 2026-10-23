@@ -23,7 +23,7 @@ public static class PdfFormattingObjects
         if (input == null || !input.CanRead)
             throw new ArgumentException("Readable borrowed XML input is required.", nameof(input));
         if (body == null || providers == null)
-            throw new ArgumentNullException(nameof(body));
+            throw new ArgumentNullException(body == null ? nameof(body) : nameof(providers));
         if (maximumPages < 1 || maximumPages > 10000)
             throw new ArgumentOutOfRangeException(nameof(maximumPages));
         PdfDocument? result = null;
