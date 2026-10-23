@@ -2,4 +2,4 @@
 *.nupkg -text
 *.snupkg -text
 *.png -text
-*.pdf -text
+*.pdf binary
