@@ -256,7 +256,7 @@ public sealed class PdfMemoryVectorStore : IPdfVectorStore
 
     private static long Size(PdfVectorIndex index, PdfOperationContext c)
     {
-        long size = 8192;
+        long size = 65536 + index.Capture.PageIndices.Count * 8L + index.Capture.OperationReport.Diagnostics.Count * 12288L;
         foreach (var chunk in index.Capture.Chunks)
         {
             c.Checkpoint();
