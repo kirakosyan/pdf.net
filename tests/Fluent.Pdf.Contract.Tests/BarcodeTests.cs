@@ -11,6 +11,19 @@ public sealed class BarcodeTests
     private readonly ITestOutputHelper _output;
     public BarcodeTests(ITestOutputHelper output) => _output = output;
     private static readonly ZxingBarcodeDecoder Decoder = new();
+    private sealed class InvalidBarcodeService : IPdfProvider
+    {
+        public PdfProviderDescriptor Descriptor { get; } = new("fixture.invalid-barcode-service", "1", PdfCapability.Barcodes);
+    }
+
+    [Fact]
+    public void RegistrationRequiresTheDeclaredIndependentDecoderContract()
+    {
+        Assert.Throws<ArgumentException>(() => new PdfProviderRegistry(new InvalidBarcodeService()));
+        var registry = new PdfProviderRegistry(Decoder);
+        Assert.Same(Decoder, registry.GetRequired<IPdfBarcodeDecoder>(PdfCapability.Barcodes));
+    }
+
     private static string FixtureRoot => Path.Combine(AppContext.BaseDirectory, "barcode-fixtures");
 
     private static void SavePixels(string name, PdfBarcodeSymbol symbol)
