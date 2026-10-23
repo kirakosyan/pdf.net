@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-079",
+  "issue": 84,
+  "sourceCommit": "f02bd1055076dfe759d7908cefa3069d1cf78575",
+  "commitBinding": "Source/runtime/API/recorded independent observations were produced from this clean code checkpoint. Subsequent evidence/docs changes retain these code hashes.",
+  "productionQualified": false,
+  "actualModelInferenceQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "fac3565e0ce9ac1df8ca8776a2b0791a4bb918d4a4a6f54c6e70ae930165b39c",
+      "bytes": 1609
+    },
+    {
+      "path": "eng/ContractProjectReference.props",
+      "sha256": "1e93afeaffb170af53f828b91b6f356529e0308fe599fc7f92b1c6763f07e643",
+      "bytes": 5155
+    },
+    {
+      "path": "eng/check-api.ps1",
+      "sha256": "a8481e55a13544b785c213cbc47cf1c7736d0fa707d3e6dbec56f3a1e71e0119",
+      "bytes": 1793
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "7b7ed364eb0fd46afedf1f43c6fb7f2b2350cf3214cdcc25581a5c0071ffbbc4",
+      "bytes": 6015
+    },
+    {
+      "path": "eng/verify-intelligence-fixtures.py",
+      "sha256": "b1bcc8713cf3fbced5f73d6136f6b7885e641ceab2a0ae348da2ece0938b46c9",
+      "bytes": 6980
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "1f9dde1b7454f694b5b1a4c99f088cdb1ef897f96099216a59589101f8b54be6",
+      "bytes": 31576
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/packages.lock.json",
+      "sha256": "3c72509919c745530daa153a1a7e1fec7f164862af32cb14b8556f79fa409444",
+      "bytes": 30940
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "8c8c5a86f79240107717e719fce5fb33b33706cb83d5e29194a63b7833668029",
+      "bytes": 36856
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/packages.lock.json",
+      "sha256": "3c72509919c745530daa153a1a7e1fec7f164862af32cb14b8556f79fa409444",
+      "bytes": 30940
+    },
+    {
+      "path": "examples/README.md",
+      "sha256": "8d4d1ff19e4e927018ee135004d4636ab3aec3ade0152786ddf22d54b90f1627",
+      "bytes": 3549
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/AssemblyInfo.cs",
+      "sha256": "c3c78a0a1e0449270c3b31d9b21a7aae7a2bbb4adf681bc00be8bfbb24af7241",
+      "bytes": 100
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/Fluent.Pdf.Intelligence.csproj",
+      "sha256": "2341a28da30d50f9ddb1d86565dfc7a0533751fe79d5b12f1bb93d4c688621cf",
+      "bytes": 856
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/IntelligenceJson.cs",
+      "sha256": "4f1c4bfd442cb1025c6eb5a98ac32325b15b7375f9d20dcd4d4162c3e24995c9",
+      "bytes": 7437
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/PdfChatDocumentModel.cs",
+      "sha256": "c04a5aa286798b9b4d52915cd9585f85c07e8ca05c36f2c3e7cddecfafe1de2f",
+      "bytes": 16623
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/PdfDocumentIntelligence.cs",
+      "sha256": "48e6345e8d6cc5f14875404430ebd7b6a98ffa84b6dce544d2723495846e8a04",
+      "bytes": 22094
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/PdfIntelligenceContracts.cs",
+      "sha256": "589893a2da6da63550d7c4af4b841775ec6ea064cd0b7acd6faa59b1f6e5c604",
+      "bytes": 21533
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/PdfIntelligenceSchema.cs",
+      "sha256": "ed17f81921ddc048af0a31a37e2720acb4314b79c8bb698735ae32cbe80d3808",
+      "bytes": 13909
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/PublicAPI.Shipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+      "bytes": 17
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/PublicAPI.Unshipped.txt",
+      "sha256": "25534c99050d747e1ac5b4920ed3598e633f2fa2916bd43fad4fe8a8009cef1e",
+      "bytes": 14579
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/packages.lock.json",
+      "sha256": "02b6e7778b288cfce28ff172638ef3fa0a3d740e4cf79e97b746b432a325957e",
+      "bytes": 2627
+    },
+    {
+      "path": "src/Fluent.Pdf/Conversion/PdfInputJson.cs",
+      "sha256": "8c703a901c7793a0a84a6725f1253330cc118514e9529ec581034ffa286be7d7",
+      "bytes": 8955
+    },
+    {
+      "path": "src/Fluent.Pdf/Properties/AssemblyInfo.cs",
+      "sha256": "1ef9a1b2cdd66299d1836003d7ac34515101e72cf1bd3f15cb26776f69ff4c1d",
+      "bytes": 855
+    },
+    {
+      "path": "src/Fluent.Pdf/Rendering/PdfRasterExport.cs",
+      "sha256": "5078c5a74b7052e8b3b8ee20e4e8d5a0fbb81de6a05488676813f183df1b70a6",
+      "bytes": 19347
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/IntelligenceTests.cs",
+      "sha256": "e4902c24679841f17fd3b33a33ce87e4bb1e9fec90a9f006ce036be5d2ca837e",
+      "bytes": 23032
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/RuntimeIdentityTests.cs",
+      "sha256": "f1ca7b0baf4d7c4cce73ac472f490a60e9fc16fecfe0349d6da54464fcf93c31",
+      "bytes": 3368
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/packages.lock.json",
+      "sha256": "c4f3ef92097531d920f4e43314eef031f68312b8018c59d84875dd26f2cb0366",
+      "bytes": 36564
+    }
+  ],
+  "fourTargetBuild": {
+    "path": "/workspace/scratch/intelligence-clean-four-target-build.log",
+    "sha256": "2e75548a93f86b14ef379b708b6439b429db5afd6f827753d4791bee2353df6e",
+    "bytes": 8235
+  },
+  "managedLanes": [
+    {
+      "profile": "net8",
+      "counters": {
+        "total": "1620",
+        "executed": "1620",
+        "passed": "1620",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 23,
+      "report": {
+        "path": "artifacts/contracts/remaining/intelligence/verified-net8/verified-net8.trx",
+        "sha256": "c339a26b5513471aabe0eb2630412da4ebdc228e1c7949d9839ad4178d8886ab",
+        "bytes": 2372988
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v8.0\nActual runtime: .NET 8.0.32\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "libraryAssetsAsserted": 13,
+      "log": {
+        "path": "/workspace/scratch/intelligence-verified-net8.log",
+        "sha256": "fd65c37def5a9363aa6f1f33476cc9cab2fc8df6950bbc5da4371210442b1803",
+        "bytes": 455
+      }
+    },
+    {
+      "profile": "net10",
+      "counters": {
+        "total": "1620",
+        "executed": "1620",
+        "passed": "1620",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 23,
+      "report": {
+        "path": "artifacts/contracts/remaining/intelligence/verified-net10/verified-net10.trx",
+        "sha256": "4bb6fbba6e9dc2918adbd6f16ace311d620846afbad68ef854850c9a5f1dd78a",
+        "bytes": 2376232
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "libraryAssetsAsserted": 13,
+      "log": {
+        "path": "/workspace/scratch/intelligence-verified-net10.log",
+        "sha256": "85f6d61852faa59f283305f51072731ee05d34e55f64cdad6177a7077cd668ec",
+        "bytes": 460
+      }
+    },
+    {
+      "profile": "netstandard",
+      "counters": {
+        "total": "1620",
+        "executed": "1620",
+        "passed": "1620",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 23,
+      "report": {
+        "path": "artifacts/contracts/remaining/intelligence/verified-netstandard/verified-netstandard.trx",
+        "sha256": "1bc5179f9e67710a6ac791289e9493a644e5f47770a0d37a0f98a11b5401c584",
+        "bytes": 2376232
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETStandard,Version=v2.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "libraryAssetsAsserted": 13,
+      "log": {
+        "path": "/workspace/scratch/intelligence-verified-netstandard.log",
+        "sha256": "5b3e33eebb4f9586226b03083e767a3cfbbfe5ae8be47da9aebbb3472468373b",
+        "bytes": 2532
+      }
+    }
+  ],
+  "localNativeLimit": "The same five native classes were explicitly filtered because this container lacks required Landlock isolation; these required production lanes remain open.",
+  "apiComparisons": {
+    "passed": 39,
+    "report": {
+      "path": "artifacts/contracts/remaining/intelligence/api/comparisons.json",
+      "sha256": "23477277c1e74782cb662f9de2c8e8eccfe3a772aa37dca63665989bbd47f4e0",
+      "bytes": 10519
+    },
+    "binaryBindings": [
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net472",
+        "leftSha256": "1aaa860a2fefb98acedd2fe1a1aa8633e5c72f213cc3a3dcdd8392055a2c43be",
+        "rightSha256": "519c4f93d934848674aede19ed00a7d4b03a865875399a41510de2a632b31ceb",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net8.0",
+        "leftSha256": "1aaa860a2fefb98acedd2fe1a1aa8633e5c72f213cc3a3dcdd8392055a2c43be",
+        "rightSha256": "3003308b186c9ebf8e7010f061148572cbca52fb0398738fc7e2f0e50feb505e",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net10.0",
+        "leftSha256": "1aaa860a2fefb98acedd2fe1a1aa8633e5c72f213cc3a3dcdd8392055a2c43be",
+        "rightSha256": "f0a241002b70229450e7d024a15f465a939591f212b410d5af6d29683202528a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net472",
+        "leftSha256": "0c1a9b9dba4ca06dd9cdfee20fdf4c93ca860b3974cb9e446e6a593af998d0d4",
+        "rightSha256": "6eec8aa563889d13aeb88b8dfe41b7eee3308a2d4126988ae372f5de9f6ec095",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net8.0",
+        "leftSha256": "0c1a9b9dba4ca06dd9cdfee20fdf4c93ca860b3974cb9e446e6a593af998d0d4",
+        "rightSha256": "3c486018d2e973333fce5ce6fc7196858d40abf7b18077f95a2f20c9ffe7cbec",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net10.0",
+        "leftSha256": "0c1a9b9dba4ca06dd9cdfee20fdf4c93ca860b3974cb9e446e6a593af998d0d4",
+        "rightSha256": "1411d93009ef63633d18a5780a86b257000b64cac67878fb9f59deacfd95726f",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net472",
+        "leftSha256": "da95b8ca41afeb788d616add384fc06575ae424e762f1eedbd622b4888b46c30",
+        "rightSha256": "55e77c423e381c5ee0cc1dfe5eda455787ac1ae6ced06dd1ae70b93833c69860",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net8.0",
+        "leftSha256": "da95b8ca41afeb788d616add384fc06575ae424e762f1eedbd622b4888b46c30",
+        "rightSha256": "5a7886dc0a7698e9a717b96ab5f7fad7a7ec62f1d1d309793d8eed2436aca457",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net10.0",
+        "leftSha256": "da95b8ca41afeb788d616add384fc06575ae424e762f1eedbd622b4888b46c30",
+        "rightSha256": "795e0767ccb5c6d1cc9cdbb081432213b4342015f225faeca675c8a9618680a1",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net472",
+        "leftSha256": "4d701344ecb649792ecc464179a43b85980c3cb14b14c7ecbd900e25d3051897",
+        "rightSha256": "eccc3d892c21f06953cc2225d67f413fce99fe939e3271ee35680df2ef8fb225",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net8.0",
+        "leftSha256": "4d701344ecb649792ecc464179a43b85980c3cb14b14c7ecbd900e25d3051897",
+        "rightSha256": "b379b7c2c21f461ce09daab713e2582ce9f616d2a72d484f82068caaac8281a1",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net10.0",
+        "leftSha256": "4d701344ecb649792ecc464179a43b85980c3cb14b14c7ecbd900e25d3051897",
+        "rightSha256": "1c0da31a3e15fe6148559a41c2d4f000667bfa7b365f9296c1cd57d86fa359c5",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net472",
+        "leftSha256": "31a1ed41be21f1dbfc34a43ccaab67ce13da26280f40b6101254a143eaa4352e",
+        "rightSha256": "c3cff0d7892931e240b3017befe72803d84cd8e2d9eb3f13b30ba203465256d8",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net8.0",
+        "leftSha256": "31a1ed41be21f1dbfc34a43ccaab67ce13da26280f40b6101254a143eaa4352e",
+        "rightSha256": "be1b445a14c17e311b3d17f750da13c69ec2f0c9ce13282116edd867dad1f3f3",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net10.0",
+        "leftSha256": "31a1ed41be21f1dbfc34a43ccaab67ce13da26280f40b6101254a143eaa4352e",
+        "rightSha256": "55cbe4ba6e0c1471d7fd3a378d9534f231d45cf391b3e21d7538220809103458",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net472",
+        "leftSha256": "4bfe6191300934103e9929d244cb652904e55d8773645bad169b380536b93f15",
+        "rightSha256": "abec392aa39f3bed5b2750dd13c43798d353bd187274592fa366515135d97961",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net8.0",
+        "leftSha256": "4bfe6191300934103e9929d244cb652904e55d8773645bad169b380536b93f15",
+        "rightSha256": "80f0af3f2cde9e579f13709377705dcb7d711858b671be7a2b7cb73563a66799",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net10.0",
+        "leftSha256": "4bfe6191300934103e9929d244cb652904e55d8773645bad169b380536b93f15",
+        "rightSha256": "338be29bdfef06491c079b7cbfc10589c9b0e1ca2b625e2b506bdf2bdc691c33",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net472",
+        "leftSha256": "e3e49bdaa7b7da0764fce8a1025a73c71948b0182fa4b37aca0fb7b399753e24",
+        "rightSha256": "0165ba67108f8622ba11a813b5d176386a536d5fde4ff2a6c98539d0eeb8d665",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net8.0",
+        "leftSha256": "e3e49bdaa7b7da0764fce8a1025a73c71948b0182fa4b37aca0fb7b399753e24",
+        "rightSha256": "3e5b5d46cd1d156285a61f99c1868d9b1d08d2f8500c5b1eeca0ea84a5c8beb6",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net10.0",
+        "leftSha256": "e3e49bdaa7b7da0764fce8a1025a73c71948b0182fa4b37aca0fb7b399753e24",
+        "rightSha256": "1e4314e8b6d15a61e24e1162769e91531ea567ce40a49b23a81a2030855891a9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net472",
+        "leftSha256": "8e39bcf7be54d6ffaf12191a50da5c70a9fe4f0899ef813ede73ec9998c15d55",
+        "rightSha256": "1b3ebed1a06cda06e9152086cfae40fc117385fbb2f96fe4183f2b22d3a5261d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net8.0",
+        "leftSha256": "8e39bcf7be54d6ffaf12191a50da5c70a9fe4f0899ef813ede73ec9998c15d55",
+        "rightSha256": "6c64db1fe6a6771814476d02e8722492e76a8c7bb6bec12ccebc671a622fd2ce",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net10.0",
+        "leftSha256": "8e39bcf7be54d6ffaf12191a50da5c70a9fe4f0899ef813ede73ec9998c15d55",
+        "rightSha256": "d3a8f66b765756fce1997240b29904a78153348f67f1eb2fb2c9b444c34da2e9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net472",
+        "leftSha256": "82a75e4d8718c50a544ea2ae080d963bda65626b2f097b4012b3626a45e763d4",
+        "rightSha256": "dad7dc9214600f34dc21a17a40fbcf5a059b760dbdde6ce17055ce70d37704c9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net8.0",
+        "leftSha256": "82a75e4d8718c50a544ea2ae080d963bda65626b2f097b4012b3626a45e763d4",
+        "rightSha256": "97a84c41129b0ae94ba6959ee1bbc7fdd949ff0744fd1d1c2b0868df9976d0c2",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net10.0",
+        "leftSha256": "82a75e4d8718c50a544ea2ae080d963bda65626b2f097b4012b3626a45e763d4",
+        "rightSha256": "cc7f83edb2bb71b1b3c519b8d8ceaabf92ef9de1f5875230f199f69ab2b86382",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net472",
+        "leftSha256": "53e9890040b930d81958a9af1de3b46ff49e94828af00f305b09e991071bad6a",
+        "rightSha256": "9ffaf57b90671eb8d5c8a2d05227feb2fc8632a6ef36d8353669c1f352c88f25",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net8.0",
+        "leftSha256": "53e9890040b930d81958a9af1de3b46ff49e94828af00f305b09e991071bad6a",
+        "rightSha256": "bbe76f4b2eb63c6cc99dad5067336a99e391280ac4488e983d71ab32a4e794ed",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net10.0",
+        "leftSha256": "53e9890040b930d81958a9af1de3b46ff49e94828af00f305b09e991071bad6a",
+        "rightSha256": "ed2a07b8a46fefdcc12e64e720d6050d42767d7aba52f54323c1f914cf1afd60",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net472",
+        "leftSha256": "a8e9e9c4c1a455ebc496784b22597b8f6be6e6564f53e6b41ffcdf3e0136a864",
+        "rightSha256": "7b953d02bae121df359bd55aaad78d4e4f1a3e717173212c72239a2d38a32d5d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net8.0",
+        "leftSha256": "a8e9e9c4c1a455ebc496784b22597b8f6be6e6564f53e6b41ffcdf3e0136a864",
+        "rightSha256": "824ee213ea78223306599dfbe0ff05e034d09944bc28fc53e722c0658f5e5a3b",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net10.0",
+        "leftSha256": "a8e9e9c4c1a455ebc496784b22597b8f6be6e6564f53e6b41ffcdf3e0136a864",
+        "rightSha256": "70ac316dd14667541d5af3027d357801b24c9dfe579254ec7ed222583cb7edee",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net472",
+        "leftSha256": "1adb2e5cc4e22a8f052f939afd1ec203295cfee09aab53b09051e143469013ab",
+        "rightSha256": "9902b983c9c1ac83b31d52eb0166747857023a5e3aceb4c92a9ad23c7e463b26",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net8.0",
+        "leftSha256": "1adb2e5cc4e22a8f052f939afd1ec203295cfee09aab53b09051e143469013ab",
+        "rightSha256": "34ddd10837f4b478d723b46fe6d55adb8b646abe009eb7867d96b2e876b9d035",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net10.0",
+        "leftSha256": "1adb2e5cc4e22a8f052f939afd1ec203295cfee09aab53b09051e143469013ab",
+        "rightSha256": "3e56413ef4091dec5ba38b9551183292e9c8cbbf708768826eba42fe23aabb1e",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Intelligence",
+        "targetFramework": "net472",
+        "leftSha256": "525366cf6dcdc1d5b9656bdcd0cb967499ed4c19426f94f67281e0367f083d9a",
+        "rightSha256": "055741572e20c1d70a146ebea14e51afe07922dfd1f6793d3145080f90e0c997",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Intelligence",
+        "targetFramework": "net8.0",
+        "leftSha256": "525366cf6dcdc1d5b9656bdcd0cb967499ed4c19426f94f67281e0367f083d9a",
+        "rightSha256": "14b9c069dbd18786cb0fc3b4e647f07a4b239ac832295ce1ac34d6073a0c85d0",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Intelligence",
+        "targetFramework": "net10.0",
+        "leftSha256": "525366cf6dcdc1d5b9656bdcd0cb967499ed4c19426f94f67281e0367f083d9a",
+        "rightSha256": "4de29b831ed59a5ccd524f370e5a3f91c4273c555f5bd10b9a2a65c5e47af17e",
+        "exitCode": 0
+      }
+    ],
+    "script": {
+      "path": "/workspace/scratch/intelligence-check-api.ps1",
+      "sha256": "3d34bebc523e5f5c75e95bfdcfc93582d61461dfff0d96241b6c6cd7b0a3187d",
+      "bytes": 1814
+    },
+    "scriptChanges": "Same eng/check-api.ps1 commands; repository root/report destination only were replaced to retain prior evidence. The owning script now includes the thirteenth optional library."
+  },
+  "independentObservation": {
+    "report": {
+      "path": "artifacts/contracts/remaining/intelligence/clean-independent/independent-intelligence.json",
+      "sha256": "79ab97154cf00663c120b1ec087dcb8e9d8616f3fe679945bc5b687e89f5d96f",
+      "bytes": 5926
+    },
+    "recordedFixtures": 11,
+    "readers": {
+      "jsonschema": "4.25.1",
+      "PyMuPDF": "1.26.6",
+      "Pillow": "13.0.0"
+    },
+    "actualModelInferenceQualified": false,
+    "scope": "Recorded deterministic adapter responses only. Independent JSON Schema validation, PDF text selection, PNG decode/hash and exact citation page/frame/quote/offset checks."
+  },
+  "dependencyDecision": {
+    "runtimeDependenciesAdded": "None beyond the existing managed Core; a new optional Intelligence assembly uses original JSON/PNG/shared-context helpers.",
+    "modelOrCredentialProvisioned": false,
+    "liveRemoteModelInvoked": false,
+    "lockedRestore": {
+      "path": "/workspace/scratch/intelligence-locked-restore.log",
+      "sha256": "f9479fd76db9cd7ebba535552adf0dee27b2034d35f49715d51edbc7e9cc2a26",
+      "bytes": 1986
+    }
+  },
+  "specification": {
+    "path": "/workspace/scratch/intelligence-clean-spec.log",
+    "sha256": "bc6da06fd852920afb5d2108ef914ea0ae54e81911b17723043a698fb80b46e3",
+    "bytes": 104
+  },
+  "releaseBlock": {
+    "path": "/workspace/scratch/intelligence-clean-release-block.log",
+    "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "bytes": 139
+  },
+  "remaining": [
+    "Actual pinned local/remote model/tokenizer/pricing/transport/isolation/security/retention qualification",
+    "Semantic/translation/OCR/provenance/human and representative adversarial quality corpora",
+    "All actual runtime/RID/minimum Framework/concurrency/endurance/resource lanes",
+    "Exact final packages and fresh package-only consumers"
+  ],
+  "commands": [
+    "source /workspace/.cloud-setup/activate.sh",
+    "dotnet restore Fluent.Pdf.slnx --locked-mode --disable-parallel -m:1",
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -NoProfile -File /workspace/scratch/intelligence-check-api.ps1",
+    "dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f <net8.0|net10.0> --no-build --no-restore --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=verified-<profile>.trx' --results-directory artifacts/contracts/remaining/intelligence/verified-<profile>",
+    "Fallback uses net10.0 with -p:UseNetStandardAssembly=true -m:1 -p:UseSharedCompilation=false and the same filter/reports; runtime identity asserts all13 library assets.",
+    "/workspace/.tools/intelligence-validators/bin/python -O eng/verify-intelligence-fixtures.py artifacts/contracts/remaining/intelligence/fixtures-net10 artifacts/contracts/remaining/intelligence/clean-independent",
+    "pwsh -NoProfile -File eng/validate-spec.ps1",
+    "pwsh -NoProfile -File eng/test-release-block.ps1"
+  ]
+}

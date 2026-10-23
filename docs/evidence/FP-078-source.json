@@ -660,5 +660,61 @@
     "dotnet list src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj package --vulnerable --include-transitive --format json",
     "pwsh -NoProfile -File eng/validate-spec.ps1",
     "pwsh -NoProfile -File eng/test-release-block.ps1"
-  ]
+  ],
+  "subsequentSourceHostObservation": {
+    "schemaVersion": 1,
+    "sourceHead": "d5d444178586b9df51cae6ad9bb5908846a3c08d",
+    "barcodeCodeCheckpoint": "23629d17dc95f09ca2a327075d424658152ab2f9",
+    "workflowRun": 39956018243,
+    "runNumber": 137,
+    "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39956018243",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 120421930673,
+        "name": "Contracts (osx-x64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120421930938,
+        "name": "Contracts (win-x64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120421930949,
+        "name": "Contracts (osx-arm64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120421930955,
+        "name": "Contracts (linux-x64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120421931244,
+        "name": "Contracts (win-arm64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120421931311,
+        "name": "Contracts (linux-arm64)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "windowsSelectedSummaries": [
+      "2026-10-23T12:54:21.5782957Z Passed!  - Failed:     0, Passed:  1671, Skipped:     0, Total:  1671, Duration: 1 m 43 s - Fluent.Pdf.Contract.Tests.dll (net8.0)",
+      "2026-10-23T12:56:15.0816028Z Passed!  - Failed:     0, Passed:  1671, Skipped:     0, Total:  1671, Duration: 1 m 50 s - Fluent.Pdf.Contract.Tests.dll (net10.0)",
+      "2026-10-23T12:58:49.7019143Z Passed!  - Failed:     0, Passed:  1671, Skipped:     0, Total:  1671, Duration: 2 m 27 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+      "2026-10-23T13:01:00.9281074Z Passed!  - Failed:     0, Passed:  1671, Skipped:     0, Total:  1671, Duration: 1 m 57 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+      "2026-10-23T13:03:10.7735319Z Passed!  - Failed:     0, Passed:  1671, Skipped:     0, Total:  1671, Duration: 1 m 49 s - Fluent.Pdf.Contract.Tests.dll (net10.0)"
+    ],
+    "productionQualified": false,
+    "limitation": "Source contracts on actual six modern hosts plus current Framework/fallback lanes. This does not qualify minimum Framework, final packages or complete production gates."
+  }
 }

@@ -3421,7 +3421,8 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-079-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3436,7 +3437,8 @@
           "Semantic/translation/OCR/provenance/human and representative adversarial quality corpora",
           "All actual runtime/RID/minimum Framework/concurrency/endurance/resource lanes",
           "Exact final packages and fresh package-only consumers"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-079-source.json"
       }
     },
     {

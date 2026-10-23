@@ -180,3 +180,5 @@ Queue #61–#80 is merged through [PR #120](https://github.com/kirakosyan/pdf.ne
 The remaining queue is tracked in draft [PR #121](https://github.com/kirakosyan/pdf.net/pull/121). Source implementations and exact evidence are recorded for [#81 optimization](evidence/FP-072-source.json) and [#82 progressive access](evidence/FP-073-source.json); the next assignment is #83. Every original production acceptance gate remains mandatory and open where evidence is incomplete.
 
 [#83 barcode source implementation](barcodes.md) and [exact evidence](evidence/FP-078-source.json) are recorded in draft PR #121. The next assignment is #84; original full production gates and incomplete feature qualifications remain open.
+
+[#84 optional intelligence adapters](document-intelligence.md) and [source evidence](evidence/FP-079-source.json) are recorded in draft PR #121. Source CI run137 passed all six hosts for the preceding #81–#83 checkpoint. The next assignment is #85. Every complete feature/production gate remains mandatory.
