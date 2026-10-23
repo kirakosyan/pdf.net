@@ -89,7 +89,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-083 Command-line and batch automation](../requirements/FP-083.md) | Required | planned | [Declared source profile](../command-line.md) |
 | [FP-084 Developer documentation and executable examples](../requirements/FP-084.md) | Required | planned | [Declared source profile](../developer-guide.md) |
 | [FP-085 Native provider deployment and isolation](../requirements/FP-085.md) | Required | implemented | Full source/qualification pending |
-| [FP-086 Runtime and architecture qualification](../requirements/FP-086.md) | Required | planned | Full source/qualification pending |
+| [FP-086 Runtime and architecture qualification](../requirements/FP-086.md) | Required | planned | [Declared source profile](../runtime-qualification.md) |
 | [FP-087 Async processing, concurrency and cancellation](../requirements/FP-087.md) | Required | planned | Full source/qualification pending |
 | [FP-088 Performance, streaming and resource envelopes](../requirements/FP-088.md) | Required | planned | Full source/qualification pending |
 | [FP-089 Security, fuzzing and malformed-content robustness](../requirements/FP-089.md) | Required | planned | Full source/qualification pending |

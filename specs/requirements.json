@@ -3519,7 +3519,7 @@
         "scope": "Separate frozen dual-interface Windows facade, finite private sessions, explicit SAFEARRAY/BSTR/VARIANT_BOOL marshaling, stable redacted HRESULTs and owned bitness-aware registration with actual native/VBScript consumer harness",
         "productionQualified": false,
         "remaining": [
-          "Actual minimum Framework4.7.2 and complete Windows/apartment/host/security/concurrency/endurance qualification",
+          "Actual minimum Framework 4.7.2 and complete Windows/apartment/host/security/concurrency/endurance qualification",
           "Complete encrypted/form-editing/appearance and broader SDK COM workflow profiles",
           "Type-library/proxy/installer and servicing qualification",
           "Exact final packages and fresh package-only consumers"
@@ -3720,7 +3720,17 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/runtime-qualification.md",
+        "scope": "Unchanged 22-lane matrix, same-test-process runtime/core-library/registry/all-SDK binary observations, fail-closed TRX/host/target/minimum-Framework checks and exact-package/test-inventory binding tools",
+        "productionQualified": false,
+        "remaining": [
+          "Actual isolated minimum Framework 4.7.2 x86/x64 and trusted native host/image/patch provenance",
+          "Exact stable packages and reviewed complete package-consumer test inventories on all 22 lanes",
+          "Complete functional/fidelity/security/resource/concurrency/consumer suites and independent production qualification"
+        ]
+      }
     },
     {
       "id": "FP-087",

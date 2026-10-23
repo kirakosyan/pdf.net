@@ -10,12 +10,16 @@ $resultsRoot = Join-Path $root 'artifacts/contracts'
 $project = Join-Path $root 'tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj'
 $records = [Collections.Generic.List[object]]::new()
 $previousArchitecture = $env:FLUENT_PDF_EXPECTED_ARCH
+$python = if ($IsWindows) { 'python' } else { 'python3' }
+& $python (Join-Path $root 'eng/test-runtime-evidence.py')
+if ($LASTEXITCODE -ne 0) { throw 'Runtime evidence checker boundary tests failed.' }
 function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [bool]$fallback = $false) {
     $env:FLUENT_PDF_EXPECTED_ARCH = $architecture
     $directory = Join-Path $resultsRoot $name
+    [IO.File]::Delete((Join-Path $directory 'runtime-identity.json'))
     $arguments = @('test', $project, '-c', $Configuration, '-f', $tfm, '--no-restore',
         '--logger', 'trx;LogFileName=contracts.trx', '--results-directory', $directory)
-    if ($fallback) { $arguments += '-p:UseNetStandardAssembly=true' }
+    if ($fallback) { $arguments += @('-p:UseNetStandardAssembly=true','-m:1','-p:UseSharedCompilation=false') }
     else { $arguments += '--no-build' }
     if ($architecture -eq 'X86') { $arguments += @('--', 'RunConfiguration.TargetPlatform=x86') }
     & dotnet @arguments
@@ -33,12 +37,19 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
     $actualArchitecture = [regex]::Match($output, '(?m)^Process architecture: (.+)').Groups[1].Value.Trim()
     $library = [regex]::Match($output, '(?m)^Library TFM: (.+)').Groups[1].Value.Trim()
     if (!$runtime -or !$os -or !$library -or $actualArchitecture -ine $architecture) { throw "Unverified runtime identity: $name" }
+    $family = if ($IsWindows) { 'win' } elseif ($IsLinux) { 'linux' } elseif ($IsMacOS) { 'osx' } else { throw 'Unsupported runtime qualification host.' }
+    $kind = if ($tfm -eq 'net472') { 'framework-current' } elseif ($fallback) { 'netstandard2.0-fallback' } else { $tfm }
+    $declaredLane = "$family-$($architecture.ToLowerInvariant())-$kind"
+    $identityPath = Join-Path $directory 'runtime-identity.json'
+    & $python (Join-Path $root 'eng/check-runtime-evidence.py') --lane $declaredLane --trx $reportPath --mode source --output $identityPath
+    if ($LASTEXITCODE -ne 0) { throw "Actual runtime evidence consistency failed: $name" }
     $assembly = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/Fluent.Pdf.dll"
     $records.Add([pscustomobject]@{
         lane=$name;libraryTfm=$library;runtime=$runtime;os=$os;architecture=$actualArchitecture
         total=[int]$counters.total;passed=[int]$counters.passed;failed=0;skipped=0
         report="$name/contracts.trx";reportSha256=(Get-FileHash -LiteralPath $reportPath).Hash
         assemblySha256=(Get-FileHash -LiteralPath $assembly).Hash
+        runtimeIdentityEvidence="$name/runtime-identity.json";runtimeIdentityEvidenceSha256=(Get-FileHash -LiteralPath $identityPath -Algorithm SHA256).Hash
     })
 }
 Push-Location $root
@@ -55,7 +66,6 @@ try {
     Run-ContractLane 'net10.0' 'netstandard-fallback' $ExpectedArchitecture $true
     & dotnet run --project (Join-Path $root 'examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj') -c $Configuration --no-build --no-restore -- --self-test
     if ($LASTEXITCODE -ne 0) { throw 'Hosted compiled Razor/MVC/Blazor boundary checks failed.' }
-    $python = if ($IsWindows) { 'python' } else { 'python3' }
     & $python (Join-Path $root 'eng/test-cli.py') --assemblies (Join-Path $root "apps/Fluent.Pdf.Cli/bin/$Configuration/net8.0/fluent-pdf.dll") (Join-Path $root "apps/Fluent.Pdf.Cli/bin/$Configuration/net10.0/fluent-pdf.dll") --output (Join-Path $resultsRoot 'cli/processes.json')
     if ($LASTEXITCODE -ne 0) { throw 'Actual CLI pipe/configuration/atomic output/protected input/batch boundaries failed.' }
     $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers src/Fluent.Pdf.Codecs src/Fluent.Pdf.Fonts src/Fluent.Pdf.Text src/Fluent.Pdf.Rendering src/Fluent.Pdf.Cryptography src/Fluent.Pdf.Compliance src/Fluent.Pdf.Html src/Fluent.Pdf.Word src/Fluent.Pdf.Ocr src/Fluent.Pdf.Formats src/Fluent.Pdf.Intelligence src/Fluent.Pdf.Automation src/Fluent.Pdf.Applications apps/Fluent.Pdf.Cli native/worker native/codecs native/text native/rendering native/ocr tests/native tests/native-aot tests/Fluent.Pdf.Contract.Tests examples eng .github/workflows third-party | Sort-Object -Unique | ForEach-Object {

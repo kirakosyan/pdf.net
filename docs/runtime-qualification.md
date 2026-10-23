@@ -1,0 +1,29 @@
+# Runtime and architecture evidence
+
+FP-086 requires exact packages on 22 mandatory lanes. The [lane inventory](../specs/runtime-lanes.json) matches the unchanged [release manifest](../specs/release-readiness.json): Windows/Linux/macOS x64/ARM64 on .NET 8 and .NET 10, explicit netstandard2.0 consumers on modern .NET, and Windows x86/x64 on both actual minimum Framework 4.7.2 and current Framework. Source declarations and consistency checks do not qualify a runtime, feature or package. The requirement remains planned.
+
+The runtime identity test records observations from the same process that executes the SDK suite: OS family/description and architecture, process architecture, RID, actual CLR/version, core-library name/file version/SHA-256, live Windows Framework release key, culture, and all 15 loaded SDK assembly targets/SHA-256/module IDs. Existing readable runtime/asset output remains available. It does not construct a runtime version from a target-framework attribute.
+
+`eng/check-runtime-evidence.py` binds that observation to the TRX. Every required result must pass: positive complete counts, zero failure/skip/abort/error/timeout and no duplicated/missing test result or identity observation. Native modern lanes require the expected OS architecture and process architecture, so emulation cannot silently replace a native host. Windows x86 Framework consumers explicitly run on the declared x64 host. Loaded SDK targets must match the requested normal or fallback asset on every assembly.
+
+Minimum Framework 4.7.2 requires the live installed release value 461808 or 461814, an actual Framework process using `mscorlib`, and 4.7-series core-library/runtime observations. A net472 assembly under Framework 4.8/4.8.1 rejects for that lane. Current Framework requires its actual serviced installation separately. Never downgrade a shared runner, edit a registry value to imitate the minimum or use a compatibility runtime/VM boot as execution evidence. Minimum-runtime machines must be isolated and independently provisioned; complete supported OS/image/patch/security evidence remains mandatory.
+
+`eng/test-runtime-lane.ps1` takes one declared lane, an explicit already built consumer project and an owned output directory. It preflights the physical host and Framework installation, runs the full unfiltered test project at the selected process bitness, and validates the resulting same-process observation. It never installs a runtime, rebuilds/retargets a consumer, chooses an emulator or infers fallback. The caller must have built the exact fallback consumer when that lane is requested. Wrong-host/minimum observations reject before or after execution rather than becoming skipped tests.
+
+Each invocation requires fresh report paths. Existing reports or input aliases reject without overwriting evidence. Platform applicability is explicit:
+
+| Surface | Applicable host | Required observation |
+| --- | --- | --- |
+| Managed SDK contracts | All 22 lanes | Actual runtime, loaded normal/fallback assets and complete reviewed package-consumer tests |
+| Native workers and optional engines | Declared supported native OS/RID with provisioned sandbox/assets | Actual isolated engine execution; a missing prerequisite blocks its lane |
+| COM automation | Windows Framework x86/x64 | Registered native/VBScript consumer and lifecycle evidence, separately from portable interface tests |
+| WinForms/WPF samples | Windows supported UI/runtime combinations | Actual UI navigation/focus/printing and accessibility evidence |
+| Browser sample | Supported modern server runtimes and browser hosts | Actual authenticated browser/client behavior |
+
+The generic contract project does not qualify those separate host integrations. Platform-specific suites require their own complete inventories and reports; this table does not waive a required runtime or feature. Linux Docker containers cannot provide Windows Framework execution. A Windows-container lane requires a compatible Windows host and independently verified actual installed Framework version; an image tag or successful container boot is insufficient.
+
+Source mode records identity consistency only. It does not establish full test coverage, exact package restoration or trusted-host provenance. Package mode additionally requires a reviewed complete test-name inventory, exact stable-version package manifest, every feed artifact SHA-256, a consumer dependency graph showing package references, and exact loaded DLL hashes matching the selected `lib/<tfm>/` assets inside the packages. The package manifest contains `schemaVersion`, `packageVersion`, `packages` (`id`, `version`, `file`, `sha256`) and `consumerDependencyGraph` (`file`, `sha256`); paths are relative to its artifact directory. The reviewed inventory has purpose `reviewed-runtime-test-inventory`, schemaVersion 1 and a unique `tests` array. No source/project-reference report is promoted to package evidence.
+
+These checks establish structural consistency of supplied evidence. Reports still need a trusted execution/provenance chain and complete functional, fidelity, security, resource, concurrency and consumer suites. A report can never attest its own physical host. The checker always retains `productionQualified:false`; it does not change the release switch or create/publish packages. Synthetic checker-unit fixtures are explicitly labeled and are not actual runtime or qualification evidence.
+
+Current source CI covers six native modern hosts and current Framework x86/x64. Exact stable packages, actual minimum Framework 4.7.2 hosts, reviewed complete package-consumer inventories and complete production suites remain missing. The task environment also lacks required local Landlock isolation for five native source classes; selected local source tests do not replace those lanes. No required lane, suite, feature or original production gate is removed or weakened.
