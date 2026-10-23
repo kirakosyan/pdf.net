@@ -21,6 +21,7 @@ internal static class Program
                 Content = control
             };
             int result = 0;
+            string stage = "initial-render";
             window.Loaded += async (_, _) =>
             {
                 try
@@ -28,10 +29,12 @@ internal static class Program
                     await control.RefreshPageAsync();
                     if (session.IsFixture)
                     {
+                        stage = "initial-page-and-peer";
                         var peer = UIElementAutomationPeer.CreatePeerForElement(control);
                         if (control.LastDisplayedPage != 0 || control.CapturedText != "Original automation Ω" || peer == null || peer.GetName() != "PDF page viewer" || peer.GetAutomationControlType() != AutomationControlType.Document)
                             throw new InvalidOperationException("WPF accessible view boundary failed.");
                         control.Focus();
+                        stage = "keyboard-route";
                         var key = new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(control), 0, Key.PageDown)
                         {
                             RoutedEvent = Keyboard.KeyDownEvent
@@ -40,15 +43,16 @@ internal static class Program
                         if (!key.Handled)
                             throw new InvalidOperationException("WPF key route missing.");
                         await control.PendingCommand;
+                        stage = "keyboard-page";
                         if (control.LastDisplayedPage != 1 || control.CapturedText != "Second automation page")
                             throw new InvalidOperationException("WPF routed page boundary failed.");
                         Console.WriteLine("WPF_VIEW_PASS;" + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription + ";" + System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture + ";fixture-renderer;keyboard-and-UIA");
                     }
                 }
-                catch
+                catch (Exception error)
                 {
                     result = 1;
-                    Console.Error.WriteLine("WPF_VIEW_FAILED");
+                    Console.Error.WriteLine("WPF_VIEW_FAILED;" + stage + ";" + error.GetType().Name + ";" + control.LastFailure);
                 }
                 finally
                 {

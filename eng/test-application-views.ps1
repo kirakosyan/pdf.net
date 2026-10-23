@@ -9,6 +9,7 @@ New-Item -ItemType Directory -Path $directory -Force | Out-Null
 $manifest = Join-Path $directory 'windows-applications.json'
 [IO.File]::Delete($manifest)
 $rows = [Collections.Generic.List[object]]::new()
+$failures = [Collections.Generic.List[object]]::new()
 foreach ($kind in @('WinForms','Wpf')) {
     $name = "Fluent.Pdf.$($kind)Sample"
     $project = Join-Path $root "examples/$name/$name.csproj"
@@ -22,12 +23,19 @@ foreach ($kind in @('WinForms','Wpf')) {
         $log = Join-Path $directory "$kind-$tfm.log"
         if ($tfm -eq 'net472') { & ($path + '.exe') --self-test 2>&1 | Tee-Object -FilePath $log }
         else { & dotnet ($path + '.dll') --self-test 2>&1 | Tee-Object -FilePath $log }
-        if ($LASTEXITCODE -ne 0) { throw "Actual application failed: $kind $tfm" }
+        $consumerExit = $LASTEXITCODE
         $content = Get-Content -LiteralPath $log -Raw
         $marker = if ($kind -eq 'WinForms') { 'WINFORMS_VIEW_PASS;' } else { 'WPF_VIEW_PASS;' }
-        if (!$content.Contains($marker) -or !$content.Contains(';fixture-renderer;keyboard-and-')) { throw "Actual keyboard/accessibility marker is absent: $kind $tfm" }
+        if ($consumerExit -ne 0 -or !$content.Contains($marker) -or !$content.Contains(';fixture-renderer;keyboard-and-')) {
+            $failures.Add([ordered]@{kind=$kind;asset=$tfm;exitCode=$consumerExit;diagnostics=$content.Trim();logSha256=(Get-FileHash $log -Algorithm SHA256).Hash.ToLowerInvariant()})
+            continue
+        }
         $rows.Add([ordered]@{kind=$kind;asset=$tfm;identity=$content.Trim();passed=$true;logSha256=(Get-FileHash $log -Algorithm SHA256).Hash.ToLowerInvariant();assemblySha256=(Get-FileHash $asset -Algorithm SHA256).Hash.ToLowerInvariant()})
     }
+}
+if ($failures.Count -ne 0) {
+    [ordered]@{sourceCommit=(& git -C $root rev-parse HEAD).Trim();failures=$failures.ToArray();productionQualified=$false} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $directory 'windows-application-failures.json') -Encoding utf8NoBOM
+    throw "Actual Windows application boundaries failed: $($failures.Count). Failure reports are retained; no passing aggregate was written."
 }
 [ordered]@{schemaVersion=1;sourceCommit=(& git -C $root rev-parse HEAD).Trim();workingTreeDirty=[bool](& git -C $root status --porcelain);os=[Runtime.InteropServices.RuntimeInformation]::OSDescription;applications=$rows.ToArray();actualRasterFidelityQualified=$false;manualScreenReaderQualified=$false;actualMinimumFrameworkQualified=$false;productionQualified=$false} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $manifest -Encoding utf8NoBOM
 Write-Output 'Six actual Windows application boundaries passed; fixture rendering, not native fidelity or full screen-reader qualification.'

@@ -76,6 +76,7 @@ internal sealed class PdfPageControl : UserControl
 
     internal string CapturedText => _text.Text;
     internal int LastDisplayedPage { get; private set; } = -1;
+    internal string LastFailure { get; private set; } = "";
 
     private void Changed(object? sender, PdfApplicationViewState state)
     {
@@ -120,6 +121,7 @@ internal sealed class PdfPageControl : UserControl
         }
         catch (Exception error)
         {
+            LastFailure = error is Fluent.Pdf.PdfException pdfError ? pdfError.Diagnostic.Code : error.GetType().Name;
             if (!IsDisposed)
                 _status.Text = error is Fluent.Pdf.PdfException pdf ? pdf.Diagnostic.Code : "ApplicationView.Failed";
         }
