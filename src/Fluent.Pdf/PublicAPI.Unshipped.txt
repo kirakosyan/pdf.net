@@ -1,4 +1,32 @@
 #nullable enable
+Fluent.Pdf.PdfProcessingOptions
+Fluent.Pdf.PdfProcessingOptions.PdfProcessingOptions(int maximumWorkers = 4, int maximumQueuedJobs = 16, long maximumResidentInputBytes = 67108864) -> void
+Fluent.Pdf.PdfProcessingOptions.MaximumWorkers.get -> int
+Fluent.Pdf.PdfProcessingOptions.MaximumQueuedJobs.get -> int
+Fluent.Pdf.PdfProcessingOptions.MaximumResidentInputBytes.get -> long
+Fluent.Pdf.PdfProcessingProgress
+Fluent.Pdf.PdfProcessingProgress.Queued.get -> int
+Fluent.Pdf.PdfProcessingProgress.Running.get -> int
+Fluent.Pdf.PdfProcessingProgress.ResidentInputBytes.get -> long
+Fluent.Pdf.PdfProcessingProgress.Succeeded.get -> long
+Fluent.Pdf.PdfProcessingProgress.Failed.get -> long
+Fluent.Pdf.PdfProcessingProgress.Canceled.get -> long
+Fluent.Pdf.PdfProcessingJob
+Fluent.Pdf.PdfProcessingJob.Document.get -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfProcessingJob.Input.get -> System.IO.Stream!
+Fluent.Pdf.PdfProcessingJob.Context.get -> Fluent.Pdf.PdfOperationContext!
+Fluent.Pdf.PdfProcessingJob.ReadDocument() -> void
+Fluent.Pdf.PdfProcessingJob.Save(System.IO.Stream! output, Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> void
+Fluent.Pdf.PdfProcessingJob.SaveFile(string! path, Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> void
+Fluent.Pdf.PdfProcessingPool
+Fluent.Pdf.PdfProcessingPool.PdfProcessingPool(Fluent.Pdf.PdfProcessingOptions? options = null, Fluent.Pdf.PdfOptions? documentOptions = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> void
+Fluent.Pdf.PdfProcessingPool.Options.get -> Fluent.Pdf.PdfProcessingOptions!
+Fluent.Pdf.PdfProcessingPool.Completion.get -> System.Threading.Tasks.Task!
+Fluent.Pdf.PdfProcessingPool.Progress.get -> Fluent.Pdf.PdfProcessingProgress!
+Fluent.Pdf.PdfProcessingPool.TrySubmit(byte[]! input, System.Action<Fluent.Pdf.PdfProcessingJob!>! action, out System.Threading.Tasks.Task<Fluent.Pdf.PdfOperationReport!>? completion, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> bool
+Fluent.Pdf.PdfProcessingPool.CompleteAsync() -> System.Threading.Tasks.Task!
+Fluent.Pdf.PdfProcessingPool.ShutdownAsync() -> System.Threading.Tasks.Task!
+Fluent.Pdf.PdfProcessingPool.Dispose() -> void
 Fluent.Pdf.IPdfAccessibilityValidator
 Fluent.Pdf.IPdfAccessibilityValidator.Validate(Fluent.Pdf.PdfAccessibilityProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfAccessibilityValidation!
 Fluent.Pdf.IPdfArchivalValidator

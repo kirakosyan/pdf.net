@@ -39,7 +39,7 @@ The original self-contained NativeAOT fixture exercises sandboxed managed thread
 
 ## Remaining production work
 
-Actual minimum Framework 4.7.2 execution on isolated x86/x64 hosts is absent. An assembly targeting net472 on a newer Framework is evidence for that installed runtime only. Exact final NuGet consumers are also absent: candidate creation is intentionally blocked until all source qualification is complete. Convert the examples into package-only consumers at that gate, without project references or direct assembly injection.
+Actual minimum Framework 4.7.2 source execution is recorded for a specific earlier commit in [Windows evidence](evidence/FP-086-windows-source.json). Later source changes require their own runtime observations; that report does not qualify subsequent code or exact packages. An assembly targeting net472 on a newer Framework is evidence for that installed runtime only. Exact final NuGet consumers are also absent: candidate creation is intentionally blocked until all source qualification is complete. Convert the examples into package-only consumers at that gate, without project references or direct assembly injection.
 
 PDF codecs, native providers, actual format validation, visual/semantic fidelity, fuzzing, integration of these policies into future engines, minimum OS/libc versions and complete release workloads remain separate required issues. The complete [production gates](production-quality.md) apply before qualification. Do not mark FP-001/FP-002 qualified or close their tracking issues merely because this source suite passes.
 

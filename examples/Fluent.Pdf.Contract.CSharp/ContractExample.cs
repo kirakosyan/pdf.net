@@ -5,6 +5,14 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static async System.Threading.Tasks.Task<PdfOperationReport> ProcessPdfAsync(byte[] input, Stream output)
+    {
+        using var pool = new PdfProcessingPool(new(maximumWorkers: 1));
+        if (!pool.TrySubmit(input, job => { job.ReadDocument(); job.Document.AddPage(); job.Save(output); }, out var work))
+            throw new InvalidOperationException("The processing pool has no input capacity.");
+        try { return await work!.ConfigureAwait(false); }
+        finally { await pool.CompleteAsync().ConfigureAwait(false); }
+    }
     public static Fluent.Pdf.Applications.PdfApplicationViewer ApplicationViewer(PdfDocumentSnapshot source, PdfProviderRegistry renderer) => new(source, renderer);
     public static PdfDocument GenerateData(IEnumerable<string> rows, PdfFlowOptions layout, PdfFlowTextStyle style, PdfProviderRegistry providers)
     {

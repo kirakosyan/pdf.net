@@ -172,3 +172,5 @@ An optional toolkit-independent controller and WinForms/WPF/ASP.NET browser samp
 An optional modern CLI now consumes the public SDK with separate data/diagnostic channels, stable exit codes, protected password-file input, bounded jobs, atomic publication and retained batch outcomes. Full host/provider/final-distribution qualification remains mandatory; see [command-line automation](command-line.md).
 
 The [developer guide](developer-guide.md) now links a versioned generated source API reference, explicit provider/platform prerequisites and real C#/VB-backed recipe applications. Narrative fragments and published-package qualification remain explicitly distinct.
+
+FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).

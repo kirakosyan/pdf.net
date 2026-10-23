@@ -2269,9 +2269,37 @@ Fluent.Pdf.PdfPrintScaling
 Fluent.Pdf.PdfPrintScaling.Fit = 0 -> Fluent.Pdf.PdfPrintScaling
 Fluent.Pdf.PdfPrintScaling.None = 1 -> Fluent.Pdf.PdfPrintScaling
 Fluent.Pdf.PdfPrinting
+Fluent.Pdf.PdfProcessingJob
+Fluent.Pdf.PdfProcessingJob.Context.get -> Fluent.Pdf.PdfOperationContext!
+Fluent.Pdf.PdfProcessingJob.Document.get -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.PdfProcessingJob.Input.get -> System.IO.Stream!
+Fluent.Pdf.PdfProcessingJob.ReadDocument() -> void
+Fluent.Pdf.PdfProcessingJob.Save(System.IO.Stream! output, Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> void
+Fluent.Pdf.PdfProcessingJob.SaveFile(string! path, Fluent.Pdf.PdfWriteOptions? writeOptions = null) -> void
 Fluent.Pdf.PdfProcessingMode
 Fluent.Pdf.PdfProcessingMode.Permissive = 1 -> Fluent.Pdf.PdfProcessingMode
 Fluent.Pdf.PdfProcessingMode.Strict = 0 -> Fluent.Pdf.PdfProcessingMode
+Fluent.Pdf.PdfProcessingOptions
+Fluent.Pdf.PdfProcessingOptions.MaximumQueuedJobs.get -> int
+Fluent.Pdf.PdfProcessingOptions.MaximumResidentInputBytes.get -> long
+Fluent.Pdf.PdfProcessingOptions.MaximumWorkers.get -> int
+Fluent.Pdf.PdfProcessingOptions.PdfProcessingOptions(int maximumWorkers = 4, int maximumQueuedJobs = 16, long maximumResidentInputBytes = 67108864) -> void
+Fluent.Pdf.PdfProcessingPool
+Fluent.Pdf.PdfProcessingPool.CompleteAsync() -> System.Threading.Tasks.Task!
+Fluent.Pdf.PdfProcessingPool.Completion.get -> System.Threading.Tasks.Task!
+Fluent.Pdf.PdfProcessingPool.Dispose() -> void
+Fluent.Pdf.PdfProcessingPool.Options.get -> Fluent.Pdf.PdfProcessingOptions!
+Fluent.Pdf.PdfProcessingPool.PdfProcessingPool(Fluent.Pdf.PdfProcessingOptions? options = null, Fluent.Pdf.PdfOptions? documentOptions = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> void
+Fluent.Pdf.PdfProcessingPool.Progress.get -> Fluent.Pdf.PdfProcessingProgress!
+Fluent.Pdf.PdfProcessingPool.ShutdownAsync() -> System.Threading.Tasks.Task!
+Fluent.Pdf.PdfProcessingPool.TrySubmit(byte[]! input, System.Action<Fluent.Pdf.PdfProcessingJob!>! action, out System.Threading.Tasks.Task<Fluent.Pdf.PdfOperationReport!>? completion, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> bool
+Fluent.Pdf.PdfProcessingProgress
+Fluent.Pdf.PdfProcessingProgress.Canceled.get -> long
+Fluent.Pdf.PdfProcessingProgress.Failed.get -> long
+Fluent.Pdf.PdfProcessingProgress.Queued.get -> int
+Fluent.Pdf.PdfProcessingProgress.ResidentInputBytes.get -> long
+Fluent.Pdf.PdfProcessingProgress.Running.get -> int
+Fluent.Pdf.PdfProcessingProgress.Succeeded.get -> long
 Fluent.Pdf.PdfProfileConversions
 Fluent.Pdf.PdfProfileOptions
 Fluent.Pdf.PdfProfileOptions.AllowAdvancedContentLoss.get -> bool
@@ -7807,6 +7835,44 @@ Queries only an exact caller-selected printer/job.
 
 Serializes completely before the one explicit spool submission. A cancellation/transport failure after submission may leave an accepted job; use its spool identity where available and never blindly retry.
 
+### <code>M:Fluent.Pdf.PdfProcessingJob.ReadDocument</code>
+
+Reads the input once into the empty private document through its explicit registered reader.
+
+### <code>M:Fluent.Pdf.PdfProcessingJob.Save(System.IO.Stream,Fluent.Pdf.PdfWriteOptions)</code>
+
+Writes using the shared budget, preserving caller stream ownership. Stream output can be partial on failure.
+
+### <code>M:Fluent.Pdf.PdfProcessingJob.SaveFile(System.String,Fluent.Pdf.PdfWriteOptions)</code>
+
+Atomically writes a file using the shared budget. Failed/canceled writes preserve any prior destination.
+
+### <code>M:Fluent.Pdf.PdfProcessingOptions.#ctor(System.Int32,System.Int32,System.Int64)</code>
+
+Creates bounded admission limits. Per-job operation budgets remain independently mandatory.
+
+### <code>M:Fluent.Pdf.PdfProcessingPool.#ctor(Fluent.Pdf.PdfProcessingOptions,Fluent.Pdf.PdfOptions,Fluent.Pdf.PdfProviderRegistry)</code>
+
+Starts a fixed number of background workers. Registry providers must support independent concurrent operations or be separately instantiated per pool.
+
+### <code>M:Fluent.Pdf.PdfProcessingPool.CompleteAsync</code>
+
+Stops admission and drains existing work without canceling it.
+
+### <code>M:Fluent.Pdf.PdfProcessingPool.Dispose</code>
+
+Requests cancellation without blocking the calling thread. Await Completion to observe finished cleanup.
+
+### <code>M:Fluent.Pdf.PdfProcessingPool.ShutdownAsync</code>
+
+Stops admission, cancels waiting and running jobs, and returns completion of all callback/provider cleanup.
+
+### <code>M:Fluent.Pdf.PdfProcessingPool.TrySubmit(System.Byte[],System.Action{Fluent.Pdf.PdfProcessingJob},System.Threading.Tasks.Task{Fluent.Pdf.PdfOperationReport}@,System.Threading.CancellationToken)</code>
+
+Copies input and admits work only when both queue and resident-byte capacity are available; otherwise returns false without copying or creating a waiter.
+
+Remarks: The caller must not mutate input during this call. On false, completion is null; retry after an admitted task completes. A stopped pool rejects admission. Exceptions from the callback are retained by its task.
+
 ### <code>M:Fluent.Pdf.PdfProfileConversions.Convert(System.IO.Stream,System.IO.Stream,Fluent.Pdf.PdfProfileOptions,Fluent.Pdf.IPdfProfileProducer,Fluent.Pdf.IPdfProfileValidator,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Stages producer output, checks page geometry/ICC/condition and requires complete independent exact-byte validation before caller writes. Missing, stale, incomplete or failed validation cannot expose a candidate.
@@ -13089,6 +13155,66 @@ Gets the exact selected printer identity.
 
 Gets physical scaling policy.
 
+### <code>P:Fluent.Pdf.PdfProcessingJob.Context</code>
+
+Gets the shared context required by optional providers and bounded work.
+
+### <code>P:Fluent.Pdf.PdfProcessingJob.Document</code>
+
+Gets the job's private mutable document, valid only on the callback thread.
+
+### <code>P:Fluent.Pdf.PdfProcessingJob.Input</code>
+
+Gets the expiring read-only input lease. Input reads charge the shared operation budget.
+
+### <code>P:Fluent.Pdf.PdfProcessingOptions.MaximumQueuedJobs</code>
+
+Gets the maximum number of waiting jobs.
+
+### <code>P:Fluent.Pdf.PdfProcessingOptions.MaximumResidentInputBytes</code>
+
+Gets the maximum copied input bytes retained by all admitted jobs.
+
+### <code>P:Fluent.Pdf.PdfProcessingOptions.MaximumWorkers</code>
+
+Gets the fixed maximum number of concurrently executing job callbacks.
+
+### <code>P:Fluent.Pdf.PdfProcessingPool.Completion</code>
+
+Gets completion of all owned workers after draining or shutdown. Completion never precedes active callback cleanup.
+
+### <code>P:Fluent.Pdf.PdfProcessingPool.Options</code>
+
+Gets immutable pool admission limits.
+
+### <code>P:Fluent.Pdf.PdfProcessingPool.Progress</code>
+
+Gets a synchronized bounded aggregate snapshot.
+
+### <code>P:Fluent.Pdf.PdfProcessingProgress.Canceled</code>
+
+Gets the canceled job count.
+
+### <code>P:Fluent.Pdf.PdfProcessingProgress.Failed</code>
+
+Gets the failed job count.
+
+### <code>P:Fluent.Pdf.PdfProcessingProgress.Queued</code>
+
+Gets the waiting job count.
+
+### <code>P:Fluent.Pdf.PdfProcessingProgress.ResidentInputBytes</code>
+
+Gets copied input bytes retained by waiting and executing jobs.
+
+### <code>P:Fluent.Pdf.PdfProcessingProgress.Running</code>
+
+Gets the executing job count.
+
+### <code>P:Fluent.Pdf.PdfProcessingProgress.Succeeded</code>
+
+Gets the successfully completed job count.
+
 ### <code>P:Fluent.Pdf.PdfProfileOptions.AllowAdvancedContentLoss</code>
 
 Gets explicit authority for a rewrite whose advanced-content semantics cannot be proven retained by this source gate. Strict loss policy still rejects it.
@@ -16885,9 +17011,29 @@ Explicit print scaling.
 
 Explicit headless printing; inspection/opening never selects a printer or submits a job.
 
+### <code>T:Fluent.Pdf.PdfProcessingJob</code>
+
+An expiring synchronous worker callback boundary owning one private document, input lease and shared operation budget.
+
+Remarks: Use Save/SaveFile on this boundary. Live model references cannot be used on other threads or after completion.
+
 ### <code>T:Fluent.Pdf.PdfProcessingMode</code>
 
 Controls whether explicitly reported losses can produce successful output.
+
+### <code>T:Fluent.Pdf.PdfProcessingOptions</code>
+
+Immutable limits on pool workers, waiting jobs and copied input bytes across waiting and running jobs.
+
+### <code>T:Fluent.Pdf.PdfProcessingPool</code>
+
+A fixed-worker asynchronous boundary with bounded, nonblocking admission and privately owned documents.
+
+Remarks: Callbacks execute synchronously on owned workers and must cooperate with their context. No arbitrary managed callback can be forcibly terminated safely. Provider instances and captured callback state remain caller-owned.
+
+### <code>T:Fluent.Pdf.PdfProcessingProgress</code>
+
+A detached aggregate progress snapshot with no document data or unbounded event queue.
 
 ### <code>T:Fluent.Pdf.PdfProfileConversions</code>
 

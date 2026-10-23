@@ -25,6 +25,17 @@
       "publishedPackageExecutionQualified": false
     },
     {
+      "path": "docs/async-processing.md",
+      "ordinal": 1,
+      "line": 9,
+      "language": "csharp",
+      "sha256": "8f61ae87cddfa143ee32fadb53c2571cbd832cf1a48fadbdff7d5465bc0744d1",
+      "classification": "narrative-fragment-requires-caller-bindings",
+      "compileExecution": null,
+      "literalFragmentExecutionQualified": false,
+      "publishedPackageExecutionQualified": false
+    },
+    {
       "path": "docs/composition.md",
       "ordinal": 1,
       "line": 7,

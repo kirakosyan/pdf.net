@@ -4,6 +4,21 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Async Function ProcessPdfAsync(input As Byte(), output As Stream) As System.Threading.Tasks.Task(Of PdfOperationReport)
+        Using pool As New PdfProcessingPool(New PdfProcessingOptions(maximumWorkers:=1))
+            Dim work As System.Threading.Tasks.Task(Of PdfOperationReport) = Nothing
+            If Not pool.TrySubmit(input, Sub(job)
+                                            job.ReadDocument()
+                                            job.Document.AddPage()
+                                            job.Save(output)
+                                        End Sub, work) Then
+                Throw New InvalidOperationException("The processing pool has no input capacity.")
+            End If
+            Dim completion = pool.CompleteAsync()
+            Await completion.ConfigureAwait(False)
+            Return Await work.ConfigureAwait(False)
+        End Using
+    End Function
     Public Function ApplicationViewer(source As PdfDocumentSnapshot, renderer As PdfProviderRegistry) As Fluent.Pdf.Applications.PdfApplicationViewer
         Return New Fluent.Pdf.Applications.PdfApplicationViewer(source, renderer)
     End Function

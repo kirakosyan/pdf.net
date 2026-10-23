@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Fluent.Pdf.Workers;
 using Xunit;
 using Xunit.Abstractions;
@@ -12,6 +13,28 @@ using Xunit.Abstractions;
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class NativeWorkerTests
 {
+    [Fact]
+    public async Task ProcessingPoolCancellationWaitsForNativeTerminationAndStageCleanup()
+    {
+        using var fixture = new WorkerFixture(_output);
+        using var pool = new PdfProcessingPool(new(1));
+        using var entered = new ManualResetEventSlim();
+        Assert.True(pool.TrySubmit(Array.Empty<byte>(), job =>
+        {
+            Assert.Equal(new byte[] { 42 }, new NativeWorkerHost().Execute(fixture.Options, new byte[] { 0, 42 }, job.Context));
+            entered.Set();
+            new NativeWorkerHost().Execute(fixture.Options, new byte[] { 2 }, job.Context);
+        }, out var work));
+        Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+        await Task.Delay(150);
+        var clock = Stopwatch.StartNew();
+        var cleanup = pool.ShutdownAsync();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => work!);
+        Assert.Same(cleanup, await Task.WhenAny(cleanup, Task.Delay(TimeSpan.FromSeconds(5))));
+        await cleanup;
+        Assert.True(clock.Elapsed < TimeSpan.FromSeconds(5));
+        Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
+    }
     [Fact]
     public void DeferredOutputAllocationIsBoundedAndViolationsCannotBeHidden()
     {

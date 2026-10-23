@@ -151,3 +151,5 @@ Bounded revision-bound range sessions, selective page/object access, private LRU
 Original QR/Code128B generation with mandatory independent decoding, explicit page-region detector landmarks and canonical EPC invoice/payment payload validation now have a source implementation. Complete corpus/scanner/runtime/host/final-package qualification remains mandatory; see [barcode workflows](barcodes.md).
 
 Explicit six-task model adapters, selected source capture, remote/image authority, token/configured-cost reservations and schema/citation validation now have a source implementation in the optional Intelligence assembly. Full model/transport/security/quality/runtime/final-package qualification remains mandatory; see [document intelligence](document-intelligence.md).
+
+FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).
