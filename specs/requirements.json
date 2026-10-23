@@ -3633,7 +3633,8 @@
       "evidence": [
         "D01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-084-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3647,7 +3648,8 @@
           "Every narrative fragment requires complete caller/provider bindings and literal compilation/execution against exact published packages",
           "Complete native/model/font/provider/host/minimum-runtime and accessibility/security/fidelity/performance/fuzz corpus qualification",
           "Positive exact final-package consumer and publication/indexing evidence"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-084-source.json"
       }
     },
     {

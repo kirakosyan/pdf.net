@@ -1,0 +1,1106 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-084",
+  "issue": 89,
+  "sourceCommit": "9feb3465f3a9dbbf507bbe3444c8d5b82227552a",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "commitBinding": "Clean documentation/tool/source-recipe checkpoint, exact generated API/XML/source hashes and actual source consumers. No SDK product implementation/public API changed. Actual CI and published-package qualification are separate.",
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/documentation.yml",
+      "sha256": "675d94039371f7a83e797f400922187af3b60917ee0505bc9d9a2c4793bb929e",
+      "bytes": 2002
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "a50a479e1fc31798ab46d64f3ac6d8228796193069693dfaec32ba4c0d776d0e",
+      "bytes": 1968
+    },
+    {
+      "path": "README.md",
+      "sha256": "95d0facde2211b9679ce6a1477bfce501965d70305ce0ca0a27573a8a826f35a",
+      "bytes": 20053
+    },
+    {
+      "path": "docs/api-contract.md",
+      "sha256": "49198b630d0ce6b8419233e495a9285e7009ad6639eb1cd7e515281c103d8c9d",
+      "bytes": 31713
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "f1d5dbaa97295a7c532c610e59d28cdf09da1787585722974372e6870a8cc55c",
+      "bytes": 24782
+    },
+    {
+      "path": "docs/developer-guide.md",
+      "sha256": "e84df0312054cce3f523be5030aee36028c8c8c81ef382fec12f69d45cc6f6d5",
+      "bytes": 7765
+    },
+    {
+      "path": "docs/recipes.md",
+      "sha256": "47615dabfee281f9c72735caeac222b8090e99b9401f6d6b621f4bd81e8da326",
+      "bytes": 7253
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Applications.md",
+      "sha256": "7ff462d141a58f11c46fa12ea1a5357c7f80ddb4b71705517f2b379e52b77784",
+      "bytes": 10059
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Automation.md",
+      "sha256": "4b361e881989f0454be70b5ad25c6b7043838f756e3687df0d97010137e7a8d7",
+      "bytes": 7354
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Codecs.md",
+      "sha256": "7e2f34d3b70c35c78d1dcff7a86770631dfcda6c9587285f7b271a6f701d73e3",
+      "bytes": 3708
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Compliance.md",
+      "sha256": "f7dcd56b268d1eefe189724c4c7110e1cfe9e6b06e43d21825cbed470c5daeaf",
+      "bytes": 4188
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Cryptography.md",
+      "sha256": "e015c7472cd34e8400ebf3d55fd01b8bd2a8c8367e73ea48d67cf21a9f10e1b6",
+      "bytes": 10795
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Fonts.md",
+      "sha256": "7ca92d47e71f155014550dc876c587eea2d6e282865c3b50489bfcd6c1a1a914",
+      "bytes": 2943
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Formats.md",
+      "sha256": "21d99b6adf7c910a733981ffcb56d333b605a179269bdc797ce7ce47ad9c330f",
+      "bytes": 62802
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Html.md",
+      "sha256": "19f95f8ae5771491d4869ecf006dfcb85e11eae59bbe934beb48d2170cd2eab9",
+      "bytes": 27583
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Intelligence.md",
+      "sha256": "5588527a42d1c0da5a46e99331e22dcd4c2b666a8da8f4dcd41b1a3448768ee5",
+      "bytes": 68117
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Ocr.md",
+      "sha256": "e2cc8209624973684a0b0238b323751c50ebdf11eadf4d8afe245e6ac24dbd5f",
+      "bytes": 5059
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Rendering.md",
+      "sha256": "ca706534a344b55246dbf2825ed2f54ebaea8b790da3df65a888ec71a2039fd3",
+      "bytes": 4840
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Text.md",
+      "sha256": "f366b21358514351f4692ef4a8b6fe03ce01aa683817a2cd02a3762f4c0a81ea",
+      "bytes": 2014
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Word.md",
+      "sha256": "99b5255189b6b41b7abd9de46a6025413848b3f7b3bb501832af2f1b6dc387d3",
+      "bytes": 8999
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Workers.md",
+      "sha256": "5c8e2604ebfada46d6db8d099737e1d30c6265c11b1ba8541bbc5eb3abe5bae2",
+      "bytes": 13493
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.md",
+      "sha256": "124009093dbf70766c50d8b2c36be20915e093802eddf66f7b50b83572d5b229",
+      "bytes": 860550
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "cba72a7f822b094b3af3365d4f0514622f4093fa43b7301e75a4940295aad96c",
+      "bytes": 1486
+    },
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "3b01a4bd3d7057805d1e72b6f82a632277487e202465cc7017308951f406ec74",
+      "bytes": 15661
+    },
+    {
+      "path": "eng/Documentation/Documentation.csproj",
+      "sha256": "bf6ea4bbfd06836b37b96088a063e1a291edda89f999e8a1886d27c9a9dab4f1",
+      "bytes": 312
+    },
+    {
+      "path": "eng/Documentation/Program.cs",
+      "sha256": "3371f10bdd592bde57e7af30abf3416b9327a8e0dacecd1ef8a772ac2fe85b86",
+      "bytes": 12352
+    },
+    {
+      "path": "eng/Documentation/packages.lock.json",
+      "sha256": "a870b1a9068b5f71dbba574611a4453b9d4a7b9d7625822137bd7b704dde0474",
+      "bytes": 334
+    },
+    {
+      "path": "eng/check-documentation.py",
+      "sha256": "46d90b5e1f569a0e9d53d901fffabecc5765c7f4e895258902599743ba3b3148",
+      "bytes": 4371
+    },
+    {
+      "path": "eng/test-documentation.ps1",
+      "sha256": "7c9df0c73c1e9c0328fc857dcb5821b553969e27365d5e18b39ffd0b38926ba6",
+      "bytes": 2784
+    },
+    {
+      "path": "eng/test-package-recipes.ps1",
+      "sha256": "3fe33e0889df904d38ab3ba54ada37d50318a282222f1b1eb23a2e76e915c593",
+      "bytes": 6284
+    },
+    {
+      "path": "eng/test-recipes.py",
+      "sha256": "322653107afed3a4772dadf0a5f1da44949b23f86ff9bef441e1975443bf33ad",
+      "bytes": 3834
+    },
+    {
+      "path": "eng/verify-recipe-fixtures.py",
+      "sha256": "465992673dfa36dc9e9fd1b941790299977ee9bb843b0feb6888737b2cf26f76",
+      "bytes": 2620
+    },
+    {
+      "path": "examples/Fluent.Pdf.Recipes/Fluent.Pdf.Recipes.csproj",
+      "sha256": "5b8901e4ffd6fe867da672d9e620641fc8b2e3e6a729a6b2ac85ac38f9cb3f77",
+      "bytes": 1104
+    },
+    {
+      "path": "examples/Fluent.Pdf.Recipes/Program.cs",
+      "sha256": "035e51aacdab072f30ff43df4e2657c77e3dd3a7c458c661fd44e175f3084b1a",
+      "bytes": 6737
+    },
+    {
+      "path": "examples/Fluent.Pdf.Recipes/packages.lock.json",
+      "sha256": "8932fd28a2d72eba6158464e76c75ab0911bb939a5fcd1558e10a2412f5584b2",
+      "bytes": 28426
+    },
+    {
+      "path": "examples/README.md",
+      "sha256": "7b8984d02acf21415e2ac23115bf88e76d4d7df9d587835c1d08b36205c9813e",
+      "bytes": 5484
+    },
+    {
+      "path": "specs/documentation-snippets.json",
+      "sha256": "fd987d7bc5eab2d92ed4e0a45a68d8ac9d773c38c4cb2ccf15aed21b72ee92e9",
+      "bytes": 14111
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "2cbf2d8702ece972490432fd4219bb4452bc77973a0b8491df10ee79b426d317",
+      "bytes": 211182
+    },
+    {
+      "path": "third-party/documentation/MetadataLoadContext-THIRD-PARTY-NOTICES.TXT",
+      "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54",
+      "bytes": 76623
+    },
+    {
+      "path": "third-party/documentation/components.json",
+      "sha256": "821659eb9ed4d7e52bc963607916c1f0db7b8e14b15fa5ec729ce4a9e770d7ba",
+      "bytes": 651
+    }
+  ],
+  "lockedRestore": {
+    "path": "/workspace/scratch/documentation-clean-restore.log",
+    "sha256": "3f3f5c750cd115490a9aed0d9ecbb9c6fe271c038f7e949d5f82b5286dd4b5da",
+    "bytes": 2490
+  },
+  "fourTargetSolutionAndRecipeBuild": {
+    "path": "/workspace/scratch/documentation-clean-build.log",
+    "sha256": "597e9f7f04906e1757d248f3b11d33278cb066d6f451d25d97de4c5114e2e771",
+    "bytes": 9974
+  },
+  "apiReference": {
+    "report": {
+      "path": "artifacts/contracts/documentation/api-reference.json",
+      "sha256": "8cb336deb17c0a16b5f990506ddb7ce425d9be6362af5058e9d9c4199af5fdef",
+      "bytes": 12888
+    },
+    "observations": {
+      "schemaVersion": 1,
+      "purpose": "source-documentation",
+      "metadataOnly": true,
+      "libraries": [
+        {
+          "assembly": "Fluent.Pdf",
+          "version": "1.0.0",
+          "publicDeclarations": 3528,
+          "documentedMembers": 3507,
+          "implicitConstructorDescriptions": [
+            "M:Fluent.Pdf.PdfSimpleTextShaper.#ctor"
+          ],
+          "assemblySha256": "297d97aead67e34d19a8f787db490a96cf51690359d8781bfc62489d7293cb73",
+          "xmlSha256": "2446a313145858099532293e524c2a570d692a54c67ec9e169683ed9d3beb72b",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+              "sha256": "d71b940420ebd033ec847f07bb598ce415b827063e6c97d6c418dc107429cd03"
+            }
+          ],
+          "outputSha256": "124009093dbf70766c50d8b2c36be20915e093802eddf66f7b50b83572d5b229"
+        },
+        {
+          "assembly": "Fluent.Pdf.Applications",
+          "version": "1.0.0",
+          "publicDeclarations": 32,
+          "documentedMembers": 32,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "2548ff77626c4fa89e7125436ff77fe26451c4d2fee6869c16f1dd2ef59b5a22",
+          "xmlSha256": "e2043d0c2eb3f9906f8b84a643e805b182e3be1fd339494a0ad13713b7a7d7f8",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Applications/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Applications/PublicAPI.Unshipped.txt",
+              "sha256": "a6b5c9bb7b3845098ccec3322c09f5008569b71a263225b627b933897435fc37"
+            }
+          ],
+          "outputSha256": "7ff462d141a58f11c46fa12ea1a5357c7f80ddb4b71705517f2b379e52b77784"
+        },
+        {
+          "assembly": "Fluent.Pdf.Automation",
+          "version": "1.0.0",
+          "publicDeclarations": 30,
+          "documentedMembers": 30,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "f4062b99a3da8f884820f79f4951ce798c1ce00912e78057a7ad6c16fee8b5a1",
+          "xmlSha256": "902050fcd2dcc4a0244e8c1a8f60e3dea5714c250add8bd4c009b49dd13b991a",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Automation/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Automation/PublicAPI.Unshipped.txt",
+              "sha256": "a75790cb431dc7d827d6d6877415456ef1a396f958f3047b9510316836bdcf56"
+            }
+          ],
+          "outputSha256": "4b361e881989f0454be70b5ad25c6b7043838f756e3687df0d97010137e7a8d7"
+        },
+        {
+          "assembly": "Fluent.Pdf.Codecs",
+          "version": "1.0.0",
+          "publicDeclarations": 9,
+          "documentedMembers": 9,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "66146468c6091268b06e3e2f1eef8e24d795dd563a0d250f47f37dcb314c8acf",
+          "xmlSha256": "293efcbde429b966a8a581dc1d483fbe0f238e808114bf477113231f84e99ebd",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Codecs/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Codecs/PublicAPI.Unshipped.txt",
+              "sha256": "19094b4e15dc24e1c1f98a04b0eb7afbf632261ab4575754faa7772345c99416"
+            }
+          ],
+          "outputSha256": "7e2f34d3b70c35c78d1dcff7a86770631dfcda6c9587285f7b271a6f701d73e3"
+        },
+        {
+          "assembly": "Fluent.Pdf.Compliance",
+          "version": "1.0.0",
+          "publicDeclarations": 10,
+          "documentedMembers": 10,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "d00e83bd09e36de256a9237f3b364838be7ab3ffda51df0302d1f244b5f01748",
+          "xmlSha256": "99d5cf19cde4956a4a4cdf293bb203a0ae22b07d161969063202ea0c78e8eb54",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Compliance/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Compliance/PublicAPI.Unshipped.txt",
+              "sha256": "7a850bc4bddc9a72440a2e9359e4340dcc48590949ba21fab5e08249a2fd7947"
+            }
+          ],
+          "outputSha256": "f7dcd56b268d1eefe189724c4c7110e1cfe9e6b06e43d21825cbed470c5daeaf"
+        },
+        {
+          "assembly": "Fluent.Pdf.Cryptography",
+          "version": "1.0.0",
+          "publicDeclarations": 26,
+          "documentedMembers": 26,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "4b97116a8ae0f9e9c9eb49673e7294725b0f231731e17c53e98cc7c6adabcd7c",
+          "xmlSha256": "89f1050bb771f535cdaab0beea742fc558d71e26d63093cf5a528cfbd6c9cbe9",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Cryptography/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Cryptography/PublicAPI.Unshipped.txt",
+              "sha256": "60a51fb4d3fd4691217907b9834cd10d191446e307dc9e4f0193defcf607fa08"
+            }
+          ],
+          "outputSha256": "e015c7472cd34e8400ebf3d55fd01b8bd2a8c8367e73ea48d67cf21a9f10e1b6"
+        },
+        {
+          "assembly": "Fluent.Pdf.Fonts",
+          "version": "1.0.0",
+          "publicDeclarations": 8,
+          "documentedMembers": 8,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "0e127317282b0c217cdfc5b27156d032caa739b6cc04b104a82188177bd4bd7b",
+          "xmlSha256": "94c3bd90b0778ba9a40794009ce8ae1aae5d8b0e26eef2cfc74ce2e61b08bd74",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Fonts/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Fonts/PublicAPI.Unshipped.txt",
+              "sha256": "7ab4329e1c295226312e907e6b3055696a42135fef18c62da4ca5ea4b47a86d2"
+            }
+          ],
+          "outputSha256": "7ca92d47e71f155014550dc876c587eea2d6e282865c3b50489bfcd6c1a1a914"
+        },
+        {
+          "assembly": "Fluent.Pdf.Formats",
+          "version": "1.0.0",
+          "publicDeclarations": 197,
+          "documentedMembers": 197,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "7bcc86377f3d4c1dc078338212712568f2cbfc8203c197a8569fed4622f58dc2",
+          "xmlSha256": "87ad2a0a9ff870911c14e4c6113d75b5c1589c17276f70234756760a4e65b983",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Formats/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Formats/PublicAPI.Unshipped.txt",
+              "sha256": "da2a299ffab8a2821487f234eb031a9aaef396ee4797101e91981dff24ae3f39"
+            }
+          ],
+          "outputSha256": "21d99b6adf7c910a733981ffcb56d333b605a179269bdc797ce7ce47ad9c330f"
+        },
+        {
+          "assembly": "Fluent.Pdf.Html",
+          "version": "1.0.0",
+          "publicDeclarations": 90,
+          "documentedMembers": 90,
+          "implicitConstructorDescriptions": [
+            "M:Fluent.Pdf.Html.SystemHtmlNameResolver.#ctor",
+            "M:Fluent.Pdf.Html.PinnedHtmlHttpTransport.#ctor"
+          ],
+          "assemblySha256": "433795040b87696e00a9fac4b1823b91401b2338089d6cd594f3e4ca8223a793",
+          "xmlSha256": "f96db2871584ec320a2a18be5a481cb732bdce7a4a942689297001497c05f370",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Html/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Html/PublicAPI.Unshipped.txt",
+              "sha256": "b5bd87e650eb67adba8523f88c3cb6447e200004595650ccc6cacc24858fe0a7"
+            }
+          ],
+          "outputSha256": "19f95f8ae5771491d4869ecf006dfcb85e11eae59bbe934beb48d2170cd2eab9"
+        },
+        {
+          "assembly": "Fluent.Pdf.Intelligence",
+          "version": "1.0.0",
+          "publicDeclarations": 239,
+          "documentedMembers": 237,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "62008d8e837379bd58364c7e12db95f09c38235518bf9f0f5610ffce5586fa10",
+          "xmlSha256": "fac90b0aecb9b9149c1018c4c23a10cdc38ea0f0f407401f85da05511153615b",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Intelligence/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Intelligence/PublicAPI.Unshipped.txt",
+              "sha256": "b9d85aac22e4d46fb99f06b7f867f4ebad0203f43deeb7ebc0525e6973ead645"
+            }
+          ],
+          "outputSha256": "5588527a42d1c0da5a46e99331e22dcd4c2b666a8da8f4dcd41b1a3448768ee5"
+        },
+        {
+          "assembly": "Fluent.Pdf.Ocr",
+          "version": "1.0.0",
+          "publicDeclarations": 14,
+          "documentedMembers": 14,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "4dcf7705a704c138bb6b55a36c301e08a6e5fab4a3f38910e98e16ef189a220c",
+          "xmlSha256": "f539f8f32db24eaee13cc4c71919304c9b83ea1ef9e7d3731c77a2096cc3de37",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Ocr/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Ocr/PublicAPI.Unshipped.txt",
+              "sha256": "04291c1feeaf161128512828418653c8ced2c9d0360f105966920041cddab7cd"
+            }
+          ],
+          "outputSha256": "e2cc8209624973684a0b0238b323751c50ebdf11eadf4d8afe245e6ac24dbd5f"
+        },
+        {
+          "assembly": "Fluent.Pdf.Rendering",
+          "version": "1.0.0",
+          "publicDeclarations": 14,
+          "documentedMembers": 14,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "7fc99910b44d458bbf0e776bf58553679632473baa548b7553afd0840ba73fbb",
+          "xmlSha256": "34d2296828b0e8a618dd54b45e76e8045bbad170bc7822ea299c9965aa19475c",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Rendering/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Rendering/PublicAPI.Unshipped.txt",
+              "sha256": "c2a4e37f12c475945d3212b7db963124134367fa38b4a7686d1c9a722d44fde9"
+            }
+          ],
+          "outputSha256": "ca706534a344b55246dbf2825ed2f54ebaea8b790da3df65a888ec71a2039fd3"
+        },
+        {
+          "assembly": "Fluent.Pdf.Text",
+          "version": "1.0.0",
+          "publicDeclarations": 6,
+          "documentedMembers": 6,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "ea88373663d735c75d52e3ca9885c2b948736fd987d76fc8a7b2954675f11dba",
+          "xmlSha256": "386c0f5b44b5a97811ef7b4b5fb96db0eea12280b0c835252790dc1cefa2ae91",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Text/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Text/PublicAPI.Unshipped.txt",
+              "sha256": "0a1f26c12d5c7e918987dc24b56babb16c9b786691ad749c88f45c7eba4deb40"
+            }
+          ],
+          "outputSha256": "f366b21358514351f4692ef4a8b6fe03ce01aa683817a2cd02a3762f4c0a81ea"
+        },
+        {
+          "assembly": "Fluent.Pdf.Word",
+          "version": "1.0.0",
+          "publicDeclarations": 25,
+          "documentedMembers": 25,
+          "implicitConstructorDescriptions": [],
+          "assemblySha256": "97f8ec705b92ab3b3d01d3066c6a369361b489995579191e0e84807c84188114",
+          "xmlSha256": "aadbde22146e0826c7719114b3914ffe805a8ad288c60c19e738880c1f384679",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Word/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Word/PublicAPI.Unshipped.txt",
+              "sha256": "8fd86d847e20c285e2c0255bcec1850abd818043ae062dafbb8a7b05d7f1f0d4"
+            }
+          ],
+          "outputSha256": "99b5255189b6b41b7abd9de46a6025413848b3f7b3bb501832af2f1b6dc387d3"
+        },
+        {
+          "assembly": "Fluent.Pdf.Workers",
+          "version": "1.0.0",
+          "publicDeclarations": 43,
+          "documentedMembers": 43,
+          "implicitConstructorDescriptions": [
+            "M:Fluent.Pdf.Workers.NativeWorkerHost.#ctor"
+          ],
+          "assemblySha256": "bd63e700c26b47bb46991eb8dcd36775ef26ccf677ad60138a5805d4a476f2da",
+          "xmlSha256": "26c7cb8cb2f96ca793a83fd62bca0082867566a237973d15095fa5b38f6b3baa",
+          "baselines": [
+            {
+              "path": "src/Fluent.Pdf.Workers/PublicAPI.Shipped.txt",
+              "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+            },
+            {
+              "path": "src/Fluent.Pdf.Workers/PublicAPI.Unshipped.txt",
+              "sha256": "4f09ece076a0f312237c37a9c5334a14b9d14258de030218aa4587491448a20c"
+            }
+          ],
+          "outputSha256": "5c8e2604ebfada46d6db8d099737e1d30c6265c11b1ba8541bbc5eb3abe5bae2"
+        }
+      ],
+      "productionQualified": false
+    },
+    "scope": "MetadataLoadContext inspects public type/member metadata without executing SDK code or attributes. Exact API baselines preserve nullability/defaults/constants. One implicit parameterless constructor description derives explicitly from its documented type. No invented private member is advertised."
+  },
+  "literalSnippets": {
+    "report": {
+      "path": "artifacts/contracts/documentation/snippets.json",
+      "sha256": "322d78ad2e2e5139410c2fc750fd8ab0269ac876e3b2b5b3b8cd6bf369389c6e",
+      "bytes": 388
+    },
+    "observations": {
+      "schemaVersion": 1,
+      "packageVersion": "1.0.0",
+      "literalFragments": 34,
+      "exactExecutableSourceSha256": "035e51aacdab072f30ff43df4e2657c77e3dd3a7c458c661fd44e175f3084b1a",
+      "catalogSha256": "fd987d7bc5eab2d92ed4e0a45a68d8ac9d773c38c4cb2ccf15aed21b72ee92e9",
+      "narrativeFragmentsStillRequiringBinding": 33,
+      "publishedPackagesQualified": false,
+      "productionQualified": false
+    },
+    "catalog": {
+      "path": "specs/documentation-snippets.json",
+      "sha256": "fd987d7bc5eab2d92ed4e0a45a68d8ac9d773c38c4cb2ccf15aed21b72ee92e9",
+      "bytes": 14111
+    },
+    "scope": "The complete application excerpt is byte-bound to compiled/executed source. The33 narrative fragments remain explicitly unbound and unqualified; they are not counted as passing executions."
+  },
+  "actualLocalRecipes": {
+    "profiles": [
+      {
+        "assembly": "/workspace/pdf.net-remaining/examples/Fluent.Pdf.Recipes/bin/Release/net8.0/Fluent.Pdf.Recipes.dll",
+        "assemblySha256": "4e854a07a27cca1785c7571e7c360159d647108a7a1713cea9eccfa3b5bad3cc",
+        "dependencyGraph": {
+          "path": "/workspace/pdf.net-remaining/examples/Fluent.Pdf.Recipes/bin/Release/net8.0/Fluent.Pdf.Recipes.deps.json",
+          "sha256": "a53327a8874cbcfc12885a2eda1f3dc7c27b978f988494c2f42232bc9e81580c",
+          "sdkAssets": {
+            "Fluent.Pdf": "project",
+            "Fluent.Pdf.Applications": "project",
+            "Fluent.Pdf.Automation": "project",
+            "Fluent.Pdf.Codecs": "project",
+            "Fluent.Pdf.Compliance": "project",
+            "Fluent.Pdf.Cryptography": "project",
+            "Fluent.Pdf.Fonts": "project",
+            "Fluent.Pdf.Formats": "project",
+            "Fluent.Pdf.Html": "project",
+            "Fluent.Pdf.Intelligence": "project",
+            "Fluent.Pdf.Ocr": "project",
+            "Fluent.Pdf.Rendering": "project",
+            "Fluent.Pdf.Text": "project",
+            "Fluent.Pdf.Word": "project",
+            "Fluent.Pdf.Workers": "project"
+          }
+        },
+        "runtime": "RECIPES_RUNTIME;.NET 8.0.32;X64;.NETCoreApp,Version=v8.0;source-consumer",
+        "cases": [
+          "model-snapshot",
+          "language-vector",
+          "language-canvas",
+          "select-and-extract",
+          "limits-and-cancellation",
+          "explicit-provider",
+          "preflight-and-formats",
+          "lossless-optimization"
+        ],
+        "total": 8,
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "outputs": [
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/cs-canvas.pdf",
+            "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/cs-formats.json",
+            "sha256": "0e0dba1e41f98b09795e219d29cc64cf32e2d1f6a687db46a3e4380d76861617"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/cs-vector.pdf",
+            "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/optimized.pdf",
+            "sha256": "5c36f9b8edcfd653290e3bd0e35dd1fcb80ccf088befdfaa34975dae7096f6ef"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/preflight.json",
+            "sha256": "45142ead5a46c3da3a737125f8846997ecd9115160465a6ac5f9c976a751ba93"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/selected.pdf",
+            "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/vb-canvas.pdf",
+            "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/vb-formats.json",
+            "sha256": "0e0dba1e41f98b09795e219d29cc64cf32e2d1f6a687db46a3e4380d76861617"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net8.0/vb-vector.pdf",
+            "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed"
+          }
+        ]
+      },
+      {
+        "assembly": "/workspace/pdf.net-remaining/examples/Fluent.Pdf.Recipes/bin/Release/net10.0/Fluent.Pdf.Recipes.dll",
+        "assemblySha256": "0e425d436c44cd8826fca0aaab9f251587dea8db67d434939f29901a95025154",
+        "dependencyGraph": {
+          "path": "/workspace/pdf.net-remaining/examples/Fluent.Pdf.Recipes/bin/Release/net10.0/Fluent.Pdf.Recipes.deps.json",
+          "sha256": "e72c941ae2c2d44a17c57f7882bc3f4d069232dccd6752a7cc09fe78e811f340",
+          "sdkAssets": {
+            "Fluent.Pdf": "project",
+            "Fluent.Pdf.Applications": "project",
+            "Fluent.Pdf.Automation": "project",
+            "Fluent.Pdf.Codecs": "project",
+            "Fluent.Pdf.Compliance": "project",
+            "Fluent.Pdf.Cryptography": "project",
+            "Fluent.Pdf.Fonts": "project",
+            "Fluent.Pdf.Formats": "project",
+            "Fluent.Pdf.Html": "project",
+            "Fluent.Pdf.Intelligence": "project",
+            "Fluent.Pdf.Ocr": "project",
+            "Fluent.Pdf.Rendering": "project",
+            "Fluent.Pdf.Text": "project",
+            "Fluent.Pdf.Word": "project",
+            "Fluent.Pdf.Workers": "project"
+          }
+        },
+        "runtime": "RECIPES_RUNTIME;.NET 10.0.13;X64;.NETCoreApp,Version=v10.0;source-consumer",
+        "cases": [
+          "model-snapshot",
+          "language-vector",
+          "language-canvas",
+          "select-and-extract",
+          "limits-and-cancellation",
+          "explicit-provider",
+          "preflight-and-formats",
+          "lossless-optimization"
+        ],
+        "total": 8,
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "outputs": [
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/cs-canvas.pdf",
+            "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/cs-formats.json",
+            "sha256": "0e0dba1e41f98b09795e219d29cc64cf32e2d1f6a687db46a3e4380d76861617"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/cs-vector.pdf",
+            "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/optimized.pdf",
+            "sha256": "eeba1e39faa809e849da7ef13d68b9c95a4835effc87208ed64031f611588a14"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/preflight.json",
+            "sha256": "45142ead5a46c3da3a737125f8846997ecd9115160465a6ac5f9c976a751ba93"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/selected.pdf",
+            "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/vb-canvas.pdf",
+            "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/vb-formats.json",
+            "sha256": "0e0dba1e41f98b09795e219d29cc64cf32e2d1f6a687db46a3e4380d76861617"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/vb-vector.pdf",
+            "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed"
+          }
+        ]
+      },
+      {
+        "assembly": "/workspace/pdf.net-remaining/examples/Fluent.Pdf.Recipes/bin/Release/net10.0/Fluent.Pdf.Recipes.dll",
+        "assemblySha256": "2686f3cf051a0f4ee143d51340489b18efe9c5791b1843141abde5bbf55670c0",
+        "dependencyGraph": {
+          "path": "/workspace/pdf.net-remaining/examples/Fluent.Pdf.Recipes/bin/Release/net10.0/Fluent.Pdf.Recipes.deps.json",
+          "sha256": "e72c941ae2c2d44a17c57f7882bc3f4d069232dccd6752a7cc09fe78e811f340",
+          "sdkAssets": {
+            "Fluent.Pdf": "project",
+            "Fluent.Pdf.Applications": "project",
+            "Fluent.Pdf.Automation": "project",
+            "Fluent.Pdf.Codecs": "project",
+            "Fluent.Pdf.Compliance": "project",
+            "Fluent.Pdf.Cryptography": "project",
+            "Fluent.Pdf.Fonts": "project",
+            "Fluent.Pdf.Formats": "project",
+            "Fluent.Pdf.Html": "project",
+            "Fluent.Pdf.Intelligence": "project",
+            "Fluent.Pdf.Ocr": "project",
+            "Fluent.Pdf.Rendering": "project",
+            "Fluent.Pdf.Text": "project",
+            "Fluent.Pdf.Word": "project",
+            "Fluent.Pdf.Workers": "project"
+          }
+        },
+        "runtime": "RECIPES_RUNTIME;.NET 10.0.13;X64;.NETStandard,Version=v2.0;source-consumer",
+        "cases": [
+          "model-snapshot",
+          "language-vector",
+          "language-canvas",
+          "select-and-extract",
+          "limits-and-cancellation",
+          "explicit-provider",
+          "preflight-and-formats",
+          "lossless-optimization"
+        ],
+        "total": 8,
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "outputs": [
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/cs-canvas.pdf",
+            "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/cs-formats.json",
+            "sha256": "0e0dba1e41f98b09795e219d29cc64cf32e2d1f6a687db46a3e4380d76861617"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/cs-vector.pdf",
+            "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/optimized.pdf",
+            "sha256": "eeba1e39faa809e849da7ef13d68b9c95a4835effc87208ed64031f611588a14"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/preflight.json",
+            "sha256": "45142ead5a46c3da3a737125f8846997ecd9115160465a6ac5f9c976a751ba93"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/selected.pdf",
+            "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/vb-canvas.pdf",
+            "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/vb-formats.json",
+            "sha256": "0e0dba1e41f98b09795e219d29cc64cf32e2d1f6a687db46a3e4380d76861617"
+          },
+          {
+            "path": "/workspace/pdf.net-remaining/artifacts/contracts/documentation/net10.0/vb-vector.pdf",
+            "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed"
+          }
+        ]
+      }
+    ],
+    "casesEachProfile": 8,
+    "profilesCount": 3,
+    "reports": [
+      {
+        "path": "artifacts/contracts/documentation/modern-recipes.json",
+        "sha256": "2c77ef1083a4d1c93a7176a5196f339977cd2fb2115578e0d7eca6c8decfa784",
+        "bytes": 7221
+      },
+      {
+        "path": "artifacts/contracts/documentation/netstandard-recipes.json",
+        "sha256": "2c9cfa5d8d7f1995ce854e847117266404f93150980e2f08a350d51288de2e2f",
+        "bytes": 3693
+      }
+    ],
+    "log": {
+      "path": "/workspace/scratch/documentation-clean-tests.log",
+      "sha256": "ce0820963eb2337b8f18137cb18b9a86cb0258f8fde2916a9e957a016b82adcd",
+      "bytes": 9767
+    }
+  },
+  "independentOutputs": {
+    "report": {
+      "path": "artifacts/contracts/documentation/independent-recipes.json",
+      "sha256": "3c7bb453d926343a8853ef2ce1436d30cfe9b765dd1a4204b55e8ab7f3104bd3",
+      "bytes": 2892
+    },
+    "observations": {
+      "schemaVersion": 1,
+      "pdfReader": "PyMuPDF",
+      "pdfReaderVersion": "1.26.6",
+      "secondReader": "Ghostscript",
+      "secondReaderVersion": "10.05.1",
+      "outputs": [
+        {
+          "path": "artifacts/contracts/documentation/net8.0/cs-canvas.pdf",
+          "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5",
+          "pages": 1,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net8.0/cs-vector.pdf",
+          "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed",
+          "pages": 1,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net8.0/optimized.pdf",
+          "sha256": "5c36f9b8edcfd653290e3bd0e35dd1fcb80ccf088befdfaa34975dae7096f6ef",
+          "pages": 2,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net8.0/selected.pdf",
+          "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd",
+          "pages": 2,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net8.0/vb-canvas.pdf",
+          "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5",
+          "pages": 1,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net8.0/vb-vector.pdf",
+          "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed",
+          "pages": 1,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net10.0/cs-canvas.pdf",
+          "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5",
+          "pages": 1,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net10.0/cs-vector.pdf",
+          "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed",
+          "pages": 1,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net10.0/optimized.pdf",
+          "sha256": "eeba1e39faa809e849da7ef13d68b9c95a4835effc87208ed64031f611588a14",
+          "pages": 2,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net10.0/selected.pdf",
+          "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd",
+          "pages": 2,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net10.0/vb-canvas.pdf",
+          "sha256": "343666e6a95d3f01ffaa68f6e541e5ffc23ead7143b8d3ebc4ab75085fd6cbe5",
+          "pages": 1,
+          "independentReaders": 2
+        },
+        {
+          "path": "artifacts/contracts/documentation/net10.0/vb-vector.pdf",
+          "sha256": "b9a2a43aa78c181898903a9ad4840ddd87a60c0485f30f4bfcdcc324f35ae2ed",
+          "pages": 1,
+          "independentReaders": 2
+        }
+      ],
+      "exactLanguageVectorCanvasPixels": true,
+      "completeFidelityQualified": false,
+      "productionQualified": false
+    },
+    "log": {
+      "path": "/workspace/scratch/documentation-clean-independent.log",
+      "sha256": "0ce2f97ee692e61e55b63854f5ea276e6a8e138bb4fb1d94443332ebdba27a06",
+      "bytes": 67
+    }
+  },
+  "packageConsumerGate": {
+    "positiveCandidateExecutionQualified": false,
+    "blockedAsRequired": true,
+    "log": {
+      "path": "/workspace/scratch/documentation-package-block.log",
+      "sha256": "2b833e79e520ce1c1fcc7feb7101193bdd4e35cca112bb766071d47cf4f81ce5",
+      "bytes": 385
+    },
+    "scope": "The unchanged source qualification gate rejects false readiness before reading candidate inputs or creating a consumer workspace. This does not verify the positive final-package path."
+  },
+  "releaseBlock": {
+    "path": "/workspace/scratch/documentation-clean-release-block.log",
+    "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "bytes": 139
+  },
+  "dependencies": {
+    "schemaVersion": 1,
+    "purpose": "Metadata-only API documentation build tool; never referenced by SDK runtime projects",
+    "components": [
+      {
+        "id": "System.Reflection.MetadataLoadContext",
+        "version": "10.0.0",
+        "packageSha256": "b8b074e0ec3b5365a32e16697b0035d61c3cf6ba39c52631056cc4635c235501",
+        "licenseExpression": "MIT",
+        "buildOnly": true,
+        "distributedWithSdk": false,
+        "notices": [
+          {
+            "path": "third-party/documentation/MetadataLoadContext-THIRD-PARTY-NOTICES.TXT",
+            "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54"
+          }
+        ]
+      }
+    ]
+  },
+  "initialObservations": [
+    "An implicit public parameterless constructor has no compiler XML entry; the generator explicitly records its description derived from the documented type.",
+    "Runtime/asset assertions detected a stale netstandard consumer after rerunning the harness. It now rebuilds normal mappings first, then executes the explicit fallback, with exact runtime/dependency-graph assertions.",
+    "Retained notice bytes are normalized to repository LF before digest binding."
+  ],
+  "remaining": [
+    "All33 narrative fragments need explicit caller/provider bindings and literal execution against exact published packages",
+    "Complete provider/model/font/host/minimum-runtime/accessibility/security/fidelity/performance/fuzzing corpus qualification",
+    "Positive exact final-package consumer, public indexing/version and publication evidence"
+  ],
+  "commands": [
+    "dotnet restore Fluent.Pdf.slnx --locked-mode --disable-parallel -m:1",
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -NoProfile -File eng/test-documentation.ps1",
+    "Independent analysis Python runs eng/verify-recipe-fixtures.py against both actual modern output directories",
+    "pwsh -NoProfile -File eng/test-release-block.ps1",
+    "Existing false-readiness rejection through eng/test-package-recipes.ps1; no fake qualification inputs"
+  ],
+  "actualSixHostSourceConsumers": {
+    "observations": [
+      {
+        "name": "Documentation (win-x64)",
+        "jobId": 120580632588,
+        "runId": 40002124882,
+        "sourceHead": "668995d2257e74f4584cf98a95c83342fe175d51",
+        "actualCheckout": "4a34205a809cea28025faa747d8d121c7c4edd00",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-89-120580632588.log",
+        "markers": [
+          "2026-10-23T18:22:52.2293259Z SOURCE_REFERENCE_PASS;15-libraries;metadata-only",
+          "2026-10-23T18:22:53.6263143Z DOCUMENTATION_SNIPPETS_PASS;34-inventoried;exact-source-recipe;remaining-bindings-explicit",
+          "2026-10-23T18:22:59.8365277Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 8.0.32;X64;.NETCoreApp,Version=v8.0;source-consumer",
+          "2026-10-23T18:22:59.8366675Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;X64;.NETCoreApp,Version=v10.0;source-consumer",
+          "2026-10-23T18:23:01.6855522Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET Framework 4.8.9363.0;X64;.NETFramework,Version=v4.7.2;source-consumer",
+          "2026-10-23T18:23:13.0199089Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;X64;.NETStandard,Version=v2.0;source-consumer"
+        ],
+        "archiveSha256": "9ccd7ddda2fbd8382089c2ea7e3771d995306e4815b8468c7df7ada6b2900ea7",
+        "artifactId": 12521974755,
+        "archiveDownloadedLocally": false,
+        "logSha256": "e05e0794a2d1fe6a2b949fe9dc3196089a684581cf261b8830ca810b647afb3f"
+      },
+      {
+        "name": "Documentation (osx-x64)",
+        "jobId": 120580633005,
+        "runId": 40002124882,
+        "sourceHead": "668995d2257e74f4584cf98a95c83342fe175d51",
+        "actualCheckout": "4a34205a809cea28025faa747d8d121c7c4edd00",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-89-120580633005.log",
+        "markers": [
+          "2026-10-23T18:23:05.0077390Z SOURCE_REFERENCE_PASS;15-libraries;metadata-only",
+          "2026-10-23T18:23:05.3232790Z DOCUMENTATION_SNIPPETS_PASS;34-inventoried;exact-source-recipe;remaining-bindings-explicit",
+          "2026-10-23T18:23:06.3518660Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 8.0.32;X64;.NETCoreApp,Version=v8.0;source-consumer",
+          "2026-10-23T18:23:06.3520310Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;X64;.NETCoreApp,Version=v10.0;source-consumer",
+          "2026-10-23T18:23:21.6621700Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;X64;.NETStandard,Version=v2.0;source-consumer"
+        ],
+        "archiveSha256": "4211746a50d4cc8dfe6ef22716ffe5662e2f79f55dc6e87d3e8975b0ffe0a4dd",
+        "artifactId": 12522966962,
+        "archiveDownloadedLocally": false,
+        "logSha256": "ca9b4bb7c18b1aacad809e92223ba714e73d9cbc28029c6b4eba6e690e9d7aad"
+      },
+      {
+        "name": "Documentation (linux-arm64)",
+        "jobId": 120580633047,
+        "runId": 40002124882,
+        "sourceHead": "668995d2257e74f4584cf98a95c83342fe175d51",
+        "actualCheckout": "4a34205a809cea28025faa747d8d121c7c4edd00",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-89-120580633047.log",
+        "markers": [
+          "2026-10-23T18:21:19.5913730Z SOURCE_REFERENCE_PASS;15-libraries;metadata-only",
+          "2026-10-23T18:21:19.6609824Z DOCUMENTATION_SNIPPETS_PASS;34-inventoried;exact-source-recipe;remaining-bindings-explicit",
+          "2026-10-23T18:21:20.2956715Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 8.0.32;Arm64;.NETCoreApp,Version=v8.0;source-consumer",
+          "2026-10-23T18:21:20.2957502Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;Arm64;.NETCoreApp,Version=v10.0;source-consumer",
+          "2026-10-23T18:21:29.1682531Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;Arm64;.NETStandard,Version=v2.0;source-consumer"
+        ],
+        "archiveSha256": "00717894010b3f8fbb9284ae9ae09b72f0a700da467b479d5eba0e9bb3992c6b",
+        "artifactId": 12521908795,
+        "archiveDownloadedLocally": false,
+        "logSha256": "96edd584e56a533cef7743536196e01beeb30d58557649533794a556fc7ade50"
+      },
+      {
+        "name": "Documentation (linux-x64)",
+        "jobId": 120580633168,
+        "runId": 40002124882,
+        "sourceHead": "668995d2257e74f4584cf98a95c83342fe175d51",
+        "actualCheckout": "4a34205a809cea28025faa747d8d121c7c4edd00",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-89-120580633168.log",
+        "markers": [
+          "2026-10-23T18:21:14.8074604Z SOURCE_REFERENCE_PASS;15-libraries;metadata-only",
+          "2026-10-23T18:21:14.8978463Z DOCUMENTATION_SNIPPETS_PASS;34-inventoried;exact-source-recipe;remaining-bindings-explicit",
+          "2026-10-23T18:21:15.5883664Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 8.0.32;X64;.NETCoreApp,Version=v8.0;source-consumer",
+          "2026-10-23T18:21:15.5885428Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;X64;.NETCoreApp,Version=v10.0;source-consumer",
+          "2026-10-23T18:21:24.2792241Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;X64;.NETStandard,Version=v2.0;source-consumer"
+        ],
+        "archiveSha256": "499c90501149b51323098d105f2a0841ac13777d4ed1ad633e93ed00e5c568cf",
+        "artifactId": 12521819929,
+        "archiveDownloadedLocally": false,
+        "logSha256": "e7a527941958bc368a0c955ba1ab4066180999a7f3ef21e729e468ae7473f477"
+      },
+      {
+        "name": "Documentation (win-arm64)",
+        "jobId": 120580633179,
+        "runId": 40002124882,
+        "sourceHead": "668995d2257e74f4584cf98a95c83342fe175d51",
+        "actualCheckout": "4a34205a809cea28025faa747d8d121c7c4edd00",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-89-120580633179.log",
+        "markers": [
+          "2026-10-23T18:22:35.3544624Z SOURCE_REFERENCE_PASS;15-libraries;metadata-only",
+          "2026-10-23T18:22:37.2232693Z DOCUMENTATION_SNIPPETS_PASS;34-inventoried;exact-source-recipe;remaining-bindings-explicit",
+          "2026-10-23T18:22:40.4673317Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 8.0.32;Arm64;.NETCoreApp,Version=v8.0;source-consumer",
+          "2026-10-23T18:22:40.4674107Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;Arm64;.NETCoreApp,Version=v10.0;source-consumer",
+          "2026-10-23T18:22:50.8946890Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;Arm64;.NETStandard,Version=v2.0;source-consumer"
+        ],
+        "archiveSha256": "c31a185d0106075af25ccd8eee21d2a43c7ef4f117c1308cf8e5dc31665197fe",
+        "artifactId": 12523016826,
+        "archiveDownloadedLocally": false,
+        "logSha256": "e05f41ad2dcfd3b8da61cfae0ee36f717b1beb23cc31d3cf2f97a19e37378ec2"
+      },
+      {
+        "name": "Documentation (osx-arm64)",
+        "jobId": 120580634335,
+        "runId": 40002124882,
+        "sourceHead": "668995d2257e74f4584cf98a95c83342fe175d51",
+        "actualCheckout": "4a34205a809cea28025faa747d8d121c7c4edd00",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-89-120580634335.log",
+        "markers": [
+          "2026-10-23T18:24:44.0116580Z SOURCE_REFERENCE_PASS;15-libraries;metadata-only",
+          "2026-10-23T18:24:44.7675370Z DOCUMENTATION_SNIPPETS_PASS;34-inventoried;exact-source-recipe;remaining-bindings-explicit",
+          "2026-10-23T18:24:45.9628240Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 8.0.32;Arm64;.NETCoreApp,Version=v8.0;source-consumer",
+          "2026-10-23T18:24:45.9631790Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;Arm64;.NETCoreApp,Version=v10.0;source-consumer",
+          "2026-10-23T18:24:54.1607530Z DOCUMENTATION_RECIPES_PASS;RECIPES_RUNTIME;.NET 10.0.13;Arm64;.NETStandard,Version=v2.0;source-consumer"
+        ],
+        "archiveSha256": "1016c705e162848ddd320ba26a7add6cf9e2e8e853ffe16c9c5dd32220a96048",
+        "artifactId": 12522153688,
+        "archiveDownloadedLocally": false,
+        "logSha256": "a916f5dec267b4810902b7e0dc80a8f5820ccc546b25722c651af5dadc606b36"
+      }
+    ],
+    "runtimeAssetProfiles": 19,
+    "recipeWorkflows": 152,
+    "failedRequiredWorkflows": 0,
+    "skippedRequiredWorkflows": 0,
+    "scope": "Metadata-only reference, exact source excerpt/inventory and all eight actual recipes on normal .NET8/.NET10 and explicit netstandard assets on six Windows/Linux/macOS x64/ARM64 hosts; current Framework x64 adds one profile. Product/tool/recipe code is identical to the later clean local checkpoint; only the retained-notice hash changed.",
+    "actualMinimumFrameworkQualified": false,
+    "publishedPackagesQualified": false
+  }
+}
