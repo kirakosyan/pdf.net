@@ -107,12 +107,21 @@ class RuntimeCheckerTests(unittest.TestCase):
             package = folder / 'synthetic.nupkg'
             with zipfile.ZipFile(package, 'w') as archive:
                 archive.writestr('lib/net10.0/Fixture.Sdk.dll', payload)
+                archive.writestr('Fixture.Sdk.nuspec', '<package><metadata><id>Fixture.Sdk</id><version>1.0.0</version></metadata></package>')
             graph = folder / 'synthetic.deps.json'
             graph.write_text(json.dumps(dict(libraries={'Fixture.Sdk/1.0.0': dict(type='package')})))
             value = dict(schemaVersion=1, packageVersion='1.0.0', packages=[dict(id='Fixture.Sdk', version='1.0.0', file=package.name, sha256=module.digest(package))], consumerDependencyGraph=dict(file=graph.name, sha256=module.digest(graph)))
             manifest = folder / 'manifest.json'
             manifest.write_text(json.dumps(value))
             module.package_bindings(manifest, identity, '1.0.0')
+            extra = folder / 'unbound.nupkg'
+            extra.write_bytes(b'SYNTHETIC UNBOUND ARTIFACT')
+            with self.assertRaises(ValueError): module.package_bindings(manifest, identity, '1.0.0')
+            extra.unlink()
+            wrong_value = copy.deepcopy(value); wrong_value['packages'][0]['id'] = 'Fixture.Other'
+            manifest.write_text(json.dumps(wrong_value))
+            with self.assertRaises(ValueError): module.package_bindings(manifest, identity, '1.0.0')
+            manifest.write_text(json.dumps(value))
             wrong = copy.deepcopy(identity); wrong['sdkAssets'][0]['sha256'] = '0' * 64
             with self.assertRaises(ValueError): module.package_bindings(manifest, wrong, '1.0.0')
             with self.assertRaises(ValueError): module.package_bindings(manifest, identity, '2.0.0')

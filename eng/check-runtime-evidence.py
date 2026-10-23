@@ -92,9 +92,18 @@ def package_bindings(manifest_path, identity, version):
     records = value.get("packages", [])
     require(len({(r["id"], r["version"]) for r in records}) == len(records), "duplicate-package-identity")
     root = manifest_path.resolve().parent
+    require(records and len({r["file"] for r in records}) == len(records) and
+            {p.name for p in root.glob("*.nupkg")} == {r["file"] for r in records}, "complete-feed-artifact-inventory")
     for record in records:
         require(Path(record["file"]).name == record["file"] and record["file"].endswith(".nupkg"), "package-path")
         require(digest(root / record["file"]) == record["sha256"], "package-file-hash")
+        with zipfile.ZipFile(root / record["file"]) as package:
+            require(len(package.namelist()) == len(set(package.namelist())), "duplicate-package-entry")
+            nuspecs = [n for n in package.namelist() if '/' not in n and n.endswith('.nuspec')]
+            require(len(nuspecs) == 1 and package.getinfo(nuspecs[0]).file_size <= 1048576, "package-metadata-extent")
+            metadata = ET.fromstring(package.read(nuspecs[0]))
+            elements = {e.tag.split('}')[-1]: e.text for e in metadata.iter() if e.tag.split('}')[-1] in {'id', 'version'}}
+            require(elements.get('id') == record['id'] and elements.get('version') == record['version'], "package-metadata-identity")
     short = {".NETFramework,Version=v4.7.2": "net472", ".NETStandard,Version=v2.0": "netstandard2.0", ".NETCoreApp,Version=v8.0": "net8.0", ".NETCoreApp,Version=v10.0": "net10.0"}
     for asset in identity["sdkAssets"]:
         candidates = [r for r in records if r["id"] == asset["name"] and r["version"] == version]
