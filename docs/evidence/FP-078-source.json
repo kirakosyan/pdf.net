@@ -1,0 +1,664 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-078",
+  "issue": 83,
+  "sourceCommit": "23629d17dc95f09ca2a327075d424658152ab2f9",
+  "commitBinding": "The source/runtime/API/independent observations were produced from this clean code checkpoint. Subsequent evidence/docs changes preserve these code hashes.",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "eng/verify-barcode-fixtures.py",
+      "sha256": "1fb3633c06a9c06581f634a14e269e63af6d4411b1e9f78875d6f6dc304efdf1",
+      "bytes": 5240
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "083788ba4097bac68bd7c467912cf5d2c90d9b4f388a8b3cc3fca21b94f98d69",
+      "bytes": 31100
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/packages.lock.json",
+      "sha256": "f444bc6312c86d6c54bb771249bd788fc033b97d30414f26a5af58c07c8bb38b",
+      "bytes": 30368
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "1bb4340dc4b4a312ee81494f5b3012c3b3439f7199a594b3e44240fbba9d1ac3",
+      "bytes": 36339
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/packages.lock.json",
+      "sha256": "f444bc6312c86d6c54bb771249bd788fc033b97d30414f26a5af58c07c8bb38b",
+      "bytes": 30368
+    },
+    {
+      "path": "src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj",
+      "sha256": "1669e1ad819b0ea15b34b46ddc3075aed3c9035d6957b8f73f717c3eb12a3308",
+      "bytes": 1348
+    },
+    {
+      "path": "src/Fluent.Pdf.Ocr/PublicAPI.Unshipped.txt",
+      "sha256": "04291c1feeaf161128512828418653c8ced2c9d0360f105966920041cddab7cd",
+      "bytes": 1418
+    },
+    {
+      "path": "src/Fluent.Pdf.Ocr/ZxingBarcodeDecoder.cs",
+      "sha256": "17c9c09375b95160d223fa8150e92d3dfb6049350e103b51d1b8967b24776a96",
+      "bytes": 6437
+    },
+    {
+      "path": "src/Fluent.Pdf.Ocr/packages.lock.json",
+      "sha256": "6f1dd4b77c25e4ceba4b608b0216c8b2bdab7df75f5d72624cd28db0b9c75ea8",
+      "bytes": 4233
+    },
+    {
+      "path": "src/Fluent.Pdf/Barcodes/PdfBarcodeContracts.cs",
+      "sha256": "fe4c485388198228815ba5b1cb4df17bc169fb7e3504e6445a450d653b7f88f0",
+      "bytes": 9503
+    },
+    {
+      "path": "src/Fluent.Pdf/Barcodes/PdfBarcodeTables.cs",
+      "sha256": "68ac514c2cd8013d2cbb9cb42de536ad75057f71fe8faa03a149841b72822867",
+      "bytes": 27949
+    },
+    {
+      "path": "src/Fluent.Pdf/Barcodes/PdfBarcodes.cs",
+      "sha256": "54da903dbefc2bce79c7e5031fe0716877f8e591274c3e5a6a627128594288c3",
+      "bytes": 14649
+    },
+    {
+      "path": "src/Fluent.Pdf/Barcodes/PdfQrEncoder.cs",
+      "sha256": "161fd606950caf055cf22dfb448843b4c0c8aba211125219061fed137c5aaa60",
+      "bytes": 12709
+    },
+    {
+      "path": "src/Fluent.Pdf/Barcodes/PdfSepaCreditTransfer.cs",
+      "sha256": "69631b89f4954741f2693e2bd31822eb87b75c5c02c5d9e4800abf5c7459e94d",
+      "bytes": 8288
+    },
+    {
+      "path": "src/Fluent.Pdf/Fluent.Pdf.csproj",
+      "sha256": "b57fa1b547848e876b93612a6af87b90bfb5f45633434faf435a91c006913ba9",
+      "bytes": 2405
+    },
+    {
+      "path": "src/Fluent.Pdf/Ocr/PdfOcrRaster.cs",
+      "sha256": "d943cdd296092285b63c9ced657f4790598f827a8d194853ee88ae12948071b1",
+      "bytes": 5212
+    },
+    {
+      "path": "src/Fluent.Pdf/Providers/PdfCapability.cs",
+      "sha256": "0a5693a7fad1daa0c276a4875618a7d4e2294566bd3d130dff9ec49338779a8e",
+      "bytes": 2525
+    },
+    {
+      "path": "src/Fluent.Pdf/Providers/PdfProviderRegistry.cs",
+      "sha256": "265a66b9270c9ed2713efa1399f6c51fd49d82a275081a678de47e4549496d30",
+      "bytes": 6245
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "d71b940420ebd033ec847f07bb598ce415b827063e6c97d6c418dc107429cd03",
+      "bytes": 339138
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/BarcodeTests.cs",
+      "sha256": "bd85ea681b0a331ec78956c933763cdb0ce51164e59b297d64f908495af0b91f",
+      "bytes": 15819
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/packages.lock.json",
+      "sha256": "ebf43ca74cfe9ddabe32ad9d836524ec5b11b552b33199698572445bbb7e5247",
+      "bytes": 35835
+    },
+    {
+      "path": "third-party/barcodes/Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "third-party/barcodes/BC-T01-BSD.txt",
+      "sha256": "41ae913dcb22c8ddfb8b7fb9117f276f59c28b3e49bef9a90f9fcc4160e42585",
+      "bytes": 2142
+    },
+    {
+      "path": "third-party/barcodes/BC-T02-MIT.txt",
+      "sha256": "98c269a2631379689a5716a849a8b7ab8d4a30d34f67e61a8643c8ad5b2de72a",
+      "bytes": 1138
+    },
+    {
+      "path": "third-party/barcodes/README.md",
+      "sha256": "4477cb971fd2190a77310bf2f7c2dc3259eb61bf2ca1924040b15a05cd816bb0",
+      "bytes": 1440
+    },
+    {
+      "path": "third-party/barcodes/components.json",
+      "sha256": "928d94b8b48ac4a34cdbefa649f4c62cf23bc9b4c0b6869211cc40c12dc9baba",
+      "bytes": 3181
+    }
+  ],
+  "fourTargetBuild": {
+    "path": "/workspace/scratch/barcode-final-four-target-build.log",
+    "sha256": "6a51d0b2204b44779147d8e60455fdfb306b201b9629f4fe1f8c4f2baa3982b8",
+    "bytes": 7694
+  },
+  "managedLanes": [
+    {
+      "profile": "net8",
+      "counters": {
+        "total": "1597",
+        "executed": "1597",
+        "passed": "1597",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 22,
+      "versionCorrectionVectors": 160,
+      "nearCapacityVectors": 36,
+      "report": {
+        "path": "artifacts/contracts/remaining/barcodes/verified-net8/verified-net8.trx",
+        "sha256": "639f7279f14ba64b643bccf65e8db4e18f67ea9def991d6994b1a2605d557bfd",
+        "bytes": 2338200
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v8.0\nActual runtime: .NET 8.0.32\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/barcode-verified-net8.log",
+        "sha256": "97459d6950ff0219694fbcf78352e9c11b6826f299c6f58fde7736926ace492c",
+        "bytes": 451
+      }
+    },
+    {
+      "profile": "net10",
+      "counters": {
+        "total": "1597",
+        "executed": "1597",
+        "passed": "1597",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 22,
+      "versionCorrectionVectors": 160,
+      "nearCapacityVectors": 36,
+      "report": {
+        "path": "artifacts/contracts/remaining/barcodes/verified-net10/verified-net10.trx",
+        "sha256": "b6af04bc0997f3d06e59f2702f7cf25962d64eb852f96f1ed799c8ac4c80c375",
+        "bytes": 2341398
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/barcode-verified-net10.log",
+        "sha256": "ed299cff2c81303b64287b7a17b37355cc9dcb81edccc56f69e2589437af621a",
+        "bytes": 456
+      }
+    },
+    {
+      "profile": "netstandard",
+      "counters": {
+        "total": "1597",
+        "executed": "1597",
+        "passed": "1597",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 22,
+      "versionCorrectionVectors": 160,
+      "nearCapacityVectors": 36,
+      "report": {
+        "path": "artifacts/contracts/remaining/barcodes/verified-netstandard/verified-netstandard.trx",
+        "sha256": "e2c838cece38f5269f6479ffcec2b506708309606b72163a933f23b10e65aaff",
+        "bytes": 2341398
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETStandard,Version=v2.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/barcode-verified-netstandard.log",
+        "sha256": "fb89c6cecca8673efcaa29dafa35cebe46c180aa0b5e9205269b8efa7c25084f",
+        "bytes": 2386
+      }
+    }
+  ],
+  "localNativeLimit": "The same five native classes were explicitly filtered because this container lacks the required Landlock isolation. These required production lanes remain open.",
+  "apiComparisons": {
+    "passed": 36,
+    "report": {
+      "path": "artifacts/contracts/remaining/barcodes/api/comparisons.json",
+      "sha256": "fecc3e0782e3347b459bc716fa0d207c489beec76facd578021aa02f6a96ed68",
+      "bytes": 9693
+    },
+    "binaryBindings": [
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net472",
+        "leftSha256": "ae4833e88571f9b268ffce88b577646579bf1d00db8f56c00b9bd67265c95f8f",
+        "rightSha256": "8e670328d0b789c159e265a623f3d5324a4744dc4fdb96262a4ad60fe5fc2a99",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net8.0",
+        "leftSha256": "ae4833e88571f9b268ffce88b577646579bf1d00db8f56c00b9bd67265c95f8f",
+        "rightSha256": "b0bda873afce4029d407521815a1477198f4a46bba293023cb7bdcdffa5e8ded",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net10.0",
+        "leftSha256": "ae4833e88571f9b268ffce88b577646579bf1d00db8f56c00b9bd67265c95f8f",
+        "rightSha256": "7675171baf23dfa79b1cd8d333cd8442d4c772a88bfcf147be89153ed25bba28",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net472",
+        "leftSha256": "48b3719a8b760a6e87c59482b4cc193d6de607e4b50a025b7dddc9a4d086c8f5",
+        "rightSha256": "2befe22f183b12a8d203776b439433d512d920e32ec5c029f68c3d8de54ef4dc",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net8.0",
+        "leftSha256": "48b3719a8b760a6e87c59482b4cc193d6de607e4b50a025b7dddc9a4d086c8f5",
+        "rightSha256": "3711d36986c119c2b85ac8cb63c5b876cc7b37b2b50078d26c623b7a7b41622a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net10.0",
+        "leftSha256": "48b3719a8b760a6e87c59482b4cc193d6de607e4b50a025b7dddc9a4d086c8f5",
+        "rightSha256": "e8427bf39a2c2d242f030786ac7ee37c1030edf9cec0c587da1d020112e41ce0",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net472",
+        "leftSha256": "291aeb2f87d3b1b84efc851ef96f25b212928d470ca6d786ccd54188c75bb344",
+        "rightSha256": "90ddeea67ee472ccbda7c22fdf609876aa855b9075946d2591c3da7df707c971",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net8.0",
+        "leftSha256": "291aeb2f87d3b1b84efc851ef96f25b212928d470ca6d786ccd54188c75bb344",
+        "rightSha256": "19d56743db4016e55bf3c12f2cff8014b11bc11e4203e00832363b02a2234d4e",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net10.0",
+        "leftSha256": "291aeb2f87d3b1b84efc851ef96f25b212928d470ca6d786ccd54188c75bb344",
+        "rightSha256": "09d2345887ef42257e94c0a5814f90e5b356a07f2849e1e83383f3aecaa36d51",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net472",
+        "leftSha256": "b56bd407d7c6f6b69e19f5ad263b0f7f45c1ae3a076b136034ca7e33ee0fae9d",
+        "rightSha256": "df7a78dec52f581ca513735940ac711343cb7bd19f4e94f7fd9a990e1ae92c81",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net8.0",
+        "leftSha256": "b56bd407d7c6f6b69e19f5ad263b0f7f45c1ae3a076b136034ca7e33ee0fae9d",
+        "rightSha256": "836285a8fb0a933710a25c246016acb8507a75774368982b8717acc7a40ad7a6",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net10.0",
+        "leftSha256": "b56bd407d7c6f6b69e19f5ad263b0f7f45c1ae3a076b136034ca7e33ee0fae9d",
+        "rightSha256": "80d476a54ea8590fa099d4ced2b46aaa5f78b91cab096852cdf14d55998fcf5a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net472",
+        "leftSha256": "12cc9bebc1899505b5686dcb3ae99fa601aecdecafb532bedbd2a7c3b1f6a297",
+        "rightSha256": "16dea4377706603e246efb27d50f9970039afe6fa183069a3c84a2845301ee4d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net8.0",
+        "leftSha256": "12cc9bebc1899505b5686dcb3ae99fa601aecdecafb532bedbd2a7c3b1f6a297",
+        "rightSha256": "2917261b6729e435b3eb29afb65e7124f3f443e312df46fc29561af42781b8d3",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net10.0",
+        "leftSha256": "12cc9bebc1899505b5686dcb3ae99fa601aecdecafb532bedbd2a7c3b1f6a297",
+        "rightSha256": "ab17c67794dfc4eb72b699ccf6ab0b00d54456ec7f8f4d0d77681821360fe79c",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net472",
+        "leftSha256": "494a3729567249b9754b5e71ee3f5fc405362ef7a688a00d8274f149ff3653f2",
+        "rightSha256": "4fc4ab02e45c4f404deb9d42b75ce5b19b239973402e46136a9974dafc44c026",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net8.0",
+        "leftSha256": "494a3729567249b9754b5e71ee3f5fc405362ef7a688a00d8274f149ff3653f2",
+        "rightSha256": "85eb8b03945c0ec2a9432e3ac76fed5a8de35846d9f6ab7a44d2eb801a9e1c40",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net10.0",
+        "leftSha256": "494a3729567249b9754b5e71ee3f5fc405362ef7a688a00d8274f149ff3653f2",
+        "rightSha256": "3e7b996648f497039b0573c5b38f669ec332a8b415f6cc533254a1eba9f073b9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net472",
+        "leftSha256": "9821444a1b5736c395eb559c10f9647e52118fa8433cf38598d9ca0a997a77c2",
+        "rightSha256": "ff822ad4f64431a37ec4c6515fd01994c4db90a29c6456853e83b7b07be79533",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net8.0",
+        "leftSha256": "9821444a1b5736c395eb559c10f9647e52118fa8433cf38598d9ca0a997a77c2",
+        "rightSha256": "88fcc819a27e28e91f92ac6d0549480aec24aa041fa64e0c12b389a2833caf86",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net10.0",
+        "leftSha256": "9821444a1b5736c395eb559c10f9647e52118fa8433cf38598d9ca0a997a77c2",
+        "rightSha256": "c89b0e2b70c0da7ae518ba3a1aef894054f433857f36425a317a5d64befde5f0",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net472",
+        "leftSha256": "54e5d922e57d30fdfe63df92acf2c31f064ab0dec268edd6e894fd04835d127d",
+        "rightSha256": "3cc36ac6c26c0ce0c853911aebae0f669bb4793fa19cc768dcf8e69a72ecee34",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net8.0",
+        "leftSha256": "54e5d922e57d30fdfe63df92acf2c31f064ab0dec268edd6e894fd04835d127d",
+        "rightSha256": "89e96805b088ec0aa042cefc1f861e09b219489f5a47970d2627c7703e8458b0",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net10.0",
+        "leftSha256": "54e5d922e57d30fdfe63df92acf2c31f064ab0dec268edd6e894fd04835d127d",
+        "rightSha256": "700183ade0052fe929329aec20ffde829a7b746994298b1ab8e8ec4698fd89f9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net472",
+        "leftSha256": "6bbb0a3d3646eda6f9b4ee00e1a5a6bae76f7a5ecbd2de4977c202627e15bd3b",
+        "rightSha256": "a7c72267b9180c198c94b35adf75e2542f50c14306e620cd3f9c26624ce08fd7",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net8.0",
+        "leftSha256": "6bbb0a3d3646eda6f9b4ee00e1a5a6bae76f7a5ecbd2de4977c202627e15bd3b",
+        "rightSha256": "91eca3ca8c692c81858f344230f46f0aa0bfd14bcabdbf83cf4fbebf0e3e5742",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net10.0",
+        "leftSha256": "6bbb0a3d3646eda6f9b4ee00e1a5a6bae76f7a5ecbd2de4977c202627e15bd3b",
+        "rightSha256": "3c9a7224d16d330a7fddb513f150cc1ab86aff7b0783e79aa35459903883aeb8",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net472",
+        "leftSha256": "d772ab51a509dbe76a89897bafc91fc2d31b0f5a2469c71400a02d2d6bca9129",
+        "rightSha256": "27ce7ae156e1a3de072c946c7308940c2fadfb68dc9539adc99ff0b46360de26",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net8.0",
+        "leftSha256": "d772ab51a509dbe76a89897bafc91fc2d31b0f5a2469c71400a02d2d6bca9129",
+        "rightSha256": "5dba71a0b9075a66d4a404a830005382527c3c01b8f296ada77360909b3531f8",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net10.0",
+        "leftSha256": "d772ab51a509dbe76a89897bafc91fc2d31b0f5a2469c71400a02d2d6bca9129",
+        "rightSha256": "a9586ab18c381a866de2c334dd572d32c477ad7f4fe509f55ddbb0563882b731",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net472",
+        "leftSha256": "f36942ff692e0d19a8f564e9402ce7ec3b8234f391bd7bccb1fb3db63cdef80c",
+        "rightSha256": "b9cde3cc559648633ff0ea37a0f3d0446b0c703496ab84667cfbecc93fa9e270",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net8.0",
+        "leftSha256": "f36942ff692e0d19a8f564e9402ce7ec3b8234f391bd7bccb1fb3db63cdef80c",
+        "rightSha256": "989bd311eeea381487539a7774931d3a9b82cdb4f3871892faf17536da71ee4a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net10.0",
+        "leftSha256": "f36942ff692e0d19a8f564e9402ce7ec3b8234f391bd7bccb1fb3db63cdef80c",
+        "rightSha256": "6598bae54a5e1f227254142b3ecc59118dd51caa47f8a671134c5c93395d05ba",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net472",
+        "leftSha256": "fc99c96c5f3123de6582134f70267a8e2d2d0da7053a211f25e74bd091fbca34",
+        "rightSha256": "4c2b3e8b4360578de36b763a6c0c8b1df5683cbd6eccb291f1c283cacdba311a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net8.0",
+        "leftSha256": "fc99c96c5f3123de6582134f70267a8e2d2d0da7053a211f25e74bd091fbca34",
+        "rightSha256": "57cdab253d89413d668875310c3f7fb0ba8118434f2afe511e716be1c19a3d22",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net10.0",
+        "leftSha256": "fc99c96c5f3123de6582134f70267a8e2d2d0da7053a211f25e74bd091fbca34",
+        "rightSha256": "37604c17112a847a4b42407d01c1fc00d18b302955f29366c7bf29fd8bcfa400",
+        "exitCode": 0
+      }
+    ],
+    "script": {
+      "path": "/workspace/scratch/barcode-check-api.ps1",
+      "sha256": "dddd8e3269b0be531a09697d5fe970ff74998e4b9061ecc2c57ee41ba91b286f",
+      "bytes": 1784
+    },
+    "scriptChanges": "Same eng/check-api.ps1 commands; repository root and report destination alone were replaced to retain earlier evidence."
+  },
+  "independentObservation": {
+    "report": {
+      "path": "artifacts/contracts/remaining/barcodes/clean-independent/independent-barcodes.json",
+      "sha256": "aed36fb25e17e256ced95191965d641097b2bca2b9575c32a0cb7f53e9081fa7",
+      "bytes": 88217
+    },
+    "symbols": 200,
+    "actualVectorPdfDocuments": 4,
+    "readerDecodes": 8,
+    "readers": {
+      "PyMuPDF": "1.26.6",
+      "Ghostscript": {
+        "version": "10.05.1",
+        "binarySha256": "791baf36ffa6dc66578c3b0feeb9b9d7ebeab5ef52624b7461550f02341b90ed"
+      }
+    },
+    "decoder": {
+      "id": "zxing-cpp",
+      "version": "3.0.0",
+      "lineage": "Related decoder lineage; both decoders are independent of the original SDK encoder"
+    },
+    "scope": "Exact independent payload bytes/text, QR version/mask/ECC, Code128 family; real vector PDF decoding after two unrelated readers."
+  },
+  "initialDevelopmentCheckerCorrection": {
+    "artifact": {
+      "path": "/workspace/scratch/barcode-initial-decoder-scope.json",
+      "sha256": "977e57c05ceadfc45425dbcd970d5ff7e67b082de5dc2d6b43be3bb971ef8b07",
+      "bytes": 645
+    },
+    "reason": "An initial all-family search found the valid version28/M QR plus an unrelated Codabar candidate. The checker was corrected to request only the declared QRCode/Code128 families. No symbol bytes or decoder algorithm changed."
+  },
+  "dependencies": {
+    "catalog": {
+      "path": "third-party/barcodes/components.json",
+      "sha256": "928d94b8b48ac4a34cdbefa649f4c62cf23bc9b4c0b6869211cc40c12dc9baba",
+      "bytes": 3181
+    },
+    "components": [
+      {
+        "sourceId": "BC-D01",
+        "packageId": "ZXing.Net",
+        "version": "0.16.11",
+        "dependencyScope": "Optional Fluent.Pdf.Ocr assembly; explicitly configured decoder only",
+        "license": "Apache-2.0",
+        "authors": "Michael Jahn and ZXing contributors",
+        "publishedAssemblyCopyright": "Copyright \u00a9 2012",
+        "packageSha256": "7d39234d668e558b3d374d18116ed57021d7c0df482801f1e1db4f1db9314ec3",
+        "nugetContentHashSha512": "kHBBMH1ZKN4Y5IZY8Cq6iETXOr7k00ZrJ8Nbsow9QlTcJZvJVR26bX7VMR/oY1XOJuPzLyMu79WKdw+bKhechg==",
+        "resolvedRuntimeAssets": [
+          {
+            "target": "net472",
+            "packageAsset": "lib/net47/zxing.dll",
+            "sha256": "eb50a587dc536918aaa678f17110ec46ec549daf89a77a8548e9079c9b7b4595"
+          },
+          {
+            "target": "net472",
+            "packageAsset": "lib/net47/zxing.presentation.dll",
+            "sha256": "b1277176545467da2edcc2ba02600cdbcd86bff897f61d7226b899a092e58ea1"
+          },
+          {
+            "target": "netstandard2.0",
+            "packageAsset": "lib/netstandard2.0/zxing.dll",
+            "sha256": "f3b823b6fd6492525a7547989056883def5d43be1e12c4f63fa54df73e3c5cfc"
+          },
+          {
+            "target": "net10.0",
+            "packageAsset": "lib/net9.0/zxing.dll",
+            "sha256": "2d9a1a3276fa21f5e20c0e8afa4ea33ca18fd6f984bd5b32ad457279e2709d73"
+          },
+          {
+            "target": "net8.0",
+            "packageAsset": "lib/net8.0/zxing.dll",
+            "sha256": "0aad7a70ad42a48d74f75204a9dcf05a94bb1ed66c0824f49d6f8bd08fefb127"
+          }
+        ],
+        "licenseFile": "Apache-2.0.txt"
+      },
+      {
+        "sourceId": "BC-T01",
+        "analysisTool": "qrcode",
+        "version": "8.2",
+        "license": "BSD-3-Clause",
+        "licenseFile": "BC-T01-BSD.txt",
+        "use": "Cross-check/extract normative QR RS block and alignment protocol data; source algorithms are original",
+        "sdkRuntimeDependency": false
+      },
+      {
+        "sourceId": "BC-T02",
+        "analysisTool": "python-barcode",
+        "version": "0.16.1",
+        "license": "MIT",
+        "licenseFile": "BC-T02-MIT.txt",
+        "use": "Cross-check/extract normative Code128 codeword bit patterns; source algorithms are original",
+        "sdkRuntimeDependency": false
+      }
+    ],
+    "licenseHashes": {
+      "Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "BC-T01-BSD.txt": "41ae913dcb22c8ddfb8b7fb9117f276f59c28b3e49bef9a90f9fcc4160e42585",
+      "BC-T02-MIT.txt": "98c269a2631379689a5716a849a8b7ab8d4a30d34f67e61a8643c8ad5b2de72a"
+    },
+    "vulnerabilityObservation": {
+      "path": "/workspace/scratch/barcode-package-vulnerabilities.json",
+      "sha256": "ff52a7dfaf5798dcd4dedc32b24dfe35aae35107e421b8b51ecdd47d285c4b7d",
+      "bytes": 253
+    },
+    "vulnerabilityResult": "The current NuGet advisory query reported no vulnerable packages in the optional Ocr dependency closure. This does not qualify a complete release security/SBOM review.",
+    "lockedRestore": {
+      "path": "/workspace/scratch/barcode-locked-restore.log",
+      "sha256": "fa79e8769a11095594f093fbab02519cdbcee79f46a40d0649b633dc89f6f932",
+      "bytes": 1875
+    }
+  },
+  "specification": {
+    "path": "/workspace/scratch/barcode-final-spec.log",
+    "sha256": "615437100444f67248dadf7ea7bf46b040bdcf1aa130e80c0a7f053ef3cd1106",
+    "bytes": 104
+  },
+  "releaseBlock": {
+    "path": "/workspace/scratch/barcode-final-release-block.log",
+    "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "bytes": 139
+  },
+  "remaining": [
+    "Complete declared symbology/payment/multi-code integration profiles and independent acceptance",
+    "Broad multilingual/damage/printing/scanner/fuzz/resource/concurrency/endurance corpora",
+    "All actual engine/runtime/RID/minimum Framework qualification",
+    "Complete release dependency/security/SBOM and exact final-package consumers"
+  ],
+  "commands": [
+    "source /workspace/.cloud-setup/activate.sh",
+    "dotnet restore Fluent.Pdf.slnx --locked-mode --disable-parallel -m:1",
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -NoProfile -File /workspace/scratch/barcode-check-api.ps1",
+    "dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f <net8.0|net10.0> --no-build --no-restore --filter 'FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests' --logger 'trx;LogFileName=verified-<profile>.trx' --results-directory artifacts/contracts/remaining/barcodes/verified-<profile>",
+    "Fallback consumer uses net10.0 with -p:UseNetStandardAssembly=true -m:1 -p:UseSharedCompilation=false and the same filter/reports; actual identity asserts all12 library assets.",
+    "/workspace/.tools/barcode-validators/bin/python -O eng/verify-barcode-fixtures.py artifacts/contracts/remaining/barcodes/fixtures-net10 artifacts/contracts/remaining/barcodes/clean-independent",
+    "dotnet list src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj package --vulnerable --include-transitive --format json",
+    "pwsh -NoProfile -File eng/validate-spec.ps1",
+    "pwsh -NoProfile -File eng/test-release-block.ps1"
+  ]
+}

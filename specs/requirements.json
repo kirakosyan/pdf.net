@@ -3377,7 +3377,8 @@
       ],
       "validation": "Independent barcode decoder tests, rotated/damaged symbols and multilingual payload fixtures.",
       "evidence": [
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-078-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3392,7 +3393,8 @@
           "Representative multilingual/damage/print/scanner/fuzz/resource/concurrency/endurance corpora",
           "All actual engine/runtime/RID/minimum Framework qualification",
           "Complete dependency/security/SBOM and exact final-package consumers"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-078-source.json"
       }
     },
     {

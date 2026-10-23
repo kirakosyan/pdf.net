@@ -17,3 +17,5 @@ Detection text is decoded Unicode. It is not automatically interpreted as a URI,
 Every job uses finite input/expanded/pixel/object/depth/output/deadline limits. Provider pixel leases expire at return. Independent jobs have separate readers, buffers and reports; no credentials, payloads, decoder settings or document caches are global. Stream/file output uses the existing explicit canvas/document APIs and their ownership/atomic save contracts.
 
 The dependency decisions, exact package/runtime assets and licenses are recorded in [barcode notices](../third-party/barcodes/README.md). Actual minimum Framework, all engine/runtime/RID lanes, broad multi-code/general symbology/payment profiles, multilingual/damage/printing/scanner/fuzz/resource/concurrency/endurance corpora, complete independent acceptance and final package consumers remain mandatory. These source profiles do not complete FP-078 production qualification.
+
+[Source evidence](evidence/FP-078-source.json) records source/runtime/API bindings,200 independent canonical symbol decodes, eight PDF-reader decodes, dependency/license/advisory observations and the retained checker-scope correction.
