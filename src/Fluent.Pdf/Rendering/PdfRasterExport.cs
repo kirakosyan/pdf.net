@@ -128,7 +128,7 @@ public static class PdfRasterExport
         c.Checkpoint();
         return output.Finish();
     }
-    private static void Png(Stream output, PdfRasterRequest request, PdfByteStore samples, byte[]? profile, PdfOperationContext c)
+    internal static void Png(Stream output, PdfRasterRequest request, PdfByteStore samples, byte[]? profile, PdfOperationContext c)
     {
         var signature = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
         output.Write(signature, 0, signature.Length);

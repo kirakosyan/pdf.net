@@ -276,6 +276,12 @@
           "System.Text.Json": "[10.0.13, )"
         }
       },
+      "fluent.pdf.intelligence": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.ocr": {
         "type": "Project",
         "dependencies": {
@@ -548,6 +554,12 @@
           "System.Text.Json": "[10.0.13, )"
         }
       },
+      "fluent.pdf.intelligence": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.ocr": {
         "type": "Project",
         "dependencies": {
@@ -677,6 +689,12 @@
         }
       },
       "fluent.pdf.html": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.intelligence": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )"
@@ -846,6 +864,12 @@
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
           "System.Text.Json": "[10.0.13, )"
+        }
+      },
+      "fluent.pdf.intelligence": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
         }
       },
       "fluent.pdf.ocr": {

@@ -1,0 +1,138 @@
+#nullable enable
+Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider
+Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider.Model.get -> Fluent.Pdf.Intelligence.PdfIntelligenceModel!
+Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider.Prepare(Fluent.Pdf.Intelligence.PdfIntelligenceJob! job, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfIntelligenceCall!
+Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider.Supports(Fluent.Pdf.Intelligence.PdfIntelligenceTask task, bool requiresImages) -> bool
+Fluent.Pdf.Intelligence.IPdfIntelligenceTransport
+Fluent.Pdf.Intelligence.IPdfIntelligenceTransport.OpenResponse(System.Uri! endpoint, System.IO.Stream! request, long requestLength, Fluent.Pdf.PdfOperationContext! context) -> System.IO.Stream!
+Fluent.Pdf.Intelligence.PdfChatDocumentModel
+Fluent.Pdf.Intelligence.PdfChatDocumentModel.Model.get -> Fluent.Pdf.Intelligence.PdfIntelligenceModel!
+Fluent.Pdf.Intelligence.PdfChatDocumentModel.PdfChatDocumentModel(Fluent.Pdf.Intelligence.PdfIntelligenceModel! model, Fluent.Pdf.Intelligence.IPdfIntelligenceTransport! transport, bool supportsImages = false, int maximumTokensPerUtf8Byte = 1) -> void
+Fluent.Pdf.Intelligence.PdfChatDocumentModel.Prepare(Fluent.Pdf.Intelligence.PdfIntelligenceJob! job, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfIntelligenceCall!
+Fluent.Pdf.Intelligence.PdfChatDocumentModel.Supports(Fluent.Pdf.Intelligence.PdfIntelligenceTask task, bool requiresImages) -> bool
+Fluent.Pdf.Intelligence.PdfChatDocumentModel.SupportsImages.get -> bool
+Fluent.Pdf.Intelligence.PdfDocumentIntelligence
+Fluent.Pdf.Intelligence.PdfIntelligenceCall
+Fluent.Pdf.Intelligence.PdfIntelligenceCall.InputTokenCeiling.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceCall.MaximumOutputTokens.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceCall.Model.get -> Fluent.Pdf.Intelligence.PdfIntelligenceModel!
+Fluent.Pdf.Intelligence.PdfIntelligenceCall.PdfIntelligenceCall(Fluent.Pdf.Intelligence.PdfIntelligenceModel! model, string! requestSha256, int inputTokenCeiling, int maximumOutputTokens, decimal reservedConfiguredCost) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceCall.RequestSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceCall.ReservedConfiguredCost.get -> decimal
+Fluent.Pdf.Intelligence.PdfIntelligenceCitation
+Fluent.Pdf.Intelligence.PdfIntelligenceCitation.OutputPath.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceCitation.PdfIntelligenceCitation(string! sourceId, string! outputPath, string! quote) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceCitation.Quote.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceCitation.SourceId.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence.CaptureRegion.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence.OutputPath.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence.PageIndex.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence.Quote.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence.SourceId.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence.SourceSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceEvidence.TextOffset.get -> int?
+Fluent.Pdf.Intelligence.PdfIntelligenceField
+Fluent.Pdf.Intelligence.PdfIntelligenceField.Name.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceField.PdfIntelligenceField(string! name, Fluent.Pdf.Intelligence.PdfIntelligenceSchema! schema, bool required = true) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceField.Required.get -> bool
+Fluent.Pdf.Intelligence.PdfIntelligenceField.Schema.get -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+Fluent.Pdf.Intelligence.PdfIntelligenceJob
+Fluent.Pdf.Intelligence.PdfIntelligenceJob.Instruction.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceJob.Options.get -> Fluent.Pdf.Intelligence.PdfIntelligenceOptions!
+Fluent.Pdf.Intelligence.PdfIntelligenceJob.RequestSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceJob.Schema.get -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+Fluent.Pdf.Intelligence.PdfIntelligenceJob.Sources.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfIntelligenceSource!>!
+Fluent.Pdf.Intelligence.PdfIntelligenceJob.TargetLanguage.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceJob.Task.get -> Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceLocation
+Fluent.Pdf.Intelligence.PdfIntelligenceLocation.Local = 0 -> Fluent.Pdf.Intelligence.PdfIntelligenceLocation
+Fluent.Pdf.Intelligence.PdfIntelligenceLocation.Remote = 1 -> Fluent.Pdf.Intelligence.PdfIntelligenceLocation
+Fluent.Pdf.Intelligence.PdfIntelligenceModel
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.Currency.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.Endpoint.get -> System.Uri?
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.ExactModelVersion.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.InputPricePerMillion.get -> decimal
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.Location.get -> Fluent.Pdf.Intelligence.PdfIntelligenceLocation
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.MaximumContextTokens.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.OutputPricePerMillion.get -> decimal
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.PdfIntelligenceModel(string! providerId, string! exactModelVersion, Fluent.Pdf.Intelligence.PdfIntelligenceLocation location = Fluent.Pdf.Intelligence.PdfIntelligenceLocation.Local, System.Uri? endpoint = null, int maximumContextTokens = 128000, string! currency = "USD", decimal inputPricePerMillion = 0, decimal outputPricePerMillion = 0, decimal requestCharge = 0) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.ProviderId.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceModel.RequestCharge.get -> decimal
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.AllowImages.get -> bool
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.AllowedRemoteOrigin.get -> System.Uri?
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.CostCurrency.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.MaximumCitations.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.MaximumConfiguredCost.get -> decimal
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.MaximumInputTokens.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.MaximumOutputCharacters.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.MaximumOutputTokens.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.MaximumSourceCharacters.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceOptions.PdfIntelligenceOptions(System.Uri? allowedRemoteOrigin = null, bool allowImages = false, int maximumSourceCharacters = 65536, int maximumInputTokens = 16384, int maximumOutputTokens = 2048, decimal maximumConfiguredCost = 0, string! costCurrency = "USD", int maximumOutputCharacters = 16384, int maximumCitations = 128) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceResponse
+Fluent.Pdf.Intelligence.PdfIntelligenceResponse.Citations.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfIntelligenceCitation!>!
+Fluent.Pdf.Intelligence.PdfIntelligenceResponse.DataJson.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceResponse.PdfIntelligenceResponse(string! requestSha256, string! dataJson, System.Collections.Generic.IEnumerable<Fluent.Pdf.Intelligence.PdfIntelligenceCitation!>! citations, Fluent.Pdf.Intelligence.PdfIntelligenceUsage! usage) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceResponse.RequestSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceResponse.Usage.get -> Fluent.Pdf.Intelligence.PdfIntelligenceUsage!
+Fluent.Pdf.Intelligence.PdfIntelligenceResult
+Fluent.Pdf.Intelligence.PdfIntelligenceResult.DataJson.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceResult.Evidence.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfIntelligenceEvidence!>!
+Fluent.Pdf.Intelligence.PdfIntelligenceResult.Model.get -> Fluent.Pdf.Intelligence.PdfIntelligenceModel!
+Fluent.Pdf.Intelligence.PdfIntelligenceResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Intelligence.PdfIntelligenceResult.RequestSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceResult.Usage.get -> Fluent.Pdf.Intelligence.PdfIntelligenceUsage!
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.AllowedStrings.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Fields.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfIntelligenceField!>!
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.ItemSchema.get -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema?
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Kind.get -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.MaximumLength.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.MaximumNumber.get -> decimal?
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.MinimumLength.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceSchema.MinimumNumber.get -> decimal?
+Fluent.Pdf.Intelligence.PdfIntelligenceSelection
+Fluent.Pdf.Intelligence.PdfIntelligenceSelection.PageIndex.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceSelection.PdfIntelligenceSelection(int pageIndex, Fluent.Pdf.PdfRect? region = null) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceSelection.Region.get -> Fluent.Pdf.PdfRect?
+Fluent.Pdf.Intelligence.PdfIntelligenceSource
+Fluent.Pdf.Intelligence.PdfIntelligenceSource.Id.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceSource.IsImage.get -> bool
+Fluent.Pdf.Intelligence.PdfIntelligenceSource.OpenImage(Fluent.Pdf.PdfOperationContext! context) -> System.IO.Stream!
+Fluent.Pdf.Intelligence.PdfIntelligenceSource.PageIndex.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceSource.Region.get -> Fluent.Pdf.PdfRect
+Fluent.Pdf.Intelligence.PdfIntelligenceSource.Sha256.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceSource.Text.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceTask.DescribeImage = 3 -> Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceTask.Ocr = 4 -> Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceTask.QuestionAnswer = 1 -> Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceTask.StructuredExtraction = 5 -> Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceTask.Summarize = 0 -> Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceTask.Translate = 2 -> Fluent.Pdf.Intelligence.PdfIntelligenceTask
+Fluent.Pdf.Intelligence.PdfIntelligenceUsage
+Fluent.Pdf.Intelligence.PdfIntelligenceUsage.ConfiguredCost.get -> decimal
+Fluent.Pdf.Intelligence.PdfIntelligenceUsage.Currency.get -> string!
+Fluent.Pdf.Intelligence.PdfIntelligenceUsage.InputTokens.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceUsage.OutputTokens.get -> int
+Fluent.Pdf.Intelligence.PdfIntelligenceUsage.PdfIntelligenceUsage(int inputTokens, int outputTokens, decimal configuredCost, string! currency) -> void
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Array = 1 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Boolean = 5 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Integer = 4 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Null = 6 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Nullable = 7 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Number = 3 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Object = 0 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.String = 2 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+abstract Fluent.Pdf.Intelligence.PdfIntelligenceCall.Execute(Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfIntelligenceResponse!
+static Fluent.Pdf.Intelligence.PdfDocumentIntelligence.Analyze(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.Intelligence.PdfIntelligenceSelection!>! selections, Fluent.Pdf.Intelligence.PdfIntelligenceTask task, Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider? provider = null, string! instruction = "", string! targetLanguage = "", Fluent.Pdf.Intelligence.PdfIntelligenceSchema? schema = null, Fluent.Pdf.Intelligence.PdfIntelligenceOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfRenderOptions? render = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Intelligence.PdfIntelligenceResult!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Array(Fluent.Pdf.Intelligence.PdfIntelligenceSchema! items, int minimumItems = 0, int maximumItems = 100) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Boolean() -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Integer(long minimum = -9223372036854775808, long maximum = 9223372036854775807) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Null() -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Nullable(Fluent.Pdf.Intelligence.PdfIntelligenceSchema! value) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Number(decimal? minimum = null, decimal? maximum = null) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Object(System.Collections.Generic.IEnumerable<Fluent.Pdf.Intelligence.PdfIntelligenceField!>! fields) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.String(int minimumLength = 0, int maximumLength = 16384, System.Collections.Generic.IEnumerable<string!>? allowedValues = null) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!

@@ -3426,7 +3426,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/document-intelligence.md",
+        "scope": "Explicit six-task selected-source analysis, per-job remote/image authority, token/cost precommit, original fixed-endpoint strict chat JSON adapter and complete schema/citation/request binding",
+        "productionQualified": false,
+        "remaining": [
+          "Actual pinned local/remote model/tokenizer/pricing/transport and isolation/security/retention qualification",
+          "Semantic/translation/OCR/provenance/human and representative adversarial quality corpora",
+          "All actual runtime/RID/minimum Framework/concurrency/endurance/resource lanes",
+          "Exact final packages and fresh package-only consumers"
+        ]
+      }
     },
     {
       "id": "FP-080",

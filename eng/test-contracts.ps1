@@ -55,7 +55,7 @@ try {
     Run-ContractLane 'net10.0' 'netstandard-fallback' $ExpectedArchitecture $true
     & dotnet run --project (Join-Path $root 'examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj') -c $Configuration --no-build --no-restore -- --self-test
     if ($LASTEXITCODE -ne 0) { throw 'Hosted compiled Razor/MVC/Blazor boundary checks failed.' }
-    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers src/Fluent.Pdf.Codecs src/Fluent.Pdf.Fonts src/Fluent.Pdf.Text src/Fluent.Pdf.Rendering src/Fluent.Pdf.Cryptography src/Fluent.Pdf.Compliance src/Fluent.Pdf.Html src/Fluent.Pdf.Word src/Fluent.Pdf.Ocr src/Fluent.Pdf.Formats native/worker native/codecs native/text native/rendering native/ocr tests/native tests/native-aot tests/Fluent.Pdf.Contract.Tests examples eng .github/workflows third-party | Sort-Object -Unique | ForEach-Object {
+    $sourceFiles = @(& git ls-files --cached --others --exclude-standard src/Fluent.Pdf src/Fluent.Pdf.Workers src/Fluent.Pdf.Codecs src/Fluent.Pdf.Fonts src/Fluent.Pdf.Text src/Fluent.Pdf.Rendering src/Fluent.Pdf.Cryptography src/Fluent.Pdf.Compliance src/Fluent.Pdf.Html src/Fluent.Pdf.Word src/Fluent.Pdf.Ocr src/Fluent.Pdf.Formats src/Fluent.Pdf.Intelligence native/worker native/codecs native/text native/rendering native/ocr tests/native tests/native-aot tests/Fluent.Pdf.Contract.Tests examples eng .github/workflows third-party | Sort-Object -Unique | ForEach-Object {
         [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash}
     })
     $summary = [ordered]@{

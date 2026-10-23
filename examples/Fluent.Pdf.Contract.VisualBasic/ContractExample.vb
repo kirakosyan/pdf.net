@@ -510,6 +510,9 @@ Public Module ContractExample
     Public Function GenerateBarcode(text As String, independentDecoder As IPdfBarcodeDecoder, options As PdfBarcodeOptions) As PdfBarcodeSymbol
         Return PdfBarcodes.Generate(text, independentDecoder, options)
     End Function
+    Public Function AnalyzeSelectedText(source As PdfDocumentSnapshot, pageIndex As Integer, provider As Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider, options As Fluent.Pdf.Intelligence.PdfIntelligenceOptions) As Fluent.Pdf.Intelligence.PdfIntelligenceResult
+        Return Fluent.Pdf.Intelligence.PdfDocumentIntelligence.Analyze(source, {New Fluent.Pdf.Intelligence.PdfIntelligenceSelection(pageIndex)}, Fluent.Pdf.Intelligence.PdfIntelligenceTask.Summarize, provider, options:=options)
+    End Function
     Public Function ReadProgressivePage(source As IPdfRangeSource, pageIndex As Integer) As PdfProgressivePage
         Using document As New PdfProgressiveDocument(source)
             Return document.ReadPage(pageIndex)
