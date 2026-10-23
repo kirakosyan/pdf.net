@@ -50,6 +50,7 @@ public sealed class PrintingTests
         if (status < 0x0400)
         {
             var job = Assert.IsType<PdfPrintJob>(failure.Data["Fluent.Pdf.PrintJob"]);
+            Assert.True(typeof(PdfPrintJob).IsDefined(typeof(SerializableAttribute), false));
             Assert.Equal(42, job.JobId);
             Assert.Equal(Printer, job.Printer);
             transport.Status = 0;

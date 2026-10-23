@@ -847,5 +847,34 @@
     "dotnet run --project eng/format-checks/OpenXmlCheck.csproj --no-build --no-restore -- artifacts/contracts/pr120-review/final/fixtures/format-fixtures/table.xlsx artifacts/contracts/pr120-review/final/independent/openxml-xlsx.json",
     "dotnet run --project eng/format-checks/OpenXmlCheck.csproj --no-build --no-restore -- artifacts/contracts/pr120-review/final/fixtures/format-fixtures/raster-slides.pptx artifacts/contracts/pr120-review/final/independent/openxml-pptx.json",
     "dotnet run --project examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj -c Release --no-build --no-restore -- --self-test"
-  ]
+  ],
+  "frameworkFollowup": {
+    "failedPrHead": "a73beb9afebbe4e4641bb2a0bfb3ad9ae353674b",
+    "failedSourceCiRun": "https://github.com/kirakosyan/pdf.net/actions/runs/39934391811",
+    "failedJob": "https://github.com/kirakosyan/pdf.net/actions/runs/39934391811/job/120350244798",
+    "observation": "All five other hosts passed; Windows x64 passed 1622 tests on each modern runtime, then Framework passed 1620 and failed the two substituted-success job-data assertions. The original ZIP/invoice failures no longer reproduced.",
+    "cause": "Framework exception-data dictionaries require serializable values. PdfPrintJob lacked SerializableAttribute, so its data attachment failed before the already-latched error was rethrown.",
+    "fix": "Mark the immutable job DTO Serializable and attach failure details before publishing the latched exception. The shared test requires serializable metadata in addition to retrieving and cancelling the exact job.",
+    "patchSourceSha256": {
+      "src/Fluent.Pdf/Printing/PdfPrinting.cs": "5a910315fc2fb98826b4d16e68f2c383eaa66a76eaa1676b72835696cec1254f",
+      "src/Fluent.Pdf/Policies/PdfOperationContext.cs": "c638062ab26ee10a79dd3bc5bc40c78dd077e130d6d5170ded278afdb9153d34",
+      "tests/Fluent.Pdf.Contract.Tests/PrintingTests.cs": "77a8906dba61b2c1b1b8a36ec2722911f1fbdd0ca01f57681a07f8bb27f585c1"
+    },
+    "requiredRecheck": "Final PR-head six-host CI, including Framework x64/x86, must pass before merge.",
+    "localPatchCheck": {
+      "baseCommit": "a73beb9afebbe4e4641bb2a0bfb3ad9ae353674b",
+      "workingTreeDirty": true,
+      "sourceBinding": "Exact patch source hashes above; final clean-head runtime verification remains the CI gate.",
+      "runtime": ".NET 10.0.13",
+      "os": "Debian 13",
+      "architecture": "X64",
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0,
+      "report": "artifacts/contracts/pr120-review/framework-details/print-failure-details.trx",
+      "reportSha256": "092e4aa316c52b749d919c2072d2ed402c9bc82423a0835f241d1c843b385bcb",
+      "log": "/workspace/scratch/pr120-serializable-tests.log",
+      "logSha256": "3c67b5d74e79027294525ce3ccdc2d7e3008ec9c98a1a86b2d678cd816398ae7"
+    }
+  }
 }

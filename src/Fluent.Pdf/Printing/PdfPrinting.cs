@@ -83,6 +83,7 @@ public sealed class PdfPrintOptions
 }
 
 /// <summary>One bounded spool observation. No output success is inferred from an accepted job.</summary>
+[Serializable]
 public sealed class PdfPrintJob
 {
     /// <summary>Captures exact printer/job identity and an observed state.</summary>
