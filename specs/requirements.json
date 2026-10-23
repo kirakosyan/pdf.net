@@ -3119,7 +3119,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/optimization.md",
+        "scope": "Bounded full graph rewrite, unreachable-object cleanup, exact safe resource sharing, unfiltered-stream compression, conservative resource-name analysis and explicit eight-bit image resampling",
+        "productionQualified": false,
+        "remaining": [
+          "Complete supported-font/image/private-owner/implicit-resource and reconstruction corpus qualification",
+          "Calibrated size/fidelity/performance/resource/security/concurrency/endurance qualification",
+          "Actual minimum Framework and all provider/runtime/RID qualification",
+          "Exact final package consumers and stable publication qualification"
+        ]
+      }
     },
     {
       "id": "FP-073",

@@ -504,4 +504,7 @@ Public Module ContractExample
     Public Function InspectPreflight(input As Stream) As PdfPreflightReport
         Return PdfPreflight.Inspect(input)
     End Function
+    Public Function OptimizePdf(source As PdfDocumentSnapshot) As PdfOptimizationResult
+        Return PdfOptimization.Optimize(source)
+    End Function
 End Module

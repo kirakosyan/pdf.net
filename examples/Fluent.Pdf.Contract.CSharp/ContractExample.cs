@@ -374,4 +374,5 @@ public static class ContractExample
     public static PdfEngineeringInspection InspectEngineering(PdfDocumentSnapshot source) => PdfEngineering.Inspect(source);
     public static PdfInvoiceValidation WriteInvoice(PdfInvoiceData data, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, IPdfInvoiceProducer producer, IPdfArchivalValidator archival, IPdfInvoiceValidator validator) => PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator);
     public static PdfPreflightReport InspectPreflight(Stream input) => PdfPreflight.Inspect(input);
+    public static PdfOptimizationResult OptimizePdf(PdfDocumentSnapshot source) => PdfOptimization.Optimize(source);
 }
