@@ -17,7 +17,7 @@ public enum PdfOcrPixelFormat
 public sealed class PdfOcrRaster
 {
     internal readonly PdfByteStore Bytes;
-    private PdfOcrRaster(PdfByteStore bytes, int width, int height, int stride, PdfOcrPixelFormat format, int dpi)
+    internal PdfOcrRaster(PdfByteStore bytes, int width, int height, int stride, PdfOcrPixelFormat format, int dpi)
     {
         Bytes = bytes;
         Width = width;

@@ -3382,7 +3382,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/barcodes.md",
+        "scope": "Original QR Model2 versions1\u201340/all ECC and Code128B; mandatory independent decode before acceptance; optional pinned managed decoder; native PDF detector landmark coordinates; canonical EPC002/UTF8 invoice/payment validation",
+        "productionQualified": false,
+        "remaining": [
+          "Full declared symbol/payment/multi-code integration profiles and complete independent acceptance",
+          "Representative multilingual/damage/print/scanner/fuzz/resource/concurrency/endurance corpora",
+          "All actual engine/runtime/RID/minimum Framework qualification",
+          "Complete dependency/security/SBOM and exact final-package consumers"
+        ]
+      }
     },
     {
       "id": "FP-079",

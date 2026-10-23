@@ -328,6 +328,11 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "ZXing.Net": {
+        "type": "Transitive",
+        "resolved": "0.16.11",
+        "contentHash": "OZfAVu88hl87BffQ+rlWCj/vLvAhhCK4QnFaoveeF/MY8SjHNSYBQ3qyUEWlPKNgBQGh1syXhCDg10vUnCsqkg=="
+      },
       "fluent.pdf": {
         "type": "Project"
       },
@@ -410,7 +415,8 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
-          "Fluent.Pdf.Workers": "[1.0.0, )"
+          "Fluent.Pdf.Workers": "[1.0.0, )",
+          "ZXing.Net": "[0.16.11, 0.16.11]"
         }
       },
       "fluent.pdf.rendering": {
@@ -584,6 +590,11 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "ZXing.Net": {
+        "type": "Transitive",
+        "resolved": "0.16.11",
+        "contentHash": "OZfAVu88hl87BffQ+rlWCj/vLvAhhCK4QnFaoveeF/MY8SjHNSYBQ3qyUEWlPKNgBQGh1syXhCDg10vUnCsqkg=="
+      },
       "fluent.pdf": {
         "type": "Project"
       },
@@ -663,7 +674,8 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
-          "Fluent.Pdf.Workers": "[1.0.0, )"
+          "Fluent.Pdf.Workers": "[1.0.0, )",
+          "ZXing.Net": "[0.16.11, 0.16.11]"
         }
       },
       "fluent.pdf.rendering": {
@@ -866,6 +878,11 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "ZXing.Net": {
+        "type": "Transitive",
+        "resolved": "0.16.11",
+        "contentHash": "OZfAVu88hl87BffQ+rlWCj/vLvAhhCK4QnFaoveeF/MY8SjHNSYBQ3qyUEWlPKNgBQGh1syXhCDg10vUnCsqkg=="
+      },
       "fluent.pdf": {
         "type": "Project"
       },
@@ -948,7 +965,8 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
-          "Fluent.Pdf.Workers": "[1.0.0, )"
+          "Fluent.Pdf.Workers": "[1.0.0, )",
+          "ZXing.Net": "[0.16.11, 0.16.11]"
         }
       },
       "fluent.pdf.rendering": {

@@ -25,6 +25,8 @@
     <EmbeddedResource Include="Images/Data/*.icc" LogicalName="Fluent.Pdf.Images.Data.%(Filename)%(Extension)" />
     <None Include="../../README.md" Pack="true" PackagePath="/" />
     <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../../third-party/barcodes/BC-T01-BSD.txt" Link="notices/barcodes/BC-T01-BSD.txt" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="notices/barcodes/" />
+    <None Include="../../third-party/barcodes/BC-T02-MIT.txt" Link="notices/barcodes/BC-T02-MIT.txt" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="notices/barcodes/" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />

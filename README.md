@@ -144,3 +144,5 @@ Passive font/image/security preflight, exact-source explicit action-remediation 
 Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](docs/optimization.md).
 
 Bounded revision-bound range sessions, selective page/object access, private LRU caches and independently gated linearized output now have a source implementation. Complete hint/producer/transport/corpus/runtime/final-package qualification remains mandatory; see [progressive access](docs/progressive-access.md).
+
+Original QR/Code128B generation with mandatory independent decoding, explicit page-region detector landmarks and canonical EPC invoice/payment payload validation now have a source implementation. Complete corpus/scanner/runtime/host/final-package qualification remains mandatory; see [barcode workflows](docs/barcodes.md).

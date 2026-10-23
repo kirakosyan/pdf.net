@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "productionQualified": false,
+  "components": [
+    {
+      "sourceId": "BC-D01",
+      "packageId": "ZXing.Net",
+      "version": "0.16.11",
+      "dependencyScope": "Optional Fluent.Pdf.Ocr assembly; explicitly configured decoder only",
+      "license": "Apache-2.0",
+      "authors": "Michael Jahn and ZXing contributors",
+      "publishedAssemblyCopyright": "Copyright \u00a9 2012",
+      "packageSha256": "7d39234d668e558b3d374d18116ed57021d7c0df482801f1e1db4f1db9314ec3",
+      "nugetContentHashSha512": "kHBBMH1ZKN4Y5IZY8Cq6iETXOr7k00ZrJ8Nbsow9QlTcJZvJVR26bX7VMR/oY1XOJuPzLyMu79WKdw+bKhechg==",
+      "resolvedRuntimeAssets": [
+        {
+          "target": "net472",
+          "packageAsset": "lib/net47/zxing.dll",
+          "sha256": "eb50a587dc536918aaa678f17110ec46ec549daf89a77a8548e9079c9b7b4595"
+        },
+        {
+          "target": "net472",
+          "packageAsset": "lib/net47/zxing.presentation.dll",
+          "sha256": "b1277176545467da2edcc2ba02600cdbcd86bff897f61d7226b899a092e58ea1"
+        },
+        {
+          "target": "netstandard2.0",
+          "packageAsset": "lib/netstandard2.0/zxing.dll",
+          "sha256": "f3b823b6fd6492525a7547989056883def5d43be1e12c4f63fa54df73e3c5cfc"
+        },
+        {
+          "target": "net10.0",
+          "packageAsset": "lib/net9.0/zxing.dll",
+          "sha256": "2d9a1a3276fa21f5e20c0e8afa4ea33ca18fd6f984bd5b32ad457279e2709d73"
+        },
+        {
+          "target": "net8.0",
+          "packageAsset": "lib/net8.0/zxing.dll",
+          "sha256": "0aad7a70ad42a48d74f75204a9dcf05a94bb1ed66c0824f49d6f8bd08fefb127"
+        }
+      ],
+      "licenseFile": "Apache-2.0.txt"
+    },
+    {
+      "sourceId": "BC-T01",
+      "analysisTool": "qrcode",
+      "version": "8.2",
+      "license": "BSD-3-Clause",
+      "licenseFile": "BC-T01-BSD.txt",
+      "use": "Cross-check/extract normative QR RS block and alignment protocol data; source algorithms are original",
+      "sdkRuntimeDependency": false
+    },
+    {
+      "sourceId": "BC-T02",
+      "analysisTool": "python-barcode",
+      "version": "0.16.1",
+      "license": "MIT",
+      "licenseFile": "BC-T02-MIT.txt",
+      "use": "Cross-check/extract normative Code128 codeword bit patterns; source algorithms are original",
+      "sdkRuntimeDependency": false
+    }
+  ],
+  "licenseSha256": {
+    "Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "BC-T01-BSD.txt": "41ae913dcb22c8ddfb8b7fb9117f276f59c28b3e49bef9a90f9fcc4160e42585",
+    "BC-T02-MIT.txt": "98c269a2631379689a5716a849a8b7ab8d4a30d34f67e61a8643c8ad5b2de72a"
+  },
+  "protocolObservationSha256": "b0763dd4f5f9442552aa6398b65988055c6a3d7144fe539343719d74c7dd7107",
+  "remaining": [
+    "Complete release SBOM/license/vulnerability and exact final-package reviews",
+    "All actual runtime/RID/minimum Framework and complete scanner/printing/corpus qualification"
+  ],
+  "originalDataSourceNoticeSha256": {
+    "BC-T01-BSD.txt": "40dfb903c94ee3f789500131311186548ecba5cefd3557623d7700e2522ab994"
+  },
+  "noticeFormatting": "BC-T01 line-ending whitespace was normalized; all copyright, license and disclaimer text is retained."
+}

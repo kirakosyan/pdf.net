@@ -507,6 +507,9 @@ Public Module ContractExample
     Public Function OptimizePdf(source As PdfDocumentSnapshot) As PdfOptimizationResult
         Return PdfOptimization.Optimize(source)
     End Function
+    Public Function GenerateBarcode(text As String, independentDecoder As IPdfBarcodeDecoder, options As PdfBarcodeOptions) As PdfBarcodeSymbol
+        Return PdfBarcodes.Generate(text, independentDecoder, options)
+    End Function
     Public Function ReadProgressivePage(source As IPdfRangeSource, pageIndex As Integer) As PdfProgressivePage
         Using document As New PdfProgressiveDocument(source)
             Return document.ReadPage(pageIndex)

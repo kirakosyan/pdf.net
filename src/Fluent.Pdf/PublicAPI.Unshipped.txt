@@ -5,6 +5,9 @@ Fluent.Pdf.IPdfArchivalValidator
 Fluent.Pdf.IPdfArchivalValidator.Validate(Fluent.Pdf.PdfArchivalProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfArchivalValidation!
 Fluent.Pdf.IPdfAsyncSignatureProvider
 Fluent.Pdf.IPdfAsyncSignatureProvider.SignAsync(System.IO.Stream! signedBytes, System.IO.Stream! cmsOutput, Fluent.Pdf.PdfOperationContext! context) -> System.Threading.Tasks.Task!
+Fluent.Pdf.IPdfBarcodeDecoder
+Fluent.Pdf.IPdfBarcodeDecoder.Decode(Fluent.Pdf.PdfOcrRaster! raster, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfBarcodeObservation?
+Fluent.Pdf.IPdfBarcodeDecoder.Supports(Fluent.Pdf.PdfBarcodeSymbology symbology) -> bool
 Fluent.Pdf.IPdfCertificateStatusProvider
 Fluent.Pdf.IPdfCertificateStatusProvider.Check(System.IO.Stream! certificate, System.DateTimeOffset evaluationTime, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfRevocationStatus
 Fluent.Pdf.IPdfCidFontProgram
@@ -300,6 +303,45 @@ Fluent.Pdf.PdfAuthenticationRole.Certificate = 2 -> Fluent.Pdf.PdfAuthentication
 Fluent.Pdf.PdfAuthenticationRole.CreatedProtection = 3 -> Fluent.Pdf.PdfAuthenticationRole
 Fluent.Pdf.PdfAuthenticationRole.Owner = 1 -> Fluent.Pdf.PdfAuthenticationRole
 Fluent.Pdf.PdfAuthenticationRole.User = 0 -> Fluent.Pdf.PdfAuthenticationRole
+Fluent.Pdf.PdfBarcodeDetection
+Fluent.Pdf.PdfBarcodeDetection.Observation.get -> Fluent.Pdf.PdfBarcodeObservation?
+Fluent.Pdf.PdfBarcodeDetection.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfBarcodeDetection.PageIndex.get -> int?
+Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeErrorCorrection.High = 4 -> Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeErrorCorrection.Low = 1 -> Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeErrorCorrection.Medium = 2 -> Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeErrorCorrection.None = 0 -> Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeErrorCorrection.Quartile = 3 -> Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeObservation
+Fluent.Pdf.PdfBarcodeObservation.ErrorCorrection.get -> Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeObservation.PdfBarcodeObservation(Fluent.Pdf.PdfBarcodeSymbology symbology, string! text, Fluent.Pdf.PdfBarcodeErrorCorrection errorCorrection, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfPoint>! points) -> void
+Fluent.Pdf.PdfBarcodeObservation.Points.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfPoint>!
+Fluent.Pdf.PdfBarcodeObservation.Symbology.get -> Fluent.Pdf.PdfBarcodeSymbology
+Fluent.Pdf.PdfBarcodeObservation.Text.get -> string!
+Fluent.Pdf.PdfBarcodeOptions
+Fluent.Pdf.PdfBarcodeOptions.BarHeight.get -> int
+Fluent.Pdf.PdfBarcodeOptions.ErrorCorrection.get -> Fluent.Pdf.PdfBarcodeErrorCorrection
+Fluent.Pdf.PdfBarcodeOptions.PdfBarcodeOptions(Fluent.Pdf.PdfBarcodeSymbology symbology = Fluent.Pdf.PdfBarcodeSymbology.QrCode, Fluent.Pdf.PdfBarcodeErrorCorrection errorCorrection = Fluent.Pdf.PdfBarcodeErrorCorrection.Medium, int qrVersion = 0, int quietZone = 0, int barHeight = 40) -> void
+Fluent.Pdf.PdfBarcodeOptions.QrVersion.get -> int
+Fluent.Pdf.PdfBarcodeOptions.QuietZone.get -> int
+Fluent.Pdf.PdfBarcodeOptions.Symbology.get -> Fluent.Pdf.PdfBarcodeSymbology
+Fluent.Pdf.PdfBarcodeSymbol
+Fluent.Pdf.PdfBarcodeSymbol.Drawing.get -> Fluent.Pdf.PdfDrawing!
+Fluent.Pdf.PdfBarcodeSymbol.Height.get -> int
+Fluent.Pdf.PdfBarcodeSymbol.Mask.get -> int
+Fluent.Pdf.PdfBarcodeSymbol.OpenVerificationPixels() -> System.IO.Stream!
+Fluent.Pdf.PdfBarcodeSymbol.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfBarcodeSymbol.Options.get -> Fluent.Pdf.PdfBarcodeOptions!
+Fluent.Pdf.PdfBarcodeSymbol.QrVersion.get -> int
+Fluent.Pdf.PdfBarcodeSymbol.Text.get -> string!
+Fluent.Pdf.PdfBarcodeSymbol.VerificationRaster.get -> Fluent.Pdf.PdfOcrRaster!
+Fluent.Pdf.PdfBarcodeSymbol.VerifierIdentity.get -> string!
+Fluent.Pdf.PdfBarcodeSymbol.Width.get -> int
+Fluent.Pdf.PdfBarcodeSymbology
+Fluent.Pdf.PdfBarcodeSymbology.Code128 = 1 -> Fluent.Pdf.PdfBarcodeSymbology
+Fluent.Pdf.PdfBarcodeSymbology.QrCode = 0 -> Fluent.Pdf.PdfBarcodeSymbology
+Fluent.Pdf.PdfBarcodes
 Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AL = 2 -> Fluent.Pdf.PdfBidiClass
 Fluent.Pdf.PdfBidiClass.AN = 6 -> Fluent.Pdf.PdfBidiClass
@@ -427,6 +469,7 @@ Fluent.Pdf.PdfCanvasStyle.PdfCanvasStyle(Fluent.Pdf.PdfPaint? fill = null, Fluen
 Fluent.Pdf.PdfCanvasStyle.State.get -> Fluent.Pdf.PdfGraphicsState?
 Fluent.Pdf.PdfCanvasStyle.Stroke.get -> Fluent.Pdf.PdfPaint?
 Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfCapability.Barcodes = 19 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.CmsEnvelopes = 8 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.ConvertWord = 10 -> Fluent.Pdf.PdfCapability
 Fluent.Pdf.PdfCapability.DecodeRasterDocuments = 18 -> Fluent.Pdf.PdfCapability
@@ -2637,6 +2680,17 @@ Fluent.Pdf.PdfSecurityResult.Permissions.get -> Fluent.Pdf.PdfDocumentPermission
 Fluent.Pdf.PdfSecurityResult.Report.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfSecurityResult.Revision.get -> int
 Fluent.Pdf.PdfSecurityResult.Role.get -> Fluent.Pdf.PdfAuthenticationRole
+Fluent.Pdf.PdfSepaCreditTransfer
+Fluent.Pdf.PdfSepaCreditTransfer.Amount.get -> decimal
+Fluent.Pdf.PdfSepaCreditTransfer.Beneficiary.get -> string!
+Fluent.Pdf.PdfSepaCreditTransfer.Bic.get -> string!
+Fluent.Pdf.PdfSepaCreditTransfer.CreditorReference.get -> string!
+Fluent.Pdf.PdfSepaCreditTransfer.Iban.get -> string!
+Fluent.Pdf.PdfSepaCreditTransfer.Information.get -> string!
+Fluent.Pdf.PdfSepaCreditTransfer.Payload.get -> string!
+Fluent.Pdf.PdfSepaCreditTransfer.PdfSepaCreditTransfer(string! beneficiary, string! iban, string! bic, decimal amount, string! creditorReference = "", string! remittance = "", string! purpose = "", string! information = "") -> void
+Fluent.Pdf.PdfSepaCreditTransfer.Purpose.get -> string!
+Fluent.Pdf.PdfSepaCreditTransfer.Remittance.get -> string!
 Fluent.Pdf.PdfShading
 Fluent.Pdf.PdfShading.ColorSpace.get -> Fluent.Pdf.PdfColorSpace!
 Fluent.Pdf.PdfShading.Resource.get -> Fluent.Pdf.PdfGraphicsResource!
@@ -3193,6 +3247,10 @@ static Fluent.Pdf.PdfAttachments.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source,
 static Fluent.Pdf.PdfAttachments.RemoveAll(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfAttachments.SetCollection(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfValue? collection, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfAttachments.SetCollectionItem(Fluent.Pdf.PdfAttachment! attachment, Fluent.Pdf.PdfValue? item, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfBarcodes.Detect(Fluent.Pdf.PdfOcrRaster! raster, Fluent.Pdf.IPdfBarcodeDecoder? independentDecoder = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfBarcodeDetection!
+static Fluent.Pdf.PdfBarcodes.DetectPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.IPdfBarcodeDecoder? independentDecoder = null, Fluent.Pdf.PdfRenderOptions? render = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfBarcodeDetection!
+static Fluent.Pdf.PdfBarcodes.Generate(string! text, Fluent.Pdf.IPdfBarcodeDecoder? independentDecoder = null, Fluent.Pdf.PdfBarcodeOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfBarcodeSymbol!
+static Fluent.Pdf.PdfBarcodes.GeneratePayment(Fluent.Pdf.PdfSepaCreditTransfer! payment, Fluent.Pdf.IPdfBarcodeDecoder? independentDecoder = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfBarcodeSymbol!
 static Fluent.Pdf.PdfCanvas.Create(Fluent.Pdf.PdfPageGeometry! geometry, System.Action<Fluent.Pdf.PdfCanvas!>! draw, Fluent.Pdf.PdfCanvasOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfCanvasResult!
 static Fluent.Pdf.PdfCanvasStyle.Default.get -> Fluent.Pdf.PdfCanvasStyle!
 static Fluent.Pdf.PdfColorRendering.RenderPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfColorRenderOptions! colorManagement, Fluent.Pdf.PdfRenderOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRaster!
@@ -3402,6 +3460,8 @@ static Fluent.Pdf.PdfSecurity.DecryptWithCertificate(System.IO.Stream! input, Sy
 static Fluent.Pdf.PdfSecurity.DecryptWithPassword(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfPassword! password, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfSecurity.EncryptWithCertificates(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfCertificateProtection! protection, Fluent.Pdf.PdfProviderRegistry! providers, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfSecurity.EncryptWithPassword(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfPasswordProtection! protection, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
+static Fluent.Pdf.PdfSepaCreditTransfer.FromInvoice(Fluent.Pdf.PdfInvoiceData! invoice, string! iban, string! bic) -> Fluent.Pdf.PdfSepaCreditTransfer!
+static Fluent.Pdf.PdfSepaCreditTransfer.Parse(string! payload) -> Fluent.Pdf.PdfSepaCreditTransfer!
 static Fluent.Pdf.PdfShading.Axial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfPoint start, Fluent.Pdf.PdfPoint end, Fluent.Pdf.PdfFunction! function, bool extendStart = false, bool extendEnd = false, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Functional(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfFunction! function, Fluent.Pdf.PdfRect domain, Fluent.Pdf.PdfMatrix? matrix = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
 static Fluent.Pdf.PdfShading.Mesh(Fluent.Pdf.PdfColorSpace! colorSpace, int shadingType, System.IO.Stream! packedData, int bitsPerCoordinate, int bitsPerComponent, double[]! decode, int bitsPerFlag = 2, int verticesPerRow = 0, Fluent.Pdf.PdfFunction? function = null, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
