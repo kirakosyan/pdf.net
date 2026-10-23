@@ -6,7 +6,7 @@ Fluent.Pdf.Automation.IPdfAutomation.Configure(int maximumInputBytes, int maximu
 Fluent.Pdf.Automation.IPdfAutomation.ExtractText(int pageIndex, int view, bool includeInvisibleText, int maximumCharacters) -> string!
 Fluent.Pdf.Automation.IPdfAutomation.GetFieldNames() -> object![]!
 Fluent.Pdf.Automation.IPdfAutomation.LastDiagnosticCode.get -> string!
-Fluent.Pdf.Automation.IPdfAutomation.OpenBytes(byte[]! document) -> void
+Fluent.Pdf.Automation.IPdfAutomation.OpenBytes(object! document) -> void
 Fluent.Pdf.Automation.IPdfAutomation.OpenFile(string! path) -> void
 Fluent.Pdf.Automation.IPdfAutomation.PageCount.get -> int
 Fluent.Pdf.Automation.IPdfAutomation.RuntimeIdentity.get -> string!
@@ -21,7 +21,7 @@ Fluent.Pdf.Automation.PdfAutomation.Dispose() -> void
 Fluent.Pdf.Automation.PdfAutomation.ExtractText(int pageIndex, int view, bool includeInvisibleText, int maximumCharacters) -> string!
 Fluent.Pdf.Automation.PdfAutomation.GetFieldNames() -> object![]!
 Fluent.Pdf.Automation.PdfAutomation.LastDiagnosticCode.get -> string!
-Fluent.Pdf.Automation.PdfAutomation.OpenBytes(byte[]! document) -> void
+Fluent.Pdf.Automation.PdfAutomation.OpenBytes(object! document) -> void
 Fluent.Pdf.Automation.PdfAutomation.OpenFile(string! path) -> void
 Fluent.Pdf.Automation.PdfAutomation.PageCount.get -> int
 Fluent.Pdf.Automation.PdfAutomation.PdfAutomation() -> void

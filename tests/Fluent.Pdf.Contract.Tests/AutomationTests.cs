@@ -39,8 +39,8 @@ public sealed class AutomationTests
         for (int i = 0; i < names.Length; i++)
             Assert.Equal(i + 1, typeof(IPdfAutomation).GetMember(names[i]).Single().GetCustomAttribute<DispIdAttribute>()!.Value);
         var input = typeof(IPdfAutomation).GetMethod("OpenBytes")!.GetParameters()[0].GetCustomAttribute<MarshalAsAttribute>()!;
-        Assert.Equal(UnmanagedType.SafeArray, input.Value);
-        Assert.Contains(input.SafeArraySubType, new[] { VarEnum.VT_EMPTY, VarEnum.VT_UI1 });
+        Assert.Equal(UnmanagedType.Struct, input.Value);
+        Assert.Equal(typeof(object), typeof(IPdfAutomation).GetMethod("OpenBytes")!.GetParameters()[0].ParameterType);
         Assert.Equal(UnmanagedType.SafeArray, typeof(IPdfAutomation).GetMethod("SaveBytes")!.ReturnParameter.GetCustomAttribute<MarshalAsAttribute>()!.Value);
         Assert.Equal(UnmanagedType.SafeArray, typeof(IPdfAutomation).GetMethod("GetFieldNames")!.ReturnParameter.GetCustomAttribute<MarshalAsAttribute>()!.Value);
         // Some runtimes omit SAFEARRAY subtypes from reflection; the independent PE metadata checker and actual native consumer verify them.

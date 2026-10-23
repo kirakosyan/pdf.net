@@ -9,7 +9,7 @@
 // Original version-one ABI declaration; method order matches the frozen dual interface.
 struct __declspec(uuid("CE62BFB2-FB23-4BC6-A6CD-7075ED70268C")) IPdfAutomation : IDispatch {
     virtual HRESULT STDMETHODCALLTYPE Configure(LONG, LONG, LONG, LONG, LONG) = 0;
-    virtual HRESULT STDMETHODCALLTYPE OpenBytes(SAFEARRAY*) = 0;
+    virtual HRESULT STDMETHODCALLTYPE OpenBytes(VARIANT) = 0;
     virtual HRESULT STDMETHODCALLTYPE OpenFile(BSTR) = 0;
     virtual HRESULT STDMETHODCALLTYPE get_PageCount(LONG*) = 0;
     virtual HRESULT STDMETHODCALLTYPE ExtractText(LONG, LONG, VARIANT_BOOL, LONG, BSTR*) = 0;
@@ -60,7 +60,7 @@ int wmain(int argc, wchar_t** argv) {
             ok(activation); phase = L"configure"; ok(pdf.value->Configure(1048576, 16777216, 1048576, 100000, 30000));
             auto bytes = read(argv[1]); OwnedArray input; input.value = SafeArrayCreateVector(VT_UI1, 0, static_cast<ULONG>(bytes.size())); check(input.value != nullptr);
             void* memory = nullptr; ok(SafeArrayAccessData(input.value, &memory)); CopyMemory(memory, bytes.data(), bytes.size()); ok(SafeArrayUnaccessData(input.value));
-            phase = L"open-bytes"; ok(pdf.value->OpenBytes(input.value)); LONG pages = 0; ok(pdf.value->get_PageCount(&pages)); check(pages == 2);
+            phase = L"open-bytes"; VARIANT inputVariant{}; VariantInit(&inputVariant); inputVariant.vt = VT_ARRAY | VT_UI1; inputVariant.parray = input.value; ok(pdf.value->OpenBytes(inputVariant)); LONG pages = 0; ok(pdf.value->get_PageCount(&pages)); check(pages == 2);
             phase = L"extract-text"; OwnedBstr text; ok(pdf.value->ExtractText(0, 0, VARIANT_FALSE, 1000, &text.value)); check(std::wstring(text.value) == L"Original automation \u03A9");
             phase = L"field-array"; OwnedArray fields; ok(pdf.value->GetFieldNames(&fields.value)); VARTYPE type = VT_EMPTY; ok(SafeArrayGetVartype(fields.value, &type)); check(type == VT_VARIANT);
             LONG index = 0; VARIANT field{}; VariantInit(&field); ok(SafeArrayGetElement(fields.value, &index, &field)); check(field.vt == VT_BSTR && std::wstring(field.bstrVal) == L"customer.Name"); VariantClear(&field);

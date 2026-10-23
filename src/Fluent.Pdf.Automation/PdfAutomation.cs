@@ -8,9 +8,9 @@ public interface IPdfAutomation
     /// <summary>Configures finite strict budgets only while no document is open. Input/output each1..16MiB, expansion1..256MiB, objects1..1million, timeout1..300000ms.</summary>
     [DispId(1)]
     void Configure(int maximumInputBytes, int maximumExpandedBytes, int maximumOutputBytes, int maximumObjects, int timeoutMilliseconds);
-    /// <summary>Captures a SAFEARRAY(UI1) into a private document. Failure preserves the previously open document.</summary>
+    /// <summary>Captures a VARIANT containing SAFEARRAY(UI1) into a private document. Failure preserves the previously open document.</summary>
     [DispId(2)]
-    void OpenBytes([In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_UI1)] byte[] document);
+    void OpenBytes([In, MarshalAs(UnmanagedType.Struct)] object document);
     /// <summary>Explicitly captures one caller-selected file; the owned file handle closes before return. No document-directed path is opened.</summary>
     [DispId(3)]
     void OpenFile([MarshalAs(UnmanagedType.BStr)] string path);
@@ -69,7 +69,7 @@ public sealed class PdfAutomation : IPdfAutomation, IDisposable
     /// <inheritdoc/>
     public void Configure(int maximumInputBytes, int maximumExpandedBytes, int maximumOutputBytes, int maximumObjects, int timeoutMilliseconds) => _session.Configure(maximumInputBytes, maximumExpandedBytes, maximumOutputBytes, maximumObjects, timeoutMilliseconds);
     /// <inheritdoc/>
-    public void OpenBytes(byte[] document) => _session.OpenBytes(document);
+    public void OpenBytes(object document) => _session.OpenBytes(document);
     /// <inheritdoc/>
     public void OpenFile(string path) => _session.OpenFile(path);
     /// <inheritdoc/>

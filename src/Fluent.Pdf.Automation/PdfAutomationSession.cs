@@ -40,9 +40,9 @@ internal sealed class PdfAutomationSession : IDisposable
     internal int PageCount => Run(token => Document().Pages.Count);
 
     private PdfDocument Document() => _document ?? throw Failure("Automation.NoDocument", 0x8004A104);
-    internal void OpenBytes(byte[] bytes) => Run(token =>
+    internal void OpenBytes(object value) => Run(token =>
     {
-        if (bytes == null || bytes.Length == 0)
+        if (value is not byte[] bytes || bytes.Length == 0)
             throw new ArgumentException("A document array is required.");
         if (bytes.LongLength > _policy.Limits.MaximumInputBytes)
             throw Failure("Limit.InputBytes", 0x8004A106);
