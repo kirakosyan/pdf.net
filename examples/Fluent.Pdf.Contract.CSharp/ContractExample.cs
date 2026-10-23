@@ -377,6 +377,8 @@ public static class ContractExample
     public static PdfOptimizationResult OptimizePdf(PdfDocumentSnapshot source) => PdfOptimization.Optimize(source);
     public static PdfBarcodeSymbol GenerateBarcode(string text, IPdfBarcodeDecoder independentDecoder, PdfBarcodeOptions options) => PdfBarcodes.Generate(text, independentDecoder, options);
     public static Fluent.Pdf.Intelligence.PdfIntelligenceResult AnalyzeSelectedText(PdfDocumentSnapshot source, int pageIndex, Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider provider, Fluent.Pdf.Intelligence.PdfIntelligenceOptions options) => Fluent.Pdf.Intelligence.PdfDocumentIntelligence.Analyze(source, new[] { new Fluent.Pdf.Intelligence.PdfIntelligenceSelection(pageIndex) }, Fluent.Pdf.Intelligence.PdfIntelligenceTask.Summarize, provider, options: options);
+
+    public static Fluent.Pdf.Intelligence.PdfSemanticChunkResult ChunkSelectedPage(PdfDocumentSnapshot source, int pageIndex, int maximumUtf8Bytes) => Fluent.Pdf.Intelligence.PdfSemanticChunks.Capture(source, new[] { pageIndex }, new(maximumUtf8Bytes));
     public static PdfProgressivePage ReadProgressivePage(IPdfRangeSource source, int pageIndex)
     {
         using var document = new PdfProgressiveDocument(source);

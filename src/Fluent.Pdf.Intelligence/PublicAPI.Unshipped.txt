@@ -3,8 +3,16 @@ Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider
 Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider.Model.get -> Fluent.Pdf.Intelligence.PdfIntelligenceModel!
 Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider.Prepare(Fluent.Pdf.Intelligence.PdfIntelligenceJob! job, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfIntelligenceCall!
 Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider.Supports(Fluent.Pdf.Intelligence.PdfIntelligenceTask task, bool requiresImages) -> bool
+Fluent.Pdf.Intelligence.IPdfEmbeddingProvider
+Fluent.Pdf.Intelligence.IPdfEmbeddingProvider.Model.get -> Fluent.Pdf.Intelligence.PdfEmbeddingModel!
+Fluent.Pdf.Intelligence.IPdfEmbeddingProvider.Prepare(Fluent.Pdf.Intelligence.PdfEmbeddingRequest! request, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfEmbeddingCall!
 Fluent.Pdf.Intelligence.IPdfIntelligenceTransport
 Fluent.Pdf.Intelligence.IPdfIntelligenceTransport.OpenResponse(System.Uri! endpoint, System.IO.Stream! request, long requestLength, Fluent.Pdf.PdfOperationContext! context) -> System.IO.Stream!
+Fluent.Pdf.Intelligence.IPdfVectorStore
+Fluent.Pdf.Intelligence.IPdfVectorStore.Authorize(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, bool write, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfVectorIndexInfo!
+Fluent.Pdf.Intelligence.IPdfVectorStore.Remove(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, long expectedVersion, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Intelligence.IPdfVectorStore.Replace(Fluent.Pdf.Intelligence.PdfVectorIndex! index, string! principal, long expectedVersion, Fluent.Pdf.PdfOperationContext! context) -> long
+Fluent.Pdf.Intelligence.IPdfVectorStore.Search(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, long expectedVersion, Fluent.Pdf.Intelligence.PdfEmbeddingModel! model, Fluent.Pdf.Intelligence.PdfEmbeddingVector! query, int maximumResults, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfVectorMatch!>!
 Fluent.Pdf.Intelligence.PdfChatDocumentModel
 Fluent.Pdf.Intelligence.PdfChatDocumentModel.Model.get -> Fluent.Pdf.Intelligence.PdfIntelligenceModel!
 Fluent.Pdf.Intelligence.PdfChatDocumentModel.PdfChatDocumentModel(Fluent.Pdf.Intelligence.PdfIntelligenceModel! model, Fluent.Pdf.Intelligence.IPdfIntelligenceTransport! transport, bool supportsImages = false, int maximumTokensPerUtf8Byte = 1) -> void
@@ -12,6 +20,28 @@ Fluent.Pdf.Intelligence.PdfChatDocumentModel.Prepare(Fluent.Pdf.Intelligence.Pdf
 Fluent.Pdf.Intelligence.PdfChatDocumentModel.Supports(Fluent.Pdf.Intelligence.PdfIntelligenceTask task, bool requiresImages) -> bool
 Fluent.Pdf.Intelligence.PdfChatDocumentModel.SupportsImages.get -> bool
 Fluent.Pdf.Intelligence.PdfDocumentIntelligence
+Fluent.Pdf.Intelligence.PdfEmbeddingCall
+Fluent.Pdf.Intelligence.PdfEmbeddingCall.ConfiguredCostCeiling.get -> decimal
+Fluent.Pdf.Intelligence.PdfEmbeddingCall.InputTokenCeiling.get -> int
+Fluent.Pdf.Intelligence.PdfEmbeddingCall.Model.get -> Fluent.Pdf.Intelligence.PdfEmbeddingModel!
+Fluent.Pdf.Intelligence.PdfEmbeddingCall.PdfEmbeddingCall(Fluent.Pdf.Intelligence.PdfEmbeddingModel! model, string! requestSha256, int inputTokenCeiling, decimal configuredCostCeiling) -> void
+Fluent.Pdf.Intelligence.PdfEmbeddingCall.RequestSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfEmbeddingModel
+Fluent.Pdf.Intelligence.PdfEmbeddingModel.Dimensions.get -> int
+Fluent.Pdf.Intelligence.PdfEmbeddingModel.Model.get -> Fluent.Pdf.Intelligence.PdfIntelligenceModel!
+Fluent.Pdf.Intelligence.PdfEmbeddingModel.PdfEmbeddingModel(Fluent.Pdf.Intelligence.PdfIntelligenceModel! model, int dimensions) -> void
+Fluent.Pdf.Intelligence.PdfEmbeddingRequest
+Fluent.Pdf.Intelligence.PdfEmbeddingRequest.RequestSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfEmbeddingRequest.Texts.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.Intelligence.PdfEmbeddingResponse
+Fluent.Pdf.Intelligence.PdfEmbeddingResponse.ExactModelVersion.get -> string!
+Fluent.Pdf.Intelligence.PdfEmbeddingResponse.InputTokens.get -> int
+Fluent.Pdf.Intelligence.PdfEmbeddingResponse.PdfEmbeddingResponse(string! requestSha256, string! exactModelVersion, System.Collections.Generic.IEnumerable<Fluent.Pdf.Intelligence.PdfEmbeddingVector!>! vectors, int inputTokens, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Intelligence.PdfEmbeddingResponse.RequestSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfEmbeddingResponse.Vectors.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfEmbeddingVector!>!
+Fluent.Pdf.Intelligence.PdfEmbeddingVector
+Fluent.Pdf.Intelligence.PdfEmbeddingVector.PdfEmbeddingVector(System.Collections.Generic.IEnumerable<double>! values, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Intelligence.PdfEmbeddingVector.Values.get -> System.Collections.Generic.IReadOnlyList<double>!
 Fluent.Pdf.Intelligence.PdfIntelligenceCall
 Fluent.Pdf.Intelligence.PdfIntelligenceCall.InputTokenCeiling.get -> int
 Fluent.Pdf.Intelligence.PdfIntelligenceCall.MaximumOutputTokens.get -> int
@@ -126,6 +156,74 @@ Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Nullable = 7 -> Fluent.Pdf.Inte
 Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Number = 3 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
 Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.Object = 0 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
 Fluent.Pdf.Intelligence.PdfIntelligenceValueKind.String = 2 -> Fluent.Pdf.Intelligence.PdfIntelligenceValueKind
+Fluent.Pdf.Intelligence.PdfJsonEmbeddingProvider
+Fluent.Pdf.Intelligence.PdfJsonEmbeddingProvider.Model.get -> Fluent.Pdf.Intelligence.PdfEmbeddingModel!
+Fluent.Pdf.Intelligence.PdfJsonEmbeddingProvider.PdfJsonEmbeddingProvider(Fluent.Pdf.Intelligence.PdfEmbeddingModel! model, Fluent.Pdf.Intelligence.IPdfIntelligenceTransport! transport, int maximumTokensPerUtf8Byte = 1) -> void
+Fluent.Pdf.Intelligence.PdfJsonEmbeddingProvider.Prepare(Fluent.Pdf.Intelligence.PdfEmbeddingRequest! request, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfEmbeddingCall!
+Fluent.Pdf.Intelligence.PdfMemoryVectorStore
+Fluent.Pdf.Intelligence.PdfMemoryVectorStore.Authorize(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, bool write, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfVectorIndexInfo!
+Fluent.Pdf.Intelligence.PdfMemoryVectorStore.PdfMemoryVectorStore(string! administrator, int maximumDocuments = 128, int maximumRecords = 65536, long maximumResidentBytes = 67108864) -> void
+Fluent.Pdf.Intelligence.PdfMemoryVectorStore.Remove(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, long expectedVersion, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Intelligence.PdfMemoryVectorStore.Replace(Fluent.Pdf.Intelligence.PdfVectorIndex! index, string! principal, long expectedVersion, Fluent.Pdf.PdfOperationContext! context) -> long
+Fluent.Pdf.Intelligence.PdfMemoryVectorStore.Search(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, long expectedVersion, Fluent.Pdf.Intelligence.PdfEmbeddingModel! model, Fluent.Pdf.Intelligence.PdfEmbeddingVector! query, int maximumResults, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfVectorMatch!>!
+Fluent.Pdf.Intelligence.PdfRetrievalPermissions
+Fluent.Pdf.Intelligence.PdfRetrievalPermissions.PdfRetrievalPermissions(string! policyVersion, string! writer, System.Collections.Generic.IEnumerable<string!>! readers) -> void
+Fluent.Pdf.Intelligence.PdfRetrievalPermissions.PolicyVersion.get -> string!
+Fluent.Pdf.Intelligence.PdfRetrievalPermissions.Readers.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Fluent.Pdf.Intelligence.PdfRetrievalPermissions.Writer.get -> string!
+Fluent.Pdf.Intelligence.PdfRetrievalScope
+Fluent.Pdf.Intelligence.PdfRetrievalScope.DocumentId.get -> string!
+Fluent.Pdf.Intelligence.PdfRetrievalScope.DocumentSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfRetrievalScope.PdfRetrievalScope(string! tenantId, string! documentId, string! documentSha256) -> void
+Fluent.Pdf.Intelligence.PdfRetrievalScope.TenantId.get -> string!
+Fluent.Pdf.Intelligence.PdfSemanticChunk
+Fluent.Pdf.Intelligence.PdfSemanticChunk.Characters.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfExtractedCharacter!>!
+Fluent.Pdf.Intelligence.PdfSemanticChunk.Index.get -> int
+Fluent.Pdf.Intelligence.PdfSemanticChunk.PageIndex.get -> int
+Fluent.Pdf.Intelligence.PdfSemanticChunk.Sha256.get -> string!
+Fluent.Pdf.Intelligence.PdfSemanticChunk.TableIndex.get -> int?
+Fluent.Pdf.Intelligence.PdfSemanticChunk.Text.get -> string!
+Fluent.Pdf.Intelligence.PdfSemanticChunk.TextOffset.get -> int
+Fluent.Pdf.Intelligence.PdfSemanticChunk.Utf8Bytes.get -> int
+Fluent.Pdf.Intelligence.PdfSemanticChunkOptions
+Fluent.Pdf.Intelligence.PdfSemanticChunkOptions.IncludeInvisibleText.get -> bool
+Fluent.Pdf.Intelligence.PdfSemanticChunkOptions.MaximumCharacters.get -> int
+Fluent.Pdf.Intelligence.PdfSemanticChunkOptions.MaximumChunks.get -> int
+Fluent.Pdf.Intelligence.PdfSemanticChunkOptions.MaximumUtf8Bytes.get -> int
+Fluent.Pdf.Intelligence.PdfSemanticChunkOptions.PdfSemanticChunkOptions(int maximumUtf8Bytes = 1024, int maximumChunks = 4096, int maximumCharacters = 1000000, bool includeInvisibleText = false, Fluent.Pdf.PdfTableExtractionOptions? tables = null) -> void
+Fluent.Pdf.Intelligence.PdfSemanticChunkOptions.Tables.get -> Fluent.Pdf.PdfTableExtractionOptions?
+Fluent.Pdf.Intelligence.PdfSemanticChunkResult
+Fluent.Pdf.Intelligence.PdfSemanticChunkResult.CaptureSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfSemanticChunkResult.Chunks.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfSemanticChunk!>!
+Fluent.Pdf.Intelligence.PdfSemanticChunkResult.DocumentSha256.get -> string!
+Fluent.Pdf.Intelligence.PdfSemanticChunkResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Intelligence.PdfSemanticChunkResult.PageIndices.get -> System.Collections.Generic.IReadOnlyList<int>!
+Fluent.Pdf.Intelligence.PdfSemanticChunks
+Fluent.Pdf.Intelligence.PdfVectorIndex
+Fluent.Pdf.Intelligence.PdfVectorIndex.Capture.get -> Fluent.Pdf.Intelligence.PdfSemanticChunkResult!
+Fluent.Pdf.Intelligence.PdfVectorIndex.Embeddings.get -> Fluent.Pdf.Intelligence.PdfEmbeddingResponse!
+Fluent.Pdf.Intelligence.PdfVectorIndex.Model.get -> Fluent.Pdf.Intelligence.PdfEmbeddingModel!
+Fluent.Pdf.Intelligence.PdfVectorIndex.Permissions.get -> Fluent.Pdf.Intelligence.PdfRetrievalPermissions!
+Fluent.Pdf.Intelligence.PdfVectorIndex.Scope.get -> Fluent.Pdf.Intelligence.PdfRetrievalScope!
+Fluent.Pdf.Intelligence.PdfVectorIndexInfo
+Fluent.Pdf.Intelligence.PdfVectorIndexInfo.Model.get -> Fluent.Pdf.Intelligence.PdfEmbeddingModel?
+Fluent.Pdf.Intelligence.PdfVectorIndexInfo.PdfVectorIndexInfo(long version, Fluent.Pdf.Intelligence.PdfEmbeddingModel? model, Fluent.Pdf.Intelligence.PdfRetrievalPermissions? permissions) -> void
+Fluent.Pdf.Intelligence.PdfVectorIndexInfo.Permissions.get -> Fluent.Pdf.Intelligence.PdfRetrievalPermissions?
+Fluent.Pdf.Intelligence.PdfVectorIndexInfo.Version.get -> long
+Fluent.Pdf.Intelligence.PdfVectorIndexResult
+Fluent.Pdf.Intelligence.PdfVectorIndexResult.Index.get -> Fluent.Pdf.Intelligence.PdfVectorIndex!
+Fluent.Pdf.Intelligence.PdfVectorIndexResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Intelligence.PdfVectorIndexResult.Version.get -> long
+Fluent.Pdf.Intelligence.PdfVectorMatch
+Fluent.Pdf.Intelligence.PdfVectorMatch.Chunk.get -> Fluent.Pdf.Intelligence.PdfSemanticChunk!
+Fluent.Pdf.Intelligence.PdfVectorMatch.Index.get -> Fluent.Pdf.Intelligence.PdfVectorIndex!
+Fluent.Pdf.Intelligence.PdfVectorMatch.PdfVectorMatch(Fluent.Pdf.Intelligence.PdfVectorIndex! index, int chunkIndex, double score) -> void
+Fluent.Pdf.Intelligence.PdfVectorMatch.Score.get -> double
+Fluent.Pdf.Intelligence.PdfVectorRetrieval
+Fluent.Pdf.Intelligence.PdfVectorSearchResult
+Fluent.Pdf.Intelligence.PdfVectorSearchResult.Matches.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Intelligence.PdfVectorMatch!>!
+Fluent.Pdf.Intelligence.PdfVectorSearchResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+abstract Fluent.Pdf.Intelligence.PdfEmbeddingCall.Execute(Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfEmbeddingResponse!
 abstract Fluent.Pdf.Intelligence.PdfIntelligenceCall.Execute(Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Intelligence.PdfIntelligenceResponse!
 static Fluent.Pdf.Intelligence.PdfDocumentIntelligence.Analyze(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.Intelligence.PdfIntelligenceSelection!>! selections, Fluent.Pdf.Intelligence.PdfIntelligenceTask task, Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider? provider = null, string! instruction = "", string! targetLanguage = "", Fluent.Pdf.Intelligence.PdfIntelligenceSchema? schema = null, Fluent.Pdf.Intelligence.PdfIntelligenceOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfRenderOptions? render = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Intelligence.PdfIntelligenceResult!
 static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Array(Fluent.Pdf.Intelligence.PdfIntelligenceSchema! items, int minimumItems = 0, int maximumItems = 100) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
@@ -136,3 +234,7 @@ static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Nullable(Fluent.Pdf.Intelli
 static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Number(decimal? minimum = null, decimal? maximum = null) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
 static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.Object(System.Collections.Generic.IEnumerable<Fluent.Pdf.Intelligence.PdfIntelligenceField!>! fields) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
 static Fluent.Pdf.Intelligence.PdfIntelligenceSchema.String(int minimumLength = 0, int maximumLength = 16384, System.Collections.Generic.IEnumerable<string!>? allowedValues = null) -> Fluent.Pdf.Intelligence.PdfIntelligenceSchema!
+static Fluent.Pdf.Intelligence.PdfSemanticChunks.Capture(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, Fluent.Pdf.Intelligence.PdfSemanticChunkOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Intelligence.PdfSemanticChunkResult!
+static Fluent.Pdf.Intelligence.PdfVectorRetrieval.Index(Fluent.Pdf.Intelligence.PdfSemanticChunkResult! capture, Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, Fluent.Pdf.Intelligence.PdfRetrievalPermissions! permissions, string! principal, Fluent.Pdf.Intelligence.IPdfEmbeddingProvider! provider, Fluent.Pdf.Intelligence.IPdfVectorStore! store, Fluent.Pdf.Intelligence.PdfIntelligenceOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Intelligence.PdfVectorIndexResult!
+static Fluent.Pdf.Intelligence.PdfVectorRetrieval.Remove(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, Fluent.Pdf.Intelligence.IPdfVectorStore! store, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Intelligence.PdfVectorRetrieval.Search(Fluent.Pdf.Intelligence.PdfRetrievalScope! scope, string! principal, string! query, Fluent.Pdf.Intelligence.IPdfEmbeddingProvider! provider, Fluent.Pdf.Intelligence.IPdfVectorStore! store, int maximumResults = 10, Fluent.Pdf.Intelligence.PdfIntelligenceOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Intelligence.PdfVectorSearchResult!

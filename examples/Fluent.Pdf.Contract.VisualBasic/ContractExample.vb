@@ -518,6 +518,9 @@ Public Module ContractExample
             Return document.ReadPage(pageIndex)
         End Using
     End Function
+    Public Function ChunkSelectedPage(source As PdfDocumentSnapshot, pageIndex As Integer, maximumUtf8Bytes As Integer) As Fluent.Pdf.Intelligence.PdfSemanticChunkResult
+        Return Fluent.Pdf.Intelligence.PdfSemanticChunks.Capture(source, {pageIndex}, New Fluent.Pdf.Intelligence.PdfSemanticChunkOptions(maximumUtf8Bytes))
+    End Function
     Public Function WriteLinearized(input As Stream, output As Stream, producer As IPdfLinearizationProducer, validator As IPdfLinearizationValidator) As PdfLinearizationValidation
         Return PdfLinearization.Write(input, output, producer:=producer, validator:=validator)
     End Function

@@ -3464,12 +3464,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-080-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/semantic-retrieval.md",
+        "scope": "Exact raw mapped source-order layout/table-aware chunking, explicit UTF8 byte ceilings, scoped embedding JSON bridge, immutable model/dimension/version provenance and bounded ACL/generation-isolated cosine storage",
+        "productionQualified": false,
+        "remaining": [
+          "Complete tagged/author-confirmed semantic chunk profiles and representative chunk/relevance corpus",
+          "Actual embedding model/tokenizer/store/transport/tenant lifecycle and isolation/security qualification",
+          "All actual runtime/RID/minimum Framework/concurrency/endurance/resource lanes",
+          "Exact final packages and fresh package-only consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-080-source.json"
+      }
     },
     {
       "id": "FP-081",

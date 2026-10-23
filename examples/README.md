@@ -19,3 +19,5 @@ Build and run using [docs/testing.md](../docs/testing.md). The examples currentl
 `RenderPagePreview` in both language consumers renders through an explicit provider registry and returns detached raw BGRA samples with exact geometry. `PageRenderer` captures a caller-provisioned offline isolated deployment. Neither method downloads engines or claims production qualification.
 
 `AnalyzeSelectedText` in C# and VB selects one explicit source page with a caller-supplied Intelligence provider and per-job options. Remote origin authority, image authority and token/configured-cost reservations are explicit. The source consumers execute deterministic labeled adapter fixtures; qualified live model/transport and exact final-package consumers remain mandatory. See [document intelligence](../docs/document-intelligence.md).
+
+`ChunkSelectedPage` in C# and VB captures one explicitly selected source page with a finite UTF8 byte ceiling, preserving exact raw mapped text and source provenance. See [semantic chunks and retrieval](../docs/semantic-retrieval.md); full tagged semantics and exact final-package consumers remain mandatory.
