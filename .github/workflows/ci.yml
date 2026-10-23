@@ -9,7 +9,7 @@ permissions:
 jobs:
   validate:
     name: Contracts (${{ matrix.id }})
-    timeout-minutes: ${{ matrix.id == 'osx-x64' && 40 || 20 }}
+    timeout-minutes: ${{ (matrix.id == 'osx-x64' || matrix.id == 'win-x64') && 40 || 20 }}
     strategy:
       fail-fast: false
       matrix:
@@ -62,6 +62,29 @@ jobs:
       - name: Verify unqualified publication stays blocked
         shell: pwsh
         run: ./eng/test-release-block.ps1
+      - name: Prepare offline minimum-Framework source consumers
+        if: matrix.id == 'win-x64'
+        shell: pwsh
+        run: |
+          & powershell.exe -NoProfile -ExecutionPolicy Bypass -File eng/test-framework-runner.ps1 -OutputDirectory artifacts/contracts/framework-runner-regressions
+          if ($LASTEXITCODE -ne 0) { throw 'Offline launcher regressions failed.' }
+          $package = 'artifacts/microsoft.testplatform.18.11.0.nupkg'
+          Invoke-WebRequest https://api.nuget.org/v3-flatcontainer/microsoft.testplatform/18.11.0/microsoft.testplatform.18.11.0.nupkg -OutFile $package
+          ./eng/new-framework-test-bundle.ps1 -OutputDirectory artifacts/framework-source-bundle -TestPlatformPackage $package -JavaHome $env:JAVA_HOME
+          foreach ($architecture in @('x64','x86')) {
+            # Exercise the exact offline entry point with Windows PowerShell 5.1.
+            & powershell.exe -NoProfile -ExecutionPolicy Bypass -File artifacts/framework-source-bundle/run-framework-bundle.ps1 -Architecture $architecture -OutputDirectory "artifacts/contracts/offline-framework-$architecture" -WorkspaceDirectory "artifacts/framework-source-workspaces/$architecture"
+            if ($LASTEXITCODE -ne 0) { throw 'Offline Framework source consumer failed.' }
+            python eng/check-runtime-evidence.py --lane "win-$architecture-framework-current" --trx "artifacts/contracts/offline-framework-$architecture/runtime-contracts.trx" --mode source --output "artifacts/contracts/offline-framework-$architecture/runtime-identity.json"
+            if ($LASTEXITCODE -ne 0) { throw 'Offline Framework runtime identity failed.' }
+          }
+      - name: Retain offline Framework source bundle
+        if: matrix.id == 'win-x64' && success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: framework-source-bundle-win-x64
+          path: artifacts/framework-source-bundle/
+          if-no-files-found: error
       - name: Retain macOS sandbox diagnostics after a native failure
         if: failure() && runner.os == 'macOS'
         shell: bash
