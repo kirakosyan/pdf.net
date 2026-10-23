@@ -158,8 +158,9 @@ internal sealed class PdfPageControl : UserControl
 
     internal bool DispatchKey(Keys key)
     {
-        var message = Message.Create(Handle, 0x0100, new IntPtr((int)key), IntPtr.Zero);
-        return PreProcessMessage(ref message);
+        var target = ActiveControl ?? this;
+        var message = Message.Create(target.Handle, 0x0100, new IntPtr((int)key), IntPtr.Zero);
+        return target.PreProcessMessage(ref message);
     }
 
     protected override bool ProcessCmdKey(ref Message message, Keys keyData) => _text.Focused && (keyData == Keys.Home || keyData == Keys.End || keyData == Keys.PageUp || keyData == Keys.PageDown) ? base.ProcessCmdKey(ref message, keyData) : RouteKey(keyData) || base.ProcessCmdKey(ref message, keyData);

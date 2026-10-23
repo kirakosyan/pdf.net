@@ -40,6 +40,15 @@ internal static class Program
                             throw new InvalidOperationException("WinForms accessible view boundary failed.");
                         stage = "next-page";
                         await control.CommandAsync(PdfApplicationViewCommand.NextPage);
+                        stage = "captured-text-focus";
+                        if (!control.Controls.OfType<TextBox>().Single().Focus())
+                            throw new InvalidOperationException("WinForms captured text focus failed.");
+                        control.DispatchKey(Keys.Home);
+                        if (session.Viewer.State.PageIndex != 1)
+                            throw new InvalidOperationException("Captured text navigation changed the PDF page.");
+                        stage = "keyboard-focus";
+                        if (!control.Controls.OfType<FlowLayoutPanel>().Single().Controls[0].Focus())
+                            throw new InvalidOperationException("WinForms navigation focus failed.");
                         stage = "keyboard-preprocess";
                         if (control.LastDisplayedPage != 1 || control.CapturedText != "Second automation page" || !control.DispatchKey(Keys.Home))
                             throw new InvalidOperationException("WinForms navigation boundary failed.");
