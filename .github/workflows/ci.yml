@@ -73,6 +73,8 @@ jobs:
           name: framework-source-bundle-win-x64
           path: artifacts/framework-source-bundle/
           if-no-files-found: error
+          # Preserve the pinned tool package's .signature.p7s and all hashed inputs.
+          include-hidden-files: true
       - name: Execute source contracts and verify runtime identity
         shell: pwsh
         run: ./eng/test-contracts.ps1 -ExpectedArchitecture '${{ matrix.arch }}'
