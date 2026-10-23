@@ -3114,7 +3114,8 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/FP-072-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
@@ -3129,7 +3130,8 @@
           "Calibrated size/fidelity/performance/resource/security/concurrency/endurance qualification",
           "Actual minimum Framework and all provider/runtime/RID qualification",
           "Exact final package consumers and stable publication qualification"
-        ]
+        ],
+        "sourceEvidence": "docs/evidence/FP-072-source.json"
       }
     },
     {
