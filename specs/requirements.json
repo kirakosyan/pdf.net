@@ -364,7 +364,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -3162,7 +3162,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/progressive-access.md",
+        "scope": "Bounded revision-bound range access, selective page/indirect object reads, private LRU caches and explicit exact-byte independently validated linearization gates",
+        "productionQualified": false,
+        "remaining": [
+          "Qualified complete producer and independently implemented complete hint/offset validator",
+          "Broader encrypted/progressive editing/rendering integration and representative corpus coverage",
+          "Actual authenticated transport/security/concurrency/endurance/first-page latency qualification",
+          "All actual runtime/RID/minimum Framework and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-074",

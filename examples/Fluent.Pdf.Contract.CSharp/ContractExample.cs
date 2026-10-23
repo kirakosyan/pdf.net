@@ -375,4 +375,10 @@ public static class ContractExample
     public static PdfInvoiceValidation WriteInvoice(PdfInvoiceData data, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, IPdfInvoiceProducer producer, IPdfArchivalValidator archival, IPdfInvoiceValidator validator) => PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator);
     public static PdfPreflightReport InspectPreflight(Stream input) => PdfPreflight.Inspect(input);
     public static PdfOptimizationResult OptimizePdf(PdfDocumentSnapshot source) => PdfOptimization.Optimize(source);
+    public static PdfProgressivePage ReadProgressivePage(IPdfRangeSource source, int pageIndex)
+    {
+        using var document = new PdfProgressiveDocument(source);
+        return document.ReadPage(pageIndex);
+    }
+    public static PdfLinearizationValidation WriteLinearized(Stream input, Stream output, IPdfLinearizationProducer producer, IPdfLinearizationValidator validator) => PdfLinearization.Write(input, output, producer: producer, validator: validator);
 }

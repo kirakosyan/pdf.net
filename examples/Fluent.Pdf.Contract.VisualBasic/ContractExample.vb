@@ -507,4 +507,12 @@ Public Module ContractExample
     Public Function OptimizePdf(source As PdfDocumentSnapshot) As PdfOptimizationResult
         Return PdfOptimization.Optimize(source)
     End Function
+    Public Function ReadProgressivePage(source As IPdfRangeSource, pageIndex As Integer) As PdfProgressivePage
+        Using document As New PdfProgressiveDocument(source)
+            Return document.ReadPage(pageIndex)
+        End Using
+    End Function
+    Public Function WriteLinearized(input As Stream, output As Stream, producer As IPdfLinearizationProducer, validator As IPdfLinearizationValidator) As PdfLinearizationValidation
+        Return PdfLinearization.Write(input, output, producer:=producer, validator:=validator)
+    End Function
 End Module

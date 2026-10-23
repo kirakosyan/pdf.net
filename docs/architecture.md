@@ -156,3 +156,5 @@ The optional Formats assembly depends only on the managed core. Its original bou
 Exact-byte PDF/X/PDF/E/invoice gates and passive engineering/preflight contracts live in the managed core. Full producers/independent validators remain explicit caller-owned integrations; contract fixtures do not qualify standards. Shared flow, image, vector and ZIP/XML helpers avoid nested operation roots across the source format profiles.
 
 Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](optimization.md).
+
+Bounded revision-bound range sessions, selective page/object access, private LRU caches and independently gated linearized output now have a source implementation. Complete hint/producer/transport/corpus/runtime/final-package qualification remains mandatory; see [progressive access](progressive-access.md).

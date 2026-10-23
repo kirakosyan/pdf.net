@@ -219,3 +219,5 @@ Immutable invoice currency/rounding calculations, synchronized CII/readable tota
 Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](preflight.md).
 
 Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](optimization.md).
+
+Bounded revision-bound range sessions, selective page/object access, private LRU caches and independently gated linearized output now have a source implementation. Complete hint/producer/transport/corpus/runtime/final-package qualification remains mandatory; see [progressive access](progressive-access.md).
