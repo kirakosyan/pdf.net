@@ -182,3 +182,5 @@ The remaining queue is tracked in draft [PR #121](https://github.com/kirakosyan/
 [#83 barcode source implementation](barcodes.md) and [exact evidence](evidence/FP-078-source.json) are recorded in draft PR #121. The next assignment is #84; original full production gates and incomplete feature qualifications remain open.
 
 [#84 optional intelligence adapters](document-intelligence.md) and [source evidence](evidence/FP-079-source.json) are recorded in draft PR #121. Source CI run137 passed all six hosts for the preceding #81–#83 checkpoint. The next assignment is #85. Every complete feature/production gate remains mandatory.
+
+[#85 explicit semantic chunks and scoped retrieval](semantic-retrieval.md) and [source evidence](evidence/FP-080-source.json) are recorded in draft PR #121. Source CI run138 passed all six hosts for the preceding #81–#84 checkpoint. The next assignment is #86. Complete tagged semantics, actual model/store/relevance/security/runtime/final-package and all original production gates remain mandatory.

@@ -590,5 +590,57 @@
     "/workspace/.tools/intelligence-validators/bin/python -O eng/verify-intelligence-fixtures.py artifacts/contracts/remaining/intelligence/fixtures-net10 artifacts/contracts/remaining/intelligence/clean-independent",
     "pwsh -NoProfile -File eng/validate-spec.ps1",
     "pwsh -NoProfile -File eng/test-release-block.ps1"
-  ]
+  ],
+  "subsequentSourceHostObservation": {
+    "sourceCommit": "786bfb8224ec882313c5f36bcd366011087283ac",
+    "workflowRun": 39966385504,
+    "url": "https://github.com/kirakosyan/pdf.net/actions/runs/39966385504",
+    "jobs": [
+      {
+        "id": 120457230867,
+        "name": "Contracts (linux-x64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120457231174,
+        "name": "Contracts (osx-arm64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120457231188,
+        "name": "Contracts (win-arm64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120457231370,
+        "name": "Contracts (linux-arm64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120457231462,
+        "name": "Contracts (win-x64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 120457231539,
+        "name": "Contracts (osx-x64)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "windowsObservedTestSummaries": [
+      "2026-10-23T14:10:05.0856326Z Passed!  - Failed:     0, Passed:  1694, Skipped:     0, Total:  1694, Duration: 1 m 21 s - Fluent.Pdf.Contract.Tests.dll (net8.0)",
+      "2026-10-23T14:11:25.2765903Z Passed!  - Failed:     0, Passed:  1694, Skipped:     0, Total:  1694, Duration: 1 m 17 s - Fluent.Pdf.Contract.Tests.dll (net10.0)",
+      "2026-10-23T14:13:59.6218485Z Passed!  - Failed:     0, Passed:  1694, Skipped:     0, Total:  1694, Duration: 2 m 25 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+      "2026-10-23T14:15:48.1616168Z Passed!  - Failed:     0, Passed:  1694, Skipped:     0, Total:  1694, Duration: 1 m 31 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+      "2026-10-23T14:17:36.9482135Z Passed!  - Failed:     0, Passed:  1694, Skipped:     0, Total:  1694, Duration: 1 m 35 s - Fluent.Pdf.Contract.Tests.dll (net10.0)"
+    ],
+    "productionQualified": false,
+    "scope": "Six actual source CI hosts; Windows source logs show1694 cases per modern/current Framework/fallback lane. This does not qualify minimum Framework, live models, complete corpus or final packages."
+  }
 }
