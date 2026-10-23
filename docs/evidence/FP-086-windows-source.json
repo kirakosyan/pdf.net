@@ -10,32 +10,44 @@
     {
       "path": "eng/run-framework-contracts.ps1",
       "bytes": 8298,
-      "sha256": "1760298b954de8d85000b87ba5a3e3dc3c8bc6df83179a0fd0edcf1d87313d2f"
+      "sha256": "1760298b954de8d85000b87ba5a3e3dc3c8bc6df83179a0fd0edcf1d87313d2f",
+      "gitBlobSha256": "1760298b954de8d85000b87ba5a3e3dc3c8bc6df83179a0fd0edcf1d87313d2f",
+      "checkoutBytesEqualGitBlob": true
     },
     {
       "path": "eng/run-framework-bundle.ps1",
       "bytes": 3902,
-      "sha256": "99cf16de2d701c5c50eee4fc608e968d8b4c655d4e759fe3e3187765df1f43a0"
+      "sha256": "99cf16de2d701c5c50eee4fc608e968d8b4c655d4e759fe3e3187765df1f43a0",
+      "gitBlobSha256": "99cf16de2d701c5c50eee4fc608e968d8b4c655d4e759fe3e3187765df1f43a0",
+      "checkoutBytesEqualGitBlob": true
     },
     {
       "path": "eng/new-framework-test-bundle.ps1",
       "bytes": 4170,
-      "sha256": "e5697a5f688f4c9b7ed3f95eea5e93838d5c3cb1c97e152c32240b01e8ba1461"
+      "sha256": "e5697a5f688f4c9b7ed3f95eea5e93838d5c3cb1c97e152c32240b01e8ba1461",
+      "gitBlobSha256": "e5697a5f688f4c9b7ed3f95eea5e93838d5c3cb1c97e152c32240b01e8ba1461",
+      "checkoutBytesEqualGitBlob": true
     },
     {
       "path": "eng/test-framework-runner.ps1",
       "bytes": 8477,
-      "sha256": "faea64d9a417c7cca8fe433d00de4a4269bce65034d32b99ce791a51c6fea2e0"
+      "sha256": "faea64d9a417c7cca8fe433d00de4a4269bce65034d32b99ce791a51c6fea2e0",
+      "gitBlobSha256": "faea64d9a417c7cca8fe433d00de4a4269bce65034d32b99ce791a51c6fea2e0",
+      "checkoutBytesEqualGitBlob": true
     },
     {
       "path": "eng/test-contracts.ps1",
       "bytes": 7902,
-      "sha256": "b24db40b2bbf5f6b7c59decd55258d27b535c3b647ba5e3782465f8852207d9e"
+      "sha256": "b24db40b2bbf5f6b7c59decd55258d27b535c3b647ba5e3782465f8852207d9e",
+      "gitBlobSha256": "b24db40b2bbf5f6b7c59decd55258d27b535c3b647ba5e3782465f8852207d9e",
+      "checkoutBytesEqualGitBlob": true
     },
     {
       "path": ".github/workflows/ci.yml",
       "bytes": 5730,
-      "sha256": "a0762f021e3b8d515e24a5e017a04c2ac5c72616d69feb9eabee6cb5908a079f"
+      "sha256": "a0762f021e3b8d515e24a5e017a04c2ac5c72616d69feb9eabee6cb5908a079f",
+      "gitBlobSha256": "494f443b3eff131af3d9c8e2f0a9f43db849445d534cf9d912d82e50aabbc8bc",
+      "checkoutBytesEqualGitBlob": false
     }
   ],
   "localCurrentFramework": [
