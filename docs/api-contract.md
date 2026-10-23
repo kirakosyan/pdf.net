@@ -229,3 +229,5 @@ Explicit six-task model adapters, selected source capture, remote/image authorit
 Explicit raw-source chunk coverage, table-aware boundaries, pinned embedding dimensions/versions and tenant/document/revision/ACL-bound cosine retrieval now have a source implementation in the optional Intelligence assembly. Full tagged semantics, real model/store/relevance/security/runtime/final-package qualification remains mandatory; see [semantic chunks and retrieval](semantic-retrieval.md).
 
 A separate frozen Windows automation facade, finite owned sessions, explicit marshaling, redacted HRESULTs and bitness-aware registration now have a source implementation. Actual COM activation and complete Windows/Framework/apartment/installer/final-package qualification are recorded separately; see [Windows automation](windows-automation.md).
+
+An optional toolkit-independent controller and WinForms/WPF/ASP.NET browser samples now use shared private viewing sessions with explicit keyboard, accessibility, generation and cancellation contracts. Full host/fidelity/assistive-technology/final-package qualification remains mandatory; see [application views](application-views.md).

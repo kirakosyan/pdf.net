@@ -235,6 +235,12 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.applications": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.automation": {
         "type": "Project",
         "dependencies": {
@@ -519,6 +525,12 @@
       "fluent.pdf": {
         "type": "Project"
       },
+      "fluent.pdf.applications": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.automation": {
         "type": "Project",
         "dependencies": {
@@ -667,6 +679,12 @@
       },
       "fluent.pdf": {
         "type": "Project"
+      },
+      "fluent.pdf.applications": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
       },
       "fluent.pdf.automation": {
         "type": "Project",
@@ -842,6 +860,12 @@
       },
       "fluent.pdf": {
         "type": "Project"
+      },
+      "fluent.pdf.applications": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
       },
       "fluent.pdf.automation": {
         "type": "Project",

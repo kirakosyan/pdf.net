@@ -4,6 +4,9 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function ApplicationViewer(source As PdfDocumentSnapshot, renderer As PdfProviderRegistry) As Fluent.Pdf.Applications.PdfApplicationViewer
+        Return New Fluent.Pdf.Applications.PdfApplicationViewer(source, renderer)
+    End Function
     Public Function GenerateData(rows As System.Collections.Generic.IEnumerable(Of String), layout As PdfFlowOptions, style As PdfFlowTextStyle, providers As PdfProviderRegistry) As PdfDocument
         Dim template = New PdfGenerationTemplate(Of String)("sample-data", Sub(context, row) context.Paragraph(row, style))
         Return PdfDataGeneration.Generate(rows, template, New PdfGenerationOptions(layout, ""), providers)

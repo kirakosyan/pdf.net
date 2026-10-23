@@ -3556,7 +3556,17 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/application-views.md",
+        "scope": "Private bounded toolkit-independent application controller, real WinForms/WPF sample controls and explicit loopback ASP.NET browser sample with keyboard/accessibility/cancellation contracts",
+        "productionQualified": false,
+        "remaining": [
+          "Actual minimum runtimes and complete Windows/Linux/macOS/architecture/browser/native renderer/print qualification",
+          "Manual screen-reader, DPI, high contrast, localization, malformed-content and endurance qualification",
+          "Exact final packages and fresh package-only consumers"
+        ]
+      }
     },
     {
       "id": "FP-083",

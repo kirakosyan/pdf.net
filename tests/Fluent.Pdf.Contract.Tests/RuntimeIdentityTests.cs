@@ -38,6 +38,7 @@ public sealed class RuntimeIdentityTests
         Assert.Equal(expected,typeof(Fluent.Pdf.Formats.PdfConversions).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
         Assert.Equal(expected,typeof(Fluent.Pdf.Intelligence.PdfDocumentIntelligence).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
         Assert.Equal(expected,typeof(Fluent.Pdf.Automation.PdfAutomation).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
+        Assert.Equal(expected,typeof(Fluent.Pdf.Applications.PdfApplicationViewer).Assembly.GetCustomAttribute<TargetFrameworkAttribute>()!.FrameworkName);
         var expectedArchitecture = Environment.GetEnvironmentVariable("FLUENT_PDF_EXPECTED_ARCH");
         if (!string.IsNullOrEmpty(expectedArchitecture))
             Assert.Equal(expectedArchitecture, RuntimeInformation.ProcessArchitecture.ToString(), ignoreCase: true);

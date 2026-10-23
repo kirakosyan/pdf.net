@@ -5,6 +5,7 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static Fluent.Pdf.Applications.PdfApplicationViewer ApplicationViewer(PdfDocumentSnapshot source, PdfProviderRegistry renderer) => new(source, renderer);
     public static PdfDocument GenerateData(IEnumerable<string> rows, PdfFlowOptions layout, PdfFlowTextStyle style, PdfProviderRegistry providers)
     {
         var template = new PdfGenerationTemplate<string>("sample-data", (context, row) => context.Paragraph(row, style));
