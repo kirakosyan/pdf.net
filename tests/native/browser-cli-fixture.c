@@ -25,7 +25,18 @@ static void pause_forever(void) {
 }
 static void trace(const char *command,const char *identity) {
     FILE *file=fopen("../peer.trace","ab");
-    if(file!=NULL) { fprintf(file,"%s %s\n",command,identity); fclose(file); }
+    if(file!=NULL) {
+        fprintf(file,"%s %s\n",command,identity); fflush(file);
+        /* Hold the flushed start marker open to make the shared-reader race deterministic. */
+        if(strcmp(command,"start")==0 && strlen(identity)==64 && identity[48]=='2') {
+#ifdef _WIN32
+            Sleep(250);
+#else
+            struct timespec t={0,250000000}; nanosleep(&t,NULL);
+#endif
+        }
+        fclose(file);
+    }
 }
 int main(int argc,char **argv) {
     int i, denied=0, pids=64;

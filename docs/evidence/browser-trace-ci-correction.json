@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    "FP-110",
+    "FP-046"
+  ],
+  "issues": [
+    110,
+    34
+  ],
+  "sourceParent": "fc031032a32064c0b590646b4017f39f974993ac",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "sourceProgress": "windows-arm-source-fixture-trace-sharing-correction",
+  "failedHead": "e4d8ec7efb13b442d1dc0d6ac276b659f2826a83",
+  "failedRun": 40129798928,
+  "failedJob": 120978884773,
+  "failedRuntime": ".NET10 Windows ARM64",
+  "failure": "The default trace reader denied an overlapping native append. The observer faulted before requesting cancellation.",
+  "correction": "Explicit ReadWrite/Delete file sharing, a dedicated joined observer and cancellation in finally. The peer flushes and holds the start marker open for250ms to make the overlap deterministic.",
+  "phaseAndCleanupDeadlineSeconds": 5,
+  "deadlinesWidened": false,
+  "sourceFiles": [
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ChromiumContainerTests.cs",
+      "sha256": "2f83c657f0d26f2d367bf82b51b5ddcdd8db9829f83afaf2db6060ab3e747edd"
+    },
+    {
+      "path": "tests/native/browser-cli-fixture.c",
+      "sha256": "094dd21fdfda376b00e63589f3b37639f40b5a499b9b6e0dcbe3a04deaedf625"
+    },
+    {
+      "path": "docs/browser-container.md",
+      "sha256": "e17429939dba113aeaedb050269f9727fecbbdec73faf2b37071ba2dfc2416a3"
+    }
+  ],
+  "selectedTests": {
+    "profiles": 5,
+    "perProfile": 12,
+    "total": 60,
+    "failed": 0,
+    "skipped": 0
+  },
+  "reports": [
+    {
+      "path": "artifacts/browser-trace-fix/framework-x64/contracts.trx",
+      "sha256": "56af9f632e5463a4e1dc37e76d2a0dc69238664ad7e1e6c56b4651ef5048865a",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "artifacts/browser-trace-fix/framework-x86/contracts.trx",
+      "sha256": "dd10b618d33f3b21e9d229116e48115a245201e56287a6d903ed92670eb70d97",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "artifacts/browser-trace-fix/net10/contracts.trx",
+      "sha256": "a6b2dd483fd22d567d23b5927dfb1655536daca4e007d1d6d3a9f5c93cd5a30e",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "artifacts/browser-trace-fix/net8/contracts.trx",
+      "sha256": "225f615fe68344e62a56f2f6974609ef9e2152dd74bb9e59a32f988e282e5f5a",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "artifacts/browser-trace-fix/netstandard/contracts.trx",
+      "sha256": "8b76aeaeed3833b07f4c65c24200c160820a1fa85eacd8621e4b34a14cdf84d4",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "archive": {
+    "path": "artifacts/browser-trace-ci-correction-evidence.zip",
+    "sha256": "593247b42cf7a03df8c7e5a258e464008a80eb9ae6e797119b7b8935ca7ddb13",
+    "bytes": 19649788,
+    "verifiedEntries": 22
+  },
+  "pending": [
+    "Final Windows ARM and complete exact-head source CI verification",
+    "All mandatory qualification remains separate; issue93 stays user-skipped and release-blocking"
+  ]
+}

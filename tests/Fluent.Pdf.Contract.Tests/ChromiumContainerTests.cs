@@ -125,17 +125,28 @@ public sealed class ChromiumContainerTests
     public async Task CancellationBeforeAndAfterCreationAcknowledgementPreservesItsExactReconciliationBoundary(char mode,string phase,bool uncertain)
     {
         var f=new Fixture();using var cancel=new CancellationTokenSource();
-        var watcher=Task.Run(()=>
+        var watcher=Task.Factory.StartNew(()=>
         {
-            var clock=Stopwatch.StartNew();
-            while(clock.Elapsed<TimeSpan.FromSeconds(5))
+            try
             {
-                string path=Path.Combine(f.Root,"peer.trace");
-                if(File.Exists(path)&&File.ReadAllText(path).Contains(phase)){cancel.Cancel();return;}
-                Thread.Sleep(10);
+                var clock=Stopwatch.StartNew();
+                while(clock.Elapsed<TimeSpan.FromSeconds(5))
+                {
+                    string path=Path.Combine(f.Root,"peer.trace");
+                    if(File.Exists(path))
+                    {
+                        using var input=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.ReadWrite|FileShare.Delete);
+                        Assert.True(input.Length<=4096);
+                        using var reader=new StreamReader(input);
+                        string snapshot=reader.ReadToEnd();
+                        if(snapshot.EndsWith("\n",StringComparison.Ordinal)&&snapshot.Contains(phase))return;
+                    }
+                    Thread.Sleep(10);
+                }
+                throw new TimeoutException("Original process peer did not reach its phase.");
             }
-            cancel.Cancel();throw new TimeoutException("Original process peer did not reach its phase.");
-        });
+            finally { cancel.Cancel(); }
+        },CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
         var elapsed=Stopwatch.StartNew();
         OperationCanceledException failure;
         try
