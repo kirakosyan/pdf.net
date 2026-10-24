@@ -3807,7 +3807,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/performance.md",
+        "scope": "Reproducible bounded eager read/write source calibration, original hash-pinned corpus, warm/cold process metrics, retained-sample verification and reviewed regression envelopes enforced by the release gate",
+        "productionQualified": false,
+        "sourceEvidence": "docs/evidence/FP-088-source.json",
+        "remaining": [
+          "Reviewed hardware/corpus and absolute resource envelopes for full managed/range/rendering/HTML/conversion/OCR workloads",
+          "Actual minimum Framework, all native/provider/runtime/package performance lanes and eight-hour endurance",
+          "Complete streaming/spill/provider memory qualification; source eager benchmarks do not claim constant-memory access"
+        ]
+      }
     },
     {
       "id": "FP-089",

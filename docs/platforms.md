@@ -153,3 +153,5 @@ Original QR/Code128B generation with mandatory independent decoding, explicit pa
 Explicit six-task model adapters, selected source capture, remote/image authority, token/configured-cost reservations and schema/citation validation now have a source implementation in the optional Intelligence assembly. Full model/transport/security/quality/runtime/final-package qualification remains mandatory; see [document intelligence](document-intelligence.md).
 
 FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).
+
+FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](performance.md).

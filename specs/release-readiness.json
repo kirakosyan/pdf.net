@@ -35,6 +35,7 @@
     "security",
     "resource-limits",
     "concurrency",
+    "performance",
     "consumer"
   ],
   "publicationBlockedReasons": [

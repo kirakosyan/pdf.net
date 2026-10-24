@@ -174,3 +174,5 @@ An optional modern CLI now consumes the public SDK with separate data/diagnostic
 The [developer guide](developer-guide.md) now links a versioned generated source API reference, explicit provider/platform prerequisites and real C#/VB-backed recipe applications. Narrative fragments and published-package qualification remain explicitly distinct.
 
 FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).
+
+FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](performance.md).

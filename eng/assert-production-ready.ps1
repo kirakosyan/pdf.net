@@ -47,6 +47,12 @@ foreach ($requiredLane in $readiness.requiredLanes) {
         $s = $suite[0]
         if ($s.total -le 0 -or $s.passed -ne $s.total -or $s.failed -ne 0 -or $s.skipped -ne 0) { throw "Incomplete or failing suite $($requiredSuite): $requiredLane" }
         Assert-HashedFile $evidenceRoot $s.reportPath $s.sha256
+        if ($requiredSuite -ceq 'performance') {
+            Assert-HashedFile $evidenceRoot $s.baselinePath $s.baselineSha256
+            $python = if ($IsWindows) { 'python' } else { 'python3' }
+            & $python (Join-Path $PSScriptRoot 'performance.py') check --report (Join-Path $evidenceRoot $s.reportPath) --baseline (Join-Path $evidenceRoot $s.baselinePath) --production --source-commit $commit --lane $requiredLane --stage $expectedStage
+            if ($LASTEXITCODE -ne 0) { throw "Performance regression, incomplete workload or invalid baseline: $requiredLane" }
+        }
     }
 }
 $requirementIds = @($evidence.requirements | ForEach-Object { $_.id })

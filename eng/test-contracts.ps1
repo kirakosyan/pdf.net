@@ -13,6 +13,8 @@ $previousArchitecture = $env:FLUENT_PDF_EXPECTED_ARCH
 $python = if ($IsWindows) { 'python' } else { 'python3' }
 & $python (Join-Path $root 'eng/test-runtime-evidence.py')
 if ($LASTEXITCODE -ne 0) { throw 'Runtime evidence checker boundary tests failed.' }
+& $python (Join-Path $root 'eng/test-performance.py')
+if ($LASTEXITCODE -ne 0) { throw 'Performance envelope/evidence boundary tests failed.' }
 function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [bool]$fallback = $false) {
     $env:FLUENT_PDF_EXPECTED_ARCH = $architecture
     $directory = Join-Path $resultsRoot $name

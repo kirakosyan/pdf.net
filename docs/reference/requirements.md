@@ -91,7 +91,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-085 Native provider deployment and isolation](../requirements/FP-085.md) | Required | implemented | Full source/qualification pending |
 | [FP-086 Runtime and architecture qualification](../requirements/FP-086.md) | Required | planned | [Declared source profile](../runtime-qualification.md) |
 | [FP-087 Async processing, concurrency and cancellation](../requirements/FP-087.md) | Required | planned | [Declared source profile](../async-processing.md) |
-| [FP-088 Performance, streaming and resource envelopes](../requirements/FP-088.md) | Required | planned | Full source/qualification pending |
+| [FP-088 Performance, streaming and resource envelopes](../requirements/FP-088.md) | Required | planned | [Declared source profile](../performance.md) |
 | [FP-089 Security, fuzzing and malformed-content robustness](../requirements/FP-089.md) | Required | planned | Full source/qualification pending |
 | [FP-090 Independent fidelity and interoperability corpus](../requirements/FP-090.md) | Required | planned | Full source/qualification pending |
 | [FP-091 Deterministic output, caching and tenancy](../requirements/FP-091.md) | Required | planned | Full source/qualification pending |

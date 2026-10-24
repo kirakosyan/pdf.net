@@ -290,5 +290,60 @@
     "path": "artifacts/fp087-source-evidence.zip",
     "bytes": 2536553,
     "sha256": "825fa61d13c0e010c02d50cf0217786e98050f767542c3824562229325facb8e"
+  },
+  "finalHostedSourceCi": {
+    "commit": "de946449f266fe4446ccdc84a650c8e621331221",
+    "workflow_runs": [
+      {
+        "id": 40033103043,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 27,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103043/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103043/logs",
+        "workflow_id": 394222479
+      },
+      {
+        "id": 40033103033,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 23,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103033/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103033/logs",
+        "workflow_id": 394289497
+      },
+      {
+        "id": 40033102924,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 18,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033102924/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033102924/logs",
+        "workflow_id": 394350116
+      },
+      {
+        "id": 40033103076,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 15,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103076/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103076/logs",
+        "workflow_id": 394397543
+      },
+      {
+        "id": 40033103252,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 169,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103252/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103252/logs",
+        "workflow_id": 387959272
+      }
+    ]
   }
 }

@@ -162,3 +162,5 @@ The [developer guide](docs/developer-guide.md) now links a versioned generated s
 The [runtime evidence tooling](docs/runtime-qualification.md) records actual process/core-library/Framework-registry/loaded SDK identities against the unchanged 22-lane matrix, with strict test and exact-package consistency checks. A Windows Docker preflight launcher can probe an explicitly resolved candidate image. Actual minimum-runtime hosts, complete package consumers and production qualification remain mandatory; see [source evidence](docs/evidence/FP-086-source.json).
 
 FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](docs/async-processing.md).
+
+FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](docs/performance.md).
