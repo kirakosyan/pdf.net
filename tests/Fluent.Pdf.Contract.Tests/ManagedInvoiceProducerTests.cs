@@ -8,7 +8,7 @@ namespace Fluent.Pdf.Contract.Tests;
 
 public sealed class ManagedInvoiceProducerTests
 {
-    private static PdfInvoiceData Data(string currency = "EUR") => new(PdfInvoiceProfile.FacturX107Minimum, "INV-1", "Seller & Co", "Buyer <One>", new DateTimeOffset(2026, 10, 24, 0, 0, 0, TimeSpan.Zero), currency, MidpointRounding.AwayFromZero, new[] { new PdfInvoiceLine("Original item", 1, 1.005m, 20), new PdfInvoiceLine("Second item", 2, 3m, 5) });
+    private static PdfInvoiceData Data(string currency = "EUR") => new PdfInvoiceData(PdfInvoiceProfile.FacturX107Minimum, "INV-1", "Seller & Co", "Buyer <One>", new DateTimeOffset(2026, 10, 24, 0, 0, 0, TimeSpan.Zero), currency, MidpointRounding.AwayFromZero, new[] { new PdfInvoiceLine("Original item", 1, currency == "BHD" ? 1m : 1.005m, 20), new PdfInvoiceLine("Second item", 2, 3m, 5) }).WithSellerRegistration("Original-seller-01", "FR");
     private static readonly PdfFlowOptions Layout = new(new(new(new(0, 0, 500, 700))), PdfMargins.Uniform(20));
     private static PdfFlowTextStyle Body() => new(new(TextTests.Read("business.ttf")), 10);
     private static PdfProviderRegistry Providers() => new(ManagedPdfProvider.Instance, new PdfSimpleTextShaper());

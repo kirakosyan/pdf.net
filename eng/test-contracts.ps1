@@ -41,6 +41,11 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
             Copy-Item -LiteralPath (Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/invoice-producer/$fixture$extension") -Destination $invoiceEvidence
         }
     }
+    $validatedInvoiceEvidence = Join-Path $directory 'validated-invoices'
+    $null = [IO.Directory]::CreateDirectory($validatedInvoiceEvidence)
+    foreach ($fixture in @('EUR','JPY','BHD','EUR-csharp','EUR-visual-basic')) {
+        Copy-Item -LiteralPath (Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/validated-invoices/$fixture.pdf") -Destination $validatedInvoiceEvidence
+    }
     $report = [xml](Get-Content -LiteralPath $reportPath -Raw)
     $counters = $report.TestRun.ResultSummary.Counters
     if ([int]$counters.total -le 0 -or [int]$counters.passed -ne [int]$counters.total -or

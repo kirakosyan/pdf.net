@@ -23,6 +23,7 @@ $tests = Join-Path $root 'tests/Fluent.Pdf.Contract.Tests/bin/Release/net472'
 $native = Join-Path $root 'artifacts/native-fixtures'
 $browserCli = Join-Path $root 'artifacts/browser-cli-fixture'
 $archival = Join-Path $root 'artifacts/archival-fixtures'
+$invoice = Join-Path $root 'artifacts/invoice-fixtures'
 foreach ($path in @((Join-Path $tests 'Fluent.Pdf.Contract.Tests.dll'),(Join-Path $java 'bin/java.exe'),(Join-Path $native 'win-x64/worker.exe'),(Join-Path $native 'win-x86/worker.exe'),(Join-Path $archival 'greenfield-apps-1.28.2.jar'))) {
     if (!(Test-Path -LiteralPath $path -PathType Leaf)) { throw "Build/provision the complete source prerequisites first: $path" }
 }
@@ -40,10 +41,26 @@ foreach ($deployment in $nativeEvidence.deployments) {
     }
 }
 if ((Get-FileHash -LiteralPath (Join-Path $archival 'greenfield-apps-1.28.2.jar')).Hash -ine '687d4d8bcfec48c9f7e931cf78ed061f1eeccfba55d4cdc000ba9b4d8aa46ce6') { throw 'Independent validator digest mismatch.' }
+$invoiceEvidence = Get-Content -LiteralPath (Join-Path $invoice 'manifest.json') -Raw | ConvertFrom-Json
+if ($invoiceEvidence.sourceCommit -cne $commit -or $invoiceEvidence.workingTreeDirty -or
+    $invoiceEvidence.hostSourceSha256 -ine (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'InvoiceValidatorHost/InvoiceValidationHost.java')).Hash -or
+    $invoiceEvidence.catalogSha256 -ine (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'format-checks/invoice-107.json')).Hash) { throw 'Invoice host source binding differs from this clean commit.' }
+foreach ($file in $invoiceEvidence.files) {
+    if ([IO.Path]::IsPathRooted($file.path) -or $file.path.Contains('..') -or
+        (Get-FileHash -LiteralPath (Join-Path $invoice $file.path)).Hash -ine $file.sha256) { throw 'Independent invoice host asset identity changed.' }
+}
 $null = [IO.Directory]::CreateDirectory($destination)
 Copy-Item -LiteralPath $tests -Destination (Join-Path $destination 'tests') -Recurse
 $null = [IO.Directory]::CreateDirectory((Join-Path $destination 'artifacts'))
 Copy-Item -LiteralPath $native,$archival -Destination (Join-Path $destination 'artifacts') -Recurse
+$invoiceDestination=Join-Path $destination 'artifacts/invoice-fixtures'
+$null=[IO.Directory]::CreateDirectory($invoiceDestination)
+Copy-Item -LiteralPath (Join-Path $invoice 'manifest.json') -Destination $invoiceDestination
+foreach ($file in $invoiceEvidence.files) {
+    $target=Join-Path $invoiceDestination $file.path
+    $null=[IO.Directory]::CreateDirectory((Split-Path $target -Parent))
+    Copy-Item -LiteralPath (Join-Path $invoice $file.path) -Destination $target
+}
 $browserDestination=Join-Path $destination 'artifacts/browser-cli-fixture'
 $null=[IO.Directory]::CreateDirectory($browserDestination)
 Copy-Item -LiteralPath (Join-Path $browserCli 'manifest.json') -Destination $browserDestination

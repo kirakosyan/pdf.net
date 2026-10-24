@@ -7,7 +7,7 @@ from pypdf import PdfReader
 
 
 def verify(directory):
-    expected = {"EUR-direct": ("EUR", "7.01", "0.50", "7.51"), "JPY-direct": ("JPY", "7", "0", "7"), "BHD-direct": ("BHD", "7.005", "0.501", "7.506"), "EUR-csharp": ("EUR", "7.01", "0.50", "7.51"), "EUR-visual-basic": ("EUR", "7.01", "0.50", "7.51")}
+    expected = {"EUR-direct": ("EUR", "7.01", "0.50", "7.51"), "JPY-direct": ("JPY", "7", "0", "7"), "BHD-direct": ("BHD", "7.00", "0.50", "7.50"), "EUR-csharp": ("EUR", "7.01", "0.50", "7.51"), "EUR-visual-basic": ("EUR", "7.01", "0.50", "7.51")}
     records = []
     for name, (currency, net, tax, gross) in expected.items():
         pdf, xml = directory / (name + ".pdf"), directory / (name + ".xml")
@@ -32,7 +32,7 @@ def verify(directory):
             assert len(found) == 1 and found[0].text == expected_value
         with fitz.open(pdf) as doc:
             text = "\n".join(page.get_text() for page in doc)
-            assert all(v + " " + currency in text for v in (net, tax, gross))
+            assert all((v + "0" if currency == "BHD" else v) + " " + currency in text for v in (net, tax, gross))
             assert doc.embfile_names() == ["factur-x.xml"] and doc.embfile_get("factur-x.xml") == xml.read_bytes()
             assert len(doc) == len(reader.pages) > 0
         records.append({"fixture": name, "pdfSha256": hashlib.sha256(pdf.read_bytes()).hexdigest(), "xmlSha256": hashlib.sha256(xml.read_bytes()).hexdigest(), "pages": len(reader.pages)})

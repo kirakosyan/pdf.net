@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "purpose": "explicit-exact-edition-independent-source-validator-assets-not-SDK-redistribution-or-production-qualification",
+  "edition": "Factur-X1.0.07-MINIMUM",
+  "sourceCommit": "eab967abfa4e42a66bfd98fd2fd6e543bb87ac71",
+  "sourceTag": "core-2.14.2",
+  "ruleBundleSha256": "711f08a9dab037032c8ddafcf0dd2bdb0ee80f7beec152e93a3289f7e49bee77",
+  "schemaRuleAssertions": 54,
+  "schemaRuleReports": 11,
+  "engine": {
+    "artifact": "Mustang-CLI-2.26.0.jar",
+    "version": "2.26.0",
+    "sha256": "42d7868cb68264874a7b8cab4c3587b03b23ccc7cd72373da917f66758bb9736",
+    "bytes": 59163641,
+    "pdfBoxVersion": "3.0.8",
+    "saxonVersion": "12.10",
+    "usesDefaultLatestInvoiceRules": false
+  },
+  "files": [
+    {
+      "name": "FACTUR-X_MINIMUM.sch",
+      "bytes": 20357,
+      "sha256": "0efd521bc52b734c344ddc17e9ef2a69b7f600639b903021871859ca8931a148",
+      "gitBlob": "82fde99f9dcea52ddeb3ea60e7ad47f2c5feab17",
+      "sourcePath": "validator/src/main/resources/schematron/ZF_230/FACTUR-X_MINIMUM.sch"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM.xsd",
+      "bytes": 1605,
+      "sha256": "fd3b2d1a850d2dcab9d5eda7749e66f6ad031c9b0a3866494d85f88012c5171c",
+      "gitBlob": "f52e628d39dae72307cb9e8487fa71ca8a6d6b03",
+      "sourcePath": "validator/src/main/resources/schema/ZF_230/MINIMUM/FACTUR-X_MINIMUM.xsd"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM.xslt",
+      "bytes": 84214,
+      "sha256": "2b96e354873ce19c25e6fcc71ceb655a80d0a0fbaa1ab7f16c24489c5e7e209b",
+      "gitBlob": "39e52c861d25a953328aee39e04c00bfe7ed9c0c",
+      "sourcePath": "validator/src/main/resources/xslt/ZF_230/FACTUR-X_MINIMUM.xslt"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM_codedb.xml",
+      "bytes": 27825,
+      "sha256": "e00a34bd04288aabe23b3f831b86d0fe51fd9beafb65fc98bce50e3f66c67eb7",
+      "gitBlob": "74a7b49c5e843a8149775135ebd2041b99e6da15",
+      "sourcePath": "validator/src/main/resources/xslt/ZF_230/FACTUR-X_MINIMUM_codedb.xml"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_QualifiedDataType_100.xsd",
+      "bytes": 1107,
+      "sha256": "c65c4929cb6f51d59aec498851a9026f0a915555555b1c3e5eafd99f191be5f5",
+      "gitBlob": "b842378b3099d47be13132a8f0a8eb042292363b",
+      "sourcePath": "validator/src/main/resources/schema/ZF_230/MINIMUM/FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_QualifiedDataType_100.xsd"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_ReusableAggregateBusinessInformationEntity_100.xsd",
+      "bytes": 4376,
+      "sha256": "bbec5def7921c02fddb531b4aa527dd9db56d37c5109b66ff7bdeeea652d40b5",
+      "gitBlob": "8fad95eda0098e7300c14e53ee5d472fec2d82b4",
+      "sourcePath": "validator/src/main/resources/schema/ZF_230/MINIMUM/FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_ReusableAggregateBusinessInformationEntity_100.xsd"
+    },
+    {
+      "name": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_100.xsd",
+      "bytes": 1306,
+      "sha256": "43042860a12cc9921df64486de7238756d382b7d92acdea1a4df25483c757dd4",
+      "gitBlob": "bb7ccb2fb2646896f685eb87a9f8b69ebb6c3a96",
+      "sourcePath": "validator/src/main/resources/schema/ZF_230/MINIMUM/FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_100.xsd"
+    },
+    {
+      "name": "LICENSE",
+      "bytes": 18096,
+      "sha256": "ba98dd76bda1e82034791438bb931145f85e5db3975852a015344ad5990fa21b",
+      "gitBlob": "d4ecc70313429fa2e1d19f25e6869adf5e1c2e0f",
+      "sourcePath": "LICENSE"
+    },
+    {
+      "name": "NOTICE",
+      "bytes": 1990,
+      "sha256": "4730c8f82436984caec13d8d865850bb6aca9ad3f94a68b3f6bbeb1a87c3bec2",
+      "gitBlob": "2292b99c9c05cfa430251ac742ae662158c290f6",
+      "sourcePath": "NOTICE"
+    }
+  ],
+  "limits": {
+    "pdfBytes": 67108864,
+    "xmlBytes": 1048576,
+    "modelBytes": 16777216,
+    "reportBytes": 4194304,
+    "javaHeapMiB": 384,
+    "javaDirectMiB": 64
+  },
+  "productionQualified": false,
+  "declaredSchemaAliases": {
+    "Factur-X_1.0.07_MINIMUM_urn_un_unece_uncefact_data_standard_QualifiedDataType_100.xsd": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_QualifiedDataType_100.xsd",
+    "Factur-X_1.0.07_MINIMUM_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_100.xsd": "FACTUR-X_MINIMUM_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_100.xsd"
+  },
+  "schemaAliasReason": "The exact upstream resource bundle retained original edition-prefixed schemaLocation names after renaming companion files. Only these declared aliases resolve to the same unmodified hash-pinned bytes; all other resolution is denied.",
+  "readableProfile": {
+    "kind": "owned-literal-black-text-without-overlapping-glyphs-or-other-paint",
+    "glyphClipNumericalTolerancePoints": 0.0001,
+    "toleranceReason": "PDFBox float transform/clip conversion produced at most 0.000027 point differences in retained original fixtures; this is below the unchanged production 0.5 point geometry bound. One-point clipping and invisible/overlaid content must still reject.",
+    "atomicUniversalReadabilityQualified": false
+  }
+}

@@ -35,6 +35,11 @@ jobs:
       - name: Provision pinned independent archival source validator
         shell: pwsh
         run: ./eng/build-archival-fixture.ps1
+      - name: Provision exact-edition independent invoice source validator
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./eng/build-invoice-fixture.ps1
       - name: Validate specification and naming
         shell: pwsh
         run: ./eng/validate-spec.ps1

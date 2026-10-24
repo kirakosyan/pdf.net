@@ -216,6 +216,8 @@ Passive advanced-content inventory with encoded payload digests, exact-byte pres
 
 Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile. Full coverage and production qualification remain mandatory; see [invoices](invoices.md).
 
+The optional Compliance assembly adds an explicit exact-edition five-phase invoice report bridge. Its original source host runs pinned MINIMUM XSD/Schematron rules, independent model arithmetic and metadata checks, and a conservative visible-glyph profile. Explicit seller registration/country and representable header precision are required for writing. Complete corpus/host/package qualification remains open.
+
 Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](preflight.md).
 
 Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](optimization.md).

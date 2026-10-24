@@ -217,6 +217,8 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 
 [#100 production workflow acceptance](workflow-acceptance.md) is blocked by missing complete providers and qualified final packages; [the blocker record](evidence/FP-097-blocked.json) claims zero acceptance runs. Source fixtures cannot replace that requirement. Continue independent source issue #101, then revisit #100 when its prerequisites are satisfied.
 
+The subsequent [exact-edition invoice checkpoint](invoices.md) adds complete pinned MINIMUM XSD/Schematron execution, independent arithmetic/metadata and conservative readable-glyph validation through an explicit nonce-bound report bridge. [Evidence](evidence/invoice-complete-source.json) separates these actual source observations from complete invoice corpus, isolated-host/human review and the remaining four #100 workflows/final-package acceptance. #93 remains skipped and mandatory; no requirement is completed by association.
+
 [#101 document collections and object XML](document-collections.md) has a source checkpoint in draft PR #121. [Exact evidence](evidence/FP-100-source.json) distinguishes bounded collection/XML behavior from untrusted adapter isolation and production qualification. The next source assignment is #102. #100 remains blocked and #93 remains user-skipped; no candidate or publication is authorized.
 
 [#102 semantic review and remediation](semantic-remediation.md) adds exact-source review plans, explicit ordered decisions, per-fix structural revalidation, role mapping and retained [source evidence](evidence/FP-101-source.json). Human/screen-reader and complete production qualification remain open. The next source assignment is #103; #100 remains blocked and #93 user-skipped.

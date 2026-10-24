@@ -1530,8 +1530,11 @@ Fluent.Pdf.PdfInvoiceData.PdfInvoiceData(Fluent.Pdf.PdfInvoiceProfile profile, s
 Fluent.Pdf.PdfInvoiceData.Profile.get -> Fluent.Pdf.PdfInvoiceProfile
 Fluent.Pdf.PdfInvoiceData.Rounding.get -> System.MidpointRounding
 Fluent.Pdf.PdfInvoiceData.Seller.get -> string!
+Fluent.Pdf.PdfInvoiceData.SellerCountryCode.get -> string?
+Fluent.Pdf.PdfInvoiceData.SellerRegistrationIdentifier.get -> string?
 Fluent.Pdf.PdfInvoiceData.TaxCategories.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfInvoiceTaxCategory!>!
 Fluent.Pdf.PdfInvoiceData.TaxTotal.get -> decimal
+Fluent.Pdf.PdfInvoiceData.WithSellerRegistration(string! identifier, string! countryCode) -> Fluent.Pdf.PdfInvoiceData!
 Fluent.Pdf.PdfInvoiceLine
 Fluent.Pdf.PdfInvoiceLine.Description.get -> string!
 Fluent.Pdf.PdfInvoiceLine.PdfInvoiceLine(string! description, decimal quantity, decimal unitPrice, decimal taxRate) -> void
@@ -7287,6 +7290,10 @@ Captures drawing geometry without opening any resource or selecting a provider.
 
 Captures1–1000 lines and computes per-line net and per-rate-category tax using the selected midpoint rounding and explicit currency minor units. Supported currency codes are EUR/USD/GBP(two), JPY(zero), BHD(three).
 
+### <code>M:Fluent.Pdf.PdfInvoiceData.WithSellerRegistration(System.String,System.String)</code>
+
+Returns an independent immutable model with explicit seller identification and a two-letter uppercase country code. No identity, jurisdiction or country is inferred.
+
 ### <code>M:Fluent.Pdf.PdfInvoiceLine.#ctor(System.String,System.Decimal,System.Decimal,System.Decimal)</code>
 
 Captures a literal description, positive quantity, nonnegative unit price and percentage tax rate. Each numeric input has at most4 fractional digits and finite magnitude.
@@ -12110,6 +12117,14 @@ Gets explicit midpoint rounding policy.
 ### <code>P:Fluent.Pdf.PdfInvoiceData.Seller</code>
 
 Gets literal seller name.
+
+### <code>P:Fluent.Pdf.PdfInvoiceData.SellerCountryCode</code>
+
+Gets the explicit uppercase seller country code, or null until supplied. Independent code-list validation remains mandatory.
+
+### <code>P:Fluent.Pdf.PdfInvoiceData.SellerRegistrationIdentifier</code>
+
+Gets the explicit seller identifier required by the MINIMUM rules, or null until supplied.
 
 ### <code>P:Fluent.Pdf.PdfInvoiceData.TaxCategories</code>
 

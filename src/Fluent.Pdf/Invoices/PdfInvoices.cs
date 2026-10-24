@@ -90,7 +90,10 @@ public static class PdfInvoices
             foreach (string value in result.Findings)
                 c.Consume(PdfResourceKind.ExpandedBytes, value.Length * 4L + 256);
             if (!result.Completed || !result.IsCompliant)
-                throw Error(c, "IndependentValidation", "Complete invoice schema/business/readable-total validation did not pass.");
+            {
+                c.ReportFailure(new("Invoice.IndependentValidation", "Complete invoice schema/business/readable-total validation did not pass."), "Fluent.Pdf.InvoiceFindings", string.Join(",", result.Findings));
+                throw new InvalidOperationException();
+            }
             result = new(result.Profile, result.PdfSha256, result.XmlSha256, result.RequestSha256, result.Completed, result.IsCompliant, result.Findings);
             PdfProfileIo.Copy(candidate, output, c);
         }, PdfCapability.WriteDocument);
@@ -104,6 +107,10 @@ public static class PdfInvoices
 
     internal static PdfByteStore Xml(PdfInvoiceData invoice, PdfOperationContext c)
     {
+        if (invoice.SellerRegistrationIdentifier == null || invoice.SellerCountryCode == null)
+            throw Error(c, "SellerIdentityRequired", "The exact MINIMUM profile requires explicit seller identification and country; none is inferred.");
+        if (new[] { invoice.NetTotal, invoice.TaxTotal, invoice.GrandTotal }.Any(value => decimal.Round(value, 2) != value))
+            throw Error(c, "ProfilePrecision", "The requested MINIMUM edition permits at most two fractional header-amount digits; amounts cannot be silently rounded.");
         const string rsm = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100", ram = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100", udt = "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100";
         using var output = new PdfCodecBufferStream(c, 1048576);
         c.Consume(PdfResourceKind.Objects, 64);
@@ -132,6 +139,12 @@ public static class PdfInvoices
             Start("ApplicableHeaderTradeAgreement");
             Start("SellerTradeParty");
             Text("Name", invoice.Seller);
+            Start("SpecifiedLegalOrganization");
+            Text("ID", invoice.SellerRegistrationIdentifier);
+            End();
+            Start("PostalTradeAddress");
+            Text("CountryID", invoice.SellerCountryCode);
+            End();
             End();
             Start("BuyerTradeParty");
             Text("Name", invoice.Buyer);
@@ -142,13 +155,13 @@ public static class PdfInvoices
             Start("ApplicableHeaderTradeSettlement");
             Text("InvoiceCurrencyCode", invoice.Currency);
             Start("SpecifiedTradeSettlementHeaderMonetarySummation");
-            Text("TaxBasisTotalAmount", invoice.Money(invoice.NetTotal));
+            Text("TaxBasisTotalAmount", invoice.XmlMoney(invoice.NetTotal));
             Start("TaxTotalAmount");
             w.WriteAttributeString("currencyID", invoice.Currency);
-            w.WriteString(invoice.Money(invoice.TaxTotal));
+            w.WriteString(invoice.XmlMoney(invoice.TaxTotal));
             End();
-            Text("GrandTotalAmount", invoice.Money(invoice.GrandTotal));
-            Text("DuePayableAmount", invoice.Money(invoice.GrandTotal));
+            Text("GrandTotalAmount", invoice.XmlMoney(invoice.GrandTotal));
+            Text("DuePayableAmount", invoice.XmlMoney(invoice.GrandTotal));
             End();
             End();
             End();
@@ -182,6 +195,8 @@ public static class PdfInvoices
         {
             new PdfFlowParagraph("Invoice " + data.Identifier, body),
             new PdfFlowParagraph("Seller: " + data.Seller, body),
+            new PdfFlowParagraph("Seller registration: " + data.SellerRegistrationIdentifier, body),
+            new PdfFlowParagraph("Seller country: " + data.SellerCountryCode, body),
             new PdfFlowParagraph("Buyer: " + data.Buyer, body),
             new PdfFlowParagraph("Date: " + data.IssueTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), body)
         };

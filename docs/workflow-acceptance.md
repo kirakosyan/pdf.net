@@ -4,7 +4,7 @@ FP-097/#100 remains blocked on its required implementations and qualification in
 
 | Workflow | Current boundary |
 | --- | --- |
-| Invoices | The managed MINIMUM draft producer now supplies explicit ICC/PDF-A/invoice metadata preparation. Actual independent PDF/A source checks exercise it, while complete exact-edition invoice validation and final-package workflows remain open; see [invoice status](invoices.md). |
+| Invoices | Actual exact-edition XSD/Schematron, PDF/A, arithmetic, metadata and conservative readable-paint checks now gate original source invoices. Full independent corpus, isolated-host/human review and final-package workflows remain open; see [invoice status](invoices.md). |
 | Accessible reports | Source structure-tree checks do not complete independent PDF/UA conformance or human reading-order review; see [accessibility status](accessibility.md). |
 | Signed forms | Local cryptographic signature checks do not establish complete trust, timestamp, revocation or long-term validation profiles; see [PAdES status](pades.md). |
 | Scanned archives | Actual model/language quality, complete archival profiles and all native/runtime lanes remain unqualified; see [model observations](ocr-models.md) and [archival status](archival.md). |

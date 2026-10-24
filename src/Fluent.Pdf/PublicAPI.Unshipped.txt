@@ -3723,3 +3723,7 @@ Fluent.Pdf.PdfHyphenationDictionary.OperationReport.get -> Fluent.Pdf.PdfOperati
 Fluent.Pdf.PdfHyphenationDictionary.Language.get -> string!
 static Fluent.Pdf.PdfHyphenationDictionary.Read(System.IO.Stream! input, string! language, string! version, string! provenance, string! expectedSha256, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHyphenationDictionary!
 static Fluent.Pdf.PdfPageImposition.FitToPaper(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, double minimumScale, double maximumScale = 1, Fluent.Pdf.PdfMargins? margins = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+
+Fluent.Pdf.PdfInvoiceData.SellerRegistrationIdentifier.get -> string?
+Fluent.Pdf.PdfInvoiceData.SellerCountryCode.get -> string?
+Fluent.Pdf.PdfInvoiceData.WithSellerRegistration(string! identifier, string! countryCode) -> Fluent.Pdf.PdfInvoiceData!

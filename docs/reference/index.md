@@ -4,11 +4,11 @@ Generated from the current public API baselines and compiled XML comments, using
 
 | Assembly | Source version | Public declarations | Documented members |
 | --- | --- | --- | --- |
-| [Fluent.Pdf](Fluent.Pdf.md) | 1.0.0 | 3724 | 3703 |
+| [Fluent.Pdf](Fluent.Pdf.md) | 1.0.0 | 3727 | 3706 |
 | [Fluent.Pdf.Applications](Fluent.Pdf.Applications.md) | 1.0.0 | 32 | 32 |
 | [Fluent.Pdf.Automation](Fluent.Pdf.Automation.md) | 1.0.0 | 30 | 30 |
 | [Fluent.Pdf.Codecs](Fluent.Pdf.Codecs.md) | 1.0.0 | 9 | 9 |
-| [Fluent.Pdf.Compliance](Fluent.Pdf.Compliance.md) | 1.0.0 | 10 | 10 |
+| [Fluent.Pdf.Compliance](Fluent.Pdf.Compliance.md) | 1.0.0 | 17 | 17 |
 | [Fluent.Pdf.Cryptography](Fluent.Pdf.Cryptography.md) | 1.0.0 | 26 | 26 |
 | [Fluent.Pdf.Fonts](Fluent.Pdf.Fonts.md) | 1.0.0 | 8 | 8 |
 | [Fluent.Pdf.Formats](Fluent.Pdf.Formats.md) | 1.0.0 | 298 | 298 |
