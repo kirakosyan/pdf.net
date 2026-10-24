@@ -4,6 +4,58 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Sub ReviewReadingOrder(input As Byte(), element As PdfObjectId, order As Integer(), decision As PdfSemanticReviewDecision, output As Stream, ledger As Stream)
+        Using source As New MemoryStream(input, False)
+            Dim suggestion = PdfSemanticSuggestion.Element(decision.SuggestionId, element, "Proposed reading order supplied by the caller", childOrder:=order)
+            Dim plan = PdfAccessibility.PrepareReview(source, {suggestion})
+            source.Position = 0
+            Dim audit = PdfAccessibility.ApplyReview(source, output, plan, {decision})
+            PdfAccessibility.WriteReview(audit, ledger)
+        End Using
+    End Sub
+    Public Sub CollectionRoundTrip(input As Byte(), archive As Stream, restored As Stream)
+        Using source As New MemoryStream(input, False), xml As New MemoryStream()
+            Fluent.Pdf.Formats.PdfObjectXml.Export(source, xml)
+            xml.Position = 0
+            Dim collection = Fluent.Pdf.Formats.PdfDocumentCollection.Capture({New Collections.Generic.KeyValuePair(Of String, Stream)("document.xml", xml)})
+            collection.WriteArchive(archive)
+            Using entry = collection.Items(0).Open()
+                Fluent.Pdf.Formats.PdfObjectXml.Import(entry, restored)
+            End Using
+        End Using
+    End Sub
+    Public Sub ObservePdf(input As Byte(), output As Stream, supportBundle As Stream)
+        Using observations As New PdfObservationSession(), source As New MemoryStream(input, False)
+            Using document = PdfFacade.Open(source, New PdfOptions(operationPolicy:=PdfOperationPolicy.Default.WithObservations(observations)))
+                document.Save(output)
+                observations.WriteBundle(supportBundle)
+            End Using
+        End Using
+    End Sub
+    Public Function CacheInput(tenantCache As PdfContentCache, input As Byte(), context As PdfOperationContext) As Byte()
+        Dim address = tenantCache.Store(input, context)
+        Dim captured As Byte() = Nothing
+        If Not tenantCache.TryGet(address, context, captured) Then Throw New InvalidOperationException("The caller's cache evicted the input.")
+        Return captured
+    End Function
+    Public Async Function ProcessPdfAsync(input As Byte(), output As Stream) As System.Threading.Tasks.Task(Of PdfOperationReport)
+        Using pool As New PdfProcessingPool(New PdfProcessingOptions(maximumWorkers:=1))
+            Dim work As System.Threading.Tasks.Task(Of PdfOperationReport) = Nothing
+            If Not pool.TrySubmit(input, Sub(job)
+                                            job.ReadDocument()
+                                            job.Document.AddPage()
+                                            job.Save(output)
+                                        End Sub, work) Then
+                Throw New InvalidOperationException("The processing pool has no input capacity.")
+            End If
+            Dim completion = pool.CompleteAsync()
+            Await completion.ConfigureAwait(False)
+            Return Await work.ConfigureAwait(False)
+        End Using
+    End Function
+    Public Function ApplicationViewer(source As PdfDocumentSnapshot, renderer As PdfProviderRegistry) As Fluent.Pdf.Applications.PdfApplicationViewer
+        Return New Fluent.Pdf.Applications.PdfApplicationViewer(source, renderer)
+    End Function
     Public Function GenerateData(rows As System.Collections.Generic.IEnumerable(Of String), layout As PdfFlowOptions, style As PdfFlowTextStyle, providers As PdfProviderRegistry) As PdfDocument
         Dim template = New PdfGenerationTemplate(Of String)("sample-data", Sub(context, row) context.Paragraph(row, style))
         Return PdfDataGeneration.Generate(rows, template, New PdfGenerationOptions(layout, ""), providers)
@@ -28,6 +80,9 @@ Public Module ContractExample
     End Function
     Public Function HtmlOptions(readiness As PdfHtmlReadinessOptions, enableJavaScript As Boolean, locale As String, timeZone As String, media As PdfHtmlMedia) As PdfHtmlOptions
         Return New PdfHtmlOptions(readiness:=readiness, enableJavaScript:=enableJavaScript, locale:=locale, timeZone:=timeZone, media:=media)
+    End Function
+    Public Function CaptureHtmlElement(renderer As Fluent.Pdf.Html.ChromiumHtmlRenderer, source As PdfHtmlSource, selector As String) As Fluent.Pdf.Html.HtmlElementCapture
+        Return renderer.Capture(source, New Fluent.Pdf.Html.HtmlElementRequest(selector:=selector))
     End Function
     Public Function ConvertHtml(source As PdfHtmlSource, providers As PdfProviderRegistry, options As PdfHtmlOptions) As PdfDocument
         Return PdfHtml.Render(source, providers, options)
@@ -501,7 +556,51 @@ Public Module ContractExample
     Public Function WriteInvoice(data As PdfInvoiceData, output As Stream, body As PdfFlowTextStyle, layout As PdfFlowOptions, providers As PdfProviderRegistry, producer As IPdfInvoiceProducer, archival As IPdfArchivalValidator, validator As IPdfInvoiceValidator) As PdfInvoiceValidation
         Return PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator)
     End Function
+    Public Function WriteManagedInvoice(data As PdfInvoiceData, output As Stream, body As PdfFlowTextStyle, layout As PdfFlowOptions, providers As PdfProviderRegistry, outputColorSpace As PdfColorSpace, outputCondition As String, archival As IPdfArchivalValidator, validator As IPdfInvoiceValidator) As PdfInvoiceValidation
+        Return PdfInvoices.Write(data, output, body, layout, providers, New ManagedPdfInvoiceProducer(outputColorSpace, outputCondition), archival, validator)
+    End Function
+    Public Function WriteValidatedInvoice(data As PdfInvoiceData, output As Stream, body As PdfFlowTextStyle, layout As PdfFlowOptions, providers As PdfProviderRegistry, outputColorSpace As PdfColorSpace, outputCondition As String, archival As IPdfArchivalValidator, validator As IPdfInvoiceValidator, policy As PdfOperationPolicy) As PdfInvoiceValidation
+        Return PdfInvoices.Write(data, output, body, layout, providers, New ManagedPdfInvoiceProducer(outputColorSpace, outputCondition), archival, validator, policy)
+    End Function
     Public Function InspectPreflight(input As Stream) As PdfPreflightReport
         Return PdfPreflight.Inspect(input)
+    End Function
+    Public Function OptimizePdf(source As PdfDocumentSnapshot) As PdfOptimizationResult
+        Return PdfOptimization.Optimize(source)
+    End Function
+    Public Function GenerateBarcode(text As String, independentDecoder As IPdfBarcodeDecoder, options As PdfBarcodeOptions) As PdfBarcodeSymbol
+        Return PdfBarcodes.Generate(text, independentDecoder, options)
+    End Function
+    Public Function AnalyzeSelectedText(source As PdfDocumentSnapshot, pageIndex As Integer, provider As Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider, options As Fluent.Pdf.Intelligence.PdfIntelligenceOptions) As Fluent.Pdf.Intelligence.PdfIntelligenceResult
+        Return Fluent.Pdf.Intelligence.PdfDocumentIntelligence.Analyze(source, {New Fluent.Pdf.Intelligence.PdfIntelligenceSelection(pageIndex)}, Fluent.Pdf.Intelligence.PdfIntelligenceTask.Summarize, provider, options:=options)
+    End Function
+    Public Function ReadProgressivePage(source As IPdfRangeSource, pageIndex As Integer) As PdfProgressivePage
+        Using document As New PdfProgressiveDocument(source)
+            Return document.ReadPage(pageIndex)
+        End Using
+    End Function
+    Public Function ChunkSelectedPage(source As PdfDocumentSnapshot, pageIndex As Integer, maximumUtf8Bytes As Integer) As Fluent.Pdf.Intelligence.PdfSemanticChunkResult
+        Return Fluent.Pdf.Intelligence.PdfSemanticChunks.Capture(source, {pageIndex}, New Fluent.Pdf.Intelligence.PdfSemanticChunkOptions(maximumUtf8Bytes))
+    End Function
+    Public Function WriteLinearized(input As Stream, output As Stream, producer As IPdfLinearizationProducer, validator As IPdfLinearizationValidator) As PdfLinearizationValidation
+        Return PdfLinearization.Write(input, output, producer:=producer, validator:=validator)
+    End Function
+    Public Function CleanScan(original As PdfOcrRaster, options As PdfImageCleanupOptions) As PdfImageCleanupResult
+        Return PdfImageCleanup.Process(original, options, New PdfOperationPolicy(PdfProcessingMode.Permissive))
+    End Function
+    Public Function ExportBusinessData(input As Stream, output As Stream, format As PdfBusinessDataFormat) As PdfOperationReport
+        Return PdfBusinessData.Write(input, output, format)
+    End Function
+    Public Function ImportLegacyFormat(input As Stream, options As Fluent.Pdf.Formats.PdfLegacyImportOptions, host As Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfLegacyImport.Read(input, options, host)
+    End Function
+    Public Function ExportMarkdown(input As Stream, output As Stream, sourceSha256 As String, pageIndex As Integer) As PdfOperationReport
+        Return Fluent.Pdf.Formats.PdfTextInterchange.Write(input, output, Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown, {New Fluent.Pdf.Formats.PdfTextInterchangeBlock(pageIndex)}, New Fluent.Pdf.Formats.PdfTextInterchangeOptions(sourceSha256), policy:=New PdfOperationPolicy(PdfProcessingMode.Permissive))
+    End Function
+    Public Function GenerateTaskPdf(tasks As Fluent.Pdf.Formats.PdfTasks, blocks As IEnumerable(Of PdfFlowBlock), options As PdfFlowOptions, output As Stream) As PdfOperationReport
+        Return tasks.Generate(blocks, options, output)
+    End Function
+    Public Function HyphenateParagraph(paragraph As PdfFlowParagraph, dictionary As PdfHyphenationDictionary, options As PdfFlowOptions, providers As PdfProviderRegistry) As PdfFlowResult
+        Return PdfFlow.Layout({paragraph.WithHyphenation(dictionary)}, options, providers)
     End Function
 End Module

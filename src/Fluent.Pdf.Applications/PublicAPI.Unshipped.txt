@@ -1,0 +1,33 @@
+#nullable enable
+Fluent.Pdf.Applications.PdfApplicationFrame
+Fluent.Pdf.Applications.PdfApplicationFrame.CapturedText.get -> string!
+Fluent.Pdf.Applications.PdfApplicationFrame.Raster.get -> Fluent.Pdf.PdfRaster!
+Fluent.Pdf.Applications.PdfApplicationFrame.State.get -> Fluent.Pdf.Applications.PdfApplicationViewState!
+Fluent.Pdf.Applications.PdfApplicationFrame.WritePng(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.ActualSize = 6 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.Cancel = 7 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.FirstPage = 2 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.LastPage = 3 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.NextPage = 0 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.PreviousPage = 1 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.ZoomIn = 4 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewCommand.ZoomOut = 5 -> Fluent.Pdf.Applications.PdfApplicationViewCommand
+Fluent.Pdf.Applications.PdfApplicationViewState
+Fluent.Pdf.Applications.PdfApplicationViewState.DiagnosticCode.get -> string!
+Fluent.Pdf.Applications.PdfApplicationViewState.Generation.get -> long
+Fluent.Pdf.Applications.PdfApplicationViewState.IsBusy.get -> bool
+Fluent.Pdf.Applications.PdfApplicationViewState.PageCount.get -> int
+Fluent.Pdf.Applications.PdfApplicationViewState.PageIndex.get -> int
+Fluent.Pdf.Applications.PdfApplicationViewState.Zoom.get -> double
+Fluent.Pdf.Applications.PdfApplicationViewer
+Fluent.Pdf.Applications.PdfApplicationViewer.CachedBytes.get -> long
+Fluent.Pdf.Applications.PdfApplicationViewer.Cancel() -> void
+Fluent.Pdf.Applications.PdfApplicationViewer.Dispose() -> void
+Fluent.Pdf.Applications.PdfApplicationViewer.Execute(Fluent.Pdf.Applications.PdfApplicationViewCommand command) -> Fluent.Pdf.Applications.PdfApplicationViewState!
+Fluent.Pdf.Applications.PdfApplicationViewer.PdfApplicationViewer(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfProviderRegistry! providers, long maximumCachedBytes = 16777216, long maximumSurfacePixels = 16000000, int maximumTextCharacters = 100000, bool captureText = true, Fluent.Pdf.PdfOperationPolicy? policy = null) -> void
+Fluent.Pdf.Applications.PdfApplicationViewer.Print(Fluent.Pdf.PdfPrintOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPrintJob!
+Fluent.Pdf.Applications.PdfApplicationViewer.RenderAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Fluent.Pdf.Applications.PdfApplicationFrame!>!
+Fluent.Pdf.Applications.PdfApplicationViewer.SetView(int pageIndex, double zoom) -> Fluent.Pdf.Applications.PdfApplicationViewState!
+Fluent.Pdf.Applications.PdfApplicationViewer.State.get -> Fluent.Pdf.Applications.PdfApplicationViewState!
+Fluent.Pdf.Applications.PdfApplicationViewer.StateChanged -> System.EventHandler<Fluent.Pdf.Applications.PdfApplicationViewState!>?

@@ -69,14 +69,16 @@ public sealed class PdfSyntaxDocument
     internal bool DecryptionApplied { get; }
 
     private readonly PdfOperationPolicy _policy;
+    private readonly Func<PdfObjectId, int, PdfValue>? _lazyResolve;
     internal PdfOperationPolicy ReadPolicy=>_policy;
-    internal PdfSyntaxDocument(string version, PdfByteStore source, List<PdfRevision> revisions, PdfOperationPolicy policy, bool decryptionApplied = false)
+    internal PdfSyntaxDocument(string version, PdfByteStore source, List<PdfRevision> revisions, PdfOperationPolicy policy, bool decryptionApplied = false, Func<PdfObjectId, int, PdfValue>? lazyResolve = null)
     {
         Version = version;
         Source = source;
         Revisions = revisions.AsReadOnly();
         _policy = policy;
         DecryptionApplied = decryptionApplied;
+        _lazyResolve = lazyResolve;
         HasSignatureByteRanges=revisions.Any(revision=>revision.Values.Values.Any(value=>value.HasSignatureByteRanges));
     }
 
@@ -97,7 +99,7 @@ public sealed class PdfSyntaxDocument
             return PdfValue.Null;
         for (int i = revisionIndex; i < Revisions.Count; i++)
             if (Revisions[i].Index.TryGetValue(id.Number, out var entry))
-                return entry.Kind == PdfCrossReferenceKind.Free || entry.Id.Generation != id.Generation ? PdfValue.Null : Revisions[revisionIndex].Values[id.Number];
+                return entry.Kind == PdfCrossReferenceKind.Free || entry.Id.Generation != id.Generation ? PdfValue.Null : _lazyResolve != null ? _lazyResolve(id, revisionIndex) : Revisions[revisionIndex].Values[id.Number];
         return PdfValue.Null;
     }
 

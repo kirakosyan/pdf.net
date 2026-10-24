@@ -26,6 +26,14 @@ The specification defines **112 requirement areas: 111 mandatory SDK production 
 
 A TFM or compatible package declaration does not establish OS, runtime or provider support. The [platform contract](docs/platforms.md) defines applicability and qualification. The .NET 8 support window must be rechecked before release.
 
+The optional [DjVu/CDR host boundary](docs/legacy-format-import.md) stages and validates explicit caller-host imports. No DjVu/CDR decoder or supported source version is bundled or qualified.
+
+[Explicit hyphenation and paper fit](docs/hyphenation-text-fit.md) support pinned whole-word exceptions and caller-bounded managed scaling. Complete linguistic/browser and production qualification remain pending.
+
+[Task facades](docs/task-facades.md) provide explicit instance-based generation, conversion, extraction, forms, optimization and collection composition over the existing engines, with C#/VB/F# source examples.
+
+[Text and Markdown interchange](docs/text-interchange.md) offers exact-source caller-assigned projections, explicit reading order, inferred tables and optional page-image bundles. Automatic complete semantic reconstruction and production qualification remain pending.
+
 The proposed package ID `Fluent.Pdf` returned HTTP 404 from the NuGet gallery and flat-container index on 2026-10-17. This is an availability observation, not a reservation or guarantee of acceptance. Recheck the ID and companion package prefixes before publication.
 
 ## Start here
@@ -140,3 +148,45 @@ Passive advanced-content inventory with encoded payload digests, exact-byte pres
 Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile. Full coverage and production qualification remain mandatory; see [invoices](docs/invoices.md).
 
 Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](docs/preflight.md).
+
+Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](docs/optimization.md).
+
+Bounded revision-bound range sessions, selective page/object access, private LRU caches and independently gated linearized output now have a source implementation. Complete hint/producer/transport/corpus/runtime/final-package qualification remains mandatory; see [progressive access](docs/progressive-access.md).
+
+Original QR/Code128B generation with mandatory independent decoding, explicit page-region detector landmarks and canonical EPC invoice/payment payload validation now have a source implementation. Complete corpus/scanner/runtime/host/final-package qualification remains mandatory; see [barcode workflows](docs/barcodes.md).
+
+Explicit six-task model adapters, selected source capture, remote/image authority, token/configured-cost reservations and schema/citation validation now have a source implementation in the optional Intelligence assembly. Full model/transport/security/quality/runtime/final-package qualification remains mandatory; see [document intelligence](docs/document-intelligence.md).
+
+Explicit raw-source chunk coverage, table-aware boundaries, pinned embedding dimensions/versions and tenant/document/revision/ACL-bound cosine retrieval now have a source implementation in the optional Intelligence assembly. Full tagged semantics, real model/store/relevance/security/runtime/final-package qualification remains mandatory; see [semantic chunks and retrieval](docs/semantic-retrieval.md).
+
+A separate frozen Windows automation facade, finite owned sessions, explicit marshaling, redacted HRESULTs and bitness-aware registration now have a source implementation. Actual COM activation and complete Windows/Framework/apartment/installer/final-package qualification are recorded separately; see [Windows automation](docs/windows-automation.md).
+
+An optional toolkit-independent controller and WinForms/WPF/ASP.NET browser samples now use shared private viewing sessions with explicit keyboard, accessibility, generation and cancellation contracts. Full host/fidelity/assistive-technology/final-package qualification remains mandatory; see [application views](docs/application-views.md).
+
+An optional modern CLI now consumes the public SDK with separate data/diagnostic channels, stable exit codes, protected password-file input, bounded jobs, atomic publication and retained batch outcomes. Full host/provider/final-distribution qualification remains mandatory; see [command-line automation](docs/command-line.md).
+
+The [developer guide](docs/developer-guide.md) now links a versioned generated source API reference, explicit provider/platform prerequisites and real C#/VB-backed recipe applications. Narrative fragments and published-package qualification remain explicitly distinct.
+
+The [runtime evidence tooling](docs/runtime-qualification.md) records actual process/core-library/Framework-registry/loaded SDK identities against the unchanged 22-lane matrix, with strict test and exact-package consistency checks. A Windows Docker preflight launcher can probe an explicitly resolved candidate image. Actual minimum-runtime hosts, complete package consumers and production qualification remain mandatory; see [source evidence](docs/evidence/FP-086-source.json).
+
+FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](docs/async-processing.md).
+
+FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](docs/performance.md).
+
+FP-090 adds a pinned original fidelity corpus with independent Unicode, geometry, form, structure and dual-renderer pixel checks. Complete corpus and production qualification remain pending; see [fidelity checks](docs/fidelity-corpus.md).
+
+FP-091 adds private bounded content caches and repeated-process checks for explicit metadata and compression inputs. See [determinism and tenancy](docs/determinism-caching.md) for isolation rules and the remaining qualification.
+
+FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sinks and bounded support JSON. See [observability](docs/observability.md) for privacy, loss counters and qualification limits.
+
+[Package provenance](docs/package-reproducibility.md) describes the guarded candidate metadata, source rebuild checks and offline symbol/archive inspection. Final packages remain unqualified and publication is blocked.
+
+[Supply-chain inventory](docs/supply-chain.md) records locked dependencies, retained notices, explicit asset observations and advisory coverage. It does not approve redistribution or qualify final packages.
+
+[Document collections](docs/document-collections.md) provide bounded ordered ZIP archives, explicit trusted batch adapters and typed PDF object XML. Protection, history, isolation and qualification limits are explicit.
+
+[Semantic remediation](docs/semantic-remediation.md) binds explicit proposals and reviewer decisions to exact source bytes, revalidates accepted fixes and preserves an audit ledger without claiming accessibility conformance.
+
+[Image cleanup](docs/image-cleanup.md) preserves original pixels, applies explicit bounded transforms and reports before/after blank-page evidence without automatic deletion.
+
+[Business observations](docs/business-data.md) exports source-bound versioned JSON/XML with declared facts, inferred structures and OCR scores kept distinct.

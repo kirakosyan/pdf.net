@@ -36,7 +36,7 @@ internal sealed class ChromiumProtocol
                     if (response.ValueKind != JsonValueKind.Number || !response.TryGetInt32(out int received) || received != id && !_acknowledgements.Remove(received))
                         throw Error("ResponseIdentity", "The browser returned an unexpected command identity.");
                     if (root.TryGetProperty("error", out _))
-                        throw Error("CommandRejected", "The pinned browser rejected a required DevTools command.");
+                        throw Error("CommandRejected", "The pinned browser rejected required DevTools method " + method + ".");
                     if (!root.TryGetProperty("result", out var result) || result.ValueKind != JsonValueKind.Object)
                         throw Error("Protocol", "A complete browser command result is required.");
                     if (received == id)

@@ -1,0 +1,71 @@
+name: Application view source consumers
+on:
+  pull_request:
+    paths:
+      - 'src/Fluent.Pdf/**'
+      - 'src/Fluent.Pdf.Applications/**'
+      - 'examples/Fluent.Pdf.WinFormsSample/**'
+      - 'examples/Fluent.Pdf.WpfSample/**'
+      - 'examples/Fluent.Pdf.ViewSample.Shared/**'
+      - 'examples/Fluent.Pdf.BrowserViewSample/**'
+      - 'eng/test-browser-view.py'
+      - 'eng/test-application-views.ps1'
+      - '.github/workflows/application-views.yml'
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    name: Actual WinForms and WPF applications
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: |
+            10.0.4xx
+            8.0.x
+      - name: Run real desktop handles, keyboard and accessibility boundaries
+        shell: pwsh
+        run: ./eng/test-application-views.ps1
+      - name: Retain actual application source evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: windows-application-views-source
+          path: artifacts/contracts/application-views/
+          if-no-files-found: error
+  browser:
+    name: Actual Chromium application view
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: |
+            10.0.4xx
+            8.0.x
+      - name: Build explicit local host
+        run: |
+          dotnet restore examples/Fluent.Pdf.BrowserViewSample/Fluent.Pdf.BrowserViewSample.csproj --locked-mode
+          dotnet build examples/Fluent.Pdf.BrowserViewSample/Fluent.Pdf.BrowserViewSample.csproj -c Release --no-restore
+          python3 -m venv /tmp/application-view-analysis
+          /tmp/application-view-analysis/bin/pip install playwright==1.62.0
+      - name: Exercise actual HTTP, keyboard and accessibility tree
+        run: |
+          for tfm in net8.0 net10.0; do
+            assembly="examples/Fluent.Pdf.BrowserViewSample/bin/Release/$tfm/Fluent.Pdf.BrowserViewSample.dll"
+            dotnet "$assembly" --self-test
+            /tmp/application-view-analysis/bin/python eng/test-browser-view.py --assembly "$assembly" --browser /usr/bin/google-chrome --output "artifacts/contracts/application-views/browser-$tfm.json"
+          done
+      - name: Retain actual browser source evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-application-views-source
+          path: artifacts/contracts/application-views/
+          if-no-files-found: error

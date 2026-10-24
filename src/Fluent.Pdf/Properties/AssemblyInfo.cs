@@ -17,3 +17,6 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Fluent.Pdf.Ocr")]
 
 [assembly: InternalsVisibleTo("Fluent.Pdf.Formats")]
+[assembly: InternalsVisibleTo("Fluent.Pdf.Intelligence")]
+[assembly: InternalsVisibleTo("Fluent.Pdf.Automation")]
+[assembly: InternalsVisibleTo("Fluent.Pdf.Applications")]

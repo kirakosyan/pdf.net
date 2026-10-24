@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "purpose": "original-source-performance-corpus",
+  "workflow": "managed-eager-open-first-page-model-and-atomic-rewrite",
+  "license": "MIT",
+  "cases": [
+    {
+      "id": "small",
+      "category": "small",
+      "file": "small.pdf",
+      "sha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+      "pages": 1,
+      "maximumInputBytes": 67108864,
+      "expectedDiagnostic": null
+    },
+    {
+      "id": "large",
+      "category": "large",
+      "file": "large.pdf",
+      "sha256": "19bf2a9efc0c31c04c3f7b4c7686de2ec6741530391d38c2f8abf1d35565ba5c",
+      "pages": 1000,
+      "maximumInputBytes": 67108864,
+      "expectedDiagnostic": null
+    },
+    {
+      "id": "scanned",
+      "category": "scanned",
+      "file": "scanned.pdf",
+      "sha256": "0229bebf5916a8428df4b44883f0adf24fe666608e81e2e450d93ed6820a0d3d",
+      "pages": 4,
+      "maximumInputBytes": 67108864,
+      "expectedDiagnostic": null
+    },
+    {
+      "id": "input-limit",
+      "category": "adversarial",
+      "file": "small.pdf",
+      "sha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+      "pages": 1,
+      "maximumInputBytes": 1,
+      "expectedDiagnostic": "Limit.InputBytes"
+    }
+  ],
+  "productionQualified": false
+}

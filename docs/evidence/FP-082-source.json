@@ -1,0 +1,1103 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-082",
+  "issue": 87,
+  "sourceCommit": "d17a2969fd629c7a63306d69df580e999265a6ac",
+  "commitBinding": "Clean SDK/source-consumer checkpoint; subsequent desktop host corrections and actual Windows evidence are separately bound. No source result qualifies final packages.",
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/application-views.yml",
+      "sha256": "6154fa68ff901e54e3dbfb00c33d4c1377424e1f6639c18bb1a91e2844b5af69",
+      "bytes": 2914
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "0490c9cff67f90f247072a0ab0341e0b7abb4513fee13363e09c484501ac871c",
+      "bytes": 1769
+    },
+    {
+      "path": "README.md",
+      "sha256": "32cd1555a2171ca9c7878500cbd55af9d204e60d4565b6e09d20b9012ff3b208",
+      "bytes": 19455
+    },
+    {
+      "path": "docs/api-contract.md",
+      "sha256": "bad188e1897553057d7eba903d4e3ba69a3250055e379d4fc66c3ad509b47452",
+      "bytes": 31125
+    },
+    {
+      "path": "docs/application-views.md",
+      "sha256": "8fc185bb94abc483ffa0d1d0d4c3c97878ec8353e7901bac31287f3a4a32f79b",
+      "bytes": 6041
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "7047b067fc384727142e3ec3cbad5f4a67e4ef97398dfcf83a1d07dab68b9bbd",
+      "bytes": 24194
+    },
+    {
+      "path": "eng/ContractProjectReference.props",
+      "sha256": "8107fa8be1810f6143da0e814122bb96d1b0463db39fb8353f908d6688e4e79f",
+      "bytes": 5959
+    },
+    {
+      "path": "eng/check-api.ps1",
+      "sha256": "573a9d41276c9ee6cdb892f048faf500b10a92ebbf0bcf33d27f1aff27989186",
+      "bytes": 1843
+    },
+    {
+      "path": "eng/test-application-views.ps1",
+      "sha256": "b4ec40f052e614e1b4ca6dcd8a4d0c74524162c9d34f68fc5ba6a5b12f927162",
+      "bytes": 2726
+    },
+    {
+      "path": "eng/test-browser-view.py",
+      "sha256": "ce647c4cc61ad6802d89c693ad1143a56135bce49995a24ab1af75d492e79173",
+      "bytes": 5272
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "93153ff03e0fa842767596d1fadeff9b86abbfe875023d59e836037d2ed14c04",
+      "bytes": 6132
+    },
+    {
+      "path": "eng/verify-application-frames.py",
+      "sha256": "a5d9f7a6ca4eae055be4474125a9ecc6714a3021860ed6d71642a178773f20b7",
+      "bytes": 2303
+    },
+    {
+      "path": "examples/Fluent.Pdf.BrowserViewSample/Fluent.Pdf.BrowserViewSample.csproj",
+      "sha256": "505b5e35fb5bfd3dcca9e0827feed299c4008e7628d5055c14a7b3b4f93b4a22",
+      "bytes": 728
+    },
+    {
+      "path": "examples/Fluent.Pdf.BrowserViewSample/Program.cs",
+      "sha256": "9882e7423ef6cc8f21d4435f1448c7ec6bc4ffbe72afa8a856a07e8b741e55fc",
+      "bytes": 7312
+    },
+    {
+      "path": "examples/Fluent.Pdf.BrowserViewSample/packages.lock.json",
+      "sha256": "eafa99cedffd7410c5ab3f8a20b095a1a6418de76453bfec298902c55cbcafde",
+      "bytes": 1133
+    },
+    {
+      "path": "examples/Fluent.Pdf.BrowserViewSample/wwwroot/index.html",
+      "sha256": "812ace2b57ece995b960936c4e83150bd67723bf780805f910b48a8a493b948f",
+      "bytes": 1299
+    },
+    {
+      "path": "examples/Fluent.Pdf.BrowserViewSample/wwwroot/viewer.css",
+      "sha256": "e42b680bcf750dde815b58dd10cf8b2b137039aca714da18adac230eeb48024c",
+      "bytes": 581
+    },
+    {
+      "path": "examples/Fluent.Pdf.BrowserViewSample/wwwroot/viewer.js",
+      "sha256": "71036dbad25fcba3460271c3edd28e7ce20bfb53c4f6bf337ebd43aabdd86634",
+      "bytes": 3346
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "90131b37beee62846c04e9369a087192c41db190b0c6924c905be9f1dad67104",
+      "bytes": 31996
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/packages.lock.json",
+      "sha256": "0fe352713be37e489d5b6fe006ebf67cfb074fbc3283fde5349c32fcdcefde0e",
+      "bytes": 32076
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "5a5437a5c0cdb32170fdd5480456e56d5e0ac55b9d6bc9683a18e123ef62c163",
+      "bytes": 37449
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/packages.lock.json",
+      "sha256": "0fe352713be37e489d5b6fe006ebf67cfb074fbc3283fde5349c32fcdcefde0e",
+      "bytes": 32076
+    },
+    {
+      "path": "examples/Fluent.Pdf.ViewSample.Shared/ViewerSampleSession.cs",
+      "sha256": "ad7647fd78e056b906516750928218b2a7169acbcf66155ad6b59e75db6932be",
+      "bytes": 5284
+    },
+    {
+      "path": "examples/Fluent.Pdf.WinFormsSample/Fluent.Pdf.WinFormsSample.csproj",
+      "sha256": "74efee158c178ed699210ba90e8d79028e7db2e4cfe6a76534ed2db5acfb6a4c",
+      "bytes": 1272
+    },
+    {
+      "path": "examples/Fluent.Pdf.WinFormsSample/PdfPageControl.cs",
+      "sha256": "b98b804e9206ab20866a49a96ed7f89e15acff853662c2ff1ce0a9797ebf421a",
+      "bytes": 6286
+    },
+    {
+      "path": "examples/Fluent.Pdf.WinFormsSample/Program.cs",
+      "sha256": "609fb02d7980e5a7a363d3c2b7044a6e1cf593167cb31406ae1630d9aca4080c",
+      "bytes": 2829
+    },
+    {
+      "path": "examples/Fluent.Pdf.WinFormsSample/packages.lock.json",
+      "sha256": "0e8fe4388805f761747565f882d732fbbd477e66a56b29dfe2b8ce3e9c711262",
+      "bytes": 2339
+    },
+    {
+      "path": "examples/Fluent.Pdf.WpfSample/Fluent.Pdf.WpfSample.csproj",
+      "sha256": "d29ca6845ca7791208d9b08f85127a936cfdbcb6597bfe86ac3433d6d96aa9e0",
+      "bytes": 1254
+    },
+    {
+      "path": "examples/Fluent.Pdf.WpfSample/PdfPageControl.cs",
+      "sha256": "4581ec2bcb2afb7ae21581642ad1b692b5a6bfb02e90477f68edbb9b70f4af2a",
+      "bytes": 6854
+    },
+    {
+      "path": "examples/Fluent.Pdf.WpfSample/Program.cs",
+      "sha256": "e011b939d619063500064c560d23e732a67553498af42012f05d98198170a07e",
+      "bytes": 2890
+    },
+    {
+      "path": "examples/Fluent.Pdf.WpfSample/packages.lock.json",
+      "sha256": "0e8fe4388805f761747565f882d732fbbd477e66a56b29dfe2b8ce3e9c711262",
+      "bytes": 2339
+    },
+    {
+      "path": "examples/README.md",
+      "sha256": "be020453566383cc8afdcff71a26f212360160d44fc59cdd2cd3c1d31d611cf5",
+      "bytes": 4737
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "0a7067494cff7c16d20bd1baca4203b7e688ae31c1d23dcd807214de82849eb4",
+      "bytes": 209448
+    },
+    {
+      "path": "src/Fluent.Pdf.Applications/AssemblyInfo.cs",
+      "sha256": "c3c78a0a1e0449270c3b31d9b21a7aae7a2bbb4adf681bc00be8bfbb24af7241",
+      "bytes": 100
+    },
+    {
+      "path": "src/Fluent.Pdf.Applications/Fluent.Pdf.Applications.csproj",
+      "sha256": "4ca85b6907b99dd893eec49052be1f7cfed513d6552be57c6cdb522f89cc7308",
+      "bytes": 856
+    },
+    {
+      "path": "src/Fluent.Pdf.Applications/PdfApplicationViewer.cs",
+      "sha256": "3551437227742ec29cc40594b1db692a9565e4a2ecd0d2d29773fad947fa5273",
+      "bytes": 15409
+    },
+    {
+      "path": "src/Fluent.Pdf.Applications/PublicAPI.Shipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+      "bytes": 17
+    },
+    {
+      "path": "src/Fluent.Pdf.Applications/PublicAPI.Unshipped.txt",
+      "sha256": "a6b5c9bb7b3845098ccec3322c09f5008569b71a263225b627b933897435fc37",
+      "bytes": 3679
+    },
+    {
+      "path": "src/Fluent.Pdf.Applications/packages.lock.json",
+      "sha256": "02b6e7778b288cfce28ff172638ef3fa0a3d740e4cf79e97b746b432a325957e",
+      "bytes": 2627
+    },
+    {
+      "path": "src/Fluent.Pdf/Properties/AssemblyInfo.cs",
+      "sha256": "d49e217ed7b47799b5dfc68925c43db4b2c8094d91b8e2c1600b7e0ba14a86e7",
+      "bytes": 969
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ApplicationViewTests.cs",
+      "sha256": "f5d5096581fa03124fa44d432686c890b560647a0dd3275f18817ed9ed3783f6",
+      "bytes": 7919
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/RuntimeIdentityTests.cs",
+      "sha256": "970e3c9712c5b8697a4950369ce0a5cd01da67c08f9af83931d1810f2792d7a1",
+      "bytes": 3671
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/packages.lock.json",
+      "sha256": "f118a67ba89aa14902e5c215a18b8b181c50f0171c2c9f485b9738faa89cc147",
+      "bytes": 38004
+    }
+  ],
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "fourTargetBuild": {
+    "path": "/workspace/scratch/applications-clean-four-target-build.log",
+    "sha256": "f4ab0e0ed5c5b977ebd5326b905bcf0460c562a6cc0cce0cfcdc2b995680967f",
+    "bytes": 9293
+  },
+  "desktopCrossCompilation": {
+    "winforms": {
+      "path": "/workspace/scratch/applications-clean-winforms-build.log",
+      "sha256": "38848f759c32be3b476645665f4acfc8d9d6df7162be20805ba3cf7364a7c29c",
+      "bytes": 1936
+    },
+    "wpf": {
+      "path": "/workspace/scratch/applications-clean-wpf-build.log",
+      "sha256": "912e4047ac15b65b82717d7058bb664578f991b0f7ea6ea0c4485d45cbc17e00",
+      "bytes": 1891
+    },
+    "actualWindowsExecution": false
+  },
+  "browserBuild": {
+    "path": "/workspace/scratch/applications-clean-browser-build.log",
+    "sha256": "1e421612d0302bc62f497403dc63237fb7cbdc4b11a241057e67aeb798815dff",
+    "bytes": 1325
+  },
+  "managedLanes": [
+    {
+      "profile": "net8.0",
+      "counters": {
+        "total": "1660",
+        "executed": "1660",
+        "passed": "1660",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 5,
+      "libraryAssetsAsserted": 15,
+      "report": {
+        "path": "artifacts/contracts/remaining/applications/verified-net8.0/verified-net8.0.trx",
+        "sha256": "5a4cdc93a9a52526a61617a680ece0d43ef7318c1015ccd5773139a674d3bb7a",
+        "bytes": 2430242
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v8.0\nActual runtime: .NET 8.0.32\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/applications-verified-net8.0.log",
+        "sha256": "b8c9f1971e5cd1b2048b2e6f7638419535aea45aa260f323c2b6b9ea0fbcee08",
+        "bytes": 455
+      }
+    },
+    {
+      "profile": "net10.0",
+      "counters": {
+        "total": "1660",
+        "executed": "1660",
+        "passed": "1660",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 5,
+      "libraryAssetsAsserted": 15,
+      "report": {
+        "path": "artifacts/contracts/remaining/applications/verified-net10.0/verified-net10.0.trx",
+        "sha256": "59c1b45051c08ab1964cc18edd586937960bb6b795baed6c8c94df25d9072b36",
+        "bytes": 2433568
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/applications-verified-net10.0.log",
+        "sha256": "01a400639401098c4b9a726af0c6f9535fcd518914166b96949c1d18bc81470a",
+        "bytes": 460
+      }
+    },
+    {
+      "profile": "netstandard",
+      "counters": {
+        "total": "1660",
+        "executed": "1660",
+        "passed": "1660",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "focusedCases": 5,
+      "libraryAssetsAsserted": 15,
+      "report": {
+        "path": "artifacts/contracts/remaining/applications/verified-netstandard/verified-netstandard.trx",
+        "sha256": "2348780e10c2eaaf765ec8385869a7148a57debf572b8b0a4efab93bd4d608c7",
+        "bytes": 2433566
+      },
+      "actualRuntimeAndAssetIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETStandard,Version=v2.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/applications-verified-netstandard.log",
+        "sha256": "43e807de00938b307c5e0dbc69202a255652e33e8738e2ac7e612aa22d0e2633",
+        "bytes": 2808
+      }
+    }
+  ],
+  "apiComparisons": {
+    "passed": 45,
+    "report": {
+      "path": "artifacts/contracts/remaining/applications/api/comparisons.json",
+      "sha256": "12cecc887c7aa719e7a61ed23231ab0ecebddc3ce40ebe069cb0102f98750206",
+      "bytes": 12165
+    },
+    "binaryBindings": [
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net472",
+        "leftSha256": "fd9d5530d479ec7c3f8b1842dd4f6217d0296936dac9b078d5e334a20a4ce56f",
+        "rightSha256": "e5bc1c626660086a1673b5992c251e2b0a9c6a4dd8ef369b41e8d4b4c2f61740",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net8.0",
+        "leftSha256": "fd9d5530d479ec7c3f8b1842dd4f6217d0296936dac9b078d5e334a20a4ce56f",
+        "rightSha256": "56a521a0ac3229a8fe9b69cdd89ddd1f63a9572c2ad8cb81d3afd5007109b2c1",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net10.0",
+        "leftSha256": "fd9d5530d479ec7c3f8b1842dd4f6217d0296936dac9b078d5e334a20a4ce56f",
+        "rightSha256": "7c8adca916e3d748d74b58d685d9ffcef3606b455439c6183edbd63083f1dd90",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net472",
+        "leftSha256": "7b1c4e271cb1fa88cb1e4e9e6552c60fcb38ae1472a7e349e6d68d63040ba3a2",
+        "rightSha256": "dfb866d9977c844fa1e6160064484003d6c20006ac8babdaa0bfa9bc3b9f5d37",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net8.0",
+        "leftSha256": "7b1c4e271cb1fa88cb1e4e9e6552c60fcb38ae1472a7e349e6d68d63040ba3a2",
+        "rightSha256": "fcbd04c0eb34a76128a47eb06907e3dcb93464e580898d9f12cd4c3367e6b025",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net10.0",
+        "leftSha256": "7b1c4e271cb1fa88cb1e4e9e6552c60fcb38ae1472a7e349e6d68d63040ba3a2",
+        "rightSha256": "c9561f4c53fd3cc243a022acc77928a108a741cd7d2b1995d8eaf8ac2e74d29b",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net472",
+        "leftSha256": "e1504927e3b5b28a75723e8d1eb6426551922ab79aef0bc10cab0b54da704213",
+        "rightSha256": "8268c28fa5634eaca899748e688fb8b16212418657304279421d55743b592b4d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net8.0",
+        "leftSha256": "e1504927e3b5b28a75723e8d1eb6426551922ab79aef0bc10cab0b54da704213",
+        "rightSha256": "a568c9373474cef8978c1375a02fac369108e5265594219b867e461a9b531a8c",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net10.0",
+        "leftSha256": "e1504927e3b5b28a75723e8d1eb6426551922ab79aef0bc10cab0b54da704213",
+        "rightSha256": "3dced6aba039cdf8051ac8a54cd0b9ec2fd93b48678a59acd50da75c0218d4a9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net472",
+        "leftSha256": "edaa477672e240f3e42d7cf6848ea1c5be205c7caf106f599208ff9da4cca276",
+        "rightSha256": "3b3582193eb7df07454a891870cde624c052b829a7eec41017ef7b8855656bce",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net8.0",
+        "leftSha256": "edaa477672e240f3e42d7cf6848ea1c5be205c7caf106f599208ff9da4cca276",
+        "rightSha256": "67546e8fdfa12cfeba5ed512f39dd36ba8753108eb0ef216c1e51c5d69e22df2",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net10.0",
+        "leftSha256": "edaa477672e240f3e42d7cf6848ea1c5be205c7caf106f599208ff9da4cca276",
+        "rightSha256": "5744b43345bee3b211f777a166cdf66f2ba6f49fdaff8c5473616b070d8014ac",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net472",
+        "leftSha256": "d19531e320674308d5753343228ff39b3a443bbab49ed22c937d72e74fb94c8c",
+        "rightSha256": "60a5acb82735cd0eab22d2dd23cb1700c85e90fe80a8228b9c8ca07ab1207122",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net8.0",
+        "leftSha256": "d19531e320674308d5753343228ff39b3a443bbab49ed22c937d72e74fb94c8c",
+        "rightSha256": "91d32d23b8d17c3de141396d055d0e2cdd35994fe18d8c46b573331268728ee4",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net10.0",
+        "leftSha256": "d19531e320674308d5753343228ff39b3a443bbab49ed22c937d72e74fb94c8c",
+        "rightSha256": "69b2aaf740c3b5643484b7863283cd0fcf61e553a7f1ddcba965c8ae952541a2",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net472",
+        "leftSha256": "41517532e14ce5b0b7e3cb62e48c882ce8d540ecaa5b70689259cee6206da61e",
+        "rightSha256": "e08831bb0641b88afe92e1d27dcef4f6a66e674cbacaf881489ba6974983a7f5",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net8.0",
+        "leftSha256": "41517532e14ce5b0b7e3cb62e48c882ce8d540ecaa5b70689259cee6206da61e",
+        "rightSha256": "4a56d3d49819c378f34ca87712aef8449b64cd58e8e597c2c26398adc341be4a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net10.0",
+        "leftSha256": "41517532e14ce5b0b7e3cb62e48c882ce8d540ecaa5b70689259cee6206da61e",
+        "rightSha256": "d06a6191f9a4c5765abe97531f300e18e62f807eee0e217da95e14a769f19696",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net472",
+        "leftSha256": "6f795cd02d423472825aeb48a7caec701864b8ea1464035a829f4c0b2622a71d",
+        "rightSha256": "1fd49dda769dbd4efb8473bbf1f8d3b8cdb669aded4b6b57de7f76bab33674cb",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net8.0",
+        "leftSha256": "6f795cd02d423472825aeb48a7caec701864b8ea1464035a829f4c0b2622a71d",
+        "rightSha256": "854eb30b03341c2dbe31d18d54cafc374079ec6136e7fbd04ebd2129dacadb76",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net10.0",
+        "leftSha256": "6f795cd02d423472825aeb48a7caec701864b8ea1464035a829f4c0b2622a71d",
+        "rightSha256": "f508ebe455714a7b0a0b793ead2a288aea042779e190fb967f640c33d15a921d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net472",
+        "leftSha256": "b46c89eed96b85fc87f2b827026906421f17f6d75acd5879850b07835bfa4a41",
+        "rightSha256": "f39397791744fac8a13de08c8739ba4aeed5d2ae4162f10f6d03373c846ef20a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net8.0",
+        "leftSha256": "b46c89eed96b85fc87f2b827026906421f17f6d75acd5879850b07835bfa4a41",
+        "rightSha256": "64a35de1ea9dd0130799ae8f350c4cbff4ac919664e033362dff05a96a1e90dd",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net10.0",
+        "leftSha256": "b46c89eed96b85fc87f2b827026906421f17f6d75acd5879850b07835bfa4a41",
+        "rightSha256": "3d5495c3d065d5b2aa54053af744af42dcd3f6cfbfa9dbee067bdcf0e49f94f7",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net472",
+        "leftSha256": "32af07744f61ef6da8d70cb94bb6fd65de828b6639160dd90a5e7ffb206f58d7",
+        "rightSha256": "40094abbe0eed313a69b541d22a153282cdd472e6567d9d782929946c95b8de1",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net8.0",
+        "leftSha256": "32af07744f61ef6da8d70cb94bb6fd65de828b6639160dd90a5e7ffb206f58d7",
+        "rightSha256": "3e239177efdda0c72d17cf87eaaff26ade005c0e87f4655ab873e816ba7e5cc3",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net10.0",
+        "leftSha256": "32af07744f61ef6da8d70cb94bb6fd65de828b6639160dd90a5e7ffb206f58d7",
+        "rightSha256": "7e8454eb01ec5cfe667840dba74658a584186ca99651d35ae4525359627b4774",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net472",
+        "leftSha256": "e54645ac7739d3d2e24c1e6e6691cec8fa09609396d9dd07226cc4cbb0703278",
+        "rightSha256": "1bc440fb1ecc2a3dd86314ee8900dce4a7ccf3766a070d14b04b45109c24467c",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net8.0",
+        "leftSha256": "e54645ac7739d3d2e24c1e6e6691cec8fa09609396d9dd07226cc4cbb0703278",
+        "rightSha256": "a7355801f2e82fd9d5d7d248e5ad7f33c56302457f866acb1488270548c0d73c",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net10.0",
+        "leftSha256": "e54645ac7739d3d2e24c1e6e6691cec8fa09609396d9dd07226cc4cbb0703278",
+        "rightSha256": "7ffd23caa4a330055d9c11d0f6127b4d6a88e6cc02b4328ed8f119a2efd3d45e",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net472",
+        "leftSha256": "3072cb4d0e6d6f7c14b1511be6fa7c46319b7f83881174d1e769ea38356edbb8",
+        "rightSha256": "b2f574a9978685764d2f35eeefacca87a607b06650783dbee5c8e4fb9d9e9b59",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net8.0",
+        "leftSha256": "3072cb4d0e6d6f7c14b1511be6fa7c46319b7f83881174d1e769ea38356edbb8",
+        "rightSha256": "75d17643410e44d7a16a4170020c1c8d85adbdafef5d0b9e2a2de21791bc3df6",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net10.0",
+        "leftSha256": "3072cb4d0e6d6f7c14b1511be6fa7c46319b7f83881174d1e769ea38356edbb8",
+        "rightSha256": "102496d91cf8b55322b957575f300b5a41d8d3267f904167cd90108f7aa1a027",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net472",
+        "leftSha256": "13444490331e68d47fa564cd7d7ca84500800f0ac3f4fba2779fad9a341284fa",
+        "rightSha256": "04f419b98e509933a8946f69bfa32c28206d40ee839787ede8a0eb4c52b70373",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net8.0",
+        "leftSha256": "13444490331e68d47fa564cd7d7ca84500800f0ac3f4fba2779fad9a341284fa",
+        "rightSha256": "cd5543d158e9bdb9547f8ba9b53504a169b906056aaa8885213d7abaa0b3798f",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net10.0",
+        "leftSha256": "13444490331e68d47fa564cd7d7ca84500800f0ac3f4fba2779fad9a341284fa",
+        "rightSha256": "37e0a08811153979faeec32d1db677f73b904314b1d11b43909fbc3f500deb8f",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Intelligence",
+        "targetFramework": "net472",
+        "leftSha256": "d2ad2ff2eba50b7970a8e1ae4e5908041b1a207bccd379ca87cb90e1e9b2cdc9",
+        "rightSha256": "5be5e3df4acf6a01cf410dbe689462d3db3f5aeabfadb3465ec8f00e25bbb7f4",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Intelligence",
+        "targetFramework": "net8.0",
+        "leftSha256": "d2ad2ff2eba50b7970a8e1ae4e5908041b1a207bccd379ca87cb90e1e9b2cdc9",
+        "rightSha256": "61408b4ac01bfd207a8c94ecc37ceca418662ee4cd49b27c67541f277f81fbd9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Intelligence",
+        "targetFramework": "net10.0",
+        "leftSha256": "d2ad2ff2eba50b7970a8e1ae4e5908041b1a207bccd379ca87cb90e1e9b2cdc9",
+        "rightSha256": "8642b33b2357f23792886dce15025bca326ee82ee4b3addb78e7e2b9d1934c81",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Automation",
+        "targetFramework": "net472",
+        "leftSha256": "57f602632abf452e8a04817ee930d358fbece820cdbcac82ca3c286e22fd58a7",
+        "rightSha256": "da9830570fc77d143d6193b5d99f3aeee11ce4d37a31aea89a4ff9eb6c7a4b1a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Automation",
+        "targetFramework": "net8.0",
+        "leftSha256": "57f602632abf452e8a04817ee930d358fbece820cdbcac82ca3c286e22fd58a7",
+        "rightSha256": "fdd6971a775d72f2d5fb6860d86c12f2a90a1f8ba44960d339d781496b63dd3f",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Automation",
+        "targetFramework": "net10.0",
+        "leftSha256": "57f602632abf452e8a04817ee930d358fbece820cdbcac82ca3c286e22fd58a7",
+        "rightSha256": "c2b885fa4ec0b0ba88c93a39ffa735fe1abc4c815836245615f7b5dfc9648789",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Applications",
+        "targetFramework": "net472",
+        "leftSha256": "d9d5c895d36e6a9ef21e850125046ed2717fee984097a3661b5505bc2ee563e8",
+        "rightSha256": "053b89e94bd66ad2c73b07cba11f64d95dfca92deeebba8d65b660ef75d81559",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Applications",
+        "targetFramework": "net8.0",
+        "leftSha256": "d9d5c895d36e6a9ef21e850125046ed2717fee984097a3661b5505bc2ee563e8",
+        "rightSha256": "1fd58a500447b482ca9711f7dccb23705b92248d225dd4f1374bbbafb1426271",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Applications",
+        "targetFramework": "net10.0",
+        "leftSha256": "d9d5c895d36e6a9ef21e850125046ed2717fee984097a3661b5505bc2ee563e8",
+        "rightSha256": "7e8dd99ef9d99ec76b5ef35b4d5a357269ce0817f0485d89d06cd6edd616b34b",
+        "exitCode": 0
+      }
+    ],
+    "script": {
+      "path": "/workspace/scratch/applications-check-api.ps1",
+      "sha256": "036a0e4d8baa42fd9b30f360eeb4ac3c9d60e7ec7ceb91deced0b12cbdff4699",
+      "bytes": 1864
+    },
+    "scriptChanges": "Same commands/inventory, explicit worktree root and distinct evidence destination only."
+  },
+  "actualLocalBrowser": [
+    {
+      "profile": "net8.0",
+      "observations": {
+        "schemaVersion": 1,
+        "assemblySha256": "31fa42fd5893aefca253a4a0fa3701fcbc6ade3dd8e60105edfa9ce47e18198c",
+        "browser": "154.0.8037.57",
+        "actualBrowser": true,
+        "keyboard": true,
+        "accessibilityTree": true,
+        "privateAuthority": true,
+        "fixtureRenderer": true,
+        "manualScreenReaderQualified": false,
+        "nativeRenderingQualified": false,
+        "productionQualified": false
+      },
+      "report": {
+        "path": "artifacts/contracts/remaining/applications/browser-net8.0.json",
+        "sha256": "9e3c739f97b81e0f1ef7b804de4b8725638f304bb2e7f0c6d0a9acebb9c67d4a",
+        "bytes": 381
+      },
+      "httpLog": {
+        "path": "/workspace/scratch/applications-http-net8.0.log",
+        "sha256": "c674f4469efe9145bedfc22c9e17b2a37dec30379633b750bab9f155b555a993",
+        "bytes": 72
+      },
+      "domLog": {
+        "path": "/workspace/scratch/applications-dom-net8.0.log",
+        "sha256": "f93f468b7bcd73b110fe5a61895763f86bde45ddce42687b5f676ae670059bc1",
+        "bytes": 55
+      }
+    },
+    {
+      "profile": "net10.0",
+      "observations": {
+        "schemaVersion": 1,
+        "assemblySha256": "1e7c20625a1e7c28a04e8f5092f6fbaa140e1365c75eb2bc8e2f92734f1d5ad7",
+        "browser": "154.0.8037.57",
+        "actualBrowser": true,
+        "keyboard": true,
+        "accessibilityTree": true,
+        "privateAuthority": true,
+        "fixtureRenderer": true,
+        "manualScreenReaderQualified": false,
+        "nativeRenderingQualified": false,
+        "productionQualified": false
+      },
+      "report": {
+        "path": "artifacts/contracts/remaining/applications/browser-net10.0.json",
+        "sha256": "f21573c0153ae471a8fa172b139300b93e31283d39011f0d335880660551a208",
+        "bytes": 381
+      },
+      "httpLog": {
+        "path": "/workspace/scratch/applications-http-net10.0.log",
+        "sha256": "5a2bfad1aca05af42b4541ebfa05ca23a2cc8711706931cb3278693cea0545f7",
+        "bytes": 73
+      },
+      "domLog": {
+        "path": "/workspace/scratch/applications-dom-net10.0.log",
+        "sha256": "f93f468b7bcd73b110fe5a61895763f86bde45ddce42687b5f676ae670059bc1",
+        "bytes": 55
+      }
+    }
+  ],
+  "independentPng": {
+    "report": {
+      "path": "artifacts/contracts/remaining/applications/independent-frames.json",
+      "sha256": "997b09a9263c566491812d49f484ff4644ff142fbf7144c5a3e9e461f45d64bb",
+      "bytes": 1983
+    },
+    "observations": {
+      "schemaVersion": 1,
+      "sourceSha256": "e43e471489f42933e08924fa04fe86b91cead0d6b682f3f565a8eb30da95ea15",
+      "pngReader": "Pillow",
+      "pngReaderVersion": "13.0.0",
+      "pdfReader": "PyMuPDF",
+      "pdfReaderVersion": "1.26.6",
+      "frames": [
+        {
+          "path": "tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/application-fixtures/page-zero.png",
+          "sha256": "3a3f32c45d1726123b3ed9c7b1454e8169ff8d644de695a3e8e1a42eee52eef2",
+          "width": 534,
+          "height": 267,
+          "exactConstantPixels": true
+        },
+        {
+          "path": "tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/application-fixtures/page-zero.png",
+          "sha256": "19e3eb15ab15e10d51063797753083516a75083aa8f8691853b174ad962fe0f9",
+          "width": 534,
+          "height": 267,
+          "exactConstantPixels": true
+        },
+        {
+          "path": "examples/Fluent.Pdf.BrowserViewSample/bin/Release/net8.0/application-browser-fixtures/page-0.png",
+          "sha256": "3a3f32c45d1726123b3ed9c7b1454e8169ff8d644de695a3e8e1a42eee52eef2",
+          "width": 534,
+          "height": 267,
+          "exactConstantPixels": true
+        },
+        {
+          "path": "examples/Fluent.Pdf.BrowserViewSample/bin/Release/net8.0/application-browser-fixtures/page-1.png",
+          "sha256": "3a3f32c45d1726123b3ed9c7b1454e8169ff8d644de695a3e8e1a42eee52eef2",
+          "width": 534,
+          "height": 267,
+          "exactConstantPixels": true
+        },
+        {
+          "path": "examples/Fluent.Pdf.BrowserViewSample/bin/Release/net10.0/application-browser-fixtures/page-0.png",
+          "sha256": "19e3eb15ab15e10d51063797753083516a75083aa8f8691853b174ad962fe0f9",
+          "width": 534,
+          "height": 267,
+          "exactConstantPixels": true
+        },
+        {
+          "path": "examples/Fluent.Pdf.BrowserViewSample/bin/Release/net10.0/application-browser-fixtures/page-1.png",
+          "sha256": "19e3eb15ab15e10d51063797753083516a75083aa8f8691853b174ad962fe0f9",
+          "width": 534,
+          "height": 267,
+          "exactConstantPixels": true
+        }
+      ],
+      "pdfRenderingFidelityQualified": false
+    },
+    "scope": "Independent source page extents, PNG decoding and exact original constant fixture pixels. No PDF raster fidelity claim."
+  },
+  "specification": {
+    "path": "/workspace/scratch/applications-clean-spec.log",
+    "sha256": "47e798182f69f787d75d2c7e1c438ae5098f2e2cbfb1fb3d5a3a340c61f9b6d9",
+    "bytes": 104
+  },
+  "releaseBlock": {
+    "path": "/workspace/scratch/applications-clean-release-block.log",
+    "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "bytes": 139
+  },
+  "localNativeLimit": "Five native test classes remain explicitly filtered because required Landlock isolation is unavailable. No native sandbox is bypassed. Chromium UI checks keep its browser sandbox enabled.",
+  "dependencies": {
+    "sdkRuntime": "Core only; no toolkit or browser dependency enters Core. Native assets and printers require explicit existing providers.",
+    "analysisOnly": [
+      "Playwright 1.62.0 with caller-provisioned system Chromium",
+      "Pillow and PyMuPDF versions recorded in independent report"
+    ],
+    "distributedAnalysisTools": false
+  },
+  "remaining": [
+    "Actual minimum runtimes, complete Windows/Linux/macOS/architecture/browser/native renderer/print qualification",
+    "Manual screen-reader, DPI, high contrast, localization, malformed-content, concurrency and endurance qualification",
+    "Exact final packages and fresh package-only consumers"
+  ],
+  "initialCi": {
+    "sourceHead": "d17a2969fd629c7a63306d69df580e999265a6ac",
+    "actualCheckout": "b7c612f51ec11e03e6b548c6ddf47a632a1b2f03",
+    "runId": 39988685588,
+    "windows": {
+      "jobId": 120534482902,
+      "conclusion": "failure",
+      "reason": "NU1004: Windows SDK default win-x86 RID differed from the Linux-produced Framework application lockfile; no UI consumer ran.",
+      "markers": [
+        "2026-10-23T16:40:37.8347669Z D:\\a\\pdf.net\\pdf.net\\examples\\Fluent.Pdf.WinFormsSample\\Fluent.Pdf.WinFormsSample.csproj : error NU1004: The project's runtime identifiers have changed from. Project's runtime identifiers: win-x86, lock file's runtime identifiers .The packages lock file is inconsistent with the project dependencies so restore can't be run in locked mode. Disable the RestoreLockedMode MSBuild property or pass an explicit --force-evaluate option to run restore to update the lock file.",
+        "2026-10-23T16:40:38.1561158Z \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m  16 | \u001b[0m \u2026 TEXITCODE -ne 0) { \u001b[36;1mthrow \"Locked application restore failed: $kind\"\u001b[0m }\u001b[0m",
+        "2026-10-23T16:40:38.1563369Z \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[31;1m\u001b[31;1m\u001b[36;1m     | \u001b[31;1mLocked application restore failed: WinForms\u001b[0m"
+      ]
+    },
+    "browser": {
+      "jobId": 120534483491,
+      "conclusion": "success",
+      "markers": [
+        "2026-10-23T16:40:56.1404644Z BROWSER_VIEW_HTTP_PASS;.NET 8.0.32;fixture-renderer;authority-and-pages",
+        "2026-10-23T16:40:59.6323656Z BROWSER_VIEW_DOM_PASS;keyboard-and-AX;fixture-renderer",
+        "2026-10-23T16:41:00.1570222Z BROWSER_VIEW_HTTP_PASS;.NET 10.0.13;fixture-renderer;authority-and-pages",
+        "2026-10-23T16:41:02.4147477Z BROWSER_VIEW_DOM_PASS;keyboard-and-AX;fixture-renderer",
+        "2026-10-23T16:41:02.9106232Z SHA256 digest of uploaded artifact zip is be9a644c0e99e8ce666bd5a9096b031fd0fac94af45ed56c43055f23e51f9c8a"
+      ],
+      "artifact": {
+        "id": 12516716828,
+        "sha256": "be9a644c0e99e8ce666bd5a9096b031fd0fac94af45ed56c43055f23e51f9c8a",
+        "archiveDownloadedLocally": false
+      }
+    }
+  },
+  "desktopCorrection": {
+    "sourceCommit": "6b0197d8b6636a1f2aaad3ee054a7cd22ffb25d7",
+    "reason": "SDK inferred a host-dependent Framework RID; explicit win-x64/x64 sample declarations and regenerated locks now align Windows restore with Linux cross-build. WPF actual peer assertion also checks Document role. SDK/controller/browser code is unchanged.",
+    "sourceFiles": [
+      {
+        "path": "docs/application-views.md",
+        "sha256": "07edce14758b673671c8017c5e4e4d8b78e5d11b179b1d636734207a4c56283f",
+        "bytes": 6405
+      },
+      {
+        "path": "examples/Fluent.Pdf.WinFormsSample/Fluent.Pdf.WinFormsSample.csproj",
+        "sha256": "1450d8b217b8e9efd84420d988241b99b187c3b801cda947a44cbb5ece1388c1",
+        "bytes": 1539
+      },
+      {
+        "path": "examples/Fluent.Pdf.WinFormsSample/packages.lock.json",
+        "sha256": "a3cbad98da11c3cabd7c6a0fe190100d600e6727be484898d8a085c1c108b795",
+        "bytes": 2462
+      },
+      {
+        "path": "examples/Fluent.Pdf.WpfSample/Fluent.Pdf.WpfSample.csproj",
+        "sha256": "20ecc9f738c2bfa9f0757a4c3fb69798fa33163415274356650ac8717ac74628",
+        "bytes": 1521
+      },
+      {
+        "path": "examples/Fluent.Pdf.WpfSample/Program.cs",
+        "sha256": "a9667a070912ea28c15820c72180e67716064b6bc2b0c1051ddba663dd46632f",
+        "bytes": 2959
+      },
+      {
+        "path": "examples/Fluent.Pdf.WpfSample/packages.lock.json",
+        "sha256": "a3cbad98da11c3cabd7c6a0fe190100d600e6727be484898d8a085c1c108b795",
+        "bytes": 2462
+      }
+    ],
+    "completePassingWindowsRunAtThisCheckpoint": false
+  },
+  "localTestFilter": "FullyQualifiedName!~NativeWorkerTests&FullyQualifiedName!~NativeImageCodecTests&FullyQualifiedName!~NativeRenderingTests&FullyQualifiedName!~NativeTextTests&FullyQualifiedName!~NativeOcrContractTests",
+  "commands": [
+    "Clean checkpoint d17a296: dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "Clean three-target desktop and two-target browser builds with the same serial flags",
+    "Normal selected net8.0/net10.0 tests with --no-build --no-restore and exact localTestFilter; fallback net10.0 -p:UseNetStandardAssembly=true with serial build flags",
+    "pwsh -NoProfile -File /workspace/scratch/applications-check-api.ps1 after SDK binary builds completed",
+    "Both browser TFMs: dotnet <assembly> --self-test, then python3 eng/test-browser-view.py --assembly <assembly> --browser /usr/bin/chromium --output <report>",
+    "Independent fixtures: caller-supplied Pillow/PyMuPDF Python executes eng/verify-application-frames.py without disabling assertions",
+    "pwsh -NoProfile -File eng/validate-spec.ps1 and eng/test-release-block.ps1"
+  ],
+  "desktopFailureHistory": [
+    {
+      "sourceHead": "d17a2969fd629c7a63306d69df580e999265a6ac",
+      "actualCheckout": "b7c612f51ec11e03e6b548c6ddf47a632a1b2f03",
+      "runId": 39988685588,
+      "jobId": 120534482902,
+      "conclusion": "failure",
+      "reason": "Host-dependent inferred RID blocked locked restore; no desktop app ran.",
+      "log": {
+        "path": "/workspace/scratch/queue-87-initial-windows.log",
+        "sha256": "5b6acd9a7a15325a098e7a909bb05c543955dba95680fd933dfd7b1d0c17c4fa"
+      },
+      "markers": []
+    },
+    {
+      "sourceHead": "6b0197d8b6636a1f2aaad3ee054a7cd22ffb25d7",
+      "actualCheckout": "f18a1c2a6d494264b665e164ab1feed6aed3a81c",
+      "runId": 39989671043,
+      "jobId": 120537861730,
+      "conclusion": "failure",
+      "reason": "Locked restore passed; first WinForms Framework consumer failed with insufficient stage diagnostics.",
+      "log": {
+        "path": "/workspace/scratch/queue-87-rid-windows.log",
+        "sha256": "79a824cd60525a7ee9d4d8fb4df711fa910dd3f7ea1553bcc41ca63a96f36395"
+      },
+      "markers": []
+    },
+    {
+      "sourceHead": "36a7c3853ab50ca11454c094384dea7f1431ac53",
+      "actualCheckout": "920aa5a29610cc2317a087f666a4b64ea0d1c0ae",
+      "runId": 39990203264,
+      "jobId": 120539708231,
+      "conclusion": "failure",
+      "reason": "All three WinForms tests reached keyboard preprocessing with the captured text box focused; all three WPF applications passed. Test now explicitly validates text-focus preservation and moves focus to navigation before page-command checks.",
+      "log": {
+        "path": "/workspace/scratch/queue-87-stages-windows.log",
+        "sha256": "826565a5767778418b4c2283cfe8d9c74249d3501edf2ed3690f6452826f9703"
+      },
+      "markers": [
+        "2026-10-23T16:52:44.1122257Z \u001b[31;1mWINFORMS_VIEW_FAILED;keyboard-preprocess;InvalidOperationException;\u001b[0m",
+        "2026-10-23T16:52:46.2700896Z \u001b[31;1mWINFORMS_VIEW_FAILED;keyboard-preprocess;InvalidOperationException;\u001b[0m",
+        "2026-10-23T16:52:47.3382567Z \u001b[31;1mWINFORMS_VIEW_FAILED;keyboard-preprocess;InvalidOperationException;\u001b[0m",
+        "2026-10-23T16:52:59.6825541Z WPF_VIEW_PASS;.NET Framework 4.8.9363.0;X64;fixture-renderer;keyboard-and-UIA",
+        "2026-10-23T16:53:01.9965489Z WPF_VIEW_PASS;.NET 8.0.32;X64;fixture-renderer;keyboard-and-UIA",
+        "2026-10-23T16:53:04.1785082Z WPF_VIEW_PASS;.NET 10.0.13;X64;fixture-renderer;keyboard-and-UIA"
+      ]
+    }
+  ],
+  "actualWindowsSdkSourceCi": {
+    "sourceHead": "d17a2969fd629c7a63306d69df580e999265a6ac",
+    "actualCheckout": "b7c612f51ec11e03e6b548c6ddf47a632a1b2f03",
+    "runId": 39988685467,
+    "runNumber": 147,
+    "jobId": 120534483173,
+    "conclusion": "success",
+    "passedEachProfile": 1734,
+    "profiles": [
+      "net8.0 x64",
+      "net10.0 x64",
+      "current Framework x64",
+      "current Framework x86",
+      "netstandard2.0 on net10.0 x64"
+    ],
+    "noNativeClassFilter": true,
+    "log": {
+      "path": "/workspace/scratch/queue-87-source-windows.log",
+      "sha256": "ecae051b23f3dbc63416f1fc955574c213b2e42160c50ca9695e7c612388541e"
+    },
+    "markers": [
+      "2026-10-23T16:46:52.6934019Z Passed!  - Failed:     0, Passed:  1734, Skipped:     0, Total:  1734, Duration: 1 m 26 s - Fluent.Pdf.Contract.Tests.dll (net8.0)",
+      "2026-10-23T16:48:11.1997877Z Passed!  - Failed:     0, Passed:  1734, Skipped:     0, Total:  1734, Duration: 1 m 15 s - Fluent.Pdf.Contract.Tests.dll (net10.0)",
+      "2026-10-23T16:50:14.9106755Z Passed!  - Failed:     0, Passed:  1734, Skipped:     0, Total:  1734, Duration: 1 m 55 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+      "2026-10-23T16:52:02.1796624Z Passed!  - Failed:     0, Passed:  1734, Skipped:     0, Total:  1734, Duration: 1 m 35 s - Fluent.Pdf.Contract.Tests.dll (net472)",
+      "2026-10-23T16:53:42.4639115Z Passed!  - Failed:     0, Passed:  1734, Skipped:     0, Total:  1734, Duration: 1 m 24 s - Fluent.Pdf.Contract.Tests.dll (net10.0)"
+    ],
+    "minimumFrameworkQualified": false,
+    "finalPackagesQualified": false
+  },
+  "actualDesktopConsumers": {
+    "sourceHead": "3d43215b8f669e0812176919b038e65ebcb481d9",
+    "actualCheckout": "8c38250662d0d9b78a31597f0cb2d7159b86d73d",
+    "runId": 39990658862,
+    "jobId": 120541250258,
+    "conclusion": "success",
+    "markers": [
+      "2026-10-23T16:55:42.6434798Z WINFORMS_VIEW_PASS;.NET Framework 4.8.9363.0;X64;fixture-renderer;keyboard-and-MSAA",
+      "2026-10-23T16:55:45.4959640Z WINFORMS_VIEW_PASS;.NET 8.0.32;X64;fixture-renderer;keyboard-and-MSAA",
+      "2026-10-23T16:55:46.6222231Z WINFORMS_VIEW_PASS;.NET 10.0.13;X64;fixture-renderer;keyboard-and-MSAA",
+      "2026-10-23T16:55:58.3541807Z WPF_VIEW_PASS;.NET Framework 4.8.9363.0;X64;fixture-renderer;keyboard-and-UIA",
+      "2026-10-23T16:56:01.0560274Z WPF_VIEW_PASS;.NET 8.0.32;X64;fixture-renderer;keyboard-and-UIA",
+      "2026-10-23T16:56:03.6182571Z WPF_VIEW_PASS;.NET 10.0.13;X64;fixture-renderer;keyboard-and-UIA"
+    ],
+    "log": {
+      "path": "/workspace/scratch/queue-87-focus-windows.log",
+      "sha256": "8cfba34456fe956bce3f72652875725fd1dbdabef425b729f8affdd74deadd39",
+      "bytes": 21949
+    },
+    "archive": {
+      "id": 12517433761,
+      "sha256": "82ff219ca0b76316289772688419c5f1e59edd7742a0c55853ea47490a5cbc0b",
+      "downloadedLocally": false
+    },
+    "manualScreenReaderQualified": false,
+    "nativeRenderingFidelityQualified": false,
+    "minimumFrameworkQualified": false,
+    "finalPackagesQualified": false
+  },
+  "actualBrowserCi": {
+    "sourceHead": "3d43215b8f669e0812176919b038e65ebcb481d9",
+    "actualCheckout": "8c38250662d0d9b78a31597f0cb2d7159b86d73d",
+    "runId": 39990658862,
+    "jobId": 120541249579,
+    "conclusion": "success",
+    "markers": [
+      "2026-10-23T16:55:17.9682122Z BROWSER_VIEW_HTTP_PASS;.NET 8.0.32;fixture-renderer;authority-and-pages",
+      "2026-10-23T16:55:27.2958885Z BROWSER_VIEW_DOM_PASS;keyboard-and-AX;fixture-renderer",
+      "2026-10-23T16:55:27.7982325Z BROWSER_VIEW_HTTP_PASS;.NET 10.0.13;fixture-renderer;authority-and-pages",
+      "2026-10-23T16:55:29.7630135Z BROWSER_VIEW_DOM_PASS;keyboard-and-AX;fixture-renderer"
+    ],
+    "log": {
+      "path": "/workspace/scratch/queue-87-focus-browser.log",
+      "sha256": "208183b6d00201a34675b1696f600efc74097c0955321c29cb9fb7167b94134d",
+      "bytes": 25391
+    },
+    "archive": {
+      "id": 12518011259,
+      "sha256": "30c87ab5739000cd0ede873fd778643d33805ad8281f1528715a627f4b444f97",
+      "downloadedLocally": false
+    },
+    "manualScreenReaderQualified": false,
+    "nativeRenderingFidelityQualified": false,
+    "minimumFrameworkQualified": false,
+    "finalPackagesQualified": false
+  },
+  "desktopSourceCorrections": {
+    "finalSourceHead": "3d43215b8f669e0812176919b038e65ebcb481d9",
+    "sourceFiles": [
+      {
+        "path": "docs/application-views.md",
+        "sha256": "07edce14758b673671c8017c5e4e4d8b78e5d11b179b1d636734207a4c56283f",
+        "bytes": 6405
+      },
+      {
+        "path": "eng/test-application-views.ps1",
+        "sha256": "105d29188738726da59b8f832f3f6b9c5f4b445bae7ab2671eb98a05547f3e65",
+        "bytes": 3334
+      },
+      {
+        "path": "examples/Fluent.Pdf.WinFormsSample/Fluent.Pdf.WinFormsSample.csproj",
+        "sha256": "1450d8b217b8e9efd84420d988241b99b187c3b801cda947a44cbb5ece1388c1",
+        "bytes": 1539
+      },
+      {
+        "path": "examples/Fluent.Pdf.WinFormsSample/PdfPageControl.cs",
+        "sha256": "59959081c823d88b7abdf28ee365bcd82d40c70c96deebaf982a6a0a17c7044a",
+        "bytes": 6523
+      },
+      {
+        "path": "examples/Fluent.Pdf.WinFormsSample/Program.cs",
+        "sha256": "451d957650005b0363321f13ba6dfee0d8c0eba78edbd00c970b4cc64a3402e1",
+        "bytes": 4071
+      },
+      {
+        "path": "examples/Fluent.Pdf.WinFormsSample/packages.lock.json",
+        "sha256": "a3cbad98da11c3cabd7c6a0fe190100d600e6727be484898d8a085c1c108b795",
+        "bytes": 2462
+      },
+      {
+        "path": "examples/Fluent.Pdf.WpfSample/Fluent.Pdf.WpfSample.csproj",
+        "sha256": "20ecc9f738c2bfa9f0757a4c3fb69798fa33163415274356650ac8717ac74628",
+        "bytes": 1521
+      },
+      {
+        "path": "examples/Fluent.Pdf.WpfSample/PdfPageControl.cs",
+        "sha256": "81b728010dce26b13839ffaacdd1a2a74c947539f9a32f6b546fd594c7c569be",
+        "bytes": 7033
+      },
+      {
+        "path": "examples/Fluent.Pdf.WpfSample/Program.cs",
+        "sha256": "e2b0e6f936db95afd0b69a97e28f5ffaabb85f512de59a1a8db5d79897ff4f39",
+        "bytes": 3244
+      },
+      {
+        "path": "examples/Fluent.Pdf.WpfSample/packages.lock.json",
+        "sha256": "a3cbad98da11c3cabd7c6a0fe190100d600e6727be484898d8a085c1c108b795",
+        "bytes": 2462
+      }
+    ],
+    "scope": "Explicit Framework RID/locks, redacted per-runtime failure diagnostics, exact UIA document-role assertion and focus-correct WinForms key preprocessing. SDK/controller/browser source is unchanged from the clean d17a296 checkpoint.",
+    "actualWindowsExecutionObserved": true
+  }
+}

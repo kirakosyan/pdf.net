@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-104",
+  "issue": 104,
+  "sourceCommit": "293f451a8b4c483ce0a7f03f999e3cdb4fbbfa53",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "ocrAccuracyMeasured": false,
+  "businessValuesVerified": false,
+  "readerVersions": {
+    "pypdf": "6.10.0",
+    "lxml": "6.1.1",
+    "jsonschema": "4.25.1"
+  },
+  "sourceFiles": [
+    {
+      "path": "docs/business-data.md",
+      "sha256": "2b0de391958f836be36e389be106d567952ff8e527e25489ad4191d051bed452",
+      "bytes": 5553
+    },
+    {
+      "path": "docs/evidence/FP-100-source.json",
+      "sha256": "e03a67dd25867fe5a3c3bb135546c238f7a893a6aac3ae4d6bdb10f816fba159",
+      "bytes": 10409
+    },
+    {
+      "path": "docs/evidence/FP-101-source.json",
+      "sha256": "751b9ca046db32a1db226e9a9ae591327e57c3a85008ad910c19e5fe9b71218f",
+      "bytes": 10992
+    },
+    {
+      "path": "docs/evidence/FP-103-source.json",
+      "sha256": "fbe25336c725a8d49bd9378b93d5fb65439534b0085205f706dc31cb0e403bf6",
+      "bytes": 8350
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "a0f572a8ba67a8cc3e4cf688fac8ecc2c7360cefeb97ff478c169b7c67808fc3",
+      "bytes": 29631
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.md",
+      "sha256": "44677fae7b15fa52afc50b107cf83486d9a59555a16b752c93b25b5ef6583584",
+      "bytes": 906584
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "825ebbccb02f0a40f9521490318229856d0b8c0f120fcb64ce8cdcf4485a6093",
+      "bytes": 1486
+    },
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "5518a97cfc705600c0dc03ffaf07edd3c73ec2b329c8023eb01eefaa831f99d1",
+      "bytes": 15857
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "9b37e3fec3efb10a359be876687c8e7f570e8e093c28ed4fc26ba0bafab375f2",
+      "bytes": 12741
+    },
+    {
+      "path": "eng/verify-business-data.py",
+      "sha256": "f1cd98dc45ab351e4733b68518ca2aa1ea10f3eb0d6621653ebd61547bf555a7",
+      "bytes": 11968
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "e8130ad64569b5b4dbbf32e5b34b1b69bab75fe09e3988306916dd1c0f74e19d",
+      "bytes": 35344
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "50504aa9607e90e3e98f01dfd8ffbe44d26c46dc3c9d6db14fffdea37441a751",
+      "bytes": 41587
+    },
+    {
+      "path": "README.md",
+      "sha256": "e16cfbba1dafdb67364ccfaf82eb5434b28825618124b3f790737ad3e216526d",
+      "bytes": 23161
+    },
+    {
+      "path": "specs/business-data-v1.schema.json",
+      "sha256": "a577b1da94798df1ee14f8b9ca9216488a749de11c41283c0f7930894efaf140",
+      "bytes": 15044
+    },
+    {
+      "path": "specs/business-data-v1.xsd",
+      "sha256": "e0c798c7547a1665ad1c9d47a77e01bbcadebb7a739ba5ac310017d6f634c719",
+      "bytes": 4400
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "c40bbcd5a2a6fdfe8555cc1c2d7c58d38e838fc7fad8f12f60958e057404b5ef",
+      "bytes": 226242
+    },
+    {
+      "path": "src/Fluent.Pdf/Extraction/PdfBusinessData.cs",
+      "sha256": "4f59a7026f7aaaacc62e18e8fa1c962adf70ab509c93165b576056fedf12a130",
+      "bytes": 19745
+    },
+    {
+      "path": "src/Fluent.Pdf/Extraction/PdfBusinessDataOptions.cs",
+      "sha256": "21f3d49a208db644f1d4cd4eb35f4cd493d242791fa5a18b33383fd5ad3814bf",
+      "bytes": 3749
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "97c0f079cfbb3a0a7faa37797684f54c5fba859bf86f37cc3aaddcac90dca373",
+      "bytes": 358904
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/BusinessDataTests.cs",
+      "sha256": "7e2f8816c738eefb0d39d7354d2753ce7ba67d3e872540acd47db5b1117787b8",
+      "bytes": 14661
+    }
+  ],
+  "validation": {
+    "newBusinessDataCasesPerProfile": 13,
+    "selectedBusinessExtractionTableFormOcrPolicyAndRuntimeCasesPerProfile": 143,
+    "profiles": 5,
+    "passed": 715,
+    "failed": 0,
+    "skipped": 0,
+    "apiComparisons": 45,
+    "newPublicDeclarations": 17,
+    "solutionWarnings": 0,
+    "solutionErrors": 0,
+    "actualPackTargetsBlocked": 15,
+    "pairedJsonXmlFormalSchemaAndPdfReaderObservations": 35,
+    "negativeIndependentCheckerCases": 6
+  },
+  "lanes": [
+    {
+      "runtime": "artifacts/fp104-lanes-verified/net8/runtime.json",
+      "lane": "win-x64-net8.0",
+      "sha256": "1EFB8101747A6774B8E96BB41109FA4496D847B35AEB6E248DB8E1762BC34FA0",
+      "failed": 0,
+      "passed": 143,
+      "runtimeSha256": "9F73677177EBF216B3B71FB2E74D6FDABFA150F0EC6DA1057C4BCCF04C62B1A4",
+      "report": "artifacts/fp104-lanes-verified/net8/selected.trx",
+      "total": 143,
+      "skipped": 0
+    },
+    {
+      "runtime": "artifacts/fp104-lanes-verified/net10/runtime.json",
+      "lane": "win-x64-net10.0",
+      "sha256": "61695563281702CFE1CFD099EBE3A6D9DB8832376BAEA629F8C2E712379618F3",
+      "failed": 0,
+      "passed": 143,
+      "runtimeSha256": "F64603E27053B470C67D2F8F8E97A6A4365486A3DAF91A06CCF47FCBD9B62A9D",
+      "report": "artifacts/fp104-lanes-verified/net10/selected.trx",
+      "total": 143,
+      "skipped": 0
+    },
+    {
+      "runtime": "artifacts/fp104-lanes-verified/framework-x64/runtime.json",
+      "lane": "win-x64-framework-current",
+      "sha256": "3D5D2D84655B788D3D96577FA6C60C83B9D50B4939A33B896880ADC366F4A21E",
+      "failed": 0,
+      "passed": 143,
+      "runtimeSha256": "53077E4FD9E907D4222816A9F5C759B41482FEE0C1C2FCBE4681D247312BBC63",
+      "report": "artifacts/fp104-lanes-verified/framework-x64/selected.trx",
+      "total": 143,
+      "skipped": 0
+    },
+    {
+      "runtime": "artifacts/fp104-lanes-verified/framework-x86/runtime.json",
+      "lane": "win-x86-framework-current",
+      "sha256": "C994FAD1698F666A1089DF936F9E1A4541FB78691E1AF944E4AA315D89E354F1",
+      "failed": 0,
+      "passed": 143,
+      "runtimeSha256": "D66CF6F5657008D9A292A0768398EFA9DF07E304BFF594110ED9ED7AF6EB3F87",
+      "report": "artifacts/fp104-lanes-verified/framework-x86/selected.trx",
+      "total": 143,
+      "skipped": 0
+    },
+    {
+      "runtime": "artifacts/fp104-lanes-verified/fallback/runtime.json",
+      "lane": "win-x64-netstandard2.0-fallback",
+      "sha256": "3AA784F954BF2715478B5A2239282B6787A2D157BA492740F4F5B48A540D95BA",
+      "failed": 0,
+      "passed": 143,
+      "runtimeSha256": "A0169CCEBC1EBAFD4BC3B23BA6B3E4F70E981508BB768FBDA2970C7B5C7E619A",
+      "report": "artifacts/fp104-lanes-verified/fallback/selected.trx",
+      "total": 143,
+      "skipped": 0
+    }
+  ],
+  "commands": [
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -File artifacts/run-fp104-tests.ps1",
+    "pwsh -File eng/check-api.ps1",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp104-reference",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp104-reference-check --check",
+    "python eng/check-documentation.py --output artifacts/fp104-snippets.json",
+    "pwsh -File eng/test-release-block.ps1",
+    "pwsh -File eng/validate-spec.ps1"
+  ],
+  "archive": {
+    "path": "artifacts/fp104-source-evidence.zip",
+    "sha256": "352e14e9a41327d779da2a0819d832b08a1c34a0ba01e1d3a42819c6f8e07e54",
+    "bytes": 7433336,
+    "verifiedEntries": 347
+  },
+  "pending": [
+    "Labeled real mixed scanned/digital business corpus, OCR accuracy and semantic reconstruction quality",
+    "Complete business profiles, nested resource occurrence provenance and schema migration consumers",
+    "Actual minimum Framework4.7.2, all required runtime/RID lanes, fuzz/endurance and exact final package consumers",
+    "Final hosted CI for this new source commit"
+  ],
+  "limitations": [
+    "Local Framework execution uses installed Framework4.8, not actual4.7.2",
+    "Seven original contract fixtures do not qualify real business-document semantics or OCR accuracy",
+    "The OCR provider in these cases is synthetic; engine scores never become verified business values",
+    "XML XSD validation is combined with typed JSON/schema parity and semantic checks; XSD alone is not a complete semantic validator",
+    "Issue103 hosted Windows native/concurrency failures are retained and awaiting correction; no qualification inferred",
+    "Issue93 remains user-skipped and issue100 remains blocked"
+  ]
+}

@@ -1,4 +1,18 @@
 #nullable enable
+Fluent.Pdf.Html.ChromiumContainerOptions
+Fluent.Pdf.Html.ChromiumContainerOptions.ChromiumContainerOptions(string! dockerExecutable, string! dockerSha256, string! daemonEndpoint, string! imageId, string! emptyConfigurationDirectory, string! seccompProfile, string! seccompSha256, long maximumMemoryBytes, int maximumProcesses = 64, System.TimeSpan? maximumElapsedTime = null) -> void
+Fluent.Pdf.Html.ChromiumContainerOptions.DockerExecutable.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.DockerSha256.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.DaemonEndpoint.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.ImageId.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.EmptyConfigurationDirectory.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.SeccompProfile.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.SeccompSha256.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.MaximumMemoryBytes.get -> long
+Fluent.Pdf.Html.ChromiumContainerOptions.MaximumProcesses.get -> int
+Fluent.Pdf.Html.ChromiumContainerOptions.MaximumElapsedTime.get -> System.TimeSpan
+Fluent.Pdf.Html.ChromiumContainerHost
+static Fluent.Pdf.Html.ChromiumContainerHost.Open(Fluent.Pdf.Html.ChromiumContainerOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Html.IChromiumConnection!
 Fluent.Pdf.Html.ChromiumConnectionFactory
 Fluent.Pdf.Html.ChromiumHtmlRenderer
 Fluent.Pdf.Html.ChromiumHtmlRenderer.ChromiumHtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory! factory, string! exactVersion, string! exactRevision) -> void
@@ -89,3 +103,25 @@ static Fluent.Pdf.Html.HtmlAssets.ReadDataUri(string! dataUri, System.Uri! addre
 static Fluent.Pdf.Html.HtmlAssets.ReadFile(string! protectedRoot, string! relativePath, System.Uri! address, string! mediaType, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
 static Fluent.Pdf.Html.HtmlNetworkPolicy.Offline.get -> Fluent.Pdf.Html.HtmlNetworkPolicy!
 static Fluent.Pdf.Html.PdfWebViews.RenderAsync(Fluent.Pdf.Html.IPdfViewHost! host, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfHtmlOptions? htmlOptions = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, System.Uri? baseAddress = null, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Fluent.Pdf.PdfDocument!>!
+Fluent.Pdf.Html.HtmlElementRequest
+Fluent.Pdf.Html.HtmlElementRequest.HtmlElementRequest(string? selector = null, string? literalText = null, int maximumNodes = 10000, long maximumPixels = 16777216, int maximumPngBytes = 8388608, int maximumMarkupCharacters = 0) -> void
+Fluent.Pdf.Html.HtmlElementRequest.Selector.get -> string?
+Fluent.Pdf.Html.HtmlElementRequest.LiteralText.get -> string?
+Fluent.Pdf.Html.HtmlElementRequest.MaximumNodes.get -> int
+Fluent.Pdf.Html.HtmlElementRequest.MaximumPixels.get -> long
+Fluent.Pdf.Html.HtmlElementRequest.MaximumPngBytes.get -> int
+Fluent.Pdf.Html.HtmlElementRequest.MaximumMarkupCharacters.get -> int
+Fluent.Pdf.Html.HtmlElementRectangle
+Fluent.Pdf.Html.HtmlElementRectangle.X.get -> double
+Fluent.Pdf.Html.HtmlElementRectangle.Y.get -> double
+Fluent.Pdf.Html.HtmlElementRectangle.Width.get -> double
+Fluent.Pdf.Html.HtmlElementRectangle.Height.get -> double
+Fluent.Pdf.Html.HtmlElementCapture
+Fluent.Pdf.Html.HtmlElementCapture.ViewportBounds.get -> Fluent.Pdf.Html.HtmlElementRectangle!
+Fluent.Pdf.Html.HtmlElementCapture.DocumentBounds.get -> Fluent.Pdf.Html.HtmlElementRectangle!
+Fluent.Pdf.Html.HtmlElementCapture.CaptureBounds.get -> Fluent.Pdf.Html.HtmlElementRectangle!
+Fluent.Pdf.Html.HtmlElementCapture.Markup.get -> string?
+Fluent.Pdf.Html.HtmlElementCapture.BaseAddress.get -> System.Uri!
+Fluent.Pdf.Html.HtmlElementCapture.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Html.HtmlElementCapture.OpenPng() -> System.IO.Stream!
+Fluent.Pdf.Html.ChromiumHtmlRenderer.Capture(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.Html.HtmlElementRequest! request, Fluent.Pdf.PdfHtmlOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Html.HtmlElementCapture!

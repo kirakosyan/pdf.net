@@ -43,6 +43,7 @@ public sealed class PdfProviderRegistry
                     capability == PdfCapability.ValidatePades && provider is not IPdfPadesValidator ||
                     capability == PdfCapability.RenderColorManaged && provider is not IPdfColorManagedPageRenderer ||
                     capability == PdfCapability.DecodeRasterDocuments && provider is not IPdfRasterDocumentDecoder ||
+                    capability == PdfCapability.Barcodes && provider is not IPdfBarcodeDecoder ||
                     capability == PdfCapability.PrintDocument && provider is not IPdfPrintProvider ||
                     capability == PdfCapability.ConvertWord && provider is not IPdfWordConverter ||
                     capability == PdfCapability.CmsEnvelopes && provider is not IPdfCmsEnvelopeProvider ||

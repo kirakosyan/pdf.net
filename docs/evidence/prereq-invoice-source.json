@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    "FP-070",
+    "FP-097"
+  ],
+  "issues": [
+    79,
+    100
+  ],
+  "sourceParent": "bda7e99e4b8c11663c80376fda39a35ad079e0a6",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssuesCompleted": false,
+  "finalPackagesProduced": false,
+  "workflowAcceptanceRuns": 0,
+  "sourceProgress": "managed-minimum-invoice-draft-producer-and-archival-associated-file-version-correction",
+  "sourceFiles": [
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "7212f442c2e8b577daf5fcec761ef224ac066b7adcd590c8ad86ec4a6d7baa01"
+    },
+    {
+      "path": "docs/invoices.md",
+      "sha256": "631b30fcd3756e2ca9bea92ac7a25a943a2eb900736b32ad6e6003826b13604e"
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.md",
+      "sha256": "6edc6a6f801f9dbf600742965160542add17415131cd2f70139a346bd0c3f152"
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "c238887d109503897fa4f1fe305fbd2606ec4ed66477e57ba301ca2e66c363e1"
+    },
+    {
+      "path": "docs/requirements/FP-070.md",
+      "sha256": "a5a343f706d0b56487b11b15cee86af994ceec1d421bb24b6690480d46cec6ba"
+    },
+    {
+      "path": "docs/workflow-acceptance.md",
+      "sha256": "155c9adf0b182fbfaef15978db9435b15d3b2aeec569a04d7990e36fd7c53fa7"
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "a750d59cd1a78822655b9db91b9eb7ea30a3e575d5fa948abdf234e5ea28a031"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "16febac5c6f6def3785d79be1d0a59912e8c55f1108e204407e10665417719aa"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "7030e8a5ba889618b95bbdeffba95bda71030f089e3671bfbea296536a56705e"
+    },
+    {
+      "path": "specs/documentation-snippets.json",
+      "sha256": "3a1bab448b510ab2ed582bc87d909bdbe6ec415bae8b3e1b4539b7dbb062cbf8"
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "657ba9130776bcad687f925d3475958ffcc023c240413c2862d781e6bf0bb4eb"
+    },
+    {
+      "path": "src/Fluent.Pdf/Archival/PdfArchival.cs",
+      "sha256": "8948e3bccd3e2ead3cf5ee8fc9f2c25cf538f490291c6c17187df075416cf524"
+    },
+    {
+      "path": "src/Fluent.Pdf/Invoices/PdfInvoices.cs",
+      "sha256": "4ffcd96941554752dc6d8895025db64fa027f2cad1c783dedc39d2a16ab1d8e1"
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "249ea8f4e8d99824ab0627f95a2eda16416870c0be87d98274a76625e9baa5b4"
+    },
+    {
+      "path": "src/Fluent.Pdf/Writing/PdfFeatureVersion.cs",
+      "sha256": "968a4551948124fb489832be2784a7260458f30c0799c73c704955814434bddd"
+    },
+    {
+      "path": "src/Fluent.Pdf/Writing/PdfWriterCore.cs",
+      "sha256": "cc51c043732d55ac31ce8cc19fc4f1367ace07d0c39244e87f2b8a47da98dd4b"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ArchivalTests.cs",
+      "sha256": "656f387a012d0719efec7d10302a0e7e79f1803a28eff30db1dbd87ced7a6536"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/VersionNegotiationTests.cs",
+      "sha256": "d16180cfa71e9af3d80cb529a33e967951aa8efeb835cd54288fa1b0cccfe7c5"
+    },
+    {
+      "path": "eng/verify-managed-invoice.py",
+      "sha256": "53ae3e87431e39cd795eadb49d0ff57b8599334b9d77beeb6ec5fb36273ed0a9"
+    },
+    {
+      "path": "src/Fluent.Pdf/Invoices/ManagedPdfInvoiceProducer.cs",
+      "sha256": "417ad0793f80e4a67ed96dc5e87f6add925de7b2847facf2b98882164b585c23"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ManagedInvoiceProducerTests.cs",
+      "sha256": "4546b47a27106aaa4ba37761ed2ff7711ca0f19e7fa938a96bb1695652ed24d6"
+    }
+  ],
+  "selectedTests": {
+    "profiles": 5,
+    "perProfile": 135,
+    "total": 675,
+    "failed": 0,
+    "skipped": 0
+  },
+  "independentObservations": {
+    "pdfA3bCandidates": 25,
+    "engine": "veraPDF 1.28.2",
+    "pdfXmlReadableTotalChecks": 25,
+    "completeInvoiceRuleValidation": false
+  },
+  "apiComparisons": 45,
+  "packTargetsBlocked": 15,
+  "archive": {
+    "path": "artifacts/prereq-invoice-source-evidence.zip",
+    "sha256": "9c7df6ce468d0e3a97db963695a23403b20447a48093c358f662405a056102a5",
+    "bytes": 6238061,
+    "verifiedEntries": 194
+  },
+  "retainedCorrections": [
+    "Test compilation used an incorrect device-RGB property; corrected to the existing Rgb contract",
+    "Initial actual candidate runs exposed the associated-file PDF2 floor blocking PDF-A3; only private archival preparation now permits the PDF1.7 association extension"
+  ],
+  "pending": [
+    "Complete exact-edition invoice schema/business/metadata/readable reconciliation validator and corpus",
+    "Other required #100 workflow/provider/human-review prerequisites",
+    "Actual minimum Framework4.7.2 and exact final-package/runtime production qualification",
+    "Mandatory issue93 remains user-skipped and release-blocking"
+  ],
+  "hostedCI": "All five workflows passed at the exact checkpoint commit; final PR-head CI is separate",
+  "checkpointCI": {
+    "commit": "08a94136ce9ff2e82ee499eb74ff539c8a8f20ae",
+    "workflows": [
+      {
+        "id": 40113324923,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324881,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324954,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324970,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324898,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "sourceScope": "Source CI only; exact final PR-head results are retained separately without relabeling these earlier source archives"
+  }
+}

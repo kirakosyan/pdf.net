@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-100",
+  "issue": 101,
+  "sourceCommit": "9b8ebef25e088c58ad23cc1f580149184bd91d0f",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "docs/document-collections.md",
+      "sha256": "e942ebc126d3baed8f5ec4be0121d7527d5e6d4106d032ae8a134af4412ef8b3",
+      "bytes": 6447
+    },
+    {
+      "path": "docs/evidence/FP-095-source.json",
+      "sha256": "11ac647896578504bff96c88f50bd5ae021836387bf36683733e2d4b641950bf",
+      "bytes": 11405
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "78ff91d54580dcd3bd817190ae20b6d71b4462c63080af4fd8a246f2e168e208",
+      "bytes": 28536
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Formats.md",
+      "sha256": "15f74ecf1a62977549fa1f842990832eabf577d7b5a00d714fc61abcd183ca97",
+      "bytes": 70903
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "f305490e9ddb41b7ca5d6a6b8c8e0c48195a82465d42507056d40f3d95385635",
+      "bytes": 1486
+    },
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "87d9f1eef91715afa6682c068668375d2367725ee628c45da27caa454c660e61",
+      "bytes": 15811
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "db8ceda03883d99caa1d4c59f3c02589201c8943a23d9ba99d8c401e05ae42db",
+      "bytes": 10158
+    },
+    {
+      "path": "eng/verify-collection-fixtures.py",
+      "sha256": "ec3c62b32f4cce0fcf70b54df829365ae5562121830b5841a6d73fbb6a076033",
+      "bytes": 4619
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "2c50c1f02c2e2bf0ca72ce5a7aa2caafef939c723b78fea8dba714a3fa3cdac0",
+      "bytes": 33922
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "b72f445934ecdc773553e7a6e66ea3e02a24ced956877e620c03f42e0128112e",
+      "bytes": 39886
+    },
+    {
+      "path": "README.md",
+      "sha256": "a99f0de2eaa4b88dc13770ef42b60e6a9e99d1ee8363816498053bad0633ba36",
+      "bytes": 22594
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "f658539fe8631f6df4b062d90ffa34fb6f71fe5dd8894fc445b0463a1826acb2",
+      "bytes": 223500
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/FormatPackage.cs",
+      "sha256": "fcd964258e37ac2e0f1b31c2c5451e56c24f1093eb51bf1e0fc82361179302e5",
+      "bytes": 22523
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/PdfDocumentCollection.cs",
+      "sha256": "6d67d5b869240b5e4786a6a4356482553c9a722f35b4455bde01241a37a21186",
+      "bytes": 11163
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/PdfObjectXml.cs",
+      "sha256": "ba74cf0cd071895775e22316a96fe7c609ce0b2bd37f1168d0dd07022884939d",
+      "bytes": 16149
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/PublicAPI.Unshipped.txt",
+      "sha256": "ee781650f8c339edb8b4becb66448526687492936fee77ffadca63a5e8608fb3",
+      "bytes": 29528
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/CollectionTests.cs",
+      "sha256": "2e2668fbe7693df5b0d9ef8a4c71e31341bfaadda0a536027e1b1d810a45681d",
+      "bytes": 17880
+    }
+  ],
+  "validation": {
+    "newCollectionCasesPerProfile": 35,
+    "selectedFormatAndRuntimeCasesPerProfile": 112,
+    "profiles": 5,
+    "passed": 560,
+    "failed": 0,
+    "skipped": 0,
+    "apiComparisons": 45,
+    "newPublicDeclarations": 25,
+    "solutionWarnings": 0,
+    "solutionErrors": 0,
+    "actualPackTargetsBlocked": 15,
+    "independentZipXmlObservations": 25,
+    "independentPdfOutputs": 10,
+    "independentPdfTextAnd144DpiPixelsEqual": true,
+    "negativeIndependentReaderChecks": 2
+  },
+  "lanes": [
+    {
+      "runtime": "artifacts/fp100-lanes-verified/net8/runtime.json",
+      "lane": "win-x64-net8.0",
+      "passed": 112,
+      "total": 112,
+      "failed": 0,
+      "runtimeSha256": "CD9046978913CFFA9736AB078A6F35FC7437356876F5C43618A2DB65164A87B2",
+      "skipped": 0,
+      "report": "artifacts/fp100-lanes-verified/net8/selected.trx",
+      "sha256": "92FBA3AA1C4BF84917FF57037737B69F38E7F57DAF9D05AF57C018AB8FFE9AD4"
+    },
+    {
+      "runtime": "artifacts/fp100-lanes-verified/net10/runtime.json",
+      "lane": "win-x64-net10.0",
+      "passed": 112,
+      "total": 112,
+      "failed": 0,
+      "runtimeSha256": "971D560B101804F0AFAE485D57A18DF437B9895509FFCCE119A99319D3194DA0",
+      "skipped": 0,
+      "report": "artifacts/fp100-lanes-verified/net10/selected.trx",
+      "sha256": "1E65B37796EA47E1544D31C8B660B26FA8B5C8E14FC3C30FC95ABE5D8B53596A"
+    },
+    {
+      "runtime": "artifacts/fp100-lanes-verified/framework-x64/runtime.json",
+      "lane": "win-x64-framework-current",
+      "passed": 112,
+      "total": 112,
+      "failed": 0,
+      "runtimeSha256": "A7B94CC7B50B4EA8A927F611C831E80FD6D9DF1302AD11655E97FD096C7B7CAD",
+      "skipped": 0,
+      "report": "artifacts/fp100-lanes-verified/framework-x64/selected.trx",
+      "sha256": "4D86F1961C924AE98BAA91D341ADCC642363CAD1792533DAE00378EB88FF30DB"
+    },
+    {
+      "runtime": "artifacts/fp100-lanes-verified/framework-x86/runtime.json",
+      "lane": "win-x86-framework-current",
+      "passed": 112,
+      "total": 112,
+      "failed": 0,
+      "runtimeSha256": "08E78C45EE28610C9BFF07869834FE70EFC8FAF388F9E4A149742BDF512940B8",
+      "skipped": 0,
+      "report": "artifacts/fp100-lanes-verified/framework-x86/selected.trx",
+      "sha256": "BD7ED7AC53D059B08CF0977268CD8123AD7672BDB094B0EB18EF636347505D8E"
+    },
+    {
+      "runtime": "artifacts/fp100-lanes-verified/fallback/runtime.json",
+      "lane": "win-x64-netstandard2.0-fallback",
+      "passed": 112,
+      "total": 112,
+      "failed": 0,
+      "runtimeSha256": "EE5EFCD4F90E6A175B7FB3642FB808FFFEB6FE4B3E1770B5FC920387A853255D",
+      "skipped": 0,
+      "report": "artifacts/fp100-lanes-verified/fallback/selected.trx",
+      "sha256": "124359B85953EE2BBCCD09267BD3695D4860DCA5C7EEBC88E1C8C63AE781CCC1"
+    }
+  ],
+  "readerVersions": {
+    "pypdf": "6.10.0",
+    "PyMuPDF": "1.26.7"
+  },
+  "corrections": [
+    "The initial language fixture assertion assumed one page; the original fixture has two. The final test compares original and reconstructed inventories.",
+    "Framework ZipArchive refuses newline filenames during fixture construction. The test now alters local and central filename bytes directly so SDK preflight rejects the same hostile bytes on every runtime.",
+    "A rerun refused a previously existing runtime identity output; final observations use a fresh directory. No stale identity report is accepted."
+  ],
+  "commands": [
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "dotnet build tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -File artifacts/run-fp100-tests.ps1",
+    "pwsh -File eng/check-api.ps1",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp100-reference",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp100-reference-check --check",
+    "python eng/check-documentation.py --output artifacts/fp100-snippets.json",
+    "pwsh -File eng/test-release-block.ps1",
+    "pwsh -File eng/validate-spec.ps1"
+  ],
+  "archive": {
+    "path": "artifacts/fp100-source-evidence.zip",
+    "sha256": "ddb429f684aad60e95e408f19011384c555e1a426288e89bba8576fd26a99349",
+    "bytes": 5524187,
+    "verifiedEntries": 190
+  },
+  "pending": [
+    "Full production acceptance remains planned; trusted in-process callbacks are not a sandbox and untrusted adapter worker isolation is not implemented",
+    "Actual minimum Framework4.7.2 and complete required runtime/RID lanes",
+    "Broad adversarial/fuzz/endurance, independent conformance/fidelity and exact final package consumers"
+  ],
+  "limitations": [
+    "Local Framework observations ran on installed Framework4.8, not actual4.7.2",
+    "Collection archives deliberately support portable leaf names and no filesystem extraction",
+    "Object XML is an original bounded vocabulary, not another vendor interchange standard; history, protection and original file bytes are not preserved",
+    "Independent PDF comparisons cover the original two-page fixture only; passing observations do not establish general fidelity",
+    "Issue93 remains user-skipped and issue100 remains blocked by production prerequisites"
+  ],
+  "finalHostedCi": {
+    "sourceCommit": "4f2b4b5a3a2549702054ed241765bfa2f0430804",
+    "allFiveWorkflowsPassed": true,
+    "workflows": [
+      {
+        "id": 40095272586,
+        "name": "Windows automation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272565,
+        "name": "Application view source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272609,
+        "name": "CLI source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272571,
+        "name": "Documentation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272673,
+        "name": "Source contracts and release guard",
+        "conclusion": "success"
+      }
+    ],
+    "sourceJobs": [
+      {
+        "id": 120876062049,
+        "name": "Managed source rebuild provenance",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062180,
+        "name": "Contracts (win-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062220,
+        "name": "Contracts (win-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062239,
+        "name": "Contracts (linux-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062244,
+        "name": "Contracts (osx-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062248,
+        "name": "Contracts (linux-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062266,
+        "name": "Contracts (osx-arm64)",
+        "conclusion": "success"
+      }
+    ],
+    "productionQualified": false
+  }
+}

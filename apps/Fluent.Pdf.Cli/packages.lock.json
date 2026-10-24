@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "fluent.pdf": {
+        "type": "Project"
+      },
+      "fluent.pdf.formats": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      }
+    },
+    "net8.0": {
+      "fluent.pdf": {
+        "type": "Project"
+      },
+      "fluent.pdf.formats": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

@@ -76,35 +76,7 @@ public static partial class PdfArchival
         var report = PdfFont.Run("ConvertArchival", providers.GetIdentifier(PdfCapability.ValidateArchival), policy, cancellationToken, context =>
         {
             using var graph = new PdfGraphEdit(source, new(allowSignatureInvalidation: options.AllowSignatureInvalidation), context);
-            var findings = Preflight(graph, options.Profile);
-            if (findings.Length != 0)
-                throw Error(context, "Preflight", findings[0].Message);
-            Metadata(graph, options);
-            if (Part(options.Profile) == 1)
-                AddExplicitCidSets(graph);
-            if (options.OutputColorSpace != null)
-            {
-                var space = options.OutputColorSpace;
-                if (Part(options.Profile) == 1 && PdfVersionNumber.Parse(space.MinimumVersion) > 14)
-                    throw Error(context, "IccVersion", "PDF/A-1 requires an explicitly compatible ICC v2 output profile.");
-                context.Consume(PdfResourceKind.Objects, 3);
-                context.Consume(PdfResourceKind.ExpandedBytes, 512);
-                var profileId = graph.Edit.Add(space.Definition.Items[1]);
-                var intent = PdfGraphicsNumbers.Dict(("Type", PdfValue.Name("OutputIntent")), ("S", PdfValue.Name("GTS_PDFA1")), ("OutputConditionIdentifier", PdfTextStrings.Encode(options.OutputCondition, context)), ("DestOutputProfile", PdfValue.Reference(profileId)));
-                var catalog = graph.Copy(graph.Catalog);
-                catalog["OutputIntents"] = PdfValue.Array(PdfValue.Reference(graph.Edit.Add(intent)));
-                graph.SetCatalog(catalog);
-            }
-
-            string version = Part(options.Profile) == 1 ? "1.4" : Part(options.Profile) == 4 ? "2.0" : "1.7";
-            // This private staging path must pass complete independent profile validation before caller output is touched.
-            var catalogVersion = graph.Copy(graph.Catalog);
-            catalogVersion["Version"] = PdfValue.Name(version);
-            graph.SetCatalog(catalogVersion);
-            using var buffer = new PdfCodecBufferStream(context, context.Available(PdfResourceKind.ExpandedBytes));
-            using (var destination = new BorrowedStream(buffer, false, context))
-                graph.Edit.WriteCore(destination, new(version: version, allowSignatureInvalidation: options.AllowSignatureInvalidation), context, validatedArchivalDowngrade: true);
-            var encoded = buffer.Finish();
+            var encoded = PrepareCore(graph, options);
             validated = ValidateCore(encoded, options.Profile, validator, context);
             if (!validated.Completed || !validated.IsCompliant)
             {
@@ -116,6 +88,41 @@ public static partial class PdfArchival
         }, PdfCapability.ValidateArchival);
         validated!.OperationReport = report;
         return new(validated, report);
+    }
+
+    // Private candidate preparation only. Every public archival/invoice path validates exact bytes before output.
+    internal static PdfByteStore PrepareCore(PdfGraphEdit graph, PdfArchivalOptions options)
+    {
+        var context = graph.Context;
+        var findings = Preflight(graph, options.Profile);
+        if (findings.Length != 0)
+            throw Error(context, "Preflight", findings[0].Message);
+        Metadata(graph, options);
+        if (Part(options.Profile) == 1)
+            AddExplicitCidSets(graph);
+        if (options.OutputColorSpace != null)
+        {
+            var space = options.OutputColorSpace;
+            if (Part(options.Profile) == 1 && PdfVersionNumber.Parse(space.MinimumVersion) > 14)
+                throw Error(context, "IccVersion", "PDF/A-1 requires an explicitly compatible ICC v2 output profile.");
+            context.Consume(PdfResourceKind.Objects, 3);
+            context.Consume(PdfResourceKind.ExpandedBytes, 512);
+            var profileId = graph.Edit.Add(space.Definition.Items[1]);
+            var intent = PdfGraphicsNumbers.Dict(("Type", PdfValue.Name("OutputIntent")), ("S", PdfValue.Name("GTS_PDFA1")), ("OutputConditionIdentifier", PdfTextStrings.Encode(options.OutputCondition, context)), ("DestOutputProfile", PdfValue.Reference(profileId)));
+            var catalog = graph.Copy(graph.Catalog);
+            catalog["OutputIntents"] = PdfValue.Array(PdfValue.Reference(graph.Edit.Add(intent)));
+            graph.SetCatalog(catalog);
+        }
+
+        string version = Part(options.Profile) == 1 ? "1.4" : Part(options.Profile) == 4 ? "2.0" : "1.7";
+        // This private staging path must pass complete independent profile validation before caller output is touched.
+        var catalogVersion = graph.Copy(graph.Catalog);
+        catalogVersion["Version"] = PdfValue.Name(version);
+        graph.SetCatalog(catalogVersion);
+        using var buffer = new PdfCodecBufferStream(context, context.Available(PdfResourceKind.ExpandedBytes));
+        using (var destination = new BorrowedStream(buffer, false, context))
+            graph.Edit.WriteCore(destination, new(version: version, allowSignatureInvalidation: options.AllowSignatureInvalidation), context, validatedArchivalDowngrade: true);
+        return buffer.Finish();
     }
 
     internal static PdfArchivalValidation ValidateCore(PdfByteStore bytes, PdfArchivalProfile profile, IPdfArchivalValidator validator, PdfOperationContext context)

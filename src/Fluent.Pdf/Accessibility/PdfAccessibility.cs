@@ -51,62 +51,66 @@ public static partial class PdfAccessibility
             throw new ArgumentException("A bounded complete child permutation is required.", nameof(childOrder));
         providers ??= PdfProviderRegistry.Default;
         var order = childOrder == null ? null : (int[])childOrder.Clone();
-        return PdfGraphEdit.Run("RemediateAccessibility", source.Source, options, policy, cancellationToken, g =>
+        return PdfGraphEdit.Run("RemediateAccessibility", source.Source, options, policy, cancellationToken,
+            g => RemediateCore(g, source.Profile, elementId, role, language, alternativeText, actualText, order, providers),
+            source.Profile == PdfAccessibilityProfile.Ua2 ? "2.0" : "1.7");
+    }
+
+    internal static void RemediateCore(PdfGraphEdit g, PdfAccessibilityProfile profile, PdfObjectId elementId, string? role, string? language, string? alternativeText, string? actualText, int[]? order, PdfProviderRegistry providers)
+    {
+        var reader = new PdfStructureReader(g, profile, providers);
+        var element = reader.Elements.FirstOrDefault(e => e.ObjectId == elementId) ?? throw reader.Error("ElementIdentity", "The selected identity is not an element in this source tree.");
+        var values = g.Copy(element.Dictionary);
+        string nextRole = reader.EffectiveRole(role ?? element.Role);
+        if ((nextRole == "Figure" || nextRole == "Formula" || nextRole == "Form") && string.IsNullOrWhiteSpace(alternativeText ?? element.AlternativeText) && string.IsNullOrWhiteSpace(actualText ?? element.ActualText))
+            throw reader.Error("AlternativeText", "This role needs meaningful explicit alternative or replacement text.");
+        if (role != null && role != element.Role && (new[]
         {
-            var reader = new PdfStructureReader(g, source.Profile, providers);
-            var element = reader.Elements.FirstOrDefault(e => e.ObjectId == elementId) ?? throw reader.Error("ElementIdentity", "The selected identity is not an element in this source tree.");
-            var values = g.Copy(element.Dictionary);
-            string nextRole = role ?? element.Role;
-            if ((nextRole == "Figure" || nextRole == "Formula" || nextRole == "Form") && string.IsNullOrWhiteSpace(alternativeText ?? element.AlternativeText) && string.IsNullOrWhiteSpace(actualText ?? element.ActualText))
-                throw reader.Error("AlternativeText", "This role needs meaningful explicit alternative or replacement text.");
-            if (role != null && role != element.Role && (new[]
-            {
-                "Table",
-                "TR",
-                "TH",
-                "TD",
-                "THead",
-                "TBody",
-                "TFoot"
-            }.Contains(role) || new[]
-            {
-                "Table",
-                "TR",
-                "TH",
-                "TD",
-                "THead",
-                "TBody",
-                "TFoot"
-            }.Contains(element.Role) || element.Children.Any(child => reader.Name(reader.Resolve(child), "Type") == "OBJR")))
-                throw reader.Error("RoleAssociations", "Changing table or annotation semantic ownership requires a complete explicit structure remediation plan.");
-            if (role != null && role != element.Role && values.ContainsKey("A"))
-                throw reader.Error("RoleAttributes", "Changing a role with attached attributes requires an explicit complete attribute remediation profile.");
-            if (role != null)
-                values["S"] = PdfValue.Name(role);
-            void Set(string key, string? text)
-            {
-                if (text != null)
-                    values[key] = PdfTextStrings.Encode(text, g.Context);
-            }
+            "Table",
+            "TR",
+            "TH",
+            "TD",
+            "THead",
+            "TBody",
+            "TFoot"
+        }.Contains(role) || new[]
+        {
+            "Table",
+            "TR",
+            "TH",
+            "TD",
+            "THead",
+            "TBody",
+            "TFoot"
+        }.Contains(reader.EffectiveRole(element.Role)) || element.Children.Any(child => reader.Name(reader.Resolve(child), "Type") == "OBJR")))
+            throw reader.Error("RoleAssociations", "Changing table or annotation semantic ownership requires a complete explicit structure remediation plan.");
+        if (role != null && role != element.Role && values.ContainsKey("A"))
+            throw reader.Error("RoleAttributes", "Changing a role with attached attributes requires an explicit complete attribute remediation profile.");
+        if (role != null)
+            values["S"] = PdfValue.Name(role);
+        void Set(string key, string? text)
+        {
+            if (text != null)
+                values[key] = PdfTextStrings.Encode(text, g.Context);
+        }
 
-            Set("Lang", language);
-            Set("Alt", alternativeText);
-            Set("ActualText", actualText);
-            if (order != null)
-            {
-                reader.Tick(order.Length * 32L + 128);
-                if (order.Length != element.Children.Count || order.Any(i => i < 0 || i >= order.Length) || order.Distinct().Count() != order.Length)
-                    throw reader.Error("ChildOrder", "Reading-order edits require an exact permutation of all existing children.");
-                values["K"] = PdfValue.OwnedArray(order.Select(i => element.Children[i]).ToList());
-            }
+        Set("Lang", language);
+        Set("Alt", alternativeText);
+        Set("ActualText", actualText);
+        if (order != null)
+        {
+            reader.Tick(order.Length * 32L + 128);
+            if (order.Length != element.Children.Count || order.Any(i => i < 0 || i >= order.Length) || order.Distinct().Count() != order.Length)
+                throw reader.Error("ChildOrder", "Reading-order edits require an exact permutation of all existing children.");
+            values["K"] = PdfValue.OwnedArray(order.Select(i => element.Children[i]).ToList());
+        }
 
-            var revision = reader.Get(element.Dictionary, "R");
-            int number = revision.Kind == PdfValueKind.Null ? 0 : reader.Integer(revision);
-            if (number == 1000000)
-                throw reader.Error("RevisionLimit", "The structure revision inventory is exhausted.");
-            values["R"] = PdfValue.Integer(number + 1);
-            g.Edit.Set(elementId, PdfValue.OwnedDictionary(values));
-            _ = new PdfStructureReader(g, source.Profile, providers);
-        }, source.Profile == PdfAccessibilityProfile.Ua2 ? "2.0" : "1.7");
+        var revision = reader.Get(element.Dictionary, "R");
+        int number = revision.Kind == PdfValueKind.Null ? 0 : reader.Integer(revision);
+        if (number == 1000000)
+            throw reader.Error("RevisionLimit", "The structure revision inventory is exhausted.");
+        values["R"] = PdfValue.Integer(number + 1);
+        g.Edit.Set(elementId, PdfValue.OwnedDictionary(values));
+        _ = new PdfStructureReader(g, profile, providers);
     }
 }

@@ -121,6 +121,18 @@ public sealed class PdfInvoiceData
 
     /// <summary>Gets exact requested profile.</summary>
     public PdfInvoiceProfile Profile { get; }
+    /// <summary>Gets the explicit seller identifier required by the MINIMUM rules, or null until supplied.</summary>
+    public string? SellerRegistrationIdentifier { get; private set; }
+    /// <summary>Gets the explicit uppercase seller country code, or null until supplied. Independent code-list validation remains mandatory.</summary>
+    public string? SellerCountryCode { get; private set; }
+    /// <summary>Returns an independent immutable model with explicit seller identification and a two-letter uppercase country code. No identity, jurisdiction or country is inferred.</summary>
+    public PdfInvoiceData WithSellerRegistration(string identifier, string countryCode)
+    {
+        PdfInvoiceLine.Literal(identifier, nameof(identifier), 80);
+        if (countryCode == null || countryCode.Length != 2 || countryCode.Any(ch => ch < 'A' || ch > 'Z'))
+            throw new ArgumentException("An explicit two-letter uppercase seller country code is required.", nameof(countryCode));
+        return new(Profile, Identifier, Seller, Buyer, IssueTime, Currency, Rounding, Lines) { SellerRegistrationIdentifier = identifier, SellerCountryCode = countryCode };
+    }
     /// <summary>Gets literal invoice identifier.</summary>
     public string Identifier { get; }
     /// <summary>Gets literal seller name.</summary>
@@ -149,4 +161,5 @@ public sealed class PdfInvoiceData
     public decimal GrandTotal { get; }
 
     internal string Money(decimal value) => value.ToString("F" + MinorUnits, CultureInfo.InvariantCulture);
+    internal string XmlMoney(decimal value) => value.ToString("F" + Math.Min(MinorUnits, 2), CultureInfo.InvariantCulture);
 }

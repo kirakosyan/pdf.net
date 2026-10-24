@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PDF application view</title><link rel="stylesheet" href="/viewer.css"><script src="/viewer.js" defer></script></head>
+<body><main>
+<h1>PDF application view</h1>
+<nav aria-label="PDF page navigation">
+<button id="first" type="button">First page</button><button id="previous" type="button">Previous page</button><button id="next" type="button">Next page</button><button id="last" type="button">Last page</button>
+<button id="zoom-in" type="button">Zoom in</button><button id="zoom-out" type="button">Zoom out</button><button id="actual" type="button">Actual size</button><button id="cancel" type="button">Cancel rendering</button>
+</nav>
+<p id="status" role="status" aria-live="polite">Preparing view</p>
+<section id="viewer" tabindex="0" aria-label="PDF page viewer" aria-describedby="keys"><img id="page" alt="No page rendered"></section>
+<p id="keys">Page Up/Down and Home/End navigate pages. Control plus/minus changes zoom; Control zero restores actual size. Escape cancels rendering. Tab reaches controls and captured text.</p>
+<label for="text">Captured page text in source order</label><textarea id="text" readonly rows="6"></textarea>
+</main></body></html>

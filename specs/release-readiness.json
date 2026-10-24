@@ -35,10 +35,11 @@
     "security",
     "resource-limits",
     "concurrency",
+    "performance",
     "consumer"
   ],
   "publicationBlockedReasons": [
-    "SDK scope and qualification are incomplete. Source implementations through issues #3\u2013#20 do not qualify the complete SDK; rendering and later mandatory feature areas remain unimplemented.",
+    "Complete SDK implementation and qualification remain incomplete. Source checkpoints through issue111 retain explicit feature/provider/corpus limitations; issue93 is user-skipped and issues100/105/110 have prerequisite blockers.",
     "Complete production runtime, native-provider, standards, security, performance and final-package evidence is incomplete.",
     "Package ownership/prefix and scoped Trusted Publishing configuration must be verified before release."
   ],

@@ -1,0 +1,39 @@
+name: Private browser source fixtures
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    name: Private browser (Linux x64 source)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: |
+            10.0.4xx
+            8.0.x
+      - name: Restore and build source observers
+        run: |
+          dotnet restore eng/HtmlContainerProbe/HtmlContainerProbe.csproj --locked-mode
+          dotnet build eng/HtmlContainerProbe/HtmlContainerProbe.csproj -c Release --no-restore
+          python3 -m pip install --only-binary=:all: --no-deps Pillow==12.3.0 pypdf==6.10.0
+      - name: Explicitly provision and observe the private sandboxed source browser
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./eng/run-browser-container-fixture.ps1 -DockerExecutable (Get-Command docker).Source -DaemonEndpoint unix:///var/run/docker.sock -ProvisionSourceImage
+      - name: Retain source identity, policy diffs, failures and independent observations
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-container-source-linux-x64
+          path: |
+            artifacts/contracts/browser-container/
+            artifacts/browser-container-source/
+          if-no-files-found: error

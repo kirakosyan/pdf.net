@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-097",
+  "issue": 100,
+  "sourceCommit": "215d1daa2e8fc12f0731d530c5443035c6adc48a",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "workflowAcceptanceRuns": 0,
+  "status": "blocked-by-prerequisites",
+  "observations": [
+    "Readiness remains false and required features remain planned rather than production qualified",
+    "All fifteen actual package targets rejected unqualified creation in the preceding FP-095 checkpoint",
+    "PdfInvoices.Write explicitly requires complete producer and independent validators; none are bundled",
+    "Invoice fixtures identify themselves as binding-only and do not establish invoice or archival compliance",
+    "The user explicitly skipped mandatory fuzzing issue93, which remains a candidate-release blocker"
+  ],
+  "requiredWorkflows": ["invoices", "accessible-reports", "signed-forms", "scanned-archives", "redacted-disclosure-bundles"],
+  "references": ["docs/requirements/FP-097.md", "docs/workflow-acceptance.md", "docs/evidence/FP-095-source.json", "src/Fluent.Pdf/Invoices/PdfInvoices.cs", "tests/Fluent.Pdf.Contract.Tests/InvoiceTests.cs", "specs/release-readiness.json"],
+  "nextAction": "Resume actual final-package workflow qualification after dependencies are complete; continue independent source issue101 meanwhile"
+}

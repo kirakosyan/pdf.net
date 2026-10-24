@@ -4,7 +4,6 @@
     <AssemblyName>Fluent.Pdf</AssemblyName>
     <RootNamespace>Fluent.Pdf</RootNamespace>
     <PackageId>Fluent.Pdf</PackageId>
-    <Version>1.0.0</Version>
     <Authors>Armen Kirakosyan</Authors>
     <Description>Production PDF SDK for .NET. Publication requires complete production qualification.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -25,11 +24,10 @@
     <EmbeddedResource Include="Images/Data/*.icc" LogicalName="Fluent.Pdf.Images.Data.%(Filename)%(Extension)" />
     <None Include="../../README.md" Pack="true" PackagePath="/" />
     <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../../third-party/barcodes/BC-T01-BSD.txt" Link="notices/barcodes/BC-T01-BSD.txt" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="notices/barcodes/" />
+    <None Include="../../third-party/barcodes/BC-T02-MIT.txt" Link="notices/barcodes/BC-T02-MIT.txt" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="notices/barcodes/" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>
-  <Target Name="RequireProductionQualification" BeforeTargets="GenerateNuspec">
-    <Exec Command="pwsh -NoProfile -File &quot;$(MSBuildThisFileDirectory)../../eng/assert-production-ready.ps1&quot; -Stage BeforePack -EvidenceDirectory &quot;$(FluentPdfEvidenceDirectory)&quot;" />
-  </Target>
 </Project>

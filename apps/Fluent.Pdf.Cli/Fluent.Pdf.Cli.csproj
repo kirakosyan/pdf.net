@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <AssemblyName>fluent-pdf</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Fluent.Pdf/Fluent.Pdf.csproj" />
+    <ProjectReference Include="../../src/Fluent.Pdf.Formats/Fluent.Pdf.Formats.csproj" />
+  </ItemGroup>
+</Project>

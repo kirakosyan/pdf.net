@@ -6,6 +6,15 @@ using Xunit;
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class ArchivalTests
 {
+    [Fact]
+    public void ArchivalAssociationAllowanceCannotDowngradeUnrelatedPdf20Features()
+    {
+        using var source = NavigationTests.Fixture((edit, root, _) => NavigationTests.Put(edit, root, "Feature", NavigationTests.D(("Type", PdfValue.Name("ExtGState")), ("UseBlackPtComp", PdfValue.Name("ON")))), 1);
+        using var output = new MemoryStream();
+        var failure = Assert.Throws<PdfException>(() => PdfArchival.Convert(source.CreateSnapshot(), output, new(PdfArchivalProfile.A3B, ArchivalFixture.Icc()), ArchivalFixture.Providers()));
+        Assert.Equal("Writer.VersionTooLow", failure.Diagnostic.Code);
+        Assert.Empty(output.ToArray());
+    }
     internal static PdfDocument DecorativeDrawing(PdfArchivalProfile profile)
     {
         using var original = Pdf.Create().AddPage();

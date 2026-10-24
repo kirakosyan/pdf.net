@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-088",
+  "issue": 92,
+  "sourceCommit": "de946449f266fe4446ccdc84a650c8e621331221",
+  "workingTreeDirty": true,
+  "commitBinding": "Development harness is bound by exact source hashes and archived files; the SDK source is unchanged from the recorded base commit.",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "eng/Performance/Performance.csproj",
+      "bytes": 283,
+      "sha256": "d5fbcf582d59fac0b72c1fd4cfffa49b12795cee7c25935b528c4a00eae2d722"
+    },
+    {
+      "path": "eng/Performance/Program.cs",
+      "bytes": 6589,
+      "sha256": "ad9c664d799d38721c36d6ee202dcc56491dc60d3cbe41158aa9eff6e652f2f8"
+    },
+    {
+      "path": "eng/Performance/packages.lock.json",
+      "bytes": 215,
+      "sha256": "4ca7a9aceeb35b9352c3684347018ea970d476e67a9a4c0f058fd82ffe5ae0a0"
+    },
+    {
+      "path": "eng/performance.py",
+      "bytes": 15752,
+      "sha256": "213b57d128197620272b09de7f19cc14ce1d40f87c9dea97a9b40ce055066d09"
+    },
+    {
+      "path": "eng/test-performance.py",
+      "bytes": 10268,
+      "sha256": "7dac4156c6252312f071b2e71c273ed30e2dd9694bed3d41d92422936364ef5f"
+    },
+    {
+      "path": "eng/performance-corpus.json",
+      "bytes": 1328,
+      "sha256": "141c9ebf9e67bf62935ebf1b1275e9ce2de7a9f6b3d787f95dfe5feb38f67679"
+    },
+    {
+      "path": "eng/assert-production-ready.ps1",
+      "bytes": 6309,
+      "sha256": "94c36a36fd0302f1a4dd559fa4c03f7c8137c467c56186fb2b34534560b0ede9"
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "bytes": 8046,
+      "sha256": "26f3362871573458cbbacb4ef09cf67576c686804d831baeb8be473277cfd9cf"
+    },
+    {
+      "path": "specs/release-readiness.json",
+      "bytes": 1554,
+      "sha256": "2a1ef4ab5f1125ca42717ac44c511c8b99aa7c4cc01f516daaf348d91cbe9956"
+    }
+  ],
+  "corpus": {
+    "path": "eng/performance-corpus.json",
+    "bytes": 1328,
+    "sha256": "141c9ebf9e67bf62935ebf1b1275e9ce2de7a9f6b3d787f95dfe5feb38f67679"
+  },
+  "measurements": [
+    {
+      "report": {
+        "path": "artifacts/performance-net8-verified/performance.json",
+        "bytes": 19584,
+        "sha256": "f399fb96d5b892a73db2d9ecec16bd3f08f0f786d86abbfaa18e72f1d5cc3316"
+      },
+      "hardware": {
+        "cpuModel": "Intel(R) Core(TM) Ultra 9 185H",
+        "physicalMemoryBytes": 68305674240,
+        "logicalProcessors": 22,
+        "provenance": "Local CIM hardware observation, 2026-10-24; calibration only, not a reviewed production host"
+      },
+      "runtime": ".NET 8.0.32",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "sdkSha256": "493c225d4e079eb4241a07095c6b66ff27c7fec874f60921436c05194022f64e",
+      "consumerSha256": "348866809b2815ba4f9b9636ba0559917c1121e87448f59fba5b394de158d2ca",
+      "cases": [
+        {
+          "id": "small",
+          "category": "small",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 67108864,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 55.6364,
+            "latencyP95Ms": 63.8427,
+            "latencyP99Ms": 67.3463,
+            "throughputPerSecond": 17.83549025348423,
+            "peakWorkingSetBytes": 39907328,
+            "outputBytes": 364,
+            "firstPageModelP50Ms": 27.5712,
+            "firstPageModelP95Ms": 30.1964,
+            "firstPageModelP99Ms": 33.2771
+          }
+        },
+        {
+          "id": "small",
+          "category": "small",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 67108864,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 2.7981,
+            "latencyP95Ms": 3.5275,
+            "latencyP99Ms": 3.7053,
+            "throughputPerSecond": 344.59350027739777,
+            "peakWorkingSetBytes": 41250816,
+            "outputBytes": 364,
+            "firstPageModelP50Ms": 0.2488,
+            "firstPageModelP95Ms": 0.2673,
+            "firstPageModelP99Ms": 0.2681
+          }
+        },
+        {
+          "id": "large",
+          "category": "large",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "19bf2a9efc0c31c04c3f7b4c7686de2ec6741530391d38c2f8abf1d35565ba5c",
+          "maximumInputBytes": 67108864,
+          "pages": 1000,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 117.6307,
+            "latencyP95Ms": 133.8309,
+            "latencyP99Ms": 134.1465,
+            "throughputPerSecond": 8.45879094863691,
+            "peakWorkingSetBytes": 56287232,
+            "outputBytes": 129049,
+            "firstPageModelP50Ms": 60.2385,
+            "firstPageModelP95Ms": 64.967,
+            "firstPageModelP99Ms": 65.481
+          }
+        },
+        {
+          "id": "large",
+          "category": "large",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "19bf2a9efc0c31c04c3f7b4c7686de2ec6741530391d38c2f8abf1d35565ba5c",
+          "maximumInputBytes": 67108864,
+          "pages": 1000,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 46.9789,
+            "latencyP95Ms": 81.4568,
+            "latencyP99Ms": 96.12,
+            "throughputPerSecond": 20.08118219526078,
+            "peakWorkingSetBytes": 88133632,
+            "outputBytes": 129049,
+            "firstPageModelP50Ms": 25.5613,
+            "firstPageModelP95Ms": 36.2572,
+            "firstPageModelP99Ms": 60.83
+          }
+        },
+        {
+          "id": "scanned",
+          "category": "scanned",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "0229bebf5916a8428df4b44883f0adf24fe666608e81e2e450d93ed6820a0d3d",
+          "maximumInputBytes": 67108864,
+          "pages": 4,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 56.1344,
+            "latencyP95Ms": 64.1708,
+            "latencyP99Ms": 66.3543,
+            "throughputPerSecond": 17.394054120903636,
+            "peakWorkingSetBytes": 40411136,
+            "outputBytes": 265512,
+            "firstPageModelP50Ms": 27.5929,
+            "firstPageModelP95Ms": 30.885,
+            "firstPageModelP99Ms": 32.1736
+          }
+        },
+        {
+          "id": "scanned",
+          "category": "scanned",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "0229bebf5916a8428df4b44883f0adf24fe666608e81e2e450d93ed6820a0d3d",
+          "maximumInputBytes": 67108864,
+          "pages": 4,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 5.3114,
+            "latencyP95Ms": 7.5536,
+            "latencyP99Ms": 12.38,
+            "throughputPerSecond": 173.46053772766697,
+            "peakWorkingSetBytes": 53805056,
+            "outputBytes": 265512,
+            "firstPageModelP50Ms": 1.1968,
+            "firstPageModelP95Ms": 2.1155,
+            "firstPageModelP99Ms": 2.4652
+          }
+        },
+        {
+          "id": "input-limit",
+          "category": "adversarial",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": "Limit.InputBytes",
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 1,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 9.5394,
+            "latencyP95Ms": 11.2001,
+            "latencyP99Ms": 11.8695,
+            "throughputPerSecond": 101.16957082350513,
+            "peakWorkingSetBytes": 35479552,
+            "outputBytes": 0
+          }
+        },
+        {
+          "id": "input-limit",
+          "category": "adversarial",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": "Limit.InputBytes",
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 1,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 0.167,
+            "latencyP95Ms": 0.219,
+            "latencyP99Ms": 0.2218,
+            "throughputPerSecond": 5823.772639916137,
+            "peakWorkingSetBytes": 35115008,
+            "outputBytes": 0
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "artifacts/performance-net10-verified/performance.json",
+        "bytes": 19593,
+        "sha256": "307ebbe465bfbaca36d3bf32be8db44435580bb9446f5fc49e8a070b7b79cfd2"
+      },
+      "hardware": {
+        "cpuModel": "Intel(R) Core(TM) Ultra 9 185H",
+        "physicalMemoryBytes": 68305674240,
+        "logicalProcessors": 22,
+        "provenance": "Local CIM hardware observation, 2026-10-24; calibration only, not a reviewed production host"
+      },
+      "runtime": ".NET 10.0.13",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "sdkSha256": "0fd26cf941063cab670f48621af2f2642515e2d82120a9ed51e588eb73913997",
+      "consumerSha256": "d0049f3b10669c9bbf67897b09ffdb8e7485eb83399944248c18ae9184707d29",
+      "cases": [
+        {
+          "id": "small",
+          "category": "small",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 67108864,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 62.7223,
+            "latencyP95Ms": 72.0442,
+            "latencyP99Ms": 82.6339,
+            "throughputPerSecond": 15.209021383123613,
+            "peakWorkingSetBytes": 39559168,
+            "outputBytes": 364,
+            "firstPageModelP50Ms": 30.5227,
+            "firstPageModelP95Ms": 34.052,
+            "firstPageModelP99Ms": 34.5767
+          }
+        },
+        {
+          "id": "small",
+          "category": "small",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 67108864,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 3.0435,
+            "latencyP95Ms": 3.611,
+            "latencyP99Ms": 3.8292,
+            "throughputPerSecond": 319.39544829546634,
+            "peakWorkingSetBytes": 40960000,
+            "outputBytes": 364,
+            "firstPageModelP50Ms": 0.271,
+            "firstPageModelP95Ms": 0.2939,
+            "firstPageModelP99Ms": 0.2981
+          }
+        },
+        {
+          "id": "large",
+          "category": "large",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "19bf2a9efc0c31c04c3f7b4c7686de2ec6741530391d38c2f8abf1d35565ba5c",
+          "maximumInputBytes": 67108864,
+          "pages": 1000,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 116.9676,
+            "latencyP95Ms": 126.3269,
+            "latencyP99Ms": 136.2573,
+            "throughputPerSecond": 8.454772757267955,
+            "peakWorkingSetBytes": 56156160,
+            "outputBytes": 129049,
+            "firstPageModelP50Ms": 60.5083,
+            "firstPageModelP95Ms": 66.157,
+            "firstPageModelP99Ms": 73.6243
+          }
+        },
+        {
+          "id": "large",
+          "category": "large",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "19bf2a9efc0c31c04c3f7b4c7686de2ec6741530391d38c2f8abf1d35565ba5c",
+          "maximumInputBytes": 67108864,
+          "pages": 1000,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 47.6001,
+            "latencyP95Ms": 71.5864,
+            "latencyP99Ms": 148.7073,
+            "throughputPerSecond": 19.816534559739026,
+            "peakWorkingSetBytes": 93503488,
+            "outputBytes": 129049,
+            "firstPageModelP50Ms": 25.5098,
+            "firstPageModelP95Ms": 52.0427,
+            "firstPageModelP99Ms": 69.5106
+          }
+        },
+        {
+          "id": "scanned",
+          "category": "scanned",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "0229bebf5916a8428df4b44883f0adf24fe666608e81e2e450d93ed6820a0d3d",
+          "maximumInputBytes": 67108864,
+          "pages": 4,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 70.3469,
+            "latencyP95Ms": 80.0776,
+            "latencyP99Ms": 86.1426,
+            "throughputPerSecond": 14.068042479016986,
+            "peakWorkingSetBytes": 40103936,
+            "outputBytes": 265512,
+            "firstPageModelP50Ms": 33.0428,
+            "firstPageModelP95Ms": 40.5858,
+            "firstPageModelP99Ms": 47.8779
+          }
+        },
+        {
+          "id": "scanned",
+          "category": "scanned",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": null,
+          "inputSha256": "0229bebf5916a8428df4b44883f0adf24fe666608e81e2e450d93ed6820a0d3d",
+          "maximumInputBytes": 67108864,
+          "pages": 4,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 5.3967,
+            "latencyP95Ms": 6.7495,
+            "latencyP99Ms": 6.8717,
+            "throughputPerSecond": 182.2112612025761,
+            "peakWorkingSetBytes": 53993472,
+            "outputBytes": 265512,
+            "firstPageModelP50Ms": 1.0337,
+            "firstPageModelP95Ms": 2.2881,
+            "firstPageModelP99Ms": 2.6563
+          }
+        },
+        {
+          "id": "input-limit",
+          "category": "adversarial",
+          "state": "process-cold-filesystem-cache-uncontrolled",
+          "diagnostic": "Limit.InputBytes",
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 1,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 11.9589,
+            "latencyP95Ms": 14.5902,
+            "latencyP99Ms": 15.7115,
+            "throughputPerSecond": 78.98008280271881,
+            "peakWorkingSetBytes": 35078144,
+            "outputBytes": 0
+          }
+        },
+        {
+          "id": "input-limit",
+          "category": "adversarial",
+          "state": "process-warm-filesystem-cache-uncontrolled",
+          "diagnostic": "Limit.InputBytes",
+          "inputSha256": "9138568aaa1a4019736bde0429c2b026dd309f9dee507c985cda2143d83e4270",
+          "maximumInputBytes": 1,
+          "pages": 1,
+          "samples": 20,
+          "metrics": {
+            "latencyP50Ms": 0.163,
+            "latencyP95Ms": 0.2052,
+            "latencyP99Ms": 0.3617,
+            "throughputPerSecond": 5784.191803800214,
+            "peakWorkingSetBytes": 36110336,
+            "outputBytes": 0
+          }
+        }
+      ]
+    }
+  ],
+  "measuredOperations": 320,
+  "checkerTests": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "report": {
+      "path": "artifacts/fp088-checker-tests.log",
+      "bytes": 115,
+      "sha256": "e40b3eb7b6b54c5fd0ee5088655b6fc0cb6319c50d01b49bc704d81eb25619df"
+    }
+  },
+  "independentVerification": {
+    "path": "artifacts/fp088-independent.json",
+    "bytes": 1132,
+    "sha256": "919fd49886ea4b7a8acf8a6bad264c9173430f2299362e0a5966b3bc126102c0"
+  },
+  "unreviewedEnvelopeCandidates": [
+    {
+      "path": "artifacts/fp088-net8-unreviewed-envelope.json",
+      "bytes": 22795,
+      "sha256": "74bfb2cf47388c55d63e44b886535569dbaa8a145edc73da6dce63a779ebe7db"
+    },
+    {
+      "path": "artifacts/fp088-net10-unreviewed-envelope.json",
+      "bytes": 22749,
+      "sha256": "183ff3e071e34ec5c0da2e3cca8b9f425580346604376a7d7738ae865eb1a4c4"
+    }
+  ],
+  "archive": {
+    "path": "artifacts/fp088-source-evidence.zip",
+    "bytes": 3452605,
+    "sha256": "aef0b3cf7f692de9ae7eedbbd813f30054f916b99226fe08331dd400d2f61dcd",
+    "verifiedEntries": 516
+  },
+  "pending": [
+    "Reviewed hardware provenance, corpus and absolute performance budgets",
+    "Complete range/rendering/HTML/conversion/OCR/native memory and performance profiles",
+    "Actual minimum Framework, all production runtime lanes and exact package consumers",
+    "Eight-hour endurance and full production qualification"
+  ],
+  "finalHostedSourceCi": {
+    "sourceCommit": "f749ac4fac1e9fcc3054fd6103f07df19cee8ecd",
+    "workflow_runs": [
+      {
+        "id": 40077426806,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 28,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426806/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426806/logs",
+        "workflow_id": 394222479
+      },
+      {
+        "id": 40077426798,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 24,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426798/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426798/logs",
+        "workflow_id": 394289497
+      },
+      {
+        "id": 40077426873,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 19,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426873/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426873/logs",
+        "workflow_id": 394350116
+      },
+      {
+        "id": 40077426800,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 16,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426800/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426800/logs",
+        "workflow_id": 394397543
+      },
+      {
+        "id": 40077426801,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 170,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426801/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426801/logs",
+        "workflow_id": 387959272
+      }
+    ]
+  }
+}

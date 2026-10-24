@@ -62,6 +62,9 @@ public static class PdfTableExtraction
         return new(captured, tables!.AsReadOnly(), sequences!.AsReadOnly(), report);
     }
 
+    internal static PdfExtractedTable? Detect(PdfGraphEdit graph, PdfTextPageData data, PdfTableExtractionOptions options, PdfProviderRegistry providers)
+        => options.Mode == PdfTableDetectionMode.Ruled ? Ruled(graph, data, options, providers) : Borderless(graph, data, options);
+
     private sealed class Segment
     {
         internal bool Vertical;

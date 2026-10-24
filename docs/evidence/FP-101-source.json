@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-101",
+  "issue": 102,
+  "sourceCommit": "4f2b4b5a3a2549702054ed241765bfa2f0430804",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "humanReviewPerformed": false,
+  "sourceFiles": [
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "b53faf1b95c6d77921da79888f4d21d28051f35243bf63bb75ad96b23598d5d7",
+      "bytes": 28920
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.md",
+      "sha256": "9cfad362a8b7b2b301becd713d8c283cf71dc9daf30f7a6f21ae21f43b6fedc4",
+      "bytes": 892745
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "3b65b041c7c8e939027f4ef0e92cec8844484e1d0e3f17da222d20b56c6e5be1",
+      "bytes": 1486
+    },
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "07e0e5efe40e8e1e58e40214cf35a29d41784af590aa69c071b254b95524a0c5",
+      "bytes": 15831
+    },
+    {
+      "path": "docs/semantic-remediation.md",
+      "sha256": "3f5d144ba27e3ca090f3a0890a03e432f4fd9b0651f33715a53e67ab02401b23",
+      "bytes": 6231
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "76e574023096f91fcaa4c12aab19021bdb257ab1b5b0bf41ae910396e0636d25",
+      "bytes": 11067
+    },
+    {
+      "path": "eng/verify-semantic-review.py",
+      "sha256": "2859c12edc59f80ea207d97f07250e5f3ea11625535e9cba50b5492f15c02a1e",
+      "bytes": 7117
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "0a38fe5734a49a6358103cd79afbf094dbf4f98f1106b2bfa8d4643b9e8ca692",
+      "bytes": 34560
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "c7b960ea5c64dfd713a163a69c24193c6f491cb21358c45a7ab5c532fb5997b7",
+      "bytes": 40551
+    },
+    {
+      "path": "README.md",
+      "sha256": "1e3433833405657f008c8536d4bf7558eef431459ef4af376c7abe1e9db4bc8c",
+      "bytes": 22822
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "c74bbbbe9c0d59c0defbb3cf73737c71ae6afcdd44f26b7aed7510d8375723b8",
+      "bytes": 224443
+    },
+    {
+      "path": "src/Fluent.Pdf/Accessibility/PdfAccessibility.cs",
+      "sha256": "2a135629b11b70c5e6255134d2a62274dbbe658049f406c26c264abc7d7d82da",
+      "bytes": 7574
+    },
+    {
+      "path": "src/Fluent.Pdf/Accessibility/PdfSemanticReview.cs",
+      "sha256": "f1620d134fb245875d958e29f44948e21a192e420d1adf08b5384a1fe9eb8f3a",
+      "bytes": 17895
+    },
+    {
+      "path": "src/Fluent.Pdf/Accessibility/PdfSemanticReviewContracts.cs",
+      "sha256": "dcdb58c878b05236c44c4c35589128042224507473d7268b73328ff9608e79b7",
+      "bytes": 9784
+    },
+    {
+      "path": "src/Fluent.Pdf/Accessibility/PdfStructureContracts.cs",
+      "sha256": "5ad7dd784f16c5de93f6afabb0fd8d4b3e8586df2e0417eb8ce84537ae557842",
+      "bytes": 14482
+    },
+    {
+      "path": "src/Fluent.Pdf/Accessibility/PdfStructureReader.cs",
+      "sha256": "f922e861380fdf33c9eac0c97c8956d8d7c93330bf3eab58c277ca7eff5878de",
+      "bytes": 22793
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "f97f57bf7d635fe8b75a4376bee9a07d98be92f3f4f0bcc802ff5566825b0513",
+      "bytes": 353805
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/AccessibilityTests.cs",
+      "sha256": "650ccfa31b7078e74b2fcf0863582b490a31f44e40515f160c040b366a3c4034",
+      "bytes": 20198
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/SemanticReviewTests.cs",
+      "sha256": "88fa8c91eefc4990fabaeae13c29acd58784c6d2494cb74f372fd6f143a6b664",
+      "bytes": 18274
+    }
+  ],
+  "validation": {
+    "newSemanticReviewCasesPerProfile": 16,
+    "selectedAccessibilityPreflightPolicyAndRuntimeCasesPerProfile": 90,
+    "profiles": 5,
+    "passed": 450,
+    "failed": 0,
+    "skipped": 0,
+    "apiComparisons": 45,
+    "newPublicDeclarations": 51,
+    "solutionWarnings": 0,
+    "solutionErrors": 0,
+    "actualPackTargetsBlocked": 15,
+    "independentLedgerObservations": 35,
+    "independentPdfStructureAndPixelObservations": 40,
+    "acceptedFixPdfUaAutomatedPositiveCases": 10,
+    "matchedActualValidatorReports": 12,
+    "negativeLedgerCheckerCases": 3
+  },
+  "lanes": [
+    {
+      "passed": 90,
+      "sha256": "9B656C45B6E60A5729CABCC36146466FA5C6A0BD5926B3F66FF112CAD1B52750",
+      "report": "artifacts/fp101-lanes-verified/net8/selected.trx",
+      "runtime": "artifacts/fp101-lanes-verified/net8/runtime.json",
+      "runtimeSha256": "39067A54988785CB2E168ABBEF4C4F1025941F697D3D72E069201CF4AF2F8E56",
+      "lane": "win-x64-net8.0",
+      "total": 90,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "passed": 90,
+      "sha256": "5448ADF80878431BC8E1019BD180ACABE633ED41DF8EC610C25268512FBF83C0",
+      "report": "artifacts/fp101-lanes-verified/net10/selected.trx",
+      "runtime": "artifacts/fp101-lanes-verified/net10/runtime.json",
+      "runtimeSha256": "08A574B35DCF5A2D7DE62DCB499FECDA62B88FE104807F93E5433C7A6BADDB2F",
+      "lane": "win-x64-net10.0",
+      "total": 90,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "passed": 90,
+      "sha256": "743F5A33C39D069E3FDE7EF737C053F5C2F754C773CDA39C96E043BC574A0F60",
+      "report": "artifacts/fp101-lanes-verified/framework-x64/selected.trx",
+      "runtime": "artifacts/fp101-lanes-verified/framework-x64/runtime.json",
+      "runtimeSha256": "D560B97C4448A459B81F0A4E8E256D9AF23F8E3A3EF8A52DA3FFF516A861D7EF",
+      "lane": "win-x64-framework-current",
+      "total": 90,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "passed": 90,
+      "sha256": "8A9B431BF3FD940CF798E0CE2FCB14A3FE9FA51D9ED824E4D3D7A03C53189B8D",
+      "report": "artifacts/fp101-lanes-verified/framework-x86/selected.trx",
+      "runtime": "artifacts/fp101-lanes-verified/framework-x86/runtime.json",
+      "runtimeSha256": "D91D5DD962F21B867FF0BF7FB0050878B13E852BFDA7AA8FCE645F4A82A55908",
+      "lane": "win-x86-framework-current",
+      "total": 90,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "passed": 90,
+      "sha256": "2BF5865EB262A13E6A4C9478AC5BE8AFA01DDADD3E7218A12DCA3F87D30C6957",
+      "report": "artifacts/fp101-lanes-verified/fallback/selected.trx",
+      "runtime": "artifacts/fp101-lanes-verified/fallback/runtime.json",
+      "runtimeSha256": "1734AB6930518B6F0A76A00F7A313F31A85515B2CCEA5EA9DE4C59FFDDB62CAB",
+      "lane": "win-x64-netstandard2.0-fallback",
+      "total": 90,
+      "skipped": 0,
+      "failed": 0
+    }
+  ],
+  "readerVersions": {
+    "pypdf": "6.10.0",
+    "PyMuPDF": "1.26.7",
+    "veraPDF": "1.28.2",
+    "Java": "Temurin21.0.12.1+1 x64"
+  },
+  "validatorReportManifest": "artifacts/fp101-validator-reports/manifest.json",
+  "corrections": [
+    "The first selected run lacked the already-provisioned task-local Java directory in PATH; four external validator tests failed to start. The final five profiles use the explicit task-local Java and pass every required selected case.",
+    "An analysis script decoded the Git API baseline with the Windows default encoding, corrupting an existing bullet default and causing four target API-analyzer failures. The baseline is now decoded explicitly as UTF-8; exactly 51 new declarations remain and the final full build/API comparisons pass."
+  ],
+  "commands": [
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -File artifacts/run-fp101-tests.ps1",
+    "pwsh -File eng/check-api.ps1",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp101-reference",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp101-reference-check --check",
+    "python eng/check-documentation.py --output artifacts/fp101-snippets.json",
+    "pwsh -File eng/test-release-block.ps1",
+    "pwsh -File eng/validate-spec.ps1"
+  ],
+  "archive": {
+    "path": "artifacts/fp101-source-evidence.zip",
+    "sha256": "2bcaaab09fdcf626640859cdcb93ea8f5187e7a404984f5ebf19e8632b3b6dea",
+    "bytes": 5231369,
+    "verifiedEntries": 299
+  },
+  "pending": [
+    "Qualified inferred suggestions and labeled real-document remediation corpus",
+    "Actual human/screen-reader review; caller decision records are not authenticated reviewer evidence",
+    "Complete namespace/class-map/arbitrary tree remediation and broad independent conformance/fidelity",
+    "Actual minimum Framework4.7.2, all required runtime/RID lanes, fuzz/endurance and exact final package consumers"
+  ],
+  "limitations": [
+    "Local Framework execution uses installed Framework4.8, not actual4.7.2",
+    "Role-map editing is an explicit bounded PDF1 profile; PDF2 namespaced role-map edits reject",
+    "Source decisions are explicitly synthetic. Automated UA success for original figure fixtures is not general compliance or human-review qualification",
+    "Pixel/structure observations cover original finite contract fixtures; missing production corpora are not waived",
+    "Issue93 remains user-skipped and issue100 remains blocked"
+  ],
+  "finalHostedCi": {
+    "sourceCommit": "c7054ccb4c192ec9d059e73193f64c890e41d158",
+    "allFiveWorkflowsPassed": true,
+    "workflows": [
+      {
+        "id": 40096648456,
+        "name": "CLI source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648483,
+        "name": "Windows automation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648489,
+        "name": "Application view source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648512,
+        "name": "Documentation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648577,
+        "name": "Source contracts and release guard",
+        "conclusion": "success"
+      }
+    ],
+    "sourceJobs": [
+      {
+        "id": 120880196140,
+        "name": "Managed source rebuild provenance",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196210,
+        "name": "Contracts (linux-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196248,
+        "name": "Contracts (osx-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196279,
+        "name": "Contracts (osx-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196313,
+        "name": "Contracts (win-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196372,
+        "name": "Contracts (win-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196431,
+        "name": "Contracts (linux-x64)",
+        "conclusion": "success"
+      }
+    ],
+    "productionQualified": false
+  }
+}

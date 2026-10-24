@@ -240,6 +240,7 @@ internal static class PdfStructureRules
             throw new ArgumentOutOfRangeException(nameof(p));
     }
 
+    internal static bool StandardRole(string role) => Roles.Contains(role);
     internal static void Role(string s)
     {
         if (s == null || !Roles.Contains(s))

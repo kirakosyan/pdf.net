@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Metadata-only API documentation build tool; never referenced by SDK runtime projects",
+  "components": [
+    {
+      "id": "System.Reflection.MetadataLoadContext",
+      "version": "10.0.0",
+      "packageSha256": "b8b074e0ec3b5365a32e16697b0035d61c3cf6ba39c52631056cc4635c235501",
+      "licenseExpression": "MIT",
+      "buildOnly": true,
+      "distributedWithSdk": false,
+      "notices": [
+        {
+          "path": "third-party/documentation/MetadataLoadContext-THIRD-PARTY-NOTICES.TXT",
+          "sha256": "66f1d4e44973185519bb4aa8a9718eb22fc7af2cc532e3ae9cfc4c127ee7fc54"
+        }
+      ]
+    }
+  ]
+}

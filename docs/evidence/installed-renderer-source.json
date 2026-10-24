@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    "FP-105"
+  ],
+  "issues": [
+    105
+  ],
+  "sourceParent": "c5cdf7e00c3bcef09d3776887deeafd36cfdcb55",
+  "workingTreeDirty": true,
+  "sourceProgress": "actual-offline-installed-renderer-source-observer",
+  "productionQualified": false,
+  "trackingIssuesCompleted": false,
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "be533b1075f048f658e92f511c8035aad86c8b5306eddba68eaa4191a1b7ef46",
+      "gitBlob": "61bef52d6a4fcc67120530167a96cf6db6e0076a"
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "d59ea1d3a38a6811035497435692278356d58f8cef167decde310616d486a7b4",
+      "gitBlob": "9e0d61a63399e95302097c5edbebc77a0a4b1f52"
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "92d22f71f50c3e6cf5564cf00e5ad01e51eba8990b45fe0372ecf7ce4ccec276",
+      "gitBlob": "2594b8891fff5209d36f20ce158862b659d72774"
+    },
+    {
+      "path": "docs/native-distribution.md",
+      "sha256": "9162cb27ac00176896e83544651a58dce661370bea36896c07a5930159139f96",
+      "gitBlob": "fcf5db8b469e928b92f4fbd50d74a0a0ef0c7b03"
+    },
+    {
+      "path": "docs/requirements/FP-105.md",
+      "sha256": "e88300b51db6b943cb18fa6f9b0b937e198f8a4a8730783a0ec69ae66b636700",
+      "gitBlob": "19bcc4cb6288614268eb225ce399d214782e5d1b"
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "789f9f43e338ffcc167a6baabebb95979ceabfbe03b98afb4da95221b54786bf",
+      "gitBlob": "41e82062cb06e6adbe1b0de4a511c7faf7803f43"
+    },
+    {
+      "path": "eng/NativeInstallProbe/NativeInstallProbe.csproj",
+      "sha256": "6b6e1746681621bdf478e0fd575a975f9718389e0c8e0204ab92947ae5ae424d",
+      "gitBlob": "521630ec90a9a9b46ba0236f3abd0255b8b8b320"
+    },
+    {
+      "path": "eng/NativeInstallProbe/Program.cs",
+      "sha256": "8f11546543db2bb7640cc3ecff69b24e3366419930ccab35dfb412652b9e7010",
+      "gitBlob": "d0e09968c7b7d1406156e5e9f2ddaad70d9f277e"
+    },
+    {
+      "path": "eng/NativeInstallProbe/packages.lock.json",
+      "sha256": "4fc9b2c02dd19e841cfc8f8e933426c2e26aa28f1e5d6d0602cad6b78d757581",
+      "gitBlob": "db476fae3f80b71ad99c8207cc924b7867e63b96"
+    },
+    {
+      "path": "eng/test-installed-renderer.py",
+      "sha256": "aefa9cf0c92d4944ecdcfddf2f6e2901ac709ac630a04c3b21ebf322d3dcb532",
+      "gitBlob": "4bae943bd2f6302c121c2c46cc99295b12b4ef31"
+    }
+  ],
+  "localRid": "win-x64",
+  "actualRuntimeObservations": [
+    {
+      "schemaVersion": 1,
+      "purpose": "offline-installed-real-renderer-source-observation",
+      "runtime": ".NET 8.0.32",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "rid": "win-x64",
+      "engine": "153.0.7999.0",
+      "abi": "fluent-pdf-render-1",
+      "manifestSha256": "545893d1e47c137e9e73fc8c4362d2106a9a76a1cdfa2625f465a1d56f0bbb52",
+      "coreSha256": "d30ea52f534b2dbb4bc807aa283245040f54aabe697c10610191a071a472f78f",
+      "adapterSha256": "9e460b37186f12b0057f2008f287134dc7a53a8b6add28e46743cb8bb2c3b3eb",
+      "workerSha256": "4a37d85ebd0852d113c9d972389bfe2b0ecec3c06eb44ded75d0148fc7ce64dd",
+      "checks": [
+        "complete-pinned-installation-preflight",
+        "actual-full-raster",
+        "actual-region-window",
+        "missing-assets-rejected",
+        "wrong-hash-rejected",
+        "no-owned-worker-directory"
+      ],
+      "width": 80,
+      "height": 60,
+      "stride": 320,
+      "samplesSha256": "c5a327e28735049d916c5e4070ab161bdbdee98fe2556bebce33e2c6cdd0f8eb",
+      "pdfSha256": "46167eff756b680bb6bd06b38d60fe79df6fdbe53b63a80d30209bf582dcf62e",
+      "networkDeniedByWorker": true,
+      "cleanAirGappedHostQualified": false,
+      "systemAbiQualified": false,
+      "redistributionApproved": false,
+      "productionQualified": false
+    },
+    {
+      "schemaVersion": 1,
+      "purpose": "offline-installed-real-renderer-source-observation",
+      "runtime": ".NET 10.0.13",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "rid": "win-x64",
+      "engine": "153.0.7999.0",
+      "abi": "fluent-pdf-render-1",
+      "manifestSha256": "545893d1e47c137e9e73fc8c4362d2106a9a76a1cdfa2625f465a1d56f0bbb52",
+      "coreSha256": "94b3c2ab8efe036de9aad07afaa1cdce6107c8eb549d8b84460b6217db7c8c37",
+      "adapterSha256": "e939bb45d657b73c970ce38411ccb9933170ca89c65b00d5b208d2ac53fa8b56",
+      "workerSha256": "4a37d85ebd0852d113c9d972389bfe2b0ecec3c06eb44ded75d0148fc7ce64dd",
+      "checks": [
+        "complete-pinned-installation-preflight",
+        "actual-full-raster",
+        "actual-region-window",
+        "missing-assets-rejected",
+        "wrong-hash-rejected",
+        "no-owned-worker-directory"
+      ],
+      "width": 80,
+      "height": 60,
+      "stride": 320,
+      "samplesSha256": "c5a327e28735049d916c5e4070ab161bdbdee98fe2556bebce33e2c6cdd0f8eb",
+      "pdfSha256": "46167eff756b680bb6bd06b38d60fe79df6fdbe53b63a80d30209bf582dcf62e",
+      "networkDeniedByWorker": true,
+      "cleanAirGappedHostQualified": false,
+      "systemAbiQualified": false,
+      "redistributionApproved": false,
+      "productionQualified": false
+    }
+  ],
+  "sourceNativeBuildCommit": "519a016630b0656d1a9c991e2ff1e8e60adc100a",
+  "sourceManifestSha256": "545893d1e47c137e9e73fc8c4362d2106a9a76a1cdfa2625f465a1d56f0bbb52",
+  "sourceAssets": 24,
+  "sourceManifestBytes": 7657709,
+  "boundaryCases": 61,
+  "installedSdkChecks": 12,
+  "actualEngine": "PDFium153.0.7999.0",
+  "independentPixelChecks": {
+    "originalPixels": 4800,
+    "perRuntime": 4800,
+    "popplerExactSamplesEqual": true,
+    "visuallyInspected": true
+  },
+  "archive": {
+    "path": "artifacts/installed-renderer-source-evidence.zip",
+    "sha256": "4391ea02543df262b37a9c92c8794fff162c562939ea6ec966f2a021d93cc58c",
+    "bytes": 16728503,
+    "verifiedEntries": 227
+  },
+  "retainedCorrections": [
+    "Initial source observer used an incorrect rectangle type name; corrected to the existing public PdfRect contract",
+    "Missing-engine fixture now retains the valid worker/bridge and proves the single absent dependency diagnosis"
+  ],
+  "pending": [
+    "All six final CI source host observations are pending this snapshot",
+    "Complete reviewed native/browser/OCR/other engine inventories and distributions",
+    "Actual clean air-gapped hosts, complete system ABI/security/corpus/minimum-runtime/final-package qualification",
+    "Mandatory issue93 remains user-skipped and release-blocking"
+  ]
+}

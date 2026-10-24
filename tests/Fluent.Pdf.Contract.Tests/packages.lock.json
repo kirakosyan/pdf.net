@@ -328,8 +328,25 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "ZXing.Net": {
+        "type": "Transitive",
+        "resolved": "0.16.11",
+        "contentHash": "OZfAVu88hl87BffQ+rlWCj/vLvAhhCK4QnFaoveeF/MY8SjHNSYBQ3qyUEWlPKNgBQGh1syXhCDg10vUnCsqkg=="
+      },
       "fluent.pdf": {
         "type": "Project"
+      },
+      "fluent.pdf.applications": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.automation": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
       },
       "fluent.pdf.codecs": {
         "type": "Project",
@@ -348,12 +365,15 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Applications": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Formats": "[1.0.0, )",
           "Fluent.Pdf.Html": "[1.0.0, )",
+          "Fluent.Pdf.Intelligence": "[1.0.0, )",
           "Fluent.Pdf.Ocr": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -365,12 +385,15 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Applications": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Formats": "[1.0.0, )",
           "Fluent.Pdf.Html": "[1.0.0, )",
+          "Fluent.Pdf.Intelligence": "[1.0.0, )",
           "Fluent.Pdf.Ocr": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -406,11 +429,18 @@
           "System.Text.Json": "[10.0.13, )"
         }
       },
+      "fluent.pdf.intelligence": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.ocr": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
-          "Fluent.Pdf.Workers": "[1.0.0, )"
+          "Fluent.Pdf.Workers": "[1.0.0, )",
+          "ZXing.Net": "[0.16.11, 0.16.11]"
         }
       },
       "fluent.pdf.rendering": {
@@ -584,8 +614,25 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "ZXing.Net": {
+        "type": "Transitive",
+        "resolved": "0.16.11",
+        "contentHash": "OZfAVu88hl87BffQ+rlWCj/vLvAhhCK4QnFaoveeF/MY8SjHNSYBQ3qyUEWlPKNgBQGh1syXhCDg10vUnCsqkg=="
+      },
       "fluent.pdf": {
         "type": "Project"
+      },
+      "fluent.pdf.applications": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.automation": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
       },
       "fluent.pdf.codecs": {
         "type": "Project",
@@ -604,12 +651,15 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Applications": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Formats": "[1.0.0, )",
           "Fluent.Pdf.Html": "[1.0.0, )",
+          "Fluent.Pdf.Intelligence": "[1.0.0, )",
           "Fluent.Pdf.Ocr": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -621,12 +671,15 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Applications": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Formats": "[1.0.0, )",
           "Fluent.Pdf.Html": "[1.0.0, )",
+          "Fluent.Pdf.Intelligence": "[1.0.0, )",
           "Fluent.Pdf.Ocr": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -659,11 +712,18 @@
           "Fluent.Pdf": "[1.0.0, )"
         }
       },
+      "fluent.pdf.intelligence": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.ocr": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
-          "Fluent.Pdf.Workers": "[1.0.0, )"
+          "Fluent.Pdf.Workers": "[1.0.0, )",
+          "ZXing.Net": "[0.16.11, 0.16.11]"
         }
       },
       "fluent.pdf.rendering": {
@@ -866,8 +926,25 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "ZXing.Net": {
+        "type": "Transitive",
+        "resolved": "0.16.11",
+        "contentHash": "OZfAVu88hl87BffQ+rlWCj/vLvAhhCK4QnFaoveeF/MY8SjHNSYBQ3qyUEWlPKNgBQGh1syXhCDg10vUnCsqkg=="
+      },
       "fluent.pdf": {
         "type": "Project"
+      },
+      "fluent.pdf.applications": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
+      "fluent.pdf.automation": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
       },
       "fluent.pdf.codecs": {
         "type": "Project",
@@ -886,12 +963,15 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Applications": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Formats": "[1.0.0, )",
           "Fluent.Pdf.Html": "[1.0.0, )",
+          "Fluent.Pdf.Intelligence": "[1.0.0, )",
           "Fluent.Pdf.Ocr": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -903,12 +983,15 @@
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
+          "Fluent.Pdf.Applications": "[1.0.0, )",
+          "Fluent.Pdf.Automation": "[1.0.0, )",
           "Fluent.Pdf.Codecs": "[1.0.0, )",
           "Fluent.Pdf.Compliance": "[1.0.0, )",
           "Fluent.Pdf.Cryptography": "[1.0.0, )",
           "Fluent.Pdf.Fonts": "[1.0.0, )",
           "Fluent.Pdf.Formats": "[1.0.0, )",
           "Fluent.Pdf.Html": "[1.0.0, )",
+          "Fluent.Pdf.Intelligence": "[1.0.0, )",
           "Fluent.Pdf.Ocr": "[1.0.0, )",
           "Fluent.Pdf.Rendering": "[1.0.0, )",
           "Fluent.Pdf.Text": "[1.0.0, )",
@@ -944,11 +1027,18 @@
           "System.Text.Json": "[10.0.13, )"
         }
       },
+      "fluent.pdf.intelligence": {
+        "type": "Project",
+        "dependencies": {
+          "Fluent.Pdf": "[1.0.0, )"
+        }
+      },
       "fluent.pdf.ocr": {
         "type": "Project",
         "dependencies": {
           "Fluent.Pdf": "[1.0.0, )",
-          "Fluent.Pdf.Workers": "[1.0.0, )"
+          "Fluent.Pdf.Workers": "[1.0.0, )",
+          "ZXing.Net": "[0.16.11, 0.16.11]"
         }
       },
       "fluent.pdf.rendering": {

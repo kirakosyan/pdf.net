@@ -1,0 +1,50 @@
+name: Windows automation source consumers
+on:
+  pull_request:
+    paths:
+      - 'src/Fluent.Pdf/**'
+      - 'src/Fluent.Pdf.Automation/**'
+      - 'eng/*automation*'
+      - 'examples/com/**'
+      - 'tests/Fluent.Pdf.Contract.Tests/Fixtures/Automation/**'
+      - '.github/workflows/automation.yml'
+      - 'Directory.Build.*'
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  automation:
+    name: Actual Framework COM x86 and x64
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: 10.0.4xx
+      - name: Restore exact automation dependencies
+        run: dotnet restore src/Fluent.Pdf.Automation/Fluent.Pdf.Automation.csproj --locked-mode
+      - name: Build the actual Framework activation asset
+        run: dotnet build src/Fluent.Pdf.Automation/Fluent.Pdf.Automation.csproj -c Release -f net472 --no-restore
+      - name: Exercise native and VBScript clients with owned registration
+        shell: pwsh
+        run: ./eng/test-automation.ps1
+      - name: Independently inspect actual automation outputs
+        shell: pwsh
+        run: |
+          python -m venv artifacts/automation-reader
+          if ($LASTEXITCODE -ne 0) { throw 'Independent reader environment creation failed.' }
+          $python = './artifacts/automation-reader/Scripts/python.exe'
+          & $python -m pip install --require-hashes --only-binary=:all: --no-deps -r eng/requirements-automation-reader.txt
+          if ($LASTEXITCODE -ne 0) { throw 'Pinned independent reader installation failed.' }
+          & $python -O eng/verify-automation-fixtures.py artifacts/contracts/automation --windows-matrix --output artifacts/contracts/automation/independent-reader.json
+          if ($LASTEXITCODE -ne 0) { throw 'Independent actual automation output check failed.' }
+      - name: Retain actual source consumer evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: windows-automation-source
+          path: artifacts/contracts/automation/
+          if-no-files-found: error

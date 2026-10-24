@@ -220,6 +220,17 @@ public sealed class AccessibilityTests
     [InlineData(PdfAccessibilityProfile.Ua2)]
     public void ExplicitlyPreparedOriginalFiguresPassIndependentAutomatedUaChecksWithoutHumanReview(PdfAccessibilityProfile profile)
     {
+        using var bytes = new MemoryStream(PreparedFigure(profile));
+        bytes.Position = 0;
+        var result = PdfAccessibility.Validate(bytes, profile, new(new Fluent.Pdf.Compliance.VeraPdfAccessibilityReportValidator(ArchivalFixture.RunAccessibility)));
+        Assert.True(result.Completed);
+        Assert.True(result.IsCompliant);
+        Assert.Empty(result.Findings);
+        Assert.Null(result.HumanReview);
+    }
+
+    internal static byte[] PreparedFigure(PdfAccessibilityProfile profile)
+    {
         using var original = Open();
         var plan = new PdfStructurePlan("en-US", new("Document", new PdfStructureItem[] { new PdfStructureElement("Figure", new PdfStructureItem[] { PdfStructureContent.MarkedContent(0, 0) }, alternativeText: "Original filled rectangle at left"), new PdfStructureElement("Figure", new PdfStructureItem[] { PdfStructureContent.MarkedContent(0, 1) }, alternativeText: "Original filled rectangle at right") }), profile);
         using var tagged = PdfAccessibility.Author(original.CreateSnapshot(), plan);
@@ -232,12 +243,7 @@ public sealed class AccessibilityTests
         using var prepared = PdfPresentation.SetViewerPreferences(metadata.CreateSnapshot(), PdfValue.Dictionary(new[] { new KeyValuePair<string, PdfValue>("DisplayDocTitle", PdfValue.Boolean(true)) }));
         using var bytes = new MemoryStream();
         prepared.Save(bytes);
-        bytes.Position = 0;
-        var result = PdfAccessibility.Validate(bytes, profile, new(new Fluent.Pdf.Compliance.VeraPdfAccessibilityReportValidator(ArchivalFixture.RunAccessibility)));
-        Assert.True(result.Completed);
-        Assert.True(result.IsCompliant);
-        Assert.Empty(result.Findings);
-        Assert.Null(result.HumanReview);
+        return bytes.ToArray();
     }
 
     [Fact]

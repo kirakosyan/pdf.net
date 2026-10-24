@@ -154,3 +154,31 @@ Queue issues #51–#60 now have documented source profiles: [signature verificat
 The optional Formats assembly depends only on the managed core. Its original bounded static SVG and spreadsheet-data profiles share the caller operation context with font shaping, layout, image capture and PDF writing. A common package boundary preflights ZIP extents/names/expansion before archive allocation and verifies decompressed lengths/CRC; XML has no DTD/resolver/stylesheet execution. Format reconstruction uses explicit typography and geometry, never ambient Office/COM or locale discovery. Capability docs distinguish these closed source profiles from mandatory complete-format qualification.
 
 Exact-byte PDF/X/PDF/E/invoice gates and passive engineering/preflight contracts live in the managed core. Full producers/independent validators remain explicit caller-owned integrations; contract fixtures do not qualify standards. Shared flow, image, vector and ZIP/XML helpers avoid nested operation roots across the source format profiles.
+
+Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](optimization.md).
+
+Bounded revision-bound range sessions, selective page/object access, private LRU caches and independently gated linearized output now have a source implementation. Complete hint/producer/transport/corpus/runtime/final-package qualification remains mandatory; see [progressive access](progressive-access.md).
+
+Original QR/Code128B generation with mandatory independent decoding, explicit page-region detector landmarks and canonical EPC invoice/payment payload validation now have a source implementation. Complete corpus/scanner/runtime/host/final-package qualification remains mandatory; see [barcode workflows](barcodes.md).
+
+Explicit six-task model adapters, selected source capture, remote/image authority, token/configured-cost reservations and schema/citation validation now have a source implementation in the optional Intelligence assembly. Full model/transport/security/quality/runtime/final-package qualification remains mandatory; see [document intelligence](document-intelligence.md).
+
+Explicit raw-source chunk coverage, table-aware boundaries, pinned embedding dimensions/versions and tenant/document/revision/ACL-bound cosine retrieval now have a source implementation in the optional Intelligence assembly. Full tagged semantics, real model/store/relevance/security/runtime/final-package qualification remains mandatory; see [semantic chunks and retrieval](semantic-retrieval.md).
+
+A separate frozen Windows automation facade, finite owned sessions, explicit marshaling, redacted HRESULTs and bitness-aware registration now have a source implementation. Actual COM activation and complete Windows/Framework/apartment/installer/final-package qualification are recorded separately; see [Windows automation](windows-automation.md).
+
+An optional toolkit-independent controller and WinForms/WPF/ASP.NET browser samples now use shared private viewing sessions with explicit keyboard, accessibility, generation and cancellation contracts. Full host/fidelity/assistive-technology/final-package qualification remains mandatory; see [application views](application-views.md).
+
+An optional modern CLI now consumes the public SDK with separate data/diagnostic channels, stable exit codes, protected password-file input, bounded jobs, atomic publication and retained batch outcomes. Full host/provider/final-distribution qualification remains mandatory; see [command-line automation](command-line.md).
+
+The [developer guide](developer-guide.md) now links a versioned generated source API reference, explicit provider/platform prerequisites and real C#/VB-backed recipe applications. Narrative fragments and published-package qualification remain explicitly distinct.
+
+FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).
+
+FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](performance.md).
+
+FP-090 keeps original corpus authoring independent of the SDK under test. Hashed fixtures and authored semantics feed bounded public-API consumers, then two unrelated readers/renderers check the outputs. See [fidelity checks](fidelity-corpus.md) for the source profile and remaining qualification.
+
+FP-091's `PdfContentCache` is an explicitly owned tenant-private object, never global state. SHA-256 addresses are computed from private captures; retention uses bounded LRU eviction and reads return budgeted copies. Existing metadata and optimization controls form the explicit repeated-process profile described in [determinism and caching](determinism-caching.md).
+
+FP-092 policies opt into an explicitly owned observation queue. Contexts publish fixed-schema numeric/sanitized events; no sink runs on the processing path. Callers drain sinks and export budgeted support snapshots separately. See [observability](observability.md).

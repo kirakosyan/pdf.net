@@ -13,6 +13,7 @@ public sealed class PdfDocument : IDisposable
     private bool _disposed;
     private bool _operationActive;
     private bool _writing;
+    private int _processingThread;
     private PdfOperationContext? _context;
     private PdfOperationReport? _lastReport;
     private PdfSyntaxDocument? _source;
@@ -98,6 +99,7 @@ public sealed class PdfDocument : IDisposable
     public void Dispose()
     {
         if (_disposed) return;
+        EnsureProcessingThread();
         if (_operationActive) throw new InvalidOperationException("Cannot dispose a document during a provider operation.");
         _pages.ClearCore();
         _source=null;_originalOrder=Array.Empty<PdfObjectId>();
@@ -138,6 +140,15 @@ public sealed class PdfDocument : IDisposable
         BeginOperation(false);
         _context = context;
         return scope;
+    }
+    internal void SuspendModelContext(Action action)
+    {
+        EnsureAlive();
+        if (!_operationActive || _writing || _context == null) throw new InvalidOperationException("A private model scope is required.");
+        var context = _context;
+        _context = null; EndOperation();
+        try { action(); }
+        finally { BeginOperation(false); _context = context; }
     }
     private sealed class ModelContextScope : IDisposable
     {
@@ -222,7 +233,13 @@ public sealed class PdfDocument : IDisposable
         if (_operationActive) throw new PdfException(new PdfDiagnostic("Operation.Reentrant", "Nested I/O on the same document is not supported."));
     }
 
-    internal void EnsureAlive() { if (_disposed) throw new ObjectDisposedException(nameof(PdfDocument)); }
+    internal void BindProcessingThread() => _processingThread = Environment.CurrentManagedThreadId;
+    private void EnsureProcessingThread()
+    {
+        if (_processingThread != 0 && _processingThread != Environment.CurrentManagedThreadId)
+            throw new PdfException(new PdfDiagnostic("Processing.DocumentThread", "A processing job's mutable document belongs to its worker thread."));
+    }
+    internal void EnsureAlive() { EnsureProcessingThread(); if (_disposed) throw new ObjectDisposedException(nameof(PdfDocument)); }
     internal void BeforePageAllocation(PdfOperationContext? context=null){var selected=context??_context;selected?.Consume(PdfResourceKind.Objects,1);selected?.Consume(PdfResourceKind.ExpandedBytes,256);}
     internal PdfContentProgram ReadPageContent(PdfPage page,PdfUnknownOperatorPolicy unknown,string? version,CancellationToken token)
     {

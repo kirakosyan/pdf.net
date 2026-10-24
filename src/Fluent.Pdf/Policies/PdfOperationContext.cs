@@ -23,7 +23,10 @@ public sealed class PdfOperationContext
     private readonly Stopwatch _clock = Stopwatch.StartNew();
     private readonly Func<TimeSpan> _elapsed;
     private PdfException? _fatal;
+    private OperationCanceledException? _callerCancellation;
     private bool _active = true;
+    private readonly Guid _observationSpan;
+    private bool _observationFinished;
     private bool _unicodeResidentCharged;
     internal void ChargeUnicodeResident(long bytes)
     {
@@ -49,6 +52,7 @@ public sealed class PdfOperationContext
         _sharedToken = _linked.Token;
         _deadlineRegistration = new DeadlineScheduler.Registration(this);
         ScheduleDeadline();
+        _observationSpan = policy.Observations?.Start(capability) ?? Guid.Empty;
     }
 
     /// <summary>Gets the operation name assigned by the SDK.</summary>
@@ -59,6 +63,17 @@ public sealed class PdfOperationContext
     public PdfCapability Capability { get; }
     /// <summary>Gets the immutable policy.</summary>
     public PdfOperationPolicy Policy { get; }
+
+    /// <summary>Reports explicit numeric work units to an opt-in observation session. No content, phase name or callback is accepted. This remains a cooperative cancellation/deadline checkpoint when telemetry is disabled.</summary>
+    public void ReportProgress(long completed, long total)
+    {
+        if (completed < 0 || total < 1 || completed > total) throw new ArgumentOutOfRangeException(nameof(completed));
+        lock (_gate)
+        {
+            CheckCore();
+            Policy.Observations?.Progress(_observationSpan, Capability, _elapsed(), completed, total);
+        }
+    }
 
     /// <summary>Gets cancellation combining the caller token and the operation deadline.</summary>
     public CancellationToken CancellationToken => _sharedToken;
@@ -496,7 +511,13 @@ public sealed class PdfOperationContext
             var resources = new PdfResourceUsage[_used.Length];
             for (int i = 0; i < resources.Length; i++)
                 resources[i] = new PdfResourceUsage((PdfResourceKind)i, _used[i], _peaks[i]);
-            return new PdfOperationReport(Operation, ProviderId, succeeded, _elapsed(), _diagnostics.ToArray(), resources, _fatal?.Diagnostic);
+            var report = new PdfOperationReport(Operation, ProviderId, succeeded, _elapsed(), _diagnostics.ToArray(), resources, _fatal?.Diagnostic);
+            if (!_observationFinished)
+            {
+                _observationFinished = true;
+                Policy.Observations?.Finish(_observationSpan, Capability, report, _callerToken.IsCancellationRequested);
+            }
+            return report;
         }
     }
 
@@ -518,7 +539,9 @@ public sealed class PdfOperationContext
             throw new ObjectDisposedException(nameof(PdfOperationContext));
         if (_fatal is not null)
             throw _fatal;
-        _callerToken.ThrowIfCancellationRequested();
+        // Cleanup may attach bounded owned-resource identities. Keep them through outer cancellation checkpoints.
+        if (_callerToken.IsCancellationRequested)
+            throw _callerCancellation ??= new OperationCanceledException(_callerToken);
         TimeSpan elapsed = _elapsed();
         if (elapsed >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
             Fail("Limit.ElapsedTime", "The operation deadline elapsed.");

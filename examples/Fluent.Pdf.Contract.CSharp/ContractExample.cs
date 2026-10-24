@@ -5,6 +5,49 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static void ReviewReadingOrder(byte[] input, PdfObjectId element, int[] order, PdfSemanticReviewDecision decision, Stream output, Stream ledger)
+    {
+        using var source = new MemoryStream(input, false);
+        var suggestion = PdfSemanticSuggestion.Element(decision.SuggestionId, element, "Proposed reading order supplied by the caller", childOrder: order);
+        var plan = PdfAccessibility.PrepareReview(source, new[] { suggestion });
+        source.Position = 0;
+        var audit = PdfAccessibility.ApplyReview(source, output, plan, new[] { decision });
+        PdfAccessibility.WriteReview(audit, ledger);
+    }
+    public static void CollectionRoundTrip(byte[] input, Stream archive, Stream restored)
+    {
+        using var source = new MemoryStream(input, false);
+        using var xml = new MemoryStream();
+        Fluent.Pdf.Formats.PdfObjectXml.Export(source, xml);
+        xml.Position = 0;
+        var collection = Fluent.Pdf.Formats.PdfDocumentCollection.Capture(new[] { new KeyValuePair<string, Stream>("document.xml", xml) });
+        collection.WriteArchive(archive);
+        using var entry = collection.Items[0].Open();
+        Fluent.Pdf.Formats.PdfObjectXml.Import(entry, restored);
+    }
+    public static void ObservePdf(byte[] input, Stream output, Stream supportBundle)
+    {
+        using var observations = new PdfObservationSession();
+        using var source = new MemoryStream(input, false);
+        using var document = PdfFacade.Open(source, new(operationPolicy: PdfOperationPolicy.Default.WithObservations(observations)));
+        document.Save(output);
+        observations.WriteBundle(supportBundle);
+    }
+    public static byte[] CacheInput(PdfContentCache tenantCache, byte[] input, PdfOperationContext context)
+    {
+        string address = tenantCache.Store(input, context);
+        if (!tenantCache.TryGet(address, context, out var captured)) throw new InvalidOperationException("The caller's cache evicted the input.");
+        return captured!;
+    }
+    public static async System.Threading.Tasks.Task<PdfOperationReport> ProcessPdfAsync(byte[] input, Stream output)
+    {
+        using var pool = new PdfProcessingPool(new(maximumWorkers: 1));
+        if (!pool.TrySubmit(input, job => { job.ReadDocument(); job.Document.AddPage(); job.Save(output); }, out var work))
+            throw new InvalidOperationException("The processing pool has no input capacity.");
+        try { return await work!.ConfigureAwait(false); }
+        finally { await pool.CompleteAsync().ConfigureAwait(false); }
+    }
+    public static Fluent.Pdf.Applications.PdfApplicationViewer ApplicationViewer(PdfDocumentSnapshot source, PdfProviderRegistry renderer) => new(source, renderer);
     public static PdfDocument GenerateData(IEnumerable<string> rows, PdfFlowOptions layout, PdfFlowTextStyle style, PdfProviderRegistry providers)
     {
         var template = new PdfGenerationTemplate<string>("sample-data", (context, row) => context.Paragraph(row, style));
@@ -19,6 +62,7 @@ public static class ContractExample
     public static PdfHtmlOptions HtmlOptions(PdfHtmlReadinessOptions readiness, bool enableJavaScript, string locale, string timeZone, PdfHtmlMedia media) => new(readiness: readiness, enableJavaScript: enableJavaScript, locale: locale, timeZone: timeZone, media: media);
     public static PdfHtmlOptions HtmlPrintOptions(PdfHtmlOptions options, PdfHtmlPrintOptions print) => options.WithPrint(print);
     public static PdfDocument ConvertHtml(PdfHtmlSource source, PdfProviderRegistry providers, PdfHtmlOptions options) => PdfHtml.Render(source, providers, options);
+    public static Fluent.Pdf.Html.HtmlElementCapture CaptureHtmlElement(Fluent.Pdf.Html.ChromiumHtmlRenderer renderer, PdfHtmlSource source, string selector) => renderer.Capture(source, new(selector: selector));
 
     public static PdfCompatibilityInspection InspectCompatibility(PdfDocumentSnapshot source) => PdfCompatibility.Inspect(source);
     public static PdfOperationReport WriteUtf8MetadataPdf(Stream output)
@@ -373,5 +417,24 @@ public static class ContractExample
     public static PdfProfileValidation ConvertProfile(Stream input, Stream output, PdfProfileOptions options, IPdfProfileProducer producer, IPdfProfileValidator validator) => PdfProfileConversions.Convert(input, output, options, producer, validator);
     public static PdfEngineeringInspection InspectEngineering(PdfDocumentSnapshot source) => PdfEngineering.Inspect(source);
     public static PdfInvoiceValidation WriteInvoice(PdfInvoiceData data, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, IPdfInvoiceProducer producer, IPdfArchivalValidator archival, IPdfInvoiceValidator validator) => PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator);
+    public static PdfInvoiceValidation WriteManagedInvoice(PdfInvoiceData data, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, PdfColorSpace outputColorSpace, string outputCondition, IPdfArchivalValidator archival, IPdfInvoiceValidator validator) => PdfInvoices.Write(data, output, body, layout, providers, new ManagedPdfInvoiceProducer(outputColorSpace, outputCondition), archival, validator);
+    public static PdfInvoiceValidation WriteValidatedInvoice(PdfInvoiceData data, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, PdfColorSpace outputColorSpace, string outputCondition, IPdfArchivalValidator archival, IPdfInvoiceValidator validator, PdfOperationPolicy policy) => PdfInvoices.Write(data, output, body, layout, providers, new ManagedPdfInvoiceProducer(outputColorSpace, outputCondition), archival, validator, policy);
     public static PdfPreflightReport InspectPreflight(Stream input) => PdfPreflight.Inspect(input);
+    public static PdfOptimizationResult OptimizePdf(PdfDocumentSnapshot source) => PdfOptimization.Optimize(source);
+    public static PdfBarcodeSymbol GenerateBarcode(string text, IPdfBarcodeDecoder independentDecoder, PdfBarcodeOptions options) => PdfBarcodes.Generate(text, independentDecoder, options);
+    public static Fluent.Pdf.Intelligence.PdfIntelligenceResult AnalyzeSelectedText(PdfDocumentSnapshot source, int pageIndex, Fluent.Pdf.Intelligence.IPdfDocumentIntelligenceProvider provider, Fluent.Pdf.Intelligence.PdfIntelligenceOptions options) => Fluent.Pdf.Intelligence.PdfDocumentIntelligence.Analyze(source, new[] { new Fluent.Pdf.Intelligence.PdfIntelligenceSelection(pageIndex) }, Fluent.Pdf.Intelligence.PdfIntelligenceTask.Summarize, provider, options: options);
+
+    public static Fluent.Pdf.Intelligence.PdfSemanticChunkResult ChunkSelectedPage(PdfDocumentSnapshot source, int pageIndex, int maximumUtf8Bytes) => Fluent.Pdf.Intelligence.PdfSemanticChunks.Capture(source, new[] { pageIndex }, new(maximumUtf8Bytes));
+    public static PdfProgressivePage ReadProgressivePage(IPdfRangeSource source, int pageIndex)
+    {
+        using var document = new PdfProgressiveDocument(source);
+        return document.ReadPage(pageIndex);
+    }
+    public static PdfLinearizationValidation WriteLinearized(Stream input, Stream output, IPdfLinearizationProducer producer, IPdfLinearizationValidator validator) => PdfLinearization.Write(input, output, producer: producer, validator: validator);
+    public static PdfImageCleanupResult CleanScan(PdfOcrRaster original, PdfImageCleanupOptions options) => PdfImageCleanup.Process(original, options, new(PdfProcessingMode.Permissive));
+    public static PdfOperationReport ExportBusinessData(Stream input, Stream output, PdfBusinessDataFormat format) => PdfBusinessData.Write(input, output, format);
+    public static PdfDocument ImportLegacyFormat(Stream input, Fluent.Pdf.Formats.PdfLegacyImportOptions options, Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter host) => Fluent.Pdf.Formats.PdfLegacyImport.Read(input, options, host);
+    public static PdfOperationReport ExportMarkdown(Stream input, Stream output, string sourceSha256, int pageIndex) => Fluent.Pdf.Formats.PdfTextInterchange.Write(input, output, Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown, new[] { new Fluent.Pdf.Formats.PdfTextInterchangeBlock(pageIndex) }, new(sourceSha256), policy: new(PdfProcessingMode.Permissive));
+    public static PdfOperationReport GenerateTaskPdf(Fluent.Pdf.Formats.PdfTasks tasks, IEnumerable<PdfFlowBlock> blocks, PdfFlowOptions options, Stream output) => tasks.Generate(blocks, options, output);
+    public static PdfFlowResult HyphenateParagraph(PdfFlowParagraph paragraph, PdfHyphenationDictionary dictionary, PdfFlowOptions options, PdfProviderRegistry providers) => PdfFlow.Layout(new[] { paragraph.WithHyphenation(dictionary) }, options, providers);
 }

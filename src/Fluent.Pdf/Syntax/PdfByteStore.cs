@@ -7,11 +7,20 @@ internal sealed class PdfByteStore
     private const int BlockSize = 4096;
     private readonly byte[][] _blocks;
     private readonly long _start;
+    private readonly Func<long, int>? _readAt;
     internal long Length { get; }
 
     private PdfByteStore(byte[][] blocks, long length, long start = 0)
     {
         _blocks = blocks;
+        _start = start;
+        Length = length;
+    }
+
+    internal PdfByteStore(long length, Func<long, int> readAt, long start = 0)
+    {
+        _blocks = Array.Empty<byte[]>();
+        _readAt = readAt;
         _start = start;
         Length = length;
     }
@@ -53,10 +62,10 @@ internal sealed class PdfByteStore
     {
         if (start < 0 || length < 0 || start > Length - length)
             throw new ArgumentOutOfRangeException(nameof(start));
-        return new(_blocks, length, checked(_start + start));
+        return _readAt == null ? new(_blocks, length, checked(_start + start)) : new(length, _readAt, checked(_start + start));
     }
 
-    internal int At(long position) => position < 0 || position >= Length ? -1 : _blocks[(int)((_start + position) / BlockSize)][(int)((_start + position) % BlockSize)];
+    internal int At(long position) => position < 0 || position >= Length ? -1 : _readAt != null ? _readAt(_start + position) : _blocks[(int)((_start + position) / BlockSize)][(int)((_start + position) % BlockSize)];
     internal Stream Open(long start, long length)
     {
         if (start < 0 || length < 0 || start > Length - length)
@@ -116,6 +125,13 @@ internal sealed class PdfByteStore
                 throw new ArgumentOutOfRangeException(nameof(offset));
             int size = (int)Math.Min(count, Math.Max(0, _length - _position));
             int copied = 0;
+            if (_owner._readAt != null)
+            {
+                for (; copied < size; copied++)
+                    buffer[offset + copied] = (byte)_owner.At(_start + _position + copied);
+                _position += size;
+                return size;
+            }
             while (copied < size)
             {
                 long source = _owner._start + _start + _position + copied;
