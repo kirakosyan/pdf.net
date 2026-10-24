@@ -11,6 +11,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 namespace Fluent.Pdf.Contract.Tests;
+[Collection("Native process stress")]
 public sealed class NativeWorkerTests
 {
     [Fact]
@@ -279,12 +280,18 @@ public sealed class NativeWorkerTests
     public async System.Threading.Tasks.Task ConcurrentStagingAndStartingRetainsIndependentExecutablePins()
     {
         using var fixture = new WorkerFixture(_output, captureDiagnostics: true);
-        var jobs = Enumerable.Range(0, 4).Select(index => System.Threading.Tasks.Task.Run(() =>
+        using var start = new Barrier(4);
+        var jobs = Enumerable.Range(0, 4).Select(index => Task.Factory.StartNew(() =>
         {
+            Assert.True(start.SignalAndWait(TimeSpan.FromSeconds(10)));
             for (int iteration = 0; iteration < 20; iteration++)
-                Assert.Equal(new byte[] { (byte)index, (byte)iteration }, fixture.Run(new byte[] { 0, (byte)index, (byte)iteration }));
-        }));
-        await System.Threading.Tasks.Task.WhenAll(jobs);
+            {
+                var clock = Stopwatch.StartNew();
+                try { Assert.Equal(new byte[] { (byte)index, (byte)iteration }, fixture.Run(new byte[] { 0, (byte)index, (byte)iteration })); }
+                finally { _output.WriteLine("Native concurrent slot=" + index + " iteration=" + iteration + " elapsed-ms=" + clock.ElapsedMilliseconds); }
+            }
+        }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
+        await Task.WhenAll(jobs);
         Assert.Empty(Directory.GetFileSystemEntries(fixture.Jobs));
     }
 

@@ -204,6 +204,49 @@
       "offline Framework x86 ProcessingTests.ShutdownCancelsQueuedAndActiveJobsButNeverReturnsBeforeCleanup: one-second cancellation signal assertion"
     ],
     "offlineFrameworkX64": "passed",
-    "resolved": false
+    "resolved": false,
+    "correction": {
+      "scope": "test scheduling and synchronization only; SDK deadlines unchanged",
+      "native": "Isolate NativeWorkerTests from unrelated process-heavy classes; retain four concurrent jobs with twenty invocations each, dedicated test threads, initial barrier and per-invocation timings",
+      "processing": "Await the explicit cancellation-observed task with existing bounded Finish helper and always release cleanup; preserve assertion that shutdown cannot finish before cleanup",
+      "rootCauseLimit": "Reports prove native workload overlap and the one-second signal assertion; they do not identify a native engine or OS defect",
+      "hostedVerification": "pending",
+      "localValidation": {
+        "sourceBase": "f447bce64d6f92c8b4e3f9c656a30415e51dcc7f",
+        "dirty": true,
+        "sourceHashes": {
+          "tests/Fluent.Pdf.Contract.Tests/NativeWorkerTests.cs": "b8ebcca5c3a9241f159e8ef92cf040e29a2a224ae0e020619ce505359a8c6912",
+          "tests/Fluent.Pdf.Contract.Tests/ProcessingTests.cs": "b76d86544af6a2f9717fd0719b18e5dc97bf89c16bcc36ed63a0b9e0a17abe68",
+          "tests/Fluent.Pdf.Contract.Tests/NativeProcessStressCollection.cs": "a8966762a1130a7f72a79d45107a073cdf69370604e98a052cee33ab89558f18"
+        },
+        "build": "Full solution, zero warnings/errors",
+        "spec": "passed",
+        "runs": [
+          {
+            "lane": "win-x64-net8.0",
+            "total": 1861,
+            "passed": 1861,
+            "failed": 0,
+            "skipped": 0
+          },
+          {
+            "lane": "win-x86-framework-current",
+            "runtime": ".NET Framework 4.8.10008.0; not minimum 4.7.2",
+            "total": 1861,
+            "passed": 1861,
+            "failed": 0,
+            "skipped": 0
+          }
+        ],
+        "runtimeIdentity": "Both checked against retained TRX and runtime reports",
+        "precedingRun": "One premature run stopped before completion. Subsequent full net8 run: 1859 passed, two operation deadlines coinciding with a five-minute Modern Standby interval confirmed by Kernel-Power events; retained without claiming success. Final runs used a process-scoped idle-sleep hold restored in finally.",
+        "archive": {
+          "path": "artifacts/fp103-ci-correction-evidence.zip",
+          "sha256": "4a5cce0cb52f05cca4adbfde9d2f4ef26533f2fd008953e60b141725c6162aae",
+          "bytes": 1552647,
+          "verifiedEntries": 15
+        }
+      }
+    }
   }
 }

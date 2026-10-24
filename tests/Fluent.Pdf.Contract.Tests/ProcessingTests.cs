@@ -89,23 +89,26 @@ public sealed class ProcessingTests
     {
         using var pool = new PdfProcessingPool(new(1, 1));
         using var entered = new ManualResetEventSlim();
-        using var canceled = new ManualResetEventSlim();
+        var canceled = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
         using var cleanup = new ManualResetEventSlim();
         var first = Submit(pool, Array.Empty<byte>(), job =>
         {
             entered.Set();
             Assert.True(job.Context.CancellationToken.WaitHandle.WaitOne(TimeSpan.FromSeconds(10)));
-            canceled.Set();
+            canceled.TrySetResult(true);
             Assert.True(cleanup.Wait(TimeSpan.FromSeconds(10)));
             job.Context.Checkpoint();
         });
         Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
         var queued = Submit(pool, Array.Empty<byte>(), _ => throw new InvalidOperationException());
         var completion = pool.ShutdownAsync();
-        Assert.True(canceled.Wait(TimeSpan.FromSeconds(1)));
-        Assert.False(completion.IsCompleted);
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => queued);
-        cleanup.Set();
+        try
+        {
+            await Finish(canceled.Task);
+            Assert.False(completion.IsCompleted);
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => queued);
+        }
+        finally { cleanup.Set(); }
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => first);
         await Finish(completion);
         pool.Dispose();
