@@ -3032,13 +3032,14 @@
         "stage": "source-validation",
         "documentation": "docs/invoices.md",
         "implemented": [
-          "Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile."
+          "Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile.",
+          "Managed MINIMUM draft production with explicit ICC output, registered invoice/PDF-A metadata and exact XML/model/attachment binding; complete independent invoice validation remains mandatory."
         ],
         "pending": [
           "Complete invoice version/profile/domain schema business and tax/rounding coverage with real producer/validators",
           "Actual independent invoice/PDF-A corpus supported-host/package and production qualification"
         ],
-        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+        "sourceEvidence": "docs/evidence/prereq-invoice-source.json"
       }
     },
     {

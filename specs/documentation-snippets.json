@@ -146,6 +146,17 @@
       "publishedPackageExecutionQualified": false
     },
     {
+      "path": "docs/invoices.md",
+      "ordinal": 1,
+      "line": 7,
+      "language": "csharp",
+      "sha256": "b01ef28990bc3e6d4112477b0952227fc22e003f90fc6e59db65e382a67e4133",
+      "classification": "narrative-fragment-requires-caller-bindings",
+      "compileExecution": null,
+      "literalFragmentExecutionQualified": false,
+      "publishedPackageExecutionQualified": false
+    },
+    {
       "path": "docs/native-deployment.md",
       "ordinal": 1,
       "line": 11,

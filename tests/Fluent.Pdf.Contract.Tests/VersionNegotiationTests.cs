@@ -11,6 +11,8 @@ public sealed class VersionNegotiationTests
     [InlineData("<< /Type /Page /UserUnit 2 >>", "1.6")]
     [InlineData("<< /Type /ExtGState /UseBlackPtComp /ON >>", "2.0")]
     [InlineData("<< /Type /Namespace /NS (urn:original:test) >>", "2.0")]
+    [InlineData("<< /Type /Filespec /AFRelationship /Data >>", "2.0")]
+    [InlineData("<< /AF [] >>", "2.0")]
     public void KnownStructuralFeaturesNegotiateOrRejectAnExactLowerVersion(string feature, string expected)
     {
         using var source = new SyntaxFixtures("1.2");

@@ -8,7 +8,7 @@ namespace Fluent.Pdf;
 /// <summary>One-source invoice calculation, CII/human composition and mandatory complete independent PDF/A/invoice validation gates.</summary>
 public static class PdfInvoices
 {
-    /// <summary>Stages all layout/XML/attachment/producer/validation phases under one context. No PDF is exposed until exact associated XML, complete PDF/A-3b and invoice-schema/business/readable-total validations all pass. No complete producer/validator is bundled by this API.</summary>
+    /// <summary>Stages all layout/XML/attachment/producer/validation phases under one context. No PDF is exposed until exact associated XML, complete PDF/A-3b and invoice-schema/business/readable-total validations all pass. The managed draft producer is optional; complete independent validators remain explicit.</summary>
     public static PdfInvoiceValidation Write(PdfInvoiceData invoice, Stream output, PdfFlowTextStyle body, PdfFlowOptions layout, PdfProviderRegistry providers, IPdfInvoiceProducer? producer = null, IPdfArchivalValidator? archivalValidator = null, IPdfInvoiceValidator? invoiceValidator = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (invoice == null || body == null || layout == null || providers == null)
@@ -102,7 +102,7 @@ public static class PdfInvoices
         return result;
     }
 
-    private static PdfByteStore Xml(PdfInvoiceData invoice, PdfOperationContext c)
+    internal static PdfByteStore Xml(PdfInvoiceData invoice, PdfOperationContext c)
     {
         const string rsm = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100", ram = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100", udt = "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100";
         using var output = new PdfCodecBufferStream(c, 1048576);
@@ -227,7 +227,7 @@ public static class PdfInvoices
         return output.Finish();
     }
 
-    private static void CheckAttachment(PdfDocument doc, string xmlHash, PdfOperationContext c)
+    internal static void CheckAttachment(PdfDocument doc, string xmlHash, PdfOperationContext c)
     {
         PdfDocumentSnapshot snapshot;
         using (doc.UseModelContext(c))

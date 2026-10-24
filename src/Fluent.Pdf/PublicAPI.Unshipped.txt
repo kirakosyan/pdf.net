@@ -1,4 +1,9 @@
 #nullable enable
+Fluent.Pdf.ManagedPdfInvoiceProducer
+Fluent.Pdf.ManagedPdfInvoiceProducer.ManagedPdfInvoiceProducer(Fluent.Pdf.PdfColorSpace! outputColorSpace, string! outputCondition) -> void
+Fluent.Pdf.ManagedPdfInvoiceProducer.EngineId.get -> string!
+Fluent.Pdf.ManagedPdfInvoiceProducer.Supports(Fluent.Pdf.PdfInvoiceProfile profile) -> bool
+Fluent.Pdf.ManagedPdfInvoiceProducer.Convert(System.IO.Stream! sourcePdf, System.IO.Stream! invoiceXml, Fluent.Pdf.PdfInvoiceData! invoice, System.IO.Stream! candidatePdf, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.PdfProcessingOptions
 Fluent.Pdf.PdfProcessingOptions.PdfProcessingOptions(int maximumWorkers = 4, int maximumQueuedJobs = 16, long maximumResidentInputBytes = 67108864) -> void
 Fluent.Pdf.PdfProcessingOptions.MaximumWorkers.get -> int

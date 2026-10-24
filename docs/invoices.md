@@ -1,5 +1,15 @@
 # Electronic invoice source gate
 
+`ManagedPdfInvoiceProducer` now prepares the SDK's MINIMUM draft with an explicitly supplied ICC output space, synchronized Info/XMP, the four invoice metadata properties and a PDF/A extension declaration. It verifies exact generated XML/model/associated-file binding and rejects existing XMP rather than replacing it implicitly. It uses the same operation context and private archival rewrite path as `PdfArchival.Convert`; no validator or asset is discovered. `PdfInvoices.Write` still requires explicit complete independent archival and invoice validators. Calling the producer directly returns an unvalidated candidate.
+
+The archival writer now permits associated files in its private PDF 1.7 preparation path, as required by PDF/A-3. Ordinary PDF association output retains its PDF 2.0 floor, and unrelated PDF 2.0 features still reject a PDF 1.7 target. Source fixtures run actual veraPDF 1.28.2 on the candidate before deliberately incomplete invoice validation rejects publication. Complete requested-edition invoice rules, business reconciliation and production qualification remain open; this does not complete #79 or #100.
+
+```csharp
+var producer = new ManagedPdfInvoiceProducer(explicitIccSpace, "Explicit output condition");
+PdfInvoices.Write(invoice, output, body, layout, providers, producer,
+    independentArchivalValidator, independentInvoiceValidator);
+```
+
 `PdfInvoiceData` is immutable and requires an exact requested version/profile, literal identity/parties, whole-second UTC issue time, explicit currency and midpoint rounding. The bounded source profile accepts1–1000 positive-quantity, nonnegative-price lines with tax percentages; it rounds line net amounts, groups those net amounts by explicit tax rate, then rounds tax once per rate category. `TaxCategories` exposes each rate, taxable sum and rounded tax; `TaxTotal` sums category taxes. Visible line amounts/rates, category breakdowns and CII header totals use that same calculation. EUR/USD/GBP, JPY and BHD have explicit minor-unit exponents. Unknown currencies, negative inputs, excessive precision/magnitude and empty invoices fail. No tax jurisdiction, credit note, discount or prepayment is inferred.
 
 `PdfInvoices.Write` composes human-readable text and escaped CII XML from that single model, with explicit fonts/shaping/page layout. The requested profile is Factur-X1.0.07 MINIMUM; CII contains its literal guideline identity and calendar date, currency and reconciled header totals. The private draft embeds exactly `factur-x.xml`, with a document-level AF entry and Data relationship. The draft is not an invoice compliance result and is never directly published by this API.

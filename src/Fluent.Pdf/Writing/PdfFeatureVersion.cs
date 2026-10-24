@@ -2,7 +2,7 @@ namespace Fluent.Pdf;
 // Original feature facts. Opaque custom content must supply its explicit minimum version.
 internal static class PdfFeatureVersion
 {
-    internal static int Dictionary(PdfValue value, Func<PdfValue, PdfValue> resolve)
+    internal static int Dictionary(PdfValue value, Func<PdfValue, PdfValue> resolve, bool archivalAssociatedFiles = false)
     {
         int floor = 12;
         var entries = value.Entries;
@@ -19,7 +19,8 @@ internal static class PdfFeatureVersion
         if (entries.ContainsKey("EmbeddedFiles")) floor = Math.Max(floor, 14);
         if (type == "Filespec" && entries.ContainsKey("Desc")) floor = Math.Max(floor, 16);
         if (type == "Collection" || entries.ContainsKey("Collection") || type == "Filespec" && (entries.ContainsKey("UF") || entries.ContainsKey("CI"))) floor = Math.Max(floor, 17);
-        if (entries.ContainsKey("AF") || entries.ContainsKey("AFRelationship")) floor = Math.Max(floor, 20);
+        // ISO 19005-3 permits these associations in its PDF 1.7 profile. Ordinary output retains the PDF 2.0 floor.
+        if (entries.ContainsKey("AF") || entries.ContainsKey("AFRelationship")) floor = Math.Max(floor, archivalAssociatedFiles ? 17 : 20);
         if (subtype == "Image" && entries.ContainsKey("Mask")) floor = Math.Max(floor, 13);
         if (type == "Metadata") floor = Math.Max(floor, 14);
         if(entries.ContainsKey("Trapped"))floor=Math.Max(floor,13);

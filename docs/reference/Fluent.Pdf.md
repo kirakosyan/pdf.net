@@ -121,6 +121,11 @@ Fluent.Pdf.IPdfWordConverter
 Fluent.Pdf.IPdfWordConverter.Export(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfWordFormat format, System.IO.Stream! output, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfWordConverter.Import(System.IO.Stream! source, Fluent.Pdf.PdfWordFormat format, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfWordConversionOptions! options, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.IPdfWordConverter.Supports(Fluent.Pdf.PdfWordFormat format, bool import) -> bool
+Fluent.Pdf.ManagedPdfInvoiceProducer
+Fluent.Pdf.ManagedPdfInvoiceProducer.Convert(System.IO.Stream! sourcePdf, System.IO.Stream! invoiceXml, Fluent.Pdf.PdfInvoiceData! invoice, System.IO.Stream! candidatePdf, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.ManagedPdfInvoiceProducer.EngineId.get -> string!
+Fluent.Pdf.ManagedPdfInvoiceProducer.ManagedPdfInvoiceProducer(Fluent.Pdf.PdfColorSpace! outputColorSpace, string! outputCondition) -> void
+Fluent.Pdf.ManagedPdfInvoiceProducer.Supports(Fluent.Pdf.PdfInvoiceProfile profile) -> bool
 Fluent.Pdf.ManagedPdfProvider
 Fluent.Pdf.ManagedPdfProvider.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.ManagedPdfProvider.ManagedPdfProvider() -> void
@@ -6226,6 +6231,18 @@ Converts borrowed Word source to PDF. Do not execute source actions or discover 
 
 Reports exact direction/format availability without opening input or loading assets.
 
+### <code>M:Fluent.Pdf.ManagedPdfInvoiceProducer.#ctor(Fluent.Pdf.PdfColorSpace,System.String)</code>
+
+Captures an explicit RGB/CMYK ICC output space and output-condition identity. No color profile, font, validator or native engine is discovered.
+
+### <code>M:Fluent.Pdf.ManagedPdfInvoiceProducer.Convert(System.IO.Stream,System.IO.Stream,Fluent.Pdf.PdfInvoiceData,System.IO.Stream,Fluent.Pdf.PdfOperationContext)</code>
+
+Prepares an unvalidated private candidate from the SDK-generated draft. Exact XML/model/attachment binding is required, existing XMP rejects, and caller streams remain open. Use PdfInvoices.Write to enforce complete independent validation before exposing invoice output.
+
+### <code>M:Fluent.Pdf.ManagedPdfInvoiceProducer.Supports(Fluent.Pdf.PdfInvoiceProfile)</code>
+
+Returns true only for the explicit Factur-X1.0.07 MINIMUM source profile; this is not production qualification.
+
 ### <code>M:Fluent.Pdf.ManagedPdfProvider.#ctor</code>
 
 Creates a stateless provider that can be shared by independent document sessions.
@@ -7280,7 +7297,7 @@ Captures exact profile/PDF/XML/request binding and bounded rule findings. Compli
 
 ### <code>M:Fluent.Pdf.PdfInvoices.Write(Fluent.Pdf.PdfInvoiceData,System.IO.Stream,Fluent.Pdf.PdfFlowTextStyle,Fluent.Pdf.PdfFlowOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.IPdfInvoiceProducer,Fluent.Pdf.IPdfArchivalValidator,Fluent.Pdf.IPdfInvoiceValidator,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
-Stages all layout/XML/attachment/producer/validation phases under one context. No PDF is exposed until exact associated XML, complete PDF/A-3b and invoice-schema/business/readable-total validations all pass. No complete producer/validator is bundled by this API.
+Stages all layout/XML/attachment/producer/validation phases under one context. No PDF is exposed until exact associated XML, complete PDF/A-3b and invoice-schema/business/readable-total validations all pass. The managed draft producer is optional; complete independent validators remain explicit.
 
 ### <code>M:Fluent.Pdf.PdfLayers.AddGroup(Fluent.Pdf.PdfDocumentSnapshot,System.String,System.Boolean,Fluent.Pdf.PdfValue,Fluent.Pdf.PdfValue,Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
@@ -9009,6 +9026,10 @@ Gets immutable registration metadata; the registry captures this value once.
 ### <code>P:Fluent.Pdf.IPdfVerticalFontProgram.SupportsVerticalMetrics</code>
 
 Gets whether the selected face supplies all required vertical metrics.
+
+### <code>P:Fluent.Pdf.ManagedPdfInvoiceProducer.EngineId</code>
+
+Gets the original managed producer identity, distinct from independent validators.
 
 ### <code>P:Fluent.Pdf.ManagedPdfProvider.Descriptor</code>
 
@@ -16361,6 +16382,10 @@ An optional exact vertical metric capability; callers must check support for the
 ### <code>T:Fluent.Pdf.IPdfWordConverter</code>
 
 An explicit optional Word converter. Implementations retain borrowed stream ownership and use the mandatory context across every SDK/provider phase.
+
+### <code>T:Fluent.Pdf.ManagedPdfInvoiceProducer</code>
+
+Prepares the SDK's exact MINIMUM invoice draft with explicit ICC output and invoice/PDF-A metadata. Independent archival and invoice validation remain mandatory in PdfInvoices.Write.
 
 ### <code>T:Fluent.Pdf.ManagedPdfProvider</code>
 

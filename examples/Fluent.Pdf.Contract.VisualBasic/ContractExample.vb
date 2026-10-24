@@ -553,6 +553,9 @@ Public Module ContractExample
     Public Function WriteInvoice(data As PdfInvoiceData, output As Stream, body As PdfFlowTextStyle, layout As PdfFlowOptions, providers As PdfProviderRegistry, producer As IPdfInvoiceProducer, archival As IPdfArchivalValidator, validator As IPdfInvoiceValidator) As PdfInvoiceValidation
         Return PdfInvoices.Write(data, output, body, layout, providers, producer, archival, validator)
     End Function
+    Public Function WriteManagedInvoice(data As PdfInvoiceData, output As Stream, body As PdfFlowTextStyle, layout As PdfFlowOptions, providers As PdfProviderRegistry, outputColorSpace As PdfColorSpace, outputCondition As String, archival As IPdfArchivalValidator, validator As IPdfInvoiceValidator) As PdfInvoiceValidation
+        Return PdfInvoices.Write(data, output, body, layout, providers, New ManagedPdfInvoiceProducer(outputColorSpace, outputCondition), archival, validator)
+    End Function
     Public Function InspectPreflight(input As Stream) As PdfPreflightReport
         Return PdfPreflight.Inspect(input)
     End Function

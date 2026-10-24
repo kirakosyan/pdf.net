@@ -34,6 +34,13 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
     & dotnet @arguments
     if ($LASTEXITCODE -ne 0) { throw "Contract tests failed: $name" }
     $reportPath = Join-Path $directory 'contracts.trx'
+    $invoiceEvidence = Join-Path $directory 'invoice-producer'
+    $null = [IO.Directory]::CreateDirectory($invoiceEvidence)
+    foreach ($fixture in @('EUR-direct','JPY-direct','BHD-direct','EUR-csharp','EUR-visual-basic')) {
+        foreach ($extension in @('.pdf','.xml')) {
+            Copy-Item -LiteralPath (Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/invoice-producer/$fixture$extension") -Destination $invoiceEvidence
+        }
+    }
     $report = [xml](Get-Content -LiteralPath $reportPath -Raw)
     $counters = $report.TestRun.ResultSummary.Counters
     if ([int]$counters.total -le 0 -or [int]$counters.passed -ne [int]$counters.total -or
