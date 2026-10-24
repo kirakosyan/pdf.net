@@ -3601,3 +3601,54 @@ Fluent.Pdf.PdfObservationSession.WriteBundle(System.IO.Stream! output, Fluent.Pd
 Fluent.Pdf.PdfOperationContext.ReportProgress(long completed, long total) -> void
 Fluent.Pdf.PdfOperationPolicy.Observations.get -> Fluent.Pdf.PdfObservationSession?
 Fluent.Pdf.PdfOperationPolicy.WithObservations(Fluent.Pdf.PdfObservationSession! observations) -> Fluent.Pdf.PdfOperationPolicy!
+Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticFixKind.Element = 0 -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticFixKind.RoleMapping = 1 -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticFixKind.StructurePlan = 2 -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticReviewAudit
+Fluent.Pdf.PdfSemanticReviewAudit.AfterSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewAudit.BeforeSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewAudit.Entries.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfSemanticReviewEntry!>!
+Fluent.Pdf.PdfSemanticReviewAudit.HumanReviewRequired.get -> bool
+Fluent.Pdf.PdfSemanticReviewAudit.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfSemanticReviewAudit.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfSemanticReviewDecision
+Fluent.Pdf.PdfSemanticReviewDecision.Accept.get -> bool
+Fluent.Pdf.PdfSemanticReviewDecision.Note.get -> string!
+Fluent.Pdf.PdfSemanticReviewDecision.PdfSemanticReviewDecision(string! suggestionId, bool accept, string! reviewer, string! note) -> void
+Fluent.Pdf.PdfSemanticReviewDecision.Reviewer.get -> string!
+Fluent.Pdf.PdfSemanticReviewDecision.SuggestionId.get -> string!
+Fluent.Pdf.PdfSemanticReviewEntry
+Fluent.Pdf.PdfSemanticReviewEntry.AffectedObjects.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfObjectId>!
+Fluent.Pdf.PdfSemanticReviewEntry.AfterSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewEntry.Applied.get -> bool
+Fluent.Pdf.PdfSemanticReviewEntry.BeforeSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewEntry.Decision.get -> Fluent.Pdf.PdfSemanticReviewDecision?
+Fluent.Pdf.PdfSemanticReviewEntry.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAccessibilityFinding!>!
+Fluent.Pdf.PdfSemanticReviewEntry.Suggestion.get -> Fluent.Pdf.PdfSemanticSuggestion!
+Fluent.Pdf.PdfSemanticReviewPlan
+Fluent.Pdf.PdfSemanticReviewPlan.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAccessibilityFinding!>!
+Fluent.Pdf.PdfSemanticReviewPlan.HumanReviewRequired.get -> bool
+Fluent.Pdf.PdfSemanticReviewPlan.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfSemanticReviewPlan.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfSemanticReviewPlan.SourceSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewPlan.Suggestions.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfSemanticSuggestion!>!
+Fluent.Pdf.PdfSemanticSuggestion
+Fluent.Pdf.PdfSemanticSuggestion.ActualText.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.AlternativeText.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.ChildOrder.get -> System.Collections.Generic.IReadOnlyList<int>?
+Fluent.Pdf.PdfSemanticSuggestion.CustomRole.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.ElementId.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfSemanticSuggestion.Id.get -> string!
+Fluent.Pdf.PdfSemanticSuggestion.Kind.get -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticSuggestion.Language.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.Reason.get -> string!
+Fluent.Pdf.PdfSemanticSuggestion.Role.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.StructurePlan.get -> Fluent.Pdf.PdfStructurePlan?
+static Fluent.Pdf.PdfAccessibility.ApplyReview(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfSemanticReviewPlan! plan, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfSemanticReviewDecision!>! decisions, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSemanticReviewAudit!
+static Fluent.Pdf.PdfAccessibility.ApplyReviewFile(System.IO.Stream! input, string! path, Fluent.Pdf.PdfSemanticReviewPlan! plan, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfSemanticReviewDecision!>! decisions, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSemanticReviewAudit!
+static Fluent.Pdf.PdfAccessibility.PrepareReview(System.IO.Stream! input, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfSemanticSuggestion!>! suggestions, Fluent.Pdf.PdfAccessibilityProfile profile = Fluent.Pdf.PdfAccessibilityProfile.Ua1, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSemanticReviewPlan!
+static Fluent.Pdf.PdfAccessibility.WriteReview(Fluent.Pdf.PdfSemanticReviewAudit! audit, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfSemanticSuggestion.Element(string! id, Fluent.Pdf.PdfObjectId elementId, string! reason, string? role = null, string? language = null, string? alternativeText = null, string? actualText = null, int[]? childOrder = null) -> Fluent.Pdf.PdfSemanticSuggestion!
+static Fluent.Pdf.PdfSemanticSuggestion.RoleMapping(string! id, string! customRole, string! standardRole, string! reason) -> Fluent.Pdf.PdfSemanticSuggestion!
+static Fluent.Pdf.PdfSemanticSuggestion.Structure(string! id, Fluent.Pdf.PdfStructurePlan! plan, string! reason) -> Fluent.Pdf.PdfSemanticSuggestion!

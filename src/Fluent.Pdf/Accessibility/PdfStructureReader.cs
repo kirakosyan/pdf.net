@@ -16,6 +16,7 @@ internal sealed class PdfStructureReader
     private readonly Dictionary<int, PdfValue> _parents = new();
     private readonly HashSet<PdfObjectId> _elements = new(), _numberNodes = new(), _forms = new();
     private readonly PdfProviderRegistry _providers;
+    private PdfValue _roleMap = PdfValue.Null;
     private PdfOperationContext C => Graph.Context;
 
     internal string? Language;
@@ -162,6 +163,17 @@ internal sealed class PdfStructureReader
         var root = Resolve(rootRaw);
         if (rootRaw.Kind != PdfValueKind.Reference || root.Kind != PdfValueKind.Dictionary || Name(root, "Type") != "StructTreeRoot")
             throw Error("Root", "The structure root requires an indirect dictionary identity and type.");
+        _roleMap = Get(root, "RoleMap");
+        if (_roleMap.Kind != PdfValueKind.Null)
+        {
+            if (_roleMap.Kind != PdfValueKind.Dictionary) throw Error("RoleMap", "RoleMap must be a dictionary of named role mappings.");
+            foreach (var mapping in _roleMap.Entries)
+            {
+                Tick();
+                if (PdfStructureRules.StandardRole(mapping.Key)) throw Error("RoleMap", "Standard structure roles cannot be remapped.");
+                _ = EffectiveRole(mapping.Key);
+            }
+        }
         var mark = Get(Get(Graph.Catalog, "MarkInfo"), "Marked");
         if (mark.Kind != PdfValueKind.Boolean || !mark.BooleanValue)
             Finding("MarkInfo", "Catalog", "Tagged source must declare MarkInfo.Marked.");
@@ -229,15 +241,31 @@ internal sealed class PdfStructureReader
             Finding("StructureEmpty", "StructTreeRoot", "A logical structure tree has no elements.");
         foreach (var element in Elements)
         {
-            if ((element.Role == "Figure" || element.Role == "Formula" || element.Role == "Form") && string.IsNullOrWhiteSpace(element.AlternativeText) && string.IsNullOrWhiteSpace(element.ActualText))
+            string role = EffectiveRole(element.Role);
+            if (!PdfStructureRules.StandardRole(role)) Finding("RoleMapping", "element:" + element.ObjectId, "The custom role needs an explicit standard-role mapping and semantic review.");
+            if ((role == "Figure" || role == "Formula" || role == "Form") && string.IsNullOrWhiteSpace(element.AlternativeText) && string.IsNullOrWhiteSpace(element.ActualText))
                 Finding("AlternativeText", "element:" + element.ObjectId, "This semantic role requires meaningful author-provided alternative or replacement text.");
-            if (element.Role == "TH" && Get(Get(element.Dictionary, "A"), "Scope").Kind == PdfValueKind.Null && Get(Get(element.Dictionary, "A"), "Headers").Kind == PdfValueKind.Null)
+            if (role == "TH" && Get(Get(element.Dictionary, "A"), "Scope").Kind == PdfValueKind.Null && Get(Get(element.Dictionary, "A"), "Headers").Kind == PdfValueKind.Null)
                 Finding("TableHeaders", "element:" + element.ObjectId, "Header relationships require explicit scope/IDs and human table review.");
         }
 
         if (Profile == PdfAccessibilityProfile.Ua2 && Get(root, "Namespaces").Kind != PdfValueKind.Array)
             Finding("Namespaces", "StructTreeRoot", "PDF/UA-2 needs explicit PDF2 structure namespaces and complete independent validation.");
         Finding("IndependentValidationRequired", "document", "Complete requested PDF/UA conformance requires an explicit independent validator; managed source findings are incomplete.");
+    }
+
+    internal string EffectiveRole(string role)
+    {
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        while (!PdfStructureRules.StandardRole(role) && _roleMap.Kind == PdfValueKind.Dictionary && _roleMap.Entries.TryGetValue(role, out var raw))
+        {
+            Tick();
+            if (!seen.Add(role)) throw Error("RoleMapCycle", "Role mappings must be acyclic.");
+            var mapped = Resolve(raw);
+            if (mapped.Kind != PdfValueKind.Name) throw Error("RoleMap", "Mapped roles must be names.");
+            role = mapped.NameValue;
+        }
+        return role;
     }
 
     private void Visit(PdfValue raw, PdfObjectId parent, PdfObjectId? inheritedPage)

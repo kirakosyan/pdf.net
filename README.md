@@ -176,3 +176,5 @@ FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sink
 [Supply-chain inventory](docs/supply-chain.md) records locked dependencies, retained notices, explicit asset observations and advisory coverage. It does not approve redistribution or qualify final packages.
 
 [Document collections](docs/document-collections.md) provide bounded ordered ZIP archives, explicit trusted batch adapters and typed PDF object XML. Protection, history, isolation and qualification limits are explicit.
+
+[Semantic remediation](docs/semantic-remediation.md) binds explicit proposals and reviewer decisions to exact source bytes, revalidates accepted fixes and preserves an audit ledger without claiming accessibility conformance.

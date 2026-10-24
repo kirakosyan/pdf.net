@@ -4,6 +4,15 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Sub ReviewReadingOrder(input As Byte(), element As PdfObjectId, order As Integer(), decision As PdfSemanticReviewDecision, output As Stream, ledger As Stream)
+        Using source As New MemoryStream(input, False)
+            Dim suggestion = PdfSemanticSuggestion.Element(decision.SuggestionId, element, "Proposed reading order supplied by the caller", childOrder:=order)
+            Dim plan = PdfAccessibility.PrepareReview(source, {suggestion})
+            source.Position = 0
+            Dim audit = PdfAccessibility.ApplyReview(source, output, plan, {decision})
+            PdfAccessibility.WriteReview(audit, ledger)
+        End Using
+    End Sub
     Public Sub CollectionRoundTrip(input As Byte(), archive As Stream, restored As Stream)
         Using source As New MemoryStream(input, False), xml As New MemoryStream()
             Fluent.Pdf.Formats.PdfObjectXml.Export(source, xml)

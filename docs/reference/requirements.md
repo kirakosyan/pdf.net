@@ -104,7 +104,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-098 PDF 2.0 and extension preservation](../requirements/FP-098.md) | Required | planned | Full source/qualification pending |
 | [FP-099 Document event hooks and data-source generation](../requirements/FP-099.md) | Required | planned | Full source/qualification pending |
 | [FP-100 Document collections, packages and interchange](../requirements/FP-100.md) | Required | planned | [Declared source profile](../document-collections.md) |
-| [FP-101 Accessibility remediation and semantic authoring](../requirements/FP-101.md) | Required | planned | Full source/qualification pending |
+| [FP-101 Accessibility remediation and semantic authoring](../requirements/FP-101.md) | Required | planned | [Declared source profile](../semantic-remediation.md) |
 | [FP-102 Signature-preserving editing and revision audit](../requirements/FP-102.md) | Required | planned | Full source/qualification pending |
 | [FP-103 Image processing and document cleanup](../requirements/FP-103.md) | Required | planned | Full source/qualification pending |
 | [FP-104 Business data extraction and export schemas](../requirements/FP-104.md) | Required | planned | Full source/qualification pending |

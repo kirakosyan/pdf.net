@@ -4439,7 +4439,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/semantic-remediation.md",
+        "implemented": [
+          "Exact-source-bound immutable semantic proposals and explicit reviewer decisions with pending/rejected/applied ledger states",
+          "Shared-context element edits, complete heading/list/table author plans and bounded direct/transitive PDF1 role mapping",
+          "Structural inspection and serialized reparse after every accepted fix, atomic file delivery and bounded audit JSON"
+        ],
+        "pending": [
+          "Qualified inferred suggestions, labeled real-document corpus and actual human/screen-reader review",
+          "Complete role/namespace/class-map and arbitrary structure remediation profiles",
+          "Actual minimum/runtime/RID, independent broad fidelity/conformance and exact final package qualification"
+        ]
+      }
     },
     {
       "id": "FP-102",

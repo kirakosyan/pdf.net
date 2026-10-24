@@ -2762,6 +2762,50 @@ Fluent.Pdf.PdfSecurityResult.Permissions.get -> Fluent.Pdf.PdfDocumentPermission
 Fluent.Pdf.PdfSecurityResult.Report.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfSecurityResult.Revision.get -> int
 Fluent.Pdf.PdfSecurityResult.Role.get -> Fluent.Pdf.PdfAuthenticationRole
+Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticFixKind.Element = 0 -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticFixKind.RoleMapping = 1 -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticFixKind.StructurePlan = 2 -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticReviewAudit
+Fluent.Pdf.PdfSemanticReviewAudit.AfterSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewAudit.BeforeSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewAudit.Entries.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfSemanticReviewEntry!>!
+Fluent.Pdf.PdfSemanticReviewAudit.HumanReviewRequired.get -> bool
+Fluent.Pdf.PdfSemanticReviewAudit.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfSemanticReviewAudit.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfSemanticReviewDecision
+Fluent.Pdf.PdfSemanticReviewDecision.Accept.get -> bool
+Fluent.Pdf.PdfSemanticReviewDecision.Note.get -> string!
+Fluent.Pdf.PdfSemanticReviewDecision.PdfSemanticReviewDecision(string! suggestionId, bool accept, string! reviewer, string! note) -> void
+Fluent.Pdf.PdfSemanticReviewDecision.Reviewer.get -> string!
+Fluent.Pdf.PdfSemanticReviewDecision.SuggestionId.get -> string!
+Fluent.Pdf.PdfSemanticReviewEntry
+Fluent.Pdf.PdfSemanticReviewEntry.AffectedObjects.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfObjectId>!
+Fluent.Pdf.PdfSemanticReviewEntry.AfterSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewEntry.Applied.get -> bool
+Fluent.Pdf.PdfSemanticReviewEntry.BeforeSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewEntry.Decision.get -> Fluent.Pdf.PdfSemanticReviewDecision?
+Fluent.Pdf.PdfSemanticReviewEntry.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAccessibilityFinding!>!
+Fluent.Pdf.PdfSemanticReviewEntry.Suggestion.get -> Fluent.Pdf.PdfSemanticSuggestion!
+Fluent.Pdf.PdfSemanticReviewPlan
+Fluent.Pdf.PdfSemanticReviewPlan.Findings.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfAccessibilityFinding!>!
+Fluent.Pdf.PdfSemanticReviewPlan.HumanReviewRequired.get -> bool
+Fluent.Pdf.PdfSemanticReviewPlan.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfSemanticReviewPlan.Profile.get -> Fluent.Pdf.PdfAccessibilityProfile
+Fluent.Pdf.PdfSemanticReviewPlan.SourceSha256.get -> string!
+Fluent.Pdf.PdfSemanticReviewPlan.Suggestions.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfSemanticSuggestion!>!
+Fluent.Pdf.PdfSemanticSuggestion
+Fluent.Pdf.PdfSemanticSuggestion.ActualText.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.AlternativeText.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.ChildOrder.get -> System.Collections.Generic.IReadOnlyList<int>?
+Fluent.Pdf.PdfSemanticSuggestion.CustomRole.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.ElementId.get -> Fluent.Pdf.PdfObjectId?
+Fluent.Pdf.PdfSemanticSuggestion.Id.get -> string!
+Fluent.Pdf.PdfSemanticSuggestion.Kind.get -> Fluent.Pdf.PdfSemanticFixKind
+Fluent.Pdf.PdfSemanticSuggestion.Language.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.Reason.get -> string!
+Fluent.Pdf.PdfSemanticSuggestion.Role.get -> string?
+Fluent.Pdf.PdfSemanticSuggestion.StructurePlan.get -> Fluent.Pdf.PdfStructurePlan?
 Fluent.Pdf.PdfSepaCreditTransfer
 Fluent.Pdf.PdfSepaCreditTransfer.Amount.get -> decimal
 Fluent.Pdf.PdfSepaCreditTransfer.Beneficiary.get -> string!
@@ -3302,10 +3346,14 @@ static Fluent.Pdf.ManagedPdfProvider.Instance.get -> Fluent.Pdf.ManagedPdfProvid
 static Fluent.Pdf.Pdf.Create(Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.Open(System.IO.Stream! input, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Pdf.OpenFile(string! path, Fluent.Pdf.PdfOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfAccessibility.ApplyReview(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfSemanticReviewPlan! plan, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfSemanticReviewDecision!>! decisions, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSemanticReviewAudit!
+static Fluent.Pdf.PdfAccessibility.ApplyReviewFile(System.IO.Stream! input, string! path, Fluent.Pdf.PdfSemanticReviewPlan! plan, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfSemanticReviewDecision!>! decisions, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSemanticReviewAudit!
 static Fluent.Pdf.PdfAccessibility.Author(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfStructurePlan! plan, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfAccessibility.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfAccessibilityProfile profile = Fluent.Pdf.PdfAccessibilityProfile.Ua1, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAccessibilityInspection!
+static Fluent.Pdf.PdfAccessibility.PrepareReview(System.IO.Stream! input, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfSemanticSuggestion!>! suggestions, Fluent.Pdf.PdfAccessibilityProfile profile = Fluent.Pdf.PdfAccessibilityProfile.Ua1, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSemanticReviewPlan!
 static Fluent.Pdf.PdfAccessibility.Remediate(Fluent.Pdf.PdfAccessibilityInspection! source, Fluent.Pdf.PdfObjectId elementId, string? role = null, string? language = null, string? alternativeText = null, string? actualText = null, int[]? childOrder = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfAccessibility.Validate(System.IO.Stream! input, Fluent.Pdf.PdfAccessibilityProfile profile, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfAccessibilityHumanReview? humanReview = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfAccessibilityValidation!
+static Fluent.Pdf.PdfAccessibility.WriteReview(Fluent.Pdf.PdfSemanticReviewAudit! audit, System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfAction.Advanced(Fluent.Pdf.PdfValue! definition) -> Fluent.Pdf.PdfAction!
 static Fluent.Pdf.PdfAction.GoTo(Fluent.Pdf.PdfDestination! destination) -> Fluent.Pdf.PdfAction!
 static Fluent.Pdf.PdfAction.GoToNamed(string! name) -> Fluent.Pdf.PdfAction!
@@ -3542,6 +3590,9 @@ static Fluent.Pdf.PdfSecurity.DecryptWithCertificate(System.IO.Stream! input, Sy
 static Fluent.Pdf.PdfSecurity.DecryptWithPassword(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfPassword! password, bool allowLegacyEncryption = false, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfSecurity.EncryptWithCertificates(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfCertificateProtection! protection, Fluent.Pdf.PdfProviderRegistry! providers, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
 static Fluent.Pdf.PdfSecurity.EncryptWithPassword(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfPasswordProtection! protection, bool allowSignatureInvalidation = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfSecurityResult!
+static Fluent.Pdf.PdfSemanticSuggestion.Element(string! id, Fluent.Pdf.PdfObjectId elementId, string! reason, string? role = null, string? language = null, string? alternativeText = null, string? actualText = null, int[]? childOrder = null) -> Fluent.Pdf.PdfSemanticSuggestion!
+static Fluent.Pdf.PdfSemanticSuggestion.RoleMapping(string! id, string! customRole, string! standardRole, string! reason) -> Fluent.Pdf.PdfSemanticSuggestion!
+static Fluent.Pdf.PdfSemanticSuggestion.Structure(string! id, Fluent.Pdf.PdfStructurePlan! plan, string! reason) -> Fluent.Pdf.PdfSemanticSuggestion!
 static Fluent.Pdf.PdfSepaCreditTransfer.FromInvoice(Fluent.Pdf.PdfInvoiceData! invoice, string! iban, string! bic) -> Fluent.Pdf.PdfSepaCreditTransfer!
 static Fluent.Pdf.PdfSepaCreditTransfer.Parse(string! payload) -> Fluent.Pdf.PdfSepaCreditTransfer!
 static Fluent.Pdf.PdfShading.Axial(Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfPoint start, Fluent.Pdf.PdfPoint end, Fluent.Pdf.PdfFunction! function, bool extendStart = false, bool extendEnd = false, Fluent.Pdf.PdfRect? bounds = null, bool antiAlias = false, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfShading!
@@ -5569,6 +5620,18 @@ Measured closed rulings; table-versus-form semantics remain unresolved and prose
 
 A caller-declared table whose raw engine order is retained.
 
+### <code>F:Fluent.Pdf.PdfSemanticFixKind.Element</code>
+
+Change an existing element's explicit semantics or child order.
+
+### <code>F:Fluent.Pdf.PdfSemanticFixKind.RoleMapping</code>
+
+Map one custom PDF1 structure role directly to a standard role.
+
+### <code>F:Fluent.Pdf.PdfSemanticFixKind.StructurePlan</code>
+
+Apply a complete explicit heading/list/table/content structure plan.
+
 ### <code>F:Fluent.Pdf.PdfSignatureLockAction.All</code>
 
 Lock every form field.
@@ -6119,6 +6182,14 @@ Remarks: On failure the partially populated document is disposed. The managed re
 
 Opens a file with an explicit reader; the SDK-owned file handle is closed before return.
 
+### <code>M:Fluent.Pdf.PdfAccessibility.ApplyReview(System.IO.Stream,System.IO.Stream,Fluent.Pdf.PdfSemanticReviewPlan,System.Collections.Generic.IEnumerable{Fluent.Pdf.PdfSemanticReviewDecision},Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Applies explicit decisions only to matching source bytes, in plan order. Every accepted fix is structurally checked, serialized and reparsed before delivery; pending/rejected changes remain untouched.
+
+### <code>M:Fluent.Pdf.PdfAccessibility.ApplyReviewFile(System.IO.Stream,System.String,Fluent.Pdf.PdfSemanticReviewPlan,System.Collections.Generic.IEnumerable{Fluent.Pdf.PdfSemanticReviewDecision},Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Stages all accepted fixes and post-fix validation before atomically replacing the destination file.
+
 ### <code>M:Fluent.Pdf.PdfAccessibility.Author(Fluent.Pdf.PdfDocumentSnapshot,Fluent.Pdf.PdfStructurePlan,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Authors a complete explicit structure tree over actual existing marked content/annotations; every MCID must have exactly one owner. No PDF/UA identification or conformance claim is fabricated.
@@ -6127,6 +6198,10 @@ Authors a complete explicit structure tree over actual existing marked content/a
 
 Inspects actual page/Form MCIDs, logical order, annotation/parent associations and incomplete automated blockers. Human review and complete independent validation remain separate requirements.
 
+### <code>M:Fluent.Pdf.PdfAccessibility.PrepareReview(System.IO.Stream,System.Collections.Generic.IEnumerable{Fluent.Pdf.PdfSemanticSuggestion},Fluent.Pdf.PdfAccessibilityProfile,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Binds up to 128 caller-proposed semantic changes to exact source bytes and passive structural observations. No suggestion is automatically accepted.
+
 ### <code>M:Fluent.Pdf.PdfAccessibility.Remediate(Fluent.Pdf.PdfAccessibilityInspection,Fluent.Pdf.PdfObjectId,System.String,System.String,System.String,System.String,System.Int32[],Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Changes author-supplied role/language/descriptions and optionally reorders existing children by an exact permutation, preserving identities and all content/parent associations. Null fields retain source values.
@@ -6134,6 +6209,10 @@ Changes author-supplied role/language/descriptions and optionally reorders exist
 ### <code>M:Fluent.Pdf.PdfAccessibility.Validate(System.IO.Stream,Fluent.Pdf.PdfAccessibilityProfile,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfAccessibilityHumanReview,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Runs complete independent exact-input validation, optionally attaching separately supplied matching human review. Caller input stays open; provider success never bypasses latched failures.
+
+### <code>M:Fluent.Pdf.PdfAccessibility.WriteReview(Fluent.Pdf.PdfSemanticReviewAudit,System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Writes bounded schema-one JSON with source/output hashes, proposed changes, caller-asserted decisions and post-fix findings. Reviewer notes and proposed text are intentionally included; no conformance claim is made.
 
 ### <code>M:Fluent.Pdf.PdfAccessibilityFinding.#ctor(System.String,System.String,System.String)</code>
 
@@ -8272,6 +8351,22 @@ Writes a certificate-encrypted full rewrite using an explicit offline CMS provid
 ### <code>M:Fluent.Pdf.PdfSecurity.EncryptWithPassword(Fluent.Pdf.PdfDocumentSnapshot,System.IO.Stream,Fluent.Pdf.PdfPasswordProtection,System.Boolean,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Writes password-encrypted output from a detached snapshot. AES-256 revision 6 is the default. Existing signature rewrites require explicit authorization.
+
+### <code>M:Fluent.Pdf.PdfSemanticReviewDecision.#ctor(System.String,System.Boolean,System.String,System.String)</code>
+
+Captures a nonempty reviewer, note, suggestion ID and accept/reject decision.
+
+### <code>M:Fluent.Pdf.PdfSemanticSuggestion.Element(System.String,Fluent.Pdf.PdfObjectId,System.String,System.String,System.String,System.String,System.String,System.Int32[])</code>
+
+Proposes explicit element metadata or an exact child permutation; null fields retain source values.
+
+### <code>M:Fluent.Pdf.PdfSemanticSuggestion.RoleMapping(System.String,System.String,System.String,System.String)</code>
+
+Proposes a direct custom-to-standard role map for the PDF1 profile; standard roles cannot be remapped.
+
+### <code>M:Fluent.Pdf.PdfSemanticSuggestion.Structure(System.String,Fluent.Pdf.PdfStructurePlan,System.String)</code>
+
+Proposes a complete author-supplied structure plan. It must be the only suggestion because it replaces element identities.
 
 ### <code>M:Fluent.Pdf.PdfSepaCreditTransfer.#ctor(System.String,System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String)</code>
 
@@ -14465,6 +14560,142 @@ Gets the standard handler revision, or zero for a public-key handler.
 
 Gets the successful authentication path.
 
+### <code>P:Fluent.Pdf.PdfSemanticReviewAudit.AfterSha256</code>
+
+Gets the exact delivered output binding.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewAudit.BeforeSha256</code>
+
+Gets original input binding.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewAudit.Entries</code>
+
+Gets every suggestion's outcome in plan order, including pending and rejected ones.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewAudit.HumanReviewRequired</code>
+
+Gets true; complete independent validation and human/screen-reader review remain separate.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewAudit.OperationReport</code>
+
+Gets the shared operation report.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewAudit.Profile</code>
+
+Gets the selected profile, without compliance inference.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewDecision.Accept</code>
+
+Gets whether this exact proposed change was accepted.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewDecision.Note</code>
+
+Gets the caller's review rationale.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewDecision.Reviewer</code>
+
+Gets caller-supplied reviewer identity.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewDecision.SuggestionId</code>
+
+Gets the selected suggestion identity.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewEntry.AffectedObjects</code>
+
+Gets affected source or newly authored structure identities.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewEntry.AfterSha256</code>
+
+Gets the exact bytes after this step; unchanged for rejected/pending suggestions.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewEntry.Applied</code>
+
+Gets true only after an accepted fix and its structural checks succeeded.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewEntry.BeforeSha256</code>
+
+Gets the exact bytes before this ledger step.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewEntry.Decision</code>
+
+Gets the reviewer decision, or null for an unreviewed suggestion.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewEntry.Findings</code>
+
+Gets incomplete automated findings after this step.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewEntry.Suggestion</code>
+
+Gets the exact proposed semantics and inference explanation.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewPlan.Findings</code>
+
+Gets incomplete automated source findings.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewPlan.HumanReviewRequired</code>
+
+Gets true; suggestion preparation never verifies human semantics.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewPlan.OperationReport</code>
+
+Gets preparation budgets and diagnostics.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewPlan.Profile</code>
+
+Gets the requested accessibility profile without a conformance claim.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewPlan.SourceSha256</code>
+
+Gets the exact input digest required when applying decisions.
+
+### <code>P:Fluent.Pdf.PdfSemanticReviewPlan.Suggestions</code>
+
+Gets immutable unaccepted suggestions in application order.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.ActualText</code>
+
+Gets proposed logical replacement text requiring explicit reviewer acceptance.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.AlternativeText</code>
+
+Gets proposed alternative text requiring explicit reviewer acceptance.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.ChildOrder</code>
+
+Gets the proposed exact permutation; null retains existing order.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.CustomRole</code>
+
+Gets the custom role to map, when applicable.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.ElementId</code>
+
+Gets the source element identity when applicable.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.Id</code>
+
+Gets the caller's unique bounded suggestion identity.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.Kind</code>
+
+Gets the exact proposed change category.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.Language</code>
+
+Gets the proposed language.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.Reason</code>
+
+Gets the explicit reason or inference explanation for review.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.Role</code>
+
+Gets the proposed standard role.
+
+### <code>P:Fluent.Pdf.PdfSemanticSuggestion.StructurePlan</code>
+
+Gets the explicit complete structure plan when applicable.
+
 ### <code>P:Fluent.Pdf.PdfSepaCreditTransfer.Amount</code>
 
 Gets exact positive EUR amount.
@@ -17570,6 +17801,30 @@ Explicit bounded full-rewrite security transformations. Credentials and plaintex
 ### <code>T:Fluent.Pdf.PdfSecurityResult</code>
 
 Detached nonsecret authentication and encryption metadata, with the operation report.
+
+### <code>T:Fluent.Pdf.PdfSemanticFixKind</code>
+
+The explicit semantic change proposed for human review; none establishes accessibility conformance.
+
+### <code>T:Fluent.Pdf.PdfSemanticReviewAudit</code>
+
+An ordered semantic review ledger. Applied fixes never imply complete accessibility or human review.
+
+### <code>T:Fluent.Pdf.PdfSemanticReviewDecision</code>
+
+An explicit caller-asserted reviewer decision. This record does not authenticate a person or certify conformance.
+
+### <code>T:Fluent.Pdf.PdfSemanticReviewEntry</code>
+
+A detached ordered ledger entry with immutable source/output binding and post-fix findings.
+
+### <code>T:Fluent.Pdf.PdfSemanticReviewPlan</code>
+
+A detached suggestion inventory bound to exact source bytes. Preparation is read-only.
+
+### <code>T:Fluent.Pdf.PdfSemanticSuggestion</code>
+
+An immutable caller-proposed semantic change. Reasons may describe inference; values are never accepted automatically.
 
 ### <code>T:Fluent.Pdf.PdfSepaCreditTransfer</code>
 

@@ -5,6 +5,15 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static void ReviewReadingOrder(byte[] input, PdfObjectId element, int[] order, PdfSemanticReviewDecision decision, Stream output, Stream ledger)
+    {
+        using var source = new MemoryStream(input, false);
+        var suggestion = PdfSemanticSuggestion.Element(decision.SuggestionId, element, "Proposed reading order supplied by the caller", childOrder: order);
+        var plan = PdfAccessibility.PrepareReview(source, new[] { suggestion });
+        source.Position = 0;
+        var audit = PdfAccessibility.ApplyReview(source, output, plan, new[] { decision });
+        PdfAccessibility.WriteReview(audit, ledger);
+    }
     public static void CollectionRoundTrip(byte[] input, Stream archive, Stream restored)
     {
         using var source = new MemoryStream(input, false);
