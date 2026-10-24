@@ -4635,7 +4635,14 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/native-distribution.md",
+        "implemented": ["Explicit offline pinned asset/notice/static-import inventory, verified staged installation without destination replacement, and literal-path owned-inventory removal tooling"],
+        "pending": ["Complete engine/host/model/font distributions and reviewed per-RID closure", "Actual clean air-gapped host, system ABI, licensing, native and production qualification"],
+        "sourceEvidence": "docs/evidence/prereq-native-source.json"
+      }
     },
     {
       "id": "FP-106",

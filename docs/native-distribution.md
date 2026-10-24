@@ -1,5 +1,19 @@
 # Native distribution qualification status
 
+## Offline source provisioning tools
+
+`eng/native-distribution.py` now reads an explicitly SHA-256-pinned version-one inventory, verifies every file and its notice asset, and stages an offline installation under a unique private directory. It copies and rehashes exact bytes, verifies the stage, then commits with an OS operation that cannot replace an existing destination. A failed copy or commit removes only the owned stage inventory. The source tool never executes assets, resolves a network address, discovers libraries or downloads anything.
+
+The inventory binds each portable relative path, exact length/hash, binary/data/model/font/notice role, version, declared origin, license and notice path. Executables/libraries additionally declare every observed static import and loader search path; imports bind either an inventoried library or an explicit system prerequisite. Original bounded PE import/delay-import, ELF64 dynamic-table and thin Mach-O load-command readers verify the declarations and architecture. Runtime-loaded modules, loader search semantics, installed system ABI, signing/notarization and legal redistribution approval remain separate required review. A static import observation is not complete runtime closure.
+
+Supply existing absolute protected source/parent directories. The owner must prevent concurrent path, mount and file replacement; these source tools are not a race-free loader for attacker-controlled trees. The profile accepts at most 4 MiB of JSON, 4,096 files, 512 MiB per file and a caller-declared total of at most 10 GiB. Hashing/copying uses bounded chunks. Unknown properties, duplicate/case-colliding paths, traversal, reparse/symbolic links, hard-linked files, unpinned notices/imports, changed bytes and an existing destination reject. The installer requires Python 3.10+; no SDK runtime depends on Python.
+
+Use `inspect-binary /absolute/file` to observe static imports, then author and review the inventory. Observation output does not approve redistribution or generate a qualified manifest. Run `verify --manifest /absolute/inventory.json --manifest-sha256 EXACT_SHA256 --source /absolute/assets --report /absolute/new-report.json`, followed by `install` with the same arguments and an explicit `--destination /absolute/new-installation` on the same filesystem as its private stage. Parent directories must already exist. A successful installation retains `provision-manifest.json`; existing reports/destinations are never overwritten.
+
+For removal, use `eng/remove-native-installation.ps1` with explicit absolute `-InstallationDirectory`, `-PythonExecutable`, `-ReportDirectory` outside that installation, and the exact `-ManifestSha256`. It verifies the retained inventory, refuses any unowned file/directory or link, retains a verification report, then removes only the exact inventoried files and empty owned directories with literal-path operations. Preserve release evidence before invoking removal. Do not use global pruning or recursive deletion.
+
+Source tests use original inert header fixtures and exact pinned original native worker/bridge files. They cover wrong/missing metadata/assets, changed bytes, notice/import failures, nested installs, interruption before commit, concurrent no-replacement commits and literal-path removal that preserves unowned files. They do not install or qualify third-party browser/rendering/OCR engines on clean air-gapped hosts. #93 stays skipped and release-blocking.
+
 FP-105/#105 remains planned and blocked on complete deployment inputs. No native distribution package or qualified offline provisioning manifest is delivered by this checkpoint. Source worker fixtures and locally provisioned analysis assets are not shipping artifacts.
 
 | Required input | Observed boundary |

@@ -41,6 +41,12 @@ jobs:
       - name: Build original native worker and crash/isolation fixtures
         shell: pwsh
         run: ./eng/build-native-fixtures.ps1
+      - name: Verify offline source provisioning and static import closure
+        shell: pwsh
+        run: |
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          & $python eng/test-native-distribution.py
+          if ($LASTEXITCODE -ne 0) { throw 'Offline source provisioning boundaries failed.' }
       - name: Enable Windows network isolation prerequisite on disposable runner
         if: runner.os == 'Windows'
         shell: pwsh

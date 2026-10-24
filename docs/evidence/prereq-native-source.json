@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-105",
+  "issue": 105,
+  "sourceParent": "08a94136ce9ff2e82ee499eb74ff539c8a8f20ae",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "distributionPackagesProduced": false,
+  "qualifiedProvisioningManifestsProduced": false,
+  "offlineInstallationAcceptanceRuns": 0,
+  "sourceProgress": "offline-pinned-inventory-static-import-verification-atomic-new-install-and-owned-removal-tooling",
+  "localSourceCases": 61,
+  "failed": 0,
+  "skipped": 0,
+  "observedInstalls": [
+    {
+      "rid": "win-x64",
+      "manifest": "actual-manifest-win-x64.json",
+      "manifestSha256": "137d9426eba15427362bc720d974bbbb6fde813bedd8102d66bb7bb755e8a265",
+      "destination": "C:/Users/armen/source/repos/kirakosyan/pdf.net/artifacts/contracts/native-distribution/8e62b16a9b8643e6a3df4e5a5c11c972/actual-installed-win-x64",
+      "verifiedFiles": 5
+    },
+    {
+      "rid": "win-x86",
+      "manifest": "actual-manifest-win-x86.json",
+      "manifestSha256": "d72c794229c607ff41cb34332f0f9c931182490707b29709e4734d1f4e47aca4",
+      "destination": "C:/Users/armen/source/repos/kirakosyan/pdf.net/artifacts/contracts/native-distribution/8e62b16a9b8643e6a3df4e5a5c11c972/actual-installed-win-x86",
+      "verifiedFiles": 5
+    }
+  ],
+  "fixtureSourceCommit": "519a016630b0656d1a9c991e2ff1e8e60adc100a",
+  "fixtureLimit": "Original native fixture bytes are pinned from the separately identified older source inventory; no engine execution, shipping distribution or current-source native runtime qualification is inferred",
+  "binaryReaderProfiles": [
+    "PE32/PE32+ ordinary and RVA delay imports",
+    "ELF64 little-endian dynamic strings/imports/search paths",
+    "Thin Mach-O64 little-endian dylib load commands/search paths"
+  ],
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "684a8fc673a77d1a9981dc4fe0e54e7afa528857aa129c52d88871fcdd28e407"
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "3ecf3e41aadecd74135dd4e6bf1173138abefc99fe69c10f429b597b81969c13"
+    },
+    {
+      "path": "docs/native-distribution.md",
+      "sha256": "b8332391505bf0d1d2aef8e2163fad8a508a8f1a5a11e5d675a4bee317f3ab43"
+    },
+    {
+      "path": "docs/requirements/FP-105.md",
+      "sha256": "8c0d91fbcf787d94afb982da0f43a2bfc08ed8f24af0b83457454d99957040a5"
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "f14113b95f24f627ed1568d8cce5c9cf911ffeb29f09688df416042990ac76db"
+    },
+    {
+      "path": "eng/native-distribution.py",
+      "sha256": "908a3ebb006463d9e6244066282bd497415750fc6639c45f268159d2cafd7874"
+    },
+    {
+      "path": "eng/remove-native-installation.ps1",
+      "sha256": "0749b1fb4559bb1357bdf14bc97c52d614eaba0847e0887e9da3c48de1f39612"
+    },
+    {
+      "path": "eng/test-native-distribution.py",
+      "sha256": "0a90d2c629fab4e140051e64869ca2b2d2af3c0cba3f99e2ce47035c47bd98c3"
+    }
+  ],
+  "archive": {
+    "path": "artifacts/prereq-native-source-evidence.zip",
+    "sha256": "702b777f7a8b7ba6d17c5b3f75e85b55f5f2a3c11a6f25c820c714dad882aedb",
+    "bytes": 1203882,
+    "verifiedEntries": 88
+  },
+  "pending": [
+    "Actual Linux/macOS tool execution and corrected final CI",
+    "Complete supported engine/browser/TeX/model/font asset closure and redistribution review",
+    "Actual clean air-gapped installations, system ABI, code-signing and native runtime/security qualification",
+    "Mandatory issue93 remains user-skipped and release-blocking"
+  ],
+  "hostedCI": "Pending final PR head; exact result will be reconciled in PR121"
+}
