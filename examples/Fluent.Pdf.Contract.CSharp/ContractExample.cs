@@ -5,6 +5,14 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static void ObservePdf(byte[] input, Stream output, Stream supportBundle)
+    {
+        using var observations = new PdfObservationSession();
+        using var source = new MemoryStream(input, false);
+        using var document = PdfFacade.Open(source, new(operationPolicy: PdfOperationPolicy.Default.WithObservations(observations)));
+        document.Save(output);
+        observations.WriteBundle(supportBundle);
+    }
     public static byte[] CacheInput(PdfContentCache tenantCache, byte[] input, PdfOperationContext context)
     {
         string address = tenantCache.Store(input, context);

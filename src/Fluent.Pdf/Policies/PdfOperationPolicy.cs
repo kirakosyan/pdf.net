@@ -16,6 +16,14 @@ public sealed class PdfOperationPolicy
     public PdfProcessingMode Mode { get; }
     /// <summary>Gets the immutable limits applied to each new operation.</summary>
     public PdfResourceLimits Limits { get; }
+    /// <summary>Gets the explicitly attached privacy-filtered observation session, or null by default.</summary>
+    public PdfObservationSession? Observations { get; private set; }
+    /// <summary>Returns a new policy sharing these immutable limits and an explicitly owned observation session. The default policy is unchanged.</summary>
+    public PdfOperationPolicy WithObservations(PdfObservationSession observations)
+    {
+        if (observations == null) throw new ArgumentNullException(nameof(observations));
+        return new PdfOperationPolicy(Mode, Limits) { Observations = observations };
+    }
 }
 
 /// <summary>Controls whether explicitly reported losses can produce successful output.</summary>

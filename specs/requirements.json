@@ -3975,7 +3975,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/observability.md",
+        "implemented": [
+          "Opt-in bounded privacy-filtered context lifecycle/progress events with random trace/span correlation",
+          "Caller-controlled draining outside processing locks, sink-failure/drop counters and typed version probes",
+          "Budgeted borrowed-stream support JSON with closed-catalog codes and safe remediation"
+        ],
+        "pending": [
+          "Complete provider/native/browser/model tracing and privacy review",
+          "All minimum/runtime/provider and exact final package qualification",
+          "Complete production, endurance and security gates"
+        ]
+      }
     },
     {
       "id": "FP-093",

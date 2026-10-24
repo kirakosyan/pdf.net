@@ -3566,3 +3566,38 @@ Fluent.Pdf.PdfContentCache.PdfContentCache(int maximumEntries = 1024, long maxim
 Fluent.Pdf.PdfContentCache.ResidentBytes.get -> long
 Fluent.Pdf.PdfContentCache.Store(byte[]! content, Fluent.Pdf.PdfOperationContext! context) -> string!
 Fluent.Pdf.PdfContentCache.TryGet(string! sha256, Fluent.Pdf.PdfOperationContext! context, out byte[]? content) -> bool
+Fluent.Pdf.PdfObservation
+Fluent.Pdf.PdfObservation.Capability.get -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfObservation.Code.get -> string?
+Fluent.Pdf.PdfObservation.Completed.get -> long?
+Fluent.Pdf.PdfObservation.DiagnosticCount.get -> int
+Fluent.Pdf.PdfObservation.ElapsedTime.get -> System.TimeSpan
+Fluent.Pdf.PdfObservation.EngineVersion.get -> string?
+Fluent.Pdf.PdfObservation.Kind.get -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservation.Remediation.get -> string?
+Fluent.Pdf.PdfObservation.Resources.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfResourceUsage!>!
+Fluent.Pdf.PdfObservation.SchemaVersion.get -> int
+Fluent.Pdf.PdfObservation.Sequence.get -> long
+Fluent.Pdf.PdfObservation.SpanId.get -> System.Guid
+Fluent.Pdf.PdfObservation.Succeeded.get -> bool?
+Fluent.Pdf.PdfObservation.Total.get -> long?
+Fluent.Pdf.PdfObservation.TraceId.get -> System.Guid
+Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.EngineProbe = 3 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.Finished = 2 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.Progress = 1 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.Started = 0 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationSession
+Fluent.Pdf.PdfObservationSession.Dispose() -> void
+Fluent.Pdf.PdfObservationSession.Drain(System.Action<Fluent.Pdf.PdfObservation!>! sink, int maximumEvents = 1024) -> int
+Fluent.Pdf.PdfObservationSession.DroppedEvents.get -> long
+Fluent.Pdf.PdfObservationSession.MaximumEvents.get -> int
+Fluent.Pdf.PdfObservationSession.PdfObservationSession(int maximumEvents = 1024) -> void
+Fluent.Pdf.PdfObservationSession.PendingEvents.get -> int
+Fluent.Pdf.PdfObservationSession.RecordEngineProbe(Fluent.Pdf.PdfCapability capability, System.Version! version, bool succeeded) -> void
+Fluent.Pdf.PdfObservationSession.SinkFailures.get -> long
+Fluent.Pdf.PdfObservationSession.TraceId.get -> System.Guid
+Fluent.Pdf.PdfObservationSession.WriteBundle(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfOperationContext.ReportProgress(long completed, long total) -> void
+Fluent.Pdf.PdfOperationPolicy.Observations.get -> Fluent.Pdf.PdfObservationSession?
+Fluent.Pdf.PdfOperationPolicy.WithObservations(Fluent.Pdf.PdfObservationSession! observations) -> Fluent.Pdf.PdfOperationPolicy!

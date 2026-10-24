@@ -1705,6 +1705,38 @@ Fluent.Pdf.PdfObjectId.Generation.get -> int
 Fluent.Pdf.PdfObjectId.Number.get -> int
 Fluent.Pdf.PdfObjectId.PdfObjectId() -> void
 Fluent.Pdf.PdfObjectId.PdfObjectId(int number, int generation = 0) -> void
+Fluent.Pdf.PdfObservation
+Fluent.Pdf.PdfObservation.Capability.get -> Fluent.Pdf.PdfCapability
+Fluent.Pdf.PdfObservation.Code.get -> string?
+Fluent.Pdf.PdfObservation.Completed.get -> long?
+Fluent.Pdf.PdfObservation.DiagnosticCount.get -> int
+Fluent.Pdf.PdfObservation.ElapsedTime.get -> System.TimeSpan
+Fluent.Pdf.PdfObservation.EngineVersion.get -> string?
+Fluent.Pdf.PdfObservation.Kind.get -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservation.Remediation.get -> string?
+Fluent.Pdf.PdfObservation.Resources.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfResourceUsage!>!
+Fluent.Pdf.PdfObservation.SchemaVersion.get -> int
+Fluent.Pdf.PdfObservation.Sequence.get -> long
+Fluent.Pdf.PdfObservation.SpanId.get -> System.Guid
+Fluent.Pdf.PdfObservation.Succeeded.get -> bool?
+Fluent.Pdf.PdfObservation.Total.get -> long?
+Fluent.Pdf.PdfObservation.TraceId.get -> System.Guid
+Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.EngineProbe = 3 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.Finished = 2 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.Progress = 1 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationKind.Started = 0 -> Fluent.Pdf.PdfObservationKind
+Fluent.Pdf.PdfObservationSession
+Fluent.Pdf.PdfObservationSession.Dispose() -> void
+Fluent.Pdf.PdfObservationSession.Drain(System.Action<Fluent.Pdf.PdfObservation!>! sink, int maximumEvents = 1024) -> int
+Fluent.Pdf.PdfObservationSession.DroppedEvents.get -> long
+Fluent.Pdf.PdfObservationSession.MaximumEvents.get -> int
+Fluent.Pdf.PdfObservationSession.PdfObservationSession(int maximumEvents = 1024) -> void
+Fluent.Pdf.PdfObservationSession.PendingEvents.get -> int
+Fluent.Pdf.PdfObservationSession.RecordEngineProbe(Fluent.Pdf.PdfCapability capability, System.Version! version, bool succeeded) -> void
+Fluent.Pdf.PdfObservationSession.SinkFailures.get -> long
+Fluent.Pdf.PdfObservationSession.TraceId.get -> System.Guid
+Fluent.Pdf.PdfObservationSession.WriteBundle(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfOcr
 Fluent.Pdf.PdfOcrAccuracy
 Fluent.Pdf.PdfOcrAccuracyGroup
@@ -1844,10 +1876,13 @@ Fluent.Pdf.PdfOperationContext.Operation.get -> string!
 Fluent.Pdf.PdfOperationContext.Policy.get -> Fluent.Pdf.PdfOperationPolicy!
 Fluent.Pdf.PdfOperationContext.ProviderId.get -> string!
 Fluent.Pdf.PdfOperationContext.Report(Fluent.Pdf.PdfDiagnostic! diagnostic) -> void
+Fluent.Pdf.PdfOperationContext.ReportProgress(long completed, long total) -> void
 Fluent.Pdf.PdfOperationPolicy
 Fluent.Pdf.PdfOperationPolicy.Limits.get -> Fluent.Pdf.PdfResourceLimits!
 Fluent.Pdf.PdfOperationPolicy.Mode.get -> Fluent.Pdf.PdfProcessingMode
+Fluent.Pdf.PdfOperationPolicy.Observations.get -> Fluent.Pdf.PdfObservationSession?
 Fluent.Pdf.PdfOperationPolicy.PdfOperationPolicy(Fluent.Pdf.PdfProcessingMode mode = Fluent.Pdf.PdfProcessingMode.Strict, Fluent.Pdf.PdfResourceLimits? limits = null) -> void
+Fluent.Pdf.PdfOperationPolicy.WithObservations(Fluent.Pdf.PdfObservationSession! observations) -> Fluent.Pdf.PdfOperationPolicy!
 Fluent.Pdf.PdfOperationReport
 Fluent.Pdf.PdfOperationReport.Diagnostics.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfDiagnostic!>!
 Fluent.Pdf.PdfOperationReport.ElapsedTime.get -> System.TimeSpan
@@ -4814,6 +4849,22 @@ Omit the affected navigation entry and report the loss.
 
 Reject before producing an incomplete destination.
 
+### <code>F:Fluent.Pdf.PdfObservationKind.EngineProbe</code>
+
+A caller explicitly recorded a numeric engine-version probe.
+
+### <code>F:Fluent.Pdf.PdfObservationKind.Finished</code>
+
+An operation finished, including failure.
+
+### <code>F:Fluent.Pdf.PdfObservationKind.Progress</code>
+
+An explicit numeric progress checkpoint.
+
+### <code>F:Fluent.Pdf.PdfObservationKind.Started</code>
+
+An operation entered its SDK context.
+
 ### <code>F:Fluent.Pdf.PdfOcrAccuracy.ComparisonProfile</code>
 
 Gets the fixed comparison definition: exact Unicode scalars, case-sensitive words split by Unicode15.1 White_Space, with no hidden normalization or trimming.
@@ -7344,6 +7395,26 @@ Compares the number and generation.
 
 Compares the number and generation.
 
+### <code>M:Fluent.Pdf.PdfObservationSession.#ctor(System.Int32)</code>
+
+Creates a private queue of1–16384 events. No sink, network connection or background thread starts.
+
+### <code>M:Fluent.Pdf.PdfObservationSession.Dispose</code>
+
+Closes the session and discards pending events. Further processing drops telemetry; it remains usable independently of the disposed session.
+
+### <code>M:Fluent.Pdf.PdfObservationSession.Drain(System.Action{Fluent.Pdf.PdfObservation},System.Int32)</code>
+
+Invokes at most1–16384 callbacks on this caller's thread and returns successful deliveries. Only one drain may run at a time; callbacks execute outside the queue lock. Ordinary callback exceptions are counted and discarded.
+
+### <code>M:Fluent.Pdf.PdfObservationSession.RecordEngineProbe(Fluent.Pdf.PdfCapability,System.Version,System.Boolean)</code>
+
+Explicitly records a numeric engine version and probe result. The caller must use an actual probe result; no engine is loaded and no path/name/message is captured.
+
+### <code>M:Fluent.Pdf.PdfObservationSession.WriteBundle(System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Writes schema1 JSON for a snapshot of pending sanitized events and loss counters, leaving the output open. This explicit export uses finite budgets, may leave partial stream output on failure, does not drain events and does not observe itself.
+
 ### <code>M:Fluent.Pdf.PdfOcr.Recognize(Fluent.Pdf.PdfOcrRaster,Fluent.Pdf.PdfOcrOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Recognizes an explicitly captured raster. Results retain engine-order geometry/confidence; accuracy and semantic order require separate qualification.
@@ -7456,9 +7527,17 @@ Remarks: Durations are 1 ms through one day; at most 128 simultaneous scopes are
 
 Records a diagnostic with SDK-bound provenance. Strict losses and error severity latch a fatal failure.
 
+### <code>M:Fluent.Pdf.PdfOperationContext.ReportProgress(System.Int64,System.Int64)</code>
+
+Reports explicit numeric work units to an opt-in observation session. No content, phase name or callback is accepted. This remains a cooperative cancellation/deadline checkpoint when telemetry is disabled.
+
 ### <code>M:Fluent.Pdf.PdfOperationPolicy.#ctor(Fluent.Pdf.PdfProcessingMode,Fluent.Pdf.PdfResourceLimits)</code>
 
 Creates a policy; strict processing is the default.
+
+### <code>M:Fluent.Pdf.PdfOperationPolicy.WithObservations(Fluent.Pdf.PdfObservationSession)</code>
+
+Returns a new policy sharing these immutable limits and an explicitly owned observation session. The default policy is unchanged.
 
 ### <code>M:Fluent.Pdf.PdfOptimization.Optimize(Fluent.Pdf.PdfDocumentSnapshot,Fluent.Pdf.PdfOptimizationOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
@@ -12102,6 +12181,86 @@ Gets the generation.
 
 Gets the object number.
 
+### <code>P:Fluent.Pdf.PdfObservation.Capability</code>
+
+Gets the declared capability, without a provider identifier.
+
+### <code>P:Fluent.Pdf.PdfObservation.Code</code>
+
+Gets a closed-catalog failure code, or null. Unrecognized provider codes become Provider.Diagnostic.
+
+### <code>P:Fluent.Pdf.PdfObservation.Completed</code>
+
+Gets explicit completed work units for a progress event.
+
+### <code>P:Fluent.Pdf.PdfObservation.DiagnosticCount</code>
+
+Gets the number of accepted diagnostics without their messages, locations or identifiers.
+
+### <code>P:Fluent.Pdf.PdfObservation.ElapsedTime</code>
+
+Gets monotonic operation elapsed time.
+
+### <code>P:Fluent.Pdf.PdfObservation.EngineVersion</code>
+
+Gets an explicitly recorded numeric engine version, otherwise null; no version is inferred from a provider name.
+
+### <code>P:Fluent.Pdf.PdfObservation.Kind</code>
+
+Gets the event kind.
+
+### <code>P:Fluent.Pdf.PdfObservation.Remediation</code>
+
+Gets SDK-authored safe remediation guidance, never provider-supplied free text.
+
+### <code>P:Fluent.Pdf.PdfObservation.Resources</code>
+
+Gets detached numeric resource counters for a completed operation.
+
+### <code>P:Fluent.Pdf.PdfObservation.SchemaVersion</code>
+
+Gets the fixed event schema version.
+
+### <code>P:Fluent.Pdf.PdfObservation.Sequence</code>
+
+Gets the session publication sequence; dropped events can leave incomplete traces.
+
+### <code>P:Fluent.Pdf.PdfObservation.SpanId</code>
+
+Gets a random per-operation/probe ID.
+
+### <code>P:Fluent.Pdf.PdfObservation.Succeeded</code>
+
+Gets success for completed operations/probes, otherwise null.
+
+### <code>P:Fluent.Pdf.PdfObservation.Total</code>
+
+Gets explicit total work units for a progress event.
+
+### <code>P:Fluent.Pdf.PdfObservation.TraceId</code>
+
+Gets the session's random correlation ID; it is unrelated to PDF IDs or content hashes.
+
+### <code>P:Fluent.Pdf.PdfObservationSession.DroppedEvents</code>
+
+Gets events discarded because the queue was full/disposed or event construction failed.
+
+### <code>P:Fluent.Pdf.PdfObservationSession.MaximumEvents</code>
+
+Gets the fixed queue capacity.
+
+### <code>P:Fluent.Pdf.PdfObservationSession.PendingEvents</code>
+
+Gets the current pending event count.
+
+### <code>P:Fluent.Pdf.PdfObservationSession.SinkFailures</code>
+
+Gets callbacks that threw; failed deliveries are not retried or exposed to PDF processing.
+
+### <code>P:Fluent.Pdf.PdfObservationSession.TraceId</code>
+
+Gets the random trace correlation ID shared by contexts explicitly using this session.
+
 ### <code>P:Fluent.Pdf.PdfOcrAccuracyGroup.CharacterErrorRate</code>
 
 Gets CER, or null when the corpus group has no reference characters.
@@ -12445,6 +12604,10 @@ Gets the immutable limits applied to each new operation.
 ### <code>P:Fluent.Pdf.PdfOperationPolicy.Mode</code>
 
 Gets how declared fidelity losses are handled.
+
+### <code>P:Fluent.Pdf.PdfOperationPolicy.Observations</code>
+
+Gets the explicitly attached privacy-filtered observation session, or null by default.
 
 ### <code>P:Fluent.Pdf.PdfOperationReport.Diagnostics</code>
 
@@ -16725,6 +16888,20 @@ A bounded passive inspection of all active objects, including orphan action defi
 ### <code>T:Fluent.Pdf.PdfObjectId</code>
 
 An indirect object number and generation. Object zero is the null reference.
+
+### <code>T:Fluent.Pdf.PdfObservation</code>
+
+An immutable schema1 event containing no caller/provider free-text fields or document payload.
+
+### <code>T:Fluent.Pdf.PdfObservationKind</code>
+
+The fixed kinds of privacy-filtered observation events.
+
+### <code>T:Fluent.Pdf.PdfObservationSession</code>
+
+An explicitly owned bounded telemetry queue. Processing never invokes a sink or performs telemetry I/O.
+
+Remarks: Drain on a caller-controlled thread. A slow sink blocks that caller only; throwing sinks are counted and discarded. Full/disposed queues drop observations without changing PDF results. Counters and generated IDs are metadata; the host must still apply its telemetry retention/access policy.
 
 ### <code>T:Fluent.Pdf.PdfOcr</code>
 

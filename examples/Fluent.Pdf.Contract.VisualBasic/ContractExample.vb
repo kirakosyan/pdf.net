@@ -4,6 +4,14 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Sub ObservePdf(input As Byte(), output As Stream, supportBundle As Stream)
+        Using observations As New PdfObservationSession(), source As New MemoryStream(input, False)
+            Using document = PdfFacade.Open(source, New PdfOptions(operationPolicy:=PdfOperationPolicy.Default.WithObservations(observations)))
+                document.Save(output)
+                observations.WriteBundle(supportBundle)
+            End Using
+        End Using
+    End Sub
     Public Function CacheInput(tenantCache As PdfContentCache, input As Byte(), context As PdfOperationContext) As Byte()
         Dim address = tenantCache.Store(input, context)
         Dim captured As Byte() = Nothing

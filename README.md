@@ -168,3 +168,5 @@ FP-088 adds reproducible source performance measurements and fail-closed reviewe
 FP-090 adds a pinned original fidelity corpus with independent Unicode, geometry, form, structure and dual-renderer pixel checks. Complete corpus and production qualification remain pending; see [fidelity checks](docs/fidelity-corpus.md).
 
 FP-091 adds private bounded content caches and repeated-process checks for explicit metadata and compression inputs. See [determinism and tenancy](docs/determinism-caching.md) for isolation rules and the remaining qualification.
+
+FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sinks and bounded support JSON. See [observability](docs/observability.md) for privacy, loss counters and qualification limits.

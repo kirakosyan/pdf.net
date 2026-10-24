@@ -180,3 +180,5 @@ FP-088 adds reproducible source performance measurements and fail-closed reviewe
 FP-090 keeps original corpus authoring independent of the SDK under test. Hashed fixtures and authored semantics feed bounded public-API consumers, then two unrelated readers/renderers check the outputs. See [fidelity checks](fidelity-corpus.md) for the source profile and remaining qualification.
 
 FP-091's `PdfContentCache` is an explicitly owned tenant-private object, never global state. SHA-256 addresses are computed from private captures; retention uses bounded LRU eviction and reads return budgeted copies. Existing metadata and optimization controls form the explicit repeated-process profile described in [determinism and caching](determinism-caching.md).
+
+FP-092 policies opt into an explicitly owned observation queue. Contexts publish fixed-schema numeric/sanitized events; no sink runs on the processing path. Callers drain sinks and export budgeted support snapshots separately. See [observability](observability.md).
