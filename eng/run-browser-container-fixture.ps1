@@ -34,6 +34,45 @@ foreach($tfm in @('net8.0','net10.0')) {
     & $python (Join-Path $PSScriptRoot 'verify-browser-captures.py') $output (Join-Path $output 'independent.json')
     if($LASTEXITCODE -ne 0){throw 'Independent original source pixel/text observations failed.'}
 }
+$delayed=Join-Path $directory 'delayed-start'
+$null=[IO.Directory]::CreateDirectory($delayed)
+$hostSource=Join-Path $PSScriptRoot 'browser-host/host.py'
+$delayedHost=Join-Path $delayed 'host.py'
+[IO.File]::WriteAllText($delayedHost,"import time`ntime.sleep(15)`n"+[IO.File]::ReadAllText($hostSource),[Text.UTF8Encoding]::new($false))
+$helperName='fluent-pdf-delay-image-'+[Guid]::NewGuid().ToString('N')
+$helper=(& $DockerExecutable --host $DaemonEndpoint create --pull=never --network=none --name $helperName --label "org.fluent-pdf.owner=$helperName" --entrypoint /bin/true $image.imageId | Out-String).Trim()
+if($LASTEXITCODE -ne 0 -or $helper -notmatch '^[0-9a-f]{64}$'){throw 'Original delayed-image preparation did not acknowledge its owned identity.'}
+try {
+    # No build resolver, pull or process execution: only change our own source file in an acknowledged stopped helper.
+    & $DockerExecutable --host $DaemonEndpoint cp $delayedHost "${helper}:/opt/fluent-pdf/browser/host.py"
+    if($LASTEXITCODE -ne 0){throw 'Original delayed host copy failed.'}
+    $delayedImage=(& $DockerExecutable --host $DaemonEndpoint commit $helper | Out-String).Trim()
+    if($LASTEXITCODE -ne 0){throw 'Original delayed-start image snapshot failed.'}
+} finally {
+    & $DockerExecutable --host $DaemonEndpoint rm --force --volumes $helper | Set-Content -LiteralPath (Join-Path $delayed 'helper-removal.txt')
+    if($LASTEXITCODE -ne 0){throw "Owned delayed-image helper needs reconciliation: $helper"}
+}
+[IO.File]::WriteAllText((Join-Path $delayed 'image-id.txt'),$delayedImage,[Text.UTF8Encoding]::new($false))
+if($delayedImage -notmatch '^sha256:[0-9a-f]{64}$'){throw 'Delayed-start source image identity differs.'}
+@{purpose='original-source-startup-delay-only';parentImage=$image.imageId;imageId=$delayedImage;originalHostSha256=(Get-FileHash -LiteralPath $hostSource).Hash.ToLowerInvariant();delayedHostSha256=(Get-FileHash -LiteralPath $delayedHost).Hash.ToLowerInvariant();difference='Prepended import time and time.sleep(15) to our original host only';productionQualified=$false} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $delayed 'source.json') -Encoding utf8NoBOM
+foreach($tfm in @('net8.0','net10.0')) {
+    $manifest=Join-Path $delayed "$tfm-manifest.json"
+    @{dockerExecutable=$DockerExecutable;dockerSha256=$image.dockerSha256;daemonEndpoint=$DaemonEndpoint;imageId=$delayedImage;emptyConfigurationDirectory=$config;seccompProfile=$policy;seccompSha256=(Get-FileHash -LiteralPath $policy).Hash.ToLowerInvariant();outputDirectory=(Join-Path $delayed $tfm);startupCancellationOnly=$true} | ConvertTo-Json | Set-Content -LiteralPath $manifest -Encoding utf8NoBOM
+    $begin=[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+    & dotnet (Join-Path $root "eng/HtmlContainerProbe/bin/Release/$tfm/HtmlContainerProbe.dll") $manifest 2>&1 | Tee-Object -FilePath (Join-Path $delayed "$tfm.log")
+    if($LASTEXITCODE -ne 0){throw 'Actual acknowledged-create cancellation fixture failed.'}
+    $end=[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()+1
+    $events=@(& $DockerExecutable --host $DaemonEndpoint events --since $begin --until $end --filter type=container --filter event=start --filter "image=$delayedImage" --filter label=org.fluent-pdf.owner --format '{{json .}}')
+    if($LASTEXITCODE -ne 0){throw 'Actual startup event observation failed.'}
+    $eventFile=Join-Path $delayed "$tfm-start-events.jsonl"
+    [IO.File]::WriteAllText($eventFile,($events -join "`n"),[Text.UTF8Encoding]::new($false))
+    $starts=@($events | Where-Object {$_} | ForEach-Object {ConvertFrom-Json $_})
+    if($starts.Count -ne 1 -or $starts[0].Actor.ID -notmatch '^[0-9a-f]{64}$' -or $starts[0].Actor.Attributes.image -ne $delayedImage){throw 'The delayed fixture did not prove one acknowledged-ID start before cancellation.'}
+    $containerId=$starts[0].Actor.ID
+    $remaining=@(& $DockerExecutable --host $DaemonEndpoint container ls --all --filter "id=$containerId" --format '{{.ID}}')
+    if($LASTEXITCODE -ne 0 -or @($remaining | Where-Object {$_}).Count -ne 0){throw 'The acknowledged delayed container remains after cancellation.'}
+    @{containerId=$containerId;startEventSha256=(Get-FileHash -LiteralPath $eventFile).Hash.ToLowerInvariant();knownAbsentAfterExit=$true;productionQualified=$false} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $delayed "$tfm-daemon-proof.json") -Encoding utf8NoBOM
+}
 $owned=@(& $DockerExecutable --host $DaemonEndpoint ps --all --filter 'label=org.fluent-pdf.owner' --format '{{.Names}}')
 if($LASTEXITCODE -ne 0){throw 'Owned-container final observation failed.'}
 [IO.File]::WriteAllText((Join-Path $directory 'owned-containers-after.txt'),($owned -join "`n"),[Text.UTF8Encoding]::new($false))

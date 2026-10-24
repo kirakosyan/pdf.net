@@ -159,7 +159,7 @@ A trusted Windows XAML print host yielding a complete PDF.
 
 ### <code>M:Fluent.Pdf.Html.ChromiumContainerHost.Open(Fluent.Pdf.Html.ChromiumContainerOptions,Fluent.Pdf.PdfOperationContext)</code>
 
-Verifies prerequisites, reserves container memory, starts one unique offline read-only nonroot container and checks its bootstrap before returning a private connection. Disposal terminates/removes only that container and joins owned I/O; cleanup failures retain its identity.
+Verifies prerequisites, reserves memory, requires an immutable creation acknowledgement, then starts the unique offline read-only nonroot container and checks its bootstrap. Disposal targets the acknowledged ID and joins owned I/O; unacknowledged creation and cleanup failures retain owned identities.
 
 ### <code>M:Fluent.Pdf.Html.ChromiumContainerOptions.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int64,System.Int32,System.Nullable{System.TimeSpan})</code>
 

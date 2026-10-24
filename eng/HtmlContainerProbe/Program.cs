@@ -15,6 +15,25 @@ string Get(string key) => root.GetProperty(key).GetString()!;
 var options = new ChromiumContainerOptions(Get("dockerExecutable"), Get("dockerSha256"), Get("daemonEndpoint"), Get("imageId"), Get("emptyConfigurationDirectory"), Get("seccompProfile"), Get("seccompSha256"), 536870912, 256, TimeSpan.FromSeconds(30));
 string output = Get("outputDirectory");
 Directory.CreateDirectory(output);
+if(root.TryGetProperty("startupCancellationOnly",out var startupOnly)&&startupOnly.ValueKind==JsonValueKind.True)
+{
+    var startupClock=Stopwatch.StartNew();
+    using var cancelStartup=new CancellationTokenSource(TimeSpan.FromSeconds(5));
+    try
+    {
+        using var unexpected=PdfHtml.Render(PdfHtmlSource.FromHtml("<!doctype html><html><body>Original delayed startup fixture</body></html>"),new(new VersionObserver(options,output)),policy:new(limits:new(maximumExpandedBytes:2147483648,maximumElapsedTime:TimeSpan.FromSeconds(30))),cancellationToken:cancelStartup.Token);
+        throw new InvalidDataException("Delayed original startup did not cancel.");
+    }
+    catch(OperationCanceledException failure)
+    {
+        if(failure.Data.Contains("Fluent.Pdf.Html.OwnedContainer"))throw new InvalidDataException("Actual delayed startup did not establish acknowledged-create cleanup.");
+    }
+    double cleanupMilliseconds=startupClock.Elapsed.TotalMilliseconds-5000;
+    if(cleanupMilliseconds>5000)throw new InvalidDataException("Actual delayed-start cleanup exceeded its bound.");
+    File.WriteAllText(Path.Combine(output,"startup-observations.json"),JsonSerializer.Serialize(new{purpose="actual-acknowledged-create-before-bootstrap-cancellation",runtime=RuntimeInformation.FrameworkDescription,os=RuntimeInformation.OSDescription,imageId=options.ImageId,coreSha256=Hash(typeof(PdfDocument).Assembly.Location),htmlSha256=Hash(typeof(ChromiumContainerHost).Assembly.Location),cleanupMilliseconds,unconfirmedCreation=false,productionQualified=false},new JsonSerializerOptions{WriteIndented=true}));
+    Console.WriteLine("ACKNOWLEDGED_CREATE_CANCELLATION_SOURCE_PASS;"+RuntimeInformation.FrameworkDescription);
+    return;
+}
 const string html = "<!doctype html><html><head><meta charset='utf-8'><style>body{margin:0;font:20px serif}.block{width:120px;height:40px;background:#00ff00}</style></head><body><div class='block'>ABC</div><p>Original browser source fixture</p></body></html>";
 var observer = new VersionObserver(options, output);
 var policy = new PdfOperationPolicy(limits: new(maximumExpandedBytes: 2147483648, maximumElapsedTime: TimeSpan.FromSeconds(30)));
@@ -81,7 +100,7 @@ using (var cancel = new CancellationTokenSource(TimeSpan.FromSeconds(3)))
 }
 double cancellationMilliseconds = clock.Elapsed.TotalMilliseconds - 3000;
 if (cancellationMilliseconds > 5000) throw new InvalidDataException("Private cancellation cleanup exceeded five seconds.");
-var record = new { purpose = "actual-private-container-browser-original-source-observations", productionQualified = false, runtime = RuntimeInformation.FrameworkDescription, os = RuntimeInformation.OSDescription, architecture = RuntimeInformation.ProcessArchitecture.ToString(), imageId = options.ImageId, version = observer.Version, revision = observer.Revision, capturePromiseTimeoutObserved=true, capturePromiseCancellationObserved=true, cancellationMilliseconds, pdfSha256 = Hash(Path.Combine(output, "original.pdf")) };
+var record = new { purpose = "actual-private-container-browser-original-source-observations", productionQualified = false, runtime = RuntimeInformation.FrameworkDescription, os = RuntimeInformation.OSDescription, architecture = RuntimeInformation.ProcessArchitecture.ToString(), imageId = options.ImageId, version = observer.Version, revision = observer.Revision, coreSha256=Hash(typeof(PdfDocument).Assembly.Location),htmlSha256=Hash(typeof(ChromiumContainerHost).Assembly.Location),capturePromiseTimeoutObserved=true, capturePromiseCancellationObserved=true, cancellationMilliseconds, pdfSha256 = Hash(Path.Combine(output, "original.pdf")) };
 File.WriteAllText(Path.Combine(output, "observations.json"), JsonSerializer.Serialize(record, new JsonSerializerOptions { WriteIndented = true }));
 Console.WriteLine(JsonSerializer.Serialize(record));
 static string Hash(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();

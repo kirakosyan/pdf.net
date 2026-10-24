@@ -13,7 +13,7 @@ namespace Fluent.Pdf.Html;
 /// <summary>Explicit bounded Docker CLI transport to one private offline Linux browser container. Complete daemon/kernel/image/security/RID qualification remains required.</summary>
 public static class ChromiumContainerHost
 {
-    /// <summary>Verifies prerequisites, reserves container memory, starts one unique offline read-only nonroot container and checks its bootstrap before returning a private connection. Disposal terminates/removes only that container and joins owned I/O; cleanup failures retain its identity.</summary>
+    /// <summary>Verifies prerequisites, reserves memory, requires an immutable creation acknowledgement, then starts the unique offline read-only nonroot container and checks its bootstrap. Disposal targets the acknowledged ID and joins owned I/O; unacknowledged creation and cleanup failures retain owned identities.</summary>
     public static IChromiumConnection Open(ChromiumContainerOptions options, PdfOperationContext context)
     {
         if (options == null || context == null)
@@ -66,7 +66,8 @@ public static class ChromiumContainerHost
         private StreamWriter? _input;
         private StreamReader? _output;
         private volatile bool _disposed;
-        private bool _bootstrapped;
+        private bool _createIssued;
+        private string? _containerId;
 
         internal Connection(ChromiumContainerOptions options, PdfOperationContext context)
         {
@@ -81,7 +82,7 @@ public static class ChromiumContainerHost
                 string memory = options.MaximumMemoryBytes.ToString(CultureInfo.InvariantCulture);
                 var args = new List<string>
                 {
-                    "run", "--pull=never", "--rm", "--interactive", "--init", "--name=" + _name,
+                    "create", "--pull=never", "--rm", "--interactive", "--init", "--name=" + _name,
                     "--label=org.fluent-pdf.owner=" + _name, "--network=none", "--read-only", "--cap-drop=ALL",
                     "--security-opt=no-new-privileges", "--security-opt=seccomp=" + options.SeccompProfile,
                     "--user=65532:65532", "--memory=" + memory, "--memory-swap=" + memory,
@@ -91,7 +92,9 @@ public static class ChromiumContainerHost
                     "--env=FLUENT_PDF_SECONDS=" + Math.Ceiling(options.MaximumElapsedTime.TotalSeconds).ToString(CultureInfo.InvariantCulture),
                     "--entrypoint=/usr/bin/python3", options.ImageId, "-I", "/opt/fluent-pdf/browser/host.py"
                 };
-                _process = Start(args);
+                CreateContainer(args, context);
+                // A late start can only refer to this acknowledged immutable ID; it cannot recreate a removed job.
+                _process = Start(new[] { "start", "--attach", "--interactive", _containerId! });
                 _input = new StreamWriter(_process.StandardInput.BaseStream, new UTF8Encoding(false, true), 8192, true) { NewLine = "\n" };
                 _output = new StreamReader(_process.StandardOutput.BaseStream, new UTF8Encoding(false, true), false, 8192, true);
                 _stderr = Task.Factory.StartNew(() => Drain(_process.StandardError), CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
@@ -101,7 +104,6 @@ public static class ChromiumContainerHost
                 if (root.ValueKind != JsonValueKind.Object || root.EnumerateObject().Count() != 4 || !root.TryGetProperty("fluentPdfBrowserHost", out var version) || version.GetInt32() != 1 || !root.TryGetProperty("memory", out var actualMemory) || actualMemory.GetInt64() != options.MaximumMemoryBytes || !root.TryGetProperty("pids", out var actualPids) || actualPids.GetInt32() != options.MaximumProcesses || !root.TryGetProperty("isolated", out var isolated) || isolated.ValueKind != JsonValueKind.True)
                     throw Error("Bootstrap", "The private container did not establish the required bounded host bootstrap.");
                 context.Checkpoint();
-                _bootstrapped = true;
             }
             catch
             {
@@ -109,6 +111,44 @@ public static class ChromiumContainerHost
                 context.Checkpoint();
                 throw Error("HostUnavailable", "The explicitly provisioned private browser container could not start with its required isolation.");
             }
+        }
+
+        private void CreateContainer(IEnumerable<string> arguments, PdfOperationContext context)
+        {
+            _process = Start(arguments);
+            _createIssued = true;
+            _stderr = Task.Factory.StartNew(() => Drain(_process.StandardError), CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            var reading = Task.Factory.StartNew(() =>
+            {
+                using var reader = new StreamReader(_process.StandardOutput.BaseStream, new UTF8Encoding(false, true), false, 1024, true);
+                var value = new StringBuilder(128);
+                int next;
+                while ((next = reader.Read()) >= 0)
+                {
+                    context.Checkpoint();
+                    if (value.Length == 128) throw new IOException("Container creation identity extent.");
+                    context.Consume(PdfResourceKind.ExpandedBytes, 8);
+                    value.Append((char)next);
+                }
+                return value.ToString();
+            }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            _pending = reading;
+            while (!_process.WaitForExit(10) || !reading.IsCompleted || !_stderr.IsCompleted)
+            {
+                context.Checkpoint();
+                if (reading.IsFaulted || _stderr.IsFaulted) throw Error("CreateIdentity", "The private container creation acknowledgement failed.");
+                Check(context);
+            }
+            string response;
+            try { response = reading.GetAwaiter().GetResult(); _stderr.GetAwaiter().GetResult(); }
+            catch { context.Checkpoint(); throw Error("CreateIdentity", "The private container creation acknowledgement failed."); }
+            string id = response.EndsWith("\r\n", StringComparison.Ordinal) ? response.Substring(0, response.Length - 2) : response.EndsWith("\n", StringComparison.Ordinal) ? response.Substring(0, response.Length - 1) : response;
+            if (_process.ExitCode != 0 || id.Length != 64 || id.Any(c => !(c >= '0' && c <= '9' || c >= 'a' && c <= 'f')))
+                throw Error("CreateIdentity", "An exact successful immutable container creation acknowledgement is required.");
+            _containerId = id;
+            reading.Dispose(); _stderr.Dispose(); _process.Dispose();
+            _pending = null; _stderr = null; _process = null;
+            Check(context);
         }
 
         public void Send(string message, PdfOperationContext context)
@@ -225,7 +265,7 @@ public static class ChromiumContainerHost
             try
             {
                 // Removal is out of band: a blocked stdin/renderer cannot prevent cancellation cleanup.
-                using var remove = Start(new[] { "rm", "--force", "--volumes", _name });
+                using var remove = Start(new[] { "rm", "--force", "--volumes", _containerId ?? _name });
                 var output = Task.Factory.StartNew(() => Drain(remove.StandardOutput), CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 var error = Task.Factory.StartNew(() => Drain(remove.StandardError), CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 if (!remove.WaitForExit(3000))
@@ -271,23 +311,25 @@ public static class ChromiumContainerHost
             {
                 var failure = Error("HostCleanup", "Private browser cleanup did not complete within its required boundary.");
                 failure.Data["Fluent.Pdf.Html.OwnedContainer"] = _name;
+                if (_containerId != null) failure.Data["Fluent.Pdf.Html.OwnedContainerId"] = _containerId;
                 if (operation?.IsActive == true)
                 {
                     try { operation.ReportFailure(failure.Diagnostic, "Fluent.Pdf.Html.OwnedContainer", _name); }
                     catch (Exception latched)
                     {
                         latched.Data["Fluent.Pdf.Html.OwnedContainer"] = _name;
+                        if (_containerId != null) latched.Data["Fluent.Pdf.Html.OwnedContainerId"] = _containerId;
                         latched.Data["Fluent.Pdf.Html.CleanupFailure"] = failure.Diagnostic.Code;
                         throw;
                     }
                 }
                 throw failure;
             }
-            if (!_bootstrapped)
+            if (_createIssued && _containerId == null)
             {
                 // A canceled daemon request can complete after its CLI is killed. A single absence query cannot prove future absence.
                 // Preserve the owned identity for explicit daemon reconciliation; never advertise successful startup cleanup.
-                var failure = Error("HostStartupUnconfirmed", "The private daemon startup did not confirm its bootstrap; later owned-container reconciliation remains required.");
+                var failure = Error("HostStartupUnconfirmed", "The private daemon did not acknowledge creation; later owned-container reconciliation remains required.");
                 failure.Data["Fluent.Pdf.Html.OwnedContainer"] = _name;
                 if (operation?.IsActive == true)
                 {
@@ -306,7 +348,7 @@ public static class ChromiumContainerHost
 
         private bool ConfirmAbsent()
         {
-            using var inspect = Start(new[] { "container", "ls", "--all", "--filter=name=^/" + _name + "$", "--format={{.ID}}" });
+            using var inspect = Start(new[] { "container", "ls", "--all", _containerId == null ? "--filter=name=^/" + _name + "$" : "--filter=id=" + _containerId, "--format={{.ID}}" });
             var output = Task.Factory.StartNew(() =>
             {
                 int count = 0;

@@ -4846,9 +4846,9 @@
       "implementationProgress": {
         "stage": "source-validation",
         "documentation": "docs/html-element-extraction.md",
-        "sourceEvidence": "docs/evidence/prereq-browser-source.json",
-        "implemented": ["Shared private browser resource/readiness/context capture, bounded unique selector/literal search, CSS geometry, validated PNG, optional private outer markup and conservative DOM change rejection", "Explicit offline read-only nonroot container source transport with pinned prerequisites, shared memory/worker bounds and retained failed-start identity"],
-        "pending": ["Complete daemon startup reconciliation, host security/distribution and all engine RID/minimum runtime qualification", "Complete dynamic/compositor/corpus/fuzz/concurrency/fidelity and exact final-package consumers"]
+        "sourceEvidence": "docs/evidence/browser-create-source.json",
+        "implemented": ["Shared private browser resource/readiness/context capture, bounded unique selector/literal search, CSS geometry, validated PNG, optional private outer markup and conservative DOM change rejection", "Explicit offline read-only nonroot container source transport with pinned prerequisites, shared memory/worker bounds and retained failed-start identity", "Separate exact immutable creation acknowledgement and ID-bound start/removal; owned-resource cancellation details survive outer checkpoints; explicit unknown-create reconciliation remains required"],
+        "pending": ["Unacknowledged-create reconciliation, host security/distribution and all engine RID/minimum runtime qualification", "Complete dynamic/compositor/corpus/fuzz/concurrency/fidelity and exact final-package consumers"]
       }
     },
     {

@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
+using System.Threading.Tasks;
 using Fluent.Pdf.Html;
 using Xunit;
 
@@ -59,6 +60,9 @@ public sealed class ChromiumContainerTests
             }
             Assert.True(before - c.Available(PdfResourceKind.ExpandedBytes) < 16777216);
         }, Limits);
+        var trace=File.ReadAllLines(Path.Combine(f.Root,"peer.trace"));
+        Assert.Equal(3,trace.Length);Assert.StartsWith("create ",trace[0]);Assert.StartsWith("start ",trace[1]);
+        string id=trace[1].Substring(6);Assert.Equal(64,id.Length);Assert.Equal("rm "+id,trace[2]);
     }
 
     [Theory]
@@ -112,6 +116,50 @@ public sealed class ChromiumContainerTests
         }, Limits));
         Assert.Equal("Html.HostCleanup", failure.Diagnostic.Code);
         Assert.StartsWith("fluent-pdf-browser-", Assert.IsType<string>(failure.Data["Fluent.Pdf.Html.OwnedContainer"]));
+        Assert.Equal(64,Assert.IsType<string>(failure.Data["Fluent.Pdf.Html.OwnedContainerId"]).Length);
+    }
+
+    [Theory]
+    [InlineData('1',"create ",true)]
+    [InlineData('2',"start ",false)]
+    public async Task CancellationBeforeAndAfterCreationAcknowledgementPreservesItsExactReconciliationBoundary(char mode,string phase,bool uncertain)
+    {
+        var f=new Fixture();using var cancel=new CancellationTokenSource();
+        var watcher=Task.Run(()=>
+        {
+            var clock=Stopwatch.StartNew();
+            while(clock.Elapsed<TimeSpan.FromSeconds(5))
+            {
+                string path=Path.Combine(f.Root,"peer.trace");
+                if(File.Exists(path)&&File.ReadAllText(path).Contains(phase)){cancel.Cancel();return;}
+                Thread.Sleep(10);
+            }
+            cancel.Cancel();throw new TimeoutException("Original process peer did not reach its phase.");
+        });
+        var elapsed=Stopwatch.StartNew();
+        OperationCanceledException failure;
+        try
+        {
+            failure=Assert.ThrowsAny<OperationCanceledException>(()=>PdfFont.Run("ContainerFixture","fixture",new(limits:Limits),cancel.Token,c=>
+            {
+                using var connection=ChromiumContainerHost.Open(f.Options(mode),c);
+            },PdfCapability.RenderHtml));
+        }
+        finally { await watcher; }
+        Assert.Equal(uncertain,failure.Data.Contains("Fluent.Pdf.Html.OwnedContainer"));
+        Assert.True(elapsed.Elapsed<TimeSpan.FromSeconds(5));
+        var trace=File.ReadAllLines(Path.Combine(f.Root,"peer.trace"));
+        if(uncertain){Assert.DoesNotContain(trace,s=>s.StartsWith("start ",StringComparison.Ordinal));Assert.StartsWith("rm fluent-pdf-browser-",trace.Last());}
+        else{string id=trace.Single(s=>s.StartsWith("start ",StringComparison.Ordinal)).Substring(6);Assert.Equal("rm "+id,trace.Last());}
+    }
+
+    [Fact]
+    public void MalformedCreationIdentityCannotStartOrDisclosePrivateCliOutput()
+    {
+        var f=new Fixture();
+        var failure=Assert.Throws<PdfException>(()=>PolicyTests.Run(c=>ChromiumContainerHost.Open(f.Options('f'),c),Limits));
+        Assert.Equal("Html.HostStartupUnconfirmed",failure.Diagnostic.Code);Assert.DoesNotContain("private-sentinel",failure.ToString());
+        Assert.DoesNotContain(File.ReadAllLines(Path.Combine(f.Root,"peer.trace")),s=>s.StartsWith("start ",StringComparison.Ordinal));
     }
 
     [Fact]

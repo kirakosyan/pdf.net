@@ -9,6 +9,21 @@ namespace Fluent.Pdf.Contract.Tests;
 public sealed class PolicyTests
 {
     [Fact]
+    public void OwnedResourceDetailsSurviveCallerCancellationAndRemainPrivateToOneOperation()
+    {
+        using var cancel=new CancellationTokenSource();OperationCanceledException? first=null;
+        var failure=Assert.Throws<OperationCanceledException>(()=>PdfFont.Run("CancellationDetails","fixture.details",null,cancel.Token,c=>
+        {
+            cancel.Cancel();first=Assert.Throws<OperationCanceledException>(c.Checkpoint);
+            first.Data["fixture.owned-resource"]="original-owned-identity";
+            Assert.Same(first,Assert.Throws<OperationCanceledException>(c.Checkpoint));
+        }));
+        Assert.Same(first,failure);Assert.Equal(cancel.Token,failure.CancellationToken);Assert.Equal("original-owned-identity",failure.Data["fixture.owned-resource"]);
+        var independent=Assert.Throws<OperationCanceledException>(()=>PdfFont.Run("IndependentCancellation","fixture.details",null,cancel.Token,_=>throw new InvalidOperationException()));
+        Assert.NotSame(failure,independent);Assert.False(independent.Data.Contains("fixture.owned-resource"));
+    }
+
+    [Fact]
     public void FailureDetailsSurviveLatchedRethrowAndOperationCompletion()
     {
         var details = new PdfArchivalValidation(PdfArchivalProfile.A2B, new string('0', 64), true, false, new[] { new PdfArchivalFinding("original.rule", "original.location", "Original bounded finding.") });

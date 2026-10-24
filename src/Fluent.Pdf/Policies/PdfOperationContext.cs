@@ -23,6 +23,7 @@ public sealed class PdfOperationContext
     private readonly Stopwatch _clock = Stopwatch.StartNew();
     private readonly Func<TimeSpan> _elapsed;
     private PdfException? _fatal;
+    private OperationCanceledException? _callerCancellation;
     private bool _active = true;
     private readonly Guid _observationSpan;
     private bool _observationFinished;
@@ -538,7 +539,9 @@ public sealed class PdfOperationContext
             throw new ObjectDisposedException(nameof(PdfOperationContext));
         if (_fatal is not null)
             throw _fatal;
-        _callerToken.ThrowIfCancellationRequested();
+        // Cleanup may attach bounded owned-resource identities. Keep them through outer cancellation checkpoints.
+        if (_callerToken.IsCancellationRequested)
+            throw _callerCancellation ??= new OperationCanceledException(_callerToken);
         TimeSpan elapsed = _elapsed();
         if (elapsed >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
             Fail("Limit.ElapsedTime", "The operation deadline elapsed.");
