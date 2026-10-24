@@ -588,4 +588,7 @@ Public Module ContractExample
     Public Function ExportMarkdown(input As Stream, output As Stream, sourceSha256 As String, pageIndex As Integer) As PdfOperationReport
         Return Fluent.Pdf.Formats.PdfTextInterchange.Write(input, output, Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown, {New Fluent.Pdf.Formats.PdfTextInterchangeBlock(pageIndex)}, New Fluent.Pdf.Formats.PdfTextInterchangeOptions(sourceSha256), policy:=New PdfOperationPolicy(PdfProcessingMode.Permissive))
     End Function
+    Public Function GenerateTaskPdf(tasks As Fluent.Pdf.Formats.PdfTasks, blocks As IEnumerable(Of PdfFlowBlock), options As PdfFlowOptions, output As Stream) As PdfOperationReport
+        Return tasks.Generate(blocks, options, output)
+    End Function
 End Module

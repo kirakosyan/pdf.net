@@ -15,6 +15,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Generated public API reference/version drift.'
 $python = if ($IsWindows) { 'python' } else { 'python3' }
 & $python (Join-Path $root 'eng/check-documentation.py') --output (Join-Path $evidence 'snippets.json')
 if ($LASTEXITCODE -ne 0) { throw 'Documentation/source excerpt drift.' }
+& dotnet fsi --exec (Join-Path $root 'examples/TaskFacades.FSharp/Example.fsx') (Join-Path $evidence 'fsharp')
+if ($LASTEXITCODE -ne 0) { throw 'FSharp task facade source consumer failed.' }
 & $python (Join-Path $root 'eng/test-recipes.py') --assemblies (Join-Path $root "examples/Fluent.Pdf.Recipes/bin/$Configuration/net8.0/Fluent.Pdf.Recipes.dll") (Join-Path $root "examples/Fluent.Pdf.Recipes/bin/$Configuration/net10.0/Fluent.Pdf.Recipes.dll") --output (Join-Path $evidence 'modern-recipes.json')
 if ($LASTEXITCODE -ne 0) { throw 'Actual modern source recipes failed.' }
 if ($IsWindows -and [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture -eq 'X64') {

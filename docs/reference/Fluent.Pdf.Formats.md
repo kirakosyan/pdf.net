@@ -199,6 +199,22 @@ Fluent.Pdf.Formats.PdfSvgImportOptions.Fonts.get -> Fluent.Pdf.PdfFontFallback?
 Fluent.Pdf.Formats.PdfSvgImportOptions.Images.get -> Fluent.Pdf.PdfImageReadOptions!
 Fluent.Pdf.Formats.PdfSvgImportOptions.PdfSvgImportOptions(Fluent.Pdf.PdfFontFallback? fonts = null, Fluent.Pdf.PdfTextOptions? text = null, bool allowDataImages = false, Fluent.Pdf.PdfImageReadOptions? images = null) -> void
 Fluent.Pdf.Formats.PdfSvgImportOptions.Text.get -> Fluent.Pdf.PdfTextOptions!
+Fluent.Pdf.Formats.PdfTasks
+Fluent.Pdf.Formats.PdfTasks.Adapters.get -> Fluent.Pdf.Formats.PdfCollectionAdapters!
+Fluent.Pdf.Formats.PdfTasks.Collect(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.IO.Stream!>>! inputs, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfDocumentCollection!
+Fluent.Pdf.Formats.PdfTasks.Convert(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfConversionOptions! options, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.PdfTasks.ConvertFile(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, string! path, Fluent.Pdf.Formats.PdfConversionOptions! options, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.PdfTasks.Extract(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfTextExtractionOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfTextExtractionResult!
+Fluent.Pdf.Formats.PdfTasks.Fill(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfFormData! data, Fluent.Pdf.PdfFormTextStyle? textStyle = null, bool retainSourceRegenerationRequest = false, Fluent.Pdf.PdfWriteMode writeMode = Fluent.Pdf.PdfWriteMode.Full, Fluent.Pdf.PdfOrganizationOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.Formats.PdfTasks.Generate(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! blocks, Fluent.Pdf.PdfFlowOptions! options, System.IO.Stream! output, Fluent.Pdf.PdfWriteOptions? writing = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.PdfTasks.GenerateFile(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowBlock!>! blocks, Fluent.Pdf.PdfFlowOptions! options, string! path, Fluent.Pdf.PdfWriteOptions? writing = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.PdfTasks.Inspect(System.IO.Stream! input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPreflightReport!
+Fluent.Pdf.Formats.PdfTasks.Optimize(Fluent.Pdf.PdfDocumentSnapshot! source, System.IO.Stream! output, Fluent.Pdf.PdfOptimizationOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOptimizationResult!
+Fluent.Pdf.Formats.PdfTasks.OptimizeFile(Fluent.Pdf.PdfDocumentSnapshot! source, string! path, Fluent.Pdf.PdfOptimizationOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOptimizationResult!
+Fluent.Pdf.Formats.PdfTasks.PdfTasks(Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, Fluent.Pdf.Formats.PdfCollectionAdapters? adapters = null) -> void
+Fluent.Pdf.Formats.PdfTasks.Policy.get -> Fluent.Pdf.PdfOperationPolicy!
+Fluent.Pdf.Formats.PdfTasks.Process(Fluent.Pdf.Formats.PdfDocumentCollection! collection, string! adapterId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfCollectionBatchResult!
+Fluent.Pdf.Formats.PdfTasks.Providers.get -> Fluent.Pdf.PdfProviderRegistry!
 Fluent.Pdf.Formats.PdfTex
 Fluent.Pdf.Formats.PdfTexOptions
 Fluent.Pdf.Formats.PdfTexOptions.MaximumPages.get -> int
@@ -857,6 +873,54 @@ Stages vector SVG before atomic file replacement.
 
 Captures caller-selected fonts/text policy and optional bounded PNG/JPEG data-image authority. Font selection explicitly overrides source family names.
 
+### <code>M:Fluent.Pdf.Formats.PdfTasks.#ctor(Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,Fluent.Pdf.Formats.PdfCollectionAdapters)</code>
+
+Captures optional service and collection registries and one policy used by every new task. Default policy is strict; source-document policy is not silently substituted.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Collect(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.IO.Stream}},System.Threading.CancellationToken)</code>
+
+Captures a named collection without filesystem discovery or source execution; input streams remain caller-owned.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Convert(Fluent.Pdf.PdfDocumentSnapshot,System.Collections.Generic.IEnumerable{System.Int32},System.IO.Stream,Fluent.Pdf.Formats.PdfConversionOptions,System.Threading.CancellationToken)</code>
+
+Delegates exact conversion options, selected page order, providers and policy to the existing conversion engine. Caller source/output stay owned by the caller.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.ConvertFile(Fluent.Pdf.PdfDocumentSnapshot,System.Collections.Generic.IEnumerable{System.Int32},System.String,Fluent.Pdf.Formats.PdfConversionOptions,System.Threading.CancellationToken)</code>
+
+Delegates conversion with atomic file replacement.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Extract(Fluent.Pdf.PdfDocumentSnapshot,System.Int32,Fluent.Pdf.PdfTextExtractionOptions,System.Threading.CancellationToken)</code>
+
+Returns detached page extraction with unchanged core mapping, geometry and diagnostics.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Fill(Fluent.Pdf.PdfDocumentSnapshot,Fluent.Pdf.PdfFormData,Fluent.Pdf.PdfFormTextStyle,System.Boolean,Fluent.Pdf.PdfWriteMode,Fluent.Pdf.PdfOrganizationOptions,System.Threading.CancellationToken)</code>
+
+Returns a caller-owned filled document. Text appearance fonts/shaping come from the explicit textStyle; no calculation/action executes. Save remains a separate operation.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Generate(System.Collections.Generic.IEnumerable{Fluent.Pdf.PdfFlowBlock},Fluent.Pdf.PdfFlowOptions,System.IO.Stream,Fluent.Pdf.PdfWriteOptions,System.Threading.CancellationToken)</code>
+
+Lays out explicit blocks, creates the document and stages a managed PDF under one budget before writing a borrowed stream. Fonts and shaping are explicit; output may be partial only if final stream copy fails.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.GenerateFile(System.Collections.Generic.IEnumerable{Fluent.Pdf.PdfFlowBlock},Fluent.Pdf.PdfFlowOptions,System.String,Fluent.Pdf.PdfWriteOptions,System.Threading.CancellationToken)</code>
+
+Stages a generated managed PDF under one budget before atomic file replacement.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Inspect(System.IO.Stream,System.Threading.CancellationToken)</code>
+
+Performs the existing passive preflight against borrowed input with injected provider declarations.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Optimize(Fluent.Pdf.PdfDocumentSnapshot,System.IO.Stream,Fluent.Pdf.PdfOptimizationOptions,System.Threading.CancellationToken)</code>
+
+Delegates bounded optimization and staged stream output; result retains the core transformation counts and hashes.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.OptimizeFile(Fluent.Pdf.PdfDocumentSnapshot,System.String,Fluent.Pdf.PdfOptimizationOptions,System.Threading.CancellationToken)</code>
+
+Delegates optimization with atomic file output.
+
+### <code>M:Fluent.Pdf.Formats.PdfTasks.Process(Fluent.Pdf.Formats.PdfDocumentCollection,System.String,System.Threading.CancellationToken)</code>
+
+Runs the selected explicit adapter sequentially under one shared batch budget. Inspect every item outcome; ordinary item failure does not imply whole-batch exception.
+
 ### <code>M:Fluent.Pdf.Formats.PdfTex.Import(System.IO.Stream,Fluent.Pdf.Formats.PdfTexOptions,Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Requires exact prerequisites before capture; stages at most8 MiB source and64 MiB PDF, validates nonempty PDF and preserves caller ownership.
@@ -1133,6 +1197,18 @@ Gets explicit PNG/JPEG color/orientation/lossless-conversion policy.
 
 Gets explicit text shaping policy.
 
+### <code>P:Fluent.Pdf.Formats.PdfTasks.Adapters</code>
+
+Gets explicit trusted collection adapters.
+
+### <code>P:Fluent.Pdf.Formats.PdfTasks.Policy</code>
+
+Gets the policy applied to each task, with a fresh operation budget per call.
+
+### <code>P:Fluent.Pdf.Formats.PdfTasks.Providers</code>
+
+Gets explicitly injected optional services. Sharing mutable services across concurrent tasks is the caller's responsibility.
+
 ### <code>P:Fluent.Pdf.Formats.PdfTexOptions.MaximumPages</code>
 
 Gets the nonempty output page bound.
@@ -1376,6 +1452,10 @@ Original bounded static SVG import and vector-page SVG export. Unsupported const
 ### <code>T:Fluent.Pdf.Formats.PdfSvgImportOptions</code>
 
 Explicit fonts/shaping and local embedded-image authority for the documented SVG profile. No font, URI or stylesheet discovery occurs.
+
+### <code>T:Fluent.Pdf.Formats.PdfTasks</code>
+
+Immutable per-instance task composition over the existing SDK engines. Providers/adapters stay caller-owned; no plugin discovery, download or global registration occurs.
 
 ### <code>T:Fluent.Pdf.Formats.PdfTex</code>
 

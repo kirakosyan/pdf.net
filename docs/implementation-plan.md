@@ -228,3 +228,5 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 [#107 legacy-format host integration](legacy-format-import.md) adds bounded explicit DjVu/CDR host contracts and failure handling. [Evidence](evidence/FP-107-source.json) covers original host fixtures only, with no actual DjVu/CDR decoding or version support claimed. Decoder/independent corpus and production qualification remain open. #108 is next.
 
 [#108 text/Markdown interchange](text-interchange.md) adds exact-source explicit reading-order projections, caller-assigned roles, inferred tables and generated page-image bundles. [Evidence](evidence/FP-108-source.json) retains finite parser/Unicode/asset observations and complete semantic/corpus/runtime qualification gaps. #109 is next.
+
+[#109 task facades](task-facades.md) compose existing engines with explicit immutable instance configuration and shared generation budgets. [Source evidence](evidence/FP-109-source.json) separates equivalence and language-consumer checks from full underlying qualification. #110 is next.

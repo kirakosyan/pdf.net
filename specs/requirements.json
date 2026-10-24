@@ -4779,7 +4779,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/task-facades.md",
+        "sourceEvidence": "docs/evidence/FP-109-source.json",
+        "implemented": [
+          "Immutable instance facade delegates to existing generation, conversion, extraction, forms, optimization and collection engines",
+          "Shared generation context; explicit plugins/policy/ownership; source C#, VB and F# consumers"
+        ],
+        "pending": [
+          "Complete underlying engine/provider/runtime and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-110",
