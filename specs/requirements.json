@@ -364,7 +364,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -3386,7 +3386,7 @@
       ],
       "implementationProgress": {
         "sourceImplementation": "docs/barcodes.md",
-        "scope": "Original QR Model2 versions1\u201340/all ECC and Code128B; mandatory independent decode before acceptance; optional pinned managed decoder; native PDF detector landmark coordinates; canonical EPC002/UTF8 invoice/payment validation",
+        "scope": "Original QR Model2 versions1–40/all ECC and Code128B; mandatory independent decode before acceptance; optional pinned managed decoder; native PDF detector landmark coordinates; canonical EPC002/UTF8 invoice/payment validation",
         "productionQualified": false,
         "remaining": [
           "Full declared symbol/payment/multi-code integration profiles and complete independent acceptance",
@@ -4529,7 +4529,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/image-cleanup.md",
+        "sourceEvidence": "docs/evidence/FP-103-source.json",
+        "implemented": [
+          "Explicit original-preserving device gray, median, threshold, border crop and nearest-neighbor resampling under shared budgets",
+          "Full-resolution before/after blank observations with caller background/tolerances and uncalibrated measured confidence",
+          "Compiled C#/VB consumers and independent exact pixel/corpus checks"
+        ],
+        "pending": [
+          "Qualified real-document classification and before/after OCR metrics; broader color, alpha and automatic border profiles",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-104",

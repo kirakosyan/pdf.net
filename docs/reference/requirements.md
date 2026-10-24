@@ -106,7 +106,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-100 Document collections, packages and interchange](../requirements/FP-100.md) | Required | planned | [Declared source profile](../document-collections.md) |
 | [FP-101 Accessibility remediation and semantic authoring](../requirements/FP-101.md) | Required | planned | [Declared source profile](../semantic-remediation.md) |
 | [FP-102 Signature-preserving editing and revision audit](../requirements/FP-102.md) | Required | planned | Full source/qualification pending |
-| [FP-103 Image processing and document cleanup](../requirements/FP-103.md) | Required | planned | Full source/qualification pending |
+| [FP-103 Image processing and document cleanup](../requirements/FP-103.md) | Required | planned | [Declared source profile](../image-cleanup.md) |
 | [FP-104 Business data extraction and export schemas](../requirements/FP-104.md) | Required | planned | Full source/qualification pending |
 | [FP-105 Cross-platform native distribution packages](../requirements/FP-105.md) | Required | planned | Full source/qualification pending |
 | [FP-106 Compatibility policy and long-term maintenance](../requirements/FP-106.md) | Required | planned | Full source/qualification pending |

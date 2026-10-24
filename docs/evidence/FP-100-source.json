@@ -206,5 +206,74 @@
     "Object XML is an original bounded vocabulary, not another vendor interchange standard; history, protection and original file bytes are not preserved",
     "Independent PDF comparisons cover the original two-page fixture only; passing observations do not establish general fidelity",
     "Issue93 remains user-skipped and issue100 remains blocked by production prerequisites"
-  ]
+  ],
+  "finalHostedCi": {
+    "sourceCommit": "4f2b4b5a3a2549702054ed241765bfa2f0430804",
+    "allFiveWorkflowsPassed": true,
+    "workflows": [
+      {
+        "id": 40095272586,
+        "name": "Windows automation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272565,
+        "name": "Application view source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272609,
+        "name": "CLI source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272571,
+        "name": "Documentation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40095272673,
+        "name": "Source contracts and release guard",
+        "conclusion": "success"
+      }
+    ],
+    "sourceJobs": [
+      {
+        "id": 120876062049,
+        "name": "Managed source rebuild provenance",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062180,
+        "name": "Contracts (win-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062220,
+        "name": "Contracts (win-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062239,
+        "name": "Contracts (linux-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062244,
+        "name": "Contracts (osx-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062248,
+        "name": "Contracts (linux-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120876062266,
+        "name": "Contracts (osx-arm64)",
+        "conclusion": "success"
+      }
+    ],
+    "productionQualified": false
+  }
 }

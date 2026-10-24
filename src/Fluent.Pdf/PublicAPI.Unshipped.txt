@@ -3652,3 +3652,40 @@ static Fluent.Pdf.PdfAccessibility.WriteReview(Fluent.Pdf.PdfSemanticReviewAudit
 static Fluent.Pdf.PdfSemanticSuggestion.Element(string! id, Fluent.Pdf.PdfObjectId elementId, string! reason, string? role = null, string? language = null, string? alternativeText = null, string? actualText = null, int[]? childOrder = null) -> Fluent.Pdf.PdfSemanticSuggestion!
 static Fluent.Pdf.PdfSemanticSuggestion.RoleMapping(string! id, string! customRole, string! standardRole, string! reason) -> Fluent.Pdf.PdfSemanticSuggestion!
 static Fluent.Pdf.PdfSemanticSuggestion.Structure(string! id, Fluent.Pdf.PdfStructurePlan! plan, string! reason) -> Fluent.Pdf.PdfSemanticSuggestion!
+Fluent.Pdf.PdfBlankPageObservation
+Fluent.Pdf.PdfBlankPageObservation.Confidence.get -> double
+Fluent.Pdf.PdfBlankPageObservation.ForegroundFraction.get -> double
+Fluent.Pdf.PdfBlankPageObservation.ForegroundPixels.get -> long
+Fluent.Pdf.PdfBlankPageObservation.IsBlank.get -> bool
+Fluent.Pdf.PdfBlankPageObservation.Options.get -> Fluent.Pdf.PdfBlankPageOptions!
+Fluent.Pdf.PdfBlankPageObservation.PixelCount.get -> long
+Fluent.Pdf.PdfBlankPageOptions
+Fluent.Pdf.PdfBlankPageOptions.BackgroundRgb.get -> int
+Fluent.Pdf.PdfBlankPageOptions.ChannelTolerance.get -> byte
+Fluent.Pdf.PdfBlankPageOptions.MaximumForegroundFraction.get -> double
+Fluent.Pdf.PdfBlankPageOptions.PdfBlankPageOptions(int backgroundRgb = 16777215, byte channelTolerance = 12, double maximumForegroundFraction = 0.001) -> void
+Fluent.Pdf.PdfImageCleanup
+Fluent.Pdf.PdfImageCleanupOptions
+Fluent.Pdf.PdfImageCleanupOptions.AllowLossy.get -> bool
+Fluent.Pdf.PdfImageCleanupOptions.BinaryThreshold.get -> byte?
+Fluent.Pdf.PdfImageCleanupOptions.BlankDetection.get -> Fluent.Pdf.PdfBlankPageOptions?
+Fluent.Pdf.PdfImageCleanupOptions.CropBottom.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.CropLeft.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.CropRight.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.CropTop.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.Grayscale.get -> bool
+Fluent.Pdf.PdfImageCleanupOptions.MaximumPixelVisits.get -> long
+Fluent.Pdf.PdfImageCleanupOptions.MedianDenoise.get -> bool
+Fluent.Pdf.PdfImageCleanupOptions.OutputHeight.get -> int?
+Fluent.Pdf.PdfImageCleanupOptions.OutputWidth.get -> int?
+Fluent.Pdf.PdfImageCleanupOptions.PdfImageCleanupOptions(bool allowLossy = false, bool grayscale = false, bool medianDenoise = false, byte? binaryThreshold = null, int cropLeft = 0, int cropTop = 0, int cropRight = 0, int cropBottom = 0, int? outputWidth = null, int? outputHeight = null, Fluent.Pdf.PdfBlankPageOptions? blankDetection = null, long maximumPixelVisits = 100000000) -> void
+Fluent.Pdf.PdfImageCleanupResult
+Fluent.Pdf.PdfImageCleanupResult.After.get -> Fluent.Pdf.PdfBlankPageObservation?
+Fluent.Pdf.PdfImageCleanupResult.Before.get -> Fluent.Pdf.PdfBlankPageObservation?
+Fluent.Pdf.PdfImageCleanupResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfImageCleanupResult.Options.get -> Fluent.Pdf.PdfImageCleanupOptions!
+Fluent.Pdf.PdfImageCleanupResult.Original.get -> Fluent.Pdf.PdfOcrRaster!
+Fluent.Pdf.PdfImageCleanupResult.OutputToOriginal.get -> Fluent.Pdf.PdfMatrix
+Fluent.Pdf.PdfImageCleanupResult.PixelVisits.get -> long
+Fluent.Pdf.PdfImageCleanupResult.Processed.get -> Fluent.Pdf.PdfOcrRaster!
+static Fluent.Pdf.PdfImageCleanup.Process(Fluent.Pdf.PdfOcrRaster! original, Fluent.Pdf.PdfImageCleanupOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageCleanupResult!

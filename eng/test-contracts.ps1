@@ -68,6 +68,15 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
     foreach ($fixture in @('original.pdf','reviewed.pdf','ledger.json','role-map.pdf','author-Ua1.pdf','author-Ua1.json','author-Ua2.pdf','author-Ua2.json','csharp.pdf','csharp.json','visual-basic.pdf','visual-basic.json','validator-Ua1.pdf','validator-Ua1.json','validator-Ua2.pdf','validator-Ua2.json')) {
         Copy-Item -LiteralPath (Join-Path $semantic $fixture) -Destination (Join-Path $semanticEvidence $fixture)
     }
+    $cleanup = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/image-cleanup"
+    & $python (Join-Path $root 'eng/verify-image-cleanup.py') --directory $cleanup --output (Join-Path $directory 'image-cleanup-readers.json')
+    if ($LASTEXITCODE -ne 0) { throw "Independent cleanup pixel observations failed: $name" }
+    $cleanupEvidence = Join-Path $directory 'image-cleanup'
+    $null = [IO.Directory]::CreateDirectory($cleanupEvidence)
+    foreach ($fixture in @('white','near-white','noise','faint-text','border','color','resize')) {
+        foreach ($stage in @('before','after')) { Copy-Item -LiteralPath (Join-Path $cleanup "$fixture-$stage.raw") -Destination (Join-Path $cleanupEvidence "$fixture-$stage.raw") }
+    }
+    Copy-Item -LiteralPath (Join-Path $cleanup 'observations.json') -Destination (Join-Path $cleanupEvidence 'observations.json')
     $assembly = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/Fluent.Pdf.dll"
     $records.Add([pscustomobject]@{
         lane=$name;libraryTfm=$library;runtime=$runtime;os=$os;architecture=$actualArchitecture

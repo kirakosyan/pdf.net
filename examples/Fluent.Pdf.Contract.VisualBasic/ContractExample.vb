@@ -576,4 +576,7 @@ Public Module ContractExample
     Public Function WriteLinearized(input As Stream, output As Stream, producer As IPdfLinearizationProducer, validator As IPdfLinearizationValidator) As PdfLinearizationValidation
         Return PdfLinearization.Write(input, output, producer:=producer, validator:=validator)
     End Function
+    Public Function CleanScan(original As PdfOcrRaster, options As PdfImageCleanupOptions) As PdfImageCleanupResult
+        Return PdfImageCleanup.Process(original, options, New PdfOperationPolicy(PdfProcessingMode.Permissive))
+    End Function
 End Module

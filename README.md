@@ -178,3 +178,5 @@ FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sink
 [Document collections](docs/document-collections.md) provide bounded ordered ZIP archives, explicit trusted batch adapters and typed PDF object XML. Protection, history, isolation and qualification limits are explicit.
 
 [Semantic remediation](docs/semantic-remediation.md) binds explicit proposals and reviewer decisions to exact source bytes, revalidates accepted fixes and preserves an audit ledger without claiming accessibility conformance.
+
+[Image cleanup](docs/image-cleanup.md) preserves original pixels, applies explicit bounded transforms and reports before/after blank-page evidence without automatic deletion.

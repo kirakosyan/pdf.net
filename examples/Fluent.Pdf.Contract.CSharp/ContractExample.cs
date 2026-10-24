@@ -428,4 +428,5 @@ public static class ContractExample
         return document.ReadPage(pageIndex);
     }
     public static PdfLinearizationValidation WriteLinearized(Stream input, Stream output, IPdfLinearizationProducer producer, IPdfLinearizationValidator validator) => PdfLinearization.Write(input, output, producer: producer, validator: validator);
+    public static PdfImageCleanupResult CleanScan(PdfOcrRaster original, PdfImageCleanupOptions options) => PdfImageCleanup.Process(original, options, new(PdfProcessingMode.Permissive));
 }

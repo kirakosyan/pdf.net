@@ -379,6 +379,18 @@ Fluent.Pdf.PdfBidiParagraph.EmbeddingLevel.get -> int
 Fluent.Pdf.PdfBidiParagraph.FirstScalar.get -> int
 Fluent.Pdf.PdfBidiParagraph.PdfBidiParagraph() -> void
 Fluent.Pdf.PdfBidiParagraph.ScalarCount.get -> int
+Fluent.Pdf.PdfBlankPageObservation
+Fluent.Pdf.PdfBlankPageObservation.Confidence.get -> double
+Fluent.Pdf.PdfBlankPageObservation.ForegroundFraction.get -> double
+Fluent.Pdf.PdfBlankPageObservation.ForegroundPixels.get -> long
+Fluent.Pdf.PdfBlankPageObservation.IsBlank.get -> bool
+Fluent.Pdf.PdfBlankPageObservation.Options.get -> Fluent.Pdf.PdfBlankPageOptions!
+Fluent.Pdf.PdfBlankPageObservation.PixelCount.get -> long
+Fluent.Pdf.PdfBlankPageOptions
+Fluent.Pdf.PdfBlankPageOptions.BackgroundRgb.get -> int
+Fluent.Pdf.PdfBlankPageOptions.ChannelTolerance.get -> byte
+Fluent.Pdf.PdfBlankPageOptions.MaximumForegroundFraction.get -> double
+Fluent.Pdf.PdfBlankPageOptions.PdfBlankPageOptions(int backgroundRgb = 16777215, byte channelTolerance = 12, double maximumForegroundFraction = 0.001) -> void
 Fluent.Pdf.PdfBookmark
 Fluent.Pdf.PdfBookmark.Action.get -> Fluent.Pdf.PdfAction?
 Fluent.Pdf.PdfBookmark.Bold.get -> bool
@@ -1394,6 +1406,30 @@ Fluent.Pdf.PdfImageAsset.Resource.get -> Fluent.Pdf.PdfGraphicsResource!
 Fluent.Pdf.PdfImageAsset.SoftMask.get -> Fluent.Pdf.PdfImageAsset?
 Fluent.Pdf.PdfImageAsset.WriteEncoded(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfImageAsset.WriteOriginalFile(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfImageCleanup
+Fluent.Pdf.PdfImageCleanupOptions
+Fluent.Pdf.PdfImageCleanupOptions.AllowLossy.get -> bool
+Fluent.Pdf.PdfImageCleanupOptions.BinaryThreshold.get -> byte?
+Fluent.Pdf.PdfImageCleanupOptions.BlankDetection.get -> Fluent.Pdf.PdfBlankPageOptions?
+Fluent.Pdf.PdfImageCleanupOptions.CropBottom.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.CropLeft.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.CropRight.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.CropTop.get -> int
+Fluent.Pdf.PdfImageCleanupOptions.Grayscale.get -> bool
+Fluent.Pdf.PdfImageCleanupOptions.MaximumPixelVisits.get -> long
+Fluent.Pdf.PdfImageCleanupOptions.MedianDenoise.get -> bool
+Fluent.Pdf.PdfImageCleanupOptions.OutputHeight.get -> int?
+Fluent.Pdf.PdfImageCleanupOptions.OutputWidth.get -> int?
+Fluent.Pdf.PdfImageCleanupOptions.PdfImageCleanupOptions(bool allowLossy = false, bool grayscale = false, bool medianDenoise = false, byte? binaryThreshold = null, int cropLeft = 0, int cropTop = 0, int cropRight = 0, int cropBottom = 0, int? outputWidth = null, int? outputHeight = null, Fluent.Pdf.PdfBlankPageOptions? blankDetection = null, long maximumPixelVisits = 100000000) -> void
+Fluent.Pdf.PdfImageCleanupResult
+Fluent.Pdf.PdfImageCleanupResult.After.get -> Fluent.Pdf.PdfBlankPageObservation?
+Fluent.Pdf.PdfImageCleanupResult.Before.get -> Fluent.Pdf.PdfBlankPageObservation?
+Fluent.Pdf.PdfImageCleanupResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfImageCleanupResult.Options.get -> Fluent.Pdf.PdfImageCleanupOptions!
+Fluent.Pdf.PdfImageCleanupResult.Original.get -> Fluent.Pdf.PdfOcrRaster!
+Fluent.Pdf.PdfImageCleanupResult.OutputToOriginal.get -> Fluent.Pdf.PdfMatrix
+Fluent.Pdf.PdfImageCleanupResult.PixelVisits.get -> long
+Fluent.Pdf.PdfImageCleanupResult.Processed.get -> Fluent.Pdf.PdfOcrRaster!
 Fluent.Pdf.PdfImageCodec
 Fluent.Pdf.PdfImageCodec.Dct = 0 -> Fluent.Pdf.PdfImageCodec
 Fluent.Pdf.PdfImageCodec.Jbig2 = 2 -> Fluent.Pdf.PdfImageCodec
@@ -3450,6 +3486,7 @@ static Fluent.Pdf.PdfHtmlResource.Read(System.Uri! address, string! mediaType, S
 static Fluent.Pdf.PdfHtmlSource.FromHtml(string! markup, System.Uri? address = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!
 static Fluent.Pdf.PdfHtmlSource.FromResource(System.Uri! address, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>! resources, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!
 static Fluent.Pdf.PdfHtmlSource.Read(System.IO.Stream! input, System.Uri? address = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!
+static Fluent.Pdf.PdfImageCleanup.Process(Fluent.Pdf.PdfOcrRaster! original, Fluent.Pdf.PdfImageCleanupOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageCleanupResult!
 static Fluent.Pdf.PdfImages.Deduplicate(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfImageAsset!>! images, int maximumImages = 10000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageDeduplicationResult!
 static Fluent.Pdf.PdfImages.FromEncoded(System.IO.Stream! input, Fluent.Pdf.PdfImageInfo! info, Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfFilter![]! filters, Fluent.Pdf.PdfImageAsset? softMask = null, double[]? decode = null, Fluent.Pdf.PdfImageMetadata? metadata = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageAsset!
 static Fluent.Pdf.PdfImages.FromRgba(System.IO.Stream! input, int width, int height, int bitsPerComponent = 8, Fluent.Pdf.PdfColorSpace? colorSpace = null, Fluent.Pdf.PdfImageMetadata? metadata = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageAsset!
@@ -6402,6 +6439,10 @@ Generates exact UTF8 QR or printable Code128B, independently decodes its canonic
 
 Generates independently decoded EPC002 UTF8 SCT at mandatory levelM, with at most version13. Payment data is validated before generation and never submitted or executed.
 
+### <code>M:Fluent.Pdf.PdfBlankPageOptions.#ctor(System.Int32,System.Byte,System.Double)</code>
+
+Captures an opaque RGB background, maximum per-channel deviation and allowed foreground fraction. Confidence is a measured background fraction, not a correctness probability.
+
 ### <code>M:Fluent.Pdf.PdfBookmark.#ctor(System.String,Fluent.Pdf.PdfDestination,Fluent.Pdf.PdfAction,System.Boolean,System.Boolean,System.Boolean,Fluent.Pdf.PdfColor,Fluent.Pdf.PdfBookmark[])</code>
 
 Creates a bounded bookmark. Destinations and actions are mutually exclusive; children retain their order.
@@ -7095,6 +7136,14 @@ Exports exact PDF filter bytes without decoding, color conversion or recompressi
 ### <code>M:Fluent.Pdf.PdfImageAsset.WriteOriginalFile(System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Exports the exact retained image file; rejects assets without an original container.
+
+### <code>M:Fluent.Pdf.PdfImageCleanup.Process(Fluent.Pdf.PdfOcrRaster,Fluent.Pdf.PdfImageCleanupOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Preserves exact source samples. Applies explicit device gray, median and threshold before border cropping and nearest-neighbor resampling, under one mandatory context.
+
+### <code>M:Fluent.Pdf.PdfImageCleanupOptions.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.Byte},System.Int32,System.Int32,System.Int32,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},Fluent.Pdf.PdfBlankPageOptions,System.Int64)</code>
+
+Captures explicit loss authority, device-gray/filter choices, source border crop, nearest-neighbor output size and optional blank analysis. Resize dimensions must both be supplied. Median and threshold on color require explicit grayscale conversion.
 
 ### <code>M:Fluent.Pdf.PdfImageInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)</code>
 
@@ -9420,6 +9469,42 @@ Gets its first scalar index.
 
 Gets its scalar count, including its terminating paragraph separator when present.
 
+### <code>P:Fluent.Pdf.PdfBlankPageObservation.Confidence</code>
+
+Gets one minus foreground fraction; this heuristic confidence is not calibrated correctness.
+
+### <code>P:Fluent.Pdf.PdfBlankPageObservation.ForegroundFraction</code>
+
+Gets the measured foreground fraction.
+
+### <code>P:Fluent.Pdf.PdfBlankPageObservation.ForegroundPixels</code>
+
+Gets pixels whose maximum RGB distance from the background exceeds tolerance.
+
+### <code>P:Fluent.Pdf.PdfBlankPageObservation.IsBlank</code>
+
+Gets whether the caller's foreground threshold is met; this never authorizes deletion.
+
+### <code>P:Fluent.Pdf.PdfBlankPageObservation.Options</code>
+
+Gets the exact classifier parameters.
+
+### <code>P:Fluent.Pdf.PdfBlankPageObservation.PixelCount</code>
+
+Gets the number of examined active pixels.
+
+### <code>P:Fluent.Pdf.PdfBlankPageOptions.BackgroundRgb</code>
+
+Gets the explicit expected opaque RGB background.
+
+### <code>P:Fluent.Pdf.PdfBlankPageOptions.ChannelTolerance</code>
+
+Gets the inclusive per-channel background tolerance.
+
+### <code>P:Fluent.Pdf.PdfBlankPageOptions.MaximumForegroundFraction</code>
+
+Gets the largest measured foreground fraction classified as blank.
+
 ### <code>P:Fluent.Pdf.PdfBookmark.Action</code>
 
 Gets the optional passive action.
@@ -11647,6 +11732,86 @@ Gets the exact reusable PDF image XObject, including its color/mask dependencies
 ### <code>P:Fluent.Pdf.PdfImageAsset.SoftMask</code>
 
 Gets the optional separate unassociated alpha image.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.AllowLossy</code>
+
+Gets explicit authority for the selected lossy transforms.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.BinaryThreshold</code>
+
+Gets the gray threshold; values below it become zero, others255.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.BlankDetection</code>
+
+Gets explicit blank analysis, performed before and after cleanup, or null.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.CropBottom</code>
+
+Gets removed source rows from the bottom.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.CropLeft</code>
+
+Gets removed source columns from the left.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.CropRight</code>
+
+Gets removed source columns from the right.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.CropTop</code>
+
+Gets removed source rows from the top.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.Grayscale</code>
+
+Gets explicit integer device-luma conversion; no ICC transform is implied.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.MaximumPixelVisits</code>
+
+Gets the cumulative pixel-visit ceiling across analysis and all transforms.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.MedianDenoise</code>
+
+Gets replicated-edge3x3 gray median filtering.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.OutputHeight</code>
+
+Gets the optional final height.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupOptions.OutputWidth</code>
+
+Gets the optional final width.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.After</code>
+
+Gets separate output blank analysis; changes do not authorize deletion.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.Before</code>
+
+Gets full source blank analysis, never inferred from reduced output.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.OperationReport</code>
+
+Gets resource accounting and explicit loss diagnostics.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.Options</code>
+
+Gets captured explicit parameters.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.Original</code>
+
+Gets exact immutable source including padding; reverting means using this raster.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.OutputToOriginal</code>
+
+Gets processed pixel-edge coordinates mapped into original pixels.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.PixelVisits</code>
+
+Gets total managed pixel visits across all stages.
+
+### <code>P:Fluent.Pdf.PdfImageCleanupResult.Processed</code>
+
+Gets processed pixels, or the original instance for an identity operation. DPI remains a nominal OCR hint; use OutputToOriginal for physical geometry.
 
 ### <code>P:Fluent.Pdf.PdfImageDeduplicationResult.Images</code>
 
@@ -16224,6 +16389,14 @@ Unicode bidirectional character classes, independent of the installed runtime's 
 
 A paragraph range and resolved base embedding level.
 
+### <code>T:Fluent.Pdf.PdfBlankPageObservation</code>
+
+Measured evidence from every active source pixel; padding is excluded and alpha is never guessed.
+
+### <code>T:Fluent.Pdf.PdfBlankPageOptions</code>
+
+Explicit full-resolution blank-page classifier parameters. No page is removed.
+
 ### <code>T:Fluent.Pdf.PdfBookmark</code>
 
 An immutable nested bookmark with an optional local destination or passive action.
@@ -16859,6 +17032,18 @@ Captured markup or an explicitly addressed main resource and immutable local res
 ### <code>T:Fluent.Pdf.PdfImageAsset</code>
 
 A detached immutable image, exact encoded samples and explicit display metadata.
+
+### <code>T:Fluent.Pdf.PdfImageCleanup</code>
+
+Original bounded image cleanup over explicitly captured samples, without implicit decoders, models or page deletion.
+
+### <code>T:Fluent.Pdf.PdfImageCleanupOptions</code>
+
+Immutable opt-in image cleanup. Defaults preserve the original raster exactly.
+
+### <code>T:Fluent.Pdf.PdfImageCleanupResult</code>
+
+Preserved source, separate processed pixels and reproducible cleanup evidence.
 
 ### <code>T:Fluent.Pdf.PdfImageCodec</code>
 
