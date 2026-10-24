@@ -1,0 +1,9 @@
+# HTML element extraction prerequisite record
+
+FP-110/#110 remains planned. The existing HTML renderer supplies a pinned DevTools adapter and a trusted original-fixture observer; it does not supply the complete deployable browser host required by FP-044/#32 and native distribution #105. Element/block extraction has no implemented public API and no acceptance runs at this checkpoint. A protocol mock or screenshot from an unrestricted browser would not satisfy the required origin, resource and process boundary.
+
+The implementation must reuse the existing private browser context, resource session, finite readiness deadline and mandatory operation context. It must define CSS viewport versus document coordinates, device scale, transformed border bounds, overflow/ancestor clipping, offscreen capture and overlapping content. It must reject missing/ambiguous selectors, detect document replacement and bound search, DOM observations, pixel/output allocation and dynamic-page waiting. Capture must never acquire new ambient credentials, bypass interception or silently reflow the selected element.
+
+Resume with the provisioned host and a pinned original fixture corpus covering nested transforms, rotated elements, overflow containers, offscreen elements, multiple matches, DOM replacement during capture, delayed fonts/images and authenticated resources. Verify pixels/rectangles with an independent observer, test network denial and cleanup, and retain actual runtime/host identities and hashes. Complete final-package consumers and all production lanes remain mandatory.
+
+See [browser implementation limits](html-rendering.md), [resource policy](html-resources.md), [readiness](html-readiness.md), [distribution blockers](native-distribution.md) and [the blocker record](evidence/FP-110-blocked.json). No requirement is closed and packing/publication remains blocked.

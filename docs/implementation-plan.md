@@ -230,3 +230,5 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 [#108 text/Markdown interchange](text-interchange.md) adds exact-source explicit reading-order projections, caller-assigned roles, inferred tables and generated page-image bundles. [Evidence](evidence/FP-108-source.json) retains finite parser/Unicode/asset observations and complete semantic/corpus/runtime qualification gaps. #109 is next.
 
 [#109 task facades](task-facades.md) compose existing engines with explicit immutable instance configuration and shared generation budgets. [Source evidence](evidence/FP-109-source.json) separates equivalence and language-consumer checks from full underlying qualification. #110 is next.
+
+[#110 HTML element extraction](html-element-extraction.md) is blocked by the complete browser-host prerequisite. [Evidence](evidence/FP-110-blocked.json) records zero element-capture acceptance runs and the precise geometry/resource/dynamic-DOM work still required. Continue independent managed #111 work; no element capture is claimed.

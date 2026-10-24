@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-110",
+  "issue": 110,
+  "sourceCommit": "a245c414ba54a2afb71d77035b893d7fd2a521b3",
+  "status": "blocked-by-prerequisites",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "elementCaptureImplemented": false,
+  "elementCaptureAcceptanceRuns": 0,
+  "dependenciesReviewed": [24, 32, 33, 34],
+  "observations": [
+    "The browser adapter requires a separately provisioned supervised host; its Linux fixture observer is explicitly not a qualified deployable security boundary",
+    "FP-044 and native distribution FP-105 still lack complete qualified host distribution",
+    "No element coordinate, clipping, dynamic-DOM or authenticated-capture result is inferred from whole-document print fixtures"
+  ],
+  "references": ["docs/requirements/FP-110.md", "docs/html-element-extraction.md", "docs/html-rendering.md", "docs/html-resources.md", "docs/html-readiness.md", "docs/evidence/FP-044-source.json", "docs/evidence/FP-046-source.json", "docs/evidence/FP-105-blocked.json"],
+  "nextAction": "Complete the supervised host prerequisite, implement capture through that same resource/lifecycle boundary, then execute the specified actual-browser corpus; continue independent managed issue111 work"
+}
