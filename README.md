@@ -166,3 +166,5 @@ FP-087 adds a bounded asynchronous processing pool with private worker-owned doc
 FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](docs/performance.md).
 
 FP-090 adds a pinned original fidelity corpus with independent Unicode, geometry, form, structure and dual-renderer pixel checks. Complete corpus and production qualification remain pending; see [fidelity checks](docs/fidelity-corpus.md).
+
+FP-091 adds private bounded content caches and repeated-process checks for explicit metadata and compression inputs. See [determinism and tenancy](docs/determinism-caching.md) for isolation rules and the remaining qualification.

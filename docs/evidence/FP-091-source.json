@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-091",
+  "issue": 95,
+  "sourceCommit": "0d801a65f1cfe0063c3b4f565597334ae66257d3",
+  "workingTreeDirty": true,
+  "commitBinding": "Exact source hashes and retained runtime binaries bind this development checkout; it is not clean release qualification.",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "src/Fluent.Pdf/Caching/PdfContentCache.cs",
+      "sha256": "171113ef6d278880b4b80aa88462a47a5bb2ddd0b6436053bdd5afbf2cb97ada",
+      "bytes": 7853
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "33dd6232c3b8530c8c8b9cab7532b90c1e4344205ef6687e18aeaf96962d1987",
+      "bytes": 345656
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/CacheTests.cs",
+      "sha256": "5d70844b0f69a2887eac545dc9a3f3fc34e21ebe7396edd8077748d409e7a962",
+      "bytes": 7475
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "23a5d04f9777c844f3b65dfafb37fe6019a071e38f8134dd46e1c73d045da59d",
+      "bytes": 32897
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "7a20cb1a70aa1fc1922d69cb4d47acf029729cfbfa5d4cba2fdff68fba0e155a",
+      "bytes": 38764
+    },
+    {
+      "path": "eng/Determinism/Program.cs",
+      "sha256": "498bf21156c901cd7d01ae4e86ffa6c4f86487c18d9b147ee4a49a165183463c",
+      "bytes": 3620
+    },
+    {
+      "path": "eng/Determinism/Determinism.csproj",
+      "sha256": "d5fbcf582d59fac0b72c1fd4cfffa49b12795cee7c25935b528c4a00eae2d722",
+      "bytes": 283
+    },
+    {
+      "path": "eng/Determinism/packages.lock.json",
+      "sha256": "4ca7a9aceeb35b9352c3684347018ea970d476e67a9a4c0f058fd82ffe5ae0a0",
+      "bytes": 215
+    },
+    {
+      "path": "eng/test-determinism.py",
+      "sha256": "42bd263a0f976cb1e1132d6a1de375d81476cd518de725894f5f8e87fda68dc0",
+      "bytes": 2684
+    },
+    {
+      "path": "eng/verify-determinism.py",
+      "sha256": "cfa9507fa1e0cecd7bfd50b4f427d552075a0ee92c0e64b3bd5842f51cf02c7e",
+      "bytes": 3563
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "4f9ecfe4fc6bba0b93d83b098414a4d6a5d7ad6f5a394151f9980443d4fb7e01",
+      "bytes": 9061
+    },
+    {
+      "path": "docs/determinism-caching.md",
+      "sha256": "8d698cee01049b0584c5d43956db23e0e3ff9815717ad0ba1bb5053b71a1131e",
+      "bytes": 5021
+    }
+  ],
+  "localValidation": {
+    "lanes": [
+      {
+        "lane": "net8",
+        "libraryTfm": ".NETCoreApp,Version=v8.0",
+        "runtime": ".NET 8.0.32",
+        "os": "Microsoft Windows 10.0.26300",
+        "architecture": "X64",
+        "total": 1768,
+        "passed": 1768,
+        "failed": 0,
+        "skipped": 0,
+        "report": "net8/contracts.trx",
+        "reportSha256": "F9EEEEB449B8130BE308F7B67684ABE63CF21349E4B25B2E18D48C7E4C516EEC",
+        "assemblySha256": "6D32D38AAAF0183F4693303D38AF37DB7BA01FE1E6526E69760517E32705CAFA",
+        "runtimeIdentityEvidence": "net8/runtime-identity.json",
+        "runtimeIdentityEvidenceSha256": "0EF8B29BABB065BCDA97B8F04124E3EFB431E4BF6A3EF138AA5792920137810A"
+      },
+      {
+        "lane": "net10",
+        "libraryTfm": ".NETCoreApp,Version=v10.0",
+        "runtime": ".NET 10.0.13",
+        "os": "Microsoft Windows 10.0.26300",
+        "architecture": "X64",
+        "total": 1768,
+        "passed": 1768,
+        "failed": 0,
+        "skipped": 0,
+        "report": "net10/contracts.trx",
+        "reportSha256": "8E1CA87630CDB11F0CFA9E6EDEB40A550D8250E5A895FC513C3958821DA6C1C4",
+        "assemblySha256": "17EB4496F1D2792F9A40A770A4EEACE8C7253FBF4881E73D3E8C9855BC349CFD",
+        "runtimeIdentityEvidence": "net10/runtime-identity.json",
+        "runtimeIdentityEvidenceSha256": "4435D67E5AB09979B56680247D93750A8C28C25B4EDC4F63479A45768F4B8BAE"
+      },
+      {
+        "lane": "framework-current-x64",
+        "libraryTfm": ".NETFramework,Version=v4.7.2",
+        "runtime": ".NET Framework 4.8.10008.0",
+        "os": "Microsoft Windows 10.0.26300",
+        "architecture": "X64",
+        "total": 1768,
+        "passed": 1768,
+        "failed": 0,
+        "skipped": 0,
+        "report": "framework-current-x64/contracts.trx",
+        "reportSha256": "7DC0A81A22E5EDFD8B379440B158AB6B9152D8C01B6B1E95BF57D214380663CF",
+        "assemblySha256": "009F4CFF15D8312B0ABC19E898C27CD0AA65C4F0435ED1A50EC6BA41E96CF403",
+        "runtimeIdentityEvidence": "framework-current-x64/runtime-identity.json",
+        "runtimeIdentityEvidenceSha256": "EED0761A0864696984FAD85ED8EC9B03D055E77F7EFF65139853BCF4828EAFE7"
+      },
+      {
+        "lane": "framework-current-x86",
+        "libraryTfm": ".NETFramework,Version=v4.7.2",
+        "runtime": ".NET Framework 4.8.10008.0",
+        "os": "Microsoft Windows 10.0.26300",
+        "architecture": "X86",
+        "total": 1768,
+        "passed": 1768,
+        "failed": 0,
+        "skipped": 0,
+        "report": "framework-current-x86/contracts.trx",
+        "reportSha256": "FFA11B5BC20681F48DD19538CDD87EF101A79E2FDEBD82CB6A8E9AC50BC66A75",
+        "assemblySha256": "009F4CFF15D8312B0ABC19E898C27CD0AA65C4F0435ED1A50EC6BA41E96CF403",
+        "runtimeIdentityEvidence": "framework-current-x86/runtime-identity.json",
+        "runtimeIdentityEvidenceSha256": "EDB1C81F071CDA2CA6CEFFDE4EF6A5089DAA503680F0E4E3F56359DCC78D3E07"
+      },
+      {
+        "lane": "netstandard-fallback",
+        "libraryTfm": ".NETStandard,Version=v2.0",
+        "runtime": ".NET 10.0.13",
+        "os": "Microsoft Windows 10.0.26300",
+        "architecture": "X64",
+        "total": 1768,
+        "passed": 1768,
+        "failed": 0,
+        "skipped": 0,
+        "report": "netstandard-fallback/contracts.trx",
+        "reportSha256": "1363B1A5419C377B3BE35DCC27EAE8568E08EC1046664797536DE3032EB51CD8",
+        "assemblySha256": "04A06CF2A17D47C06A2A909718416761199083436B8CDCE522A008C6A614507D",
+        "runtimeIdentityEvidence": "netstandard-fallback/runtime-identity.json",
+        "runtimeIdentityEvidenceSha256": "F91A6E64A38C1FF9F4E23A33C82DB15CA049502064855411E43DAD6BFEF9C720"
+      }
+    ],
+    "totalTestExecutions": 8840,
+    "apiComparisons": 45,
+    "newCacheCases": 18,
+    "mixedTenantWorkers": 64,
+    "iterationsPerTenant": 200,
+    "freshProcesses": 20,
+    "deterministicOutputs": 80,
+    "compressionProfiles": [
+      "plain",
+      "compressed"
+    ],
+    "independentMetadataOutputs": 80,
+    "independentlyRenderedProfileOutputs": 16,
+    "rendererComparisons": 32,
+    "solutionBuildWarnings": 0,
+    "solutionBuildErrors": 0
+  },
+  "reports": [
+    {
+      "path": "artifacts/contracts/determinism/net8.0/921c80be57aa43da9ae723e146f3cf24/report.json",
+      "sha256": "4326ada06b1b4ae78d0b5f439b37b63dc1cf6c7fb79483d75cb8889a2f3fe223"
+    },
+    {
+      "path": "artifacts/contracts/determinism/net10.0/7a32fdcb976c4f339e896ca820d80366/report.json",
+      "sha256": "f9acd3891b73d5e15ff506501cbd7f3ac136760fd533a96aabf32abf3cfe4c4b"
+    },
+    {
+      "path": "artifacts/fp091-independent-final-net8.0/report.json",
+      "sha256": "b8a179f6905a03c1a2681af0ccb96efc0d181eff4fd5f35a1b93c19fbc6f685c"
+    },
+    {
+      "path": "artifacts/fp091-independent-final-net10.0/report.json",
+      "sha256": "eef5385d7b984c928c618a2f6abe509546364b9f51cce05850576b8882aadb01"
+    }
+  ],
+  "archive": {
+    "path": "artifacts/fp091-source-evidence.zip",
+    "sha256": "44e98fef488085a339845111e15751d95319274909fdc4377740c566e4075edb",
+    "bytes": 9813022,
+    "verifiedEntries": 371
+  },
+  "limitations": [
+    "Source contracts run on current Framework4.8, not minimum4.7.2; older minimum-runtime evidence does not qualify new cache code",
+    "Native fixture binaries reuse the verified519a016 CI source prerequisites; native implementation was unchanged",
+    "Private cache-instance possession is host-granted authority, not tenant authentication",
+    "Retention bounds exclude caller-owned operation copies; those use operation budgets and caller concurrency limits",
+    "No complete native/browser/OCR/model/signing/encryption repeatability profile or eight-hour endurance",
+    "Exact final packages and complete corpus/runtime/provider qualification remain mandatory"
+  ]
+}

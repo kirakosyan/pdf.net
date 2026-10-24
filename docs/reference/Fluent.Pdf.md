@@ -580,6 +580,17 @@ Fluent.Pdf.PdfConformanceProfile.X1A2003 = 1 -> Fluent.Pdf.PdfConformanceProfile
 Fluent.Pdf.PdfConformanceProfile.X32002 = 2 -> Fluent.Pdf.PdfConformanceProfile
 Fluent.Pdf.PdfConformanceProfile.X32003 = 3 -> Fluent.Pdf.PdfConformanceProfile
 Fluent.Pdf.PdfConformanceProfile.X42010 = 4 -> Fluent.Pdf.PdfConformanceProfile
+Fluent.Pdf.PdfContentCache
+Fluent.Pdf.PdfContentCache.Clear() -> void
+Fluent.Pdf.PdfContentCache.Count.get -> int
+Fluent.Pdf.PdfContentCache.Dispose() -> void
+Fluent.Pdf.PdfContentCache.MaximumEntries.get -> int
+Fluent.Pdf.PdfContentCache.MaximumEntryBytes.get -> int
+Fluent.Pdf.PdfContentCache.MaximumResidentBytes.get -> long
+Fluent.Pdf.PdfContentCache.PdfContentCache(int maximumEntries = 1024, long maximumResidentBytes = 67108864, int maximumEntryBytes = 4194304) -> void
+Fluent.Pdf.PdfContentCache.ResidentBytes.get -> long
+Fluent.Pdf.PdfContentCache.Store(byte[]! content, Fluent.Pdf.PdfOperationContext! context) -> string!
+Fluent.Pdf.PdfContentCache.TryGet(string! sha256, Fluent.Pdf.PdfOperationContext! context, out byte[]? content) -> bool
 Fluent.Pdf.PdfContentKind
 Fluent.Pdf.PdfContentKind.Page = 0 -> Fluent.Pdf.PdfContentKind
 Fluent.Pdf.PdfContentKind.Type3Glyph = 1 -> Fluent.Pdf.PdfContentKind
@@ -6429,6 +6440,26 @@ Writes version-one JSON or escaped static HTML to a borrowed output under fresh 
 
 Inspects declared versions and preserves raw extension/namespace values without following URLs, running actions or decrypting an encrypted input.
 
+### <code>M:Fluent.Pdf.PdfContentCache.#ctor(System.Int32,System.Int64,System.Int32)</code>
+
+Creates private storage with 1–65536 entries, 1 byte–1 GiB retained payload and a per-entry ceiling of at most16 MiB and the retained capacity.
+
+### <code>M:Fluent.Pdf.PdfContentCache.Clear</code>
+
+Removes and clears all retained arrays. Existing detached caller copies remain caller-owned.
+
+### <code>M:Fluent.Pdf.PdfContentCache.Dispose</code>
+
+Idempotently closes the cache and clears retained arrays. Managed cleanup is not a guarantee of cryptographic erasure of all process memory.
+
+### <code>M:Fluent.Pdf.PdfContentCache.Store(System.Byte[],Fluent.Pdf.PdfOperationContext)</code>
+
+Captures content, computes its lowercase SHA-256 address and inserts or refreshes it. Input must remain unchanged during this call. There is no caller-supplied key that could poison another address.
+
+### <code>M:Fluent.Pdf.PdfContentCache.TryGet(System.String,Fluent.Pdf.PdfOperationContext,System.Byte[]@)</code>
+
+Returns a detached content copy on a hit, or null on a miss. A hit consumes Objects and ExpandedBytes before allocating; failures never expose a partial array.
+
 ### <code>M:Fluent.Pdf.PdfContentOperation.#ctor(Fluent.Pdf.PdfOperator,Fluent.Pdf.PdfValue[])</code>
 
 Creates a standard operator after validating its operand grammar.
@@ -9582,6 +9613,26 @@ Gets the captured immutable source, retaining indirect extension/namespace relat
 ### <code>P:Fluent.Pdf.PdfCompatibilityInspection.StructureNamespaces</code>
 
 Gets the resolved structure-root Namespaces value or null. Namespace semantics are not inferred or rewritten.
+
+### <code>P:Fluent.Pdf.PdfContentCache.Count</code>
+
+Gets the synchronized retained entry count, including after disposal.
+
+### <code>P:Fluent.Pdf.PdfContentCache.MaximumEntries</code>
+
+Gets the retained entry ceiling, including empty values.
+
+### <code>P:Fluent.Pdf.PdfContentCache.MaximumEntryBytes</code>
+
+Gets the maximum size of one captured value.
+
+### <code>P:Fluent.Pdf.PdfContentCache.MaximumResidentBytes</code>
+
+Gets the retained payload-byte ceiling; dictionary metadata is separately bounded by MaximumEntries.
+
+### <code>P:Fluent.Pdf.PdfContentCache.ResidentBytes</code>
+
+Gets the synchronized retained payload size, including after disposal.
 
 ### <code>P:Fluent.Pdf.PdfContentOperation.InlineImageDictionary</code>
 
@@ -15900,6 +15951,12 @@ Detached passive version and raw catalog compatibility inventory. This is not PD
 ### <code>T:Fluent.Pdf.PdfConformanceProfile</code>
 
 Exact standard editions. Selecting a profile is not a conformance claim.
+
+### <code>T:Fluent.Pdf.PdfContentCache</code>
+
+A private, bounded, thread-safe LRU store of immutable content addressed by SHA-256.
+
+Remarks: Create a separate instance for each tenant and retain it only in that tenant's trusted scope. Possession of an instance grants access to its content; this is not an authentication service. No static store, tenant lookup, disk persistence or credential inheritance exists. Capacity bounds retained payload bytes; operation copies additionally consume the supplied context's expanded-byte budget. Returned copies belong to the caller.
 
 ### <code>T:Fluent.Pdf.PdfContentKind</code>
 

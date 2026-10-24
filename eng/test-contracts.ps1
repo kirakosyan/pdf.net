@@ -73,6 +73,9 @@ try {
         $fidelityOutput = Join-Path $resultsRoot ('fidelity/' + $framework + '/' + [Guid]::NewGuid().ToString('N'))
         & dotnet (Join-Path $root "eng/Fidelity/bin/$Configuration/$framework/Fidelity.dll") (Join-Path $root 'tests/FidelityCorpus') $fidelityOutput
         if ($LASTEXITCODE -ne 0) { throw "Fidelity corpus source consumer failed: $framework" }
+        $determinismOutput = Join-Path $resultsRoot ('determinism/' + $framework + '/' + [Guid]::NewGuid().ToString('N'))
+        & $python (Join-Path $root 'eng/test-determinism.py') --assembly (Join-Path $root "eng/Determinism/bin/$Configuration/$framework/Determinism.dll") --corpus (Join-Path $root 'tests/FidelityCorpus') --output $determinismOutput
+        if ($LASTEXITCODE -ne 0) { throw "Repeated-process determinism failed: $framework" }
     }
     & dotnet run --project (Join-Path $root 'examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj') -c $Configuration --no-build --no-restore -- --self-test
     if ($LASTEXITCODE -ne 0) { throw 'Hosted compiled Razor/MVC/Blazor boundary checks failed.' }

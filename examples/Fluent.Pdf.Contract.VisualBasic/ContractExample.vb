@@ -4,6 +4,12 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Function CacheInput(tenantCache As PdfContentCache, input As Byte(), context As PdfOperationContext) As Byte()
+        Dim address = tenantCache.Store(input, context)
+        Dim captured As Byte() = Nothing
+        If Not tenantCache.TryGet(address, context, captured) Then Throw New InvalidOperationException("The caller's cache evicted the input.")
+        Return captured
+    End Function
     Public Async Function ProcessPdfAsync(input As Byte(), output As Stream) As System.Threading.Tasks.Task(Of PdfOperationReport)
         Using pool As New PdfProcessingPool(New PdfProcessingOptions(maximumWorkers:=1))
             Dim work As System.Threading.Tasks.Task(Of PdfOperationReport) = Nothing

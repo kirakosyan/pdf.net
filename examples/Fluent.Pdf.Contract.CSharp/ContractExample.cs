@@ -5,6 +5,12 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static byte[] CacheInput(PdfContentCache tenantCache, byte[] input, PdfOperationContext context)
+    {
+        string address = tenantCache.Store(input, context);
+        if (!tenantCache.TryGet(address, context, out var captured)) throw new InvalidOperationException("The caller's cache evicted the input.");
+        return captured!;
+    }
     public static async System.Threading.Tasks.Task<PdfOperationReport> ProcessPdfAsync(byte[] input, Stream output)
     {
         using var pool = new PdfProcessingPool(new(maximumWorkers: 1));

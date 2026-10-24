@@ -3555,3 +3555,14 @@ static Fluent.Pdf.PdfWriteOptions.Default.get -> Fluent.Pdf.PdfWriteOptions!
 static Fluent.Pdf.PdfXfa.ConvertToAcroForm(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFormFieldDefinition!>! fields, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfXfa.Fill(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! values, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfXfa.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfXfaSet!
+Fluent.Pdf.PdfContentCache
+Fluent.Pdf.PdfContentCache.Clear() -> void
+Fluent.Pdf.PdfContentCache.Count.get -> int
+Fluent.Pdf.PdfContentCache.Dispose() -> void
+Fluent.Pdf.PdfContentCache.MaximumEntries.get -> int
+Fluent.Pdf.PdfContentCache.MaximumEntryBytes.get -> int
+Fluent.Pdf.PdfContentCache.MaximumResidentBytes.get -> long
+Fluent.Pdf.PdfContentCache.PdfContentCache(int maximumEntries = 1024, long maximumResidentBytes = 67108864, int maximumEntryBytes = 4194304) -> void
+Fluent.Pdf.PdfContentCache.ResidentBytes.get -> long
+Fluent.Pdf.PdfContentCache.Store(byte[]! content, Fluent.Pdf.PdfOperationContext! context) -> string!
+Fluent.Pdf.PdfContentCache.TryGet(string! sha256, Fluent.Pdf.PdfOperationContext! context, out byte[]? content) -> bool

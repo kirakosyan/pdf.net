@@ -3931,7 +3931,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/determinism-caching.md",
+        "implemented": [
+          "Private bounded SHA-256 content cache with LRU eviction, detached copies and mandatory operation budgets",
+          "Explicit existing metadata ID/time and compression controls exercised in fresh-process byte comparisons",
+          "Cross-tenant misses, poisoning prevention, eviction/cancellation/disposal and mixed concurrency contracts"
+        ],
+        "pending": [
+          "Complete provider/HTML/OCR/model and signed/encrypted applicability profiles",
+          "All minimum/current/fallback/runtime lanes, independent complete corpus and eight-hour endurance",
+          "Exact final packages and complete production qualification"
+        ]
+      }
     },
     {
       "id": "FP-092",
