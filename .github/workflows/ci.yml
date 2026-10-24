@@ -68,6 +68,15 @@ jobs:
         run: ./eng/test-package-metadata.ps1 -OutputDirectory artifacts/contracts/package-metadata
       - name: Build SDK and executable C#/VB contracts
         run: dotnet build Fluent.Pdf.slnx -c Release --no-restore
+      - name: Exercise offline installed real rendering source assets
+        shell: pwsh
+        run: |
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          $rid = '${{ matrix.id }}'
+          $output = Join-Path $PWD 'artifacts/contracts/installed-renderer'
+          $null = [IO.Directory]::CreateDirectory($output)
+          & $python eng/test-installed-renderer.py --rid $rid --source (Join-Path $PWD "artifacts/native-fixtures/$rid") --output $output
+          if ($LASTEXITCODE -ne 0) { throw 'Offline actual-engine source installation failed.' }
       - name: Inventory source dependencies and check advisory query coverage
         shell: pwsh
         run: ./eng/audit-supply-chain.ps1 -OutputDirectory artifacts/contracts/supply-chain

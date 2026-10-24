@@ -4640,9 +4640,9 @@
       "implementationProgress": {
         "stage": "source-validation",
         "documentation": "docs/native-distribution.md",
-        "implemented": ["Explicit offline pinned asset/notice/static-import inventory, verified staged installation without destination replacement, and literal-path owned-inventory removal tooling"],
+        "implemented": ["Explicit offline pinned asset/notice/static-import inventory, verified staged installation without destination replacement, and literal-path owned-inventory removal tooling", "Actual pinned renderer/worker/notice source installation with network-denied provisioning, public SDK full-page/region/missing-asset/hash checks, independent exact pixels and retained binary/runtime provenance"],
         "pending": ["Complete engine/host/model/font distributions and reviewed per-RID closure", "Actual clean air-gapped host, system ABI, licensing, native and production qualification"],
-        "sourceEvidence": "docs/evidence/prereq-native-source.json"
+        "sourceEvidence": "docs/evidence/installed-renderer-source.json"
       }
     },
     {
