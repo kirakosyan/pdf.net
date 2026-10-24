@@ -105,7 +105,8 @@ jobs:
           NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
         run: |
           $ErrorActionPreference = 'Stop'
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_API_KEY)) { throw 'Missing short-lived OIDC publishing credential.' }
           foreach ($package in Get-ChildItem qualified/packages -Filter '*.nupkg') {
-            dotnet nuget push $package.FullName --source https://api.nuget.org/v3/index.json
+            dotnet nuget push $package.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
             if ($LASTEXITCODE -ne 0) { throw "Package publication failed: $($package.Name)" }
           }

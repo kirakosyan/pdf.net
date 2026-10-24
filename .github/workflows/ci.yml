@@ -132,6 +132,9 @@ jobs:
         run: |
           dotnet tool restore
           python3 eng/test-maintenance.py --output artifacts/source-maintenance
+      - name: Verify offline publishing credential argument wiring
+        shell: pwsh
+        run: ./eng/test-publish-token.ps1
       - name: Retain source provenance reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -142,4 +145,5 @@ jobs:
             artifacts/source-rebuild/report.json
             artifacts/source-rebuild/probes/*.json
             artifacts/source-maintenance/**
+            artifacts/contracts/publish-token/**/report.json
           if-no-files-found: error
