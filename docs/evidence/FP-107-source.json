@@ -121,5 +121,9 @@
     "Actual decoder implementation, versioned independent readers/corpora, codec/font fidelity and sandbox qualification",
     "Actual minimum/runtime/RID, fuzz/endurance and final-package consumers",
     "Final hosted CI"
-  ]
+  ],
+  "documentationCorrection": {
+    "sourceCommit": "51920897e272de33cd6ed807da91046dbde2fd9e",
+    "observation": "Final post-evidence check found generated requirements.md drift; regenerated the FP-107 source-profile link and the metadata check passed. No SDK bytes changed."
+  }
 }
