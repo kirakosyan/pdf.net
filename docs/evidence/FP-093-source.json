@@ -252,6 +252,12 @@
     "localRegression": "artifacts/fp093-directory-fix/19860b80544b482099c1304b8207854f/nested/report.json",
     "localRegressionSha256": "17c29e27a5508521bbcfcfc9cccf819524cd83697a0744a43bace7fa7cf46610",
     "failedLogSha256": "19e6755c0ef124d3627fd42e9cd3938d2e7f09bfc82d9968b97e2fe362cb28e3",
-    "hostedRevalidation": "pending"
+    "hostedRevalidation": {
+      "head": "8291fc0ddc548d4c8a3924c9aea705375691e6cd",
+      "run": 40085584042,
+      "job": 120847719239,
+      "conclusion": "success",
+      "scope": "Managed source rebuild provenance; other complete source workflow results are recorded separately"
+    }
   }
 }

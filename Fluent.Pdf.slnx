@@ -30,5 +30,7 @@
     <Project Path="tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj" />
   </Folder>
   <Folder Name="/eng/"><Project Path="eng/HtmlBrowserProbe/HtmlBrowserProbe.csproj" /><Project Path="eng/Documentation/Documentation.csproj" />
-    <Project Path="eng/PackageProbe/PackageProbe.csproj" /><Project Path="eng/Performance/Performance.csproj" /><Project Path="eng/Fidelity/Fidelity.csproj" /><Project Path="eng/Determinism/Determinism.csproj" /></Folder>
+    <Project Path="eng/PackageProbe/PackageProbe.csproj" /><Project Path="eng/Performance/Performance.csproj" /><Project Path="eng/Fidelity/Fidelity.csproj" /><Project Path="eng/Determinism/Determinism.csproj" />
+    <Project Path="eng/SupplyChainProbe/SupplyChainProbe.csproj" />
+  </Folder>
 </Solution>

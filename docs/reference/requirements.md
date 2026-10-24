@@ -98,7 +98,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-092 Observability and support diagnostics](../requirements/FP-092.md) | Required | planned | [Declared source profile](../observability.md) |
 | [FP-093 Reproducible NuGet packages and API compatibility](../requirements/FP-093.md) | Required | planned | [Declared source profile](../package-reproducibility.md) |
 | [FP-094 Production release and Trusted Publishing](../requirements/FP-094.md) | Required | planned | Full source/qualification pending |
-| [FP-095 Dependency licensing and supply-chain inventory](../requirements/FP-095.md) | Required | planned | Full source/qualification pending |
+| [FP-095 Dependency licensing and supply-chain inventory](../requirements/FP-095.md) | Required | planned | [Declared source profile](../supply-chain.md) |
 | [FP-096 PDF Reader placeholder boundary](../requirements/FP-096.md) | Excluded Reader | implemented | Full source/qualification pending |
 | [FP-097 Production document workflow acceptance](../requirements/FP-097.md) | Required | planned | Full source/qualification pending |
 | [FP-098 PDF 2.0 and extension preservation](../requirements/FP-098.md) | Required | planned | Full source/qualification pending |

@@ -151,5 +151,60 @@
     "Numeric engine probe recorded the actual managed assembly version; it does not qualify arbitrary native engines",
     "Native fixture binaries reuse the verified519a016 CI prerequisites; native implementation is unchanged",
     "Bundles describe pending observations with explicit loss counters; they are not guaranteed complete event archives"
-  ]
+  ],
+  "finalHostedSourceCi": {
+    "sourceCommit": "c75e44c74ef91be279ef7d957426c61e8478de77",
+    "workflow_runs": [
+      {
+        "id": 40081834075,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 173,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834075/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834075/logs",
+        "workflow_id": 387959272
+      },
+      {
+        "id": 40081834055,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 19,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834055/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834055/logs",
+        "workflow_id": 394397543
+      },
+      {
+        "id": 40081834108,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 31,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834108/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834108/logs",
+        "workflow_id": 394222479
+      },
+      {
+        "id": 40081834051,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 27,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834051/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834051/logs",
+        "workflow_id": 394289497
+      },
+      {
+        "id": 40081834056,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 22,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834056/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834056/logs",
+        "workflow_id": 394350116
+      }
+    ]
+  }
 }

@@ -19,6 +19,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Performance envelope/evidence boundary tests f
 if ($LASTEXITCODE -ne 0) { throw 'Independent fidelity corpus/checker boundary tests failed.' }
 & $python (Join-Path $root 'eng/test-package-audit.py')
 if ($LASTEXITCODE -ne 0) { throw 'Candidate archive boundary tests failed.' }
+& $python (Join-Path $root 'eng/test-supply-chain.py')
+if ($LASTEXITCODE -ne 0) { throw 'Supply-chain evidence boundary tests failed.' }
 function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [bool]$fallback = $false) {
     $env:FLUENT_PDF_EXPECTED_ARCH = $architecture
     $directory = Join-Path $resultsRoot $name

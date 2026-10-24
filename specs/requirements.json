@@ -4193,7 +4193,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/supply-chain.md",
+        "implemented": [
+          "Offline locked NuGet content verification and separate archive hashes with source context inventory",
+          "Incomplete CycloneDX source SBOM, retained notice/configuration hashes and explicit native/model declaration matching",
+          "Fail-closed advisory coverage/finding checks and dependency-change qualification invalidation",
+          "Cross-platform notice inclusion including extensionless upstream licenses"
+        ],
+        "pending": [
+          "Full license/redistribution and signer/source-to-binary trust review",
+          "Complete native/model/font support lifetimes and vulnerability review",
+          "Exact final distribution SBOM, package notices and all production runtime/provider gates"
+        ]
+      }
     },
     {
       "id": "FP-096",

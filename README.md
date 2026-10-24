@@ -172,3 +172,5 @@ FP-091 adds private bounded content caches and repeated-process checks for expli
 FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sinks and bounded support JSON. See [observability](docs/observability.md) for privacy, loss counters and qualification limits.
 
 [Package provenance](docs/package-reproducibility.md) describes the guarded candidate metadata, source rebuild checks and offline symbol/archive inspection. Final packages remain unqualified and publication is blocked.
+
+[Supply-chain inventory](docs/supply-chain.md) records locked dependencies, retained notices, explicit asset observations and advisory coverage. It does not approve redistribution or qualify final packages.

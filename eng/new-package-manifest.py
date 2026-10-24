@@ -23,7 +23,7 @@ def create(root, output):
         raise ValueError('Shared package version differs from readiness')
     common = {p.name: audit.digest(p.read_bytes()) for p in (root / 'README.md', root / 'LICENSE')}
     for path in (root / 'third-party').rglob('*'):
-        if path.suffix in ('.txt', '.md', '.json'):
+        if path.is_file() and (path.suffix.lower() in ('.txt', '.md', '.json') or path.name.endswith('-LICENSE')):
             common['notices/' + path.relative_to(root / 'third-party').as_posix()] = audit.digest(path.read_bytes())
     projects = sorted(p.parent for p in (root / 'src').glob('*/PublicAPI.Shipped.txt'))
     rows = []

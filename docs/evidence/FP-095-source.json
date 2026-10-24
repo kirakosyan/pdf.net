@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-095",
+  "issue": 98,
+  "sourceCommit": "8291fc0ddc548d4c8a3924c9aea705375691e6cd",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "8468f25c92423cda72040aef17985d563e9d4841bd7559af8c2b262060216c94",
+      "bytes": 7030
+    },
+    {
+      "path": "docs/evidence/FP-092-source.json",
+      "sha256": "888cd08294730fd23b38db7c785e3aef4530f8ae0353147692ced09e226757a8",
+      "bytes": 8600
+    },
+    {
+      "path": "docs/evidence/FP-093-source.json",
+      "sha256": "d6dab8c8d21e6383198c9c12eb0ed79d8d5d23071df1b0d1d676fcf1236605a3",
+      "bytes": 10176
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "5b16d7267a2c3998c2ec569a6d9fa94aef42739c693f8683a714c47e2e7fa052",
+      "bytes": 27777
+    },
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "075bf75d00ffe780f1320bef119f2636b7c5f8770424adef5b18a5ab8ffc9a21",
+      "bytes": 15791
+    },
+    {
+      "path": "docs/supply-chain.md",
+      "sha256": "ab49f7e120a4881a00fd9d8799ec26e8ff0ca6ada136d0549f5e417427115f96",
+      "bytes": 4851
+    },
+    {
+      "path": "eng/audit-supply-chain.ps1",
+      "sha256": "e5c1d006b0a8c3e410aef35c4ac19225a351b7ad4f75a2ad0b1e4d83479563be",
+      "bytes": 2253
+    },
+    {
+      "path": "eng/check-vulnerabilities.py",
+      "sha256": "1aa98b75288ba8c2c5a9767857ccf703489d512cbd9348f2235ba222229b10e8",
+      "bytes": 2079
+    },
+    {
+      "path": "eng/new-package-manifest.py",
+      "sha256": "a7084c3378ee93fb8464ca08c3a7803c13d00f33bf6748d49aa25e978fbe537f",
+      "bytes": 3803
+    },
+    {
+      "path": "eng/supply-chain.py",
+      "sha256": "aa15e87ab73aaea539799a3fe92de3c0129d57003a7e17ed9460b5b54f5d6682",
+      "bytes": 12297
+    },
+    {
+      "path": "eng/SupplyChainProbe/packages.lock.json",
+      "sha256": "a4364d81a6de2707d66fbced18fbbc926c882ab96e1d1aebbb17e871285b9d75",
+      "bytes": 66
+    },
+    {
+      "path": "eng/SupplyChainProbe/Program.cs",
+      "sha256": "b0639c775124726e0ddd13327dbe734b726762d978fea769aae6e48f05b67cb3",
+      "bytes": 1871
+    },
+    {
+      "path": "eng/SupplyChainProbe/SupplyChainProbe.csproj",
+      "sha256": "f26fcd709332d55b47af63b5dc7994d8722ef3533826457c49af4a8421d5ac9e",
+      "bytes": 893
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "106fa50c8a523c9c0052caac161ebd22a1c58de8dfebc48c9ef233c89c459027",
+      "bytes": 9332
+    },
+    {
+      "path": "eng/test-package-metadata.ps1",
+      "sha256": "5e8ff84998e605763043894e691272084c9ac46fd90c59a39c158261d9c23df3",
+      "bytes": 3526
+    },
+    {
+      "path": "eng/test-supply-chain-probe.py",
+      "sha256": "235832ef6b3b368ba19546fdeec8ffa8e97525821ec4de5ab4c4377524e12df6",
+      "bytes": 2369
+    },
+    {
+      "path": "eng/test-supply-chain.py",
+      "sha256": "59da290c55a3afbf516705e60bc148e0ce30f60e40eabcfb16aae4749b8f7fe4",
+      "bytes": 5512
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "12fa6257b4bd9b252287a9d281cb25a0968f8a00c25cfce6f63fc91a5981335c",
+      "bytes": 2288
+    },
+    {
+      "path": "README.md",
+      "sha256": "fdb46e2d0dd4bb50136679f62d23423b69d5a9c3370254e9ce9b78cc025b1020",
+      "bytes": 22372
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "9e366c6a01c25c0b6ccc52dc6802150c8cd0061be246553b63cf47aec7d42aa3",
+      "bytes": 1638
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "533728ee396958cf207d9b82777d175ec45309586ff0b74a22420c8fbc8047a7",
+      "bytes": 222621
+    },
+    {
+      "path": "src/Directory.Build.targets",
+      "sha256": "0a29ff6022cda79fa61a8fbe43085a4a20173cf3ead3588261de352fbb011538",
+      "bytes": 2651
+    }
+  ],
+  "validation": {
+    "lockedPackageVersions": 68,
+    "nugetContentHashesVerified": 68,
+    "unavailableAnalysisPackages": 0,
+    "lockTfmContexts": 121,
+    "observedDeclaredHashMatches": 80,
+    "supplyChainUnitGroups": 7,
+    "archiveRegressionGroups": 8,
+    "realPackageNegativeCases": 3,
+    "evaluatedPackageProjects": 15,
+    "noticeAndMetadataFilesPerProject": 64,
+    "actualPackTargetsBlocked": 15,
+    "solutionWarnings": 0,
+    "solutionErrors": 0,
+    "apiComparisons": 45,
+    "advisorySolutionProjects": 29,
+    "advisoryNativeProjects": 1,
+    "advisoryAdditionalAnalysisProjects": 1,
+    "returnedAdvisoryFindings": 0,
+    "independentCycloneDxSchema": "1.6"
+  },
+  "commands": [
+    "dotnet restore Fluent.Pdf.slnx --locked-mode",
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "dotnet restore native/codecs/Fluent.Pdf.Codecs.Native.csproj --locked-mode",
+    "pwsh -NoProfile -File eng/audit-supply-chain.ps1 -OutputDirectory artifacts/fp095-final -AssetDirectories artifacts/native-fixtures",
+    "dotnet list native/codecs/Fluent.Pdf.Codecs.Native.csproj package --vulnerable --include-transitive --format json --no-restore (fresh task-local HTTP cache)",
+    "python eng/test-supply-chain.py",
+    "python eng/test-supply-chain-probe.py --probe eng/SupplyChainProbe/bin/Release/net10.0/SupplyChainProbe.dll --requests artifacts/fp095-inventory-checked/nuget-request.json --output artifacts/fp095-probe-negatives-final",
+    "python eng/test-package-audit.py",
+    "pwsh -NoProfile -File eng/test-package-metadata.ps1 -OutputDirectory artifacts/fp095-metadata",
+    "pwsh -NoProfile -File eng/test-release-block.ps1",
+    "pwsh -NoProfile -File eng/check-api.ps1",
+    "Independent jsonschema4.25.1 Draft7 validation using the retained official CycloneDX1.6 schema",
+    "pwsh -NoProfile -File eng/validate-spec.ps1"
+  ],
+  "environment": {
+    "os": "Windows11Pro build26300 x64",
+    "sdk": "10.0.402",
+    "runtime": "10.0.13",
+    "nugetPackaging": "7.9.0.0"
+  },
+  "archive": {
+    "path": "artifacts/fp095-source-evidence.zip",
+    "sha256": "a366ff50e495ca6b9fb7fd456c4f51e7f73440295f2d36bfd8dde4abb0057d4f",
+    "bytes": 3428772,
+    "verifiedEntries": 250
+  },
+  "pending": [
+    "Complete final distribution SBOM and exact package notice audit",
+    "Unresolved upstream license declarations and redistribution approval",
+    "Signer trust, native source-to-binary provenance and full model/font/native lifetime/security/rights review",
+    "All actual minimum/runtime/provider/fidelity/endurance and original production gates"
+  ],
+  "limitations": [
+    "A matched declaration can be a notice or data file; 80 matches do not mean 80 engines were qualified",
+    "Fresh NuGet advisory responses returned no findings for the listed projects; this is not a proof of safety or native/model coverage",
+    "Schema validation proves SBOM structure, not distribution completeness or redistribution rights",
+    "No new SDK functional implementation or runtime qualification is claimed by these analysis tools",
+    "Final hosted CI for this checkpoint remains required"
+  ]
+}

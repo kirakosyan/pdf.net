@@ -54,6 +54,9 @@ jobs:
         run: ./eng/test-package-metadata.ps1 -OutputDirectory artifacts/contracts/package-metadata
       - name: Build SDK and executable C#/VB contracts
         run: dotnet build Fluent.Pdf.slnx -c Release --no-restore
+      - name: Inventory source dependencies and check advisory query coverage
+        shell: pwsh
+        run: ./eng/audit-supply-chain.ps1 -OutputDirectory artifacts/contracts/supply-chain
       - name: Release completed build servers before API comparison
         run: dotnet build-server shutdown
       - name: Compare API across target frameworks

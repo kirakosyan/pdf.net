@@ -9,7 +9,7 @@ $null = [IO.Directory]::CreateDirectory($OutputDirectory)
 $version = (Get-Content -LiteralPath (Join-Path $root 'specs/release-readiness.json') -Raw | ConvertFrom-Json).packageVersion
 $rows = [Collections.Generic.List[object]]::new()
 $expectedFiles = @{'README.md'=(Join-Path $root 'README.md');'LICENSE'=(Join-Path $root 'LICENSE')}
-Get-ChildItem -LiteralPath (Join-Path $root 'third-party') -File -Recurse | Where-Object { $_.Extension -in @('.txt','.md','.json') } | ForEach-Object {
+Get-ChildItem -LiteralPath (Join-Path $root 'third-party') -File -Recurse | Where-Object { $_.Extension -in @('.txt','.md','.json') -or $_.Name.EndsWith('-LICENSE') } | ForEach-Object {
     $relative = [IO.Path]::GetRelativePath((Join-Path $root 'third-party'), $_.FullName).Replace('\','/')
     $expectedFiles["notices/$relative"] = $_.FullName
 }
