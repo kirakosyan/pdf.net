@@ -16,6 +16,8 @@ At release time, record exact supported OS versions/distributions, kernel/libc, 
 
 .NET 8 reaches its upstream support boundary soon after this planning date; verify the current Microsoft lifecycle at release and make any change through the documented compatibility policy, not an unnoticed removal.
 
+The [maintenance policy](maintenance.md) records the dated upstream lifecycle snapshot and the required reviewed decision before changing a target or support claim. No production-supported version/OS matrix is approved yet.
+
 ## Applicability
 
 Core parse/edit/write/generate/extract operations are cross-platform. Native rendering, OCR and browser operations require their exact optional engines on each supported RID. Missing engines produce capability diagnostics; they do not reduce the required production qualification matrix.

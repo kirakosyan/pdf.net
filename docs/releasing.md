@@ -14,6 +14,8 @@ Use NuGet Trusted Publishing, repository kirakosyan/pdf.net, workflow publish.ym
 
 ## Release sequence
 
+Apply the [compatibility and maintenance policy](maintenance.md) for version selection, lifecycle review, migration notes and servicing/rollback records. A dependency update invalidates affected package qualification even when the API is unchanged. No public action is part of the offline source maintenance drill.
+
 1. Fast-forward the active branch and verify the exact release commit is on current main. Reconcile all required issues, implementation state, API baselines and capability/version documentation.
 2. Run complete source qualification on actual target runtimes, including actual Framework 4.7.2 x86/x64, modern Windows/Linux/macOS x64/ARM64 and fallback consumers.
 3. Set requirement status to qualified only with reviewed evidence. Set readiness true only after all required statuses, lane suites and retained report hashes validate. eng/assert-production-ready.ps1 -Stage BeforePack must pass.

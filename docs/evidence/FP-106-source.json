@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-106",
+  "issue": 106,
+  "sourceCommit": "eef4667ab4ffcdbe1f6b8d8f0a4884a85d2e1a0e",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "supportedPublishedVersions": [],
+  "sourceFiles": [
+    {
+      "path": "eng/test-maintenance.py",
+      "sha256": "1277a6b03655cfd853207c3ee1c6a9099289bcdde46f6cdf165c1b1898973f84"
+    },
+    {
+      "path": "docs/maintenance.md",
+      "sha256": "71e0690572d623a5e85b4b402e1a83bf60cd5edea5af120d0a30130b71c4dfd2"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "549b4eda57f67e84e8f8d00efea17e038fa110aedd97a2adfec8c7b28526df59"
+    },
+    {
+      "path": "docs/platforms.md",
+      "sha256": "af2f05d792542e842d6eaed9917ef66f97d9c403101b95249c94244ae2d96e64"
+    },
+    {
+      "path": "docs/releasing.md",
+      "sha256": "b9f018b3e3059e22bcf5676923398e9c232093516051797465b9ac145c0340bf"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "d8e79e0607f8a5c22de76950601467b2ba14ad69b02d7b0b2be595a0339184ea"
+    }
+  ],
+  "validation": {
+    "report": "artifacts/fp106-maintenance/report.json",
+    "sha256": "a8b9e2b750edb02ace033579947ee4b4db2b4e40792f43e8c9be639412391bf5",
+    "apiToolVersion": "10.0.402",
+    "sdkVersion": "10.0.402",
+    "host": "Windows 11 Pro 26300 x64",
+    "apiCases": 5,
+    "expectedPositiveResults": 3,
+    "expectedBreakingRejections": 2,
+    "realReadinessGateRejections": 2,
+    "syntheticDependencyHashInvalidation": true,
+    "actualDependencyUpdated": false
+  },
+  "archive": {
+    "path": "artifacts/fp106-source-evidence.zip",
+    "sha256": "db051df4dc8cc36eee9a7f8038f4a0be999e5f058e39f9143510a1be6e75147f",
+    "bytes": 189202,
+    "verifiedEntries": 136
+  },
+  "pending": [
+    "Maintainer policy and support-line/response-commitment review",
+    "Exact published baseline and clean final-package servicing/rollback consumers",
+    "All applicable runtime/provider qualification",
+    "Final hosted CI at the resulting commit"
+  ],
+  "limitations": [
+    "Original API fixture assemblies are analysis inputs, not SDK packages",
+    "Synthetic dependency bytes demonstrate hash invalidation only; no actual vulnerability fix or affected RID/fidelity requalification was performed",
+    "No gallery, publication, tag, unlisting or relisting action was performed",
+    "Issue93 remains skipped; issues100 and105 remain blocked"
+  ]
+}

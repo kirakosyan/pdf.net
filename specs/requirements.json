@@ -4651,7 +4651,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/maintenance.md",
+        "sourceEvidence": "docs/evidence/FP-106-source.json",
+        "implemented": [
+          "Compatibility and lifecycle policy with executable API maintenance and blocked release-gate exercises"
+        ],
+        "pending": [
+          "Maintainer support commitments and policy review",
+          "Exact final-package servicing and full runtime qualification"
+        ]
+      }
     },
     {
       "id": "FP-107",

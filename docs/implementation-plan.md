@@ -222,3 +222,5 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 [#104 business observations](business-data.md) adds exact-source versioned JSON/XML, passive declared fields/structure, inferred tables and separate source-bound OCR under shared budgets. [Evidence](evidence/FP-104-source.json) retains source-only limits and real-corpus qualification gaps.
 
 [#105 native distribution](native-distribution.md) is blocked by missing complete hosts and unqualified distribution closure; [evidence](evidence/FP-105-blocked.json) records zero offline installation acceptance runs. The next independent assignment is #106; #100 remains blocked and #93 user-skipped.
+
+[#106 maintenance](maintenance.md) adds compatibility, deprecation, lifecycle, security servicing and rollback policy plus an executable source API/release-guard drill. [Evidence](evidence/FP-106-source.json) distinguishes tool observations from unapproved support commitments and missing final-package qualification. #107 is next; #100/#105 remain blocked and #93 remains user-skipped.
