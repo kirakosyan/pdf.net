@@ -3886,7 +3886,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "implemented": [
+          "Four original MIT fixtures with independent PDF syntax authoring, exact source hashes and reproducible generation",
+          "Bounded public-API source round trips and two-reader Unicode/geometry/form/structure validation",
+          "Two independent renderers with retained images, SSIM and exact changed-pixel checks; omission and tolerance regression tests"
+        ],
+        "pending": [
+          "Complete multilingual/layout/forms/annotations/signatures/standards/accessibility and native-provider corpus",
+          "Reviewed corpus changes and any justified tolerance exceptions",
+          "Actual minimum/current/fallback runtimes and exact final package qualification"
+        ],
+        "sourceImplementation": "docs/fidelity-corpus.md"
+      }
     },
     {
       "id": "FP-091",

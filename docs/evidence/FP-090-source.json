@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-090",
+  "issue": 94,
+  "sourceCommit": "f749ac4fac1e9fcc3054fd6103f07df19cee8ecd",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceProfile": "Four original controlled fixtures; complete corpus and release qualification pending",
+  "localValidation": {
+    "modernRuntimes": [
+      "net8.0",
+      "net10.0"
+    ],
+    "fixtureRoundTrips": 8,
+    "independentReaderSemanticPasses": 16,
+    "independentRendererComparisons": 16,
+    "exactPixels": true,
+    "checkerTests": 6,
+    "independentReaderTestGroups": 2,
+    "negativeSemanticMutations": 6,
+    "solutionBuild": "zero warnings/errors",
+    "sdkSourceChanged": false
+  },
+  "pending": [
+    "Complete multilingual/layout/annotation/form/tag corpus",
+    "Signed/historical revisions and standards/accessibility validation",
+    "Complete native/provider/platform and actual minimum runtime qualification",
+    "Exact final packages and reviewed complete production evidence"
+  ],
+  "retainedReports": [
+    "artifacts/fp090-independent-net8-final/report.json",
+    "artifacts/fp090-independent-net10-final/report.json"
+  ],
+  "commitBinding": "Development source is bound by exact file hashes at the stated base commit; dirty-tree source evidence is not clean release qualification.",
+  "sourceFiles": [
+    {
+      "path": "eng/Fidelity/Fidelity.csproj",
+      "bytes": 283,
+      "sha256": "d5fbcf582d59fac0b72c1fd4cfffa49b12795cee7c25935b528c4a00eae2d722"
+    },
+    {
+      "path": "eng/Fidelity/Program.cs",
+      "bytes": 2479,
+      "sha256": "0b88ddd57ab7ad9f4f86d1dd18c140ad95803eff387278b4bdc5ead6659eb0bb"
+    },
+    {
+      "path": "eng/Fidelity/packages.lock.json",
+      "bytes": 215,
+      "sha256": "4ca7a9aceeb35b9352c3684347018ea970d476e67a9a4c0f058fd82ffe5ae0a0"
+    },
+    {
+      "path": "eng/create-fidelity-corpus.py",
+      "bytes": 5012,
+      "sha256": "a639986a40f77b8d32c49e2fb13a0068571378957bdada72bd017eb888739a96"
+    },
+    {
+      "path": "eng/fidelity.py",
+      "bytes": 9591,
+      "sha256": "8d85aff5a4004c046da5e6b5160a9c8b630c63caaf0d981a92702294addb529b"
+    },
+    {
+      "path": "eng/test-fidelity.py",
+      "bytes": 3573,
+      "sha256": "c46fd888c4e12196a10ee07d9730e3aa60938652261885d16a6b43b06754af28"
+    },
+    {
+      "path": "eng/test-fidelity-readers.py",
+      "bytes": 1654,
+      "sha256": "295fc372455d23a03bd15a7f65e4e8457289daa82d92514343a7b9354fd09300"
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "bytes": 8613,
+      "sha256": "788e82f609d1116a40020252cac2e10dbd8d7e78e216d150b3c94d3f84b36fa4"
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "bytes": 2068,
+      "sha256": "c91abacd87345f439ee4ee41a401c1abb78498dfd90ca7f9815a13a22edd5876"
+    },
+    {
+      "path": "docs/fidelity-corpus.md",
+      "bytes": 2944,
+      "sha256": "9b07aa02fc458e4858f2cd6284b34c80911210a3775b9004ee12d29aee16e152"
+    },
+    {
+      "path": "third-party/fidelity/README.md",
+      "bytes": 886,
+      "sha256": "33f8f4cb6f0ff47e94601bfe931925a17e7d421b793fdc42ffc610341a3a9182"
+    },
+    {
+      "path": "tests/FidelityCorpus/forms.pdf",
+      "bytes": 2252,
+      "sha256": "4b31efd954ac529d2053bac19b52ad4c6eacae12ebe5d4e5aac0b0037ccd110a"
+    },
+    {
+      "path": "tests/FidelityCorpus/glyphs.pdf",
+      "bytes": 1821,
+      "sha256": "36f9292531625a124b8ffb2e41d2a78610568f4b1633624877598ddbdde5b093"
+    },
+    {
+      "path": "tests/FidelityCorpus/graphics.pdf",
+      "bytes": 1858,
+      "sha256": "0372568ecb8254c6c9008d4dcc62f6c9d1657c8c481e882930c68fb0b4f1fe59"
+    },
+    {
+      "path": "tests/FidelityCorpus/manifest.json",
+      "bytes": 4207,
+      "sha256": "08a2ccea244c4c5d67ffa9cca49da888c246f021113481cefa9dbd469959f1ee"
+    },
+    {
+      "path": "tests/FidelityCorpus/README.md",
+      "bytes": 1440,
+      "sha256": "816881bb25a3f96cbb0b3460ef04556815a35a819886b6a9cc86dab4d3670768"
+    },
+    {
+      "path": "tests/FidelityCorpus/structure.pdf",
+      "bytes": 2173,
+      "sha256": "38491f205a10988e4cd7bba3f51ce7b5061bd47d0a19444063a42b6eb9a176fc"
+    }
+  ],
+  "reports": [
+    {
+      "path": "artifacts/fp090-independent-net8-final/report.json",
+      "sha256": "2b085224adce1dca3ca90adcf471f7b57cd5b04ea91d447eb12a226e4b8f3b1e"
+    },
+    {
+      "path": "artifacts/fp090-independent-net10-final/report.json",
+      "sha256": "71de850f6e579621ff943f9260ba5432fc37562ec5c015427d2185fe8257d5d0"
+    },
+    {
+      "path": "artifacts/fp090-net8/consumer.json",
+      "sha256": "eb77702a31c813fbc08f289222a2f10267bd39bd1e627b41d2dd9011edb51f8a"
+    },
+    {
+      "path": "artifacts/fp090-net10/consumer.json",
+      "sha256": "8849ef230016805095816cedf95c1d15f13a7b48ce528d13e8a6c4b6b6187f1b"
+    }
+  ],
+  "archive": {
+    "path": "artifacts/fp090-source-evidence.zip",
+    "sha256": "7c532b259579639dedaf827c749da8a5030a45037942015ae30440d14f5d7ff4",
+    "bytes": 2530449,
+    "verifiedEntries": 115
+  },
+  "toolInventory": {
+    "path": "artifacts/fp090-tool-inventory.json",
+    "sha256": "f3fea3e6733bf2814e622095ca004487ce10e0d6ceaa55ca27a800dfcd70a638"
+  },
+  "limitations": [
+    "One Windows x64 host; source consumers only",
+    "Independent renderers compare each original to SDK output; engine-to-engine antialiasing is not asserted identical",
+    "Unsigned/nonconformance fixtures do not qualify signatures or standards",
+    "External analysis tool binaries remain in the caller cache or retained task artifacts, bound by inventory; they are not SDK dependencies"
+  ]
+}

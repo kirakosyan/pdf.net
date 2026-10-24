@@ -15,6 +15,8 @@ $python = if ($IsWindows) { 'python' } else { 'python3' }
 if ($LASTEXITCODE -ne 0) { throw 'Runtime evidence checker boundary tests failed.' }
 & $python (Join-Path $root 'eng/test-performance.py')
 if ($LASTEXITCODE -ne 0) { throw 'Performance envelope/evidence boundary tests failed.' }
+& $python (Join-Path $root 'eng/test-fidelity.py')
+if ($LASTEXITCODE -ne 0) { throw 'Independent fidelity corpus/checker boundary tests failed.' }
 function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [bool]$fallback = $false) {
     $env:FLUENT_PDF_EXPECTED_ARCH = $architecture
     $directory = Join-Path $resultsRoot $name
@@ -67,6 +69,11 @@ try {
         Run-ContractLane 'net472' 'framework-current-x86' 'X86'
     }
     Run-ContractLane 'net10.0' 'netstandard-fallback' $ExpectedArchitecture $true
+    foreach ($framework in @('net8.0','net10.0')) {
+        $fidelityOutput = Join-Path $resultsRoot ('fidelity/' + $framework + '/' + [Guid]::NewGuid().ToString('N'))
+        & dotnet (Join-Path $root "eng/Fidelity/bin/$Configuration/$framework/Fidelity.dll") (Join-Path $root 'tests/FidelityCorpus') $fidelityOutput
+        if ($LASTEXITCODE -ne 0) { throw "Fidelity corpus source consumer failed: $framework" }
+    }
     & dotnet run --project (Join-Path $root 'examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj') -c $Configuration --no-build --no-restore -- --self-test
     if ($LASTEXITCODE -ne 0) { throw 'Hosted compiled Razor/MVC/Blazor boundary checks failed.' }
     & $python (Join-Path $root 'eng/test-cli.py') --assemblies (Join-Path $root "apps/Fluent.Pdf.Cli/bin/$Configuration/net8.0/fluent-pdf.dll") (Join-Path $root "apps/Fluent.Pdf.Cli/bin/$Configuration/net10.0/fluent-pdf.dll") --output (Join-Path $resultsRoot 'cli/processes.json')

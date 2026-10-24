@@ -465,5 +465,60 @@
     "Complete range/rendering/HTML/conversion/OCR/native memory and performance profiles",
     "Actual minimum Framework, all production runtime lanes and exact package consumers",
     "Eight-hour endurance and full production qualification"
-  ]
+  ],
+  "finalHostedSourceCi": {
+    "sourceCommit": "f749ac4fac1e9fcc3054fd6103f07df19cee8ecd",
+    "workflow_runs": [
+      {
+        "id": 40077426806,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 28,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426806/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426806/logs",
+        "workflow_id": 394222479
+      },
+      {
+        "id": 40077426798,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 24,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426798/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426798/logs",
+        "workflow_id": 394289497
+      },
+      {
+        "id": 40077426873,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 19,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426873/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426873/logs",
+        "workflow_id": 394350116
+      },
+      {
+        "id": 40077426800,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 16,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426800/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426800/logs",
+        "workflow_id": 394397543
+      },
+      {
+        "id": 40077426801,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 170,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426801/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40077426801/logs",
+        "workflow_id": 387959272
+      }
+    ]
+  }
 }

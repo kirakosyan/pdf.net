@@ -93,7 +93,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-087 Async processing, concurrency and cancellation](../requirements/FP-087.md) | Required | planned | [Declared source profile](../async-processing.md) |
 | [FP-088 Performance, streaming and resource envelopes](../requirements/FP-088.md) | Required | planned | [Declared source profile](../performance.md) |
 | [FP-089 Security, fuzzing and malformed-content robustness](../requirements/FP-089.md) | Required | planned | Full source/qualification pending |
-| [FP-090 Independent fidelity and interoperability corpus](../requirements/FP-090.md) | Required | planned | Full source/qualification pending |
+| [FP-090 Independent fidelity and interoperability corpus](../requirements/FP-090.md) | Required | planned | [Declared source profile](../fidelity-corpus.md) |
 | [FP-091 Deterministic output, caching and tenancy](../requirements/FP-091.md) | Required | planned | Full source/qualification pending |
 | [FP-092 Observability and support diagnostics](../requirements/FP-092.md) | Required | planned | Full source/qualification pending |
 | [FP-093 Reproducible NuGet packages and API compatibility](../requirements/FP-093.md) | Required | planned | Full source/qualification pending |

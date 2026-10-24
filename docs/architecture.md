@@ -176,3 +176,5 @@ The [developer guide](developer-guide.md) now links a versioned generated source
 FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).
 
 FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](performance.md).
+
+FP-090 keeps original corpus authoring independent of the SDK under test. Hashed fixtures and authored semantics feed bounded public-API consumers, then two unrelated readers/renderers check the outputs. See [fidelity checks](fidelity-corpus.md) for the source profile and remaining qualification.

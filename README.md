@@ -164,3 +164,5 @@ The [runtime evidence tooling](docs/runtime-qualification.md) records actual pro
 FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](docs/async-processing.md).
 
 FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](docs/performance.md).
+
+FP-090 adds a pinned original fidelity corpus with independent Unicode, geometry, form, structure and dual-renderer pixel checks. Complete corpus and production qualification remain pending; see [fidelity checks](docs/fidelity-corpus.md).
