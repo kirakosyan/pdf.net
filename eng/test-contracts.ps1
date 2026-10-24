@@ -52,6 +52,14 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
     $identityPath = Join-Path $directory 'runtime-identity.json'
     & $python (Join-Path $root 'eng/check-runtime-evidence.py') --lane $declaredLane --trx $reportPath --mode source --output $identityPath
     if ($LASTEXITCODE -ne 0) { throw "Actual runtime evidence consistency failed: $name" }
+    $collections = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/collections"
+    & $python (Join-Path $root 'eng/verify-collection-fixtures.py') --directory $collections --output (Join-Path $directory 'collection-readers.json')
+    if ($LASTEXITCODE -ne 0) { throw "Independent collection archive/XML observations failed: $name" }
+    $collectionEvidence = Join-Path $directory 'collections'
+    $null = [IO.Directory]::CreateDirectory($collectionEvidence)
+    foreach ($fixture in @('unicode.zip','csharp.zip','visual-basic.zip','original.pdf','csharp.pdf','visual-basic.pdf','objects-Table.xml','objects-Stream.xml','objects-Table.pdf','objects-Stream.pdf')) {
+        Copy-Item -LiteralPath (Join-Path $collections $fixture) -Destination (Join-Path $collectionEvidence $fixture)
+    }
     $assembly = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/Fluent.Pdf.dll"
     $records.Add([pscustomobject]@{
         lane=$name;libraryTfm=$library;runtime=$runtime;os=$os;architecture=$actualArchitecture

@@ -4395,7 +4395,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/document-collections.md",
+        "implemented": [
+          "Bounded ordered immutable collections with safe UTF-8 archive names, CRC/header verification and atomic archive files",
+          "Per-instance trusted adapters with ordered detached outcomes, failure recovery, mandatory leases and shared budgets",
+          "Strict typed active-object XML with exact tokens, opaque stream bytes and explicit protection/history limits"
+        ],
+        "pending": [
+          "Enforced worker isolation for untrusted adapters and complete adversarial/endurance qualification",
+          "Actual minimum and complete supported runtime/RID observations",
+          "Independent broad conformance/fidelity and exact final package consumers"
+        ]
+      }
     },
     {
       "id": "FP-101",

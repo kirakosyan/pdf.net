@@ -19,6 +19,20 @@ Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter
 Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter.EngineId.get -> string!
 Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter.Supports(Fluent.Pdf.Formats.PdfTexOptions! options) -> bool
 Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter.Typeset(System.IO.Stream! source, Fluent.Pdf.Formats.PdfTexOptions! options, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> void
+Fluent.Pdf.Formats.PdfCollectionAdapter
+Fluent.Pdf.Formats.PdfCollectionAdapters
+Fluent.Pdf.Formats.PdfCollectionAdapters.PdfCollectionAdapters(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, Fluent.Pdf.Formats.PdfCollectionAdapter!>>! adapters) -> void
+Fluent.Pdf.Formats.PdfCollectionBatchResult
+Fluent.Pdf.Formats.PdfCollectionBatchResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.PdfCollectionBatchResult.Outcomes.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Formats.PdfCollectionOutcome!>!
+Fluent.Pdf.Formats.PdfCollectionItem
+Fluent.Pdf.Formats.PdfCollectionItem.Length.get -> long
+Fluent.Pdf.Formats.PdfCollectionItem.Name.get -> string!
+Fluent.Pdf.Formats.PdfCollectionItem.Open() -> System.IO.Stream!
+Fluent.Pdf.Formats.PdfCollectionOutcome
+Fluent.Pdf.Formats.PdfCollectionOutcome.DiagnosticCode.get -> string?
+Fluent.Pdf.Formats.PdfCollectionOutcome.Name.get -> string!
+Fluent.Pdf.Formats.PdfCollectionOutcome.Output.get -> Fluent.Pdf.Formats.PdfCollectionItem?
 Fluent.Pdf.Formats.PdfConversionOptions
 Fluent.Pdf.Formats.PdfConversionOptions.Language.get -> string?
 Fluent.Pdf.Formats.PdfConversionOptions.OfdIdentity.get -> Fluent.Pdf.Formats.PdfOfdIdentity?
@@ -61,6 +75,12 @@ Fluent.Pdf.Formats.PdfDetectedFormat.Tiff = 4 -> Fluent.Pdf.Formats.PdfDetectedF
 Fluent.Pdf.Formats.PdfDetectedFormat.Unknown = 0 -> Fluent.Pdf.Formats.PdfDetectedFormat
 Fluent.Pdf.Formats.PdfDetectedFormat.Xlsx = 9 -> Fluent.Pdf.Formats.PdfDetectedFormat
 Fluent.Pdf.Formats.PdfDetectedFormat.Xps = 14 -> Fluent.Pdf.Formats.PdfDetectedFormat
+Fluent.Pdf.Formats.PdfDocumentCollection
+Fluent.Pdf.Formats.PdfDocumentCollection.Items.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.Formats.PdfCollectionItem!>!
+Fluent.Pdf.Formats.PdfDocumentCollection.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.PdfDocumentCollection.Process(string! format, Fluent.Pdf.Formats.PdfCollectionAdapters! adapters, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfCollectionBatchResult!
+Fluent.Pdf.Formats.PdfDocumentCollection.WriteArchive(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.PdfDocumentCollection.WriteArchiveFile(string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.Formats.PdfEbookLayout
 Fluent.Pdf.Formats.PdfEbookLayout.FixedRaster = 0 -> Fluent.Pdf.Formats.PdfEbookLayout
 Fluent.Pdf.Formats.PdfEbookLayout.ReflowText = 1 -> Fluent.Pdf.Formats.PdfEbookLayout
@@ -102,6 +122,7 @@ Fluent.Pdf.Formats.PdfMetafileFormat.Emf = 2 -> Fluent.Pdf.Formats.PdfMetafileFo
 Fluent.Pdf.Formats.PdfMetafileFormat.EmfPlus = 3 -> Fluent.Pdf.Formats.PdfMetafileFormat
 Fluent.Pdf.Formats.PdfMetafileFormat.Wmf = 1 -> Fluent.Pdf.Formats.PdfMetafileFormat
 Fluent.Pdf.Formats.PdfMetafiles
+Fluent.Pdf.Formats.PdfObjectXml
 Fluent.Pdf.Formats.PdfOfd
 Fluent.Pdf.Formats.PdfOfdIdentity
 Fluent.Pdf.Formats.PdfOfdIdentity.CreationDate.get -> string!
@@ -174,6 +195,8 @@ static Fluent.Pdf.Formats.PdfConversions.Detect(System.IO.Stream! input, string?
 static Fluent.Pdf.Formats.PdfConversions.Export(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfConversionOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Action<Fluent.Pdf.Formats.PdfConversionPhase, Fluent.Pdf.PdfOperationContext!>? progress = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfConversions.ExportFile(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, string! path, Fluent.Pdf.Formats.PdfConversionOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, System.Action<Fluent.Pdf.Formats.PdfConversionPhase, Fluent.Pdf.PdfOperationContext!>? progress = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfConversions.WriteMatrix(System.IO.Stream! output, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfDocumentCollection.Capture(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.IO.Stream!>>! inputs, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfDocumentCollection!
+static Fluent.Pdf.Formats.PdfDocumentCollection.ReadArchive(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Formats.PdfDocumentCollection!
 static Fluent.Pdf.Formats.PdfEbooks.ImportReflowText(System.IO.Stream! input, Fluent.Pdf.Formats.PdfFormatTextOptions! text, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfEbooks.WriteEpub(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfEbookMetadata! metadata, Fluent.Pdf.Formats.PdfEbookOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfEbooks.WriteMobiSource(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfEbookMetadata! metadata, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
@@ -184,6 +207,8 @@ static Fluent.Pdf.Formats.PdfHtmlExport.WriteFile(Fluent.Pdf.PdfDocumentSnapshot
 static Fluent.Pdf.Formats.PdfMetafiles.Import(System.IO.Stream! input, Fluent.Pdf.Formats.PdfMetafileFormat format, Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter? converter = null, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfMetafiles.WriteRasterEmf(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.IO.Stream! output, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfObjectXml.Export(System.IO.Stream! pdf, System.IO.Stream! xml, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfObjectXml.Import(System.IO.Stream! xml, System.IO.Stream! pdf, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(System.IO.Stream! input, out Fluent.Pdf.Formats.PdfOfdIdentity! identity, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfOfd.WriteRasterPages(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfOfdIdentity! identity, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfPresentations.ImportRasterSlides(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
@@ -476,6 +501,14 @@ Checks the exact engine and all local package/font/format prerequisites before s
 
 Typesets in a fresh bounded OS-isolated job with shell escape, ambient files/network, child processes and runtime installation denied. Lua and TeX file primitives need the same isolation. Leases expire at return; all phases use this context and actual worker scopes.
 
+### <code>M:Fluent.Pdf.Formats.PdfCollectionAdapters.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Fluent.Pdf.Formats.PdfCollectionAdapter}})</code>
+
+Copies at most 128 distinct ordinal format IDs and explicit trusted adapters.
+
+### <code>M:Fluent.Pdf.Formats.PdfCollectionItem.Open</code>
+
+Opens an independent read-only stream owned by the caller.
+
 ### <code>M:Fluent.Pdf.Formats.PdfConversionOptions.#ctor(Fluent.Pdf.Formats.PdfConversionTarget,Fluent.Pdf.PdfRenderOptions,System.String,System.String,Fluent.Pdf.Formats.PdfOfdIdentity)</code>
 
 Captures an exact profile and its literal metadata/rendering requirements; does not install or discover providers.
@@ -495,6 +528,26 @@ Stages output before atomic file replacement; callbacks share the same context a
 ### <code>M:Fluent.Pdf.Formats.PdfConversions.WriteMatrix(System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Writes the exact machine-readable source export matrix. All entries use the managed library targets on Windows/Linux/macOS; renderer entries additionally need a qualified provider for the actual host.
+
+### <code>M:Fluent.Pdf.Formats.PdfDocumentCollection.Capture(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.IO.Stream}},Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Copies 1–4096 borrowed inputs, at most 16 MiB each and 64 MiB in total. Names must be distinct portable NFC leaf names.
+
+### <code>M:Fluent.Pdf.Formats.PdfDocumentCollection.Process(System.String,Fluent.Pdf.Formats.PdfCollectionAdapters,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Runs one explicitly registered trusted adapter sequentially. Ordinary item failures are reported in place; cancellation, latched limits and leaked scopes abort the batch.
+
+### <code>M:Fluent.Pdf.Formats.PdfDocumentCollection.ReadArchive(System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Reads a bounded ZIP into memory, rejecting unsafe paths, collisions, links and corrupt data before returning any entries.
+
+### <code>M:Fluent.Pdf.Formats.PdfDocumentCollection.WriteArchive(System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Writes a deterministic UTF-8 ZIP with stored entries. Caller streams stay open; I/O failure may leave partial stream output.
+
+### <code>M:Fluent.Pdf.Formats.PdfDocumentCollection.WriteArchiveFile(System.String,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Stages and atomically commits an archive file after every check succeeds.
 
 ### <code>M:Fluent.Pdf.Formats.PdfEbookMetadata.#ctor(System.String,System.String,System.String,System.String)</code>
 
@@ -551,6 +604,14 @@ Reads the exact single-image EMF24 source profile without executing GDI, text/fo
 ### <code>M:Fluent.Pdf.Formats.PdfMetafiles.WriteRasterEmf(Fluent.Pdf.PdfDocumentSnapshot,System.Int32,System.IO.Stream,Fluent.Pdf.PdfRenderOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Writes one explicit opaque rendered page as an original EMF1.0 header, SRCCOPY STRETCHDIBITS and EOF. Frame quantization requires declared loss authority; no vector reconstruction is claimed.
+
+### <code>M:Fluent.Pdf.Formats.PdfObjectXml.Export(System.IO.Stream,System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Exports an unencrypted, unsigned PDF as a bounded typed object graph. Byte-valued names and strings use base64; indirect identities and exact decimal tokens are retained.
+
+### <code>M:Fluent.Pdf.Formats.PdfObjectXml.Import(System.IO.Stream,System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Imports the strict version-one object vocabulary and writes a full PDF revision after validation. Unknown XML, encrypted trailers and signature byte ranges reject.
 
 ### <code>M:Fluent.Pdf.Formats.PdfOfd.ImportRasterPages(System.IO.Stream,Fluent.Pdf.Formats.PdfOfdIdentity@,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
@@ -664,6 +725,34 @@ Gets a stable nonsecret ASCII engine/configuration identity. Do not return paylo
 
 Gets a stable nonsecret ASCII pinned engine/configuration identity.
 
+### <code>P:Fluent.Pdf.Formats.PdfCollectionBatchResult.OperationReport</code>
+
+Gets the shared operation report.
+
+### <code>P:Fluent.Pdf.Formats.PdfCollectionBatchResult.Outcomes</code>
+
+Gets all attempted outcomes in input order.
+
+### <code>P:Fluent.Pdf.Formats.PdfCollectionItem.Length</code>
+
+Gets the byte length.
+
+### <code>P:Fluent.Pdf.Formats.PdfCollectionItem.Name</code>
+
+Gets its canonical portable leaf name.
+
+### <code>P:Fluent.Pdf.Formats.PdfCollectionOutcome.DiagnosticCode</code>
+
+Gets a stable failure code, or null on success.
+
+### <code>P:Fluent.Pdf.Formats.PdfCollectionOutcome.Name</code>
+
+Gets the original name.
+
+### <code>P:Fluent.Pdf.Formats.PdfCollectionOutcome.Output</code>
+
+Gets successful output, or null when this item failed.
+
 ### <code>P:Fluent.Pdf.Formats.PdfConversionOptions.Language</code>
 
 Gets explicit language, when used.
@@ -683,6 +772,14 @@ Gets exact export profile.
 ### <code>P:Fluent.Pdf.Formats.PdfConversionOptions.Title</code>
 
 Gets literal HTML title, when used.
+
+### <code>P:Fluent.Pdf.Formats.PdfDocumentCollection.Items</code>
+
+Gets entries in capture or central-directory order.
+
+### <code>P:Fluent.Pdf.Formats.PdfDocumentCollection.OperationReport</code>
+
+Gets the capture operation report.
 
 ### <code>P:Fluent.Pdf.Formats.PdfEbookMetadata.Identifier</code>
 
@@ -856,6 +953,26 @@ Trusted optional host contract for a separately qualified, offline, OS-isolated 
 
 Trusted caller-owned host for a separately qualified offline OS-isolated typesetter. This contract alone does not supply or qualify a sandbox.
 
+### <code>T:Fluent.Pdf.Formats.PdfCollectionAdapter</code>
+
+A trusted synchronous adapter. It must use the supplied context, keep streams borrowed and leave process state unchanged. This delegate is not a sandbox.
+
+### <code>T:Fluent.Pdf.Formats.PdfCollectionAdapters</code>
+
+An immutable instance-owned registry. No process-wide registration or implicit plugin discovery occurs.
+
+### <code>T:Fluent.Pdf.Formats.PdfCollectionBatchResult</code>
+
+An immutable batch result; a completed batch may contain individual failures.
+
+### <code>T:Fluent.Pdf.Formats.PdfCollectionItem</code>
+
+An immutable named byte sequence. Opening an entry never executes its content.
+
+### <code>T:Fluent.Pdf.Formats.PdfCollectionOutcome</code>
+
+A detached item outcome in original input order.
+
 ### <code>T:Fluent.Pdf.Formats.PdfConversionOptions</code>
 
 Explicit per-export format options. Language/title/identity are required by the profiles that use them.
@@ -875,6 +992,10 @@ Content discovery and explicit source-profile export orchestration. No advertise
 ### <code>T:Fluent.Pdf.Formats.PdfDetectedFormat</code>
 
 Content family observation, not complete validation or an inferred plain-text format.
+
+### <code>T:Fluent.Pdf.Formats.PdfDocumentCollection</code>
+
+A bounded ordered collection with no filesystem extraction or implicit format conversion.
 
 ### <code>T:Fluent.Pdf.Formats.PdfEbookLayout</code>
 
@@ -923,6 +1044,10 @@ Exact caller-selected metafile family; no format guessing or desktop-session fal
 ### <code>T:Fluent.Pdf.Formats.PdfMetafiles</code>
 
 Managed EMF24 raster-page interchange and explicit optional full metafile conversion.
+
+### <code>T:Fluent.Pdf.Formats.PdfObjectXml</code>
+
+Versioned typed XML interchange for the active PDF object graph, including opaque stream bytes. It does not execute actions or preserve revision history, encryption or signatures.
 
 ### <code>T:Fluent.Pdf.Formats.PdfOfd</code>
 

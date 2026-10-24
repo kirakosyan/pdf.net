@@ -188,6 +188,105 @@
     "fix": "Exclude only fresh-advisory-cache from upload; retain raw advisories, checked coverage, source inventories and every other source report.",
     "log": "artifacts/fp095-upload-failure.log",
     "logSha256": "635d5062e4583897999cd2dcd7e263b1b37fab581b970833975887735d7a2f07",
-    "correctedHostedStatus": "pending"
+    "correctedHostedStatus": "success",
+    "revalidation": {
+      "head": "9b8ebef25e088c58ad23cc1f580149184bd91d0f",
+      "workflow_runs": [
+        {
+          "id": 40092929744,
+          "name": "Windows automation source consumers",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 36,
+          "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929744/jobs",
+          "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929744/logs",
+          "workflow_id": 394222479
+        },
+        {
+          "id": 40092929735,
+          "name": "Application view source consumers",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 32,
+          "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929735/jobs",
+          "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929735/logs",
+          "workflow_id": 394289497
+        },
+        {
+          "id": 40092929662,
+          "name": "Documentation source consumers",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 24,
+          "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929662/jobs",
+          "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929662/logs",
+          "workflow_id": 394397543
+        },
+        {
+          "id": 40092929683,
+          "name": "CLI source consumers",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 27,
+          "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929683/jobs",
+          "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929683/logs",
+          "workflow_id": 394350116
+        },
+        {
+          "id": 40092929716,
+          "name": "Source contracts and release guard",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 178,
+          "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929716/jobs",
+          "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40092929716/logs",
+          "workflow_id": 387959272
+        }
+      ],
+      "jobs": [
+        {
+          "id": 120869153316,
+          "name": "Contracts (win-arm64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120869153411,
+          "name": "Contracts (osx-arm64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120869153430,
+          "name": "Contracts (linux-arm64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120869153447,
+          "name": "Contracts (linux-x64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120869153455,
+          "name": "Managed source rebuild provenance",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120869153507,
+          "name": "Contracts (win-x64)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 120869153535,
+          "name": "Contracts (osx-x64)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
   }
 }

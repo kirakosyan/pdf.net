@@ -9,13 +9,14 @@ internal sealed class FormatPackage : IDisposable
     private readonly ZipArchive _archive;
     private readonly Dictionary<string, (ZipArchiveEntry Entry, uint Crc)> _entries = new(StringComparer.Ordinal);
     private readonly PdfOperationContext _c;
-    internal IEnumerable<string> Names => _entries.Keys;
+    private readonly List<string> _names = new();
+    internal IEnumerable<string> Names => _names;
 
-    internal FormatPackage(Stream input, PdfOperationContext c)
+    internal FormatPackage(Stream input, PdfOperationContext c, bool collectionNames = false)
     {
         _c = c;
         var bytes = FormatIo.Capture(input, c, 67108864);
-        var expected = Preflight(bytes, c);
+        var expected = Preflight(bytes, c, collectionNames);
         _source = bytes.Open(0, bytes.Length);
         try
         {
@@ -27,6 +28,7 @@ internal sealed class FormatPackage : IDisposable
                 if (!expected.TryGetValue(entry.FullName, out uint crc) || _entries.ContainsKey(entry.FullName))
                     throw FormatIo.Error(c, "PackageIdentity", "Ambiguous ZIP part identities reject.");
                 _entries.Add(entry.FullName, (entry, crc));
+                _names.Add(entry.FullName);
             }
         }
         catch (InvalidDataException)
@@ -195,10 +197,10 @@ internal sealed class FormatPackage : IDisposable
         return string.Join("/", parts);
     }
 
-    internal static PdfByteStore Write(IEnumerable<(string Name, byte[] Bytes, bool Stored)> entries, PdfOperationContext c)
+    internal static PdfByteStore Write(IEnumerable<(string Name, byte[] Bytes, bool Stored)> entries, PdfOperationContext c, bool collectionNames = false)
     {
         using var output = new PdfCodecBufferStream(c, 67108864);
-        var names = new HashSet<string>(StringComparer.Ordinal);
+        var names = new HashSet<string>(collectionNames ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
         var directory = new List<(byte[] Name, uint Crc, int Method, int Length, long Compressed, long Offset)>();
         long expanded = 0;
         c.Consume(PdfResourceKind.ExpandedBytes, 8192);
@@ -225,7 +227,9 @@ internal sealed class FormatPackage : IDisposable
             if (directory.Count == 4096 || !names.Add(item.Name))
                 throw FormatIo.Error(c, "PackageIdentity", "A finite unique package inventory is required.");
             Name(item.Name, c);
-            var name = Encoding.ASCII.GetBytes(item.Name);
+            if (collectionNames) PdfDocumentCollection.SafeName(item.Name, c);
+            else if (item.Name.Any(ch => ch < 32 || ch > 126)) throw FormatIo.Error(c, "PackageName", "This profile requires ASCII names.");
+            var name = collectionNames ? new UTF8Encoding(false, true).GetBytes(item.Name) : Encoding.ASCII.GetBytes(item.Name);
             uint crc = 0xffffffff;
             for (int at = 0; at < item.Bytes.Length; at++)
             {
@@ -253,7 +257,7 @@ internal sealed class FormatPackage : IDisposable
             int method = item.Stored ? 0 : 8;
             U32(0x04034b50);
             U16(20);
-            U16(0);
+            U16(collectionNames ? 0x0800 : 0);
             U16(method);
             U16(0);
             U16(33);
@@ -292,7 +296,7 @@ internal sealed class FormatPackage : IDisposable
             U32(0x02014b50);
             U16(20);
             U16(20);
-            U16(0);
+            U16(collectionNames ? 0x0800 : 0);
             U16(item.Method);
             U16(0);
             U16(33);
@@ -321,7 +325,7 @@ internal sealed class FormatPackage : IDisposable
         return output.Finish();
     }
 
-    private static Dictionary<string, uint> Preflight(PdfByteStore bytes, PdfOperationContext c)
+    private static Dictionary<string, uint> Preflight(PdfByteStore bytes, PdfOperationContext c, bool collectionNames)
     {
         int Byte(long p)
         {
@@ -350,7 +354,7 @@ internal sealed class FormatPackage : IDisposable
             throw FormatIo.Error(c, "PackageExtent", "The central directory must match its declared extent.");
         var ranges = new List<(long Start, long End)>();
         var result = new Dictionary<string, uint>(StringComparer.Ordinal);
-        var all = new HashSet<string>(StringComparer.Ordinal);
+        var all = new HashSet<string>(collectionNames ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
         for (int index = 0; index < U16(end + 10); index++)
         {
             c.Checkpoint();
@@ -367,14 +371,24 @@ internal sealed class FormatPackage : IDisposable
             for (int i = 0; i < nameLength; i++)
             {
                 int value = Byte(atDirectory + 46 + i);
-                if (value < 32 || value > 126)
+                if (!collectionNames && (value < 32 || value > 126) || collectionNames && value > 127 && (flags & 0x0800) == 0)
                     throw FormatIo.Error(c, "PackageName", "This package profile requires bounded canonical ASCII part names.");
                 nameBytes[i] = (byte)value;
             }
 
             Extras(atDirectory + 46 + nameLength, extra);
-            string name = Encoding.ASCII.GetString(nameBytes);
+            string name;
+            try { name = collectionNames ? new UTF8Encoding(false, true).GetString(nameBytes) : Encoding.ASCII.GetString(nameBytes); }
+            catch (DecoderFallbackException) { throw FormatIo.Error(c, "PackageName", "Invalid UTF-8 archive name."); }
             Name(name, c);
+            if (collectionNames)
+            {
+                PdfDocumentCollection.SafeName(name, c);
+                uint attributes = U32(atDirectory + 38);
+                uint type = (attributes >> 16) & 0xf000;
+                if ((attributes & 0x18) != 0 || type != 0 && type != 0x8000)
+                    throw FormatIo.Error(c, "PackageProfile", "Collection entries must be regular files, never links or directories.");
+            }
             if (!all.Add(name))
                 throw FormatIo.Error(c, "PackageIdentity", "Duplicate package names reject.");
             if (local > directory - 30 || U32(local) != 0x04034b50 || U16(local + 6) != flags || U16(local + 8) != method || U16(local + 26) != nameLength)

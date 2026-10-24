@@ -5,6 +5,17 @@ namespace ContractExamples.CSharp;
 
 public static class ContractExample
 {
+    public static void CollectionRoundTrip(byte[] input, Stream archive, Stream restored)
+    {
+        using var source = new MemoryStream(input, false);
+        using var xml = new MemoryStream();
+        Fluent.Pdf.Formats.PdfObjectXml.Export(source, xml);
+        xml.Position = 0;
+        var collection = Fluent.Pdf.Formats.PdfDocumentCollection.Capture(new[] { new KeyValuePair<string, Stream>("document.xml", xml) });
+        collection.WriteArchive(archive);
+        using var entry = collection.Items[0].Open();
+        Fluent.Pdf.Formats.PdfObjectXml.Import(entry, restored);
+    }
     public static void ObservePdf(byte[] input, Stream output, Stream supportBundle)
     {
         using var observations = new PdfObservationSession();

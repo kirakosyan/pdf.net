@@ -4,6 +4,17 @@ Imports Fluent.Pdf
 Imports PdfFacade = Fluent.Pdf.Pdf
 
 Public Module ContractExample
+    Public Sub CollectionRoundTrip(input As Byte(), archive As Stream, restored As Stream)
+        Using source As New MemoryStream(input, False), xml As New MemoryStream()
+            Fluent.Pdf.Formats.PdfObjectXml.Export(source, xml)
+            xml.Position = 0
+            Dim collection = Fluent.Pdf.Formats.PdfDocumentCollection.Capture({New Collections.Generic.KeyValuePair(Of String, Stream)("document.xml", xml)})
+            collection.WriteArchive(archive)
+            Using entry = collection.Items(0).Open()
+                Fluent.Pdf.Formats.PdfObjectXml.Import(entry, restored)
+            End Using
+        End Using
+    End Sub
     Public Sub ObservePdf(input As Byte(), output As Stream, supportBundle As Stream)
         Using observations As New PdfObservationSession(), source As New MemoryStream(input, False)
             Using document = PdfFacade.Open(source, New PdfOptions(operationPolicy:=PdfOperationPolicy.Default.WithObservations(observations)))

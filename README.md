@@ -174,3 +174,5 @@ FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sink
 [Package provenance](docs/package-reproducibility.md) describes the guarded candidate metadata, source rebuild checks and offline symbol/archive inspection. Final packages remain unqualified and publication is blocked.
 
 [Supply-chain inventory](docs/supply-chain.md) records locked dependencies, retained notices, explicit asset observations and advisory coverage. It does not approve redistribution or qualify final packages.
+
+[Document collections](docs/document-collections.md) provide bounded ordered ZIP archives, explicit trusted batch adapters and typed PDF object XML. Protection, history, isolation and qualification limits are explicit.
