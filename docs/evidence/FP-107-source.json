@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-107",
+  "issue": 107,
+  "sourceCommit": "4c787d9a714833079edc7d622966fcc7e6eca834",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "actualDjVuCdrDecodingRuns": 0,
+  "builtInSupportedVersions": [],
+  "sourceFiles": [
+    {
+      "path": "src/Fluent.Pdf.Formats/PdfLegacyImport.cs",
+      "sha256": "1a6993fd3fa984e0111f8afa982c42868d62bbba1aa6a4cb7e3530b4cba0cca7"
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/PublicAPI.Unshipped.txt",
+      "sha256": "d7c77f4f1a41f87cd4feea94d587a3dda8cb87a18d4189cc1ccb3c0e042be07d"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/LegacyImportTests.cs",
+      "sha256": "e63703e29edd1975084086e0bf3c6d2b5b495425fd36a26afbd4e82a5836c7c6"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "15c85753de074c4ef3de334adf65a7705bef2a7b03edd72142a2d1b4ae5299f0"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "f2f197bcadc5ae1c4b1a8b148d4a90c64a30deb84ba79c3b6cf7dbb2ae97e22c"
+    },
+    {
+      "path": "docs/legacy-format-import.md",
+      "sha256": "15c63f3a56ec57d448c9349f052445c2ec4b37e054ff5280a7d89dda71ba3acd"
+    }
+  ],
+  "validation": {
+    "selectedSourceTests": {
+      "productionQualified": false,
+      "sourceCommit": "4c787d9a714833079edc7d622966fcc7e6eca834",
+      "purpose": "selected-source-legacy-host-format-policy-and-runtime-tests",
+      "workingTreeDirty": true,
+      "lanes": [
+        {
+          "sha256": "30EEADCF04D566043984C059D6FCDE57AE698B2FB5D800CF6BD9F5C0BA069D81",
+          "passed": 77,
+          "total": 77,
+          "runtimeSha256": "E8F4BC1E78CBA2F3512B13437CA14E27B5C3A41FD57921DDA7C795B0C203D5C1",
+          "failed": 0,
+          "skipped": 0,
+          "runtime": "artifacts/fp107-lanes-verified/net8/runtime.json",
+          "lane": "win-x64-net8.0",
+          "report": "artifacts/fp107-lanes-verified/net8/selected.trx"
+        },
+        {
+          "sha256": "921A32869AC000EFEE7B2FE41652E51B008DF73C1F37D9E681DF162B55DF2099",
+          "passed": 77,
+          "total": 77,
+          "runtimeSha256": "10CADD9DDCC51AED41BDD197E41DC8804D8D46EBECD27A41AAC34E4F53E51C1F",
+          "failed": 0,
+          "skipped": 0,
+          "runtime": "artifacts/fp107-lanes-verified/net10/runtime.json",
+          "lane": "win-x64-net10.0",
+          "report": "artifacts/fp107-lanes-verified/net10/selected.trx"
+        },
+        {
+          "sha256": "749EB47DF81B0ADC8BFC2813BEB8B89AEE6BD6EAD64184CB7D6D7150DD4C7DBF",
+          "passed": 77,
+          "total": 77,
+          "runtimeSha256": "AFAE886490634F81129513C8A0E232357E41369DC4D90B53A6B513F80895C7F4",
+          "failed": 0,
+          "skipped": 0,
+          "runtime": "artifacts/fp107-lanes-verified/framework-x64/runtime.json",
+          "lane": "win-x64-framework-current",
+          "report": "artifacts/fp107-lanes-verified/framework-x64/selected.trx"
+        },
+        {
+          "sha256": "336BFC7DC2376E5AA0E3378C4DF8C17B3CA57614681132DC3635C2BE9A194501",
+          "passed": 77,
+          "total": 77,
+          "runtimeSha256": "0ADF88225B88B581E0DD3989AAB6E5223AA809E55FC0BC0699245CAB8AB891AC",
+          "failed": 0,
+          "skipped": 0,
+          "runtime": "artifacts/fp107-lanes-verified/framework-x86/runtime.json",
+          "lane": "win-x86-framework-current",
+          "report": "artifacts/fp107-lanes-verified/framework-x86/selected.trx"
+        },
+        {
+          "sha256": "0C0E25FACAA2B1F8B1E146D1AC1DF592620053AD18EF55329DECC3D2164EC685",
+          "passed": 77,
+          "total": 77,
+          "runtimeSha256": "E8E4DFCF444A76C4BF006301EAA994E4A28145FE99640D0AC5C23262AB6951EB",
+          "failed": 0,
+          "skipped": 0,
+          "runtime": "artifacts/fp107-lanes-verified/fallback/runtime.json",
+          "lane": "win-x64-netstandard2.0-fallback",
+          "report": "artifacts/fp107-lanes-verified/fallback/selected.trx"
+        }
+      ]
+    },
+    "newApiDeclarations": 23,
+    "apiComparisons": 45,
+    "fullBuild": "zero warnings/errors",
+    "packageTargetsBlocked": 15,
+    "documentation": "metadata reference generation/check and snippet inventory passed"
+  },
+  "archive": {
+    "path": "artifacts/fp107-source-evidence.zip",
+    "sha256": "397dbe0103de0ea6c6c1dbddc7d49b87d07aadd8aeead67a2a37bfe1ee9e48e7",
+    "bytes": 144105,
+    "verifiedEntries": 70
+  },
+  "limitations": [
+    "The original fixture host returns PDF; it does not decode a DjVu or CDR document",
+    "An interface does not supply or qualify native isolation; no decoder, external asset resolver or native distribution was added",
+    "Installed Framework4.8 is not actual minimum4.7.2",
+    "Initial build overlapped language-example edits and failed compilation; final complete build and all five fresh selected lanes passed"
+  ],
+  "pending": [
+    "Actual decoder implementation, versioned independent readers/corpora, codec/font fidelity and sandbox qualification",
+    "Actual minimum/runtime/RID, fuzz/endurance and final-package consumers",
+    "Final hosted CI"
+  ]
+}

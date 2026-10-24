@@ -221,3 +221,26 @@ static Fluent.Pdf.Formats.PdfTex.Import(System.IO.Stream! source, Fluent.Pdf.For
 static Fluent.Pdf.Formats.PdfTex.WriteInferredText(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfXps.ImportRasterPages(System.IO.Stream! input, Fluent.Pdf.Formats.PdfXpsFormat format, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfXps.WriteRasterPages(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfXpsFormat format, string! language, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.EngineId.get -> string!
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.Import(System.IO.Stream! source, Fluent.Pdf.Formats.PdfLegacyImportOptions! options, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.Supports(Fluent.Pdf.Formats.PdfLegacyImportOptions! options) -> bool
+Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyFormat.Cdr = 1 -> Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyFormat.DjVu = 0 -> Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyImport
+Fluent.Pdf.Formats.PdfLegacyImportOptions
+Fluent.Pdf.Formats.PdfLegacyImportOptions.Format.get -> Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumInputBytes.get -> int
+Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumOutputBytes.get -> int
+Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumPages.get -> int
+Fluent.Pdf.Formats.PdfLegacyImportOptions.PdfLegacyImportOptions(Fluent.Pdf.Formats.PdfLegacyFormat format, string! versionProfile, int maximumPages = 1000, int maximumInputBytes = 16777216, int maximumOutputBytes = 67108864) -> void
+Fluent.Pdf.Formats.PdfLegacyImportOptions.VersionProfile.get -> string!
+Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.Completed = 0 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.DamagedInput = 5 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.MissingCodec = 2 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.MissingFont = 3 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedRecord = 4 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedVersion = 1 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+static Fluent.Pdf.Formats.PdfLegacyImport.Read(System.IO.Stream! source, Fluent.Pdf.Formats.PdfLegacyImportOptions! options, Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter? importer = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!

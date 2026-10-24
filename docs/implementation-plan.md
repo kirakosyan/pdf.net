@@ -224,3 +224,5 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 [#105 native distribution](native-distribution.md) is blocked by missing complete hosts and unqualified distribution closure; [evidence](evidence/FP-105-blocked.json) records zero offline installation acceptance runs. The next independent assignment is #106; #100 remains blocked and #93 user-skipped.
 
 [#106 maintenance](maintenance.md) adds compatibility, deprecation, lifecycle, security servicing and rollback policy plus an executable source API/release-guard drill. [Evidence](evidence/FP-106-source.json) distinguishes tool observations from unapproved support commitments and missing final-package qualification. #107 is next; #100/#105 remain blocked and #93 remains user-skipped.
+
+[#107 legacy-format host integration](legacy-format-import.md) adds bounded explicit DjVu/CDR host contracts and failure handling. [Evidence](evidence/FP-107-source.json) covers original host fixtures only, with no actual DjVu/CDR decoding or version support claimed. Decoder/independent corpus and production qualification remain open. #108 is next.

@@ -109,7 +109,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-103 Image processing and document cleanup](../requirements/FP-103.md) | Required | planned | [Declared source profile](../image-cleanup.md) |
 | [FP-104 Business data extraction and export schemas](../requirements/FP-104.md) | Required | planned | [Declared source profile](../business-data.md) |
 | [FP-105 Cross-platform native distribution packages](../requirements/FP-105.md) | Required | planned | Full source/qualification pending |
-| [FP-106 Compatibility policy and long-term maintenance](../requirements/FP-106.md) | Required | planned | Full source/qualification pending |
+| [FP-106 Compatibility policy and long-term maintenance](../requirements/FP-106.md) | Required | planned | [Declared source profile](../maintenance.md) |
 | [FP-107 DjVu and CDR document import](../requirements/FP-107.md) | Required | planned | Full source/qualification pending |
 | [FP-108 PDF to Markdown and text interchange](../requirements/FP-108.md) | Required | planned | Full source/qualification pending |
 | [FP-109 Task-oriented facades and plugin composition](../requirements/FP-109.md) | Required | planned | Full source/qualification pending |

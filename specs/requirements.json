@@ -4691,7 +4691,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/legacy-format-import.md",
+        "sourceEvidence": "docs/evidence/FP-107-source.json",
+        "implemented": [
+          "Explicit bounded caller-owned host integration and typed failure outcomes, staged PDF validation and expiring leases"
+        ],
+        "pending": [
+          "Actual DjVu/CDR decoders and versioned independent corpus, codec/font fidelity and isolated execution",
+          "Full actual-runtime, fuzz/endurance and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-108",

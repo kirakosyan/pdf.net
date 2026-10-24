@@ -26,6 +26,8 @@ The specification defines **112 requirement areas: 111 mandatory SDK production 
 
 A TFM or compatible package declaration does not establish OS, runtime or provider support. The [platform contract](docs/platforms.md) defines applicability and qualification. The .NET 8 support window must be rechecked before release.
 
+The optional [DjVu/CDR host boundary](docs/legacy-format-import.md) stages and validates explicit caller-host imports. No DjVu/CDR decoder or supported source version is bundled or qualified.
+
 The proposed package ID `Fluent.Pdf` returned HTTP 404 from the NuGet gallery and flat-container index on 2026-10-17. This is an availability observation, not a reservation or guarantee of acceptance. Recheck the ID and companion package prefixes before publication.
 
 ## Start here

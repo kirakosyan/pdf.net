@@ -430,4 +430,5 @@ public static class ContractExample
     public static PdfLinearizationValidation WriteLinearized(Stream input, Stream output, IPdfLinearizationProducer producer, IPdfLinearizationValidator validator) => PdfLinearization.Write(input, output, producer: producer, validator: validator);
     public static PdfImageCleanupResult CleanScan(PdfOcrRaster original, PdfImageCleanupOptions options) => PdfImageCleanup.Process(original, options, new(PdfProcessingMode.Permissive));
     public static PdfOperationReport ExportBusinessData(Stream input, Stream output, PdfBusinessDataFormat format) => PdfBusinessData.Write(input, output, format);
+    public static PdfDocument ImportLegacyFormat(Stream input, Fluent.Pdf.Formats.PdfLegacyImportOptions options, Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter host) => Fluent.Pdf.Formats.PdfLegacyImport.Read(input, options, host);
 }

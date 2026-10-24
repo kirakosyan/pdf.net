@@ -582,4 +582,7 @@ Public Module ContractExample
     Public Function ExportBusinessData(input As Stream, output As Stream, format As PdfBusinessDataFormat) As PdfOperationReport
         Return PdfBusinessData.Write(input, output, format)
     End Function
+    Public Function ImportLegacyFormat(input As Stream, options As Fluent.Pdf.Formats.PdfLegacyImportOptions, host As Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter) As PdfDocument
+        Return Fluent.Pdf.Formats.PdfLegacyImport.Read(input, options, host)
+    End Function
 End Module

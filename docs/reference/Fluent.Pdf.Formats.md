@@ -7,6 +7,10 @@ Version `1.0.0`. These are source contracts; exact final packages and production
 The baseline preserves exact nullability, parameter names, defaults and constant values.
 
 ```text
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.EngineId.get -> string!
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.Import(System.IO.Stream! source, Fluent.Pdf.Formats.PdfLegacyImportOptions! options, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.Supports(Fluent.Pdf.Formats.PdfLegacyImportOptions! options) -> bool
 Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter
 Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter.Convert(System.IO.Stream! input, Fluent.Pdf.Formats.PdfMetafileFormat format, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter.EngineId.get -> string!
@@ -116,6 +120,24 @@ Fluent.Pdf.Formats.PdfHtmlExportOptions.PdfHtmlExportOptions(Fluent.Pdf.Formats.
 Fluent.Pdf.Formats.PdfHtmlExportOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions!
 Fluent.Pdf.Formats.PdfHtmlExportOptions.Text.get -> Fluent.Pdf.PdfTextExtractionOptions!
 Fluent.Pdf.Formats.PdfHtmlExportOptions.Title.get -> string!
+Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyFormat.Cdr = 1 -> Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyFormat.DjVu = 0 -> Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyImport
+Fluent.Pdf.Formats.PdfLegacyImportOptions
+Fluent.Pdf.Formats.PdfLegacyImportOptions.Format.get -> Fluent.Pdf.Formats.PdfLegacyFormat
+Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumInputBytes.get -> int
+Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumOutputBytes.get -> int
+Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumPages.get -> int
+Fluent.Pdf.Formats.PdfLegacyImportOptions.PdfLegacyImportOptions(Fluent.Pdf.Formats.PdfLegacyFormat format, string! versionProfile, int maximumPages = 1000, int maximumInputBytes = 16777216, int maximumOutputBytes = 67108864) -> void
+Fluent.Pdf.Formats.PdfLegacyImportOptions.VersionProfile.get -> string!
+Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.Completed = 0 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.DamagedInput = 5 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.MissingCodec = 2 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.MissingFont = 3 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedRecord = 4 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
+Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedVersion = 1 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
 Fluent.Pdf.Formats.PdfMetafileFormat
 Fluent.Pdf.Formats.PdfMetafileFormat.Cgm = 0 -> Fluent.Pdf.Formats.PdfMetafileFormat
 Fluent.Pdf.Formats.PdfMetafileFormat.Emf = 2 -> Fluent.Pdf.Formats.PdfMetafileFormat
@@ -204,6 +226,7 @@ static Fluent.Pdf.Formats.PdfFormattingObjects.Import(System.IO.Stream! source, 
 static Fluent.Pdf.Formats.PdfFormattingObjects.Transform(System.IO.Stream! xml, System.IO.Stream! stylesheet, Fluent.Pdf.PdfFlowTextStyle! body, Fluent.Pdf.PdfProviderRegistry! providers, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfHtmlExport.Write(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfHtmlExportOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfHtmlExport.WriteFile(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, string! path, Fluent.Pdf.Formats.PdfHtmlExportOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfLegacyImport.Read(System.IO.Stream! source, Fluent.Pdf.Formats.PdfLegacyImportOptions! options, Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter? importer = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfMetafiles.Import(System.IO.Stream! input, Fluent.Pdf.Formats.PdfMetafileFormat format, Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter? converter = null, int maximumPages = 1000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfMetafiles.ImportRasterEmf(System.IO.Stream! input, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfMetafiles.WriteRasterEmf(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, System.IO.Stream! output, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
@@ -373,6 +396,38 @@ Self-contained PNG page appearances at explicit rendering DPI.
 
 Unstyled inferred text; shared permissive policy is required for declared reconstruction losses.
 
+### <code>F:Fluent.Pdf.Formats.PdfLegacyFormat.Cdr</code>
+
+CDR vector documents.
+
+### <code>F:Fluent.Pdf.Formats.PdfLegacyFormat.DjVu</code>
+
+DjVu scanned documents.
+
+### <code>F:Fluent.Pdf.Formats.PdfLegacyImportStatus.Completed</code>
+
+The requested exact profile was decoded.
+
+### <code>F:Fluent.Pdf.Formats.PdfLegacyImportStatus.DamagedInput</code>
+
+The source is damaged.
+
+### <code>F:Fluent.Pdf.Formats.PdfLegacyImportStatus.MissingCodec</code>
+
+A required explicitly provisioned codec is absent.
+
+### <code>F:Fluent.Pdf.Formats.PdfLegacyImportStatus.MissingFont</code>
+
+A required explicitly provisioned font is absent.
+
+### <code>F:Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedRecord</code>
+
+A source record cannot be represented by this host.
+
+### <code>F:Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedVersion</code>
+
+The source version does not match the requested supported profile.
+
 ### <code>F:Fluent.Pdf.Formats.PdfMetafileFormat.Cgm</code>
 
 Computer Graphics Metafile, with encoding/version explicit in the configured converter profile.
@@ -476,6 +531,14 @@ OpenXPS1.0 package.
 ### <code>F:Fluent.Pdf.Formats.PdfXpsFormat.Xps</code>
 
 Original XPS2005 package.
+
+### <code>M:Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.Import(System.IO.Stream,Fluent.Pdf.Formats.PdfLegacyImportOptions,System.IO.Stream,Fluent.Pdf.PdfOperationContext)</code>
+
+Imports in a fresh bounded OS-isolated job. Deny ambient file/network access and external document references; charge resources, use actual worker scopes and report every fidelity loss. Borrowed leases expire at return. No source actions may execute.
+
+### <code>M:Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.Supports(Fluent.Pdf.Formats.PdfLegacyImportOptions)</code>
+
+Checks the exact format/version and local codec/font prerequisites before input capture. No downloads or ambient discovery are allowed.
 
 ### <code>M:Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter.Convert(System.IO.Stream,Fluent.Pdf.Formats.PdfMetafileFormat,System.IO.Stream,Fluent.Pdf.PdfOperationContext)</code>
 
@@ -592,6 +655,14 @@ Stages complete HTML before atomic file replacement.
 ### <code>M:Fluent.Pdf.Formats.PdfHtmlExportOptions.#ctor(Fluent.Pdf.Formats.PdfHtmlExportMode,System.String,System.String,Fluent.Pdf.PdfRenderOptions,Fluent.Pdf.PdfTextExtractionOptions)</code>
 
 Captures one profile, a literal title and explicit language. No asset, font, script or network discovery occurs.
+
+### <code>M:Fluent.Pdf.Formats.PdfLegacyImport.Read(System.IO.Stream,Fluent.Pdf.Formats.PdfLegacyImportOptions,Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Captures source and stages/reparses all PDF output under one operation context. Failure returns no partial document; caller streams and host remain owned by the caller.
+
+### <code>M:Fluent.Pdf.Formats.PdfLegacyImportOptions.#ctor(Fluent.Pdf.Formats.PdfLegacyFormat,System.String,System.Int32,System.Int32,System.Int32)</code>
+
+Requires a literal host-defined version/profile identity; no format version is inferred or advertised by the SDK wrapper.
 
 ### <code>M:Fluent.Pdf.Formats.PdfMetafiles.Import(System.IO.Stream,Fluent.Pdf.Formats.PdfMetafileFormat,Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter,System.Int32,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
@@ -712,6 +783,10 @@ Imports the documented PNG-brush full-page profile with exact namespace/version 
 ### <code>M:Fluent.Pdf.Formats.PdfXps.WriteRasterPages(Fluent.Pdf.PdfDocumentSnapshot,System.Collections.Generic.IEnumerable{System.Int32},System.IO.Stream,Fluent.Pdf.Formats.PdfXpsFormat,System.String,Fluent.Pdf.PdfRenderOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Renders selected whole pages in explicit order and writes an original OPC fixed-layout package with canonical part names and lossless PNG brushes. Density is normalized to96-DPI image-space defaults; integral96-DPI page dimensions retain source points; fractional dimensions require explicit permissive loss authority.
+
+### <code>P:Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter.EngineId</code>
+
+Gets the pinned nonsecret engine/configuration identity.
 
 ### <code>P:Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter.EngineId</code>
 
@@ -849,6 +924,26 @@ Gets passive text/layer grouping policy.
 
 Gets literal caller title.
 
+### <code>P:Fluent.Pdf.Formats.PdfLegacyImportOptions.Format</code>
+
+Gets the explicit source format.
+
+### <code>P:Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumInputBytes</code>
+
+Gets the source capture byte limit.
+
+### <code>P:Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumOutputBytes</code>
+
+Gets the staged PDF byte limit.
+
+### <code>P:Fluent.Pdf.Formats.PdfLegacyImportOptions.MaximumPages</code>
+
+Gets the maximum nonempty output page count.
+
+### <code>P:Fluent.Pdf.Formats.PdfLegacyImportOptions.VersionProfile</code>
+
+Gets the exact separately documented host version/compression/font profile.
+
 ### <code>P:Fluent.Pdf.Formats.PdfOfdIdentity.CreationDate</code>
 
 Gets ISO calendar creation date.
@@ -940,6 +1035,10 @@ Gets exact engine/format profile.
 ### <code>P:Fluent.Pdf.Formats.PdfTexOptions.RequiredPackages</code>
 
 Gets required locally pinned packages. Font, format and transitive package assets are explicit host prerequisites too.
+
+### <code>T:Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter</code>
+
+Caller-owned trusted adapter for an independently qualified offline isolated decoder. Implementing this interface does not supply a sandbox or codec.
 
 ### <code>T:Fluent.Pdf.Formats.IPdfIsolatedMetafileConverter</code>
 
@@ -1036,6 +1135,22 @@ Explicit reconstruction intent; neither profile infers source accessibility stru
 ### <code>T:Fluent.Pdf.Formats.PdfHtmlExportOptions</code>
 
 Explicit HTML document identity, rendering and passive extraction choices.
+
+### <code>T:Fluent.Pdf.Formats.PdfLegacyFormat</code>
+
+Explicit read-only source format for a separately provisioned import host.
+
+### <code>T:Fluent.Pdf.Formats.PdfLegacyImport</code>
+
+Bounded, explicit DjVu/CDR host integration. No built-in decoder or supported source version is supplied.
+
+### <code>T:Fluent.Pdf.Formats.PdfLegacyImportOptions</code>
+
+Immutable exact decoder profile and finite source, output and page bounds.
+
+### <code>T:Fluent.Pdf.Formats.PdfLegacyImportStatus</code>
+
+Stable import outcomes. A completed decode must still return a nonempty valid PDF.
 
 ### <code>T:Fluent.Pdf.Formats.PdfMetafileFormat</code>
 
