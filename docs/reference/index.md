@@ -11,7 +11,7 @@ Generated from the current public API baselines and compiled XML comments, using
 | [Fluent.Pdf.Compliance](Fluent.Pdf.Compliance.md) | 1.0.0 | 10 | 10 |
 | [Fluent.Pdf.Cryptography](Fluent.Pdf.Cryptography.md) | 1.0.0 | 26 | 26 |
 | [Fluent.Pdf.Fonts](Fluent.Pdf.Fonts.md) | 1.0.0 | 8 | 8 |
-| [Fluent.Pdf.Formats](Fluent.Pdf.Formats.md) | 1.0.0 | 245 | 245 |
+| [Fluent.Pdf.Formats](Fluent.Pdf.Formats.md) | 1.0.0 | 282 | 282 |
 | [Fluent.Pdf.Html](Fluent.Pdf.Html.md) | 1.0.0 | 90 | 90 |
 | [Fluent.Pdf.Intelligence](Fluent.Pdf.Intelligence.md) | 1.0.0 | 239 | 237 |
 | [Fluent.Pdf.Ocr](Fluent.Pdf.Ocr.md) | 1.0.0 | 14 | 14 |

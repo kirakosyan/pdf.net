@@ -209,6 +209,41 @@ Fluent.Pdf.Formats.PdfTexProfile
 Fluent.Pdf.Formats.PdfTexProfile.LuaLatex = 1 -> Fluent.Pdf.Formats.PdfTexProfile
 Fluent.Pdf.Formats.PdfTexProfile.PdfLatex = 0 -> Fluent.Pdf.Formats.PdfTexProfile
 Fluent.Pdf.Formats.PdfTexProfile.XeLatex = 2 -> Fluent.Pdf.Formats.PdfTexProfile
+Fluent.Pdf.Formats.PdfTextInterchange
+Fluent.Pdf.Formats.PdfTextInterchangeBlock
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.CharacterCount.get -> int?
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.FirstCharacter.get -> int?
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.HeadingLevel.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Link.get -> string?
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Number.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Order.get -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.PageIndex.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.PdfTextInterchangeBlock(int pageIndex, Fluent.Pdf.Formats.PdfTextInterchangeRole role = Fluent.Pdf.Formats.PdfTextInterchangeRole.Paragraph, Fluent.Pdf.Formats.PdfTextInterchangeOrder order = Fluent.Pdf.Formats.PdfTextInterchangeOrder.Grouped, int? firstCharacter = null, int? characterCount = null, int headingLevel = 1, int number = 1, string? link = null, Fluent.Pdf.PdfTableExtractionOptions? table = null) -> void
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Role.get -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Table.get -> Fluent.Pdf.PdfTableExtractionOptions?
+Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown = 1 -> Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeFormat.MarkdownBundle = 2 -> Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeFormat.PlainText = 0 -> Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeOptions
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.MaximumOutputBytes.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.PdfTextInterchangeOptions(string! sourceSha256, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfRenderOptions? rendering = null, int maximumOutputBytes = 16777216) -> void
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions?
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.SourceSha256.get -> string!
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.Text.get -> Fluent.Pdf.PdfTextExtractionOptions!
+Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeOrder.Grouped = 1 -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeOrder.Layout = 2 -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeOrder.Raw = 0 -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Bullet = 2 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Code = 4 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Heading = 1 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Link = 5 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Numbered = 3 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.PageImage = 7 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Paragraph = 0 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Table = 6 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
 Fluent.Pdf.Formats.PdfXps
 Fluent.Pdf.Formats.PdfXpsFormat
 Fluent.Pdf.Formats.PdfXpsFormat.OpenXps = 1 -> Fluent.Pdf.Formats.PdfXpsFormat
@@ -250,6 +285,8 @@ static Fluent.Pdf.Formats.PdfSvg.WritePage(Fluent.Pdf.PdfDocumentSnapshot! sourc
 static Fluent.Pdf.Formats.PdfSvg.WritePageFile(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, string! path, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfTex.Import(System.IO.Stream! source, Fluent.Pdf.Formats.PdfTexOptions! options, Fluent.Pdf.Formats.IPdfIsolatedTexTypesetter? typesetter = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfTex.WriteInferredText(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfTextInterchange.Write(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.Formats.PdfTextInterchangeFormat format, System.Collections.Generic.IEnumerable<Fluent.Pdf.Formats.PdfTextInterchangeBlock!>! blocks, Fluent.Pdf.Formats.PdfTextInterchangeOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfTextInterchange.WriteFile(System.IO.Stream! input, string! path, Fluent.Pdf.Formats.PdfTextInterchangeFormat format, System.Collections.Generic.IEnumerable<Fluent.Pdf.Formats.PdfTextInterchangeBlock!>! blocks, Fluent.Pdf.Formats.PdfTextInterchangeOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.Formats.PdfXps.ImportRasterPages(System.IO.Stream! input, Fluent.Pdf.Formats.PdfXpsFormat format, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.Formats.PdfXps.WriteRasterPages(Fluent.Pdf.PdfDocumentSnapshot! source, System.Collections.Generic.IEnumerable<int>! pages, System.IO.Stream! output, Fluent.Pdf.Formats.PdfXpsFormat format, string! language, Fluent.Pdf.PdfRenderOptions! rendering, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 ```
@@ -524,6 +561,62 @@ pdfTeX with the LaTeX format.
 
 XeTeX with the LaTeX format.
 
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown</code>
+
+Escaped CommonMark with optional pipe-table extension; no image files.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeFormat.MarkdownBundle</code>
+
+Deterministic ZIP with document.md and explicitly rendered PNG page assets.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeFormat.PlainText</code>
+
+UTF8 literal text with source-page references.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeOrder.Grouped</code>
+
+Geometrically inferred grouped text.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeOrder.Layout</code>
+
+Geometrically inferred spacing/layout text.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeOrder.Raw</code>
+
+Source text execution order.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.Bullet</code>
+
+Flat bullet item.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.Code</code>
+
+Literal fenced code.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.Heading</code>
+
+Explicit level1–6 heading.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.Link</code>
+
+Literal label with explicit HTTPS target.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.Numbered</code>
+
+Flat ordered item with explicit counter.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.PageImage</code>
+
+Whole page rendered to a generated relative PNG asset; bundle only.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.Paragraph</code>
+
+Literal paragraph.
+
+### <code>F:Fluent.Pdf.Formats.PdfTextInterchangeRole.Table</code>
+
+Explicit ruled/borderless table inference; only unit cell spans are supported.
+
 ### <code>F:Fluent.Pdf.Formats.PdfXpsFormat.OpenXps</code>
 
 OpenXPS1.0 package.
@@ -775,6 +868,22 @@ Stages an escaped ASCII LaTeX article in selected page order. Explicit permissiv
 ### <code>M:Fluent.Pdf.Formats.PdfTexOptions.#ctor(Fluent.Pdf.Formats.PdfTexProfile,System.Collections.Generic.IEnumerable{System.String},System.Int32)</code>
 
 Captures at most128 distinct ASCII package identities and an exact engine profile.
+
+### <code>M:Fluent.Pdf.Formats.PdfTextInterchange.Write(System.IO.Stream,System.IO.Stream,Fluent.Pdf.Formats.PdfTextInterchangeFormat,System.Collections.Generic.IEnumerable{Fluent.Pdf.Formats.PdfTextInterchangeBlock},Fluent.Pdf.Formats.PdfTextInterchangeOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Stages complete UTF8 or a deterministic bundle before copying to a distinct borrowed output. The entire projection requires explicit permissive loss authority.
+
+### <code>M:Fluent.Pdf.Formats.PdfTextInterchange.WriteFile(System.IO.Stream,System.String,Fluent.Pdf.Formats.PdfTextInterchangeFormat,System.Collections.Generic.IEnumerable{Fluent.Pdf.Formats.PdfTextInterchangeBlock},Fluent.Pdf.Formats.PdfTextInterchangeOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Stages all content/assets before atomic file replacement. No asset path is resolved or written separately.
+
+### <code>M:Fluent.Pdf.Formats.PdfTextInterchangeBlock.#ctor(System.Int32,Fluent.Pdf.Formats.PdfTextInterchangeRole,Fluent.Pdf.Formats.PdfTextInterchangeOrder,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Int32,System.Int32,System.String,Fluent.Pdf.PdfTableExtractionOptions)</code>
+
+Selects a page and role. Optional raw character ranges use extracted source-character indices, not UTF16 offsets. Tables and images cannot use ranges.
+
+### <code>M:Fluent.Pdf.Formats.PdfTextInterchangeOptions.#ctor(System.String,Fluent.Pdf.PdfTextExtractionOptions,Fluent.Pdf.PdfRenderOptions,System.Int32)</code>
+
+Requires the expected SHA256 of captured PDF bytes to prevent applying a stale semantic projection. Image rendering is optional and must cover the whole page.
 
 ### <code>M:Fluent.Pdf.Formats.PdfXps.ImportRasterPages(System.IO.Stream,Fluent.Pdf.Formats.PdfXpsFormat,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
@@ -1036,6 +1145,58 @@ Gets exact engine/format profile.
 
 Gets required locally pinned packages. Font, format and transitive package assets are explicit host prerequisites too.
 
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.CharacterCount</code>
+
+Gets optional raw character count.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.FirstCharacter</code>
+
+Gets optional raw character offset.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.HeadingLevel</code>
+
+Gets explicit heading level.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.Link</code>
+
+Gets explicit HTTPS link. It is never fetched.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.Number</code>
+
+Gets explicit flat-list counter.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.Order</code>
+
+Gets explicit text order.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.PageIndex</code>
+
+Gets zero-based source page.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.Role</code>
+
+Gets caller-assigned role.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeBlock.Table</code>
+
+Gets explicit table inference profile.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeOptions.MaximumOutputBytes</code>
+
+Gets the UTF8 document extent; bundle extent is additionally limited to64MiB.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeOptions.Rendering</code>
+
+Gets optional explicit whole-page raster policy.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeOptions.SourceSha256</code>
+
+Gets exact expected captured-source digest.
+
+### <code>P:Fluent.Pdf.Formats.PdfTextInterchangeOptions.Text</code>
+
+Gets text/layer selection.
+
 ### <code>T:Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter</code>
 
 Caller-owned trusted adapter for an independently qualified offline isolated decoder. Implementing this interface does not supply a sandbox or codec.
@@ -1227,6 +1388,30 @@ Immutable, explicit engine and local package prerequisites. No package installat
 ### <code>T:Fluent.Pdf.Formats.PdfTexProfile</code>
 
 Explicit TeX engine/format identities. Availability never implies permission for shell escape or ambient file/network access.
+
+### <code>T:Fluent.Pdf.Formats.PdfTextInterchange</code>
+
+Exact-source, explicitly ordered text/Markdown projections with caller-assigned roles and declared reconstruction losses.
+
+### <code>T:Fluent.Pdf.Formats.PdfTextInterchangeBlock</code>
+
+Immutable caller-assigned source-page projection. Enumerable order is reading order; repeats are intentional.
+
+### <code>T:Fluent.Pdf.Formats.PdfTextInterchangeFormat</code>
+
+Explicit interchange representation.
+
+### <code>T:Fluent.Pdf.Formats.PdfTextInterchangeOptions</code>
+
+Exact-source binding, text selection and finite export extent.
+
+### <code>T:Fluent.Pdf.Formats.PdfTextInterchangeOrder</code>
+
+Text order is explicit and independent of block ordering.
+
+### <code>T:Fluent.Pdf.Formats.PdfTextInterchangeRole</code>
+
+Caller-assigned block role; never an assertion that the PDF declares this semantic role.
 
 ### <code>T:Fluent.Pdf.Formats.PdfXps</code>
 

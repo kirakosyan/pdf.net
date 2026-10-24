@@ -52,6 +52,14 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
     $identityPath = Join-Path $directory 'runtime-identity.json'
     & $python (Join-Path $root 'eng/check-runtime-evidence.py') --lane $declaredLane --trx $reportPath --mode source --output $identityPath
     if ($LASTEXITCODE -ne 0) { throw "Actual runtime evidence consistency failed: $name" }
+    $interchange = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/text-interchange"
+    & $python (Join-Path $root 'eng/verify-text-interchange.py') --directory $interchange --output (Join-Path $directory 'text-interchange-readers.json')
+    if ($LASTEXITCODE -ne 0) { throw "Interchange fixture integrity checks failed: $name" }
+    $interchangeEvidence = Join-Path $directory 'text-interchange'
+    $null = [IO.Directory]::CreateDirectory($interchangeEvidence)
+    foreach ($fixture in @('roles.pdf','roles.md','roles.txt','table-0.md','table-1.md','table.pdf','ranges.txt','images.zip','csharp.md','visual-basic.md')) {
+        Copy-Item -LiteralPath (Join-Path $interchange $fixture) -Destination (Join-Path $interchangeEvidence $fixture)
+    }
     $collections = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/collections"
     & $python (Join-Path $root 'eng/verify-collection-fixtures.py') --directory $collections --output (Join-Path $directory 'collection-readers.json')
     if ($LASTEXITCODE -ne 0) { throw "Independent collection archive/XML observations failed: $name" }

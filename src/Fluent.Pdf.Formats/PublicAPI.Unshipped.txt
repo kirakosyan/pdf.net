@@ -244,3 +244,40 @@ Fluent.Pdf.Formats.PdfLegacyImportStatus.MissingFont = 3 -> Fluent.Pdf.Formats.P
 Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedRecord = 4 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
 Fluent.Pdf.Formats.PdfLegacyImportStatus.UnsupportedVersion = 1 -> Fluent.Pdf.Formats.PdfLegacyImportStatus
 static Fluent.Pdf.Formats.PdfLegacyImport.Read(System.IO.Stream! source, Fluent.Pdf.Formats.PdfLegacyImportOptions! options, Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter? importer = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+Fluent.Pdf.Formats.PdfTextInterchange
+Fluent.Pdf.Formats.PdfTextInterchangeBlock
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.CharacterCount.get -> int?
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.FirstCharacter.get -> int?
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.HeadingLevel.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Link.get -> string?
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Number.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Order.get -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.PageIndex.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.PdfTextInterchangeBlock(int pageIndex, Fluent.Pdf.Formats.PdfTextInterchangeRole role = Fluent.Pdf.Formats.PdfTextInterchangeRole.Paragraph, Fluent.Pdf.Formats.PdfTextInterchangeOrder order = Fluent.Pdf.Formats.PdfTextInterchangeOrder.Grouped, int? firstCharacter = null, int? characterCount = null, int headingLevel = 1, int number = 1, string? link = null, Fluent.Pdf.PdfTableExtractionOptions? table = null) -> void
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Role.get -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeBlock.Table.get -> Fluent.Pdf.PdfTableExtractionOptions?
+Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown = 1 -> Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeFormat.MarkdownBundle = 2 -> Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeFormat.PlainText = 0 -> Fluent.Pdf.Formats.PdfTextInterchangeFormat
+Fluent.Pdf.Formats.PdfTextInterchangeOptions
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.MaximumOutputBytes.get -> int
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.PdfTextInterchangeOptions(string! sourceSha256, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfRenderOptions? rendering = null, int maximumOutputBytes = 16777216) -> void
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions?
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.SourceSha256.get -> string!
+Fluent.Pdf.Formats.PdfTextInterchangeOptions.Text.get -> Fluent.Pdf.PdfTextExtractionOptions!
+Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeOrder.Grouped = 1 -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeOrder.Layout = 2 -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeOrder.Raw = 0 -> Fluent.Pdf.Formats.PdfTextInterchangeOrder
+Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Bullet = 2 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Code = 4 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Heading = 1 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Link = 5 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Numbered = 3 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.PageImage = 7 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Paragraph = 0 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+Fluent.Pdf.Formats.PdfTextInterchangeRole.Table = 6 -> Fluent.Pdf.Formats.PdfTextInterchangeRole
+static Fluent.Pdf.Formats.PdfTextInterchange.Write(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.Formats.PdfTextInterchangeFormat format, System.Collections.Generic.IEnumerable<Fluent.Pdf.Formats.PdfTextInterchangeBlock!>! blocks, Fluent.Pdf.Formats.PdfTextInterchangeOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.Formats.PdfTextInterchange.WriteFile(System.IO.Stream! input, string! path, Fluent.Pdf.Formats.PdfTextInterchangeFormat format, System.Collections.Generic.IEnumerable<Fluent.Pdf.Formats.PdfTextInterchangeBlock!>! blocks, Fluent.Pdf.Formats.PdfTextInterchangeOptions! options, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!

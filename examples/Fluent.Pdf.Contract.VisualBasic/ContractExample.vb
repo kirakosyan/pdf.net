@@ -585,4 +585,7 @@ Public Module ContractExample
     Public Function ImportLegacyFormat(input As Stream, options As Fluent.Pdf.Formats.PdfLegacyImportOptions, host As Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter) As PdfDocument
         Return Fluent.Pdf.Formats.PdfLegacyImport.Read(input, options, host)
     End Function
+    Public Function ExportMarkdown(input As Stream, output As Stream, sourceSha256 As String, pageIndex As Integer) As PdfOperationReport
+        Return Fluent.Pdf.Formats.PdfTextInterchange.Write(input, output, Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown, {New Fluent.Pdf.Formats.PdfTextInterchangeBlock(pageIndex)}, New Fluent.Pdf.Formats.PdfTextInterchangeOptions(sourceSha256), policy:=New PdfOperationPolicy(PdfProcessingMode.Permissive))
+    End Function
 End Module

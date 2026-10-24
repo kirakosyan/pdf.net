@@ -431,4 +431,5 @@ public static class ContractExample
     public static PdfImageCleanupResult CleanScan(PdfOcrRaster original, PdfImageCleanupOptions options) => PdfImageCleanup.Process(original, options, new(PdfProcessingMode.Permissive));
     public static PdfOperationReport ExportBusinessData(Stream input, Stream output, PdfBusinessDataFormat format) => PdfBusinessData.Write(input, output, format);
     public static PdfDocument ImportLegacyFormat(Stream input, Fluent.Pdf.Formats.PdfLegacyImportOptions options, Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter host) => Fluent.Pdf.Formats.PdfLegacyImport.Read(input, options, host);
+    public static PdfOperationReport ExportMarkdown(Stream input, Stream output, string sourceSha256, int pageIndex) => Fluent.Pdf.Formats.PdfTextInterchange.Write(input, output, Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown, new[] { new Fluent.Pdf.Formats.PdfTextInterchangeBlock(pageIndex) }, new(sourceSha256), policy: new(PdfProcessingMode.Permissive));
 }

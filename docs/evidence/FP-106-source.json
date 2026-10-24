@@ -64,5 +64,21 @@
     "Synthetic dependency bytes demonstrate hash invalidation only; no actual vulnerability fix or affected RID/fidelity requalification was performed",
     "No gallery, publication, tag, unlisting or relisting action was performed",
     "Issue93 remains skipped; issues100 and105 remain blocked"
-  ]
+  ],
+  "hostedDocumentationFailure": {
+    "sourceCommit": "4c787d9a714833079edc7d622966fcc7e6eca834",
+    "workflowRun": 40101426445,
+    "job": 120894205802,
+    "cause": "Generated requirements.md omitted the FP-106 source-profile link",
+    "report": "artifacts/fp106-documentation-failure.log",
+    "sha256": "3eb41e1abca83897ce78d9430b9437106afb704a1594c28ef2d00e4097b72f96",
+    "correction": "Regenerated requirements reference; corrected documentation workflow40104077196 passed at ebf64843f2ae1a9e747b79ef1fffbe6df28e2fdc",
+    "resolved": true
+  },
+  "hostedSourceMatrix": {
+    "sourceCommit": "4c787d9a714833079edc7d622966fcc7e6eca834",
+    "workflowRun": 40101426460,
+    "sixHostsAndRebuild": "passed",
+    "maintenanceDrillOnLinux": "passed"
+  }
 }

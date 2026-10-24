@@ -226,3 +226,5 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 [#106 maintenance](maintenance.md) adds compatibility, deprecation, lifecycle, security servicing and rollback policy plus an executable source API/release-guard drill. [Evidence](evidence/FP-106-source.json) distinguishes tool observations from unapproved support commitments and missing final-package qualification. #107 is next; #100/#105 remain blocked and #93 remains user-skipped.
 
 [#107 legacy-format host integration](legacy-format-import.md) adds bounded explicit DjVu/CDR host contracts and failure handling. [Evidence](evidence/FP-107-source.json) covers original host fixtures only, with no actual DjVu/CDR decoding or version support claimed. Decoder/independent corpus and production qualification remain open. #108 is next.
+
+[#108 text/Markdown interchange](text-interchange.md) adds exact-source explicit reading-order projections, caller-assigned roles, inferred tables and generated page-image bundles. [Evidence](evidence/FP-108-source.json) retains finite parser/Unicode/asset observations and complete semantic/corpus/runtime qualification gaps. #109 is next.

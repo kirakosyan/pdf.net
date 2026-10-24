@@ -182,8 +182,7 @@
   "pending": [
     "Real labeled scan corpus, classification error rates and before/after OCR CER/WER",
     "Broader ICC/alpha/antialiased reduction and automatic border profiles",
-    "Actual minimum Framework4.7.2, all required runtime/RID lanes, fuzz/endurance and exact final package consumers",
-    "Final hosted CI for this new source commit"
+    "Actual minimum Framework4.7.2, all required runtime/RID lanes, fuzz/endurance and exact final package consumers"
   ],
   "limitations": [
     "Local Framework execution uses installed Framework4.8, not actual4.7.2",
@@ -204,13 +203,21 @@
       "offline Framework x86 ProcessingTests.ShutdownCancelsQueuedAndActiveJobsButNeverReturnsBeforeCleanup: one-second cancellation signal assertion"
     ],
     "offlineFrameworkX64": "passed",
-    "resolved": false,
+    "resolved": true,
     "correction": {
       "scope": "test scheduling and synchronization only; SDK deadlines unchanged",
       "native": "Isolate NativeWorkerTests from unrelated process-heavy classes; retain four concurrent jobs with twenty invocations each, dedicated test threads, initial barrier and per-invocation timings",
       "processing": "Await the explicit cancellation-observed task with existing bounded Finish helper and always release cleanup; preserve assertion that shutdown cannot finish before cleanup",
       "rootCauseLimit": "Reports prove native workload overlap and the one-second signal assertion; they do not identify a native engine or OS defect",
-      "hostedVerification": "pending",
+      "hostedVerification": {
+        "sourceCommit": "d8b3fd15c9ab53c41b57e40a1547d709f0a61b66",
+        "workflowRun": 40101030111,
+        "workflowsPassed": 5,
+        "sourceHostJobsPassed": 6,
+        "rebuildJobPassed": true,
+        "report": "artifacts/fp103-corrected-final-ci.json",
+        "sha256": "2b11cb105c036bfa3166f33ce780dbce456d2325ba5deebabb6466a9e88a067b"
+      },
       "localValidation": {
         "sourceBase": "f447bce64d6f92c8b4e3f9c656a30415e51dcc7f",
         "dirty": true,

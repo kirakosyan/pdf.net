@@ -4733,7 +4733,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/text-interchange.md",
+        "sourceEvidence": "docs/evidence/FP-108-source.json",
+        "implemented": [
+          "Exact-source UTF8 and caller-assigned Markdown projections with explicit order, escaped literal Unicode, flat roles and inferred unit-span tables",
+          "Deterministic page-image bundles, shared budgets, atomic output, C#/VB and independent parser fixtures"
+        ],
+        "pending": [
+          "Automatic full tagged semantic reconstruction, nested and complex multi-column/corpus quality",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-109",

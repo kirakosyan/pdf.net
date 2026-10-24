@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-108",
+  "issue": 108,
+  "sourceCommit": "ebf64843f2ae1a9e747b79ef1fffbe6df28e2fdc",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "src/Fluent.Pdf.Formats/PdfTextInterchange.cs",
+      "sha256": "2996a7ad15f545152d0ab2692c3acba76978e2c5edc32b23cd7a6e048f7a7ee2"
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/PdfTextInterchangeOptions.cs",
+      "sha256": "5987321940ed865d0fa03ef7d2aa6e24d1933ebe7a1a542b5851dee3b742710b"
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/PublicAPI.Unshipped.txt",
+      "sha256": "6d560aef1371828cff07fda3754499c274d0e43f99f7a0ccf8de5449c1db81dc"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/TextInterchangeTests.cs",
+      "sha256": "a909a5c92dde2e123708a4d7893d5f4130882b9987771ed00ce5f73556ab68f2"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "b42718e1b05478a3572cad25b92ecfcd8cf2b2bda375f8f51c3fe0ad3edf9e6d"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "9e59fbb473fdb1c490550102169218b38e2032fd8a0f6d1ee5b6721e34fc8448"
+    },
+    {
+      "path": "docs/text-interchange.md",
+      "sha256": "b5bc9875e8d9bbecd3207f672c52fea1c7d783aca55554aec7d26171d5ee8e24"
+    },
+    {
+      "path": "eng/verify-text-interchange.py",
+      "sha256": "71cf7db2f1722841999c3750c0f926bc9b735b7ca4c643640178eeacaafd6672"
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "9b747644ae9fec47a4f14477a7ccb959d4113dd313c69f5cb86380c1acbef231"
+    }
+  ],
+  "validation": {
+    "selectedSourceTests": {
+      "workingTreeDirty": true,
+      "purpose": "selected-source-text-interchange-extraction-table-policy-and-runtime-tests",
+      "sourceCommit": "ebf64843f2ae1a9e747b79ef1fffbe6df28e2fdc",
+      "lanes": [
+        {
+          "total": 110,
+          "lane": "win-x64-net8.0",
+          "passed": 110,
+          "runtime": "artifacts/fp108-lanes-verified/net8/runtime.json",
+          "failed": 0,
+          "runtimeSha256": "C36B7223FDE48883CB770AE427242DD5CE02E7FCF9289F7D753E4F42B845D22F",
+          "skipped": 0,
+          "report": "artifacts/fp108-lanes-verified/net8/selected.trx",
+          "sha256": "E02A44401CE5BAC59354A674B0F83A251C9F5C201D3C88601AD1D7610050C923"
+        },
+        {
+          "total": 110,
+          "lane": "win-x64-net10.0",
+          "passed": 110,
+          "runtime": "artifacts/fp108-lanes-verified/net10/runtime.json",
+          "failed": 0,
+          "runtimeSha256": "C3A3C477C12479A3E788C09FEC2513EED204199CC0B52869372FE9EF7578F438",
+          "skipped": 0,
+          "report": "artifacts/fp108-lanes-verified/net10/selected.trx",
+          "sha256": "D1F97BA533274CD654E93536FB99B9D49C9F2D3AC317C7E32C468627AA9F6F75"
+        },
+        {
+          "total": 110,
+          "lane": "win-x64-framework-current",
+          "passed": 110,
+          "runtime": "artifacts/fp108-lanes-verified/framework-x64/runtime.json",
+          "failed": 0,
+          "runtimeSha256": "949C544096980352CE924578BDB37D9FD90D1835A0143386AD51706EB6143957",
+          "skipped": 0,
+          "report": "artifacts/fp108-lanes-verified/framework-x64/selected.trx",
+          "sha256": "8A298E78A07ACB4F7527B16E29B78510BD4E115E553BC2AC3E6EE272BB11B052"
+        },
+        {
+          "total": 110,
+          "lane": "win-x86-framework-current",
+          "passed": 110,
+          "runtime": "artifacts/fp108-lanes-verified/framework-x86/runtime.json",
+          "failed": 0,
+          "runtimeSha256": "CFC1912BF97D1D73EED7269F54A7E81447018C11F4E519ABCBF24512F367A28F",
+          "skipped": 0,
+          "report": "artifacts/fp108-lanes-verified/framework-x86/selected.trx",
+          "sha256": "56BBE45FD32EC4EFED4A0C96FC28096FCD0AD99E66EC8B8CE400F921B1A82603"
+        },
+        {
+          "total": 110,
+          "lane": "win-x64-netstandard2.0-fallback",
+          "passed": 110,
+          "runtime": "artifacts/fp108-lanes-verified/fallback/runtime.json",
+          "failed": 0,
+          "runtimeSha256": "7F54ECFE8A9C679E60A02C74FE7DE22B3C27AE7CF849AE35C19F9FE587F11B42",
+          "skipped": 0,
+          "report": "artifacts/fp108-lanes-verified/fallback/selected.trx",
+          "sha256": "A35A11B406201128B72D899C20BD58FBE8889AD2D31E30E37B29C6FBFAADCDFF"
+        }
+      ],
+      "productionQualified": false
+    },
+    "newApiDeclarations": 37,
+    "apiComparisons": 45,
+    "fullBuild": "zero warnings/errors",
+    "packageTargetsBlocked": 15,
+    "independentArtifactObservations": 30,
+    "independentPngDecodes": 10,
+    "rejectedCheckerCorruptions": 4,
+    "parser": "markdown-it-py4.0.0 with mdurl0.1.2; task-local MIT analysis tools, not SDK dependencies",
+    "imageDecoder": "Pillow12.3.0",
+    "documentation": "metadata reference generation/check and snippet inventory passed"
+  },
+  "archive": {
+    "path": "artifacts/fp108-source-evidence.zip",
+    "sha256": "17b9691cf82b5b6eef3c2cb802d9ac581a70aeb352c32505afd0bf634aab9901",
+    "bytes": 385658,
+    "verifiedEntries": 196
+  },
+  "limitations": [
+    "Caller-assigned roles and explicit plans do not constitute automatic source semantic reconstruction or human reading-order review",
+    "Page PNGs use the original pattern renderer, not a qualified native PDF rendering engine",
+    "Tables have unit spans, explicit header policy and uncalibrated inference; complete source links/images and nested structure remain pending",
+    "Initial three Unicode fixture failures were unavailable glyphs in a test font; replaced fixture with original explicit ToUnicode mappings, retained failed run; final five lanes all passed",
+    "Installed Framework4.8 is not actual minimum4.7.2"
+  ],
+  "pending": [
+    "Complex real multi-column and complete tagged semantic corpus, native fidelity and human review",
+    "Actual minimum/runtime/RID, fuzz/endurance and final-package consumers",
+    "Final hosted CI"
+  ]
+}
