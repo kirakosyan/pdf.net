@@ -107,7 +107,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-101 Accessibility remediation and semantic authoring](../requirements/FP-101.md) | Required | planned | [Declared source profile](../semantic-remediation.md) |
 | [FP-102 Signature-preserving editing and revision audit](../requirements/FP-102.md) | Required | planned | Full source/qualification pending |
 | [FP-103 Image processing and document cleanup](../requirements/FP-103.md) | Required | planned | [Declared source profile](../image-cleanup.md) |
-| [FP-104 Business data extraction and export schemas](../requirements/FP-104.md) | Required | planned | Full source/qualification pending |
+| [FP-104 Business data extraction and export schemas](../requirements/FP-104.md) | Required | planned | [Declared source profile](../business-data.md) |
 | [FP-105 Cross-platform native distribution packages](../requirements/FP-105.md) | Required | planned | Full source/qualification pending |
 | [FP-106 Compatibility policy and long-term maintenance](../requirements/FP-106.md) | Required | planned | Full source/qualification pending |
 | [FP-107 DjVu and CDR document import](../requirements/FP-107.md) | Required | planned | Full source/qualification pending |

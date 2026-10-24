@@ -218,3 +218,5 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 [#102 semantic review and remediation](semantic-remediation.md) adds exact-source review plans, explicit ordered decisions, per-fix structural revalidation, role mapping and retained [source evidence](evidence/FP-101-source.json). Human/screen-reader and complete production qualification remain open. The next source assignment is #103; #100 remains blocked and #93 user-skipped.
 
 [#103 image cleanup](image-cleanup.md) adds explicit loss authority, retained source rasters, bounded transforms and separate measured blank observations. [Evidence](evidence/FP-103-source.json) keeps real-corpus/OCR/final-package qualification open. The next independent source assignment is #104; #100 remains blocked and #93 user-skipped.
+
+[#104 business observations](business-data.md) adds exact-source versioned JSON/XML, passive declared fields/structure, inferred tables and separate source-bound OCR under shared budgets. [Evidence](evidence/FP-104-source.json) retains source-only limits and real-corpus qualification gaps. The next assignment is #105; #100 remains blocked and #93 user-skipped.

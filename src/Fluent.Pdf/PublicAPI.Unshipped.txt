@@ -3689,3 +3689,20 @@ Fluent.Pdf.PdfImageCleanupResult.OutputToOriginal.get -> Fluent.Pdf.PdfMatrix
 Fluent.Pdf.PdfImageCleanupResult.PixelVisits.get -> long
 Fluent.Pdf.PdfImageCleanupResult.Processed.get -> Fluent.Pdf.PdfOcrRaster!
 static Fluent.Pdf.PdfImageCleanup.Process(Fluent.Pdf.PdfOcrRaster! original, Fluent.Pdf.PdfImageCleanupOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageCleanupResult!
+Fluent.Pdf.PdfBusinessData
+Fluent.Pdf.PdfBusinessDataFormat
+Fluent.Pdf.PdfBusinessDataFormat.Json = 0 -> Fluent.Pdf.PdfBusinessDataFormat
+Fluent.Pdf.PdfBusinessDataFormat.Xml = 1 -> Fluent.Pdf.PdfBusinessDataFormat
+Fluent.Pdf.PdfBusinessDataOptions
+Fluent.Pdf.PdfBusinessDataOptions.IncludeFields.get -> bool
+Fluent.Pdf.PdfBusinessDataOptions.MaximumOutputBytes.get -> long
+Fluent.Pdf.PdfBusinessDataOptions.MaximumRecords.get -> int
+Fluent.Pdf.PdfBusinessDataOptions.PdfBusinessDataOptions(int schemaVersion = 1, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfTableExtractionOptions? tables = null, bool includeFields = true, Fluent.Pdf.PdfAccessibilityProfile? structureProfile = null, Fluent.Pdf.PdfOcrOptions? recognition = null, Fluent.Pdf.PdfRenderOptions? rendering = null, int maximumRecords = 100000, long maximumOutputBytes = 16777216) -> void
+Fluent.Pdf.PdfBusinessDataOptions.Recognition.get -> Fluent.Pdf.PdfOcrOptions?
+Fluent.Pdf.PdfBusinessDataOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions?
+Fluent.Pdf.PdfBusinessDataOptions.SchemaVersion.get -> int
+Fluent.Pdf.PdfBusinessDataOptions.StructureProfile.get -> Fluent.Pdf.PdfAccessibilityProfile?
+Fluent.Pdf.PdfBusinessDataOptions.Tables.get -> Fluent.Pdf.PdfTableExtractionOptions?
+Fluent.Pdf.PdfBusinessDataOptions.Text.get -> Fluent.Pdf.PdfTextExtractionOptions!
+static Fluent.Pdf.PdfBusinessData.Write(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfBusinessDataFormat format, Fluent.Pdf.PdfBusinessDataOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfBusinessData.WriteFile(System.IO.Stream! input, string! path, Fluent.Pdf.PdfBusinessDataFormat format, Fluent.Pdf.PdfBusinessDataOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!

@@ -197,8 +197,7 @@
   "pending": [
     "Full production acceptance remains planned; trusted in-process callbacks are not a sandbox and untrusted adapter worker isolation is not implemented",
     "Actual minimum Framework4.7.2 and complete required runtime/RID lanes",
-    "Broad adversarial/fuzz/endurance, independent conformance/fidelity and exact final package consumers",
-    "Final hosted CI for the new source commit"
+    "Broad adversarial/fuzz/endurance, independent conformance/fidelity and exact final package consumers"
   ],
   "limitations": [
     "Local Framework observations ran on installed Framework4.8, not actual4.7.2",

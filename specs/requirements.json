@@ -4573,7 +4573,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/business-data.md",
+        "sourceEvidence": "docs/evidence/FP-104-source.json",
+        "implemented": [
+          "Version1 paired JSON/XML observations bound to exact source SHA256 with page/object provenance",
+          "Separate declared fields/structure, text mapping, inferred paragraphs/tables and optional source-bound OCR scores under shared budgets",
+          "Explicit compatibility rules, schemas, compiled C#/VB and independent paired/provenance checks"
+        ],
+        "pending": [
+          "Full business reconstruction and labeled real mixed scanned/digital corpus, OCR accuracy and semantic extraction quality",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-105",

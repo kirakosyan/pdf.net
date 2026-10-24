@@ -77,6 +77,14 @@ function Run-ContractLane([string]$tfm, [string]$name, [string]$architecture, [b
         foreach ($stage in @('before','after')) { Copy-Item -LiteralPath (Join-Path $cleanup "$fixture-$stage.raw") -Destination (Join-Path $cleanupEvidence "$fixture-$stage.raw") }
     }
     Copy-Item -LiteralPath (Join-Path $cleanup 'observations.json') -Destination (Join-Path $cleanupEvidence 'observations.json')
+    $business = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/artifacts/business-data"
+    & $python (Join-Path $root 'eng/verify-business-data.py') --directory $business --output (Join-Path $directory 'business-data-readers.json')
+    if ($LASTEXITCODE -ne 0) { throw "Independent business JSON/XML provenance checks failed: $name" }
+    $businessEvidence = Join-Path $directory 'business-data'
+    $null = [IO.Directory]::CreateDirectory($businessEvidence)
+    foreach ($fixture in @('digital','table','fields','structure','mixed','csharp','visual-basic')) {
+        foreach ($extension in @('pdf','json','xml')) { Copy-Item -LiteralPath (Join-Path $business "$fixture.$extension") -Destination (Join-Path $businessEvidence "$fixture.$extension") }
+    }
     $assembly = Join-Path $root "tests/Fluent.Pdf.Contract.Tests/bin/$Configuration/$tfm/Fluent.Pdf.dll"
     $records.Add([pscustomobject]@{
         lane=$name;libraryTfm=$library;runtime=$runtime;os=$os;architecture=$actualArchitecture

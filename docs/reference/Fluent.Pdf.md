@@ -402,6 +402,21 @@ Fluent.Pdf.PdfBookmark.Italic.get -> bool
 Fluent.Pdf.PdfBookmark.PdfBookmark(string! title, Fluent.Pdf.PdfDestination? destination = null, Fluent.Pdf.PdfAction? action = null, bool isOpen = true, bool bold = false, bool italic = false, Fluent.Pdf.PdfColor? color = null, params Fluent.Pdf.PdfBookmark![]! children) -> void
 Fluent.Pdf.PdfBookmark.Title.get -> string!
 Fluent.Pdf.PdfBookmark.WithChildren(params Fluent.Pdf.PdfBookmark![]! children) -> Fluent.Pdf.PdfBookmark!
+Fluent.Pdf.PdfBusinessData
+Fluent.Pdf.PdfBusinessDataFormat
+Fluent.Pdf.PdfBusinessDataFormat.Json = 0 -> Fluent.Pdf.PdfBusinessDataFormat
+Fluent.Pdf.PdfBusinessDataFormat.Xml = 1 -> Fluent.Pdf.PdfBusinessDataFormat
+Fluent.Pdf.PdfBusinessDataOptions
+Fluent.Pdf.PdfBusinessDataOptions.IncludeFields.get -> bool
+Fluent.Pdf.PdfBusinessDataOptions.MaximumOutputBytes.get -> long
+Fluent.Pdf.PdfBusinessDataOptions.MaximumRecords.get -> int
+Fluent.Pdf.PdfBusinessDataOptions.PdfBusinessDataOptions(int schemaVersion = 1, Fluent.Pdf.PdfTextExtractionOptions? text = null, Fluent.Pdf.PdfTableExtractionOptions? tables = null, bool includeFields = true, Fluent.Pdf.PdfAccessibilityProfile? structureProfile = null, Fluent.Pdf.PdfOcrOptions? recognition = null, Fluent.Pdf.PdfRenderOptions? rendering = null, int maximumRecords = 100000, long maximumOutputBytes = 16777216) -> void
+Fluent.Pdf.PdfBusinessDataOptions.Recognition.get -> Fluent.Pdf.PdfOcrOptions?
+Fluent.Pdf.PdfBusinessDataOptions.Rendering.get -> Fluent.Pdf.PdfRenderOptions?
+Fluent.Pdf.PdfBusinessDataOptions.SchemaVersion.get -> int
+Fluent.Pdf.PdfBusinessDataOptions.StructureProfile.get -> Fluent.Pdf.PdfAccessibilityProfile?
+Fluent.Pdf.PdfBusinessDataOptions.Tables.get -> Fluent.Pdf.PdfTableExtractionOptions?
+Fluent.Pdf.PdfBusinessDataOptions.Text.get -> Fluent.Pdf.PdfTextExtractionOptions!
 Fluent.Pdf.PdfCalculationResult
 Fluent.Pdf.PdfCalculationResult.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfCalculationResult.Value.get -> decimal
@@ -3417,6 +3432,8 @@ static Fluent.Pdf.PdfBarcodes.Detect(Fluent.Pdf.PdfOcrRaster! raster, Fluent.Pdf
 static Fluent.Pdf.PdfBarcodes.DetectPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.IPdfBarcodeDecoder? independentDecoder = null, Fluent.Pdf.PdfRenderOptions? render = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfBarcodeDetection!
 static Fluent.Pdf.PdfBarcodes.Generate(string! text, Fluent.Pdf.IPdfBarcodeDecoder? independentDecoder = null, Fluent.Pdf.PdfBarcodeOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfBarcodeSymbol!
 static Fluent.Pdf.PdfBarcodes.GeneratePayment(Fluent.Pdf.PdfSepaCreditTransfer! payment, Fluent.Pdf.IPdfBarcodeDecoder? independentDecoder = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfBarcodeSymbol!
+static Fluent.Pdf.PdfBusinessData.Write(System.IO.Stream! input, System.IO.Stream! output, Fluent.Pdf.PdfBusinessDataFormat format, Fluent.Pdf.PdfBusinessDataOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
+static Fluent.Pdf.PdfBusinessData.WriteFile(System.IO.Stream! input, string! path, Fluent.Pdf.PdfBusinessDataFormat format, Fluent.Pdf.PdfBusinessDataOptions? options = null, Fluent.Pdf.PdfProviderRegistry? providers = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfOperationReport!
 static Fluent.Pdf.PdfCanvas.Create(Fluent.Pdf.PdfPageGeometry! geometry, System.Action<Fluent.Pdf.PdfCanvas!>! draw, Fluent.Pdf.PdfCanvasOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfCanvasResult!
 static Fluent.Pdf.PdfCanvasStyle.Default.get -> Fluent.Pdf.PdfCanvasStyle!
 static Fluent.Pdf.PdfColorRendering.RenderPage(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfProviderRegistry! providers, Fluent.Pdf.PdfColorRenderOptions! colorManagement, Fluent.Pdf.PdfRenderOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfRaster!
@@ -3960,6 +3977,14 @@ Segment separator.
 ### <code>F:Fluent.Pdf.PdfBidiClass.WS</code>
 
 Whitespace.
+
+### <code>F:Fluent.Pdf.PdfBusinessDataFormat.Json</code>
+
+UTF-8 JSON matching the version-one business schema.
+
+### <code>F:Fluent.Pdf.PdfBusinessDataFormat.Xml</code>
+
+UTF-8 XML in urn:fluent-pdf:business:1, with explicit scalar/array types.
 
 ### <code>F:Fluent.Pdf.PdfCanvasAnchor.Bottom</code>
 
@@ -6450,6 +6475,18 @@ Creates a bounded bookmark. Destinations and actions are mutually exclusive; chi
 ### <code>M:Fluent.Pdf.PdfBookmark.WithChildren(Fluent.Pdf.PdfBookmark[])</code>
 
 Returns a bookmark with replaced ordered children, retaining destination, action, expansion and styling.
+
+### <code>M:Fluent.Pdf.PdfBusinessData.Write(System.IO.Stream,System.IO.Stream,Fluent.Pdf.PdfBusinessDataFormat,Fluent.Pdf.PdfBusinessDataOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Captures at most64MiBof source PDF at the borrowed current position and stages complete JSON/XML before writing. Source facts, geometric inference and OCR remain separate; no business value is verified.
+
+### <code>M:Fluent.Pdf.PdfBusinessData.WriteFile(System.IO.Stream,System.String,Fluent.Pdf.PdfBusinessDataFormat,Fluent.Pdf.PdfBusinessDataOptions,Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Stages complete versioned observations before atomic file replacement.
+
+### <code>M:Fluent.Pdf.PdfBusinessDataOptions.#ctor(System.Int32,Fluent.Pdf.PdfTextExtractionOptions,Fluent.Pdf.PdfTableExtractionOptions,System.Boolean,System.Nullable{Fluent.Pdf.PdfAccessibilityProfile},Fluent.Pdf.PdfOcrOptions,Fluent.Pdf.PdfRenderOptions,System.Int32,System.Int64)</code>
+
+Captures schema1, digital text, optional table inference, passive fields/structure and optional separate page OCR. OCR requires both explicit rendering and recognition configuration. Table continuation/header aggregation requires a separate profile.
 
 ### <code>M:Fluent.Pdf.PdfCanvas.Clip(Fluent.Pdf.PdfPath,System.Boolean)</code>
 
@@ -9536,6 +9573,42 @@ Gets italic title styling.
 ### <code>P:Fluent.Pdf.PdfBookmark.Title</code>
 
 Gets the Unicode title.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.IncludeFields</code>
+
+Gets whether passive declared form fields and widget references are exported.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.MaximumOutputBytes</code>
+
+Gets maximum staged serialized byte count.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.MaximumRecords</code>
+
+Gets total retained observation-record ceiling.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.Recognition</code>
+
+Gets optional explicitly configured OCR, exported separately from digital text.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.Rendering</code>
+
+Gets explicit OCR page-rendering choices.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.SchemaVersion</code>
+
+Gets exact schema version1; unknown versions reject.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.StructureProfile</code>
+
+Gets optional passive structural inspection profile; it is not conformance validation.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.Tables</code>
+
+Gets optional per-page table inference and explicit numeric culture.
+
+### <code>P:Fluent.Pdf.PdfBusinessDataOptions.Text</code>
+
+Gets explicit digital text selection/grouping parameters.
 
 ### <code>P:Fluent.Pdf.PdfCalculationResult.OperationReport</code>
 
@@ -16400,6 +16473,18 @@ Explicit full-resolution blank-page classifier parameters. No page is removed.
 ### <code>T:Fluent.Pdf.PdfBookmark</code>
 
 An immutable nested bookmark with an optional local destination or passive action.
+
+### <code>T:Fluent.Pdf.PdfBusinessData</code>
+
+Passive versioned business observations with source/inference/OCR provenance and exact input binding.
+
+### <code>T:Fluent.Pdf.PdfBusinessDataFormat</code>
+
+Equivalent versioned business-observation serializations.
+
+### <code>T:Fluent.Pdf.PdfBusinessDataOptions</code>
+
+Explicit extraction scope and finite export limits; observations never establish business correctness.
 
 ### <code>T:Fluent.Pdf.PdfCalculationResult</code>
 

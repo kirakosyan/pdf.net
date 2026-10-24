@@ -191,5 +191,19 @@
     "Confidence is an uncalibrated background fraction; no page is automatically removed",
     "Only source-preserving explicit parameters are implemented; issue remains open and planned",
     "Issue93 remains user-skipped and issue100 remains blocked"
-  ]
+  ],
+  "hostedFailure": {
+    "sourceCommit": "293f451a8b4c483ce0a7f03f999e3cdb4fbbfa53",
+    "workflowRun": 40097791372,
+    "job": 120883574617,
+    "artifact": 12561313546,
+    "archive": "artifacts/fp103-ci-win-x64-failure.zip",
+    "sha256": "a4665d4c8546d79a5a28c2552d344d50c68370b70557d87e135c38d816561185",
+    "failures": [
+      "net8 NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins: native worker deadline, overlapping NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+      "offline Framework x86 ProcessingTests.ShutdownCancelsQueuedAndActiveJobsButNeverReturnsBeforeCleanup: one-second cancellation signal assertion"
+    ],
+    "offlineFrameworkX64": "passed",
+    "resolved": false
+  }
 }

@@ -211,8 +211,7 @@
     "Qualified inferred suggestions and labeled real-document remediation corpus",
     "Actual human/screen-reader review; caller decision records are not authenticated reviewer evidence",
     "Complete namespace/class-map/arbitrary tree remediation and broad independent conformance/fidelity",
-    "Actual minimum Framework4.7.2, all required runtime/RID lanes, fuzz/endurance and exact final package consumers",
-    "Final hosted CI for this new source commit"
+    "Actual minimum Framework4.7.2, all required runtime/RID lanes, fuzz/endurance and exact final package consumers"
   ],
   "limitations": [
     "Local Framework execution uses installed Framework4.8, not actual4.7.2",
@@ -220,5 +219,74 @@
     "Source decisions are explicitly synthetic. Automated UA success for original figure fixtures is not general compliance or human-review qualification",
     "Pixel/structure observations cover original finite contract fixtures; missing production corpora are not waived",
     "Issue93 remains user-skipped and issue100 remains blocked"
-  ]
+  ],
+  "finalHostedCi": {
+    "sourceCommit": "c7054ccb4c192ec9d059e73193f64c890e41d158",
+    "allFiveWorkflowsPassed": true,
+    "workflows": [
+      {
+        "id": 40096648456,
+        "name": "CLI source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648483,
+        "name": "Windows automation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648489,
+        "name": "Application view source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648512,
+        "name": "Documentation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40096648577,
+        "name": "Source contracts and release guard",
+        "conclusion": "success"
+      }
+    ],
+    "sourceJobs": [
+      {
+        "id": 120880196140,
+        "name": "Managed source rebuild provenance",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196210,
+        "name": "Contracts (linux-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196248,
+        "name": "Contracts (osx-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196279,
+        "name": "Contracts (osx-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196313,
+        "name": "Contracts (win-x64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196372,
+        "name": "Contracts (win-arm64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 120880196431,
+        "name": "Contracts (linux-x64)",
+        "conclusion": "success"
+      }
+    ],
+    "productionQualified": false
+  }
 }

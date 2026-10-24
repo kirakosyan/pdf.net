@@ -4,7 +4,7 @@ Generated from the current public API baselines and compiled XML comments, using
 
 | Assembly | Source version | Public declarations | Documented members |
 | --- | --- | --- | --- |
-| [Fluent.Pdf](Fluent.Pdf.md) | 1.0.0 | 3690 | 3669 |
+| [Fluent.Pdf](Fluent.Pdf.md) | 1.0.0 | 3707 | 3686 |
 | [Fluent.Pdf.Applications](Fluent.Pdf.Applications.md) | 1.0.0 | 32 | 32 |
 | [Fluent.Pdf.Automation](Fluent.Pdf.Automation.md) | 1.0.0 | 30 | 30 |
 | [Fluent.Pdf.Codecs](Fluent.Pdf.Codecs.md) | 1.0.0 | 9 | 9 |

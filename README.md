@@ -180,3 +180,5 @@ FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sink
 [Semantic remediation](docs/semantic-remediation.md) binds explicit proposals and reviewer decisions to exact source bytes, revalidates accepted fixes and preserves an audit ledger without claiming accessibility conformance.
 
 [Image cleanup](docs/image-cleanup.md) preserves original pixels, applies explicit bounded transforms and reports before/after blank-page evidence without automatic deletion.
+
+[Business observations](docs/business-data.md) exports source-bound versioned JSON/XML with declared facts, inferred structures and OCR scores kept distinct.

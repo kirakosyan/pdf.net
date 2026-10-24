@@ -579,4 +579,7 @@ Public Module ContractExample
     Public Function CleanScan(original As PdfOcrRaster, options As PdfImageCleanupOptions) As PdfImageCleanupResult
         Return PdfImageCleanup.Process(original, options, New PdfOperationPolicy(PdfProcessingMode.Permissive))
     End Function
+    Public Function ExportBusinessData(input As Stream, output As Stream, format As PdfBusinessDataFormat) As PdfOperationReport
+        Return PdfBusinessData.Write(input, output, format)
+    End Function
 End Module

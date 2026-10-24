@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:b="urn:fluent-pdf:business:1" targetNamespace="urn:fluent-pdf:business:1" elementFormDefault="qualified">
+  <xs:complexType name="valueType" mixed="true">
+    <xs:sequence><xs:element name="value" type="xs:string" minOccurs="0" maxOccurs="100000" /></xs:sequence>
+    <xs:attribute name="type" use="required"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="null"/><xs:enumeration value="string"/><xs:enumeration value="number"/><xs:enumeration value="boolean"/><xs:enumeration value="array"/></xs:restriction></xs:simpleType></xs:attribute>
+  </xs:complexType>
+  <xs:element name="businessData">
+    <xs:complexType>
+      <xs:sequence><xs:element name="record" minOccurs="0" maxOccurs="1000000"><xs:complexType><xs:choice minOccurs="1" maxOccurs="unbounded">
+          <xs:element name="id" type="b:valueType" />
+          <xs:element name="kind" type="b:valueType" />
+          <xs:element name="provenance" type="b:valueType" />
+          <xs:element name="objectId" type="b:valueType" />
+          <xs:element name="parentId" type="b:valueType" />
+          <xs:element name="text" type="b:valueType" />
+          <xs:element name="semanticText" type="b:valueType" />
+          <xs:element name="layoutText" type="b:valueType" />
+          <xs:element name="layoutProvenance" type="b:valueType" />
+          <xs:element name="mapping" type="b:valueType" />
+          <xs:element name="confidenceKind" type="b:valueType" />
+          <xs:element name="label" type="b:valueType" />
+          <xs:element name="numericCulture" type="b:valueType" />
+          <xs:element name="language" type="b:valueType" />
+          <xs:element name="engine" type="b:valueType" />
+          <xs:element name="model" type="b:valueType" />
+          <xs:element name="fieldKind" type="b:valueType" />
+          <xs:element name="valueKind" type="b:valueType" />
+          <xs:element name="alternativeText" type="b:valueType" />
+          <xs:element name="location" type="b:valueType" />
+          <xs:element name="pageIndex" type="b:valueType" />
+          <xs:element name="x" type="b:valueType" />
+          <xs:element name="y" type="b:valueType" />
+          <xs:element name="width" type="b:valueType" />
+          <xs:element name="height" type="b:valueType" />
+          <xs:element name="sourceIndex" type="b:valueType" />
+          <xs:element name="operationIndex" type="b:valueType" />
+          <xs:element name="sourceCode" type="b:valueType" />
+          <xs:element name="codeLength" type="b:valueType" />
+          <xs:element name="characterCount" type="b:valueType" />
+          <xs:element name="rows" type="b:valueType" />
+          <xs:element name="columns" type="b:valueType" />
+          <xs:element name="confidence" type="b:valueType" />
+          <xs:element name="number" type="b:valueType" />
+          <xs:element name="row" type="b:valueType" />
+          <xs:element name="column" type="b:valueType" />
+          <xs:element name="rowSpan" type="b:valueType" />
+          <xs:element name="columnSpan" type="b:valueType" />
+          <xs:element name="businessVerified" type="b:valueType" />
+          <xs:element name="invisible" type="b:valueType" />
+          <xs:element name="layerVisible" type="b:valueType" />
+          <xs:element name="geometryEstimated" type="b:valueType" />
+          <xs:element name="sourceIndices" type="b:valueType" />
+          <xs:element name="ruleSources" type="b:valueType" />
+          <xs:element name="values" type="b:valueType" />
+          <xs:element name="sourceObjects" type="b:valueType" />
+          <xs:element name="children" type="b:valueType" />
+      </xs:choice></xs:complexType></xs:element></xs:sequence>
+      <xs:attribute name="schemaVersion" type="xs:positiveInteger" fixed="1" use="required"/>
+      <xs:attribute name="sourceSha256" use="required"><xs:simpleType><xs:restriction base="xs:string"><xs:pattern value="[a-f0-9]{64}"/></xs:restriction></xs:simpleType></xs:attribute>
+      <xs:attribute name="coordinateSpace" type="xs:string" fixed="display-points-top-left" use="required"/>
+      <xs:attribute name="businessVerified" type="xs:boolean" fixed="false" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
