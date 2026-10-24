@@ -114,5 +114,5 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-108 PDF to Markdown and text interchange](../requirements/FP-108.md) | Required | planned | [Declared source profile](../text-interchange.md) |
 | [FP-109 Task-oriented facades and plugin composition](../requirements/FP-109.md) | Required | planned | [Declared source profile](../task-facades.md) |
 | [FP-110 HTML element and block extraction](../requirements/FP-110.md) | Required | planned | Full source/qualification pending |
-| [FP-111 Hyphenation and advanced text-fit controls](../requirements/FP-111.md) | Required | planned | Full source/qualification pending |
+| [FP-111 Hyphenation and advanced text-fit controls](../requirements/FP-111.md) | Required | planned | [Declared source profile](../hyphenation-text-fit.md) |
 | [FP-112 Document templates and mail merge](../requirements/FP-112.md) | Required | planned | Full source/qualification pending |

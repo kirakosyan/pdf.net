@@ -119,11 +119,43 @@
   ],
   "pending": [
     "Actual decoder implementation, versioned independent readers/corpora, codec/font fidelity and sandbox qualification",
-    "Actual minimum/runtime/RID, fuzz/endurance and final-package consumers",
-    "Final hosted CI"
+    "Actual minimum/runtime/RID, fuzz/endurance and final-package consumers"
   ],
   "documentationCorrection": {
     "sourceCommit": "51920897e272de33cd6ed807da91046dbde2fd9e",
     "observation": "Final post-evidence check found generated requirements.md drift; regenerated the FP-107 source-profile link and the metadata check passed. No SDK bytes changed."
+  },
+  "finalHostedCi": {
+    "sourceCommit": "ebf64843f2ae1a9e747b79ef1fffbe6df28e2fdc",
+    "workflows": [
+      {
+        "id": 40104077253,
+        "name": "Application view source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40104077143,
+        "name": "Source contracts and release guard",
+        "conclusion": "success"
+      },
+      {
+        "id": 40104077071,
+        "name": "Windows automation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40104077129,
+        "name": "CLI source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40104077196,
+        "name": "Documentation source consumers",
+        "conclusion": "success"
+      }
+    ],
+    "rawObservation": "artifacts/fp107-final-ci.json",
+    "sha256": "b49344f9512f4d7254fa7347b6f0ee3ce89e30563bfc23e85d6cda4786153393",
+    "sourceOnly": true
   }
 }

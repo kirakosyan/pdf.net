@@ -4848,7 +4848,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/hyphenation-text-fit.md",
+        "sourceEvidence": "docs/evidence/FP-111-source.json",
+        "implemented": [
+          "Explicit exact-hash offline whole-word exceptions with language matching and grapheme-safe discretionary layout retaining logical ActualText",
+          "Managed fit-to-paper with caller scale floor/ceiling over existing imposition; source C#/VB consumers"
+        ],
+        "pending": [
+          "Complete linguistic pattern dictionaries and mixed-direction tailoring, multilingual visual/copy/search corpus",
+          "Browser CSS fit measurement and complete deployable host",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-112",

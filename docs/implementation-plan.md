@@ -232,3 +232,5 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 [#109 task facades](task-facades.md) compose existing engines with explicit immutable instance configuration and shared generation budgets. [Source evidence](evidence/FP-109-source.json) separates equivalence and language-consumer checks from full underlying qualification. #110 is next.
 
 [#110 HTML element extraction](html-element-extraction.md) is blocked by the complete browser-host prerequisite. [Evidence](evidence/FP-110-blocked.json) records zero element-capture acceptance runs and the precise geometry/resource/dynamic-DOM work still required. Continue independent managed #111 work; no element capture is claimed.
+
+[#111 hyphenation and text fit](hyphenation-text-fit.md) adds pinned offline word exceptions, logical-text-preserving discretionary hyphens and managed scale-limited paper fit. [Evidence](evidence/FP-111-source.json) keeps full linguistic/browser and production qualification open. Final release-workflow issue #112 is next; publication remains unauthorized and blocked.

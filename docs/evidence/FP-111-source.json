@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-111",
+  "issue": 111,
+  "sourceCommit": "75926abc450c642261ea1980aa4b221d71f31e28",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "src/Fluent.Pdf/Layout/PdfHyphenationDictionary.cs",
+      "sha256": "af0da13ab9ab69210fa186e197fe18a402f5b558e18a0088c00367c579e29266"
+    },
+    {
+      "path": "src/Fluent.Pdf/Layout/PdfFlowContracts.cs",
+      "sha256": "b49dac549367cfbb65026407b7e8a931e5dc42f1d74176081db393385ae7a171"
+    },
+    {
+      "path": "src/Fluent.Pdf/Layout/PdfFlowParagraphData.cs",
+      "sha256": "135311e1144a08766a3116933415b15a891d9af4815cd398c35c2df1674705e2"
+    },
+    {
+      "path": "src/Fluent.Pdf/Layout/PdfFlowLinePainter.cs",
+      "sha256": "5be7189fe538791812f46a0a8369bd2e2185d04867113ed43eb9f9b5dd4e8100"
+    },
+    {
+      "path": "src/Fluent.Pdf/Layout/PdfFlowResult.cs",
+      "sha256": "7690b84c79fb240e325accd2e5140f82b6bbc053b586ee7aebe41e12ca4b62cd"
+    },
+    {
+      "path": "src/Fluent.Pdf/Composition/PdfFlowNotes.cs",
+      "sha256": "914edf9573b1724de56d04fee5cd1eae2c7d60f5dab27244521cf0e14362a01d"
+    },
+    {
+      "path": "src/Fluent.Pdf/Organization/PdfPageImposition.cs",
+      "sha256": "128c8a85c949398d462b03027e79e4b2204ba3b2abd206d62d21d434f654e3c3"
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "171cc5954692d78e468c512ebb41a2447ed4250c52eb2d0f4d1490cae5035f35"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/HyphenationTests.cs",
+      "sha256": "3e02616ae8710ace24f0d8ed3ab56a444eb94095b47668155b3302dfc73bef1d"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "243ae7cec27e0be9924be909e1ff2b6cd0675d546374d0bcdc562f9d8d34b4f1"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "aa0be72325c597d8b7ba3eea89b7b1b8527e5c41b1e9b10be53165a18bc527f6"
+    },
+    {
+      "path": "docs/hyphenation-text-fit.md",
+      "sha256": "bd7be206b391ca6074abdb668a2e9eadc60b74b3343737ae5a1e151eb6ed3ce2"
+    }
+  ],
+  "validation": {
+    "selectedSourceTests": {
+      "productionQualified": false,
+      "lanes": [
+        {
+          "runtime": "artifacts/fp111-final-lanes-verified/net8/runtime.json",
+          "runtimeSha256": "A752F81760016F0FC43FE9015902292CC0256327C63DBC73350010C3519A2914",
+          "lane": "win-x64-net8.0",
+          "passed": 133,
+          "total": 133,
+          "report": "artifacts/fp111-final-lanes-verified/net8/selected.trx",
+          "sha256": "4171E09B066A02C02D5B191626FC9BFCBEBBA8027B5B507B876F3573F98435ED",
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "runtime": "artifacts/fp111-final-lanes-verified/net10/runtime.json",
+          "runtimeSha256": "8904CD7C5B6CA53861784A8B0947FA236CA0B5DD247BE5CA63F53EE1D92AA426",
+          "lane": "win-x64-net10.0",
+          "passed": 133,
+          "total": 133,
+          "report": "artifacts/fp111-final-lanes-verified/net10/selected.trx",
+          "sha256": "90D73D82ED3DE19B900E878683E6A37A35F6A35A7811146C310D8136AD6D3432",
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "runtime": "artifacts/fp111-final-lanes-verified/framework-x64/runtime.json",
+          "runtimeSha256": "BAB3FE2CAF0CED35166619B767DA7B6188B559686C68DF991EF1CED1FC70E773",
+          "lane": "win-x64-framework-current",
+          "passed": 133,
+          "total": 133,
+          "report": "artifacts/fp111-final-lanes-verified/framework-x64/selected.trx",
+          "sha256": "8D5E9ECA7123941057946AB56D30146F4362054D818FB791B488899AFE07530C",
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "runtime": "artifacts/fp111-final-lanes-verified/framework-x86/runtime.json",
+          "runtimeSha256": "CC1CCF2C3C3531096F818FA13F5B71A071E3E76562775970F71904CEC700F60E",
+          "lane": "win-x86-framework-current",
+          "passed": 133,
+          "total": 133,
+          "report": "artifacts/fp111-final-lanes-verified/framework-x86/selected.trx",
+          "sha256": "24CA77FC4BFA5DAD11C6760CD6D24F9D048B17E3CEBED178CBD42DADE20D3085",
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "runtime": "artifacts/fp111-final-lanes-verified/fallback/runtime.json",
+          "runtimeSha256": "E129666323B63B89FD8847F2B65866D0D0084477E020128EBA376B2ED5021DCD",
+          "lane": "win-x64-netstandard2.0-fallback",
+          "passed": 133,
+          "total": 133,
+          "report": "artifacts/fp111-final-lanes-verified/fallback/selected.trx",
+          "sha256": "1981EC729394F96F2D2449D7C2EC0CE4F16568D870DC9EB64246599BEB24366E",
+          "failed": 0,
+          "skipped": 0
+        }
+      ],
+      "purpose": "selected-source-hyphenation-flow-composition-organization-policy-and-runtime-tests",
+      "sourceCommit": "75926abc450c642261ea1980aa4b221d71f31e28",
+      "workingTreeDirty": true
+    },
+    "newApiDeclarations": 12,
+    "apiComparisons": 45,
+    "fullBuild": "zero warnings/errors",
+    "packageTargetsBlocked": 15,
+    "independentArtifactObservations": 40,
+    "readers": "pypdf6.10.0; PyMuPDF1.26.7 logical text/bounding boxes; Poppler pdfinfo",
+    "languageConsumers": "C#/VB across five source profiles; original English/Norwegian exception fixtures; Armenian/French combining-mark dictionary capture only, not visual language qualification"
+  },
+  "archive": {
+    "path": "artifacts/fp111-source-evidence.zip",
+    "sha256": "35c077ff6f65bb16d73ae5317e59652a9867528d6245a8f26d22f8c14f123bd4",
+    "bytes": 1107905,
+    "verifiedEntries": 121
+  },
+  "limitations": [
+    "Explicit exact whole-word exceptions, not complete linguistic pattern dictionaries",
+    "Entirely bidi-level-zero paragraphs and BMP pinned Unicode word-character profile; mixed/RTL tailoring fails explicitly",
+    "ActualText-aware readers retain logical text; raw glyph readers see discretionary hyphens",
+    "Paper-fit bounds apply to displayed source crop, not browser reflow or content outside the source crop",
+    "A premature initial test before full build matched zero cases and is rejected; subsequent source run retained one fixture-width overflow; final five lanes must all pass",
+    "Installed Framework4.8 is not actual minimum4.7.2"
+  ],
+  "pending": [
+    "Complete linguistic dictionaries/rules, multilingual visual/copy/search and overlap corpus",
+    "Browser CSS fitting measurement and qualified deployable host",
+    "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification",
+    "Final hosted CI"
+  ]
+}

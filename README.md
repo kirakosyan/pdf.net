@@ -28,6 +28,8 @@ A TFM or compatible package declaration does not establish OS, runtime or provid
 
 The optional [DjVu/CDR host boundary](docs/legacy-format-import.md) stages and validates explicit caller-host imports. No DjVu/CDR decoder or supported source version is bundled or qualified.
 
+[Explicit hyphenation and paper fit](docs/hyphenation-text-fit.md) support pinned whole-word exceptions and caller-bounded managed scaling. Complete linguistic/browser and production qualification remain pending.
+
 [Task facades](docs/task-facades.md) provide explicit instance-based generation, conversion, extraction, forms, optimization and collection composition over the existing engines, with C#/VB/F# source examples.
 
 [Text and Markdown interchange](docs/text-interchange.md) offers exact-source caller-assigned projections, explicit reading order, inferred tables and optional page-image bundles. Automatic complete semantic reconstruction and production qualification remain pending.

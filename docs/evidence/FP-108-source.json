@@ -135,7 +135,39 @@
   ],
   "pending": [
     "Complex real multi-column and complete tagged semantic corpus, native fidelity and human review",
-    "Actual minimum/runtime/RID, fuzz/endurance and final-package consumers",
-    "Final hosted CI"
-  ]
+    "Actual minimum/runtime/RID, fuzz/endurance and final-package consumers"
+  ],
+  "finalHostedCi": {
+    "sourceCommit": "767484ce351c9500b5be248f075d71a2b39b13fd",
+    "workflows": [
+      {
+        "id": 40105422379,
+        "name": "Windows automation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40105422387,
+        "name": "Application view source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40105422411,
+        "name": "CLI source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40105422370,
+        "name": "Documentation source consumers",
+        "conclusion": "success"
+      },
+      {
+        "id": 40105422424,
+        "name": "Source contracts and release guard",
+        "conclusion": "success"
+      }
+    ],
+    "rawObservation": "artifacts/fp108-final-ci.json",
+    "sha256": "c5b7459f6ddeb536814443855bcb3c00d80dfd8c11f95391bef05e2f1a02b036",
+    "sourceOnly": true
+  }
 }

@@ -220,6 +220,11 @@ public sealed class PdfFlowParagraph : PdfFlowBlock
     public IReadOnlyList<PdfFlowRun> Runs { get; }
     /// <summary>Gets the immutable formatting policy.</summary>
     public PdfFlowParagraphStyle Style { get; }
+
+    /// <summary>Gets the explicitly provisioned whole-word hyphenation dictionary, or null.</summary>
+    public PdfHyphenationDictionary? Hyphenation { get; private set; }
+    /// <summary>Returns a new paragraph with exact-language dictionary breaks. Original runs and logical text are unchanged; no dictionary is selected implicitly.</summary>
+    public PdfFlowParagraph WithHyphenation(PdfHyphenationDictionary dictionary) => new(Runs, Style) { Hyphenation = dictionary ?? throw new ArgumentNullException(nameof(dictionary)) };
 }
 
 /// <summary>An explicit page boundary, including an intentional blank page when already at a page start.</summary>

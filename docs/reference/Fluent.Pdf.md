@@ -958,6 +958,7 @@ Fluent.Pdf.PdfFlowLine.Baseline.get -> double
 Fluent.Pdf.PdfFlowLine.BlockIndex.get -> int
 Fluent.Pdf.PdfFlowLine.Bounds.get -> Fluent.Pdf.PdfRect
 Fluent.Pdf.PdfFlowLine.EndsHardBreak.get -> bool
+Fluent.Pdf.PdfFlowLine.HasDiscretionaryHyphen.get -> bool
 Fluent.Pdf.PdfFlowLine.IsClipped.get -> bool
 Fluent.Pdf.PdfFlowLine.ShapedText.get -> Fluent.Pdf.PdfShapedText!
 Fluent.Pdf.PdfFlowLine.Text.get -> string!
@@ -1024,11 +1025,13 @@ Fluent.Pdf.PdfFlowPage.Tables.get -> System.Collections.Generic.IReadOnlyList<Fl
 Fluent.Pdf.PdfFlowPageBreak
 Fluent.Pdf.PdfFlowPageBreak.PdfFlowPageBreak() -> void
 Fluent.Pdf.PdfFlowParagraph
+Fluent.Pdf.PdfFlowParagraph.Hyphenation.get -> Fluent.Pdf.PdfHyphenationDictionary?
 Fluent.Pdf.PdfFlowParagraph.PdfFlowParagraph(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowRun!>! runs) -> void
 Fluent.Pdf.PdfFlowParagraph.PdfFlowParagraph(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfFlowRun!>! runs, Fluent.Pdf.PdfFlowParagraphStyle? style) -> void
 Fluent.Pdf.PdfFlowParagraph.PdfFlowParagraph(string! text, Fluent.Pdf.PdfFlowTextStyle! textStyle, Fluent.Pdf.PdfFlowParagraphStyle? style = null) -> void
 Fluent.Pdf.PdfFlowParagraph.Runs.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfFlowRun!>!
 Fluent.Pdf.PdfFlowParagraph.Style.get -> Fluent.Pdf.PdfFlowParagraphStyle!
+Fluent.Pdf.PdfFlowParagraph.WithHyphenation(Fluent.Pdf.PdfHyphenationDictionary! dictionary) -> Fluent.Pdf.PdfFlowParagraph!
 Fluent.Pdf.PdfFlowParagraphStyle
 Fluent.Pdf.PdfFlowParagraphStyle.Alignment.get -> Fluent.Pdf.PdfFlowAlignment
 Fluent.Pdf.PdfFlowParagraphStyle.Clear.get -> Fluent.Pdf.PdfFlowClear
@@ -1406,6 +1409,13 @@ Fluent.Pdf.PdfHtmlSource.Address.get -> System.Uri!
 Fluent.Pdf.PdfHtmlSource.Markup.get -> string?
 Fluent.Pdf.PdfHtmlSource.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
 Fluent.Pdf.PdfHtmlSource.Resources.get -> System.Collections.Generic.IReadOnlyList<Fluent.Pdf.PdfHtmlResource!>!
+Fluent.Pdf.PdfHyphenationDictionary
+Fluent.Pdf.PdfHyphenationDictionary.Count.get -> int
+Fluent.Pdf.PdfHyphenationDictionary.Language.get -> string!
+Fluent.Pdf.PdfHyphenationDictionary.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.PdfHyphenationDictionary.Provenance.get -> string!
+Fluent.Pdf.PdfHyphenationDictionary.Sha256.get -> string!
+Fluent.Pdf.PdfHyphenationDictionary.Version.get -> string!
 Fluent.Pdf.PdfImageAsset
 Fluent.Pdf.PdfImageAsset.Definition.get -> Fluent.Pdf.PdfValue!
 Fluent.Pdf.PdfImageAsset.DisplayAspect.get -> double
@@ -3503,6 +3513,7 @@ static Fluent.Pdf.PdfHtmlResource.Read(System.Uri! address, string! mediaType, S
 static Fluent.Pdf.PdfHtmlSource.FromHtml(string! markup, System.Uri? address = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!
 static Fluent.Pdf.PdfHtmlSource.FromResource(System.Uri! address, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>! resources, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!
 static Fluent.Pdf.PdfHtmlSource.Read(System.IO.Stream! input, System.Uri? address = null, System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfHtmlResource!>? resources = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlSource!
+static Fluent.Pdf.PdfHyphenationDictionary.Read(System.IO.Stream! input, string! language, string! version, string! provenance, string! expectedSha256, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHyphenationDictionary!
 static Fluent.Pdf.PdfImageCleanup.Process(Fluent.Pdf.PdfOcrRaster! original, Fluent.Pdf.PdfImageCleanupOptions! options, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageCleanupResult!
 static Fluent.Pdf.PdfImages.Deduplicate(System.Collections.Generic.IEnumerable<Fluent.Pdf.PdfImageAsset!>! images, int maximumImages = 10000, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageDeduplicationResult!
 static Fluent.Pdf.PdfImages.FromEncoded(System.IO.Stream! input, Fluent.Pdf.PdfImageInfo! info, Fluent.Pdf.PdfColorSpace! colorSpace, Fluent.Pdf.PdfFilter![]! filters, Fluent.Pdf.PdfImageAsset? softMask = null, double[]? decode = null, Fluent.Pdf.PdfImageMetadata? metadata = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfImageAsset!
@@ -3577,6 +3588,7 @@ static Fluent.Pdf.PdfPageDecoration.Html(string! html, Fluent.Pdf.IPdfTemplateHt
 static Fluent.Pdf.PdfPageDecoration.Vector(Fluent.Pdf.PdfDrawing! drawing, Fluent.Pdf.PdfRect sourceBounds) -> Fluent.Pdf.PdfPageDecoration!
 static Fluent.Pdf.PdfPageGraphics.Inspect(Fluent.Pdf.PdfDocumentSnapshot! source, int pageIndex, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfPageGraphics!
 static Fluent.Pdf.PdfPageImposition.Booklet(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, Fluent.Pdf.PdfMargins? margins = null, double gap = 0, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
+static Fluent.Pdf.PdfPageImposition.FitToPaper(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, double minimumScale, double maximumScale = 1, Fluent.Pdf.PdfMargins? margins = null, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfPageImposition.NUp(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, int columns = 2, int rows = 1, Fluent.Pdf.PdfMargins? margins = null, double gap = 0, Fluent.Pdf.PdfCanvasFit fit = Fluent.Pdf.PdfCanvasFit.Contain, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfPageImposition.Tile(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSize sheet, Fluent.Pdf.PdfMargins? margins = null, double overlap = 0, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
 static Fluent.Pdf.PdfPageOrganization.Delete(Fluent.Pdf.PdfDocumentSnapshot! source, Fluent.Pdf.PdfPageSelection! selection, Fluent.Pdf.PdfOrganizationOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfDocument!
@@ -6878,6 +6890,10 @@ Captures a nonempty style-bearing run collection or one styled text paragraph.
 
 Captures a nonempty style-bearing run collection or one styled text paragraph.
 
+### <code>M:Fluent.Pdf.PdfFlowParagraph.WithHyphenation(Fluent.Pdf.PdfHyphenationDictionary)</code>
+
+Returns a new paragraph with exact-language dictionary breaks. Original runs and logical text are unchanged; no dictionary is selected implicitly.
+
 ### <code>M:Fluent.Pdf.PdfFlowParagraphStyle.#ctor(Fluent.Pdf.PdfFlowAlignment,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,Fluent.Pdf.PdfFlowClear)</code>
 
 Captures finite paragraph geometry and explicit pagination constraints.
@@ -7161,6 +7177,10 @@ Uses an exact HTTP(S) document address. Bytes require supplied Resources or an e
 ### <code>M:Fluent.Pdf.PdfHtmlSource.Read(System.IO.Stream,System.Uri,System.Collections.Generic.IEnumerable{Fluent.Pdf.PdfHtmlResource},Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Captures UTF-8 HTML from a borrowed file/document stream. A UTF-8 BOM is allowed; malformed Unicode rejects without guessing another encoding.
+
+### <code>M:Fluent.Pdf.PdfHyphenationDictionary.Read(System.IO.Stream,System.String,System.String,System.String,System.String,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Reads at most 2 MiB of strict UTF-8 LF-terminated word TAB comma-separated UTF-16 break offsets. Unique BMP words use pinned Unicode strong/mark characters, at most128 units; offsets increase at interior extended-grapheme boundaries. Input stays caller-owned.
 
 ### <code>M:Fluent.Pdf.PdfImageAsset.OpenSamples(Fluent.Pdf.PdfProviderRegistry,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
@@ -7887,6 +7907,10 @@ Replaces exactly one captured invocation with a detached XObject, retaining its 
 ### <code>M:Fluent.Pdf.PdfPageImposition.Booklet(Fluent.Pdf.PdfDocumentSnapshot,Fluent.Pdf.PdfPageSize,System.Nullable{Fluent.Pdf.PdfMargins},System.Double,Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Pads to a multiple of four and places outer/inner front and back pairs for a left-bound booklet.
+
+### <code>M:Fluent.Pdf.PdfPageImposition.FitToPaper(Fluent.Pdf.PdfDocumentSnapshot,Fluent.Pdf.PdfPageSize,System.Double,System.Double,System.Nullable{Fluent.Pdf.PdfMargins},Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Fits each displayed source page onto one sheet without clipping or distortion. Uniform scale stays within explicit positive limits; a page requiring smaller scale rejects the whole operation. Existing source crop semantics are retained.
 
 ### <code>M:Fluent.Pdf.PdfPageImposition.NUp(Fluent.Pdf.PdfDocumentSnapshot,Fluent.Pdf.PdfPageSize,System.Int32,System.Int32,System.Nullable{Fluent.Pdf.PdfMargins},System.Double,Fluent.Pdf.PdfCanvasFit,Fluent.Pdf.PdfOrganizationOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
@@ -10714,6 +10738,10 @@ Gets the available rectangle relative to the page content origin, in physical po
 
 Gets whether the line ends at an explicit logical line separator.
 
+### <code>P:Fluent.Pdf.PdfFlowLine.HasDiscretionaryHyphen</code>
+
+Gets whether visual shaping appends a discretionary hyphen omitted from the unchanged logical Text and ActualText.
+
 ### <code>P:Fluent.Pdf.PdfFlowLine.IsClipped</code>
 
 Gets whether explicit diagnosed overflow clipping applies.
@@ -10877,6 +10905,10 @@ Gets footnotes/endnotes and their reference associations.
 ### <code>P:Fluent.Pdf.PdfFlowPage.Tables</code>
 
 Gets immutable table header/body slices on this page.
+
+### <code>P:Fluent.Pdf.PdfFlowParagraph.Hyphenation</code>
+
+Gets the explicitly provisioned whole-word hyphenation dictionary, or null.
 
 ### <code>P:Fluent.Pdf.PdfFlowParagraph.Runs</code>
 
@@ -11761,6 +11793,30 @@ Gets the successful source preparation report.
 ### <code>P:Fluent.Pdf.PdfHtmlSource.Resources</code>
 
 Gets the explicit resource map; document creation never follows these URLs.
+
+### <code>P:Fluent.Pdf.PdfHyphenationDictionary.Count</code>
+
+Gets the number of exact whole-word entries.
+
+### <code>P:Fluent.Pdf.PdfHyphenationDictionary.Language</code>
+
+Gets the exact language tag required by all paragraph runs.
+
+### <code>P:Fluent.Pdf.PdfHyphenationDictionary.OperationReport</code>
+
+Gets the completed dictionary-capture report.
+
+### <code>P:Fluent.Pdf.PdfHyphenationDictionary.Provenance</code>
+
+Gets the caller's source/license provenance identifier; it is not a redistribution approval.
+
+### <code>P:Fluent.Pdf.PdfHyphenationDictionary.Sha256</code>
+
+Gets the verified SHA-256 of the exact input bytes.
+
+### <code>P:Fluent.Pdf.PdfHyphenationDictionary.Version</code>
+
+Gets the caller's pinned dictionary version.
 
 ### <code>P:Fluent.Pdf.PdfImageAsset.Definition</code>
 
@@ -17113,6 +17169,10 @@ An immutable explicitly supplied browser resource. No path or URL is fetched by 
 ### <code>T:Fluent.Pdf.PdfHtmlSource</code>
 
 Captured markup or an explicitly addressed main resource and immutable local resource map. It authorizes no network or filesystem access.
+
+### <code>T:Fluent.Pdf.PdfHyphenationDictionary</code>
+
+Explicit offline, exact-language whole-word hyphenation exceptions. No dictionary download, normalization, case folding or linguistic rules are inferred.
 
 ### <code>T:Fluent.Pdf.PdfImageAsset</code>
 

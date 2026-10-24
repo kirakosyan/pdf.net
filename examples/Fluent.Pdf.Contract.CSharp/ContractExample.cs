@@ -433,4 +433,5 @@ public static class ContractExample
     public static PdfDocument ImportLegacyFormat(Stream input, Fluent.Pdf.Formats.PdfLegacyImportOptions options, Fluent.Pdf.Formats.IPdfIsolatedLegacyImporter host) => Fluent.Pdf.Formats.PdfLegacyImport.Read(input, options, host);
     public static PdfOperationReport ExportMarkdown(Stream input, Stream output, string sourceSha256, int pageIndex) => Fluent.Pdf.Formats.PdfTextInterchange.Write(input, output, Fluent.Pdf.Formats.PdfTextInterchangeFormat.Markdown, new[] { new Fluent.Pdf.Formats.PdfTextInterchangeBlock(pageIndex) }, new(sourceSha256), policy: new(PdfProcessingMode.Permissive));
     public static PdfOperationReport GenerateTaskPdf(Fluent.Pdf.Formats.PdfTasks tasks, IEnumerable<PdfFlowBlock> blocks, PdfFlowOptions options, Stream output) => tasks.Generate(blocks, options, output);
+    public static PdfFlowResult HyphenateParagraph(PdfFlowParagraph paragraph, PdfHyphenationDictionary dictionary, PdfFlowOptions options, PdfProviderRegistry providers) => PdfFlow.Layout(new[] { paragraph.WithHyphenation(dictionary) }, options, providers);
 }

@@ -591,4 +591,7 @@ Public Module ContractExample
     Public Function GenerateTaskPdf(tasks As Fluent.Pdf.Formats.PdfTasks, blocks As IEnumerable(Of PdfFlowBlock), options As PdfFlowOptions, output As Stream) As PdfOperationReport
         Return tasks.Generate(blocks, options, output)
     End Function
+    Public Function HyphenateParagraph(paragraph As PdfFlowParagraph, dictionary As PdfHyphenationDictionary, options As PdfFlowOptions, providers As PdfProviderRegistry) As PdfFlowResult
+        Return PdfFlow.Layout({paragraph.WithHyphenation(dictionary)}, options, providers)
+    End Function
 End Module

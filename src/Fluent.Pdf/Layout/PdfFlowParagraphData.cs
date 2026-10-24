@@ -108,6 +108,9 @@ internal sealed class PdfFlowParagraphData
             if (!HardBreaks.Contains(boundary) && boundary < Text.Length && (Glue(Text[boundary]) || boundary > 0 && Glue(Text[boundary - 1])))
                 Breaks.Remove(boundary);
         Breaks.Add(Text.Length);
+        HyphenBreaks = new HashSet<int>();
+        paragraph.Hyphenation?.Apply(paragraph, Text, Unicode, HyphenBreaks, context);
+        Breaks.UnionWith(HyphenBreaks);
         var full = Get(0, Text.Length);
         Height = full.Height;
         context.Consume(PdfResourceKind.ExpandedBytes, Ends.Length * 16L + 64);
@@ -130,6 +133,7 @@ internal sealed class PdfFlowParagraphData
     internal int[] Ends { get; }
     internal HashSet<int> Breaks { get; }
     internal HashSet<int> HardBreaks { get; }
+    internal HashSet<int> HyphenBreaks { get; }
     internal Dictionary<int, double> Advances { get; }
     internal double Height { get; }
 
@@ -152,9 +156,11 @@ internal sealed class PdfFlowParagraphData
     {
         if (_cache.TryGetValue((start, end), out var cached))
             return cached;
-        var analysis = PdfFlowUnicode.Line(Unicode, start, end - start, _context);
+        bool hyphen = HyphenBreaks.Contains(end);
+        if (hyphen) _context.Consume(PdfResourceKind.ExpandedBytes, (end - start + 1) * 4L + 128);
+        var analysis = hyphen ? PdfUnicode.AnalyzeCore(Text.Substring(start, end - start) + "-", PdfParagraphDirection.LeftToRight, _context) : PdfFlowUnicode.Line(Unicode, start, end - start, _context);
         var firstStyle = StyleAt(start);
-        var shaped = PdfText.ShapeCore(analysis.Text, firstStyle.Fonts, _shaper, firstStyle.TextOptions, _context, analysis, p => StyleAt(start + p).Fonts, p => StyleAt(start + p).TextOptions, true);
+        var shaped = PdfText.ShapeCore(analysis.Text, firstStyle.Fonts, _shaper, firstStyle.TextOptions, _context, analysis, p => StyleAt(hyphen ? Math.Min(end - 1, start + p) : start + p).Fonts, p => StyleAt(hyphen ? Math.Min(end - 1, start + p) : start + p).TextOptions, true);
         _context.Consume(PdfResourceKind.ExpandedBytes, analysis.Scalars.Count * 24L + shaped.Runs.Count * 64L + 256);
         var visual = new Dictionary<int, int>();
         for (int i = 0; i < analysis.VisualScalarOrder.Count; i++)
@@ -167,7 +173,7 @@ internal sealed class PdfFlowParagraphData
             foreach (var scalar in analysis.Scalars)
                 if (scalar.Utf16Offset >= run.Request.Start && scalar.Utf16Offset < run.Request.Start + run.Request.Length && visual.TryGetValue(scalar.Utf16Offset, out int v))
                     rank = Math.Min(rank, v);
-            entries.Add(new(run, StyleAt(start + run.Request.Start), -1, rank));
+            entries.Add(new(run, StyleAt(hyphen ? Math.Min(end - 1, start + run.Request.Start) : start + run.Request.Start), -1, rank));
         }
 
         foreach (var s in analysis.Scalars)
