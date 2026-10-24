@@ -5,6 +5,7 @@ using System.Text.Json;
 
 // Offline metadata only. Inspected code is never loaded or invoked.
 if (args.Length != 4) throw new ArgumentException("Supply assembly, portable PDB, source commit and report path.");
+Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(args[3]))!);
 File.Delete(args[3]); // A failed repeat cannot leave a stale passing report.
 string assembly = Path.GetFullPath(args[0]), pdb = Path.GetFullPath(args[1]), commit = args[2];
 if (!System.Text.RegularExpressions.Regex.IsMatch(commit, "^[a-f0-9]{40}$")) throw new ArgumentException("Invalid source commit.");

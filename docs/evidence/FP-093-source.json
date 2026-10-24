@@ -242,5 +242,16 @@
     "Final probe revision was rebuilt separately and all 60 probes repeated; source project whitespace was normalized after the two SDK builds",
     "Archive positives use synthetic in-memory ZIP bytes, not SDK candidate packages; positive packing and clean manifest generation remain unexecuted while qualification is blocked",
     "All new hosted source/rebuild CI, exact final packages, complete minimum-runtime/provider/native/supply-chain and full production qualification remain required"
-  ]
+  ],
+  "hostedRebuildCorrection": {
+    "failedHead": "572cbfb870609d75577b5a7af62e6182ef71847a",
+    "run": 40084888344,
+    "job": 120845684411,
+    "cause": "On Linux File.Delete throws DirectoryNotFoundException for an absent parent; both source builds completed before the first probe failed",
+    "fix": "Create the report parent directory before removing any stale report",
+    "localRegression": "artifacts/fp093-directory-fix/19860b80544b482099c1304b8207854f/nested/report.json",
+    "localRegressionSha256": "17c29e27a5508521bbcfcfc9cccf819524cd83697a0744a43bace7fa7cf46610",
+    "failedLogSha256": "19e6755c0ef124d3627fd42e9cd3938d2e7f09bfc82d9968b97e2fe362cb28e3",
+    "hostedRevalidation": "pending"
+  }
 }
