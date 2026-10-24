@@ -26,6 +26,8 @@ foreach($file in $catalog.files){
 $source=Join-Path $PSScriptRoot 'InvoiceValidatorHost/InvoiceValidationHost.java'
 & javac --release 17 -cp $jar -d $classes $source
 if($LASTEXITCODE -ne 0){throw 'Original independent source invoice host did not compile.'}
+& java -cp ($classes+[IO.Path]::PathSeparator+$jar) InvoiceValidationHost --verify-assets $rules
+if($LASTEXITCODE -ne 0){throw 'Exact invoice asset alias/resolution boundary failed.'}
 $version=& java -version 2>&1 | Out-String
 if($LASTEXITCODE -ne 0){throw 'Explicit independent source Java prerequisite failed.'}
 $saxon=& java -cp $jar net.sf.saxon.Version 2>&1 | Out-String
