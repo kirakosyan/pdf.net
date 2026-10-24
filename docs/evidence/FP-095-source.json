@@ -179,5 +179,15 @@
     "Schema validation proves SBOM structure, not distribution completeness or redistribution rights",
     "No new SDK functional implementation or runtime qualification is claimed by these analysis tools",
     "Final hosted CI for this checkpoint remains required"
-  ]
+  ],
+  "hostedCorrection": {
+    "commit": "c9441d2d5e8cefa09efaf9d73c5b1a30016d7f73",
+    "run": 40092155397,
+    "job": 120866869693,
+    "failure": "Evidence upload rejected colon characters in the disposable NuGet HTTP cache. All three Linux x64 profiles passed 1781 tests each; API, advisory and release guard steps passed.",
+    "fix": "Exclude only fresh-advisory-cache from upload; retain raw advisories, checked coverage, source inventories and every other source report.",
+    "log": "artifacts/fp095-upload-failure.log",
+    "logSha256": "635d5062e4583897999cd2dcd7e263b1b37fab581b970833975887735d7a2f07",
+    "correctedHostedStatus": "pending"
+  }
 }

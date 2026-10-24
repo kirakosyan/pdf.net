@@ -111,7 +111,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: source-contracts-${{ matrix.id }}
-          path: artifacts/contracts/
+          path: |
+            artifacts/contracts/
+            !artifacts/contracts/supply-chain/fresh-advisory-cache/**
           if-no-files-found: error
 
   reproducibility:
