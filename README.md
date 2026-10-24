@@ -170,3 +170,5 @@ FP-090 adds a pinned original fidelity corpus with independent Unicode, geometry
 FP-091 adds private bounded content caches and repeated-process checks for explicit metadata and compression inputs. See [determinism and tenancy](docs/determinism-caching.md) for isolation rules and the remaining qualification.
 
 FP-092 adds opt-in sanitized observations, numeric progress, caller-drained sinks and bounded support JSON. See [observability](docs/observability.md) for privacy, loss counters and qualification limits.
+
+[Package provenance](docs/package-reproducibility.md) describes the guarded candidate metadata, source rebuild checks and offline symbol/archive inspection. Final packages remain unqualified and publication is blocked.

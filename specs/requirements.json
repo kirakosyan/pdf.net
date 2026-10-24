@@ -364,7 +364,7 @@
       "dependencies": [
         "FP-007"
       ],
-      "scope": "Draw and edit paths, Bézier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
+      "scope": "Draw and edit paths, B\u00e9zier curves, clipping, patterns, shadings, blend modes, soft masks, transparency groups, RGB/CMYK/Gray, ICC, Lab, spot and DeviceN colors.",
       "acceptance": [
         "Maintain graphics-state isolation",
         "Preserve vector output and transparency semantics",
@@ -3386,7 +3386,7 @@
       ],
       "implementationProgress": {
         "sourceImplementation": "docs/barcodes.md",
-        "scope": "Original QR Model2 versions1–40/all ECC and Code128B; mandatory independent decode before acceptance; optional pinned managed decoder; native PDF detector landmark coordinates; canonical EPC002/UTF8 invoice/payment validation",
+        "scope": "Original QR Model2 versions1\u201340/all ECC and Code128B; mandatory independent decode before acceptance; optional pinned managed decoder; native PDF detector landmark coordinates; canonical EPC002/UTF8 invoice/payment validation",
         "productionQualified": false,
         "remaining": [
           "Full declared symbol/payment/multi-code integration profiles and complete independent acceptance",
@@ -4018,7 +4018,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/package-reproducibility.md",
+        "implemented": [
+          "Shared guarded metadata for fifteen version-coupled candidate projects",
+          "Fresh output-tree reproducibility checks and offline assembly/PDB/SourceLink inspection",
+          "Bounded candidate ZIP content/dependency/hash inspection with exact rebuild comparison"
+        ],
+        "pending": [
+          "Actual final candidates and independent clean-checkout rebuilds",
+          "Complete symbols/source checksum, native package and supply-chain qualification",
+          "All exact-package consumers and complete production gates"
+        ]
+      }
     },
     {
       "id": "FP-094",

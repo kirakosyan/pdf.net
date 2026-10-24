@@ -96,7 +96,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-090 Independent fidelity and interoperability corpus](../requirements/FP-090.md) | Required | planned | [Declared source profile](../fidelity-corpus.md) |
 | [FP-091 Deterministic output, caching and tenancy](../requirements/FP-091.md) | Required | planned | [Declared source profile](../determinism-caching.md) |
 | [FP-092 Observability and support diagnostics](../requirements/FP-092.md) | Required | planned | [Declared source profile](../observability.md) |
-| [FP-093 Reproducible NuGet packages and API compatibility](../requirements/FP-093.md) | Required | planned | Full source/qualification pending |
+| [FP-093 Reproducible NuGet packages and API compatibility](../requirements/FP-093.md) | Required | planned | [Declared source profile](../package-reproducibility.md) |
 | [FP-094 Production release and Trusted Publishing](../requirements/FP-094.md) | Required | planned | Full source/qualification pending |
 | [FP-095 Dependency licensing and supply-chain inventory](../requirements/FP-095.md) | Required | planned | Full source/qualification pending |
 | [FP-096 PDF Reader placeholder boundary](../requirements/FP-096.md) | Excluded Reader | implemented | Full source/qualification pending |

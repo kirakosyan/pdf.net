@@ -28,6 +28,6 @@ Use NuGet Trusted Publishing, repository kirakosyan/pdf.net, workflow publish.ym
 
 The checked-in publish workflow is fail-closed. It accepts only a stable main-branch tag, a previous successful qualification workflow run and a named artifact containing final packages and release-evidence.json. It verifies the current checked-in requirement/readiness state and exact evidence before granting OIDC to the publishing job.
 
-The first implementation of full qualification runners and SourceLink/package inspection remains mandatory FP-086/093/094 work. Foundation CI is not a qualification workflow. Never point publication at a foundation artifact or manually change statuses to bypass that distinction.
+The [package provenance tooling](package-reproducibility.md) checks shared metadata, source rebuild bytes and embedded SourceLink, and provides an offline final-candidate inspector. Its source checks do not qualify final packages. Full qualification runners and actual package inspection remain mandatory FP-086/093/094 work. Foundation CI is not a qualification workflow. Never point publication at a foundation artifact or manually change statuses to bypass that distinction.
 
 Official references: [NuGet Trusted Publishing](https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing), [package publishing](https://learn.microsoft.com/en-us/nuget/nuget-org/publish-a-package), [repository signatures](https://learn.microsoft.com/en-us/nuget/reference/signed-packages-reference).
