@@ -8,7 +8,21 @@ The baseline preserves exact nullability, parameter names, defaults and constant
 
 ```text
 Fluent.Pdf.Html.ChromiumConnectionFactory
+Fluent.Pdf.Html.ChromiumContainerHost
+Fluent.Pdf.Html.ChromiumContainerOptions
+Fluent.Pdf.Html.ChromiumContainerOptions.ChromiumContainerOptions(string! dockerExecutable, string! dockerSha256, string! daemonEndpoint, string! imageId, string! emptyConfigurationDirectory, string! seccompProfile, string! seccompSha256, long maximumMemoryBytes, int maximumProcesses = 64, System.TimeSpan? maximumElapsedTime = null) -> void
+Fluent.Pdf.Html.ChromiumContainerOptions.DaemonEndpoint.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.DockerExecutable.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.DockerSha256.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.EmptyConfigurationDirectory.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.ImageId.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.MaximumElapsedTime.get -> System.TimeSpan
+Fluent.Pdf.Html.ChromiumContainerOptions.MaximumMemoryBytes.get -> long
+Fluent.Pdf.Html.ChromiumContainerOptions.MaximumProcesses.get -> int
+Fluent.Pdf.Html.ChromiumContainerOptions.SeccompProfile.get -> string!
+Fluent.Pdf.Html.ChromiumContainerOptions.SeccompSha256.get -> string!
 Fluent.Pdf.Html.ChromiumHtmlRenderer
+Fluent.Pdf.Html.ChromiumHtmlRenderer.Capture(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.Html.HtmlElementRequest! request, Fluent.Pdf.PdfHtmlOptions? options = null, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.Html.HtmlElementCapture!
 Fluent.Pdf.Html.ChromiumHtmlRenderer.ChromiumHtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory! factory, string! exactVersion, string! exactRevision) -> void
 Fluent.Pdf.Html.ChromiumHtmlRenderer.ChromiumHtmlRenderer(Fluent.Pdf.Html.ChromiumConnectionFactory! factory, string! exactVersion, string! exactRevision, Fluent.Pdf.Html.HtmlResourceSessionFactory? resourceSessionFactory) -> void
 Fluent.Pdf.Html.ChromiumHtmlRenderer.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
@@ -16,6 +30,27 @@ Fluent.Pdf.Html.ChromiumHtmlRenderer.ExpectedRevision.get -> string!
 Fluent.Pdf.Html.ChromiumHtmlRenderer.ExpectedVersion.get -> string!
 Fluent.Pdf.Html.ChromiumHtmlRenderer.Render(Fluent.Pdf.PdfHtmlSource! source, Fluent.Pdf.PdfHtmlOptions! options, System.IO.Stream! pdfOutput, Fluent.Pdf.PdfOperationContext! context) -> void
 Fluent.Pdf.Html.HtmlAssets
+Fluent.Pdf.Html.HtmlElementCapture
+Fluent.Pdf.Html.HtmlElementCapture.BaseAddress.get -> System.Uri!
+Fluent.Pdf.Html.HtmlElementCapture.CaptureBounds.get -> Fluent.Pdf.Html.HtmlElementRectangle!
+Fluent.Pdf.Html.HtmlElementCapture.DocumentBounds.get -> Fluent.Pdf.Html.HtmlElementRectangle!
+Fluent.Pdf.Html.HtmlElementCapture.Markup.get -> string?
+Fluent.Pdf.Html.HtmlElementCapture.OpenPng() -> System.IO.Stream!
+Fluent.Pdf.Html.HtmlElementCapture.OperationReport.get -> Fluent.Pdf.PdfOperationReport!
+Fluent.Pdf.Html.HtmlElementCapture.ViewportBounds.get -> Fluent.Pdf.Html.HtmlElementRectangle!
+Fluent.Pdf.Html.HtmlElementRectangle
+Fluent.Pdf.Html.HtmlElementRectangle.Height.get -> double
+Fluent.Pdf.Html.HtmlElementRectangle.Width.get -> double
+Fluent.Pdf.Html.HtmlElementRectangle.X.get -> double
+Fluent.Pdf.Html.HtmlElementRectangle.Y.get -> double
+Fluent.Pdf.Html.HtmlElementRequest
+Fluent.Pdf.Html.HtmlElementRequest.HtmlElementRequest(string? selector = null, string? literalText = null, int maximumNodes = 10000, long maximumPixels = 16777216, int maximumPngBytes = 8388608, int maximumMarkupCharacters = 0) -> void
+Fluent.Pdf.Html.HtmlElementRequest.LiteralText.get -> string?
+Fluent.Pdf.Html.HtmlElementRequest.MaximumMarkupCharacters.get -> int
+Fluent.Pdf.Html.HtmlElementRequest.MaximumNodes.get -> int
+Fluent.Pdf.Html.HtmlElementRequest.MaximumPixels.get -> long
+Fluent.Pdf.Html.HtmlElementRequest.MaximumPngBytes.get -> int
+Fluent.Pdf.Html.HtmlElementRequest.Selector.get -> string?
 Fluent.Pdf.Html.HtmlHttpRequest
 Fluent.Pdf.Html.HtmlHttpRequest.Address.get -> System.Uri!
 Fluent.Pdf.Html.HtmlHttpRequest.ClientCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
@@ -91,6 +126,7 @@ Fluent.Pdf.Html.PinnedHtmlHttpTransport.Send(Fluent.Pdf.Html.HtmlHttpRequest! re
 Fluent.Pdf.Html.SystemHtmlNameResolver
 Fluent.Pdf.Html.SystemHtmlNameResolver.Resolve(string! host, Fluent.Pdf.PdfOperationContext! context) -> System.Collections.Generic.IReadOnlyList<System.Net.IPAddress!>!
 Fluent.Pdf.Html.SystemHtmlNameResolver.SystemHtmlNameResolver() -> void
+static Fluent.Pdf.Html.ChromiumContainerHost.Open(Fluent.Pdf.Html.ChromiumContainerOptions! options, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.Html.IChromiumConnection!
 static Fluent.Pdf.Html.HtmlAssets.CaptureDataUri(string! dataUri, System.Uri! address, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfHtmlResource!
 static Fluent.Pdf.Html.HtmlAssets.CaptureFile(string! protectedRoot, string! relativePath, System.Uri! address, string! mediaType, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfHtmlResource!
 static Fluent.Pdf.Html.HtmlAssets.ReadDataUri(string! dataUri, System.Uri! address, Fluent.Pdf.PdfOperationPolicy? policy = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Fluent.Pdf.PdfHtmlResource!
@@ -121,6 +157,14 @@ A trusted ASPX/WebForms host on Windows .NET Framework, yielding UTF8 HTML.
 
 A trusted Windows XAML print host yielding a complete PDF.
 
+### <code>M:Fluent.Pdf.Html.ChromiumContainerHost.Open(Fluent.Pdf.Html.ChromiumContainerOptions,Fluent.Pdf.PdfOperationContext)</code>
+
+Verifies prerequisites, reserves container memory, starts one unique offline read-only nonroot container and checks its bootstrap before returning a private connection. Disposal terminates/removes only that container and joins owned I/O; cleanup failures retain its identity.
+
+### <code>M:Fluent.Pdf.Html.ChromiumContainerOptions.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int64,System.Int32,System.Nullable{System.TimeSpan})</code>
+
+Captures exact CLI/policy hashes, a local Unix/named-pipe daemon endpoint, immutable local image ID and a protected empty CLI configuration directory. The caller provisions/reviews every prerequisite; none is downloaded.
+
 ### <code>M:Fluent.Pdf.Html.ChromiumHtmlRenderer.#ctor(Fluent.Pdf.Html.ChromiumConnectionFactory,System.String,System.String)</code>
 
 Requires a private host factory and exact expected four-part Chromium version and DevTools source revision. The actual Browser.getVersion response must match before document input is sent.
@@ -128,6 +172,10 @@ Requires a private host factory and exact expected four-part Chromium version an
 ### <code>M:Fluent.Pdf.Html.ChromiumHtmlRenderer.#ctor(Fluent.Pdf.Html.ChromiumConnectionFactory,System.String,System.String,Fluent.Pdf.Html.HtmlResourceSessionFactory)</code>
 
 Captures an optional explicit factory for a fresh policy-bound resource/authentication session on every job. The browser host must still deny uncontrolled network and filesystem access.
+
+### <code>M:Fluent.Pdf.Html.ChromiumHtmlRenderer.Capture(Fluent.Pdf.PdfHtmlSource,Fluent.Pdf.Html.HtmlElementRequest,Fluent.Pdf.PdfHtmlOptions,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
+
+Captures one uniquely selected main-document element under the ordinary resource/readiness/host boundary. Missing, ambiguous, changing or oversized captures reject without retry or reflow.
 
 ### <code>M:Fluent.Pdf.Html.ChromiumHtmlRenderer.Render(Fluent.Pdf.PdfHtmlSource,Fluent.Pdf.PdfHtmlOptions,System.IO.Stream,Fluent.Pdf.PdfOperationContext)</code>
 
@@ -148,6 +196,14 @@ Decodes one bounded data URI into an immutable virtual resource. This performs n
 ### <code>M:Fluent.Pdf.Html.HtmlAssets.ReadFile(System.String,System.String,System.Uri,System.String,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
 Snapshots one relative file from a caller-protected root. The caller must prevent concurrent path/link mutation and unauthorized hard links throughout capture.
+
+### <code>M:Fluent.Pdf.Html.HtmlElementCapture.OpenPng</code>
+
+Opens immutable exact PNG bytes in a fresh read-only stream owned by the caller.
+
+### <code>M:Fluent.Pdf.Html.HtmlElementRequest.#ctor(System.String,System.String,System.Int32,System.Int64,System.Int32,System.Int32)</code>
+
+Requires exactly one selector or literal text. Markup is private, active source data, returned only when explicitly requested; it is not a sanitized or standalone document.
 
 ### <code>M:Fluent.Pdf.Html.HtmlHttpResponse.#ctor(System.Int32,System.String,System.IO.Stream,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}},Fluent.Pdf.PdfOperationContext)</code>
 
@@ -229,6 +285,46 @@ Public parameterless construction. Explicit cancellation-capable system DNS on m
 
 Resolves a policy-authorized hostname under the shared deadline; the caller must validate and pin every result before connecting.
 
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.DaemonEndpoint</code>
+
+Gets the explicitly selected local daemon endpoint.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.DockerExecutable</code>
+
+Gets the explicitly pinned Docker CLI path.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.DockerSha256</code>
+
+Gets its exact lowercase SHA256.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.EmptyConfigurationDirectory</code>
+
+Gets the caller-protected empty Docker configuration directory.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.ImageId</code>
+
+Gets the immutable local image ID; pulling is prohibited.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.MaximumElapsedTime</code>
+
+Gets its finite wall deadline; operation/readiness cancellation may expire sooner.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.MaximumMemoryBytes</code>
+
+Gets the hard browser-container memory/swap ceiling reserved against the operation budget.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.MaximumProcesses</code>
+
+Gets the container process/thread ceiling.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.SeccompProfile</code>
+
+Gets the exact caller-reviewed default-deny seccomp profile path.
+
+### <code>P:Fluent.Pdf.Html.ChromiumContainerOptions.SeccompSha256</code>
+
+Gets its exact lowercase SHA256.
+
 ### <code>P:Fluent.Pdf.Html.ChromiumHtmlRenderer.Descriptor</code>
 
 Gets the pinned declared engine identity. This does not declare platform or production qualification.
@@ -240,6 +336,70 @@ Gets the exact required browser source revision.
 ### <code>P:Fluent.Pdf.Html.ChromiumHtmlRenderer.ExpectedVersion</code>
 
 Gets the exact required browser product version.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementCapture.BaseAddress</code>
+
+Gets the final private document address for relative resource interpretation; credentials are never embedded by the SDK.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementCapture.CaptureBounds</code>
+
+Gets the outward-integer-rounded rectangle clipped to the document surface; PNG dimensions equal this extent at device scale one.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementCapture.DocumentBounds</code>
+
+Gets the transformed element border bounding rectangle relative to the document origin.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementCapture.Markup</code>
+
+Gets optional original active outer markup. Treat it as private untrusted source; it is not a resource bundle or sanitized HTML.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementCapture.OperationReport</code>
+
+Gets the successful shared-budget operation report.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementCapture.ViewportBounds</code>
+
+Gets the transformed element border bounding rectangle relative to the unchanged CSS viewport.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRectangle.Height</code>
+
+Gets its nonnegative CSS height.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRectangle.Width</code>
+
+Gets its nonnegative CSS width.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRectangle.X</code>
+
+Gets its left position in the declared CSS coordinate space.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRectangle.Y</code>
+
+Gets its top position in the declared CSS coordinate space.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRequest.LiteralText</code>
+
+Gets the ordinal substring matched within individual text nodes, selecting their unique parent element; scripts/styles are excluded.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRequest.MaximumMarkupCharacters</code>
+
+Gets the explicit outer-markup character ceiling; zero disables markup extraction.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRequest.MaximumNodes</code>
+
+Gets the maximum visited light-DOM element/text nodes.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRequest.MaximumPixels</code>
+
+Gets the maximum rounded CSS capture area at fixed device scale one.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRequest.MaximumPngBytes</code>
+
+Gets the maximum accepted encoded PNG extent.
+
+### <code>P:Fluent.Pdf.Html.HtmlElementRequest.Selector</code>
+
+Gets the unique main-document CSS selector, or null for literal text search.
 
 ### <code>P:Fluent.Pdf.Html.HtmlHttpRequest.Address</code>
 
@@ -381,6 +541,14 @@ Gets whether this compiled library asset supplies the built-in cancellable, DNS-
 
 Opens one private, explicitly provisioned Chromium process/transport. The host must enforce offline network, read-only pinned assets/fonts, memory/process/time limits and termination within five seconds; Dispose must join all owned work even after a latched failure. No SDK engine download or host discovery occurs.
 
+### <code>T:Fluent.Pdf.Html.ChromiumContainerHost</code>
+
+Explicit bounded Docker CLI transport to one private offline Linux browser container. Complete daemon/kernel/image/security/RID qualification remains required.
+
+### <code>T:Fluent.Pdf.Html.ChromiumContainerOptions</code>
+
+Explicit local Linux-container browser prerequisites. No CLI, daemon, image, policy or credential discovery is permitted.
+
 ### <code>T:Fluent.Pdf.Html.ChromiumHtmlRenderer</code>
 
 Original DevTools HTML/CSS/SVG/canvas/explicit-script printing over a caller-owned supervised Chromium host. No executable or runtime is discovered or downloaded.
@@ -388,6 +556,18 @@ Original DevTools HTML/CSS/SVG/canvas/explicit-script printing over a caller-own
 ### <code>T:Fluent.Pdf.Html.HtmlAssets</code>
 
 Explicit immutable file/data-URI snapshots mapped to virtual HTTP(S) addresses. Browser file access is never enabled.
+
+### <code>T:Fluent.Pdf.Html.HtmlElementCapture</code>
+
+A detached painted-page bounding-box capture. Ancestor clipping and overlapping page content remain visible; this does not isolate or reflow an element.
+
+### <code>T:Fluent.Pdf.Html.HtmlElementRectangle</code>
+
+A CSS rectangle with top-left origin and downward positive Y; values are CSS pixels, never PDF points.
+
+### <code>T:Fluent.Pdf.Html.HtmlElementRequest</code>
+
+Explicit unique CSS selector or ordinal literal text-node search in the main light DOM, with finite traversal, pixel and output bounds.
 
 ### <code>T:Fluent.Pdf.Html.HtmlHttpRequest</code>
 

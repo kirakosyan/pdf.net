@@ -132,5 +132,41 @@
     "Actual minimum Framework4.7.2 and exact final-package/runtime production qualification",
     "Mandatory issue93 remains user-skipped and release-blocking"
   ],
-  "hostedCI": "Pending final PR head; exact result will be reconciled in PR121"
+  "hostedCI": "All five workflows passed at the exact checkpoint commit; final PR-head CI is separate",
+  "checkpointCI": {
+    "commit": "08a94136ce9ff2e82ee499eb74ff539c8a8f20ae",
+    "workflows": [
+      {
+        "id": 40113324923,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324881,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324954,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324970,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40113324898,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "sourceScope": "Source CI only; exact final PR-head results are retained separately without relabeling these earlier source archives"
+  }
 }

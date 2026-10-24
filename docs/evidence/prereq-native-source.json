@@ -77,10 +77,46 @@
     "verifiedEntries": 88
   },
   "pending": [
-    "Actual Linux/macOS tool execution and corrected final CI",
     "Complete supported engine/browser/TeX/model/font asset closure and redistribution review",
     "Actual clean air-gapped installations, system ABI, code-signing and native runtime/security qualification",
     "Mandatory issue93 remains user-skipped and release-blocking"
   ],
-  "hostedCI": "Pending final PR head; exact result will be reconciled in PR121"
+  "hostedCI": "All five workflows passed at the exact checkpoint commit; final PR-head CI is separate",
+  "checkpointCI": {
+    "commit": "7384bfd9f326eac37481a794b66f218887bd569c",
+    "workflows": [
+      {
+        "id": 40114329094,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40114329025,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40114329058,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40114329060,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40114329024,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "sourceScope": "Source CI only; exact final PR-head results are retained separately without relabeling these earlier source archives"
+  },
+  "retainedCICorrection": "macOS x64 documentation checks passed, but GitHub artifact creation timed out after built-in retries; only failed job120932382690 was rerun, then passed. No source gate was weakened."
 }

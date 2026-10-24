@@ -29,3 +29,5 @@ Resume with a reviewed per-RID inventory that binds each executable, library, mo
 No clean offline installation acceptance runs were performed for this checkpoint. Packaging remains blocked, including the user-skipped mandatory #93 qualification. Continue independent source work with #106; publication is separately prohibited.
 
 See [native deployment](native-deployment.md), [HTML rendering](html-rendering.md), [TeX](tex.md), [supply chain](supply-chain.md), [production gates](production-quality.md) and [evidence](evidence/FP-105-blocked.json).
+
+The subsequent [private browser container source checkpoint](browser-container.md) retains explicit image/package/file inventories and modified analysis-policy provenance. It is a private provisioned source fixture, not a reviewed native distribution or clean air-gapped installation. Complete #105 acceptance remains blocked.

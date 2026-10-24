@@ -62,6 +62,7 @@ public static class ContractExample
     public static PdfHtmlOptions HtmlOptions(PdfHtmlReadinessOptions readiness, bool enableJavaScript, string locale, string timeZone, PdfHtmlMedia media) => new(readiness: readiness, enableJavaScript: enableJavaScript, locale: locale, timeZone: timeZone, media: media);
     public static PdfHtmlOptions HtmlPrintOptions(PdfHtmlOptions options, PdfHtmlPrintOptions print) => options.WithPrint(print);
     public static PdfDocument ConvertHtml(PdfHtmlSource source, PdfProviderRegistry providers, PdfHtmlOptions options) => PdfHtml.Render(source, providers, options);
+    public static Fluent.Pdf.Html.HtmlElementCapture CaptureHtmlElement(Fluent.Pdf.Html.ChromiumHtmlRenderer renderer, PdfHtmlSource source, string selector) => renderer.Capture(source, new(selector: selector));
 
     public static PdfCompatibilityInspection InspectCompatibility(PdfDocumentSnapshot source) => PdfCompatibility.Inspect(source);
     public static PdfOperationReport WriteUtf8MetadataPdf(Stream output)

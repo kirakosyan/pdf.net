@@ -81,6 +81,9 @@ Public Module ContractExample
     Public Function HtmlOptions(readiness As PdfHtmlReadinessOptions, enableJavaScript As Boolean, locale As String, timeZone As String, media As PdfHtmlMedia) As PdfHtmlOptions
         Return New PdfHtmlOptions(readiness:=readiness, enableJavaScript:=enableJavaScript, locale:=locale, timeZone:=timeZone, media:=media)
     End Function
+    Public Function CaptureHtmlElement(renderer As Fluent.Pdf.Html.ChromiumHtmlRenderer, source As PdfHtmlSource, selector As String) As Fluent.Pdf.Html.HtmlElementCapture
+        Return renderer.Capture(source, New Fluent.Pdf.Html.HtmlElementRequest(selector:=selector))
+    End Function
     Public Function ConvertHtml(source As PdfHtmlSource, providers As PdfProviderRegistry, options As PdfHtmlOptions) As PdfDocument
         Return PdfHtml.Render(source, providers, options)
     End Function

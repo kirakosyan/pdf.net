@@ -41,3 +41,5 @@ dotnet run --project eng/HtmlBrowserProbe -c Release -- \
 ```
 
 The manifest has `browserExecutable`, `nodeExecutable`, `fontFile`, corresponding `*Sha256` properties, `browserVersion`, `browserRevision`, `temporaryParent` and `outputDirectory`. No source path is inferred. The checked source fixture uses the repository's original font, not machine-selected font goldens. Actual independent reports cover exact Unicode, declared grid/flex positions, SVG dimensions, canvas/script behavior and retention after SDK editing. Complete visual/semantic/accessibility, font policy, engine/dependency review, browser security/fuzz/concurrency/endurance and production host/package qualification remain mandatory. Packing/publication stay blocked.
+
+The optional [private container source host](browser-container.md) now provides explicit pinned offline/read-only/nonroot CLI transport with shared memory/worker accounting and finite original-fixture observations. It remains unqualified, including daemon startup reconciliation and complete host/RID/security/distribution requirements. [Element capture](html-element-extraction.md) uses the same private resource/readiness boundary.

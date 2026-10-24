@@ -21,12 +21,19 @@ if ($LASTEXITCODE -ne 0) { throw 'Test platform signature verification failed.' 
 $java = [IO.Path]::GetFullPath($JavaHome)
 $tests = Join-Path $root 'tests/Fluent.Pdf.Contract.Tests/bin/Release/net472'
 $native = Join-Path $root 'artifacts/native-fixtures'
+$browserCli = Join-Path $root 'artifacts/browser-cli-fixture'
 $archival = Join-Path $root 'artifacts/archival-fixtures'
 foreach ($path in @((Join-Path $tests 'Fluent.Pdf.Contract.Tests.dll'),(Join-Path $java 'bin/java.exe'),(Join-Path $native 'win-x64/worker.exe'),(Join-Path $native 'win-x86/worker.exe'),(Join-Path $archival 'greenfield-apps-1.28.2.jar'))) {
     if (!(Test-Path -LiteralPath $path -PathType Leaf)) { throw "Build/provision the complete source prerequisites first: $path" }
 }
 $nativeEvidence = Get-Content -LiteralPath (Join-Path $native 'native-fixtures.json') -Raw | ConvertFrom-Json
 if ($nativeEvidence.sourceCommit -cne $commit) { throw 'Native source fixtures were built from a different commit.' }
+$browserEvidence = Get-Content -LiteralPath (Join-Path $browserCli 'manifest.json') -Raw | ConvertFrom-Json
+if ($browserEvidence.sourceCommit -cne $commit -or $browserEvidence.sourceSha256 -ine (Get-FileHash -LiteralPath (Join-Path $root 'tests/native/browser-cli-fixture.c') -Algorithm SHA256).Hash) { throw 'Browser process peer source binding differs from this commit.' }
+foreach ($file in $browserEvidence.files) {
+    if ($file.rid -notin @('win-x64','win-x86')) { throw 'The Windows offline source bundle requires the exact x64/x86 process peers.' }
+    if ((Get-FileHash -LiteralPath (Join-Path $browserCli ($file.rid+'/browser-cli-fixture.exe')) -Algorithm SHA256).Hash -ine $file.sha256) { throw 'The browser process peer digest changed after build.' }
+}
 foreach ($deployment in $nativeEvidence.deployments) {
     foreach ($file in $deployment.files) {
         if ((Get-FileHash -LiteralPath (Join-Path $native ($deployment.rid + '/' + $file.name))).Hash -ine $file.sha256) { throw 'Native fixture digest changed after its build.' }
@@ -37,6 +44,14 @@ $null = [IO.Directory]::CreateDirectory($destination)
 Copy-Item -LiteralPath $tests -Destination (Join-Path $destination 'tests') -Recurse
 $null = [IO.Directory]::CreateDirectory((Join-Path $destination 'artifacts'))
 Copy-Item -LiteralPath $native,$archival -Destination (Join-Path $destination 'artifacts') -Recurse
+$browserDestination=Join-Path $destination 'artifacts/browser-cli-fixture'
+$null=[IO.Directory]::CreateDirectory($browserDestination)
+Copy-Item -LiteralPath (Join-Path $browserCli 'manifest.json') -Destination $browserDestination
+foreach ($file in $browserEvidence.files) {
+    $target=Join-Path $browserDestination $file.rid
+    $null=[IO.Directory]::CreateDirectory($target)
+    Copy-Item -LiteralPath (Join-Path $browserCli ($file.rid+'/browser-cli-fixture.exe')) -Destination $target
+}
 Copy-Item -LiteralPath $java -Destination (Join-Path $destination 'java') -Recurse
 Copy-Item -LiteralPath (Join-Path $root 'Fluent.Pdf.slnx'),(Join-Path $PSScriptRoot 'run-framework-contracts.ps1'),(Join-Path $PSScriptRoot 'run-framework-bundle.ps1') -Destination $destination
 # Retain upstream notices together with analysis-only native and Java assets.

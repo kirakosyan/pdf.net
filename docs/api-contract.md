@@ -237,3 +237,5 @@ An optional modern CLI now consumes the public SDK with separate data/diagnostic
 The [developer guide](developer-guide.md) now links a versioned generated source API reference, explicit provider/platform prerequisites and real C#/VB-backed recipe applications. Narrative fragments and published-package qualification remain explicitly distinct.
 
 FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).
+
+Explicit private container source transport and bounded HTML element capture now share browser resource/readiness policies, memory/worker/pixel limits and conservative DOM identity/geometry checks. Complete daemon startup reconciliation, host/corpus/runtime/final-package qualification remains mandatory; see [container source host](browser-container.md) and [element capture](html-element-extraction.md).

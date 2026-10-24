@@ -4,7 +4,7 @@ The current follow-up works through prerequisites for #100, then #105 and #110 i
 
 ## Assignment rule
 
-The #105 prerequisite checkpoint adds [offline native inventory/install/removal tooling](native-distribution.md), with source-only [evidence](evidence/prereq-native-source.json). It verifies static imports and pinned original fixture installations, while complete browser/TeX/engine distributions and clean air-gapped qualification remain blocked. The next requested prerequisite is #110's private browser/capture boundary; #93 remains skipped.
+The #105 prerequisite checkpoint adds [offline native inventory/install/removal tooling](native-distribution.md), with source-only [evidence](evidence/prereq-native-source.json). It verifies static imports and pinned original fixture installations, while complete browser/TeX/engine distributions and clean air-gapped qualification remain blocked. The #110 checkpoint now adds a [private container source host](browser-container.md) and [bounded element capture](html-element-extraction.md), with actual finite browser/pixel/resource observations. Complete host/distribution/runtime/corpus qualification remains blocking; #93 remains skipped.
 
 Use the dependency graph in [requirements.json](../specs/requirements.json) and [GitHub roadmap #113](https://github.com/kirakosyan/pdf.net/issues/113). Assign one issue at a time in the concrete order below unless the user requests parallel work. A task is ready only when its dependencies have delivered reviewed public contracts and the evidence its implementation needs. Do not equate a closed issue with evidence if the implementation or release claims disagree.
 
@@ -235,7 +235,7 @@ All five #95 workflows passed at `48f3f11`, including [run 40080488148](https://
 
 [#109 task facades](task-facades.md) compose existing engines with explicit immutable instance configuration and shared generation budgets. [Source evidence](evidence/FP-109-source.json) separates equivalence and language-consumer checks from full underlying qualification. #110 is next.
 
-[#110 HTML element extraction](html-element-extraction.md) is blocked by the complete browser-host prerequisite. [Evidence](evidence/FP-110-blocked.json) records zero element-capture acceptance runs and the precise geometry/resource/dynamic-DOM work still required. Continue independent managed #111 work; no element capture is claimed.
+[#110 HTML element extraction](html-element-extraction.md) now has a bounded shared-context capture source profile and an explicit private container source host. [Current source evidence](evidence/prereq-browser-source.json) records actual original-fixture geometry/pixel/authentication observations and remaining qualification gaps. The earlier [zero-run blocker](evidence/FP-110-blocked.json) remains a historical checkpoint; full host/corpus/runtime/final-package work is still required.
 
 [#111 hyphenation and text fit](hyphenation-text-fit.md) adds pinned offline word exceptions, logical-text-preserving discretionary hyphens and managed scale-limited paper fit. [Evidence](evidence/FP-111-source.json) keeps full linguistic/browser and production qualification open. Final release-workflow issue #112 is next; publication remains unauthorized and blocked.
 

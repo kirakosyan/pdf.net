@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-110",
+  "issue": 110,
+  "sharedPrerequisites": [
+    32,
+    33,
+    34,
+    105
+  ],
+  "sourceParent": "7384bfd9f326eac37481a794b66f218887bd569c",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "elementCaptureImplemented": true,
+  "elementCaptureProductionAcceptanceComplete": false,
+  "sourceProgress": "explicit-private-container-source-transport-and-bounded-main-document-element-capture",
+  "sourceTests": [
+    {
+      "lane": "net8",
+      "total": 122,
+      "passed": 122,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "3c765a474511bffecef0da5562114ca7f77f09f64ca4ae6942a60d3d0392c9a4",
+      "htmlAssemblySha256": "9abcccc00d869988c9f461083252d6ba1a4e91d69036199fa79afd91b5a028ed",
+      "actualRuntime": ".NET 8.0.32",
+      "actualOS": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "coreAsset": ".NETCoreApp,Version=v8.0",
+      "report": "artifacts/prereq-browser-final-v3-contracts/net8/browser.trx"
+    },
+    {
+      "lane": "net10",
+      "total": 122,
+      "passed": 122,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "ac9ce9f047c841751ed2f3f9e02367df6a56b56cc12361978325dfae73460233",
+      "htmlAssemblySha256": "cce416f8d919ad7851421fe02db69781c8a287ad0798cd7a3f1ba270ec87176d",
+      "actualRuntime": ".NET 10.0.13",
+      "actualOS": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "coreAsset": ".NETCoreApp,Version=v10.0",
+      "report": "artifacts/prereq-browser-final-v3-contracts/net10/browser.trx"
+    },
+    {
+      "lane": "framework-x64",
+      "total": 122,
+      "passed": 122,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "7739e81fc44abd1e2c7138d3cf1856426ea1520c5b3d0a7fcca1550c49e4c8c4",
+      "htmlAssemblySha256": "97c521145d3c00937a695b906a5e376d3fdfd6305315c42e4cccf2936df5d3ef",
+      "actualRuntime": ".NET Framework 4.8.10008.0",
+      "actualOS": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "coreAsset": ".NETFramework,Version=v4.7.2",
+      "report": "artifacts/prereq-browser-final-v3-contracts/framework-x64/browser.trx"
+    },
+    {
+      "lane": "framework-x86",
+      "total": 122,
+      "passed": 122,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "e9d1a39da07c343482ffc3995d935a2bf2205a94df6b5aad4d08b606c07417eb",
+      "htmlAssemblySha256": "97c521145d3c00937a695b906a5e376d3fdfd6305315c42e4cccf2936df5d3ef",
+      "actualRuntime": ".NET Framework 4.8.10008.0",
+      "actualOS": "Microsoft Windows 10.0.26300",
+      "architecture": "X86",
+      "coreAsset": ".NETFramework,Version=v4.7.2",
+      "report": "artifacts/prereq-browser-final-v3-contracts/framework-x86/browser.trx"
+    },
+    {
+      "lane": "fallback",
+      "total": 122,
+      "passed": 122,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "e8392f3e6267ae6e7c6b670682e1710322f4507f62215047851ea32e5426d4ad",
+      "htmlAssemblySha256": "a0f5cc25ff9666f04d550416b4c0a29320e8a965bc2c76d785443628d181d4e4",
+      "actualRuntime": ".NET 8.0.32",
+      "actualOS": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "coreAsset": ".NETStandard,Version=v2.0",
+      "report": "artifacts/prereq-browser-final-v3-contracts/fallback/browser.trx"
+    }
+  ],
+  "sourceTestsTotal": 610,
+  "sourceEngine": {
+    "imageId": "sha256:76cde36cefa8bb5f4d5dd623b04c7d4b6bed4b6fe86cbfbc8e06e32aa4dfec97",
+    "browserVersion": "155.0.8059.79",
+    "browserRevision": "@a49e2e3d4addfd84e765b52afe230bedb81096db",
+    "memoryBytes": 536870912,
+    "maximumTasks": 256,
+    "clientHost": "Windows x64; Linux x64 Docker Desktop engine",
+    "completeHostQualified": false,
+    "redistributionApproved": false,
+    "bridgeAndContextMatchRetainedImage": true,
+    "sourceImageInventorySha256": "60f218479d3d00e5856a0153273658c2ee114d3a490e2d9d868b1ed69c746570"
+  },
+  "analysisPolicy": {
+    "purpose": "bounded-task-local-analysis-policy-modification",
+    "productionApproved": false,
+    "upstreamPolicyGitBlob": "6e5e47e242892aaa290f916ba1045f9213ef0b84",
+    "upstreamLicenseGitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+    "license": "Apache-2.0",
+    "originalSha256": "514c38e72edc5363e87287ea87212211172c6c3251a974ca21ebfd05a56c7f5d",
+    "modifiedSha256": "6d97c046706433452ea93497df2d8e2c5597e751742060f0b6bd4c3b55cf0df0",
+    "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "limitations": [
+      "Source fixtures only; complete syscall/namespace/kernel/daemon review remains required",
+      "No outer capability, no sandbox-disable flag, no global daemon/kernel policy change",
+      "Does not qualify network/security/host distribution or production use"
+    ]
+  },
+  "actualBrowserObservations": [
+    {
+      "purpose": "actual-private-container-browser-original-source-observations",
+      "productionQualified": false,
+      "runtime": ".NET 8.0.32",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "imageId": "sha256:76cde36cefa8bb5f4d5dd623b04c7d4b6bed4b6fe86cbfbc8e06e32aa4dfec97",
+      "version": "155.0.8059.79",
+      "revision": "@a49e2e3d4addfd84e765b52afe230bedb81096db",
+      "capturePromiseTimeoutObserved": true,
+      "capturePromiseCancellationObserved": true,
+      "cancellationMilliseconds": 199.85959999999977,
+      "pdfSha256": "375da19d2971363052f72d07b0cd7af2e06149526a76c9f323eed9c84b15337e",
+      "sourceDirectory": "artifacts/prereq-browser-final-net8",
+      "successfulElementCaptures": 5,
+      "explicitElementOrOriginRejections": 8,
+      "independentReportSha256": "ff984a48fdb314676909054de537a1ee17baab0b9ddfcae42ff6487cfd5788ba"
+    },
+    {
+      "purpose": "actual-private-container-browser-original-source-observations",
+      "productionQualified": false,
+      "runtime": ".NET 10.0.13",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "imageId": "sha256:76cde36cefa8bb5f4d5dd623b04c7d4b6bed4b6fe86cbfbc8e06e32aa4dfec97",
+      "version": "155.0.8059.79",
+      "revision": "@a49e2e3d4addfd84e765b52afe230bedb81096db",
+      "capturePromiseTimeoutObserved": true,
+      "capturePromiseCancellationObserved": true,
+      "cancellationMilliseconds": 191.01279999999997,
+      "pdfSha256": "561b7f068f5298725196222fabbcaf7d99a9521622a41f40ce852cf997dff538",
+      "sourceDirectory": "artifacts/prereq-browser-final-net10",
+      "successfulElementCaptures": 5,
+      "explicitElementOrOriginRejections": 8,
+      "independentReportSha256": "ff984a48fdb314676909054de537a1ee17baab0b9ddfcae42ff6487cfd5788ba"
+    }
+  ],
+  "retainedFailuresAndCorrections": [
+    "Default source container policy denied user namespaces; a bounded explicit source-only policy modification retains original/modified hashes, exact diff and Apache-2.0 license",
+    "Initial namespace-only policy denied inner-sandbox chroot; source fixture modification adds chroot without outer capabilities or disabling Chromium sandbox",
+    "The 128-task original fixture hit 46 denied allocations, zero OOM; the explicit 256-task source admission passed. Default SDK admission remains fail-closed",
+    "Framework error-path run exposed nonserializable exception metadata; stable string diagnostic codes now preserve the intended failure across all five runtime profiles",
+    "Offline source tests read the copied PNG fixture relative to the executing test assembly, not the original repository hierarchy"
+  ],
+  "limitations": [
+    "Current Framework 4.8 observations do not qualify actual minimum Framework4.7.2 for this source",
+    "Before/after DOM and geometry guards do not atomically freeze animation/canvas/video/compositor state",
+    "Managed authenticated source responses do not qualify remote TLS or an identity service",
+    "CLI/config paths require caller protection; hash checks are not a race-free loader for hostile trees",
+    "Unconfirmed daemon startup retains an owned-container identity for later reconciliation; complete startup/security/cleanup qualification remains blocking"
+  ],
+  "pending": [
+    "Complete daemon request reconciliation, browser image/OS/kernel/syscall/license/security and all six engine RIDs",
+    "Complete dynamic DOM/compositor/child-target/corpus/fuzz/concurrency/endurance and fidelity qualification",
+    "Actual minimum/runtime/final-package consumers and clean air-gapped reviewed distributions",
+    "Mandatory issue93 remains user-skipped and release-blocking"
+  ],
+  "publicationAuthorized": false,
+  "hostedCI": "Pending exact final PR head; results retained separately without reusing earlier commit reports",
+  "apiComparisons": 45,
+  "packTargetsBlocked": 15,
+  "frameworkLauncherSyntheticCases": 15,
+  "documentationSourceLibraries": 15,
+  "documentationFragmentsInventoried": 36,
+  "ownedBrowserContainersAfter": 0,
+  "localCompiler": {
+    "purpose": "explicit-task-local-original-process-peer-build-only",
+    "version": "Zig0.17.0",
+    "sha256": "f54b14f02a4d7d8ac62a94a0663486eb166bba3745d85b466238c1b93e723d46",
+    "licenseSha256": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177",
+    "zipSha256": "b5663f69581dcf391293fbf16c06cb80d81d806545ce618b4d0bab7f0eb8c428",
+    "globalToolingChanged": false
+  },
+  "issue93RequirementUnchanged": true,
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/browser-container.yml",
+      "sha256": "4dde63b87ae576e297d7ca6e1fc4e47e3fdd364203dd33e09a23a5bee475ffa2",
+      "gitNormalizedSha256": "4dde63b87ae576e297d7ca6e1fc4e47e3fdd364203dd33e09a23a5bee475ffa2"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "527eee837f08163ab2a57ba14bfc3fbb9868ab20b332b981072d63f7931c6327",
+      "gitNormalizedSha256": "86cf8c1de9772de8bc443f438dc1da10c8efdb86f6a36150c4f358ba56c8d432"
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "36b62727277b6efadf37ac92dd6081aa248eeb8b8156fd4f586127af3fd3af3c",
+      "gitNormalizedSha256": "8770dc46da0a11dc40e1687875c99ec6f218caddd9bd237ec7cd1d686290223c"
+    },
+    {
+      "path": "docs/api-contract.md",
+      "sha256": "3d2e44b5c829d5a2f0c3090e0047755b99f4b1d6293239b43c4311bf58b8292c",
+      "gitNormalizedSha256": "af0dfcbdea896df4a4c8dbdfd6b61b1d66e9e045778bc240c0c46630528a8f05"
+    },
+    {
+      "path": "docs/browser-container.md",
+      "sha256": "0bac0f693ed5315ee7b80741a0112e3fbde57fa3cd7b2c8a4ce66395dd317394",
+      "gitNormalizedSha256": "0bac0f693ed5315ee7b80741a0112e3fbde57fa3cd7b2c8a4ce66395dd317394"
+    },
+    {
+      "path": "docs/evidence/prereq-invoice-source.json",
+      "sha256": "d6efe0b563584635ac4edfb9c73548142ce1f1673cd617fcb12a1fc1a47f373c",
+      "gitNormalizedSha256": "102afa5af03380c9efbb794bf7146516257966eb22051bc213270e7c13a79d7d"
+    },
+    {
+      "path": "docs/evidence/prereq-native-source.json",
+      "sha256": "3245a676c9e0c2b3d6f07e52e64e08a7c5df690fe88a060abfaac24c677685c5",
+      "gitNormalizedSha256": "9ea577f505648589eefbee442e191d5dd9116765b8737009eef5743c63fdc887"
+    },
+    {
+      "path": "docs/html-element-extraction.md",
+      "sha256": "73e0b779dcefe02b17e5817f5489814ae9ce6b3618c53dd8aea65b712e7151e9",
+      "gitNormalizedSha256": "73e0b779dcefe02b17e5817f5489814ae9ce6b3618c53dd8aea65b712e7151e9"
+    },
+    {
+      "path": "docs/html-rendering.md",
+      "sha256": "5fb97f588f3d26fb5e80a926d360ebdcc5bfc132a82720b9f3d77370dc40c754",
+      "gitNormalizedSha256": "9ad6898e9f94c952dccdd6e1bdbecd69eb6162b359370a14a4f230c2e8fbf410"
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "d5817f8c82d1a7d5456b8f1e6159e278e1a8fe151224de540b438669c8dce72e",
+      "gitNormalizedSha256": "eed6817211193d159475955aa066c0e2b827a9582ad598ea49e6fbc7908e4834"
+    },
+    {
+      "path": "docs/native-distribution.md",
+      "sha256": "17a3c6ee47cd99a6e9561efae716f906c5c496114bcf89b73580bc657d2323aa",
+      "gitNormalizedSha256": "05e32706790c51b513ef58d0d250e3b7fe8259cb2c2c818e15165d7959da7fc9"
+    },
+    {
+      "path": "docs/operation-policies.md",
+      "sha256": "54adaaf687e642e636ab834241c1be44bb00ae44a0482dc99e24bd499b6b6c4e",
+      "gitNormalizedSha256": "3d4c9b2f436687b238f7f3c56ab6251d35de73ea48725aab2130d7015f362869"
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Html.md",
+      "sha256": "374c20049854cb36fa5290413139e568a1e68b8d26b7c1727305f2605ad254ba",
+      "gitNormalizedSha256": "374c20049854cb36fa5290413139e568a1e68b8d26b7c1727305f2605ad254ba"
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "a5f7ae56c1e92c23793d7f072a8bcc80129335e09678290f0692caafa02c291b",
+      "gitNormalizedSha256": "a5f7ae56c1e92c23793d7f072a8bcc80129335e09678290f0692caafa02c291b"
+    },
+    {
+      "path": "docs/requirements/FP-110.md",
+      "sha256": "4a3181896db582997214e3a00c65689a3fac14141f53fb0796e8723771860d56",
+      "gitNormalizedSha256": "4a3181896db582997214e3a00c65689a3fac14141f53fb0796e8723771860d56"
+    },
+    {
+      "path": "eng/HtmlContainerProbe/HtmlContainerProbe.csproj",
+      "sha256": "f27b644c77245c723b2746fecdb5041fa5b4a1ae0ff8afac1bd6d7c68fb6fc83",
+      "gitNormalizedSha256": "f27b644c77245c723b2746fecdb5041fa5b4a1ae0ff8afac1bd6d7c68fb6fc83"
+    },
+    {
+      "path": "eng/HtmlContainerProbe/Program.cs",
+      "sha256": "0e81c0d9621c1524f7733ab855514914b5da64362f2c554dabf9d1bab76026ea",
+      "gitNormalizedSha256": "0e81c0d9621c1524f7733ab855514914b5da64362f2c554dabf9d1bab76026ea"
+    },
+    {
+      "path": "eng/HtmlContainerProbe/packages.lock.json",
+      "sha256": "07f23a1b5dca9e852e590bb033e85a53f319bffde9107e27212e3cc5d5b9e7e8",
+      "gitNormalizedSha256": "dca79a15ba8d6580775bc084e1cf1c6880b6d27be31625743af3d324078eeee8"
+    },
+    {
+      "path": "eng/browser-host/Dockerfile",
+      "sha256": "20372ec7d8c1759a852e94ba673573654df4354c7096b0cf36a7ee5fcfc87f71",
+      "gitNormalizedSha256": "20372ec7d8c1759a852e94ba673573654df4354c7096b0cf36a7ee5fcfc87f71"
+    },
+    {
+      "path": "eng/browser-host/fontconfig.xml",
+      "sha256": "56c9b875d8ceb2f1349c068dc8a6d4d8ae6ee934f7e1dc8a33b46846b84a63e6",
+      "gitNormalizedSha256": "56c9b875d8ceb2f1349c068dc8a6d4d8ae6ee934f7e1dc8a33b46846b84a63e6"
+    },
+    {
+      "path": "eng/browser-host/host.py",
+      "sha256": "39c9babbae3b5afb3ae6d481c2470528fd1903159fcc29278dda123df7d4dc58",
+      "gitNormalizedSha256": "39c9babbae3b5afb3ae6d481c2470528fd1903159fcc29278dda123df7d4dc58"
+    },
+    {
+      "path": "eng/build-browser-cli-fixture.ps1",
+      "sha256": "169a219dbf00554577563cf9736d0cc2413362622e022b8259b1fd492c884034",
+      "gitNormalizedSha256": "169a219dbf00554577563cf9736d0cc2413362622e022b8259b1fd492c884034"
+    },
+    {
+      "path": "eng/build-browser-container-fixture.ps1",
+      "sha256": "d131284d3832c255fedd530f55e2218f6a067319c45ee86420c0af954cce4b11",
+      "gitNormalizedSha256": "d131284d3832c255fedd530f55e2218f6a067319c45ee86420c0af954cce4b11"
+    },
+    {
+      "path": "eng/new-framework-test-bundle.ps1",
+      "sha256": "871315ac3232519948cdbc4414fdc1276cec6ecfcb6404679ecfca9fa8b65dfa",
+      "gitNormalizedSha256": "871315ac3232519948cdbc4414fdc1276cec6ecfcb6404679ecfca9fa8b65dfa"
+    },
+    {
+      "path": "eng/prepare-browser-fixture-policy.py",
+      "sha256": "2544f2ec9ff3457fb18358f3128655ff9a0428f8813604d97b10b7dba9ccc680",
+      "gitNormalizedSha256": "2544f2ec9ff3457fb18358f3128655ff9a0428f8813604d97b10b7dba9ccc680"
+    },
+    {
+      "path": "eng/run-browser-container-fixture.ps1",
+      "sha256": "4064ef8ee0ab8b5db4d0a9ba04f20afbb12a68c8ecd615ad0fde6ebf3f75b074",
+      "gitNormalizedSha256": "4064ef8ee0ab8b5db4d0a9ba04f20afbb12a68c8ecd615ad0fde6ebf3f75b074"
+    },
+    {
+      "path": "eng/verify-browser-captures.py",
+      "sha256": "6a4a78f8a47bfac93f3dea1b05c5caf1e6c4e0f14246dfba8eb4eae6aea0cd9d",
+      "gitNormalizedSha256": "4d296f179b61f90186e8ef290e72f1792d4b2019a001a700b19615ff99a56f6f"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "445a6190ba9cf6a09b2385e4da60c17ae7739fe4f88323173e4d1d30bb53be91",
+      "gitNormalizedSha256": "8919cd7ed9fa22916019d89d22bcfe8f9a46446addf5135844ba1d4d5dcfd258"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "ca9497a92dad1400e3a9c5323204996c73158ad68f150cf65a390c74b30f1e45",
+      "gitNormalizedSha256": "c0135ca3c6b34e99f07778e1c95744ea2996b4b1db9729d3e87b2b791eab2da8"
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "cba8debcdaefdb9f01da1edcddbfb33a028d552a6d5a03cee4254003576008b2",
+      "gitNormalizedSha256": "55f7e8d663fa9dc7a62927a4426650ad0629550c179f1fb623c23d2f3f9d296d"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/ChromiumContainerHost.cs",
+      "sha256": "8fc255b7e2b79630e4cb28cad07000be79a899a8b4c6bb91056ff5b3cead2f4c",
+      "gitNormalizedSha256": "8fc255b7e2b79630e4cb28cad07000be79a899a8b4c6bb91056ff5b3cead2f4c"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/ChromiumContainerOptions.cs",
+      "sha256": "4b8491ffc16d212849a479a85352d161479abccc10a9bbfe5ef3b41d21992e05",
+      "gitNormalizedSha256": "4b8491ffc16d212849a479a85352d161479abccc10a9bbfe5ef3b41d21992e05"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/ChromiumHtmlRenderer.Capture.cs",
+      "sha256": "eac9b9acb79ace97f627536486190ed3289a430d883414b5de45f8f07c3ac52b",
+      "gitNormalizedSha256": "36fc3fdfa7814e01f12a46a85ff1ca6b13ded41543db9fc09dc4f111b2408981"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/ChromiumHtmlRenderer.cs",
+      "sha256": "0c56235f5672a1a342cee19ba45c63ca0000411250d8f06029348aead6ea74ef",
+      "gitNormalizedSha256": "0c56235f5672a1a342cee19ba45c63ca0000411250d8f06029348aead6ea74ef"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/ChromiumProtocol.cs",
+      "sha256": "cf5ac4c056cef917a223c8d3d2d00dc1eb3df30590272e37bfbd1ad9220beb53",
+      "gitNormalizedSha256": "cf5ac4c056cef917a223c8d3d2d00dc1eb3df30590272e37bfbd1ad9220beb53"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/HtmlElementCapture.cs",
+      "sha256": "eb4c8716d1aede851e6550f0e635f2c43d0e31182078689e486b45078b5e13fa",
+      "gitNormalizedSha256": "eb4c8716d1aede851e6550f0e635f2c43d0e31182078689e486b45078b5e13fa"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/PublicAPI.Unshipped.txt",
+      "sha256": "1f524270959ff9c5309a63d7a51f2556383dbda142e8c33f445129f3156acf12",
+      "gitNormalizedSha256": "7755d9868a371c05355eeb1ae519a6f4a9d06c183f3f85f4342f3e715377946d"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ChromiumContainerTests.cs",
+      "sha256": "05fbf9d6381faf5854640f449dde20a2883e4bf3d0df46240fae8bbf3266a607",
+      "gitNormalizedSha256": "05fbf9d6381faf5854640f449dde20a2883e4bf3d0df46240fae8bbf3266a607"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/HtmlElementTests.cs",
+      "sha256": "aa3a65bd10b9c38ade59b81a8bdbe9d72910bebd716669deb9426c31cd4b91d7",
+      "gitNormalizedSha256": "aa3a65bd10b9c38ade59b81a8bdbe9d72910bebd716669deb9426c31cd4b91d7"
+    },
+    {
+      "path": "tests/native/browser-cli-fixture.c",
+      "sha256": "c9e82c326d61c024e8031cdf42980474155b12824b3b382abe856a6a609a69ca",
+      "gitNormalizedSha256": "c9e82c326d61c024e8031cdf42980474155b12824b3b382abe856a6a609a69ca"
+    },
+    {
+      "path": "third-party/html/README.md",
+      "sha256": "36ecd2b8900f5896a0221fd5b8df79f85c94484dec6f0d3d9faab2f6c46a205a",
+      "gitNormalizedSha256": "36ecd2b8900f5896a0221fd5b8df79f85c94484dec6f0d3d9faab2f6c46a205a"
+    }
+  ],
+  "sourceScope": "Local reports bind the dirty source snapshot and recorded file/asset hashes; LF-normalized Git source and final exact-head hosted CI are separately identified. This record is excluded from its own source archive.",
+  "archive": {
+    "path": "artifacts/prereq-browser-source-evidence.zip",
+    "sha256": "82fe6abfb7d37387f6b662d0f9f82e9e7f1f3bee3b87aba92a0900c2589bbcf2",
+    "bytes": 1063463,
+    "verifiedEntries": 243
+  },
+  "postSnapshotFormatting": {
+    "file": "src/Fluent.Pdf.Html/ChromiumHtmlRenderer.Capture.cs",
+    "change": "Remove one blank line at EOF for git diff --check; local reports retain their exact pre-format source archive, final hosted CI binds the committed source",
+    "beforeSha256": "eac9b9acb79ace97f627536486190ed3289a430d883414b5de45f8f07c3ac52b",
+    "afterSha256": "8c89c86ea7863e8775ed488bceea8bae601001a8dbe558f1769f302ac5edb402"
+  }
+}

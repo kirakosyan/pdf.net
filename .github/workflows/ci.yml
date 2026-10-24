@@ -41,6 +41,9 @@ jobs:
       - name: Build original native worker and crash/isolation fixtures
         shell: pwsh
         run: ./eng/build-native-fixtures.ps1
+      - name: Build original browser transport process peer
+        shell: pwsh
+        run: ./eng/build-browser-cli-fixture.ps1
       - name: Verify offline source provisioning and static import closure
         shell: pwsh
         run: |

@@ -6,7 +6,7 @@ using static Fluent.Pdf.Html.ChromiumProtocol;
 
 namespace Fluent.Pdf.Html;
 /// <summary>Original DevTools HTML/CSS/SVG/canvas/explicit-script printing over a caller-owned supervised Chromium host. No executable or runtime is discovered or downloaded.</summary>
-public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
+public sealed partial class ChromiumHtmlRenderer : IPdfHtmlRenderer
 {
     private readonly ChromiumConnectionFactory _factory;
     private readonly string _version, _revision;
@@ -39,12 +39,15 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
 
     /// <summary>Creates a fresh off-the-record browser context, intercepts all HTTP resources, waits for load/fonts and streams PDF into the borrowed SDK lease.</summary>
     public void Render(PdfHtmlSource source, PdfHtmlOptions options, Stream pdfOutput, PdfOperationContext context)
+        => Run(source, options, pdfOutput, context, null);
+
+    private void Run(PdfHtmlSource source, PdfHtmlOptions options, Stream? pdfOutput, PdfOperationContext context, Action<ChromiumProtocol, string, string>? capture)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
         if (options == null)
             throw new ArgumentNullException(nameof(options));
-        if (pdfOutput == null || !pdfOutput.CanWrite)
+        if (capture == null && (pdfOutput == null || !pdfOutput.CanWrite))
             throw new ArgumentException("A writable borrowed PDF output is required.", nameof(pdfOutput));
         if (context == null)
             throw new ArgumentNullException(nameof(context));
@@ -118,6 +121,10 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
         }
 
         context.Checkpoint();
+        if (capture != null)
+            capture(protocol, session, frame);
+        else
+        {
         string handle;
         using (var printed = protocol.Call("Page.printToPDF", P(("transferMode", "ReturnAsStream"), ("printBackground", options.PrintBackground), ("paperWidth", options.PageSize.Width / 72d), ("paperHeight", options.PageSize.Height / 72d), ("marginTop", options.Print.MarginTop / 72d), ("marginBottom", options.Print.MarginBottom / 72d), ("marginLeft", options.Print.MarginLeft / 72d), ("marginRight", options.Print.MarginRight / 72d), ("landscape", options.Print.Landscape), ("scale", options.Print.Scale), ("preferCSSPageSize", options.Print.PreferCssPageSize), ("displayHeaderFooter", options.Print.HeaderHtml != null || options.Print.FooterHtml != null), ("headerTemplate", header), ("footerTemplate", footer), ("generateTaggedPDF", options.Print.Tagged)), session))
             handle = protocol.String(Result(printed), "stream");
@@ -149,7 +156,7 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
 
             if (bytes.Length > 65536)
                 throw protocol.Error("OutputExtent", "The decoded browser PDF chunk exceeds its requested extent.");
-            pdfOutput.Write(bytes, 0, bytes.Length);
+            pdfOutput!.Write(bytes, 0, bytes.Length);
             if (!result.TryGetProperty("eof", out var eof) || eof.ValueKind != JsonValueKind.True && eof.ValueKind != JsonValueKind.False)
                 throw protocol.Error("OutputExtent", "Every browser PDF chunk must state whether EOF was reached.");
             if (eof.ValueKind == JsonValueKind.True)
@@ -159,6 +166,7 @@ public sealed class ChromiumHtmlRenderer : IPdfHtmlRenderer
         }
 
         Command("IO.close", P(("handle", handle)));
+        }
         protocol.Notification = null; // Intentional target shutdown is not an unexpected renderer crash.
         using (protocol.Call("Target.closeTarget", P(("targetId", target))))
         {
