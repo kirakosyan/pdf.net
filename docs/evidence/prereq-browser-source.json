@@ -106,7 +106,7 @@
     "upstreamPolicyGitBlob": "6e5e47e242892aaa290f916ba1045f9213ef0b84",
     "upstreamLicenseGitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
     "license": "Apache-2.0",
-    "originalSha256": "514c38e72edc5363e87287ea87212211172c6c3251a974ca21ebfd05a56c7f5d",
+    "originalSha256": "6416b47770785a41ac59073cdc77d9fe98517df2799dc83ef207e622de3053f6",
     "modifiedSha256": "6d97c046706433452ea93497df2d8e2c5597e751742060f0b6bd4c3b55cf0df0",
     "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "limitations": [
@@ -409,5 +409,26 @@
     "change": "Remove one blank line at EOF for git diff --check; local reports retain their exact pre-format source archive, final hosted CI binds the committed source",
     "beforeSha256": "eac9b9acb79ace97f627536486190ed3289a430d883414b5de45f8f07c3ac52b",
     "afterSha256": "8c89c86ea7863e8775ed488bceea8bae601001a8dbe558f1769f302ac5edb402"
+  },
+  "analysisPolicyInputCorrection": {
+    "previousLocalCopySha256": "514c38e72edc5363e87287ea87212211172c6c3251a974ca21ebfd05a56c7f5d",
+    "previousLocalCopyBytes": 17868,
+    "upstreamExactBytes": 17867,
+    "cause": "The first retained download copy had one added terminal newline; CI downloads exact Git blob bytes. The source preparation gate now pins both the exact upstream SHA256 and Git blob identity.",
+    "modifiedPolicyBytesUnchanged": true,
+    "sourceProbePolicySha256": "6d97c046706433452ea93497df2d8e2c5597e751742060f0b6bd4c3b55cf0df0",
+    "oldSourceArchivePreserved": true,
+    "archive": {
+      "path": "artifacts/prereq-browser-policy-correction-evidence.zip",
+      "sha256": "65d64d3a9f087cedc313fad35d4991b495015c1eaad9958dcef114c16b4b7918",
+      "bytes": 35292,
+      "verifiedEntries": 11
+    },
+    "failedCI": {
+      "head": "2d1d393992dddf8217e5fef290277d1b6f302327",
+      "run": 40120842040,
+      "job": 120951828637,
+      "cause": "The exact upstream analysis-policy input differed by one terminal newline from the earlier local retained copy; strict pin gate rejected it before image provisioning. Exact SHA256 and Git blob pins now replace the local-copy pin; generated policy bytes are identical."
+    }
   }
 }

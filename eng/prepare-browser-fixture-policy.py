@@ -8,7 +8,7 @@ from pathlib import Path
 
 def prepare(original, license_file, output):
     raw = original.read_bytes()
-    if hashlib.sha256(raw).hexdigest() != "514c38e72edc5363e87287ea87212211172c6c3251a974ca21ebfd05a56c7f5d":
+    if hashlib.sha256(raw).hexdigest() != "6416b47770785a41ac59073cdc77d9fe98517df2799dc83ef207e622de3053f6" or hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest() != "6e5e47e242892aaa290f916ba1045f9213ef0b84":
         raise ValueError("Unrecognized original analysis policy")
     license_bytes = license_file.read_bytes()
     if hashlib.sha1(b"blob " + str(len(license_bytes)).encode() + b"\0" + license_bytes).hexdigest() != "d645695673349e3947e8e5ae42332d0ac3164cd7":
