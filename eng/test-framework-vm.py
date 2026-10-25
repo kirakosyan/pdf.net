@@ -247,11 +247,18 @@ class SourceVmTests(unittest.TestCase):
         commands = []
         password = "a" * 32 + "aA1!"
         actual_stat = Path.stat
+        actual_exists = Path.exists
 
         def fake_stat(path, *args, **kwargs):
             if path == Path("/dev/kvm"):
                 return SimpleNamespace(st_mode=stat.S_IFCHR | 0o600)
             return actual_stat(path, *args, **kwargs)
+
+        def fake_exists(path, *args, **kwargs):
+            # Python 3.14's exists() uses os.path rather than Path.stat().
+            if path == Path("/dev/kvm"):
+                return True
+            return actual_exists(path, *args, **kwargs)
 
         def fake_docker(command, **kwargs):
             commands.append(command)
@@ -272,7 +279,8 @@ class SourceVmTests(unittest.TestCase):
         with mock.patch.dict(vm.os.environ, {"GITHUB_ACTIONS": "true", "RUNNER_ENVIRONMENT": "github-hosted",
                 "DOCKER_HOST": "tcp://must-not-use", "DOCKER_CONTEXT": "must-not-use", "DOCKER_CONFIG": "unchanged-docker-config"}), \
              mock.patch.object(vm.platform, "system", return_value="Linux"), mock.patch.object(vm.platform, "machine", return_value="x86_64"), \
-             mock.patch.object(Path, "stat", fake_stat), mock.patch.object(vm.os, "access", return_value=True), \
+             mock.patch.object(Path, "stat", fake_stat), mock.patch.object(Path, "exists", fake_exists), \
+             mock.patch.object(vm.os, "access", return_value=True), \
              mock.patch.object(vm.shutil, "disk_usage", return_value=SimpleNamespace(free=100 * 1024**3)), \
              mock.patch.object(vm.uuid, "uuid4", return_value=SimpleNamespace(hex="a" * 32)), \
              mock.patch.object(vm.subprocess, "run", side_effect=fake_docker):
