@@ -16,9 +16,12 @@ $backlog = Get-Content -LiteralPath (Join-Path $root 'specs/github-issues.json')
 $requirements = @($policy.RequiredFeatures | ForEach-Object {
     $feature = $_
     $pending = @()
-    if ($feature.PSObject.Properties.Name -contains 'implementationProgress' -and
-        $feature.implementationProgress.PSObject.Properties.Name -contains 'pending') {
-        $pending = @($feature.implementationProgress.pending)
+    if ($feature.PSObject.Properties.Name -contains 'implementationProgress') {
+        foreach ($field in @('pending','remaining')) {
+            if ($feature.implementationProgress.PSObject.Properties.Name -contains $field) {
+                $pending += @($feature.implementationProgress.$field)
+            }
+        }
     }
     $mapping = @($backlog.issues | Where-Object requirement -CEQ $feature.id)
     [ordered]@{

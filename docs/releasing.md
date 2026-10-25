@@ -14,6 +14,8 @@ Use NuGet Trusted Publishing, owner profile kirakosyan, repository kirakosyan/pd
 
 ## Release sequence
 
+The user supplied [word.net's publishing workflow](https://github.com/kirakosyan/word.net/blob/c723fb8aa4ed70fda5562da7f472e6fef54740b7/.github/workflows/publish.yml) as the working reference. Its [successful publishing run](https://github.com/kirakosyan/word.net/actions/runs/39494674611) uses the same pinned NuGet OIDC action, a nuget environment, exact-source CI artifacts and package consumers. PDF keeps its own approved production gates and must produce its own exact-artifact evidence. The NuGet policy must authorize repository pdf.net; the reference repository's successful publication establishes its own configuration.
+
 Apply the [compatibility and maintenance policy](maintenance.md) for version selection, lifecycle review, migration notes and servicing/rollback records. A dependency update invalidates affected package qualification even when the API is unchanged. No public action is part of the offline source maintenance drill.
 
 1. Fast-forward the active branch and verify the exact release commit is on current main. Reconcile all required issues, implementation state, API baselines and capability/version documentation.

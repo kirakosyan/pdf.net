@@ -3726,7 +3726,7 @@
       ],
       "implementationProgress": {
         "sourceImplementation": "docs/runtime-qualification.md",
-        "scope": "Unchanged 22-lane matrix, same-test-process runtime/core-library/registry/all-SDK binary observations, fail-closed TRX/host/target/minimum-Framework checks and exact-package/test-inventory binding tools",
+        "scope": "Unchanged 22-lane matrix, same-test-process runtime/core-library/registry/all-SDK binary observations, fail-closed TRX/host/target/minimum-Framework checks, exact-package/test-inventory binding tools and hardware-backed x86/x64 minimum-Framework source VM orchestration with owned cleanup",
         "productionQualified": false,
         "remaining": [
           "Independently qualified minimum-runtime host/image/patch provenance and exact-package execution; actual source runs are recorded separately",
