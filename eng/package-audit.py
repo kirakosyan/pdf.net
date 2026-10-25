@@ -55,7 +55,7 @@ def normalized_tfm(value):
     return {'.NETFramework4.7.2': 'net472', '.NETStandard2.0': 'netstandard2.0'}.get(value, value)
 
 
-def inspect(data, expected, symbols=False):
+def inspect(data, expected, symbols=False, signed=False):
     files = entries(data)
     name, version, commit = expected['id'], expected['version'], expected['sourceCommit']
     spec_name = name + '.nuspec'
@@ -104,6 +104,10 @@ def inspect(data, expected, symbols=False):
     if len(core_properties) != 1 or not containers.issubset(files):
         raise ValueError('Incomplete NuGet container')
     allowed = set(required) | containers | set(core_properties)
+    if signed:
+        if symbols or ".signature.p7s" not in files:
+            raise ValueError("Missing public repository signature")
+        allowed.add(".signature.p7s")
     if set(files) != allowed:
         raise ValueError('Unreviewed package payload')
     return {'id': name, 'version': version, 'symbols': symbols, 'sha256': digest(data),

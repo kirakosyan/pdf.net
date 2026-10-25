@@ -46,6 +46,13 @@ jobs:
       - name: Verify release exception boundaries and status inventory
         shell: pwsh
         run: ./eng/test-release-policy.ps1 -OutputDirectory artifacts/contracts/release-policy
+      - name: Check scoped core push argument and inventory boundaries offline
+        shell: pwsh
+        run: |
+          ./eng/test-core-publish.ps1
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          & $python eng/test-core-release.py
+          if ($LASTEXITCODE -ne 0) { throw 'Core scope/runtime evidence regressions failed.' }
       - name: Verify source VM evidence and owned cleanup boundaries
         shell: pwsh
         run: |
@@ -98,6 +105,22 @@ jobs:
       - name: Compare API across target frameworks
         shell: pwsh
         run: ./eng/check-api.ps1
+      - name: Pack the explicitly scoped core and prepare package-only Framework consumers
+        if: matrix.id == 'win-x64'
+        shell: pwsh
+        run: ./eng/core-release.ps1 -Stage Pack -Directory artifacts/core-release
+      - name: Retain exact core candidate and consumer launchers
+        if: matrix.id == 'win-x64' && success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: core-release-candidate
+          path: |
+            artifacts/core-release/packages/
+            artifacts/core-release/core-manifest.json
+            artifacts/core-release/package-audit.json
+            artifacts/core-release/source-probes/
+            artifacts/core-release/framework/
+          if-no-files-found: error
       - name: Prepare offline Framework source bundle
         id: framework_bundle
         if: matrix.id == 'win-x64'
@@ -107,7 +130,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Offline launcher regressions failed.' }
           $package = 'artifacts/microsoft.testplatform.18.11.0.nupkg'
           Invoke-WebRequest https://api.nuget.org/v3-flatcontainer/microsoft.testplatform/18.11.0/microsoft.testplatform.18.11.0.nupkg -OutFile $package
-          ./eng/new-framework-test-bundle.ps1 -OutputDirectory artifacts/framework-source-bundle -TestPlatformPackage $package -JavaHome $env:JAVA_HOME
+          ./eng/new-framework-test-bundle.ps1 -OutputDirectory artifacts/framework-source-bundle -TestPlatformPackage $package -JavaHome $env:JAVA_HOME -CoreReleaseDirectory artifacts/core-release
       - name: Retain offline Framework source bundle
         if: matrix.id == 'win-x64' && success()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -242,3 +265,109 @@ jobs:
             artifacts/source-maintenance/**
             artifacts/contracts/publish-token/**/report.json
           if-no-files-found: error
+
+  core-consumers:
+    name: Core package (${{ matrix.id }})
+    needs: validate
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { id: win-x64, os: windows-latest }
+          - { id: win-arm64, os: windows-11-arm }
+          - { id: linux-x64, os: ubuntu-latest }
+          - { id: linux-arm64, os: ubuntu-24.04-arm }
+          - { id: osx-x64, os: macos-15-intel }
+          - { id: osx-arm64, os: macos-15 }
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: |
+            10.0.4xx
+            8.0.x
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: core-release-candidate
+          path: artifacts/core-release
+          digest-mismatch: error
+      - name: Restore and execute fresh exact-package consumers
+        shell: pwsh
+        run: ./eng/core-release.ps1 -Stage Consumers -Directory artifacts/core-release -HostId '${{ matrix.id }}' -OutputDirectory artifacts/core-consumers
+      - name: Retain actual consumer outputs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: core-consumers-${{ matrix.id }}
+          path: |
+            artifacts/core-consumers/
+            !artifacts/core-consumers/*-workspace/**
+          if-no-files-found: error
+
+  core-independent:
+    name: Independently inspect generated core-package PDFs
+    needs: core-consumers
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: core-release-candidate
+          path: artifacts/core-release
+          digest-mismatch: error
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: core-consumers-linux-x64
+          path: artifacts/consumer
+          digest-mismatch: error
+      - name: Provision independent PDF readers and inspect exact fixture bytes
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y qpdf poppler-utils
+          python3 eng/core_release.py independent --directory artifacts/core-release --reports artifacts/consumer --output artifacts/independent
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: core-independent
+          path: artifacts/independent/
+          if-no-files-found: error
+
+  core-evidence:
+    name: Bind and archive verified core release
+    needs: [validate, minimum-framework, reproducibility, core-consumers, core-independent]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: core-release-candidate
+          path: artifacts/core-release
+          digest-mismatch: error
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          pattern: core-consumers-*
+          path: artifacts/core-reports
+          digest-mismatch: error
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: framework472-source-evidence-attempt-${{ github.run_attempt }}
+          path: artifacts/core-reports/minimum-framework
+          digest-mismatch: error
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: core-independent
+          path: artifacts/core-reports/independent
+          digest-mismatch: error
+      - name: Reconcile all 22 actual package-consumer lanes and exact payload
+        run: |
+          python3 eng/core_release.py collect --directory artifacts/core-release --reports artifacts/core-reports
+          python3 eng/core_release.py verify --directory artifacts/core-release
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: core-release-verified
+          path: artifacts/core-release/
+          if-no-files-found: error
+          retention-days: 90

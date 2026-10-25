@@ -1,6 +1,10 @@
 # Stable release procedure
 
-## Publication policy
+## User-selected core 1.0.0 release
+
+On 2026-10-25 the user explicitly selected the currently implemented core profiles for 1.0.0. The [release scope](releases/1.0.0.md) and specs/core-release.json authorize only Fluent.Pdf and its symbols. Full-roadmap readiness and requirement statuses remain unchanged. CI packs the Windows build bytes used in the actual minimum-Framework tests, inspects package/symbol contents and SourceLink, executes 22 package-only runtime consumers, checks generated files with independent tools, and archives the exact verified artifact. The publish workflow accepts only that successful main-branch source run and matching stable tag. It pushes the verified bytes through the existing core-only NuGet policy, verifies the signed public payload and fresh consumers, and records the release.
+
+## Full-roadmap publication policy
 
 Publish only when the approved SDK production scope is ready. Target first stable version: 1.0.0. The [user-authorized exception for FP-089/#93](release-exceptions.md) applies only to this version and does not qualify the deferred work. No placeholder, alpha/beta or package-name reservation publication. Keep readiness false until the exact source and package evidence satisfies every other applicable gate. The user has authorized completing qualification and publication; no further publication confirmation is required in this task.
 

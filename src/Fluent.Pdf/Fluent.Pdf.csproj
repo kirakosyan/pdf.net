@@ -5,7 +5,7 @@
     <RootNamespace>Fluent.Pdf</RootNamespace>
     <PackageId>Fluent.Pdf</PackageId>
     <Authors>Armen Kirakosyan</Authors>
-    <Description>Production PDF SDK for .NET. Publication requires complete production qualification.</Description>
+    <Description>Managed PDF creation, inspection and editing with explicit resource budgets and provider contracts. Version 1.0.0 covers the documented implemented core profiles; optional engines and full-roadmap qualification are separate.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/kirakosyan/pdf.net</RepositoryUrl>

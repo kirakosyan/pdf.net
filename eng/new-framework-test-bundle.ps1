@@ -3,7 +3,8 @@
 param(
     [Parameter(Mandatory)][string]$OutputDirectory,
     [Parameter(Mandatory)][string]$TestPlatformPackage,
-    [Parameter(Mandatory)][string]$JavaHome
+    [Parameter(Mandatory)][string]$JavaHome,
+    [string]$CoreReleaseDirectory = ''
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
@@ -74,6 +75,19 @@ Copy-Item -LiteralPath (Join-Path $root 'Fluent.Pdf.slnx'),(Join-Path $PSScriptR
 # Retain upstream notices together with analysis-only native and Java assets.
 Copy-Item -LiteralPath (Join-Path $root 'third-party') -Destination (Join-Path $destination 'third-party') -Recurse
 Expand-Archive -LiteralPath $package -DestinationPath (Join-Path $destination 'testplatform')
+if ($CoreReleaseDirectory) {
+    $core = [IO.Path]::GetFullPath($CoreReleaseDirectory)
+    & python (Join-Path $PSScriptRoot 'core_release.py') audit --directory $core
+    if ($LASTEXITCODE -ne 0) { throw 'The supplementary core consumer must use the current exact candidate.' }
+    $target = Join-Path $destination 'core-release'
+    $null = [IO.Directory]::CreateDirectory($target)
+    Copy-Item -LiteralPath (Join-Path $core 'core-manifest.json') -Destination $target
+    Copy-Item -LiteralPath (Join-Path $core 'framework'),(Join-Path $core 'packages') -Destination $target -Recurse
+    $sourceCore = (Get-FileHash -LiteralPath (Join-Path $tests 'Fluent.Pdf.dll')).Hash
+    foreach ($architecture in @('x86','x64')) {
+        if ((Get-FileHash -LiteralPath (Join-Path $target "framework/$architecture/Fluent.Pdf.dll")).Hash -ine $sourceCore) { throw 'Package-only Framework consumer loaded different bytes from the source baseline.' }
+    }
+}
 $files = @(Get-ChildItem -LiteralPath $destination -Recurse -File | Sort-Object FullName | ForEach-Object {
     [ordered]@{path=[IO.Path]::GetRelativePath($destination,$_.FullName).Replace('\','/');bytes=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()}
 })

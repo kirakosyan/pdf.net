@@ -1,5 +1,9 @@
 name: Publish qualified stable packages
 on:
+  workflow_run:
+    workflows: ['Source contracts and release guard']
+    types: [completed]
+    branches: [main]
   push:
     branches: [main]
     paths: ['.github/workflows/publish.yml']
@@ -141,3 +145,109 @@ jobs:
             dotnet nuget push $package.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
             if ($LASTEXITCODE -ne 0) { throw "Package publication failed: $($package.Name)" }
           }
+
+  core-verify:
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'kirakosyan/pdf.net' && github.event.workflow_run.head_sha == github.sha
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      artifact_id: ${{ steps.core_candidate.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify core release tag and successful main-run provenance
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CORE_RUN: ${{ github.event.workflow_run.id }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $head = (git rev-parse HEAD).Trim()
+          $main = (git rev-parse origin/main).Trim()
+          $tag = (git rev-parse 'v1.0.0^{commit}').Trim()
+          if ($LASTEXITCODE -ne 0 -or $tag -cne $head -or $main -cne $head) { throw 'Core tag must match the current main release commit.' }
+          $run = gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:CORE_RUN" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0 -or $run.head_sha -cne $head -or $run.event -cne 'push' -or $run.conclusion -cne 'success' -or $run.path -cne '.github/workflows/ci.yml' -or $run.head_repository.full_name -cne 'kirakosyan/pdf.net') { throw 'Foreign or incomplete core release verification.' }
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: core-release-verified
+          path: qualified
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+          digest-mismatch: error
+      - name: Reverify exact core package inventory and raw consumer evidence
+        run: python3 eng/core_release.py verify --directory qualified
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        id: core_candidate
+        with:
+          name: verified-core-publish-artifact
+          path: qualified/
+          if-no-files-found: error
+          retention-days: 90
+
+  core-publish:
+    needs: core-verify
+    runs-on: ubuntu-24.04
+    environment: nuget
+    permissions:
+      contents: write
+      actions: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: |
+            10.0.4xx
+            8.0.x
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          artifact-ids: ${{ needs.core-verify.outputs.artifact_id }}
+          path: qualified
+          merge-multiple: true
+          digest-mismatch: error
+      - name: Reverify exact core candidate before obtaining publishing credentials
+        run: python3 eng/core_release.py verify --directory qualified
+      - uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
+        id: core_login
+        with:
+          user: kirakosyan
+      - name: Push scoped core and symbol bytes
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.core_login.outputs.NUGET_API_KEY }}
+        run: ./eng/push-core.ps1 -Directory qualified
+      - name: Verify public indexing, repository signature and every reviewed payload byte
+        run: python3 eng/core_release.py public --directory qualified
+      - name: Execute fresh NuGet-only package consumers
+        shell: pwsh
+        run: ./eng/core-release.ps1 -Stage Consumers -Directory qualified -HostId linux-x64 -OutputDirectory artifacts/public-core-consumers -PublicFeed
+      - name: Publish release notes and verified artifact hashes
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v1.0.0 --verify-tag --title 'Fluent.Pdf 1.0.0 — implemented core profiles' --notes-file docs/releases/1.0.0.md qualified/packages/Fluent.Pdf.1.0.0.nupkg qualified/packages/Fluent.Pdf.1.0.0.snupkg qualified/core-manifest.json qualified/core-evidence.json qualified/public-verification.json
+          if ($LASTEXITCODE -ne 0) { throw 'GitHub release recording failed; preserve the already published NuGet evidence.' }
+      - name: Retain public verification reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: core-publication-verification
+          path: |
+            qualified/core-manifest.json
+            qualified/core-evidence.json
+            qualified/public-verification.json
+            artifacts/public-core-consumers/
+            !artifacts/public-core-consumers/*-workspace/**
+          if-no-files-found: error
+          retention-days: 90

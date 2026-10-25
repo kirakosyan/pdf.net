@@ -13,7 +13,8 @@
     </ItemGroup>
   </Target>
   <Target Name="RequireProductionQualification" BeforeTargets="GenerateNuspec">
-    <Exec Command="pwsh -NoProfile -File &quot;$(FluentPdfRoot)/eng/assert-production-ready.ps1&quot; -Stage BeforePack -EvidenceDirectory &quot;$(FluentPdfEvidenceDirectory)&quot;" />
+    <Exec Condition="'$(FluentPdfCoreRelease)' == 'true'" Command="pwsh -NoProfile -File &quot;$(FluentPdfRoot)/eng/assert-core-release.ps1&quot; -ProjectName &quot;$(MSBuildProjectName)&quot; -PackageVersion &quot;$(PackageVersion)&quot;" />
+    <Exec Condition="'$(FluentPdfCoreRelease)' != 'true'" Command="pwsh -NoProfile -File &quot;$(FluentPdfRoot)/eng/assert-production-ready.ps1&quot; -Stage BeforePack -EvidenceDirectory &quot;$(FluentPdfEvidenceDirectory)&quot;" />
   </Target>
   <Target Name="CoupleSdkPackageVersions" AfterTargets="_GetProjectReferenceVersions">
     <ItemGroup>
