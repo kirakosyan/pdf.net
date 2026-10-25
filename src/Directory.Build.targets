@@ -9,7 +9,7 @@
   <Target Name="IncludeSdkNotices" BeforeTargets="_GetPackageFiles">
     <ItemGroup>
       <_FluentPdfNotice Include="$(FluentPdfRoot)/third-party/**/*" />
-      <Content Include="@(_FluentPdfNotice)" Condition="'%(_FluentPdfNotice.Extension)' == '.txt' Or '%(_FluentPdfNotice.Extension)' == '.md' Or '%(_FluentPdfNotice.Extension)' == '.json' Or $([System.String]::Copy('%(_FluentPdfNotice.Filename)%(_FluentPdfNotice.Extension)').EndsWith('-LICENSE'))" Pack="true" PackagePath="notices/%(RecursiveDir)" />
+      <Content Include="@(_FluentPdfNotice)" Condition="'%(_FluentPdfNotice.Extension)' == '.txt' Or '%(_FluentPdfNotice.Extension)' == '.md' Or '%(_FluentPdfNotice.Extension)' == '.json' Or $([System.String]::Copy('%(_FluentPdfNotice.Filename)%(_FluentPdfNotice.Extension)').EndsWith('-LICENSE'))" Pack="true" PackagePath="notices/" />
     </ItemGroup>
   </Target>
   <Target Name="RequireProductionQualification" BeforeTargets="GenerateNuspec">

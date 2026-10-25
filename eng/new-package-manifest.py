@@ -43,7 +43,8 @@ def create(root, output):
                 raise ValueError('Conditional dependency requires explicit inventory support')
             dependencies[p.get('Include')] = p.get('Version')
         groups = {tfm: dict(dependencies) for tfm in audit.TFMS}
-        groups['netstandard2.0']['NETStandard.Library'] = '2.0.3'
+        # The pinned SDK's implicit NETStandard.Library reference is private
+        # build-time metadata; it is not a nuspec runtime dependency.
         files, symbols = dict(common), {}
         for tfm in audit.TFMS:
             directory = project / 'bin/Release' / tfm
