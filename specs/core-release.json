@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "packageId": "Fluent.Pdf",
+  "packageVersion": "1.0.0",
+  "scope": "implemented-managed-core-profiles",
+  "authorizedOn": "2026-10-25",
+  "authorization": "User explicitly selected Current implemented core profiles for 1.0.0 after disclosure that full feature and final-package qualification are unfinished.",
+  "scopeDocument": "docs/releases/1.0.0.md",
+  "fullRoadmapQualified": false,
+  "publishCompanionPackages": false,
+  "requiredConsumerHosts": ["win-x64", "win-arm64", "linux-x64", "linux-arm64", "osx-x64", "osx-arm64"],
+  "requiredAssets": ["net472", "netstandard2.0", "net8.0", "net10.0"]
+}

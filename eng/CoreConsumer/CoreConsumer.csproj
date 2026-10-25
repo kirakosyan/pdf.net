@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net472;net8.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <AssemblyName>CoreConsumer</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Fluent.Pdf" Version="[1.0.0]" GeneratePathProperty="true" ExcludeAssets="$(CoreExcludedAssets)" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(CoreAssetTfm)' == 'netstandard2.0'">
+    <CoreExcludedAssets>compile;runtime</CoreExcludedAssets>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(CoreAssetTfm)' == 'netstandard2.0'">
+    <Reference Include="Fluent.Pdf"><HintPath>$(PkgFluent_Pdf)/lib/netstandard2.0/Fluent.Pdf.dll</HintPath></Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+</Project>

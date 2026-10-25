@@ -4,6 +4,8 @@ This policy governs review of Fluent.Pdf changes. There is no supported publishe
 
 ## Version and API changes
 
+The first core-only 1.0.0 release freezes the currently implemented Fluent.Pdf surface in src/Fluent.Pdf/PublicAPI.Shipped.txt; companion surfaces remain unshipped. The core release manifest binds that baseline hash. Publishing the core does not qualify the other roadmap/provider implementations or make their packages available.
+
 Use [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html): compatible fixes increment patch, compatible additions increment minor, and incompatible public changes require a major version. Published bytes are immutable; all coupled SDK/provider packages advance together with exact reviewed dependency versions. Before first publication, keep unshipped declarations distinct from the eventual published API baseline.
 
 Compatibility includes binary and source signatures, parameter names used by named arguments, nullable contracts, exceptions/diagnostic codes, ownership, cancellation, resource accounting, defaults, document output and provider ABI. A passing API comparison only covers part of this contract. See Microsoft's [library change guidance](https://learn.microsoft.com/en-us/dotnet/core/compatibility/library-change-rules).

@@ -1,8 +1,8 @@
 # Production qualification
 
-## Release rule
+## Full-roadmap release rule
 
-The first NuGet publication is a stable production release. The canonical manifest retains 111 SDK requirements; FP-096 is the separate Reader placeholder. For version 1.0.0, the user's [explicit exception](release-exceptions.md) defers FP-089/#93 without marking it qualified. The other 110 requirements must be implemented, reviewed and qualified. Do not publish an empty or prerelease package to reserve an ID. The checked-in readiness manifest remains false and the package target fails closed.
+The owner selected the implemented-core 1.0.0 release described in [its scoped contract](releases/1.0.0.md). It publishes only Fluent.Pdf and symbols after exact-package consumer and artifact checks; unfinished roadmap requirements remain unqualified. The following gates describe the broader full-roadmap release and are not claims about core 1.0.0. The canonical manifest retains 111 SDK requirements; FP-096 is the separate Reader placeholder. For version 1.0.0, the user's [explicit exception](release-exceptions.md) defers FP-089/#93 without marking it qualified. The other 110 requirements must be implemented, reviewed and qualified. Do not publish an empty or prerelease package to reserve an ID. The checked-in readiness manifest remains false and the package target fails closed.
 
 A passing build, metadata scan, source test on a newer runtime or dependency installation is not a substitute for observable behavior on the final package. An alpha-quality implementation with a stable version number is not acceptable.
 

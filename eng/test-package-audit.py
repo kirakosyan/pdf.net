@@ -40,7 +40,13 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(len(self.files), len(report['entries']))
         symbols = {k: v for k, v in self.files.items() if k not in self.expected['files']}
         symbols.update({k: b'portable fixture' for k in self.expected['symbols']})
+        # The pinned SDK emits SymbolsPackage metadata without the primary's
+        # license field. The companion primary still requires MIT and LICENSE.
+        symbols['Fluent.Pdf.nuspec'] = symbols['Fluent.Pdf.nuspec'].replace(b'<license type="expression">MIT</license>', b'').replace(b'</metadata>', b'<packageTypes><packageType name="SymbolsPackage"/></packageTypes></metadata>')
         self.assertTrue(audit.inspect(self.archive(symbols), self.expected, True)['symbols'])
+        symbols['Fluent.Pdf.nuspec'] = symbols['Fluent.Pdf.nuspec'].replace(b'SymbolsPackage', b'OtherPackage')
+        with self.assertRaisesRegex(ValueError, 'symbol package type'):
+            audit.inspect(self.archive(symbols), self.expected, True)
 
     def test_missing_and_changed_payloads(self):
         for name in self.expected['files']:
@@ -105,6 +111,16 @@ class AuditTests(unittest.TestCase):
         audit.compare(data, data)
         with self.assertRaises(ValueError):
             audit.compare(data, data + b'changed')
+
+    def test_public_signing_preserves_every_original_entry_byte(self):
+        original = self.archive()
+        public = dict(self.files, **{".signature.p7s": b"synthetic-signature;not-cryptographic-proof"})
+        audit.compare_signed_payload(original, self.archive(public))
+        public["Fluent.Pdf.nuspec"] += b"\n"
+        with self.assertRaisesRegex(ValueError, "payload bytes"):
+            audit.compare_signed_payload(original, self.archive(public))
+        with self.assertRaisesRegex(ValueError, "signature inventory"):
+            audit.compare_signed_payload(original, original)
 
     def test_xml_entities_and_duplicate_groups_rejected(self):
         for payload in (b'<!DOCTYPE package><package/>', self.files['Fluent.Pdf.nuspec'].replace(b'</dependencies>', b'<group targetFramework="net8.0"/></dependencies>')):

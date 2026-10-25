@@ -39,6 +39,8 @@ $workflow = Join-Path $root ('.github/workflows/' + $readiness.qualificationWork
 $report = [ordered]@{
     schemaVersion = 1; purpose = 'release-status-inventory'; sourceCommit = $commit
     workingTreeDirty = ($dirty.Count -gt 0); packageVersion = $readiness.packageVersion
+    inventoryScope = 'full-planned-sdk'
+    implementedCoreRelease = $(if (Test-Path -LiteralPath (Join-Path $root 'specs/core-release.json')) { Get-Content -LiteralPath (Join-Path $root 'specs/core-release.json') -Raw | ConvertFrom-Json } else { $null })
     productionReady = $readiness.productionReady; qualificationEvidenceValidated = $false
     sourceTestsExecuted = $false; packageConsumersExecuted = $false
     catalogueReleaseRequirements = @($spec.features | Where-Object releaseRequired).Count

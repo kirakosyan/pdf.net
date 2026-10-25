@@ -1,6 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "Fluent.Pdf",
+  "scope": "full-planned-sdk",
+  "coreReleasePolicy": "core-release.json",
   "packageVersion": "1.0.0",
   "productionReady": false,
   "stage": "implementation",

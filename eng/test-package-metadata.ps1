@@ -28,6 +28,9 @@ foreach ($project in @(Get-ChildItem -LiteralPath (Join-Path $root 'src') -Direc
     foreach ($file in $data.Items._PackageFiles) {
         $destination = $file.PackagePath.Replace('\','/').Trim('/')
         if ($destination) { $destination += '/' }
+        # NuGet appends RecursiveDir when packing wildcard content. Model the
+        # actual archive destination rather than just its PackagePath prefix.
+        if ($file.PSObject.Properties.Name -contains 'RecursiveDir') { $destination += $file.RecursiveDir.Replace('\','/') }
         $destination += [IO.Path]::GetFileName($file.FullPath)
         if (!$seen.Add($destination) -or !$expectedFiles.ContainsKey($destination) -or [IO.Path]::GetFullPath($file.FullPath) -cne [IO.Path]::GetFullPath($expectedFiles[$destination])) { throw 'Unreviewed, duplicate or misplaced package content.' }
     }

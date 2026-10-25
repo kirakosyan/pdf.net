@@ -41,6 +41,14 @@ $previousPath = $env:PATH
 try {
     $env:PATH = (Join-Path $workspace 'java/bin') + ';' + $env:PATH
     & (Join-Path $workspace 'run-framework-contracts.ps1') -TestAssembly (Join-Path $workspace 'tests/Fluent.Pdf.Contract.Tests.dll') -TestPlatformDirectory (Join-Path $workspace 'testplatform/tools/net462/Common7/IDE/Extensions/TestPlatform') -Architecture $Architecture -OutputDirectory $output -RequireFramework472:$RequireFramework472 -TimeoutSeconds $TimeoutSeconds
+    $core = Join-Path $workspace "core-release/framework/$Architecture/CoreConsumer.exe"
+    if (Test-Path -LiteralPath $core) {
+        $process = Start-Process -FilePath $core -ArgumentList @('"' + (Join-Path $output 'core-consumer') + '"') -PassThru -NoNewWindow
+        try {
+            if (!$process.WaitForExit(60000)) { $process.Kill(); throw 'The core package consumer exceeded its deadline.' }
+            if ($process.ExitCode -ne 0) { throw 'The core package-only Framework consumer failed.' }
+        } finally { $process.Dispose() }
+    }
 } finally {
     $env:PATH = $previousPath
     if (Test-Path -LiteralPath $output -PathType Container) {

@@ -55,7 +55,7 @@ def normalized_tfm(value):
     return {'.NETFramework4.7.2': 'net472', '.NETStandard2.0': 'netstandard2.0'}.get(value, value)
 
 
-def inspect(data, expected, symbols=False):
+def inspect(data, expected, symbols=False, signed=False):
     files = entries(data)
     name, version, commit = expected['id'], expected['version'], expected['sourceCommit']
     spec_name = name + '.nuspec'
@@ -74,8 +74,12 @@ def inspect(data, expected, symbols=False):
     if repository is None or repository.get('type') != 'git' or repository.get('url') != 'https://github.com/kirakosyan/pdf.net' or repository.get('commit') != commit:
         raise ValueError('Repository/commit mismatch')
     license_node = metadata.find('license')
-    if license_node is None or license_node.get('type') != 'expression' or license_node.text != 'MIT':
+    if license_node is None and not symbols or license_node is not None and (license_node.get('type') != 'expression' or license_node.text != 'MIT'):
         raise ValueError('License metadata mismatch')
+    if symbols:
+        types = metadata.findall('packageTypes/packageType')
+        if len(types) != 1 or types[0].get('name') != 'SymbolsPackage':
+            raise ValueError('Wrong symbol package type')
     if not symbols:
         if metadata.findtext('readme') != 'README.md':
             raise ValueError('Missing README metadata')
@@ -104,6 +108,10 @@ def inspect(data, expected, symbols=False):
     if len(core_properties) != 1 or not containers.issubset(files):
         raise ValueError('Incomplete NuGet container')
     allowed = set(required) | containers | set(core_properties)
+    if signed:
+        if symbols or ".signature.p7s" not in files:
+            raise ValueError("Missing public repository signature")
+        allowed.add(".signature.p7s")
     if set(files) != allowed:
         raise ValueError('Unreviewed package payload')
     return {'id': name, 'version': version, 'symbols': symbols, 'sha256': digest(data),
@@ -114,6 +122,16 @@ def compare(first, second):
     # Byte equality includes ZIP metadata, not just decompressed payload hashes.
     if digest(first) != digest(second):
         raise ValueError('Rebuild archive bytes differ')
+
+
+def compare_signed_payload(candidate, public):
+    # Repository signing changes ZIP/signature bytes. All original entry bytes,
+    # including nuspec/container metadata, must remain identical.
+    original, signed = entries(candidate), entries(public)
+    if set(signed) != set(original) | {".signature.p7s"} or ".signature.p7s" in original:
+        raise ValueError("Public package signature inventory differs")
+    if any(signed[name] != value for name, value in original.items()):
+        raise ValueError("Public package payload bytes differ")
 
 
 def main():
