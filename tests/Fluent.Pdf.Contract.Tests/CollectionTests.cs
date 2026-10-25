@@ -95,6 +95,20 @@ public sealed class CollectionTests
         var retry = original.Process("owned", Adapters((_, input, output, c) => input.CopyTo(output))); Assert.All(retry.Outcomes, o => Assert.NotNull(o.Output));
     }
     [Fact]
+    public void LatchedSdkAdapterErrorsAbortTheSharedBatchEvenWhenAdapterSwallowsThem()
+    {
+        var attempted = new List<string>();
+        var failure = Assert.Throws<PdfException>(() => Collection("first", "bad", "last").Process("owned", Adapters((name, input, output, c) =>
+        {
+            attempted.Add(name);
+            if (name != "bad") { input.CopyTo(output); return; }
+            try { c.Report(new PdfDiagnostic("Fixture.InvalidItem", "Malformed item.")); }
+            catch (PdfException) { }
+        })));
+        Assert.Equal("Fixture.InvalidItem", failure.Diagnostic.Code);
+        Assert.Equal(new[] { "first", "bad" }, attempted);
+    }
+    [Fact]
     public void AdapterRegistriesAreDetachedAndDoNotShareProcessConfiguration()
     {
         int first = 0, second = 0;

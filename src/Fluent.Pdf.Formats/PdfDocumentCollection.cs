@@ -74,7 +74,7 @@ public sealed class PdfDocumentCollection
     private PdfByteStore Archive(PdfOperationContext c)
         => FormatPackage.Write(Items.Select(item => (item.Name, FormatIo.Raw(item.Bytes, c), true)), c, collectionNames: true);
 
-    /// <summary>Runs one explicitly registered trusted adapter sequentially. Ordinary item failures are reported in place; cancellation, latched limits and leaked scopes abort the batch.</summary>
+    /// <summary>Runs one explicitly registered trusted adapter sequentially. Unlatched adapter exceptions are reported in place. All context-latched SDK errors, strict losses, cancellation, limits and leaked scopes abort the shared-budget batch.</summary>
     public PdfCollectionBatchResult Process(string format, PdfCollectionAdapters adapters, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
     {
         if (adapters == null) throw new ArgumentNullException(nameof(adapters));

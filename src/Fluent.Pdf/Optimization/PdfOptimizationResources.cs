@@ -12,6 +12,9 @@ internal static class PdfOptimizationResources
         var used = new HashSet<(string Category, string Name)>();
         var streams = new HashSet<PdfValue>();
         var owners = new HashSet<PdfValue>();
+        var prunedResources = new HashSet<PdfObjectId>();
+        var prunedCategories = new HashSet<PdfObjectId>();
+        var categoryUses = new Dictionary<PdfObjectId, HashSet<string>>();
         var ids = new List<PdfObjectId>();
         foreach (var id in graph.Edit.ActiveIds(c))
         {
@@ -27,6 +30,18 @@ internal static class PdfOptimizationResources
 
         foreach (var id in ids)
             Walk(graph.Edit.Resolve(id));
+        foreach (var owner in owners)
+        {
+            var resources = graph.Get(owner, "Resources");
+            if (resources.Kind != PdfValueKind.Dictionary) continue;
+            foreach (var entry in resources.Entries)
+                if (entry.Value.Kind == PdfValueKind.Reference)
+                {
+                    c.Consume(PdfResourceKind.ExpandedBytes, entry.Key.Length * 2L + 128);
+                    if (!categoryUses.TryGetValue(entry.Value.ReferenceId, out var names)) categoryUses.Add(entry.Value.ReferenceId, names = new(StringComparer.Ordinal));
+                    names.Add(entry.Key);
+                }
+        }
         int removed = 0;
         foreach (var id in ids)
             graph.Edit.Set(id, Rewrite(graph.Edit.Resolve(id)));
@@ -194,33 +209,54 @@ internal static class PdfOptimizationResources
             foreach (string key in entries.Keys.ToArray())
                 entries[key] = Rewrite(entries[key]);
             if (owners.Contains(value) && value.Entries.TryGetValue("Resources", out var reference))
-            {
-                var resources = graph.Resolve(reference);
-                if (resources.Kind != PdfValueKind.Dictionary)
-                    throw PdfOptimizationEngine.Error(c, "ResourceUsage", "Resource owners require a dictionary before pruning.");
-                var kept = graph.Copy(resources);
-                foreach (string category in Categories)
-                    if (kept.TryGetValue(category, out var declared))
-                    {
-                        var group = graph.Resolve(declared);
-                        if (group.Kind != PdfValueKind.Dictionary)
-                            throw PdfOptimizationEngine.Error(c, "ResourceUsage", "Resource categories require exact dictionary bindings.");
-                        var selected = graph.Copy(group);
-                        foreach (string name in selected.Keys.ToArray())
-                            if (!used.Contains((category, name)))
-                            {
-                                selected.Remove(name);
-                                removed++;
-                            }
-
-                        kept[category] = PdfValue.OwnedDictionary(selected);
-                    }
-
-                entries["Resources"] = PdfValue.OwnedDictionary(kept);
-            }
+                entries["Resources"] = PruneResources(reference);
 
             var dictionary = PdfValue.OwnedDictionary(entries);
             return value.Kind == PdfValueKind.Stream ? value.WithStreamDictionary(dictionary) : dictionary;
+        }
+
+        PdfValue PruneResources(PdfValue reference)
+        {
+            if (reference.Kind == PdfValueKind.Reference && prunedResources.Contains(reference.ReferenceId)) return reference;
+            c.Consume(PdfResourceKind.ExpandedBytes, 64);
+            if (reference.Kind == PdfValueKind.Reference) prunedResources.Add(reference.ReferenceId);
+            var resources = graph.Resolve(reference);
+            if (resources.Kind != PdfValueKind.Dictionary)
+                throw PdfOptimizationEngine.Error(c, "ResourceUsage", "Resource owners require a dictionary before pruning.");
+            var kept = graph.Copy(resources);
+            foreach (string category in Categories)
+                if (kept.TryGetValue(category, out var declared))
+                    kept[category] = PruneCategory(category, declared);
+            var result = PdfValue.OwnedDictionary(kept);
+            if (reference.Kind == PdfValueKind.Reference)
+            {
+                graph.Edit.Set(reference.ReferenceId, result);
+                return reference;
+            }
+            return result;
+        }
+
+        PdfValue PruneCategory(string category, PdfValue declared)
+        {
+            if (declared.Kind == PdfValueKind.Reference && prunedCategories.Contains(declared.ReferenceId)) return declared;
+            c.Consume(PdfResourceKind.ExpandedBytes, 64);
+            if (declared.Kind == PdfValueKind.Reference) prunedCategories.Add(declared.ReferenceId);
+            var group = graph.Resolve(declared);
+            if (group.Kind != PdfValueKind.Dictionary)
+                throw PdfOptimizationEngine.Error(c, "ResourceUsage", "Resource categories require exact dictionary bindings.");
+            var selected = graph.Copy(group);
+            var categories = declared.Kind == PdfValueKind.Reference ? categoryUses[declared.ReferenceId] : new HashSet<string>(new[] { category }, StringComparer.Ordinal);
+            // An alias used in an unknown resource category remains conservative.
+            if (categories.Any(name => !Categories.Contains(name))) return declared;
+            foreach (string name in selected.Keys.ToArray())
+                if (!categories.Any(kind => used.Contains((kind, name)))) { selected.Remove(name); removed++; }
+            var result = PdfValue.OwnedDictionary(selected);
+            if (declared.Kind == PdfValueKind.Reference)
+            {
+                graph.Edit.Set(declared.ReferenceId, result);
+                return declared;
+            }
+            return result;
         }
     }
 }

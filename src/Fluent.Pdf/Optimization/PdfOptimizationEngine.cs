@@ -266,6 +266,9 @@ internal sealed partial class PdfOptimizationEngine
             var value = _g.Edit.Resolve(id);
             if (value.Kind != PdfValueKind.Stream)
                 continue;
+            // Archival XMP metadata must retain its plain, unfiltered packet.
+            if (Name(value, "Type") == "Metadata")
+                continue;
             var filter = _g.Get(value, "Filter");
             if (filter.Kind != PdfValueKind.Null && !(filter.Kind == PdfValueKind.Array && filter.Items.Count == 0))
                 continue;

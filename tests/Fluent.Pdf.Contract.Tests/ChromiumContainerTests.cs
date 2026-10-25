@@ -45,6 +45,33 @@ public sealed class ChromiumContainerTests
         Assert.Throws<ArgumentOutOfRangeException>(() => f.Options(timeout: TimeSpan.Zero));
         Assert.Throws<ArgumentException>(() => new ChromiumContainerOptions("\\\\server\\share\\docker.exe", new string('0',64), "unix:///fixture", "sha256:" + new string('a',64), f.Config, f.Policy, Fixture.Hash(f.Policy), 268435456));
     }
+    [Fact]
+    public void UnstartableCliPreservesHostUnavailableWithoutInventingOwnedContainerCleanup()
+    {
+        var f = new Fixture();
+        string invalid = Path.Combine(f.Root, "not-an-executable.exe");
+        File.WriteAllBytes(invalid, new byte[] { 0, 1, 2, 3 });
+        var options = new ChromiumContainerOptions(invalid, Fixture.Hash(invalid), "unix:///explicit-source-fixture.sock", "sha256:" + new string('a',64), f.Config, f.Policy, Fixture.Hash(f.Policy), 268435456);
+        var failure = Assert.Throws<PdfException>(() => PolicyTests.Run(c => ChromiumContainerHost.Open(options, c), Limits));
+        Assert.Equal("Html.HostUnavailable", failure.Diagnostic.Code);
+        Assert.False(failure.Data.Contains("Fluent.Pdf.Html.OwnedContainer"));
+        Assert.False(File.Exists(Path.Combine(f.Root, "peer.trace")));
+    }
+
+    [Theory]
+    [InlineData(4095)]
+    [InlineData(4096)]
+    [InlineData(8192)]
+    public void BlockChargedUnicodeFramesKeepTheirNewlineBoundaryAcrossRepeatedResponses(int padding)
+    {
+        var f = new Fixture();
+        PolicyTests.Run(c =>
+        {
+            using var connection = ChromiumContainerHost.Open(f.Options(), c);
+            foreach (string message in new[] { "{\"value\":\"" + new string('x',padding) + "Հայերեն 😀\"}", "{}" })
+            { connection.Send(message,c); Assert.Equal(message,connection.Receive(c)); }
+        }, Limits);
+    }
 
     [Fact]
     public void OriginalPeerVerifiesOfflineFlagsAndEchoesUnicodeWithReleasedReservation()

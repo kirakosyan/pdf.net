@@ -13080,7 +13080,7 @@ Gets whether exactly equal safe image/font-program streams are shared.
 
 ### <code>P:Fluent.Pdf.PdfOptimizationOptions.MaximumImageDimension</code>
 
-Gets the image-plane dimension bound, or zero for lossless.
+Gets the resampling target dimension, or zero for lossless. An original encoding is retained when its resampled replacement would not be smaller.
 
 ### <code>P:Fluent.Pdf.PdfOptimizationOptions.Preset</code>
 

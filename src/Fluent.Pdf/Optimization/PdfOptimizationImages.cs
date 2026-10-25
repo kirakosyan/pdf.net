@@ -38,7 +38,6 @@ internal sealed partial class PdfOptimizationEngine
                 targetWidth = Math.Max(1, (int)((long)width * limit / height));
             }
 
-            _c.Report(new("Optimization.ImageDownsampled", "An eight-bit image plane is explicitly resampled by nearest-neighbor sample selection; original resolution and pixel detail are reduced.", lossCategory: PdfLossCategory.FidelityReduction, objectId: id.Number));
             _c.ConsumePixels(targetWidth, targetHeight);
             var resolved = PdfFilterDeclarations.Resolve(value, reference => _g.Edit.Resolve(reference), _c);
             bool codec = PdfFilters.Inspect(resolved).Any(f => PdfStreamFilters.Canonical(f.Name) == "CCITTFaxDecode" || PdfImageCodecPipeline.TryKind(PdfStreamFilters.Canonical(f.Name), out _));
@@ -65,6 +64,19 @@ internal sealed partial class PdfOptimizationEngine
             }
 
             var bytes = resized.Build();
+            bool flate = false;
+            if (_options.CompressStreams)
+            {
+                using var raw = bytes.Open(0, bytes.Length);
+                var encoded = PdfFilterEncoders.Flate(raw, _c);
+                if (encoded.Length + 24 < bytes.Length) { bytes = encoded; flate = true; }
+            }
+            if (bytes.Length + (flate ? 24 : 0) >= value.RawStreamLength)
+            {
+                Info("ImageEncodingRetained", "The original image encoding and resolution were retained because the resampled encoding would not be smaller.");
+                continue;
+            }
+            _c.Report(new("Optimization.ImageDownsampled", "An eight-bit image plane is explicitly resampled by nearest-neighbor sample selection; original resolution and pixel detail are reduced.", lossCategory: PdfLossCategory.FidelityReduction, objectId: id.Number));
             var entries = _g.Copy(value);
             entries["Width"] = PdfValue.Integer(targetWidth);
             entries["Height"] = PdfValue.Integer(targetHeight);
@@ -72,6 +84,11 @@ internal sealed partial class PdfOptimizationEngine
             entries.Remove("Filter");
             entries.Remove("DecodeParms");
             entries.Remove("DL");
+            if (flate)
+            {
+                entries["Filter"] = PdfValue.Name("FlateDecode");
+                Compressed++;
+            }
             _g.Edit.Set(id, PdfValue.StreamValue(PdfValue.OwnedDictionary(entries), bytes, 0, bytes.Length));
             Downsampled++;
         }

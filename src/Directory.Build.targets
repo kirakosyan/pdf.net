@@ -1,25 +1,5 @@
 <Project>
-  <!-- Shared candidate metadata. Every pack entry point still invokes the production gate. -->
-  <PropertyGroup>
-    <Version>1.0.0</Version>
-    <PackageVersion>$(Version)</PackageVersion>
-    <PackageId>$(MSBuildProjectName)</PackageId>
-    <IsPackable>true</IsPackable>
-    <Authors>Armen Kirakosyan</Authors>
-    <Description>Fluent.Pdf SDK component. Publication requires complete production qualification.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/kirakosyan/pdf.net</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/kirakosyan/pdf.net</PackageProjectUrl>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <DebugType>portable</DebugType>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>false</EmbedUntrackedSources>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <FluentPdfRoot>$(MSBuildThisFileDirectory)..</FluentPdfRoot>
-  </PropertyGroup>
+  <!-- Shared notices, version coupling and production gate. Defaults live in Directory.Build.props. -->
   <ItemGroup>
     <None Remove="$(FluentPdfRoot)/README.md;$(FluentPdfRoot)/LICENSE" />
     <None Include="$(FluentPdfRoot)/README.md;$(FluentPdfRoot)/LICENSE" Pack="true" PackagePath="/" />

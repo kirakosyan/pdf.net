@@ -1,0 +1,23 @@
+<Project>
+  <Import Project="../Directory.Build.props" Condition="'$(FluentPdfSharedPropsImported)' != 'true'" />
+  <!-- Early defaults permit explicit project metadata and pack opt-outs. -->
+  <PropertyGroup>
+    <Version Condition="'$(Version)' == ''">1.0.0</Version>
+    <PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName)</PackageId>
+    <IsPackable Condition="'$(IsPackable)' == ''">true</IsPackable>
+    <Authors Condition="'$(Authors)' == ''">Armen Kirakosyan</Authors>
+    <Description Condition="'$(Description)' == ''">Fluent.Pdf SDK component. Publication requires complete production qualification.</Description>
+    <PackageLicenseExpression Condition="'$(PackageLicenseExpression)' == ''">MIT</PackageLicenseExpression>
+    <PackageReadmeFile Condition="'$(PackageReadmeFile)' == ''">README.md</PackageReadmeFile>
+    <RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/kirakosyan/pdf.net</RepositoryUrl>
+    <RepositoryType Condition="'$(RepositoryType)' == ''">git</RepositoryType>
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">https://github.com/kirakosyan/pdf.net</PackageProjectUrl>
+    <IncludeSymbols Condition="'$(IncludeSymbols)' == ''">true</IncludeSymbols>
+    <SymbolPackageFormat Condition="'$(SymbolPackageFormat)' == ''">snupkg</SymbolPackageFormat>
+    <DebugType Condition="'$(DebugType)' == ''">portable</DebugType>
+    <PublishRepositoryUrl Condition="'$(PublishRepositoryUrl)' == ''">true</PublishRepositoryUrl>
+    <EmbedUntrackedSources Condition="'$(EmbedUntrackedSources)' == ''">false</EmbedUntrackedSources>
+    <GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">true</GenerateDocumentationFile>
+    <FluentPdfRoot Condition="'$(FluentPdfRoot)' == ''">$(MSBuildThisFileDirectory)..</FluentPdfRoot>
+  </PropertyGroup>
+</Project>

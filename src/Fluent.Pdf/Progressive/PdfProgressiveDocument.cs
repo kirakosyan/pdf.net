@@ -282,12 +282,12 @@ public sealed class PdfProgressiveDocument : IDisposable
 
             if (lease.ReadByte() != -1)
                 throw Error(c, "ResponseLength", "A range response contains bytes beyond its declared length.");
-            if (!Same(_identity, Identity(c)))
-                throw Error(c, "SourceChanged", "The source revision changed during a range read.");
         }
         catch
         {
             c.Checkpoint();
+            if (!Same(_identity, Identity(c)))
+                throw Error(c, "SourceChanged", "The source revision changed while its range provider failed.");
             throw Error(c, "ProviderFailed", "The configured authenticated range provider failed.");
         }
 

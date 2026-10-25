@@ -34,5 +34,26 @@ foreach ($project in @(Get-ChildItem -LiteralPath (Join-Path $root 'src') -Direc
     if ($seen.Count -ne $expectedFiles.Count) { throw 'Missing package README/license/notices.' }
     $rows.Add([ordered]@{id=$project.Name;version=$version;coupledReferences=@($data.Items._ProjectReferencesWithVersions).Count;noticeAndMetadataFiles=$seen.Count})
 }
+$props = [Security.SecurityElement]::Escape((Join-Path $root 'src/Directory.Build.props'))
+$targets = [Security.SecurityElement]::Escape((Join-Path $root 'src/Directory.Build.targets'))
+$overrideProject = Join-Path $OutputDirectory 'project-overrides.csproj'
+@"
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$props" />
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Description>Project-owned description.</Description>
+    <PackageId>Fixture.OwnedPackage</PackageId>
+    <Version>2.3.4</Version>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <Import Project="$targets" />
+</Project>
+"@ | Set-Content -LiteralPath $overrideProject -Encoding utf8NoBOM
+$overrideJson = & dotnet msbuild $overrideProject -nologo -getProperty:Description,PackageId,Version,PackageVersion,IsPackable
+if ($LASTEXITCODE -ne 0) { throw 'Project override metadata evaluation failed.' }
+$override = ($overrideJson | ConvertFrom-Json).Properties
+if ($override.Description -cne 'Project-owned description.' -or $override.PackageId -cne 'Fixture.OwnedPackage' -or $override.Version -cne '2.3.4' -or $override.PackageVersion -cne '2.3.4' -or $override.IsPackable -cne 'false') { throw 'Shared defaults overrode explicit project metadata or package opt-out.' }
+$overrideJson | Set-Content -LiteralPath (Join-Path $OutputDirectory 'project-overrides.json') -Encoding utf8NoBOM
 $rows.ToArray() | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $OutputDirectory 'report.json') -Encoding utf8NoBOM
 Write-Output "PACKAGE_METADATA_PASS;$($rows.Count)-projects"

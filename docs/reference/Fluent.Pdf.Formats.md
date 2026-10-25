@@ -707,7 +707,7 @@ Copies 1–4096 borrowed inputs, at most 16 MiB each and 64 MiB in total. Names 
 
 ### <code>M:Fluent.Pdf.Formats.PdfDocumentCollection.Process(System.String,Fluent.Pdf.Formats.PdfCollectionAdapters,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 
-Runs one explicitly registered trusted adapter sequentially. Ordinary item failures are reported in place; cancellation, latched limits and leaked scopes abort the batch.
+Runs one explicitly registered trusted adapter sequentially. Unlatched adapter exceptions are reported in place. All context-latched SDK errors, strict losses, cancellation, limits and leaked scopes abort the shared-budget batch.
 
 ### <code>M:Fluent.Pdf.Formats.PdfDocumentCollection.ReadArchive(System.IO.Stream,Fluent.Pdf.PdfOperationPolicy,System.Threading.CancellationToken)</code>
 

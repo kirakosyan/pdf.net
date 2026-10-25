@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
+    <FluentPdfSharedPropsImported>true</FluentPdfSharedPropsImported>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>

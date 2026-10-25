@@ -96,10 +96,15 @@ def main():
 
             retained = directory / "retained.pdf"
             retained.write_bytes(b"unchanged")
+            if os.name != 'nt': retained.chmod(0o644)
             result, reports = run(["rewrite", "--input", source, "--output", retained], 5)
             assert retained.read_bytes() == b"unchanged" and reports[0]["cleanup"] == "removed"
             result, _ = run(["rewrite", "--input", source, "--output", retained, "--overwrite"])
             assert not result.stdout and retained.read_bytes().startswith(b"%PDF-")
+            if os.name != 'nt': assert retained.stat().st_mode & 0o7777 == 0o600
+            private_output = directory / 'new-private.pdf'
+            run(["rewrite", "--input", source, "--output", private_output])
+            if os.name != 'nt': assert private_output.stat().st_mode & 0o7777 == 0o600
             shutil.copyfile(retained, destination / "rewritten.pdf")
             assert not list(directory.glob(".fluent-pdf-*.tmp"))
             cases.append("atomic-no-clobber-explicit-overwrite-and-owned-cleanup")

@@ -90,6 +90,18 @@ public sealed class ProgressiveTests
     }
 
     [Fact]
+    public void CacheMissRangesDoNotAddIdentityRoundTripsBeyondTheOperationBoundary()
+    {
+        var source = new Source(LargeFixture());
+        using var progressive = new PdfProgressiveDocument(source, new(blockSize:4096,maximumCacheBytes:8192));
+        _ = progressive.DecodeStream(new(6));
+        Assert.True(source.Ranges.Count > 3);
+        Assert.Equal(2,source.Authorizations);
+        _ = progressive.ReadPage(0);
+        Assert.Equal(4,source.Authorizations);
+    }
+
+    [Fact]
     public void CompressedObjectsAndIncrementalGenerationShadowingRemainLazy()
     {
         using var f = new SyntaxFixtures();

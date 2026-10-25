@@ -170,7 +170,11 @@ internal sealed class PdfStructureReader
             foreach (var mapping in _roleMap.Entries)
             {
                 Tick();
-                if (PdfStructureRules.StandardRole(mapping.Key)) throw Error("RoleMap", "Standard structure roles cannot be remapped.");
+                if (PdfStructureRules.StandardRole(mapping.Key))
+                {
+                    Finding("RoleMap", "role:" + mapping.Key, "A standard structure role cannot be remapped; this mapping is ignored and requires remediation.");
+                    continue;
+                }
                 _ = EffectiveRole(mapping.Key);
             }
         }
@@ -239,10 +243,16 @@ internal sealed class PdfStructureReader
             throw Error("Coverage", "Structure, actual MCIDs and parent-tree associations must have identical unique coverage.");
         if (Elements.Count == 0)
             Finding("StructureEmpty", "StructTreeRoot", "A logical structure tree has no elements.");
+        var unmappedRoles = new HashSet<string>(StringComparer.Ordinal);
         foreach (var element in Elements)
         {
             string role = EffectiveRole(element.Role);
-            if (!PdfStructureRules.StandardRole(role)) Finding("RoleMapping", "element:" + element.ObjectId, "The custom role needs an explicit standard-role mapping and semantic review.");
+            if (!PdfStructureRules.StandardRole(role) && !unmappedRoles.Contains(role))
+            {
+                Tick(role.Length * 2L + 64);
+                unmappedRoles.Add(role);
+                Finding("RoleMapping", "role:" + role, "The custom role needs an explicit standard-role mapping and semantic review.");
+            }
             if ((role == "Figure" || role == "Formula" || role == "Form") && string.IsNullOrWhiteSpace(element.AlternativeText) && string.IsNullOrWhiteSpace(element.ActualText))
                 Finding("AlternativeText", "element:" + element.ObjectId, "This semantic role requires meaningful author-provided alternative or replacement text.");
             if (role == "TH" && Get(Get(element.Dictionary, "A"), "Scope").Kind == PdfValueKind.Null && Get(Get(element.Dictionary, "A"), "Headers").Kind == PdfValueKind.Null)

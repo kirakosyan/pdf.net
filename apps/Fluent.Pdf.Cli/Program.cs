@@ -25,7 +25,7 @@ internal static class Program
         {
             if (args.Length == 1 && args[0] == "--help")
             {
-                Console.Error.WriteLine("fluent-pdf <text|select|rewrite|preflight|detect|convert|decrypt> --input <path|-> [--output <path|->] [--pages <range>] [--view raw|semantic|layout] [--target Svg|StaticEps] [--password-file <protected-path>] [--overwrite] [--allow-signature-invalidation] [--max-input-bytes n] [--max-output-bytes n] [--timeout-ms n]\nfluent-pdf formats [--output <path|->]\nfluent-pdf <run|batch> --config <closed-schema-json>\nfluent-pdf --version");
+                Console.Error.WriteLine("fluent-pdf <text|select|rewrite|preflight|detect|convert|decrypt> --input <path|-> [--output <path|->] [--pages <range>] [--view raw|semantic|layout] [--target Svg|StaticEps] [--password-file <protected-path>] [--overwrite] [--allow-signature-invalidation] [--max-input-bytes n] [--max-output-bytes n] [--timeout-ms n]\nfluent-pdf formats [--output <path|->]\nfluent-pdf <run|batch> --config <closed-schema-json>\nfluent-pdf --version\nFile outputs, including --overwrite replacements, are private to the current user; grant sharing permissions explicitly after successful publication.");
                 return 0;
             }
 

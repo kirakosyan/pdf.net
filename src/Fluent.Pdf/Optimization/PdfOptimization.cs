@@ -42,7 +42,7 @@ public sealed class PdfOptimizationOptions
     public bool RemoveUnusedResources { get; }
     /// <summary>Gets explicit authority to rewrite signature/certification byte ranges without a validity claim.</summary>
     public bool AllowSignatureInvalidation { get; }
-    /// <summary>Gets the image-plane dimension bound, or zero for lossless.</summary>
+    /// <summary>Gets the resampling target dimension, or zero for lossless. An original encoding is retained when its resampled replacement would not be smaller.</summary>
     public int MaximumImageDimension { get; }
 }
 

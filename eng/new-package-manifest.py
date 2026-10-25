@@ -18,8 +18,8 @@ def create(root, output):
         raise ValueError('Candidate manifest requires clean committed source')
     readiness = json.loads((root / 'specs/release-readiness.json').read_text(encoding='utf-8-sig'))
     version = readiness['packageVersion']
-    targets = ET.parse(root / 'src/Directory.Build.targets')
-    if targets.findtext('./PropertyGroup/Version') != version:
+    defaults = ET.parse(root / 'src/Directory.Build.props')
+    if defaults.findtext('./PropertyGroup/Version') != version:
         raise ValueError('Shared package version differs from readiness')
     common = {p.name: audit.digest(p.read_bytes()) for p in (root / 'README.md', root / 'LICENSE')}
     for path in (root / 'third-party').rglob('*'):

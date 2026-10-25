@@ -181,20 +181,28 @@ public static class ChromiumContainerHost
             reading = Task.Factory.StartNew(() =>
             {
                 var value = new StringBuilder(2048);
+                var block = new char[4096];
                 while (true)
                 {
                     context.Checkpoint();
-                    int next = _output!.Read();
-                    if (next < 0) throw Error("HostExited", "The private browser transport ended before a complete message.");
-                    if (next == '\n')
+                    int count = 0;
+                    bool complete = false;
+                    // StreamReader already buffers the pipe. Preserve newline framing
+                    // without a block read waiting for bytes from the next response.
+                    while (count < block.Length)
                     {
-                        if (value.Length == 0) throw Error("TransportExtent", "An empty browser transport message is invalid.");
-                        return value.ToString();
+                        int next = _output!.Read();
+                        if (next < 0) throw Error("HostExited", "The private browser transport ended before a complete message.");
+                        if (next == '\n') { complete = true; break; }
+                        if (next == '\r' || next == 0 || value.Length + count == MaximumCharacters)
+                            throw Error("TransportExtent", "The browser transport exceeded its complete-message profile.");
+                        block[count++] = (char)next;
                     }
-                    if (next == '\r' || next == 0 || value.Length == MaximumCharacters)
-                        throw Error("TransportExtent", "The browser transport exceeded its complete-message profile.");
-                    context.Consume(PdfResourceKind.ExpandedBytes, 8);
-                    value.Append((char)next);
+                    context.Consume(PdfResourceKind.ExpandedBytes, count * 8L);
+                    value.Append(block, 0, count);
+                    if (!complete) continue;
+                    if (value.Length == 0) throw Error("TransportExtent", "An empty browser transport message is invalid.");
+                    return value.ToString();
                 }
             }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
             _pending = reading;
@@ -262,7 +270,7 @@ public static class ChromiumContainerHost
             var operation = _context;
             bool unexpectedExit = _process != null && _process.HasExited && _process.ExitCode != 0;
             Exception? cleanup = null;
-            try
+            if (_createIssued) try
             {
                 // Removal is out of band: a blocked stdin/renderer cannot prevent cancellation cleanup.
                 using var remove = Start(new[] { "rm", "--force", "--volumes", _containerId ?? _name });
@@ -314,14 +322,10 @@ public static class ChromiumContainerHost
                 if (_containerId != null) failure.Data["Fluent.Pdf.Html.OwnedContainerId"] = _containerId;
                 if (operation?.IsActive == true)
                 {
-                    try { operation.ReportFailure(failure.Diagnostic, "Fluent.Pdf.Html.OwnedContainer", _name); }
-                    catch (Exception latched)
-                    {
-                        latched.Data["Fluent.Pdf.Html.OwnedContainer"] = _name;
-                        if (_containerId != null) latched.Data["Fluent.Pdf.Html.OwnedContainerId"] = _containerId;
-                        latched.Data["Fluent.Pdf.Html.CleanupFailure"] = failure.Diagnostic.Code;
-                        throw;
-                    }
+                    operation.PreserveFailureDetail("Fluent.Pdf.Html.OwnedContainer", _name);
+                    if (_containerId != null) operation.PreserveFailureDetail("Fluent.Pdf.Html.OwnedContainerId", _containerId);
+                    operation.PreserveFailureDetail("Fluent.Pdf.Html.CleanupFailure", failure.Diagnostic.Code);
+                    operation.ReportFailure(failure.Diagnostic, "Fluent.Pdf.Html.OwnedContainer", _name);
                 }
                 throw failure;
             }
@@ -333,8 +337,8 @@ public static class ChromiumContainerHost
                 failure.Data["Fluent.Pdf.Html.OwnedContainer"] = _name;
                 if (operation?.IsActive == true)
                 {
-                    try { operation.ReportFailure(failure.Diagnostic, "Fluent.Pdf.Html.OwnedContainer", _name); }
-                    catch (Exception latched) { latched.Data["Fluent.Pdf.Html.OwnedContainer"] = _name; throw; }
+                    operation.PreserveFailureDetail("Fluent.Pdf.Html.OwnedContainer", _name);
+                    operation.ReportFailure(failure.Diagnostic, "Fluent.Pdf.Html.OwnedContainer", _name);
                 }
                 throw failure;
             }
