@@ -7,6 +7,27 @@ on:
 permissions:
   contents: read
 jobs:
+  publisher-sdk:
+    name: Qualified publisher SDK versions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: |
+            10.0.402
+            8.0.426
+      - name: Observe installed qualified SDKs and runtime families
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet --list-sdks | tee sdks.txt
+          dotnet --list-runtimes | tee runtimes.txt
+          grep -q '^10\.0\.402 ' sdks.txt
+          grep -q '^8\.0\.426 ' sdks.txt
+          grep -q '^Microsoft.NETCore.App 8\.' runtimes.txt
+          grep -q '^Microsoft.NETCore.App 10\.' runtimes.txt
   framework-launcher:
     name: Windows PowerShell 5.1 launcher exits
     runs-on: windows-latest
@@ -41,8 +62,8 @@ jobs:
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
           dotnet-version: |
-            10.0.4xx
-            8.0.x
+            10.0.402
+            8.0.426
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
           distribution: temurin
@@ -257,7 +278,7 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
-          dotnet-version: 10.0.4xx
+          dotnet-version: 10.0.402
       - name: Compare fresh deterministic builds and embedded SourceLink
         shell: pwsh
         run: ./eng/test-rebuild.ps1 -OutputDirectory artifacts/source-rebuild
@@ -301,8 +322,8 @@ jobs:
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
           dotnet-version: |
-            10.0.4xx
-            8.0.x
+            10.0.402
+            8.0.426
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           name: core-release-candidate
