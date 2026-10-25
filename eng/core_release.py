@@ -230,7 +230,9 @@ def public(directory):
             if error.code not in (404, 429, 503) or attempt == 30: raise
             time.sleep(10)
     require(raw is not None and len(raw) <= 32 * 1024 * 1024, "Public package unavailable or oversized")
-    inspected = module("package-audit").inspect(raw, manifest["content"], signed=True)
+    inspector = module("package-audit")
+    inspected = inspector.inspect(raw, manifest["content"], signed=True)
+    inspector.compare_signed_payload((Path(directory) / "packages/Fluent.Pdf.1.0.0.nupkg").read_bytes(), raw)
     destination = Path(directory) / "public/Fluent.Pdf.1.0.0.nupkg"
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(raw)

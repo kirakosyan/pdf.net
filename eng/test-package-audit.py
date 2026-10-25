@@ -112,6 +112,16 @@ class AuditTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             audit.compare(data, data + b'changed')
 
+    def test_public_signing_preserves_every_original_entry_byte(self):
+        original = self.archive()
+        public = dict(self.files, **{".signature.p7s": b"synthetic-signature;not-cryptographic-proof"})
+        audit.compare_signed_payload(original, self.archive(public))
+        public["Fluent.Pdf.nuspec"] += b"\n"
+        with self.assertRaisesRegex(ValueError, "payload bytes"):
+            audit.compare_signed_payload(original, self.archive(public))
+        with self.assertRaisesRegex(ValueError, "signature inventory"):
+            audit.compare_signed_payload(original, original)
+
     def test_xml_entities_and_duplicate_groups_rejected(self):
         for payload in (b'<!DOCTYPE package><package/>', self.files['Fluent.Pdf.nuspec'].replace(b'</dependencies>', b'<group targetFramework="net8.0"/></dependencies>')):
             files = self.files.copy()

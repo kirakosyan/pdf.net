@@ -124,6 +124,16 @@ def compare(first, second):
         raise ValueError('Rebuild archive bytes differ')
 
 
+def compare_signed_payload(candidate, public):
+    # Repository signing changes ZIP/signature bytes. All original entry bytes,
+    # including nuspec/container metadata, must remain identical.
+    original, signed = entries(candidate), entries(public)
+    if set(signed) != set(original) | {".signature.p7s"} or ".signature.p7s" in original:
+        raise ValueError("Public package signature inventory differs")
+    if any(signed[name] != value for name, value in original.items()):
+        raise ValueError("Public package payload bytes differ")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest', required=True)
