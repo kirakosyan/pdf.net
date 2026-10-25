@@ -1,5 +1,7 @@
 # Fluent.Pdf production specification
 
+Version 1.0.0 publishes the user-selected [currently implemented core profiles](releases/1.0.0.md), only as Fluent.Pdf and symbols. The broader SDK requirements below remain the full planned scope; unfinished features and their qualification are not represented as completed by this first core release.
+
 ## Objective and settled decisions
 
 Build an original, coherent PDF SDK whose required capability set covers the combined reference surfaces and adds measurable quality controls. Its public identity is Fluent.Pdf; MIT is the repository license. Windows, Linux and macOS are required. Full .NET Framework applies to Windows; modern .NET is the cross-platform runtime. Optional native engines are allowed. Stable publication waits for production readiness.

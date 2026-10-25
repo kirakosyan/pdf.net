@@ -248,6 +248,6 @@ jobs:
             qualified/core-evidence.json
             qualified/public-verification.json
             artifacts/public-core-consumers/
-            !artifacts/public-core-consumers/*-workspace/**
+            !artifacts/public-core-consumers/workspaces/**
           if-no-files-found: error
           retention-days: 90

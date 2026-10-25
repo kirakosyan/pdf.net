@@ -16,12 +16,12 @@ function PrepareConsumer([string]$Destination, [string]$Fallback, [string]$Archi
     if (Test-Path -LiteralPath $Destination) { throw 'Fresh package consumer workspace required.' }
     $null = [IO.Directory]::CreateDirectory($Destination)
     Copy-Item -LiteralPath (Join-Path $root 'eng/CoreConsumer/Program.cs'),(Join-Path $root 'eng/CoreConsumer/CoreConsumer.csproj') -Destination $Destination
-    $configuration = [Xml.Linq.XElement]::new('configuration')
-    $sources = [Xml.Linq.XElement]::new('packageSources')
-    $sources.Add([Xml.Linq.XElement]::new('clear'))
+    $configuration = [Xml.Linq.XElement]::new([Xml.Linq.XName]::Get('configuration'))
+    $sources = [Xml.Linq.XElement]::new([Xml.Linq.XName]::Get('packageSources'))
+    $sources.Add([Xml.Linq.XElement]::new([Xml.Linq.XName]::Get('clear')))
     foreach ($pair in @(@('Candidate',(Join-Path $directory 'packages')),@('NuGet','https://api.nuget.org/v3/index.json'))) {
         if ($PublicFeed -and $pair[0] -eq 'Candidate') { continue }
-        $entry = [Xml.Linq.XElement]::new('add'); $entry.SetAttributeValue('key',$pair[0]); $entry.SetAttributeValue('value',$pair[1]); $sources.Add($entry)
+        $entry = [Xml.Linq.XElement]::new([Xml.Linq.XName]::Get('add')); $entry.SetAttributeValue('key',$pair[0]); $entry.SetAttributeValue('value',$pair[1]); $sources.Add($entry)
     }
     $configuration.Add($sources)
     $configuration.Save((Join-Path $Destination 'NuGet.Config'))
@@ -29,7 +29,9 @@ function PrepareConsumer([string]$Destination, [string]$Fallback, [string]$Archi
     $properties = @("-p:CoreAssetTfm=$Fallback")
     if ($Fallback) { $properties += '-p:TargetFrameworks=net10.0' }
     if ($Architecture) { $properties += @('-p:TargetFrameworks=net472',"-p:PlatformTarget=$Architecture") }
-    Run 'dotnet' (@('restore',$project,'--configfile',(Join-Path $Destination 'NuGet.Config'),'--packages',(Join-Path $Destination 'fresh-packages'),'--no-cache','--disable-parallel','-m:1') + $properties)
+    # Keep NuGet DLLs outside the project tree: SDK default items otherwise make
+    # foreign reference facades candidates for Framework assembly resolution.
+    Run 'dotnet' (@('restore',$project,'--configfile',(Join-Path $Destination 'NuGet.Config'),'--packages',"$Destination-packages",'--no-cache','--disable-parallel','-m:1') + $properties)
     Run 'dotnet' (@('build',$project,'-c','Release','--no-restore','-m:1','-p:UseSharedCompilation=false') + $properties)
 }
 if ($Stage -eq 'Pack') {
@@ -55,7 +57,7 @@ if ($Stage -eq 'Pack') {
     Run $python @((Join-Path $root 'eng/core_release.py'),'audit','--directory',$directory)
     $output = [IO.Path]::GetFullPath($OutputDirectory)
     foreach ($mode in @('normal','fallback')) {
-        $workspace = Join-Path $output "$mode-workspace"
+        $workspace = Join-Path $output "workspaces/$mode"
         PrepareConsumer $workspace $(if ($mode -eq 'fallback') { 'netstandard2.0' } else { '' })
         # Each modern runtime executes the exact restored package DLL.
         foreach ($tfm in @('net8.0','net10.0')) {

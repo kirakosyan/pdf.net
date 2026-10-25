@@ -303,7 +303,7 @@ jobs:
           name: core-consumers-${{ matrix.id }}
           path: |
             artifacts/core-consumers/
-            !artifacts/core-consumers/*-workspace/**
+            !artifacts/core-consumers/workspaces/**
           if-no-files-found: error
 
   core-independent:
