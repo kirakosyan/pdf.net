@@ -8,9 +8,9 @@ Current state: the [sequential source queue](implementation-plan.md) includes SD
 
 ## Package identity and ownership
 
-Candidate core ID: Fluent.Pdf. Gallery and flat-container endpoints returned 404 on 2026-10-17. Recheck availability, reserved prefixes and ownership before configuring publishing. Related package candidates are listed in architecture.md; each needs its own authorized scope. A source project/package file does not reserve a NuGet name.
+Candidate core ID: Fluent.Pdf. The user selected the public [kirakosyan profile](https://www.nuget.org/profiles/kirakosyan) as the publisher on 2026-10-25. This identifies the intended account; it does not verify a signed-in session, package/prefix ownership or account-side OIDC policy. Recheck availability, reserved prefixes and ownership before publishing. Related package candidates are listed in architecture.md; each needs its own authorized scope. A source project/package file does not reserve a NuGet name.
 
-Use NuGet Trusted Publishing, repository kirakosyan/pdf.net, workflow publish.yml and GitHub environment nuget restricted to main. Scope policies to the exact package IDs being released, without unrelated wildcards or unlist/relist permissions. Set NUGET_USER to the authorized account. Never paste or use a stored long-lived API key.
+Use NuGet Trusted Publishing, owner profile kirakosyan, repository kirakosyan/pdf.net, workflow filename publish.yml and GitHub environment nuget restricted to main. The pinned login action now selects that public username directly; no separate NUGET_USER repository variable is required. Scope the account-side policy to the exact package IDs being released, permit new-package publication for the first release and new versions for servicing, and exclude unrelated wildcards or unlist/relist permissions. Verify the selected owner and effective scopes in the signed-in NuGet session. Never paste or use a stored long-lived API key.
 
 ## Release sequence
 

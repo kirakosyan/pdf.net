@@ -98,7 +98,8 @@ jobs:
       - uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
         id: login
         with:
-          user: ${{ vars.NUGET_USER }}
+          # Public profile selected by the user; authorization comes from OIDC.
+          user: kirakosyan
       - name: Push qualified package and symbol bytes
         shell: pwsh
         env:
