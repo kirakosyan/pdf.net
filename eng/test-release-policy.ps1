@@ -124,3 +124,6 @@ if ((Get-FileHash -LiteralPath $inventoryPath).Hash -cne $originalHash) { throw 
 [ordered]@{schemaVersion=1;purpose='release-policy-and-synthetic-boundary-regressions';passed=@($passed);total=$passed.Count;failed=0;sdkQualificationExecuted=$false;productionQualified=$false} |
     ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $directory 'regressions.json') -Encoding utf8
 Write-Output "Release policy and inventory regressions passed: $($passed.Count). No SDK qualification inferred."
+# Expected negative subprocesses leave LASTEXITCODE nonzero. GitHub Actions'
+# PowerShell wrapper propagates it unless this successful script clears it.
+exit 0
