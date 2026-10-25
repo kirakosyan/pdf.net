@@ -7,6 +7,21 @@ on:
 permissions:
   contents: read
 jobs:
+  framework-launcher:
+    name: Windows PowerShell 5.1 launcher exits
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Exercise fast success, nonzero exits and immutable bundle boundaries
+        shell: powershell
+        run: ./eng/test-framework-runner.ps1 -OutputDirectory artifacts/framework-launcher-process
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: framework-launcher-process-regressions
+          path: artifacts/framework-launcher-process/
+          if-no-files-found: error
   validate:
     name: Contracts (${{ matrix.id }})
     timeout-minutes: ${{ matrix.id == 'win-x64' && 60 || (matrix.id == 'osx-x64' && 40 || 20) }}
@@ -336,7 +351,7 @@ jobs:
 
   core-evidence:
     name: Bind and archive verified core release
-    needs: [validate, minimum-framework, reproducibility, core-consumers, core-independent]
+    needs: [framework-launcher, validate, minimum-framework, reproducibility, core-consumers, core-independent]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
