@@ -104,7 +104,10 @@ foreach (string project in projects)
 
 Write("index.md", index.ToString());
 using var requirements = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(root, "specs/requirements.json")));
-var matrix = new StringBuilder("# Required capability/source matrix\n\nThis is declared requirement/source progress, not runtime capability or qualification. The 111 SDK requirements remain mandatory; the independent Reader is excluded. Exact provider/format applicability is in the linked feature documentation.\n\n| Requirement | SDK release | Status | Source progress |\n| --- | --- | --- | --- |\n");
+var deferredRequirements = readiness.RootElement.TryGetProperty("requirementExceptions", out var releaseExceptions)
+    ? releaseExceptions.EnumerateArray().Select(e => e.GetProperty("requirement").GetString()!).ToHashSet(StringComparer.Ordinal)
+    : new HashSet<string>(StringComparer.Ordinal);
+var matrix = new StringBuilder("# Required capability/source matrix\n\nThis is declared requirement/source progress, not runtime capability or qualification. The catalogue retains 111 SDK requirements; the independent Reader is excluded. Explicit version-specific deferrals are shown below and documented in the [release exception](../release-exceptions.md). A deferral is not qualification. Exact provider/format applicability is in the linked feature documentation.\n\n| Requirement | SDK release | Status | Source progress |\n| --- | --- | --- | --- |\n");
 foreach (var feature in requirements.RootElement.GetProperty("features").EnumerateArray())
 {
     string id = feature.GetProperty("id").GetString()!, title = feature.GetProperty("title").GetString()!;
@@ -117,7 +120,9 @@ foreach (var feature in requirements.RootElement.GetProperty("features").Enumera
         progress = "[Declared source profile](../" + path[5..] + ")";
     }
 
-    matrix.Append("| [").Append(id).Append(" ").Append(title.Replace("|", "\\|", StringComparison.Ordinal)).Append("](../requirements/").Append(id).Append(".md) | ").Append(feature.GetProperty("releaseRequired").GetBoolean() ? "Required" : "Excluded Reader").Append(" | ").Append(feature.GetProperty("status").GetString()).Append(" | ").Append(progress).Append(" |\n");
+    string releaseScope = !feature.GetProperty("releaseRequired").GetBoolean() ? "Excluded Reader"
+        : deferredRequirements.Contains(id) ? "Deferred for " + version : "Required";
+    matrix.Append("| [").Append(id).Append(" ").Append(title.Replace("|", "\\|", StringComparison.Ordinal)).Append("](../requirements/").Append(id).Append(".md) | ").Append(releaseScope).Append(" | ").Append(feature.GetProperty("status").GetString()).Append(" | ").Append(progress).Append(" |\n");
 }
 
 Write("requirements.md", matrix.ToString());

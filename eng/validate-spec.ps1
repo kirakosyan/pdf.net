@@ -5,6 +5,8 @@ Set-StrictMode -Version Latest
 $root = Split-Path $PSScriptRoot -Parent
 $spec = Get-Content (Join-Path $root 'specs/requirements.json') -Raw | ConvertFrom-Json
 $readiness = Get-Content (Join-Path $root 'specs/release-readiness.json') -Raw | ConvertFrom-Json
+. (Join-Path $PSScriptRoot 'release-policy.ps1')
+$policy = Get-FluentPdfReleasePolicy -Readiness $readiness -Specification $spec
 $ids = @{}
 foreach ($feature in $spec.features) {
     if ($feature.id -notmatch '^FP-\d{3}$' -or $ids.ContainsKey($feature.id)) { throw "Invalid or duplicate requirement: $($feature.id)" }
@@ -54,7 +56,7 @@ $requirementFiles = @(Get-ChildItem (Join-Path $root 'docs/requirements') -Filte
 if ($requirementFiles.Count -ne $ids.Count) { throw 'Stale or missing requirement documents.' }
 $reader = @($spec.features | Where-Object { !$_.releaseRequired })
 if ($reader.Count -ne 1 -or $reader[0].id -ne 'FP-096') { throw 'Unexpected SDK release exclusion.' }
-if ($readiness.productionReady -and @($spec.features | Where-Object { $_.releaseRequired -and $_.status -ne 'qualified' }).Count) { throw 'Readiness contradicts requirement status.' }
+if ($readiness.productionReady -and @($policy.RequiredFeatures | Where-Object { $_.status -ne 'qualified' }).Count) { throw 'Readiness contradicts requirement status.' }
 
 # Encode excluded source names so this check does not introduce those names into tracked text.
 $excludedTerms = @(
