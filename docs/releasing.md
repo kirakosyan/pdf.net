@@ -12,6 +12,8 @@ Candidate core ID: Fluent.Pdf. The user selected the public [kirakosyan profile]
 
 Use NuGet Trusted Publishing, owner profile kirakosyan, repository kirakosyan/pdf.net, workflow filename publish.yml and GitHub environment nuget restricted to main. The pinned login action now selects that public username directly; no separate NUGET_USER repository variable is required. Scope the account-side policy to the exact package IDs being released, permit new-package publication for the first release and new versions for servicing, and exclude unrelated wildcards or unlist/relist permissions. Verify the selected owner and effective scopes in the signed-in NuGet session. Never paste or use a stored long-lived API key.
 
+The workflow checks the live NuGet login when its own file changes on main, or when dispatched from main with verify_publisher_only selected. This job obtains and checks a masked short-lived credential without creating or uploading packages. A rejected login supplies a concrete account-side configuration error; an accepted login does not establish package ownership/scopes or production qualification. Tag and artifact inputs are still validated by the full publication path. The account owner can configure the policy through [NuGet Trusted Publishing](https://www.nuget.org/account/trustedpublishing).
+
 ## Release sequence
 
 The user supplied [word.net's publishing workflow](https://github.com/kirakosyan/word.net/blob/c723fb8aa4ed70fda5562da7f472e6fef54740b7/.github/workflows/publish.yml) as the working reference. Its [successful publishing run](https://github.com/kirakosyan/word.net/actions/runs/39494674611) uses the same pinned NuGet OIDC action, a nuget environment, exact-source CI artifacts and package consumers. PDF keeps its own approved production gates and must produce its own exact-artifact evidence. The NuGet policy must authorize repository pdf.net; the reference repository's successful publication establishes its own configuration.
@@ -30,7 +32,7 @@ Apply the [compatibility and maintenance policy](maintenance.md) for version sel
 
 ## Current automation boundary
 
-The checked-in publish workflow is fail-closed. It accepts only a stable main-branch tag, a previous successful qualification workflow run and a named artifact containing final packages and release-evidence.json. It verifies the current checked-in requirement/readiness state and exact evidence before granting OIDC to the publishing job.
+The checked-in publication path is fail-closed. It accepts only a stable main-branch tag, a previous successful qualification workflow run and a named artifact containing final packages and release-evidence.json. It verifies the current checked-in requirement/readiness state and exact evidence before granting OIDC to the publishing job. The separate login-only check never runs the verification or package-push jobs.
 
 The [package provenance tooling](package-reproducibility.md) checks shared metadata, source rebuild bytes and embedded SourceLink, and provides an offline final-candidate inspector. Its source checks do not qualify final packages. Full qualification runners and actual package inspection remain mandatory FP-086/093/094 work. Foundation CI is not a qualification workflow. Never point publication at a foundation artifact or manually change statuses to bypass that distinction.
 
