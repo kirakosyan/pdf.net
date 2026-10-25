@@ -1,18 +1,26 @@
 name: Publish qualified stable packages
 on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish.yml']
   workflow_dispatch:
     inputs:
+      verify_publisher_only:
+        description: Check NuGet trusted-publisher login without creating or uploading packages
+        required: false
+        default: false
+        type: boolean
       tag:
         description: Stable main-branch tag, for example v1.0.0
-        required: true
+        required: false
         type: string
       qualification_run:
         description: Successful production-qualification workflow run ID
-        required: true
+        required: false
         type: string
       artifact_id:
         description: Immutable qualified artifact ID containing packages and evidence
-        required: true
+        required: false
         type: string
 permissions:
   contents: read
@@ -20,7 +28,28 @@ concurrency:
   group: fluent-pdf-production-publish
   cancel-in-progress: false
 jobs:
+  verify-publisher:
+    if: github.repository == 'kirakosyan/pdf.net' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.verify_publisher_only))
+    runs-on: ubuntu-latest
+    environment: nuget
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
+        id: publisher
+        with:
+          user: kirakosyan
+      - name: Confirm account-side trusted-publisher authorization
+        shell: bash
+        env:
+          PUBLISHER_TOKEN: ${{ steps.publisher.outputs.NUGET_API_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$PUBLISHER_TOKEN"
+          echo 'NuGet accepted the kirakosyan/pdf.net publish.yml identity in environment nuget. No packages were created or uploaded; package scopes and production qualification remain separate checks.' >> "$GITHUB_STEP_SUMMARY"
   verify:
+    if: github.event_name == 'workflow_dispatch' && !inputs.verify_publisher_only
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -71,6 +100,7 @@ jobs:
     outputs:
       artifact_id: ${{ steps.verified.outputs.artifact-id }}
   publish:
+    if: github.event_name == 'workflow_dispatch' && !inputs.verify_publisher_only
     needs: verify
     runs-on: ubuntu-latest
     environment: nuget
