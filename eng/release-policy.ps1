@@ -9,7 +9,9 @@ function Get-FluentPdfReleasePolicy {
     $seen = @{}
     foreach ($exception in $exceptions) {
         # This is the single user-authorized exception, not a general waiver switch.
-        foreach ($field in @('requirement','issue','packageVersion','disposition','authorizedOn','reason')) {
+        $fields = @('requirement','issue','packageVersion','disposition','authorizedOn','reason')
+        if (@($exception.PSObject.Properties.Name).Count -ne $fields.Count) { throw 'Invalid release exception fields.' }
+        foreach ($field in $fields) {
             if ($exception.PSObject.Properties.Name -cnotcontains $field) { throw "Incomplete release exception: $field" }
         }
         if ($exception.requirement -cne 'FP-089' -or $exception.issue -ne 93 -or

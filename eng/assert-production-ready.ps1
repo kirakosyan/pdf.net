@@ -30,7 +30,9 @@ if ($policy.Exceptions.Count) {
     foreach ($exception in $policy.Exceptions) {
         $declared = @($declaredExceptions | Where-Object requirement -CEQ $exception.requirement)
         if ($declared.Count -ne 1) { throw 'Missing or duplicate qualification release exception.' }
-        foreach ($field in @('requirement','issue','packageVersion','disposition','authorizedOn','reason')) {
+        $fields = @('requirement','issue','packageVersion','disposition','authorizedOn','reason')
+        if (@($declared[0].PSObject.Properties.Name).Count -ne $fields.Count) { throw 'Invalid qualification release exception fields.' }
+        foreach ($field in $fields) {
             if ($declared[0].PSObject.Properties.Name -cnotcontains $field -or $declared[0].$field -cne $exception.$field) { throw 'Qualification release exception differs from policy.' }
         }
     }

@@ -52,6 +52,7 @@ Reject-Policy 'catalogue-scope-cannot-disappear' { param($r,$s) ($s.features | W
 Reject-Policy 'automated-security-remains-mandatory' { param($r,$s) $r.requiredSuites = @($r.requiredSuites | Where-Object { $_ -cne 'security' }) }
 Reject-Policy 'resource-checks-remain-mandatory' { param($r,$s) $r.requiredSuites = @($r.requiredSuites | Where-Object { $_ -cne 'resource-limits' }) }
 Reject-Policy 'duplicate-security-suite' { param($r,$s) $r.requiredSuites += 'security' }
+Reject-Policy 'unknown-exception-field' { param($r,$s) $r.requirementExceptions[0] | Add-Member -NotePropertyName waiveOtherRequirements -NotePropertyValue $true }
 foreach ($case in @(
     @{release=461808;arch='X64';expected=@('win-x86-framework472','win-x64-framework472')},
     @{release=461814;arch='X64';expected=@('win-x86-framework472','win-x64-framework472')},
@@ -110,6 +111,10 @@ Reject-Script 'synthetic-changed-disclosure-rejected' $gate $gateArguments 'diff
 $evidence.requirementExceptions = @($r.requirementExceptions) + @($r.requirementExceptions)
 $evidence | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $evidencePath -Encoding utf8
 Reject-Script 'synthetic-extra-disclosure-rejected' $gate $gateArguments 'inventory differs from policy'
+$evidence.requirementExceptions = @((Copy-Value $readiness).requirementExceptions)
+$evidence.requirementExceptions[0] | Add-Member -NotePropertyName securityAuditPassed -NotePropertyValue $true
+$evidence | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $evidencePath -Encoding utf8
+Reject-Script 'synthetic-extra-disclosure-field-rejected' $gate $gateArguments 'Invalid qualification release exception fields'
 $inventoryPath = Join-Path $directory 'release-status.json'
 & (Join-Path $PSScriptRoot 'get-release-status.ps1') -OutputPath $inventoryPath
 $inventory = Get-Content -LiteralPath $inventoryPath -Raw | ConvertFrom-Json
