@@ -2,7 +2,7 @@
 
 ## Release rule
 
-The first NuGet publication is a stable production release. All 111 SDK requirements in the canonical manifest must be implemented, reviewed and qualified; FP-096 is the separate Reader placeholder. Do not publish a reduced, empty or prerelease package to reserve an ID. The checked-in readiness manifest starts false and the package target fails closed.
+The first NuGet publication is a stable production release. The canonical manifest retains 111 SDK requirements; FP-096 is the separate Reader placeholder. For version 1.0.0, the user's [explicit exception](release-exceptions.md) defers FP-089/#93 without marking it qualified. The other 110 requirements must be implemented, reviewed and qualified. Do not publish an empty or prerelease package to reserve an ID. The checked-in readiness manifest remains false and the package target fails closed.
 
 A passing build, metadata scan, source test on a newer runtime or dependency installation is not a substitute for observable behavior on the final package. An alpha-quality implementation with a stable version number is not acceptable.
 
@@ -29,7 +29,7 @@ Record applicability before running tests. The six modern OS/architecture lanes 
 | Cancellation | Managed operations respond within 1 s at cooperative boundaries; supervised native/browser workers terminate within 5 s after deadline/cancel, with no partial committed output |
 | Performance | Pinned hardware/corpus, warm/cold p50/p95/p99, throughput, peak working set and output size; no >10% regression against reviewed baseline without an explicit accepted explanation |
 | Resource limits | Every input/expansion/object/depth/pixel/worker/output/time boundary has below/at/above tests and safe failure |
-| Security | At least 100,000 mutation cases per major parser/codec surface plus a recorded 24-hour guided fuzz campaign; zero unresolved exploitable crashes/hangs; regression seeds retained |
+| Security | Automated malformed-input, cancellation, isolation and resource regression checks remain mandatory; no known exploitable defect is exempted. FP-089's extended 100,000-case mutation and 24-hour guided campaigns and specialist review are explicitly deferred for 1.0.0, with the limitation disclosed in release evidence; see the release exception. |
 | Dependency safety | SBOM and complete notices; no unaccepted high/critical vulnerability; pinned native/model asset origins and hashes |
 | Package consumers | Fresh C#/VB/F# consumers restore exact final packages on every applicable runtime; public API compatibility, symbols/SourceLink and dependency isolation pass |
 | Public verification | NuGet indexing, repository signature and SHA-256 match; fresh public consumers pass complete business workflows |
@@ -47,7 +47,7 @@ Goldens require provenance and redistribution rights. Record original content ha
 
 specs/release-readiness.json is the release switch and required lane/suite inventory. Each qualification report is immutable JSON with schemaVersion, sourceCommit, packageVersion, lane, runtime, os, architecture, suites and artifact hashes. suites contain positive test totals, zero failed, zero skipped and report paths/hashes. Publish stage additionally binds final package filenames/SHA-256.
 
-eng/assert-production-ready.ps1 validates readiness, requirement status and retained report hashes. FP-094 must extend and independently exercise the gate when the full qualification runners exist. Source CI exercises current contract/policy behavior and the negative publication boundary; it is not full production qualification.
+eng/assert-production-ready.ps1 validates readiness, active requirement status, exact exception disclosure and retained report hashes. A deferred requirement cannot be reported as qualified. FP-094 must extend and independently exercise the gate when the full qualification runners exist. Source CI exercises current contract/policy behavior and the negative publication boundary; it is not full production qualification.
 
 ## Current result
 

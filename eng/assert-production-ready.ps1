@@ -9,9 +9,11 @@ Set-StrictMode -Version Latest
 $root = Split-Path $PSScriptRoot -Parent
 $readiness = Get-Content (Join-Path $root 'specs/release-readiness.json') -Raw | ConvertFrom-Json
 $spec = Get-Content (Join-Path $root 'specs/requirements.json') -Raw | ConvertFrom-Json
+. (Join-Path $PSScriptRoot 'release-policy.ps1')
+$policy = Get-FluentPdfReleasePolicy -Readiness $readiness -Specification $spec
 if (!$readiness.productionReady) { throw 'Production publication blocked: readiness is false. Complete the production requirements and qualification evidence first.' }
 if ($readiness.packageVersion -notmatch '^\d+\.\d+\.\d+$') { throw 'Only stable package versions are allowed.' }
-$incomplete = @($spec.features | Where-Object { $_.releaseRequired -and $_.status -ne 'qualified' })
+$incomplete = @($policy.RequiredFeatures | Where-Object { $_.status -ne 'qualified' })
 if ($incomplete.Count) { throw "Production publication blocked: $($incomplete.Count) SDK requirements are not qualified." }
 if ([string]::IsNullOrWhiteSpace($EvidenceDirectory)) { throw 'Production evidence directory is required.' }
 $evidenceRoot = [IO.Path]::GetFullPath($EvidenceDirectory)
@@ -21,6 +23,22 @@ $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
 $commit = (& git -C $root rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0) { throw 'Cannot resolve source commit.' }
 if ($evidence.schemaVersion -ne 1 -or $evidence.purpose -ne 'production-qualification') { throw 'Unrecognized qualification evidence.' }
+if ($policy.Exceptions.Count) {
+    if ($evidence.PSObject.Properties.Name -cnotcontains 'requirementExceptions') { throw 'Qualification evidence must disclose the release exception.' }
+    $declaredExceptions = @($evidence.requirementExceptions)
+    if ($declaredExceptions.Count -ne $policy.Exceptions.Count) { throw 'Qualification release exception inventory differs from policy.' }
+    foreach ($exception in $policy.Exceptions) {
+        $declared = @($declaredExceptions | Where-Object requirement -CEQ $exception.requirement)
+        if ($declared.Count -ne 1) { throw 'Missing or duplicate qualification release exception.' }
+        $fields = @('requirement','issue','packageVersion','disposition','authorizedOn','reason')
+        if (@($declared[0].PSObject.Properties.Name).Count -ne $fields.Count) { throw 'Invalid qualification release exception fields.' }
+        foreach ($field in $fields) {
+            if ($declared[0].PSObject.Properties.Name -cnotcontains $field -or $declared[0].$field -cne $exception.$field) { throw 'Qualification release exception differs from policy.' }
+        }
+    }
+} elseif ($evidence.PSObject.Properties.Name -contains 'requirementExceptions' -and @($evidence.requirementExceptions).Count) {
+    throw 'Qualification evidence contains an unapproved release exception.'
+}
 if ($evidence.sourceCommit -cne $commit -or $evidence.packageVersion -cne $readiness.packageVersion) { throw 'Qualification source/version mismatch.' }
 $expectedStage = if ($Stage -eq 'Publish') { 'package' } else { 'source' }
 if ($evidence.stage -cne $expectedStage) { throw "Expected $expectedStage qualification evidence." }
@@ -57,7 +75,10 @@ foreach ($requiredLane in $readiness.requiredLanes) {
 }
 $requirementIds = @($evidence.requirements | ForEach-Object { $_.id })
 if (@($requirementIds | Sort-Object -Unique).Count -ne $requirementIds.Count) { throw 'Duplicate requirement evidence.' }
-foreach ($feature in @($spec.features | Where-Object releaseRequired)) {
+foreach ($exception in $policy.Exceptions) {
+    if ($exception.requirement -cin $requirementIds) { throw 'A deferred requirement cannot be represented as qualified evidence.' }
+}
+foreach ($feature in $policy.RequiredFeatures) {
     $record = @($evidence.requirements | Where-Object id -CEQ $feature.id)
     if ($record.Count -ne 1 -or @($record[0].reports).Count -eq 0) { throw "Missing requirement evidence: $($feature.id)" }
     foreach ($report in $record[0].reports) { Assert-HashedFile $evidenceRoot $report.path $report.sha256 }

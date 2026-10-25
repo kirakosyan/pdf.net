@@ -43,6 +43,13 @@ jobs:
       - name: Validate specification and naming
         shell: pwsh
         run: ./eng/validate-spec.ps1
+      - name: Verify release exception boundaries and status inventory
+        shell: pwsh
+        run: ./eng/test-release-policy.ps1 -OutputDirectory artifacts/contracts/release-policy
+      - name: Observe actual Windows Framework host eligibility
+        if: matrix.id == 'win-x64'
+        shell: powershell
+        run: ./eng/get-windows-release-host.ps1 -OutputPath artifacts/contracts/windows-host-preflight.json
       - name: Build original native worker and crash/isolation fixtures
         shell: pwsh
         run: ./eng/build-native-fixtures.ps1

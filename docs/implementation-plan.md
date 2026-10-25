@@ -1,6 +1,8 @@
 # Implementation order and production milestones
 
-The current follow-up works through prerequisites for #100, then #105 and #110 in order. The first source checkpoint adds [managed MINIMUM invoice production](invoices.md), actual independent PDF/A-3b observations and a narrowly scoped associated-file version correction. [Evidence](evidence/prereq-invoice-source.json) retains failures, exact reports and current-runtime limits. Complete invoice-rule validation, the other #100 workflows and final-package qualification remain open. #93 stays user-skipped and mandatory; no candidate or publication is authorized.
+Current release policy, 2026-10-25: the user authorized completing production readiness and NuGet publication, and explicitly deferred #93 as a blocker for 1.0.0. The [version-specific exception](release-exceptions.md) preserves its unqualified status and automated security checks. Historical checkpoints below describe the conditions at their own commits; their older #93-blocking and publication-authorization statements are superseded by this policy. #100/#105/#110 and all other active acceptance gates remain incomplete.
+
+The follow-up works through prerequisites for #100, then #105 and #110 in order. The first source checkpoint added [managed MINIMUM invoice production](invoices.md), actual independent PDF/A-3b observations and a narrowly scoped associated-file version correction. [Evidence](evidence/prereq-invoice-source.json) retains failures, exact reports and current-runtime limits. Subsequent exact-edition validation is recorded below. Complete independent workflow corpus and final-package qualification remain open.
 
 ## Assignment rule
 

@@ -8,7 +8,7 @@ The project includes a separately scoped PDF Reader placeholder. Its reference a
 
 ## Normative scope
 
-The [112-item capability catalogue](feature-catalogue.md) indexes the detailed requirement contracts. [specs/requirements.json](../specs/requirements.json) is the machine-readable source. Requirement IDs are stable and must remain in issue titles, evidence and documentation. Every SDK requirement is mandatory for 1.0.0; sequencing does not imply optional scope. Reader is the only current non-release requirement.
+The [112-item capability catalogue](feature-catalogue.md) indexes the detailed requirement contracts. [specs/requirements.json](../specs/requirements.json) is the machine-readable source. Requirement IDs are stable and must remain in issue titles, evidence and documentation. SDK requirements are mandatory; sequencing does not imply optional scope. The user explicitly deferred FP-089/#93 as a blocker for version 1.0.0; the [release exception](release-exceptions.md) preserves its unqualified status and the automated security gates. Reader remains the only catalogue-level non-release requirement.
 
 The scope includes:
 - PDF object/stream syntax, PDF 1.2–2.0, full and incremental writes, repair and low-level operators.

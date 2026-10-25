@@ -125,18 +125,22 @@ class PerformanceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="fluent-performance-gate-") as folder:
             root = Path(folder).resolve()
             (root / "eng").mkdir(); (root / "specs").mkdir(); (root / "evidence").mkdir()
-            for name in ("assert-production-ready.ps1", "performance.py"):
+            for name in ("assert-production-ready.ps1", "release-policy.ps1", "performance.py"):
                 (root / "eng" / name).write_bytes((source / name).read_bytes())
             subprocess.run(["git", "init", "-q", str(root)], check=True, capture_output=True)
             subprocess.run(["git", "-C", str(root), "-c", "user.name=Performance fixture", "-c", "user.email=fixture@example.invalid", "commit", "--allow-empty", "-qm", "Original gate fixture"], check=True, capture_output=True)
             commit = subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
-            p.save(root / "specs/release-readiness.json", dict(productionReady=True, packageVersion="1.0.0", requiredLanes=["win-x64-net10.0"], requiredSuites=["performance"]))
+            suite_names = ["functional", "fidelity", "security", "resource-limits", "concurrency", "performance", "consumer"]
+            p.save(root / "specs/release-readiness.json", dict(productionReady=True, packageVersion="1.0.0", requiredLanes=["win-x64-net10.0"], requiredSuites=suite_names))
             p.save(root / "specs/requirements.json", {"features": [dict(id="FP-088", releaseRequired=True, status="qualified")]})
             report, baseline = fixture()
             report.update(sourceCommit=commit, lane="win-x64-net10.0", stage="source", reports=[])
             p.save(root / "evidence/report.json", report); p.save(root / "evidence/baseline.json", baseline)
             suite = dict(name="performance", total=1, passed=1, failed=0, skipped=0, reportPath="report.json", sha256=p.digest(root / "evidence/report.json"), baselinePath="baseline.json", baselineSha256=p.digest(root / "evidence/baseline.json"))
-            p.save(root / "evidence/release-evidence.json", dict(schemaVersion=1, purpose="production-qualification", sourceCommit=commit, packageVersion="1.0.0", stage="source", lanes=[dict(id="win-x64-net10.0", runtime="fixture", os="fixture", architecture="X64", suites=[suite])], requirements=[]))
+            # Synthetic positive counters exercise gate ordering only. The real
+            # performance checker must reject the missing raw observations.
+            suites = [dict(suite, name=name) for name in suite_names]
+            p.save(root / "evidence/release-evidence.json", dict(schemaVersion=1, purpose="production-qualification", sourceCommit=commit, packageVersion="1.0.0", stage="source", lanes=[dict(id="win-x64-net10.0", runtime="fixture", os="fixture", architecture="X64", suites=suites)], requirements=[]))
             result = subprocess.run(["pwsh", "-NoProfile", "-File", str(root / "eng/assert-production-ready.ps1"), "-EvidenceDirectory", str(root / "evidence")], capture_output=True, text=True, timeout=30)
             self.assertNotEqual(0, result.returncode)
             self.assertIn("Missing/extra observation groups", result.stderr)

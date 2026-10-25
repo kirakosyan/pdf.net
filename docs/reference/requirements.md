@@ -1,6 +1,6 @@
 # Required capability/source matrix
 
-This is declared requirement/source progress, not runtime capability or qualification. The 111 SDK requirements remain mandatory; the independent Reader is excluded. Exact provider/format applicability is in the linked feature documentation.
+This is declared requirement/source progress, not runtime capability or qualification. The catalogue retains 111 SDK requirements; the independent Reader is excluded. Explicit version-specific deferrals are shown below and documented in the [release exception](../release-exceptions.md). A deferral is not qualification. Exact provider/format applicability is in the linked feature documentation.
 
 | Requirement | SDK release | Status | Source progress |
 | --- | --- | --- | --- |
@@ -92,7 +92,7 @@ This is declared requirement/source progress, not runtime capability or qualific
 | [FP-086 Runtime and architecture qualification](../requirements/FP-086.md) | Required | planned | [Declared source profile](../runtime-qualification.md) |
 | [FP-087 Async processing, concurrency and cancellation](../requirements/FP-087.md) | Required | planned | [Declared source profile](../async-processing.md) |
 | [FP-088 Performance, streaming and resource envelopes](../requirements/FP-088.md) | Required | planned | [Declared source profile](../performance.md) |
-| [FP-089 Security, fuzzing and malformed-content robustness](../requirements/FP-089.md) | Required | planned | Full source/qualification pending |
+| [FP-089 Security, fuzzing and malformed-content robustness](../requirements/FP-089.md) | Deferred for 1.0.0 | planned | Full source/qualification pending |
 | [FP-090 Independent fidelity and interoperability corpus](../requirements/FP-090.md) | Required | planned | [Declared source profile](../fidelity-corpus.md) |
 | [FP-091 Deterministic output, caching and tenancy](../requirements/FP-091.md) | Required | planned | [Declared source profile](../determinism-caching.md) |
 | [FP-092 Observability and support diagnostics](../requirements/FP-092.md) | Required | planned | [Declared source profile](../observability.md) |
