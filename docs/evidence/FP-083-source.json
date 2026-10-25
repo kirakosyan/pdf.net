@@ -1,0 +1,574 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-083",
+  "issue": 88,
+  "sourceCommit": "21d9898d3a1efae50998b9da9ea4dfb232d9cb77",
+  "commitBinding": "Clean CLI product/source checkpoint; later host-test encoding correction and actual CI observations are separately bound. SDK source/public API code is unchanged from FP-082.",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/cli.yml",
+      "sha256": "92c6dde651c96559a09a13ec9e801f045b4fb870e13e7ea4f8676ad4779dead5",
+      "bytes": 2315
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "30bd373704a9984b05c44c33113f610fa3b98030d5b9cab93c2226cb571d88d9",
+      "bytes": 1834
+    },
+    {
+      "path": "README.md",
+      "sha256": "04451ceae45fbf6e809b47fd3ef5b8e5c45d7fae05106482375b7b68b33a9f5e",
+      "bytes": 19783
+    },
+    {
+      "path": "apps/Fluent.Pdf.Cli/BoundedMemory.cs",
+      "sha256": "9a83e5f5208d4726cee94175ac877126855d9ebc94a9bf676fc8ebf2f0090011",
+      "bytes": 1622
+    },
+    {
+      "path": "apps/Fluent.Pdf.Cli/Configuration.cs",
+      "sha256": "f250a015ce8a93f6bbbf4f58dcf642c6409fbe06334b15e8837e02fac6ade0b6",
+      "bytes": 10993
+    },
+    {
+      "path": "apps/Fluent.Pdf.Cli/FilePublication.cs",
+      "sha256": "efc1865b7fb93ca222bd2d0bc97a11ba5a744d62df59c350c73cf4bb2348f3e2",
+      "bytes": 5739
+    },
+    {
+      "path": "apps/Fluent.Pdf.Cli/Fluent.Pdf.Cli.csproj",
+      "sha256": "01dea616f11c9f1847c1ed687463bf02eef8423728d29270625b18f153a6a9b0",
+      "bytes": 443
+    },
+    {
+      "path": "apps/Fluent.Pdf.Cli/JobRunner.cs",
+      "sha256": "935f50f5cd63aa7f7d0f56c99d418b7581bbb5c89bfb4cb23c27f5ef2339636f",
+      "bytes": 14954
+    },
+    {
+      "path": "apps/Fluent.Pdf.Cli/Program.cs",
+      "sha256": "6c54bdeabcff8bcd6e8b0b25d135f62f571d3b6aed2e3dbd27c78b4946189c10",
+      "bytes": 5525
+    },
+    {
+      "path": "apps/Fluent.Pdf.Cli/packages.lock.json",
+      "sha256": "67543ba9602fc0019f24c75dbfffaf458d5ba683e11d11d2540c1bf8b268fe31",
+      "bytes": 477
+    },
+    {
+      "path": "docs/api-contract.md",
+      "sha256": "5b8a7ae3eda64bde9e08da9cf2121598e66a3e764c3fc149653065d75f020631",
+      "bytes": 31448
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "dd368c1e2a73e15ac79c2d0d8c39ef2d948ad7a1bd87c19ce7fcfb6ef864227f",
+      "bytes": 24517
+    },
+    {
+      "path": "docs/command-line.md",
+      "sha256": "a07c48c914a5040687da99a95b8a10568f38de0ccd340431b39d3ede7bcf22a9",
+      "bytes": 8976
+    },
+    {
+      "path": "eng/generate-cli-encrypted-fixture.py",
+      "sha256": "8c5440e9b8786a17abefa6632aa93c1db5b0b728f456e22cfb2df2863ec91ca6",
+      "bytes": 851
+    },
+    {
+      "path": "eng/generate-cli-vector-fixture.py",
+      "sha256": "06abc5efd6138c8dd0aefb768c8781b65cc74b752875b0073fa7767048ae9adb",
+      "bytes": 1087
+    },
+    {
+      "path": "eng/test-cli.py",
+      "sha256": "a7f6a59a3c9f4e18d41b943e256ecb48cfd4fdcea7b839eceeb920fbd91aa251",
+      "bytes": 13292
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "bad60bc9cfe001f6043c39b4434c53e7d60beea7c9b8a4ae13958e752d50ca4e",
+      "bytes": 6792
+    },
+    {
+      "path": "eng/verify-cli-fixtures.py",
+      "sha256": "fddc00212953c2c53ce0b620cc9e91023e3dcb7a07e7f8e06a91457d8d67ac94",
+      "bytes": 4151
+    },
+    {
+      "path": "examples/README.md",
+      "sha256": "f633ec2c6124b0cf0e643394b32b7204400aeccf4054c52a4cbb4414929e34fc",
+      "bytes": 5068
+    },
+    {
+      "path": "examples/cli/batch.json",
+      "sha256": "51a48d034829b801f1742de8b32182295a46ff67ac0833a8eb477babfc9ed9dc",
+      "bytes": 406
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "b78c453dd1ff635710ea09aef0315cdc551c888d2b00f9f21190679c314e5ca3",
+      "bytes": 210288
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/Fixtures/Cli/encrypted.pdf",
+      "sha256": "b6b782eb48765abc6ef3e982052f23e93d513d8c56715ca5945356d8df53f919",
+      "bytes": 2886
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/Fixtures/Cli/vector.pdf",
+      "sha256": "f502dc15b1e373135fa4cade6cc34ae82edafd85019590e1a7ad37eca3ebe5da",
+      "bytes": 454
+    }
+  ],
+  "lockedRestore": {
+    "path": "/workspace/scratch/cli-clean-locked-restore.log",
+    "sha256": "59d8fa29945d2df342dd365220c1632f915b9d68e830bace0943b15803fa1bda",
+    "bytes": 2293
+  },
+  "fourTargetSolutionAndTwoTargetCliBuild": {
+    "path": "/workspace/scratch/cli-clean-four-target-build.log",
+    "sha256": "c63e9cfbb7c39a3e022313929c0fb5c74359d9e138c4fb7dbd9c6c7f9ba836ca",
+    "bytes": 9500
+  },
+  "actualLocalProcesses": {
+    "report": {
+      "path": "artifacts/contracts/remaining/cli/clean/processes.json",
+      "sha256": "c2706cc74227c5d2fc5179f8767159dbe3509c66c3aabe6b84e949d85d4c4017",
+      "bytes": 5564
+    },
+    "profiles": [
+      {
+        "assembly": "/workspace/pdf.net-remaining/apps/Fluent.Pdf.Cli/bin/Release/net8.0/fluent-pdf.dll",
+        "assemblySha256": "2923a43fda76242aef840ecfdb361dda8b71c26f2de8e3dc04d48566e77bf221",
+        "identity": {
+          "schemaVersion": 1,
+          "application": "fluent-pdf",
+          "runtime": ".NET 8.0.32",
+          "os": "Debian GNU/Linux 13 (trixie)",
+          "architecture": "X64",
+          "sdkTarget": ".NETCoreApp,Version=v8.0",
+          "productionQualified": false
+        },
+        "cases": [
+          "actual-runtime-and-sdk-asset",
+          "binary-pipes-with-separate-json-diagnostics",
+          "three-explicit-text-views-and-selection-order",
+          "read-only-preflight-discovery-and-exact-matrix",
+          "actual-managed-vector-conversion-profiles",
+          "exact-input-and-failing-input-output-boundaries",
+          "unsupported-renderer-and-signature-authority",
+          "atomic-no-clobber-explicit-overwrite-and-owned-cleanup",
+          "bounded-partial-batch-with-ordered-durable-outcomes",
+          "closed-duplicate-key-quota-collision-and-secret-argument-rejection",
+          "actual-independent-encryption-protected-secret-and-redaction",
+          "actual-blocked-stdin-cancellation-and-process-exit",
+          "actual-blocked-path-admission-supervision",
+          "actual-closed-output-pipe-failure"
+        ],
+        "total": 14,
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "outputs": [
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net8.0/selected.pdf",
+            "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net8.0/rewritten.pdf",
+            "sha256": "767636efdf7f379969645956e338ca3d65c49e100704f0cd9b1978ee327e4d52"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net8.0/decrypted.pdf",
+            "sha256": "22286c4b4cedeb0eda25290d6160cf6f9293f678db8741b4c4df69685c2937b1"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net8.0/preflight.json",
+            "sha256": "45142ead5a46c3da3a737125f8846997ecd9115160465a6ac5f9c976a751ba93"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net8.0/vector.svg",
+            "sha256": "6df1bf64e2961354d3028e164300a2828c17fe45e6392dddad2e0c142233c017"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net8.0/vector.eps",
+            "sha256": "ef62fc376c5fb7f35ced153ba7252d2b6ae8459c68fabf4a355ae0293d363123"
+          }
+        ],
+        "dependencyBinaries": [
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net8.0/Fluent.Pdf.dll",
+            "sha256": "a1de862765dec365c09e87c341f7e52add4c2cd15fb526408b76451225b18baa",
+            "bytes": 2038272
+          },
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net8.0/Fluent.Pdf.Formats.dll",
+            "sha256": "61681d541816363bd4943b4b38a9e1a8648678855478d6ccd31d16c67fc45488",
+            "bytes": 258048
+          },
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net8.0/fluent-pdf.deps.json",
+            "sha256": "9c886ecd1f863c49d68bc9ee97db32a856c79393221e883fe36ed64466c68822",
+            "bytes": 1191
+          },
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net8.0/fluent-pdf.runtimeconfig.json",
+            "sha256": "97c9700542b659150b230c3578b29530fd76ab01ec66a92cd16945e0245713df",
+            "bytes": 328
+          }
+        ]
+      },
+      {
+        "assembly": "/workspace/pdf.net-remaining/apps/Fluent.Pdf.Cli/bin/Release/net10.0/fluent-pdf.dll",
+        "assemblySha256": "12affb1c3422cec7d93bb93ab77000c07772953192d3a0e4e22a27b370ce57b6",
+        "identity": {
+          "schemaVersion": 1,
+          "application": "fluent-pdf",
+          "runtime": ".NET 10.0.13",
+          "os": "Debian GNU/Linux 13 (trixie)",
+          "architecture": "X64",
+          "sdkTarget": ".NETCoreApp,Version=v10.0",
+          "productionQualified": false
+        },
+        "cases": [
+          "actual-runtime-and-sdk-asset",
+          "binary-pipes-with-separate-json-diagnostics",
+          "three-explicit-text-views-and-selection-order",
+          "read-only-preflight-discovery-and-exact-matrix",
+          "actual-managed-vector-conversion-profiles",
+          "exact-input-and-failing-input-output-boundaries",
+          "unsupported-renderer-and-signature-authority",
+          "atomic-no-clobber-explicit-overwrite-and-owned-cleanup",
+          "bounded-partial-batch-with-ordered-durable-outcomes",
+          "closed-duplicate-key-quota-collision-and-secret-argument-rejection",
+          "actual-independent-encryption-protected-secret-and-redaction",
+          "actual-blocked-stdin-cancellation-and-process-exit",
+          "actual-blocked-path-admission-supervision",
+          "actual-closed-output-pipe-failure"
+        ],
+        "total": 14,
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "outputs": [
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net10.0/selected.pdf",
+            "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net10.0/rewritten.pdf",
+            "sha256": "767636efdf7f379969645956e338ca3d65c49e100704f0cd9b1978ee327e4d52"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net10.0/decrypted.pdf",
+            "sha256": "22286c4b4cedeb0eda25290d6160cf6f9293f678db8741b4c4df69685c2937b1"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net10.0/preflight.json",
+            "sha256": "45142ead5a46c3da3a737125f8846997ecd9115160465a6ac5f9c976a751ba93"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net10.0/vector.svg",
+            "sha256": "6df1bf64e2961354d3028e164300a2828c17fe45e6392dddad2e0c142233c017"
+          },
+          {
+            "path": "artifacts/contracts/remaining/cli/clean/net10.0/vector.eps",
+            "sha256": "ef62fc376c5fb7f35ced153ba7252d2b6ae8459c68fabf4a355ae0293d363123"
+          }
+        ],
+        "dependencyBinaries": [
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net10.0/Fluent.Pdf.dll",
+            "sha256": "9a3fc65cabd0949e261d93df6a6d394eb84f2d3ec0481a5169425d0fc37e503f",
+            "bytes": 2038272
+          },
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net10.0/Fluent.Pdf.Formats.dll",
+            "sha256": "17c3abc9ed8d272dd9f3e6ee53a56341f76be37cdffaaac8ac84d24d491c4189",
+            "bytes": 258048
+          },
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net10.0/fluent-pdf.deps.json",
+            "sha256": "87aaa0e6a725fec653108a67401f28010e0b168a129fccc3488020abd0ee3132",
+            "bytes": 1193
+          },
+          {
+            "path": "apps/Fluent.Pdf.Cli/bin/Release/net10.0/fluent-pdf.runtimeconfig.json",
+            "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+            "bytes": 330
+          }
+        ]
+      }
+    ],
+    "log": {
+      "path": "/workspace/scratch/cli-clean-process-tests.log",
+      "sha256": "d126feb31c6220aeb2d262f04c46c66c4e61746f885e38fcb8bbb6081017d174",
+      "bytes": 87
+    }
+  },
+  "independentOutputs": {
+    "report": {
+      "path": "artifacts/contracts/remaining/cli/clean/independent.json",
+      "sha256": "babb46ee00384bd5c6fb35631544f160751a91ce8075d52873344633cf46c216",
+      "bytes": 2417
+    },
+    "observations": {
+      "schemaVersion": 1,
+      "pdfReader": "PyMuPDF",
+      "pdfReaderVersion": "1.26.6",
+      "secondReader": "Ghostscript",
+      "secondReaderVersion": "10.05.1",
+      "pngReader": "Pillow",
+      "pngReaderVersion": "13.0.0",
+      "observations": [
+        {
+          "path": "artifacts/contracts/remaining/cli/clean/net8.0/selected.pdf",
+          "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd",
+          "twoIndependentReaders": true,
+          "exactUnicodeAndOrder": true
+        },
+        {
+          "path": "artifacts/contracts/remaining/cli/clean/net8.0/rewritten.pdf",
+          "sha256": "767636efdf7f379969645956e338ca3d65c49e100704f0cd9b1978ee327e4d52",
+          "twoIndependentReaders": true,
+          "exactUnicodeAndOrder": true
+        },
+        {
+          "path": "artifacts/contracts/remaining/cli/clean/net8.0/decrypted.pdf",
+          "sha256": "22286c4b4cedeb0eda25290d6160cf6f9293f678db8741b4c4df69685c2937b1",
+          "twoIndependentReaders": true,
+          "exactUnicodeAndOrder": true
+        },
+        {
+          "directory": "artifacts/contracts/remaining/cli/clean/net8.0",
+          "svgSha256": "6df1bf64e2961354d3028e164300a2828c17fe45e6392dddad2e0c142233c017",
+          "epsSha256": "ef62fc376c5fb7f35ced153ba7252d2b6ae8459c68fabf4a355ae0293d363123",
+          "exactOriginalVectorPixels": true
+        },
+        {
+          "path": "artifacts/contracts/remaining/cli/clean/net10.0/selected.pdf",
+          "sha256": "9ea2180c8775925b554318e3218e21d702de643d9f2afdcf964789c71bd898dd",
+          "twoIndependentReaders": true,
+          "exactUnicodeAndOrder": true
+        },
+        {
+          "path": "artifacts/contracts/remaining/cli/clean/net10.0/rewritten.pdf",
+          "sha256": "767636efdf7f379969645956e338ca3d65c49e100704f0cd9b1978ee327e4d52",
+          "twoIndependentReaders": true,
+          "exactUnicodeAndOrder": true
+        },
+        {
+          "path": "artifacts/contracts/remaining/cli/clean/net10.0/decrypted.pdf",
+          "sha256": "22286c4b4cedeb0eda25290d6160cf6f9293f678db8741b4c4df69685c2937b1",
+          "twoIndependentReaders": true,
+          "exactUnicodeAndOrder": true
+        },
+        {
+          "directory": "artifacts/contracts/remaining/cli/clean/net10.0",
+          "svgSha256": "6df1bf64e2961354d3028e164300a2828c17fe45e6392dddad2e0c142233c017",
+          "epsSha256": "ef62fc376c5fb7f35ced153ba7252d2b6ae8459c68fabf4a355ae0293d363123",
+          "exactOriginalVectorPixels": true
+        }
+      ],
+      "completeFidelityQualified": false,
+      "completeSecurityQualified": false,
+      "productionQualified": false
+    },
+    "scope": "Six actual CLI PDFs through PyMuPDF and Ghostscript, two SVG/EPS exact-original-vector pixel groups, and preflight source binding. Not full format/security/fidelity qualification."
+  },
+  "previousSdkValidation": {
+    "evidence": "docs/evidence/FP-082-source.json",
+    "apiComparisons": 45,
+    "libraries": 15,
+    "sdkSourceCodeChanged": false,
+    "managedSelectedPassedEachProfile": 1660,
+    "fullWindowsCasesEachOfFiveProfiles": 1734,
+    "sixHostSourceRun": 39988685467,
+    "sixHostSourceRunNumber": 147,
+    "sixHostSourceConclusion": "success"
+  },
+  "specification": {
+    "path": "/workspace/scratch/cli-clean-spec.log",
+    "sha256": "1dfcb5a4d6074fa814ade31e2b6b3d695bc84d270a81f6be8420c15b8d2069d6",
+    "bytes": 104
+  },
+  "releaseBlock": {
+    "path": "/workspace/scratch/cli-clean-release-block.log",
+    "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "bytes": 139
+  },
+  "initialObservations": {
+    "closedPipe": "Console output suppressed an actual broken-pipe error and reported success; redirected data now uses borrowed raw OS handles and the actual closed-pipe case passes.",
+    "initialLocalFailure": {
+      "path": "/workspace/scratch/cli-initial-process-tests.log",
+      "sha256": "6b3fddaf6cbdfbdf14930520cdfb006824cb0aa11120c52994c7833101e480c8",
+      "bytes": 399
+    },
+    "windowsHarness": "Python default-locale read_text misdecoded an actual UTF8 file on Windows after byte-oriented stdout tests passed. The consumer now uses explicit UTF8; no product-code correction was needed.",
+    "windowsFailures": [
+      {
+        "runId": 39996331493,
+        "jobId": 120560691466,
+        "log": {
+          "path": "/workspace/scratch/queue-88-initial-120560691466.log",
+          "sha256": "fe412679ac9e8a18e2d534d8dab1835439af1cfb715a66d1fd06b2f657a9b535",
+          "bytes": 19995
+        }
+      },
+      {
+        "runId": 39996331493,
+        "jobId": 120560691467,
+        "log": {
+          "path": "/workspace/scratch/queue-88-initial-120560691467.log",
+          "sha256": "42ab0bee0919b61fe5da504c456b6328ec44700e0089492674aa327ff4987add",
+          "bytes": 19308
+        }
+      }
+    ]
+  },
+  "dependencies": {
+    "runtime": "Public Core and Formats assemblies plus installed .NET8/.NET10, no new third-party runtime package or implicit providers",
+    "analysisOnly": [
+      "Python standard-library process harness",
+      "PyMuPDF 1.26.6 original independent encrypted input",
+      "Pillow and Ghostscript versions retained in independent report"
+    ],
+    "analysisToolsDistributedWithApplication": false
+  },
+  "remaining": [
+    "Complete provider/conversion/remediation workflows and legacy host bindings",
+    "Full console/signal/filesystem/backpressure/crash/concurrency/endurance/security/fuzz/performance and corpus qualification",
+    "Exact final application/packages and fresh package-only consumers"
+  ],
+  "commands": [
+    "dotnet restore Fluent.Pdf.slnx --locked-mode --disable-parallel -m:1",
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "python3 eng/test-cli.py --assemblies <actual net8.0/net10.0 CLI DLLs> --output artifacts/contracts/remaining/cli/clean/processes.json",
+    "Caller-provisioned analysis Python runs eng/verify-cli-fixtures.py against both actual output directories, without disabling assertions",
+    "pwsh -NoProfile -File eng/validate-spec.ps1 and eng/test-release-block.ps1"
+  ],
+  "consumerCorrection": {
+    "sourceCommit": "6d18f8cb3446ace25de463686140bb20a2b71640",
+    "path": "eng/test-cli.py",
+    "sha256": "f81474e4fbf1804d6033dcd379f6c3f13137a3c032d64e0ea1e04a713c7a9425",
+    "scope": "Read the already-UTF8 configured output using explicit UTF8 instead of the Windows default code page. Product/SDK source is unchanged."
+  },
+  "actualSixHostSourceConsumers": {
+    "observations": [
+      {
+        "name": "CLI (linux-x64)",
+        "runId": 39997072978,
+        "jobId": 120563260860,
+        "sourceHead": "6d18f8cb3446ace25de463686140bb20a2b71640",
+        "actualCheckout": "26fb54654fa4bf256fd3b409277021a08d34784f",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-88-120563260860.log",
+        "markers": [
+          "2026-10-23T17:42:04.8398532Z CLI_PROCESS_PASS;.NET 8.0.32;X64;14-groups",
+          "2026-10-23T17:42:04.8399468Z CLI_PROCESS_PASS;.NET 10.0.13;X64;14-groups"
+        ],
+        "archiveSha256": "841da90e0eed545206ce1c2d08c1585943044a82cc7f84546548b12e2db2aafe",
+        "artifactId": 12520126846,
+        "archiveDownloadedLocally": false,
+        "logSha256": "fa50a17744ab13bbd59d89987c516041ff38e4d864ff5548b3b91ca2dd3f97a8"
+      },
+      {
+        "name": "CLI (linux-arm64)",
+        "runId": 39997072978,
+        "jobId": 120563261177,
+        "sourceHead": "6d18f8cb3446ace25de463686140bb20a2b71640",
+        "actualCheckout": "26fb54654fa4bf256fd3b409277021a08d34784f",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-88-120563261177.log",
+        "markers": [
+          "2026-10-23T17:42:15.6785924Z CLI_PROCESS_PASS;.NET 8.0.32;Arm64;14-groups",
+          "2026-10-23T17:42:15.6788796Z CLI_PROCESS_PASS;.NET 10.0.13;Arm64;14-groups"
+        ],
+        "archiveSha256": "87cfd8b7c13985e64a5aae2c8953976c3bdc1ad86a12a7bbc82cf152f5a23d34",
+        "artifactId": 12519304812,
+        "archiveDownloadedLocally": false,
+        "logSha256": "3e159d426e14aa7b190a971c961a93265fc1a2cd357c6736ecce8fff54d48239"
+      },
+      {
+        "name": "CLI (win-arm64)",
+        "runId": 39997072978,
+        "jobId": 120563261196,
+        "sourceHead": "6d18f8cb3446ace25de463686140bb20a2b71640",
+        "actualCheckout": "26fb54654fa4bf256fd3b409277021a08d34784f",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-88-120563261196.log",
+        "markers": [
+          "2026-10-23T17:42:39.8254326Z CLI_PROCESS_PASS;.NET 8.0.32;Arm64;13-groups",
+          "2026-10-23T17:42:39.8254700Z CLI_PROCESS_PASS;.NET 10.0.13;Arm64;13-groups"
+        ],
+        "archiveSha256": "6f5e358086a12f4a496762f7cc0b6380749c1bbf49f74c99f8f2657729985206",
+        "artifactId": 12520047334,
+        "archiveDownloadedLocally": false,
+        "logSha256": "1a53d43f5e86af4a233e4c3c4f040c5992fd8fa56656f43f5044bba22d7386b2"
+      },
+      {
+        "name": "CLI (win-x64)",
+        "runId": 39997072978,
+        "jobId": 120563261199,
+        "sourceHead": "6d18f8cb3446ace25de463686140bb20a2b71640",
+        "actualCheckout": "26fb54654fa4bf256fd3b409277021a08d34784f",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-88-120563261199.log",
+        "markers": [
+          "2026-10-23T17:42:29.4902942Z CLI_PROCESS_PASS;.NET 8.0.32;X64;13-groups",
+          "2026-10-23T17:42:29.4903495Z CLI_PROCESS_PASS;.NET 10.0.13;X64;13-groups"
+        ],
+        "archiveSha256": "4cc9b4b7d99dc2ba86053bff7c909cdfc219a7d3a55b069b4d0442d56f0df15c",
+        "artifactId": 12520182032,
+        "archiveDownloadedLocally": false,
+        "logSha256": "9e4b1e2bcb0bb11453f8e4854f17d59ce2db6dc883352d08bb4b05b163daac13"
+      },
+      {
+        "name": "CLI (osx-arm64)",
+        "runId": 39997072978,
+        "jobId": 120563261250,
+        "sourceHead": "6d18f8cb3446ace25de463686140bb20a2b71640",
+        "actualCheckout": "26fb54654fa4bf256fd3b409277021a08d34784f",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-88-120563261250.log",
+        "markers": [
+          "2026-10-23T17:42:18.3828360Z CLI_PROCESS_PASS;.NET 8.0.32;Arm64;14-groups",
+          "2026-10-23T17:42:18.3829690Z CLI_PROCESS_PASS;.NET 10.0.13;Arm64;14-groups"
+        ],
+        "archiveSha256": "46539b8735f548646d8fd245bc507418b676e24d40d954cd5a61f363a8214a00",
+        "artifactId": 12519564095,
+        "archiveDownloadedLocally": false,
+        "logSha256": "2f2d91d9aa37383af30760f309c855855191bb52b7a57a5ab30f59aac26d1e3a"
+      },
+      {
+        "name": "CLI (osx-x64)",
+        "runId": 39996331493,
+        "jobId": 120560691562,
+        "sourceHead": "21d9898d3a1efae50998b9da9ea4dfb232d9cb77",
+        "actualCheckout": "deb4c011ce9efd9f4d3fe4f03b999bafe193d7e1",
+        "conclusion": "success",
+        "log": "/workspace/scratch/queue-88-120560691562.log",
+        "markers": [
+          "2026-10-23T17:38:24.0319580Z CLI_PROCESS_PASS;.NET 8.0.32;X64;14-groups",
+          "2026-10-23T17:38:24.0384500Z CLI_PROCESS_PASS;.NET 10.0.13;X64;14-groups"
+        ],
+        "archiveSha256": "d087c7f2ef2afe4103cce425e1db959bdf3e5342ce6d5f81f3dd7364b48822d0",
+        "artifactId": 12520201759,
+        "archiveDownloadedLocally": false,
+        "logSha256": "00d41ecbfbd7837d40c79e3b9e9e5eeda77c328810d29a0431fa45c1a38c52fe"
+      }
+    ],
+    "scope": "Actual .NET8/.NET10 process consumers on Windows/Linux/macOS x64/ARM64. Identical product/SDK source across the two commits; only Python consumer file decoding changed. The original macOS-x64 job passed at the clean product checkpoint; five later hosts passed after the consumer correction. Latest macOS-x64 repeat remains separately pending.",
+    "runtimeProfiles": 12,
+    "processGroups": 164,
+    "failedRequiredGroupsInThesePassingObservations": 0,
+    "skippedRequiredGroups": 0,
+    "fifos": "The additional POSIX path-admission FIFO group applies to Linux/macOS only. Windows has13 groups per runtime; Linux/macOS14.",
+    "finalPackagesQualified": false,
+    "completeHostSecurityQualified": false
+  }
+}

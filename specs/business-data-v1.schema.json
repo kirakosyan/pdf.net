@@ -1,0 +1,641 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:fluent-pdf:business:1:json-schema",
+  "title": "Fluent.Pdf business observations version1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceSha256",
+    "coordinateSpace",
+    "businessVerified",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "coordinateSpace": {
+      "const": "display-points-top-left"
+    },
+    "businessVerified": {
+      "const": false
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 1000000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "provenance",
+          "pageIndex",
+          "objectId",
+          "parentId",
+          "businessVerified"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^r[0-9]+$"
+          },
+          "kind": {
+            "enum": [
+              "page",
+              "character",
+              "replacement",
+              "paragraph",
+              "table",
+              "cell",
+              "field",
+              "widget",
+              "structure",
+              "structure-finding",
+              "ocr",
+              "ocr-word"
+            ]
+          },
+          "provenance": {
+            "enum": [
+              "source",
+              "inference",
+              "ocr",
+              "mixed"
+            ]
+          },
+          "objectId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[1-9][0-9]*:[0-9]+$"
+          },
+          "parentId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^r[0-9]+$"
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "semanticText": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "layoutText": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "layoutProvenance": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mapping": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "confidenceKind": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "numericCulture": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "engine": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fieldKind": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valueKind": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "alternativeText": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pageIndex": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "x": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "y": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "width": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "height": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "sourceIndex": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "operationIndex": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "sourceCode": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "codeLength": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "characterCount": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "rows": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "columns": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "confidence": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "number": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "row": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "column": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "rowSpan": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "columnSpan": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "businessVerified": {
+            "const": false
+          },
+          "invisible": {
+            "type": "boolean"
+          },
+          "layerVisible": {
+            "type": "boolean"
+          },
+          "geometryEstimated": {
+            "type": "boolean"
+          },
+          "sourceIndices": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100000
+          },
+          "ruleSources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100000
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100000
+          },
+          "sourceObjects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100000
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100000
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "page"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "text",
+                "semanticText",
+                "layoutText",
+                "layoutProvenance",
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "properties": {
+                "provenance": {
+                  "const": "mixed"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "character"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "text",
+                "sourceIndex",
+                "operationIndex",
+                "mapping",
+                "sourceCode",
+                "codeLength",
+                "invisible",
+                "layerVisible",
+                "geometryEstimated",
+                "x",
+                "y",
+                "width",
+                "height"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "replacement"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "text",
+                "sourceIndex",
+                "characterCount"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "paragraph"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "sourceIndices",
+                "confidenceKind",
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "properties": {
+                "provenance": {
+                  "const": "inference"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "table"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "rows",
+                "columns",
+                "label",
+                "confidence",
+                "confidenceKind",
+                "numericCulture",
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "properties": {
+                "provenance": {
+                  "const": "inference"
+                },
+                "confidenceKind": {
+                  "const": "uncalibrated-table-heuristic"
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "cell"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "text",
+                "number",
+                "row",
+                "column",
+                "rowSpan",
+                "columnSpan",
+                "confidence",
+                "confidenceKind",
+                "sourceIndices",
+                "ruleSources",
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "properties": {
+                "provenance": {
+                  "const": "inference"
+                },
+                "confidenceKind": {
+                  "const": "uncalibrated-table-heuristic"
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "field"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "label",
+                "fieldKind",
+                "valueKind",
+                "values",
+                "sourceObjects"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "widget"
+                }
+              }
+            },
+            "then": {
+              "required": []
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "structure"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "label",
+                "text",
+                "alternativeText",
+                "language",
+                "children"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "structure-finding"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "label",
+                "text",
+                "location"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "ocr"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "text",
+                "language",
+                "engine",
+                "model",
+                "confidence",
+                "confidenceKind"
+              ],
+              "properties": {
+                "provenance": {
+                  "const": "ocr"
+                },
+                "confidenceKind": {
+                  "const": "engine-score-0-100"
+                },
+                "confidence": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "ocr-word"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "text",
+                "confidence",
+                "confidenceKind",
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "properties": {
+                "provenance": {
+                  "const": "ocr"
+                },
+                "confidenceKind": {
+                  "const": "engine-score-0-100"
+                },
+                "confidence": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

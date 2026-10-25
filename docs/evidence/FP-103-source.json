@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-103",
+  "issue": 103,
+  "sourceCommit": "c7054ccb4c192ec9d059e73193f64c890e41d158",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "ocrAccuracyMeasured": false,
+  "confidenceCalibrated": false,
+  "sourceFiles": [
+    {
+      "path": "docs/evidence/FP-100-source.json",
+      "sha256": "c0b43490746200d84d714db15477e88933807157a0e7000fdaf36ee3b38cd458",
+      "bytes": 10459
+    },
+    {
+      "path": "docs/image-cleanup.md",
+      "sha256": "910f56c6ff1174a605c89767afc796881d48d24bd5d564fe553dbfbe0a826df7",
+      "bytes": 4297
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "497a4b42382cf37ddd0492b9567bf005c997cf64ce128d31831635ecc38807e8",
+      "bytes": 29265
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.md",
+      "sha256": "8c1827285d8f0247375a2359a97d9ba227b1d1ebb2faeb2407eb0b854eba6444",
+      "bytes": 901261
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "8c54a66c07e6fa5424e02355945135d925ec05a58b62afb49e552c744420d4d1",
+      "bytes": 1486
+    },
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "aee557f21f5b0ccb2e0c4ea490cbe242483d53344b759dde7ba692289d3a11e2",
+      "bytes": 15844
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "8039dc70d0900d2c15c8f55df6ba0feae6fc638e06dfb9682fc43107c35b954b",
+      "bytes": 11957
+    },
+    {
+      "path": "eng/verify-image-cleanup.py",
+      "sha256": "197275115029e57923ddb5a1e75bac5de4dfe52c0a4c5d44c231daffd7460370",
+      "bytes": 4176
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "3e06bceb142f2df6a1dec1707c5bd6b38cbdd2f2c551b83e74346effa446cd02",
+      "bytes": 35179
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "89143a3b0e320676a0f70d2d25fbc8573c911c50a6de28ef5c9f7bda0ff153b6",
+      "bytes": 41378
+    },
+    {
+      "path": "README.md",
+      "sha256": "15ecbd08e38493269179483fd75f9ab8663d7c8266314e648b2755a13c3cd339",
+      "bytes": 23000
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "d618f549f6b02e2b69d8b71efce10583f855688ea2798a2807a49a6a2d605662",
+      "bytes": 225332
+    },
+    {
+      "path": "src/Fluent.Pdf/Ocr/PdfImageCleanup.cs",
+      "sha256": "dca6f4257c21dcd0a4c67b6e8b2ff82c6c98502451b6cc102907a37345b9eb4f",
+      "bytes": 6314
+    },
+    {
+      "path": "src/Fluent.Pdf/Ocr/PdfImageCleanupContracts.cs",
+      "sha256": "8282b442e89c4e5e682b747d084852aefdda192ae3acdff9560ad9cecfee8b6e",
+      "bytes": 7698
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "fef09904f8eb63bb34be9d74bdc728f3e42f665f192c370618166f4830d48479",
+      "bytes": 356734
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ImageCleanupTests.cs",
+      "sha256": "888db77dea9716a265dcc2ad002b28d8c03ba34bbe786d19354056bac0e33bd6",
+      "bytes": 13943
+    }
+  ],
+  "validation": {
+    "newCleanupCasesPerProfile": 16,
+    "selectedCleanupScanOcrOptimizationPolicyAndRuntimeCasesPerProfile": 106,
+    "profiles": 5,
+    "passed": 530,
+    "failed": 0,
+    "skipped": 0,
+    "apiComparisons": 45,
+    "newPublicDeclarations": 37,
+    "solutionWarnings": 0,
+    "solutionErrors": 0,
+    "actualPackTargetsBlocked": 15,
+    "independentPixelGeometryMeasurementObservations": 35,
+    "negativeIndependentCheckerCases": 3
+  },
+  "lanes": [
+    {
+      "runtimeSha256": "AA2B1C11AEBD9364EA338E1BA25674C864B9F750BE5F6A621D04C1E128298C19",
+      "report": "artifacts/fp103-lanes-verified/net8/selected.trx",
+      "skipped": 0,
+      "passed": 106,
+      "failed": 0,
+      "runtime": "artifacts/fp103-lanes-verified/net8/runtime.json",
+      "total": 106,
+      "sha256": "F8FF152278D289E44D9BE9AE3AD9520215B6F5AF55C6B4D97741A04106936A3E",
+      "lane": "win-x64-net8.0"
+    },
+    {
+      "runtimeSha256": "C4E21E932AD8A648FCD6D5EBC81713FF0B44A25381B4AC86DD19A7ED809E1D65",
+      "report": "artifacts/fp103-lanes-verified/net10/selected.trx",
+      "skipped": 0,
+      "passed": 106,
+      "failed": 0,
+      "runtime": "artifacts/fp103-lanes-verified/net10/runtime.json",
+      "total": 106,
+      "sha256": "E142F3C53580137033500DE4A4B777AA13B5FCAEE2F558596642FE42556BDD8B",
+      "lane": "win-x64-net10.0"
+    },
+    {
+      "runtimeSha256": "DC2BD46E84335FFB2905585A147B9219AC576EB0283014EEDBBCFFE12274C9B6",
+      "report": "artifacts/fp103-lanes-verified/framework-x64/selected.trx",
+      "skipped": 0,
+      "passed": 106,
+      "failed": 0,
+      "runtime": "artifacts/fp103-lanes-verified/framework-x64/runtime.json",
+      "total": 106,
+      "sha256": "3D2A00D65C75FC76F8D798ED4A3E7D9A15FC325172FE6B5C9E8816FE155BF2B2",
+      "lane": "win-x64-framework-current"
+    },
+    {
+      "runtimeSha256": "C2B4D245831AEFB38A11DE9E1AFC264BC66B8B783CAA082DD0E7A4352F12C6E3",
+      "report": "artifacts/fp103-lanes-verified/framework-x86/selected.trx",
+      "skipped": 0,
+      "passed": 106,
+      "failed": 0,
+      "runtime": "artifacts/fp103-lanes-verified/framework-x86/runtime.json",
+      "total": 106,
+      "sha256": "340E8AB8D83767E34E8E7F4F131A4A677A9E6D219298DC612E85A343DB9CC88D",
+      "lane": "win-x86-framework-current"
+    },
+    {
+      "runtimeSha256": "5A0B01DA05C62115DB176EC9089C5595781830131486232FB7FAE318190ADF05",
+      "report": "artifacts/fp103-lanes-verified/fallback/selected.trx",
+      "skipped": 0,
+      "passed": 106,
+      "failed": 0,
+      "runtime": "artifacts/fp103-lanes-verified/fallback/runtime.json",
+      "total": 106,
+      "sha256": "5CAAAEFF7358696D840E20F21FA18F71FECC3133DECAB2DDEFCD173D7700A50D",
+      "lane": "win-x64-netstandard2.0-fallback"
+    }
+  ],
+  "commands": [
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -File artifacts/run-fp103-tests.ps1",
+    "pwsh -File eng/check-api.ps1",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp103-reference",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp103-reference-check --check",
+    "python eng/check-documentation.py --output artifacts/fp103-snippets.json",
+    "pwsh -File eng/test-release-block.ps1",
+    "pwsh -File eng/validate-spec.ps1"
+  ],
+  "archive": {
+    "path": "artifacts/fp103-source-evidence.zip",
+    "sha256": "11e5a067e6168f039febd54df6d812eb9795d197a40470fd45caaae68f1d119a",
+    "bytes": 5081696,
+    "verifiedEntries": 227
+  },
+  "pending": [
+    "Real labeled scan corpus, classification error rates and before/after OCR CER/WER",
+    "Broader ICC/alpha/antialiased reduction and automatic border profiles",
+    "Actual minimum Framework4.7.2, all required runtime/RID lanes, fuzz/endurance and exact final package consumers"
+  ],
+  "limitations": [
+    "Local Framework execution uses installed Framework4.8, not actual4.7.2",
+    "Seven original small pixel fixtures do not qualify real scan fidelity or OCR accuracy",
+    "Confidence is an uncalibrated background fraction; no page is automatically removed",
+    "Only source-preserving explicit parameters are implemented; issue remains open and planned",
+    "Issue93 remains user-skipped and issue100 remains blocked"
+  ],
+  "hostedFailure": {
+    "sourceCommit": "293f451a8b4c483ce0a7f03f999e3cdb4fbbfa53",
+    "workflowRun": 40097791372,
+    "job": 120883574617,
+    "artifact": 12561313546,
+    "archive": "artifacts/fp103-ci-win-x64-failure.zip",
+    "sha256": "a4665d4c8546d79a5a28c2552d344d50c68370b70557d87e135c38d816561185",
+    "failures": [
+      "net8 NativeWorkerTests.ConcurrentStagingAndStartingRetainsIndependentExecutablePins: native worker deadline, overlapping NativeImageCodecTests.SequentialDecodesWithDefaultWorkerAndOperationMemoryReuseTheirEnvelope",
+      "offline Framework x86 ProcessingTests.ShutdownCancelsQueuedAndActiveJobsButNeverReturnsBeforeCleanup: one-second cancellation signal assertion"
+    ],
+    "offlineFrameworkX64": "passed",
+    "resolved": true,
+    "correction": {
+      "scope": "test scheduling and synchronization only; SDK deadlines unchanged",
+      "native": "Isolate NativeWorkerTests from unrelated process-heavy classes; retain four concurrent jobs with twenty invocations each, dedicated test threads, initial barrier and per-invocation timings",
+      "processing": "Await the explicit cancellation-observed task with existing bounded Finish helper and always release cleanup; preserve assertion that shutdown cannot finish before cleanup",
+      "rootCauseLimit": "Reports prove native workload overlap and the one-second signal assertion; they do not identify a native engine or OS defect",
+      "hostedVerification": {
+        "sourceCommit": "d8b3fd15c9ab53c41b57e40a1547d709f0a61b66",
+        "workflowRun": 40101030111,
+        "workflowsPassed": 5,
+        "sourceHostJobsPassed": 6,
+        "rebuildJobPassed": true,
+        "report": "artifacts/fp103-corrected-final-ci.json",
+        "sha256": "2b11cb105c036bfa3166f33ce780dbce456d2325ba5deebabb6466a9e88a067b"
+      },
+      "localValidation": {
+        "sourceBase": "f447bce64d6f92c8b4e3f9c656a30415e51dcc7f",
+        "dirty": true,
+        "sourceHashes": {
+          "tests/Fluent.Pdf.Contract.Tests/NativeWorkerTests.cs": "b8ebcca5c3a9241f159e8ef92cf040e29a2a224ae0e020619ce505359a8c6912",
+          "tests/Fluent.Pdf.Contract.Tests/ProcessingTests.cs": "b76d86544af6a2f9717fd0719b18e5dc97bf89c16bcc36ed63a0b9e0a17abe68",
+          "tests/Fluent.Pdf.Contract.Tests/NativeProcessStressCollection.cs": "a8966762a1130a7f72a79d45107a073cdf69370604e98a052cee33ab89558f18"
+        },
+        "build": "Full solution, zero warnings/errors",
+        "spec": "passed",
+        "runs": [
+          {
+            "lane": "win-x64-net8.0",
+            "total": 1861,
+            "passed": 1861,
+            "failed": 0,
+            "skipped": 0
+          },
+          {
+            "lane": "win-x86-framework-current",
+            "runtime": ".NET Framework 4.8.10008.0; not minimum 4.7.2",
+            "total": 1861,
+            "passed": 1861,
+            "failed": 0,
+            "skipped": 0
+          }
+        ],
+        "runtimeIdentity": "Both checked against retained TRX and runtime reports",
+        "precedingRun": "One premature run stopped before completion. Subsequent full net8 run: 1859 passed, two operation deadlines coinciding with a five-minute Modern Standby interval confirmed by Kernel-Power events; retained without claiming success. Final runs used a process-scoped idle-sleep hold restored in finally.",
+        "archive": {
+          "path": "artifacts/fp103-ci-correction-evidence.zip",
+          "sha256": "4a5cce0cb52f05cca4adbfde9d2f4ef26533f2fd008953e60b141725c6162aae",
+          "bytes": 1552647,
+          "verifiedEntries": 15
+        }
+      }
+    }
+  }
+}

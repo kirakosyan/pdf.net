@@ -9,7 +9,7 @@ permissions:
 jobs:
   validate:
     name: Contracts (${{ matrix.id }})
-    timeout-minutes: ${{ matrix.id == 'osx-x64' && 40 || 20 }}
+    timeout-minutes: ${{ (matrix.id == 'osx-x64' || matrix.id == 'win-x64') && 40 || 20 }}
     strategy:
       fail-fast: false
       matrix:
@@ -35,12 +35,26 @@ jobs:
       - name: Provision pinned independent archival source validator
         shell: pwsh
         run: ./eng/build-archival-fixture.ps1
+      - name: Provision exact-edition independent invoice source validator
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./eng/build-invoice-fixture.ps1
       - name: Validate specification and naming
         shell: pwsh
         run: ./eng/validate-spec.ps1
       - name: Build original native worker and crash/isolation fixtures
         shell: pwsh
         run: ./eng/build-native-fixtures.ps1
+      - name: Build original browser transport process peer
+        shell: pwsh
+        run: ./eng/build-browser-cli-fixture.ps1
+      - name: Verify offline source provisioning and static import closure
+        shell: pwsh
+        run: |
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          & $python eng/test-native-distribution.py
+          if ($LASTEXITCODE -ne 0) { throw 'Offline source provisioning boundaries failed.' }
       - name: Enable Windows network isolation prerequisite on disposable runner
         if: runner.os == 'Windows'
         shell: pwsh
@@ -49,19 +63,64 @@ jobs:
         run: dotnet restore Fluent.Pdf.slnx --locked-mode
       - name: Restore pinned API tooling
         run: dotnet tool restore
+      - name: Inspect evaluated SDK package metadata without packing
+        shell: pwsh
+        run: ./eng/test-package-metadata.ps1 -OutputDirectory artifacts/contracts/package-metadata
       - name: Build SDK and executable C#/VB contracts
         run: dotnet build Fluent.Pdf.slnx -c Release --no-restore
+      - name: Exercise offline installed real rendering source assets
+        shell: pwsh
+        run: |
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          $rid = '${{ matrix.id }}'
+          $output = Join-Path $PWD 'artifacts/contracts/installed-renderer'
+          $null = [IO.Directory]::CreateDirectory($output)
+          & $python eng/test-installed-renderer.py --rid $rid --source (Join-Path $PWD "artifacts/native-fixtures/$rid") --output $output
+          if ($LASTEXITCODE -ne 0) { throw 'Offline actual-engine source installation failed.' }
+      - name: Inventory source dependencies and check advisory query coverage
+        shell: pwsh
+        run: ./eng/audit-supply-chain.ps1 -OutputDirectory artifacts/contracts/supply-chain
       - name: Release completed build servers before API comparison
         run: dotnet build-server shutdown
       - name: Compare API across target frameworks
         shell: pwsh
         run: ./eng/check-api.ps1
+      - name: Prepare offline Framework source bundle
+        id: framework_bundle
+        if: matrix.id == 'win-x64'
+        shell: pwsh
+        run: |
+          & powershell.exe -NoProfile -ExecutionPolicy Bypass -File eng/test-framework-runner.ps1 -OutputDirectory artifacts/contracts/framework-runner-regressions
+          if ($LASTEXITCODE -ne 0) { throw 'Offline launcher regressions failed.' }
+          $package = 'artifacts/microsoft.testplatform.18.11.0.nupkg'
+          Invoke-WebRequest https://api.nuget.org/v3-flatcontainer/microsoft.testplatform/18.11.0/microsoft.testplatform.18.11.0.nupkg -OutFile $package
+          ./eng/new-framework-test-bundle.ps1 -OutputDirectory artifacts/framework-source-bundle -TestPlatformPackage $package -JavaHome $env:JAVA_HOME
+      - name: Retain offline Framework source bundle
+        if: matrix.id == 'win-x64' && success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: framework-source-bundle-win-x64
+          path: artifacts/framework-source-bundle/
+          if-no-files-found: error
+          # Preserve the pinned tool package's .signature.p7s and all hashed inputs.
+          include-hidden-files: true
       - name: Execute source contracts and verify runtime identity
         shell: pwsh
         run: ./eng/test-contracts.ps1 -ExpectedArchitecture '${{ matrix.arch }}'
       - name: Verify unqualified publication stays blocked
         shell: pwsh
         run: ./eng/test-release-block.ps1
+      - name: Execute offline Framework source consumers
+        if: ${{ !cancelled() && steps.framework_bundle.outcome == 'success' }}
+        shell: pwsh
+        run: |
+          foreach ($architecture in @('x64','x86')) {
+            # Exercise the exact offline entry point with Windows PowerShell 5.1.
+            & powershell.exe -NoProfile -ExecutionPolicy Bypass -File artifacts/framework-source-bundle/run-framework-bundle.ps1 -Architecture $architecture -OutputDirectory "artifacts/contracts/offline-framework-$architecture" -WorkspaceDirectory "artifacts/framework-source-workspaces/$architecture"
+            if ($LASTEXITCODE -ne 0) { throw 'Offline Framework source consumer failed.' }
+            python eng/check-runtime-evidence.py --lane "win-$architecture-framework-current" --trx "artifacts/contracts/offline-framework-$architecture/runtime-contracts.trx" --mode source --output "artifacts/contracts/offline-framework-$architecture/runtime-identity.json"
+            if ($LASTEXITCODE -ne 0) { throw 'Offline Framework runtime identity failed.' }
+          }
       - name: Retain macOS sandbox diagnostics after a native failure
         if: failure() && runner.os == 'macOS'
         shell: bash
@@ -75,5 +134,39 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: source-contracts-${{ matrix.id }}
-          path: artifacts/contracts/
+          path: |
+            artifacts/contracts/
+            !artifacts/contracts/supply-chain/fresh-advisory-cache/**
+          if-no-files-found: error
+
+  reproducibility:
+    name: Managed source rebuild provenance
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: 10.0.4xx
+      - name: Compare fresh deterministic builds and embedded SourceLink
+        shell: pwsh
+        run: ./eng/test-rebuild.ps1 -OutputDirectory artifacts/source-rebuild
+      - name: Exercise API maintenance and blocked release gates
+        run: |
+          dotnet tool restore
+          python3 eng/test-maintenance.py --output artifacts/source-maintenance
+      - name: Verify offline publishing credential argument wiring
+        shell: pwsh
+        run: ./eng/test-publish-token.ps1
+      - name: Retain source provenance reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-rebuild-provenance
+          path: |
+            artifacts/source-rebuild/*.log
+            artifacts/source-rebuild/report.json
+            artifacts/source-rebuild/probes/*.json
+            artifacts/source-maintenance/**
+            artifacts/contracts/publish-token/**/report.json
           if-no-files-found: error

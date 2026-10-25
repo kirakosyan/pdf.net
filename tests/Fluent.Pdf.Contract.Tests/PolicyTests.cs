@@ -9,6 +9,46 @@ namespace Fluent.Pdf.Contract.Tests;
 public sealed class PolicyTests
 {
     [Fact]
+    public void OwnedResourceDetailsSurviveCallerCancellationAndRemainPrivateToOneOperation()
+    {
+        using var cancel=new CancellationTokenSource();OperationCanceledException? first=null;
+        var failure=Assert.Throws<OperationCanceledException>(()=>PdfFont.Run("CancellationDetails","fixture.details",null,cancel.Token,c=>
+        {
+            cancel.Cancel();first=Assert.Throws<OperationCanceledException>(c.Checkpoint);
+            c.PreserveFailureDetail("fixture.owned-resource","original-owned-identity");
+            var repeated=Assert.Throws<OperationCanceledException>(c.Checkpoint);
+            Assert.NotSame(first,repeated);
+            Assert.Equal("original-owned-identity",repeated.Data["fixture.owned-resource"]);
+        }));
+        Assert.NotSame(first,failure);Assert.Equal(cancel.Token,failure.CancellationToken);Assert.Equal("original-owned-identity",failure.Data["fixture.owned-resource"]);
+        var independent=Assert.Throws<OperationCanceledException>(()=>PdfFont.Run("IndependentCancellation","fixture.details",null,cancel.Token,_=>throw new InvalidOperationException()));
+        Assert.NotSame(failure,independent);Assert.False(independent.Data.Contains("fixture.owned-resource"));
+    }
+
+    [Fact]
+    public void ConcurrentCancellationThrowsIndependentExceptionsWithSynchronizedOwnedDetails()
+    {
+        using var cancel = new CancellationTokenSource();
+        var errors = new System.Collections.Concurrent.ConcurrentBag<OperationCanceledException>();
+        var final = Assert.Throws<OperationCanceledException>(() => PdfFont.Run("ConcurrentCancellation", "fixture.details", null, cancel.Token, c =>
+        {
+            c.PreserveFailureDetail("fixture.resource", "original-resource");
+            cancel.Cancel();
+            Parallel.For(0, 64, index =>
+            {
+                c.PreserveFailureDetail("fixture.cleanup", "pending");
+                var error = Assert.Throws<OperationCanceledException>(c.Checkpoint);
+                error.Data["fixture.thread"] = index;
+                errors.Add(error);
+            });
+        }));
+        Assert.Equal(64, errors.Distinct().Count());
+        Assert.All(errors, error => Assert.Equal("original-resource", error.Data["fixture.resource"]));
+        Assert.False(final.Data.Contains("fixture.thread"));
+        Assert.Equal("pending", final.Data["fixture.cleanup"]);
+    }
+
+    [Fact]
     public void FailureDetailsSurviveLatchedRethrowAndOperationCompletion()
     {
         var details = new PdfArchivalValidation(PdfArchivalProfile.A2B, new string('0', 64), true, false, new[] { new PdfArchivalFinding("original.rule", "original.location", "Original bounded finding.") });

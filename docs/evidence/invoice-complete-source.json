@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    "FP-070",
+    "FP-097"
+  ],
+  "issues": [
+    79,
+    100
+  ],
+  "sourceParent": "04855fb4229495e0c962d1b2048eb91b07acd3eb",
+  "workingTreeDirty": true,
+  "sourceProgress": "exact-edition-invoice-rules-and-independent-arithmetic-metadata-readable-paint",
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "c41b184601655244f2b162548947d0a53e15750fd09d96c1dfb0ff502b274f8c",
+      "gitBlob": "093f261c92b391c32cdd1d5d7e5915022d5989a0"
+    },
+    {
+      "path": "docs/api-contract.md",
+      "sha256": "ea8ad5f5cb3396b9cc909f839a4f95edb64e51929d879b535ad943c1e02c1497",
+      "gitBlob": "11e9ed58c25a00e224a3ca4ffba8c077609c8488"
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "6819b080c632cd6f4159f421fbc5ca63fb5eb81d089772352e180fb45b9c34cf",
+      "gitBlob": "a68d690653440f3602acfebc294941f9dfac69b3"
+    },
+    {
+      "path": "docs/invoices.md",
+      "sha256": "ff8ebd735114c9b9d156148774b4d24cae8dd7ad0907d0741c5329ace824bf58",
+      "gitBlob": "fc367ed478c331950c64e74accfb652332748952"
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Compliance.md",
+      "sha256": "0261262cfce3b5f4148a13cd643ed447152ad3b1aca12114f7a165920120dc18",
+      "gitBlob": "2e1787e79a5ee19414075730e6ff0738bb096c5f"
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.md",
+      "sha256": "f003b5a5b94607b06efb96302ba0857c22db19ed05c12a0e83521fc77e1d8b14",
+      "gitBlob": "b5e817646c4ccbc62618ea19a809fbe92e05b7a4"
+    },
+    {
+      "path": "docs/reference/index.md",
+      "sha256": "0193850950d6faf3046f41b5753ccc0d97ab3b61bab1110471b58eb5221d96c4",
+      "gitBlob": "321a263b157b6f8ea95782b49b74eb7c58046d53"
+    },
+    {
+      "path": "docs/requirements/FP-070.md",
+      "sha256": "4a93c41e5f88b2a0002e9d0152a1fc12e73745363b91c4701fd44ddfc883ec68",
+      "gitBlob": "78ec7d703c013e7e13cf19b673c954f6f34703f1"
+    },
+    {
+      "path": "docs/testing.md",
+      "sha256": "7dbf1d958efb3c31b2e30888e845a18c13669cfdaac6cebd5305c9ea74f0c400",
+      "gitBlob": "7fc45bb44f93f42a27a8e8370c4b9bde293a13aa"
+    },
+    {
+      "path": "docs/workflow-acceptance.md",
+      "sha256": "bf00b65ded26cf9028530e0a42feedf8c2df9e9519d66d1398fa05c93399bb50",
+      "gitBlob": "3af74a95abc9ed5dedd9ab1e90d52ca913792ea6"
+    },
+    {
+      "path": "eng/format-checks/README.md",
+      "sha256": "478e082f82b9231af6c72f4f86194d8ba2ba83ffd39d577e699140c9eda8ae36",
+      "gitBlob": "ec0b7de15870aa866a9355a6d1c2973575c73955"
+    },
+    {
+      "path": "eng/new-framework-test-bundle.ps1",
+      "sha256": "d22b6adf9b8d2f29ccb739c558c8b91b46a183901b72bcde4bf715a5e70eb0de",
+      "gitBlob": "b5e9c8d0a48ace49441d7400b1c821e796e9dd64"
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "2bcc8fa3751a6c41895742f594472cf90f9507ddb044c72bcc3511b83f535d60",
+      "gitBlob": "8d3c25bd9a579bf94ff69bd405043d4fb1240611"
+    },
+    {
+      "path": "eng/verify-managed-invoice.py",
+      "sha256": "b6ec4a218c8bc7d3380a4fd367f80bf895dfa3c47c1691634bbe87e3f9aa4322",
+      "gitBlob": "ab3884534de45377b4f3255e83d3def0660bc421"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "0f1d95a31319a31e002da4d525b70501cc3e78cad4b55da5b874ac9ca6318456",
+      "gitBlob": "e8ca9c44797be7b46bea279573de55ae42c96a33"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "41c7f2ecda61369a6e5f186b1f74a5d475a930640da5807a7593931a7af5f81e",
+      "gitBlob": "cf94bb348f3cbbdd0e11193e57f8e5646c3b6356"
+    },
+    {
+      "path": "specs/documentation-snippets.json",
+      "sha256": "92751d17355817962c50c426edcf5de761d26cae64cdc26e3b4c86ce6734aa58",
+      "gitBlob": "5b6bb6b3078c026610f2113ab0abb24ab398abdf"
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "b579ba1e8da30aa5e0fcc888dd9c8772f5ccbb1a69aff11671183e4a1fc95afe",
+      "gitBlob": "71d1ddace00749f5dfa757767e0d974dedc476d4"
+    },
+    {
+      "path": "src/Fluent.Pdf.Compliance/PublicAPI.Unshipped.txt",
+      "sha256": "17c5eb67e1d3417d220730652c054d8109d92ba9d4632c4aa24340bf8c981376",
+      "gitBlob": "d5013683c157d6e518bbcc8a57c63853eb25ea76"
+    },
+    {
+      "path": "src/Fluent.Pdf/Invoices/PdfInvoiceData.cs",
+      "sha256": "c0b3be7f9b13b62e2ee66983f06ae07243e4a4eb45cc0ff08e39309840234add",
+      "gitBlob": "9da0e5e0c00ab07990555529e469ed5ff1bf4892"
+    },
+    {
+      "path": "src/Fluent.Pdf/Invoices/PdfInvoices.cs",
+      "sha256": "a4cd11e15586888879df14d9f972d72aec21bfcc4c8f279f6f270ea57e5b5ad9",
+      "gitBlob": "31fc8413fd2742ad129942a6e9617dace58f0ae5"
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "b5a150542285c21111398805cd40e31a27eb0093fc0daf0b7a2d72f65773e5b5",
+      "gitBlob": "b4c48be357e16fabba2b2651e8defbdedbd48c17"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/InvoiceTests.cs",
+      "sha256": "af1320eb49ed6ed9f6571f9867ab67695d6adafdee21d44cd4279cc3f9bc10f3",
+      "gitBlob": "a3c448dc7d7e8e16495f378f44533e655f3259c7"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ManagedInvoiceProducerTests.cs",
+      "sha256": "9e7a74e4a1fdd12d70909d01529c3889eb2775a48d2cd6433a014545f161ab6f",
+      "gitBlob": "a5c480db866a2d631dee0aaaff2e18f045185d06"
+    },
+    {
+      "path": "eng/InvoiceValidatorHost/InvoiceValidationHost.java",
+      "sha256": "2565cd3f4f497fe7a770aa65980d374348d5cadca45a768a12635c18369bb80c",
+      "gitBlob": "c2529bf43c3ce02365150dbc1f766d9dda188f51"
+    },
+    {
+      "path": "eng/build-invoice-fixture.ps1",
+      "sha256": "d590b1e9f144edaa9049a8019598fe3a59b914c265a4a4c2ea6a28ccc082f2d4",
+      "gitBlob": "c9502162f53c3bbf4e4d5e76daad4d123aa90b73"
+    },
+    {
+      "path": "eng/format-checks/invoice-107.json",
+      "sha256": "1b57a197735d97c067a8858e0c7de7ca0c90b80e5235ef5adf9f7692e3c1cb3f",
+      "gitBlob": "84ee72cf7b7f49be0ab0b29b2c0555ae521e7149"
+    },
+    {
+      "path": "src/Fluent.Pdf.Compliance/FacturX107MinimumReportValidator.cs",
+      "sha256": "7c208088844ae74b30c337db1d37367762f15ff0efbc970eb3260200b1895f06",
+      "gitBlob": "bb6fe73b5cccf3ab66c9544bcbd502d2f1f69c4f"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/InvoiceReportTests.cs",
+      "sha256": "6da9dbb8c07459efa4a1822ecf60747e0b511b5c8f62c0205b63933ff0115823",
+      "gitBlob": "2ccae2d830f1caffc9dea3acfe5fb89563896a3f"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/InvoiceValidationFixture.cs",
+      "sha256": "d4b6a986d31e28fc6cdfff5155c5ee3b1cd37780312e041d971f8fc2b35230fb",
+      "gitBlob": "3da24df75041ecc5860c329b57bb2a616f2ea613"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/InvoiceValidationTests.cs",
+      "sha256": "b93fd30e591d277565920d2faf870fc21164b5221174a45b5daaeeb57f64e9bd",
+      "gitBlob": "50cf68314c6ad39ac300be3b8e1c2ca652931126"
+    }
+  ],
+  "productionQualified": false,
+  "trackingIssuesCompleted": false,
+  "finalPackagesProduced": false,
+  "workflowAcceptanceRuns": 0,
+  "selectedTests": {
+    "profiles": 5,
+    "perProfile": 82,
+    "total": 410,
+    "failed": 0,
+    "skipped": 0
+  },
+  "exactRuleBundle": {
+    "edition": "Factur-X1.0.07-MINIMUM",
+    "sha256": "711f08a9dab037032c8ddafcf0dd2bdb0ee80f7beec152e93a3289f7e49bee77",
+    "assertions": 54,
+    "reports": 11,
+    "unmodifiedAssets": true,
+    "declaredSchemaFilenameAliases": 2
+  },
+  "independentEngines": [
+    "veraPDF1.28.2",
+    "PDFBox3.0.8",
+    "SaxonHE12.10",
+    "pypdf6.10.0",
+    "MuPDF1.26.7",
+    "Poppler"
+  ],
+  "apiComparisons": 45,
+  "packTargetsBlocked": 15,
+  "archive": {
+    "path": "artifacts/invoice-complete-source-evidence.zip",
+    "sha256": "a3becb818743243b08fe89ddc57c18fa9e095905ccaa4432bc68be7a32437501",
+    "bytes": 36661047,
+    "verifiedEntries": 1744
+  },
+  "retainedCorrections": [
+    "Exact MINIMUM rules required explicit legal registration/country and at-most-two-digit header amounts; producer corrected without rounding away BHD source amounts",
+    "Exact upstream schema filenames require two closed aliases to unchanged pinned bytes",
+    "PDFBox float clip conversion required a retained0.0001pt numerical tolerance; invisible and point-scale clipped mutants still reject",
+    "Report/cancellation tests corrected to assert the existing latched binding and caller-cancellation contracts",
+    "Missing seller registration is a business-rule failure; a separate missing required tax-basis element proves XSD rejection"
+  ],
+  "pending": [
+    "Complete invoice/profile/Unicode/graphical corpus and isolated-host/human qualification",
+    "Other required #100 workflow/provider prerequisites and exact final-package acceptance",
+    "Reviewed per-RID distributions, minimum Framework4.7.2 and complete runtime/security qualification",
+    "Mandatory #93 remains user-skipped and release-blocking"
+  ],
+  "hostedCI": "Pending final PR head; retain exact results in PR121 without relabeling earlier evidence"
+}

@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-093",
+  "issue": 97,
+  "sourceCommit": "c75e44c74ef91be279ef7d957426c61e8478de77",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "ea207206497eb2bf6bcb2ab743e5b3dc3bff3f4147e3e6f4cd54301584b637d9",
+      "bytes": 6837
+    },
+    {
+      "path": "docs/evidence/FP-091-source.json",
+      "sha256": "c7b17053f407e6cb6e8fe12815c7536ed702f5947a22e82eb8b9a600f5b11a52",
+      "bytes": 10750
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "8082e7b3c3a377d29f7dcf20603b8d66e2b275a23ce343ac324c8be24e84e781",
+      "bytes": 27133
+    },
+    {
+      "path": "docs/package-reproducibility.md",
+      "sha256": "bd713ad14eb9b12a29a915a8e01924ee04f4ae2ef1cabe78f9b9055fba5430e0",
+      "bytes": 3879
+    },
+    {
+      "path": "docs/reference/requirements.md",
+      "sha256": "43e6cb6e50f2112c70d0c10b80da52d3e02dacf7e15c185b9041bf36db95ea36",
+      "bytes": 15779
+    },
+    {
+      "path": "docs/releasing.md",
+      "sha256": "395dac1649ec59b04489a9399106ace66c5a3e04855fa04bd8e0a3a4a429e411",
+      "bytes": 4603
+    },
+    {
+      "path": "eng/check-api.ps1",
+      "sha256": "6ee1623432bfc59945e6a512b6585ced277dbcbe1f2558776e0cc40b199565f7",
+      "bytes": 2215
+    },
+    {
+      "path": "eng/new-package-manifest.py",
+      "sha256": "4a59f64051227afa14f5740e1c11ba92f253a2eeb5f0a025e303258b56754c15",
+      "bytes": 3740
+    },
+    {
+      "path": "eng/pack.ps1",
+      "sha256": "a8e65ee4a51ca3e3b9e34f8852382e532adea87135dc374bf78ca53db4c0ab70",
+      "bytes": 2290
+    },
+    {
+      "path": "eng/package-audit.py",
+      "sha256": "7c901b20ff7a5070bfb3718c1a19aea3698ec1f6a3e212d84d9057cf23373f52",
+      "bytes": 7598
+    },
+    {
+      "path": "eng/PackageProbe/PackageProbe.csproj",
+      "sha256": "f0c7575c09e6c9a3966e9b5c22211b5d39ef5e9706e8dd330250e7002e6c42b1",
+      "bytes": 179
+    },
+    {
+      "path": "eng/PackageProbe/packages.lock.json",
+      "sha256": "a4364d81a6de2707d66fbced18fbbc926c882ab96e1d1aebbb17e871285b9d75",
+      "bytes": 66
+    },
+    {
+      "path": "eng/PackageProbe/Program.cs",
+      "sha256": "339ffa5ee48b609ab1df50d1647166689d9a9ff925fa3f7d66768a32fc009817",
+      "bytes": 3408
+    },
+    {
+      "path": "eng/test-contracts.ps1",
+      "sha256": "8f569ebe2882f4b5b5df060becd3aee2b89e801a82ab94b5ed6995e3eeb0cce2",
+      "bytes": 9195
+    },
+    {
+      "path": "eng/test-package-audit.py",
+      "sha256": "8b49910b0faa54b99f40f61101420e7399f35893094f2d2e840fad581bb49f25",
+      "bytes": 6150
+    },
+    {
+      "path": "eng/test-package-metadata.ps1",
+      "sha256": "62dbcf1b480ab9fd4e6311b75d45d4bca563b3c322a429c2475587b89ef8d3e3",
+      "bytes": 3493
+    },
+    {
+      "path": "eng/test-rebuild.ps1",
+      "sha256": "9c618e3a98ecf730dd120ac8e880c66d4da19e467b1510a60aba52005d37cfa5",
+      "bytes": 3411
+    },
+    {
+      "path": "eng/test-release-block.ps1",
+      "sha256": "45adb0819cd6fcd2f034572162aa73ff7ab9a9402082e1dd654bed8642076697",
+      "bytes": 1606
+    },
+    {
+      "path": "Fluent.Pdf.slnx",
+      "sha256": "3f122436e7e4f327cd4ae2632aca38a3fc953cbd935243122010a5274e3ae965",
+      "bytes": 2215
+    },
+    {
+      "path": "README.md",
+      "sha256": "16db6d295fd54bd19b8d605ea2931202f51a8c6c244465ffac054d161190be36",
+      "bytes": 22162
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "60224639611638864550bba0ab0078a4448104b3866a9cb0795fef11b1c1afc7",
+      "bytes": 221699
+    },
+    {
+      "path": "src/Directory.Build.targets",
+      "sha256": "cd77eda2dc69a5913685ae64ce2ab58fa4b7863912e61b90816370c0b4220971",
+      "bytes": 2304
+    },
+    {
+      "path": "src/Fluent.Pdf/Fluent.Pdf.csproj",
+      "sha256": "b997a600a00af9eac8ec9e722ca619096d1d499bc131f5206304d4261c8b1445",
+      "bytes": 2116
+    },
+    {
+      "path": "src/Fluent.Pdf.Applications/Fluent.Pdf.Applications.csproj",
+      "sha256": "5c3745e834e4c4404b1dfeb706280f03ea21350261f1668a9b4c631fc4797d20",
+      "bytes": 808
+    },
+    {
+      "path": "src/Fluent.Pdf.Automation/Fluent.Pdf.Automation.csproj",
+      "sha256": "bdbff7c6aec6f8524ced4d22e1ad6e172440ab319ca88694c7f4fb12c5d5516f",
+      "bytes": 806
+    },
+    {
+      "path": "src/Fluent.Pdf.Codecs/Fluent.Pdf.Codecs.csproj",
+      "sha256": "4dd8f16b3b4c7b6d47890efd9ac4853e8bb5de3a295506997e8e80466be19790",
+      "bytes": 870
+    },
+    {
+      "path": "src/Fluent.Pdf.Compliance/Fluent.Pdf.Compliance.csproj",
+      "sha256": "27075cf78060bbb95867b8984feea13e616c57c42a72429da33c8e13381c3b6c",
+      "bytes": 790
+    },
+    {
+      "path": "src/Fluent.Pdf.Cryptography/Fluent.Pdf.Cryptography.csproj",
+      "sha256": "092c4dd1460d917092dbaa87c5184678e3055bcc7c542f36b882595a31b6ae3b",
+      "bytes": 1029
+    },
+    {
+      "path": "src/Fluent.Pdf.Fonts/Fluent.Pdf.Fonts.csproj",
+      "sha256": "b006767b0b28c509db8dec4a41c7183d692b10dff934ac9807b2329f8a5d7655",
+      "bytes": 956
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/Fluent.Pdf.Formats.csproj",
+      "sha256": "97389772d55611d120102fea918095741a423d505dbcbfa2a782e2ec55fe140b",
+      "bytes": 844
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj",
+      "sha256": "3c285dae587077ec98f16704d204366a4ed312cc00e297c75148a7566b84f2a7",
+      "bytes": 855
+    },
+    {
+      "path": "src/Fluent.Pdf.Intelligence/Fluent.Pdf.Intelligence.csproj",
+      "sha256": "0b3a2e90b59bd3b763117e123b5ff161b3941a5b429253030b2e6fe8a248319f",
+      "bytes": 808
+    },
+    {
+      "path": "src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj",
+      "sha256": "d5fe52897f829e08884db500d2154790124b3a687e2bc2bb9233a9330336ecc2",
+      "bytes": 1311
+    },
+    {
+      "path": "src/Fluent.Pdf.Rendering/Fluent.Pdf.Rendering.csproj",
+      "sha256": "3a6ffe456e024baefa36afe9141fb9d4c550513362d4b93d4813856ed3983328",
+      "bytes": 873
+    },
+    {
+      "path": "src/Fluent.Pdf.Text/Fluent.Pdf.Text.csproj",
+      "sha256": "7c51fe1e16f50258d20894eef867011f4a0063478ca02021e5a225aac12c4ab3",
+      "bytes": 868
+    },
+    {
+      "path": "src/Fluent.Pdf.Word/Fluent.Pdf.Word.csproj",
+      "sha256": "4a43a8973d51c600d81e6d6a4eae1c3d8b55e361f8b370501923e188f87f63e2",
+      "bytes": 963
+    },
+    {
+      "path": "src/Fluent.Pdf.Workers/Fluent.Pdf.Workers.csproj",
+      "sha256": "81d52e72ee33f9044c9b5eb8302d61fb77178c9866198360d24141892e06de66",
+      "bytes": 858
+    }
+  ],
+  "validation": {
+    "freshSolutionBuilds": 2,
+    "warnings": 0,
+    "errors": 0,
+    "identicalDllPdbXmlFiles": 180,
+    "assemblyPdbSourceLinkProbes": 60,
+    "corruptionAndStaleReportNegatives": 3,
+    "archiveBoundaryTestGroups": 8,
+    "evaluatedPackageProjects": 15,
+    "noticeAndMetadataFilesPerProject": 62,
+    "actualPackTargetsBlocked": 15,
+    "apiComparisons": 45
+  },
+  "commands": [
+    "dotnet restore Fluent.Pdf.slnx --locked-mode",
+    "pwsh -NoProfile -File eng/test-rebuild.ps1 -OutputDirectory artifacts/fp093-rebuild",
+    "dotnet build eng/PackageProbe/PackageProbe.csproj -c Release --no-restore -o artifacts/fp093-probe-final",
+    "Re-probe all 60 rebuilt binaries with final tool and three negative metadata inputs",
+    "pwsh -NoProfile -File eng/test-package-metadata.ps1 -OutputDirectory artifacts/fp093-metadata-final",
+    "pwsh -NoProfile -File eng/check-api.ps1 -BuildArtifactsDirectory artifacts/fp093-rebuild/first",
+    "python eng/test-package-audit.py",
+    "pwsh -NoProfile -File eng/test-release-block.ps1",
+    "dotnet eng/Documentation/bin/Release/net10.0/Documentation.dll . artifacts/fp093-reference-check --check",
+    "pwsh -NoProfile -File eng/validate-spec.ps1"
+  ],
+  "environment": {
+    "os": "Windows 11 Pro build 26300 x64",
+    "sdk": "10.0.402",
+    "probeRuntime": "10.0.13",
+    "compiledTfms": [
+      "net472",
+      "netstandard2.0",
+      "net8.0",
+      "net10.0"
+    ]
+  },
+  "archive": {
+    "path": "artifacts/fp093-source-evidence.zip",
+    "sha256": "d25240ca702b6eb65d4c0f7612bf3dc9f43383aa9e01815a52db8761e43a02ef",
+    "bytes": 14110024,
+    "verifiedEntries": 600
+  },
+  "limitations": [
+    "Source rebuilds used two fresh output/object trees in one development checkout; not independent clean-checkout or package rebuild qualification",
+    "Portable PDB commit maps were inspected offline; dirty source is not vouched for by a remote SourceLink URL",
+    "Final probe revision was rebuilt separately and all 60 probes repeated; source project whitespace was normalized after the two SDK builds",
+    "Archive positives use synthetic in-memory ZIP bytes, not SDK candidate packages; positive packing and clean manifest generation remain unexecuted while qualification is blocked",
+    "All new hosted source/rebuild CI, exact final packages, complete minimum-runtime/provider/native/supply-chain and full production qualification remain required"
+  ],
+  "hostedRebuildCorrection": {
+    "failedHead": "572cbfb870609d75577b5a7af62e6182ef71847a",
+    "run": 40084888344,
+    "job": 120845684411,
+    "cause": "On Linux File.Delete throws DirectoryNotFoundException for an absent parent; both source builds completed before the first probe failed",
+    "fix": "Create the report parent directory before removing any stale report",
+    "localRegression": "artifacts/fp093-directory-fix/19860b80544b482099c1304b8207854f/nested/report.json",
+    "localRegressionSha256": "17c29e27a5508521bbcfcfc9cccf819524cd83697a0744a43bace7fa7cf46610",
+    "failedLogSha256": "19e6755c0ef124d3627fd42e9cd3938d2e7f09bfc82d9968b97e2fe362cb28e3",
+    "hostedRevalidation": {
+      "head": "8291fc0ddc548d4c8a3924c9aea705375691e6cd",
+      "run": 40085584042,
+      "job": 120847719239,
+      "conclusion": "success",
+      "scope": "Managed source rebuild provenance; other complete source workflow results are recorded separately"
+    }
+  }
+}

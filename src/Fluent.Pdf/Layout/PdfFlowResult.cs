@@ -39,6 +39,8 @@ public sealed class PdfFlowLine
     public bool EndsHardBreak { get; }
     /// <summary>Gets whether explicit diagnosed overflow clipping applies.</summary>
     public bool IsClipped { get; }
+    /// <summary>Gets whether visual shaping appends a discretionary hyphen omitted from the unchanged logical Text and ActualText.</summary>
+    public bool HasDiscretionaryHyphen => ShapedText.Unicode.Text.Length == Text.Length + 1 && ShapedText.Unicode.Text.EndsWith("-", StringComparison.Ordinal);
 }
 
 /// <summary>An immutable float placement in displayed physical point coordinates.</summary>

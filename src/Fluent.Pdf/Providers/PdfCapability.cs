@@ -40,5 +40,7 @@ public enum PdfCapability
     /// <summary>Explicit printer selection, one spool submission and job observations.</summary>
     PrintDocument = 17,
     /// <summary>Explicit optional multi-frame raster-file decoding.</summary>
-    DecodeRasterDocuments = 18
+    DecodeRasterDocuments = 18,
+    /// <summary>Explicit independent barcode decoding and document symbol workflows.</summary>
+    Barcodes = 19
 }

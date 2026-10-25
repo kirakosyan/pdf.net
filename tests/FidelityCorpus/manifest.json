@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "corpusVersion": "original-fidelity-1",
+  "productionQualified": false,
+  "fixtures": [
+    {
+      "id": "glyphs",
+      "file": "glyphs.pdf",
+      "sha256": "36f9292531625a124b8ffb2e41d2a78610568f4b1633624877598ddbdde5b093",
+      "license": "MIT",
+      "provenance": "Original hand-authored PDF syntax and glyph outlines in eng/create-fidelity-corpus.py; no SDK output used",
+      "expected": {
+        "pages": 1,
+        "text": [
+          "ABΩ"
+        ],
+        "mediaBox": [
+          0,
+          0,
+          144,
+          100
+        ],
+        "rotation": 0,
+        "formValues": {},
+        "structureRoles": [],
+        "signed": false,
+        "textOrigin": [
+          12,
+          70
+        ],
+        "textAdvance": 24,
+        "displayText": [
+          "ABΩ"
+        ]
+      },
+      "visual": {
+        "dpi": 144,
+        "minimumSsim": 1.0,
+        "maximumChangedPixels": 0,
+        "masks": [],
+        "toleranceReview": null
+      }
+    },
+    {
+      "id": "graphics",
+      "file": "graphics.pdf",
+      "sha256": "0372568ecb8254c6c9008d4dcc62f6c9d1657c8c481e882930c68fb0b4f1fe59",
+      "license": "MIT",
+      "provenance": "Original hand-authored PDF syntax and glyph outlines in eng/create-fidelity-corpus.py; no SDK output used",
+      "expected": {
+        "pages": 1,
+        "text": [
+          "ABΩ"
+        ],
+        "mediaBox": [
+          0,
+          0,
+          144,
+          100
+        ],
+        "rotation": 0,
+        "formValues": {},
+        "structureRoles": [],
+        "signed": false,
+        "textOrigin": [
+          12,
+          70
+        ],
+        "textAdvance": 24,
+        "displayText": [
+          "ABΩ"
+        ]
+      },
+      "visual": {
+        "dpi": 144,
+        "minimumSsim": 1.0,
+        "maximumChangedPixels": 0,
+        "masks": [],
+        "toleranceReview": null
+      }
+    },
+    {
+      "id": "structure",
+      "file": "structure.pdf",
+      "sha256": "38491f205a10988e4cd7bba3f51ce7b5061bd47d0a19444063a42b6eb9a176fc",
+      "license": "MIT",
+      "provenance": "Original hand-authored PDF syntax and glyph outlines in eng/create-fidelity-corpus.py; no SDK output used",
+      "expected": {
+        "pages": 1,
+        "text": [
+          "ABΩ"
+        ],
+        "mediaBox": [
+          0,
+          0,
+          144,
+          100
+        ],
+        "rotation": 0,
+        "formValues": {},
+        "structureRoles": [
+          "/P"
+        ],
+        "signed": false,
+        "textOrigin": [
+          12,
+          70
+        ],
+        "textAdvance": 24,
+        "displayText": [
+          "ABΩ"
+        ]
+      },
+      "visual": {
+        "dpi": 144,
+        "minimumSsim": 1.0,
+        "maximumChangedPixels": 0,
+        "masks": [],
+        "toleranceReview": null
+      }
+    },
+    {
+      "id": "forms",
+      "file": "forms.pdf",
+      "sha256": "4b31efd954ac529d2053bac19b52ad4c6eacae12ebe5d4e5aac0b0037ccd110a",
+      "license": "MIT",
+      "provenance": "Original hand-authored PDF syntax and glyph outlines in eng/create-fidelity-corpus.py; no SDK output used",
+      "expected": {
+        "pages": 1,
+        "text": [
+          "ABΩ"
+        ],
+        "mediaBox": [
+          0,
+          0,
+          144,
+          100
+        ],
+        "rotation": 0,
+        "formValues": {
+          "OriginalField": "AB"
+        },
+        "structureRoles": [],
+        "signed": false,
+        "textOrigin": [
+          12,
+          70
+        ],
+        "textAdvance": 24,
+        "displayText": [
+          "ABΩ\nAB"
+        ]
+      },
+      "visual": {
+        "dpi": 144,
+        "minimumSsim": 1.0,
+        "maximumChangedPixels": 0,
+        "masks": [],
+        "toleranceReview": null
+      }
+    }
+  ],
+  "pending": [
+    "Multilingual shaping and real document layouts",
+    "All form/annotation/structure profiles",
+    "Signed and historical-revision inputs",
+    "Independent standards conformance and accessibility review",
+    "Complete rendering/provider/platform corpus"
+  ]
+}

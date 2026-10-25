@@ -7,15 +7,24 @@ namespace Fluent.Pdf;
 internal sealed class PdfInputJson
 {
     private readonly string _source;
-    private readonly PdfInputParser _owner;
+    private readonly PdfOperationContext _context;
+    private readonly Action _node;
     private int _at;
     internal PdfInputJson(string source, PdfInputParser owner)
     {
         _source = source;
-        _owner = owner;
+        _context = owner.Context;
+        _node = owner.Node;
     }
 
-    private PdfOperationContext C => _owner.Context;
+    internal PdfInputJson(string source, PdfOperationContext context)
+    {
+        _source = source;
+        _context = context;
+        _node = () => { context.Checkpoint(); context.Consume(PdfResourceKind.Objects, 1); context.Consume(PdfResourceKind.ExpandedBytes, 128); };
+    }
+
+    private PdfOperationContext C => _context;
 
     private PdfException Error() => PdfInputConversion.Error(C, "Json", "The JSON syntax or scalar extent is invalid.");
     internal object? Read()
@@ -56,7 +65,7 @@ internal sealed class PdfInputJson
 
     private object? Value()
     {
-        _owner.Node();
+        _node();
         using var depth = C.EnterScope(PdfResourceKind.Depth);
         Space();
         if (_at == _source.Length)

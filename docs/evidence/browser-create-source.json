@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    "FP-046",
+    "FP-110",
+    "FP-002"
+  ],
+  "issues": [
+    34,
+    110,
+    2
+  ],
+  "sourceParent": "3ee8328e8e8998076c3445efca64dc2bd7645e23",
+  "workingTreeDirty": true,
+  "sourceProgress": "acknowledged-immutable-create-start-cleanup-and-preserved-cancellation-details",
+  "productionQualified": false,
+  "trackingIssuesCompleted": false,
+  "sourceFiles": [
+    {
+      "path": "docs/browser-container.md",
+      "sha256": "1975a47d8a1658563ef1e7331a3f531d26b0072a3b3cea26b99e28cf7d2f14ba",
+      "gitBlob": "bd788c757e53a601af2f747ee5b4884db8a3e093"
+    },
+    {
+      "path": "docs/implementation-plan.md",
+      "sha256": "192dc28facc430192efb2dc157be7b9de9da667dcb03b3262fb5083396f3b471",
+      "gitBlob": "314069e8a463bb3a69406dd59bbd6fb4f121fccd"
+    },
+    {
+      "path": "docs/operation-policies.md",
+      "sha256": "ba1b06a3514bd5c1b0ec6686c8ea1fe9eafb40360b166f857b83324a3b20cb0a",
+      "gitBlob": "150d7732b7bade63fa2c4ae5df6af8844f0ac8fd"
+    },
+    {
+      "path": "docs/reference/Fluent.Pdf.Html.md",
+      "sha256": "d658092afdcf0ff6ab249b9a6987555b2355d141efee9c55452b4b99d2c2c456",
+      "gitBlob": "53544d327a42725256965f093e81bf12f5db2e5e"
+    },
+    {
+      "path": "eng/HtmlContainerProbe/Program.cs",
+      "sha256": "db55f4b679a045f05690721eea433d29398822c1765c97229631c8451191fc2b",
+      "gitBlob": "821bef89a1d189839190a3e71245c84f13417ae7"
+    },
+    {
+      "path": "eng/run-browser-container-fixture.ps1",
+      "sha256": "6c84b95c99458a494e62e82bb9f6253fe3996794bb4cb639120723d58ce9b90e",
+      "gitBlob": "dcc3e0fd067d7e7c73d8ad75a882d5c2a1856489"
+    },
+    {
+      "path": "specs/requirements.json",
+      "sha256": "458eb69b9c71a026a2a2e6cc9312e4e311119a41479692ce87a072e457ad9584",
+      "gitBlob": "d491bd996ea11793dcf6666a01fe64f0645a8633"
+    },
+    {
+      "path": "src/Fluent.Pdf.Html/ChromiumContainerHost.cs",
+      "sha256": "266887cf5a608f485ba64377cdef30475273bf52cb86c20cfc5554ccabb51581",
+      "gitBlob": "c384cc0f90388a034311ad229da77c2e484f5a6e"
+    },
+    {
+      "path": "src/Fluent.Pdf/Policies/PdfOperationContext.cs",
+      "sha256": "b6256efd91c5ac29a20c217512b44aed7e1746d3db3fafc25414b4da415bed16",
+      "gitBlob": "6d581d4ceb08c46effbb752ff66fd01613b88028"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ChromiumContainerTests.cs",
+      "sha256": "cea24b5586e814c4f01c940e279dc31305249d47b00b4e6006ddcb91e0144fd8",
+      "gitBlob": "39722ec274351e6c0ae749e6fb9f3665f39ad21d"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/PolicyTests.cs",
+      "sha256": "c323e2e0a5610537b12843a17446ac2f2c014700d7747d17a35b8c872d4edd72",
+      "gitBlob": "e14292ee3995e0f1fb8f3ff5f9512afe792ae4dc"
+    },
+    {
+      "path": "tests/native/browser-cli-fixture.c",
+      "sha256": "e9dfb88769d172b5c2954b1b3838a1d6ce178ca488375fe51fcc91c1f0d009c1",
+      "gitBlob": "a329de446b894eeb6b194ebc8b02eeac7856944b"
+    }
+  ],
+  "selectedTests": {
+    "profiles": 5,
+    "perProfile": 278,
+    "total": 1390,
+    "failed": 0,
+    "skipped": 0
+  },
+  "actualBrowserObservations": [
+    {
+      "purpose": "actual-private-container-browser-original-source-observations",
+      "productionQualified": false,
+      "runtime": ".NET 8.0.32",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "imageId": "sha256:2b70c5544eb202fecf598b4f0074b9438c75c2f35d544cd1fff0bfa3670a9ea9",
+      "version": "155.0.8059.79",
+      "revision": "@a49e2e3d4addfd84e765b52afe230bedb81096db",
+      "coreSha256": "82e5ca932b6d859b3838054593aae432d622e107ef832ec78a749eb21a0f8a96",
+      "htmlSha256": "83772e238ee60f00acae1aa6f950104d72b4a080465814d10fc4775e0946f7a5",
+      "capturePromiseTimeoutObserved": true,
+      "capturePromiseCancellationObserved": true,
+      "cancellationMilliseconds": 180.43190000000004,
+      "pdfSha256": "26f47752be4aae599cde3945e726b942b03bc823d7e242c0ad2c5269c0473558"
+    },
+    {
+      "purpose": "actual-private-container-browser-original-source-observations",
+      "productionQualified": false,
+      "runtime": ".NET 10.0.13",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "imageId": "sha256:2b70c5544eb202fecf598b4f0074b9438c75c2f35d544cd1fff0bfa3670a9ea9",
+      "version": "155.0.8059.79",
+      "revision": "@a49e2e3d4addfd84e765b52afe230bedb81096db",
+      "coreSha256": "a52e2890adb91cb7a5345523096dee8eae79120429ee7320b868ef8d5bf79e06",
+      "htmlSha256": "78fea1067e11c2c80057918e46b2681964783f54b800fa4e65daed0826ddcfe2",
+      "capturePromiseTimeoutObserved": true,
+      "capturePromiseCancellationObserved": true,
+      "cancellationMilliseconds": 195.89550000000008,
+      "pdfSha256": "7303c3875f23415984caf86e11842c1a177f52b6f3d17ac997d2e1fc56135f0e"
+    }
+  ],
+  "actualBeforeBootstrapCancellation": [
+    {
+      "purpose": "actual-acknowledged-create-before-bootstrap-cancellation",
+      "runtime": ".NET 8.0.32",
+      "os": "Microsoft Windows 10.0.26300",
+      "imageId": "sha256:799fab9ee5554e0ca55e738ac4316fe99d34dd8944026c825c9f4c4dee4032ed",
+      "coreSha256": "82e5ca932b6d859b3838054593aae432d622e107ef832ec78a749eb21a0f8a96",
+      "htmlSha256": "83772e238ee60f00acae1aa6f950104d72b4a080465814d10fc4775e0946f7a5",
+      "cleanupMilliseconds": 206.61309999999958,
+      "unconfirmedCreation": false,
+      "productionQualified": false
+    },
+    {
+      "purpose": "actual-acknowledged-create-before-bootstrap-cancellation",
+      "runtime": ".NET 10.0.13",
+      "os": "Microsoft Windows 10.0.26300",
+      "imageId": "sha256:799fab9ee5554e0ca55e738ac4316fe99d34dd8944026c825c9f4c4dee4032ed",
+      "coreSha256": "a52e2890adb91cb7a5345523096dee8eae79120429ee7320b868ef8d5bf79e06",
+      "htmlSha256": "78fea1067e11c2c80057918e46b2681964783f54b800fa4e65daed0826ddcfe2",
+      "cleanupMilliseconds": 203.42129999999997,
+      "unconfirmedCreation": false,
+      "productionQualified": false
+    }
+  ],
+  "daemonStartAndAbsenceProofs": [
+    {
+      "knownAbsentAfterExit": true,
+      "startEventSha256": "f929b87893f5b993634c59c9251281b23c670cc0378f88f77d81f5a5641011fa",
+      "containerId": "401ca38d8a24c843ed1245706518c56b4d0579ef3e8138404abcc562138060e5",
+      "productionQualified": false
+    },
+    {
+      "knownAbsentAfterExit": true,
+      "startEventSha256": "9bed71dec9a44908e09830abbafce5e516f023cf4cbdeeedd370b0c7aac2c11d",
+      "containerId": "1e32f999cfdcb387794253376424f1a4e0e2e3610b5b285cbce8ed787ae911fc",
+      "productionQualified": false
+    }
+  ],
+  "apiComparisons": 45,
+  "packTargetsBlocked": 15,
+  "archive": {
+    "path": "artifacts/browser-create-source-evidence.zip",
+    "sha256": "20bdb31221ea8ec91fee6b4888d24e9ab37b49bbefc8fa35ff4fd72d1891b58b",
+    "bytes": 1026807,
+    "verifiedEntries": 290
+  },
+  "retainedCorrections": [
+    "Original process-peer prefix length corrected to strlen of its exact literal",
+    "Phase observer test uses async/await to join its owned watcher",
+    "Unknown-create cancellation test exposed loss of owned identities through replacement cancellation exceptions; context now preserves one exception per operation"
+  ],
+  "pending": [
+    "Unacknowledged daemon create requests can still leave a stopped owned container and require explicit reconciliation",
+    "Complete syscall/kernel/daemon/security/host/distribution and cross-RID/minimum-runtime qualification",
+    "Complete dynamic/compositor/corpus/fuzz/concurrency/endurance/fidelity and exact final-package consumers",
+    "Mandatory issue93 remains user-skipped and release-blocking"
+  ],
+  "hostedCI": "Pending exact final PR head; retain current results separately without relabeling historical archives"
+}

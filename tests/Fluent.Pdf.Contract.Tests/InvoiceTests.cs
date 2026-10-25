@@ -7,7 +7,7 @@ using Xunit;
 namespace Fluent.Pdf.Contract.Tests;
 public sealed class InvoiceTests
 {
-    private static PdfInvoiceData Data(string currency = "EUR", MidpointRounding rounding = MidpointRounding.AwayFromZero) => new(PdfInvoiceProfile.FacturX107Minimum, "INV-1", "Seller & Co", "Buyer <One>", new DateTimeOffset(2026, 10, 20, 0, 0, 0, TimeSpan.Zero), currency, rounding, new[] { new PdfInvoiceLine("Original item", 1, 1.005m, 20), new PdfInvoiceLine("Second item", 2, 3m, 5) });
+    private static PdfInvoiceData Data(string currency = "EUR", MidpointRounding rounding = MidpointRounding.AwayFromZero) => new PdfInvoiceData(PdfInvoiceProfile.FacturX107Minimum, "INV-1", "Seller & Co", "Buyer <One>", new DateTimeOffset(2026, 10, 20, 0, 0, 0, TimeSpan.Zero), currency, rounding, new[] { new PdfInvoiceLine("Original item", 1, 1.005m, 20), new PdfInvoiceLine("Second item", 2, 3m, 5) }).WithSellerRegistration("Original-seller-01", "FR");
     private static string Hash(byte[] bytes)
     {
         using var hash = SHA256.Create();
@@ -106,7 +106,7 @@ public sealed class InvoiceTests
     public void TaxRoundsOnceOnEachRateCategory(MidpointRounding rounding, string expected)
     {
         var lines = Enumerable.Range(0, 3).Select(_ => new PdfInvoiceLine("Small", 1, .10m, 15)).Concat(new[] { new PdfInvoiceLine("Other", 1, .20m, 5) });
-        var data = new PdfInvoiceData(PdfInvoiceProfile.FacturX107Minimum, "INV-1", "Seller", "Buyer", new DateTimeOffset(2026, 10, 23, 0, 0, 0, TimeSpan.Zero), "EUR", rounding, lines);
+        var data = new PdfInvoiceData(PdfInvoiceProfile.FacturX107Minimum, "INV-1", "Seller", "Buyer", new DateTimeOffset(2026, 10, 23, 0, 0, 0, TimeSpan.Zero), "EUR", rounding, lines).WithSellerRegistration("Original-seller-01", "FR");
         var category = Assert.Single(data.TaxCategories, c => c.TaxRate == 15);
         Assert.Equal(.30m, category.TaxableAmount);
         Assert.Equal(decimal.Parse(expected, System.Globalization.CultureInfo.InvariantCulture), category.TaxAmount);

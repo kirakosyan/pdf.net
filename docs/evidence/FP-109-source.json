@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-109",
+  "issue": 109,
+  "sourceCommit": "767484ce351c9500b5be248f075d71a2b39b13fd",
+  "workingTreeDirty": true,
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "src/Fluent.Pdf.Formats/PdfTasks.cs",
+      "sha256": "6feb8ccb5eb1f0a609dbf12f340007174f85cf340aa6e9ad76a32f439a8bfc4c"
+    },
+    {
+      "path": "src/Fluent.Pdf.Formats/PublicAPI.Unshipped.txt",
+      "sha256": "66c4967219fc3cfd069e6c326e588d38aecc6c3dbf21d5f6da16827dfa25fd0f"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/TaskFacadeTests.cs",
+      "sha256": "0ba90d18fa714455cab7910044aa6ead671414c2eea0c30f31de1fc38cf4996d"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "7ec8cf0511f308bde01bfdac49b056fe6234a868aeebff92ae1bee99093cc534"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "77adf994480d91a6f99098738d4cdc88cc232b697ab962ffb2e9695a8cdcc347"
+    },
+    {
+      "path": "examples/TaskFacades.FSharp/Example.fsx",
+      "sha256": "32f989ffbdf62c4a3d9052d469d71e200473e6aa1a035e127ef2f35d794fcced"
+    },
+    {
+      "path": "docs/task-facades.md",
+      "sha256": "a0b2018c7b47423f6c559072703f1768f272ee104b578e6411f21afccd6e1918"
+    },
+    {
+      "path": "eng/test-documentation.ps1",
+      "sha256": "ce5c27b13046f24238faa4c53d810fd06cd51cf63c3000d71964c6a73ddfa7d5"
+    }
+  ],
+  "validation": {
+    "selectedSourceTests": {
+      "purpose": "selected-source-task-facade-policy-and-runtime-tests",
+      "lanes": [
+        {
+          "sha256": "59AF314CC8299C37E8AC483247C911B3AF1BC37313C0B49711081AF22A3179D9",
+          "total": 56,
+          "runtime": "artifacts/fp109-lanes-verified/net8/runtime.json",
+          "passed": 56,
+          "report": "artifacts/fp109-lanes-verified/net8/selected.trx",
+          "runtimeSha256": "009706B96F17E673A771126FF88DCEBFE7D4B57986527629F6A7101A134FD7E6",
+          "failed": 0,
+          "skipped": 0,
+          "lane": "win-x64-net8.0"
+        },
+        {
+          "sha256": "4CC8CC00D2B250679B4A095A0D8D82B72D2C8BB361B9E5AFC2988DEF1A6DC970",
+          "total": 56,
+          "runtime": "artifacts/fp109-lanes-verified/net10/runtime.json",
+          "passed": 56,
+          "report": "artifacts/fp109-lanes-verified/net10/selected.trx",
+          "runtimeSha256": "59CDA557D38C685DC5629F9CDA727E96769BEE3E7342E1F0049C12389FF0D5D3",
+          "failed": 0,
+          "skipped": 0,
+          "lane": "win-x64-net10.0"
+        },
+        {
+          "sha256": "523BF501BCB95AF67839F718181C1689A064DF501EE22523E699F898BCD4F4C3",
+          "total": 56,
+          "runtime": "artifacts/fp109-lanes-verified/framework-x64/runtime.json",
+          "passed": 56,
+          "report": "artifacts/fp109-lanes-verified/framework-x64/selected.trx",
+          "runtimeSha256": "898733367FDE52096E59F50FDDCEC8CAFEA03799B91242F1B0396D56496F1803",
+          "failed": 0,
+          "skipped": 0,
+          "lane": "win-x64-framework-current"
+        },
+        {
+          "sha256": "04D5E74973632BBAB340F37BC600CE01479B11C8890BE3634DDF0272BC88102E",
+          "total": 56,
+          "runtime": "artifacts/fp109-lanes-verified/framework-x86/runtime.json",
+          "passed": 56,
+          "report": "artifacts/fp109-lanes-verified/framework-x86/selected.trx",
+          "runtimeSha256": "4D0E7238D47957D4A7123327FB74A242E9DE62859C53A982B7A6E306C96EAE20",
+          "failed": 0,
+          "skipped": 0,
+          "lane": "win-x86-framework-current"
+        },
+        {
+          "sha256": "93BA4EF39CF289E63408832DA85020859029B731D3BF64CE8410CD28F4FA1518",
+          "total": 56,
+          "runtime": "artifacts/fp109-lanes-verified/fallback/runtime.json",
+          "passed": 56,
+          "report": "artifacts/fp109-lanes-verified/fallback/selected.trx",
+          "runtimeSha256": "F2C790C3DBA51BCA6A2E5CDD9F9DA4806D8DF5FC13B716A0E6E33A681057B67D",
+          "failed": 0,
+          "skipped": 0,
+          "lane": "win-x64-netstandard2.0-fallback"
+        }
+      ],
+      "productionQualified": false,
+      "workingTreeDirty": true,
+      "sourceCommit": "767484ce351c9500b5be248f075d71a2b39b13fd"
+    },
+    "newApiDeclarations": 16,
+    "apiComparisons": 45,
+    "fullBuild": "zero warnings/errors",
+    "packageTargetsBlocked": 15,
+    "independentArtifactObservations": 41,
+    "readers": "pypdf6.10.0, Poppler, Pillow12.3.0",
+    "languageConsumers": "C#/VB across five source profiles; F# actual net10 FSI; no final packages"
+  },
+  "archive": {
+    "path": "artifacts/fp109-source-evidence.zip",
+    "sha256": "e022fb3895c71d33dc4672f36d0aada598535053e5721df7c34a52fc04ed3a36",
+    "bytes": 448351,
+    "verifiedEntries": 116
+  },
+  "limitations": [
+    "Facades add no capabilities missing from underlying engines/providers",
+    "Generation combines layout, composition and writing under one context; other methods delegate to their existing single operations; Fill returns a caller-owned document requiring separate save",
+    "Caller-owned mutable services need separate instances or thread-safety",
+    "Installed Framework4.8 is not actual minimum4.7.2",
+    "Initial independent-reader assertion assumed one page for a two-page form fixture; corrected expected fixture page count, no SDK change"
+  ],
+  "pending": [
+    "Full underlying engine/provider/runtime/fuzz/endurance and exact final-package qualification",
+    "Final hosted CI"
+  ]
+}

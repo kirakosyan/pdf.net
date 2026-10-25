@@ -1,14 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;netstandard2.0;net8.0;net10.0</TargetFrameworks>
-    <AssemblyName>Fluent.Pdf.Ocr</AssemblyName><Version>1.0.0</Version>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile><IsPackable>false</IsPackable>
+    <AssemblyName>Fluent.Pdf.Ocr</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../Fluent.Pdf/Fluent.Pdf.csproj" />
     <ProjectReference Include="../Fluent.Pdf.Workers/Fluent.Pdf.Workers.csproj" />
+    <PackageReference Include="ZXing.Net" Version="[0.16.11]" />
     <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.3.4" PrivateAssets="all" />
     <AdditionalFiles Include="PublicAPI.Shipped.txt" /><AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+    <None Include="../../third-party/barcodes/Apache-2.0.txt" Link="notices/barcodes/Apache-2.0.txt" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="notices/barcodes/" />
+    <None Include="../../third-party/barcodes/components.json" Link="notices/barcodes/components.json" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="notices/barcodes/" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'"><PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" /></ItemGroup>
 </Project>

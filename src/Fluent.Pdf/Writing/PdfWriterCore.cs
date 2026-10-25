@@ -210,8 +210,8 @@ internal static class PdfWriterCore
         if (sourceExtensions.Kind != PdfValueKind.Null || options.Extensions.Count > 0)
             requiredVersion = Math.Max(requiredVersion, extensionFloor);
         foreach (var item in objects.Values)
-            Inspect(item.Value, context, true, ref signature, ref requiredVersion, ResolveFeature);
-        Inspect(trailer, context, false, ref signature, ref requiredVersion, ResolveFeature);
+            Inspect(item.Value, context, true, ref signature, ref requiredVersion, ResolveFeature, validatedArchivalDowngrade && version == 17);
+        Inspect(trailer, context, false, ref signature, ref requiredVersion, ResolveFeature, validatedArchivalDowngrade && version == 17);
         if (version < requiredVersion)
         {
             if (options.Version != null)
@@ -474,7 +474,7 @@ internal static class PdfWriterCore
         return value;
     }
 
-    private static void Inspect(PdfValue value, PdfOperationContext context, bool topLevel, ref bool signature, ref int requiredVersion, Func<PdfValue, PdfValue> resolve)
+    private static void Inspect(PdfValue value, PdfOperationContext context, bool topLevel, ref bool signature, ref int requiredVersion, Func<PdfValue, PdfValue> resolve, bool archivalAssociatedFiles)
     {
         context.Consume(PdfResourceKind.Objects, 1);
         using var scope = context.EnterScope(PdfResourceKind.Depth);
@@ -484,16 +484,16 @@ internal static class PdfWriterCore
         {
             requiredVersion = Math.Max(requiredVersion, PdfFeatureVersion.Array(value, resolve));
             foreach (var item in value.Items)
-                Inspect(item, context, false, ref signature, ref requiredVersion, resolve);
+                Inspect(item, context, false, ref signature, ref requiredVersion, resolve, archivalAssociatedFiles);
         }
 
         if (value.Kind == PdfValueKind.Dictionary || value.Kind == PdfValueKind.Stream)
         {
-            requiredVersion = Math.Max(requiredVersion, PdfFeatureVersion.Dictionary(value, resolve));
+            requiredVersion = Math.Max(requiredVersion, PdfFeatureVersion.Dictionary(value, resolve, archivalAssociatedFiles));
             if (value.Entries.ContainsKey("ByteRange") && value.Entries.ContainsKey("Contents"))
                 signature = true;
             foreach (var item in value.Entries.Values)
-                Inspect(item, context, false, ref signature, ref requiredVersion, resolve);
+                Inspect(item, context, false, ref signature, ref requiredVersion, resolve, archivalAssociatedFiles);
         }
     }
 

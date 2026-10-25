@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup><TargetFrameworks>net8.0;net10.0</TargetFrameworks><IsPackable>false</IsPackable></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Fluent.Pdf.Applications/Fluent.Pdf.Applications.csproj" />
+    <ProjectReference Include="../../src/Fluent.Pdf.Rendering/Fluent.Pdf.Rendering.csproj" />
+    <Compile Include="../Fluent.Pdf.ViewSample.Shared/ViewerSampleSession.cs" Link="ViewerSampleSession.cs" />
+    <None Include="../../tests/Fluent.Pdf.Contract.Tests/Fixtures/Automation/original.pdf" Link="original.pdf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="wwwroot/**/*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

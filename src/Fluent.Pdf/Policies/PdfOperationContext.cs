@@ -23,7 +23,10 @@ public sealed class PdfOperationContext
     private readonly Stopwatch _clock = Stopwatch.StartNew();
     private readonly Func<TimeSpan> _elapsed;
     private PdfException? _fatal;
+    private readonly Dictionary<string, string> _failureDetails = new(StringComparer.Ordinal);
     private bool _active = true;
+    private readonly Guid _observationSpan;
+    private bool _observationFinished;
     private bool _unicodeResidentCharged;
     internal void ChargeUnicodeResident(long bytes)
     {
@@ -49,6 +52,7 @@ public sealed class PdfOperationContext
         _sharedToken = _linked.Token;
         _deadlineRegistration = new DeadlineScheduler.Registration(this);
         ScheduleDeadline();
+        _observationSpan = policy.Observations?.Start(capability) ?? Guid.Empty;
     }
 
     /// <summary>Gets the operation name assigned by the SDK.</summary>
@@ -59,6 +63,17 @@ public sealed class PdfOperationContext
     public PdfCapability Capability { get; }
     /// <summary>Gets the immutable policy.</summary>
     public PdfOperationPolicy Policy { get; }
+
+    /// <summary>Reports explicit numeric work units to an opt-in observation session. No content, phase name or callback is accepted. This remains a cooperative cancellation/deadline checkpoint when telemetry is disabled.</summary>
+    public void ReportProgress(long completed, long total)
+    {
+        if (completed < 0 || total < 1 || completed > total) throw new ArgumentOutOfRangeException(nameof(completed));
+        lock (_gate)
+        {
+            CheckCore();
+            Policy.Observations?.Progress(_observationSpan, Capability, _elapsed(), completed, total);
+        }
+    }
 
     /// <summary>Gets cancellation combining the caller token and the operation deadline.</summary>
     public CancellationToken CancellationToken => _sharedToken;
@@ -263,7 +278,7 @@ public sealed class PdfOperationContext
             lock (_gate)
             {
                 if (_fatal == null)
-                    _fatal = new PdfException(new PdfDiagnostic("Limit.ElapsedTime", "The operation deadline elapsed.", Capability, ProviderId, operation: Operation));
+                    _fatal = CreateFailure(new PdfDiagnostic("Limit.ElapsedTime", "The operation deadline elapsed.", Capability, ProviderId, operation: Operation));
                 _fatal.Data["Fluent.Pdf.CancellationCallbackFailure"] = failure;
             }
         }
@@ -348,6 +363,20 @@ public sealed class PdfOperationContext
 
     /// <summary>Records a diagnostic with SDK-bound provenance. Strict losses and error severity latch a fatal failure.</summary>
     public void Report(PdfDiagnostic diagnostic) => ReportCore(diagnostic, null, null);
+    // Cleanup can run after cancellation. Keep bounded operation-owned details
+    // under the context lock, never in a shared cancellation exception instance.
+    internal void PreserveFailureDetail(string key, string value)
+    {
+        if (string.IsNullOrEmpty(key) || key.Length > 128 || value == null || value.Length > 256)
+            throw new ArgumentException("Bounded owned failure details are required.");
+        lock (_gate)
+        {
+            if (_failureDetails.Count == 16 && !_failureDetails.ContainsKey(key))
+                throw new InvalidOperationException("The owned failure-detail inventory is full.");
+            _failureDetails[key] = value;
+            if (_fatal != null) _fatal.Data[key] = value;
+        }
+    }
     // Attach bounded operation-owned details before publishing/throwing a latched failure on every runtime.
     internal void ReportFailure(PdfDiagnostic diagnostic, string dataKey, object details)
     {
@@ -374,7 +403,7 @@ public sealed class PdfOperationContext
             _diagnostics.Add(bound);
             if (severity == PdfDiagnosticSeverity.Error)
             {
-                var failure = new PdfException(bound);
+                var failure = CreateFailure(bound);
                 if (dataKey != null)
                     failure.Data[dataKey] = details;
                 _fatal = failure;
@@ -496,7 +525,13 @@ public sealed class PdfOperationContext
             var resources = new PdfResourceUsage[_used.Length];
             for (int i = 0; i < resources.Length; i++)
                 resources[i] = new PdfResourceUsage((PdfResourceKind)i, _used[i], _peaks[i]);
-            return new PdfOperationReport(Operation, ProviderId, succeeded, _elapsed(), _diagnostics.ToArray(), resources, _fatal?.Diagnostic);
+            var report = new PdfOperationReport(Operation, ProviderId, succeeded, _elapsed(), _diagnostics.ToArray(), resources, _fatal?.Diagnostic);
+            if (!_observationFinished)
+            {
+                _observationFinished = true;
+                Policy.Observations?.Finish(_observationSpan, Capability, report, _callerToken.IsCancellationRequested);
+            }
+            return report;
         }
     }
 
@@ -518,7 +553,14 @@ public sealed class PdfOperationContext
             throw new ObjectDisposedException(nameof(PdfOperationContext));
         if (_fatal is not null)
             throw _fatal;
-        _callerToken.ThrowIfCancellationRequested();
+        // Each throw owns its stack trace and Data dictionary. Snapshot only the
+        // synchronized operation-owned details into this thread's exception.
+        if (_callerToken.IsCancellationRequested)
+        {
+            var cancellation = new OperationCanceledException(_callerToken);
+            foreach (var detail in _failureDetails) cancellation.Data[detail.Key] = detail.Value;
+            throw cancellation;
+        }
         TimeSpan elapsed = _elapsed();
         if (elapsed >= Policy.Limits.MaximumElapsedTime || _deadline.IsCancellationRequested)
             Fail("Limit.ElapsedTime", "The operation deadline elapsed.");
@@ -538,8 +580,15 @@ public sealed class PdfOperationContext
 
     private void Fail(string code, string message)
     {
-        _fatal = new PdfException(new PdfDiagnostic(code, message, Capability, ProviderId, operation: Operation));
+        _fatal = CreateFailure(new PdfDiagnostic(code, message, Capability, ProviderId, operation: Operation));
         throw _fatal;
+    }
+
+    private PdfException CreateFailure(PdfDiagnostic diagnostic)
+    {
+        var failure = new PdfException(diagnostic);
+        foreach (var detail in _failureDetails) failure.Data[detail.Key] = detail.Value;
+        return failure;
     }
 
     private static void ValidateResource(PdfResourceKind resource)
@@ -570,7 +619,7 @@ public sealed class PdfOperationContext
                 _owner = null;
                 // Expiry cannot be hidden by disposing the scope before the next provider checkpoint.
                 if (owner._active && owner._fatal == null && (owner._elapsed() >= Deadline || owner._deadline.IsCancellationRequested))
-                    owner._fatal = new PdfException(new PdfDiagnostic("Limit.ElapsedTime", "The operation phase deadline elapsed.", owner.Capability, owner.ProviderId, operation: owner.Operation));
+                    owner._fatal = owner.CreateFailure(new PdfDiagnostic("Limit.ElapsedTime", "The operation phase deadline elapsed.", owner.Capability, owner.ProviderId, operation: owner.Operation));
                 owner._timeLimits.Remove(this);
                 owner.ScheduleDeadline();
             }

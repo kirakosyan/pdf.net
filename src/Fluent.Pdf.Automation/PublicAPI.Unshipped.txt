@@ -1,0 +1,31 @@
+#nullable enable
+Fluent.Pdf.Automation.IPdfAutomation
+Fluent.Pdf.Automation.IPdfAutomation.Cancel() -> void
+Fluent.Pdf.Automation.IPdfAutomation.Close() -> void
+Fluent.Pdf.Automation.IPdfAutomation.Configure(int maximumInputBytes, int maximumExpandedBytes, int maximumOutputBytes, int maximumObjects, int timeoutMilliseconds) -> void
+Fluent.Pdf.Automation.IPdfAutomation.ExtractText(int pageIndex, int view, bool includeInvisibleText, int maximumCharacters) -> string!
+Fluent.Pdf.Automation.IPdfAutomation.GetFieldNames() -> object![]!
+Fluent.Pdf.Automation.IPdfAutomation.LastDiagnosticCode.get -> string!
+Fluent.Pdf.Automation.IPdfAutomation.OpenBytes(object! document) -> void
+Fluent.Pdf.Automation.IPdfAutomation.OpenFile(string! path) -> void
+Fluent.Pdf.Automation.IPdfAutomation.PageCount.get -> int
+Fluent.Pdf.Automation.IPdfAutomation.RuntimeIdentity.get -> string!
+Fluent.Pdf.Automation.IPdfAutomation.SaveBytes(bool allowSignatureInvalidation) -> byte[]!
+Fluent.Pdf.Automation.IPdfAutomation.SaveFile(string! path, bool allowSignatureInvalidation) -> void
+Fluent.Pdf.Automation.IPdfAutomation.SelectPages(string! expression, bool allowSignatureInvalidation) -> void
+Fluent.Pdf.Automation.PdfAutomation
+Fluent.Pdf.Automation.PdfAutomation.Cancel() -> void
+Fluent.Pdf.Automation.PdfAutomation.Close() -> void
+Fluent.Pdf.Automation.PdfAutomation.Configure(int maximumInputBytes, int maximumExpandedBytes, int maximumOutputBytes, int maximumObjects, int timeoutMilliseconds) -> void
+Fluent.Pdf.Automation.PdfAutomation.Dispose() -> void
+Fluent.Pdf.Automation.PdfAutomation.ExtractText(int pageIndex, int view, bool includeInvisibleText, int maximumCharacters) -> string!
+Fluent.Pdf.Automation.PdfAutomation.GetFieldNames() -> object![]!
+Fluent.Pdf.Automation.PdfAutomation.LastDiagnosticCode.get -> string!
+Fluent.Pdf.Automation.PdfAutomation.OpenBytes(object! document) -> void
+Fluent.Pdf.Automation.PdfAutomation.OpenFile(string! path) -> void
+Fluent.Pdf.Automation.PdfAutomation.PageCount.get -> int
+Fluent.Pdf.Automation.PdfAutomation.PdfAutomation() -> void
+Fluent.Pdf.Automation.PdfAutomation.RuntimeIdentity.get -> string!
+Fluent.Pdf.Automation.PdfAutomation.SaveBytes(bool allowSignatureInvalidation) -> byte[]!
+Fluent.Pdf.Automation.PdfAutomation.SaveFile(string! path, bool allowSignatureInvalidation) -> void
+Fluent.Pdf.Automation.PdfAutomation.SelectPages(string! expression, bool allowSignatureInvalidation) -> void

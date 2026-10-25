@@ -1,0 +1,25 @@
+<Project>
+  <!-- Shared notices, version coupling and production gate. Defaults live in Directory.Build.props. -->
+  <ItemGroup>
+    <None Remove="$(FluentPdfRoot)/README.md;$(FluentPdfRoot)/LICENSE" />
+    <None Include="$(FluentPdfRoot)/README.md;$(FluentPdfRoot)/LICENSE" Pack="true" PackagePath="/" />
+    <None Update="$(FluentPdfRoot)/third-party/**/*" Pack="false" />
+    <!-- Retain the complete notice inventory, including separately identified analysis tools. -->
+  </ItemGroup>
+  <Target Name="IncludeSdkNotices" BeforeTargets="_GetPackageFiles">
+    <ItemGroup>
+      <_FluentPdfNotice Include="$(FluentPdfRoot)/third-party/**/*" />
+      <Content Include="@(_FluentPdfNotice)" Condition="'%(_FluentPdfNotice.Extension)' == '.txt' Or '%(_FluentPdfNotice.Extension)' == '.md' Or '%(_FluentPdfNotice.Extension)' == '.json' Or $([System.String]::Copy('%(_FluentPdfNotice.Filename)%(_FluentPdfNotice.Extension)').EndsWith('-LICENSE'))" Pack="true" PackagePath="notices/%(RecursiveDir)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="RequireProductionQualification" BeforeTargets="GenerateNuspec">
+    <Exec Command="pwsh -NoProfile -File &quot;$(FluentPdfRoot)/eng/assert-production-ready.ps1&quot; -Stage BeforePack -EvidenceDirectory &quot;$(FluentPdfEvidenceDirectory)&quot;" />
+  </Target>
+  <Target Name="CoupleSdkPackageVersions" AfterTargets="_GetProjectReferenceVersions">
+    <ItemGroup>
+      <_ProjectReferencesWithVersions Update="@(_ProjectReferencesWithVersions)">
+        <ProjectVersion>[$(PackageVersion)]</ProjectVersion>
+      </_ProjectReferencesWithVersions>
+    </ItemGroup>
+  </Target>
+</Project>

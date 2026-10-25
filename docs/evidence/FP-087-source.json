@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-087",
+  "issue": 91,
+  "sourceCommit": "2669cc5363f321d17b6a8da963bc114f51e908d3",
+  "workingTreeDirty": true,
+  "commitBinding": "Development source run; checkout file hashes bind uncommitted additions to the recorded base commit. This is not clean production qualification.",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "src/Fluent.Pdf/Processing/PdfProcessingJob.cs",
+      "bytes": 4259,
+      "sha256": "d0ccf05a2b3d682355c50b8055acdae535bb610c6dc92cf1e131c0a94927082c"
+    },
+    {
+      "path": "src/Fluent.Pdf/Processing/PdfProcessingOptions.cs",
+      "bytes": 2356,
+      "sha256": "0c355d294c914ad5c83f555ef1724dcbfb76ae1af69196918352180226b81bb6"
+    },
+    {
+      "path": "src/Fluent.Pdf/Processing/PdfProcessingPool.cs",
+      "bytes": 9306,
+      "sha256": "08b2a66b53950431c99dda6e324f2e6d61d653d97e1ad2a01815ae1088c01dcc"
+    },
+    {
+      "path": "src/Fluent.Pdf/PdfDocument.cs",
+      "bytes": 20096,
+      "sha256": "0352e0d024b1625f3056c45849e4ba8aa42a0cb76e457c0decd81a973802ba18"
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "bytes": 341336,
+      "sha256": "8ed3e51bd188c171f09ef06bd291de749c07cac2bc5526b1e3322c0df4b31e7e"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ProcessingTests.cs",
+      "bytes": 15624,
+      "sha256": "3a55137df5f97b8930619ab23fd293271e1498e5bb53eccae2ca7cecd336a6b7"
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/NativeWorkerTests.cs",
+      "bytes": 19863,
+      "sha256": "241505fc2ae444430d3a657d2fece809e8a791dcf59b92647bd5b359f3f5b01f"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "bytes": 32544,
+      "sha256": "9088d29027b013f0d2b55ddd0a215206677616b43410bc431fd50de875720965"
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "bytes": 38360,
+      "sha256": "eda287eb0a129fa32c67f0231d11cf0ef92cf5715413f9630e9b688590a951e9"
+    }
+  ],
+  "focused": {
+    "report": {
+      "path": "artifacts/contracts/fp087/processing-net10-final.trx",
+      "bytes": 30140,
+      "sha256": "5edef8e4a9ead91152c96549c4e3ba35cc3618bcbfe825cf62b033b8d05e0bd7"
+    },
+    "counters": {
+      "total": 17,
+      "executed": 17,
+      "passed": 17,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0
+    }
+  },
+  "apiComparisons": {
+    "report": {
+      "path": "artifacts/contracts/api/comparisons.json",
+      "bytes": 12482,
+      "sha256": "5f30fd80aafd51415a344e54382fb28b19139490f682774daaa1bf09dc0283ba"
+    },
+    "count": 45
+  },
+  "independent": [
+    {
+      "path": "artifacts/contracts/fp087/independent-readers.json",
+      "bytes": 835,
+      "sha256": "767098c7d5eb2a59a572e00c06451eef61d561391e28088719f9f2740edec2e1"
+    },
+    {
+      "path": "artifacts/contracts/fp087/poppler-version.txt",
+      "bytes": 146,
+      "sha256": "87898596910485018467eb9bd8d46a7e4090654ba0e9cd1a5a9e9a0f5d367d1f"
+    },
+    {
+      "path": "artifacts/contracts/fp087/poppler-csharp.txt",
+      "bytes": 325,
+      "sha256": "762d85e2e461685ebe368d38da3da823834284ce36a9cd17c8f52660ebb9de9d"
+    },
+    {
+      "path": "artifacts/contracts/fp087/poppler-vb.txt",
+      "bytes": 325,
+      "sha256": "762d85e2e461685ebe368d38da3da823834284ce36a9cd17c8f52660ebb9de9d"
+    }
+  ],
+  "nativePrerequisites": {
+    "path": "artifacts/fp087-tools/prerequisites.json",
+    "bytes": 123086,
+    "sha256": "ec2045ddf7991a84da491650efe7c04950a256165787219b0995012d8bf94492"
+  },
+  "sourceWorkload": "64 independent workers, 200 original page write/read/geometry checks each; ten 32-job cancellation race batches; supervised native cancellation and staging cleanup within five seconds. These bounded source cases are not eight-hour endurance or complete provider qualification.",
+  "pending": [
+    "Eight-hour mixed workload with reviewed memory and handle growth envelopes",
+    "Full browser, native engine, OCR/model, security and independent fidelity qualification",
+    "New source on all six modern OS/architecture hosts, actual minimum Framework 4.7.2 x64/x86 and complete exact-package consumers",
+    "Qualified host provenance and complete mandatory production gates"
+  ],
+  "localSourceSuites": [
+    {
+      "lane": "net8",
+      "libraryTfm": ".NETCoreApp,Version=v8.0",
+      "runtime": ".NET 8.0.32",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "total": 1750,
+      "passed": 1750,
+      "failed": 0,
+      "skipped": 0,
+      "report": "net8/contracts.trx",
+      "reportSha256": "3149CFDA2148ACC6DF5FCEE956DE3488E5FEEE67BBAF3B69E5695035C29CC0EC",
+      "assemblySha256": "96B3C29FED7D90DEC88D11D3D5E6C6D6187B4198742662C605A5AE091441C0E5",
+      "runtimeIdentityEvidence": "net8/runtime-identity.json",
+      "runtimeIdentityEvidenceSha256": "5E924A25C4C5485B3F6026053261F5435F5007253F17E7B2D936BA5DC76D04DA"
+    },
+    {
+      "lane": "net10",
+      "libraryTfm": ".NETCoreApp,Version=v10.0",
+      "runtime": ".NET 10.0.13",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "total": 1750,
+      "passed": 1750,
+      "failed": 0,
+      "skipped": 0,
+      "report": "net10/contracts.trx",
+      "reportSha256": "34D347635373C77F3265C07DEDE03CDAC4EA1B5A82908CB63A5EAB37712B725A",
+      "assemblySha256": "700452568A9ABBA71A187AE3438A5769DDD213EB94654B5258884CB07474C9B9",
+      "runtimeIdentityEvidence": "net10/runtime-identity.json",
+      "runtimeIdentityEvidenceSha256": "8FC416F276845863D7213644429DBFB02F8174530EE615160FB7A40587E59E0F"
+    },
+    {
+      "lane": "framework-current-x64",
+      "libraryTfm": ".NETFramework,Version=v4.7.2",
+      "runtime": ".NET Framework 4.8.10008.0",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "total": 1750,
+      "passed": 1750,
+      "failed": 0,
+      "skipped": 0,
+      "report": "framework-current-x64/contracts.trx",
+      "reportSha256": "1BBF5E27EC9B770B71CB5E649974D529CFC0FDCC2E01B84B207123CB1254E2C8",
+      "assemblySha256": "14BDC423F577CE78483C234F354B4640FB7DE8681EA74BDB638CFF2383DE87BF",
+      "runtimeIdentityEvidence": "framework-current-x64/runtime-identity.json",
+      "runtimeIdentityEvidenceSha256": "20F964CBBF5D5A679E36DD6860F3F56985A139DCB31FC366DAA7320006F8A447"
+    },
+    {
+      "lane": "framework-current-x86",
+      "libraryTfm": ".NETFramework,Version=v4.7.2",
+      "runtime": ".NET Framework 4.8.10008.0",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X86",
+      "total": 1750,
+      "passed": 1750,
+      "failed": 0,
+      "skipped": 0,
+      "report": "framework-current-x86/contracts.trx",
+      "reportSha256": "2185A4BE5EA6F2A0C079161C61CE30339EE6816E705574824DDB413EB0CB7898",
+      "assemblySha256": "14BDC423F577CE78483C234F354B4640FB7DE8681EA74BDB638CFF2383DE87BF",
+      "runtimeIdentityEvidence": "framework-current-x86/runtime-identity.json",
+      "runtimeIdentityEvidenceSha256": "7A2FF4EB721C01C7158E00DA45FC62FC76FEAEAF3B08E8D5DA206435188C5F06"
+    },
+    {
+      "lane": "netstandard-fallback",
+      "libraryTfm": ".NETStandard,Version=v2.0",
+      "runtime": ".NET 10.0.13",
+      "os": "Microsoft Windows 10.0.26300",
+      "architecture": "X64",
+      "total": 1750,
+      "passed": 1750,
+      "failed": 0,
+      "skipped": 0,
+      "report": "netstandard-fallback/contracts.trx",
+      "reportSha256": "464DFE00AAFCD86C4FC8CD3A9BC79754F6E0343F8B0DE0C25F65A71244D769CF",
+      "assemblySha256": "9BCDA866BA20348E106C5210B34A840C47DDCE0AEFA79B42A2A1D5E28D4260B7",
+      "runtimeIdentityEvidence": "netstandard-fallback/runtime-identity.json",
+      "runtimeIdentityEvidenceSha256": "F083E9E58882EF46A2E537CE8664259ECD052388E8AB1E5DD9B2C2EA5C30ACCB"
+    }
+  ],
+  "aggregateReport": {
+    "path": "artifacts/contracts/source-contract-evidence.json",
+    "bytes": 156051,
+    "sha256": "ba8b07c2a691337127f899ee28040172e57403627ef2c81d999bf244be21d7e8"
+  },
+  "incomingFinalCi": {
+    "commit": "2669cc5363f321d17b6a8da963bc114f51e908d3",
+    "workflow_runs": [
+      {
+        "id": 40029635420,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 26,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635420/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635420/logs",
+        "workflow_id": 394222479
+      },
+      {
+        "id": 40029635270,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 22,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635270/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635270/logs",
+        "workflow_id": 394289497
+      },
+      {
+        "id": 40029635440,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 17,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635440/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635440/logs",
+        "workflow_id": 394350116
+      },
+      {
+        "id": 40029635267,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 14,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635267/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635267/logs",
+        "workflow_id": 394397543
+      },
+      {
+        "id": 40029635310,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 168,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635310/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40029635310/logs",
+        "workflow_id": 387959272
+      }
+    ]
+  },
+  "validationLogs": [
+    {
+      "path": "artifacts/fp087-solution-build.log",
+      "bytes": 11500,
+      "sha256": "5489c90fbd8dd972efa53e747567fc0cfbde2f880ad4964b206e279acc20c9e8"
+    },
+    {
+      "path": "artifacts/fp087-api.log",
+      "bytes": 2970,
+      "sha256": "1e23156c92886f1eef3ea1c5b4e10e0db67cc8ef932d3c3c75e500d36bea8207"
+    },
+    {
+      "path": "artifacts/fp087-spec.log",
+      "bytes": 105,
+      "sha256": "7f2fe94ca1875f8e38dca977e6c7993ecc7715adfa494cba3ae08cc318217efa"
+    },
+    {
+      "path": "artifacts/fp087-release-block.log",
+      "bytes": 141,
+      "sha256": "d453dabcb20a93d4e3665fdd980b0b3159f0bd770027d6c9a0fe5fc5939b30ff"
+    }
+  ],
+  "archive": {
+    "path": "artifacts/fp087-source-evidence.zip",
+    "bytes": 2536553,
+    "sha256": "825fa61d13c0e010c02d50cf0217786e98050f767542c3824562229325facb8e"
+  },
+  "finalHostedSourceCi": {
+    "commit": "de946449f266fe4446ccdc84a650c8e621331221",
+    "workflow_runs": [
+      {
+        "id": 40033103043,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 27,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103043/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103043/logs",
+        "workflow_id": 394222479
+      },
+      {
+        "id": 40033103033,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 23,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103033/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103033/logs",
+        "workflow_id": 394289497
+      },
+      {
+        "id": 40033102924,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 18,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033102924/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033102924/logs",
+        "workflow_id": 394350116
+      },
+      {
+        "id": 40033103076,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 15,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103076/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103076/logs",
+        "workflow_id": 394397543
+      },
+      {
+        "id": 40033103252,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 169,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103252/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40033103252/logs",
+        "workflow_id": 387959272
+      }
+    ]
+  }
+}

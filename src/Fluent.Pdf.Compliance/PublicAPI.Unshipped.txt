@@ -9,3 +9,10 @@ Fluent.Pdf.Compliance.VeraPdfReportValidator
 Fluent.Pdf.Compliance.VeraPdfReportValidator.Descriptor.get -> Fluent.Pdf.PdfProviderDescriptor!
 Fluent.Pdf.Compliance.VeraPdfReportValidator.Validate(Fluent.Pdf.PdfArchivalProfile profile, System.IO.Stream! input, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfArchivalValidation!
 Fluent.Pdf.Compliance.VeraPdfReportValidator.VeraPdfReportValidator(Fluent.Pdf.Compliance.PdfArchivalValidationRunner! runner) -> void
+Fluent.Pdf.Compliance.PdfInvoiceValidationRunner
+Fluent.Pdf.Compliance.FacturX107MinimumReportValidator
+Fluent.Pdf.Compliance.FacturX107MinimumReportValidator.FacturX107MinimumReportValidator(Fluent.Pdf.Compliance.PdfInvoiceValidationRunner! runner) -> void
+Fluent.Pdf.Compliance.FacturX107MinimumReportValidator.EngineId.get -> string!
+Fluent.Pdf.Compliance.FacturX107MinimumReportValidator.Supports(Fluent.Pdf.PdfInvoiceProfile profile) -> bool
+Fluent.Pdf.Compliance.FacturX107MinimumReportValidator.Validate(System.IO.Stream! pdf, System.IO.Stream! xml, Fluent.Pdf.PdfInvoiceData! invoice, string! requestSha256, Fluent.Pdf.PdfOperationContext! context) -> Fluent.Pdf.PdfInvoiceValidation!
+const Fluent.Pdf.Compliance.FacturX107MinimumReportValidator.RuleBundleSha256 = "711f08a9dab037032c8ddafcf0dd2bdb0ee80f7beec152e93a3289f7e49bee77" -> string!

@@ -4,7 +4,7 @@
 
 Publish only when the complete SDK production scope is ready. Target first stable version: 1.0.0. No placeholder, alpha/beta or package-name reservation publication. Keep readiness false until the exact source and package evidence satisfies every applicable gate.
 
-Current state: specification, FP-001 source contracts and FP-002 policies/budgets; production qualification remains incomplete. Candidate packing and NuGet publication stay blocked. No publishing policy is activated by these implementations.
+Current state: the [sequential source queue](implementation-plan.md) includes SDK implementations, source consumers and evidence, with explicit incomplete profiles and prerequisite blockers. Complete production qualification remains incomplete. Candidate packing and NuGet publication stay blocked. See the [release checkpoint](release-qualification-status.md); no publishing policy is activated by source implementations.
 
 ## Package identity and ownership
 
@@ -13,6 +13,8 @@ Candidate core ID: Fluent.Pdf. Gallery and flat-container endpoints returned 404
 Use NuGet Trusted Publishing, repository kirakosyan/pdf.net, workflow publish.yml and GitHub environment nuget restricted to main. Scope policies to the exact package IDs being released, without unrelated wildcards or unlist/relist permissions. Set NUGET_USER to the authorized account. Never paste or use a stored long-lived API key.
 
 ## Release sequence
+
+Apply the [compatibility and maintenance policy](maintenance.md) for version selection, lifecycle review, migration notes and servicing/rollback records. A dependency update invalidates affected package qualification even when the API is unchanged. No public action is part of the offline source maintenance drill.
 
 1. Fast-forward the active branch and verify the exact release commit is on current main. Reconcile all required issues, implementation state, API baselines and capability/version documentation.
 2. Run complete source qualification on actual target runtimes, including actual Framework 4.7.2 x86/x64, modern Windows/Linux/macOS x64/ARM64 and fallback consumers.
@@ -28,6 +30,6 @@ Use NuGet Trusted Publishing, repository kirakosyan/pdf.net, workflow publish.ym
 
 The checked-in publish workflow is fail-closed. It accepts only a stable main-branch tag, a previous successful qualification workflow run and a named artifact containing final packages and release-evidence.json. It verifies the current checked-in requirement/readiness state and exact evidence before granting OIDC to the publishing job.
 
-The first implementation of full qualification runners and SourceLink/package inspection remains mandatory FP-086/093/094 work. Foundation CI is not a qualification workflow. Never point publication at a foundation artifact or manually change statuses to bypass that distinction.
+The [package provenance tooling](package-reproducibility.md) checks shared metadata, source rebuild bytes and embedded SourceLink, and provides an offline final-candidate inspector. Its source checks do not qualify final packages. Full qualification runners and actual package inspection remain mandatory FP-086/093/094 work. Foundation CI is not a qualification workflow. Never point publication at a foundation artifact or manually change statuses to bypass that distinction.
 
 Official references: [NuGet Trusted Publishing](https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing), [package publishing](https://learn.microsoft.com/en-us/nuget/nuget-org/publish-a-package), [repository signatures](https://learn.microsoft.com/en-us/nuget/reference/signed-packages-reference).

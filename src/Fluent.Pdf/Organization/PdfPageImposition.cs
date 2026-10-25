@@ -4,13 +4,20 @@ namespace Fluent.Pdf;
 /// <summary>Managed vector N-up, booklet and tiled page imposition with explicit sheet geometry.</summary>
 public static class PdfPageImposition
 {
+    /// <summary>Fits each displayed source page onto one sheet without clipping or distortion. Uniform scale stays within explicit positive limits; a page requiring smaller scale rejects the whole operation. Existing source crop semantics are retained.</summary>
+    public static PdfDocument FitToPaper(PdfDocumentSnapshot source, PdfPageSize sheet, double minimumScale, double maximumScale = 1, PdfMargins? margins = null, PdfOrganizationOptions? options = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default)
+    {
+        PdfGraphicsNumbers.Finite(minimumScale); PdfGraphicsNumbers.Finite(maximumScale);
+        if (minimumScale <= 0 || maximumScale < minimumScale) throw new ArgumentOutOfRangeException(nameof(minimumScale));
+        return Run(source, sheet, 1, 1, margins, 0, PdfCanvasFit.Contain, false, false, 0, options, policy, cancellationToken, minimumScale, maximumScale);
+    }
     /// <summary>Fits source pages into physical row-major sheet cells. Logical structure remains in source reading order.</summary>
     public static PdfDocument NUp(PdfDocumentSnapshot source, PdfPageSize sheet, int columns = 2, int rows = 1, PdfMargins? margins = null, double gap = 0, PdfCanvasFit fit = PdfCanvasFit.Contain, PdfOrganizationOptions? options = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default) => Run(source, sheet, columns, rows, margins, gap, fit, false, false, 0, options, policy, cancellationToken);
     /// <summary>Pads to a multiple of four and places outer/inner front and back pairs for a left-bound booklet.</summary>
     public static PdfDocument Booklet(PdfDocumentSnapshot source, PdfPageSize sheet, PdfMargins? margins = null, double gap = 0, PdfOrganizationOptions? options = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default) => Run(source, sheet, 2, 1, margins, gap, PdfCanvasFit.Contain, true, false, 0, options, policy, cancellationToken);
     /// <summary>Tiles displayed source pages at physical size with explicit overlap. Interactive or structured duplicates require an additional copy profile.</summary>
     public static PdfDocument Tile(PdfDocumentSnapshot source, PdfPageSize sheet, PdfMargins? margins = null, double overlap = 0, PdfOrganizationOptions? options = null, PdfOperationPolicy? policy = null, CancellationToken cancellationToken = default) => Run(source, sheet, 1, 1, margins, 0, PdfCanvasFit.Contain, false, true, overlap, options, policy, cancellationToken);
-    private static PdfDocument Run(PdfDocumentSnapshot source, PdfPageSize sheet, int columns, int rows, PdfMargins? margins, double gap, PdfCanvasFit fit, bool booklet, bool tile, double overlap, PdfOrganizationOptions? options, PdfOperationPolicy? policy, CancellationToken token)
+    private static PdfDocument Run(PdfDocumentSnapshot source, PdfPageSize sheet, int columns, int rows, PdfMargins? margins, double gap, PdfCanvasFit fit, bool booklet, bool tile, double overlap, PdfOrganizationOptions? options, PdfOperationPolicy? policy, CancellationToken token, double minimumScale = 0, double maximumScale = double.MaxValue)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
@@ -96,6 +103,11 @@ public static class PdfPageImposition
                         double sx = w / b.Width, sy = h / b.Height;
                         if (fit != PdfCanvasFit.Stretch)
                             sx = sy = fit == PdfCanvasFit.Cover ? Math.Max(sx, sy) : Math.Min(sx, sy);
+                        if (minimumScale > 0)
+                        {
+                            sx = sy = Math.Min(sx, maximumScale);
+                            if (sx < minimumScale) throw PdfWriterCore.Error(context, "Layout.MinimumScale", "A page cannot fit the requested paper within the caller's scale floor.");
+                        }
                         if (sx <= 0 || sy <= 0 || double.IsInfinity(sx) || double.IsInfinity(sy))
                             throw PdfWriterCore.Error(context, "Organization.TransformRange", "The requested fit cannot retain positive finite scale factors.");
                         double left = x + (w - b.Width * sx) / 2, top = y + (h - b.Height * sy) / 2;

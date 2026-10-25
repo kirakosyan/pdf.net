@@ -1,0 +1,63 @@
+%PDF-1.7
+% Original MIT fidelity fixture
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 1 /Kids [3 0 R] >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 144 100] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 72  >>
+stream
+BT /F1 16 Tf 1 0 0 1 12 70 Tm (ABC) Tj ET
+q 1 0 0 rg 12 12 40 20 re f Q
+
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type3 /FontBBox [0 0 500 700] /FontMatrix [0.001 0 0 0.001 0 0] /CharProcs << /gA 6 0 R /gB 7 0 R /gC 8 0 R >> /Encoding << /Type /Encoding /Differences [65 /gA /gB /gC] >> /FirstChar 65 /LastChar 67 /Widths [500 500 500] /Resources <<>> /ToUnicode 9 0 R >>
+endobj
+6 0 obj
+<< /Length 73  >>
+stream
+500 0 0 0 500 700 d1 40 0 m 250 700 l 460 0 l 380 0 l 250 460 l 120 0 l f
+endstream
+endobj
+7 0 obj
+<< /Length 124  >>
+stream
+500 0 0 0 500 700 d1 40 0 80 700 re 120 0 300 80 re 120 310 240 80 re 120 620 300 80 re 340 80 80 230 re 340 390 80 230 re f
+endstream
+endobj
+8 0 obj
+<< /Length 104  >>
+stream
+500 0 0 0 500 700 d1 40 0 160 70 re 300 0 160 70 re 80 70 80 500 re 340 70 80 500 re 160 570 180 80 re f
+endstream
+endobj
+9 0 obj
+<< /Length 353  >>
+stream
+/CIDInit /ProcSet findresource begin 12 dict begin begincmap /CIDSystemInfo << /Registry (Original) /Ordering (Fidelity) /Supplement 0 >> def /CMapName /Original def /CMapType 2 def 1 begincodespacerange <00> <FF> endcodespacerange 3 beginbfchar <41> <0041> <42> <0042> <43> <03A9> endbfchar endcmap CMapName currentdict /CMap defineresource pop end end
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000041 00000 n 
+0000000090 00000 n 
+0000000147 00000 n 
+0000000273 00000 n 
+0000000396 00000 n 
+0000000694 00000 n 
+0000000818 00000 n 
+0000000994 00000 n 
+0000001150 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+1555
+%%EOF

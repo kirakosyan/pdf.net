@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([string]$Configuration = 'Release')
+param([string]$Configuration = 'Release', [string]$BuildArtifactsDirectory = '')
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $evidence = Join-Path $root 'artifacts/contracts/api'
@@ -7,10 +7,12 @@ New-Item -ItemType Directory -Path $evidence -Force | Out-Null
 $comparisons = [System.Collections.Generic.List[object]]::new()
 Push-Location $root
 try {
-    foreach ($project in @('Fluent.Pdf','Fluent.Pdf.Workers','Fluent.Pdf.Codecs','Fluent.Pdf.Fonts','Fluent.Pdf.Text','Fluent.Pdf.Rendering','Fluent.Pdf.Cryptography','Fluent.Pdf.Compliance','Fluent.Pdf.Html','Fluent.Pdf.Word','Fluent.Pdf.Ocr','Fluent.Pdf.Formats')) {
+    foreach ($project in @('Fluent.Pdf','Fluent.Pdf.Workers','Fluent.Pdf.Codecs','Fluent.Pdf.Fonts','Fluent.Pdf.Text','Fluent.Pdf.Rendering','Fluent.Pdf.Cryptography','Fluent.Pdf.Compliance','Fluent.Pdf.Html','Fluent.Pdf.Word','Fluent.Pdf.Ocr','Fluent.Pdf.Formats','Fluent.Pdf.Intelligence','Fluent.Pdf.Automation','Fluent.Pdf.Applications')) {
         $baseline = "src/$project/bin/$Configuration/netstandard2.0/$project.dll"
+        if ($BuildArtifactsDirectory) { $baseline = Join-Path $BuildArtifactsDirectory "bin/$project/$($Configuration.ToLowerInvariant())_netstandard2.0/$project.dll" }
         foreach ($tfm in @('net472','net8.0','net10.0')) {
             $candidate = "src/$project/bin/$Configuration/$tfm/$project.dll"
+            if ($BuildArtifactsDirectory) { $candidate = Join-Path $BuildArtifactsDirectory "bin/$project/$($Configuration.ToLowerInvariant())_$tfm/$project.dll" }
             $leftHash = (Get-FileHash -LiteralPath $baseline -Algorithm SHA256).Hash.ToLowerInvariant()
             $rightHash = (Get-FileHash -LiteralPath $candidate -Algorithm SHA256).Hash.ToLowerInvariant()
             $log = Join-Path $evidence "$project-$tfm.log"

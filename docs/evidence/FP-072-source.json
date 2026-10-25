@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-072",
+  "issue": 81,
+  "sourceCommit": "319ba01cb91620e75b00c8fa1d2efd7d38ba6ad8",
+  "commitBinding": "All source/runtime/API and independent observations were produced from this clean code checkpoint. Later evidence/documentation and main-merge ancestry changes retain these source hashes.",
+  "productionQualified": false,
+  "finalPackagesProduced": false,
+  "trackingIssueCompleted": false,
+  "sourceFiles": [
+    {
+      "path": "eng/verify-optimization-fixtures.py",
+      "sha256": "91589763d4630a8e24d9c3d513353fe3c502dac05a5bf40c07919dab65649476",
+      "bytes": 4752
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "e8fbda0cf93ae4d9a0db26b8ee3d2bcb0afc408f828dae3ff6628240253718cb",
+      "bytes": 30444
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "5472b81434d41326b9700976cab223a23901583a5c399ea40e953754127c556c",
+      "bytes": 35559
+    },
+    {
+      "path": "src/Fluent.Pdf/Optimization/PdfOptimization.cs",
+      "sha256": "48bece40ef5cd7d44207119a616ff0e4269e3580db74bc008969f8041a1564ca",
+      "bytes": 8534
+    },
+    {
+      "path": "src/Fluent.Pdf/Optimization/PdfOptimizationEngine.cs",
+      "sha256": "8628b7e209c7b43a765f120354afc030bb3a4c8ba1bdb6a0b1cd99918563b2d8",
+      "bytes": 14169
+    },
+    {
+      "path": "src/Fluent.Pdf/Optimization/PdfOptimizationImages.cs",
+      "sha256": "fa8cd8eba2a6bf37a58fc639a3e134a10ba6ad5248d18cc6e633c73c01152f42",
+      "bytes": 4915
+    },
+    {
+      "path": "src/Fluent.Pdf/Optimization/PdfOptimizationResources.cs",
+      "sha256": "562aeb959ee00a92ae2f7fffd82e8197ef64abf31fae910def1c8524dceb52ca",
+      "bytes": 10597
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "9b9a9bbcf5fa00940f99afbfd1c50c12683303d1f3d17fad5e977d5005c6ef30",
+      "bytes": 326955
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/OptimizationTests.cs",
+      "sha256": "c28ee220dab05a2549dd3fdfefe9ad604bdab7cc948c14b1421304856b386ed5",
+      "bytes": 15446
+    }
+  ],
+  "fourTargetBuild": {
+    "path": "/workspace/scratch/optimization-four-target-build.log",
+    "sha256": "1bfe246e3bc0f70a472f8423f27d762fda29e2fcd0609d3db06546bb2801451e",
+    "bytes": 7694
+  },
+  "managedLanes": [
+    {
+      "profile": "net8",
+      "functionalCounters": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "functionalReport": {
+        "path": "artifacts/contracts/remaining/optimization/clean-net8/clean-net8.trx",
+        "sha256": "21b863b2e1f7c3fb22c16ffe2703a317b76933976c3e8a7d175bbe2d3c890efa",
+        "bytes": 14537
+      },
+      "identityReport": {
+        "path": "artifacts/contracts/remaining/optimization/identity-net8/identity-net8.trx",
+        "sha256": "fc22b62d23b38f4130542299e5cc7f0d107681fd1c53f9644e166257520dcd4f",
+        "bytes": 3234
+      },
+      "actualIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net8.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v8.0\nActual runtime: .NET 8.0.32\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/optimization-clean-net8.log",
+        "sha256": "3fd4167f9461f0c4d50909a3041ebf40faae79e834a8de9a7afd19fd0df5333f",
+        "bytes": 447
+      }
+    },
+    {
+      "profile": "net10",
+      "functionalCounters": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "functionalReport": {
+        "path": "artifacts/contracts/remaining/optimization/clean-net10/clean-net10.trx",
+        "sha256": "5f1a8af26a6c6edd75dfceb67a209aa8661ceb393713bae8a4ceb8c95cff8527",
+        "bytes": 14556
+      },
+      "identityReport": {
+        "path": "artifacts/contracts/remaining/optimization/identity-net10/identity-net10.trx",
+        "sha256": "1d7355639a5ea6dd45a752c849e27c4393ed21c31b9e3453cd7d2804aab6c7d3",
+        "bytes": 3240
+      },
+      "actualIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETCoreApp,Version=v10.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/optimization-clean-net10.log",
+        "sha256": "1def613d3f9d4f590b7f0661ff4a2b9443e8ffd34924471de308053f65c2fce2",
+        "bytes": 452
+      }
+    },
+    {
+      "profile": "netstandard",
+      "functionalCounters": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "functionalReport": {
+        "path": "artifacts/contracts/remaining/optimization/clean-netstandard/clean-netstandard.trx",
+        "sha256": "c9c2b269cd3e707e55d57925c54b77fe16cebc40668e93dcad425148b4f9a0b0",
+        "bytes": 14556
+      },
+      "identityReport": {
+        "path": "artifacts/contracts/remaining/optimization/identity-netstandard/identity-netstandard.trx",
+        "sha256": "ed40184d393a4a7f403a7a0e1bc1f38aef58507149f47ded58f70f7061bb73e5",
+        "bytes": 3240
+      },
+      "actualIdentity": "Library: /workspace/pdf.net-remaining/tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/Fluent.Pdf.dll\nLibrary TFM: .NETStandard,Version=v2.0\nActual runtime: .NET 10.0.13\nActual OS: Debian GNU/Linux 13 (trixie)\nProcess architecture: X64",
+      "log": {
+        "path": "/workspace/scratch/optimization-clean-netstandard.log",
+        "sha256": "1599631283b59c47c88333d35ecc3a681211c7e26fbf7b2e7328addb0831f6d8",
+        "bytes": 2387
+      }
+    }
+  ],
+  "apiComparisons": {
+    "passed": 36,
+    "report": {
+      "path": "artifacts/contracts/api/comparisons.json",
+      "sha256": "7d5f7bfd80edc86bd38d028797666f1bd846b3a94241bac669dff61f43b04bf0",
+      "bytes": 9693
+    },
+    "binaryBindings": [
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net472",
+        "leftSha256": "baeae05c635816df761163ddf6261fd4be4b349daf606d5ebc88a09c240e3045",
+        "rightSha256": "313f58994e3c0e7fb0ff6b73388fa31726ec62e4c66adc14175425ca7d569939",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net8.0",
+        "leftSha256": "baeae05c635816df761163ddf6261fd4be4b349daf606d5ebc88a09c240e3045",
+        "rightSha256": "452a979e49678c0273e0481a7cb7dc8133922402459d151dfa58a29809b0ac1c",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf",
+        "targetFramework": "net10.0",
+        "leftSha256": "baeae05c635816df761163ddf6261fd4be4b349daf606d5ebc88a09c240e3045",
+        "rightSha256": "0bee31e79c14166aa77c046ef355ce5c1fb18013fb7d83976a2ff4aa2bc5026b",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net472",
+        "leftSha256": "4e69a4b605d043382fa6d4ed09dab9c70ccea6adc04d18b9902c71641cfeac3e",
+        "rightSha256": "a2a8ac149177aefdcc8e02cde40b1f943948daa539dfb57e17c7bf01ad755fdc",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net8.0",
+        "leftSha256": "4e69a4b605d043382fa6d4ed09dab9c70ccea6adc04d18b9902c71641cfeac3e",
+        "rightSha256": "6a25bd29005850ab99ef95486b5ff2328267ab206b7922f1affe194a2c26a694",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Workers",
+        "targetFramework": "net10.0",
+        "leftSha256": "4e69a4b605d043382fa6d4ed09dab9c70ccea6adc04d18b9902c71641cfeac3e",
+        "rightSha256": "4fa1e2d61602efdf381d566266c76c050789dad4479deec745e77d2dc8470070",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net472",
+        "leftSha256": "c2efef1977af07ad347f1c6b1ff954a175f70cf65dca9d3c33e5ecfedcda8978",
+        "rightSha256": "24fb9899a028eec97e05f94b4e59b5d08c8aa84514e531bded9d96b7413331c6",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net8.0",
+        "leftSha256": "c2efef1977af07ad347f1c6b1ff954a175f70cf65dca9d3c33e5ecfedcda8978",
+        "rightSha256": "846d6823ea0aab4d65edbe96ddc06e0bc5a007bfddc5af2d1fd1b22be2b22d3e",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Codecs",
+        "targetFramework": "net10.0",
+        "leftSha256": "c2efef1977af07ad347f1c6b1ff954a175f70cf65dca9d3c33e5ecfedcda8978",
+        "rightSha256": "cb8a8ff822dd9fbcb2de6964a64fcc4cc665dbecb3b76b3fdbb79c38a4c7fddd",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net472",
+        "leftSha256": "e4b11b66ddbae6b741ec7b25f168756426037411a15eec0382fa7c3796e546d2",
+        "rightSha256": "8960c0798eaea077bc4928338e7366793621957601c7138e8afb1b4d49a3c273",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net8.0",
+        "leftSha256": "e4b11b66ddbae6b741ec7b25f168756426037411a15eec0382fa7c3796e546d2",
+        "rightSha256": "a5e532a7ea19d98b548366bf44c2949ce2718d51440ea25df72bcc620af4b0e5",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Fonts",
+        "targetFramework": "net10.0",
+        "leftSha256": "e4b11b66ddbae6b741ec7b25f168756426037411a15eec0382fa7c3796e546d2",
+        "rightSha256": "1b0a04b386e3a82d51da35734e0238415534f9260d588e844830a76cfde72fb8",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net472",
+        "leftSha256": "f956a6dcc45621056200ea304f7a773123bf11401ddd49610d7b0a3dec016277",
+        "rightSha256": "6515475c04fe2012d6561e3e52254e2063a1acdc2fba809e6087c1099e8277a5",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net8.0",
+        "leftSha256": "f956a6dcc45621056200ea304f7a773123bf11401ddd49610d7b0a3dec016277",
+        "rightSha256": "bc47e2d0bd377bf48a0f63f83bbf375bf1f7eb98f86cc473b1016f6fccfae4a0",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Text",
+        "targetFramework": "net10.0",
+        "leftSha256": "f956a6dcc45621056200ea304f7a773123bf11401ddd49610d7b0a3dec016277",
+        "rightSha256": "1183c6da1926760387a532b1926c175ed4ea323f8a94c2bb84fdf0f54fa79f3f",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net472",
+        "leftSha256": "3c68feb6540a8dc66a083be387e33428074e9f9eddd93cf4d2c6e5a7d98bdfad",
+        "rightSha256": "915a4ec7880ed9da173f66b284914bb6768bb10fa293671830a96e7179ef7c82",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net8.0",
+        "leftSha256": "3c68feb6540a8dc66a083be387e33428074e9f9eddd93cf4d2c6e5a7d98bdfad",
+        "rightSha256": "02adc9630ad9a07d505fd1dfde49349f76efa44ce5e12758b04d91492f7cb65e",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Rendering",
+        "targetFramework": "net10.0",
+        "leftSha256": "3c68feb6540a8dc66a083be387e33428074e9f9eddd93cf4d2c6e5a7d98bdfad",
+        "rightSha256": "b92d6ee6d2a3fa44d090d7b6893525187b6d8317205e353807fecab99227e3f9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net472",
+        "leftSha256": "2555e644498b6d834f2415ca83a0127e94c09cbb40e05cfff44694a7793d755e",
+        "rightSha256": "38456ad232da0c604127bb88661f3c762132560dd3dd4c041e591821b7bbd027",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net8.0",
+        "leftSha256": "2555e644498b6d834f2415ca83a0127e94c09cbb40e05cfff44694a7793d755e",
+        "rightSha256": "b7897db9dffc7830ccc747e0ca81bd46620910276bb2e827f87c1535682cd095",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Cryptography",
+        "targetFramework": "net10.0",
+        "leftSha256": "2555e644498b6d834f2415ca83a0127e94c09cbb40e05cfff44694a7793d755e",
+        "rightSha256": "b20482209b4cbb3056f0d741fdab66d8eebc62f6fc0698f2eae1e1e7547565e3",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net472",
+        "leftSha256": "f178b5a9ff240866fe472b20ab453e95c2c1a23468154cb586dfd43510efe4ab",
+        "rightSha256": "edf368b8dae22b39c737149ee826ac92590f98434a25ef014dd34ad0df8aabc9",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net8.0",
+        "leftSha256": "f178b5a9ff240866fe472b20ab453e95c2c1a23468154cb586dfd43510efe4ab",
+        "rightSha256": "aa5fccc5e7fee8432bf4e36e07818b78c10e1fbe3b121b5fca1e26b25a055b1a",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Compliance",
+        "targetFramework": "net10.0",
+        "leftSha256": "f178b5a9ff240866fe472b20ab453e95c2c1a23468154cb586dfd43510efe4ab",
+        "rightSha256": "46fda8b92868eccf2f736a7660453493173e8d171da8d0208738173b358f2483",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net472",
+        "leftSha256": "2d41cbef3866dea4a67fee57faa66a00890ba56d4a0f40b745a12cc1cf19f272",
+        "rightSha256": "e071011a83dba60a6473808d375cffb5e7158f13d071ea3e3848b190e8a9b07b",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net8.0",
+        "leftSha256": "2d41cbef3866dea4a67fee57faa66a00890ba56d4a0f40b745a12cc1cf19f272",
+        "rightSha256": "9a59952c4051e48cb7b1864aa8f78ca1d4ea4ede494676c1d1c1c51698e6a51b",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Html",
+        "targetFramework": "net10.0",
+        "leftSha256": "2d41cbef3866dea4a67fee57faa66a00890ba56d4a0f40b745a12cc1cf19f272",
+        "rightSha256": "ba2fbd40f21c73958e79689a935a3978d2862c8f3a3f519c89b48aa957e3c251",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net472",
+        "leftSha256": "25802e3fdd7611946748347960fc1699d9fc5158ea84075eeb26153293adf51d",
+        "rightSha256": "8ed2a6a6783e79db3a93a310d9481bcda3c2e2b73f84e0805e71fe5452749757",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net8.0",
+        "leftSha256": "25802e3fdd7611946748347960fc1699d9fc5158ea84075eeb26153293adf51d",
+        "rightSha256": "24425915e50ee72b422286b4e01421bc2579171821c62e44f8b2859099c47441",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Word",
+        "targetFramework": "net10.0",
+        "leftSha256": "25802e3fdd7611946748347960fc1699d9fc5158ea84075eeb26153293adf51d",
+        "rightSha256": "71fea1b86c9b24f19ae995b281107c5863207ace7da02a7c2a397ba0ec7d4693",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net472",
+        "leftSha256": "1aa6cc65bef9c45ebea3acf41f8572328416ad0a9808972352bacf6473ea4ed3",
+        "rightSha256": "2c45885d5c6d7718b3168e7a4d29d4461eaf18860286ef644feef0d16c2f0072",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net8.0",
+        "leftSha256": "1aa6cc65bef9c45ebea3acf41f8572328416ad0a9808972352bacf6473ea4ed3",
+        "rightSha256": "7d600505aa9fc893d9a4c922e10a7400751677e594f3901a8b263437bb80ad5d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Ocr",
+        "targetFramework": "net10.0",
+        "leftSha256": "1aa6cc65bef9c45ebea3acf41f8572328416ad0a9808972352bacf6473ea4ed3",
+        "rightSha256": "c4dacad696be08ed72355ebb59967c53a06b108d6bfb8c2694184483cd46d08d",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net472",
+        "leftSha256": "7b0ddf51e73eb0ea0a75a214c4d73841b1e6c96fd0083656e2f6001ca93478da",
+        "rightSha256": "fe2e81caadfff782542b2101826e8106fae8f0d1aae14d521dd16c72c90223bb",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net8.0",
+        "leftSha256": "7b0ddf51e73eb0ea0a75a214c4d73841b1e6c96fd0083656e2f6001ca93478da",
+        "rightSha256": "10a49fa7de789505718b9c9550d421041a72f45328f915e4527815cd3b35be05",
+        "exitCode": 0
+      },
+      {
+        "project": "Fluent.Pdf.Formats",
+        "targetFramework": "net10.0",
+        "leftSha256": "7b0ddf51e73eb0ea0a75a214c4d73841b1e6c96fd0083656e2f6001ca93478da",
+        "rightSha256": "b4c92d3eca1092c995620e73307dce34c8e972d241dbb7abd69cba7ea332fb0d",
+        "exitCode": 0
+      }
+    ]
+  },
+  "independentObservation": {
+    "report": {
+      "path": "artifacts/contracts/remaining/optimization/clean-independent/independent-optimization.json",
+      "sha256": "8691f1028b7cc4f7cb8938b54ec7932a45508d52239eb04de98c4c5a0ccd5216",
+      "bytes": 1269
+    },
+    "readers": {
+      "PyMuPDF": "1.26.6",
+      "offlineInterpreter": "10.05.1"
+    },
+    "offlineInterpreterBinary": {
+      "path": "/usr/bin/gs",
+      "sha256": "791baf36ffa6dc66578c3b0feeb9b9d7ebeab5ef52624b7461550f02341b90ed",
+      "bytes": 14600
+    },
+    "fixtures": [
+      {
+        "path": "tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/optimization-fixtures/source.pdf",
+        "sha256": "663525b038b911ba319fc272d5c297d46410b68ea60d43e30bdc487e81b421ed",
+        "bytes": 20235
+      },
+      {
+        "path": "tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/optimization-fixtures/lossless.pdf",
+        "sha256": "3b38204d8fb0d90faf35d9354ce85a9f1c5c6487d3d40808e47f1c5dab2bd67f",
+        "bytes": 3890
+      },
+      {
+        "path": "tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/optimization-fixtures/pruned.pdf",
+        "sha256": "10c6c1fb400a80260791017179b1c4c8f214ac213b39be908e5867e6857436d3",
+        "bytes": 3558
+      },
+      {
+        "path": "tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0/optimization-fixtures/downsampled.pdf",
+        "sha256": "4d558586b0b467fd23f98c3b37c755a3854ba1eb93a4fb149349871166793577",
+        "bytes": 3867
+      }
+    ],
+    "result": "Exact per-reader lossless/pruned pixels, visible/logical glyphs, decoded image/alpha/font bytes and associated XML; explicit downsample sample centers/alpha.",
+    "observedBytes": {
+      "source.pdf": 20235,
+      "lossless.pdf": 3890,
+      "pruned.pdf": 3558,
+      "downsampled.pdf": 3867
+    }
+  },
+  "specification": {
+    "path": "/workspace/scratch/optimization-final-spec.log",
+    "sha256": "94d413fe90d6f588fc726e7b2245b8d925d638b80bb2e9673b116b9527ead3fe",
+    "bytes": 104
+  },
+  "releaseBlock": {
+    "path": "/workspace/scratch/optimization-release-block.log",
+    "sha256": "5893e3c0dd5bd4dc2099c8a3c5ec811193c148645c3a6bb81e2742c2d9eb2a55",
+    "bytes": 139
+  },
+  "remaining": [
+    "Full supported-font/image/private-owner/implicit-resource and standards/fidelity corpus qualification",
+    "Calibrated size/performance/resource/security/concurrency/endurance envelopes",
+    "Actual minimum Framework and all supported provider/runtime/RID qualification",
+    "Exact final packages, package consumers and stable publication qualification"
+  ],
+  "commands": [
+    "source /workspace/.cloud-setup/activate.sh",
+    "dotnet restore Fluent.Pdf.slnx --locked-mode --disable-parallel -m:1",
+    "dotnet build Fluent.Pdf.slnx -c Release --no-restore -m:1 -p:UseSharedCompilation=false",
+    "pwsh -NoProfile -File eng/check-api.ps1",
+    "dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net10.0 --no-build --no-restore --filter 'FullyQualifiedName~OptimizationTests' --logger 'trx;LogFileName=clean-net10.trx' --results-directory artifacts/contracts/remaining/optimization/clean-net10",
+    "dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net8.0 --no-build --no-restore --filter 'FullyQualifiedName~OptimizationTests' --logger 'trx;LogFileName=clean-net8.trx' --results-directory artifacts/contracts/remaining/optimization/clean-net8",
+    "dotnet test tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj -c Release -f net10.0 -p:UseNetStandardAssembly=true -m:1 -p:UseSharedCompilation=false --no-restore --filter 'FullyQualifiedName~OptimizationTests' --logger 'trx;LogFileName=clean-netstandard.trx' --results-directory artifacts/contracts/remaining/optimization/clean-netstandard",
+    "RuntimeIdentityTests were run separately on each corresponding compiled profile; net10 was rebuilt normally after the fallback check.",
+    "PYTHONPATH=/workspace/.tools/format-validators python3 -O eng/verify-optimization-fixtures.py tests/Fluent.Pdf.Contract.Tests/bin/Release/net10.0 artifacts/contracts/remaining/optimization/clean-independent",
+    "pwsh -NoProfile -File eng/validate-spec.ps1",
+    "pwsh -NoProfile -File eng/test-release-block.ps1"
+  ]
+}

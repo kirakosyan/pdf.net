@@ -128,3 +128,11 @@ Passive advanced-content inventory with encoded payload digests, exact-byte pres
 Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile. Full coverage and production qualification remain mandatory; see [invoices](docs/invoices.md).
 
 Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](docs/preflight.md).
+
+Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](docs/optimization.md).
+
+Bounded revision-bound range sessions, selective page/object access, private LRU caches and independently gated linearized output now have a source implementation. Complete hint/producer/transport/corpus/runtime/final-package qualification remains mandatory; see [progressive access](docs/progressive-access.md).
+
+Original QR/Code128B generation with mandatory independent decoding, explicit page-region detector landmarks and canonical EPC invoice/payment payload validation now have a source implementation. Complete corpus/scanner/runtime/host/final-package qualification remains mandatory; see [barcode workflows](docs/barcodes.md).
+
+Explicit six-task model adapters, selected source capture, remote/image authority, token/configured-cost reservations and schema/citation validation now have a source implementation in the optional Intelligence assembly. Full model/transport/security/quality/runtime/final-package qualification remains mandatory; see [document intelligence](docs/document-intelligence.md).

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "requirements": [
+    "FP-070",
+    "FP-097"
+  ],
+  "issues": [
+    79,
+    100
+  ],
+  "sourceParent": "e4d8ec7efb13b442d1dc0d6ac276b659f2826a83",
+  "workingTreeDirty": true,
+  "sourceProgress": "exact-two-schema-alias-resolution-correction",
+  "productionQualified": false,
+  "trackingIssuesCompleted": false,
+  "ruleBundleUnchanged": true,
+  "reason": "The previous prefix substitution could accept an undeclared spelling for another already-pinned companion. Only the two declared aliases now resolve; resource bytes remain unchanged.",
+  "checks": {
+    "aliases": 2,
+    "deniedResources": 4,
+    "actualInvoiceTests": 16,
+    "failed": 0,
+    "skipped": 0,
+    "actualHostRuns": 15,
+    "runtime": ".NET8.0.32 Windows x64"
+  },
+  "sourceFiles": [
+    {
+      "path": "eng/InvoiceValidatorHost/InvoiceValidationHost.java",
+      "sha256": "440ebe7b19679bd7e3082b669c5cd9ccac973fa6c92fe9c71caa81c0aa27bbb4"
+    },
+    {
+      "path": "eng/build-invoice-fixture.ps1",
+      "sha256": "f8a9056d867227067507a0e43f07771da0491721ee557269519103014540349d"
+    },
+    {
+      "path": "docs/invoices.md",
+      "sha256": "acb0b02d8b3ddc8ffeef3cd33c59a21bdd8d3fe0760ce6ae2099df2277de695b"
+    }
+  ],
+  "archive": {
+    "path": "artifacts/invoice-rule-resolver-evidence.zip",
+    "sha256": "3743280bea89adf5fc9cee63785d86c0a1131ceb82d5766e72ab7f71061c1da8",
+    "bytes": 1792110,
+    "verifiedEntries": 113
+  },
+  "pending": [
+    "Final exact-head source CI and all mandatory production qualification remain separate",
+    "User-skipped issue93 remains mandatory and release-blocking"
+  ]
+}

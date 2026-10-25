@@ -1,0 +1,58 @@
+name: CLI source consumers
+on:
+  pull_request:
+    paths:
+      - 'apps/Fluent.Pdf.Cli/**'
+      - 'src/Fluent.Pdf/**'
+      - 'src/Fluent.Pdf.Formats/**'
+      - 'eng/test-cli.py'
+      - 'tests/Fluent.Pdf.Contract.Tests/Fixtures/Cli/**'
+      - 'tests/Fluent.Pdf.Contract.Tests/Fixtures/Automation/**'
+      - '.github/workflows/cli.yml'
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  consumers:
+    name: CLI (${{ matrix.id }})
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { id: win-x64, os: windows-latest }
+          - { id: win-arm64, os: windows-11-arm }
+          - { id: linux-x64, os: ubuntu-latest }
+          - { id: linux-arm64, os: ubuntu-24.04-arm }
+          - { id: osx-x64, os: macos-15-intel }
+          - { id: osx-arm64, os: macos-15 }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: |
+            10.0.4xx
+            8.0.x
+      - name: Restore locked application and build both consumers
+        shell: pwsh
+        run: |
+          dotnet restore apps/Fluent.Pdf.Cli/Fluent.Pdf.Cli.csproj --locked-mode --disable-parallel -m:1
+          if ($LASTEXITCODE -ne 0) { throw 'CLI locked restore failed.' }
+          dotnet build apps/Fluent.Pdf.Cli/Fluent.Pdf.Cli.csproj -c Release --no-restore -m:1 -p:UseSharedCompilation=false
+          if ($LASTEXITCODE -ne 0) { throw 'CLI build failed.' }
+      - name: Run actual process and pipe boundaries
+        shell: pwsh
+        run: |
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          & $python eng/test-cli.py --assemblies apps/Fluent.Pdf.Cli/bin/Release/net8.0/fluent-pdf.dll apps/Fluent.Pdf.Cli/bin/Release/net10.0/fluent-pdf.dll --output artifacts/contracts/cli/processes.json
+          if ($LASTEXITCODE -ne 0) { throw 'Actual CLI consumer failed.' }
+      - name: Retain actual CLI source evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cli-source-${{ matrix.id }}
+          path: artifacts/contracts/cli/
+          if-no-files-found: error

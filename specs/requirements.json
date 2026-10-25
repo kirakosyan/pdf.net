@@ -3032,13 +3032,15 @@
         "stage": "source-validation",
         "documentation": "docs/invoices.md",
         "implemented": [
-          "Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile."
+          "Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile.",
+          "Managed MINIMUM draft production with explicit ICC output, registered invoice/PDF-A metadata and exact XML/model/attachment binding; complete independent invoice validation remains mandatory.",
+          "Exact Factur-X1.0.07 MINIMUM XSD/Schematron/code-list source host, independent PDFBox/Saxon arithmetic/metadata/conservative glyph-paint checks and nonce-bound five-phase report bridge; explicit seller registration/country and representable header precision."
         ],
         "pending": [
           "Complete invoice version/profile/domain schema business and tax/rounding coverage with real producer/validators",
           "Actual independent invoice/PDF-A corpus supported-host/package and production qualification"
         ],
-        "sourceEvidence": "docs/evidence/issues-61-80-source.json"
+        "sourceEvidence": "docs/evidence/invoice-complete-source.json"
       }
     },
     {
@@ -3114,12 +3116,25 @@
         "A01",
         "B01",
         "D01",
-        "D02"
+        "D02",
+        "docs/evidence/FP-072-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/optimization.md",
+        "scope": "Bounded full graph rewrite, unreachable-object cleanup, exact safe resource sharing, unfiltered-stream compression, conservative resource-name analysis and explicit eight-bit image resampling",
+        "productionQualified": false,
+        "remaining": [
+          "Complete supported-font/image/private-owner/implicit-resource and reconstruction corpus qualification",
+          "Calibrated size/fidelity/performance/resource/security/concurrency/endurance qualification",
+          "Actual minimum Framework and all provider/runtime/RID qualification",
+          "Exact final package consumers and stable publication qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-072-source.json"
+      }
     },
     {
       "id": "FP-073",
@@ -3144,12 +3159,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-073-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/progressive-access.md",
+        "scope": "Bounded revision-bound range access, selective page/indirect object reads, private LRU caches and explicit exact-byte independently validated linearization gates",
+        "productionQualified": false,
+        "remaining": [
+          "Qualified complete producer and independently implemented complete hint/offset validator",
+          "Broader encrypted/progressive editing/rendering integration and representative corpus coverage",
+          "Actual authenticated transport/security/concurrency/endurance/first-page latency qualification",
+          "All actual runtime/RID/minimum Framework and exact final-package qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-073-source.json"
+      }
     },
     {
       "id": "FP-074",
@@ -3351,12 +3379,25 @@
       ],
       "validation": "Independent barcode decoder tests, rotated/damaged symbols and multilingual payload fixtures.",
       "evidence": [
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-078-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/barcodes.md",
+        "scope": "Original QR Model2 versions1–40/all ECC and Code128B; mandatory independent decode before acceptance; optional pinned managed decoder; native PDF detector landmark coordinates; canonical EPC002/UTF8 invoice/payment validation",
+        "productionQualified": false,
+        "remaining": [
+          "Full declared symbol/payment/multi-code integration profiles and complete independent acceptance",
+          "Representative multilingual/damage/print/scanner/fuzz/resource/concurrency/endurance corpora",
+          "All actual engine/runtime/RID/minimum Framework qualification",
+          "Complete dependency/security/SBOM and exact final-package consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-078-source.json"
+      }
     },
     {
       "id": "FP-079",
@@ -3382,12 +3423,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-079-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/document-intelligence.md",
+        "scope": "Explicit six-task selected-source analysis, per-job remote/image authority, token/cost precommit, original fixed-endpoint strict chat JSON adapter and complete schema/citation/request binding",
+        "productionQualified": false,
+        "remaining": [
+          "Actual pinned local/remote model/tokenizer/pricing/transport and isolation/security/retention qualification",
+          "Semantic/translation/OCR/provenance/human and representative adversarial quality corpora",
+          "All actual runtime/RID/minimum Framework/concurrency/endurance/resource lanes",
+          "Exact final packages and fresh package-only consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-079-source.json"
+      }
     },
     {
       "id": "FP-080",
@@ -3412,12 +3466,25 @@
       "evidence": [
         "A01",
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-080-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/semantic-retrieval.md",
+        "scope": "Exact raw mapped source-order layout/table-aware chunking, explicit UTF8 byte ceilings, scoped embedding JSON bridge, immutable model/dimension/version provenance and bounded ACL/generation-isolated cosine storage",
+        "productionQualified": false,
+        "remaining": [
+          "Complete tagged/author-confirmed semantic chunk profiles and representative chunk/relevance corpus",
+          "Actual embedding model/tokenizer/store/transport/tenant lifecycle and isolation/security qualification",
+          "All actual runtime/RID/minimum Framework/concurrency/endurance/resource lanes",
+          "Exact final packages and fresh package-only consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-080-source.json"
+      }
     },
     {
       "id": "FP-081",
@@ -3442,12 +3509,25 @@
       "validation": "VBScript and native COM consumer samples; registration/unregistration and error marshaling tests.",
       "evidence": [
         "D01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-081-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/windows-automation.md",
+        "scope": "Separate frozen dual-interface Windows facade, finite private sessions, explicit SAFEARRAY/BSTR/VARIANT_BOOL marshaling, stable redacted HRESULTs and owned bitness-aware registration with actual native/VBScript consumer harness",
+        "productionQualified": false,
+        "remaining": [
+          "Actual minimum Framework 4.7.2 and complete Windows/apartment/host/security/concurrency/endurance qualification",
+          "Complete encrypted/form-editing/appearance and broader SDK COM workflow profiles",
+          "Type-library/proxy/installer and servicing qualification",
+          "Exact final packages and fresh package-only consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-081-source.json"
+      }
     },
     {
       "id": "FP-082",
@@ -3473,12 +3553,24 @@
         "D01",
         "D02",
         "B01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-082-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/application-views.md",
+        "scope": "Private bounded toolkit-independent application controller, real WinForms/WPF sample controls and explicit loopback ASP.NET browser sample with keyboard/accessibility/cancellation contracts",
+        "productionQualified": false,
+        "remaining": [
+          "Actual minimum runtimes and complete Windows/Linux/macOS/architecture/browser/native renderer/print qualification",
+          "Manual screen-reader, DPI, high contrast, localization, malformed-content and endurance qualification",
+          "Exact final packages and fresh package-only consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-082-source.json"
+      }
     },
     {
       "id": "FP-083",
@@ -3502,12 +3594,24 @@
       ],
       "validation": "Cross-platform CLI consumers, pipe cancellation, partial batch failures and invalid configuration tests.",
       "evidence": [
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-083-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/command-line.md",
+        "scope": "Optional .NET8/.NET10 process CLI using public Core/Formats APIs, strict closed configuration, separate binary/diagnostic channels, stable exits, protected password-file admission, bounded scheduling and atomic outputs/durable batch results",
+        "productionQualified": false,
+        "remaining": [
+          "Complete provider/conversion/remediation workflows and legacy host bindings",
+          "Full console/signal/filesystem/backpressure/crash/concurrency/endurance/security/fuzz/performance and corpus qualification",
+          "Exact final application/packages and fresh package-only consumers"
+        ],
+        "sourceEvidence": "docs/evidence/FP-083-source.json"
+      }
     },
     {
       "id": "FP-084",
@@ -3531,12 +3635,24 @@
       "evidence": [
         "D01",
         "D02",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-084-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/developer-guide.md",
+        "scope": "Version-synchronized metadata-only API reference across15 assemblies, declared source/capability matrix, literal fragment inventory, exact-source executable C#/VB-backed recipes and gated fresh package consumer tooling",
+        "productionQualified": false,
+        "remaining": [
+          "Every narrative fragment requires complete caller/provider bindings and literal compilation/execution against exact published packages",
+          "Complete native/model/font/provider/host/minimum-runtime and accessibility/security/fidelity/performance/fuzz corpus qualification",
+          "Positive exact final-package consumer and publication/indexing evidence"
+        ],
+        "sourceEvidence": "docs/evidence/FP-084-source.json"
+      }
     },
     {
       "id": "FP-085",
@@ -3601,12 +3717,24 @@
       "validation": "Native host and isolated minimum-runtime reports with OS, runtime, RID, package hashes and complete test totals.",
       "evidence": [
         "WN01",
-        "ENH"
+        "ENH",
+        "docs/evidence/FP-086-windows-source.json"
       ],
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/runtime-qualification.md",
+        "scope": "Unchanged 22-lane matrix, same-test-process runtime/core-library/registry/all-SDK binary observations, fail-closed TRX/host/target/minimum-Framework checks and exact-package/test-inventory binding tools",
+        "productionQualified": false,
+        "remaining": [
+          "Independently qualified minimum-runtime host/image/patch provenance and exact-package execution; actual source runs are recorded separately",
+          "Exact stable packages and reviewed complete package-consumer test inventories on all 22 lanes",
+          "Complete functional/fidelity/security/resource/concurrency/consumer suites and independent production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-086-source.json"
+      }
     },
     {
       "id": "FP-087",
@@ -3638,7 +3766,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/async-processing.md",
+        "scope": "Bounded fixed-worker pool, explicit admission backpressure, copied input limits, private thread-owned documents, shared operation context, aggregate progress and cancellation/disposal completion",
+        "productionQualified": false,
+        "remaining": [
+          "Complete actual native/browser/OCR concurrent workloads and all runtime/package lanes",
+          "Eight-hour endurance, handle monitoring and pinned performance envelopes",
+          "Complete independent production qualification"
+        ],
+        "sourceEvidence": "docs/evidence/FP-087-source.json"
+      }
     },
     {
       "id": "FP-088",
@@ -3670,7 +3809,18 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "sourceImplementation": "docs/performance.md",
+        "scope": "Reproducible bounded eager read/write source calibration, original hash-pinned corpus, warm/cold process metrics, retained-sample verification and reviewed regression envelopes enforced by the release gate",
+        "productionQualified": false,
+        "sourceEvidence": "docs/evidence/FP-088-source.json",
+        "remaining": [
+          "Reviewed hardware/corpus and absolute resource envelopes for full managed/range/rendering/HTML/conversion/OCR workloads",
+          "Actual minimum Framework, all native/provider/runtime/package performance lanes and eight-hour endurance",
+          "Complete streaming/spill/provider memory qualification; source eager benchmarks do not claim constant-memory access"
+        ]
+      }
     },
     {
       "id": "FP-089",
@@ -3738,7 +3888,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "implemented": [
+          "Four original MIT fixtures with independent PDF syntax authoring, exact source hashes and reproducible generation",
+          "Bounded public-API source round trips and two-reader Unicode/geometry/form/structure validation",
+          "Two independent renderers with retained images, SSIM and exact changed-pixel checks; omission and tolerance regression tests"
+        ],
+        "pending": [
+          "Complete multilingual/layout/forms/annotations/signatures/standards/accessibility and native-provider corpus",
+          "Reviewed corpus changes and any justified tolerance exceptions",
+          "Actual minimum/current/fallback runtimes and exact final package qualification"
+        ],
+        "sourceImplementation": "docs/fidelity-corpus.md"
+      }
     },
     {
       "id": "FP-091",
@@ -3769,7 +3933,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/determinism-caching.md",
+        "implemented": [
+          "Private bounded SHA-256 content cache with LRU eviction, detached copies and mandatory operation budgets",
+          "Explicit existing metadata ID/time and compression controls exercised in fresh-process byte comparisons",
+          "Cross-tenant misses, poisoning prevention, eviction/cancellation/disposal and mixed concurrency contracts"
+        ],
+        "pending": [
+          "Complete provider/HTML/OCR/model and signed/encrypted applicability profiles",
+          "All minimum/current/fallback/runtime lanes, independent complete corpus and eight-hour endurance",
+          "Exact final packages and complete production qualification"
+        ]
+      }
     },
     {
       "id": "FP-092",
@@ -3799,7 +3977,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/observability.md",
+        "implemented": [
+          "Opt-in bounded privacy-filtered context lifecycle/progress events with random trace/span correlation",
+          "Caller-controlled draining outside processing locks, sink-failure/drop counters and typed version probes",
+          "Budgeted borrowed-stream support JSON with closed-catalog codes and safe remediation"
+        ],
+        "pending": [
+          "Complete provider/native/browser/model tracing and privacy review",
+          "All minimum/runtime/provider and exact final package qualification",
+          "Complete production, endurance and security gates"
+        ]
+      }
     },
     {
       "id": "FP-093",
@@ -3828,7 +4020,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/package-reproducibility.md",
+        "implemented": [
+          "Shared guarded metadata for fifteen version-coupled candidate projects",
+          "Fresh output-tree reproducibility checks and offline assembly/PDB/SourceLink inspection",
+          "Bounded candidate ZIP content/dependency/hash inspection with exact rebuild comparison"
+        ],
+        "pending": [
+          "Actual final candidates and independent clean-checkout rebuilds",
+          "Complete symbols/source checksum, native package and supply-chain qualification",
+          "All exact-package consumers and complete production gates"
+        ]
+      }
     },
     {
       "id": "FP-094",
@@ -3963,7 +4169,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "blocked-by-prerequisites",
+        "sourceImplementation": "docs/release-qualification-status.md",
+        "sourceEvidence": "docs/evidence/FP-094-blocked.json",
+        "implemented": [
+          "Short-lived OIDC token passed explicitly to CLI; exact-step offline argument and failure drill",
+          "Existing real package/publication rejection retained"
+        ],
+        "pending": [
+          "Complete required features, qualification orchestrator, exact final artifacts and independent gate audit",
+          "Package ownership and scoped OIDC configuration, authorized public indexing/signature/fresh-consumer verification"
+        ]
+      }
     },
     {
       "id": "FP-095",
@@ -3989,7 +4208,22 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/supply-chain.md",
+        "implemented": [
+          "Offline locked NuGet content verification and separate archive hashes with source context inventory",
+          "Incomplete CycloneDX source SBOM, retained notice/configuration hashes and explicit native/model declaration matching",
+          "Fail-closed advisory coverage/finding checks and dependency-change qualification invalidation",
+          "Cross-platform notice inclusion including extensionless upstream licenses"
+        ],
+        "pending": [
+          "Full license/redistribution and signer/source-to-binary trust review",
+          "Complete native/model/font support lifetimes and vulnerability review",
+          "Exact final distribution SBOM, package notices and all production runtime/provider gates"
+        ]
+      }
     },
     {
       "id": "FP-096",
@@ -4176,7 +4410,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/document-collections.md",
+        "implemented": [
+          "Bounded ordered immutable collections with safe UTF-8 archive names, CRC/header verification and atomic archive files",
+          "Per-instance trusted adapters with ordered detached outcomes, failure recovery, mandatory leases and shared budgets",
+          "Strict typed active-object XML with exact tokens, opaque stream bytes and explicit protection/history limits"
+        ],
+        "pending": [
+          "Enforced worker isolation for untrusted adapters and complete adversarial/endurance qualification",
+          "Actual minimum and complete supported runtime/RID observations",
+          "Independent broad conformance/fidelity and exact final package consumers"
+        ]
+      }
     },
     {
       "id": "FP-101",
@@ -4206,7 +4454,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/semantic-remediation.md",
+        "implemented": [
+          "Exact-source-bound immutable semantic proposals and explicit reviewer decisions with pending/rejected/applied ledger states",
+          "Shared-context element edits, complete heading/list/table author plans and bounded direct/transitive PDF1 role mapping",
+          "Structural inspection and serialized reparse after every accepted fix, atomic file delivery and bounded audit JSON"
+        ],
+        "pending": [
+          "Qualified inferred suggestions, labeled real-document corpus and actual human/screen-reader review",
+          "Complete role/namespace/class-map and arbitrary structure remediation profiles",
+          "Actual minimum/runtime/RID, independent broad fidelity/conformance and exact final package qualification"
+        ]
+      }
     },
     {
       "id": "FP-102",
@@ -4282,7 +4544,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/image-cleanup.md",
+        "sourceEvidence": "docs/evidence/FP-103-source.json",
+        "implemented": [
+          "Explicit original-preserving device gray, median, threshold, border crop and nearest-neighbor resampling under shared budgets",
+          "Full-resolution before/after blank observations with caller background/tolerances and uncalibrated measured confidence",
+          "Compiled C#/VB consumers and independent exact pixel/corpus checks"
+        ],
+        "pending": [
+          "Qualified real-document classification and before/after OCR metrics; broader color, alpha and automatic border profiles",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-104",
@@ -4312,7 +4588,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/business-data.md",
+        "sourceEvidence": "docs/evidence/FP-104-source.json",
+        "implemented": [
+          "Version1 paired JSON/XML observations bound to exact source SHA256 with page/object provenance",
+          "Separate declared fields/structure, text mapping, inferred paragraphs/tables and optional source-bound OCR scores under shared budgets",
+          "Explicit compatibility rules, schemas, compiled C#/VB and independent paired/provenance checks"
+        ],
+        "pending": [
+          "Full business reconstruction and labeled real mixed scanned/digital corpus, OCR accuracy and semantic extraction quality",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification; all production gates remain mandatory"
+        ]
+      }
     },
     {
       "id": "FP-105",
@@ -4346,7 +4636,14 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/native-distribution.md",
+        "implemented": ["Explicit offline pinned asset/notice/static-import inventory, verified staged installation without destination replacement, and literal-path owned-inventory removal tooling", "Actual pinned renderer/worker/notice source installation with network-denied provisioning, public SDK full-page/region/missing-asset/hash checks, independent exact pixels and retained binary/runtime provenance"],
+        "pending": ["Complete engine/host/model/font distributions and reviewed per-RID closure", "Actual clean air-gapped host, system ABI, licensing, native and production qualification"],
+        "sourceEvidence": "docs/evidence/installed-renderer-source.json"
+      }
     },
     {
       "id": "FP-106",
@@ -4376,7 +4673,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/maintenance.md",
+        "sourceEvidence": "docs/evidence/FP-106-source.json",
+        "implemented": [
+          "Compatibility and lifecycle policy with executable API maintenance and blocked release-gate exercises"
+        ],
+        "pending": [
+          "Maintainer support commitments and policy review",
+          "Exact final-package servicing and full runtime qualification"
+        ]
+      }
     },
     {
       "id": "FP-107",
@@ -4404,7 +4713,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/legacy-format-import.md",
+        "sourceEvidence": "docs/evidence/FP-107-source.json",
+        "implemented": [
+          "Explicit bounded caller-owned host integration and typed failure outcomes, staged PDF validation and expiring leases"
+        ],
+        "pending": [
+          "Actual DjVu/CDR decoders and versioned independent corpus, codec/font fidelity and isolated execution",
+          "Full actual-runtime, fuzz/endurance and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-108",
@@ -4434,7 +4755,20 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/text-interchange.md",
+        "sourceEvidence": "docs/evidence/FP-108-source.json",
+        "implemented": [
+          "Exact-source UTF8 and caller-assigned Markdown projections with explicit order, escaped literal Unicode, flat roles and inferred unit-span tables",
+          "Deterministic page-image bundles, shared budgets, atomic output, C#/VB and independent parser fixtures"
+        ],
+        "pending": [
+          "Automatic full tagged semantic reconstruction, nested and complex multi-column/corpus quality",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-109",
@@ -4467,7 +4801,19 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/task-facades.md",
+        "sourceEvidence": "docs/evidence/FP-109-source.json",
+        "implemented": [
+          "Immutable instance facade delegates to existing generation, conversion, extraction, forms, optimization and collection engines",
+          "Shared generation context; explicit plugins/policy/ownership; source C#, VB and F# consumers"
+        ],
+        "pending": [
+          "Complete underlying engine/provider/runtime and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-110",
@@ -4496,7 +4842,14 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "documentation": "docs/html-element-extraction.md",
+        "sourceEvidence": "docs/evidence/browser-create-source.json",
+        "implemented": ["Shared private browser resource/readiness/context capture, bounded unique selector/literal search, CSS geometry, validated PNG, optional private outer markup and conservative DOM change rejection", "Explicit offline read-only nonroot container source transport with pinned prerequisites, shared memory/worker bounds and retained failed-start identity", "Separate exact immutable creation acknowledgement and ID-bound start/removal; owned-resource cancellation details survive outer checkpoints; explicit unknown-create reconciliation remains required"],
+        "pending": ["Unacknowledged-create reconciliation, host security/distribution and all engine RID/minimum runtime qualification", "Complete dynamic/compositor/corpus/fuzz/concurrency/fidelity and exact final-package consumers"]
+      }
     },
     {
       "id": "FP-111",
@@ -4524,7 +4877,21 @@
       "nonGoals": [
         "Features owned by other requirements except integration through public contracts.",
         "Silent fallback, unqualified support claims or changes to the approved production release scope."
-      ]
+      ],
+      "implementationProgress": {
+        "stage": "source-validation",
+        "sourceImplementation": "docs/hyphenation-text-fit.md",
+        "sourceEvidence": "docs/evidence/FP-111-source.json",
+        "implemented": [
+          "Explicit exact-hash offline whole-word exceptions with language matching and grapheme-safe discretionary layout retaining logical ActualText",
+          "Managed fit-to-paper with caller scale floor/ceiling over existing imposition; source C#/VB consumers"
+        ],
+        "pending": [
+          "Complete linguistic pattern dictionaries and mixed-direction tailoring, multilingual visual/copy/search corpus",
+          "Browser CSS fit measurement and complete deployable host",
+          "Actual minimum/runtime/RID, fuzz/endurance and exact final-package qualification"
+        ]
+      }
     },
     {
       "id": "FP-112",

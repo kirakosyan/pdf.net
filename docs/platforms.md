@@ -16,6 +16,8 @@ At release time, record exact supported OS versions/distributions, kernel/libc, 
 
 .NET 8 reaches its upstream support boundary soon after this planning date; verify the current Microsoft lifecycle at release and make any change through the documented compatibility policy, not an unnoticed removal.
 
+The [maintenance policy](maintenance.md) records the dated upstream lifecycle snapshot and the required reviewed decision before changing a target or support claim. No production-supported version/OS matrix is approved yet.
+
 ## Applicability
 
 Core parse/edit/write/generate/extract operations are cross-platform. Native rendering, OCR and browser operations require their exact optional engines on each supported RID. Missing engines produce capability diagnostics; they do not reduce the required production qualification matrix.
@@ -143,3 +145,15 @@ Passive advanced-content inventory with encoded payload digests, exact-byte pres
 Immutable invoice currency/rounding calculations, synchronized CII/readable totals, exact associated XML and mandatory independent PDF/A/invoice publication gates now have a source profile. Full coverage and production qualification remain mandatory; see [invoices](invoices.md).
 
 Passive font/image/security preflight, exact-source explicit action-remediation plans, post-write verification and schema-one before/after audit reports now have a source profile. Full coverage and production qualification remain mandatory; see [preflight](preflight.md).
+
+Bounded lossless graph cleanup, exact safe resource sharing, conservative unused-binding analysis and explicit eight-bit image resampling now have a shared-context implementation. Full corpus/runtime/provider/final-package and production qualification remain mandatory; see [optimization](optimization.md).
+
+Bounded revision-bound range sessions, selective page/object access, private LRU caches and independently gated linearized output now have a source implementation. Complete hint/producer/transport/corpus/runtime/final-package qualification remains mandatory; see [progressive access](progressive-access.md).
+
+Original QR/Code128B generation with mandatory independent decoding, explicit page-region detector landmarks and canonical EPC invoice/payment payload validation now have a source implementation. Complete corpus/scanner/runtime/host/final-package qualification remains mandatory; see [barcode workflows](barcodes.md).
+
+Explicit six-task model adapters, selected source capture, remote/image authority, token/configured-cost reservations and schema/citation validation now have a source implementation in the optional Intelligence assembly. Full model/transport/security/quality/runtime/final-package qualification remains mandatory; see [document intelligence](document-intelligence.md).
+
+FP-087 adds a bounded asynchronous processing pool with private worker-owned documents, shared job contexts, nonblocking admission, copied-input limits and cancellation-aware cleanup. Full workload/runtime/package/endurance qualification remains required; see [asynchronous processing](async-processing.md).
+
+FP-088 adds reproducible source performance measurements and fail-closed reviewed regression envelopes. Calibration is separate from production budgets and full provider/runtime qualification; see [performance measurement](performance.md).

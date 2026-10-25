@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/examples/">
+    <Project Path="examples/Fluent.Pdf.Recipes/Fluent.Pdf.Recipes.csproj" />
     <Project Path="examples/Fluent.Pdf.Contract.CSharp/Fluent.Pdf.Contract.CSharp.csproj" />
     <Project Path="examples/Fluent.Pdf.Contract.VisualBasic/Fluent.Pdf.Contract.VisualBasic.vbproj" />
     <Project Path="examples/Fluent.Pdf.WebSample/Fluent.Pdf.WebSample.csproj" />
@@ -17,12 +18,21 @@
     <Project Path="src/Fluent.Pdf.Html/Fluent.Pdf.Html.csproj" />
     <Project Path="src/Fluent.Pdf.Word/Fluent.Pdf.Word.csproj" />
     <Project Path="src/Fluent.Pdf.Ocr/Fluent.Pdf.Ocr.csproj" />
+    <Project Path="src/Fluent.Pdf.Intelligence/Fluent.Pdf.Intelligence.csproj" />
+    <Project Path="src/Fluent.Pdf.Automation/Fluent.Pdf.Automation.csproj" />
+    <Project Path="src/Fluent.Pdf.Applications/Fluent.Pdf.Applications.csproj" />
   </Folder>
   <Folder Name="/apps/">
+    <Project Path="apps/Fluent.Pdf.Cli/Fluent.Pdf.Cli.csproj" />
     <Project Path="apps/PdfReader/PdfReader.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Fluent.Pdf.Contract.Tests/Fluent.Pdf.Contract.Tests.csproj" />
   </Folder>
-  <Folder Name="/eng/"><Project Path="eng/HtmlBrowserProbe/HtmlBrowserProbe.csproj" /></Folder>
+  <Folder Name="/eng/"><Project Path="eng/HtmlBrowserProbe/HtmlBrowserProbe.csproj" /><Project Path="eng/Documentation/Documentation.csproj" />
+    <Project Path="eng/HtmlContainerProbe/HtmlContainerProbe.csproj" />
+    <Project Path="eng/NativeInstallProbe/NativeInstallProbe.csproj" />
+    <Project Path="eng/PackageProbe/PackageProbe.csproj" /><Project Path="eng/Performance/Performance.csproj" /><Project Path="eng/Fidelity/Fidelity.csproj" /><Project Path="eng/Determinism/Determinism.csproj" />
+    <Project Path="eng/SupplyChainProbe/SupplyChainProbe.csproj" />
+  </Folder>
 </Solution>

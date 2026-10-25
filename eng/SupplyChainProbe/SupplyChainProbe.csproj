@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><IsPackable>false</IsPackable></PropertyGroup>
+  <!-- Analysis-only APIs from the selected SDK, whose identities/hashes are reported. -->
+  <ItemGroup>
+    <Reference Include="NuGet.Packaging"><HintPath>$(MSBuildBinPath)/NuGet.Packaging.dll</HintPath></Reference>
+    <Reference Include="NuGet.Common"><HintPath>$(MSBuildBinPath)/NuGet.Common.dll</HintPath></Reference>
+    <Reference Include="NuGet.Versioning"><HintPath>$(MSBuildBinPath)/NuGet.Versioning.dll</HintPath></Reference>
+    <Reference Include="NuGet.Frameworks"><HintPath>$(MSBuildBinPath)/NuGet.Frameworks.dll</HintPath></Reference>
+    <Reference Include="System.Security.Cryptography.Pkcs"><HintPath>$(MSBuildBinPath)/System.Security.Cryptography.Pkcs.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

@@ -20,7 +20,7 @@ internal sealed class PdfSyntaxReader
         _authenticate = authenticate;
     }
 
-    internal PdfSyntaxDocument Read()
+    internal PdfSyntaxDocument Read(bool lazy = false)
     {
         try
         {
@@ -71,7 +71,7 @@ internal sealed class PdfSyntaxReader
                 ConfigureCrypt();
             if (_crypt == null && _revisions.Any(revision => revision.Trailer.Entries.TryGetValue("Encrypt", out var encryption) && encryption.Kind != PdfValueKind.Null) && _revisions.Any(revision => revision.Entries.Any(entry => entry.Kind == PdfCrossReferenceKind.Compressed)))
                 throw Error("Syntax.EncryptionProviderRequired", "Encrypted object streams require an explicitly configured encryption implementation.");
-            for (int revision = 0; revision < _revisions.Count; revision++)
+            for (int revision = 0; !lazy && revision < _revisions.Count; revision++)
             {
                 var seen = new HashSet<int>();
                 for (int i = revision; i < _revisions.Count; i++)
@@ -80,7 +80,7 @@ internal sealed class PdfSyntaxReader
                             _revisions[revision].Values.Add(entry.Id.Number, Resolve(entry.Id, revision));
             }
 
-            return new PdfSyntaxDocument(version, _source, _revisions, _context.Policy, _crypt != null);
+            return new PdfSyntaxDocument(version, _source, _revisions, _context.Policy, _crypt != null, lazy ? ResolveLazy : null);
         }
         catch (OverflowException)
         {
@@ -90,6 +90,13 @@ internal sealed class PdfSyntaxReader
         {
             throw Error("Syntax.IntegerRange", "An integer field is malformed or outside its supported range.");
         }
+    }
+
+    private PdfValue ResolveLazy(PdfObjectId id, int revision)
+    {
+        try { return Resolve(id, revision); }
+        catch (OverflowException) { throw Error("Syntax.IntegerRange", "A syntax count or offset overflowed its supported range."); }
+        catch (System.IO.InvalidDataException) { throw Error("Syntax.IntegerRange", "An integer field is malformed or outside its supported range."); }
     }
 
     private void ConfigureCrypt()

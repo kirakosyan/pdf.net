@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-105",
+  "issue": 105,
+  "sourceCommit": "d8b3fd15c9ab53c41b57e40a1547d709f0a61b66",
+  "status": "blocked-by-prerequisites",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "distributionPackagesProduced": false,
+  "qualifiedProvisioningManifestsProduced": false,
+  "offlineInstallationAcceptanceRuns": 0,
+  "observations": [
+    "The browser adapter requires a separately provisioned supervised host",
+    "TeX has a host contract but no qualified typesetter implementation or complete package and font closure",
+    "Native hash inventories do not establish all loader dependencies, redistribution rights or clean offline installation",
+    "Required source and final-package qualification remains incomplete; issue93 is user-skipped"
+  ],
+  "dependenciesReviewed": [27, 61, 32, 70, 72, 45, 3, 98],
+  "references": ["docs/requirements/FP-105.md", "docs/native-distribution.md", "docs/native-deployment.md", "docs/html-rendering.md", "docs/tex.md", "docs/supply-chain.md"],
+  "nextAction": "Complete deployment implementations and reviewed per-RID closure, then execute actual clean offline installations; continue independent issue106 policy work meanwhile"
+}

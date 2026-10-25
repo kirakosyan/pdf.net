@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "requirement": "FP-092",
+  "issue": 96,
+  "sourceCommit": "48f3f11ec667eea2a309f09050a8be83ad426d86",
+  "workingTreeDirty": true,
+  "commitBinding": "Exact source hashes and actual loaded-runtime evidence bind this development checkout; this is not clean production qualification.",
+  "productionQualified": false,
+  "trackingIssueCompleted": false,
+  "finalPackagesProduced": false,
+  "sourceFiles": [
+    {
+      "path": "src/Fluent.Pdf/Observability/PdfObservation.cs",
+      "sha256": "affbadc1cc2e58d549acc9b85314ae4039f0c350ea8e886d774fc7bd19f738c0",
+      "bytes": 3190
+    },
+    {
+      "path": "src/Fluent.Pdf/Observability/PdfObservationSession.cs",
+      "sha256": "556f4f24f58558c30657ab1dfeee7877bea44141e3a67ee337d2f1b986dc8b40",
+      "bytes": 9998
+    },
+    {
+      "path": "src/Fluent.Pdf/Policies/PdfOperationContext.cs",
+      "sha256": "7725e06efb1558c866204de26c295a6fd7834b19ccbd5eae6956b692f396b4a0",
+      "bytes": 24586
+    },
+    {
+      "path": "src/Fluent.Pdf/Policies/PdfOperationPolicy.cs",
+      "sha256": "e5f6aba36f2333cb110ece885320ae0e7dab0e805f5f6a66e64e23743c18b3cb",
+      "bytes": 2666
+    },
+    {
+      "path": "src/Fluent.Pdf/PublicAPI.Unshipped.txt",
+      "sha256": "842c0c2eae742e4d7ad912c179e77d508c7923b3b84d5e670784ca7cf1ffb785",
+      "bytes": 348189
+    },
+    {
+      "path": "tests/Fluent.Pdf.Contract.Tests/ObservabilityTests.cs",
+      "sha256": "c81d06325000ff19a8bf2673c40bcb8994274c45d567a140319770805c64f228",
+      "bytes": 10506
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.CSharp/ContractExample.cs",
+      "sha256": "8550983d346eea860180513640d26a04989cd0de7cde488bf685f201e1b89f9c",
+      "bytes": 33329
+    },
+    {
+      "path": "examples/Fluent.Pdf.Contract.VisualBasic/ContractExample.vb",
+      "sha256": "c64dc670db55876b73d21711140d19f122136d37506b203540b3975d053c403b",
+      "bytes": 39240
+    },
+    {
+      "path": "eng/verify-observability.py",
+      "sha256": "7cdbdf4d2f984162f68000ad195a9f7acdf44d5706147849a5ee9b854a306964",
+      "bytes": 4744
+    },
+    {
+      "path": "docs/observability.md",
+      "sha256": "a854b0c6cb8fcfb9b550e3a08f9266656cffc6b4d5a20bafcff840bef8901fa4",
+      "bytes": 4722
+    }
+  ],
+  "localValidation": {
+    "selection": "selected-source-observability-policy-processing-cache-native-and-runtime-tests",
+    "lanes": [
+      {
+        "runtime": "artifacts/fp092-lanes/net8/runtime.json",
+        "sha256": "F7C17F1F060FC8AB4D860489162139A82B7757B1C30B5DB3E3C1AF0B1B590F05",
+        "failed": 0,
+        "skipped": 0,
+        "total": 114,
+        "passed": 114,
+        "runtimeSha256": "FD49B053AA639165087BFE90D7620BFE5D90C4DD231659116D6339EC9C35BA91",
+        "lane": "win-x64-net8.0",
+        "report": "artifacts/fp092-lanes/net8/selected.trx"
+      },
+      {
+        "runtime": "artifacts/fp092-lanes/net10/runtime.json",
+        "sha256": "17ED835C2FC667C1440DBDD42085938B4E79FB90EBE72FF4CAFBFF4A9C9779E0",
+        "failed": 0,
+        "skipped": 0,
+        "total": 114,
+        "passed": 114,
+        "runtimeSha256": "170C67A5592FBD6BB35512C88A5A1AF18D9698BD92FE3B668372AA4B9F7D7665",
+        "lane": "win-x64-net10.0",
+        "report": "artifacts/fp092-lanes/net10/selected.trx"
+      },
+      {
+        "runtime": "artifacts/fp092-lanes/framework-x64/runtime.json",
+        "sha256": "26349009D8676BFDED2DAE9562BA79F9028D1327C269FFAEA007881C35FE1B71",
+        "failed": 0,
+        "skipped": 0,
+        "total": 114,
+        "passed": 114,
+        "runtimeSha256": "7531A8728A1BDA486F0766DEB58FE281480577A394220B5455C6C9594F9DC134",
+        "lane": "win-x64-framework-current",
+        "report": "artifacts/fp092-lanes/framework-x64/selected.trx"
+      },
+      {
+        "runtime": "artifacts/fp092-lanes/framework-x86/runtime.json",
+        "sha256": "41A2F0E4A1BD7EEEA155EBE1B07B73BE2B73147B065E21741A1811A19E58C074",
+        "failed": 0,
+        "skipped": 0,
+        "total": 114,
+        "passed": 114,
+        "runtimeSha256": "4C07BB772769CBA0144BAA1BBD699A419A45D42A04347D07CADC91A1A5607337",
+        "lane": "win-x86-framework-current",
+        "report": "artifacts/fp092-lanes/framework-x86/selected.trx"
+      },
+      {
+        "runtime": "artifacts/fp092-lanes/fallback/runtime.json",
+        "sha256": "18C4CA15CE6112043CF5A8C800644275BEFEAB6AC25033865025D5DABE2CD0F0",
+        "failed": 0,
+        "skipped": 0,
+        "total": 114,
+        "passed": 114,
+        "runtimeSha256": "429717A781F950507D246CBE897F8B8170FABA944954DDF78AB8E06559D74625",
+        "lane": "win-x64-netstandard2.0-fallback",
+        "report": "artifacts/fp092-lanes/fallback/selected.trx"
+      }
+    ],
+    "totalSelectedExecutions": 570,
+    "newObservationCases": 13,
+    "apiComparisons": 45,
+    "sourceApiAdditions": 35,
+    "independentSupportBundles": 25,
+    "independentlyReadPdfOutputs": 10,
+    "workerCorrelationCount": 64,
+    "solutionWarnings": 0,
+    "solutionErrors": 0
+  },
+  "independentReport": {
+    "path": "artifacts/fp092-independent.json",
+    "sha256": "0afb3ed92de80bfafc63bb75ebe4146b40a1922073ec4d90738e5b9239c88e24"
+  },
+  "archive": {
+    "path": "artifacts/fp092-source-evidence.zip",
+    "sha256": "186948ae4950055446da9306d4b105045f3ddce4c72877cbd355038aadaf214a",
+    "bytes": 4798019,
+    "verifiedEntries": 139
+  },
+  "pending": [
+    "Complete provider/native/browser/model probe integration and tracing",
+    "Complete deployment privacy review and endurance",
+    "Actual minimum Framework4.7.2 and all production runtime/provider lanes",
+    "Exact final packages and complete production qualification"
+  ],
+  "limitations": [
+    "Local execution is a selected regression inventory, not the full contract suite; new hosted full source CI remains required",
+    "Current Framework4.8 x64/x86 is not minimum4.7.2",
+    "Numeric engine probe recorded the actual managed assembly version; it does not qualify arbitrary native engines",
+    "Native fixture binaries reuse the verified519a016 CI prerequisites; native implementation is unchanged",
+    "Bundles describe pending observations with explicit loss counters; they are not guaranteed complete event archives"
+  ],
+  "finalHostedSourceCi": {
+    "sourceCommit": "c75e44c74ef91be279ef7d957426c61e8478de77",
+    "workflow_runs": [
+      {
+        "id": 40081834075,
+        "name": "Source contracts and release guard",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 173,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834075/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834075/logs",
+        "workflow_id": 387959272
+      },
+      {
+        "id": 40081834055,
+        "name": "Documentation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 19,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834055/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834055/logs",
+        "workflow_id": 394397543
+      },
+      {
+        "id": 40081834108,
+        "name": "Windows automation source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 31,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834108/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834108/logs",
+        "workflow_id": 394222479
+      },
+      {
+        "id": 40081834051,
+        "name": "Application view source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 27,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834051/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834051/logs",
+        "workflow_id": 394289497
+      },
+      {
+        "id": 40081834056,
+        "name": "CLI source consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 22,
+        "jobs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834056/jobs",
+        "logs_url": "https://api.github.com/repos/kirakosyan/pdf.net/actions/runs/40081834056/logs",
+        "workflow_id": 394350116
+      }
+    ]
+  }
+}

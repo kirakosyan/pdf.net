@@ -37,6 +37,7 @@ internal sealed partial class PdfFlowEngine
         var raised = new PdfFlowTextStyle(style.Fonts, style.FontSize * .75, markerOptions, style.Color, style.BaselineShift + style.FontSize * .35);
         _context.Consume(PdfResourceKind.ExpandedBytes, reference.Paragraph.Runs.Count * 32L + 256);
         var paragraph = new PdfFlowParagraph(reference.Paragraph.Runs.Concat(new[] { new PdfFlowRun(definition.Label, raised) }), reference.Paragraph.Style);
+        if (reference.Paragraph.Hyphenation != null) paragraph = paragraph.WithHyphenation(reference.Paragraph.Hyphenation);
         var data = Prepare(block, paragraph);
         if (paragraph.Style.PageBreakBefore && HasContent(_page))
             NewPage();
@@ -163,7 +164,8 @@ internal sealed partial class PdfFlowEngine
         {
             var o = note.MarkerStyle.TextOptions;
             var marker = new PdfFlowTextStyle(note.MarkerStyle.Fonts, note.MarkerStyle.FontSize, new(first.Runs[0].Style.TextOptions.ParagraphDirection, false, o.Language, o.Features.ToArray()), note.MarkerStyle.Color);
-            content.Add(new PdfFlowParagraph(new[] { new PdfFlowRun(note.Label + " ", marker) }.Concat(first.Runs), first.Style));
+            var firstWithMarker = new PdfFlowParagraph(new[] { new PdfFlowRun(note.Label + " ", marker) }.Concat(first.Runs), first.Style);
+            content.Add(first.Hyphenation == null ? firstWithMarker : firstWithMarker.WithHyphenation(first.Hyphenation));
             content.AddRange(note.Content.Skip(1));
         }
         else

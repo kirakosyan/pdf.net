@@ -63,7 +63,8 @@ internal static class PdfFlowLinePainter
                 int count = ends[glyph.Cluster] - glyph.Cluster;
                 if (count > 512)
                     throw PdfWriterCore.Error(context, "Text.ClusterEncodingLimit", "A layout glyph cluster exceeds the font resource mapping limit.");
-                mappings.Add(new(glyph.GlyphIndex, seen.Add(glyph.Cluster) ? line.Text.Substring(glyph.Cluster, count) : string.Empty));
+                // A discretionary visual hyphen is inside the unchanged logical ActualText span.
+                mappings.Add(new(glyph.GlyphIndex, seen.Add(glyph.Cluster) ? measured.Shaped.Unicode.Text.Substring(glyph.Cluster, count) : string.Empty));
             }
 
             var font = PdfFontResource.CreateCore(run.Request.Font, mappings, true, false, context);

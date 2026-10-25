@@ -1,0 +1,7 @@
+# Barcode dependency and protocol-data notices
+
+The optional Ocr assembly explicitly pins ZXing.Net0.16.11 (BC-D01), Apache-2.0, for independent managed decoding. Its package identity, archive digest, NuGet integrity value, four target-specific runtime assets and published assembly copyright are retained in `components.json`; the complete Apache license is retained here. No image binding, desktop object, native barcode library or automatic download is selected by the adapter.
+
+The original core encoders use normative QR block/alignment layouts and Code128 codeword bit patterns. These protocol data were cross-checked/extracted using explicit analysis tools qrcode8.2 (BC-T01, BSD-3-Clause) and python-barcode0.16.1 (BC-T02, MIT). Their complete data-source notices are retained here. Encoder bit packing, Reed–Solomon arithmetic, layout, mask evaluation, Code128 assembly, independent acceptance, PDF placement and payment validation are original code. The Python tools are development dependencies.
+
+The external development checker additionally uses explicitly pinned zxing-cpp3.0.0, Pillow13.0.0, PyMuPDF1.26.6 and Ghostscript10.05.1. Those tools are outside the SDK dependency/distribution graph. The two barcode decoders share lineage and are each independent of the original SDK encoder. Complete release SBOM, vulnerability/license review, scanner/corpus/runtime/host and exact final-package qualification remain mandatory.
