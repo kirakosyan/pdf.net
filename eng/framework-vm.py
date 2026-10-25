@@ -292,7 +292,11 @@ def run(args):
                 copy_export(exported, results)
                 export_copied = True
                 completed = read_json(results / "export-complete.json")
-                require(completed.get("exitCode") == 0 and completed.get("sourceCommit") == args.commit, "Guest setup/source execution failed")
+                if completed.get("exitCode") != 0:
+                    guest = read_json(results / "status.json")
+                    summary = {k: guest.get(k) for k in ("stage", "installedFrameworkRelease", "error", "lanes")}
+                    raise ValueError("Guest source execution failed: " + json.dumps(summary, ensure_ascii=True)[:4000])
+                require(completed.get("sourceCommit") == args.commit, "Guest export source commit differs")
                 verification = validate_results(results, setup, manifest, bundle)
                 (results / "verification.json").write_text(json.dumps(verification, indent=2) + "\n")
                 break
@@ -306,6 +310,7 @@ def run(args):
         if isinstance(error, subprocess.CalledProcessError):
             failure += "\n" + (error.stderr or "")
         (results / "host-error.txt").write_text(redact(failure) + "\n")
+        print("Source VM failure: " + redact(failure).replace("\n", " ")[:6000], flush=True)
     finally:
         signal.signal(signal.SIGTERM, previous_signal)
         # Failed log/archive reads must never skip owned container teardown.

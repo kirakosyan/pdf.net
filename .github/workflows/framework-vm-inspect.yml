@@ -1,0 +1,35 @@
+name: Inspect retained minimum-Framework failure
+on:
+  pull_request:
+    paths: ['.github/workflows/framework-vm-inspect.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  inspect:
+    if: github.repository == 'kirakosyan/pdf.net'
+    runs-on: ubuntu-24.04
+    steps:
+      # Temporary inspection of the first retained guest failure. Remove after diagnosis.
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          artifact-ids: '12601062438'
+          run-id: '40197837290'
+          github-token: ${{ github.token }}
+          path: vm-failure
+      - name: Show bounded noncredential guest and cleanup diagnostics
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('vm-failure')
+          for name, fields in [('status.json',['stage','passed','error','installedFrameworkRelease','lanes']),('cleanup.json',['containersRemoved','networkRemoved','stateRemoved','evidenceArchivedAndVerified','archiveError','error'])]:
+              p=root/name
+              if p.is_file() and p.stat().st_size < 1048576:
+                  value=json.loads(p.read_text(encoding='utf-8-sig'))
+                  print(name+': '+json.dumps({k:value.get(k) for k in fields},ensure_ascii=True)[:10000])
+          p=root/'host-error.txt'
+          if p.is_file() and p.stat().st_size < 1048576:
+              print('Sanitized host error: '+p.read_text()[:4000].replace('\n',' '))
+          PY
