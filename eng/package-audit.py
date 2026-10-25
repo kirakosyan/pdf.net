@@ -74,8 +74,12 @@ def inspect(data, expected, symbols=False, signed=False):
     if repository is None or repository.get('type') != 'git' or repository.get('url') != 'https://github.com/kirakosyan/pdf.net' or repository.get('commit') != commit:
         raise ValueError('Repository/commit mismatch')
     license_node = metadata.find('license')
-    if license_node is None or license_node.get('type') != 'expression' or license_node.text != 'MIT':
+    if license_node is None and not symbols or license_node is not None and (license_node.get('type') != 'expression' or license_node.text != 'MIT'):
         raise ValueError('License metadata mismatch')
+    if symbols:
+        types = metadata.findall('packageTypes/packageType')
+        if len(types) != 1 or types[0].get('name') != 'SymbolsPackage':
+            raise ValueError('Wrong symbol package type')
     if not symbols:
         if metadata.findtext('readme') != 'README.md':
             raise ValueError('Missing README metadata')

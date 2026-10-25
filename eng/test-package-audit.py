@@ -40,7 +40,13 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(len(self.files), len(report['entries']))
         symbols = {k: v for k, v in self.files.items() if k not in self.expected['files']}
         symbols.update({k: b'portable fixture' for k in self.expected['symbols']})
+        # The pinned SDK emits SymbolsPackage metadata without the primary's
+        # license field. The companion primary still requires MIT and LICENSE.
+        symbols['Fluent.Pdf.nuspec'] = symbols['Fluent.Pdf.nuspec'].replace(b'<license type="expression">MIT</license>', b'').replace(b'</metadata>', b'<packageTypes><packageType name="SymbolsPackage"/></packageTypes></metadata>')
         self.assertTrue(audit.inspect(self.archive(symbols), self.expected, True)['symbols'])
+        symbols['Fluent.Pdf.nuspec'] = symbols['Fluent.Pdf.nuspec'].replace(b'SymbolsPackage', b'OtherPackage')
+        with self.assertRaisesRegex(ValueError, 'symbol package type'):
+            audit.inspect(self.archive(symbols), self.expected, True)
 
     def test_missing_and_changed_payloads(self):
         for name in self.expected['files']:
