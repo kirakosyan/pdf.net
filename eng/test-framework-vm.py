@@ -56,7 +56,7 @@ class SourceVmTests(unittest.TestCase):
                 archive.writestr(name, payload)
         for name in vm.SETUP_FILES - {"source-bundle.zip", "baseline-x86.trx", "baseline-x64.trx"}:
             if name in {"qualify.ps1", "install.bat"}:
-                (self.setup / name).write_bytes((vm.ROOT / "eng/framework-vm" / name).read_bytes())
+                (self.setup / name).write_bytes(vm.control_source(name))
             else:
                 (self.setup / name).write_text("SYNTHETIC NONEXECUTABLE CHECKER FIXTURE")
         self.status = dict(schemaVersion=1, purpose="framework472-vm-source-execution", sourceCommit=self.commit,
@@ -194,6 +194,16 @@ class SourceVmTests(unittest.TestCase):
 
     def test_rebinding_manifest_cannot_replace_guest_control_source(self):
         (self.setup / "qualify.ps1").write_text("SYNTHETIC REPLACEMENT SCRIPT")
+        self.rehash_setup()
+        with self.assertRaisesRegex(ValueError, "Guest control source"):
+            vm.validate_setup(self.setup, self.commit)
+
+    def test_batch_hook_is_hashed_as_crlf_and_other_script_bytes_are_unchanged(self):
+        batch = (self.setup / "install.bat").read_bytes()
+        self.assertIn(b"\r\n", batch)
+        self.assertNotIn(b"\n", batch.replace(b"\r\n", b""))
+        self.assertEqual((vm.ROOT / "eng/framework-vm/qualify.ps1").read_bytes(), (self.setup / "qualify.ps1").read_bytes())
+        (self.setup / "install.bat").write_bytes(batch.replace(b"\r\n", b"\n"))
         self.rehash_setup()
         with self.assertRaisesRegex(ValueError, "Guest control source"):
             vm.validate_setup(self.setup, self.commit)

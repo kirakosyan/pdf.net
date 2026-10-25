@@ -1,5 +1,7 @@
 # Source VM lifecycle provenance
 
+The OEM transport converts its batch hook to Windows CRLF line endings. Preparation stages those exact bytes before hashing; the host binds that deterministic representation to the checked-out source, and the guest still requires byte-for-byte hash agreement. Other input bytes remain unchanged.
+
 The source qualification launcher follows the owned Docker/QEMU guest lifecycle and OEM/export pattern in [word.net](https://github.com/kirakosyan/word.net/tree/c723fb8aa4ed70fda5562da7f472e6fef54740b7/eng/minimum-runtimes), reviewed at commit c723fb8aa4ed70fda5562da7f472e6fef54740b7. That source is MIT-licensed, copyright 2026 Armen Kirakosyan; its [license](wordnet-LICENSE) is retained. The PDF implementation uses its own immutable source bundle, two process architectures, actual same-process runtime evidence and exact baseline test inventories.
 
 The externally pulled test-host image is dockurr/windows:6.06@sha256:16fd7c39a3e48bb946d29c59dc6015942e5b900a1fa5d7e5552053bfc48ee2ea; see [upstream source and terms](https://github.com/dockur/windows/tree/v6.06). Its explicit Windows Server 2019 media verification remains enabled. The image, Windows evaluation media, VM disk and C++ prerequisite installers are analysis infrastructure and are not included in SDK packages. Installed image/patch/security/licensing provenance remains part of the separate production host qualification.

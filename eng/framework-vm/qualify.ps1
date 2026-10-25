@@ -19,7 +19,9 @@ try {
     foreach ($file in $manifest.files) {
         if ($file.path -notin @('source-bundle.zip','qualify.ps1','install.bat','baseline-x86.trx','baseline-x64.trx','baseline-x86-execution.json','baseline-x64-execution.json','vc_redist.x86.exe','vc_redist.x64.exe')) { throw 'Unexpected setup file.' }
         $path = Join-Path $PSScriptRoot $file.path
-        if ((Get-Item -LiteralPath $path).Length -ne $file.bytes -or (Get-FileHash -LiteralPath $path).Hash -ine $file.sha256) { throw 'VM setup input hash mismatch.' }
+        $actualBytes = (Get-Item -LiteralPath $path).Length
+        $actualHash = (Get-FileHash -LiteralPath $path).Hash.ToLowerInvariant()
+        if ($actualBytes -ne $file.bytes -or $actualHash -ine $file.sha256) { throw "VM setup input hash mismatch: $($file.path), bytes $actualBytes/$($file.bytes), SHA256 $actualHash/$($file.sha256)." }
     }
     $status.runtimeOverrideNames = @([Environment]::GetEnvironmentVariables().Keys | Where-Object { ([string]$_).StartsWith('COMPlus_',[StringComparison]::OrdinalIgnoreCase) })
     if ($status.runtimeOverrideNames.Count) { throw 'Runtime/JIT overrides are not allowed for this source execution.' }

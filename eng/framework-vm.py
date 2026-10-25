@@ -64,6 +64,12 @@ def checker():
     return module
 
 
+def control_source(name):
+    payload = (ROOT / "eng/framework-vm" / name).read_bytes()
+    # Match the pinned OEM batch transport without changing any other bytes.
+    return payload.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n") if name == "install.bat" else payload
+
+
 def validate_execution(execution, identity, counts, inputs, architecture, minimum):
     require(execution.get("executionPassed") is True and execution.get("exitCode") == 0
             and execution.get("timedOut") is False and execution.get("filtered") is False
@@ -91,7 +97,7 @@ def validate_setup(setup, commit):
         require(path.is_file() and not path.is_symlink() and path.stat().st_size == record["bytes"]
                 and digest(path) == record["sha256"], "VM setup file changed")
         if record["path"] in {"qualify.ps1", "install.bat"}:
-            require(record["sha256"] == digest(ROOT / "eng/framework-vm" / record["path"]), "Guest control source differs from this checkout")
+            require(record["sha256"] == hashlib.sha256(control_source(record["path"])).hexdigest(), "Guest control source differs from this checkout")
     with zipfile.ZipFile(setup / "source-bundle.zip") as archive:
         entries = [e for e in archive.infolist() if not e.is_dir()]
         require(0 < len(entries) <= MAX_FILES and sum(e.file_size for e in entries) <= MAX_BYTES,

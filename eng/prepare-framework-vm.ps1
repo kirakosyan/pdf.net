@@ -29,9 +29,11 @@ foreach ($architecture in @('x86','x64')) {
 }
 $null = [IO.Directory]::CreateDirectory($output)
 [IO.Compression.ZipFile]::CreateFromDirectory($bundle,(Join-Path $output 'source-bundle.zip'),[IO.Compression.CompressionLevel]::Fastest,$false)
-foreach ($file in @('qualify.ps1','install.bat')) {
-    Copy-Item -LiteralPath (Join-Path $PSScriptRoot "framework-vm/$file") -Destination (Join-Path $output $file)
-}
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'framework-vm/qualify.ps1') -Destination (Join-Path $output 'qualify.ps1')
+# The pinned OEM transport applies unix2dos to its batch hook. Stage those exact
+# wire bytes before hashing; the guest still checks the unchanged expected hash.
+$batch = [regex]::Replace([IO.File]::ReadAllText((Join-Path $PSScriptRoot 'framework-vm/install.bat')), '\r?\n', [Environment]::NewLine)
+[IO.File]::WriteAllText((Join-Path $output 'install.bat'), $batch, [Text.UTF8Encoding]::new($false))
 foreach ($architecture in @('x86','x64')) {
     Copy-Item -LiteralPath (Join-Path $baseline "offline-framework-$architecture/runtime-contracts.trx") -Destination (Join-Path $output "baseline-$architecture.trx")
     Copy-Item -LiteralPath (Join-Path $baseline "offline-framework-$architecture/framework-execution.json") -Destination (Join-Path $output "baseline-$architecture-execution.json")
