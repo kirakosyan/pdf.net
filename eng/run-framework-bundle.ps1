@@ -45,8 +45,12 @@ try {
     if (Test-Path -LiteralPath $core) {
         $process = Start-Process -FilePath $core -ArgumentList @('"' + (Join-Path $output 'core-consumer') + '"') -PassThru -NoNewWindow
         try {
+            # Match the full runner: Windows PowerShell 5.1 can lose ExitCode
+            # unless the native handle is retained before a fast process exits.
+            $null = $process.Handle
             if (!$process.WaitForExit(60000)) { $process.Kill(); throw 'The core package consumer exceeded its deadline.' }
-            if ($process.ExitCode -ne 0) { throw 'The core package-only Framework consumer failed.' }
+            $process.WaitForExit()
+            if ($null -eq $process.ExitCode -or $process.ExitCode -ne 0) { throw "The core package-only Framework consumer failed: exit code $($process.ExitCode)." }
         } finally { $process.Dispose() }
     }
 } finally {

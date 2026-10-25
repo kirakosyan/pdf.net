@@ -13,6 +13,11 @@ using System.IO;
 using System.Threading;
 class Fixture {
     static int Main(string[] args) {
+        if (args.Length == 1 && !args[0].StartsWith("/")) {
+            Directory.CreateDirectory(args[0]);
+            File.WriteAllText(Path.Combine(args[0], "synthetic-core-consumer.txt"), "synthetic launcher only");
+            return Environment.GetEnvironmentVariable("FP_CORE_CONSUMER_EXIT_CODE") == "17" ? 17 : 0;
+        }
         string mode = Environment.GetEnvironmentVariable("FP_RUNNER_FIXTURE_MODE");
         if (mode == "timeout") { Thread.Sleep(60000); return 0; }
         string directory = null;
@@ -32,6 +37,7 @@ $release = Get-ItemPropertyValue -LiteralPath 'HKLM:\SOFTWARE\Microsoft\NET Fram
 $previousMode = $env:FP_RUNNER_FIXTURE_MODE
 $previousTrx = $env:FP_RUNNER_FIXTURE_TRX
 $previousArch = $env:FLUENT_PDF_EXPECTED_ARCH
+$previousCoreExit = $env:FP_CORE_CONSUMER_EXIT_CODE
 $passed = @()
 try {
     foreach ($case in @('pass','exit-failure','failed','skipped','missing-result','missing-identity','wrong-architecture','timeout')) {
@@ -86,6 +92,23 @@ try {
         & (Join-Path $bundle 'run-framework-bundle.ps1') -Architecture x64 -WorkspaceDirectory (Join-Path $directory "bundle-work-$attempt") -OutputDirectory (Join-Path $directory "bundle-output-$attempt")
     }
     $passed+='repeat-immutable-bundle'
+    # Exercise the actual supplemental launch path with a fast synthetic
+    # success and a nonzero exit. Neither executes or qualifies the SDK.
+    $coreDirectory=Join-Path $bundle 'core-release/framework/x64'
+    $null=[IO.Directory]::CreateDirectory($coreDirectory)
+    Copy-Item -LiteralPath (Join-Path $directory 'vstest.console.exe') -Destination (Join-Path $coreDirectory 'CoreConsumer.exe')
+    $files=@(Get-ChildItem -LiteralPath $bundle -Recurse -File | Where-Object FullName -ne $manifestPath | ForEach-Object { @{path=$_.FullName.Substring($bundlePrefix.Length).Replace('\','/');bytes=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash.ToLowerInvariant()} })
+    $manifest.files=$files
+    $manifest | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $manifestPath -Encoding UTF8
+    $env:FP_CORE_CONSUMER_EXIT_CODE='0'
+    & (Join-Path $bundle 'run-framework-bundle.ps1') -Architecture x64 -WorkspaceDirectory (Join-Path $directory 'core-success-work') -OutputDirectory (Join-Path $directory 'core-success-output')
+    $passed+='core-fast-success'
+    $env:FP_CORE_CONSUMER_EXIT_CODE='17'
+    $rejected=$false
+    try { & (Join-Path $bundle 'run-framework-bundle.ps1') -Architecture x64 -WorkspaceDirectory (Join-Path $directory 'core-failure-work') -OutputDirectory (Join-Path $directory 'core-failure-output') } catch { $rejected=$_.Exception.Message -like '*consumer failed: exit code 17*' }
+    if (!$rejected -or !(Test-Path -LiteralPath (Join-Path $directory 'core-failure-output/core-consumer/synthetic-core-consumer.txt'))) { throw 'A nonzero supplemental consumer exit was not retained/rejected.' }
+    $passed+='core-nonzero-rejection'
+    $env:FP_CORE_CONSUMER_EXIT_CODE='0'
     foreach($case in @('changed-input','additional-input','escaping-path','duplicate-path')) {
         $manifest.files=$files
         $target=Join-Path $bundle 'tests/Fluent.Pdf.Contract.Tests.dll'
@@ -106,6 +129,7 @@ try {
     $env:FP_RUNNER_FIXTURE_MODE=$previousMode
     $env:FP_RUNNER_FIXTURE_TRX=$previousTrx
     $env:FLUENT_PDF_EXPECTED_ARCH=$previousArch
+    $env:FP_CORE_CONSUMER_EXIT_CODE=$previousCoreExit
 }
 [ordered]@{purpose='synthetic-offline-launcher-regressions';passed=$passed;productionQualified=$false} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $directory 'regressions.json') -Encoding UTF8
 Write-Output "Synthetic offline launcher regressions passed: $($passed.Count). No SDK qualification inferred."
