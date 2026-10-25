@@ -9,7 +9,7 @@ permissions:
 jobs:
   validate:
     name: Contracts (${{ matrix.id }})
-    timeout-minutes: ${{ (matrix.id == 'osx-x64' || matrix.id == 'win-x64') && 40 || 20 }}
+    timeout-minutes: ${{ matrix.id == 'win-x64' && 60 || (matrix.id == 'osx-x64' && 40 || 20) }}
     strategy:
       fail-fast: false
       matrix:
@@ -46,6 +46,12 @@ jobs:
       - name: Verify release exception boundaries and status inventory
         shell: pwsh
         run: ./eng/test-release-policy.ps1 -OutputDirectory artifacts/contracts/release-policy
+      - name: Verify source VM evidence and owned cleanup boundaries
+        shell: pwsh
+        run: |
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          & $python eng/test-framework-vm.py
+          if ($LASTEXITCODE -ne 0) { throw 'Source VM boundary regressions failed.' }
       - name: Observe actual Windows Framework host eligibility
         if: matrix.id == 'win-x64'
         shell: powershell
@@ -128,6 +134,18 @@ jobs:
             python eng/check-runtime-evidence.py --lane "win-$architecture-framework-current" --trx "artifacts/contracts/offline-framework-$architecture/runtime-contracts.trx" --mode source --output "artifacts/contracts/offline-framework-$architecture/runtime-identity.json"
             if ($LASTEXITCODE -ne 0) { throw 'Offline Framework runtime identity failed.' }
           }
+      - name: Prepare exact source inputs for the minimum-Framework VM
+        if: matrix.id == 'win-x64' && success()
+        shell: pwsh
+        run: ./eng/prepare-framework-vm.ps1 -BundleDirectory artifacts/framework-source-bundle -BaselineDirectory artifacts/contracts -OutputDirectory artifacts/framework-vm-source-setup
+      - name: Retain minimum-Framework VM source setup
+        if: matrix.id == 'win-x64' && success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: framework-vm-source-setup
+          path: artifacts/framework-vm-source-setup/
+          if-no-files-found: error
+          include-hidden-files: true
       - name: Retain macOS sandbox diagnostics after a native failure
         if: failure() && runner.os == 'macOS'
         shell: bash
@@ -144,6 +162,53 @@ jobs:
           path: |
             artifacts/contracts/
             !artifacts/contracts/supply-chain/fresh-advisory-cache/**
+          if-no-files-found: error
+
+  minimum-framework:
+    name: Actual Framework 4.7.2 source (x86 and x64)
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Check VM evidence rejection and cleanup controls
+        run: python3 eng/test-framework-vm.py
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: framework-vm-source-setup
+          path: artifacts/framework-vm-source-setup
+      - name: Reclaim unused tools only on this dedicated disposable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_ACTIONS" = true
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          test "$RUNNER_OS" = Linux
+          # This job executes prebuilt Windows tests; it does not use these SDKs.
+          sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache /opt/google /opt/microsoft /usr/local/share/chromium
+          if test -c /dev/kvm; then
+            sudo chown "$(id -u):$(id -g)" /dev/kvm
+            sudo chmod 600 /dev/kvm
+          fi
+      - name: Execute both actual minimum-Framework source lanes
+        run: >-
+          python3 eng/framework-vm.py
+          --setup artifacts/framework-vm-source-setup
+          --work artifacts/framework-vm-owned-state
+          --results artifacts/framework-vm-source-evidence
+          --commit "$GITHUB_SHA"
+          --timeout-seconds 4500
+      - name: Retain source reports, archive and owned-resource receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: framework472-source-evidence-attempt-${{ github.run_attempt }}
+          path: artifacts/framework-vm-source-evidence/
           if-no-files-found: error
 
   reproducibility:

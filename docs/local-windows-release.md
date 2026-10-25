@@ -1,5 +1,7 @@
 # Continue release work in a local Windows Codex session
 
+The source-contract workflow also has an [automatic hardware-backed Framework 4.7.2 source VM job](runtime-qualification.md#offline-windows-vm-source-execution) on a disposable Linux runner. Review its actual current-commit reports before repeating manual source runs on the PC. It supplies source consistency evidence only; final package consumers, full production suites and host provenance remain separate requirements.
+
 The cloud task has no attached Windows terminal or PC connection. Open the Windows repository in a local Codex session to run commands there. Do not send credentials or expose a remote shell to the internet. The user's authorization to complete qualification, defer #93 for 1.0.0 and publish qualified packages persists in the handoff below.
 
 Use this task prompt in the local session:
