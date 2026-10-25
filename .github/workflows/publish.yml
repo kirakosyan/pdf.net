@@ -118,7 +118,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
-          dotnet-version: '10.0.4xx'
+          dotnet-version: '10.0.402'
       - name: Retrieve and reverify exact candidate
         shell: pwsh
         env:
@@ -147,37 +147,49 @@ jobs:
           }
 
   core-verify:
-    if: github.event_name == 'workflow_run' && github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'kirakosyan/pdf.net' && github.event.workflow_run.head_sha == github.sha
+    if: github.repository == 'kirakosyan/pdf.net' && ((github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_run' && github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'kirakosyan/pdf.net' && github.event.workflow_run.head_sha == '3f6f589521871911ef8f2c5cd6424c5c53ddb84b'))
     runs-on: ubuntu-24.04
+    env:
+      # Immutable first-core artifact; deployment-only fixes do not rebuild it.
+      CORE_VERIFIED_RUN: '40218271071'
+      CORE_VERIFIED_COMMIT: '3f6f589521871911ef8f2c5cd6424c5c53ddb84b'
     permissions:
       contents: read
       actions: read
     outputs:
       artifact_id: ${{ steps.core_candidate.outputs.artifact-id }}
+      source_commit: ${{ steps.core_source.outputs.source_commit }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: v1.0.0
           fetch-depth: 0
           persist-credentials: false
       - name: Verify core release tag and successful main-run provenance
+        id: core_source
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
-          CORE_RUN: ${{ github.event.workflow_run.id }}
+          CORE_RUN: ${{ env.CORE_VERIFIED_RUN }}
         run: |
           $ErrorActionPreference = 'Stop'
           $head = (git rev-parse HEAD).Trim()
           $main = (git rev-parse origin/main).Trim()
           $tag = (git rev-parse 'v1.0.0^{commit}').Trim()
-          if ($LASTEXITCODE -ne 0 -or $tag -cne $head -or $main -cne $head) { throw 'Core tag must match the current main release commit.' }
+          if ($LASTEXITCODE -ne 0 -or $tag -cne $head -or $head -cne $env:CORE_VERIFIED_COMMIT) { throw 'Core tag must match the immutable verified release commit.' }
+          git merge-base --is-ancestor $head $main
+          if ($LASTEXITCODE -ne 0) { throw 'The verified core release must belong to main.' }
+          $deploymentOnly = @('.github/workflows/publish.yml','.github/workflows/ci.yml','.github/workflows/documentation.yml','.github/workflows/cli.yml','.github/workflows/automation.yml','.github/workflows/browser-container.yml','.github/workflows/application-views.yml')
+          $changes = @(git diff --name-only $head $main)
+          if ($LASTEXITCODE -ne 0 -or @($changes | Where-Object { $_ -cnotin $deploymentOnly }).Count) { throw 'Product, policy or tooling changed after core qualification; obtain fresh qualification.' }
           $run = gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:CORE_RUN" | ConvertFrom-Json
           if ($LASTEXITCODE -ne 0 -or $run.head_sha -cne $head -or $run.event -cne 'push' -or $run.conclusion -cne 'success' -or $run.path -cne '.github/workflows/ci.yml' -or $run.head_repository.full_name -cne 'kirakosyan/pdf.net') { throw 'Foreign or incomplete core release verification.' }
+          "source_commit=$head" >> $env:GITHUB_OUTPUT
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           name: core-release-verified
           path: qualified
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ env.CORE_VERIFIED_RUN }}
           github-token: ${{ github.token }}
           digest-mismatch: error
       - name: Reverify exact core package inventory and raw consumer evidence
@@ -201,14 +213,14 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ needs.core-verify.outputs.source_commit }}
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
           dotnet-version: |
-            10.0.4xx
-            8.0.x
+            10.0.402
+            8.0.426
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           artifact-ids: ${{ needs.core-verify.outputs.artifact_id }}

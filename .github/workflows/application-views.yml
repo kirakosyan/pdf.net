@@ -26,8 +26,8 @@ jobs:
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
           dotnet-version: |
-            10.0.4xx
-            8.0.x
+            10.0.402
+            8.0.426
       - name: Run real desktop handles, keyboard and accessibility boundaries
         shell: pwsh
         run: ./eng/test-application-views.ps1
@@ -47,8 +47,8 @@ jobs:
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
         with:
           dotnet-version: |
-            10.0.4xx
-            8.0.x
+            10.0.402
+            8.0.426
       - name: Build explicit local host
         run: |
           dotnet restore examples/Fluent.Pdf.BrowserViewSample/Fluent.Pdf.BrowserViewSample.csproj --locked-mode
