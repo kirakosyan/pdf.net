@@ -56,6 +56,10 @@ def policy():
             and value["publishCompanionPackages"] is False and value["scopeDocument"] == "docs/releases/1.0.0.md"
             and value["requiredConsumerHosts"] == list(HOSTS) and value["requiredAssets"] == list(TFMS),
             "Core 1.0.0 release scope changed")
+    declarations = ROOT / "src/Fluent.Pdf"
+    require((declarations / "PublicAPI.Unshipped.txt").read_text().strip() == "#nullable enable"
+            and any(line.strip() and not line.startswith("#") for line in (declarations / "PublicAPI.Shipped.txt").read_text().splitlines()),
+            "Freeze the implemented core API before its stable release")
     return value
 
 
@@ -65,6 +69,8 @@ def audit(directory):
     require(manifest["schemaVersion"] == 1 and manifest["sourceCommit"] == commit()
             and manifest["scope"] == policy() and manifest["fullRoadmapQualified"] is False,
             "Core candidate origin/scope differs from this checkout")
+    require(manifest["shippedApiSha256"] == sha(ROOT / "src/Fluent.Pdf/PublicAPI.Shipped.txt"),
+            "Core shipped API baseline differs from the candidate")
     expected = manifest["content"]
     require(expected["id"] == "Fluent.Pdf" and expected["version"] == "1.0.0"
             and expected["sourceCommit"] == commit(), "Foreign core candidate")
@@ -89,6 +95,7 @@ def create_manifest(directory):
     expected = next(x for x in entries if x["id"] == "Fluent.Pdf")
     write(directory / "core-manifest.json", {
         "schemaVersion": 1, "sourceCommit": commit(), "scope": policy(), "fullRoadmapQualified": False,
+        "shippedApiSha256": sha(ROOT / "src/Fluent.Pdf/PublicAPI.Shipped.txt"),
         "content": expected,
         "packageHashes": {p.name: sha(p) for p in sorted((directory / "packages").iterdir())}})
     _, results = audit(directory)
